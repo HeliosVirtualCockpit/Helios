@@ -35,6 +35,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
         private IntPtr _hWnd;
         private delegate IntPtr GetMainHandleDelegate();
 
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public DirectXControllerInterface()
             : base("DirectX Controller")
         {
@@ -76,24 +78,25 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                     {
                         newDevice = new Joystick(DirectXControllerInterfaceFactory.DirectInput, newDeviceId.InstanceGuid);
                     }
-                    catch (SharpDX.SharpDXException)
+                    catch (SharpDX.SharpDXException ex)
                     {
                         //    // Check to see if any enumerable controllers have the same DisplayName
-                        //    DeviceList gameControllerList = Manager.GetDevices(DeviceClass.GameControl, EnumDevicesFlags.AttachedOnly);
-                        //    if (gameControllerList.Count > 0)
-                        //    {
-                        //        while (gameControllerList.MoveNext())
-                        //        {
-                        //            DeviceInstance joystickInstance = (DeviceInstance)gameControllerList.Current;
-                        //            DirectXControllerGuid joystickId = new DirectXControllerGuid(joystickInstance.ProductName, joystickInstance.InstanceGuid);
-                        //            if (joystickId.ProductName.Equals(newDeviceId.ProductName))
-                        //            {
-                        //                newDeviceId = joystickId;
-                        //                newDevice = new Device(newDeviceId.InstanceGuid);
-                        //                break;
-                        //            }
-                        //        }
-                        //    }
+                        //    // This should address https://github.com/BlueFinBima/Helios/issues/235 and https://github.com/BlueFinBima/Helios/issues/231
+                        bool alternateDeviceFound = false;
+                        foreach (DeviceInstance controllerInstance in DirectXControllerInterfaceFactory.DirectInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly))
+                        {
+                            if (controllerInstance.ProductName == value.ProductName)
+                            {
+                                Logger.Info(ex, $"Unable to create device for \"{value.ProductName}\" with the GUID {value.InstanceGuid} which is specified in the profile.  Instance GUID {controllerInstance.InstanceGuid} will be used instead.  This can happen when the profile is running with a different account or on a different machine than the machine used to create the profile.  It can also happen when the device is not plugged in.");
+                                newDeviceId = new DirectXControllerGuid(controllerInstance.ProductName, controllerInstance.InstanceGuid);
+                                newDevice = new Joystick(DirectXControllerInterfaceFactory.DirectInput, controllerInstance.InstanceGuid);
+                                alternateDeviceFound = true;
+                                break;
+                            }
+                        }
+                        if(!alternateDeviceFound){
+                            Logger.Debug(ex, $"Unable to create device for \"{value.ProductName}\" with the GUID {value.InstanceGuid} which is  specified in the profile.  No obvious alternative devices have been found.  This can happen when the profile is running with a different account or on a different machine than the machine used to create the profile.  It can also happen when the device is not plugged in.");
+                        }
                     }
 
 
