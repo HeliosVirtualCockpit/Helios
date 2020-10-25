@@ -159,7 +159,8 @@ if %errorlevel% neq 0 (
 )
 popd
 pushd "Tools Installer\Release"
-cscript //nologo "..\..\Helios Installer\HeliosInstallAdjustments.vbs" "Helios Developer Tools.%HELIOS_BUILT_VERSION%.msi" %HELIOS_BUILT_VERSION%
+echo %cd%
+cscript //nologo ".\Helios Installer\HeliosInstallAdjustments.vbs" "Helios Developer Tools.%HELIOS_BUILT_VERSION%.msi" %HELIOS_BUILT_VERSION%
 if %errorlevel% neq 0 (
 	echo Installer fixup script failed to fix up 64-bit Developer Tools installer.  Already built installers will be deleted.
 	popd
