@@ -556,19 +556,28 @@ namespace GadrocsWorkshop.Helios
         /// Called when a mouse button is pressed on this control.
         /// </summary>
         /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
-        public abstract void MouseDown(Point location);
+        public virtual void MouseDown(Point location)
+        {
+            // no code in base
+        }
 
         /// <summary>
         /// Called when the mouse is dragged after being pressed on this control.
         /// </summary>
         /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
-        public abstract void MouseDrag(Point location);
+        public virtual void MouseDrag(Point location)
+        {
+            // no code in base    
+        }
 
         /// <summary>
         /// Called when the mouse button is released after being pressed on this control.
         /// </summary>
         /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
-        public abstract void MouseUp(Point location);
+        public virtual void MouseUp(Point location)
+        {
+            // no code in base
+        }
 
         private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
