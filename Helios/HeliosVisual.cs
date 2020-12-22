@@ -553,10 +553,30 @@ namespace GadrocsWorkshop.Helios
         }
 
         /// <summary>
+        /// Called when a mouse wheel is rotated on this control.
+        /// </summary>
+        /// <param name="delta">Signed change in mouse wheel value.</param>
+        /// <param name="e">Original event arguments.</param>
+        public virtual void MouseWheelWithArgs(int delta, MouseWheelEventArgs e)
+        {
+            // no code in base
+        }
+
+        /// <summary>
         /// Called when a mouse button is pressed on this control.
         /// </summary>
         /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
         public virtual void MouseDown(Point location)
+        {
+            // no code in base
+        }
+
+        /// <summary>
+        /// Called when a mouse button is pressed on this control.
+        /// </summary>
+        /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
+        /// <param name="e">Original event arguments.</param>
+        public virtual void MouseDownWithArgs(Point location, MouseButtonEventArgs e)
         {
             // no code in base
         }
@@ -571,10 +591,30 @@ namespace GadrocsWorkshop.Helios
         }
 
         /// <summary>
+        /// Called when the mouse is dragged after being pressed on this control.
+        /// </summary>
+        /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
+        /// <param name="e">Original event arguments.</param>
+        public virtual void MouseDragWithArgs(Point location, MouseEventArgs e)
+        {
+            // no code in base
+        }
+
+        /// <summary>
         /// Called when the mouse button is released after being pressed on this control.
         /// </summary>
         /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
         public virtual void MouseUp(Point location)
+        {
+            // no code in base
+        }
+
+        /// <summary>
+        /// Called when the mouse button is released after being pressed on this control.
+        /// </summary>
+        /// <param name="location">Current location of the mouse relative to this controls upper left corner.</param>
+        /// <param name="e">Original event arguments.</param>
+        public virtual void MouseUpWithArgs(Point location, MouseButtonEventArgs e)
         {
             // no code in base
         }
