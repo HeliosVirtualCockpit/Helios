@@ -24,10 +24,13 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.IAS
     public class IAS : BaseGauge
     {
         private HeliosValue _indicatedAirSpeed;
+        private HeliosValue _limitingAirSpeed;
         private GaugeNeedle _needle;
         private GaugeNeedle _tape;
+        private GaugeNeedle _limitingAirSpeedNeedle;
         private CalibrationPointCollectionDouble _needleCalibration;
         private CalibrationPointCollectionDouble _tapeCalibration;
+        private CalibrationPointCollectionDouble _limitingAirSpeedNeedleCalibration;
 
         public IAS()
             : base("IAS", new Size(364, 376))
@@ -40,6 +43,10 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.IAS
 
             Components.Add(new GaugeImage("{Helios}/Gauges/A-10/IAS/ias_faceplate.xaml", new Rect(32d, 38d, 300, 300)));
 
+            _limitingAirSpeedNeedleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 550d, 335d);
+            _limitingAirSpeedNeedle = new GaugeNeedle("{Helios}/Gauges/A-10/IAS/needle_ias_limit.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), 10d);
+            Components.Add(_limitingAirSpeedNeedle);
+
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 550d, 340d);
             _needleCalibration.Add(new CalibrationPointDouble(100d, 34d));
             _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), 10d);
@@ -50,6 +57,10 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.IAS
             _indicatedAirSpeed = new HeliosValue(this, new BindingValue(0d), "", "indicated airspeed", "Current indicated airspeed of the aircraft.", "(0 - 550)", BindingValueUnits.Knots);
             _indicatedAirSpeed.Execute += new HeliosActionHandler(IndicatedAirSpeed_Execute);
             Actions.Add(_indicatedAirSpeed);
+
+            _limitingAirSpeed = new HeliosValue(this, new BindingValue(0d), "", "limiting airspeed", "Current altitude compensated, limiting structural airspeed of the aircraft.", "(0 - 550)", BindingValueUnits.Knots);
+            _limitingAirSpeed.Execute += new HeliosActionHandler(LimitingAirSpeed_Execute);
+            Actions.Add(_limitingAirSpeed);
         }
 
         void IndicatedAirSpeed_Execute(object action, HeliosActionEventArgs e)
@@ -58,5 +69,9 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.IAS
             _tape.HorizontalOffset = -_tapeCalibration.Interpolate(e.Value.DoubleValue % 100d);
         }
 
+        void LimitingAirSpeed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _limitingAirSpeedNeedle.Rotation = _limitingAirSpeedNeedleCalibration.Interpolate(e.Value.DoubleValue);
+        }
     }
 }
