@@ -534,6 +534,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
             {
                 Point location = e.GetPosition(this);
                 Visual.MouseDrag(location);
+                Visual.MouseDragWithArgs(location, e);
                 e.Handled = true;
             }
         }
@@ -559,6 +560,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                 }
                 Point location = e.GetPosition(this);
                 Visual.MouseUp(location);
+                Visual.MouseUpWithArgs(location, e);
                 e.MouseDevice.Capture(null);
                 ReleaseMouseCapture();
                 e.Handled = true;
@@ -644,6 +646,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
         {
             int delta = e.Delta;
             Visual.MouseWheel(delta);
+            Visual.MouseWheelWithArgs(delta, e);
             e.Handled = true;
         }
     }
