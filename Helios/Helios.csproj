@@ -101,6 +101,7 @@
     <Compile Include="Gauges\A-10\HARS\HARSSync_1.cs" />
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
+    <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="HeliosCapabilityEditorDescriptor.cs" />
     <Compile Include="IInstallation2.cs" />
     <Compile Include="Interfaces\DCS\A10C\A10C1Interface.cs" />

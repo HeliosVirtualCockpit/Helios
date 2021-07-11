@@ -49,7 +49,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicatorPushButton("EFF", "eff", new Point(column5, row8), new Size(50, 50));
             AddIndicatorPushButton("INS", "ins", new Point(column7, row8), new Size(50, 50));
 
-            AddIndicatorPushButton("Offset Waypoint/Target", "enc", new Point(column1, row1), new Size(58, 40));
+            //AddIndicatorPushButton("Offset Waypoint/Target", "enc", new Point(column1, row1), new Size(58, 40));
             AddIndicatorPushButton("AUTO Navigation", "bad", new Point(column4, row4), new Size(58, 40));
             AddIndicatorPushButton("INS Update", "rec", new Point(column4, row6), new Size(58, 40));
             AddIndicatorPushButton("Marq Position", "mrq", new Point(column4, row7), new Size(58, 40));

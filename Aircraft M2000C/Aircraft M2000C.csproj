@@ -671,6 +671,7 @@
     </Resource>
     <Resource Include="Images\TestPanel\test-ok-on.png">
     </Resource>
+    <Resource Include="Images\VTBPanel\VTB-panel.png" />
     <Content Include="Templates\Base\M2000C\CautionPanelRedIndicator.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

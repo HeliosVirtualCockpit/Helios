@@ -407,8 +407,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "571", "PCN Panel", "PREP", "PREP"));
             AddFunction(new PushButton(this, PCN_NAV, "3572", "572", "PCN Panel", "DEST Button"));
             AddFunction(new FlagValue(this, "573", "PCN Panel", "DEST", "DEST"));
-            AddFunction(new PushButton(this, PCN_NAV, "3667", "667", "PCN Panel", "Offset Waypoint/Target Button"));
-            AddFunction(new FlagValue(this, "668", "PCN Panel", "Offset Waypoint/Target", "ENC"));
+            //AddFunction(new PushButton(this, PCN_NAV, "3667", "667", "PCN Panel", "Offset Waypoint/Target Button"));
+            //AddFunction(new FlagValue(this, "668", "PCN Panel", "Offset Waypoint/Target", "ENC"));
             AddFunction(new PushButton(this, PCN_NAV, "3578", "578", "PCN Panel", "INS Update Button"));
             AddFunction(new FlagValue(this, "579", "PCN Panel", "INS Update", "REC"));
             AddFunction(new PushButton(this, PCN_NAV, "3580", "580", "PCN Panel", "Validate Data Entry Button"));
@@ -633,9 +633,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateThreeWaySwitch(this, VTH_VTB, "3218", "218", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Altitude", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, VTH_VTB, "3219", "219", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Mach Number", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, VTH_VTB, "3220", "220", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Age", "%0.1f"));
-            AddFunction(new PushButton(this, VTH_VTB, "3221", "221", "HUD/VTB", "VTB Power Switch"));    // elements["PTN_221"] = default_2_position_tumb(_("VTB Power Switch"), devices.VTH_VTB, device_commands.Button_221, 221)
-            AddFunction(Switch.CreateToggleSwitch(this, VTH_VTB, "3222", "222", "1.0", "Declutter", "0.0", "Neutral", "HUD/VTB", "VTB Declutter", "%0.1f"));    // elements["PTN_222"] = default_2_way_spring_switch(_("VTB Declutter"), devices.VTH_VTB, device_commands.Button_222, 222, true)
-            AddFunction(new PushButton(this, VTH_VTB, "3223", "223", "HUD/VTB", "VTB Orientation Selector (Inop)"));    // elements["PTN_223"] = default_2_position_tumb(_("VTB Orientation Selector (Inop)"), devices.VTH_VTB, device_commands.Button_223, 223)
+            //AddFunction(new PushButton(this, VTH_VTB, "3221", "221", "HUD/VTB", "VTB Power Switch"));    // elements["PTN_221"] = default_2_position_tumb(_("VTB Power Switch"), devices.VTH_VTB, device_commands.Button_221, 221)
+            AddFunction(Switch.CreateToggleSwitch(this, VTH_VTB, "3221", "221", "1.0", "ON",        "0.0", "OFF",     "HUD/VTB", "VTB Power Switch", "%0.1f"));    // elements["PTN_221"] = default_2_position_tumb(_("VTB Power Switch"), devices.VTH_VTB, device_commands.Button_221, 221)
+            AddFunction(Switch.CreateToggleSwitch(this, VTH_VTB, "3222", "222", "1.0", "Declutter", "0.0", "Neutral", "HUD/VTB", "VTB Declutter",    "%0.1f"));    // elements["PTN_222"] = default_2_way_spring_switch(_("VTB Declutter"), devices.VTH_VTB, device_commands.Button_222, 222, true)
+            AddFunction(Switch.CreateToggleSwitch(this, VTH_VTB, "3223", "223", "0.0", "AV",        "1.0", "AR",      "HUD/VTB", "VTB Orientation Selector (Inop)", "%0.1f"));    // elements["PTN_223"] = default_2_position_tumb(_("VTB Orientation Selector (Inop)"), devices.VTH_VTB, device_commands.Button_223, 223)
+            //AddFunction(new PushButton(this, VTH_VTB, "3223", "223", "HUD/VTB", "VTB Orientation Selector (Inop)"));    // elements["PTN_223"] = default_2_position_tumb(_("VTB Orientation Selector (Inop)"), devices.VTH_VTB, device_commands.Button_223, 223)
             AddFunction(new Switch(this, VTH_VTB, "224", new SwitchPosition[] { }, "HUD/VTB", "Icons and Rulers Brightness", "%0.1f"));    // elements["PTN_224"] = multiposition_switch_limited(_("Icons and Rulers Brightness"), devices.VTH_VTB, device_commands.Button_224, 224, 8, 0.1, false, 0)
             AddFunction(new Switch(this, VTH_VTB, "225", new SwitchPosition[] { }, "HUD/VTB", "Video Brightness", "%0.1f"));    // elements["PTN_225"] = multiposition_switch_limited(_("Video Brightness"), devices.VTH_VTB, device_commands.Button_225, 225, 8, 0.1, false, 0)
             AddFunction(new Switch(this, VTH_VTB, "226", new SwitchPosition[] { }, "HUD/VTB", "Display Contrast", "%0.1f"));    // elements["PTN_226"] = multiposition_switch_limited(_("Display Contrast"), devices.VTH_VTB, device_commands.Button_226, 226, 8, 0.1, false, 0)
