@@ -117,6 +117,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestInstallerSupport", "Too
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileEditorTools", "Tools\ProfileEditorTools\ProfileEditorTools.csproj", "{5326288B-FD5D-48D0-B310-AD66B9C8E777}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeliosFalconRTT", "HeliosFalconRTT\HeliosFalconRTT.csproj", "{BD8870EB-69E3-4761-83A6-5ED3A2B16370}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A7237E1E-B363-491D-9B78-BD46CCE689AA} = {A7237E1E-B363-491D-9B78-BD46CCE689AA}
+		{E5ABE3F5-46EC-46D1-9330-D42311471A93} = {E5ABE3F5-46EC-46D1-9330-D42311471A93}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -738,6 +744,30 @@ Global
 		{5326288B-FD5D-48D0-B310-AD66B9C8E777}.Release|AnyCPU32.Build.0 = Release|AnyCPU32
 		{5326288B-FD5D-48D0-B310-AD66B9C8E777}.Release|x64.ActiveCfg = Release|x64
 		{5326288B-FD5D-48D0-B310-AD66B9C8E777}.Release|x64.Build.0 = Release|x64
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Debug|AnyCPU32.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Debug|AnyCPU32.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Debug|x64.ActiveCfg = Debug|x64
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Debug|x64.Build.0 = Debug|x64
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.JustInstallers|AnyCPU.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.JustInstallers|AnyCPU.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.JustInstallers|AnyCPU32.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.JustInstallers|AnyCPU32.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.JustInstallers|x64.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.JustInstallers|x64.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.NoInstallers|AnyCPU.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.NoInstallers|AnyCPU.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.NoInstallers|AnyCPU32.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.NoInstallers|AnyCPU32.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.NoInstallers|x64.ActiveCfg = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.NoInstallers|x64.Build.0 = Debug|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Release|AnyCPU32.ActiveCfg = Release|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Release|AnyCPU32.Build.0 = Release|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD8870EB-69E3-4761-83A6-5ED3A2B16370}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
