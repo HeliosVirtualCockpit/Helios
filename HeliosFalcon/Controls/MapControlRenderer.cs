@@ -41,24 +41,26 @@ namespace GadrocsWorkshop.Helios.Controls
 		private double _pixelsPerDip = 1.0d;
 
 		private double[,] _navPoints_WP = new double[24, 2];
-		private double[,] _navPoints_MK = new double[19, 2];
+		private double[,] _navPoints_PO = new double[19, 2];
 		private double[,] _navPoints_PT = new double[15, 3];
 		private string[] _navNames_PT = new string[15];
 
 		private double[,] _mapPoints_WP = new double[24, 2];
-		private double[,] _mapPoints_MK = new double[19, 2];
+		private double[,] _mapPoints_PO = new double[19, 2];
 		private double[,] _mapPoints_PT = new double[15, 3];
 
 		private ImageSource[] _waypointImages = new ImageSource[24];
+		private ImageSource[] _pospointImages = new ImageSource[19];
 		private Rect[] _waypointRect = new Rect[24];
+		private Rect[] _pospointRect = new Rect[19];
 
 		private const double _minThreatCircleRadius = 30000d;
 		private const double _mapBaseUnit = 1000d;
 		private const double _mapScaleModifier = 1.33d;
 		private double _mapScaleUnit;
-		private const double _waypointBaseScale = 30d;
-		private double _waypointSize;
-		private double _waypointLineWidth;
+		private const double _navpointBaseScale = 30d;
+		private double _navpointSize;
+		private double _navpointLineWidth;
 
 		private Pen _linePen;
 		private Brush _lineBrush;
@@ -75,7 +77,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			: this(location, size, center, 0d)
 		{
 			GetPixelsPerDip();
-			InitializeWaypointImagesArray();
+			InitializeImageArrays();
 		}
 
 		public MapControlRenderer(Point location, Size size, Point center, double baseRotation)
@@ -89,72 +91,85 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		#region Actions
 
-		void InitializeWaypointImagesArray()
+		void InitializeImageArrays()
 		{
 			string imagePath;
 
 			for (int i = 0; i < _waypointImages.GetLength(0); i++)
 			{
-				imagePath = "{HeliosFalcon}/Images/Waypoints/Waypoint_" + (i + 1).ToString("D2") + ".png";
+				imagePath = "{HeliosFalcon}/Images/Navpoints/Waypoint_" + (i + 1).ToString("D2") + ".png";
 
 				_waypointImages[i] = ConfigManager.ImageManager.LoadImage(imagePath, 120, 120);
 			}
+
+			for (int i = 0; i < _pospointImages.GetLength(0); i++)
+			{
+				imagePath = "{HeliosFalcon}/Images/Navpoints/Pospoint_" + (i + 81).ToString("D2") + ".png";
+
+				_pospointImages[i] = ConfigManager.ImageManager.LoadImage(imagePath, 120, 120);
+			}
 		}
 
-		internal void ProcessNavPointValues(List<string> navPoints )
+		internal void ProcessNavPointValues(List<string> navPoints)
 		{
 			int lenWP = _navPoints_WP.GetLength(0);
-			int lenMK = _navPoints_MK.GetLength(0);
+			int lenPO = _navPoints_PO.GetLength(0);
 			int lenPT = _navPoints_PT.GetLength(0);
 
 			int posWP = 0;
-			int posMK = 0;
+			int posPO = 0;
 			int posPT = 0;
 
 			Array.Clear(_navPoints_WP, 0, _navPoints_WP.Length);
-			Array.Clear(_navPoints_MK, 0, _navPoints_MK.Length);
+			Array.Clear(_navPoints_PO, 0, _navPoints_PO.Length);
 			Array.Clear(_navPoints_PT, 0, _navPoints_PT.Length);
 			Array.Clear(_navNames_PT, 0, _navNames_PT.Length);
 
 			foreach (string navLine in navPoints)
 			{
-				string[] navValues = navLine.Split(',');
+				string[] navLineValues = navLine.Split(',');
 
-				if (navValues.Length >= 4)
+				if (navLineValues.Length >= 4)
 				{
-					switch (navValues[1])
+					switch (navLineValues[1])
 					{
-						case "WP":
+						case "WP": // (WAYPOINT)
 							{
 								if (posWP < lenWP)
 								{
-									_navPoints_WP[posWP, 0] = NavPointToDouble(navValues[3]);
-									_navPoints_WP[posWP, 1] = NavPointToDouble(navValues[2]);
+									_navPoints_WP[posWP, 0] = NavPointToDouble(navLineValues[3]);
+									_navPoints_WP[posWP, 1] = NavPointToDouble(navLineValues[2]);
 									posWP++;
 								}
 								break;
 							}
-						case "MK":
+						case "PO": // (POSPOINT)
 							{
-								if (posMK < lenMK)
+								string[] navLineIndexValues = navLineValues[0].Split(':');
+
+								if (navLineIndexValues.GetLength(0) == 2)
 								{
-									_navPoints_MK[posMK, 0] = NavPointToDouble(navValues[3]);
-									_navPoints_MK[posMK, 1] = NavPointToDouble(navValues[2]);
-									posMK++;
+									posPO = Convert.ToInt32(navLineIndexValues[1]) - 81;
+
+									if (posPO >= 0 && posPO < lenPO)
+									{
+										_navPoints_PO[posPO, 0] = NavPointToDouble(navLineValues[3]);
+										_navPoints_PO[posPO, 1] = NavPointToDouble(navLineValues[2]);
+									}
 								}
 								break;
 							}
-						case "PT":
+						case "PT": // (PREPLANNEDTHREAT)
 							{
 								if (posPT < lenPT)
 								{
-									_navPoints_PT[posPT, 0] = NavPointToDouble(navValues[3]);
-									_navPoints_PT[posPT, 1] = NavPointToDouble(navValues[2]);
+									_navPoints_PT[posPT, 0] = NavPointToDouble(navLineValues[3]);
+									_navPoints_PT[posPT, 1] = NavPointToDouble(navLineValues[2]);
 
-									if (navValues.Length >= 7)
+									if (navLineValues.Length >= 7)
 									{
-										_navPoints_PT[posPT, 2] = NavPointToDouble(navValues[6]);
-										_navNames_PT[posPT] = NavPointToName(navValues[5]);
+										_navPoints_PT[posPT, 2] = NavPointToDouble(navLineValues[6]);
+										_navNames_PT[posPT] = NavPointToName(navLineValues[5]);
 									}
 									posPT++;
 								}
@@ -170,12 +185,12 @@ namespace GadrocsWorkshop.Helios.Controls
 			return decimal.ToDouble(decimal.Parse(navValue, NumberStyles.Float));
 		}
 
-		string NavPointToName(string navValue)
+		string NavPointToName(string navName)
 		{
-			string[] navValues = navValue.Split(':');
-			if (navValues.Length >= 2)
+			string[] navNameValues = navName.Split(':');
+			if (navNameValues.Length >= 2)
 			{
-				return navValues[1].Trim('"');
+				return navNameValues[1].Trim('"');
 			}
 			else
 			{
@@ -209,7 +224,6 @@ namespace GadrocsWorkshop.Helios.Controls
 			if (ThreatVisibility)
 			{
 				DrawThreatCircles(drawingContext);
-				DrawDesignatedTargets(drawingContext);
 				DrawThreatNames(drawingContext);
 			}
 
@@ -217,6 +231,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			{
 				DrawWaypointLines(drawingContext);
 				DrawWaypointImages(drawingContext);
+				DrawPospointImages(drawingContext);
 			}
 
 			drawingContext.Pop();
@@ -239,22 +254,6 @@ namespace GadrocsWorkshop.Helios.Controls
 					}
 
 					drawingContext.DrawEllipse(_pointFillBrush, null, new Point(_mapPoints_PT[i, 0], _mapPoints_PT[i, 1]), _mapScaleUnit * 12d, _mapScaleUnit * 12d);
-				}
-			}
-		}
-
-		void DrawDesignatedTargets(DrawingContext drawingContext)
-		{
-			_pointFillBrush = new SolidColorBrush(Color.FromRgb(0, 0, 255));
-			_backgroundFillBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-
-			for (int i = 0; i < _mapPoints_MK.GetLength(0); i++)
-			{
-				if (_mapPoints_MK[i, 0] > 0d)
-				{
-					drawingContext.DrawEllipse(_backgroundFillBrush, null, new Point(_mapPoints_MK[i, 0], _mapPoints_MK[i, 1]), _mapScaleUnit * 18d, _mapScaleUnit * 18d);
-
-					drawingContext.DrawEllipse(_pointFillBrush, null, new Point(_mapPoints_MK[i, 0], _mapPoints_MK[i, 1]), _mapScaleUnit * 12d, _mapScaleUnit * 12d);
 				}
 			}
 		}
@@ -296,7 +295,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		void DrawWaypointLines(DrawingContext drawingContext)
 		{
 			_lineBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-			_linePen = new Pen(_lineBrush, _waypointLineWidth) {DashStyle = DashStyles.Dash};
+			_linePen = new Pen(_lineBrush, _navpointLineWidth) {DashStyle = DashStyles.Dash};
 
 			for (int i = 0; i < _mapPoints_WP.GetLength(0) - 1; i++)
 			{
@@ -322,6 +321,17 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
+		void DrawPospointImages(DrawingContext drawingContext)
+		{
+			for (int i = 0; i < _navPoints_PO.GetLength(0); i++)
+			{
+				if (_navPoints_PO[i, 0] > 0d)
+				{
+					drawingContext.DrawImage(_pospointImages[i], _pospointRect[i]);
+				}
+			}
+		}
+
 		protected override void OnRefresh(double xScale, double yScale)
 		{
 			_xScale = xScale;
@@ -329,22 +339,22 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			_mapScaleUnit = FeetToMapUnits_ScaleUnit(_mapBaseUnit, _xScale, _yScale);
 			_fontScaleSize = _mapScaleUnit * _fontBaseSize;
-			_waypointSize = MapShortestSize / _waypointBaseScale * MapScaleMultiplier;
+			_navpointSize = MapShortestSize / _navpointBaseScale * MapScaleMultiplier;
 
 			if (MapScaleMultiplier == 1d)
 			{
 				_fontScaleSize = _fontScaleSize * _mapScaleModifier;
-				_waypointSize = _waypointSize * _mapScaleModifier;
+				_navpointSize = _navpointSize * _mapScaleModifier;
 			}
 			else if (MapScaleMultiplier == 4d)
 			{
 				_fontScaleSize = _fontScaleSize / _mapScaleModifier;
-				_waypointSize = _waypointSize / _mapScaleModifier;
+				_navpointSize = _navpointSize / _mapScaleModifier;
 			}
 
-			_waypointLineWidth = _waypointSize / 10d;
+			_navpointLineWidth = _navpointSize / 10d;
 
-			double waypointOffset = _waypointSize / 2;
+			double navpointOffset = _navpointSize / 2;
 
 			for (int i = 0; i < _navPoints_WP.GetLength(0); i++)
 			{
@@ -352,10 +362,10 @@ namespace GadrocsWorkshop.Helios.Controls
 				_mapPoints_WP[i, 1] = FeetToMapUnits_Y(_navPoints_WP[i, 1], _yScale);
 			}
 
-			for (int i = 0; i < _navPoints_MK.GetLength(0); i++)
+			for (int i = 0; i < _navPoints_PO.GetLength(0); i++)
 			{
-				_mapPoints_MK[i, 0] = FeetToMapUnits_X(_navPoints_MK[i, 0], _xScale);
-				_mapPoints_MK[i, 1] = FeetToMapUnits_Y(_navPoints_MK[i, 1], _yScale);
+				_mapPoints_PO[i, 0] = FeetToMapUnits_X(_navPoints_PO[i, 0], _xScale);
+				_mapPoints_PO[i, 1] = FeetToMapUnits_Y(_navPoints_PO[i, 1], _yScale);
 			}
 
 			for (int i = 0; i < _navPoints_PT.GetLength(0); i++)
@@ -367,7 +377,12 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			for (int i = 0; i < _waypointRect.GetLength(0); i++)
 			{
-				_waypointRect[i] = new Rect(_mapPoints_WP[i, 0] - waypointOffset, _mapPoints_WP[i, 1] - waypointOffset, _waypointSize, _waypointSize);
+				_waypointRect[i] = new Rect(_mapPoints_WP[i, 0] - navpointOffset, _mapPoints_WP[i, 1] - navpointOffset, _navpointSize, _navpointSize);
+			}
+
+			for (int i = 0; i < _pospointRect.GetLength(0); i++)
+			{
+				_pospointRect[i] = new Rect(_mapPoints_PO[i, 0] - navpointOffset, _mapPoints_PO[i, 1] - navpointOffset, _navpointSize, _navpointSize);
 			}
 		}
 
