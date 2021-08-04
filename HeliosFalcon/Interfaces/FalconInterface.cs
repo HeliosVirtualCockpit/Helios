@@ -46,6 +46,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         private FalconDataExporter _dataExporter;
         private FalconKeyFile _callbacks = new FalconKeyFile("");
         private bool _forceKeyFile;
+		private bool _inFlight;
+		private bool _inFlightLastValue;
 
         public FalconInterface()
             : base("Falcon")
@@ -360,7 +362,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                     File.Copy(popFile, backupPopFile, true);
                     Logger.Debug("File " + Path.GetFileName(popFile) + " has been backed up to " + backupDir);
                 }
-                //}
 
                 File.SetAttributes(popFile, File.GetAttributes(popFile) & ~FileAttributes.ReadOnly);
 
@@ -430,6 +431,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         void Profile_ProfileTick(object sender, EventArgs e)
         {
             _dataExporter?.PollData();
+
+			BindingValue runtimeFlying = GetValue("Runtime", "Flying");
+			_inFlight = runtimeFlying.BoolValue;
+
+			if (_inFlight != _inFlightLastValue)
+			{
+				if (_inFlight)
+				{
+					_currentTheater = GetCurrentTheater();
+				}
+
+				_inFlightLastValue = _inFlight;
+			}
         }
 
         void Profile_ProfileStarted(object sender, EventArgs e)

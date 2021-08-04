@@ -57,12 +57,14 @@
     <Compile Include="Interfaces\RTT\IRttGeneratorHost.cs" />
     <Compile Include="Controls\MapControl.cs" />
     <Compile Include="Controls\MapControlRenderer.cs" />
-    <Compile Include="Controls\MapControlUserMapEditor.xaml.cs">
-      <DependentUpon>MapControlUserMapEditor.xaml</DependentUpon>
+    <Compile Include="Controls\MapControls.cs" />
+    <Compile Include="Controls\MapControlsUserMapEditor.xaml.cs">
+      <DependentUpon>MapControlsUserMapEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MapControlBaseMapEditor.xaml.cs">
-      <DependentUpon>MapControlBaseMapEditor.xaml</DependentUpon>
+    <Compile Include="Controls\MapControlsBaseMapEditor.xaml.cs">
+      <DependentUpon>MapControlsBaseMapEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MapViewer.cs" />
     <Compile Include="Gauges\Altimeter.cs" />
     <Compile Include="Interfaces\BMS\BMSFalconDataExporter.cs" />
     <Compile Include="Interfaces\BMS\BMSLightBits.cs" />
@@ -141,11 +143,11 @@
     <Resource Include="Images\Textures\rwr.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\MapControlUserMapEditor.xaml">
+    <Page Include="Controls\MapControlsUserMapEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\MapControlBaseMapEditor.xaml">
+    <Page Include="Controls\MapControlsBaseMapEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -208,7 +210,8 @@
     <Resource Include="Images\MapControl\Map Aircraft.png" />
     <Resource Include="Images\MapControl\Map No Data.png" />
     <Resource Include="Images\MapControl\Foreground.png" />
-    <Resource Include="Images\MapControl\Background.png" />
+    <Resource Include="Images\MapControl\Background 01.png" />
+    <Resource Include="Images\MapControl\Background 02.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Maps\Aegean\Map.jpg" />

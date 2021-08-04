@@ -23,12 +23,15 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
 	/// <summary>
-	/// Interaction logic for MapControlBaseMapsEditor.xaml
+	/// Interaction logic for MapControlsBaseMapsEditor.xaml
 	/// </summary>
+
 	[HeliosPropertyEditor("Helios.Falcon.MapControl", "Base Maps")]
-	public partial class MapControlBaseMapEditor : HeliosPropertyEditor
+	[HeliosPropertyEditor("Helios.Falcon.MapViewer", "Base Maps")]
+
+	public partial class MapControlsBaseMapEditor : HeliosPropertyEditor
 	{
-		public MapControlBaseMapEditor()
+		public MapControlsBaseMapEditor()
 		{
 			InitializeComponent();
 		}
