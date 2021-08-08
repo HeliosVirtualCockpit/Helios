@@ -428,7 +428,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		void MapControlStaticResize()
 		{
-			double _mapShortestSize = 0d;
+			double mapShortestSize = 0d;
 			double rangeWidth = 0d;
 			double rangeHeight = 0d;
 			double rangeInitialHorizontal = 0d;
@@ -436,7 +436,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			if (Height >= Width)
 			{
-				_mapShortestSize = Width;
+				mapShortestSize = Width;
 				_rangeScale = Width / Height * _mapBaseScale;
 				rangeWidth = 200d * _mapBaseScale;
 				rangeHeight = 200d * _rangeScale;
@@ -451,7 +451,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 			else
 			{
-				_mapShortestSize = Height;
+				mapShortestSize = Height;
 				_rangeScale = Height / Width * _mapBaseScale;
 				rangeWidth = 200d * _rangeScale;
 				rangeHeight = 200d * _mapBaseScale;
@@ -465,7 +465,7 @@ namespace GadrocsWorkshop.Helios.Controls
 				_MapNoData.PosX = (200d - Height / Width * 200d) / 2d;
 			}
 
-			_MapOverlays.MapShortestSize = _mapShortestSize;
+			_MapOverlays.MapShortestSize = mapShortestSize;
 
 			_RangeRings.Tape_Width = rangeWidth;
 			_Aircraft.Tape_Width = rangeWidth;

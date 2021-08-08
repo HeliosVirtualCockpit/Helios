@@ -34,6 +34,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		private Gauges.GaugeImage _Background;
 		private Gauges.CustomGaugeNeedle _Map;
 		private Gauges.CustomGaugeNeedle _MapZoomIn;
+		private MapViewerRenderer _MapOverlay;
 
 		private Rect _imageSize = new Rect(0d, 0d, 200d, 200d);
 		private Size _needleSize = new Size(200d, 200d);
@@ -43,19 +44,25 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		private const string _backgroundImage = "{HeliosFalcon}/Images/MapControl/Background 02.png";
 		private string _lastTheater;
+		private bool _navPointsInitialized = false;
 
+		private const double _mapSizeFeet64 = 3358700;   // 1024 km x 3279.98 ft/km (BMS conversion value)
+		private const double _mapSizeFeet128 = 6717400;  // 2048 km x 3279.98 ft/km (BMS conversion value)
+
+		private double _mapSizeFeet = 3358700;
+		private double _mapSizeMultiplier = 1d;   // 1d = 64 Segment, 2d = 128 Segment
 		private double _mapSize = 200d;
 		private double _mapMultiplier = 4d;
+		private double _baseMapWidth = 0d;
+		private double _baseMapHeight = 0d;
 		private double _mapWidthScale = 0d;
 		private double _mapHeightScale = 0d;
-		private double _mapOffsetHorizontal = 0d;
-		private double _mapOffsetVertical = 0d;
 		private double _xMinValue = 0d;
 		private double _xMaxValue = 0d;
 		private double _yMinValue = 0d;
 		private double _yMaxValue = 0d;
 
-
+		
 		public MapViewer()
 			: base("MapViewer", new Size(200d, 200d))
 		{
@@ -72,8 +79,13 @@ namespace GadrocsWorkshop.Helios.Controls
 			_MapZoomIn.ImageRefresh = true;
 			_MapZoomIn.IsHidden = true;
 			Components.Add(_MapZoomIn);
-			
-			MapResize();
+
+			_MapOverlay = new MapViewerRenderer(_needleLocation, _needleSize);
+			_MapOverlay.Clip = new RectangleGeometry(_needleClip);
+			_MapOverlay.IsHidden = true;
+			Components.Add(_MapOverlay);
+
+			BaseMapResize();
 			Resized += new EventHandler(OnMapControl_Resized);
 		}
 
@@ -86,10 +98,10 @@ namespace GadrocsWorkshop.Helios.Controls
 			{
 				if (location.X >= _xMinValue && location.X <= _xMaxValue && location.Y >= _yMinValue && location.Y <= _yMaxValue)
 				{
-					_MapZoomIn.IsHidden = false;
 					_Map.IsHidden = true;
+					_MapZoomIn.IsHidden = false;
 
-					SetMapZoomInOffsets(location.X, location.Y);
+					MapZoomInResize(location.X, location.Y);
 				}
 				else
 				{
@@ -100,6 +112,8 @@ namespace GadrocsWorkshop.Helios.Controls
 			{
 				_Map.IsHidden = false;
 				_MapZoomIn.IsHidden = true;
+
+				MapOverlayResize();
 			}
 		}
 
@@ -134,12 +148,39 @@ namespace GadrocsWorkshop.Helios.Controls
 		{
 			if (_falconInterface != null)
 			{
+				BindingValue runtimeFlying = GetValue("Runtime", "Flying");
+				bool inFlight = runtimeFlying.BoolValue;
+
 				string theater = _falconInterface.CurrentTheater;
 
 				if (!string.IsNullOrEmpty(theater) && theater != _lastTheater)
 				{
 					_lastTheater = theater;
 					TheaterMapSelect(theater);
+				}
+
+				if (inFlight)
+				{
+					_MapOverlay.IsHidden = false;
+
+					if (!_navPointsInitialized)
+					{
+						List<string> navPoints = _falconInterface.NavPoints;
+
+						if (navPoints != null && navPoints.Any())
+						{
+							_MapOverlay.ProcessNavPointValues(navPoints);
+							_navPointsInitialized = true;
+							Refresh();
+						}
+					}
+				}
+
+				if (!inFlight)
+				{
+					_MapOverlay.IsHidden = true;
+					_navPointsInitialized = false;
+					Refresh();
 				}
 			}
 		}
@@ -214,14 +255,31 @@ namespace GadrocsWorkshop.Helios.Controls
 					if (_Map.Image != mapImages[i, 1])
 					{
 						_Map.Image = mapImages[i, 1];
-					}
-
-					if (_MapZoomIn.Image != mapImages[i, 1])
-					{
 						_MapZoomIn.Image = mapImages[i, 1];
-					}
 
-					Refresh();
+						_mapSizeMultiplier = Convert.ToDouble(mapImages[i, 2]);
+
+						if (_mapSizeMultiplier == 1d)
+						{
+							_mapSizeFeet = _mapSizeFeet64;
+							_MapOverlay.MapSizeMultiplier = 1d;
+						}
+						else if (_mapSizeMultiplier == 2d)
+						{
+							_mapSizeFeet = _mapSizeFeet128;
+							_MapOverlay.MapSizeMultiplier = 2d;
+						}
+						else
+						{
+							_mapSizeFeet = _mapSizeFeet64;
+							_MapOverlay.MapSizeMultiplier = 1d;
+						}
+
+						_Map.IsHidden = false;
+						_MapZoomIn.IsHidden = true;
+
+						BaseMapResize();
+					}
 				}
 			}
 		}
@@ -233,17 +291,16 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		void OnMapControl_Resized(object sender, EventArgs e)
 		{
-			MapResize();
+			BaseMapResize();
 		}
 
-		void MapResize()
+		void BaseMapResize()
 		{
-			double mapWidth;
-			double mapHeight;
 			double mapOffsetHorizontal;
 			double mapOffsetVertical;
 			double mapWidthZoomIn;
 			double mapHeightZoomIn;
+			double mapShortestSize = 0d;
 
 			double xMinValue;
 			double xMaxValue;
@@ -252,33 +309,35 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			if (Height >= Width)
 			{
-				mapWidth = _mapSize;
+				_baseMapWidth = _mapSize;
+				_baseMapHeight = _mapSize * Width / Height;
 				mapOffsetHorizontal = 0d;
-				mapHeight = _mapSize * Width / Height;
-				mapOffsetVertical = (_mapSize - mapHeight) / 2d;
+				mapOffsetVertical = (_mapSize - _baseMapHeight) / 2d;
 
 				xMinValue = 0d;
-				xMaxValue = mapWidth;
+				xMaxValue = _baseMapWidth;
 				yMinValue = mapOffsetVertical;
-				yMaxValue = mapOffsetVertical + mapHeight;
+				yMaxValue = mapOffsetVertical + _baseMapHeight;
 
-				mapWidthZoomIn = _mapSize * _mapMultiplier;
-				mapHeightZoomIn = _mapSize * Width / Height * _mapMultiplier;
+				mapWidthZoomIn = _baseMapWidth * _mapMultiplier;
+				mapHeightZoomIn = _baseMapHeight * _mapMultiplier;
+				mapShortestSize = Width;
 			}
 			else
 			{
-				mapWidth = _mapSize * Height / Width;
-				mapOffsetHorizontal = (_mapSize - mapWidth) / 2d;
-				mapHeight = _mapSize;
+				_baseMapHeight = _mapSize;
+				_baseMapWidth = _mapSize * Height / Width;
 				mapOffsetVertical = 0d;
+				mapOffsetHorizontal = (_mapSize - _baseMapWidth) / 2d;
 
 				xMinValue = mapOffsetHorizontal;
-				xMaxValue = mapOffsetHorizontal + mapWidth;
+				xMaxValue = mapOffsetHorizontal + _baseMapWidth;
 				yMinValue = 0;
-				yMaxValue = mapHeight;
+				yMaxValue = _baseMapHeight;
 
-				mapWidthZoomIn = _mapSize * Height / Width * _mapMultiplier;
-				mapHeightZoomIn = _mapSize * _mapMultiplier;
+				mapWidthZoomIn = _baseMapWidth * _mapMultiplier;
+				mapHeightZoomIn = _baseMapHeight * _mapMultiplier;
+				mapShortestSize = Height;
 			}
 
 			_mapWidthScale = Width / _mapSize;
@@ -289,28 +348,51 @@ namespace GadrocsWorkshop.Helios.Controls
 			_yMinValue = yMinValue * _mapHeightScale;
 			_yMaxValue = yMaxValue * _mapHeightScale;
 
-			_Map.Tape_Width = mapWidth;
-			_Map.Tape_Height = mapHeight;
-
-			_mapOffsetHorizontal = mapOffsetHorizontal;
-			_mapOffsetVertical = mapOffsetVertical;
-
+			_Map.Tape_Width = _baseMapWidth;
+			_Map.Tape_Height = _baseMapHeight;
 			_Map.HorizontalOffset = mapOffsetHorizontal;
 			_Map.VerticalOffset = mapOffsetVertical;
 
 			_MapZoomIn.Tape_Width = mapWidthZoomIn;
 			_MapZoomIn.Tape_Height = mapHeightZoomIn;
+			_MapOverlay.MapShortestSize = mapShortestSize;
+
+			MapOverlayResize();
+		}
+
+		void MapOverlayResize()
+		{
+			_MapOverlay.MapSizeFeet = _mapSizeFeet;
+			_MapOverlay.MapScaleMultiplier = 1d;
+
+			_MapOverlay.MapWidth = _Map.Tape_Width;
+			_MapOverlay.MapHeight = _Map.Tape_Height;
+			_MapOverlay.Tape_Width = _MapZoomIn.Tape_Width;
+			_MapOverlay.Tape_Height = _MapZoomIn.Tape_Height;
+			_MapOverlay.HorizontalOffset = _Map.HorizontalOffset;
+			_MapOverlay.VerticalOffset = _Map.VerticalOffset;
 
 			Refresh();
 		}
 
-		void SetMapZoomInOffsets(double xPos, double yPos)
+		void MapZoomInResize(double xPos, double yPos)
 		{
 			double xMapPos;
 			double yMapPos;
 
-			xMapPos = (_mapOffsetHorizontal - xPos / _mapWidthScale) * _mapMultiplier;
-			yMapPos = (_mapOffsetVertical - yPos / _mapHeightScale) * _mapMultiplier;
+			xMapPos = (_Map.HorizontalOffset - xPos / _mapWidthScale) * _mapMultiplier;
+			yMapPos = (_Map.VerticalOffset - yPos / _mapHeightScale) * _mapMultiplier;
+
+			_MapOverlay.MapSizeFeet = _mapSizeFeet;
+			_MapOverlay.MapScaleMultiplier = _mapMultiplier;
+
+			_MapOverlay.MapWidth = _baseMapWidth * _mapMultiplier;
+			_MapOverlay.MapHeight = _baseMapHeight * _mapMultiplier;
+			_MapOverlay.Tape_Width = _baseMapWidth * _mapMultiplier;
+			_MapOverlay.Tape_Height = _baseMapHeight * _mapMultiplier;
+
+			_MapOverlay.HorizontalOffset = xMapPos + _mapSize / 2d;
+			_MapOverlay.VerticalOffset = yMapPos + _mapSize / 2d;
 
 			_MapZoomIn.HorizontalOffset = xMapPos + _mapSize / 2d;
 			_MapZoomIn.VerticalOffset = yMapPos + _mapSize / 2d;
