@@ -65,6 +65,7 @@
       <DependentUpon>MapControlsBaseMapEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MapViewer.cs" />
+    <Compile Include="Controls\MapViewerRenderer.cs" />
     <Compile Include="Gauges\Altimeter.cs" />
     <Compile Include="Interfaces\BMS\BMSFalconDataExporter.cs" />
     <Compile Include="Interfaces\BMS\BMSLightBits.cs" />
