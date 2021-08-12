@@ -430,10 +430,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 
         void Profile_ProfileTick(object sender, EventArgs e)
         {
-            _dataExporter?.PollData();
+			_dataExporter?.PollUserInterfaceData();
 
 			BindingValue runtimeFlying = GetValue("Runtime", "Flying");
 			_inFlight = runtimeFlying.BoolValue;
+
+			if (_inFlight)
+			{
+				_dataExporter?.PollFlightData();
+			}
 
 			if (_inFlight != _inFlightLastValue)
 			{

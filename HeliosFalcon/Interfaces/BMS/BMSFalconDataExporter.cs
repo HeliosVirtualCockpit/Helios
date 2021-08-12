@@ -389,7 +389,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             _sharedMemoryStringArea.Open();
         }
 
-        internal override void PollData()
+        internal override void PollUserInterfaceData()
+        {
+            SetValue("Runtime", "Current Theater", new BindingValue(FalconInterface.CurrentTheater));
+
+            if (_sharedMemory != null && _sharedMemory.IsDataAvailable)
+            {
+                FlightData lastFlightData = (FlightData)_sharedMemory.MarshalTo(typeof(FlightData));
+
+                SetValue("Runtime", "Flying", new BindingValue(lastFlightData.hsiBits.HasFlag(HsiBits.Flying)));
+            }
+        }
+
+        internal override void PollFlightData()
         {
             if (_sharedMemory != null && _sharedMemory.IsDataAvailable)
             {
@@ -828,7 +840,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             SetValue("VVI", "off flag", new BindingValue(bits.HasFlag(HsiBits.VVI)));
             SetValue("AOA", "off flag", new BindingValue(bits.HasFlag(HsiBits.AOA)));
             SetValue("AVTR", "avtr indicator", new BindingValue(bits.HasFlag(HsiBits.AVTR)));
-            SetValue("Runtime", "Flying", new BindingValue(bits.HasFlag(HsiBits.Flying)));
 
             UpdateBlinkingLightState(bits.HasFlag(HsiBits.OuterMarker), blinkBits.HasFlag(BlinkBits.OuterMarker), ref _outerMarkerLastTick, ref _outerMarkerOnState);
             SetValue("HSI", "Outer marker indicator", new BindingValue(_outerMarkerOnState));

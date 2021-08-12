@@ -52,7 +52,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         }
 
         internal abstract void InitData();
-        internal abstract void PollData();
+		internal abstract void PollUserInterfaceData();
+		internal abstract void PollFlightData();
         internal abstract void CloseData();
 
         public static float AngleDelta(float Ang1, float Ang2)
