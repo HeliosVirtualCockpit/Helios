@@ -161,7 +161,7 @@
                                  Width="16"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
-                                 IsChecked="{av:Binding Interface.PilotOptions.ForceKeyFile,
+                                 IsChecked="{av:Binding Interface.PilotOptions.Enabled,
                                            Mode=TwoWay}" />
                     <av:TextBlock Margin="4"
                                   Text="Force Falcon pilot callsign to use the key file defined in this profile"

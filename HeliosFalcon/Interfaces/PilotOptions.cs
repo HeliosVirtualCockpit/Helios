@@ -188,17 +188,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
             }
         }
 
-        public bool ForceKeyFile
-        {
-            get { return _forceKeyFile; }
-            set
-            {
-                var oldValue = _forceKeyFile;
-                _forceKeyFile = value;
-                OnPropertyChanged("ForceKeyFile", oldValue, value, true);
-            }
-        }
-
         /// <summary>
         /// true if pilot options updates are allowed on this machine (not per-profile)
         /// </summary>
