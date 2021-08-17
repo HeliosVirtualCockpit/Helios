@@ -13,13 +13,13 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
+namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
 {
-    /// <summary>
-    /// Interface provided for accessing FalconInterface Properties without needing the entire Interface
-    /// </summary>
-    public interface IRttGeneratorHost
+    public interface IFalconInterfaceHost
     {
         string FalconPath { get; }
+        string FalconVersion { get; }
+        string FalconRootKey { get; }
+        string KeyFileName { get; }
     }
 }

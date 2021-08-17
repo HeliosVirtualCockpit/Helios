@@ -54,7 +54,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\RTT\IRttGeneratorHost.cs" />
+    <Compile Include="Interfaces\IFalconInterfaceHost.cs" />
+    <Compile Include="Interfaces\PilotOptions.cs" />
     <Compile Include="Controls\MapControl.cs" />
     <Compile Include="Controls\MapControlRenderer.cs" />
     <Compile Include="Controls\MapControls.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Interfaces\RTT\NetworkOptions.cs" />
     <Compile Include="Interfaces\RTT\ProcessControl.cs" />
     <Compile Include="Interfaces\RTT\ShadowMonitor.cs" />
+    <Compile Include="Interfaces\_pilotCallsign.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\RadarContact.cs" />
     <Compile Include="Interfaces\RadarSymbols.cs" />

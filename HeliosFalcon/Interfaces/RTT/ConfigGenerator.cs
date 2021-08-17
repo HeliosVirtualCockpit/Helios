@@ -847,7 +847,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
         }
 
         [XmlIgnore] 
-        public IRttGeneratorHost Parent { get; internal set; }
+        public IFalconInterfaceHost Parent { get; internal set; }
 
         #endregion
 

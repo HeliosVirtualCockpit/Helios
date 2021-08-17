@@ -59,7 +59,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
             return CheckCommonItems();
         }
 
-        internal void OnProfileStart(IRttGeneratorHost parent, bool networked)
+        internal void OnProfileStart(IFalconInterfaceHost parent, bool networked)
         {
             StartedProcess = false;
 
@@ -81,7 +81,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
                 StartRTTClient(Path.Combine(parent.FalconPath, "Tools", "RTTRemote", selectedClient));
         }
 
-        internal void OnProfileStop(IRttGeneratorHost _, bool networked)
+        internal void OnProfileStop(IFalconInterfaceHost _, bool networked)
         {
             if (!StartedProcess)
             {

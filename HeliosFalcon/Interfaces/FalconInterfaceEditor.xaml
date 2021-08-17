@@ -22,7 +22,6 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Util:EnumBooleanConverter x:Key="EnumBooleanConverter" />
-            <!--<helios:EnumConverter x:Key="FalconTypes" Type="{x:Type local:FalconTypes}" />-->
             <av:Style x:Key="TextueSettingsSidebar"
                       BasedOn="{av:StaticResource {x:Type av:GroupBox}}"
                       TargetType="{x:Type av:GroupBox}">
@@ -78,7 +77,7 @@
                     <av:Label Margin="0,2,0,19.667"
                               HorizontalContentAlignment="Center"
                               VerticalContentAlignment="Center"
-                              av:Content="{av:Binding Interface.PilotCallsign}" />
+                              av:Content="{av:Binding Interface.PilotOptions.PilotCallsign}" />
                 </av:GroupBox>
 
                 <av:TextBlock Margin="4,4,10,4"
@@ -162,7 +161,7 @@
                                  Width="16"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
-                                 IsChecked="{av:Binding Interface.ForceKeyFile,
+                                 IsChecked="{av:Binding Interface.PilotOptions.ForceKeyFile,
                                            Mode=TwoWay}" />
                     <av:TextBlock Margin="4"
                                   Text="Force Falcon pilot callsign to use the key file defined in this profile"
