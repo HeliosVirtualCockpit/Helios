@@ -435,19 +435,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 			BindingValue runtimeFlying = GetValue("Runtime", "Flying");
 			_inFlight = runtimeFlying.BoolValue;
 
-			if (_inFlight)
-			{
-				_dataExporter?.PollFlightData();
-			}
-
 			if (_inFlight != _inFlightLastValue)
 			{
 				if (_inFlight)
 				{
 					_currentTheater = GetCurrentTheater();
+
+                    _dataExporter.Synchronized = false;
+                    _dataExporter.PollUserInterfaceData();
+                    _dataExporter.PollFlightData();
+                    _dataExporter.Synchronized = true;
 				}
 
 				_inFlightLastValue = _inFlight;
+            }
+
+            if (_inFlight)
+            {
+                _dataExporter?.PollFlightData();
 			}
         }
 

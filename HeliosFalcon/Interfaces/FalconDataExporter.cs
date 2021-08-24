@@ -39,6 +39,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         internal abstract List<string> NavPoints { get; }
         internal abstract bool StringDataUpdated { get; }
 
+        internal bool Synchronized { get; set; } = true;
+
         #endregion
 
         internal void RemoveExportData(FalconInterface falcon)
@@ -109,7 +111,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             string key = device + "." + name;
             if (_values.ContainsKey(key))
             {
-                _values[key].SetValue(value, false);
+                if (Synchronized)
+                {
+                    _values[key].SetValue(value, false);
+                }
+                else
+                {
+                    _values[key].SetValue(BindingValue.Empty, true);
+                }
             }
         }
 
