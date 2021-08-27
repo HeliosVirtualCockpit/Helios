@@ -40,6 +40,8 @@ namespace GadrocsWorkshop.Helios.Controls
 		private double _mapSizeFeet;
 		private double _pixelsPerDip = 1.0d;
 
+		private CultureInfo _provider = new CultureInfo("en-US");
+
 		private double[,] _navPoints_WP = new double[24, 2];
 		private double[,] _navPoints_PO = new double[19, 2];
 		private double[,] _navPoints_PT = new double[15, 3];
@@ -182,7 +184,14 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		double NavPointToDouble(string navValue)
 		{
-			return decimal.ToDouble(decimal.Parse(navValue, NumberStyles.Float));
+			try
+			{
+				return decimal.ToDouble(decimal.Parse(navValue, NumberStyles.Float, _provider));
+			}
+			catch
+			{
+				return 0d;
+			}
 		}
 
 		string NavPointToName(string navName)
@@ -246,7 +255,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			for (int i = 0; i < _mapPoints_PT.GetLength(0); i++)
 			{
-				if (_mapPoints_PT[i, 0] > 0d)
+				if (_mapPoints_PT[i, 0] > 0d && _mapPoints_PT[i, 1] > 0d)
 				{
 					if (_mapPoints_PT[i, 2] > 0d)
 					{
@@ -273,7 +282,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			for (int i = 0; i < _mapPoints_PT.GetLength(0); i++)
 			{
-				if (_mapPoints_PT[i, 0] > 0d && !string.IsNullOrEmpty(_navNames_PT[i]))
+				if (_mapPoints_PT[i, 0] > 0d && _mapPoints_PT[i, 1] > 0d && !string.IsNullOrEmpty(_navNames_PT[i]))
 				{
 					double xPos = _mapPoints_PT[i, 0] + xPosOffset;
 					double yPos = _mapPoints_PT[i, 1] - yPosOffset;
@@ -310,7 +319,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		{
 			for (int i = 0; i < _navPoints_WP.GetLength(0); i++)
 			{
-				if (_navPoints_WP[i, 0] > 0d)
+				if (_navPoints_WP[i, 0] > 0d && _navPoints_WP[i, 1] > 0d)
 				{
 					drawingContext.DrawImage(_waypointImages[i], _waypointRect[i]);
 				}
@@ -325,7 +334,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		{
 			for (int i = 0; i < _navPoints_PO.GetLength(0); i++)
 			{
-				if (_navPoints_PO[i, 0] > 0d)
+				if (_navPoints_PO[i, 0] > 0d && _navPoints_PO[i, 1] > 0d)
 				{
 					drawingContext.DrawImage(_pospointImages[i], _pospointRect[i]);
 				}
