@@ -375,6 +375,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             // Falcon RunTime Data
             AddValue("Runtime", "Current Theater", "Name of the Current Theater", "", BindingValueUnits.Text);
             AddValue("Runtime", "Flying", "Player flying state", "True if in 3D.", BindingValueUnits.Boolean);
+            AddValue("Runtime", "Flight Start Mode", "Flight initial start mode.", "1 = Ramp Start, 2 = Hot Start, 3 = Air Start", BindingValueUnits.Numeric);
         }
 
         internal override void InitData()
@@ -398,6 +399,41 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 FlightData lastFlightData = (FlightData)_sharedMemory.MarshalTo(typeof(FlightData));
 
                 SetValue("Runtime", "Flying", new BindingValue(lastFlightData.hsiBits.HasFlag(HsiBits.Flying)));
+            }
+        }
+
+        internal override void PollFlightStartData()
+        {
+            if (_sharedMemory != null && _sharedMemory.IsDataAvailable)
+            {
+                FlightData lastFlightData = (FlightData)_sharedMemory.MarshalTo(typeof(FlightData));
+
+                if (lastFlightData.hsiBits.HasFlag(HsiBits.Flying))
+                {
+                    if (lastFlightData.lightBits3.HasFlag(BMSLightBits3.OnGround))
+                    {
+                        if (lastFlightData.rpm > 0d)
+                        {
+                            // Hot Start mode.
+                            SetValue("Runtime", "Flight Start Mode", new BindingValue(2d));
+                        }
+                        else
+                        {
+                            // Ramp Start mode.
+                            SetValue("Runtime", "Flight Start Mode", new BindingValue(1d));
+                        }
+                    }
+                    else
+                    {
+                        // Air Start mode.
+                        SetValue("Runtime", "Flight Start Mode", new BindingValue(3d));
+                    }
+                }
+                else
+                {
+                    // In user interface so set to zero.
+                    SetValue("Runtime", "Flight Start Mode", new BindingValue(0d));
+                }
             }
         }
 

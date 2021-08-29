@@ -46,8 +46,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         private FalconDataExporter _dataExporter;
         private FalconKeyFile _callbacks = new FalconKeyFile("");
         private bool _forceKeyFile;
-		private bool _inFlight;
-		private bool _inFlightLastValue;
+        private bool _inFlight;
+        private bool _inFlightLastValue;
 
         public FalconInterface()
             : base("Falcon")
@@ -430,30 +430,36 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 
         void Profile_ProfileTick(object sender, EventArgs e)
         {
-			_dataExporter?.PollUserInterfaceData();
+            _dataExporter?.PollUserInterfaceData();
 
-			BindingValue runtimeFlying = GetValue("Runtime", "Flying");
-			_inFlight = runtimeFlying.BoolValue;
+            BindingValue runtimeFlying = GetValue("Runtime", "Flying");
+            _inFlight = runtimeFlying.BoolValue;
 
-			if (_inFlight != _inFlightLastValue)
-			{
-				if (_inFlight)
-				{
-					_currentTheater = GetCurrentTheater();
+            if (_inFlight != _inFlightLastValue)
+            {
+                if (_inFlight)
+                {
+                    _currentTheater = GetCurrentTheater();
+
+                    _dataExporter?.PollFlightStartData();
 
                     _dataExporter.Synchronized = false;
-                    _dataExporter.PollUserInterfaceData();
-                    _dataExporter.PollFlightData();
+                    _dataExporter?.PollUserInterfaceData();
+                    _dataExporter?.PollFlightData();
                     _dataExporter.Synchronized = true;
-				}
+                }
 
-				_inFlightLastValue = _inFlight;
+                _inFlightLastValue = _inFlight;
             }
 
             if (_inFlight)
             {
                 _dataExporter?.PollFlightData();
-			}
+            }
+            else
+            {
+                _dataExporter?.PollFlightStartData();
+            }
         }
 
         void Profile_ProfileStarted(object sender, EventArgs e)
