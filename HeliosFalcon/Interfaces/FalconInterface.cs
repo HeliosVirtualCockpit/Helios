@@ -601,6 +601,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             }
 
             PilotOptions.OnLoaded();
+
+            // observe the PilotOptions object, either the one we deserialized or the one we just created
             PilotOptions.PropertyChanged += PilotOptions_PropertyChanged;
         }
 
