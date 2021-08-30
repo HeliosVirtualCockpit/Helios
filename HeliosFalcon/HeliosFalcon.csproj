@@ -101,6 +101,9 @@
     <Compile Include="Gauges\Textures\PFL.cs" />
     <Compile Include="Gauges\Textures\RightMFD.cs" />
     <Compile Include="Gauges\Textures\RWR.cs" />
+    <Compile Include="Interfaces\PilotOptionsEditor.xaml.cs">
+      <DependentUpon>PilotOptionsEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\RTT\InterfaceEditor.xaml.cs">
       <DependentUpon>InterfaceEditor.xaml</DependentUpon>
     </Compile>
@@ -109,7 +112,6 @@
     <Compile Include="Interfaces\RTT\NetworkOptions.cs" />
     <Compile Include="Interfaces\RTT\ProcessControl.cs" />
     <Compile Include="Interfaces\RTT\ShadowMonitor.cs" />
-    <Compile Include="Interfaces\_pilotCallsign.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\RadarContact.cs" />
     <Compile Include="Interfaces\RadarSymbols.cs" />
@@ -161,6 +163,10 @@
     <Page Include="Interfaces\FalconInterfaceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Interfaces\PilotOptionsEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Interfaces\RTT\InterfaceEditor.xaml">
       <SubType>Designer</SubType>

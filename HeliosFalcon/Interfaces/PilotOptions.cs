@@ -14,12 +14,42 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using GadrocsWorkshop.Helios.Windows;
+using GadrocsWorkshop.Helios.Windows.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Xml.Serialization;
+
+/*
+ Design:
+    PilotOptions is a Helios global settings that the user enables to allow
+    Helios to update the Pilot Options file of the current Falcon BMS callsign.
+    
+    Currently only the key file being used by the current profile will be updated
+    in the callsign.pop file.
+
+    The callsign.pop file is NOT a Helios managed file but does require Helios
+    to backup the file prior to update.
+
+Profile Users:
+
+- on load
+    - Check if PilotOptions is enabled and if not go to special status
+- on status report / ready check
+    - If Enabled but callsign is not available report an error
+- on profile start
+    - Update callsign.pop file if PilotOptions enabled
+- interactive
+    - on enable, if file exists show dialog and backup file (Profile Editor)
+ */
+
+
 
 namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
 {
@@ -46,10 +76,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
         private string _pilotCallsign;
 
         /// <summary>
-        /// backing field for ForceKeyFile
+        /// backing field for property EnabledCommand, contains
+        /// handler for interaction with the visual representation (such as checkbox) of the Enabled property
         /// </summary>
-        private bool _forceKeyFile;
-
+        private ICommand _enabledCommand;
 
         internal IEnumerable<StatusReportItem> OnStatusReport()
         {
@@ -65,7 +95,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
         {
             if(Enabled)
             {
-                if (PilotCallsign.Equals(""))
+                if (null == PilotCallsign)
                 {
                     yield return new StatusReportItem
                     {
@@ -74,35 +104,52 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
                         Recommendation = "Run Falcon and set your pilot callsign"
                     };
                 }
+
+                if(null == Parent.KeyFileName && null == PilotCallsign)
+                {
+                    yield return new StatusReportItem
+                    {
+                        Status = $"No Key File defined in profile",
+                        Severity = StatusReportItem.SeverityCode.Warning,
+                        Recommendation = "Set a valid Key File for this profile in order for the Force Key File feature to work properly"
+                    };
+                }
+
+                if(PilotCallsign != "")
+                {
+                    yield return new StatusReportItem
+                    {
+                        Status = $"Profile has set pilot callsign  {PilotCallsign} to use key file { Parent.KeyFileName }",
+                        Severity = StatusReportItem.SeverityCode.Info
+                    };
+                }
+
+                CalculatePaths(out string _, out string outputPath);
+                if (!File.Exists(outputPath))
+                {
+                    yield return new StatusReportItem
+                    {
+                        Status = $"Pilot Options file {outputPath} is missing from Falcon installation.",
+                        Severity = StatusReportItem.SeverityCode.Error,
+                        Recommendation = "Check your Falcon setup"
+                    };
+                }
             }
         }
 
         public PilotOptions() : base(XML_NAMESPACE)
         {
-           //no-op
+            // nothing to do here
         }
 
         internal void OnProfileStart()
         {
             /*
-             * Gets the pilot callsign and populates PilotCallsign property
+             * Set the Pilot Callsign if Enabled
              */
-            GetPilotCallsign();
-
-            /*
-             * Check to see if we need to rewrite pilot options file
-             */
-            if (Enabled)
+            if(Enabled)
             {
-                if (PilotCallsign != "")
-                {
-                    Logger.Info("Profile has set pilot callsign " + PilotCallsign + " to use key file " + Parent.KeyFileName);
-                    SetPilotOptions();
-                }
-                else
-                {
-                    Logger.Warn("Profile is set to force key file usage but the pilot callsign is not set in Falcon install");
-                }
+                SetPilotOptions();
             }
         }
 
@@ -126,25 +173,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
 
         private void SetPilotOptions()
         {
-            var popFile = Path.Combine(Parent.FalconPath, "User", "Config", PilotCallsign + ".pop");
-            var backupDir = Path.Combine(Parent.FalconPath, "User", "Config", "Helios");
-            var backupPopFile = Path.Combine(backupDir, PilotCallsign + ".pop");
+            CalculatePaths(out string _, out string outputPath);
 
-            if (File.Exists(popFile))
+            if (File.Exists(outputPath))
             {
-                if (!File.Exists(backupPopFile))
-                {
-                    if (!Directory.Exists(backupDir))
-                    {
-                        _ = Directory.CreateDirectory(backupDir);
-                    }
-                    File.Copy(popFile, backupPopFile, true);
-                    Logger.Debug("File " + Path.GetFileName(popFile) + " has been backed up to " + backupDir);
-                }
+                File.SetAttributes(outputPath, File.GetAttributes(outputPath) & ~FileAttributes.ReadOnly);
 
-                File.SetAttributes(popFile, File.GetAttributes(popFile) & ~FileAttributes.ReadOnly);
-
-                FileStream fileStream = new FileStream(popFile, FileMode.Open, FileAccess.Read);
+                FileStream fileStream = new FileStream(outputPath, FileMode.Open, FileAccess.Read);
                 byte[] bytes = new byte[fileStream.Length];
                 _ = fileStream.Read(bytes, 0, bytes.Length);
                 fileStream.Close();
@@ -162,14 +197,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
                 }
 
                 fileStream = new FileStream
-                    (popFile, FileMode.Create, FileAccess.Write);
+                    (outputPath, FileMode.Create, FileAccess.Write);
                 fileStream.Write(bytes, 0, bytes.Length);
                 fileStream.Close();
-                Logger.Debug(popFile + " has been modified to load key file " + Path.GetFileName(Parent.KeyFileName) + " by default");
-            }
-            else
-            {
-                Logger.Error("FILE NOT FOUND! " + popFile + " Failed to force key file usage in Falcon");
             }
         }
 
@@ -186,6 +216,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
                 _pilotCallsign = value;
                 OnPropertyChanged("PilotCallsign", oldValue, value, true);
             }
+        }
+
+        private void CalculatePaths(out string outputDirectory, out string outputPath)
+        {
+            outputDirectory = Path.Combine(Parent.FalconPath, "User", "Config");
+            outputPath = Path.Combine(outputDirectory, PilotCallsign + ".pop");
         }
 
         /// <summary>
@@ -209,8 +245,97 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces
             }
         }
 
+        /// <summary>
+        /// handler for interaction with the visual representation (such as checkbox) of the Enabled property
+        /// </summary>
+        public ICommand EnabledCommand
+        {
+            get
+            {
+                _enabledCommand = _enabledCommand ?? new RelayCommand(parameter =>
+                {
+                    CheckBox source = (CheckBox)parameter;
+                    if (!source.IsChecked ?? false)
+                    {
+                        // nothing to do here
+                        return;
+                    }
+
+                    OnInteractivelyEnabled(source);
+                });
+                return _enabledCommand;
+            }
+        }
+
+        internal void OnInteractivelyEnabled(CheckBox source)
+        {
+            CalculatePaths(out string _, out string outputPath);
+            
+            if (!File.Exists(outputPath))
+            {
+                //We can't enable if there is no Pilot Options file
+                Enabled = false;
+                return;
+            }
+
+            // determine what the backup file might be right now
+            string backupPath = Path.ChangeExtension(outputPath, "pop.txt");
+            int n = 1;
+            while (File.Exists(backupPath))
+            {
+                n++;
+                backupPath = Path.ChangeExtension(outputPath, $"pop{n}.txt");
+            }
+
+            // display a warning
+            InstallationDangerPromptModel warningModel = new InstallationDangerPromptModel
+            {
+                Title = "Advanced Operation Requested",
+                Message = "You are about to enable the Falcon Force Key File feature of Helios.  Doing so will grant Helios permission to change this file when you start a profile.",
+                Info = new List<StructuredInfo>
+                {
+                    new StructuredInfo
+                    {
+                        Message = $"A backup of your current Pilot Options file '{outputPath}' will be stored at {backupPath} for you."
+                    }
+                }
+            };
+            Dialog.ShowModalCommand.Execute(new ShowModalParameter
+            {
+                Content = warningModel
+            }, source);
+
+            switch (warningModel.Result)
+            {
+                case InstallationPromptResult.Cancel:
+                    {
+                        // undo it
+                        Enabled = false;
+                        break;
+                    }
+
+                case InstallationPromptResult.Ok:
+                    {
+                        // take over, so from now on we own this file
+                        File.Copy(outputPath, backupPath);
+                        SetPilotOptions();
+                        break;
+                    }
+            }
+        }
+
         [XmlIgnore]
         public IFalconInterfaceHost Parent { get; internal set; }
+
+        internal void OnLoaded()
+        {
+            if (!Enabled)
+            {
+                return;
+            }
+
+            GetPilotCallsign();
+        }
 
         #endregion
     }

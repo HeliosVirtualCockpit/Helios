@@ -599,6 +599,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                     Parent = this
                 };
             }
+
+            PilotOptions.OnLoaded();
             PilotOptions.PropertyChanged += PilotOptions_PropertyChanged;
         }
 
@@ -610,6 +612,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                 Rtt.PropertyChanged -= Rtt_PropertyChanged;
                 Rtt.Dispose();
                 Rtt = null;
+            }
+
+            if(PilotOptions != null)
+            {
+                PilotOptions.PropertyChanged -= PilotOptions_PropertyChanged;
+                PilotOptions = null;
             }
         }
 
