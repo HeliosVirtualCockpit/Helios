@@ -387,6 +387,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
                 var column = int.Parse(reader.ReadElementString("Column"));
                 DeckButtons[i].Text = reader.ReadElementString("Text");
                 DeckButtons[i].BackgroundImageUri = reader.ReadElementString("BackgroundImageUri");
+                DeckButtons[i].BackgroundImageEnabled = bool.Parse(reader.ReadElementString("BackgroundImageEnabled"));
                 reader.ReadEndElement();
             }
             reader.ReadEndElement();
@@ -405,6 +406,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
                 writer.WriteElementString("Column", button.Column.ToString());
                 writer.WriteElementString("Text", button.Text);
                 writer.WriteElementString("BackgroundImageUri", button.BackgroundImageUri);
+                writer.WriteElementString("BackgroundImageEnabled", button.BackgroundImageEnabled.ToString());
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
