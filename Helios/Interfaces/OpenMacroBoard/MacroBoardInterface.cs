@@ -54,6 +54,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
             _buttonText = text;
             _isPressed = false;
             _backgroundImageUri = backgroundImageUri;
+            _backgroundImageEnabled = true;
             _bitmapImage = null;
             UpdateImage();
         }
