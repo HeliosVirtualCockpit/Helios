@@ -13,10 +13,12 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Globalization;
-using System.Xml;
 using GadrocsWorkshop.Helios.ComponentModel;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities;
+using GadrocsWorkshop.Helios.Interfaces.Keyboard.Input;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Keyboard
 {
@@ -24,12 +26,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.Keyboard
         typeof(UniqueHeliosInterfaceFactory), AutoAdd = true)]
     public class KeyboardInterface : HeliosInterface, IExtendedDescription
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        
         public static readonly string SpecialKeyHelp =
             "\r\n\r\nSpecial keys can be sent by sending their names in brackets, ex: {PAUSE}.\r\nBACKSPACE, TAB, CLEAR, RETURN, ENTER, LSHIFT, RSHIFT, LCONTROL, RCONTROL, LALT, RALT, PAUSE, CAPSLOCK, ESCAPE, SPACE, PAGEUP, PAGEDOWN, END, HOME, LEFT, UP, RIGHT, DOWN, PRINTSCREEN, INSERT, DELETE, LWIN, RWIN, APPS, NUMPAD0, NUMPAD1, NUMPAD2, NUMPAD3, NUMPAD4, NUMPAD5, NUMPAD6, NUMPAD7, NUMPAD8, NUMPAD9, MULTIPLY, ADD, SEPARATOR, SUBTRACT, DECIMAL, DIVIDE, NUMPADENTER, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24, NUMLOCK, SCROLLLOCK";
 
         private readonly HeliosAction _keyPressAction;
         private readonly HeliosAction _keyDownAction;
         private readonly HeliosAction _keyUpAction;
+        
+        // keyboard input support, optional
+        private readonly KeyboardInput _input;
+
+        /// <summary>
+        /// backing field for property InputEnabled, contains
+        /// true if this keyboard interface fires events for keyboard input
+        /// </summary>
+        private bool _inputEnabled;
 
         public KeyboardInterface()
             : base("Keyboard")
@@ -54,6 +67,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Keyboard
             Actions.Add(_keyPressAction);
             Actions.Add(_keyDownAction);
             Actions.Add(_keyUpAction);
+
+            _input = new KeyboardInput(this);
+            Triggers.AddRange(_input.Triggers);
         }
 
         public int KeyDelay
@@ -64,6 +80,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.Keyboard
                 int oldValue = KeyboardEmulator.KeyDelay;
                 KeyboardEmulator.KeyDelay = value;
                 OnPropertyChanged("KeyDelay", oldValue, value, true);
+            }
+        }
+
+        /// <summary>
+        /// true if this keyboard interface fires events for keyboard input
+        /// </summary>
+        public bool InputEnabled
+        {
+            get => _inputEnabled;
+            set
+            {
+                if (_inputEnabled == value) return;
+                bool oldValue = _inputEnabled;
+                _inputEnabled = value;
+                OnPropertyChanged(nameof(InputEnabled), oldValue, value, true);
             }
         }
 
@@ -79,6 +110,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.Keyboard
                 // no undo, since this isn't part of profile
                 OnPropertyChanged("ForceQwerty", oldValue, value, false);
             }
+        }
+
+        private void Profile_ProfileStarted(object sender, System.EventArgs e)
+        {
+            if (_inputEnabled)
+            {
+                _input?.Start();
+            }
+        }
+
+        private void Profile_ProfileStopped(object sender, System.EventArgs e)
+        {
+            _input?.Stop();
         }
 
         /// <summary>
@@ -105,21 +149,62 @@ namespace GadrocsWorkshop.Helios.Interfaces.Keyboard
         public override void ReadXml(XmlReader reader)
         {
             // load profile-specific configuration
-            KeyDelay = int.Parse(reader.ReadElementString("KeyDelay"), CultureInfo.InvariantCulture);
+            TypeConverter bc = TypeDescriptor.GetConverter(typeof(bool));
+            while (reader.NodeType == XmlNodeType.Element && reader.Name != "Children")
+            {
+                switch (reader.Name)
+                {
+                    case "KeyDelay":
+                        KeyDelay = int.Parse(reader.ReadElementString("KeyDelay"), CultureInfo.InvariantCulture);
+                        break;
+                    case "InputEnabled":
+                        InputEnabled = (bool)bc.ConvertFromInvariantString(reader.ReadElementString("InputEnabled"));
+                        break;
+                    default:
+                        // ignore unsupported settings
+                        string elementName = reader.Name;
+                        string discard = reader.ReadInnerXml();
+                        Logger.Warn($"Ignored unsupported {GetType().Name} setting '{elementName}' with value '{discard}'");
+                        break;
+                }
+            }
         }
 
         public override void WriteXml(XmlWriter writer)
         {
             // save profile-specific configuration
             writer.WriteElementString("KeyDelay", KeyDelay.ToString(CultureInfo.InvariantCulture));
+            if (InputEnabled)
+            {
+                TypeConverter bc = TypeDescriptor.GetConverter(typeof(bool));
+                writer.WriteElementString("InputEnabled", bc.ConvertToInvariantString(true));
+            }
         }
+
+        #region Overrides of HeliosInterface
+
+        protected override void AttachToProfileOnMainThread()
+        {
+            base.AttachToProfileOnMainThread();
+            Profile.ProfileStarted += Profile_ProfileStarted;
+            Profile.ProfileStopped += Profile_ProfileStopped;
+        }
+
+        protected override void DetachFromProfileOnMainThread(HeliosProfile oldProfile)
+        {
+            base.DetachFromProfileOnMainThread(oldProfile);
+            oldProfile.ProfileStarted -= Profile_ProfileStarted;
+            oldProfile.ProfileStopped -= Profile_ProfileStopped;
+        }
+
+        #endregion
 
         #region IExtendedDescription
 
-        public string Description => "Interface to send synthetic key strokes";
+        public string Description => "Interface to send key strokes or react to key presses";
 
         public string RemovalNarrative =>
-            "Delete this interface and remove all of its bindings from the Profile, making it impossible to send keyboard input.";
+            "Delete this interface and remove all of its bindings from the Profile, making it impossible to simulate or receive keyboard input.";
 
         #endregion
     }

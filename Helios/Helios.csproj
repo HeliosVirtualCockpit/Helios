@@ -136,6 +136,10 @@
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceFactory.cs" />
     <Compile Include="Interfaces\DCS\Template\Functions\ExampleFunction.cs" />
     <Compile Include="Interfaces\DCS\Template\TemplateInterface.cs" />
+    <Compile Include="Interfaces\Keyboard\Input\KeyboardInput.cs" />
+    <Compile Include="Interfaces\Keyboard\Input\KeyTriggers.cs" />
+    <Compile Include="Interfaces\Keyboard\Input\KeyTriggersFixed.cs" />
+    <Compile Include="Interfaces\Keyboard\Input\KeyTriggersWithModifiers.cs" />
     <Compile Include="Json\BindingValueUnit\ConverterForJsonNet.cs" />
     <Compile Include="Json\BindingValueUnit\SchemaGenerationProviderForJsonNet.cs" />
     <Compile Include="Json\BindingValue\ConverterForJsonNet.cs" />

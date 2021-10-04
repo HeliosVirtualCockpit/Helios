@@ -15,10 +15,17 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Key Delay</Label>
                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Interface.KeyDelay}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="40" MaxWidth="40" />
                 <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" FontStyle="Italic" TextWrapping="Wrap">Delay in miliseconds between each key up and down event.</TextBlock>
+
+                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" Content="Key Input"/>
+                <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding Interface.InputEnabled}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" FontSize="10" FontStyle="Italic" TextWrapping="Wrap">If enabled, supports keyboard input in addition to output.  This may increase the CPU load of Helios if a lot of keyboard input is used at high rate.</TextBlock>
             </Grid>
         </GroupBox>
         <GroupBox Header="Global Settings for this Computer">
@@ -49,8 +56,9 @@
         </GroupBox>
         <GroupBox Header="Documentation" Margin="0,4,0,0">
             <StackPanel>
-                <TextBlock Margin="4" TextWrapping="Wrap" Text="Keyboard interface allows emulation of a physical keyboard to control the simulation."/>
+                <TextBlock Margin="4" TextWrapping="Wrap" Text="The Keyboard interface allows emulation of a physical keyboard to control the simulation."/>
                 <TextBlock Margin="4" TextWrapping="Wrap" Text="{Binding SpecialKeysText}" />
+                <TextBlock Margin="4" TextWrapping="Wrap" Text="If input is enabled, the Keyboard interface also provided Helios triggers for keyboard keys being pressed."/>
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Keyboard Sender Information" Margin="0,4,0,0">
