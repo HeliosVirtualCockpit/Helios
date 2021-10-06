@@ -417,10 +417,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 
                     _dataExporter?.PollFlightStartData();
 
-                    _dataExporter.Synchronized = false;
-                    _dataExporter?.PollUserInterfaceData();
-                    _dataExporter?.PollFlightData();
-                    _dataExporter.Synchronized = true;
+                    SynchronizeData();
                 }
 
                 _inFlightLastValue = _inFlight;
@@ -465,6 +462,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         public override void Reset()
         {
             _currentTheater = GetCurrentTheater();
+
+            if (_inFlight)
+            {
+                SynchronizeData();
+            }
+        }
+
+        void SynchronizeData()
+        {
+            _dataExporter.Synchronized = false;
+            _dataExporter?.PollUserInterfaceData();
+            _dataExporter?.PollFlightData();
+            _dataExporter.Synchronized = true;
         }
 
         void PressAction_Execute(object action, HeliosActionEventArgs e)
