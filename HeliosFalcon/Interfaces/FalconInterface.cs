@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 using GadrocsWorkshop.Helios.ComponentModel;
@@ -47,6 +48,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         private bool _forceKeyFile;
         private bool _inFlight;
         private bool _inFlightLastValue;
+        private DispatcherTimer _dispatcherTimer;
 
         public FalconInterface()
             : base("Falcon")
@@ -400,6 +402,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             {
                 Rtt.OnProfileStop();
             }
+
+            if (_dispatcherTimer != null)
+            {
+                _dispatcherTimer.Stop();
+                _dispatcherTimer = null;
+            }
         }
 
         void Profile_ProfileTick(object sender, EventArgs e)
@@ -413,8 +421,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             {
                 if (_inFlight)
                 {
-                    _currentTheater = GetCurrentTheater();
-
                     _dataExporter?.PollFlightStartData();
 
                     _dataExporter.Synchronized = false;
@@ -460,9 +466,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             }
 
             _dataExporter?.InitData();
+
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            _dispatcherTimer.Start();
         }
 
-        public override void Reset()
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             _currentTheater = GetCurrentTheater();
         }
