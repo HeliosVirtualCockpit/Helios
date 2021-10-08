@@ -153,7 +153,7 @@ namespace GadrocsWorkshop.Helios
 
         private ImageSource CacheImageSource(ImageLoadRequest request, ImageSource source)
         {
-            if (_cacheObjects)
+            if (_cacheObjects && !request.Options.HasFlag(LoadImageOptions.ReloadIfChangedExternally))
             {
                 _objectCache.Add(request.Key, source);
             }
