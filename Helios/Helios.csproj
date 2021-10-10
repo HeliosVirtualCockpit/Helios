@@ -98,6 +98,7 @@
       <DependentUpon>NumericTextDisplayBehaviorPropertyEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Special\LockedViewportExtent.cs" />
+    <Compile Include="Controls\Special\MemoryWire.cs" />
     <Compile Include="Controls\TimerPanelBehaviorEditor.xaml.cs">
       <DependentUpon>TimerPanelBehaviorEditor.xaml</DependentUpon>
     </Compile>
