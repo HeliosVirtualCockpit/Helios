@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Threading;
 using GadrocsWorkshop.Helios.Interfaces.Falcon.BMS;
 using GadrocsWorkshop.Helios.Util;
 
@@ -41,6 +42,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
         private SharedMemory _textureMemory;
         private SharedMemory _sharedMemory2;
         private FlightData2 _lastFlightData2;
+        private DispatcherTimer _dispatcherTimer;
+        private bool _useLegacyTextureRefreshRate;
 
         protected FalconTextureDisplay(string name, Size defaultSize)
             : base(name, defaultSize)
@@ -117,6 +120,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
 
         void Profile_ProfileStopped(object sender, EventArgs e)
         {
+            if (_dispatcherTimer != null)
+            {
+                _dispatcherTimer.Stop();
+                _dispatcherTimer = null;
+            }
+
             _textureMemory?.Close();
             _textureMemory?.Dispose();
             _textureMemory = null;
@@ -129,6 +138,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
         }
 
         void Profile_ProfileTick(object sender, EventArgs e)
+        {
+            if (_useLegacyTextureRefreshRate)
+            {
+                RefreshTextures();
+            }
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if (!_useLegacyTextureRefreshRate)
+            {
+                RefreshTextures();
+            }
+        }
+
+        private void RefreshTextures()
         {
             if (_textureMemory != null && _textureMemory.IsDataAvailable)
             {
@@ -157,10 +182,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
                 {
                     ParseDatFile(falconInterface.CockpitDatFile);
                 }
+
+                _useLegacyTextureRefreshRate = falconInterface.UseLegacyTextureRefreshRate;
             }
             
             _textureMemory = new SharedMemory("FalconTexturesSharedMemoryArea");
             _textureMemory.Open();
+
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            _dispatcherTimer.Start();
 
             IsRunning = true;
         }

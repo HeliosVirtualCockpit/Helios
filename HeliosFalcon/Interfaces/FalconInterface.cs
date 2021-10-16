@@ -40,6 +40,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         private string _keyFile;
         private string _cockpitDatFile;
         private bool _focusAssist;
+        private bool _useLegacyRefresh;
         private string _falconVersion;
         private string[] _falconVersions;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -104,6 +105,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                 OnPropertyChanged("ForceKeyFile", oldValue, value, true);
             }
         }
+
         public bool FocusAssist
         {
             get { return _focusAssist; }
@@ -112,6 +114,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                 var oldValue = _focusAssist;
                 _focusAssist = value;
                 OnPropertyChanged("FocusAssist", oldValue, value, true);
+            }
+        }
+
+        public bool UseLegacyTextureRefreshRate
+        {
+            get { return _useLegacyRefresh; }
+            set
+            {
+                var oldValue = _useLegacyRefresh;
+                _useLegacyRefresh = value;
+                OnPropertyChanged("UseLegacyTextureRefreshRate", oldValue, value, true);
             }
         }
 
@@ -572,8 +585,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                     case "FocusAssist":
                         FocusAssist = Convert.ToBoolean(reader.ReadElementString("FocusAssist"));
                         break;
-                    case "ForceKeyFile":
+                       case "ForceKeyFile":
                         ForceKeyFile = Convert.ToBoolean(reader.ReadElementString("ForceKeyFile"));
+                        break;
+                    case "UseLegacyTextureRefreshRate":
+                        UseLegacyTextureRefreshRate = Convert.ToBoolean(reader.ReadElementString("UseLegacyTextureRefreshRate"));
                         break;
                     case "FalconVersion":
                         FalconVersion = reader.ReadElementString("FalconVersion");
@@ -605,6 +621,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             //writer.WriteElementString("CockpitDatFile", CockpitDatFile);
             writer.WriteElementString("FocusAssist", FocusAssist.ToString());
             writer.WriteElementString("ForceKeyFile", ForceKeyFile.ToString());
+            writer.WriteElementString("UseLegacyTextureRefreshRate", UseLegacyTextureRefreshRate.ToString());
 
             if (null != Rtt)
             {
