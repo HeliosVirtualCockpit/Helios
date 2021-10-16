@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -54,6 +55,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\Textures\HUDBehaviorEditor.xaml.cs">
+      <DependentUpon>HUDBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\RTT\IRttGeneratorHost.cs" />
     <Compile Include="Controls\MapControl.cs" />
     <Compile Include="Controls\MapControlRenderer.cs" />
@@ -145,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Gauges\Textures\HUDBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Interfaces\FalconCallbackValueEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -159,6 +167,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Textures\hud_mask.png" />
     <Content Include="Templates\HeliosFalcon\Falcon RTT DED.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
