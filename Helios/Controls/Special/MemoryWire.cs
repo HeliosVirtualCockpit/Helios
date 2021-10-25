@@ -40,7 +40,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         public MemoryWire(): base("MemoryWire")
         {
             DesignTimeOnly = true;
-            Image = "{Helios}/Images/General/wire.png";
+            Image = "{Helios}/Images/General/memory_wire.png";
             Alignment = ImageAlignment.Stretched;
             Width = 128;
             Height = 128;

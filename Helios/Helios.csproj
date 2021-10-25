@@ -806,6 +806,7 @@
     <Resource Include="Images\General\HeliosSimplifiedIcon.png" />
     <Content Include="Controls\Special\readme.txt" />
     <Resource Include="Images\General\calibration.png" />
+    <Resource Include="Images\General\memory_wire.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
