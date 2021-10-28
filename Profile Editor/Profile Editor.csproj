@@ -340,6 +340,13 @@
     <Resource Include="ToolbarGraphics\SpaceVertical.png" />
     <Resource Include="ToolbarGraphics\UnLockedIcon.png" />
     <Resource Include="ToolbarGraphics\VisibleIcon.png" />
+    <Resource Include="ToolbarGraphics\LockedPlusIcon.png" />
+    <Resource Include="ToolbarGraphics\UnLockedPlusIcon.png" />
+    <Resource Include="ToolbarGraphics\BringForwardFullyIcon.png" />
+    <Resource Include="ToolbarGraphics\SendBackFullyIcon.png" />
+    <Resource Include="ToolbarGraphics\ButtonCollapseIcon.png" />
+    <Resource Include="ToolbarGraphics\ButtonExpandIcon.png" />
+    <Resource Include="ToolbarGraphics\ButtonOpenIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.png" />
@@ -361,18 +368,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="about.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\LockedPlusIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\UnLockedPlusIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\BringForwardFullyIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\SendBackFullyIcon.png" />
   </ItemGroup>
   <Import Project="..\HeliosExecutable.targets" />
   <PropertyGroup>
