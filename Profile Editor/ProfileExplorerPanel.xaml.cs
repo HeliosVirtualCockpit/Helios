@@ -94,6 +94,8 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             item.ExpandAll();
             ProfileExplorerItems = item.Children;
 
+            ButtonItemExpand.IsEnabled = false;
+            ButtonItemCollapse.IsEnabled = false;
             ButtonBranchExpand.IsEnabled = false;
             ButtonBranchCollapse.IsEnabled = false;
             ButtonItemOpen.IsEnabled = false;
@@ -109,6 +111,8 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
         {
             if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
             {
+                ButtonItemExpand.IsEnabled = item.HasChildren;
+                ButtonItemCollapse.IsEnabled = item.HasChildren;
                 ButtonBranchExpand.IsEnabled = item.HasChildren;
                 ButtonBranchCollapse.IsEnabled = item.HasChildren;
                 ButtonItemOpen.IsEnabled = item.ItemType.HasFlag(ProfileExplorerTreeItemType.Panel) ||
@@ -117,11 +121,19 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             }
         }
 
-        private void ButtonBranchExpand_Click(object sender, RoutedEventArgs e)
+        private void ButtonItemCollapse_Click(object sender, RoutedEventArgs e)
         {
             if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
             {
-                item.ExpandAll();
+                item.IsExpanded = false;
+            }
+        }
+
+        private void ButtonItemExpand_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
+            {
+                item.IsExpanded = true;
             }
         }
 
@@ -130,6 +142,14 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
             {
                 item.CollapseAll();
+            }
+        }
+
+        private void ButtonBranchExpand_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
+            {
+                item.ExpandAll();
             }
         }
 
