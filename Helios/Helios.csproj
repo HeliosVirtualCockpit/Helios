@@ -87,6 +87,9 @@
     <Compile Include="Controls\Capabilities\IWindowsManipulationAware.cs" />
     <Compile Include="Controls\Capabilities\IWindowsMouseInput.cs" />
     <Compile Include="Controls\Capabilities\IWindowsPreviewInput.cs" />
+    <Compile Include="Controls\ImageTranslucentBehaviorEditor.xaml.cs">
+      <DependentUpon>ImageTranslucentBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NumericTextDisplay.cs" />
     <Compile Include="Controls\RendererCapabilities\IWindowsControl.cs" />
     <Compile Include="Controls\Special\CalibrationFilter.cs" />
@@ -270,6 +273,10 @@
     <Compile Include="Windows\ViewModel\ShareInstallationResults.cs" />
     <Compile Include="Windows\ViewModel\VersionCheckViewModel.cs" />
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageTranslucentBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

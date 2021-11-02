@@ -1,4 +1,5 @@
 ﻿//  Copyright 2014 Craig Courtney
+//  Copyright 2021 Helios Contributors
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -49,6 +50,8 @@ namespace GadrocsWorkshop.Helios.Controls
 		}
 
         #region Properties
+
+        public bool AllowInteraction { get; set; } = false;
 
         public string Image
         {
@@ -213,6 +216,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		}
 
 		#endregion
+
 		public double ImageOpacity
 		{
 			get
@@ -230,7 +234,6 @@ namespace GadrocsWorkshop.Helios.Controls
 				}
 			}
 		}
-
 
 		private void SetOpacity()
 		{
@@ -250,6 +253,12 @@ namespace GadrocsWorkshop.Helios.Controls
 			Value = _default_opacity;
 			EndTriggerBypass(true);
 		}
+
+        public override bool HitTest(Point location)
+        {
+            // return false to allow pass through interaction with underlying controls
+            return !AllowInteraction;
+        }
 
         public override void MouseDown(Point location)
         {
@@ -292,6 +301,16 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 BorderThickness = 0d;
             }
+
+            try
+            {
+                AllowInteraction = bool.Parse(reader.ReadElementString("AllowInteraction"));
+            }
+            catch
+            {
+                AllowInteraction = false;
+            }
+
             // Load base after image so size is properly persisted.
             base.ReadXml(reader);
         }
@@ -311,6 +330,8 @@ namespace GadrocsWorkshop.Helios.Controls
                 writer.WriteElementString("Color", colorConverter.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, BorderColor));
                 writer.WriteEndElement();
             }
+            writer.WriteElementString("AllowInteraction", AllowInteraction.ToString(CultureInfo.InvariantCulture));
+
             // Save base after image so size is properly persisted.
             base.WriteXml(writer);
         }
