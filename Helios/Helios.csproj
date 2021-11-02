@@ -106,6 +106,9 @@
       <DependentUpon>TimerPanelBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimerPanel.cs" />
+    <Compile Include="Controls\HeliosPanelBehaviorEditor.xaml.cs">
+      <DependentUpon>HeliosPanelBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EnumDisplayEntry.cs" />
     <Compile Include="Gauges\A-10\Common\Blanking Panel Left.cs" />
     <Compile Include="Gauges\A-10\Radios\UHFRadio.cs" />
@@ -273,6 +276,10 @@
     <Compile Include="Windows\ViewModel\ShareInstallationResults.cs" />
     <Compile Include="Windows\ViewModel\VersionCheckViewModel.cs" />
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\HeliosPanelBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -18,18 +18,37 @@ namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Windows.Controls;
-	using System.Windows;
+    using System.Windows;
 
     /// <summary>
     /// Panel behavior for pass through interaction with underlying controls
     /// </summary>
-    [HeliosPropertyEditor("Helios.Base.ImageTranslucent", "Behavior")]
+    [HeliosPropertyEditor("Helios.Panel", "Behavior")]
+    [HeliosPropertyEditor("Helios.Panel.Timer", "Behavior")]
 
-    public partial class ImageTranslucentBehaviorEditor : HeliosPropertyEditor
+    public partial class HeliosPanelBehaviorEditor : HeliosPropertyEditor
     {
-        public ImageTranslucentBehaviorEditor()
+        public HeliosPanelBehaviorEditor()
         {
             InitializeComponent();
+        }      
+
+        private void Chk1_Checked(object sender, RoutedEventArgs e)
+        {
+            Chk2.IsChecked = false;
+            Chk3.IsChecked = false;
+        }
+
+        private void Chk2_Checked(object sender, RoutedEventArgs e)
+        {
+            Chk1.IsChecked = false;
+            Chk3.IsChecked = false;
+        }
+
+        private void Chk3_Checked(object sender, RoutedEventArgs e)
+        {
+            Chk1.IsChecked = false;
+            Chk2.IsChecked = false;
         }
     }
 }
