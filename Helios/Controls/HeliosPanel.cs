@@ -351,9 +351,11 @@ namespace GadrocsWorkshop.Helios.Controls
                 writer.WriteEndElement();
             }
 
+            writer.WriteStartElement("Interaction");
             writer.WriteElementString("AllowInteractionFull", AllowInteractionFull.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("AllowInteractionNone", AllowInteractionNone.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("AllowInteractionLegacy", AllowInteractionLegacy.ToString(CultureInfo.InvariantCulture));
+            writer.WriteEndElement();
         }
 
         public override void ReadXml(XmlReader reader)
@@ -409,13 +411,15 @@ namespace GadrocsWorkshop.Helios.Controls
                 DrawBorder = false;
             }
 
-            try
+            if (reader.Name.Equals("Interaction"))
             {
+                reader.ReadStartElement();
                 AllowInteractionFull = bool.Parse(reader.ReadElementString("AllowInteractionFull"));
                 AllowInteractionNone = bool.Parse(reader.ReadElementString("AllowInteractionNone"));
                 AllowInteractionLegacy = bool.Parse(reader.ReadElementString("AllowInteractionLegacy"));
+                reader.ReadEndElement();
             }
-            catch
+            else
             {
                 AllowInteractionFull = false;
                 AllowInteractionNone = false;

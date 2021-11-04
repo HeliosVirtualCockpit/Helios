@@ -302,13 +302,11 @@ namespace GadrocsWorkshop.Helios.Controls
                 BorderThickness = 0d;
             }
 
-            try
+            if (reader.Name.Equals("Interaction"))
             {
+                reader.ReadStartElement("Interaction");
                 AllowInteraction = bool.Parse(reader.ReadElementString("AllowInteraction"));
-            }
-            catch
-            {
-                AllowInteraction = false;
+                reader.ReadEndElement();
             }
 
             // Load base after image so size is properly persisted.
@@ -330,7 +328,9 @@ namespace GadrocsWorkshop.Helios.Controls
                 writer.WriteElementString("Color", colorConverter.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, BorderColor));
                 writer.WriteEndElement();
             }
+            writer.WriteStartElement("Interaction");
             writer.WriteElementString("AllowInteraction", AllowInteraction.ToString(CultureInfo.InvariantCulture));
+            writer.WriteEndElement();
 
             // Save base after image so size is properly persisted.
             base.WriteXml(writer);
