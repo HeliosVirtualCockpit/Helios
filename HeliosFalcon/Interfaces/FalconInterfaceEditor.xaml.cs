@@ -1,5 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2021 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -65,6 +66,28 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             {
                 ((FalconInterface)Interface).KeyFileName = ConfigManager.ImageManager.MakeImagePathRelative(ofd.FileName);
             }
+
+        }
+
+        private void Chk90_Clicked(object sender, RoutedEventArgs e)
+        {
+            Chk90.IsChecked = true;
+            Chk60.IsChecked = false;
+            Chk30.IsChecked = false;
+        }
+
+        private void Chk60_Clicked(object sender, RoutedEventArgs e)
+        {
+            Chk90.IsChecked = false;
+            Chk60.IsChecked = true;
+            Chk30.IsChecked = false;
+        }
+
+        private void Chk30_Clicked(object sender, RoutedEventArgs e)
+        {
+            Chk90.IsChecked = false;
+            Chk60.IsChecked = false;
+            Chk30.IsChecked = true;
         }
     }
 

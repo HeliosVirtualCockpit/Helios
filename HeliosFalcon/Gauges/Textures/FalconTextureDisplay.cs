@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2020 Helios Contributors
-//    
+//  Copyright 2021 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -43,7 +43,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
         private SharedMemory _sharedMemory2;
         private FlightData2 _lastFlightData2;
         private DispatcherTimer _dispatcherTimer;
-        private bool _useLegacyTextureRefreshRate;
+        private bool _textureRefreshRate_30;
+        private bool _textureRefreshRate_60;
+        private bool _textureRefreshRate_90;
 
         /// <summary>
         /// backing field for background transparency
@@ -159,7 +161,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
 
         void Profile_ProfileTick(object sender, EventArgs e)
         {
-            if (_useLegacyTextureRefreshRate)
+            if (_textureRefreshRate_30 || Texture == FalconTextures.DED || Texture == FalconTextures.PFL || Texture == FalconTextures.RWR)
             {
                 RefreshTextures();
             }
@@ -167,7 +169,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (!_useLegacyTextureRefreshRate)
+            if ((_textureRefreshRate_60 || _textureRefreshRate_90) && (Texture == FalconTextures.HUD || Texture == FalconTextures.MFDLeft || Texture == FalconTextures.MFDRight))
             {
                 RefreshTextures();
             }
@@ -203,7 +205,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
                     ParseDatFile(falconInterface.CockpitDatFile);
                 }
 
-                _useLegacyTextureRefreshRate = falconInterface.UseLegacyTextureRefreshRate;
+                _textureRefreshRate_30 = falconInterface.TextureRefreshRate_30;
+                _textureRefreshRate_60 = falconInterface.TextureRefreshRate_60;
+                _textureRefreshRate_90 = falconInterface.TextureRefreshRate_90;
             }
             
             _textureMemory = new SharedMemory("FalconTexturesSharedMemoryArea");
@@ -211,9 +215,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
 
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            _dispatcherTimer.Start();
 
+            if (_textureRefreshRate_60)
+            {
+                _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 16);
+                _dispatcherTimer.Start();
+            }
+            else if (_textureRefreshRate_90)
+            {
+                _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 11);
+                _dispatcherTimer.Start();
+            }
+            
             IsRunning = true;
         }
 

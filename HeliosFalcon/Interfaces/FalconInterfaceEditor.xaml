@@ -115,7 +115,7 @@
         </av:GroupBox>
         <av:Expander Header="RTT Client"
                      Style="{StaticResource GroupBoxWithExpanderStyle}"
-                     IsExpanded="True"
+                     IsExpanded="False"
                      Margin="4,4,4,4">
             <rtt:InterfaceEditor DataContext="{Binding Interface.Rtt}" />
         </av:Expander>
@@ -134,15 +134,15 @@
                 </av:Grid.RowDefinitions>
                 <WrapPanel
                     av:Grid.Row="0">
-                    <av:Label Content="   Focus Assist" 
-                              HorizontalAlignment="Right"
-                              VerticalAlignment="Center"/>
+                    <av:Label Content="Focus Assist"
+                              MinWidth="86"
+                              HorizontalContentAlignment="Right"
+                              VerticalAlignment="Center" />
                     <av:CheckBox Width="16"
                                  Height="16"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
-                                 IsChecked="{av:Binding Path=Interface.FocusAssist,
-                                           Mode=TwoWay}"
+                                 IsChecked="{av:Binding Path=Interface.FocusAssist, Mode=TwoWay}"
                                  RenderTransformOrigin="-0.708,0.646" />
                     <av:TextBlock Margin="4"
                                   HorizontalAlignment="Center"
@@ -155,15 +155,15 @@
                 <WrapPanel
                     av:Grid.Row="1">
                     <av:Label Content="Force Key File"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Right" />
+                              MinWidth="86"
+                              HorizontalContentAlignment="Right"
+                              VerticalAlignment="Center" />
                     <av:CheckBox
                                  Height="16"
                                  Width="16"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
-                                 IsChecked="{av:Binding Interface.ForceKeyFile,
-                                           Mode=TwoWay}" />
+                                 IsChecked="{av:Binding Interface.ForceKeyFile, Mode=TwoWay}" />
                     <av:TextBlock Margin="4"
                                   Text="Force Falcon pilot callsign to use the key file defined in this profile"
                                   Style="{StaticResource Documentation}"
@@ -183,17 +183,22 @@
                 </av:Grid.ColumnDefinitions>
                 <av:Grid.RowDefinitions>
                     <av:RowDefinition Height="Auto" />
+                    <av:RowDefinition Height="Auto" />
+                    <av:RowDefinition Height="Auto" />
                 </av:Grid.RowDefinitions>
                 <WrapPanel
                     av:Grid.Row="0">
-                    <av:Label Content="Legacy Refresh"
-                              HorizontalAlignment="Right"
+                    <av:Label Content="Legacy 30Hz Refresh"
+                              MinWidth="138"
+                              HorizontalContentAlignment="Right"
                               VerticalAlignment="Center"/>
-                    <av:CheckBox Width="16"
+                    <av:CheckBox Name="Chk30"
+                                 Width="16"
                                  Height="16"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
-                                 IsChecked="{av:Binding Path=Interface.UseLegacyTextureRefreshRate, Mode=TwoWay}"
+                                 Click="Chk30_Clicked"
+                                 IsChecked="{av:Binding Path=Interface.TextureRefreshRate_30, Mode=TwoWay}"
                                  RenderTransformOrigin="-0.708,0.646" />
                     <av:TextBlock Margin="4"
                                   HorizontalAlignment="Center"
@@ -202,7 +207,48 @@
                                   Style="{StaticResource Documentation}"
                                   TextWrapping="Wrap" />
                 </WrapPanel>
-
+                <WrapPanel
+                    av:Grid.Row="1">
+                    <av:Label Content="Enhanced 60Hz Refresh"
+                              MinWidth="138"
+                              HorizontalContentAlignment="Right"
+                              VerticalAlignment="Center"/>
+                    <av:CheckBox Name="Chk60"
+                                 Width="16"
+                                 Height="16"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Center"
+                                 Click="Chk60_Clicked"
+                                 IsChecked="{av:Binding Path=Interface.TextureRefreshRate_60, Mode=TwoWay}"
+                                 RenderTransformOrigin="-0.708,0.646" />
+                    <av:TextBlock Margin="4"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Text="Use enhanced 60 Hz texture refresh rate"
+                                  Style="{StaticResource Documentation}"
+                                  TextWrapping="Wrap" />
+                </WrapPanel>
+                <WrapPanel
+                    av:Grid.Row="2">
+                    <av:Label Content="Enhanced 90Hz Refresh"
+                              MinWidth="138"
+                              HorizontalContentAlignment="Right"
+                              VerticalAlignment="Center"/>
+                    <av:CheckBox Name="Chk90"
+                                 Width="16"
+                                 Height="16"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Center"
+                                 Click="Chk90_Clicked"
+                                 IsChecked="{av:Binding Path=Interface.TextureRefreshRate_90, Mode=TwoWay}"
+                                 RenderTransformOrigin="-0.708,0.646" />
+                    <av:TextBlock Margin="4"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Text="Use enhanced 90 Hz texture refresh rate"
+                                  Style="{StaticResource Documentation}"
+                                  TextWrapping="Wrap" />
+                </WrapPanel>
             </av:Grid>
         </av:Expander>
         <av:Expander Height="456"
