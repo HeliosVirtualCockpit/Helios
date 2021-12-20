@@ -33,22 +33,25 @@ namespace GadrocsWorkshop.Helios.Controls
             InitializeComponent();
         }      
 
-        private void Chk1_Checked(object sender, RoutedEventArgs e)
+        private void Chk1_Clicked(object sender, RoutedEventArgs e)
         {
+            Chk1.IsChecked = true;
             Chk2.IsChecked = false;
             Chk3.IsChecked = false;
         }
 
-        private void Chk2_Checked(object sender, RoutedEventArgs e)
+        private void Chk2_Clicked(object sender, RoutedEventArgs e)
         {
             Chk1.IsChecked = false;
+            Chk2.IsChecked = true;
             Chk3.IsChecked = false;
         }
 
-        private void Chk3_Checked(object sender, RoutedEventArgs e)
+        private void Chk3_Clicked(object sender, RoutedEventArgs e)
         {
             Chk1.IsChecked = false;
             Chk2.IsChecked = false;
+            Chk3.IsChecked = true;
         }
     }
 }
