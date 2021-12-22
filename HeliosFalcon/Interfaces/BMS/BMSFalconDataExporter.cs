@@ -376,6 +376,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("Runtime", "Current Theater", "Name of the Current Theater", "", BindingValueUnits.Text);
             AddValue("Runtime", "Flying", "Player flying state", "True if in 3D.", BindingValueUnits.Boolean);
             AddValue("Runtime", "Flight Start Mode", "Flight initial start mode.", "1 = Ramp Start, 2 = Hot Start, 3 = Air Start", BindingValueUnits.Numeric);
+            AddValue("Runtime", "RTT Enabled", "RTT texture extraction state", "True if RTT enabled.", BindingValueUnits.Boolean);
         }
 
         internal override void InitData()
@@ -400,6 +401,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
 
                 SetValue("Runtime", "Flying", new BindingValue(lastFlightData.hsiBits.HasFlag(HsiBits.Flying)));
             }
+
+            SetValue("Runtime", "RTT Enabled", new BindingValue(FalconInterface.Rtt.Enabled));
         }
 
         internal override void PollFlightStartData()
