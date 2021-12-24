@@ -35,7 +35,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void TextBoxFPS_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBoxIPAddress_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBoxPort_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var binding = ((TextBox)sender).GetBindingExpression(TextBox.TextProperty);
             binding.UpdateSource();
