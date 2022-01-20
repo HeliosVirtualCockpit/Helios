@@ -122,6 +122,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileEditorTools", "Tools
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceFiles", "InterfaceFiles\InterfaceFiles.csproj", "{6297B32B-F34F-4610-9711-E7326907BA39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMacroBoard", "OpenMacroBoard\OpenMacroBoard.csproj", "{0B1B0665-99D5-4990-994D-8F92A0E15299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -765,6 +767,30 @@ Global
 		{6297B32B-F34F-4610-9711-E7326907BA39}.Release|AnyCPU32.Build.0 = Release|AnyCPU32
 		{6297B32B-F34F-4610-9711-E7326907BA39}.Release|x64.ActiveCfg = Release|x64
 		{6297B32B-F34F-4610-9711-E7326907BA39}.Release|x64.Build.0 = Release|x64
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Debug|AnyCPU32.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Debug|AnyCPU32.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Debug|x64.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.JustInstallers|AnyCPU.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.JustInstallers|AnyCPU.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.JustInstallers|AnyCPU32.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.JustInstallers|AnyCPU32.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.JustInstallers|x64.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.JustInstallers|x64.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.NoInstallers|AnyCPU.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.NoInstallers|AnyCPU.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.NoInstallers|AnyCPU32.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.NoInstallers|AnyCPU32.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.NoInstallers|x64.ActiveCfg = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.NoInstallers|x64.Build.0 = Debug|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Release|AnyCPU32.ActiveCfg = Release|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Release|AnyCPU32.Build.0 = Release|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Release|x64.ActiveCfg = Release|Any CPU
+		{0B1B0665-99D5-4990-994D-8F92A0E15299}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
