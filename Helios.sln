@@ -123,7 +123,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileEditorTools", "Tools
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceFiles", "InterfaceFiles\InterfaceFiles.csproj", "{6297B32B-F34F-4610-9711-E7326907BA39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeliosMacroBoard", "OpenMacroBoard\HeliosMacroBoard.csproj", "{0B1B0665-99D5-4990-994D-8F92A0E15299}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeliosMacroBoard", "HeliosMacroBoard\HeliosMacroBoard.csproj", "{0B1B0665-99D5-4990-994D-8F92A0E15299}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
