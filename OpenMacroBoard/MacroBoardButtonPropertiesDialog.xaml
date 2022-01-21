@@ -4,7 +4,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard"
              xmlns:StreamDeckAlias="clr-namespace:GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard"
-             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
+             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls;assembly=Helios"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Background="{StaticResource ToolBackground}" SizeToContent="WidthAndHeight" Title="Button Properties"
              Width="400" Height="800">
