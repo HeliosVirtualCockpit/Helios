@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
+namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 {
 
     using GadrocsWorkshop.Helios.Windows.Controls;
@@ -90,7 +90,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
         {
             Regex r = new Regex("^[0-9]*$");
 
-            if (!r.IsMatch(e.Text)) 
+            if (!r.IsMatch(e.Text))
             {
                 e.Handled = true;
             }

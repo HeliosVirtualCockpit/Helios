@@ -21,7 +21,7 @@ using System.Xml.Serialization;
 using System.Windows.Threading;
 using OpenMacroBoard.VirtualBoard;
 
-namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
+namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 {
 
     public enum MacroBoardModel
@@ -218,11 +218,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
         }
     }
 
-    [HeliosInterface("Helios.Base.VirtualMacroBoardInterface", "OpenMacroBoard Virtual Board", typeof(MacroBoardInterfaceEditor),
+    [HeliosInterface("Helios.Base.VirtualMacroBoardInterface", "HeliosMacroBoard Virtual Board", typeof(MacroBoardInterfaceEditor),
             typeof(UniqueHeliosInterfaceFactory), AutoAdd = false)]
     public class VirtualMacroboardInterface : MacroBoardInterface
     {
-        public VirtualMacroboardInterface() : base("VirtualMacroboardInterface", "OpenMacroBoard Virtual Board", 4, 8)
+        public VirtualMacroboardInterface() : base("VirtualMacroboardInterface", "HeliosMacroBoard Virtual Board", 4, 8)
         {
 
         }

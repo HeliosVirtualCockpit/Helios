@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
+namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 {
     [ValueConversion(typeof(bool), typeof(Brush))]
     internal class ButtonStateConverter : IValueConverter
@@ -42,7 +42,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
     /// </summary>
     public partial class MacroBoardLayoutEditor : UserControl
     {
-        
+
         public MacroBoardLayoutEditor()
         {
             InitializeComponent();

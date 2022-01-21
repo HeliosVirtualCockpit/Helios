@@ -8,14 +8,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using Microsoft.Win32;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
+namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
@@ -28,7 +28,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
         public MacroBoardButton TargetButton
         {
             get => _targetButton;
-            set {
+            set
+            {
                 _targetButton = value;
                 _pendingButton.Row = _targetButton.Row;
                 _pendingButton.Column = _targetButton.Column;
@@ -57,7 +58,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
             openDialog.Filter = "Image Files (*.png;*.bmp;*.jpg;*.jpeg;*.gif)|*.png;*.bmp;*.jpg;*.jpeg;*.gif";
             openDialog.InitialDirectory = ConfigManager.ImagePath;
 
-            if (openDialog.ShowDialog() == true)
+            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 PendingButton.BackgroundImageUri = openDialog.FileName;
             }
