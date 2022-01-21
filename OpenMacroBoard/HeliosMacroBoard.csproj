@@ -71,7 +71,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MacroBoardButton.cs" />
     <Compile Include="MacroBoardButtonPropertiesDialog.xaml.cs">
       <DependentUpon>MacroBoardButtonPropertiesDialog.xaml</DependentUpon>
     </Compile>
