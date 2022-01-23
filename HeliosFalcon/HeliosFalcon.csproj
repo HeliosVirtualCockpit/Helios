@@ -61,6 +61,7 @@
     <Compile Include="Interfaces\RTT\IRttGeneratorHost.cs" />
     <Compile Include="Controls\MapControl.cs" />
     <Compile Include="Controls\MapControlRenderer.cs" />
+    <Compile Include="Controls\MapControlTargetRenderer.cs" />
     <Compile Include="Controls\MapControls.cs" />
     <Compile Include="Controls\MapControlsUserMapEditor.xaml.cs">
       <DependentUpon>MapControlsUserMapEditor.xaml</DependentUpon>
@@ -167,7 +168,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Textures\hud_mask.png" />
     <Content Include="Templates\HeliosFalcon\Falcon RTT DED.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -215,6 +215,10 @@
     <Resource Include="Images\MapControl\Foreground.png" />
     <Resource Include="Images\MapControl\Background 01.png" />
     <Resource Include="Images\MapControl\Background 02.png" />
+    <Resource Include="Images\Textures\hud_mask.png" />
+    <Resource Include="Images\MapControl\Target Background.png" />
+    <Resource Include="Images\MapControl\Target Bullseye.png" />
+    <Resource Include="Images\MapControl\Target Position.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Maps\Aegean\Map.jpg" />
