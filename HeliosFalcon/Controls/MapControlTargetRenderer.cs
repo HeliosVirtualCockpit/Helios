@@ -29,6 +29,10 @@ namespace GadrocsWorkshop.Helios.Controls
 		private double _pixelsPerDip = 1.0d;
 		private const double _fontBaseSize = 6d;
 		private double _fontScaleSize;
+		private const double _textBaseMargin = 5d;
+		private const double _textBaseTopMargin = 5d;
+		private double _textMargin;
+		private double _textTopMargin;
 
 
 		public MapControlTargetRenderer()
@@ -59,32 +63,32 @@ namespace GadrocsWorkshop.Helios.Controls
 			Brush lineBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 			Pen linePen = new Pen(lineBrush, _fontScaleSize * 0.05d);
 			Brush backgroundFillBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-			FormattedText _targetText;
-			FormattedText _courseText;
-			double textMargin = 10d;
-			double textTopMargin = 10d;
+			FormattedText textFormattedAircraft;
+			FormattedText textFormattedTarget;
+						
+			string textAircraft = "OWNSHIP: " + AircraftDistance.ToString() + " Nm " + AircraftBearing.ToString("000") + "°";
+			string textTarget = "TARGET: " + TargetDistance.ToString() + " Nm " + TargetBearing.ToString("000") + "°";
 
-			string target_text = "TGT: " + TargetDistance.ToString() + " Nm " + TargetBearing.ToString("000") + "°";
-			string course_text = "CRS: " + CourseDistance.ToString() + " Nm " + CourseBearing.ToString("000") + "°";
+			textFormattedAircraft = new FormattedText(textAircraft, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
+			double textAircraftPos = _textMargin;
+			Rect textBoundsAircraft = new Rect(textAircraftPos, _textTopMargin, textFormattedAircraft.Width + (4 * _scaleFactor), textFormattedAircraft.Height + (2 * _scaleFactor));
+			drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsAircraft);
 
-			_targetText = new FormattedText(target_text, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
-			double targetTextPos = textMargin;
-			Rect _targetTextBounds = new Rect(targetTextPos, textTopMargin, _targetText.Width + (4 * _scaleFactor), _targetText.Height + (2 * _scaleFactor));
-			drawingContext.DrawRectangle(backgroundFillBrush, linePen, _targetTextBounds);
+			textFormattedTarget = new FormattedText(textTarget, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
+			double textTargetPos = MapControlWidth - (_textMargin + textFormattedTarget.Width + (4 * _scaleFactor));
+			Rect textBoundsTarget = new Rect(textTargetPos, _textTopMargin, textFormattedTarget.Width + (4 * _scaleFactor), textFormattedTarget.Height + (2 * _scaleFactor));
+			drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsTarget);
 
-			_courseText = new FormattedText(course_text, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
-			double courseTextPos = MapControlWidth - (textMargin + _courseText.Width + (4 * _scaleFactor));
-			Rect _courseTextBounds = new Rect(courseTextPos, textTopMargin, _courseText.Width + (4 * _scaleFactor), _courseText.Height + (2 * _scaleFactor));
-			drawingContext.DrawRectangle(backgroundFillBrush, linePen, _courseTextBounds);
-
-			drawingContext.DrawText(_targetText, new Point(targetTextPos + (2 * _scaleFactor), textTopMargin + (1 * _scaleFactor)));
-			drawingContext.DrawText(_courseText, new Point(courseTextPos + (2 * _scaleFactor), textTopMargin + (1 * _scaleFactor)));
+			drawingContext.DrawText(textFormattedAircraft, new Point(textAircraftPos + (2 * _scaleFactor), _textTopMargin + (1 * _scaleFactor)));
+			drawingContext.DrawText(textFormattedTarget, new Point(textTargetPos + (2 * _scaleFactor), _textTopMargin + (1 * _scaleFactor)));
 		}
 
 		protected override void OnRefresh(double xScale, double yScale)
 		{
 			_scaleFactor = Math.Min(xScale, yScale);
 			_fontScaleSize = _fontBaseSize * _scaleFactor;
+			_textMargin = _textBaseMargin * _scaleFactor;
+			_textTopMargin = _textBaseTopMargin * _scaleFactor;
 		}
 
 		#endregion Drawing
@@ -96,8 +100,8 @@ namespace GadrocsWorkshop.Helios.Controls
 		public double MapControlHeight { get; set; }
 		public double TargetBearing { get; set; }
 		public double TargetDistance { get; set; }
-		public double CourseBearing { get; set; }
-		public double CourseDistance { get; set; }
+		public double AircraftBearing { get; set; }
+		public double AircraftDistance { get; set; }
 
 		#endregion
 

@@ -219,6 +219,8 @@
     <Resource Include="Images\MapControl\Target Background.png" />
     <Resource Include="Images\MapControl\Target Bullseye.png" />
     <Resource Include="Images\MapControl\Target Position.png" />
+    <Resource Include="Images\MapControl\Aircraft Position Normal.png" />
+    <Resource Include="Images\MapControl\Aircraft Position Remote.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Maps\Aegean\Map.jpg" />
