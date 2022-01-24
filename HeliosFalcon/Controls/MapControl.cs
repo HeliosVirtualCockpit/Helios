@@ -43,11 +43,13 @@ namespace GadrocsWorkshop.Helios.Controls
 		private Gauges.GaugeImage _TargetBullseyeBackground;
 		private Gauges.GaugeImage _TargetBullseye;
 		private Gauges.GaugeImage _TargetPosition;
+		private Gauges.GaugeImage _AircraftPositionNormal;
 		private Gauges.GaugeImage _MapNoData;
 		private Gauges.CustomGaugeNeedle _Map;
 		private Gauges.CustomGaugeNeedle _Bullseye;
 		private Gauges.CustomGaugeNeedle _RangeRings;
 		private Gauges.CustomGaugeNeedle _Aircraft;
+		private Gauges.CustomGaugeNeedle _AircraftPositionRemote;
 		private MapControlRenderer _MapOverlays;
 		private MapControlTargetRenderer _TargetOverlays;
 
@@ -63,8 +65,10 @@ namespace GadrocsWorkshop.Helios.Controls
 		private const string _mapAircraftImage = "{HeliosFalcon}/Images/MapControl/Map Aircraft.png";
 		private const string _mapNoDataImage = "{HeliosFalcon}/Images/MapControl/Map No Data.png";
 		private const string _targetBullseyeImage = "{HeliosFalcon}/Images/MapControl/Target Bullseye.png";
-		private const string _targetPositionImage = "{HeliosFalcon}/Images/MapControl/Target Position.png";
 		private const string _targetBackgroundImage = "{HeliosFalcon}/Images/MapControl/Target Background.png";
+		private const string _targetPositionImage = "{HeliosFalcon}/Images/MapControl/Target Position.png";
+		private const string _aircraftPositionNormalImage = "{HeliosFalcon}/Images/MapControl/Aircraft Position Normal.png";
+		private const string _aircraftPositionRemoteImage = "{HeliosFalcon}/Images/MapControl/Aircraft Position Remote.png";
 		private const string _backgroundImage = "{HeliosFalcon}/Images/MapControl/Background 01.png";
 		private const string _foregroundImage = "{HeliosFalcon}/Images/MapControl/Foreground.png";
 
@@ -86,6 +90,8 @@ namespace GadrocsWorkshop.Helios.Controls
 		private double _targetBullseyeScale = 1.200d * 1.075d;
 		private double _targetVerticalOffset;
 		private double _targetHorizontalOffset;
+		private double _aircraftBearing;
+		private double _aircraftDistance;
 		private int _rangeInitialHorizontal = 0;
 		private int _mapInitialHorizontal = 0;
 		private int _rangeInitialVertical = 0;
@@ -135,6 +141,14 @@ namespace GadrocsWorkshop.Helios.Controls
 			_TargetBullseye = new Gauges.GaugeImage(_targetBullseyeImage, _imageSize);
 			_TargetBullseye.IsHidden = true;
 			Components.Add(_TargetBullseye);
+
+			_AircraftPositionNormal = new Gauges.GaugeImage(_aircraftPositionNormalImage, _imageSize);
+			_AircraftPositionNormal.IsHidden = true;
+			Components.Add(_AircraftPositionNormal);
+
+			_AircraftPositionRemote = new Gauges.CustomGaugeNeedle(_aircraftPositionRemoteImage, _needleLocation, _needleSize, _needleCenter);
+			_AircraftPositionRemote.IsHidden = true;
+			Components.Add(_AircraftPositionRemote);
 
 			_TargetPosition = new Gauges.GaugeImage(_targetPositionImage, _imageSize);
 			_TargetPosition.IsHidden = true;
@@ -259,6 +273,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 				ProcessOwnshipValues();
 				ProcessTargetValues(false);
+				ProcessAircraftValues();
 
 				if (_refreshPending)
 				{
@@ -270,7 +285,7 @@ namespace GadrocsWorkshop.Helios.Controls
 				{
 					_navPointsInitialized = false;
 					ShowNoDataPanel();
-					ResetTargetValues();
+					ResetTargetSelect();
 				}
 			}
 		}
@@ -325,9 +340,6 @@ namespace GadrocsWorkshop.Helios.Controls
 					double distance = GetHypotenuse(xValue, yValue);
 					double bearing = GetBearing(xValue, yValue);
 
-					_TargetOverlays.CourseDistance = distance;
-					_TargetOverlays.CourseBearing = bearing;
-
 					_MapOverlays.CourseDistance = distance;
 					_MapOverlays.CourseBearing = bearing;
 
@@ -338,10 +350,46 @@ namespace GadrocsWorkshop.Helios.Controls
 					_targetTextRefreshCount++;
 				}
 			}
-			else
+		}
+
+		private void ProcessAircraftValues()
+		{
+			if (_targetSelectVisible.Value.BoolValue)
 			{
-				_TargetOverlays.CourseDistance = 0;
-				_TargetOverlays.CourseBearing = 0;
+				double xValue = BullseyeHorizontalValue / _mapFeetPerNauticalMile;
+				double yValue = BullseyeVerticalValue / _mapFeetPerNauticalMile;
+
+				double xScaleValue = xValue / _targetBullseyeScale;
+				double yScaleValue = yValue / _targetBullseyeScale;
+
+				if (Height >= Width)
+				{
+					_AircraftPositionNormal.PosX = xScaleValue;
+					_AircraftPositionNormal.PosY = -yScaleValue * Width / Height + _TargetBullseye.PosY;
+				}
+				else
+				{
+					_AircraftPositionNormal.PosX = xScaleValue * Height / Width + _TargetBullseye.PosX;
+					_AircraftPositionNormal.PosY = -yScaleValue;
+				}
+
+				AircraftDistance = GetHypotenuse(xValue, yValue);
+				AircraftBearing = GetBearing(xValue, yValue);
+
+				_TargetOverlays.AircraftDistance = AircraftDistance;
+				_TargetOverlays.AircraftBearing = AircraftBearing;
+				_AircraftPositionRemote.Rotation = AircraftBearing;
+
+				if (AircraftDistance <= 120)
+				{
+					_AircraftPositionNormal.IsHidden = false;
+					_AircraftPositionRemote.IsHidden = true;
+				}
+				else
+				{
+					_AircraftPositionNormal.IsHidden = true;
+					_AircraftPositionRemote.IsHidden = false;
+				}
 			}
 		}
 
@@ -360,7 +408,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			_mapRotation_Enabled = false;
 			MapRotationAngle = 0d;
 			MapScaleChange(2d);
-			ResetTargetValues();
+			ResetTargetSelect();
 
 			EndTriggerBypass(true);
 		}
@@ -404,23 +452,38 @@ namespace GadrocsWorkshop.Helios.Controls
 		void TargetSelectVisible_Execute(object action, HeliosActionEventArgs e)
 		{
 			_targetSelectVisible.SetValue(e.Value, e.BypassCascadingTriggers);
-			bool value = _targetSelectVisible.Value.BoolValue;
 
-			_TargetBullseye.IsHidden = !value;
-			_TargetBullseyeBackground.IsHidden = !value;
-			_TargetOverlays.IsHidden = !value;
-
-			if (_targetSelected)
+			if (_targetSelectVisible.Value.BoolValue)
 			{
-				_TargetPosition.IsHidden = !value;
+				ProcessAircraftValues();
+
+				_TargetBullseye.IsHidden = false;
+				_TargetBullseyeBackground.IsHidden = false;
+				_TargetOverlays.IsHidden = false;
+
+				if (_targetSelected)
+				{
+					_TargetPosition.IsHidden = false;
+				}
+
+				if (AircraftDistance <= 120)
+				{
+					_AircraftPositionNormal.IsHidden = false;
+				}
+				else
+				{
+					_AircraftPositionRemote.IsHidden = false;
+				}
 			}
 			else
 			{
+				_TargetBullseye.IsHidden = true;
+				_TargetBullseyeBackground.IsHidden = true;
 				_TargetPosition.IsHidden = true;
-			}
+				_TargetOverlays.IsHidden = true;
+				_AircraftPositionNormal.IsHidden = true;
+				_AircraftPositionRemote.IsHidden = true;
 
-			if (_TargetOverlays.IsHidden)
-			{
 				Refresh();
 			}
 		}
@@ -491,13 +554,15 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		void ResetTargetValues()
+		void ResetTargetSelect()
 		{
 			_targetSelected = false;
 			_TargetBullseyeBackground.IsHidden = true;
 			_TargetBullseye.IsHidden = true;
 			_TargetPosition.IsHidden = true;
 			_TargetOverlays.IsHidden = true;
+			_AircraftPositionNormal.IsHidden = true;
+			_AircraftPositionRemote.IsHidden = true;
 			_TargetOverlays.TargetBearing = 0;
 			_TargetOverlays.TargetDistance = 0;
 			_targetHorizontalOffset = 0;
@@ -689,6 +754,16 @@ namespace GadrocsWorkshop.Helios.Controls
 			_TargetPosition.Height = squareHeight;
 			_TargetPosition.PosX = squarePosX;
 			_TargetPosition.PosY = squarePosY;
+
+			_AircraftPositionNormal.Width = squareWidth;
+			_AircraftPositionNormal.Height = squareHeight;
+			_AircraftPositionNormal.PosX = squarePosX;
+			_AircraftPositionNormal.PosY = squarePosY;
+
+			_AircraftPositionRemote.Tape_Width = squareWidth;
+			_AircraftPositionRemote.Tape_Height = squareHeight;
+			_AircraftPositionRemote.TapePosX = squarePosX;
+			_AircraftPositionRemote.TapePosY = squarePosY;
 
 			_MapNoData.Width = squareWidth;
 			_MapNoData.Height = squareHeight;
@@ -996,6 +1071,40 @@ namespace GadrocsWorkshop.Helios.Controls
 						BullseyeHorizontalOffset_Calculate(_bullseyeHorizontalValue);
 						_refreshPending = false;
 					}
+				}
+			}
+		}
+
+		public double AircraftBearing
+		{
+			get
+			{
+				return _aircraftBearing;
+			}
+			set
+			{
+				double oldValue = _aircraftBearing;
+				_aircraftBearing = value;
+				if (!_aircraftBearing.Equals(oldValue))
+				{
+					Refresh();
+				}
+			}
+		}
+
+		public double AircraftDistance
+		{
+			get
+			{
+				return _aircraftDistance;
+			}
+			set
+			{
+				double oldValue = _aircraftDistance;
+				_aircraftDistance = value;
+				if (!_aircraftDistance.Equals(oldValue))
+				{
+					Refresh();
 				}
 			}
 		}
