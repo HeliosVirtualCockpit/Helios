@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Controls
 	using System.Windows.Media;
 
 
-	public class MapControlRenderer : GaugeComponent
+	public class MapControlMapRenderer : GaugeComponent
 	{
 		private Point _location;
 		private Size _size;
@@ -86,14 +86,14 @@ namespace GadrocsWorkshop.Helios.Controls
 		private double _fontScaleSize;
 
 
-		public MapControlRenderer(Point location, Size size, Point center)
+		public MapControlMapRenderer(Point location, Size size, Point center)
 			: this(location, size, center, 0d)
 		{
 			GetPixelsPerDip();
 			InitializeImageArrays();
 		}
 
-		public MapControlRenderer(Point location, Size size, Point center, double baseRotation)
+		public MapControlMapRenderer(Point location, Size size, Point center, double baseRotation)
 		{
 			_location = location;
 			_size = size;

@@ -60,8 +60,9 @@
     </Compile>
     <Compile Include="Interfaces\RTT\IRttGeneratorHost.cs" />
     <Compile Include="Controls\MapControl.cs" />
-    <Compile Include="Controls\MapControlRenderer.cs" />
-    <Compile Include="Controls\MapControlTargetRenderer.cs" />
+    <Compile Include="Controls\MapControlMapRenderer.cs" />
+    <Compile Include="Controls\MapControlLineRenderer.cs" />
+    <Compile Include="Controls\MapControlTextRenderer.cs" />
     <Compile Include="Controls\MapControls.cs" />
     <Compile Include="Controls\MapControlsUserMapEditor.xaml.cs">
       <DependentUpon>MapControlsUserMapEditor.xaml</DependentUpon>
@@ -211,16 +212,17 @@
     <Resource Include="Images\MapControl\Map Bullseye 128.png" />
     <Resource Include="Images\MapControl\Map Range Rings.png" />
     <Resource Include="Images\MapControl\Map Aircraft.png" />
-    <Resource Include="Images\MapControl\Map No Data.png" />
-    <Resource Include="Images\MapControl\Foreground.png" />
-    <Resource Include="Images\MapControl\Background 01.png" />
-    <Resource Include="Images\MapControl\Background 02.png" />
+    <Resource Include="Images\MapControl\MapNoData Foreground.png" />
+    <Resource Include="Images\MapControl\MapNoData Background.png" />
+    <Resource Include="Images\MapControl\Map Background.png" />
+    <Resource Include="Images\MapControl\MapViewer Background.png" />
     <Resource Include="Images\Textures\hud_mask.png" />
-    <Resource Include="Images\MapControl\Target Background.png" />
-    <Resource Include="Images\MapControl\Target Bullseye.png" />
-    <Resource Include="Images\MapControl\Target Position.png" />
-    <Resource Include="Images\MapControl\Aircraft Position Normal.png" />
-    <Resource Include="Images\MapControl\Aircraft Position Remote.png" />
+    <Resource Include="Images\MapControl\Overview Background.png" />
+    <Resource Include="Images\MapControl\Overview Bullseye.png" />
+    <Resource Include="Images\MapControl\Overview Target.png" />
+    <Resource Include="Images\MapControl\Overview Aircraft.png" />
+    <Resource Include="Images\MapControl\Overview Range Rings.png" />
+    <Resource Include="Images\MapControl\Overview Aircraft Remote.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Maps\Aegean\Map.jpg" />

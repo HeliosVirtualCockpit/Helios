@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls
 	using System.Windows.Media;
 
 
-	public class MapControlTargetRenderer : GaugeComponent
+	public class MapControlTextRenderer : GaugeComponent
 	{
 		private double _scaleFactor = 1.0d;
 		private double _pixelsPerDip = 1.0d;
@@ -33,9 +33,11 @@ namespace GadrocsWorkshop.Helios.Controls
 		private const double _textBaseTopMargin = 5d;
 		private double _textMargin;
 		private double _textTopMargin;
+		private double _courseBaseTextOffset = 6d;
+		private double _courseTextOffset;
 
 
-		public MapControlTargetRenderer()
+		public MapControlTextRenderer()
 		{
 			GetPixelsPerDip();
 		}
@@ -65,22 +67,62 @@ namespace GadrocsWorkshop.Helios.Controls
 			Brush backgroundFillBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 			FormattedText textFormattedAircraft;
 			FormattedText textFormattedTarget;
-						
-			string textAircraft = "OWNSHIP: " + AircraftDistance.ToString() + " Nm " + AircraftBearing.ToString("000") + "°";
-			string textTarget = "TARGET: " + TargetDistance.ToString() + " Nm " + TargetBearing.ToString("000") + "°";
+			FormattedText textFormattedCourse;
+
+			double textAircraftPos;
+			double textTargetPos;
+			double courseTextPosX;
+			double courseTextPosY;
+
+			string textAircraft = "OWNSHIP: " + AircraftDistance.ToString() + "Nm " + AircraftBearing.ToString("000") + "°";
+			string textTarget = "TARGET: " + TargetDistance.ToString() + "Nm " + TargetBearing.ToString("000") + "°";
+			string textCourse = CourseDistance.ToString() + "Nm " + CourseBearing.ToString("000") + "°";
 
 			textFormattedAircraft = new FormattedText(textAircraft, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
-			double textAircraftPos = _textMargin;
+			textFormattedTarget = new FormattedText(textTarget, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
+			textFormattedCourse = new FormattedText(textCourse, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
+
+			textAircraftPos = _textMargin;
 			Rect textBoundsAircraft = new Rect(textAircraftPos, _textTopMargin, textFormattedAircraft.Width + (4 * _scaleFactor), textFormattedAircraft.Height + (2 * _scaleFactor));
 			drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsAircraft);
+			drawingContext.DrawText(textFormattedAircraft, new Point(textAircraftPos + (2 * _scaleFactor), _textTopMargin + (1 * _scaleFactor)));
 
-			textFormattedTarget = new FormattedText(textTarget, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
-			double textTargetPos = MapControlWidth - (_textMargin + textFormattedTarget.Width + (4 * _scaleFactor));
+			textTargetPos = MapControlWidth - (_textMargin + textFormattedTarget.Width + (4 * _scaleFactor));
 			Rect textBoundsTarget = new Rect(textTargetPos, _textTopMargin, textFormattedTarget.Width + (4 * _scaleFactor), textFormattedTarget.Height + (2 * _scaleFactor));
 			drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsTarget);
-
-			drawingContext.DrawText(textFormattedAircraft, new Point(textAircraftPos + (2 * _scaleFactor), _textTopMargin + (1 * _scaleFactor)));
 			drawingContext.DrawText(textFormattedTarget, new Point(textTargetPos + (2 * _scaleFactor), _textTopMargin + (1 * _scaleFactor)));
+
+			if (TargetSelected)
+			{
+				if (TargetBearing > 90 && TargetBearing < 270)
+				{
+					courseTextPosY = TargetPositionY - (_courseTextOffset + textFormattedCourse.Height + (2 * _scaleFactor));
+				}
+				else
+				{
+					courseTextPosY = TargetPositionY + _courseTextOffset;
+				}
+
+				if (TargetDistance > 95 + 30 * Math.Abs(Math.Cos(TargetBearing * Math.PI / 180)))
+				{
+					if (TargetBearing > 180 && TargetBearing < 360)
+					{
+						courseTextPosX = TargetPositionX;
+					}
+					else
+					{
+						courseTextPosX = TargetPositionX - (textFormattedCourse.Width + (4 * _scaleFactor));
+					}
+				}
+				else
+				{
+					courseTextPosX = TargetPositionX - (textFormattedCourse.Width + (4 * _scaleFactor)) / 2;
+				}
+
+				Rect textBoundsCourse = new Rect(courseTextPosX, courseTextPosY, textFormattedCourse.Width + (4 * _scaleFactor), textFormattedCourse.Height + (2 * _scaleFactor));
+				drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsCourse);
+				drawingContext.DrawText(textFormattedCourse, new Point(courseTextPosX + (2 * _scaleFactor), courseTextPosY + (1 * _scaleFactor)));
+			}
 		}
 
 		protected override void OnRefresh(double xScale, double yScale)
@@ -89,6 +131,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			_fontScaleSize = _fontBaseSize * _scaleFactor;
 			_textMargin = _textBaseMargin * _scaleFactor;
 			_textTopMargin = _textBaseTopMargin * _scaleFactor;
+			_courseTextOffset = _courseBaseTextOffset * _scaleFactor;
 		}
 
 		#endregion Drawing
@@ -100,8 +143,13 @@ namespace GadrocsWorkshop.Helios.Controls
 		public double MapControlHeight { get; set; }
 		public double TargetBearing { get; set; }
 		public double TargetDistance { get; set; }
+		public double TargetPositionX { get; set; }
+		public double TargetPositionY { get; set; }
 		public double AircraftBearing { get; set; }
 		public double AircraftDistance { get; set; }
+		public double CourseBearing { get; set; }
+		public double CourseDistance { get; set; }
+		public bool TargetSelected { get; set; }
 
 		#endregion
 
