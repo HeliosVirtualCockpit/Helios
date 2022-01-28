@@ -18,9 +18,9 @@ namespace GadrocsWorkshop.Helios.Controls
 {
 	using GadrocsWorkshop.Helios.ComponentModel;
 	using GadrocsWorkshop.Helios.Interfaces.Falcon;
+	using System;
 	using System.Windows;
 	using System.Windows.Media;
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 
@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Controls
 	{
 		private FalconInterface _falconInterface;
 
-		private Gauges.GaugeImage _Background;
+		private Gauges.GaugeImage _MapBackground;
 		private Gauges.CustomGaugeNeedle _Map;
 		private Gauges.CustomGaugeNeedle _MapZoomIn;
 		private MapViewerRenderer _MapOverlay;
@@ -42,7 +42,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		private Point _needleLocation = new Point(0d, 0d);
 		private Point _needleCenter = new Point(100d, 100d);
 
-		private const string _backgroundImage = "{HeliosFalcon}/Images/MapControl/Background 02.png";
+		private const string _mapBackgroundImage = "{HeliosFalcon}/Images/MapControl/MapViewer Background.png";
 		private string _lastTheater;
 		private bool _navPointsInitialized = false;
 
@@ -66,8 +66,8 @@ namespace GadrocsWorkshop.Helios.Controls
 		public MapViewer()
 			: base("MapViewer", new Size(200d, 200d))
 		{
-			_Background = new Gauges.GaugeImage(_backgroundImage, _imageSize);
-			Components.Add(_Background);
+			_MapBackground = new Gauges.GaugeImage(_mapBackgroundImage, _imageSize);
+			Components.Add(_MapBackground);
 
 			_Map = new Gauges.CustomGaugeNeedle(_mapBaseImages[7, 1], _needleLocation, _needleSize, _needleCenter);
 			_Map.Clip = new RectangleGeometry(_needleClip);
