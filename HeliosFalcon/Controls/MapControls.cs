@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2021 Helios Contributors
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -24,6 +24,8 @@ namespace GadrocsWorkshop.Helios.Controls
 
 	public class MapControls : Gauges.BaseGauge
 	{
+		private bool _targetClearOnTouch = false;
+
 		public string[,] _mapBaseImages = new string[,]
 		{	{ "101", "{HeliosFalcon}/Images/Maps/Aegean/Map.jpg", "1", "Aegean" },
 			{ "102", "{HeliosFalcon}/Images/Maps/Balkans/Map.jpg", "1", "Balkans, BFB 1.2.1" },
@@ -66,6 +68,24 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
 		#region Properties
+
+		public bool TargetClearOnTouch
+		{
+			get
+			{
+				return _targetClearOnTouch;
+			}
+			set
+			{
+				if (_targetClearOnTouch == value)
+				{
+					return;
+				}
+				bool oldValue = _targetClearOnTouch;
+				_targetClearOnTouch = value;
+				OnPropertyChanged(nameof(TargetClearOnTouch), oldValue, value, true);
+			}
+		}
 
 		public string UserMapImage_201
 		{
@@ -852,6 +872,10 @@ namespace GadrocsWorkshop.Helios.Controls
 		{
 			base.WriteXml(writer);
 
+			writer.WriteStartElement("Settings");
+			writer.WriteElementString("TargetClearOnTouch", TargetClearOnTouch.ToString(CultureInfo.InvariantCulture));
+			writer.WriteEndElement();
+
 			writer.WriteElementString("UserMapImage_201", UserMapImage_201);
 			writer.WriteElementString("UserMapName_201", UserMapName_201);
 			writer.WriteElementString("UserMapSize_201", UserMapSize_201.ToString(CultureInfo.InvariantCulture));
@@ -906,6 +930,13 @@ namespace GadrocsWorkshop.Helios.Controls
 		public override void ReadXml(XmlReader reader)
 		{
 			base.ReadXml(reader);
+
+			if (reader.Name.Equals("Settings"))
+			{
+				reader.ReadStartElement();
+				TargetClearOnTouch = bool.Parse(reader.ReadElementString("TargetClearOnTouch"));
+				reader.ReadEndElement();
+			}
 
 			UserMapImage_201 = reader.ReadElementString("UserMapImage_201");
 			UserMapName_201 = reader.ReadElementString("UserMapName_201");
