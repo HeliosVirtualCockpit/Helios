@@ -37,6 +37,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		private HeliosValue _threatsVisible;
 		private HeliosValue _waypointsVisible;
 		private HeliosValue _overviewPanelVisible;
+		private HeliosValue _overviewClearTarget;
 		private HeliosValue _overviewRangeRingsVisible;
 
 		private Gauges.GaugeImage _MapBackground;
@@ -219,7 +220,12 @@ namespace GadrocsWorkshop.Helios.Controls
 			Actions.Add(_overviewPanelVisible);
 			Values.Add(_overviewPanelVisible);
 
-			_overviewRangeRingsVisible = new HeliosValue(this, new BindingValue(false), "", "Target Selection Range Rings Visible", "Sets visibility of the target selection range rings.", "Set true to show target selection range rings.", BindingValueUnits.Boolean);
+			_overviewClearTarget = new HeliosValue(this, new BindingValue(false), "", "Target Selection Clear", "Clears the selected target.", "Set true to clear the selected target.", BindingValueUnits.Boolean);
+			_overviewClearTarget.Execute += new HeliosActionHandler(OverviewClearTarget_Execute);
+			Actions.Add(_overviewClearTarget);
+			Values.Add(_overviewClearTarget);
+
+			_overviewRangeRingsVisible = new HeliosValue(this, new BindingValue(true), "", "Target Selection Range Rings Visible", "Sets visibility of the target selection range rings.", "Set true to show target selection range rings.", BindingValueUnits.Boolean);
 			_overviewRangeRingsVisible.Execute += new HeliosActionHandler(OverviewRangeRingsVisible_Execute);
 			Actions.Add(_overviewRangeRingsVisible);
 			Values.Add(_overviewRangeRingsVisible);
@@ -574,6 +580,17 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
+		void OverviewClearTarget_Execute(object action, HeliosActionEventArgs e)
+		{
+			_overviewClearTarget.SetValue(e.Value, e.BypassCascadingTriggers);
+			bool overviewClearTarget = _overviewClearTarget.Value.BoolValue;
+
+			if (overviewClearTarget)
+			{
+				ClearSelectedTarget();
+			}
+		}
+
 		void OverviewRangeRingsVisible_Execute(object action, HeliosActionEventArgs e)
 		{
 			_overviewRangeRingsVisible.SetValue(e.Value, e.BypassCascadingTriggers);
@@ -610,7 +627,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 				if (distance <= 125)
 				{
-					if (_OverviewTarget.IsHidden)
+					if (_OverviewTarget.IsHidden || !TargetClearOnTouch)
 					{
 						if (Height >= Width)
 						{
@@ -639,27 +656,35 @@ namespace GadrocsWorkshop.Helios.Controls
 						_MapOverlays.TargetVisible = true;
 						_targetHorizontalOffset = distance_posX * _mapFeetPerNauticalMile;
 						_targetVerticalOffset = distance_posY * _mapFeetPerNauticalMile;
+
+						ProcessTargetValues(true);
+						Refresh();
 					}
 					else
 					{
-						_targetSelected = false;
-						_OverviewTarget.IsHidden = true;
-
-						_OverviewTextData.TargetSelected = false;
-						_OverviewTextData.TargetBearing = 0;
-						_OverviewTextData.TargetDistance = 0;
-
-						_OverviewTargetLines.IsHidden = true;
-						
-						_MapOverlays.TargetVisible = false;
-						_targetHorizontalOffset = 0;
-						_targetVerticalOffset = 0;
+						ClearSelectedTarget();
 					}
-
-					ProcessTargetValues(true);
-					Refresh();
 				}
 			}
+		}
+
+		void ClearSelectedTarget()
+		{
+			_targetSelected = false;
+			_OverviewTarget.IsHidden = true;
+
+			_OverviewTextData.TargetSelected = false;
+			_OverviewTextData.TargetBearing = 0;
+			_OverviewTextData.TargetDistance = 0;
+
+			_OverviewTargetLines.IsHidden = true;
+
+			_MapOverlays.TargetVisible = false;
+			_targetHorizontalOffset = 0;
+			_targetVerticalOffset = 0;
+
+			ProcessTargetValues(true);
+			Refresh();
 		}
 
 		void ResetTargetOverview()

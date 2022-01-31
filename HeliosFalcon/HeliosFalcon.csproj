@@ -59,17 +59,20 @@
       <DependentUpon>HUDBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\RTT\IRttGeneratorHost.cs" />
-    <Compile Include="Controls\MapControl.cs" />
-    <Compile Include="Controls\MapControlMapRenderer.cs" />
-    <Compile Include="Controls\MapControlLineRenderer.cs" />
-    <Compile Include="Controls\MapControlTextRenderer.cs" />
     <Compile Include="Controls\MapControls.cs" />
+    <Compile Include="Controls\MapControlBehaviorEditor.xaml.cs">
+      <DependentUpon>MapControlBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MapControlsUserMapEditor.xaml.cs">
       <DependentUpon>MapControlsUserMapEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MapControlsBaseMapEditor.xaml.cs">
       <DependentUpon>MapControlsBaseMapEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MapControl.cs" />
+    <Compile Include="Controls\MapControlMapRenderer.cs" />
+    <Compile Include="Controls\MapControlLineRenderer.cs" />
+    <Compile Include="Controls\MapControlTextRenderer.cs" />
     <Compile Include="Controls\MapViewer.cs" />
     <Compile Include="Controls\MapViewerRenderer.cs" />
     <Compile Include="Gauges\Altimeter.cs" />
@@ -143,6 +146,10 @@
     <Resource Include="Images\Textures\rwr.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\MapControlBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\MapControlsUserMapEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
