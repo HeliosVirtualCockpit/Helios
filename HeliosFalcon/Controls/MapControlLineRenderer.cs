@@ -16,20 +16,33 @@
 
 namespace GadrocsWorkshop.Helios.Controls
 {
+	using static GadrocsWorkshop.Helios.Controls.MapControls;
 	using GadrocsWorkshop.Helios.Gauges;
 	using System;
 	using System.Windows;
 	using System.Windows.Media;
-
+	using System.Collections.Generic;
 
 	public class MapControlLineRenderer : GaugeComponent
 	{
+		private List<ITargetData> TargetList = new List<ITargetData>();
+
 		private double _scaleFactor = 1.0d;
 		private const double _targetBaseLineWidth = 1.3d;
 		private double _targetLineWidth;
 
 
 		public MapControlLineRenderer() {}
+
+
+		#region Methods
+
+		public void SetTargetData(List<ITargetData> targetList)
+		{
+			TargetList = targetList;
+		}
+
+		#endregion Methods
 
 
 		#region Drawing
@@ -39,7 +52,10 @@ namespace GadrocsWorkshop.Helios.Controls
 			Brush _lineBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 			Pen _linePen = new Pen(_lineBrush, _targetLineWidth) { DashStyle = DashStyles.Dash };
 
-			drawingContext.DrawLine(_linePen, new Point(AircraftPositionX, AircraftPositionY), new Point(TargetPositionX, TargetPositionY));
+			for (int i = 0; i < TargetList.Count; i++)
+			{
+				drawingContext.DrawLine(_linePen, new Point(AircraftPosition_X, AircraftPosition_Y), new Point(TargetList[i].TargetPosition_X, TargetList[i].TargetPosition_Y));
+			}
 		}
 
 		protected override void OnRefresh(double xScale, double yScale)
@@ -53,12 +69,10 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		#region Properties
 
-		public double TargetPositionX { get; set; }
-		public double TargetPositionY { get; set; }
-		public double AircraftPositionX { get; set; }
-		public double AircraftPositionY { get; set; }
+		public double AircraftPosition_X { get; set; }
+		public double AircraftPosition_Y { get; set; }
 
-		#endregion
+		#endregion Properties
 
 	}
 }
