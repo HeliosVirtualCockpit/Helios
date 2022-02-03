@@ -24,8 +24,6 @@ namespace GadrocsWorkshop.Helios.Controls
 
 	public class MapControls : Gauges.BaseGauge
 	{
-		private bool _targetClearOnTouch = false;
-
 		public string[,] _mapBaseImages = new string[,]
 		{	{ "101", "{HeliosFalcon}/Images/Maps/Aegean/Map.jpg", "1", "Aegean" },
 			{ "102", "{HeliosFalcon}/Images/Maps/Balkans/Map.jpg", "1", "Balkans, BFB 1.2.1" },
@@ -69,22 +67,18 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		#region Properties
 
-		public bool TargetClearOnTouch
+		public interface ITargetData
 		{
-			get
-			{
-				return _targetClearOnTouch;
-			}
-			set
-			{
-				if (_targetClearOnTouch == value)
-				{
-					return;
-				}
-				bool oldValue = _targetClearOnTouch;
-				_targetClearOnTouch = value;
-				OnPropertyChanged(nameof(TargetClearOnTouch), oldValue, value, true);
-			}
+			double TargetBearing { get; set; }
+			double TargetDistance { get; set; }
+			double TargetPosition_X { get; set; }
+			double TargetPosition_Y { get; set; }
+			double TargetHorizontalValue { get; set; }
+			double TargetVerticalValue { get; set; }
+			double MapTargetHorizontalValue { get; set; }
+			double MapTargetVerticalValue { get; set; }
+			double CourseBearing { get; set; }
+			double CourseDistance { get; set; }
 		}
 
 		public string UserMapImage_201
@@ -863,7 +857,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		#endregion
+		#endregion Properties
 
 
 		#region Read/Write Xml
@@ -871,10 +865,6 @@ namespace GadrocsWorkshop.Helios.Controls
 		public override void WriteXml(XmlWriter writer)
 		{
 			base.WriteXml(writer);
-
-			writer.WriteStartElement("Settings");
-			writer.WriteElementString("TargetClearOnTouch", TargetClearOnTouch.ToString(CultureInfo.InvariantCulture));
-			writer.WriteEndElement();
 
 			writer.WriteElementString("UserMapImage_201", UserMapImage_201);
 			writer.WriteElementString("UserMapName_201", UserMapName_201);
@@ -931,13 +921,6 @@ namespace GadrocsWorkshop.Helios.Controls
 		{
 			base.ReadXml(reader);
 
-			if (reader.Name.Equals("Settings"))
-			{
-				reader.ReadStartElement();
-				TargetClearOnTouch = bool.Parse(reader.ReadElementString("TargetClearOnTouch"));
-				reader.ReadEndElement();
-			}
-
 			UserMapImage_201 = reader.ReadElementString("UserMapImage_201");
 			UserMapName_201 = reader.ReadElementString("UserMapName_201");
 			UserMapSize_201 = bool.Parse(reader.ReadElementString("UserMapSize_201"));
@@ -991,7 +974,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			Refresh();
 		}
 
-		#endregion
+		#endregion Read/Write Xml
 
 	}
 }

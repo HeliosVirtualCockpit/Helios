@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2021 Helios Contributors
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -66,6 +66,16 @@ namespace GadrocsWorkshop.Helios.Controls
 		public MapViewer()
 			: base("MapViewer", new Size(200d, 200d))
 		{
+			AddComponents();
+			BaseMapResize();
+			Resized += new EventHandler(OnMapControl_Resized);
+		}
+
+
+		#region Components
+
+		void AddComponents()
+		{
 			_MapBackground = new Gauges.GaugeImage(_mapBackgroundImage, _imageSize);
 			Components.Add(_MapBackground);
 
@@ -84,13 +94,12 @@ namespace GadrocsWorkshop.Helios.Controls
 			_MapOverlay.Clip = new RectangleGeometry(_needleClip);
 			_MapOverlay.IsHidden = true;
 			Components.Add(_MapOverlay);
-
-			BaseMapResize();
-			Resized += new EventHandler(OnMapControl_Resized);
 		}
 
+		#endregion Components
 
-		#region Actions
+
+		#region Methods
 
 		public override void MouseDown(Point location)
 		{
@@ -195,7 +204,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			return _falconInterface?.GetValue(device, name) ?? BindingValue.Empty;
 		}
 
-		#endregion Actions
+		#endregion Methods
 
 
 		#region Map Selection
@@ -284,10 +293,10 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		#endregion
+		#endregion Map Selection
 
 
-		#region Map Scaling
+		#region Scaling
 
 		void OnMapControl_Resized(object sender, EventArgs e)
 		{
@@ -400,7 +409,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			Refresh();
 		}
 
-		#endregion
+		#endregion Scaling
 
 	}
 }

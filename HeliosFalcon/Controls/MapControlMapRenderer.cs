@@ -16,16 +16,19 @@
 
 namespace GadrocsWorkshop.Helios.Controls
 {
+	using static GadrocsWorkshop.Helios.Controls.MapControls;
 	using GadrocsWorkshop.Helios.Gauges;
 	using System;
-	using System.Collections.Generic;
-	using System.Globalization;
 	using System.Windows;
 	using System.Windows.Media;
+	using System.Collections.Generic;
+	using System.Globalization;
 
 
 	public class MapControlMapRenderer : GaugeComponent
 	{
+		private List<ITargetData> TargetList = new List<ITargetData>();
+
 		private Point _location;
 		private Size _size;
 		private Point _center;
@@ -89,7 +92,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		public MapControlMapRenderer(Point location, Size size, Point center)
 			: this(location, size, center, 0d)
 		{
-			GetPixelsPerDip();
+			SetPixelsPerDip();
 			InitializeImageArrays();
 		}
 
@@ -102,7 +105,12 @@ namespace GadrocsWorkshop.Helios.Controls
 		}
 
 
-		#region Actions
+		#region Methods
+
+		public void SetTargetData(List<ITargetData> targetList)
+		{
+			TargetList = targetList;
+		}
 
 		void InitializeImageArrays()
 		{
@@ -193,6 +201,21 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
+		void SetPixelsPerDip()
+		{
+			DisplayManager displayManager = new DisplayManager();
+
+			if (displayManager.PixelsPerDip != 0d)
+			{
+				_pixelsPerDip = displayManager.PixelsPerDip;
+			}
+		}
+
+		#endregion Methods
+
+
+		#region Functions
+
 		double NavPointToDouble(string navValue)
 		{
 			try
@@ -218,17 +241,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		void GetPixelsPerDip()
-		{
-			DisplayManager displayManager = new DisplayManager();
-
-			if (displayManager.PixelsPerDip != 0d)
-			{
-				_pixelsPerDip = displayManager.PixelsPerDip;
-			}
-		}
-
-		#endregion Actions
+		#endregion Functions
 
 
 		#region Drawing
@@ -244,7 +257,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			drawingContext.PushTransform(transform);
 
-			if (TargetVisible)
+			if (TargetsSelected && TargetsVisible)
 			{
 				DrawTargetLines(drawingContext);
 			}
@@ -254,7 +267,7 @@ namespace GadrocsWorkshop.Helios.Controls
 				DrawThreatCircles(drawingContext);
 			}
 
-			if (TargetVisible)
+			if (TargetsSelected && TargetsVisible)
 			{
 				DrawTargetCircles(drawingContext);
 			}
@@ -264,7 +277,7 @@ namespace GadrocsWorkshop.Helios.Controls
 				DrawThreatNames(drawingContext);
 			}
 
-			if (TargetVisible)
+			if (TargetsSelected && TargetsVisible)
 			{
 				DrawTargetNames(drawingContext);
 			}
@@ -284,7 +297,13 @@ namespace GadrocsWorkshop.Helios.Controls
 			_lineBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 			_linePen = new Pen(_lineBrush, _navpointLineWidth) { DashStyle = DashStyles.Dash };
 
-			drawingContext.DrawLine(_linePen, new Point(OwnshipHorizontalValue, OwnshipVerticalValue), new Point(TargetHorizontalValue, TargetVerticalValue));
+			for (int i = 0; i < TargetList.Count; i++)
+			{
+				TargetHorizontalValue = TargetList[i].MapTargetHorizontalValue;
+				TargetVerticalValue = TargetList[i].MapTargetVerticalValue;
+
+				drawingContext.DrawLine(_linePen, new Point(OwnshipHorizontalValue, OwnshipVerticalValue), new Point(TargetHorizontalValue, TargetVerticalValue));
+			}
 		}
 
 		void DrawThreatCircles(DrawingContext drawingContext)
@@ -318,8 +337,14 @@ namespace GadrocsWorkshop.Helios.Controls
 			_pointFillBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 			_transparentFillBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0)) { Opacity = 0.15d };
 
-			drawingContext.DrawEllipse(_transparentFillBrush, _linePen, new Point(TargetHorizontalValue, TargetVerticalValue), _mapScaleUnit * 50d, _mapScaleUnit * 50d);
-			drawingContext.DrawEllipse(_pointFillBrush, _linePointPen, new Point(TargetHorizontalValue, TargetVerticalValue), _mapScaleUnit * 14d, _mapScaleUnit * 14d);
+			for (int i = 0; i < TargetList.Count; i++)
+			{
+				TargetHorizontalValue = TargetList[i].MapTargetHorizontalValue;
+				TargetVerticalValue = TargetList[i].MapTargetVerticalValue;
+
+				drawingContext.DrawEllipse(_transparentFillBrush, _linePen, new Point(TargetHorizontalValue, TargetVerticalValue), _mapScaleUnit * 50d, _mapScaleUnit * 50d);
+				drawingContext.DrawEllipse(_pointFillBrush, _linePointPen, new Point(TargetHorizontalValue, TargetVerticalValue), _mapScaleUnit * 14d, _mapScaleUnit * 14d);
+			}
 		}
 
 		void DrawThreatNames(DrawingContext drawingContext)
@@ -363,21 +388,27 @@ namespace GadrocsWorkshop.Helios.Controls
 			_linePen = new Pen(_lineBrush, _fontScaleSize * 0.11d);
 			_backgroundFillBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
-			double xPos = TargetHorizontalValue + xPosOffset;
-			double yPos = TargetVerticalValue - yPosOffset;
+			for (int i = 0; i < TargetList.Count; i++)
+			{
+				TargetHorizontalValue = TargetList[i].MapTargetHorizontalValue;
+				TargetVerticalValue = TargetList[i].MapTargetVerticalValue;
 
-			string target_text = CourseDistance.ToString() + "Nm " + CourseBearing.ToString("000") + "°";
-			
-			_formattedText = new FormattedText(target_text, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Lucida Console Regular"), _fontScaleSize, Brushes.Black, _pixelsPerDip);
-			_textBounds = new Rect(xPos - sizeOffset * 1.5d, yPos - sizeOffset, _formattedText.Width + sizeOffset * 2.5d, _formattedText.Height + sizeOffset);
-			_textGeometry = _formattedText.BuildGeometry(new Point(xPos, yPos));
+				double xPos = TargetHorizontalValue + xPosOffset;
+				double yPos = TargetVerticalValue - yPosOffset;
 
-			drawingContext.PushTransform(new RotateTransform(_rotationNegative, TargetHorizontalValue, TargetVerticalValue));
+				string target_text = (i + 1).ToString("00") + " " + TargetList[i].CourseDistance.ToString() + "Nm " + TargetList[i].CourseBearing.ToString("000") + "°";
 
-			drawingContext.DrawRectangle(_backgroundFillBrush, _linePen, _textBounds);
-			drawingContext.DrawGeometry(Brushes.Black, null, _textGeometry);
+				_formattedText = new FormattedText(target_text, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Lucida Console Regular"), _fontScaleSize, Brushes.Black, _pixelsPerDip);
+				_textBounds = new Rect(xPos - sizeOffset * 1.5d, yPos - sizeOffset, _formattedText.Width + sizeOffset * 2.5d, _formattedText.Height + sizeOffset);
+				_textGeometry = _formattedText.BuildGeometry(new Point(xPos, yPos));
 
-			drawingContext.Pop();
+				drawingContext.PushTransform(new RotateTransform(_rotationNegative, TargetHorizontalValue, TargetVerticalValue));
+
+				drawingContext.DrawRectangle(_backgroundFillBrush, _linePen, _textBounds);
+				drawingContext.DrawGeometry(Brushes.Black, null, _textGeometry);
+
+				drawingContext.Pop();
+			}
 		}
 
 		void DrawWaypointLines(DrawingContext drawingContext)
@@ -427,6 +458,11 @@ namespace GadrocsWorkshop.Helios.Controls
 				}
 			}
 		}
+
+		#endregion Drawing
+
+
+		#region OnRefresh
 
 		protected override void OnRefresh(double xScale, double yScale)
 		{
@@ -482,6 +518,11 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
+		#endregion OnRefresh
+
+
+		#region Functions
+
 		double FeetToMapUnits_X(double xPosFeet, double xScale)
 		{
 			if (xPosFeet > 0d)
@@ -534,16 +575,15 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		#endregion Drawing
+		#endregion Functions
 
 
 		#region Properties
 
+		public bool TargetsSelected { get; set; }
+		public bool TargetsVisible { get; set; }
 		public bool ThreatsVisible { get; set; }
 		public bool WaypointsVisible { get; set; }
-		public bool TargetVisible { get; set; }
-		public double CourseBearing { get; set; }
-		public double CourseDistance { get; set; }
 		public double MapShortestSize { get; set; }
 		public double MapScaleMultiplier { get; set; }
 
@@ -779,7 +819,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		#endregion
+		#endregion Properties
 
 	}
 }
