@@ -364,7 +364,7 @@ namespace GadrocsWorkshop.Helios.Controls
 					double xPos = _mapPoints_PT[i, 0] + xPosOffset;
 					double yPos = _mapPoints_PT[i, 1] - yPosOffset;
 
-					_formattedText = new FormattedText(_navNames_PT[i], CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Lucida Console Regular"), _fontScaleSize, Brushes.Black, _pixelsPerDip);
+					_formattedText = new FormattedText(_navNames_PT[i], CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Arial"), _fontScaleSize, Brushes.Black, _pixelsPerDip);
 					_textBounds = new Rect(xPos - sizeOffset, yPos - sizeOffset, _formattedText.Width + sizeOffset * 2.5d, _formattedText.Height + sizeOffset);
 					_textGeometry = _formattedText.BuildGeometry(new Point(xPos, yPos));
 
@@ -398,7 +398,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 				string target_text = (i + 1).ToString("00") + " " + TargetList[i].CourseDistance.ToString() + "Nm " + TargetList[i].CourseBearing.ToString("000") + "°";
 
-				_formattedText = new FormattedText(target_text, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Lucida Console Regular"), _fontScaleSize, Brushes.Black, _pixelsPerDip);
+				_formattedText = new FormattedText(target_text, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Arial"), _fontScaleSize, Brushes.Black, _pixelsPerDip);
 				_textBounds = new Rect(xPos - sizeOffset * 1.5d, yPos - sizeOffset, _formattedText.Width + sizeOffset * 2.5d, _formattedText.Height + sizeOffset);
 				_textGeometry = _formattedText.BuildGeometry(new Point(xPos, yPos));
 
