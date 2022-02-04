@@ -354,6 +354,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		public override void MouseDown(Point location)
 		{
+			int target_Num;
 			double target_posX;
 			double target_posY;
 			double distance_posX;
@@ -368,85 +369,104 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			_inhibitMouseAction = true;
 			
-			if (!_OverviewBullseye.IsHidden)
+			target_Num = GetTargetAtLocation(location.X, location.Y);
+
+			if (target_Num >= 0)
 			{
-				double size = 8d * _scaleFactor;
+				OverviewRemoveTarget(target_Num);
+				_inhibitMouseAction = false;
 
-				for (int i = 0; i < TargetDataList.Count; i++)
-				{
-					if (location.X > TargetDataList[i].TargetPosition_X - size && location.X < TargetDataList[i].TargetPosition_X + size)
-					{
-						if (location.Y > TargetDataList[i].TargetPosition_Y - size && location.Y < TargetDataList[i].TargetPosition_Y + size)
-						{
-							OverviewRemoveTarget(i);
-							_inhibitMouseAction = false;
-							return;
-						}
-					}
-				}
+				return;
+			}
 
-				target_posX = (location.X - _widthCenterPosition) * 200 / Width;
-				target_posY = (location.Y - _heightCenterPosition) * 200 / Height;
+			target_posX = (location.X - _widthCenterPosition) * 200 / Width;
+			target_posY = (location.Y - _heightCenterPosition) * 200 / Height;
+
+			if (Height >= Width)
+			{
+				distance_posX = target_posX * _targetBullseyeScale;
+				distance_posY = -target_posY * _targetBullseyeScale * _ratioHeightToWidth;
+			}
+			else
+			{
+				distance_posX = target_posX * _targetBullseyeScale * _ratioWidthToHeight;
+				distance_posY = -target_posY * _targetBullseyeScale;
+			}
+
+			bearing = GetBearing(distance_posX, distance_posY);
+			distance = GetHypotenuse(distance_posX, distance_posY);
+
+			if (distance <= 125)
+			{
+				OverviewTargetList.Insert(0, new Gauges.GaugeImage(_overviewTargetImage, _imageSize));
+				OverviewTargetList[0].IsHidden = true;
+				OverviewTargetList[0].Width = _squareWidth;
+				OverviewTargetList[0].Height = _squareHeight;
 
 				if (Height >= Width)
 				{
-					distance_posX = target_posX * _targetBullseyeScale;
-					distance_posY = -target_posY * _targetBullseyeScale * _ratioHeightToWidth;
+					OverviewTargetList[0].PosX = target_posX;
+					OverviewTargetList[0].PosY = target_posY + _OverviewBullseye.PosY;
 				}
 				else
 				{
-					distance_posX = target_posX * _targetBullseyeScale * _ratioWidthToHeight;
-					distance_posY = -target_posY * _targetBullseyeScale;
+					OverviewTargetList[0].PosX = target_posX + _OverviewBullseye.PosX;
+					OverviewTargetList[0].PosY = target_posY;
 				}
 
-				bearing = GetBearing(distance_posX, distance_posY);
-				distance = GetHypotenuse(distance_posX, distance_posY);
+				_targetSelected = true;
+				OverviewTargetList[0].IsHidden = false;
 
-				if (distance <= 125)
+				Components.Insert(Components.IndexOf(_OverviewAircraftRemote) + 1, OverviewTargetList[0]);
+
+				TargetDataList.Insert(0, new TargetData
 				{
-					OverviewTargetList.Insert(0, new Gauges.GaugeImage(_overviewTargetImage, _imageSize));
-					OverviewTargetList[0].IsHidden = true;
-					OverviewTargetList[0].Width = _squareWidth;
-					OverviewTargetList[0].Height = _squareHeight;
+					TargetBearing = bearing,
+					TargetDistance = distance,
+					TargetPosition_X = location.X,
+					TargetPosition_Y = location.Y,
+					TargetHorizontalValue = distance_posX * _mapFeetPerNauticalMile,
+					TargetVerticalValue = distance_posY * _mapFeetPerNauticalMile
+				});
 
-					if (Height >= Width)
-					{
-						OverviewTargetList[0].PosX = target_posX;
-						OverviewTargetList[0].PosY = target_posY + _OverviewBullseye.PosY;
-					}
-					else
-					{
-						OverviewTargetList[0].PosX = target_posX + _OverviewBullseye.PosX;
-						OverviewTargetList[0].PosY = target_posY;
-					}
+				_OverviewTextData.TargetSelected = true;
+				_OverviewTextData.SetTargetData(TargetDataList);
 
-					_targetSelected = true;
-					OverviewTargetList[0].IsHidden = false;
+				_OverviewTargetLines.IsHidden = false;
+				_OverviewTargetLines.SetTargetData(TargetDataList);
 
-					Components.Insert(Components.IndexOf(_OverviewAircraftRemote) + 1, OverviewTargetList[0]);
-
-					TargetDataList.Insert(0, new TargetData
-					{
-						TargetBearing = bearing,
-						TargetDistance = distance,
-						TargetPosition_X = location.X,
-						TargetPosition_Y = location.Y,
-						TargetHorizontalValue = distance_posX * _mapFeetPerNauticalMile,
-						TargetVerticalValue = distance_posY * _mapFeetPerNauticalMile
-					});
-
-					_OverviewTextData.TargetSelected = true;
-					_OverviewTextData.SetTargetData(TargetDataList);
-
-					_OverviewTargetLines.IsHidden = false;
-					_OverviewTargetLines.SetTargetData(TargetDataList);
-
-					ProcessTargetValues();
-					Refresh();
-				}
+				ProcessTargetValues();
+				Refresh();
 			}
 
 			_inhibitMouseAction = false;
+		}
+
+		int GetTargetAtLocation(double location_X, double location_Y)
+		{
+			double radius_Max = 8d * _scaleFactor;
+			double radius_Min = radius_Max;
+			double radius_Location;
+			double diff_X;
+			double diff_Y;
+
+			int target_Num = -1;
+
+			for (int i = 0; i < TargetDataList.Count; i++)
+			{
+				diff_X = TargetDataList[i].TargetPosition_X - location_X;
+				diff_Y = TargetDataList[i].TargetPosition_Y - location_Y;
+
+				radius_Location = GetHypotenuse(diff_X, diff_Y);
+
+				if (radius_Location <= radius_Min)
+				{
+					radius_Min = radius_Location;
+					target_Num = i;
+				}
+			}
+
+			return target_Num;
 		}
 
 		void OverviewRemoveTarget(int index)
