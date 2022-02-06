@@ -218,12 +218,12 @@
     <Resource Include="Images\MapControl\Map Background.png" />
     <Resource Include="Images\MapControl\MapViewer Background.png" />
     <Resource Include="Images\Textures\hud_mask.png" />
-    <Resource Include="Images\MapControl\Overview Background.png" />
-    <Resource Include="Images\MapControl\Overview Bullseye.png" />
-    <Resource Include="Images\MapControl\Overview Target.png" />
-    <Resource Include="Images\MapControl\Overview Aircraft.png" />
-    <Resource Include="Images\MapControl\Overview Range Rings.png" />
-    <Resource Include="Images\MapControl\Overview Aircraft Remote.png" />
+    <Resource Include="Images\MapControl\Selection Background.png" />
+    <Resource Include="Images\MapControl\Selection Bullseye.png" />
+    <Resource Include="Images\MapControl\Selection Target.png" />
+    <Resource Include="Images\MapControl\Selection Aircraft.png" />
+    <Resource Include="Images\MapControl\Selection Range Rings.png" />
+    <Resource Include="Images\MapControl\Selection Aircraft Remote.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Maps\Aegean\Map.jpg" />

@@ -38,7 +38,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		private Rect _imageSize = new Rect(0d, 0d, 200d, 200d);
 		private Size _needleSize = new Size(200d, 200d);
-		private Rect _needleClip = new Rect(1d, 1d, 198d, 198d);
+		private Rect _needleClip = new Rect(0d, 0d, 200d, 200d);
 		private Point _needleLocation = new Point(0d, 0d);
 		private Point _needleCenter = new Point(100d, 100d);
 
@@ -77,6 +77,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		void AddComponents()
 		{
 			_MapBackground = new Gauges.GaugeImage(_mapBackgroundImage, _imageSize);
+			_MapBackground.Clip = new RectangleGeometry(_needleClip);
 			Components.Add(_MapBackground);
 
 			_Map = new Gauges.CustomGaugeNeedle(_mapBaseImages[7, 1], _needleLocation, _needleSize, _needleCenter);

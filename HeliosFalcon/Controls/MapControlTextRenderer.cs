@@ -101,7 +101,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			if (TargetSelected)
 			{
-				for (int i = 0; i < TargetList.Count; i++)
+				for (int i = TargetList.Count - 1; i >= 0; i--)
 				{
 					string textCourse = (i + 1).ToString("00") + " " + TargetList[i].CourseDistance.ToString() + "Nm " + TargetList[i].CourseBearing.ToString("000") + "°";
 					textFormattedCourse = new FormattedText(textCourse, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Arial Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);

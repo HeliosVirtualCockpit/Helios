@@ -69,6 +69,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		public interface ITargetData
 		{
+			Gauges.GaugeImage TargetImage { get; set; }
 			double TargetBearing { get; set; }
 			double TargetDistance { get; set; }
 			double TargetPosition_X { get; set; }
