@@ -337,7 +337,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			_pointFillBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 			_transparentFillBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0)) { Opacity = 0.15d };
 
-			for (int i = 0; i < TargetList.Count; i++)
+			for (int i = TargetList.Count - 1; i >= 0; i--)
 			{
 				TargetHorizontalValue = TargetList[i].MapTargetHorizontalValue;
 				TargetVerticalValue = TargetList[i].MapTargetVerticalValue;
@@ -388,7 +388,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			_linePen = new Pen(_lineBrush, _fontScaleSize * 0.11d);
 			_backgroundFillBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
-			for (int i = 0; i < TargetList.Count; i++)
+			for (int i = TargetList.Count - 1; i >= 0; i--)
 			{
 				TargetHorizontalValue = TargetList[i].MapTargetHorizontalValue;
 				TargetVerticalValue = TargetList[i].MapTargetVerticalValue;
