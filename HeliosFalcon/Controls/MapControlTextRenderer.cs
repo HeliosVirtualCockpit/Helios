@@ -83,8 +83,8 @@ namespace GadrocsWorkshop.Helios.Controls
 			double courseTextPosX;
 			double courseTextPosY;
 
-			string textAircraft = "OWNSHIP: " + AircraftDistance.ToString() + "Nm " + AircraftBearing.ToString("000") + "°";
-			string textTarget = "TARGET 01: " + TargetDistance.ToString() + "Nm " + TargetBearing.ToString("000") + "°";
+			string textAircraft = "OWNSHIP: " + AircraftBearing.ToString("000") + "° " + AircraftDistance.ToString() + "Nm";
+			string textTarget = "TARGET 01: " + TargetBearing.ToString("000") + "° " + TargetDistance.ToString() + "Nm";
 
 			textFormattedAircraft = new FormattedText(textAircraft, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
 			textFormattedTarget = new FormattedText(textTarget, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
@@ -103,7 +103,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			{
 				for (int i = TargetList.Count - 1; i >= 0; i--)
 				{
-					string textCourse = (i + 1).ToString("00") + " " + TargetList[i].CourseDistance.ToString() + "Nm " + TargetList[i].CourseBearing.ToString("000") + "°";
+					string textCourse = (i + 1).ToString("00") + " " + TargetList[i].CourseBearing.ToString("000") + "° " + TargetList[i].CourseDistance.ToString() + "Nm";
 					textFormattedCourse = new FormattedText(textCourse, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Arial Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
 
 					if (TargetList[i].TargetBearing > 90 && TargetList[i].TargetBearing < 270)
