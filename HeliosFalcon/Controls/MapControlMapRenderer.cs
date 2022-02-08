@@ -396,10 +396,10 @@ namespace GadrocsWorkshop.Helios.Controls
 				double xPos = TargetHorizontalValue + xPosOffset;
 				double yPos = TargetVerticalValue - yPosOffset;
 
-				string target_text = (i + 1).ToString("00") + " " + TargetList[i].CourseDistance.ToString() + "Nm " + TargetList[i].CourseBearing.ToString("000") + "°";
+				string target_text = (i + 1).ToString("00") + " " + TargetList[i].CourseBearing.ToString("000") + "° " + TargetList[i].CourseDistance.ToString() + "Nm";
 
 				_formattedText = new FormattedText(target_text, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Arial"), _fontScaleSize, Brushes.Black, _pixelsPerDip);
-				_textBounds = new Rect(xPos - sizeOffset * 1.5d, yPos - sizeOffset, _formattedText.Width + sizeOffset * 2.5d, _formattedText.Height + sizeOffset);
+				_textBounds = new Rect(xPos - sizeOffset * 1.8d, yPos - sizeOffset, _formattedText.Width + sizeOffset * 3.5d, _formattedText.Height + sizeOffset);
 				_textGeometry = _formattedText.BuildGeometry(new Point(xPos, yPos));
 
 				drawingContext.PushTransform(new RotateTransform(_rotationNegative, TargetHorizontalValue, TargetVerticalValue));
