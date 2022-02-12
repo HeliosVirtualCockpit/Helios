@@ -31,6 +31,8 @@ namespace GadrocsWorkshop.Helios.Controls
 	{
 		private FalconInterface _falconInterface;
 
+		private List<string> _navPointsLast = new List<string>();
+
 		private Gauges.GaugeImage _MapBackground;
 		private Gauges.CustomGaugeNeedle _Map;
 		private Gauges.CustomGaugeNeedle _MapZoomIn;
@@ -44,7 +46,6 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		private const string _mapBackgroundImage = "{HeliosFalcon}/Images/MapControl/MapViewer Background.png";
 		private string _lastTheater;
-		private bool _navPointsInitialized = false;
 
 		private const double _mapSizeFeet64 = 3358700;   // 1024 km x 3279.98 ft/km (BMS conversion value)
 		private const double _mapSizeFeet128 = 6717400;  // 2048 km x 3279.98 ft/km (BMS conversion value)
@@ -62,7 +63,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		private double _yMinValue = 0d;
 		private double _yMaxValue = 0d;
 
-		
+
 		public MapViewer()
 			: base("MapViewer", new Size(200d, 200d))
 		{
@@ -173,14 +174,14 @@ namespace GadrocsWorkshop.Helios.Controls
 				{
 					_MapOverlay.IsHidden = false;
 
-					if (!_navPointsInitialized)
-					{
-						List<string> navPoints = _falconInterface.NavPoints;
+					List<string> navPoints = _falconInterface.NavPoints;
 
-						if (navPoints != null && navPoints.Any())
+					if (navPoints != null && navPoints.Any())
+					{
+						if (!navPoints.Equals(_navPointsLast))
 						{
 							_MapOverlay.ProcessNavPointValues(navPoints);
-							_navPointsInitialized = true;
+							_navPointsLast = navPoints;
 							Refresh();
 						}
 					}
@@ -189,7 +190,7 @@ namespace GadrocsWorkshop.Helios.Controls
 				if (!inFlight)
 				{
 					_MapOverlay.IsHidden = true;
-					_navPointsInitialized = false;
+					_navPointsLast = null;
 					Refresh();
 				}
 			}
@@ -198,6 +199,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		void Profile_ProfileStopped(object sender, EventArgs e)
 		{
 			_falconInterface = null;
+			_navPointsLast = null;
 		}
 
 		private BindingValue GetValue(string device, string name)

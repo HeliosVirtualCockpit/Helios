@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		private FalconInterface _falconInterface;
 
 		private List<ITargetData> TargetDataList = new List<ITargetData>();
+		private List<string> _navPointsLast = new List<string>();
 
 		private HeliosValue _mapRotationEnable;
 		private HeliosValue _mapScaleChange;
@@ -114,7 +115,6 @@ namespace GadrocsWorkshop.Helios.Controls
 		private bool _mapRotation_Enabled = false;
 		private bool _mapImageChanged = false;
 		private bool _profileFirstStart = true;
-		private bool _navPointsInitialized = false;
 		private bool _refreshPending = false;
 		private bool _selectionPanelEnabled = false;
 		private bool _selectionRangeRingsEnabled = true;
@@ -446,14 +446,14 @@ namespace GadrocsWorkshop.Helios.Controls
 						TheaterMapSelect(theater);
 					}
 
-					if (!_navPointsInitialized)
-					{
-						List<string> navPoints = _falconInterface.NavPoints;
+					List<string> navPoints = _falconInterface.NavPoints;
 
-						if (navPoints != null && navPoints.Any())
+					if (navPoints != null && navPoints.Any())
+					{
+						if (!navPoints.Equals(_navPointsLast))
 						{
 							_MapOverlays.ProcessNavPointValues(navPoints);
-							_navPointsInitialized = true;
+							_navPointsLast = navPoints;
 							Refresh();
 						}
 					}
@@ -470,7 +470,7 @@ namespace GadrocsWorkshop.Helios.Controls
 					{
 						ShowNoDataPanel();
 						ResetTargetSelection();
-						_navPointsInitialized = false;
+						_navPointsLast = null;
 						_inFlightLastValue = false;
 					}
 				}
@@ -486,6 +486,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		void Profile_ProfileStopped(object sender, EventArgs e)
 		{
 			_falconInterface = null;
+			_navPointsLast = null;
 		}
 
 		void ProcessOwnshipValues()
