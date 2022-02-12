@@ -1,5 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -38,8 +39,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         internal abstract string[] RwrInfo { get; }
         internal abstract List<string> NavPoints { get; }
         internal abstract bool StringDataUpdated { get; }
-
-        internal bool Synchronized { get; set; } = true;
 
         #endregion
 
@@ -112,14 +111,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             string key = device + "." + name;
             if (_values.ContainsKey(key))
             {
-                if (Synchronized)
-                {
-                    _values[key].SetValue(value, false);
-                }
-                else
-                {
-                    _values[key].SetValue(BindingValue.Empty, true);
-                }
+                _values[key].SetValue(value, false);
             }
         }
 

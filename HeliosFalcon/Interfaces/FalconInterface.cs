@@ -1,5 +1,5 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2021 Helios Contributors
+//  Copyright 2022 Helios Contributors
 //
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -246,7 +246,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 
         internal List<string> NavPoints => _dataExporter?.NavPoints;
 
-        internal bool StringDataUpdated => (bool)(_dataExporter?.StringDataUpdated);
+        internal bool StringDataUpdated => _dataExporter.StringDataUpdated;
 
         public string[] RwrInfo => _dataExporter?.RwrInfo;
 
@@ -414,11 +414,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                 if (_inFlight)
                 {
                     _dataExporter?.PollFlightStartData();
-
-                    _dataExporter.Synchronized = false;
-                    _dataExporter?.PollUserInterfaceData();
-                    _dataExporter?.PollFlightData();
-                    _dataExporter.Synchronized = true;
                 }
 
                 _inFlightLastValue = _inFlight;

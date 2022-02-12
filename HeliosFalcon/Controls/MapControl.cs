@@ -114,7 +114,6 @@ namespace GadrocsWorkshop.Helios.Controls
 		private bool _mapRotation_Enabled = false;
 		private bool _mapImageChanged = false;
 		private bool _profileFirstStart = true;
-		private bool _navPointsInitialized = false;
 		private bool _refreshPending = false;
 		private bool _selectionPanelEnabled = false;
 		private bool _selectionRangeRingsEnabled = true;
@@ -446,14 +445,13 @@ namespace GadrocsWorkshop.Helios.Controls
 						TheaterMapSelect(theater);
 					}
 
-					if (!_navPointsInitialized)
+					if (_falconInterface.StringDataUpdated)
 					{
 						List<string> navPoints = _falconInterface.NavPoints;
 
 						if (navPoints != null && navPoints.Any())
 						{
 							_MapOverlays.ProcessNavPointValues(navPoints);
-							_navPointsInitialized = true;
 							Refresh();
 						}
 					}
@@ -470,7 +468,6 @@ namespace GadrocsWorkshop.Helios.Controls
 					{
 						ShowNoDataPanel();
 						ResetTargetSelection();
-						_navPointsInitialized = false;
 						_inFlightLastValue = false;
 					}
 				}
