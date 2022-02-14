@@ -59,11 +59,11 @@ namespace GadrocsWorkshop.Helios.Controls
 		private MapControlLineRenderer _SelectionTargetLines;
 		private MapControlTextRenderer _SelectionTextData;
 
-		private Rect _imageSize = new Rect(0d, 0d, 200d, 200d);
-		private Size _needleSize = new Size(200d, 200d);
-		private Rect _needleClip = new Rect(0d, 0d, 200d, 200d);
+		private Rect _imageSize = new Rect(0d, 0d, 400d, 400d);
+		private Size _needleSize = new Size(400d, 400d);
+		private Rect _needleClip = new Rect(0d, 0d, 400d, 400d);
 		private Point _needleLocation = new Point(0d, 0d);
-		private Point _needleCenter = new Point(100d, 100d);
+		private Point _needleCenter = new Point(200d, 200d);
 
 		private const string _mapBackgroundImage = "{HeliosFalcon}/Images/MapControl/Map Background.png";
 		private const string _mapBullseyeImage64 = "{HeliosFalcon}/Images/MapControl/Map Bullseye 64.png";
@@ -80,17 +80,18 @@ namespace GadrocsWorkshop.Helios.Controls
 		private const string _selectionAircraftImage = "{HeliosFalcon}/Images/MapControl/Selection Aircraft.png";
 		private const string _selectionAircraftRemoteImage = "{HeliosFalcon}/Images/MapControl/Selection Aircraft Remote.png";
 
+		private const double _controlBaseSize = 200;
 		private const double _mapBaseScale = 2.2d;
 		private const double _mapSizeFeet64 = 3358700;   // 1024 km x 3279.98 ft/km (BMS conversion value)
 		private const double _mapSizeFeet128 = 6717400;  // 2048 km x 3279.98 ft/km (BMS conversion value)
 		private const double _mapFeetPerNauticalMile = 6076;
-		private const double _targetBullseyeScale = 1.200d * 1.075d;
+		private const double _targetBullseyeScale = 0.600d * 1.075d;
 
 		private double _mapSizeFeet = 3358700;
 		private double _mapScaleMultiplier = 1d;  // 1d = 60Nm, 2d = 30Nm, 4d = 15Nm
 		private double _mapSizeMultiplier = 1d;   // 1d = 64 Segment, 2d = 128 Segment
 		private double _mapModifiedScale;
-		private double _scaleFactor;
+		private double _controlScaleFactor;
 		private double _squareWidth = 0d;
 		private double _squareHeight = 0d;
 		private double _squarePosX = 0d;
@@ -122,7 +123,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
 		public MapControl()
-			: base("MapControl", new Size(200d, 200d))
+			: base("MapControl", new Size(400d, 400d))
 		{
 			AddComponents();
 			AddActions();
@@ -457,8 +458,8 @@ namespace GadrocsWorkshop.Helios.Controls
 					}
 
 					ProcessOwnshipValues();
-					ProcessAircraftValues();
 					ProcessTargetValues();
+					ProcessAircraftValues();
 					HideNoDataPanel();
 					_inFlightLastValue = true;
 				}
@@ -708,6 +709,7 @@ namespace GadrocsWorkshop.Helios.Controls
 				_MapOverlays.SetTargetData(TargetDataList);
 
 				ProcessTargetValues();
+				ProcessAircraftValues();
 				Refresh();
 			}
 
@@ -716,7 +718,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		int GetTargetAtLocation(double location_X, double location_Y)
 		{
-			double radius_Max = 8d * _scaleFactor;
+			double radius_Max = 8d * _controlScaleFactor;
 			double radius_Min = radius_Max;
 			double radius_Location;
 			double diff_X;
@@ -992,10 +994,10 @@ namespace GadrocsWorkshop.Helios.Controls
 			_ratioHeightToWidth = Height / Width;
 			_ratioWidthToHeight = Width / Height;
 
+			_controlScaleFactor = Math.Min(Width, Height) / _controlBaseSize;
+
 			if (Height >= Width)
 			{
-				_scaleFactor = Width / _needleSize.Width;
-
 				mapShortestSize = Width;
 				_rangeScale = _mapBaseScale * _ratioWidthToHeight;
 				rangeWidth = _needleSize.Width * _mapBaseScale;
@@ -1016,8 +1018,6 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 			else
 			{
-				_scaleFactor = Height / _needleSize.Height;
-
 				mapShortestSize = Height;
 				_rangeScale = _mapBaseScale * _ratioHeightToWidth;
 				rangeWidth = _needleSize.Width * _rangeScale;

@@ -29,7 +29,8 @@ namespace GadrocsWorkshop.Helios.Controls
 	{
 		private List<ITargetData> TargetList = new List<ITargetData>();
 
-		private double _scaleFactor = 1.0d;
+		private const double _controlBaseSize = 200;
+		private double _controlScaleFactor = 1.0d;
 		private double _pixelsPerDip = 1.0d;
 		private const double _fontBaseSize = 6d;
 		private double _fontScaleSize;
@@ -90,14 +91,14 @@ namespace GadrocsWorkshop.Helios.Controls
 			textFormattedTarget = new FormattedText(textTarget, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana Bold"), _fontScaleSize, Brushes.White, _pixelsPerDip);
 	
 			textAircraftPos = _textMargin;
-			Rect textBoundsAircraft = new Rect(textAircraftPos, _textTopMargin, textFormattedAircraft.Width + (4 * _scaleFactor), textFormattedAircraft.Height + (2 * _scaleFactor));
+			Rect textBoundsAircraft = new Rect(textAircraftPos, _textTopMargin, textFormattedAircraft.Width + (4 * _controlScaleFactor), textFormattedAircraft.Height + (2 * _controlScaleFactor));
 			drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsAircraft);
-			drawingContext.DrawText(textFormattedAircraft, new Point(textAircraftPos + (2 * _scaleFactor), _textTopMargin + (1 * _scaleFactor)));
+			drawingContext.DrawText(textFormattedAircraft, new Point(textAircraftPos + (2 * _controlScaleFactor), _textTopMargin + (1 * _controlScaleFactor)));
 
-			textTargetPos = MapControlWidth - (_textMargin + textFormattedTarget.Width + (4 * _scaleFactor));
-			Rect textBoundsTarget = new Rect(textTargetPos, _textTopMargin, textFormattedTarget.Width + (4 * _scaleFactor), textFormattedTarget.Height + (2 * _scaleFactor));
+			textTargetPos = MapControlWidth - (_textMargin + textFormattedTarget.Width + (4 * _controlScaleFactor));
+			Rect textBoundsTarget = new Rect(textTargetPos, _textTopMargin, textFormattedTarget.Width + (4 * _controlScaleFactor), textFormattedTarget.Height + (2 * _controlScaleFactor));
 			drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsTarget);
-			drawingContext.DrawText(textFormattedTarget, new Point(textTargetPos + (2 * _scaleFactor), _textTopMargin + (1 * _scaleFactor)));
+			drawingContext.DrawText(textFormattedTarget, new Point(textTargetPos + (2 * _controlScaleFactor), _textTopMargin + (1 * _controlScaleFactor)));
 
 			if (TargetSelected)
 			{
@@ -108,7 +109,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 					if (TargetList[i].TargetBearing > 90 && TargetList[i].TargetBearing < 270)
 					{
-						courseTextPosY = TargetList[i].TargetPosition_Y - (_courseTextOffset + textFormattedCourse.Height + (2 * _scaleFactor));
+						courseTextPosY = TargetList[i].TargetPosition_Y - (_courseTextOffset + textFormattedCourse.Height + (2 * _controlScaleFactor));
 					}
 					else
 					{
@@ -123,17 +124,17 @@ namespace GadrocsWorkshop.Helios.Controls
 						}
 						else
 						{
-							courseTextPosX = TargetList[i].TargetPosition_X - (textFormattedCourse.Width + (4 * _scaleFactor));
+							courseTextPosX = TargetList[i].TargetPosition_X - (textFormattedCourse.Width + (4 * _controlScaleFactor));
 						}
 					}
 					else
 					{
-						courseTextPosX = TargetList[i].TargetPosition_X - (textFormattedCourse.Width + (4 * _scaleFactor)) / 2;
+						courseTextPosX = TargetList[i].TargetPosition_X - (textFormattedCourse.Width + (4 * _controlScaleFactor)) / 2;
 					}
 
-					Rect textBoundsCourse = new Rect(courseTextPosX, courseTextPosY, textFormattedCourse.Width + (4 * _scaleFactor), textFormattedCourse.Height + (2 * _scaleFactor));
+					Rect textBoundsCourse = new Rect(courseTextPosX, courseTextPosY, textFormattedCourse.Width + (4 * _controlScaleFactor), textFormattedCourse.Height + (2 * _controlScaleFactor));
 					drawingContext.DrawRectangle(backgroundFillBrush, linePen, textBoundsCourse);
-					drawingContext.DrawText(textFormattedCourse, new Point(courseTextPosX + (2 * _scaleFactor), courseTextPosY + (1 * _scaleFactor)));
+					drawingContext.DrawText(textFormattedCourse, new Point(courseTextPosX + (2 * _controlScaleFactor), courseTextPosY + (1 * _controlScaleFactor)));
 				}
 			}
 		}
@@ -145,11 +146,11 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		protected override void OnRefresh(double xScale, double yScale)
 		{
-			_scaleFactor = Math.Min(xScale, yScale);
-			_fontScaleSize = _fontBaseSize * _scaleFactor;
-			_textMargin = _textBaseMargin * _scaleFactor;
-			_textTopMargin = _textBaseTopMargin * _scaleFactor;
-			_courseTextOffset = _courseBaseTextOffset * _scaleFactor;
+			_controlScaleFactor = Math.Min(MapControlWidth, MapControlHeight) / _controlBaseSize;
+			_fontScaleSize = _fontBaseSize * _controlScaleFactor;
+			_textMargin = _textBaseMargin * _controlScaleFactor;
+			_textTopMargin = _textBaseTopMargin * _controlScaleFactor;
+			_courseTextOffset = _courseBaseTextOffset * _controlScaleFactor;
 
 			if (TargetList.Count > 0)
 			{

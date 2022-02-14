@@ -36,21 +36,21 @@ namespace GadrocsWorkshop.Helios.Controls
 		private Gauges.CustomGaugeNeedle _MapZoomIn;
 		private MapViewerRenderer _MapOverlay;
 
-		private Rect _imageSize = new Rect(0d, 0d, 200d, 200d);
-		private Size _needleSize = new Size(200d, 200d);
-		private Rect _needleClip = new Rect(0d, 0d, 200d, 200d);
+		private Rect _imageSize = new Rect(0d, 0d, 400d, 400d);
+		private Size _needleSize = new Size(400d, 400d);
+		private Rect _needleClip = new Rect(0d, 0d, 400d, 400d);
 		private Point _needleLocation = new Point(0d, 0d);
-		private Point _needleCenter = new Point(100d, 100d);
+		private Point _needleCenter = new Point(200d, 200d);
 
 		private const string _mapBackgroundImage = "{HeliosFalcon}/Images/MapControl/MapViewer Background.png";
 		private string _lastTheater;
 
+		private const double _baseMapSize = 400d;
 		private const double _mapSizeFeet64 = 3358700;   // 1024 km x 3279.98 ft/km (BMS conversion value)
 		private const double _mapSizeFeet128 = 6717400;  // 2048 km x 3279.98 ft/km (BMS conversion value)
 
 		private double _mapSizeFeet = 3358700;
 		private double _mapSizeMultiplier = 1d;   // 1d = 64 Segment, 2d = 128 Segment
-		private double _mapSize = 200d;
 		private double _mapMultiplier = 4d;
 		private double _baseMapWidth = 0d;
 		private double _baseMapHeight = 0d;
@@ -63,7 +63,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
 		public MapViewer()
-			: base("MapViewer", new Size(200d, 200d))
+			: base("MapViewer", new Size(400d, 400d))
 		{
 			AddComponents();
 			BaseMapResize();
@@ -114,7 +114,10 @@ namespace GadrocsWorkshop.Helios.Controls
 				}
 				else
 				{
-					this.IsHidden = true;
+					if (!ConfigManager.Application.ShowDesignTimeControls)
+					{
+						this.IsHidden = true;
+					}
 				}
 			}
 			else
@@ -316,10 +319,10 @@ namespace GadrocsWorkshop.Helios.Controls
 
 			if (Height >= Width)
 			{
-				_baseMapWidth = _mapSize;
-				_baseMapHeight = _mapSize * Width / Height;
+				_baseMapWidth = _baseMapSize;
+				_baseMapHeight = _baseMapSize * Width / Height;
 				mapOffsetHorizontal = 0d;
-				mapOffsetVertical = (_mapSize - _baseMapHeight) / 2d;
+				mapOffsetVertical = (_baseMapSize - _baseMapHeight) / 2d;
 
 				xMinValue = 0d;
 				xMaxValue = _baseMapWidth;
@@ -332,10 +335,10 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 			else
 			{
-				_baseMapHeight = _mapSize;
-				_baseMapWidth = _mapSize * Height / Width;
+				_baseMapHeight = _baseMapSize;
+				_baseMapWidth = _baseMapSize * Height / Width;
 				mapOffsetVertical = 0d;
-				mapOffsetHorizontal = (_mapSize - _baseMapWidth) / 2d;
+				mapOffsetHorizontal = (_baseMapSize - _baseMapWidth) / 2d;
 
 				xMinValue = mapOffsetHorizontal;
 				xMaxValue = mapOffsetHorizontal + _baseMapWidth;
@@ -347,8 +350,8 @@ namespace GadrocsWorkshop.Helios.Controls
 				mapShortestSize = Height;
 			}
 
-			_mapWidthScale = Width / _mapSize;
-			_mapHeightScale = Height / _mapSize;
+			_mapWidthScale = Width / _baseMapSize;
+			_mapHeightScale = Height / _baseMapSize;
 
 			_xMinValue = xMinValue * _mapWidthScale;
 			_xMaxValue = xMaxValue * _mapWidthScale;
@@ -398,11 +401,11 @@ namespace GadrocsWorkshop.Helios.Controls
 			_MapOverlay.Tape_Width = _baseMapWidth * _mapMultiplier;
 			_MapOverlay.Tape_Height = _baseMapHeight * _mapMultiplier;
 
-			_MapOverlay.HorizontalOffset = xMapPos + _mapSize / 2d;
-			_MapOverlay.VerticalOffset = yMapPos + _mapSize / 2d;
+			_MapOverlay.HorizontalOffset = xMapPos + _baseMapSize / 2d;
+			_MapOverlay.VerticalOffset = yMapPos + _baseMapSize / 2d;
 
-			_MapZoomIn.HorizontalOffset = xMapPos + _mapSize / 2d;
-			_MapZoomIn.VerticalOffset = yMapPos + _mapSize / 2d;
+			_MapZoomIn.HorizontalOffset = xMapPos + _baseMapSize / 2d;
+			_MapZoomIn.VerticalOffset = yMapPos + _baseMapSize / 2d;
 
 			Refresh();
 		}
