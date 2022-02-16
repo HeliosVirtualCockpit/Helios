@@ -74,6 +74,8 @@
     <Compile Include="Controls\MapViewerRenderer.cs" />
     <Compile Include="Controls\MapControlBullseye.cs" />
     <Compile Include="Gauges\Altimeter.cs" />
+    <Compile Include="Gauges\EHSI\EHSI.cs" />
+    <Compile Include="Gauges\EHSI\EHSIRenderer.cs" />
     <Compile Include="Interfaces\BMS\BMSFalconDataExporter.cs" />
     <Compile Include="Interfaces\BMS\BMSLightBits.cs" />
     <Compile Include="Interfaces\BMS\BMSLightBits2.cs" />
@@ -156,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Resource Include="Images\EHSI\Current Heading Scale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Interfaces\FalconCallbackValueEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -207,6 +213,21 @@
     <Content Include="Templates\HeliosFalcon\Falcon RTT RWR ONTOP.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\EHSI\Aircraft Image.png" />
+    <Resource Include="Images\EHSI\Background Base Image.png" />
+    <Resource Include="Images\EHSI\Background Marker Image.png" />
+    <Resource Include="Images\EHSI\Beacon Bearing Optional.png" />
+    <Resource Include="Images\EHSI\Course Deviation Needle.png" />
+    <Resource Include="Images\EHSI\Beacon Bearing Needle.png" />
+    <Resource Include="Images\EHSI\Desired Course Needle.png" />
+    <Resource Include="Images\EHSI\Desired Heading Marker.png" />
+    <Resource Include="Images\EHSI\ILS From Flag Indicator.png" />
+    <Resource Include="Images\EHSI\ILS Indicator.png" />
+    <Resource Include="Images\EHSI\ILS To Flag Indicator.png" />
+    <Resource Include="Images\EHSI\Middle Marker Needle.png" />
+    <Resource Include="Images\EHSI\Outer Marker Needle.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\MapControl\Map Bullseye 64.png" />
