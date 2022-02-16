@@ -54,6 +54,7 @@ namespace GadrocsWorkshop.Helios.Controls
 		private const string _imageBackgroundMarkerImage = "{HeliosFalcon}/Images/EHSI/Background Marker Image.png";
 		private const string _imageAircraftImage = "{HeliosFalcon}/Images/EHSI/Aircraft Image.png";
 		private const string _imageCurrentHeadingScale = "{HeliosFalcon}/Images/EHSI/Current Heading Scale.xaml";
+		private const string _imageCurrentHeadingScale = "{HeliosFalcon}/Images/EHSI/Current Heading Scale.png"
 		private const string _imageDesiredHeadingMarker = "{HeliosFalcon}/Images/EHSI/Desired Heading Marker.png";
 		private const string _imageILSIndicator = "{HeliosFalcon}/Images/EHSI/ILS Indicator.png";
 		private const string _imageILSToFlagIndicator = "{HeliosFalcon}/Images/EHSI/ILS To Flag Indicator.png";
