@@ -1,0 +1,3 @@
+﻿@@ -426,125 +426,4 @@
+ %22 %7D%0A
+-%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0Atry_find_assigned_viewport(%22M2000C_PCN_BR%22%2C %22PCN_BR%22)%0A

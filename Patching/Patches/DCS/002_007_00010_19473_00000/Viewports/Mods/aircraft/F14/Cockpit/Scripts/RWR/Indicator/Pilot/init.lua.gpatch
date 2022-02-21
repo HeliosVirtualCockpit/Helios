@@ -1,0 +1,3 @@
+﻿@@ -1291,8 +1291,388 @@
+ GE_MAIN%0A
++%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_RWR_PILOT%22%2C %22RWR_PILOT%22)%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_RWR_PILOT%22%2C %22RWR_PILOT%22)%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_RWR_PILOT%22%2C %22RWR_PILOT%22)%0D%0A

@@ -1,0 +1,8 @@
+﻿@@ -502,16 +502,37 @@
+ iewport(
++%22AV8BNA_RIGHT_MFCD%22%2C 
+ %22RIGHT_M
+@@ -573,16 +573,36 @@
+ iewport(
++%22AV8BNA_LEFT_MFCD%22%2C 
+ %22LEFT_MF
