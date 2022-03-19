@@ -78,6 +78,9 @@
       <DependentUpon>EHSIBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gauges\ICP\ICP.cs" />
+    <Compile Include="Gauges\ICP\ICPBehaviorEditor.xaml.cs">
+      <DependentUpon>ICPBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gauges\Textures\HUDBehaviorEditor.xaml.cs">
       <DependentUpon>HUDBehaviorEditor.xaml</DependentUpon>
     </Compile>
@@ -634,6 +637,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="Gauges\ICP\ICPBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Gauges\Textures\HUDBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

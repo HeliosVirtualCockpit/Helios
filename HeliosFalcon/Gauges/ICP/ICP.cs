@@ -19,7 +19,9 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ICP
 	using GadrocsWorkshop.Helios.ComponentModel;
 	using GadrocsWorkshop.Helios.Interfaces.Falcon;
 	using System;
+	using System.Xml;
 	using System.Windows;
+	using System.Globalization;
 
 	[HeliosControl("Helios.Falcon.ICP", "Falcon BMS ICP", "Falcon Simulator", typeof(GaugeRenderer))]
 	public class ICP : BaseGauge
@@ -38,7 +40,17 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ICP
 			Three
 		}
 
+		private enum WheelType
+		{
+			SYM,
+			BRT,
+			DEPR,
+			CONT,
+			DRIFT
+		}
+
 		private SwitchPosition _switchDRIFTPosition = SwitchPosition.Two;
+		private WheelType _wheelType;
 
 		private FalconInterface _falconInterface;
 		private GaugeImage _backplate;
@@ -216,10 +228,12 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ICP
 		private const string _switchPositionThreeImage = "{HeliosFalcon}/Gauges/ICP/icp_switch_down.png";
 
 		private static Rect _rectBase = new Rect(0d, 0d, 660d, 500d);
-		private Point _mouseDownLocation;
 		private double _backlight;
-		private bool _mouseAction;
 		private bool _inFlightLastValue = true;
+
+		private Point _mouseDownLocation;
+		private bool _mouseAction;
+		private int _clickType = 0;
 
 		public ICP()
 			: base("ICP", new Size(_rectBase.Width, _rectBase.Height))
@@ -693,48 +707,73 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ICP
 				_rockerFLIR.Image = _rockerDownImage;
 				_rockerFLIRDownTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelSYMUp.Contains(point))
+			else if (_rectWheelSYMUp.Contains(point) && TouchMode)
 			{
 				_wheelSYM.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
 				_wheelSYMUpTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelSYMDown.Contains(point))
+			else if (_rectWheelSYMDown.Contains(point) && TouchMode)
 			{
 				_wheelSYM.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
 				_wheelSYMDownTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelBRTUp.Contains(point))
+			else if (_rectWheelBRTUp.Contains(point) && TouchMode)
 			{
 				_wheelBRT.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
 				_wheelBRTUpTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelBRTDown.Contains(point))
+			else if (_rectWheelBRTDown.Contains(point) && TouchMode)
 			{
 				_wheelBRT.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
 				_wheelBRTDownTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelDEPRUp.Contains(point))
+			else if (_rectWheelDEPRUp.Contains(point) && TouchMode)
 			{
 				_wheelDEPR.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
 				_wheelDEPRUpTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelDEPRDown.Contains(point))
+			else if (_rectWheelDEPRDown.Contains(point) && TouchMode)
 			{
 				_wheelDEPR.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
 				_wheelDEPRDownTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelCONTUp.Contains(point))
+			else if (_rectWheelCONTUp.Contains(point) && TouchMode)
 			{
 				_wheelCONT.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
 				_wheelCONTUpTrigger.FireTrigger(new BindingValue(true));
 			}
-			else if (_rectWheelCONTDown.Contains(point))
+			else if (_rectWheelCONTDown.Contains(point) && TouchMode)
 			{
 				_wheelCONT.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
 				_wheelCONTDownTrigger.FireTrigger(new BindingValue(true));
 			}
+			else if (_rectWheelSYMCenter.Contains(point) && SwipeMode)
+			{
+				_wheelType = WheelType.SYM;
+				_mouseDownLocation = point;
+				_mouseAction = false;
+			}
+			else if (_rectWheelBRTCenter.Contains(point) && SwipeMode)
+			{
+				_wheelType = WheelType.BRT;
+				_mouseDownLocation = point;
+				_mouseAction = false;
+			}
+			else if (_rectWheelDEPRCenter.Contains(point) && SwipeMode)
+			{
+				_wheelType = WheelType.DEPR;
+				_mouseDownLocation = point;
+				_mouseAction = false;
+			}
+			else if (_rectWheelCONTCenter.Contains(point) && SwipeMode)
+			{
+				_wheelType = WheelType.CONT;
+				_mouseDownLocation = point;
+				_mouseAction = false;
+			}
 			else if (_rectSwitchDRIFT.Contains(point))
 			{
+				_wheelType = WheelType.DRIFT;
 				_mouseDownLocation = point;
 				_mouseAction = false;
 			}
@@ -816,37 +855,91 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ICP
 
 		private void ThrowSwitch(SwitchAction action)
 		{
-			if (action == SwitchAction.Increment)
+			switch (_wheelType)
 			{
-				switch (_switchDRIFTPosition)
-				{
-					case SwitchPosition.One:
-						_switchDRIFTPosition = SwitchPosition.Two;
-						_switchDRIFT.Image = _switchPositionTwoImage;
-						_switchDRIFTPositionTwoTrigger.FireTrigger(new BindingValue(true));
-						break;
-					case SwitchPosition.Two:
-						_switchDRIFTPosition = SwitchPosition.Three;
-						_switchDRIFT.Image = _switchPositionThreeImage;
-						_switchDRIFTPositionThreeTrigger.FireTrigger(new BindingValue(true));
-						break;
-				}
-			}
-			else if (action == SwitchAction.Decrement)
-			{
-				switch (_switchDRIFTPosition)
-				{
-					case SwitchPosition.Two:
-						_switchDRIFTPosition = SwitchPosition.One;
-						_switchDRIFT.Image = _switchPositionOneImage;
-						_switchDRIFTPositionOneTrigger.FireTrigger(new BindingValue(true));
-						break;
-					case SwitchPosition.Three:
-						_switchDRIFTPosition = SwitchPosition.Two;
-						_switchDRIFT.Image = _switchPositionTwoImage;
-						_switchDRIFTPositionTwoTrigger.FireTrigger(new BindingValue(true));
-						break;
-				}
+				case WheelType.SYM:
+					if (action == SwitchAction.Increment)
+					{
+						_wheelSYM.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
+						_wheelSYMDownTrigger.FireTrigger(new BindingValue(true));
+					}
+					else
+					{
+						_wheelSYM.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
+						_wheelSYMUpTrigger.FireTrigger(new BindingValue(true));
+					}
+					break;
+				case WheelType.BRT:
+					if (action == SwitchAction.Increment)
+					{
+						_wheelBRT.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
+						_wheelBRTDownTrigger.FireTrigger(new BindingValue(true));
+					}
+					else
+					{
+						_wheelBRT.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
+						_wheelBRTUpTrigger.FireTrigger(new BindingValue(true));
+					}
+					break;
+				case WheelType.DEPR:
+					if (action == SwitchAction.Increment)
+					{
+						_wheelDEPR.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
+						_wheelDEPRDownTrigger.FireTrigger(new BindingValue(true));
+					}
+					else
+					{
+						_wheelDEPR.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
+						_wheelDEPR.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
+						_wheelDEPRUpTrigger.FireTrigger(new BindingValue(true));
+					}
+					break;
+				case WheelType.CONT:
+					if (action == SwitchAction.Increment)
+					{
+						_wheelCONT.Image = Backlight == 0 ? _wheelDownOffImage : _wheelDownLitImage;
+						_wheelCONTDownTrigger.FireTrigger(new BindingValue(true));
+					}
+					else
+					{
+						_wheelCONT.Image = Backlight == 0 ? _wheelUpOffImage : _wheelUpLitImage;
+						_wheelCONTUpTrigger.FireTrigger(new BindingValue(true));
+					}
+					break;
+				case WheelType.DRIFT:
+					if (action == SwitchAction.Increment)
+					{
+						switch (_switchDRIFTPosition)
+						{
+							case SwitchPosition.One:
+								_switchDRIFTPosition = SwitchPosition.Two;
+								_switchDRIFT.Image = _switchPositionTwoImage;
+								_switchDRIFTPositionTwoTrigger.FireTrigger(new BindingValue(true));
+								break;
+							case SwitchPosition.Two:
+								_switchDRIFTPosition = SwitchPosition.Three;
+								_switchDRIFT.Image = _switchPositionThreeImage;
+								_switchDRIFTPositionThreeTrigger.FireTrigger(new BindingValue(true));
+								break;
+						}
+					}
+					else if (action == SwitchAction.Decrement)
+					{
+						switch (_switchDRIFTPosition)
+						{
+							case SwitchPosition.Two:
+								_switchDRIFTPosition = SwitchPosition.One;
+								_switchDRIFT.Image = _switchPositionOneImage;
+								_switchDRIFTPositionOneTrigger.FireTrigger(new BindingValue(true));
+								break;
+							case SwitchPosition.Three:
+								_switchDRIFTPosition = SwitchPosition.Two;
+								_switchDRIFT.Image = _switchPositionTwoImage;
+								_switchDRIFTPositionTwoTrigger.FireTrigger(new BindingValue(true));
+								break;
+						}
+					}
+					break;
 			}
 
 			Refresh();
@@ -856,12 +949,31 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ICP
 
 		#region Properties
 
+		private bool TouchMode => !Convert.ToBoolean(ClickType);
+
+		private bool SwipeMode => Convert.ToBoolean(ClickType);
+
+		public int ClickType
+		{
+			get => _clickType;
+
+			set
+			{
+				if (_clickType == value)
+				{
+					return;
+				}
+
+				int oldValue = _clickType;
+				_clickType = value;
+				OnPropertyChanged("ClickType", oldValue, value, true);
+			}
+		}
+
 		private double Backlight
 		{
-			get
-			{
-				return _backlight;
-			}
+			get => _backlight;
+
 			set
 			{
 				double oldValue = _backlight;
@@ -874,5 +986,30 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ICP
 		}
 
 		#endregion Properties
+
+		#region Read/Write Xml
+
+		public override void WriteXml(XmlWriter writer)
+		{
+			base.WriteXml(writer);
+
+			writer.WriteElementString("ClickType", _clickType.ToString(CultureInfo.InvariantCulture));
+		}
+
+		public override void ReadXml(XmlReader reader)
+		{
+			base.ReadXml(reader);
+
+			try
+			{
+				ClickType = int.Parse(reader.ReadElementString("ClickType"), CultureInfo.InvariantCulture);
+			}
+			catch
+			{
+				ClickType = 0;
+			}
+		}
+
+		#endregion Read/Write Xml
 	}
 }
