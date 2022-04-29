@@ -136,6 +136,9 @@
     <Compile Include="Gauges\AH-64D\EUFD\EUFD CPG.cs" />
     <Compile Include="Gauges\AH-64D\EUFD\EUFD Pilot.cs" />
     <Compile Include="Gauges\AH-64D\EUFD\EUFD.cs" />
+    <Compile Include="Gauges\AH-64D\KU\KU CPG.cs" />
+    <Compile Include="Gauges\AH-64D\KU\KU Pilot.cs" />
+    <Compile Include="Gauges\AH-64D\KU\KU.cs" />
     <Compile Include="Gauges\AH-64D\MFD\MFD CPG Left.cs" />
     <Compile Include="Gauges\AH-64D\MFD\MFD Pilot Left.cs" />
     <Compile Include="Gauges\AH-64D\MFD\MFD CPG Right.cs" />
@@ -981,6 +984,9 @@
     <Resource Include="Gauges\AH-64D\EUFD\EUFD Stopwatch Button DnH.png" />
     <Resource Include="Gauges\AH-64D\EUFD\EUFD Stopwatch Button UpH.png" />
     <Resource Include="Gauges\AH-64D\EUFD\EUFD.png" />
+    <Resource Include="Gauges\AH-64D\KU\KU_Frame.png" />
+    <Resource Include="Gauges\AH-64D\KU\tactile-dark-square-emphasised-in.png" />
+    <Resource Include="Gauges\AH-64D\KU\tactile-dark-square-emphasised.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -3121,7 +3127,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gauges\AH-64D\KU\" />
     <Folder Include="Gauges\AH-64D\TEDAC\" />
     <Folder Include="Gauges\FA-18C\Controls\" />
     <Folder Include="Interfaces\DCS\F14B\Functions\" />
