@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.RockerSwitch", "Rocker Switch", "Rocker Switches", typeof(RockerSwitchRenderer))]
+    [HeliosControl("Helios.Base.RockerSwitch", "Rocker Switch with Label", "Rockers", typeof(RockerSwitchRenderer))]
     public class RockerSwitch : ThreeWayToggleSwitch
     {
         private string _label = "";
