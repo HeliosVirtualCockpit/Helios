@@ -1,0 +1,48 @@
+﻿<HeliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.RockerSwitchBehaviorEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Helios="clr-namespace:GadrocsWorkshop.Helios"
+             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
+             xmlns:HeliosTouch="clr-namespace:GadrocsWorkshop.Helios.Controls"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             Height="Auto"
+             mc:Ignorable="d"          
+             d:DesignWidth="180">
+    <HeliosSdk:HeliosPropertyEditor.Resources>
+        <Helios:EnumConverter Type="{x:Type HeliosTouch:ThreeWayToggleSwitchType}" x:Key="ToggleSwitchTypes" />
+        <Helios:EnumConverter Type="{x:Type HeliosTouch:ToggleSwitchOrientation}" x:Key="ToggleSwitchOrientation" />
+        <Helios:EnumConverter Type="{x:Type HeliosTouch:ThreeWayToggleSwitchPosition}" x:Key="ThreeWayToggleSwitchPosition" />
+        <Helios:EnumConverter Type="{x:Type HeliosTouch:LinearClickType}" x:Key="ClickTypes" />
+    </HeliosSdk:HeliosPropertyEditor.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right" Content="Type">
+            <Label.ToolTip>Selects what kind of toggle switch to emulate.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="0" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource ToggleSwitchTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchType, Converter={StaticResource ToggleSwitchTypes}}" />
+        
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right" Content="Default Position">
+            <Label.ToolTip>Position which this switch will default to on profile load or reset.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="1" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource ThreeWayToggleSwitchPosition}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.DefaultPosition, Converter={StaticResource ThreeWayToggleSwitchPosition}}" />
+        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>When checked this switch has an indicator light.</Label.ToolTip> Indicator Light
+        </Label>
+        <CheckBox Grid.Column="1" Grid.Row="2" FontSize="10" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Control.HasIndicator}" />
+        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>When set to touch this switch will respond to control regions (upper/lower, left/right) and switch the switch appropriatly. Swipe will switch the switch in the direction you swipe your finger or mouse.</Label.ToolTip> Click Type
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="3" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource ClickTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.ClickType, Converter={StaticResource ClickTypes}}" />
+    </Grid>
+</HeliosSdk:HeliosPropertyEditor>

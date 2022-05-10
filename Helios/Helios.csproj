@@ -110,6 +110,14 @@
     </Compile>
     <Compile Include="Controls\Special\LockedViewportExtent.cs" />
     <Compile Include="Controls\Special\MemoryWire.cs" />
+    <Compile Include="Controls\RockerSwitch.cs" />
+    <Compile Include="Controls\RockerSwitchAppearanceEditor.xaml.cs">
+      <DependentUpon>RockerSwitchAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RockerSwitchRenderer.cs" />
+    <Compile Include="Controls\RockerSwitchBehaviorEditor.xaml.cs">
+      <DependentUpon>RockerSwitchBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TimerPanelBehaviorEditor.xaml.cs">
       <DependentUpon>TimerPanelBehaviorEditor.xaml</DependentUpon>
     </Compile>
@@ -338,6 +346,14 @@
       <SubType>Designer</SubType>
     </Resource>
     <Page Include="Controls\NumericTextDisplayBehaviorPropertyEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RockerSwitchAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RockerSwitchBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
