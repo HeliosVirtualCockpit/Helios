@@ -305,15 +305,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
             _rowCount = rowCount;
             _description = displayName;
             _columnCount = columnCount;
-        }
-
-        protected override void AttachToProfileOnMainThread()
-        {
-            _board = OpenDevice();
 
             DeckButtons = new ObservableCollection<MacroBoardButton>();
             InitializeTriggers();
             InitializeButtons();
+        }
+
+        protected override void AttachToProfileOnMainThread()
+        {
+            InitializeBoard();
+
             PropertyChanged += MacroBoardInterface_PropertyChanged;
             _board.KeyStateChanged += Board_KeyStateChanged;
         }
@@ -358,9 +359,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 
         }
 
+        private void InitializeBoard()
+        {
+            if(null == _board) { _board = OpenDevice(); }
+        }
+
         private void InitializeButtons()
         {
             DeckButtons.Clear();
+            InitializeBoard();
             _board.ClearKeys();
 
             for (int row = 0; row < RowCount; row++)
