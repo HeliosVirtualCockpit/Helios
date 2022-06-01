@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.HydraulicPressure
 	using System;
 	using System.Windows;
 
-	[HeliosControl("Helios.Falcon.HydraulicPressure", "Falcon BMS Hydraulic Pressure B", "Falcon Simulator", typeof(GaugeRenderer))]
+	[HeliosControl("Helios.Falcon.HydraulicPressureB", "Falcon BMS Hydraulic Pressure B", "Falcon Simulator", typeof(GaugeRenderer))]
 	public class HydraulicPressureB : BaseGauge
 	{
 		private FalconInterface _falconInterface;

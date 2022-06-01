@@ -34,9 +34,9 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private HeliosAction _toggleAction;
         private HeliosValue _value;
-
-        public IndicatorPushButton()
-            : base("Indicator Pushbutton", new Size(100, 50))
+        public IndicatorPushButton() : this("Indicator Pushbutton", new Size(100, 50)) { }
+        public IndicatorPushButton(string name, Size size)
+            : base(name, size)
         {
             Image = "{Helios}/Images/Indicators/caution-indicator-off.png";
             PushedImage = "{Helios}/Images/Indicators/caution-indicator-off-pushed.png";

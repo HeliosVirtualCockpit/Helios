@@ -1,0 +1,89 @@
+﻿[
+  {
+    "templateName": "AH-64D Apache",
+    "moduleId": "AH-64D",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "LEFT_MFCD_PLT",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_plt_left_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 600,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "RIGHT_MFCD_PLT",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_plt_right_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "LEFT_MFCD_CPG",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_cpg_left_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "RIGHT_MFCD_CPG",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_cpg_right_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "EUFD_PLT",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/EUFD/EUFD_plt_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 480,
+        "height": 240
+      },
+      {
+        "viewportName": "EUFD_CPG",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/EUFD/EUFD_cpg_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 480,
+        "height": 240
+      },
+      {
+        "viewportName": "TEDAC",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/TEDAC/TEDAC_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 400,
+        "height": 400
+      },
+      {
+        "viewportName": "CMWS",
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/ASE/CMWS/CMWS_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 200,
+        "height": 100
+      }
+    ]
+  }
+]

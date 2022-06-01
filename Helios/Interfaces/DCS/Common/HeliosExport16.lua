@@ -89,6 +89,7 @@ local helios_module_names = {
     ["AV8BNA"] = "Helios_Harrier",
     ["UH-1H"] = "Helios_Huey",
     ["Ka-50"] = "Helios_KA50",
+    ["AH-64D_BLK_II"] = "Helios_AH64D",
     -- legacy entry
     ["L-39"] = "Helios_L39",
     -- valid aircraft for L39 module

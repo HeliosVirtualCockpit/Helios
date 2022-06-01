@@ -1,0 +1,3 @@
+﻿@@ -1308,12 +1308,63 @@
+ _image%22%2C%0A%7D%0A%0A
++%0D%0Atry_find_assigned_viewport(%22M2000C_VTB%22%2C %22VTB%22)%0D%0A

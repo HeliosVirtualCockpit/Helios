@@ -15,6 +15,7 @@
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Template
 {
+    using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Template.Functions;
 

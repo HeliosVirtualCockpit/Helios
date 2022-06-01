@@ -49,8 +49,8 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C
             : base("CMSP", new Size(666, 404))
         {
             //AddPanel("Filters", new Point(0, 0), new Size(666, 404), _imageLocation + "A-10C_CMSP_Filter_Panel.png", _interfaceDeviceName, "Display Filters");
-            AddTextDisplay("Display Line 1 Text", 73, 35, new Size(430, 50), "Line 1 Display", "a1B2C3D4m5s6x7O8", "    =[]]]];   =[]]];  =[]]; =][;");  // These substitutions are for blanks of different widths
             _bezel = AddPanel("Bezel", new Point(0, 0), new Size(666, 404), _imageLocation + PANEL_IMAGE, _interfaceDeviceName, "CMSP Bezel");
+            AddTextDisplay("Display Line 1 Text", 73, 35, new Size(430, 50), "Line 1 Display", "a1B2C3D4m5s6x7O8", "    =[]]]];   =[]]];  =[]]; =][;");  // These substitutions are for blanks of different widths
             AddOSBButton("OSB 1", 86, 168, new Size(64, 64), "OSB 1");
             AddOSBButton("OSB 2", 175, 168, new Size(64, 64), "OSB 2");
             AddOSBButton("OSB 3", 275, 168, new Size(64, 64), "OSB 3");
@@ -71,15 +71,15 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C
             AddThreeWayToggle("Disp Switch", new Point(374, 262), new Size(41, 139), "DISP");
             AddTwoWayToggle("ECM Pod Jettison", 471, 139, new Size(53,128), "ECM Pod Jettison");
             AddPot("Brightness", new Point(550,176), new Size(60, 60), "Brightness");
-            AddTextDisplay("Display MWS Text", 73, 87, new Size(101, 50), "Line 2 MWS Display", "amsx", _CMSPConversion);
-            AddTextDisplay("Display JMR Text", 174, 87, new Size(101, 50), "Line 2 JMR Display", "amsx", _CMSPConversion);
-            AddTextDisplay("Display RWR Text", 275, 87, new Size(101, 50), "Line 2 RWR Display", "amsx", _CMSPConversion);
-            AddTextDisplay("Display Disp Text", 376, 87, new Size(101, 50), "Line 2 DISP Display", "amsx", _CMSPConversion);
-            _positions.Add(new RotarySwitchPosition(this, 1, "OFF", 225d));
+            AddTextDisplay("Display MWS Text", 70, 87, new Size(98, 50), "Line 2 MWS Display", "amsx", _CMSPConversion);
+            AddTextDisplay("Display JMR Text", 168, 87, new Size(98, 50), "Line 2 JMR Display", "amsx", _CMSPConversion);
+            AddTextDisplay("Display RWR Text", 266, 87, new Size(98, 50), "Line 2 RWR Display", "amsx", _CMSPConversion);
+            AddTextDisplay("Display Disp Text", 364, 87, new Size(98, 50), "Line 2 DISP Display", "amsx", _CMSPConversion);
+            _positions.Add(new RotarySwitchPosition(this, 1, "OFF", 230d));
             _positions.Add(new RotarySwitchPosition(this, 2, "STBY", 270d));
-            _positions.Add(new RotarySwitchPosition(this, 3, "MAN", 315d));
-            _positions.Add(new RotarySwitchPosition(this, 4, "SEMI", 0d));
-            _positions.Add(new RotarySwitchPosition(this, 5, "AUTO", 45d));
+            _positions.Add(new RotarySwitchPosition(this, 3, "MAN", 305d));
+            _positions.Add(new RotarySwitchPosition(this, 4, "SEMI", 335d));
+            _positions.Add(new RotarySwitchPosition(this, 5, "AUTO", 25d));
             RotarySwitch knob = AddRotarySwitch("Mode Dial", new Point(478, 269), new Size(125, 125), _imageLocation + "A-10C_CMSP_Knob.png", 1, _positions, _interfaceDeviceName, "Mode Select Dial", false);
             knob.IsContinuous = false;
         }
@@ -146,7 +146,7 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C
                 posn: new Point(x, y),
                 size: size,
                 font: "Helios Virtual Cockpit A-10C_ALQ_213",
-                baseFontsize: 29,
+                baseFontsize: 22,
                 horizontalAlignment: TextHorizontalAlignment.Left,
                 verticalAligment: TextVerticalAlignment.Center,
                 testTextDisplay: testDisp,

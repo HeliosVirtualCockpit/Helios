@@ -48,6 +48,9 @@
     <Content Include="Data\Viewports\ViewportTemplates_002_005_00006_52196_00000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\Viewports\ViewportTemplates_002_007_00011_22211_00000.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Data\Viewports\ViewportTemplates.md" />
     <Content Include="Data\Viewports\ViewportTemplates_002_007_00006_13436_00000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

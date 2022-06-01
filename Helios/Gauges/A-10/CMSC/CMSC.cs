@@ -50,9 +50,9 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C
             AddPot("Brightness Control", new Point(261, 375), new Size(110, 110), "Brightness");
             AddPot("RWR Volume Control", new Point(503, 375), new Size(110, 110), "RWR Volume");
 
-            AddTextDisplay("MWS Text", 279, 258, new Size(471, 113), "MWS Display", "amsxIJKL", _cmscConversion);
-            AddTextDisplay("JMR Text", 279, 100, new Size(471, 113), "JMR Display", "ABCDEFGH", _cmscConversion);
-            AddTextDisplay("Chaff Text", 844, 100, new Size(471, 113), "Chaff Flare Display", "12345678", _cmscConversion);
+            AddTextDisplay("MWS Text", 279, 258, new Size(500, 113), "MWS Display", "amsxIJKL", _cmscConversion);
+            AddTextDisplay("JMR Text", 279, 100, new Size(500, 113), "JMR Display", "ABCDEFGH", _cmscConversion);
+            AddTextDisplay("Chaff Text", 844, 100, new Size(500, 113), "Chaff Flare Display", "12345678", _cmscConversion);
 
             AddIndicator("Indicator: Missile Launch", "Red", 761, 408, new Size(48,48), "Missle Launch Indicator");
             AddIndicator("Indicator: Priority", "Green", 869, 222, new Size(48, 48), "Priority Status Indicator");
@@ -122,7 +122,7 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C
                 posn: new Point(x, y),
                 size: size,
                 font: "Helios Virtual Cockpit A-10C_ALQ_213",
-                baseFontsize: 76,
+                baseFontsize: 60,
                 horizontalAlignment: TextHorizontalAlignment.Left,
                 verticalAligment: TextVerticalAlignment.Center,
                 testTextDisplay: testDisp,

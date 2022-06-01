@@ -41,8 +41,9 @@ namespace GadrocsWorkshop.Helios.Controls
         private HeliosTrigger _positionThreeEnterAction;
         private HeliosTrigger _positionThreeExitAction;
 
-        public ThreeWayToggleSwitch()
-            : base("Three Way Toggle Switch", new System.Windows.Size(50, 100))
+        public ThreeWayToggleSwitch() : this("Three Way Toggle Switch", new System.Windows.Size(50, 100)) {}
+        public ThreeWayToggleSwitch(string name, System.Windows.Size size)
+            : base(name, size)
         {
             _positionOneImage = "{Helios}/Images/Toggles/toggle-up.png";
             _positionTwoImage = "{Helios}/Images/Toggles/toggle-norm.png";
@@ -66,8 +67,9 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_positionValue);
             Actions.Add(_positionValue);
             Triggers.Add(_positionValue);
-        }
 
+        }
+ 
         #region Properties
 
         public ThreeWayToggleSwitchPosition DefaultPosition

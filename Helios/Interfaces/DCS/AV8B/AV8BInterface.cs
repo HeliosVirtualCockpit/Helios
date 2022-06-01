@@ -20,7 +20,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
     using GadrocsWorkshop.Helios.Interfaces.DCS.AV8B.Functions;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 
-    [HeliosInterface("Helios.AV8B", "DCS AV-8B", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
+    [HeliosInterface(
+        "Helios.AV8B",                         // Helios internal type ID used in Profile XML, must never change
+        "DCS AV-8B",                    // human readable UI name for this interface
+        typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
+        typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
+        UniquenessKey = "Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
+
     public class AV8BInterface : DCSInterface
     {
         #region Devices
@@ -71,6 +77,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
         public AV8BInterface()
             : base("DCS AV-8B", "AV8BNA", "pack://application:,,,/Helios;component/Interfaces/DCS/AV8B/ExportFunctions.lua")
         {
+
+            // see if we can restore from JSON
+            if (LoadFunctionsFromJson())
+            {
+                return;
+            }
+
             #region Left MCFD
             AddFunction(new PushButton(this, MPCD_LEFT, "3200", "200", "Left MFCD", "OSB01", "1", "0", "%1d"));
             AddFunction(new PushButton(this, MPCD_LEFT, "3201", "201", "Left MFCD", "OSB02", "1", "0", "%1d"));

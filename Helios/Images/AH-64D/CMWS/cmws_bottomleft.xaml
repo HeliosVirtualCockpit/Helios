@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas Width="437.000" Height="437.000" Name="CMWS_Arrows_Bottom_Left"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+        <Canvas>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 28.775,218.473 L 48.566,238.264 L 48.566,228.764 L 58.831,228.764 L 58.831,208.236 L 48.566,208.236 L 48.566,198.682 L 28.775,218.473 Z"/>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 218.473,408.225 L 238.264,388.434 L 228.764,388.434 L 228.764,378.169 L 208.236,378.169 L 208.236,388.434 L 198.682,388.434 L 218.473,408.225 Z"/>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 84.325,352.637 L 112.314,352.637 L 105.597,345.919 L 112.855,338.661 L 98.339,324.145 L 91.081,331.403 L 84.325,324.648 L 84.325,352.637 Z"/>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 18.526,418.475 L 88.854,418.500 L 71.969,401.615 L 90.200,383.384 L 53.711,346.895 L 35.480,365.126 L 18.500,348.146 L 18.526,418.475 Z"/>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 43.066,269.197 L 65.099,263.294 L 63.327,256.684 L 41.295,262.587 L 43.066,269.197 Z"/>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 62.165,312.875 L 81.919,301.470 L 78.498,295.544 L 58.744,306.949 L 62.165,312.875 Z"/>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 130.298,378.399 L 141.703,358.645 L 135.776,355.224 L 124.371,374.978 L 130.298,378.399 Z"/>
+
+            <!-- CMWS Threat Direction Indicator/Bottom Left/<Path> -->
+            <Path Fill="#ffff9811" Data="F1 M 174.688,395.779 L 180.592,373.746 L 173.982,371.975 L 168.078,394.008 L 174.688,395.779 Z"/>
+
+        </Canvas>
+    </Canvas>
+</Canvas>

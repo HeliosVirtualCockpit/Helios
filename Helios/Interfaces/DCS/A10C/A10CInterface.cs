@@ -217,7 +217,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
 
             #region Flight Gauges
             AddFunction(new Altimeter(this));
-            AddFunction(new RotaryEncoder(this, FM_PROXY, BUTTON_1, "62", 0.04d, "Altimeter", "Pressure"));
+            AddFunction(new RotaryEncoder(this, AAU34, BUTTON_1, "62", 0.04d, "Altimeter", "Pressure"));
 			AddFunction(Switch.CreateThreeWaySwitch(this, AAU34, BUTTON_2, "60", "1.0", "PNEU", "0.0", "NONE", "-1.0", "ELECT", "Altimeter", "ELECT/PNEU switch", "%0.1f"));
 
 			AddFunction(new PushButton(this, ACCELEROMETER, BUTTON_1, "904", "Accelerometer", "Push to set"));
