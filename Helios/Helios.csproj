@@ -151,6 +151,7 @@
     <Compile Include="Gauges\AH-64D\MFD\MFD CPG Right.cs" />
     <Compile Include="Gauges\AH-64D\MFD\MFD Pilot Right.cs" />
     <Compile Include="Gauges\AH-64D\MFD\MFD.cs" />
+    <Compile Include="Gauges\AH-64D\Power\PowerLever.cs" />
     <Compile Include="Gauges\AH-64D\SAI\SAI.cs" />
     <Compile Include="Gauges\AH-64D\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\AH-64D\FAT\FAT.cs" />
@@ -1006,6 +1007,28 @@
     <Resource Include="Images\AH-64D\MFD\MFD_glass.png" />
     <Resource Include="Images\AH-64D\SAI\adi_bezel.png" />
     <Resource Include="Images\AH-64D\TEDAC\TEDAC_frame.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_0.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_1.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_10.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_2.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_3.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_4.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_5.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_6.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_7.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_8.png" />
+    <Resource Include="Images\AH-64D\Power\Left_Power_Lever_9.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_0.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_1.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_10.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_2.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_3.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_4.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_5.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_6.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_7.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_8.png" />
+    <Resource Include="Images\AH-64D\Power\Right_Power_Lever_9.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
