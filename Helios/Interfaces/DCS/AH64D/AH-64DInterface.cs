@@ -1348,7 +1348,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             AddFunction(new FlagValue(this, Warning_Lights.FLAG_APUPLT.ToString("d"), "Left Console (Pilot)", "APU Indicator", ""));
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE_INTERFACE, engine_commands.APU_StartBtnCover.ToString("d"), "401", "1.0", "Closed", "0.0", "Open", "Left Console (Pilot)", "APU Start Button Cover", "%0.1f"));
 
-            //elements["pnt_633"] = default_lever(CREW.PLT, _("Power Lever Friction Adjustment Lever"), devices.CONTROL_INTERFACE, ctrl_commands.FrictionLever, 633)
             AddFunction(new Switch(this, ENGINE_INTERFACE, "317", new SwitchPosition[] { new SwitchPosition("1.0", "IGN ORIDE", engine_commands.Eng1IgnOrideSw.ToString("d"), engine_commands.Eng1IgnOrideSw.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Off", null), new SwitchPosition("-1.0", "Start", engine_commands.Eng1StartSw.ToString("d"), engine_commands.Eng1StartSw.ToString("d"), "0.0", "0.0") }, "Left Console (Pilot)", "No.1 Engine Start Switch", "%0.1f"));
             AddFunction(new Switch(this, ENGINE_INTERFACE, "318", new SwitchPosition[] { new SwitchPosition("1.0", "IGN ORIDE", engine_commands.Eng2IgnOrideSw.ToString("d"), engine_commands.Eng2IgnOrideSw.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Off", null), new SwitchPosition("-1.0", "Start", engine_commands.Eng2StartSw.ToString("d"), engine_commands.Eng2StartSw.ToString("d"), "0.0", "0.0") }, "Left Console (Pilot)", "No.2 Engine Start Switch", "%0.1f"));
             #endregion
@@ -1421,16 +1420,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             AddFunction(new Switch(this, ENGINE_INTERFACE, "291", new SwitchPosition[] { new SwitchPosition("-1.0", "1", engine_commands.CPG_FireDetTestSw1.ToString("d")), new SwitchPosition("0.0", "OFF", engine_commands.CPG_FireDetTestSw1.ToString("d")), new SwitchPosition("1.0", "2", engine_commands.CPG_FireDetTestSw2.ToString("d")) }, "Fire Panel (CP/G)", "Fire Test Switch", "%0.1f"));
             #endregion
             #endregion
-            #region Power Levers
-            #region Pilot
-            //elements["pnt_398"] = default_lever(CREW.PLT, _('Power Lever Smoothly (Left)'), devices.ENGINE_INTERFACE, engine_commands.PLT_L_PowerLever, 398)
-            //elements["pnt_399"] = default_lever(CREW.PLT, _('Power Lever Smoothly (Right)'), devices.ENGINE_INTERFACE, engine_commands.PLT_R_PowerLever, 399)
-            #endregion
-            #region CP/G
-            //elements["pnt_628"] = default_lever(CREW.CPG, _('Power Lever Smoothly (Left)'), devices.ENGINE_INTERFACE, engine_commands.CPG_L_PowerLever, 628)
-            //elements["pnt_629"] = default_lever(CREW.CPG, _('Power Lever Smoothly (Right)'), devices.ENGINE_INTERFACE, engine_commands.CPG_R_PowerLever, 629)
-            #endregion
-            #endregion
             #region Very essential cockpit elements
             #region Pilot
             //elements["pnt_827"] = default_button(CREW.PLT, _('PLT M4 Trigger'), devices.CPT_MECH, cpt_mech_commands.PLT_M4_Trigger, 827)
@@ -1457,13 +1446,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             #region Power Lever Quadrant
             #region Pilot
             AddFunction(new Switch(this, ELEC_INTERFACE, "315", new SwitchPosition[] { new SwitchPosition("0.0", "Off", electric_commands.MIK.ToString("d")), new SwitchPosition("0.5", "Batt", electric_commands.MIK.ToString("d")), new SwitchPosition("1.0", "External Power", electric_commands.MIK.ToString("d")) }, "Electrical", "Master Ignition Switch", "%0.1f"));
-
-            //elements["pnt_398"] = default_lever(CREW.PLT, _('Power Lever Smoothly (Left)'), devices.ENGINE_INTERFACE, engine_commands.PLT_L_PowerLever, 398)
-            //elements["pnt_399"] = default_lever(CREW.PLT, _('Power Lever Smoothly (Right)'), devices.ENGINE_INTERFACE, engine_commands.PLT_R_PowerLever, 399)
+            AddFunction(new Axis(this, CONTROL_INTERFACE, ctrl_commands.FrictionLever.ToString("d"), "633", 0.1d, 0d, 1d, "Power (Pilot)", "Lever Friction Adjustment"));
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.PLT_L_PowerLever.ToString("d"), "398", 0.05d, 0d, 1d, "Power (Pilot)", "Left Power Lever"));
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.PLT_R_PowerLever.ToString("d"), "399", 0.05d, 0d, 1d, "Power (Pilot)", "Right Power Lever"));
             #endregion
             #region CP/G
-            //elements["pnt_628"] = default_lever(CREW.CPG, _('Power Lever Smoothly (Left)'), devices.ENGINE_INTERFACE, engine_commands.CPG_L_PowerLever, 628)
-            //elements["pnt_629"] = default_lever(CREW.CPG, _('Power Lever Smoothly (Right)'), devices.ENGINE_INTERFACE, engine_commands.CPG_R_PowerLever, 629)
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.CPG_L_PowerLever.ToString("d"), "628", 0.05d, 0d, 1d, "Power (CP/G)", "Left Power Lever"));
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.CPG_R_PowerLever.ToString("d"), "629", 0.05d, 0d, 1d, "Power (CP/G)", "Right Power Lever"));
             #endregion
             #endregion
             #region Processor Select Panel
