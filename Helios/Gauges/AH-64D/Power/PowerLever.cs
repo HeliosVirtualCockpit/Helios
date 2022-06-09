@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.Altimeter
 
 
         public Lever()
-            : base("Power Levers", new Size(285d, 540d))
+            : base("Power Levers", new Size(288d, 540d))
         {
             for(_rightComponentOffset=0; _rightComponentOffset < 11; _rightComponentOffset++)
             {
@@ -49,7 +49,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.Altimeter
 
             for (int i = 0; i < 11; i++)
             {
-                Components.Add(new GaugeImage($"{{Helios}}/Images/AH-64D/Power/Right_Power_Lever_{i}.png", new Rect(145d, 0d, 140d, 540d)));
+                Components.Add(new GaugeImage($"{{Helios}}/Images/AH-64D/Power/Right_Power_Lever_{i}.png", new Rect(148d, 0d, 140d, 540d)));
                 Components[i + _rightComponentOffset].IsHidden = true;
             }
             Components[_rightComponentOffset].IsHidden = false;

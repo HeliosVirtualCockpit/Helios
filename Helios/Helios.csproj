@@ -100,7 +100,10 @@
     <Compile Include="Controls\DualIndicatorPushButtonAppearanceEditor.xaml.cs">
       <DependentUpon>DualIndicatorPushButtonAppearanceEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Capabilities\IKineographControl.cs" />
+    <Compile Include="Controls\KineographRenderer.cs" />
     <Compile Include="Controls\NumericTextDisplay.cs" />
+    <Compile Include="Controls\LinearPotentiometerAnimated.cs" />
     <Compile Include="Controls\RendererCapabilities\IWindowsControl.cs" />
     <Compile Include="Controls\Special\CalibrationFilter.cs" />
     <Compile Include="Controls\Special\CalibrationFilterBehaviorEditor.xaml.cs">
