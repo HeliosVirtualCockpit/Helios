@@ -312,7 +312,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected void CalculateMovement(double pulses)
         {
-            double dragProportion = pulses / this.Height * MaxValue * -1; 
+            double dragProportion = Math.Round(pulses / this.Height * MaxValue * -1,3); 
             Value = Math.Max(Math.Min(Value + dragProportion, MaxValue), MinValue);
             AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
         }
@@ -431,7 +431,7 @@ namespace GadrocsWorkshop.Helios.Controls
             // The bitmap is unscaled so we adjust the location to be tested
             Point testLocation = readjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height));
             System.Drawing.Color pxl = _animationFrameBitmap.GetPixel(Convert.ToInt32(testLocation.X), Convert.ToInt32(testLocation.Y));
-            return !((pxl.A == 0xff && pxl.R == 0xff && pxl.G == 0x00 && pxl.B == 0xff) || pxl.A == 0x00);
+            return !((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || pxl.A == 0);
         }
         private Point readjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
         {

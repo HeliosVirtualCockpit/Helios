@@ -1445,14 +1445,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             #endregion
             #region Power Lever Quadrant
             #region Pilot
-            AddFunction(new Switch(this, ELEC_INTERFACE, "315", new SwitchPosition[] { new SwitchPosition("0.0", "Off", electric_commands.MIK.ToString("d")), new SwitchPosition("0.5", "Batt", electric_commands.MIK.ToString("d")), new SwitchPosition("1.0", "External Power", electric_commands.MIK.ToString("d")) }, "Electrical", "Master Ignition Switch", "%0.1f"));
-            AddFunction(new Axis(this, CONTROL_INTERFACE, ctrl_commands.FrictionLever.ToString("d"), "633", 0.1d, 0d, 1d, "Power (Pilot)", "Lever Friction Adjustment"));
-            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.PLT_L_PowerLever.ToString("d"), "398", 0.05d, 0d, 1d, "Power (Pilot)", "Left Power Lever"));
-            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.PLT_R_PowerLever.ToString("d"), "399", 0.05d, 0d, 1d, "Power (Pilot)", "Right Power Lever"));
+            AddFunction(new Switch(this, ELEC_INTERFACE, "315", new SwitchPosition[] { new SwitchPosition("0.0", "Off", electric_commands.MIK.ToString("d")), new SwitchPosition("0.5", "Batt", electric_commands.MIK.ToString("d")), new SwitchPosition("1.0", "External Power", electric_commands.MIK.ToString("d")) }, "Left Console (Pilot)", "Master Ignition Switch", "%0.1f"));
+            AddFunction(new Axis(this, CONTROL_INTERFACE, ctrl_commands.FrictionLever.ToString("d"), "633", 0.1d, 0d, 1d, "Left Console (Pilot)", "Lever Friction Adjustment"));
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.PLT_L_PowerLever.ToString("d"), "398", 0.05d, 0d, 1d, "Left Console (Pilot)", "Left Power Lever"));
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.PLT_R_PowerLever.ToString("d"), "399", 0.05d, 0d, 1d, "Left Console (Pilot)", "Right Power Lever"));
             #endregion
             #region CP/G
-            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.CPG_L_PowerLever.ToString("d"), "628", 0.05d, 0d, 1d, "Power (CP/G)", "Left Power Lever"));
-            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.CPG_R_PowerLever.ToString("d"), "629", 0.05d, 0d, 1d, "Power (CP/G)", "Right Power Lever"));
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.CPG_L_PowerLever.ToString("d"), "628", 0.05d, 0d, 1d, "Left Console (CP/G)", "Left Power Lever"));
+            AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.CPG_R_PowerLever.ToString("d"), "629", 0.05d, 0d, 1d, "Left Console (CP/G)", "Right Power Lever"));
             #endregion
             #endregion
             #region Processor Select Panel
