@@ -321,8 +321,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
         {
             foreach (MacroBoardButton button in DeckButtons)
             {
-                HeliosTrigger pressedTrigger = new HeliosTrigger(this, $"Row {button.Row}", $"button at row {button.Row} column {button.Column}", "pressed", "Fired when a button is pressed.");
-                HeliosTrigger releasedTrigger = new HeliosTrigger(this, $"Row {button.Row}", $"button at row {button.Row} column {button.Column}", "released", "Fired when a button is released.");
+                HeliosTrigger pressedTrigger = new HeliosTrigger(this, $"Row {button.Row}", $"button at row {button.Row} column {button.Column}", "pressed", "Fired when a button is pressed.", "Always returns true.", BindingValueUnits.Boolean);
+                HeliosTrigger releasedTrigger = new HeliosTrigger(this, $"Row {button.Row}", $"button at row {button.Row} column {button.Column}", "released", "Fired when a button is released.", "Always returns false.", BindingValueUnits.Boolean);
 
                 _pressedTriggers.Add(pressedTrigger);
                 _releasedTriggers.Add(releasedTrigger);
