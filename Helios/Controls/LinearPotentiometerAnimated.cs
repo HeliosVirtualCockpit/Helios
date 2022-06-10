@@ -276,7 +276,9 @@ namespace GadrocsWorkshop.Helios.Controls
                     Refresh();
                     // we want to test for transparency in HitTest so we need to make a bitmap
                     // from the image source
-                    _animationFrameBitmap = BitmapImage2Bitmap(AnimationFrames[AnimationFrameNumber] as BitmapImage);
+                    if (AnimationFrames.Count > 0) {
+                        _animationFrameBitmap = BitmapImage2Bitmap(AnimationFrames[AnimationFrameNumber] as BitmapImage);
+                    }
                 }
             }
         }
