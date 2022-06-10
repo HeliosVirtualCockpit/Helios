@@ -429,8 +429,7 @@ namespace GadrocsWorkshop.Helios.Controls
             // The bitmap is unscaled so we adjust the location to be tested
             Point testLocation = readjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height));
             System.Drawing.Color pxl = _animationFrameBitmap.GetPixel(Convert.ToInt32(testLocation.X), Convert.ToInt32(testLocation.Y));
-            Console.WriteLine($"{testLocation} : {pxl}");
-            return !((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || pxl.A == 0);
+            return !((pxl.A == 0xff && pxl.R == 0xff && pxl.G == 0x00 && pxl.B == 0xff) || pxl.A == 0x00);
         }
         private Point readjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
         {
