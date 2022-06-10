@@ -5,3 +5,11 @@
 [submodule "InterfaceFiles/Interfaces"]
 	path = InterfaceFiles/Interfaces
 	url = https://github.com/HeliosVirtualCockpit/HeliosInterfaces
+[submodule "OpenMacroBoard.SDK"]
+	path = OpenMacroBoard.SDK
+	url = https://github.com/HeliosVirtualCockpit/OpenMacroBoard.SDK
+	branch = helios
+[submodule "StreamDeckSharp"]
+	path = StreamDeckSharp
+	url = https://github.com/HeliosVirtualCockpit/StreamDeckSharp
+	branch = helios

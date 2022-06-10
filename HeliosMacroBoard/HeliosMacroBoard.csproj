@@ -5,76 +5,33 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU32'">
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU32'">
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <PropertyGroup>
     <OutputType>Library</OutputType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard</RootNamespace>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <ItemGroup>
-    <Reference Include="HidSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HidSharp.2.1.0\lib\net35\HidSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.0\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="OpenMacroBoard.SDK, Version=3.0.0.0, Culture=neutral, PublicKeyToken=be9f0b07fc09366f, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenMacroBoard.SDK.3.0.0\lib\netstandard2.0\OpenMacroBoard.SDK.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenMacroBoard.VirtualBoard, Version=4.1.0.0, Culture=neutral, PublicKeyToken=a6830bae1972bbf9, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenMacroBoard.VirtualBoard.4.1.0\lib\net472\OpenMacroBoard.VirtualBoard.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
-    </Reference>
-    <Reference Include="StreamDeckSharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=e3da2f522ff1f75c, processorArchitecture=MSIL">
-      <HintPath>..\packages\StreamDeckSharp.3.0.0\lib\netstandard2.0\StreamDeckSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -107,6 +64,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenMacroBoard.SDK\src\OpenMacroBoard.SDK\OpenMacroBoard.SDK.csproj">
+      <Project>{3e28549c-c22e-4545-a13d-32981a39ae91}</Project>
+      <Name>OpenMacroBoard.SDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenMacroBoard.SDK\src\OpenMacroBoard.VirtualBoard\OpenMacroBoard.VirtualBoard.csproj">
+      <Project>{94715b35-6f71-403b-84d1-9839c017ced6}</Project>
+      <Name>OpenMacroBoard.VirtualBoard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StreamDeckSharp\src\StreamDeckSharp\StreamDeckSharp.csproj">
+      <Project>{7becb623-5eb3-44e4-b702-58ec3777f284}</Project>
+      <Name>StreamDeckSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>

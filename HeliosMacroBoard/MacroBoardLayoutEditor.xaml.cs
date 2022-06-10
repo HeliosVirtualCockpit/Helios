@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var buttonPressed = (bool)value;
+            bool buttonPressed = (bool)value;
             if (buttonPressed)
             {
                 return Brushes.Red;
@@ -50,8 +50,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 
         public void ButtonPropertiesMenuItem_Click(object source, RoutedEventArgs e)
         {
-            var targetButton = ((Control)source).DataContext as MacroBoardButton;
-            var buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
+            MacroBoardButton targetButton = ((Control)source).DataContext as MacroBoardButton;
+            MacroBoardButtonPropertiesDialog buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
             buttonPropertiesDialog.TargetButton = targetButton;
 
             buttonPropertiesDialog.ShowDialog();
@@ -61,8 +61,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
         {
             if (e.ClickCount == 2)
             {
-                var targetButton = ((Control)source).DataContext as MacroBoardButton;
-                var buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
+                MacroBoardButton targetButton = ((Control)source).DataContext as MacroBoardButton;
+                MacroBoardButtonPropertiesDialog buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
                 buttonPropertiesDialog.TargetButton = targetButton;
 
                 buttonPropertiesDialog.ShowDialog();

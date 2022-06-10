@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var model = (MacroBoardModel)value;
+            MacroBoardModel model = (MacroBoardModel)value;
             switch (model)
             {
                 case MacroBoardModel.StreamDeck:
@@ -70,7 +70,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var models = (IEnumerable<MacroBoardModel>)value;
+            IEnumerable<MacroBoardModel> models = (IEnumerable<MacroBoardModel>)value;
             return models.Select((item) => new MacroBoardModelConverter().Convert(item, typeof(string), parameter, culture));
         }
 
