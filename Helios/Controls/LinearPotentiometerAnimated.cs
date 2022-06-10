@@ -66,9 +66,9 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
         public LinearPotentiometerAnimated( )
-            : base( "Linear Potentiometer (Animated)", new Size( 140, 540 ) )
+            : base( "Linear Potentiometer (Animated)", new Size( 73, 240 ) )
         {
-            AnimationFrameImageNamePattern ="{Helios}/Images/AH-64D/Power/Left_Power_Lever_*.png";
+            AnimationFrameImageNamePattern ="{Helios}/Images/AH-64D/Power/Lever_0.png";
             AnimationFrameNumber = AnimationFrameCount-1;
             _clickableVertical = true;
             ClickType = LinearClickType.Swipe;
@@ -427,8 +427,9 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             // Alpha channel on PNG pixels seems to be a mystery so we use 0xffffffff to determine transparent if alpha cannot be used
             // The bitmap is unscaled so we adjust the location to be tested
-            Point testLocation = readjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width,this.Height));
+            Point testLocation = readjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height));
             System.Drawing.Color pxl = _animationFrameBitmap.GetPixel(Convert.ToInt32(testLocation.X), Convert.ToInt32(testLocation.Y));
+            Console.WriteLine($"{testLocation} : {pxl}");
             return !((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || pxl.A == 0);
         }
         private Point readjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
