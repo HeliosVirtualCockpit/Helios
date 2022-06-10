@@ -23,6 +23,11 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows.Media;
     using System.Collections.Generic;
     using System.Xml;
+    using System.Drawing;
+    using System.IO;
+    using System.Windows.Media.Imaging;
+    using Size = System.Windows.Size;
+    using Point = System.Windows.Point;
 
     [HeliosControl("Helios.Base.LinearPotentiometerAnimated", "Linear Potentiometer (Animated)", "Potentiometers", typeof( KineographRenderer ) )]
     public class LinearPotentiometerAnimated : HeliosVisual, IKineographControl
@@ -40,7 +45,6 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private bool _clickableVertical = false;
         private bool _clickableHorizontal = false;
-        PulseType _pulseType = PulseType.None;
         LinearClickType _clickType = LinearClickType.Swipe;
 
         private HeliosValue _linearPotentiometer;
@@ -56,6 +60,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private string _animationFrameImageNamePattern;
         private int _animationFrameNumber = 0;
         private int _animationFrameCount = 0;
+        private Bitmap _animationFrameBitmap;
 
 
 
@@ -107,7 +112,6 @@ namespace GadrocsWorkshop.Helios.Controls
                     double oldValue = _minValue;
                     _minValue = value;
                     OnPropertyChanged("MinValue", oldValue, value, true);
-                    //SetRotation();
                 }
             }
         }
@@ -125,7 +129,6 @@ namespace GadrocsWorkshop.Helios.Controls
                     double oldValue = _maxValue;
                     _maxValue = value;
                     OnPropertyChanged("MaxValue", oldValue, value, true);
-                    //SetRotation();
                 }
             }
         }
@@ -168,7 +171,6 @@ namespace GadrocsWorkshop.Helios.Controls
                 double oldValue = _linearPotentiometer.Value.DoubleValue;
                 _linearPotentiometer.SetValue(new BindingValue(value), BypassTriggers);
                 OnPropertyChanged("Value", oldValue, value, false);
-                //SetRotation();
             }
         }
 
@@ -272,6 +274,9 @@ namespace GadrocsWorkshop.Helios.Controls
                     _animationFrameNumber = value;
                     OnPropertyChanged("AnimationFrameNumber", oldValue, value, true);
                     Refresh();
+                    // we want to test for transparency in HitTest so we also need to make a bitmap
+                    // from the image source
+                    _animationFrameBitmap = BitmapImage2Bitmap(AnimationFrames[AnimationFrameNumber] as BitmapImage);
                 }
             }
         }
@@ -283,7 +288,6 @@ namespace GadrocsWorkshop.Helios.Controls
                 int oldValue = _animationFrameCount;
                 _animationFrameCount = value;
                 OnPropertyChanged("AnimationFrameCount", oldValue, value, true);
-                //Refresh();
             }
         }
         public List<ImageSource> AnimationFrames
@@ -303,19 +307,15 @@ namespace GadrocsWorkshop.Helios.Controls
         }
 
         #endregion
-        #region IPulsedControl
 
-        protected void Pulse (double pulses)
+        protected void CalculateMovement(double pulses)
         {
-            // clamp
             double dragProportion = pulses / this.Height * MaxValue * -1; 
             Value = Math.Max(Math.Min(Value + dragProportion, MaxValue), MinValue);
             AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
         }
 
-        #endregion
-
-        public override void Reset ( )
+         public override void Reset ( )
         {
             base.Reset();
 
@@ -388,19 +388,7 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override void MouseDown(Point location)
         {
-            if (_clickType == LinearClickType.Touch)
-            {
-                //_repeating = false;
-                //_repeatRate = 200d;
-                //_repeatRate = 0d;
-                //_lastRepeat = Environment.TickCount & Int32.MaxValue;
-
-                //if ( Parent != null && Parent.Profile != null )
-                //{
-                //    Parent.Profile.ProfileTick += new EventHandler( Profile_ProfileTick );
-                //}
-            }
-            else if (_clickType == LinearClickType.Swipe)
+            if (_clickType == LinearClickType.Swipe)
             {
                 _mouseDown = true;
                 _mouseDownLocation = location;
@@ -416,7 +404,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     double increment = location.Y - _mouseDownLocation.Y;
                     if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
                     {
-                        Pulse(increment);
+                        CalculateMovement(increment);
                         _mouseDownLocation = location;
                     }
                 }
@@ -425,20 +413,50 @@ namespace GadrocsWorkshop.Helios.Controls
                     double increment = location.X - _mouseDownLocation.X;
                     if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
                     {
-                        Pulse(increment);
+                        CalculateMovement(increment);
                         _mouseDownLocation = location;
                     }
                 }
             }
         }
-
         public override void MouseUp(Point location)
         {
             _mouseDown = false;
         }
+        public override bool HitTest(Point location)
+        {
+            // Alpha channel on PNG pixels seems to be a mystery so we use 0xffffffff to determine transparent if alpha cannot be used
+            // The bitmap is unscaled so we adjust the location to be tested
+            Point testLocation = readjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width,this.Height));
+            System.Drawing.Color pxl = _animationFrameBitmap.GetPixel(Convert.ToInt32(testLocation.X), Convert.ToInt32(testLocation.Y));
+            return !((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || pxl.A == 0);
+        }
+        private Point readjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
+        {
+            Point testPoint = new Point();
+            testPoint.X = Clamp(location.X * bitmapSize.Width / visualSize.Width, 0, bitmapSize.Width-1);
+            testPoint.Y = Clamp(location.Y * bitmapSize.Height / visualSize.Height, 0, bitmapSize.Height-1);
+            return testPoint;
+        }
         private double Clamp(double value, double min, double max)
         {
             return value < min ? min : value > max ? max : value ;
-         }
+        }
+        private Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
+        {
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                if (_animationFrameBitmap != null)
+                {
+                    _animationFrameBitmap.Dispose();
+                }
+                Bitmap bm = new Bitmap(outStream);
+                outStream.Dispose();    
+                return bm;
+            }
+        }
     }
 }

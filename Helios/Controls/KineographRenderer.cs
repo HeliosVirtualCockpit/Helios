@@ -80,11 +80,12 @@ namespace GadrocsWorkshop.Helios.Controls
                                     imageLoaded = false; // tolerate image sequences starting at 0 or 1
                                     Logger.Debug($"Unable to load image name {ImageFileName(animation.AnimationFrameImageNamePattern, i, substitutionChar)}");
                                 }
-                                continue;
                             }
                         }
+                        animation.AnimationFrameCount = animation.AnimationFrames.Count;
+                        animation.AnimationFrameNumber = 0;
+                        Logger.Debug($"Loaded animation frame set {animation.AnimationFrameImageNamePattern} with {animation.AnimationFrames.Count} frames");
                     }
-                    Logger.Debug($"Loaded animation frame set {animation.AnimationFrameImageNamePattern} with {animation.AnimationFrames.Count - 1} frames");
                 }
                 else
                 {

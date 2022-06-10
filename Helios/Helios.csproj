@@ -104,6 +104,12 @@
     <Compile Include="Controls\KineographRenderer.cs" />
     <Compile Include="Controls\NumericTextDisplay.cs" />
     <Compile Include="Controls\LinearPotentiometerAnimated.cs" />
+    <Compile Include="Controls\AnimationAppearanceEditor.xaml.cs">
+      <DependentUpon>AnimationAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LinearPotentiometerBehaviorEditor.xaml.cs">
+      <DependentUpon>LinearPotentiometerBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RendererCapabilities\IWindowsControl.cs" />
     <Compile Include="Controls\Special\CalibrationFilter.cs" />
     <Compile Include="Controls\Special\CalibrationFilterBehaviorEditor.xaml.cs">
@@ -337,6 +343,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DualIndicatorPushButtonAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnimationAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LinearPotentiometerBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
