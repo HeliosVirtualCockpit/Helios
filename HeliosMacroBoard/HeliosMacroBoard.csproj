@@ -72,15 +72,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenMacroBoard.SDK\src\OpenMacroBoard.SDK\OpenMacroBoard.SDK.csproj">
+    <ProjectReference Include="..\Thirdparty\OpenMacroBoard.SDK\src\OpenMacroBoard.SDK\OpenMacroBoard.SDK.csproj">
       <Project>{3e28549c-c22e-4545-a13d-32981a39ae91}</Project>
       <Name>OpenMacroBoard.SDK</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenMacroBoard.SDK\src\OpenMacroBoard.VirtualBoard\OpenMacroBoard.VirtualBoard.csproj">
+    <ProjectReference Include="..\Thirdparty\OpenMacroBoard.SDK\src\OpenMacroBoard.VirtualBoard\OpenMacroBoard.VirtualBoard.csproj">
       <Project>{94715b35-6f71-403b-84d1-9839c017ced6}</Project>
       <Name>OpenMacroBoard.VirtualBoard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StreamDeckSharp\src\StreamDeckSharp\StreamDeckSharp.csproj">
+    <ProjectReference Include="..\Thirdparty\StreamDeckSharp\src\StreamDeckSharp\StreamDeckSharp.csproj">
       <Project>{7becb623-5eb3-44e4-b702-58ec3777f284}</Project>
       <Name>StreamDeckSharp</Name>
     </ProjectReference>

@@ -125,11 +125,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceFiles", "Interface
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeliosMacroBoard", "HeliosMacroBoard\HeliosMacroBoard.csproj", "{0B1B0665-99D5-4990-994D-8F92A0E15299}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMacroBoard.SDK", "OpenMacroBoard.SDK\src\OpenMacroBoard.SDK\OpenMacroBoard.SDK.csproj", "{3E28549C-C22E-4545-A13D-32981A39AE91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMacroBoard.SDK", "Thirdparty\OpenMacroBoard.SDK\src\OpenMacroBoard.SDK\OpenMacroBoard.SDK.csproj", "{3E28549C-C22E-4545-A13D-32981A39AE91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamDeckSharp", "StreamDeckSharp\src\StreamDeckSharp\StreamDeckSharp.csproj", "{7BECB623-5EB3-44E4-B702-58EC3777F284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamDeckSharp", "Thirdparty\StreamDeckSharp\src\StreamDeckSharp\StreamDeckSharp.csproj", "{7BECB623-5EB3-44E4-B702-58EC3777F284}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMacroBoard.VirtualBoard", "OpenMacroBoard.SDK\src\OpenMacroBoard.VirtualBoard\OpenMacroBoard.VirtualBoard.csproj", "{94715B35-6F71-403B-84D1-9839C017CED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMacroBoard.VirtualBoard", "Thirdparty\OpenMacroBoard.SDK\src\OpenMacroBoard.VirtualBoard\OpenMacroBoard.VirtualBoard.csproj", "{94715B35-6F71-403B-84D1-9839C017CED6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -877,6 +877,9 @@ Global
 		{E39821C7-ADBC-4FCF-9497-FD44A6FC2CE9} = {4BAD86A3-88DE-4AD6-B1E3-982D118CCB8D}
 		{9CA5E376-5653-4B71-B58B-1685B8227790} = {4BAD86A3-88DE-4AD6-B1E3-982D118CCB8D}
 		{5326288B-FD5D-48D0-B310-AD66B9C8E777} = {4BAD86A3-88DE-4AD6-B1E3-982D118CCB8D}
+		{3E28549C-C22E-4545-A13D-32981A39AE91} = {C8FEC79C-D618-482A-84E1-F07C5D220581}
+		{7BECB623-5EB3-44E4-B702-58EC3777F284} = {C8FEC79C-D618-482A-84E1-F07C5D220581}
+		{94715B35-6F71-403B-84D1-9839C017CED6} = {C8FEC79C-D618-482A-84E1-F07C5D220581}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B206942-1574-47C9-BA9A-843FD9F493D4}
