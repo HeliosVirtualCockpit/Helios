@@ -1,32 +1,41 @@
 ﻿<HeliosSdk:DialogWindow x:Class="GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard.MacroBoardButtonPropertiesDialog"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:System="clr-namespace:System;assembly=mscorlib"
-             xmlns:local="clr-namespace:GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard"
-             xmlns:StreamDeckAlias="clr-namespace:GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard"
-             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls;assembly=Helios"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             Background="{StaticResource ToolBackground}" SizeToContent="WidthAndHeight" Title="Button Properties"
-             Width="400" Height="800">
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:System="clr-namespace:System;assembly=mscorlib"
+                        xmlns:local="clr-namespace:GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard"
+                        xmlns:StreamDeckAlias="clr-namespace:GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard"
+                        xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls;assembly=Helios"
+                        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                        Background="{StaticResource ToolBackground}" SizeToContent="WidthAndHeight"
+                        Title="Button Properties"
+                        Width="400" Height="800">
     <StackPanel Orientation="Vertical" Margin="5">
         <GroupBox Header="Button Preview">
-            <Image Source="{Binding PendingButton.ButtonImage}" Height="72" MinHeight="72" MaxHeight="72" Width="72" MinWidth="72" MaxWidth="72"/>
+            <Image Source="{Binding PendingButton.ButtonImage}" Height="72" MinHeight="72" MaxHeight="72" Width="72"
+                   MinWidth="72" MaxWidth="72" />
         </GroupBox>
         <GroupBox Header="Background Image">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <CheckBox x:Name="ImageEnabledCheckBox" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsChecked="{Binding Path=PendingButton.BackgroundImageEnabled}"  VerticalContentAlignment="Center">
-                        <TextBlock Text="Enable"/>
+                    <CheckBox x:Name="ImageEnabledCheckBox" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                              IsChecked="{Binding Path=PendingButton.BackgroundImageEnabled}"
+                              VerticalContentAlignment="Center">
+                        <TextBlock Text="Enable" />
                     </CheckBox>
                 </StackPanel>
-                <DockPanel Margin="0,4,0,0" LastChildFill="True" IsEnabled="{Binding ElementName=ImageEnabledCheckBox, Path=IsChecked, TargetNullValue=False}">
-                    <Button Margin="4,0,0,0" HorizontalAlignment="Stretch" MinWidth="60" DockPanel.Dock="Right" Click="BackgroundImageBrowseButton_Click">Browse...</Button>
-                    <TextBox Width="Auto" DockPanel.Dock="Left" Text="{Binding Path=PendingButton.BackgroundImageUri}"/>
+                <DockPanel Margin="0,4,0,0" LastChildFill="True"
+                           IsEnabled="{Binding ElementName=ImageEnabledCheckBox, Path=IsChecked, TargetNullValue=False}">
+                    <Button Margin="4,0,0,0" HorizontalAlignment="Stretch" MinWidth="60" DockPanel.Dock="Right"
+                            Click="BackgroundImageBrowseButton_Click">
+                        Browse...
+                    </Button>
+                    <TextBox Width="Auto" DockPanel.Dock="Left" Text="{Binding Path=PendingButton.BackgroundImageUri}" />
                 </DockPanel>
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Button Text">
-            <TextBox AcceptsReturn="True" HorizontalAlignment="Stretch" TextWrapping="NoWrap" MinLines="4" MaxLines="4" Text="{Binding Path=PendingButton.Text, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
+            <TextBox AcceptsReturn="True" HorizontalAlignment="Stretch" TextWrapping="NoWrap" MinLines="4" MaxLines="4"
+                     Text="{Binding Path=PendingButton.Text, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0" />
         </GroupBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button IsDefault="True" Margin="4" MinWidth="60" Click="OkButton_Click">OK</Button>
