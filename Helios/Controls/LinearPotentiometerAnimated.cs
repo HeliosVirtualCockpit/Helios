@@ -427,17 +427,24 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override bool HitTest(Point location)
         {
-            // Alpha channel on PNG pixels seems to be a mystery so we use 0xffffffff to determine transparent if alpha cannot be used
             // The bitmap is unscaled so we adjust the location to be tested
-            Point testLocation = readjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height));
-            System.Drawing.Color pxl = _animationFrameBitmap.GetPixel(Convert.ToInt32(testLocation.X), Convert.ToInt32(testLocation.Y));
-            return !((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || pxl.A == 0);
+            return IsTransparent(AdjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height)), _animationFrameBitmap);
         }
-        private Point readjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
+        private bool IsTransparent(Point location, Bitmap bitmap)
+        {
+            /// TODO: Find a robust test for pixel transparency in a HeliosVisual
+            /// Alpha channel on PNG pixels seems to be always 255 and the color value returned for a transparent region can also change depending on how it is
+            /// exported.  0xffffffff and 0xff000000 have both been returned for transparent areas from different PNGs.  Testing against Color.Transarent also does not
+            /// seem to produce the hoped for results.
+            System.Drawing.Color pxl = _animationFrameBitmap.GetPixel(Convert.ToInt32(location.X), Convert.ToInt32(location.Y));
+            Logger.Debug($"{Name} HitTest location {location} {pxl} Result {!((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || (pxl.A == 255 && pxl.R == 0 && pxl.G == 0 && pxl.B == 0) || pxl.A == 0)} Transparent {pxl.ToArgb() == System.Drawing.Color.Transparent.ToArgb()} Empty Colour {pxl.IsEmpty}");
+            return !((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || (pxl.A == 255 && pxl.R == 0 && pxl.G == 0 && pxl.B == 0) || pxl.A == 0);
+        }
+        private Point AdjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
         {
             Point testPoint = new Point();
-            testPoint.X = Clamp(location.X * bitmapSize.Width / visualSize.Width, 0, bitmapSize.Width-1);
-            testPoint.Y = Clamp(location.Y * bitmapSize.Height / visualSize.Height, 0, bitmapSize.Height-1);
+            testPoint.X = Math.Round(Clamp(location.X * bitmapSize.Width / visualSize.Width, 0, bitmapSize.Width - 1));
+            testPoint.Y = Math.Round(Clamp(location.Y * bitmapSize.Height / visualSize.Height, 0, bitmapSize.Height - 1));
             return testPoint;
         }
         private double Clamp(double value, double min, double max)
