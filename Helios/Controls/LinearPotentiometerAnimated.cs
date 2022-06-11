@@ -73,7 +73,7 @@ namespace GadrocsWorkshop.Helios.Controls
             _clickableVertical = true;
             ClickType = LinearClickType.Swipe;
 
-            _linearPotentiometer = new HeliosValue(this, new BindingValue(0d), "", "value", "Current value of potentiometer", "", BindingValueUnits.Numeric);
+            _linearPotentiometer = new HeliosValue(this, new BindingValue(0d), "", "value", "Current value of potentiometer", "0 to 1", BindingValueUnits.Numeric);
             _linearPotentiometer.SetValue(new BindingValue(0), true);
             _linearPotentiometer.Execute += new HeliosActionHandler(SetValuePotentionmeter_Execute);
             Values.Add(_linearPotentiometer);
@@ -304,20 +304,22 @@ namespace GadrocsWorkshop.Helios.Controls
         void SetValuePotentionmeter_Execute(object action, HeliosActionEventArgs e)
         {
             double maxImage = AnimationFrameCount - 1;
-            _linearPotentiometer.SetValue(new BindingValue(Clamp(Math.Round(e.Value.DoubleValue * maxImage), 0, maxImage)), true);
-            AnimationFrameNumber = Convert.ToInt32(_linearPotentiometer.Value.DoubleValue);
+            //_linearPotentiometer.SetValue(new BindingValue(Clamp(Math.Round(e.Value.DoubleValue * maxImage), 0, maxImage)), true);
+            //AnimationFrameNumber = Convert.ToInt32(_linearPotentiometer.Value.DoubleValue);
+            Value = e.Value.DoubleValue;
+            AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(e.Value.DoubleValue * maxImage), 0, maxImage));
         }
 
         #endregion
 
         protected void CalculateMovement(double pulses)
         {
-            double dragProportion = Math.Round(pulses / this.Height * MaxValue * -1,3); 
-            Value = Math.Max(Math.Min(Value + dragProportion, MaxValue), MinValue);
+            double dragProportion = pulses / this.Height * MaxValue * -1;
+            Value = Math.Round(Math.Max(Math.Min(Value + dragProportion, MaxValue), MinValue), 3);
             AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
         }
 
-         public override void Reset ( )
+        public override void Reset ( )
         {
             base.Reset();
 
