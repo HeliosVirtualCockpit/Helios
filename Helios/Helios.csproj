@@ -87,6 +87,11 @@
     <Compile Include="ComponentModel\HeliosCapabilityEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
+    <Compile Include="Controls\BacklitPushButton.cs" />
+    <Compile Include="Controls\BacklitPushButtonAppearanceEditor.xaml.cs">
+      <DependentUpon>BacklitPushButtonAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BacklitPushButtonRenderer.cs" />
     <Compile Include="Controls\Capabilities\IBackgroundImage.cs" />
     <Compile Include="Controls\Capabilities\IConfigurableBackgroundImage.cs" />
     <Compile Include="Controls\Capabilities\IControlWithProfileInstance.cs" />
@@ -99,6 +104,14 @@
     <Compile Include="Controls\Capabilities\IWindowsManipulationAware.cs" />
     <Compile Include="Controls\Capabilities\IWindowsMouseInput.cs" />
     <Compile Include="Controls\Capabilities\IWindowsPreviewInput.cs" />
+    <Compile Include="Controls\ImageTranslucentBehaviorEditor.xaml.cs">
+      <DependentUpon>ImageTranslucentBehaviorEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DualIndicatorPushButton.cs" />
+    <Compile Include="Controls\DualIndicatorPushButtonRenderer.cs" />
+    <Compile Include="Controls\DualIndicatorPushButtonAppearanceEditor.xaml.cs">
+      <DependentUpon>DualIndicatorPushButtonAppearanceEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NumericTextDisplay.cs" />
     <Compile Include="Controls\RendererCapabilities\IWindowsControl.cs" />
     <Compile Include="Controls\Special\CalibrationFilter.cs" />
@@ -110,10 +123,19 @@
       <DependentUpon>NumericTextDisplayBehaviorPropertyEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Special\LockedViewportExtent.cs" />
+    <Compile Include="Controls\Special\MemoryWire.cs" />
+    <Compile Include="Controls\RockerSwitch.cs" />
+    <Compile Include="Controls\RockerSwitchAppearanceEditor.xaml.cs">
+      <DependentUpon>RockerSwitchAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RockerSwitchRenderer.cs" />
     <Compile Include="Controls\TimerPanelBehaviorEditor.xaml.cs">
       <DependentUpon>TimerPanelBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimerPanel.cs" />
+    <Compile Include="Controls\HeliosPanelBehaviorEditor.xaml.cs">
+      <DependentUpon>HeliosPanelBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EnumDisplayEntry.cs" />
     <Compile Include="Gauges\A-10\Common\Blanking Panel Left.cs" />
     <Compile Include="Gauges\A-10\Radios\UHFRadio.cs" />
@@ -128,6 +150,29 @@
     <Compile Include="Gauges\A-10\HARS\HARS.cs" />
     <Compile Include="Gauges\A-10\HARS\HARSSync_1.cs" />
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
+    <Compile Include="Gauges\AH-64D\CMWS\CMWSDisplay.cs" />
+    <Compile Include="Gauges\AH-64D\CMWS\CMWSThreatDisplay.cs" />
+    <Compile Include="Gauges\AH-64D\EUFD\EUFD CPG.cs" />
+    <Compile Include="Gauges\AH-64D\EUFD\EUFD Pilot.cs" />
+    <Compile Include="Gauges\AH-64D\EUFD\EUFD.cs" />
+    <Compile Include="Gauges\AH-64D\KU\KU CPG.cs" />
+    <Compile Include="Gauges\AH-64D\KU\KU Pilot.cs" />
+    <Compile Include="Gauges\AH-64D\KU\KU.cs" />
+    <Compile Include="Gauges\AH-64D\MFD\MFD CPG Left.cs" />
+    <Compile Include="Gauges\AH-64D\MFD\MFD Pilot Left.cs" />
+    <Compile Include="Gauges\AH-64D\MFD\MFD CPG Right.cs" />
+    <Compile Include="Gauges\AH-64D\MFD\MFD Pilot Right.cs" />
+    <Compile Include="Gauges\AH-64D\MFD\MFD.cs" />
+    <Compile Include="Gauges\AH-64D\SAI\SAI.cs" />
+    <Compile Include="Gauges\AH-64D\Altimeter\Altimeter.cs" />
+    <Compile Include="Gauges\AH-64D\FAT\FAT.cs" />
+    <Compile Include="Gauges\AH-64D\IAS\IAS.cs" />
+    <Compile Include="Gauges\AH-64D\TEDAC\TEDAC.cs" />
+    <Compile Include="Gauges\AV-8B\ADI\SAI.cs" />
+    <Compile Include="Gauges\AV-8B\Clock\Clock Face.cs" />
+    <Compile Include="Gauges\AV-8B\Clock\Clock.cs" />
+    <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
+    <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="GlobalOptions.cs" />
@@ -140,24 +185,21 @@
     <Compile Include="Interfaces\DCS\A10C\A10C1Interface.cs" />
     <Compile Include="Interfaces\DCS\A10C\A10C2Interface.cs" />
     <Compile Include="Interfaces\Common\Ignored.cs" />
+    <Compile Include="Interfaces\DCS\AH64D\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSInterfaceEditorBase.cs" />
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceEditor.xaml.cs">
       <DependentUpon>SoftInterfaceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\DCS\Soft\SoftInterface.cs" />
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceFactory.cs" />
+    <Compile Include="Interfaces\DCS\AH64D\Functions\AH-64DFunction.cs" />
+    <Compile Include="Interfaces\DCS\AH64D\AH-64DInterface.cs" />
     <Compile Include="Interfaces\DCS\Template\Functions\ExampleFunction.cs" />
     <Compile Include="Interfaces\DCS\Template\TemplateInterface.cs" />
-    <Compile Include="Interfaces\OpenMacroBoard\MacroBoardLayoutEditor.xaml.cs">
-      <DependentUpon>MacroBoardLayoutEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Interfaces\OpenMacroBoard\MacroBoardInterface.cs" />
-    <Compile Include="Interfaces\OpenMacroBoard\MacroBoardInterfaceEditor.xaml.cs">
-      <DependentUpon>MacroBoardInterfaceEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Interfaces\OpenMacroBoard\MacroBoardButtonPropertiesDialog.xaml.cs">
-      <DependentUpon>MacroBoardButtonPropertiesDialog.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Interfaces\Keyboard\Input\KeyboardInput.cs" />
+    <Compile Include="Interfaces\Keyboard\Input\KeyTriggers.cs" />
+    <Compile Include="Interfaces\Keyboard\Input\KeyTriggersFixed.cs" />
+    <Compile Include="Interfaces\Keyboard\Input\KeyTriggersWithModifiers.cs" />
     <Compile Include="Json\BindingValueUnit\ConverterForJsonNet.cs" />
     <Compile Include="Json\BindingValueUnit\SchemaGenerationProviderForJsonNet.cs" />
     <Compile Include="Json\BindingValue\ConverterForJsonNet.cs" />
@@ -290,6 +332,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\BacklitPushButtonAppearanceEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HeliosPanelBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageTranslucentBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DualIndicatorPushButtonAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Special\CalibrationFilterBehaviorEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -302,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\RockerSwitchAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\TimerPanelBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -309,6 +371,110 @@
     <Resource Include="Gauges\A-10\IAS\needle_ias_limit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Gauges\AV-8B\ADI\adi_adjustment_scale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AV-8B\Clock\clock_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AV-8B\Stopwatch\minutes_needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AV-8B\Clock\hours_needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\Altimeter\altimeter_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_background.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_bottomleft.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_bottomright.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_d.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_front.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_left.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_r.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_rear.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_right.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_threat_background.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_topleft.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\CMWS\cmws_topright.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\FAT\fat_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\IAS\ias_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\SAI\adi_arrow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\SAI\adi_guides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\SAI\adi_inner_ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\SAI\adi_innermost_ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\SAI\adi_outer_ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\SAI\adi_turn_marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\AH-64D\SAI\adi_wings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Resource>
     <Page Include="Interfaces\DCS\Common\RemoteConfigurationSection.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -820,6 +986,7 @@
     <None Include="BindingValueUnits.cd" />
     <None Include="Images\A-10\readme.md" />
     <Resource Include="Interfaces\DCS\A10C\ExportFunctionsA10C2.lua" />
+    <Resource Include="Interfaces\DCS\AH64D\ExportFunctions.lua" />
     <None Include="Interfaces\Falcon\readme.md" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\ded.png" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\hud.png" />
@@ -835,6 +1002,34 @@
     <Resource Include="Images\General\HeliosSimplifiedIcon.png" />
     <Content Include="Controls\Special\readme.txt" />
     <Resource Include="Images\General\calibration.png" />
+    <Resource Include="Images\General\memory_wire.png" />
+    <Resource Include="Images\Buttons\backlit.png" />
+    <Resource Include="Images\AH-64D\CMWS\cmws_frame.png" />
+    <Resource Include="Images\AH-64D\CMWS\CMWS_Jettison_Guard_Down.png" />
+    <Resource Include="Images\AH-64D\CMWS\CMWS_Jettison_One_Up.png" />
+    <Resource Include="Images\AH-64D\CMWS\CMWS_Jettison_Two_Up.png" />
+    <Resource Include="Images\AH-64D\Common\Common Knob.png" />
+    <Resource Include="Images\AH-64D\Common\Selector_Knob.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Enter Button DnH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Enter Button UpH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Preset Button DnH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Preset Button UpH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Stopwatch Button DnH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Stopwatch Button UpH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Swap Button DnH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD Swap Button UpH.png" />
+    <Resource Include="Images\AH-64D\EUFD\EUFD.png" />
+    <Resource Include="Images\AH-64D\KU\KU_Frame.png" />
+    <Resource Include="Images\AH-64D\KU\tactile-dark-square-emphasised-in.png" />
+    <Resource Include="Images\AH-64D\KU\tactile-dark-square-emphasised.png" />
+    <Resource Include="Images\AH-64D\MFD\MFD Button 1 DnH.png" />
+    <Resource Include="Images\AH-64D\MFD\MFD Button 1 UpH.png" />
+    <Resource Include="Images\AH-64D\MFD\MFD Button 2 DnH.png" />
+    <Resource Include="Images\AH-64D\MFD\MFD Button 2 UpH.png" />
+    <Resource Include="Images\AH-64D\MFD\MFD_Frame.png" />
+    <Resource Include="Images\AH-64D\MFD\MFD_glass.png" />
+    <Resource Include="Images\AH-64D\SAI\adi_bezel.png" />
+    <Resource Include="Images\AH-64D\TEDAC\TEDAC_frame.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

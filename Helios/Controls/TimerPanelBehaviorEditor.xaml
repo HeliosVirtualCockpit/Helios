@@ -32,7 +32,7 @@
     </HeliosSdk:HeliosPropertyEditor.Resources>
 
     <Grid
-        Height="146"
+        Height="72"
         Margin="4"
         Background="Transparent">
         <Grid.ColumnDefinitions>

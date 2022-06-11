@@ -393,6 +393,32 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
         }
 
+        /// <summary>
+        /// Reports if the viewports are being hidden by the parent monitor by a Fill Background
+        /// </summary>
+        private IEnumerable<StatusReportItem> ReportViewportMasking()
+        {
+            bool isMasked = false;
+
+            foreach(Util.Shadow.ShadowVisual viewport in Viewports)
+            {
+                if (viewport.IsViewport)
+                {
+                    isMasked = viewport.Monitor.FillBackground;
+                }
+            }
+
+            if (isMasked)
+            {
+                yield return new StatusReportItem
+                {
+                    Status = "One or more DCS viewports are masked by a monitor with a fill background. The result is you won't see the DCS viewports being rendered to the monitor.",
+                    Link = StatusReportItem.ProfileEditor,
+                    Severity = StatusReportItem.SeverityCode.Warning,
+                    Recommendation = "Review your profile and ensure monitors do not have Fill Background enabled when a viewport is configured for that monitor"
+                };
+            }
+        }
 
         private void EnsurePrimaryLayout()
         {
@@ -425,6 +451,9 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
             // send newly calculated viewports data to any observers (such as combined monitor setup view model)
             UpdatedViewports?.Invoke(this, new UpdatedViewportsEventArgs(_renderer.LocalViewports));
+
+            newReport.AddRange(ReportViewportMasking());
+
             return newReport;
         }
 
@@ -440,6 +469,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 return;
             }
 
+            ReportViewportMasking();
             CheckMonitorSettings();
             EnsureValidMonitorSelections();
             AutoSelectMainView();

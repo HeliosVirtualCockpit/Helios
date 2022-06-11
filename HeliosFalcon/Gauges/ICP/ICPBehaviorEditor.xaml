@@ -1,0 +1,47 @@
+<HeliosSdk1:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Gauges.Falcon.ICP.ICPBehaviorEditor"
+             xmlns:HeliosSdk1="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls;assembly=Helios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             Height="Auto"
+             mc:Ignorable="d"          
+             d:DesignWidth="180">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label 
+            Grid.Column="0" 
+            Grid.Row="3" 
+            FontSize="10" 
+            HorizontalAlignment="Right">
+            <Label.ToolTip>Touch will move the wheels with a touch or click on the upper or lower wheel regions. Swipe will move the wheels in the direction you swipe your finger or mouse.</Label.ToolTip> Wheel Click Type
+        </Label>
+
+        <ComboBox
+            SelectedValue="{Binding Control.ClickType}"
+            IsEnabled="{Binding Enabled}"
+            SelectedValuePath="Tag"
+            Grid.Column="1" 
+            Grid.Row="3" 
+            FontSize="10" 
+            Margin="0,2,0,2" 
+            HorizontalAlignment="Left">
+            <ComboBox.Items>
+                <ComboBoxItem Tag="0"
+                              Content="Touch the location towards which the wheel should move" />
+                <ComboBoxItem Tag="1"
+                              Content="Swipe over the wheel in the direction it should move" />
+            </ComboBox.Items>
+        </ComboBox>
+
+    </Grid>
+</HeliosSdk1:HeliosPropertyEditor>

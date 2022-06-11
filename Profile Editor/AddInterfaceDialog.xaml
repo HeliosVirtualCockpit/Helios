@@ -8,7 +8,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" ItemsSource="{Binding Items}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedInterface}" />
+        <ListBox Grid.Row="0" ItemsSource="{Binding Items}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedInterface}" MouseDoubleClick="AddInterface"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4" >
             <Button MinWidth="60" Click="Cancel" Margin="0,0,4,0">Cancel</Button>
             <Button MinWidth="60" Name="AddButton" IsDefault="True" IsEnabled="{Binding CanAdd}" Click="AddInterface">Add</Button>

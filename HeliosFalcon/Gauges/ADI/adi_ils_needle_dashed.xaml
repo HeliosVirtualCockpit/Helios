@@ -1,0 +1,31 @@
+<Canvas Width="190.000" Height="6.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 88.000,1.000 L 102.000,1.000 L 102.000,5.000 L 88.000,5.000 L 88.000,1.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 25.000,5.000 L 39.000,5.000 L 39.000,1.000 L 25.000,1.000 L 25.000,5.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 4.000,5.000 L 18.000,5.000 L 18.000,1.000 L 4.000,1.000 L 4.000,5.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 46.000,5.000 L 60.000,5.000 L 60.000,1.000 L 46.000,1.000 L 46.000,5.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 67.000,5.000 L 81.000,5.000 L 81.000,1.000 L 67.000,1.000 L 67.000,5.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 130.000,5.000 L 144.000,5.000 L 144.000,1.000 L 130.000,1.000 L 130.000,5.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 109.000,5.000 L 123.000,5.000 L 123.000,1.000 L 109.000,1.000 L 109.000,5.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 151.000,5.000 L 165.000,5.000 L 165.000,1.000 L 151.000,1.000 L 151.000,5.000 Z"/>
+
+  <!-- LINE -->
+  <Path StrokeThickness="0.2" Stroke="#FF131313" StrokeMiterLimit="1.0" Fill="#FFFFD40A" Data="F1 M 172.000,5.000 L 186.000,5.000 L 186.000,1.000 L 172.000,1.000 L 172.000,5.000 Z"/>
+
+</Canvas>

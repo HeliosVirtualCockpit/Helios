@@ -37,11 +37,13 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             AddGauge("VVI Gauge", new VVI1(), new Point(387, 456), new Size(238, 247), _interfaceDeviceName, "VVI", _generalComponentName);
             AddGauge("IAS Gauge", new IAS(), new Point(70, 186), new Size(203, 203), _interfaceDeviceName, "IAS Airspeed", _generalComponentName);
             AddGauge("AOA Gauge", new AOA(), new Point(61, 473), new Size(221, 221), _interfaceDeviceName, new string[2] { "AOA Flag", "Angle of Attack" }, _generalComponentName);
-            AddGauge("ADI Gauge", new ADI(), new Point(350, 59), new Size(293, 293), _interfaceDeviceName, new string[4] { "SAI Pitch" , "SAI Bank", "SAI Cage/Pitch Adjust Knob", "SAI Warning Flag" }, _generalComponentName);
-            _interfaceDeviceName = "Flight Instruments";
-            AddPot("ADI Pitch Adjust", new Point(575, 278), new Size(60, 60), "SAI Cage/Pitch Adjust Knob", "WQHD/Knob/Cage Knob.png");
+            AddGauge("SAI Gauge", new SAI(), new Point(350, 59), new Size(293, 293), _interfaceDeviceName, new string[4] { "SAI Pitch" , "SAI Bank", "SAI Pitch Adjust Knob", "SAI Warning Flag" }, _generalComponentName);
+
+            AddButton("SAI Cage Pull Switch", 515, 218, new Size(60, 60), "Flight Instruments", "SAI Cage Pull Switch");
+            AddPot("SAI Pitch Adjust Knob", new Point(575, 278), new Size(60, 60), "Flight Instruments", "SAI Pitch Adjust Knob", "WQHD/Knob/Cage Knob.png");
+
             _interfaceDeviceName = "NAV course";
-            AddEncoder("Course Set Knob", new Point(150, 40), new Size(80, 80), "Course Setting");
+            AddThreeWayToggleHorizontal("Course Set Switch", 150, 40, new Size(89, 137), "Course Setting", "Horizontal Switch");
             _interfaceDeviceName = "Flight Instruments";
             AddGauge("Altimeter Gauge", new Altimeter(), new Point(727, 351), new Size(261, 272), _interfaceDeviceName, new string[2] { "Air Pressure", "Altitude"  }, _generalComponentName);
             AddEncoder("Altimeter Pressure Adjust", new Point(720, 558), new Size(60,60), "Barometric pressure calibration adjust");
@@ -55,12 +57,6 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             }
             set
             {
-                //double oldValue = _IFEI_gauges.GlassReflectionOpacity;
-                //_IFEI_gauges.GlassReflectionOpacity = value;
-                //if (value != oldValue)
-                {
-                    //OnPropertyChanged("GlassReflectionOpacity", oldValue, value, true);
-                }
             }
         }
 
@@ -69,25 +65,20 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             get { return _imageLocation + "WQHD/Panel/Flight Instruments.png"; }
         }
 
-        private void AddButton(string name, double x, double y, string interfaceElementName) { AddButton(name, x, y, false, interfaceElementName); }
-        private void AddButton(string name, double x, double y, Size size, string interfaceElementName) { AddButton(name, x, y, size, false, interfaceElementName); }
-        private void AddButton(string name, double x, double y, bool horizontal, string interfaceElementName) { AddButton(name, x, y, new Size(40,40),false, interfaceElementName); }
-        private void AddButton(string name, double x, double y, Size size, bool horizontal, string interfaceElementName) { AddButton(name, x, y, size, horizontal, false, interfaceElementName); }
-        private void AddButton(string name, double x, double y, Size size, bool horizontal, bool altImage, string interfaceElementName)
+        private void AddButton(string name, double x, double y, Size size, string interfaceDeviceName, string interfaceElementName)
         {
             Point pos = new Point(x, y);
-            PushButton button = AddButton(
-                    name: name,
-                    posn: pos,
-                    size: size,
-                    image: _imageLocation + "WQHD/Button /" + name + " Normal.png",
-                    pushedImage: _imageLocation + "WQHD/Button/" + name + " Pushed.png",
-                    buttonText: "",
-                    interfaceDeviceName: _interfaceDeviceName,
-                    interfaceElementName: interfaceElementName,
-                    fromCenter: false
-                    );
-            button.Name = _generalComponentName + "_" + name;
+            AddButton(
+                name: name,
+                posn: pos,
+                size: size,
+                image: "{AV-8B}/Images/_transparent.png",
+                pushedImage: "{AV-8B}/Images/_transparent.png",
+                buttonText: "",
+                interfaceDeviceName: interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                fromCenter: false
+                );
         }
 
         protected override void OnProfileChanged(HeliosProfile oldProfile)
@@ -116,38 +107,42 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
                 );
         }
 
-        private void AddPot(string name, Point posn, Size size, string interfaceElementName, string knobName)
+        private void AddPot(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName, string knobName)
         {
             AddPot(name: name,
                 posn: posn,
                 size: size,
                 knobImage: _imageLocation + knobName,
-                initialRotation: 45,
+                initialRotation: -45,
                 rotationTravel: 90,
-                minValue: 0,
+                minValue: -1,
                 maxValue: 1,
-                initialValue: 0.5,
-                stepValue: 0.1,
-                interfaceDeviceName: _interfaceDeviceName,
+                initialValue: 0.0,
+                stepValue: 0.01,
+                interfaceDeviceName: interfaceDeviceName,
                 interfaceElementName: interfaceElementName,
                 isContinuous: false,
                 fromCenter: false);
         }
 
-        private void AddButton(string name, double x, double y, Size size, string interfaceDevice, string interfaceElement)
+        private void AddThreeWayToggleHorizontal(string name, double x, double y, Size size, string interfaceElementName) => AddThreeWayToggleHorizontal(name, x, y, size, interfaceElementName, name);
+        private void AddThreeWayToggleHorizontal(string name, double x, double y, Size size, string interfaceElementName, string imageName)
         {
-            Point pos = new Point(x, y);
-            AddButton(
+            ThreeWayToggleSwitch toggle = AddThreeWayToggle(
                 name: name,
-                posn: pos,
+                posn: new Point(x, y),
                 size: size,
-                image: _imageLocation +  name + "Normal.png",
-                pushedImage: _imageLocation +  name + " Pushed.png",
-                buttonText: "",
-                interfaceDeviceName: interfaceDevice,
-                interfaceElementName: interfaceElement,
+                defaultPosition: ThreeWayToggleSwitchPosition.Two,
+                defaultType: ThreeWayToggleSwitchType.MomOnMom,
+                positionOneImage: _imageLocation + "WQHD/Switch/" + imageName + " Right.png",
+                positionTwoImage: _imageLocation + "WQHD/Switch/" + imageName + " Normal.png",
+                positionThreeImage: _imageLocation + "WQHD/Switch/" + imageName + " Left.png",
+                interfaceDeviceName: _interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                horizontal: true,
                 fromCenter: false
                 );
+            toggle.Name = _generalComponentName + "_" + name;
         }
 
         private void AddPart(string name, CompositeVisual Part, Point posn, Size size, string interfaceDevice, string interfaceElement)

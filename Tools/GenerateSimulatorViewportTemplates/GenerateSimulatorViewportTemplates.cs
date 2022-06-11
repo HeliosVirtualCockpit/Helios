@@ -31,9 +31,7 @@ namespace GenerateSimulatorViewportTemplates
                 throw new Exception("JSON path, output path, and usesPatches boolean parameters are required");
             }
 
-            string json = File.ReadAllText(args[0]);
-            List<ViewportTemplate> templates = JsonConvert.DeserializeObject<ViewportTemplate[]>(json).ToList();
-            Generate(templates, args[1], args[2] == "true");
+            Generate(args[0], args[1], args[2].Trim().Equals("true", StringComparison.InvariantCultureIgnoreCase));
         }
 
         private static readonly string[] _colors =
@@ -52,8 +50,18 @@ namespace GenerateSimulatorViewportTemplates
             "596387"
         };
 
-        private static void Generate(IList<ViewportTemplate> templates, string templatePath, bool usesPatches = false)
+        private static void Generate(string jsonPath, string templatePath, bool usesPatches = false)
         {
+            // set of generated viewport names, used to only emit each viewport once in spite of iterating all template files
+            HashSet<string> generated = new HashSet<string>();
+
+            // HACK: instead of reading the specified file, read all versions of it
+            foreach (string jsonFilePath in Directory.EnumerateFiles(Path.GetDirectoryName(jsonPath) ?? ".", Path.GetFileName(jsonPath).Replace("Templates.json", "Templates*.json")))
+            {
+                Console.WriteLine($"reading {jsonFilePath}");
+                string json = File.ReadAllText(jsonFilePath);
+                List<ViewportTemplate> templates = JsonConvert.DeserializeObject<ViewportTemplate[]>(json).ToList();
+
             foreach (ViewportTemplate template in templates)
             {
                 // assign a stable color based on the UI name of this viewport template
@@ -62,7 +70,6 @@ namespace GenerateSimulatorViewportTemplates
                 // generate all valid viewports as templates
                 foreach (Viewport viewport in template.Viewports.Where(v => v.IsValid || !usesPatches))
                 {
-                    List<string> lines = new List<string>();
                     string viewportName = viewport.ViewportName;
                     string category = "Simulator Viewports";
                     if (usesPatches)
@@ -71,6 +78,15 @@ namespace GenerateSimulatorViewportTemplates
                         category = $"{template.TemplateCategory} Simulator Viewports";
                     }
 
+                    if (!generated.Add(viewportName))
+                    {
+                        // alrady done
+                        Console.WriteLine($"  ignoring duplicate {viewportName}");
+                        continue;
+                    }
+
+                    Console.WriteLine($"  generating {viewportName}");
+                    List<string> lines = new List<string>();
                     lines.Add("<ControlTemplate>");
                     lines.Add($"    <Name>{template.DisplayName(viewport)}</Name>");
                     lines.Add($"    <Category>{category}</Category>");
@@ -129,6 +145,7 @@ namespace GenerateSimulatorViewportTemplates
 
                     File.WriteAllLines(Path.Combine(outputDirectoryPath, $"{viewportName}.htpl"), lines);
                 }
+            }
             }
         }
     }

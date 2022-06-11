@@ -26,21 +26,34 @@ namespace GadrocsWorkshop.Helios
     {
         private string _device;
         private string _name;
+
+        /// <summary>
+        /// an explicitly configured id that does not have to be equal to the name, or null to use the name as id
+        /// </summary>
+        private readonly string _explicitId;
+
         private string _bindingDescription;
 
         private readonly WeakReference _source;
         private WeakReference _context = new WeakReference(null);
 
         public HeliosTrigger(HeliosObject source, string device, string name, string verb, string description)
-            : this(source, device, name, verb, description, "", BindingValueUnits.NoValue)
+            : this(source, device, null, name, verb, description, "", BindingValueUnits.NoValue)
         {
-            // no additional code
+            // all code in referenced constructor
         }
 
         public HeliosTrigger(HeliosObject source, string device, string name, string verb, string description,
             string valueDescription, BindingValueUnit unit)
+            : this(source, device, null, name, verb, description, valueDescription, unit)
         {
-            TriggerID = "";
+            // all code in referenced constructor
+        }
+
+        public HeliosTrigger(HeliosObject source, string device, string id, string name, string verb, string description,
+            string valueDescription, BindingValueUnit unit)
+        {
+            _explicitId = id;
             _device = device;
             _name = name;
             TriggerVerb = verb;
@@ -65,10 +78,7 @@ namespace GadrocsWorkshop.Helios
 
         private void UpdateId()
         {
-            if (TriggerID.Length < 1)
-            {
-                TriggerID = _name;
-            }
+            TriggerID = _explicitId ?? _name;
             string prefix = "";
             if (!string.IsNullOrEmpty(_device))
             {

@@ -1,5 +1,6 @@
 @echo off
 REM output location (you will need to change this for your local folder structure or mklink to where you want the files)
+REM must be relative path because of submodule git log commands below
 set HELIOS_SHARE_FOLDER=..\HeliosBuilds
 
 REM arguments and validation
@@ -29,6 +30,9 @@ copy "Tools Installer\Release\*.msi" %HELIOS_SHARE_FOLDER%\%HELIOS_BUILT_VERSION
 REM collect and format log
 FOR /F %%i IN ('git rev-parse %HELIOS_BUILT_VERSION%') DO @set COMMIT=%%i
 git log --date=short --decorate-refs="1.*" --format="##### [%%h](https://github.com/HeliosVirtualCockpit/Helios/commit/%%H) by %%an on %%ad %%d%%n%%w(0,4,4)%%B  %%n" %HELIOS_REFERENCE_TAG%..%HELIOS_BUILT_VERSION% > %HELIOS_SHARE_FOLDER%\%HELIOS_BUILT_VERSION%\changes_%COMMIT%.md
+pushd "InterfaceFiles\Interfaces"
+git log --date=short --decorate-refs="1.*" --format="##### [%%h](https://github.com/HeliosVirtualCockpit/HeliosInterfaces/commit/%%H) by %%an on %%ad %%d%%n%%w(0,4,4)%%B  %%n" %HELIOS_REFERENCE_TAG%..%HELIOS_BUILT_VERSION% >> ..\..\%HELIOS_SHARE_FOLDER%\%HELIOS_BUILT_VERSION%\changes_%COMMIT%.md
+popd 
 
 if "%3" == "nogithub" goto end
 
@@ -51,11 +55,7 @@ echo.>> "..\Releases\Helios\%HELIOS_BUILT_VERSION%\changes.md"
 echo Full change notes from previous releases here: https://github.com/HeliosVirtualCockpit/Helios/wiki/Change-Log >> "..\Releases\Helios\%HELIOS_BUILT_VERSION%\changes.md"
 
 REM create draft on github (requires https://github.com/github/hub/releases/latest)
-hub release create -d ^
-	-a "..\Releases\Helios\%HELIOS_BUILT_VERSION%\Assets\Helios_Installers.zip#Helios Installers" ^
-	-a "..\Releases\Helios\%HELIOS_BUILT_VERSION%\Assets\Helios32Bit_Installers.zip#Helios Installers for 32-bit Systems (untested)" ^
-	-F "..\Releases\Helios\%HELIOS_BUILT_VERSION%\changes.md" ^
-	%HELIOS_BUILT_VERSION%
+gh release create --draft %HELIOS_BUILT_VERSION% "..\Releases\Helios\%HELIOS_BUILT_VERSION%\Assets\Helios_Installers.zip#Helios Installers" "..\Releases\Helios\%HELIOS_BUILT_VERSION%\Assets\Helios32Bit_Installers.zip#Helios Installers for 32-bit Systems (untested)" -F "..\Releases\Helios\%HELIOS_BUILT_VERSION%\changes.md"
 
 :end
 REM clean up (except HELIOS_BUILT_VERSION)

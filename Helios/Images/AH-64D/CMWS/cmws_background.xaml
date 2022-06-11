@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas Width="1250.000" Height="437.000" Name="CMWS_Arrows_All"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Left="0" Top ="0" Width="813.000" Height="437.000">
+        <Path Fill="#ff042A00" Data="F1 M 0,0 L 0,437.000 L 813.000,437.000 L 813.000,0 Z"/>
+    </Canvas>
+</Canvas>

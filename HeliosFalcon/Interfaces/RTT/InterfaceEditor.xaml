@@ -171,7 +171,10 @@
                Height="26"
                Width="110"
                Margin="-25,0,0,0" />
-        <TextBox Text="{Binding LocalOptions.FramesPerSecond}"
+        <TextBox Name="TextBoxFPS"
+                 Text="{Binding LocalOptions.FramesPerSecond, Mode=TwoWay}"
+                 PreviewTextInput="TextBoxFPS_PreviewTextInput"
+                 TextChanged="TextBox_TextChanged"
                  Grid.Row="4"
                  Grid.Column="1"
                  HorizontalAlignment="Left"
@@ -295,6 +298,8 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Column="0"
@@ -303,13 +308,16 @@
                        VerticalAlignment="Center"
                        Content="IP Address"
                        Width="66" />
-                <TextBox Grid.Column="1"
+                <TextBox Name="TextBoxIPAddress"
+                         PreviewTextInput="TextBoxIPAddress_PreviewTextInput"
+                         TextChanged="TextBox_TextChanged"
+                         Grid.Column="1"
                          Grid.Row="0"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Left"
                          Width="200"
                          MaxWidth="200"
-                         Text="{Binding NetworkOptions.IPAddress}"
+                         Text="{Binding NetworkOptions.IPAddress, Mode=TwoWay}"
                          IsEnabled="{Binding Networked}"
                          Height="18" />
                 <TextBlock Text="The IP Address where the RTT Server is running"
@@ -324,11 +332,14 @@
                        Grid.Column="0"
                        Grid.Row="1"
                        Width="32" />
-                <TextBox Grid.Column="1"
+                <TextBox Name="TextBoxPort"
+                         PreviewTextInput="TextBoxPort_PreviewTextInput"
+                         TextChanged="TextBox_TextChanged"
+                         Grid.Column="1"
                          Grid.Row="1"
                          Width="40"
                          MaxWidth="40"
-                         Text="{Binding NetworkOptions.Port}"
+                         Text="{Binding NetworkOptions.Port, Mode=TwoWay}"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Center"
                          Height="18"
@@ -388,6 +399,28 @@
                           Grid.Column="1"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Center" />
+                
+                <Label Content="STRING STR"
+                       HorizontalAlignment="Right"
+                       Grid.Row="6"
+                       Grid.Column="0" />
+                <CheckBox IsChecked="{Binding NetworkOptions.StringStr}"
+                          IsEnabled="{Binding Networked}"
+                          Grid.Row="6"
+                          Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center" />
+
+                <Label Content="STRING DRW"
+                       HorizontalAlignment="Right"
+                       Grid.Row="7"
+                       Grid.Column="0" />
+                <CheckBox IsChecked="{Binding NetworkOptions.StringDrw}"
+                          IsEnabled="{Binding Networked}"
+                          Grid.Row="7"
+                          Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center" />
 
                 <GroupBox Header="Shared Memory Mirroring"
                           Style="{StaticResource BasicGroup}"
@@ -396,7 +429,7 @@
                           Grid.Column="1"
                           Grid.Row="2"
                           Margin="34,4,781,0"
-                          Grid.RowSpan="4">
+                          Grid.RowSpan="6">
                     <Grid Margin="0,0,0,-81">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="78" />

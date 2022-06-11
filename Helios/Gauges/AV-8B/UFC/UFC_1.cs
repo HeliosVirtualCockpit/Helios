@@ -120,10 +120,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             AddButton("Comm 2", 697, 526, new Size(60, 60), "UFC", "UFC COMM 2 Channel Selector Pull");
 
             
-            AddTextDisplay("Left Scratchpad", 327, 53, new Size(80, 60), "Left Scratchpad Data", 38, "XX", TextHorizontalAlignment.Left, _ufcNumbers16);
-            AddTextDisplay("Scratchpad", 387, 53, new Size(256,60), "Scratchpad Number", 38, "1234567", TextHorizontalAlignment.Right, _ufcNumbers7);
-            AddTextDisplay("Comm 1 Display", 196,367, new Size(100, 60), "Comm Channel 1", 40, "~~", TextHorizontalAlignment.Center, _ufcNumbers16);
-            AddTextDisplay("Comm 2 Display", 679,367, new Size(100, 60), "Comm Channel 2", 40, "~~", TextHorizontalAlignment.Center, _ufcNumbers16);
+            AddTextDisplay("Left Scratchpad", 329, 53, new Size(120, 60), "Left Scratchpad Data", 40, "XX", TextHorizontalAlignment.Left, _ufcNumbers16);
+            AddTextDisplay("Scratchpad", 350, 53, new Size(280,60), "Scratchpad Number", 40, "1234567", TextHorizontalAlignment.Right, _ufcNumbers7);
+            AddTextDisplay("Comm 1 Display", 187,367, new Size(120, 60), "Comm Channel 1", 40, "~~", TextHorizontalAlignment.Center, _ufcNumbers16);
+            AddTextDisplay("Comm 2 Display", 669,367, new Size(120, 60), "Comm Channel 2", 40, "~~", TextHorizontalAlignment.Center, _ufcNumbers16);
 
             _interfaceDeviceName = "HUD Control";
             AddPot("HUD Brightness", new Point(297, 779), new Size(64, 64), "Off/Brightness control");

@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GadrocsWorkshop.Helios.ProfileEditor"
-             xmlns:vm="clr-namespace:GadrocsWorkshop.Helios.ProfileEditor.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="{StaticResource ToolBackground}">
     <UserControl.Resources>
@@ -18,6 +16,36 @@
         <CommandBinding Command="Delete" Executed="Delete_Executed" CanExecute="Delete_CanExecute" />
     </UserControl.CommandBindings>
     <Grid>
-        <TreeView Name="ProfileExplorerTree" BorderThickness="0" ItemsSource="{Binding ProfileExplorerItems}" Style="{StaticResource ProfileExplorerTreeStyle}" PreviewMouseDoubleClick="TreeView_PreviewMouseDoubleClick" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBarTray Grid.Row="0" IsLocked="True" Background="Transparent">
+        <ToolBar Height="28" Background="Transparent">
+            <Button Name="ButtonItemCollapse" Click="ButtonItemCollapse_Click" Focusable="False">
+                <Image Source="ToolbarGraphics/ItemCollapseIcon.png" />
+                <Button.ToolTip>Collapse selected item.</Button.ToolTip>
+            </Button>
+            <Button Name="ButtonItemExpand" Click="ButtonItemExpand_Click" Focusable="False">
+                <Image Source="ToolbarGraphics/ItemExpandIcon.png" />
+                <Button.ToolTip>Expand selected item.</Button.ToolTip>
+            </Button>
+                <Separator />
+            <Button Name="ButtonBranchCollapse" Click="ButtonBranchCollapse_Click" Focusable="False">
+                <Image Source="ToolbarGraphics/BranchCollapseIcon.png" />
+                <Button.ToolTip>Collapse all items in selected branch.</Button.ToolTip>
+            </Button>
+            <Button Name="ButtonBranchExpand" Click="ButtonBranchExpand_Click" Focusable="False">
+                <Image Source="ToolbarGraphics/BranchExpandIcon.png" />
+                <Button.ToolTip>Expand all items in selected branch.</Button.ToolTip>
+            </Button>
+                <Separator />
+            <Button Name="ButtonItemOpen" Click="ButtonItemOpen_Click" Focusable="False">
+                <Image Source="ToolbarGraphics/ItemOpenIcon.png" />
+                <Button.ToolTip>Open selected item.</Button.ToolTip>
+            </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <TreeView Name="ProfileExplorerTree" Grid.Row="1" BorderBrush="LightGray" BorderThickness="0,2,0,0" ItemsSource="{Binding ProfileExplorerItems}" Style="{StaticResource ProfileExplorerTreeStyle}" PreviewMouseDoubleClick="TreeView_PreviewMouseDoubleClick" />
     </Grid>
 </UserControl>

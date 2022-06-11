@@ -1,6 +1,7 @@
 ﻿//  Copyright 2014 Craig Courtney
 //  Copyright 2020 Ammo Goettsch
-//    
+//  Copyright 2021 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -48,6 +49,7 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             DataContext = this;
             ProfileExplorerItems = new ProfileExplorerTreeItemCollection();
             InitializeComponent();
+            ProfileExplorerTree.SelectedItemChanged += ProfileExplorerTree_SelectedItemChanged;
         }
 
         public event EventHandler<ItemDeleteEventArgs> ItemDeleting;
@@ -91,12 +93,75 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             ProfileExplorerTreeItem item = new ProfileExplorerTreeItem(Profile, types);
             item.ExpandAll();
             ProfileExplorerItems = item.Children;
+
+            ButtonItemExpand.IsEnabled = false;
+            ButtonItemCollapse.IsEnabled = false;
+            ButtonBranchExpand.IsEnabled = false;
+            ButtonBranchCollapse.IsEnabled = false;
+            ButtonItemOpen.IsEnabled = false;
         }
 
         private static void OnItemReload(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             ProfileExplorerPanel p = d as ProfileExplorerPanel;
             p.LoadItems();
+        }
+
+        private void ProfileExplorerTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
+            {
+                ButtonItemExpand.IsEnabled = item.HasChildren;
+                ButtonItemCollapse.IsEnabled = item.HasChildren;
+                ButtonBranchExpand.IsEnabled = item.HasChildren;
+                ButtonBranchCollapse.IsEnabled = item.HasChildren;
+                ButtonItemOpen.IsEnabled = item.ItemType.HasFlag(ProfileExplorerTreeItemType.Panel) ||
+                                             item.ItemType.HasFlag(ProfileExplorerTreeItemType.Monitor) ||
+                                             item.ItemType.HasFlag(ProfileExplorerTreeItemType.Interface);
+            }
+        }
+
+        private void ButtonItemCollapse_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
+            {
+                item.IsExpanded = false;
+            }
+        }
+
+        private void ButtonItemExpand_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
+            {
+                item.IsExpanded = true;
+            }
+        }
+
+        private void ButtonBranchCollapse_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
+            {
+                item.CollapseAll();
+            }
+        }
+
+        private void ButtonBranchExpand_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item)
+            {
+                item.ExpandAll();
+            }
+        }
+
+        private void ButtonItemOpen_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProfileExplorerTree.SelectedItem is ProfileExplorerTreeItem item &&
+                (item.ItemType.HasFlag(ProfileExplorerTreeItemType.Panel) ||
+                 item.ItemType.HasFlag(ProfileExplorerTreeItemType.Monitor) ||
+                 item.ItemType.HasFlag(ProfileExplorerTreeItemType.Interface)))
+            {
+                ProfileEditorCommands.OpenProfileItem.Execute(item.ContextItem, this);
+            }
         }
 
         private void TreeView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)

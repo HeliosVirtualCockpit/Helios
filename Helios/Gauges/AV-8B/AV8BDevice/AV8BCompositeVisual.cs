@@ -55,9 +55,9 @@ namespace GadrocsWorkshop.Helios
             string[] interfaceElementNames
         )
         {
-            // XXX why is this here? this class is only used as AV8BDevice
-            if (name == "Altimeter Gauge" || name == "ADI Gauge" || name == "Slip/Turn Gauge" || name == "AOA Gauge")
-            {
+            if (interfaceElementNames.Length > 1)
+                //if (name == "Altimeter Gauge" || name == "SAI Gauge" || name == "Slip/Turn Gauge" || name == "AOA Gauge")
+                {
                 gauge.Name = name;
                 gauge.Top = posn.Y;
                 gauge.Left = posn.X;

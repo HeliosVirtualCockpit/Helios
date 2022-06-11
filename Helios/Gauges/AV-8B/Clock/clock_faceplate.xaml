@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="svg2" Width="340" Height="340">
+    <Canvas x:Name="layer1">
+        <Canvas>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <!--g-->
+                    <TranslateTransform X="0" Y="-712.36218"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Path x:Name="path2987" Fill="#FF1E1E1E" Stroke="#FF0A0A0A" StrokeThickness="1" StrokeMiterLimit="4" Data="m 320 170 a 150 150 0 1 1 -300 0 150 150 0 1 1 300 0 z">
+                <!--path-->
+                <Path.RenderTransform>
+                    <TranslateTransform X="0" Y="712.36218"/>
+                </Path.RenderTransform>
+            </Path>
+        </Canvas>
+    </Canvas>
+    <Canvas x:Name="layer2">
+        <Canvas x:Name="g5510">
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path5763" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="M 170 21.325163 170 34"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5120" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 244.24823 41.219915 -6.33742 10.976731"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5122" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="M 298.6017 95.573386 287.62497 101.9108"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5124" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 318.49645 169.82161 -12.67484 0"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5126" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 298.6017 244.06984 -10.97673 -6.33742"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5128" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="M 244.24822 298.42331 237.9108 287.44658"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5130" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 170 318.31806 0 -12.67484"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5132" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 95.751774 298.42331 6.337416 -10.97673"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5134" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 41.398303 244.06984 10.976731 -6.33742"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5136" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 21.503551 169.82161 12.674837 0"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5138" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="M 41.398303 95.573384 52.375034 101.9108"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5140" Stroke="#FFF5F5F5" StrokeThickness="4" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 95.751775 41.219913 6.337415 10.976731"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5144" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="M 183.05939 20.812903 181.9264 33.763441"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5146" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 196.02003 22.511867 -2.25738 12.802512"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5148" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 208.78329 25.333958 -3.36461 12.55705"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5150" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 221.25202 29.257695 -4.44623 12.216021"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5152" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 233.33132 34.25322 -5.494 11.782022"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5156" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 255.9576 47.299688 -7.45646 10.649003"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5158" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 266.33237 55.251338 -8.35621 9.958606"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5160" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 275.97464 64.076948 -9.19236 9.192419"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5162" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 284.81101 73.709348 -9.95855 8.356272"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5164" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 292.77424 84.075232 -10.64896 7.456529"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5168" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 305.84595 106.6869 -11.78199 5.49408"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5170" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 310.85495 118.7606 -12.216 4.4463"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5172" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 314.79259 131.22492 -12.55703 3.36468"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5174" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 317.62891 143.98499 -12.80249 2.25746"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5176" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 319.34234 156.9437 -12.95054 1.13306"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5180" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 319.35695 183.06179 -12.95054 -1.13298"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5182" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 317.65802 196.0224 -12.80251 -2.25738"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5184" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 314.83597 208.78562 -12.55705 -3.36461"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5186" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 310.91227 221.25431 -12.21602 -4.44623"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5188" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 305.91679 233.33357 -11.78203 -5.494"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5192" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 292.8704 255.95977 -10.649 -7.45646"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5194" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 284.91879 266.3345 -9.9586 -8.35621"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5196" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 276.09322 275.97673 -9.19242 -9.19236"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5198" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 266.46086 284.81306 -8.35627 -9.95855"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5200" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 256.09502 292.77625 -7.45653 -10.64896"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5204" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 233.48343 305.84788 -5.49408 -11.78199"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5206" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 221.40977 310.85684 -4.4463 -12.216"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5208" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 208.94549 314.79444 -3.36468 -12.55703"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5210" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 196.18546 317.63072 -2.25747 -12.80249"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5212" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 183.22679 319.34411 -1.13307 -12.95054"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5216" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 157.10877 319.35864 1.13299 -12.95054"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5218" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 144.14821 317.65967 2.25738 -12.80251"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5220" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 131.38502 314.83758 3.36461 -12.55705"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5222" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 118.91638 310.91384 4.44623 -12.21602"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5224" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 106.83715 305.91832 5.494 -11.78203"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5228" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 84.21104 292.87185 7.456463 -10.649"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5230" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 73.836347 284.9202 8.356211 -9.9586"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5232" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 64.194161 276.09459 9.192363 -9.19242"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5234" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 55.357866 266.46218 9.958555 -8.35627"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5236" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 47.394722 256.09631 10.648957 -7.45653"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5240" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 34.323173 233.48464 11.781988 -5.49408"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5242" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 29.314254 221.41094 12.215994 -4.4463"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5244" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 25.376687 208.94661 12.557029 -3.36468"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5246" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 22.540441 196.18655 12.802498 -2.25747"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5248" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 20.827102 183.22784 12.950531 -1.13307"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5252" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 20.812654 157.10974 12.950538 1.13299"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5254" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 22.511658 144.14914 12.802512 2.25738"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5256" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 25.333789 131.38591 12.55705 3.36461"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5258" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 29.257566 118.91723 12.216021 4.44623"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5260" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 34.253132 106.83796 11.782022 5.494"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5264" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 47.29968 84.21177 10.649003 7.456463"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5266" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 55.25137 73.837037 9.958606 8.356211"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5268" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 64.077019 64.194811 9.192419 9.192363"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5270" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 73.709459 55.358476 8.356272 9.958555"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5272" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 84.075383 47.395292 7.456529 10.648957"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5276" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 106.68714 34.323662 5.49407 11.781988"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5278" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 118.76087 29.314703 4.4463 12.215994"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5280" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 131.22523 25.377095 3.36469 12.557029"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5282" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 143.98534 22.540809 2.25746 12.802498"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="use5284" Stroke="#FFF5F5F5" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Data="m 156.94409 20.827431 1.13306 12.950531"/>
+        </Canvas>
+    </Canvas>
+    <Canvas x:Name="layer10">
+        <Canvas x:Name="g5584">
+        </Canvas>
+    </Canvas>
+    <Canvas x:Name="layer7">
+        <Canvas x:Name="g6355">
+
+        </Canvas>
+    </Canvas>
+    <Canvas x:Name="layer3">
+        <Canvas x:Name="flowRoot5443" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="134.16527" Y="-110.66757"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6614" Fill="#FFF5F5F5" Data="m 101.30469 184.64689 c -10e-6 0.0846 -0.01 0.17579 -0.0293 0.27344 -0.15625 0.73568 -0.61198 1.10352 -1.367187 1.10352 -0.553386 0 -0.963542 -0.25716 -1.230469 -0.77149 -0.05859 -0.0977 -0.107422 -0.29948 -0.146484 -0.60547 l 0 -17.22656 c 0.01953 -0.15623 0.04394 -0.30434 0.07324 -0.44433 0.0293 -0.13996 0.09928 -0.27505 0.209961 -0.40528 0.260416 -0.31899 0.595702 -0.49314 1.005859 -0.52246 0.410158 -0.0293 0.764968 0.10256 1.064458 0.39551 0.15624 0.15627 0.25715 0.30601 0.30273 0.44922 0.0456 0.14325 0.0846 0.31903 0.11719 0.52734 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot5949" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="176.66527" Y="-62.66757"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6611" Fill="#FFF5F5F5" Data="m 95.71875 186.02385 c -0.384116 0 -0.711264 -0.13347 -0.981445 -0.40039 -0.270183 -0.26693 -0.405274 -0.59571 -0.405274 -0.98633 0 -0.013 0.03418 -0.21973 0.102539 -0.62012 0.06836 -0.40039 0.10905 -0.62988 0.122071 -0.68848 0.33203 -1.59504 0.978189 -3.11197 1.938476 -4.55078 0.960284 -1.43879 2.120764 -2.61717 3.481445 -3.53515 0.481768 -0.32551 0.919588 -0.66568 1.313478 -1.02051 0.39387 -0.35481 0.79589 -0.75357 1.20605 -1.19629 0.52734 -0.59894 0.75683 -1.27928 0.68848 -2.04102 -0.0684 -0.7617 -0.4476 -1.36391 -1.13769 -1.80664 -0.84637 -0.52732 -1.70574 -0.54034 -2.57813 -0.0391 -0.8724 0.50132 -1.289066 1.25002 -1.25 2.2461 -4e-6 0.0195 0.0016 0.0407 0.0049 0.0635 0.0033 0.0228 0.0049 0.044 0.0049 0.0635 0.03906 0.29949 -0.03256 0.59083 -0.214844 0.87402 -0.182295 0.28322 -0.413415 0.46714 -0.69336 0.55176 -0.42969 0.13673 -0.828452 0.0944 -1.196289 -0.12695 -0.36784 -0.22134 -0.5778 -0.54686 -0.629882 -0.97657 -0.01953 -0.0586 -0.02116 -0.29946 -0.0049 -0.72265 0.01627 -0.42316 0.03418 -0.67056 0.05371 -0.74219 0.292967 -1.60154 1.134438 -2.8076 2.524414 -3.61816 1.389969 -0.81053 2.856437 -0.95213 4.399417 -0.42481 1.82941 0.63804 2.94595 1.88479 3.34961 3.74024 0.40363 1.85548 -0.0326 3.47657 -1.3086 4.86328 -0.26042 0.27996 -0.52247 0.55502 -0.78613 0.82519 -0.26368 0.2702 -0.54526 0.52898 -0.84473 0.77637 -0.46875 0.39063 -0.96192 0.75196 -1.47949 1.08398 -0.51758 0.33204 -0.98145 0.72267 -1.3916 1.17188 -0.468756 0.52084 -0.909836 1.09376 -1.323243 1.71875 -0.413415 0.625 -0.740563 1.26628 -0.981445 1.92383 -0.01954 0.0391 -0.06999 0.18229 -0.151367 0.42968 -0.08138 0.2474 -0.122074 0.38087 -0.122071 0.4004 l 7.246096 0 c 0.89842 0.0586 1.33462 0.53385 1.30859 1.42578 -0.026 0.89192 -0.47852 1.33789 -1.35742 1.33789 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot5957" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="194.16527" Y="-5.16757"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6608" Fill="#FFF5F5F5" Data="m 103.95117 180.10588 c -0.007 -0.39713 0.002 -0.76009 0.0244 -1.08887 0.0228 -0.32877 -0.0505 -0.69498 -0.21973 -1.09863 -0.42319 -0.97655 -1.07911 -1.68619 -1.96777 -2.12891 -0.88868 -0.4427 -1.850596 -0.51756 -2.885746 -0.22461 -0.01303 0.013 -0.03256 0.0195 -0.05859 0.0195 -0.05209 0.0261 -0.113938 0.0456 -0.185547 0.0586 -0.312505 0.0651 -0.605473 0.026 -0.878906 -0.11719 -0.312504 -0.14322 -0.540368 -0.40363 -0.683594 -0.78125 -0.01954 -0.0456 -0.04232 -0.13996 -0.06836 -0.2832 -0.07813 -0.42317 0.01953 -0.77147 0.292968 -1.04492 l 3.740238 -4.61915 -4.619144 0 c -0.42969 2e-5 -0.784507 -0.16111 -1.064453 -0.48339 -0.279949 -0.32225 -0.380861 -0.69823 -0.302734 -1.12793 0.123696 -0.76821 0.576169 -1.15233 1.357422 -1.15235 l 7.529299 0 c 0.77473 2e-5 1.23045 0.39716 1.36719 1.19141 0.0651 0.43622 -0.0326 0.78778 -0.29297 1.05469 l -3.63282 4.48242 c 0.0977 0.0195 0.19694 0.044 0.29786 0.0732 0.1009 0.0293 0.20018 0.0537 0.29785 0.0732 0.0586 0.0195 0.0944 0.0293 0.10742 0.0293 1.32811 0.44923 2.4007 1.19793 3.21777 2.24609 0.81705 1.04819 1.29393 2.26564 1.43067 3.65235 0.10415 1.04167 -0.057 2.05892 -0.4834 3.05176 -0.42645 0.99284 -1.02703 1.8278 -1.80176 2.50488 -1.25001 1.09375 -2.69207 1.64062 -4.32617 1.64062 -1.660163 0 -3.103847 -0.51106 -4.331057 -1.5332 -1.227214 -1.02213 -2.000325 -2.34049 -2.319336 -3.95508 -0.0065 -0.007 -0.01139 -0.0749 -0.01465 -0.20508 -0.0033 -0.1302 -0.0049 -0.21158 -0.0049 -0.24414 0.162761 -0.78124 0.628255 -1.17186 1.396485 -1.17187 0.18229 1e-5 0.429685 0.0749 0.742187 0.22461 0.117185 0.0651 0.245766 0.19694 0.385742 0.39551 0.139972 0.19857 0.209959 0.36621 0.209961 0.50292 -2e-6 0.0716 0.0472 0.26043 0.141602 0.56641 0.0944 0.306 0.216468 0.56641 0.366211 0.78125 1.080725 1.6211 2.578119 2.19401 4.492186 1.71875 0.53385 -0.13671 1.05631 -0.4427 1.56738 -0.91797 0.51106 -0.47525 0.84472 -0.97981 1.00098 -1.51367 0.007 -0.026 0.0374 -0.12695 0.0928 -0.30273 0.0553 -0.17578 0.083 -0.26693 0.083 -0.27344 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot5965" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="176.66527" Y="52.33243"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6605" Fill="#FFF5F5F5" Data="m 94.302734 182.44963 c -0.468751 0 -0.838216 -0.1888 -1.108398 -0.56641 -0.270182 -0.3776 -0.336914 -0.79101 -0.200195 -1.24023 l 4.384765 -13.65235 c -4e-6 -0.006 0.0016 -0.0163 0.0049 -0.0293 0.0033 -0.013 0.0081 -0.026 0.01465 -0.0391 0.162756 -0.41664 0.445959 -0.69008 0.84961 -0.82031 0.40364 -0.13019 0.800775 -0.0814 1.191406 0.14649 0.605457 0.37762 0.794267 0.90822 0.566407 1.59179 l -3.808594 11.84571 4.775394 0 0 -4.05274 c -1e-5 -0.58592 0.26366 -1.00259 0.79101 -1.25 0.52734 -0.24738 1.01562 -0.19204 1.46485 0.16602 0.33853 0.27345 0.5078 0.63477 0.50781 1.08398 l 0 4.05274 2.5293 0 c 0.4492 0 0.78774 0.14486 1.01562 0.43457 0.22785 0.28972 0.34178 0.6071 0.3418 0.95215 -2e-5 0.34505 -0.11395 0.66081 -0.3418 0.94726 -0.22788 0.28646 -0.56642 0.42969 -1.01562 0.42969 l -2.5293 0 c -10e-6 0.0846 -10e-6 0.47201 0 1.16211 -10e-6 0.6901 -10e-6 1.03841 0 1.04492 -10e-6 0.56641 -0.2409 0.97005 -0.72266 1.21094 -0.46876 0.22135 -0.92611 0.20833 -1.37207 -0.0391 -0.44597 -0.24739 -0.6657 -0.63802 -0.65918 -1.17187 -1e-5 -0.0456 -0.002 -0.40364 -0.005 -1.07422 -0.003 -0.67057 -0.005 -1.04817 -0.005 -1.13281 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot5973" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="129.09691" Y="96.33243"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6602" Fill="#FFF5F5F5" Data="m 94.214844 183.26018 c -0.01953 -0.0195 -0.05371 -0.0732 -0.102539 -0.16114 -0.04883 -0.0879 -0.0765 -0.14485 -0.08301 -0.1709 -0.117188 -0.40364 -0.07161 -0.78775 0.136719 -1.15234 0.08464 -0.14973 0.205077 -0.2832 0.361328 -0.40039 0.286457 -0.21484 0.621743 -0.28808 1.005859 -0.21973 0.384113 0.0684 0.677081 0.24903 0.878906 0.542 0.963539 1.28906 2.237951 1.81478 3.823241 1.57714 1.58528 -0.23762 2.6123 -1.1442 3.08106 -2.71972 0.22785 -0.76172 0.20995 -1.56087 -0.0537 -2.39746 -0.26369 -0.83658 -0.74383 -1.47298 -1.44043 -1.90918 -0.75522 -0.47525 -1.49415 -0.71288 -2.216801 -0.71289 -0.755213 1e-5 -1.451827 0.20183 -2.089844 0.60546 -0.175785 0.1172 -0.3418 0.23764 -0.498047 0.36133 -0.208336 0.16277 -0.416669 0.26043 -0.625 0.29297 -0.416669 0.0716 -0.784507 -0.0277 -1.103516 -0.29785 -0.319011 -0.27017 -0.478516 -0.61685 -0.478515 -1.04004 l 0 -8.07617 c -10e-7 -0.0716 0.0098 -0.1546 0.0293 -0.24902 0.01953 -0.0944 0.03255 -0.15461 0.03906 -0.18067 0.201822 -0.61196 0.628254 -0.91795 1.279297 -0.91797 l 6.367187 0 0 0 c 0.37109 2e-5 0.69335 0.13674 0.9668 0.41016 0.41665 0.4232 0.50617 0.91148 0.26855 1.46484 -0.23764 0.55341 -0.64942 0.8301 -1.23535 0.83008 l -5.019531 0 0 4.43359 c -3e-6 2e-5 0.04882 -0.0163 0.146485 -0.0488 1.705724 -0.52733 3.356116 -0.37922 4.951176 0.44433 1.59504 0.82358 2.67577 2.08497 3.24218 3.78418 0.10416 0.33204 0.19856 0.73569 0.28321 1.21094 0.16274 1.00912 0.0602 2.01661 -0.30762 3.02246 -0.36785 1.00586 -0.90659 1.86035 -1.61621 2.56348 -1.06772 1.06771 -2.37306 1.67969 -3.91602 1.83593 -1.542971 0.15625 -2.94922 -0.16601 -4.218748 -0.96679 -0.29948 -0.18229 -0.644532 -0.44271 -1.035156 -0.78125 -0.390625 -0.33854 -0.664063 -0.66406 -0.820312 -0.97656 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot5981" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="10.140144" Y="96.83243"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6599" Fill="#FFF5F5F5" Data="m 99.957031 185.07658 c -0.04558 0.14323 -0.126958 0.29297 -0.24414 0.44922 -0.475266 0.58594 -1.051437 0.69661 -1.728516 0.33203 -0.677086 -0.36458 -0.895185 -0.9082 -0.654297 -1.63086 l 4.912112 -15.43945 -6.474612 0 c -0.44922 2e-5 -0.786133 -0.14321 -1.010742 -0.42969 -0.22461 -0.28644 -0.336914 -0.60057 -0.336914 -0.94238 0 -0.34178 0.112304 -0.65753 0.336914 -0.94727 0.224609 -0.28969 0.561522 -0.43455 1.010742 -0.43457 l 8.359372 0 c 0.46223 2e-5 0.83821 0.18882 1.12793 0.56641 0.28971 0.37762 0.35644 0.78778 0.2002 1.23047 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot5989" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-37.33473" Y="54.33243"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6596" Fill="#FFF5F5F5" Data="m 104.10742 175.77971 c -0.11068 0.11068 -0.19206 0.1823 -0.24414 0.21484 -0.0521 0.0326 -0.003 0.10743 0.14649 0.22461 0.013 0.0195 0.0277 0.0358 0.0439 0.0488 0.0163 0.013 0.0342 0.026 0.0537 0.0391 1.11978 1.1198 1.67968 2.47722 1.67969 4.07227 -1e-5 1.8099 -0.70965 3.28125 -2.12891 4.41406 -0.48829 0.39062 -1.06446 0.70638 -1.72851 0.94726 -1.00261 0.35157 -2.080086 0.39388 -3.232424 0.12696 -0.944014 -0.23438 -1.770836 -0.68522 -2.480469 -1.35254 -0.709637 -0.66732 -1.217449 -1.46321 -1.523438 -2.3877 -0.449218 -1.40624 -0.377604 -2.77343 0.214844 -4.10156 0.07813 -0.16926 0.133463 -0.28645 0.166016 -0.35156 0.240884 -0.4427 0.504556 -0.82031 0.791015 -1.13281 0.07812 -0.0846 0.161132 -0.16764 0.249024 -0.24903 0.08789 -0.0814 0.177407 -0.16438 0.268554 -0.24902 -0.13021 -0.12369 -0.255535 -0.24576 -0.375976 -0.36621 -0.120444 -0.12043 -0.239259 -0.25227 -0.356445 -0.39551 -0.520834 -0.64452 -0.869141 -1.34439 -1.044922 -2.09961 -0.234375 -0.97655 -0.240886 -1.92707 -0.01953 -2.85156 0.208333 -0.85936 0.600586 -1.62108 1.176758 -2.28516 0.57617 -0.66404 1.264646 -1.17836 2.06543 -1.54297 1.093745 -0.49477 2.250975 -0.60382 3.471675 -0.32715 1.2207 0.27672 2.22819 0.86103 3.02247 1.75293 1.0091 1.13283 1.49412 2.45607 1.45507 3.96973 -0.0391 1.51369 -0.59571 2.80763 -1.66992 3.88184 z m -1.08398 -4.04297 c -10e-6 -1.17186 -0.55665 -2.04751 -1.66992 -2.62696 -1.11329 -0.5794 -2.128915 -0.47849 -3.046879 0.30274 -0.488285 0.42319 -0.828454 0.92775 -1.020508 1.51367 -0.19206 0.58595 -0.170901 1.19142 0.06348 1.81641 0.279945 0.76173 0.734046 1.28907 1.362305 1.58203 0.62825 0.29298 1.261388 0.3825 1.899416 0.26855 0.63801 -0.11392 1.19953 -0.41502 1.68457 -0.90332 0.48502 -0.48827 0.72753 -1.13931 0.72754 -1.95312 z m 0 8.61328 c -10e-6 -0.65755 -0.20346 -1.25325 -0.61035 -1.78711 -0.40691 -0.53385 -0.93263 -0.88215 -1.57715 -1.04492 -1.171883 -0.29296 -2.146817 0.005 -2.924807 0.89355 -0.777998 0.88868 -0.961917 1.8864 -0.551758 2.99317 0.20833 0.5599 0.564775 1.01074 1.069336 1.35254 0.504553 0.3418 1.059565 0.51269 1.665039 0.51269 0.80729 0 1.49739 -0.2832 2.07031 -0.84961 0.57291 -0.5664 0.85937 -1.2565 0.85938 -2.07031 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot5997" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-53.83473" Y="-5.16757"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6593" Fill="#FFF5F5F5" Data="m 97.076172 185.85783 c -0.397139 0.19531 -0.784508 0.22461 -1.16211 0.0879 -0.377606 -0.13672 -0.647788 -0.41341 -0.810546 -0.83008 -0.08464 -0.21484 -0.0944 -0.48828 -0.0293 -0.82031 0.03255 -0.22786 0.169269 -0.45573 0.410156 -0.68359 0.01953 -0.0195 0.09765 -0.0749 0.234375 -0.16602 0.631508 -0.35156 1.248369 -0.71288 1.850586 -1.08398 0.602209 -0.37109 1.180008 -0.79752 1.733398 -1.2793 0.585932 -0.50781 1.178376 -1.15885 1.777346 -1.95312 -1.04819 0.17578 -2.099617 0.0667 -3.154299 -0.32715 -1.054691 -0.39387 -1.933596 -0.98144 -2.636719 -1.7627 -1.204427 -1.34113 -1.767578 -2.88898 -1.689453 -4.64355 0.07813 -1.75454 0.745442 -3.26333 2.001953 -4.52637 1.484372 -1.48435 3.289383 -2.07355 5.415038 -1.76758 2.12564 0.30601 3.72232 1.34768 4.79004 3.125 0.5729 0.95705 0.87727 1.91896 0.91309 2.88574 0.0358 0.96681 -0.11232 1.95477 -0.44434 2.96387 -0.50131 1.23048 -1.04819 2.42677 -1.64062 3.58887 -0.59246 1.16211 -1.34442 2.25098 -2.25586 3.2666 -0.76173 0.84636 -1.59181 1.5739 -2.490238 2.18262 -0.898443 0.60872 -1.835942 1.18978 -2.8125 1.74316 z m 6.914058 -13.24219 c -0.007 -0.81378 -0.22299 -1.52179 -0.64941 -2.12402 -0.42644 -0.6022 -0.95867 -1.04816 -1.59668 -1.33789 -0.63803 -0.2897 -1.32488 -0.39875 -2.060546 -0.32715 -0.735683 0.0716 -1.40951 0.37111 -2.021485 0.89844 -0.625003 0.53387 -1.033531 1.23211 -1.225586 2.09473 -0.19206 0.86264 -0.102541 1.66179 0.268555 2.39746 0.253903 0.65756 0.714515 1.19141 1.381836 1.60156 0.667313 0.41017 1.342768 0.61524 2.026366 0.61523 0.63801 1e-5 1.1914 -0.11717 1.66016 -0.35156 0.67056 -0.33853 1.20767 -0.81053 1.61133 -1.41601 0.40363 -0.60546 0.60545 -1.28905 0.60546 -2.05079 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6005" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-32.83473" Y="-68.66757"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6588" Fill="#FFF5F5F5" Data="m 93.960937 184.64689 c -2e-6 0.0846 -0.0098 0.17579 -0.0293 0.27344 -0.156253 0.73568 -0.611982 1.10352 -1.367188 1.10352 -0.553386 0 -0.963542 -0.25716 -1.230469 -0.77149 -0.05859 -0.0977 -0.107422 -0.29948 -0.146484 -0.60547 l 0 -17.22656 c 0.01953 -0.15623 0.04394 -0.30434 0.07324 -0.44433 0.0293 -0.13996 0.09928 -0.27505 0.209961 -0.40528 0.260416 -0.31899 0.595702 -0.49314 1.005859 -0.52246 0.410155 -0.0293 0.764972 0.10256 1.064454 0.39551 0.156247 0.15627 0.257158 0.30601 0.302734 0.44922 0.04557 0.14325 0.08463 0.31903 0.117187 0.52734 z"/>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6590" Fill="#FFF5F5F5" Data="m 103.04297 166.03361 c 1.45832 2e-5 2.64973 0.60549 3.57422 1.81641 0.92447 1.21095 1.56574 2.44142 1.92383 3.69141 0.14972 0.54688 0.27993 1.1198 0.39062 1.71875 0.33202 1.77735 0.33365 3.72396 0.005 5.83984 -0.32878 2.11589 -1.10841 3.87045 -2.33886 5.26367 -0.9896 1.11328 -2.13543 1.66992 -3.4375 1.66992 -1.99871 0 -3.500983 -1.04166 -4.50684 -3.125 -1.00586 -2.08333 -1.513672 -4.37499 -1.523437 -6.875 -0.0098 -2.49998 0.476887 -4.79165 1.459961 -6.875 0.98307 -2.08331 2.467446 -3.12498 4.453126 -3.125 z m 0.0684 2.76367 c -0.77475 0.15627 -1.38835 0.59898 -1.84082 1.32813 -0.45248 0.72918 -0.78614 1.55926 -1.00098 2.49023 -0.21485 0.93101 -0.332033 1.87176 -0.351561 2.82227 -0.01953 0.95053 0.01627 1.72201 0.107421 2.31445 0.0781 0.55991 0.26367 1.28093 0.55664 2.16309 0.29297 0.88217 0.66243 1.64063 1.1084 2.27539 0.44596 0.63477 0.9554 0.99935 1.52832 1.09375 0.57291 0.0944 1.18163 -0.36621 1.82617 -1.38184 0.48827 -0.78124 0.85286 -1.77408 1.09375 -2.97851 0.24088 -1.20442 0.32551 -2.43489 0.25391 -3.69141 -0.0716 -1.2565 -0.31088 -2.44139 -0.71778 -3.55469 -0.4069 -1.11326 -1.00749 -1.97264 -1.80175 -2.57812 -0.2409 -0.16925 -0.46876 -0.27017 -0.6836 -0.30274 -0.007 2e-5 -0.0146 2e-5 -0.0244 0 -0.01 2e-5 -0.0277 2e-5 -0.0537 0 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6013" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="8.9975656" Y="-110.66757"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6583" Fill="#FFF5F5F5" Data="m 98.335937 184.64689 c -2e-6 0.0846 -0.0098 0.17579 -0.0293 0.27344 -0.156253 0.73568 -0.611982 1.10352 -1.367188 1.10352 -0.553386 0 -0.963542 -0.25716 -1.230469 -0.77149 -0.05859 -0.0977 -0.107422 -0.29948 -0.146484 -0.60547 l 0 -17.22656 c 0.01953 -0.15623 0.04394 -0.30434 0.07324 -0.44433 0.0293 -0.13996 0.09928 -0.27505 0.209961 -0.40528 0.260416 -0.31899 0.595702 -0.49314 1.005859 -0.52246 0.410155 -0.0293 0.764972 0.10256 1.064454 0.39551 0.156247 0.15627 0.257158 0.30601 0.302734 0.44922 0.04557 0.14325 0.08463 0.31903 0.117187 0.52734 z"/>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6585" Fill="#FFF5F5F5" Data="m 104.27344 184.64689 c -10e-6 0.0846 -0.01 0.17579 -0.0293 0.27344 -0.15625 0.73568 -0.61198 1.10352 -1.36719 1.10352 -0.55338 0 -0.96354 -0.25716 -1.23047 -0.77149 -0.0586 -0.0977 -0.10742 -0.29948 -0.14648 -0.60547 l 0 -17.22656 c 0.0195 -0.15623 0.0439 -0.30434 0.0732 -0.44433 0.0293 -0.13996 0.0993 -0.27505 0.20996 -0.40528 0.26042 -0.31899 0.59571 -0.49314 1.00586 -0.52246 0.41016 -0.0293 0.76497 0.10256 1.06446 0.39551 0.15624 0.15627 0.25715 0.30601 0.30273 0.44922 0.0456 0.14325 0.0846 0.31903 0.11719 0.52734 z"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6021" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="23.5" Y="-7.5"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6029" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="40" Y="9.5"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6037" Opacity="1">
+        </Canvas>
+        <Canvas x:Name="flowRoot6045" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="40.5" Y="54"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6053" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="24" Y="71"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6061" Opacity="1" RenderTransformOrigin="0,0">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="115" X="-84"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-1.1767578" Y="76"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6565" Fill="#FFF5F5F5" Data="m 167.62793 68.693564 0.01 -0.05859 c 0.0423 -0.22135 0.0871 -0.441077 0.13427 -0.65918 0.0472 -0.218094 0.10824 -0.434565 0.18311 -0.649414 0.10416 -0.328771 0.22461 -0.639643 0.36133 -0.932617 0.35807 -0.794264 0.78613 -1.485182 1.28418 -2.072754 0.49804 -0.587557 1.0856 -1.135245 1.76269 -1.643067 l 0.0488 -0.03418 c 0.33203 -0.221344 0.63151 -0.187165 0.89844 0.102539 0.26692 0.289723 0.27831 0.589202 0.0342 0.898437 -0.0423 0.05209 -0.0895 0.09441 -0.14161 0.126953 -0.38086 0.286467 -0.74137 0.594084 -1.08154 0.922852 -0.34017 0.328783 -0.64046 0.693366 -0.90088 1.09375 -0.0521 0.08464 -0.0928 0.146491 -0.12207 0.185547 l -0.0244 0.04394 -0.0293 0.04883 0.0342 -0.0098 0.0342 -0.0049 c 0.41992 -0.05859 0.7902 -0.07568 1.11084 -0.05127 0.32064 0.02442 0.68115 0.126146 1.08154 0.305176 0.57617 0.263678 1.03597 0.695806 1.3794 1.296387 0.34342 0.60059 0.49071 1.213382 0.44189 1.838379 -0.01 0.09766 -0.0146 0.144859 -0.0146 0.141601 -0.0553 0.325524 -0.13753 0.638023 -0.24658 0.9375 -0.10905 0.299481 -0.27588 0.574546 -0.50049 0.825196 -0.84961 0.940755 -1.8929 1.311848 -3.12988 1.113281 -0.91797 -0.152995 -1.6154 -0.609537 -2.09228 -1.369629 -0.47689 -0.760089 -0.6486 -1.558428 -0.51514 -2.39502 z m 1.53809 1.396485 c 0.10091 0.253908 0.29215 0.480959 0.57373 0.681152 0.28157 0.200197 0.55745 0.314943 0.82763 0.344238 0.49154 0.05209 0.92611 -0.03906 1.30371 -0.273437 0.57943 -0.364581 0.86995 -0.898435 0.87159 -1.601563 0.002 -0.703121 -0.28891 -1.236974 -0.87159 -1.601562 -0.57617 -0.354813 -1.16699 -0.400386 -1.77246 -0.136719 -0.49805 0.221359 -0.83903 0.585942 -1.02295 1.09375 -0.18392 0.507816 -0.15381 1.005862 0.0903 1.494141 z" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6069" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-25" Y="69"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6077" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-40.5" Y="54"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6085" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-48" Y="32"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6093" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-40" Y="8"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6101" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-23" Y="-8.5"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6425" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-32.99953" Y="197.79196"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot6433" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <!--g-->
+                        <TranslateTransform X="-32.999531" Y="156.4438"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="flowRoot12" Opacity="1">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="74.16527" Y="-125.66757"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path1" Fill="#FFF5F5F5" Data="m 101.30469 184.64689 c -10e-6 0.0846 -0.01 0.17579 -0.0293 0.27344 -0.15625 0.73568 -0.61198 1.10352 -1.367187 1.10352 -0.553386 0 -0.963542 -0.25716 -1.230469 -0.77149 -0.05859 -0.0977 -0.107422 -0.29948 -0.146484 -0.60547 l 0 -17.22656 c 0.01953 -0.15623 0.04394 -0.30434 0.07324 -0.44433 0.0293 -0.13996 0.09928 -0.27505 0.209961 -0.40528 0.260416 -0.31899 0.595702 -0.49314 1.005859 -0.52246 0.410158 -0.0293 0.764968 0.10256 1.064458 0.39551 0.15624 0.15627 0.25715 0.30601 0.30273 0.44922 0.0456 0.14325 0.0846 0.31903 0.11719 0.52734 z" RenderTransformOrigin="0,0">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-10"/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+                <Path x:Name="path2" Fill="#FFF5F5F5" Data="m 95.71875 186.02385 c -0.384116 0 -0.711264 -0.13347 -0.981445 -0.40039 -0.270183 -0.26693 -0.405274 -0.59571 -0.405274 -0.98633 0 -0.013 0.03418 -0.21973 0.102539 -0.62012 0.06836 -0.40039 0.10905 -0.62988 0.122071 -0.68848 0.33203 -1.59504 0.978189 -3.11197 1.938476 -4.55078 0.960284 -1.43879 2.120764 -2.61717 3.481445 -3.53515 0.481768 -0.32551 0.919588 -0.66568 1.313478 -1.02051 0.39387 -0.35481 0.79589 -0.75357 1.20605 -1.19629 0.52734 -0.59894 0.75683 -1.27928 0.68848 -2.04102 -0.0684 -0.7617 -0.4476 -1.36391 -1.13769 -1.80664 -0.84637 -0.52732 -1.70574 -0.54034 -2.57813 -0.0391 -0.8724 0.50132 -1.289066 1.25002 -1.25 2.2461 -4e-6 0.0195 0.0016 0.0407 0.0049 0.0635 0.0033 0.0228 0.0049 0.044 0.0049 0.0635 0.03906 0.29949 -0.03256 0.59083 -0.214844 0.87402 -0.182295 0.28322 -0.413415 0.46714 -0.69336 0.55176 -0.42969 0.13673 -0.828452 0.0944 -1.196289 -0.12695 -0.36784 -0.22134 -0.5778 -0.54686 -0.629882 -0.97657 -0.01953 -0.0586 -0.02116 -0.29946 -0.0049 -0.72265 0.01627 -0.42316 0.03418 -0.67056 0.05371 -0.74219 0.292967 -1.60154 1.134438 -2.8076 2.524414 -3.61816 1.389969 -0.81053 2.856437 -0.95213 4.399417 -0.42481 1.82941 0.63804 2.94595 1.88479 3.34961 3.74024 0.40363 1.85548 -0.0326 3.47657 -1.3086 4.86328 -0.26042 0.27996 -0.52247 0.55502 -0.78613 0.82519 -0.26368 0.2702 -0.54526 0.52898 -0.84473 0.77637 -0.46875 0.39063 -0.96192 0.75196 -1.47949 1.08398 -0.51758 0.33204 -0.98145 0.72267 -1.3916 1.17188 -0.468756 0.52084 -0.909836 1.09376 -1.323243 1.71875 -0.413415 0.625 -0.740563 1.26628 -0.981445 1.92383 -0.01954 0.0391 -0.06999 0.18229 -0.151367 0.42968 -0.08138 0.2474 -0.122074 0.38087 -0.122071 0.4004 l 7.246096 0 c 0.89842 0.0586 1.33462 0.53385 1.30859 1.42578 -0.026 0.89192 -0.47852 1.33789 -1.35742 1.33789 z"/>
+            </Canvas>
+        </Canvas>
+    </Canvas>
+</Canvas>

@@ -1,0 +1,3 @@
+﻿@@ -617,28 +617,146 @@
+ l%22%2C %22rwr_indication_font%22%2C %7D
++%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22M2000C_RWR%22%2C %22RWR%22)%0D%0A

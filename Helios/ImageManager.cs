@@ -53,6 +53,31 @@ namespace GadrocsWorkshop.Helios
         // (actual bitmap contents may be evicted due to system caching)
         private readonly Dictionary<string, ImageSource> _objectCache = new Dictionary<string, ImageSource>();
 
+        /// <summary>
+        /// this class represents all the characteristics of an image load that must be identical for
+        /// the resulting image to be the same
+        /// </summary>
+        private class ImageLoadRequest
+        {
+            public ImageLoadRequest(string uri, int? width, int? height, LoadImageOptions options)
+            {
+                Uri = uri;
+                Width = width;
+                Height = height;
+                Options = options;
+
+                // can calculate a fixed key, since all properties are read only
+                Key = $"{uri}&{width ?? 0}&{height ?? 0}&{Convert.ToInt32(options)}";
+            }
+
+            public string Uri { get; }
+            public int? Width { get; }
+            public int? Height{ get; }
+            public LoadImageOptions Options { get; }
+
+            public string Key { get; }
+        }
+
         internal ImageManager(string userImagePath)
         {
             Logger.Debug($"Helios will load user images from {Anonymizer.Anonymize(userImagePath)}");
@@ -61,14 +86,14 @@ namespace GadrocsWorkshop.Helios
             _xamlFirewall = new XamlFirewall();
         }
 
-        private ImageSource DoLoadImage(string uri, int? width, int? height, LoadImageOptions options)
+        private ImageSource DoLoadImage(ImageLoadRequest request)
         {
-            if (null == uri)
+            if (null == request.Uri)
             {
                 return null;
             }
 
-            if (_objectCache.TryGetValue(uri, out ImageSource imageSource))
+            if (_objectCache.TryGetValue(request.Key, out ImageSource imageSource))
             {
                 // NOTE: this caching makes a huge difference (many seconds on a large profile) because there are usually
                 // many hundreds of buttons and switches using the same images, and it also makes restarting a profile faster
@@ -77,24 +102,24 @@ namespace GadrocsWorkshop.Helios
 
             // parse as URI and check for existence of file, return Uri for resource that exists
             // or null (note: resource is not necesarily allowed to be read)
-            Uri imageUri = GetImageUri(uri);
+            Uri imageUri = GetImageUri(request.Uri);
             if (imageUri == null)
             {
                 // cache denial
-                return CacheImageSource(uri, null);
+                return CacheImageSource(request, null);
             }
 
             // based on protocol/scheme, check to make sure source location is permitted
             if (!CheckImageLocationSecurity(imageUri))
             {
                 // cache denial
-                return CacheImageSource(uri, null);
+                return CacheImageSource(request, null);
             }
 
-            if (uri.EndsWith(".xaml", StringComparison.InvariantCulture))
+            if (request.Uri.EndsWith(".xaml", StringComparison.InvariantCulture))
             {
-                imageSource = imageUri.Scheme == "pack" ? LoadXamlResource(imageUri, width, height) : LoadXamlFile(imageUri, width, height);
-                return CacheImageSource(uri, imageSource);
+                imageSource = imageUri.Scheme == "pack" ? LoadXamlResource(imageUri, request.Width, request.Height) : LoadXamlFile(imageUri, request.Width, request.Height);
+                return CacheImageSource(request, imageSource);
             }
 
             if (Logger.IsDebugEnabled)
@@ -109,28 +134,28 @@ namespace GadrocsWorkshop.Helios
             image.CacheOption = imageUri.Scheme == "pack" ? BitmapCacheOption.OnDemand : BitmapCacheOption.OnLoad;
             
             // Override BitMapCreateOptions but only for certain controls that require a reload of images 
-            image.CreateOptions = options.HasFlag(LoadImageOptions.ReloadIfChangedExternally) ? BitmapCreateOptions.IgnoreImageCache : BitmapCreateOptions.DelayCreation;
+            image.CreateOptions = request.Options.HasFlag(LoadImageOptions.ReloadIfChangedExternally) ? BitmapCreateOptions.IgnoreImageCache : BitmapCreateOptions.DelayCreation;
             image.UriSource = imageUri;
 
             // REVISIT: not clear if it is legal to set decoding in just one axis but we will find out if anyone ever uses this function with only one scaling factor
-            if (width.HasValue)
+            if (request.Width.HasValue)
             {
-                image.DecodePixelWidth = Math.Max(1, width.Value);
+                image.DecodePixelWidth = Math.Max(1, request.Width.Value);
             }
-            if (height.HasValue)
+            if (request.Height.HasValue)
             {
-                image.DecodePixelHeight = Math.Max(1, height.Value);
+                image.DecodePixelHeight = Math.Max(1, request.Height.Value);
             }
 
             image.EndInit();
-            return CacheImageSource(uri, image);
+            return CacheImageSource(request, image);
         }
 
-        private ImageSource CacheImageSource(string uri, ImageSource source)
+        private ImageSource CacheImageSource(ImageLoadRequest request, ImageSource source)
         {
-            if (_cacheObjects)
+            if (_cacheObjects && !request.Options.HasFlag(LoadImageOptions.ReloadIfChangedExternally))
             {
-                _objectCache.Add(uri, source);
+                _objectCache.Add(request.Key, source);
             }
             return source;
         }
@@ -417,14 +442,14 @@ namespace GadrocsWorkshop.Helios
 
         public ImageSource LoadImage(string uri)
         {
-            ImageSource result = DoLoadImage(uri, null, null, LoadImageOptions.None);
+            ImageSource result = DoLoadImage(new ImageLoadRequest(uri, null, null, LoadImageOptions.None));
             OnImageLoad(uri, result);
             return result;
         }
 
         public ImageSource LoadImage(string uri, int width, int height)
         {
-            ImageSource result = DoLoadImage(uri, width, height, LoadImageOptions.None);
+            ImageSource result = DoLoadImage(new ImageLoadRequest(uri, width, height, LoadImageOptions.None));
             OnImageLoad(uri, result);
             return result;
         }
@@ -435,14 +460,14 @@ namespace GadrocsWorkshop.Helios
 
         public ImageSource LoadImage(string uri, LoadImageOptions options)
         {
-            ImageSource result = DoLoadImage(uri, null, null, options);
+            ImageSource result = DoLoadImage(new ImageLoadRequest(uri, null, null, options));
             OnImageLoad(uri, result);
             return result;
         }
 
         public ImageSource LoadImage(string uri, int width, int height, LoadImageOptions options)
         {
-            ImageSource result = DoLoadImage(uri, width, height, options);
+            ImageSource result = DoLoadImage(new ImageLoadRequest(uri, width, height, options));
             OnImageLoad(uri, result);
             return result;
         }

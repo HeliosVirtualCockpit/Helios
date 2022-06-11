@@ -1,0 +1,155 @@
+﻿<HeliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.RockerSwitchAppearanceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Helios="clr-namespace:GadrocsWorkshop.Helios"
+             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
+             xmlns:HeliosTouch="clr-namespace:GadrocsWorkshop.Helios.Controls"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             Height="Auto"
+             mc:Ignorable="d"          
+             d:DesignWidth="180">
+    <HeliosSdk:HeliosPropertyEditor.Resources>
+        <Helios:EnumConverter Type="{x:Type Helios:TextVerticalAlignment}" x:Key="VertAlignmentTypes" />
+        <Helios:EnumConverter Type="{x:Type Helios:TextHorizontalAlignment}" x:Key="HorizAlignmentTypes" />
+
+        <Helios:EnumConverter Type="{x:Type HeliosTouch:ThreeWayToggleSwitchType}" x:Key="ToggleSwitchTypes" />
+        
+        <Style x:Key="IndicatorLabelStyle" TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasIndicator}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="IndicatorTextBlockStyle" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasIndicator}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="IndicatorImagePickerStyle" TargetType="{x:Type HeliosSdk:ImagePicker}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasIndicator}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasLabel}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelLabelStyle" TargetType="Label">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasLabel}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </HeliosSdk:HeliosPropertyEditor.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Position Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right"><Label.ToolTip>Image displayed when the switch is in position one (up).</Label.ToolTip>One</Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="1" ImageFilename="{Binding Control.PositionOneImage, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right"><Label.ToolTip>Image displayed when the switch is in position two (center).</Label.ToolTip> Two</Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="2" ImageFilename="{Binding Control.PositionTwoImage, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right"><Label.ToolTip>Image displayed when the switch is in position three (down).</Label.ToolTip> Three</Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="3" ImageFilename="{Binding Control.PositionThreeImage, Mode=TwoWay}" />
+
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="4,10,2,2" Style="{StaticResource IndicatorTextBlockStyle}">Indicator On Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource IndicatorLabelStyle}">
+            <Label.ToolTip>Image displayed when the switch is in position one (up) and the indicator light is on.</Label.ToolTip> One
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="5" ImageFilename="{Binding Control.PositionOneIndicatorOnImage, Mode=TwoWay}" Style="{StaticResource IndicatorImagePickerStyle}" />
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource IndicatorLabelStyle}">
+            <Label.ToolTip>Image displayed when the switch is in position two (center) and the indicator light is on.</Label.ToolTip> Two
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="6" ImageFilename="{Binding Control.PositionTwoIndicatorOnImage, Mode=TwoWay}" Style="{StaticResource IndicatorImagePickerStyle}" />
+        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource IndicatorLabelStyle}">
+            <Label.ToolTip>Image displayed when the switch is in position three (down) and the indicator light is on.</Label.ToolTip> Three
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="7" ImageFilename="{Binding Control.PositionThreeIndicatorOnImage, Mode=TwoWay}" Style="{StaticResource IndicatorImagePickerStyle}" />
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Margin="4,10,2,2" Style="{StaticResource LabelTextBlockStyle}">Text Label</TextBlock>
+        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right" Content="Text" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>Text which will be displayed on top of the button images.</Label.ToolTip>
+        </Label>
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="9" FontSize="10" Text="{Binding Control.Text, Mode=TwoWay}" Margin="2" />
+        <Label Grid.Column="0" Grid.Row="10" FontSize="10" HorizontalAlignment="Right" Content="Font" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>Font used to render the text.</Label.ToolTip>
+        </Label>
+        <HeliosSdk:TextFormatButton Grid.Column="1" Grid.Row="10" TextFormat="{Binding Control.TextFormat}" HorizontalAlignment="Left" Margin="2" />
+        <Label Grid.Column="0" Grid.Row="11" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="V Align" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>How the text will be aligned vertically inside the indicator.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="11" Margin="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource VertAlignmentTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.TextFormat.VerticalAlignment, Converter={StaticResource VertAlignmentTypes}}" />
+        <Label Grid.Column="0" Grid.Row="12" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="H Align" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>How the text will be aligned horizontally inside the indicator.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="12" Margin="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource HorizAlignmentTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.TextFormat.HorizontalAlignment, Converter={StaticResource HorizAlignmentTypes}}" />
+
+        <Label Grid.Column="0" Grid.Row="13" FontSize="10" HorizontalAlignment="Right" Content="Color" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>Color in which the text will be rendered.</Label.ToolTip>
+        </Label>
+        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="13" Color="{Binding Control.TextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="2" />
+        <Label Grid.Column="0" Grid.Row="14" FontSize="10" HorizontalAlignment="Right" Content="Push Offset">
+            <Label.ToolTip>Offset which will be used to move text and decorations when the button is pushed.</Label.ToolTip>
+        </Label>
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding Control.TextPushOffset, Mode=TwoWay}" Margin="2" />
+
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15" Margin="4,10,2,2"  Style="{StaticResource LabelTextBlockStyle}">Text Padding</TextBlock>
+        <Label Grid.Column="0" Grid.Row="16" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Left" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>Amount of space on the left edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
+        </Label>
+        <Slider Grid.Column="1" Grid.Row="16" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingLeft}" Margin="0,2" ValueChanged="LeftPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="17" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Right" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>Amount of space on the right edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
+        </Label>
+        <Slider Grid.Column="1" Grid.Row="17" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingRight}" IsDirectionReversed="true" Margin="0,2" ValueChanged="RightPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="18" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Top" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>Amount of space on the top edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
+        </Label>
+        <Slider Grid.Column="1" Grid.Row="18" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingTop}" Margin="0,2" ValueChanged="TopPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="19" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Bottom" Style="{StaticResource LabelLabelStyle}">
+            <Label.ToolTip>Amount of space on the bottom edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
+        </Label>
+        <Slider Grid.Column="1" Grid.Row="19" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingBottom}" IsDirectionReversed="true" Margin="0,2" ValueChanged="BottomPaddingChanged" />
+
+
+    </Grid>
+</HeliosSdk:HeliosPropertyEditor>

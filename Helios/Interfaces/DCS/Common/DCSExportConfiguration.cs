@@ -1128,14 +1128,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private IEnumerable<string> GenerateDoFileLines()
         {
             int index = 1;
-            foreach (string file in DoFiles)
+            foreach (string dofile in DoFiles)
             {
                 // generate a local to hold a reference to anything the dofile returns, to
                 // ensure its lifetime and report result in case of error
+                // perform check to identify absolute paths entered in the panel, but for others
+                // they will be assumed to be correctly following the description on the panel which 
+                // says they should be a path relative to the export.lua script.
+                
+                string file;
+                if(System.IO.Path.GetPathRoot(dofile) == "")
+                {
+                    file = $"lfs.writedir()..[[{System.IO.Path.Combine("Scripts", dofile)}]]";
+                } else
+                {
+                    file = $"[[{dofile}]]";
+                }
                 yield return $"local helios_dofile_{index} = {{ }}";
-                yield return $"helios_dofile_{index}.success, helios_dofile_{index}.result = pcall(dofile, \"{file}\")";
+                yield return $"helios_dofile_{index}.success, helios_dofile_{index}.result = pcall(dofile, {file})";
                 yield return
-                    $"if not helios_dofile_{index}.success then log.write(\"HELIOS.EXPORT\", log.ERROR, string.format(\"error return from configured external '{file}': %s\", tostring(helios_dofile_{index}.result))) end";
+                    $"if not helios_dofile_{index}.success then log.write(\"HELIOS.EXPORT\", log.ERROR, string.format(\"error return from configured external %s : %s\", [['{dofile}']], tostring(helios_dofile_{index}.result))) end";
                 index++;
             }
         }

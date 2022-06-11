@@ -1,0 +1,3 @@
+﻿@@ -940,20 +940,139 @@
+ %2C 13%2F255%2C 255%2F255%7D%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22SA342_NADIR%22%2C %22NADIR%22)%0D%0A

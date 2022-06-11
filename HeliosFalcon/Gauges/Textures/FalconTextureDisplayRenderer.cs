@@ -13,6 +13,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,7 +25,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
     {
         private FalconTextureDisplay _display;
         private ImageBrush _defaultImage;
+        private ImageBrush _runningImage;
         private Rect _displayRect = new Rect(0, 0, 0, 0);
+        
 
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
         {
@@ -44,7 +47,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
                 {
                     drawingContext.DrawRectangle(CreateImageBrush(), null, _displayRect);
                 }
-                else if (_display.IsRunning)
+                else if (_display.IsRunning && _display.TransparencyEnabled)
+                {
+                    drawingContext.DrawRectangle(_runningImage, null, _displayRect);
+                }
+                else if (_display.IsRunning && !_display.TransparencyEnabled)
                 {
                     drawingContext.DrawRectangle(Brushes.Black, null, _displayRect);
                 }
@@ -87,39 +94,138 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
                                                          surfaceDesc.lPitch * (int)_display.TextureRect.Height,
                                                          surfaceDesc.lPitch);
 
+                if(_display.TransparencyEnabled)
+                {
+                    image = ImageTransparency(image);
+                }
+
                 brush = new ImageBrush(image);
-                _defaultImage = new ImageBrush(image);
-                _defaultImage.Stretch = Stretch.Fill;
-                _defaultImage.TileMode = TileMode.None;
-                _defaultImage.Viewport = new Rect(0d, 0d, 1d, 1d);
-                _defaultImage.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
+
+                _defaultImage = new ImageBrush(image)
+                {
+                    Stretch = Stretch.Fill,
+                    TileMode = TileMode.None,
+                    Viewport = new Rect(0d, 0d, 1d, 1d),
+                    ViewportUnits = BrushMappingMode.RelativeToBoundingBox
+                };
             }
+
             return brush;
+        }
+
+        BitmapSource ImageTransparency(BitmapSource sourceImage)
+        {
+            if (sourceImage.Format != PixelFormats.Bgra32)
+            {
+                sourceImage = new FormatConvertedBitmap(sourceImage, PixelFormats.Bgra32, null, 0.0);
+            }
+
+            int sourceStride = sourceImage.PixelWidth * sourceImage.Format.BitsPerPixel / 8;
+            byte[] sourcePixels = new byte[sourceImage.PixelHeight * sourceStride];
+            sourceImage.CopyPixels(sourcePixels, sourceStride, 0);
+
+            ImageSource maskImageSource = ConfigManager.ImageManager.LoadImage("{HeliosFalcon}/Images/Textures/hud_mask.png", (int)_display.TextureRect.Width, (int)_display.TextureRect.Height);
+            BitmapSource maskImage = (BitmapSource)maskImageSource;
+
+            int maskStride = maskImage.PixelWidth * maskImage.Format.BitsPerPixel / 8;
+            byte[] maskPixels = new byte[maskImage.PixelHeight * maskStride];
+            maskImage.CopyPixels(maskPixels, maskStride, 0);
+
+            byte targetThreshold = 20;
+
+            int numPixels = Math.Min(sourceImage.PixelHeight * sourceStride, maskImage.PixelHeight * maskStride);
+
+            for (int i = 0; i < numPixels; i += sourceImage.Format.BitsPerPixel / 8)
+            {
+                if (maskPixels[i] == 0)
+                {
+                    sourcePixels[i + 3] = 0;
+                }
+                else
+                {
+                    bool sourcePixelValid = false;
+                    byte pixelMaxValue = Math.Max(Math.Max(sourcePixels[i], sourcePixels[i + 1]), sourcePixels[i + 2]);
+
+                    if (sourcePixels[i] > targetThreshold)
+                    {
+                        sourcePixels[i] = 255;
+                        sourcePixelValid = true;
+                    }
+
+                    if (sourcePixels[i + 1] > targetThreshold)
+                    {
+                        sourcePixels[i + 1] = 255;
+                        sourcePixelValid = true;
+                    }
+
+                    if (sourcePixels[i + 2] > targetThreshold)
+                    {
+                        sourcePixels[i + 2] = 255;
+                        sourcePixelValid = true;
+                    }
+
+                    if (sourcePixelValid)
+                    {
+                        sourcePixels[i + 3] = pixelMaxValue;
+                    }
+                    else
+                    {
+                        sourcePixels[i] = 200;
+                        sourcePixels[i + 1] = 255;
+                        sourcePixels[i + 2] = 200;
+                        sourcePixels[i + 3] = 25;
+                    }
+                }
+            }
+
+            BitmapSource newImage = BitmapSource.Create(sourceImage.PixelWidth, sourceImage.PixelHeight,sourceImage.DpiX, sourceImage.DpiY, PixelFormats.Bgra32, sourceImage.Palette, sourcePixels, sourceStride);
+            return newImage;
         }
 
         protected override void OnRefresh()
         {
             if (_display != null)
             {
-                ImageSource image = ConfigManager.ImageManager.LoadImage(_display.DefaultImage);
-                if (image == null)
+                ImageSource defaultImage = ConfigManager.ImageManager.LoadImage(_display.DefaultImage);
+                if (defaultImage == null)
                 {
                     _defaultImage = null;
                 }
                 else
                 {
-                    _defaultImage = new ImageBrush(image);
-                    _defaultImage.Stretch = Stretch.Fill;
-                    _defaultImage.TileMode = TileMode.None;
-                    _defaultImage.Viewport = new Rect(0d, 0d, 1d, 1d);
-                    _defaultImage.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
+                    _defaultImage = new ImageBrush(defaultImage)
+                    {
+                        Stretch = Stretch.Fill,
+                        TileMode = TileMode.None,
+                        Viewport = new Rect(0d, 0d, 1d, 1d),
+                        ViewportUnits = BrushMappingMode.RelativeToBoundingBox
+                    };
                 }
+
+                ImageSource runningImage = ConfigManager.ImageManager.LoadImage("{HeliosFalcon}/Images/Textures/hud_mask.png");
+                if (runningImage == null)
+                {
+                    _runningImage = null;
+                }
+                else
+                {
+                    _runningImage = new ImageBrush(runningImage)
+                    {
+                        Opacity = 0.1,
+                        Stretch = Stretch.Fill,
+                        TileMode = TileMode.None,
+                        Viewport = new Rect(0d, 0d, 1d, 1d),
+                        ViewportUnits = BrushMappingMode.RelativeToBoundingBox
+                    };
+                }
+
                 _displayRect.Width = _display.Width;
                 _displayRect.Height = _display.Height;
             }
             else
             {
                 _defaultImage = null;
+                _runningImage = null;
             }
         }
     }

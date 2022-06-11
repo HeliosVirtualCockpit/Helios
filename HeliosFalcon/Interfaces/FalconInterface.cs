@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2021 Helios Contributors
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -19,8 +19,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Threading;
 using System.Xml;
-using System.Xml.Serialization;
 using GadrocsWorkshop.Helios.ComponentModel;
 using GadrocsWorkshop.Helios.Interfaces.Common;
 using Microsoft.Win32;
@@ -34,29 +34,25 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         const string falconRootKey = @"SOFTWARE\WOW6432Node\Benchmark Sims\";
         private FalconTypes _falconType;
         private string _falconPath;
-        private string _pilotCallsign;
-        private string _currentTheater;
-        private string _keyFile;
+        private string _keyFileName;
         private string _cockpitDatFile;
         private bool _focusAssist;
         private string _falconVersion;
-        private string[] _falconVersions;
-        private Version _falconProfileVersion;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private FalconDataExporter _dataExporter;
-        private FalconKeyFile _callbacks = new FalconKeyFile("");
         private bool _forceKeyFile;
         private bool _inFlight;
         private bool _inFlightLastValue;
+        private DispatcherTimer _dispatcherTimer;
 
         public FalconInterface()
             : base("Falcon")
         {
             FalconType = FalconTypes.BMS;
-            _falconVersions = GetFalconVersions();
+            FalconVersions = GetFalconVersions();
             _falconPath = GetFalconPath();
-            _pilotCallsign = GetpilotCallsign();
-            _currentTheater = GetCurrentTheater();
+            PilotCallsign = GetpilotCallsign();
+            CurrentTheater = GetCurrentTheater();
 
             _dataExporter = new BMS.BMSFalconDataExporter(this);
 
@@ -90,9 +86,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 
         #region Properties
 
-        public string CurrentTheater { get { return _currentTheater; } }
-        public string PilotCallsign { get { return _pilotCallsign; } }
-        
+        public string CurrentTheater { get; private set; }
+        public string PilotCallsign { get; }
+
         public bool ForceKeyFile
         {
             get { return _forceKeyFile; }
@@ -103,6 +99,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                 OnPropertyChanged("ForceKeyFile", oldValue, value, true);
             }
         }
+
         public bool FocusAssist
         {
             get { return _focusAssist; }
@@ -114,21 +111,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             }
         }
 
-        public string[] FalconVersions
-        {
-            get
-            {
-                return _falconVersions;
-            }
-        }
+        public bool TextureRefreshRate_90 { get; set; } = true;
+        public bool TextureRefreshRate_60 { get; set; } = false;
+        public bool TextureRefreshRate_30 { get; set; } = false;
+        public bool UseLegacyTextureRefreshRate { get; set; } = false;
+
+        public string[] FalconVersions { get; }
 
         public string FalconVersion
         {
             get
             {
-                if(_falconVersion == null && _falconVersions != null)
+                if(_falconVersion == null && FalconVersions != null)
                 {
-                    _falconVersion = _falconVersions[0];
+                    _falconVersion = FalconVersions[0];
                 }
                 return _falconVersion;
             }
@@ -140,26 +136,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                     string oldValue = _falconVersion;
                     _falconVersion = value;
                     OnPropertyChanged("FalconVersion", oldValue, value, false);
-                    FalconProfileVersion = ParseProfileVersion(_falconVersion);
                     FalconPath = GetFalconPath();
-                }
-            }
-        }
-
-        public Version FalconProfileVersion
-        {
-            get
-            {
-                return _falconProfileVersion;
-            }
-            set
-            {
-                if (_falconProfileVersion == null && value != null ||
-                    _falconProfileVersion != null && !_falconProfileVersion.Equals(value))
-                {
-                    Version oldValue = _falconProfileVersion;
-                    _falconProfileVersion = value;
-                    OnPropertyChanged("FalconVersion", oldValue, value, false);
                 }
             }
         }
@@ -198,18 +175,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             }
         }
 
-        public FalconKeyFile KeyFile
-        {
-            get { return _callbacks; }
-        }
+        public FalconKeyFile KeyFile { get; private set; } = new FalconKeyFile("");
 
         public string KeyFileName
         {
             get
             {
-                if(_keyFile != null)
+                if(_keyFileName != null)
                 {
-                    return _keyFile;
+                    return _keyFileName;
                 }
                 else
                 {
@@ -218,15 +192,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             }
             set
             {
-                if ((_keyFile == null && value != null)
-                    || (_keyFile != null && value != null))
+                if ((_keyFileName == null && value != null)
+                    || (_keyFileName != null && value != null))
                 {
-                    string oldValue = _keyFile;
-                    FalconKeyFile oldKeyFile = _callbacks;
-                    _keyFile = value;
-                    _callbacks = new FalconKeyFile(_keyFile);
+                    string oldValue = _keyFileName;
+                    FalconKeyFile oldKeyFile = KeyFile;
+                    _keyFileName = value;
+                    KeyFile = new FalconKeyFile(_keyFileName);
                     OnPropertyChanged("KeyFileName", oldValue, value, true);
-                    OnPropertyChanged("KeyFile", oldKeyFile, _callbacks, false);
+                    OnPropertyChanged("KeyFile", oldKeyFile, KeyFile, false);
                     InvalidateStatusReport();
                 }
             }
@@ -272,19 +246,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 
         internal List<string> NavPoints => _dataExporter?.NavPoints;
 
-        internal bool StringDataUpdated => (bool)(_dataExporter?.StringDataUpdated);
+        internal bool StringDataUpdated => _dataExporter.StringDataUpdated;
 
         public string[] RwrInfo => _dataExporter?.RwrInfo;
 
         public Interfaces.RTT.ConfigGenerator Rtt { get; private set; }
 
         #endregion
-
-        public static Version ParseProfileVersion(string versionString)
-        {
-            Version ver = Version.Parse(System.Text.RegularExpressions.Regex.Replace(versionString, "[A-Za-z ]", ""));
-            return ver;
-        }
 
         public string[] GetFalconVersions()
         {
@@ -426,6 +394,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             {
                 Rtt.OnProfileStop();
             }
+
+            if (_dispatcherTimer != null)
+            {
+                _dispatcherTimer.Stop();
+                _dispatcherTimer = null;
+            }
         }
 
         void Profile_ProfileTick(object sender, EventArgs e)
@@ -439,14 +413,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             {
                 if (_inFlight)
                 {
-                    _currentTheater = GetCurrentTheater();
-
                     _dataExporter?.PollFlightStartData();
-
-                    _dataExporter.Synchronized = false;
-                    _dataExporter?.PollUserInterfaceData();
-                    _dataExporter?.PollFlightData();
-                    _dataExporter.Synchronized = true;
                 }
 
                 _inFlightLastValue = _inFlight;
@@ -486,37 +453,42 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             }
 
             _dataExporter?.InitData();
+
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            _dispatcherTimer.Start();
         }
 
-        public override void Reset()
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            _currentTheater = GetCurrentTheater();
+            CurrentTheater = GetCurrentTheater();
         }
 
         void PressAction_Execute(object action, HeliosActionEventArgs e)
         {
-            if (_callbacks.HasCallback(e.Value.StringValue))
+            if (KeyFile.HasCallback(e.Value.StringValue))
             {
                 WindowFocused(_falconType);
-                _callbacks[e.Value.StringValue].Down();
+                KeyFile[e.Value.StringValue].Down();
             }
         }
 
         void ReleaseAction_Execute(object action, HeliosActionEventArgs e)
         {
-            if (_callbacks.HasCallback(e.Value.StringValue))
+            if (KeyFile.HasCallback(e.Value.StringValue))
             {
                 WindowFocused(_falconType);
-                _callbacks[e.Value.StringValue].Up();
+                KeyFile[e.Value.StringValue].Up();
             }
         }
 
         void SendAction_Execute(object action, HeliosActionEventArgs e)
         {
-            if (_callbacks.HasCallback(e.Value.StringValue))
+            if (KeyFile.HasCallback(e.Value.StringValue))
             {
                 WindowFocused(_falconType);
-                _callbacks[e.Value.StringValue].Press();
+                KeyFile[e.Value.StringValue].Press();
             }
         }
         
@@ -590,6 +562,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                     case "ForceKeyFile":
                         ForceKeyFile = Convert.ToBoolean(reader.ReadElementString("ForceKeyFile"));
                         break;
+                    case "TextureRefreshRate_30":
+                        TextureRefreshRate_30 = Convert.ToBoolean(reader.ReadElementString("TextureRefreshRate_30"));
+                        break;
+                    case "TextureRefreshRate_60":
+                        TextureRefreshRate_60 = Convert.ToBoolean(reader.ReadElementString("TextureRefreshRate_60"));
+                        break;
+                    case "TextureRefreshRate_90":
+                        TextureRefreshRate_90 = Convert.ToBoolean(reader.ReadElementString("TextureRefreshRate_90"));
+                        break;
+                    case "UseLegacyTextureRefreshRate":
+                        UseLegacyTextureRefreshRate = Convert.ToBoolean(reader.ReadElementString("UseLegacyTextureRefreshRate"));
+                        if (UseLegacyTextureRefreshRate)
+                        {
+                            TextureRefreshRate_30 = true;
+                            TextureRefreshRate_60 = false;
+                            TextureRefreshRate_90 = false;
+                        }
+                        break;
                     case "FalconVersion":
                         FalconVersion = reader.ReadElementString("FalconVersion");
                         break;
@@ -620,6 +610,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             //writer.WriteElementString("CockpitDatFile", CockpitDatFile);
             writer.WriteElementString("FocusAssist", FocusAssist.ToString());
             writer.WriteElementString("ForceKeyFile", ForceKeyFile.ToString());
+            writer.WriteElementString("TextureRefreshRate_30", TextureRefreshRate_30.ToString());
+            writer.WriteElementString("TextureRefreshRate_60", TextureRefreshRate_60.ToString());
+            writer.WriteElementString("TextureRefreshRate_90", TextureRefreshRate_90.ToString());
 
             if (null != Rtt)
             {
@@ -739,7 +732,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             HeliosBindingCollection missingCallbackBindings = new HeliosBindingCollection();
             foreach (HeliosBinding binding in heliosBindings)
             {
-                if (binding.Value != "" && !_callbacks.HasCallback(binding.Value) && binding.ValueSource.ToString().Equals("StaticValue"))
+                if (binding.Value != "" && !KeyFile.HasCallback(binding.Value) && binding.ValueSource.ToString().Equals("StaticValue"))
                 {
                     missingCallbackBindings.Add(binding);
 
@@ -775,7 +768,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         {
             List<StatusReportItem> newReport = new List<StatusReportItem> (GenerateCommonStatusItems());
 
-            if (_callbacks.IsParsed)
+            if (KeyFile.IsParsed)
             {
                 newReport.AddRange(ReportBindings(CheckBindings(InputBindings)));
             }
@@ -784,6 +777,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             {
                 // write the RTT configuration status report
                 newReport.AddRange(Rtt.OnStatusReport(Viewports));
+
+                // check viewport masking
+                newReport.AddRange(Rtt.ReportViewportMasking(Viewports));
             }
 
             return newReport;

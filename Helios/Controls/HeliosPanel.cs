@@ -1,5 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2021 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -18,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
@@ -50,6 +52,10 @@ namespace GadrocsWorkshop.Helios.Controls
         }
 
         #region Properties
+
+        public bool AllowInteractionFull { get; set; } = false;
+        public bool AllowInteractionNone { get; set; } = true;
+        public bool AllowInteractionLegacy { get; set; } = false;
 
         public bool DrawBorder
         {
@@ -344,6 +350,12 @@ namespace GadrocsWorkshop.Helios.Controls
                 writer.WriteElementString("LeftBorder", LeftBorderImage);
                 writer.WriteEndElement();
             }
+
+            writer.WriteStartElement("Interaction");
+            writer.WriteElementString("AllowInteractionFull", AllowInteractionFull.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("AllowInteractionNone", AllowInteractionNone.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("AllowInteractionLegacy", AllowInteractionLegacy.ToString(CultureInfo.InvariantCulture));
+            writer.WriteEndElement();
         }
 
         public override void ReadXml(XmlReader reader)
@@ -398,11 +410,37 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 DrawBorder = false;
             }
+
+            if (reader.Name.Equals("Interaction"))
+            {
+                reader.ReadStartElement();
+                AllowInteractionFull = bool.Parse(reader.ReadElementString("AllowInteractionFull"));
+                AllowInteractionNone = bool.Parse(reader.ReadElementString("AllowInteractionNone"));
+                AllowInteractionLegacy = bool.Parse(reader.ReadElementString("AllowInteractionLegacy"));
+                reader.ReadEndElement();
+            }
+            else
+            {
+                AllowInteractionFull = false;
+                AllowInteractionNone = false;
+                AllowInteractionLegacy = true;
+            }
         }
 
         public override bool HitTest(Point location)
         {
-            return (FillBackground || DrawBorder);
+            bool retVal = FillBackground || DrawBorder;
+
+            if (AllowInteractionFull)
+            {
+                retVal = false;
+            }
+            else if (AllowInteractionNone)
+            {
+                retVal = true;
+            }
+
+            return retVal;
         }
 
         public override void MouseDown(Point location)

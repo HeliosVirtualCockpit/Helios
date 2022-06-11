@@ -19,13 +19,13 @@ using GadrocsWorkshop.Helios.ComponentModel;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
 {
-    [HeliosControl("Helios.Falcon.MFDLeft", "MFD (Left)", "Falcon Textures", typeof(FalconTextureDisplayRenderer))]
+    [HeliosControl("Helios.Falcon.MFDLeft", "MFD Left", "Falcon Textures", typeof(FalconTextureDisplayRenderer))]
     public class LeftMFD : FalconTextureDisplay
     {
         private static readonly Rect _defaultRect = new Rect(265, 5, 175, 175);
 
         public LeftMFD()
-            : base("MFD (Left)", new Size(485, 502))
+            : base("MFD Left", new Size(485, 502))
         {
         }
 

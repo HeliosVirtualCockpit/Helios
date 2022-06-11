@@ -28,6 +28,11 @@ namespace GadrocsWorkshop.Helios
     /// </summary>
     public class HeliosAction : NotificationObject, IBindingAction, INamedBindingElement
     {
+        /// <summary>
+        /// an explicitly configured id that does not have to be equal to the name, or null to use the name as id
+        /// </summary>
+        private readonly string _explicitId;
+
         private string _device;
         private string _name;
         private string _bindingDescription = "";
@@ -37,15 +42,32 @@ namespace GadrocsWorkshop.Helios
         private WeakReference _context = new WeakReference(null);
 
         public HeliosAction(HeliosObject target, string device, string name, string verb, string description)
-            : this(target, device, name, verb, description, "", BindingValueUnits.NoValue)
+            : this(target, device, null, name, verb, description, "", BindingValueUnits.NoValue)
         {
-            // no additional code
+            // all code in referenced constructor
         }
 
         public HeliosAction(HeliosObject target, string device, string name, string verb, string description,
             string valueDescription, BindingValueUnit unit)
+            : this(target, device, null, name, verb, description, valueDescription, unit)
         {
-            ActionID = "";
+            // all code in referenced constructor
+        }
+
+        /// <summary>
+        /// constructor to be used when id does not match name
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="device"></param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="verb"></param>
+        /// <param name="description"></param>
+        /// <param name="valueDescription"></param>
+        /// <param name="unit"></param>
+        public HeliosAction(HeliosObject target, string device, string id, string name, string verb, string description, string valueDescription, BindingValueUnit unit)
+        {
+            _explicitId = id;
             _device = device;
             _target = new WeakReference(target);
             _name = name;
@@ -66,37 +88,6 @@ namespace GadrocsWorkshop.Helios
             RecalculateName();
         }
 
-        /// <summary>
-        /// constructor to be used when id does not match name
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="device"></param>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="verb"></param>
-        /// <param name="description"></param>
-        /// <param name="valueDescription"></param>
-        /// <param name="unit"></param>
-        public HeliosAction(HeliosObject target, string device, string id, string name, string verb, string description, string valueDescription, BindingValueUnit unit)
-        {
-            ActionID = id;
-            _device = device;
-            _target = new WeakReference(target);
-            _name = name;
-            ActionVerb = verb;
-            ActionDescription = description;
-            ActionValueDescription = valueDescription;
-            Unit = unit;
-
-            UpdateId();
-
-            ActionBindingDescription = ActionVerb + (Device.Length > 0 ? " " + _device : "") + (_name.Length > 0 ? " " + _name + " on" : "") + " " + Target.Name + (ActionRequiresValue ? " to %value%" : "");
-            if (ActionRequiresValue)
-            {
-                ActionInputBindingDescription = "to %value%";
-            }
-        }
-
         public void RecalculateName()
         {
             string targetName = _target.IsAlive ? Target.Name : "";
@@ -107,10 +98,7 @@ namespace GadrocsWorkshop.Helios
 
         private void UpdateId()
         {
-            if (ActionID.Length < 1)
-            {
-                ActionID = _name;
-            }
+            ActionID = _explicitId ?? _name;
             string prefix = "";
             if (!string.IsNullOrEmpty(_device))
             {

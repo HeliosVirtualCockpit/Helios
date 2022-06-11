@@ -48,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
 
             Components.Add(new GaugeImage("{Helios}/Gauges/A-10/ADI/adi_backup_inner_ring.xaml", new Rect(0d, 0d, 350d, 350d)));
 
-            _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0d, -30d, 1d, 30d);
+            _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1d, -30d, 1d, 30d);
             _wings = new GaugeNeedle("{Helios}/Gauges/A-10/ADI/adi_backup_wings.xaml", center, new Size(188d, 37d), new Point(94d, 3d));
             Components.Add(_wings);
 
@@ -72,7 +72,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             Actions.Add(_roll);
 
             _pitchAdjustment = new HeliosValue(this, new BindingValue(0d), "Flight Instruments", "Pitch adjustment offset", "Location of pitch reference wings.", "(0 to 1) 0 full up and 1 is full down.", BindingValueUnits.Numeric);
-            _pitchAdjustment.Execute += new HeliosActionHandler(PitchAdjsut_Execute);
+            _pitchAdjustment.Execute += new HeliosActionHandler(PitchAdjust_Execute);
             Actions.Add(_pitchAdjustment);
 
             _warningFlag = new HeliosValue(this, new BindingValue(false), "Flight Instruments", "ADI Warning Flag", "Indicates whether the warning flag is displayed.", "True if displayed.", BindingValueUnits.Boolean);
@@ -86,7 +86,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _ball.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue);
         }
 
-        void PitchAdjsut_Execute(object action, HeliosActionEventArgs e)
+        void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
             _pitchAdjustment.SetValue(e.Value, e.BypassCascadingTriggers);
             _wings.VerticalOffset = -_pitchAdjustCalibaration.Interpolate(e.Value.DoubleValue);

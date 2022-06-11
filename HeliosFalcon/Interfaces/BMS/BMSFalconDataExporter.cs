@@ -16,13 +16,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Data;
 using GadrocsWorkshop.Helios.Util;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
@@ -67,6 +62,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         private DateTime _unkLastTick;
         private bool _unkOnState;
         private List<string> _navPoints;
+        private string _acName;
+        private string _acNCTR;
         private bool _stringDataUpdated;
         private uint _lastStringAreaTime;
 
@@ -250,6 +247,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("ADI", "ils horizontal", "Position of horizontal ils bar.", "(-1 full left, 1 full right)", BindingValueUnits.Numeric);
             AddValue("ADI", "ils vertical", "Position of vertical ils bar.", "(-1 highest, 1 lowest)", BindingValueUnits.Numeric);
             AddValue("ADI", "ils vertical to flight path", "Position of vertical ils bar with AOA correction.", "(-1 highest, 1 lowest)", BindingValueUnits.Numeric);
+            AddValue("ADI", "sideslip angle", "Angle of sideslip of the aircraft.", "", BindingValueUnits.Degrees);
 
             // Backup ADI
             AddValue("Backup ADI", "off flag", "Backup ADI off flag", "True if displayed.", BindingValueUnits.Boolean);
@@ -349,6 +347,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("IFF", "backup mode 3 digit 1", "AUX COMM: Mode 3 left digit", "", BindingValueUnits.Numeric);
             AddValue("IFF", "backup mode 3 digit 2", "AUX COMM: Mode 3 right digit", "", BindingValueUnits.Numeric);
 
+            // Lighting
+            AddValue("Lighting", "instrument backlight", "Instrument panel backlight brightness.", "0 = Off, 1 = Dim, 2 = Bright", BindingValueUnits.Numeric);
+
             // Misc Bits
             AddValue("Misc", "tfs stanby indicator", "Misc panel Terrain Following(TFS) standby indicator.", "True if lit.", BindingValueUnits.Boolean);
             AddValue("Misc", "tfs engaged indicator", "Misc panel Terrain Following(TFS) engaged indicator.", "True if lit.", BindingValueUnits.Boolean);
@@ -376,6 +377,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("Runtime", "Current Theater", "Name of the Current Theater", "", BindingValueUnits.Text);
             AddValue("Runtime", "Flying", "Player flying state", "True if in 3D.", BindingValueUnits.Boolean);
             AddValue("Runtime", "Flight Start Mode", "Flight initial start mode.", "1 = Ramp Start, 2 = Hot Start, 3 = Air Start", BindingValueUnits.Numeric);
+            AddValue("Runtime", "RTT Enabled", "RTT texture extraction state", "True if RTT enabled.", BindingValueUnits.Boolean);
+            AddValue("Runtime", "Aircraft Name", "The name of the aircraft", "Example: F-16B-15 or F/A-18D", BindingValueUnits.Text);
+            AddValue("Runtime", "Aircraft Nomenclature", "The nomenclature of the aircraft", "Example: F16 or F18", BindingValueUnits.Text);
         }
 
         internal override void InitData()
@@ -400,6 +404,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
 
                 SetValue("Runtime", "Flying", new BindingValue(lastFlightData.hsiBits.HasFlag(HsiBits.Flying)));
             }
+
+            SetValue("Runtime", "RTT Enabled", new BindingValue(FalconInterface.Rtt.Enabled));
         }
 
         internal override void PollFlightStartData()
@@ -454,6 +460,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 SetValue("ADI", "roll", new BindingValue(_lastFlightData.roll));
                 SetValue("ADI", "ils horizontal", new BindingValue((_lastFlightData.AdiIlsHorPos / 2.5f) - 1f));
                 SetValue("ADI", "ils vertical", new BindingValue((_lastFlightData.AdiIlsVerPos * 2f) - 1f));
+                SetValue("ADI", "sideslip angle", new BindingValue(_lastFlightData.beta));
                 SetValue("HSI", "bearing to beacon", new BindingValue(_lastFlightData.bearingToBeacon));
                 SetValue("HSI", "current heading", new BindingValue(_lastFlightData.currentHeading));
                 SetValue("HSI", "desired course", new BindingValue(_lastFlightData.desiredCourse));
@@ -565,6 +572,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 SetValue("Hydraulic", "Pressure A", new BindingValue(_lastFlightData2.hydPressureA));
                 SetValue("Hydraulic", "Pressure B", new BindingValue(_lastFlightData2.hydPressureB));
                 SetValue("Time", "Time", new BindingValue(_lastFlightData2.currentTime));
+                SetValue("Lighting", "instrument backlight", new BindingValue((int)_lastFlightData2.instrLight));
 
                 //Bullseye                
                 ProcessOwnshipFromBullseye(_lastFlightData.x, _lastFlightData.y, _lastFlightData2.bullseyeX, _lastFlightData2.bullseyeY);
@@ -597,6 +605,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                         var _rawStringData = new byte[_stringAreaSize];
                         Marshal.Copy(_sharedMemoryStringArea.GetPointer(), _rawStringData, 0, (int)_stringAreaSize);
                         _navPoints = stringData.GetNavPoints(_rawStringData);
+
+                        _acName = stringData.GetValueForStrId(_rawStringData, StringIdentifier.AcName);
+                        _acNCTR = stringData.GetValueForStrId(_rawStringData, StringIdentifier.AcNCTR);
                     }
                 }
                 else
@@ -607,6 +618,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
 
             //Runtime bindings
             SetValue("Runtime", "Current Theater", new BindingValue(FalconInterface.CurrentTheater));
+            SetValue("Runtime", "Aircraft Name", new BindingValue(_acName));
+            SetValue("Runtime", "Aircraft Nomenclature", new BindingValue(_acNCTR));
         }
 
         internal float ClampAOA(float alpha)

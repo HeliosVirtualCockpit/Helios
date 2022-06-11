@@ -24,6 +24,11 @@ namespace GadrocsWorkshop.Helios
         private string _device;
         private string _name;
 
+        /// <summary>
+        /// an explicitly configured id that does not have to be equal to the name, or null to use the name as id
+        /// </summary>
+        private readonly string _explicitId;
+
         private readonly WeakReference _owner;
         private WeakReference _context = new WeakReference(null);
 
@@ -35,7 +40,7 @@ namespace GadrocsWorkshop.Helios
 
         public HeliosValue(HeliosObject owner, BindingValue initialValue, string device, string name,
             string description, string valueDescription, BindingValueUnit unit)
-            : this(owner, initialValue, device, "", name, description, valueDescription, unit)
+            : this(owner, initialValue, device, null, name, description, valueDescription, unit)
         {
             // all code in referenced constructor
         }
@@ -53,7 +58,7 @@ namespace GadrocsWorkshop.Helios
         /// <param name="unit"></param>
         public HeliosValue(HeliosObject owner, BindingValue initialValue, string device, string id, string name, string description, string valueDescription, BindingValueUnit unit)
         {
-            ValueID = id;
+            _explicitId = id;
             _device = device;
             _name = name;
             ActionDescription = description;
@@ -76,10 +81,7 @@ namespace GadrocsWorkshop.Helios
 
         private void UpdateId()
         {
-            if (ValueID.Length < 1)
-            {
-                ValueID = _name;
-            }
+            ValueID = _explicitId ?? _name;
             if (!string.IsNullOrEmpty(_device))
             {
                 ActionID = $"{_device}.set.{ValueID}";

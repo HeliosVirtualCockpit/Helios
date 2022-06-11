@@ -687,6 +687,20 @@
     <Resource Include="Images\INS_Panel.png" />
     <Resource Include="Images\Left Throttle Panel.png" />
     <Resource Include="Images\Flaps Panel.png" />
+    <Resource Include="Images\Stopwatch Bezel.png" />
+    <Resource Include="Images\Stopwatch_Button_Pushed.png" />
+    <Resource Include="Images\Stopwatch_Button_Unpushed.png" />
+    <Resource Include="Images\Stopwatch_Lap_Button_Pushed.png" />
+    <Resource Include="Images\Stopwatch_Lap_Button_Unpushed.png" />
+    <Resource Include="Images\Stopwatch Faceplate.png" />
+    <Resource Include="Images\Stopwatch Mounting Panel.png" />
+    <Resource Include="Images\Stopwatch Minute Hand.png" />
+    <Resource Include="Images\Stopwatch Second Hand.png" />
+    <Resource Include="Images\Clock Bezel.png" />
+    <Resource Include="Images\Clock Panel.png" />
+    <Resource Include="Images\Clock Button Pushed.png" />
+    <Resource Include="Images\Clock Button Unpushed.png" />
+    <Resource Include="Images\Clock Knob.png" />
     <Content Include="Templates\Base\AV-8B\Switch 2-way Toggle Domed.htpl">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

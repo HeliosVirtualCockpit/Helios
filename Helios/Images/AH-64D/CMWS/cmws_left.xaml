@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <Canvas Width="437.000" Height="437.000" Name="CMWS_Arrows_Left"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Canvas>
+            <Canvas>
+                <!-- CMWS Threat Direction Indicator/Top Left/<Path> -->
+                <Path Fill="#ffffd841" Data="F1 M 28.775,218.473 L 48.566,238.264 L 48.566,228.764 L 58.831,228.764 L 58.831,208.236 L 48.566,208.236 L 48.566,198.682 L 28.775,218.473 Z"/>
+            </Canvas>
+        </Canvas>
+    </Canvas>

@@ -64,7 +64,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             string rtnValue = "";
             foreach(var item in GetStringData(data).data)
             {
-                Console.WriteLine($"'{(StringIdentifier)item.strId}' = '{item.value}'");
                 if ((StringIdentifier)item.strId == stringIdentifier)
                 {
                     rtnValue = item.value;

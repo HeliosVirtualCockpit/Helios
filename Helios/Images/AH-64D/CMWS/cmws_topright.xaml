@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <Canvas Width="437.000" Height="437.000" Name="CMWS_Arrows_Top_Right"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Canvas>
+            <Canvas>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 408.225,218.527 L 388.434,198.736 L 388.434,208.236 L 378.169,208.236 L 378.169,228.764 L 388.434,228.764 L 388.434,238.318 L 408.225,218.527 Z"/>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 218.527,28.775 L 198.736,48.566 L 208.236,48.566 L 208.236,58.831 L 228.764,58.831 L 228.764,48.566 L 238.318,48.566 L 218.527,28.775 Z"/>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 352.675,84.363 L 324.686,84.363 L 331.403,91.081 L 324.145,98.339 L 338.661,112.855 L 345.919,105.597 L 352.675,112.352 L 352.675,84.363 Z"/>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 418.474,18.525 L 348.146,18.500 L 365.031,35.385 L 346.800,53.616 L 383.289,90.105 L 401.520,71.874 L 418.500,88.854 L 418.474,18.525 Z"/>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 393.934,167.803 L 371.901,173.706 L 373.673,180.316 L 395.705,174.413 L 393.934,167.803 Z"/>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 374.835,124.125 L 355.081,135.530 L 358.502,141.456 L 378.256,130.051 L 374.835,124.125 Z"/>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 306.702,58.601 L 295.297,78.355 L 301.224,81.776 L 312.629,62.022 L 306.702,58.601 Z"/>
+
+                <!-- CMWS Threat Direction Indicator/Top Right/<Path> -->
+                <Path Fill="#ffff9811" Data="F1 M 262.312,41.221 L 256.408,63.254 L 263.018,65.025 L 268.922,42.992 L 262.312,41.221 Z"/>
+
+            </Canvas>
+
+        </Canvas>
+    </Canvas>

@@ -23,6 +23,8 @@ namespace GadrocsWorkshop.Helios.Controls
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.PushButton", "Behavior")]
     [HeliosPropertyEditor("Helios.Base.IndicatorPushButton", "Behavior")]
+    [HeliosPropertyEditor("Helios.Base.BacklitPushButton", "Behavior")]
+    [HeliosPropertyEditor("Helios.Base.DualIndicatorPushButton", "Behavior")]
     public partial class PushButtonBehaviorEditor : HeliosPropertyEditor
     {
         public PushButtonBehaviorEditor()

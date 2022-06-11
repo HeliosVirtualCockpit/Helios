@@ -187,6 +187,39 @@ namespace GadrocsWorkshop.Helios
                     item.Key.Top = item.Value.Top + (locYDif * scaleY) - locYDif;
                 }
                 item.Key.Height = Math.Max(item.Value.Height * scaleY, 1d);
+                if (GlobalOptions.HasScaleAllText)
+                {
+                    switch (item.Key.TypeIdentifier)
+                    {
+                        // These scaling operations on fonts rely on the ConfiguredFontSize of the button being the initial fontsize, 
+                        // so that multiple scalings, either up or down, are done with reference to the starting fontsize rather than
+                        // the current font being used.  It is therefore important that when the child is created, the 
+                        // TextFormat.ConfiguredFontSize should be set to the TextFormat.FontSize.
+                        case "Helios.Base.PushButton":
+                            PushButton pb = item.Key as PushButton;
+                            if (pb.TextFormat != null)
+                            {
+                                pb.TextFormat.FontSize = Clamp(pb.TextFormat.ConfiguredFontSize * scaleY, 1, 2000);
+                            }
+                            break;
+                        case "Helios.Base.RockerSwitch":
+                            RockerSwitch rs = item.Key as RockerSwitch;
+                            if (rs.TextFormat != null)
+                            {
+                                rs.TextFormat.FontSize = Clamp(rs.TextFormat.ConfiguredFontSize * scaleY, 1, 2000);
+                            }
+                            break;
+                        case "Helios.Base.Text":
+                            Controls.TextDecoration td = item.Key as Controls.TextDecoration;
+                            if (td.Format != null)
+                            {
+                                td.Format.FontSize = Clamp(td.Format.ConfiguredFontSize * scaleY, 1, 2000);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
 
@@ -545,7 +578,7 @@ namespace GadrocsWorkshop.Helios
                 Text = buttonText,
                 Name = componentName
             };
-
+            button.TextFormat.ConfiguredFontSize = button.TextFormat.FontSize;
             Children.Add(button);
 
             AddTrigger(button.Triggers["pushed"], componentName);
@@ -945,22 +978,18 @@ namespace GadrocsWorkshop.Helios
             string interfaceElementName
             )
         {
-            gauge.Name = name;
+            gauge.Name = GetComponentName(name);
             gauge.Top = posn.Y;
             gauge.Left = posn.X;
             gauge.Width = size.Width;
             gauge.Height = size.Height;
 
-            // XXX what is going on here?  we just set Name above
-            string componentName = GetComponentName(name);
-            gauge.Name = componentName;
-
             Children.Add(gauge);
 
-            AddAction(gauge.Actions["set.value"], componentName);
+            AddAction(gauge.Actions["set.value"], GetComponentName(name));
 
             AddDefaultInputBinding(
-                childName: componentName,
+                childName: GetComponentName(name),
                 interfaceTriggerName: interfaceDeviceName + "." + interfaceElementName + ".changed",
                 deviceActionName: "set.value");
             return gauge;
@@ -975,15 +1004,11 @@ namespace GadrocsWorkshop.Helios
             string interfaceElementName
             )
         {
-            device.Name = name;
+            device.Name = GetComponentName(name);
             device.Top = posn.Y;
             device.Left = posn.X;
             device.Width = size.Width;
             device.Height = size.Height;
-
-            // XXX what is going on here?  we just set Name above
-            string componentName = GetComponentName(name);
-            device.Name = componentName;
 
             Children.Add(device);
             foreach (IBindingTrigger trigger in device.Triggers)
@@ -998,7 +1023,6 @@ namespace GadrocsWorkshop.Helios
                 }
 
                 AddAction(action, action.Device);
-                // Create the automatic input bindings for the IFEI_Gauge sub component
                 AddDefaultInputBinding(
                     childName: name,
                     deviceActionName: action.ActionVerb + "." + action.Device,
@@ -1017,15 +1041,11 @@ namespace GadrocsWorkshop.Helios
             string interfaceElementName
             )
         {
-            gauge.Name = name;
+            gauge.Name = GetComponentName(name);
             gauge.Top = posn.Y;
             gauge.Left = posn.X;
             gauge.Width = size.Width;
             gauge.Height = size.Height;
-
-            // XXX what is going on here?  we just set Name above
-            string componentName = GetComponentName(name);
-            gauge.Name = componentName;
 
             Children.Add(gauge);
             foreach (IBindingTrigger trigger in gauge.Triggers)
@@ -1041,7 +1061,7 @@ namespace GadrocsWorkshop.Helios
 
                 AddAction(action, action.Device);
                 AddDefaultInputBinding(
-                    childName: componentName,
+                    childName: GetComponentName(name),
                     interfaceTriggerName: interfaceDeviceName + "." + interfaceElementName + ".changed",
                     deviceActionName: action.Device + "." + action.ActionVerb + "." + action.Name
                 );
@@ -1062,6 +1082,18 @@ namespace GadrocsWorkshop.Helios
             };
             Children.Add(panel);
             return panel;
+        }
+        private double Clamp(double value, double min, double max)
+        {
+            if (value < min)
+            {
+                return min;
+            }
+            if (value > max)
+            {
+                return max;
+            }
+            return value;
         }
     }
 }

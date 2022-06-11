@@ -1,0 +1,682 @@
+﻿[
+  {
+    "templateName": "F-14B Pilot (Helios 16/9)",
+    "moduleId": "HEATBLUR_F-14",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "UHF_ARC159_M",
+        "relativeInitFilePath": "Mods/Aircraft/F14/Cockpit/Scripts/UHF_Radio/Indicator/Main/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 452,
+        "y": 486,
+        "width": 137,
+        "height": 30
+      },
+      {
+        "viewportName": "UHF_ARC159_RP",
+        "relativeInitFilePath": "Mods/Aircraft/F14/Cockpit/Scripts/UHF_Radio/Indicator/RemotePilot/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1452,
+        "y": 270,
+        "width": 120,
+        "height": 30
+      },
+      {
+        "viewportName": "VHF_ARC182_RP",
+        "relativeInitFilePath": "Mods/Aircraft/F14/Cockpit/Scripts/VHF_Radio/Indicator/RemotePilot/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1452,
+        "y": 354,
+        "width": 120,
+        "height": 30
+      },
+      {
+        "viewportName": "ECMD",
+        "relativeInitFilePath": "",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 729,
+        "y": 697,
+        "width": 480,
+        "height": 480
+      },
+      {
+        "viewportName": "VDI",
+        "relativeInitFilePath": "",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 794,
+        "y": 290,
+        "width": 338,
+        "height": 324
+      },
+      {
+        "viewportName": "RWR_PILOT",
+        "relativeInitFilePath": "Mods/Aircraft/F14/Cockpit/Scripts/RWR/Indicator/Pilot/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1472,
+        "y": 443,
+        "width": 170,
+        "height": 170
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/F14/Cockpit/Scripts/HeadUpDisplay/Indicator/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "templateName": "F/A-18C (Helios 16/9)",
+    "moduleId": "FA-18C",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "LEFT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_left_viewport_cfg.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 158,
+        "y": 165,
+        "width": 330,
+        "height": 311
+      },
+      {
+        "viewportName": "RIGHT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/MDI_IP1556A/indicator/MDI_right_viewport_cfg.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 970,
+        "y": 165,
+        "width": 330,
+        "height": 311
+      },
+      {
+        "viewportName": "RWR",
+        "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/TEWS/indicator/RWR_ALR67_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1166,
+        "y": 600,
+        "width": 150,
+        "height": 150
+      },
+      {
+        "viewportName": "CENTER_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/AMPCD/indicator/AMPCD_viewport_cfg.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 562,
+        "y": 572,
+        "width": 315,
+        "height": 300
+      },
+      {
+        "viewportName": "IFEI",
+        "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/IFEI/indicator/IFEI_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 52,
+        "y": 630,
+        "width": 430,
+        "height": 167
+      },
+      {
+        "viewportName": "UFC",
+        "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/UFC/indicator/UFC_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 538,
+        "y": 25,
+        "width": 380,
+        "height": 216
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/FA-18C/Cockpit/Scripts/Multipurpose_Display_Group/HUD_AVQ32/indicator/AVQ32_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "templateName": "KA-50 (Helios 16/9)",
+    "moduleId": "KA-50",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "SHKVAL",
+        "relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/SHKVAL/BAKE/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 717,
+        "y": 240,
+        "width": 507,
+        "height": 320
+      },
+      {
+        "viewportName": "ABRIS",
+        "relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/ABRIS/BAKE/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1280,
+        "y": 376,
+        "width": 421,
+        "height": 543
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/HUD/HUD_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "templateName": "F-16C (Helios 16/9)",
+    "moduleId": "F-16C",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "LEFT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/MFD/indicator/MFD_left_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 275,
+        "y": 384,
+        "width": 375,
+        "height": 375
+      },
+      {
+        "viewportName": "RIGHT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/MFD/indicator/MFD_right_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1280,
+        "y": 384,
+        "width": 375,
+        "height": 375
+      },
+      {
+        "viewportName": "LEFT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/MFD/indicator/LCD/MFD_LCD.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 275,
+        "y": 384,
+        "width": 375,
+        "height": 375
+      },
+      {
+        "viewportName": "RIGHT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/MFD/indicator/LCD/MFD_LCD.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1280,
+        "y": 384,
+        "width": 375,
+        "height": 375
+      },
+      {
+        "viewportName": "RWR",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/EWS/RWR/indicator/RWR_ALR56_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 463,
+        "y": 74,
+        "width": 225,
+        "height": 225
+      },
+      {
+        "viewportName": "DED",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/DED/indicator/DED_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1211,
+        "y": 0,
+        "width": 317,
+        "height": 108
+      },
+      {
+        "viewportName": "EHSI",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/EHSI/indicator/EHSI_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 852,
+        "y": 836,
+        "width": 218,
+        "height": 218
+      },
+      {
+        "viewportName": "EHSI",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/EHSI/indicator/LCD/EHSI_LCD.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 852,
+        "y": 836,
+        "width": 218,
+        "height": 218
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/F-16C/Cockpit/Scripts/Displays/HUD/indicator/HUD_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "templateName": "A-10C (Helios 16/9)",
+    "moduleId": "A-10C",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "LEFT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/MFCD/indicator/MFCD_left_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 59,
+        "y": 140,
+        "width": 435,
+        "height": 435
+      },
+      {
+        "viewportName": "RIGHT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/MFCD/indicator/MFCD_right_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1417,
+        "y": 140,
+        "width": 435,
+        "height": 435
+      },
+      {
+        "viewportName": "CMSP_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/CMSP/indicator/CMSP_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": -1610,
+        "y": 25,
+        "width": 207,
+        "height": 41
+      },
+      {
+        "viewportName": "CMSC_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/CMSC/indicator/CMSC_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 860,
+        "y": 122,
+        "width": 250,
+        "height": 58
+      },
+      {
+        "viewportName": "RWR_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/AN_ALR69V/indicator/AN_ALR69V_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 594,
+        "y": 162,
+        "width": 185,
+        "height": 185
+      },
+      {
+        "viewportName": "DIGIT_CLOCK",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/DigitalClock/Indicator/DIGIT_CLK_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 478,
+        "y": 825,
+        "width": 123,
+        "height": 123
+      },
+      {
+        "viewportName": "UHF_FREQUENCY_STATUS",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/freq_status_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 546,
+        "y": 438,
+        "width": 112,
+        "height": 28
+      },
+      {
+        "viewportName": "UHF_PRESET_CHANNEL",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/preset_channel_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 637,
+        "y": 367,
+        "width": 34,
+        "height": 27
+      },
+      {
+        "viewportName": "UHF_REPEATER",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/UHF_Radio/indicator/repeater_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 666,
+        "y": 698,
+        "width": 95,
+        "height": 25
+      },
+      {
+        "viewportName": "CDU_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/CDU/indicator/CDU_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1225,
+        "y": 642,
+        "width": 222,
+        "height": 163
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/A-10C/Cockpit/Scripts/HUD/Indicator/HUD_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "templateName": "A-10C II",
+    "moduleId": "A-10C_2",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "LEFT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/MFCD/indicator/MFCD_left_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 59,
+        "y": 140,
+        "width": 435,
+        "height": 435
+      },
+      {
+        "viewportName": "RIGHT_MFCD",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/MFCD/indicator/MFCD_right_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1417,
+        "y": 140,
+        "width": 435,
+        "height": 435
+      },
+      {
+        "viewportName": "CMSP_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/CMSP/indicator/CMSP_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": -1610,
+        "y": 25,
+        "width": 207,
+        "height": 41
+      },
+      {
+        "viewportName": "CMSC_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/CMSC/indicator/CMSC_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 860,
+        "y": 122,
+        "width": 250,
+        "height": 58
+      },
+      {
+        "viewportName": "RWR_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/AN_ALR69V/indicator/AN_ALR69V_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 594,
+        "y": 162,
+        "width": 185,
+        "height": 185
+      },
+      {
+        "viewportName": "DIGIT_CLOCK",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/DigitalClock/Indicator/DIGIT_CLK_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 478,
+        "y": 825,
+        "width": 123,
+        "height": 123
+      },
+      {
+        "viewportName": "UHF_FREQUENCY_STATUS",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/UHF_Radio/indicator/freq_status_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 546,
+        "y": 438,
+        "width": 112,
+        "height": 28
+      },
+      {
+        "viewportName": "UHF_PRESET_CHANNEL",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/UHF_Radio/indicator/preset_channel_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 637,
+        "y": 367,
+        "width": 34,
+        "height": 27
+      },
+      {
+        "viewportName": "UHF_REPEATER",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/UHF_Radio/indicator/repeater_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 666,
+        "y": 698,
+        "width": 95,
+        "height": 25
+      },
+      {
+        "viewportName": "CDU_SCREEN",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/CDU/indicator/CDU_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1225,
+        "y": 642,
+        "width": 222,
+        "height": 163
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/HUD/Indicator/HUD_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "templateName": "M-2000C",
+    "moduleId": "M2000C",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "COM_GREENBOX",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/COM/COM_GreenBox_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 783,
+        "y": 660,
+        "width": 170,
+        "height": 40
+      },
+      {
+        "viewportName": "COM",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/COM/COM_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 420,
+        "y": 149,
+        "width": 100,
+        "height": 60
+      },
+      {
+        "viewportName": "FUEL",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/FUEL/FUEL_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1805,
+        "y": 447,
+        "width": 60,
+        "height": 40
+      },
+      {
+        "viewportName": "PCA_BR",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/PCA_PPA/PCA_BR_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 120,
+        "y": 949,
+        "width": 540,
+        "height": 50
+      },
+      {
+        "viewportName": "PCA_UR",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/PCA_PPA/PCA_UR_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 120,
+        "y": 822,
+        "width": 540,
+        "height": 50
+      },
+      {
+        "viewportName": "PPA",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/PCA_PPA/PPA_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1424,
+        "y": 895,
+        "width": 60,
+        "height": 100
+      },
+      {
+        "viewportName": "PCN_BR",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/PCN/PCN_BR_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 783,
+        "y": 585,
+        "width": 250,
+        "height": 60
+      },
+      {
+        "viewportName": "PCN_UR",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/PCN/PCN_UR_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 783,
+        "y": 514,
+        "width": 360,
+        "height": 60
+      },
+      {
+        "viewportName": "RWR",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/RWR/RWR_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1280,
+        "y": 170,
+        "width": 260,
+        "height": 260
+      },
+      {
+        "viewportName": "VTB",
+        "relativeInitFilePath": "Mods/Aircraft/M-2000C/Cockpit/VTB/VTB_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 754,
+        "y": 506,
+        "width": 400,
+        "height": 400
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/M-2000C/Cockpit/VTH/HUD_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
+  }
+]

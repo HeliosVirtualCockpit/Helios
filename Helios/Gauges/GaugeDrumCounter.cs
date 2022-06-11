@@ -1,5 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -50,6 +51,22 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
 
         #region Properties
+
+        public string Image
+        {
+            get
+            {
+                return _imageFile;
+            }
+            set
+            {
+                if (value != _imageFile)
+                {
+                    _imageFile = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
 
         public double Value
         {

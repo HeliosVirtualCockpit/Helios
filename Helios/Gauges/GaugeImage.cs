@@ -1,5 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -23,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private string _imageFile;
         private ImageSource _image;
         private Rect _rectangle;
-        private Rect _imageRetangle;
+        private Rect _imageRectangle;
         private double _opacity;
 
         public GaugeImage(string imageFile, Rect location)
@@ -137,19 +138,19 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             if (_opacity >= 1.0)
             {
-                drawingContext.DrawImage(_image, _imageRetangle);
+                drawingContext.DrawImage(_image, _imageRectangle);
                 return;
             }
 
             drawingContext.PushOpacity(_opacity);
-            drawingContext.DrawImage(_image, _imageRetangle);
+            drawingContext.DrawImage(_image, _imageRectangle);
             drawingContext.Pop();
         }
 
         protected override void OnRefresh(double xScale, double yScale)
         {
-            _imageRetangle = new Rect(_rectangle.X * xScale, _rectangle.Y * yScale, _rectangle.Width * xScale, _rectangle.Height * yScale);
-            _image = ConfigManager.ImageManager.LoadImage(_imageFile, (int)_imageRetangle.Width, (int)_imageRetangle.Height);
+            _imageRectangle = new Rect(_rectangle.X * xScale, _rectangle.Y * yScale, _rectangle.Width * xScale, _rectangle.Height * yScale);
+            _image = ConfigManager.ImageManager.LoadImage(_imageFile, (int)_imageRectangle.Width, (int)_imageRectangle.Height);
         }
     }
 }

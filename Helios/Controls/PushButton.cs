@@ -465,6 +465,8 @@ namespace GadrocsWorkshop.Helios.Controls
         public override void ReadXml(XmlReader reader)
         {
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
+            TypeConverter pointConverter = TypeDescriptor.GetConverter(typeof(Point));
+
             base.ReadXml(reader);
 
             ButtonType = (PushButtonType)Enum.Parse(typeof(PushButtonType), reader.ReadElementString("Type"));
@@ -493,7 +495,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 reader.ReadEndElement();
 
                 Text = reader.ReadElementString("Text");
-
+                if (reader.Name.Equals("TextPushOffset"))
+                {
+                    TextPushOffset = (Point)pointConverter.ConvertFromInvariantString(reader.ReadElementString("TextPushOffset"));
+                }
                 reader.ReadEndElement();
             }
         }
@@ -501,6 +506,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public override void WriteXml(XmlWriter writer)
         {
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
+            TypeConverter pointConverter = TypeDescriptor.GetConverter(typeof(Point));
 
             base.WriteXml(writer);
 
@@ -529,7 +535,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 writer.WriteEndElement();
 
                 writer.WriteElementString("Text", Text);
-
+                if (TextPushOffset != new Point(1, 1))  // 1,1 is the value hard coded
+                {
+                    writer.WriteElementString("TextPushOffset", pointConverter.ConvertToString(null, CultureInfo.InvariantCulture, TextPushOffset));
+                }
                 writer.WriteEndElement();
             }
         }

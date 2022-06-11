@@ -9,14 +9,10 @@ function driver.processLowImportance(mainPanelDevice)
 
 	li = helios.parseIndication(5)
 	if li then
-		--Helios.log.write(thisScript,string.format("UFC Dump " .. Heliosdump(li)))
-		--Helios.log.write(thisScript,string.format("UFC Comm 1: " .. helios.ensureString(li.ufc_chnl_1_m) .. helios.ensureString(li.ufc_chnl_1_v)))
         helios.send(2092, string.format("%2s",helios.ensureString(li.ufc_left_position)))
         helios.send(2094, string.format("%7s",helios.ensureString(li.ufc_right_position)))
-        helios.send(2095, string.format("%2s",helios.ensureString(li.ufc_chnl_1_m) .. helios.ensureString(li.ufc_chnl_1_v)))
-		helios.send(2096, string.format("%2s",helios.ensureString(li.ufc_chnl_2_m) .. helios.ensureString(li.ufc_chnl_2_v)))
-	--[ufc_left_position]  string: "ON"
-    --[ufc_right_position] = string: "16"
+        helios.send(2095, string.format("%2s",string.sub(helios.ensureString(li.ufc_chnl_1_m) .. helios.ensureString(li.ufc_chnl_1_v),-2)))
+		helios.send(2096, string.format("%2s",string.sub(helios.ensureString(li.ufc_chnl_2_m) .. helios.ensureString(li.ufc_chnl_2_v),-2)))
 	end
 
  	local li = helios.parseIndication(6)
@@ -31,11 +27,12 @@ function driver.processLowImportance(mainPanelDevice)
 		helios.send(2089, string.format("%1s",helios.ensureString(li.ODU_Option_3_Slc):gsub(":","!")))  -- ":" is reserved
 		helios.send(2090, string.format("%1s",helios.ensureString(li.ODU_Option_4_Slc):gsub(":","!")))  -- ":" is reserved
 		helios.send(2091, string.format("%1s",helios.ensureString(li.ODU_Option_5_Slc):gsub(":","!")))  -- ":" is reserved
-		-- -- test command 00000000*2096=20:2095=13:2087=!:2088=!:2089=!:2090=!:2091=!:2082=BLUE:2083=FIN :2084=BIMA:2085=2019:2086=test:2094=123.567:2092=~0:2093=-:326=1:336=1:197=1:365=1:196=1: 
+		-- -- test command 00000000*2096=25:2095=13:2087=!:2088=!:2089=!:2090=!:2091=!:2082=BLUE:2083=FIN :2084=BIMA:2085=2019:2086=test:2094=123.567:2092=~0:2093=-:326=1:336=1:197=1:365=1:196=1: 
 	end
  	local li = helios.parseIndication(7)  --V/UHF Radio and ACNIP
 	if li then
 		helios.send(2100, string.format("%2s",helios.ensureString(li.uvhf_channel)))
+
 		helios.send(2101, string.format("%7s",helios.ensureString(li.uvhf_freq_left)))
 		helios.send(2102, string.format("%s",helios.ensureString(li.acnip_1_label_mode)))
 		helios.send(2103, string.format("%s",helios.ensureString(li.acnip_1_mode)))

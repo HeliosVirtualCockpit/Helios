@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2021 Helios Contributors
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -77,14 +77,14 @@ namespace GadrocsWorkshop.Helios.Controls
 			_location = location;
 			_size = size;
 
-			GetPixelsPerDip();
+			SetPixelsPerDip();
 			InitializeImageArrays();
 		}
 
 
-		#region Actions
+		#region Methods
 
-		void InitializeImageArrays()
+		private void InitializeImageArrays()
 		{
 			string imagePath;
 
@@ -173,7 +173,22 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		double NavPointToDouble(string navValue)
+		private void SetPixelsPerDip()
+		{
+			DisplayManager displayManager = new DisplayManager();
+
+			if (displayManager.PixelsPerDip != 0d)
+			{
+				_pixelsPerDip = displayManager.PixelsPerDip;
+			}
+		}
+
+		#endregion Methods
+
+
+		#region Functions
+
+		private double NavPointToDouble(string navValue)
 		{
 			try
 			{
@@ -185,7 +200,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		string NavPointToName(string navName)
+		private string NavPointToName(string navName)
 		{
 			string[] navNameValues = navName.Split(':');
 			if (navNameValues.Length >= 2)
@@ -198,17 +213,59 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		void GetPixelsPerDip()
+		private double FeetToMapUnits_X(double xPosFeet, double xScale)
 		{
-			DisplayManager displayManager = new DisplayManager();
-
-			if (displayManager.PixelsPerDip != 0d)
+			if (xPosFeet > 0d)
 			{
-				_pixelsPerDip = displayManager.PixelsPerDip;
+				return xPosFeet / MapSizeFeet * MapWidth * xScale;
+			}
+			else
+			{
+				return 0d;
 			}
 		}
 
-		#endregion Actions
+		private double FeetToMapUnits_Y(double yPosFeet, double yScale)
+		{
+			if (yPosFeet > 0d)
+			{
+				return (MapSizeFeet - yPosFeet) / MapSizeFeet * MapHeight * yScale;
+			}
+			else
+			{
+				return 0d;
+			}
+		}
+
+		private double FeetToMapUnits_CircleRadius(double radiusFeet, double xScale, double yScale)
+		{
+			if (radiusFeet < _minThreatCircleRadius)
+			{
+				return 0d;
+			}
+			else if (MapHeight >= MapWidth)
+			{
+				return radiusFeet / MapSizeFeet * MapWidth * xScale;
+			}
+			else
+			{
+				return radiusFeet / MapSizeFeet * MapHeight * yScale;
+			}
+		}
+
+		private double FeetToMapUnits_ScaleUnit(double unit, double xScale, double yScale)
+		{
+			if (MapHeight >= MapWidth)
+			{
+				return unit / MapSizeFeet * MapWidth * xScale;
+			}
+			else
+			{
+				return unit / MapSizeFeet * MapHeight * yScale;
+			}
+		}
+
+		#endregion Functions
 
 
 		#region Drawing
@@ -226,7 +283,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			drawingContext.Pop();
 		}
 
-		void DrawThreatCircles(DrawingContext drawingContext)
+		private void DrawThreatCircles(DrawingContext drawingContext)
 		{
 			_lineBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 			_linePen = new Pen(_lineBrush, _mapScaleUnit * 4d);
@@ -247,7 +304,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		void DrawThreatNames(DrawingContext drawingContext)
+		private void DrawThreatNames(DrawingContext drawingContext)
 		{
 			double sizeOffset = _fontScaleSize * 0.1d;
 			double xPosOffset = _mapScaleUnit * 20d;
@@ -276,7 +333,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		void DrawWaypointLines(DrawingContext drawingContext)
+		private void DrawWaypointLines(DrawingContext drawingContext)
 		{
 			_lineBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 			_linePen = new Pen(_lineBrush, _navpointLineWidth) {DashStyle = DashStyles.Dash};
@@ -290,7 +347,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		void DrawWaypointImages(DrawingContext drawingContext)
+		private void DrawWaypointImages(DrawingContext drawingContext)
 		{
 			for (int i = 0; i < _navPoints_WP.GetLength(0); i++)
 			{
@@ -305,7 +362,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		void DrawPospointImages(DrawingContext drawingContext)
+		private void DrawPospointImages(DrawingContext drawingContext)
 		{
 			for (int i = 0; i < _navPoints_PO.GetLength(0); i++)
 			{
@@ -315,6 +372,11 @@ namespace GadrocsWorkshop.Helios.Controls
 				}
 			}
 		}
+
+		#endregion Drawing
+
+
+		#region OnRefresh
 
 		protected override void OnRefresh(double xScale, double yScale)
 		{
@@ -365,67 +427,13 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		double FeetToMapUnits_X(double xPosFeet, double xScale)
-		{
-			if (xPosFeet > 0d)
-			{
-				return xPosFeet / MapSizeFeet * MapWidth * xScale;
-			}
-			else
-			{
-				return 0d;
-			}
-		}
-
-		double FeetToMapUnits_Y(double yPosFeet, double yScale)
-		{
-			if (yPosFeet > 0d)
-			{
-				return (MapSizeFeet - yPosFeet) / MapSizeFeet * MapHeight * yScale;
-			}
-			else
-			{
-				return 0d;
-			}
-		}
-
-		double FeetToMapUnits_CircleRadius(double radiusFeet, double xScale, double yScale)
-		{
-			if (radiusFeet < _minThreatCircleRadius)
-			{
-				return 0d;
-			}
-			else if (MapHeight >= MapWidth)
-			{
-				return radiusFeet / MapSizeFeet * MapWidth * xScale;
-			}
-			else
-			{
-				return radiusFeet / MapSizeFeet * MapHeight * yScale;
-			}
-		}
-
-		double FeetToMapUnits_ScaleUnit(double unit, double xScale, double yScale)
-		{
-			if (MapHeight >= MapWidth)
-			{
-				return unit / MapSizeFeet * MapWidth * xScale;
-			}
-			else
-			{
-				return unit / MapSizeFeet * MapHeight * yScale;
-			}
-		}
-
-		#endregion Drawing
+		#endregion OnRefresh
 
 
 		#region Properties
 
 		public double MapShortestSize { get; set; }
-
 		public double MapScaleMultiplier { get; set; }
-
 		public double MapSizeMultiplier { get; set; } = 1d;
 
 		public double MapWidth
@@ -558,7 +566,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		#endregion
+		#endregion Properties
 
 	}
 }

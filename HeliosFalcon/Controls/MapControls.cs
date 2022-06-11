@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2021 Helios Contributors
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -66,6 +66,21 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
 		#region Properties
+
+		public interface ITargetData
+		{
+			Gauges.GaugeImage TargetImage { get; set; }
+			double TargetBearing { get; set; }
+			double TargetDistance { get; set; }
+			double TargetPosition_X { get; set; }
+			double TargetPosition_Y { get; set; }
+			double TargetHorizontalValue { get; set; }
+			double TargetVerticalValue { get; set; }
+			double MapTargetHorizontalValue { get; set; }
+			double MapTargetVerticalValue { get; set; }
+			double CourseBearing { get; set; }
+			double CourseDistance { get; set; }
+		}
 
 		public string UserMapImage_201
 		{
@@ -843,7 +858,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-		#endregion
+		#endregion Properties
 
 
 		#region Read/Write Xml
@@ -960,7 +975,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			Refresh();
 		}
 
-		#endregion
+		#endregion Read/Write Xml
 
 	}
 }

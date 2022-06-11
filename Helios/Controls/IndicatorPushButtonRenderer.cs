@@ -138,9 +138,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 _pushedImage = null;
                 _onTextBrush = null;
                 _offTextBrush = null;
-                _onTextBrush = null;
                 _onGlyphPen = null;
-                _offTextBrush = null;
                 _offGlyphPen = null;
                 _glyphPath = null;
                 _indicatorOnImage = null;

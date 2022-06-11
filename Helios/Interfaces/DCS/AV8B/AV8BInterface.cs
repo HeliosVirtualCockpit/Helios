@@ -20,7 +20,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
     using GadrocsWorkshop.Helios.Interfaces.DCS.AV8B.Functions;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 
-    [HeliosInterface("Helios.AV8B", "DCS AV-8B", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
+    [HeliosInterface(
+        "Helios.AV8B",                         // Helios internal type ID used in Profile XML, must never change
+        "DCS AV-8B",                    // human readable UI name for this interface
+        typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
+        typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
+        UniquenessKey = "Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
+
     public class AV8BInterface : DCSInterface
     {
         #region Devices
@@ -71,6 +77,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
         public AV8BInterface()
             : base("DCS AV-8B", "AV8BNA", "pack://application:,,,/Helios;component/Interfaces/DCS/AV8B/ExportFunctions.lua")
         {
+
+            // see if we can restore from JSON
+            if (LoadFunctionsFromJson())
+            {
+                return;
+            }
+
             #region Left MCFD
             AddFunction(new PushButton(this, MPCD_LEFT, "3200", "200", "Left MFCD", "OSB01", "1", "0", "%1d"));
             AddFunction(new PushButton(this, MPCD_LEFT, "3201", "201", "Left MFCD", "OSB02", "1", "0", "%1d"));
@@ -165,8 +178,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
             AddFunction(new Axis(this, UFCCONTROL, "3295", "295", 0.1d, 0d, 1d, "UFC", "UFC Brightness Control Knob"));
             AddFunction(new Axis(this, UFCCONTROL, "3298", "298", 0.1d, 0d, 1d, "UFC", "UFC COMM 1 Volume Control Knob"));
             AddFunction(new Axis(this, UFCCONTROL, "3299", "299", 0.1d, 0d, 1d, "UFC", "UFC COMM 2 Volume Control Knob"));
-            AddFunction(new Axis(this, UFCCONTROL, "3300", "300", 0.005d, -1d, 1d, "UFC", "UFC COMM 1 Channel Selector Knob"));
-            AddFunction(new Axis(this, UFCCONTROL, "3301", "301", 0.005d, -1d, 1d, "UFC", "UFC COMM 2 Channel Selector Knob"));
+            AddFunction(new RotaryEncoder(this, UFCCONTROL, "3300", "300", 0.01d, "UFC", "UFC COMM 1 Channel Selector Knob"));
+            AddFunction(new RotaryEncoder(this, UFCCONTROL, "3301", "301", 0.01d, "UFC", "UFC COMM 2 Channel Selector Knob"));
             AddFunction(new PushButton(this, UFCCONTROL, "3178", "178", "UFC", "UFC COMM 1 Channel Selector Pull"));
             AddFunction(new PushButton(this, UFCCONTROL, "3179", "179", "UFC", "UFC COMM 2 Channel Selector Pull"));
             AddFunction(Switch.CreateThreeWaySwitch(this, HUDCONTROL, "3288", "288", "1.0", "Norm", "0.5", "Reject 1", "0.0", "Reject 2", "HUD Control", "Declutter switch", "%.1f"));
@@ -538,8 +551,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
             #endregion
 
             #region Stopwatch
-            AddFunction(new PushButton(this, MSC, "4121", "121", "Stop Watch", "Stopwatch Start/Stop"));
-            AddFunction(new PushButton(this, MSC, "4122", "122", "Stop Watch", "Stopwatch Lap/Reset"));
+            AddFunction(new PushButton(this, MSC, "3051", "1121", "Stopwatch", "Start/Stop Button"));
+            AddFunction(new PushButton(this, MSC, "3052", "1122", "Stopwatch", "Lap/Reset Button"));
+            AddFunction(new ScaledNetworkValue(this, "1119", 60d, "Stopwatch", "Minutes", "Current minute of the stopwatch.", "(0-60)", BindingValueUnits.Numeric));
+            AddFunction(new ScaledNetworkValue(this, "1120", 60d, "Stopwatch", "Seconds", "Current seconds of the stopwatch.", "(0-60)", BindingValueUnits.Numeric));
+
+            #endregion
+
+            #region Clock
+            AddFunction(new PushButton(this, MSC, "3758", "758", "Clock", "Button"));
+            AddFunction(new RotaryEncoder(this, MSC, "3757", "757", 0.01d, "Clock", "Knob"));
+            AddFunction(new ScaledNetworkValue(this, "759", 12d, "Clock", "Hours", "Current seconds of the clock.", "(0-12)", BindingValueUnits.Numeric));
+            AddFunction(new ScaledNetworkValue(this, "760", 60d, "Clock", "Minutes", "Current minute of the clock.", "(0-60)", BindingValueUnits.Numeric));
+            AddFunction(new ScaledNetworkValue(this, "761", 60d, "Clock", "Seconds", "Current seconds of the clock.", "(0-60)", BindingValueUnits.Numeric));
+
             #endregion
 
             #region ECS
@@ -593,9 +618,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
 
             AddFunction(new Altimeter(this,"Flight Instruments","2051","Altitude", "Barometric altitude above sea level of the aircraft.", "Value is adjusted per altimeter pressure setting.", "2059","Air Pressure", "Manually set barometric altitude.",""));
             AddFunction(new RotaryEncoder(this, ADC, "3653", "653", 0.01d, "Flight Instruments", "Barometric pressure calibration adjust"));
-            // TODO remove the old axis function
-            //AddFunction(new Axis(this, ADC, "3653", "653", 0.01d, 0d, 1d, "Flight Instruments", "Barometric pressure calibration adjust", true, "%.3f"));
-
+ 
             CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d);
             vviScale.Add(new CalibrationPointDouble(0d, 0d));
             AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "VVI", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
@@ -608,12 +631,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
             CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
             AddFunction(new ScaledNetworkValue(this, "346", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
 
-            AddFunction(new RotaryEncoder(this, NAV_INS, "3364", "364", 0.01d, "NAV course", "Course Setting"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, NAV_INS, "3364", "364", "1", "Left", "0", "Centre", "-1", "Right", "NAV course", "Course Setting", "%.1f"));
 
             AddFunction(new ScaledNetworkValue(this, "349", 90d, "Flight Instruments", "SAI Pitch", "Current pitch displayed on the SAI.", "", BindingValueUnits.Degrees));
             AddFunction(new ScaledNetworkValue(this, "348", -180d, "Flight Instruments", "SAI Bank", "Current bank displayed on the SAI.", "", BindingValueUnits.Degrees));
             AddFunction(new FlagValue(this, "347", "Flight Instruments", "SAI Warning Flag", "Displayed when SAI is caged or non-functional."));
-            AddFunction(new Axis(this, ADC, "3351", "351", 0.01d, 0d, 1d, "Flight Instruments", "SAI Cage/Pitch Adjust Knob", false, "%.3f"));
+            AddFunction(new Axis(this, FLIGHTINSTRUMENTS, "3351", "351", 0.1d, -1d, 1d, "Flight Instruments", "SAI Pitch Adjust Knob"));
+            AddFunction(new PushButton(this, FLIGHTINSTRUMENTS, "3350", "350", "Flight Instruments", "SAI Cage Pull Switch"));
 
             AddFunction(new NetworkValue(this, "363", "Flight Instruments", "Slip Ball", "Current position of the slip ball relative to the center of the tube.", "(-1 to 1) -1 is full left and 1 is full right.", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "652", "Flight Instruments", "Turn Indicator", "Current position of the turn indicator.", "(-1 to 1) -1 is full left and 1 is full right.", BindingValueUnits.Numeric));

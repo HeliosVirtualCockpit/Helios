@@ -41,9 +41,9 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             KnobImage = "{Helios}/Images/Knobs/knob1.png";
 
-            _incrementTrigger = new HeliosTrigger(this, "", "encoder", "incremented", "Triggered when encoder is incremented.", "Current encoder value", BindingValueUnits.Numeric);
+            _incrementTrigger = new HeliosTrigger(this, "", "encoder", "incremented", "Triggered when encoder is incremented.", "Encoder step value", BindingValueUnits.Numeric);
             Triggers.Add(_incrementTrigger);
-            _decrementTrigger = new HeliosTrigger(this, "", "encoder", "decremented", "Triggered when encoder is decremented.", "Current encoder value", BindingValueUnits.Numeric);
+            _decrementTrigger = new HeliosTrigger(this, "", "encoder", "decremented", "Triggered when encoder is decremented.", "Encoder step value (negative)", BindingValueUnits.Numeric);
             Triggers.Add(_decrementTrigger);
         }
 

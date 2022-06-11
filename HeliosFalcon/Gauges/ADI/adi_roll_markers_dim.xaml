@@ -1,0 +1,13 @@
+<Canvas Width="50.000" Height="230.500"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+  <!-- MARKERS/MARKERS -->
+  <Path StrokeThickness="0.5" Stroke="#FF000000" StrokeMiterLimit="1.0" Fill="#FF62B386" Data="F1 M 25.093,220.847 L 35.093,203.526 L 15.093,203.526 L 25.093,220.847 Z M 35.000,26.987 L 15.000,26.987 L 25.000,9.666 L 35.000,26.987 Z"/>
+
+  <!-- MARKERS/BACK BROWN -->
+  <Path StrokeThickness="0.5" Stroke="#FF000000" StrokeMiterLimit="1.0" Fill="#FF622D1B" Data="F1 M 35.093,203.526 L 25.093,220.847 L 15.093,203.526 L 5.093,220.847 L 5.129,220.847 L 5.129,230.250 L 45.093,230.250 L 45.093,220.847 L 35.093,203.526 Z"/>
+
+  <!-- MARKERS/BACK BLUE -->
+  <Path StrokeThickness="0.5" Stroke="#FF000000" StrokeMiterLimit="1.0" Fill="#FFA2B6BA" Data="F1 M 5.000,0.250 L 5.000,9.666 L 15.000,26.987 L 25.000,9.666 L 35.000,26.987 L 45.000,9.666 L 45.000,0.250 L 5.000,0.250 Z"/>
+
+</Canvas>

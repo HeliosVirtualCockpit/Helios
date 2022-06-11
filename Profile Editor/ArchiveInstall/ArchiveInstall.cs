@@ -603,8 +603,11 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.ArchiveInstall
                 return false;
             }
 
-            if (pathSegments[1].Equals("Helios", StringComparison.InvariantCultureIgnoreCase)
-                && !pathSegments[0].Equals("Helios", StringComparison.InvariantCultureIgnoreCase))
+            if ((pathSegments[1].Equals("Helios", StringComparison.InvariantCultureIgnoreCase)
+                && !pathSegments[0].Equals("Helios", StringComparison.InvariantCultureIgnoreCase)) 
+                ||
+                (pathSegments[1].Equals("HeliosDev", StringComparison.InvariantCultureIgnoreCase)
+                && !pathSegments[0].Equals("HeliosDev", StringComparison.InvariantCultureIgnoreCase)))
             {
                 // Helios folder is nested in profile name folder or similar
                 pathSegments.RemoveAt(0);
@@ -620,7 +623,7 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.ArchiveInstall
                 return false;
             }
 
-            if (!pathSegments[0].Equals("Helios", StringComparison.InvariantCultureIgnoreCase))
+            if (!(pathSegments[0].Equals("Helios", StringComparison.InvariantCultureIgnoreCase) || pathSegments[0].Equals("HeliosDev", StringComparison.InvariantCultureIgnoreCase)))
             {
                 Logger.Debug(
                     "skipping profile archive entry {Path} because it it not within the supported directory structure (must use Helios folder)",

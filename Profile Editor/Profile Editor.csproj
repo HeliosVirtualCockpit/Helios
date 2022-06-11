@@ -340,6 +340,15 @@
     <Resource Include="ToolbarGraphics\SpaceVertical.png" />
     <Resource Include="ToolbarGraphics\UnLockedIcon.png" />
     <Resource Include="ToolbarGraphics\VisibleIcon.png" />
+    <Resource Include="ToolbarGraphics\LockedPlusIcon.png" />
+    <Resource Include="ToolbarGraphics\UnLockedPlusIcon.png" />
+    <Resource Include="ToolbarGraphics\BringForwardFullyIcon.png" />
+    <Resource Include="ToolbarGraphics\SendBackFullyIcon.png" />
+    <Resource Include="ToolbarGraphics\BranchCollapseIcon.png" />
+    <Resource Include="ToolbarGraphics\BranchExpandIcon.png" />
+    <Resource Include="ToolbarGraphics\ItemCollapseIcon.png" />
+    <Resource Include="ToolbarGraphics\ItemExpandIcon.png" />
+    <Resource Include="ToolbarGraphics\ItemOpenIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.png" />
@@ -361,18 +370,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="about.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\LockedPlusIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\UnLockedPlusIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\BringForwardFullyIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ToolbarGraphics\SendBackFullyIcon.png" />
   </ItemGroup>
   <Import Project="..\HeliosExecutable.targets" />
   <PropertyGroup>

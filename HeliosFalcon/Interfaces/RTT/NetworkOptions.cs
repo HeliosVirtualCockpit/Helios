@@ -60,6 +60,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
         /// </summary>
         private bool _dataIvibe;
 
+        /// <summary>
+        /// backing field for StringStr options, Contains
+        /// true if you wish to enable remote sharedmemory support for String Data
+        /// 
+        /// </summary>
+        private bool _stringStr;
+
+        /// <summary>
+        /// backing field for StringDrw options, contains
+        /// true if you wish to enable remote sharedmemory support for String Draw Data
+        /// </summary>
+        private bool _stringDrw;
+
         #region Properties
 
         /// <summary>
@@ -179,6 +192,48 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
                 bool oldValue = _dataIvibe;
                 _dataIvibe = value;
                 OnPropertyChanged(nameof(DataIvibe), oldValue, value, true);
+            }
+        }
+
+        /// <summary>
+        /// STRING_STR switch
+        ///  Introduced in RTT Version 4.0
+        /// </summary>
+        [DefaultValue(false)]
+        [XmlElement("StringStr")]
+        public bool StringStr
+        {
+            get => _stringStr;
+            set
+            {
+                if (_stringStr == value)
+                {
+                    return;
+                }
+                bool oldValue = _stringStr;
+                _stringStr = value;
+                OnPropertyChanged(nameof(StringStr), oldValue, value, true);
+            }
+        }
+
+        /// <summary>
+        /// STRING_DRW switch
+        ///  Introduced in RTT Version 4.0
+        /// </summary>
+        [DefaultValue(false)]
+        [XmlElement("StringDrw")]
+        public bool StringDrw
+        {
+            get => _stringDrw;
+            set
+            {
+                if (_stringDrw == value)
+                {
+                    return;
+                }
+                bool oldValue = _stringDrw;
+                _stringDrw = value;
+                OnPropertyChanged(nameof(StringDrw), oldValue, value, true);
             }
         }
         #endregion

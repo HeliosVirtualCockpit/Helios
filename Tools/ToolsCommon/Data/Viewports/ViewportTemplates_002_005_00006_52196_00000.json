@@ -71,5 +71,45 @@
         "height": 216
       }
     ]
+  },
+  {
+    "templateName": "KA-50 (Helios 16/9)",
+    "moduleId": "KA-50",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "SHKVAL",
+        "relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/SHKVAL/BAKE/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 717,
+        "y": 240,
+        "width": 507,
+        "height": 320
+      },
+      {
+        "viewportName": "ABRIS",
+        "relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/ABRIS/BAKE/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 1280,
+        "y": 376,
+        "width": 421,
+        "height": 543
+      },
+      {
+        "viewportName": "HUD",
+        "relativeInitFilePath": "Mods/aircraft/Ka-50/Cockpit/Scripts/HUD/HUD_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 660,
+        "y": 0,
+        "width": 600,
+        "height": 700
+      }
+    ]
   }
 ]

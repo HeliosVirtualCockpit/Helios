@@ -103,7 +103,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
         private const string TGP_INTERFACE = "62";
         private const string WALLEYE_INTERFACE = "63";
         private const string DATALINK_INTERFACE = "64";
-        private const string HMD = "65";
+        private const string SLAM_INTERFACE = "65";
+        private const string ASPJ = "66";
+        private const string BCN = "67";
+        private const string KNEEBOARD = "68";
+        private const string LINK4 = "69";
 
         #endregion
 
@@ -182,8 +186,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             // Arresting Hook Control Handle
             AddFunction(new FlagValue(this, "294", "Caution Indicators", "HOOK", ""));          // create_caution_lamp(294,CautionLights.CPT_LTS_HOOK)
                                                                                                 // Landing Gear 
-                                                                                                //create_caution_lamp(CautionLights.CPT_LTS_LDG_GEAR_HANDLE)
-                                                                                                // APU Control Panel
+            AddFunction(new FlagValue(this, "227", "Caution Indicators", "Landing Gear Handle", "")); //create_caution_lamp(227, CautionLights.CPT_LTS_LDG_GEAR_HANDLE)                                                                                                // APU Control Panel
             AddFunction(new FlagValue(this, "376", "Caution Indicators", "APU_READY", ""));    // create_caution_lamp(376,CautionLights.CPT_LTS_APU_READY)
                                                                                                // ECM Control Panel Assy
                                                                                                //create_caution_lamp(CautionLights.CPT_LTS_SEL)
@@ -285,8 +288,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new PushButton(this, GEAR_INTERFACE, "3002", "228", "Gear system", "Emergency Down - Push to unlock", "1", "0", "%1d"));
             AddFunction(new PushButton(this, GEAR_INTERFACE, "3003", "229", "Gear system", "Down Lock Override Button - Push to unlock", "1", "0", "%1d"));    // elements["pnt_229"]     = default_button(_("Down Lock Override Button - Push to unlock"),   devices.GEAR_INTERFACE, gear_commands.DownLockOverrideBtn,  229)
             AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, "3004", "238", "1.0", "ON", "0.0", "OFF", "Gear system", "Anti Skid Switch", "%0.1f"));    // elements["pnt_238"]     = default_2_position_tumb(_("Anti Skid Switch, ON/OFF"),            devices.GEAR_INTERFACE, gear_commands.AntiSkidSw,           238)
-            //AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, "3008", "233", "0.0", "RETRACT", "1.0", "EXTEND", "Gear system", "Launch Bar Control Switch", "%0.1f"));    // elements["pnt_233"]     = default_button2(_("Launch Bar Control Switch, EXTEND/RETRACT"),   devices.GEAR_INTERFACE, gear_commands.LaunchBarSw, 233, anim_speed_default)
-            AddFunction(new Switch(this, GEAR_INTERFACE, "233", new SwitchPosition[] { new SwitchPosition("0.0", "Retract", "3008", "3008", "0.3"), new SwitchPosition("1.0", "Extend", "3008") }, "Gear system", "Launch Bar Control Switch", "%0.1f"));
+            AddFunction(new Switch(this, GEAR_INTERFACE, "233", new SwitchPosition[] { new SwitchPosition("-1.0", "Retract", "3008", "3008", "0.3"), new SwitchPosition("1.0", "Extend", "3008") }, "Gear system", "Launch Bar Control Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, "3009", "293", "1.0", "UP", "0.0", "DOWN", "Gear system", "Arresting Hook Handle", "%0.1f"));    // elements["pnt_293"]     = default_2_position_tumb(_("Arresting Hook Handle, UP/DOWN"),      devices.GEAR_INTERFACE, gear_commands.HookHandle,   293)
             //AddFunction(new Switch(this, GEAR_INTERFACE, "241", new SwitchPosition[] { new SwitchPosition("-1", "Park", "3006", "3006", "0"), new SwitchPosition("0", "Emergency", "3007") }, "Gear system", "Emergency / Parking Brake Handle Park/Emergency", "%1d"));
             AddFunction(new PushButton(this, GEAR_INTERFACE, "3006", "241", "Gear system", "Brake Handle Park/Emergency", "1", "0", "%0.1f"));
@@ -294,7 +296,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             #endregion
             #region  Fuel system
             AddFunction(Switch.CreateToggleSwitch(this, FUEL_INTERFACE, "3001", "340", "1.0", "INHIBIT", "0.0", "NORM", "Fuel system", "Internal Wing Tank Fuel Control Switch", "%0.1f"));    // elements["pnt_340"]     = default_2_position_tumb(_("Internal Wing Tank Fuel Control Switch, INHIBIT/NORM"),            devices.FUEL_INTERFACE, fuel_commands.IntrWingInhibitSw,    340)
-            AddFunction(new Switch(this, FUEL_INTERFACE, "341", new SwitchPosition[] { new SwitchPosition("1.0", "EXTEND", "3002"), new SwitchPosition("0.5", "RETRACT", "3002"), new SwitchPosition("0.0", "EMERG EXTD", "3002") }, "Fuel system", "Probe Control Switch", "%0.1f"));    // elements["pnt_341"]     = default_3_position_tumb(_("Probe Control Switch, EXTEND/RETRACT/EMERG EXTD"),                 devices.FUEL_INTERFACE, fuel_commands.ProbeControlSw,       341)
+            AddFunction(new Switch(this, FUEL_INTERFACE, "341", new SwitchPosition[] { new SwitchPosition("1.0", "EXTEND", "3002"), new SwitchPosition("0.0", "RETRACT", "3002"), new SwitchPosition("-1.0", "EMERG EXTD", "3002") }, "Fuel system", "Probe Control Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FUEL_INTERFACE, "3003", "344", "1.0", "ON", "0.0", "OFF", "Fuel system", "Fuel Dump Switch", "%0.1f"));    // elements["pnt_344"]     = default_button2(_("Fuel Dump Switch, ON/OFF"),                                                    devices.FUEL_INTERFACE, fuel_commands.DumpSw,               344, anim_speed_default)
             AddFunction(new Switch(this, FUEL_INTERFACE, "343", new SwitchPosition[] { new SwitchPosition("1.0", "STOP", "3004"), new SwitchPosition("0.5", "NORM", "3004"), new SwitchPosition("0.0", "ORIDE", "3004") }, "Fuel system", "External Centerline Tank Fuel Control Switch", "%0.1f"));    // elements["pnt_343"]     = default_3_position_tumb(_("External Centerline Tank Fuel Control Switch, STOP/NORM/ORIDE"),   devices.FUEL_INTERFACE, fuel_commands.ExtTanksCtrSw,        343)
             AddFunction(new Switch(this, FUEL_INTERFACE, "342", new SwitchPosition[] { new SwitchPosition("1.0", "STOP", "3005"), new SwitchPosition("0.5", "NORM", "3005"), new SwitchPosition("0.0", "ORIDE", "3005") }, "Fuel system", "External Wing Tanks Fuel Control Switch", "%0.1f"));    // elements["pnt_342"]     = default_3_position_tumb(_("External Wing Tanks Fuel Control Switch, STOP/NORM/ORIDE"),        devices.FUEL_INTERFACE, fuel_commands.ExtTanksWingSw,       342)
@@ -318,16 +320,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             //AddFunction(new PushButton(this,, "", "499", "Mirrors","Toggle Mirrors"));    // elements["pnt_499"]             = default_2_position_tumb(_("Toggle Mirrors"), 0, 3004, 0)
             #endregion
             #region  Exterior Lights
-            AddFunction(new Axis(this, EXT_LIGHTS, "3001", "338", 0.15d, 0d, 1d, "Exterior Lights", "Position Lights Dimmer Control"));    // elements["pnt_338"]     = default_axis_limited(_("POSITION Lights Dimmer Control"),         devices.EXT_LIGHTS,     extlights_commands.Position,    338, 0, 0.15)
-            AddFunction(new Axis(this, EXT_LIGHTS, "3002", "337", 0.10d, 0d, 1d, "Exterior Lights", "Formation Lights Dimmer Control"));    // elements["pnt_337"]     = default_axis_limited(_("FORMATION Lights Dimmer Control"),        devices.EXT_LIGHTS,     extlights_commands.Formation,   337, 0, 0.15)
-            AddFunction(new Switch(this, EXT_LIGHTS, "339", new SwitchPosition[] { new SwitchPosition("1.0", "BRT", "3003"), new SwitchPosition("0.5", "OFF", "3003"), new SwitchPosition("0.0", "DIM", "3003") }, "Exterior Lights", "STROBE Lights Switch", "%0.1f"));    // elements["pnt_339"]     = default_3_position_tumb(_("STROBE Lights Switch, BRT/OFF/DIM"),   devices.EXT_LIGHTS,     extlights_commands.Strobe,      339)
-            AddFunction(Switch.CreateToggleSwitch(this, EXT_LIGHTS, "3004", "237", "1.0", "ON", "0.0", "OFF", "Exterior Lights", "LDG/TAXI LIGHT Switch", "%0.1f"));    // elements["pnt_237"]     = default_2_position_tumb(_("LDG/TAXI LIGHT Switch, ON/OFF"),       devices.EXT_LIGHTS,     extlights_commands.LdgTaxi,     237)
+            AddFunction(new Axis(this, EXT_LIGHTS, "3001", "338", 0.15d, 0d, 1d, "Exterior Lights", "Position Lights Dimmer Control"));
+            AddFunction(new Axis(this, EXT_LIGHTS, "3002", "337", 0.10d, 0d, 1d, "Exterior Lights", "Formation Lights Dimmer Control"));
+            AddFunction(new Switch(this, EXT_LIGHTS, "339", new SwitchPosition[] { new SwitchPosition("1.0", "BRT", "3003"), new SwitchPosition("0.0", "OFF", "3003"), new SwitchPosition("-1.0", "DIM", "3003") }, "Exterior Lights", "STROBE Lights Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, EXT_LIGHTS, "3004", "237", "1.0", "ON", "0.0", "OFF", "Exterior Lights", "LDG/TAXI LIGHT Switch", "%0.1f"));
             #endregion
             #region  Cockpit Lights
             AddFunction(new Axis(this, CPT_LIGTHS, "3001", "413", 0.15d, 0d, 1d, "Cockpit Lights", "CONSOLES Lights Dimmer Control"));    // elements["pnt_413"]     = default_axis_limited(_("CONSOLES Lights Dimmer Control"),         devices.CPT_LIGTHS,     cptlights_commands.Consoles,    413, 0, 0.15)
             AddFunction(new Axis(this, CPT_LIGTHS, "3002", "414", 0.15d, 0d, 1d, "Cockpit Lights", "INST PNL Dimmer Control"));    // elements["pnt_414"]     = default_axis_limited(_("INST PNL Dimmer Control"),                devices.CPT_LIGTHS,     cptlights_commands.InstPnl,     414, 0, 0.15)
             AddFunction(new Axis(this, CPT_LIGTHS, "3003", "415", 0.15d, 0d, 1d, "Cockpit Lights", "FLOOD Light Dimmer Control"));    // elements["pnt_415"]     = default_axis_limited(_("FLOOD Light Dimmer Control"),             devices.CPT_LIGTHS,     cptlights_commands.Flood,       415, 0, 0.15)
-            AddFunction(new Switch(this, CPT_LIGTHS, "419", new SwitchPosition[] { new SwitchPosition("1.0", "NVG", "3004"), new SwitchPosition("0.5", "NITE", "3004"), new SwitchPosition("0.0", "DAY", "3004") }, "Cockpit Lights", "MODE Switch", "%0.1f"));    // elements["pnt_419"]     = default_3_position_tumb(_("MODE Switch, NVG/NITE/DAY"),           devices.CPT_LIGTHS,     cptlights_commands.ModeSw,      419)
+            AddFunction(new Switch(this, CPT_LIGTHS, "419", new SwitchPosition[] { new SwitchPosition("1.0", "NVG", "3004"), new SwitchPosition("0.0", "NITE", "3004"), new SwitchPosition("-1.0", "DAY", "3004") }, "Cockpit Lights", "MODE Switch", "%0.1f"));
             AddFunction(new Axis(this, CPT_LIGTHS, "3005", "418", 0.15d, 0d, 1d, "Cockpit Lights", "CHART Light Dimmer Control"));    // elements["pnt_418"]     = default_axis_limited(_("CHART Light Dimmer Control"),             devices.CPT_LIGTHS,     cptlights_commands.Chart,       418, 0, 0.15)
             AddFunction(new Axis(this, CPT_LIGTHS, "3006", "417", 0.15d, 0d, 1d, "Cockpit Lights", "WARN/CAUTION Dimmer Control"));    // elements["pnt_417"]     = default_axis_limited(_("WARN/CAUTION Dimmer Control"),            devices.CPT_LIGTHS,     cptlights_commands.WarnCaution, 417, 0, 0.15)
             AddFunction(Switch.CreateToggleSwitch(this, CPT_LIGTHS, "3007", "416", "1.0", "TEST", "0.0", "OFF", "Cockpit Lights", "Lights Test Switch", "%0.1f"));    // elements["pnt_416"]     = springloaded_2_pos_tumb2(_("Lights Test Switch, TEST/OFF"),       devices.CPT_LIGTHS,     cptlights_commands.LtTestSw,    416)
@@ -389,7 +391,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new Switch(this, HUD, "148", new SwitchPosition[] { new SwitchPosition("1.0", "INS", "3009"), new SwitchPosition("0.5", "AUTO", "3009"), new SwitchPosition("0.0", "STBY", "3009") }, "Head-Up Display", "Attitude Selector Switch", "%0.1f"));    // elements["pnt_148"]     = default_3_position_tumb(_("Attitude Selector Switch, INS/AUTO/STBY"),             devices.HUD, HUD_commands.HUD_AttitudeSelSw, 148)
             #endregion
             #region  Left MDI
-            AddFunction(new Switch(this, MDI_LEFT, "51", new SwitchPosition[] { new SwitchPosition("0.0", "OFF", "3001"), new SwitchPosition("0.5", "NIGHT", "3001"), new SwitchPosition("1.0", "DAY", "3001") }, "Left MDI", "Left MDI Brightness Selector Knob", "%0.1f"));    // elements["pnt_51"]      = default_3_position_tumb(_("Left MDI Brightness Selector Knob, OFF/NIGHT/DAY"),    devices.MDI_LEFT, MDI_commands.MDI_off_night_day, 51, false, anim_speed_default, false, 0.1, {0, 0.2})
+            AddFunction(new Switch(this, MDI_LEFT, "51", new SwitchPosition[] { new SwitchPosition("0.0", "OFF", "3001"), new SwitchPosition("0.1", "NIGHT", "3001"), new SwitchPosition("0.2", "DAY", "3001") }, "Left MDI", "Left MDI Brightness Selector Knob", "%0.1f"));    // elements["pnt_51"]      = default_3_position_tumb(_("Left MDI Brightness Selector Knob, OFF/NIGHT/DAY"),    devices.MDI_LEFT, MDI_commands.MDI_off_night_day, 51, false, anim_speed_default, false, 0.1, {0, 0.2})
             AddFunction(new Axis(this, MDI_LEFT, "3002", "52", 0.15d, 0d, 1d, "Left MDI", "Left MDI Brightness Control Knob"));    // elements["pnt_52"]      = default_axis_limited(_("Left MDI Brightness Control Knob"),                       devices.MDI_LEFT, MDI_commands.MDI_brightness, 52, 0.0, 0.1, false, false, {0, 1})
             AddFunction(new Axis(this, MDI_LEFT, "3003", "53", 0.15d, 0d, 1d, "Left MDI", "Left MDI Contrast Control Knob"));    // elements["pnt_53"]      = default_axis_limited(_("Left MDI Contrast Control Knob"),                         devices.MDI_LEFT, MDI_commands.MDI_contrast, 53, 0.0, 0.1, false, false, {0, 1})
             AddFunction(new PushButton(this, MDI_LEFT, "3011", "54", "Left MDI", "OSB 01", "1", "0", "%1d"));
@@ -414,7 +416,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new PushButton(this, MDI_LEFT, "3030", "75", "Left MDI", "OSB 20", "1", "0", "%1d"));
             #endregion
             #region  Right MDI
-            AddFunction(new Switch(this, MDI_RIGHT, "76", new SwitchPosition[] { new SwitchPosition("0.0", "OFF", "3001"), new SwitchPosition("0.5", "NIGHT", "3001"), new SwitchPosition("1.0", "DAY", "3001") }, "Right MDI", "Right MDI Brightness Selector Knob", "%0.1f"));    // elements["pnt_76"]      = default_3_position_tumb(_("Right MDI Brightness Selector Knob, OFF/NIGHT/DAY"),   devices.MDI_RIGHT, MDI_commands.MDI_off_night_day, 76, false, anim_speed_default, false, 0.1, {0, 0.2})
+            AddFunction(new Switch(this, MDI_RIGHT, "76", new SwitchPosition[] { new SwitchPosition("0.0", "OFF", "3001"), new SwitchPosition("0.1", "NIGHT", "3001"), new SwitchPosition("0.2", "DAY", "3001") }, "Right MDI", "Right MDI Brightness Selector Knob", "%0.1f"));    // elements["pnt_76"]      = default_3_position_tumb(_("Right MDI Brightness Selector Knob, OFF/NIGHT/DAY"),   devices.MDI_RIGHT, MDI_commands.MDI_off_night_day, 76, false, anim_speed_default, false, 0.1, {0, 0.2})
             AddFunction(new Axis(this, MDI_RIGHT, "3002", "77", 0.15d, 0d, 1d, "Right MDI", "Right MDI Brightness Control Knob"));    // elements["pnt_77"]      = default_axis_limited(_("Right MDI Brightness Control Knob"),                      devices.MDI_RIGHT, MDI_commands.MDI_brightness, 77, 0.0, 0.1, false, false, {0, 1})
             AddFunction(new Axis(this, MDI_RIGHT, "3003", "78", 0.15d, 0d, 1d, "Right MDI", "Right MDI Contrast Control Knob"));    // elements["pnt_78"]      = default_axis_limited(_("Right MDI Contrast Control Knob"),                        devices.MDI_RIGHT, MDI_commands.MDI_contrast, 78, 0.0, 0.1, false, false, {0, 1})
             AddFunction(new PushButton(this, MDI_RIGHT, "3011", "79", "Right MDI", "OSB 01", "1", "0", "%1d"));
@@ -637,13 +639,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new Switch(this, RWR, "261", new SwitchPosition[] { new SwitchPosition("1.0", "N", "3007"), new SwitchPosition("0.8", "I", "3007"), new SwitchPosition("0.5", "A", "3007"), new SwitchPosition("0.3", "U", "3007"), new SwitchPosition("0.0", "F", "3007") }, "RWR", "ALR-67 DIS TYPE Switch", "%0.1f"));    // elements["pnt_261"]     = multiposition_switch(_("ALR-67 DIS TYPE Switch, N/I/A/U/F"),                  devices.RWR, rwr_commands.DisType, 261, 5, 0.1, false, 0.0, anim_speed_default * 0.1, false)
             AddFunction(new Axis(this, RWR, "3008", "216", 0.15d, 0d, 1d, "RWR", "RWR Intensity Knob"));    // elements["pnt_216"]     = default_axis_limited(_("RWR Intensity Knob"),                                 devices.RWR, rwr_commands.IntControl, 216, 0.0, 0.1, false, false, {0,1})
             #endregion
+
             #region  CMDS
             AddFunction(new PushButton(this, CMDS, "3002", "380", "CMDS", "Dispense Button - Push to dispense flares and chaff", "1", "0", "%1d"));    // elements["pnt_380"]     = default_button(_("Dispense Button - Push to dispense flares and chaff"),  devices.CMDS, cmds_commands.EcmDisp, 380)
-            AddFunction(new Switch(this, CMDS, "517", new SwitchPosition[] { new SwitchPosition("0.0", "BYPASS", "3001"), new SwitchPosition("0.1", "ON", "3001"), new SwitchPosition("0.2", "OFF", "3001") }, "CMDS", "DISPENSER Switch", "%0.1f"));    // elements["pnt_517"]     = default_3_position_tumb(_("DISPENSER Switch, BYPASS/ON/OFF"),             devices.CMDS, cmds_commands.Dispenser, 517, false, anim_speed_default, false, 0.1, {0.0, 0.2})
+            AddFunction(new Switch(this, CMDS, "517", new SwitchPosition[] { new SwitchPosition("0.2", "BYPASS", "3001"), new SwitchPosition("0.1", "ON", "3001"), new SwitchPosition("0.0", "OFF", "3001") }, "CMDS", "DISPENSER Switch", "%0.1f")); 
             AddFunction(new PushButton(this, CMDS, "3003", "515", "CMDS", "ECM JETT JETT SEL Button - Push to jettison", "1", "0", "%1d"));    // elements["pnt_515"]     = default_2_position_tumb(_("ECM JETT JETT SEL Button - Push to jettison"), devices.CMDS, cmds_commands.EcmJett, 515)
             #endregion
-            #region  ICMCP
-            //AddFunction(new Switch(this, , "248", new SwitchPosition[]{new SwitchPosition("1.0","XMIT", ""), new SwitchPosition("0.8","REC", ""), new SwitchPosition("0.5","BIT", ""), new SwitchPosition("0.3","STBY", ""), new SwitchPosition("0.0","OFF", "")}, "ICMCP","ECM Mode Switch", "%0.1f"));    // elements["pnt_248"]     = multiposition_switch(_("ECM Mode Switch, XMIT/REC/BIT/STBY/OFF"),     0, 3116, 248, 5, 0.1, false, 0.0, anim_speed_default * 0.1, false)
+            #region  ASPJ
+            AddFunction(new Switch(this, ASPJ, "248", new SwitchPosition[] { new SwitchPosition("0.0", "OFF", "3001"), new SwitchPosition("0.1", "STBY", "3001"), new SwitchPosition("0.2", "BIT", "3001"), new SwitchPosition("0.3", "REC", "3001"), new SwitchPosition("0.4", "XMIT", "3001")}, "ASPJ", "ECM Mode Switch", "%0.1f"));    // elements["pnt_107"]     = default_3_position_tumb(_("UFC ADF Function Select Switch, 1/OFF/2"), devices.UFC, UFC_commands.SwADF,        107,    false, anim_speed_default, false)
             //AddFunction(new PushButton(this,, "", "507","1.0","ENABLE","0.0","DISABLE (no function)", "ICMCP","NUC WPN Switch"));    // elements["pnt_507"]     = default_2_position_tumb(_("NUC WPN Switch, ENABLE/DISABLE (no function)"),        0, 3100, 507)
             #endregion
             #region  TODO list

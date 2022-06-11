@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2020 Helios Contributors
-//    
+//  Copyright 2021 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Threading;
 using GadrocsWorkshop.Helios.Interfaces.Falcon.BMS;
 using GadrocsWorkshop.Helios.Util;
 
@@ -41,6 +42,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
         private SharedMemory _textureMemory;
         private SharedMemory _sharedMemory2;
         private FlightData2 _lastFlightData2;
+        private DispatcherTimer _dispatcherTimer;
+        private bool _textureRefreshRate_30;
+        private bool _textureRefreshRate_60;
+        private bool _textureRefreshRate_90;
+
+        /// <summary>
+        /// backing field for background transparency
+        /// </summary>
+        private bool _transparency;
 
         protected FalconTextureDisplay(string name, Size defaultSize)
             : base(name, defaultSize)
@@ -95,6 +105,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
             }
         }
 
+        public bool TransparencyEnabled
+        {
+            get => _transparency;
+            set
+            {
+                if (_transparency == value)
+                {
+                    return;
+                }
+                bool oldValue = _transparency;
+                _transparency = value;
+                OnPropertyChanged(nameof(TransparencyEnabled), oldValue, value, true);
+            }
+        }
+
         #endregion
 
         protected override void OnProfileChanged(HeliosProfile oldProfile)
@@ -117,6 +142,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
 
         void Profile_ProfileStopped(object sender, EventArgs e)
         {
+            if (_dispatcherTimer != null)
+            {
+                _dispatcherTimer.Stop();
+                _dispatcherTimer = null;
+            }
+
             _textureMemory?.Close();
             _textureMemory?.Dispose();
             _textureMemory = null;
@@ -129,6 +160,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
         }
 
         void Profile_ProfileTick(object sender, EventArgs e)
+        {
+            if (_textureRefreshRate_30 || Texture == FalconTextures.DED || Texture == FalconTextures.PFL || Texture == FalconTextures.RWR)
+            {
+                RefreshTextures();
+            }
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if ((_textureRefreshRate_60 || _textureRefreshRate_90) && (Texture == FalconTextures.HUD || Texture == FalconTextures.MFDLeft || Texture == FalconTextures.MFDRight))
+            {
+                RefreshTextures();
+            }
+        }
+
+        private void RefreshTextures()
         {
             if (_textureMemory != null && _textureMemory.IsDataAvailable)
             {
@@ -157,11 +204,29 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
                 {
                     ParseDatFile(falconInterface.CockpitDatFile);
                 }
+
+                _textureRefreshRate_30 = falconInterface.TextureRefreshRate_30;
+                _textureRefreshRate_60 = falconInterface.TextureRefreshRate_60;
+                _textureRefreshRate_90 = falconInterface.TextureRefreshRate_90;
             }
             
             _textureMemory = new SharedMemory("FalconTexturesSharedMemoryArea");
             _textureMemory.Open();
 
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+
+            if (_textureRefreshRate_60)
+            {
+                _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 16);
+                _dispatcherTimer.Start();
+            }
+            else if (_textureRefreshRate_90)
+            {
+                _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 11);
+                _dispatcherTimer.Start();
+            }
+            
             IsRunning = true;
         }
 
@@ -255,5 +320,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Gauges.Textures
             // No-Op
         }
 
+        public override void WriteXml(System.Xml.XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("TransparentBackground", TransparencyEnabled.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        public override void ReadXml(System.Xml.XmlReader reader)
+        {
+            base.ReadXml(reader);
+
+            try
+            {
+                TransparencyEnabled = bool.Parse(reader.ReadElementString("TransparentBackground"));
+            }
+            catch
+            {
+                TransparencyEnabled = false;
+            }
+        }
     }
 }

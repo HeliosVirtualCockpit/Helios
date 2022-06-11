@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -54,9 +55,36 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\HydraulicPressure\HydraulicPressureA.cs" />
+    <Compile Include="Gauges\HydraulicPressure\HydraulicPressureB.cs" />
+    <Compile Include="Gauges\OilPressure\OilPressure.cs" />
+    <Compile Include="Gauges\EPU\EPU.cs" />
+    <Compile Include="Gauges\Nozzle\Nozzle.cs" />
+    <Compile Include="Gauges\Clock\Clock.cs" />
+    <Compile Include="Gauges\FTIT\FTIT.cs" />
+    <Compile Include="Gauges\Fuel\Fuel.cs" />
+    <Compile Include="Gauges\RPM\RPM.cs" />
+    <Compile Include="Gauges\Altimeter\Altimeter.cs" />
+    <Compile Include="Gauges\Airspeed\Airspeed.cs" />
+    <Compile Include="Gauges\VVI\VVI.cs" />
+    <Compile Include="Gauges\AOA\AOA.cs" />
+    <Compile Include="Gauges\FuelFlow\FuelFlow.cs" />
+    <Compile Include="Gauges\StandbyADI\StandbyADI.cs" />
+    <Compile Include="Gauges\ADI\ADI.cs" />
+    <Compile Include="Gauges\MFD\MFD.cs" />
+    <Compile Include="Gauges\EHSI\EHSI.cs" />
+    <Compile Include="Gauges\EHSI\EHSIRenderer.cs" />
+    <Compile Include="Gauges\EHSI\EHSIBehaviorEditor.xaml.cs">
+      <DependentUpon>EHSIBehaviorEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gauges\ICP\ICP.cs" />
+    <Compile Include="Gauges\ICP\ICPBehaviorEditor.xaml.cs">
+      <DependentUpon>ICPBehaviorEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gauges\Textures\HUDBehaviorEditor.xaml.cs">
+      <DependentUpon>HUDBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\RTT\IRttGeneratorHost.cs" />
-    <Compile Include="Controls\MapControl.cs" />
-    <Compile Include="Controls\MapControlRenderer.cs" />
     <Compile Include="Controls\MapControls.cs" />
     <Compile Include="Controls\MapControlsUserMapEditor.xaml.cs">
       <DependentUpon>MapControlsUserMapEditor.xaml</DependentUpon>
@@ -64,9 +92,13 @@
     <Compile Include="Controls\MapControlsBaseMapEditor.xaml.cs">
       <DependentUpon>MapControlsBaseMapEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MapControl.cs" />
+    <Compile Include="Controls\MapControlMapRenderer.cs" />
+    <Compile Include="Controls\MapControlLineRenderer.cs" />
+    <Compile Include="Controls\MapControlTextRenderer.cs" />
     <Compile Include="Controls\MapViewer.cs" />
     <Compile Include="Controls\MapViewerRenderer.cs" />
-    <Compile Include="Gauges\Altimeter.cs" />
+    <Compile Include="Controls\MapControlBullseye.cs" />
     <Compile Include="Interfaces\BMS\BMSFalconDataExporter.cs" />
     <Compile Include="Interfaces\BMS\BMSLightBits.cs" />
     <Compile Include="Interfaces\BMS\BMSLightBits2.cs" />
@@ -145,6 +177,506 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Resource Include="Gauges\Altimeter\altimeter_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\altimeter_needle_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\altimeter_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\altimeter_needle_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\alt_drum_tape_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\drum_tape_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\drum_tape_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\alt_drum_tape_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\altimeter_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\altimeter_needle_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\alt_drum_tape_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\drum_tape_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\FTIT\ftit_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\FTIT\ftit_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\FTIT\ftit_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Nozzle\nozzle_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Nozzle\nozzle_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Nozzle\nozzle_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\OilPressure\oil_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\OilPressure\oil_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\OilPressure\oil_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\gauge_backplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RPM\rpm_faceplate_ge_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RPM\rpm_faceplate_ge_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RPM\rpm_faceplate_ge_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RPM\rpm_faceplate_pw_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RPM\rpm_faceplate_pw_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RPM\rpm_faceplate_pw_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\EPU\epu_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\EPU\epu_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\EPU\epu_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_mach_ring_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_mach_ring_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_mach_ring_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_needle_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_needle_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\asi_needle_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_aft_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_aft_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_aft_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_fwd_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_fwd_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_fwd_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\HydraulicPressure\hydraulic_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\HydraulicPressure\hydraulic_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\HydraulicPressure\hydraulic_faceplate_dim.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Gauges\FuelFlow\fuelflow_labels_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\FuelFlow\fuelflow_labels_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\FuelFlow\fuelflow_labels_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\needle_long_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\needle_long_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\needle_long_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\needle_short_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\needle_short_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\needle_short_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AOA\aoa_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AOA\aoa_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AOA\aoa_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AOA\aoa_off_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AOA\aoa_tape_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AOA\aoa_tape_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\AOA\aoa_tape_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\clock_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\clock_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\clock_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\second_hand_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\second_hand_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\second_hand_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\minute_hand_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\minute_hand_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\minute_hand_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\hour_hand_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\hour_hand_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Clock\hour_hand_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ball_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ball_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ball_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_guides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_gs_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_loc_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_off_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_aux_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ils_pointer_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ils_pointer_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ils_pointer_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_slip_ball_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_slip_ball_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_slip_ball_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_roll_markers_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_roll_markers_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_roll_markers_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\StandbyADI\adi_ball_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\StandbyADI\adi_ball_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\StandbyADI\adi_ball_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\StandbyADI\adi_ring_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\StandbyADI\adi_ring_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\StandbyADI\adi_ring_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ils_needle_dashed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\adi_ils_needle_solid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="Gauges\EHSI\EHSIBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Gauges\ICP\icp_backplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ICP\icp_backplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ICP\icp_backplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\MFD\mfd_backplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\MFD\mfd_backplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\MFD\mfd_backplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="Gauges\ICP\ICPBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gauges\Textures\HUDBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Images\EHSI\Current Heading Scale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\vvi_faceplate_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\vvi_faceplate_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\vvi_faceplate_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\vvi_off_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\vvi_tape_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\vvi_tape_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\vvi_tape_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Interfaces\FalconCallbackValueEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -159,6 +691,87 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gauges\Common\f16_engine_bezel.png" />
+    <Resource Include="Gauges\Common\aoa_vvi_bezel.png" />
+    <Resource Include="Gauges\FuelFlow\fuelflow_bezel.png" />
+    <Resource Include="Gauges\ADI\adi_bezel.png" />
+    <Resource Include="Gauges\StandbyADI\adi_faceplate.png" />
+    <Resource Include="Gauges\StandbyADI\adi_off_flag.png" />
+    <Resource Include="Gauges\ADI\adi_ball_mask.png" />
+    <Resource Include="Gauges\StandbyADI\adi_ball_mask.png" />
+    <Resource Include="Gauges\ICP\icp_a_a_press.png" />
+    <Resource Include="Gauges\ICP\icp_a_a.png" />
+    <Resource Include="Gauges\ICP\icp_a_g_press.png" />
+    <Resource Include="Gauges\ICP\icp_a_g.png" />
+    <Resource Include="Gauges\ICP\icp_comm1_press.png" />
+    <Resource Include="Gauges\ICP\icp_comm1.png" />
+    <Resource Include="Gauges\ICP\icp_comm2_press.png" />
+    <Resource Include="Gauges\ICP\icp_comm2.png" />
+    <Resource Include="Gauges\ICP\icp_0_press.png" />
+    <Resource Include="Gauges\ICP\icp_0.png" />
+    <Resource Include="Gauges\ICP\icp_1_press.png" />
+    <Resource Include="Gauges\ICP\icp_1.png" />
+    <Resource Include="Gauges\ICP\icp_2_press.png" />
+    <Resource Include="Gauges\ICP\icp_2.png" />
+    <Resource Include="Gauges\ICP\icp_3_press.png" />
+    <Resource Include="Gauges\ICP\icp_3.png" />
+    <Resource Include="Gauges\ICP\icp_4_press.png" />
+    <Resource Include="Gauges\ICP\icp_4.png" />
+    <Resource Include="Gauges\ICP\icp_5_press.png" />
+    <Resource Include="Gauges\ICP\icp_5.png" />
+    <Resource Include="Gauges\ICP\icp_6_press.png" />
+    <Resource Include="Gauges\ICP\icp_6.png" />
+    <Resource Include="Gauges\ICP\icp_7_press.png" />
+    <Resource Include="Gauges\ICP\icp_7.png" />
+    <Resource Include="Gauges\ICP\icp_8_press.png" />
+    <Resource Include="Gauges\ICP\icp_8.png" />
+    <Resource Include="Gauges\ICP\icp_9_press.png" />
+    <Resource Include="Gauges\ICP\icp_9.png" />
+    <Resource Include="Gauges\ICP\icp_enter_press.png" />
+    <Resource Include="Gauges\ICP\icp_enter.png" />
+    <Resource Include="Gauges\ICP\icp_wx_press.png" />
+    <Resource Include="Gauges\ICP\icp_wx.png" />
+    <Resource Include="Gauges\ICP\icp_iff_press.png" />
+    <Resource Include="Gauges\ICP\icp_iff.png" />
+    <Resource Include="Gauges\ICP\icp_rcl_press.png" />
+    <Resource Include="Gauges\ICP\icp_rcl.png" />
+    <Resource Include="Gauges\ICP\icp_list_press.png" />
+    <Resource Include="Gauges\ICP\icp_list.png" />
+    <Resource Include="Gauges\ICP\icp_faceplate_lit.png" />
+    <Resource Include="Gauges\ICP\icp_faceplate_off.png" />
+    <Resource Include="Gauges\ICP\icp_rocker_down.png" />
+    <Resource Include="Gauges\ICP\icp_rocker_center.png" />
+    <Resource Include="Gauges\ICP\icp_rocker_up.png" />
+    <Resource Include="Gauges\ICP\icp_dcs_center.png" />
+    <Resource Include="Gauges\ICP\icp_dcs_down.png" />
+    <Resource Include="Gauges\ICP\icp_dcs_left.png" />
+    <Resource Include="Gauges\ICP\icp_dcs_right.png" />
+    <Resource Include="Gauges\ICP\icp_dcs_up.png" />
+    <Resource Include="Gauges\ICP\icp_wheel_center_off.png" />
+    <Resource Include="Gauges\ICP\icp_wheel_down_off.png" />
+    <Resource Include="Gauges\ICP\icp_wheel_up_off.png" />
+    <Resource Include="Gauges\ICP\icp_switch_center.png" />
+    <Resource Include="Gauges\ICP\icp_switch_down.png" />
+    <Resource Include="Gauges\ICP\icp_switch_up.png" />
+    <Resource Include="Gauges\ICP\icp_wheel_center_lit.png" />
+    <Resource Include="Gauges\ICP\icp_wheel_down_lit.png" />
+    <Resource Include="Gauges\ICP\icp_wheel_up_lit.png" />
+    <Resource Include="Gauges\MFD\mfd_faceplate.png" />
+    <Resource Include="Gauges\MFD\mfd_button_off.png" />
+    <Resource Include="Gauges\MFD\mfd_button_press.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_brt_center.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_brt_down.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_brt_up.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_con_center.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_con_down.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_con_up.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_gain_center.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_gain_down.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_gain_up.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_sym_center.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_sym_down.png" />
+    <Resource Include="Gauges\MFD\mfd_rocker_sym_up.png" />
+    <Resource Include="Gauges\MFD\mfd_button_lit.png" />
     <Content Include="Templates\HeliosFalcon\Falcon RTT DED.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -198,14 +811,36 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\EHSI\Aircraft Image.png" />
+    <Resource Include="Images\EHSI\Current Heading Marker.png" />
+    <Resource Include="Images\EHSI\Background Image.png" />
+    <Resource Include="Images\EHSI\Beacon Bearing Optional.png" />
+    <Resource Include="Images\EHSI\Course Deviation Needle.png" />
+    <Resource Include="Images\EHSI\Beacon Bearing Needle.png" />
+    <Resource Include="Images\EHSI\Desired Course Needle.png" />
+    <Resource Include="Images\EHSI\Desired Heading Marker.png" />
+    <Resource Include="Images\EHSI\ILS From Flag Indicator.png" />
+    <Resource Include="Images\EHSI\ILS Indicator.png" />
+    <Resource Include="Images\EHSI\ILS To Flag Indicator.png" />
+    <Resource Include="Images\EHSI\Middle Marker Needle.png" />
+    <Resource Include="Images\EHSI\Outer Marker Needle.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\MapControl\Map Bullseye 64.png" />
     <Resource Include="Images\MapControl\Map Bullseye 128.png" />
     <Resource Include="Images\MapControl\Map Range Rings.png" />
     <Resource Include="Images\MapControl\Map Aircraft.png" />
-    <Resource Include="Images\MapControl\Map No Data.png" />
-    <Resource Include="Images\MapControl\Foreground.png" />
-    <Resource Include="Images\MapControl\Background 01.png" />
-    <Resource Include="Images\MapControl\Background 02.png" />
+    <Resource Include="Images\MapControl\MapNoData Foreground.png" />
+    <Resource Include="Images\MapControl\MapNoData Background.png" />
+    <Resource Include="Images\MapControl\Map Background.png" />
+    <Resource Include="Images\MapControl\MapViewer Background.png" />
+    <Resource Include="Images\Textures\hud_mask.png" />
+    <Resource Include="Images\MapControl\Selection Background.png" />
+    <Resource Include="Images\MapControl\Selection Bullseye.png" />
+    <Resource Include="Images\MapControl\Selection Target.png" />
+    <Resource Include="Images\MapControl\Selection Aircraft.png" />
+    <Resource Include="Images\MapControl\Selection Range Rings.png" />
+    <Resource Include="Images\MapControl\Selection Aircraft Remote.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Maps\Aegean\Map.jpg" />
@@ -268,5 +903,6 @@
     <Resource Include="Images\Navpoints\Waypoint_23.png" />
     <Resource Include="Images\Navpoints\Waypoint_24.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\HeliosPlugin.targets" />
 </Project>
