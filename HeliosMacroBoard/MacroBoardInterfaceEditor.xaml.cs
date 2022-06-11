@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
+namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 {
 
     using GadrocsWorkshop.Helios.Windows.Controls;
@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var model = (MacroBoardModel)value;
+            MacroBoardModel model = (MacroBoardModel)value;
             switch (model)
             {
                 case MacroBoardModel.StreamDeck:
@@ -36,6 +36,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
                 case MacroBoardModel.StreamDeckXL:
                     {
                         return "Stream Deck XL";
+                    }
+                case MacroBoardModel.Virtual:
+                    {
+                        return "Virtual";
                     }
                 default:
                     {
@@ -58,6 +62,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
                     {
                         return MacroBoardModel.StreamDeckXL;
                     }
+                case "Virtual":
+                    {
+                        return MacroBoardModel.Virtual;
+                    }
                 default:
                     return null;
 
@@ -70,7 +78,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var models = (IEnumerable<MacroBoardModel>)value;
+            IEnumerable<MacroBoardModel> models = (IEnumerable<MacroBoardModel>)value;
             return models.Select((item) => new MacroBoardModelConverter().Convert(item, typeof(string), parameter, culture));
         }
 
@@ -90,7 +98,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
         {
             Regex r = new Regex("^[0-9]*$");
 
-            if (!r.IsMatch(e.Text)) 
+            if (!r.IsMatch(e.Text))
             {
                 e.Handled = true;
             }

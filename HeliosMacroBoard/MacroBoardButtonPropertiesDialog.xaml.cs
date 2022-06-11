@@ -8,14 +8,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
-namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
+namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
@@ -28,7 +28,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
         public MacroBoardButton TargetButton
         {
             get => _targetButton;
-            set {
+            set
+            {
                 _targetButton = value;
                 _pendingButton.Row = _targetButton.Row;
                 _pendingButton.Column = _targetButton.Column;
@@ -37,10 +38,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
             }
         }
 
-        public MacroBoardButton PendingButton
-        {
-            get => _pendingButton;
-        }
+        public MacroBoardButton PendingButton => _pendingButton;
 
         public MacroBoardButtonPropertiesDialog(MacroBoardButton targetButton)
         {
@@ -51,13 +49,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
 
         private void BackgroundImageBrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            var openDialog = new OpenFileDialog();
+            OpenFileDialog openDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Filter = "Image Files (*.png;*.bmp;*.jpg;*.jpeg;*.gif)|*.png;*.bmp;*.jpg;*.jpeg;*.gif",
+                InitialDirectory = ConfigManager.ImagePath
+            };
 
-            openDialog.Multiselect = false;
-            openDialog.Filter = "Image Files (*.png;*.bmp;*.jpg;*.jpeg;*.gif)|*.png;*.bmp;*.jpg;*.jpeg;*.gif";
-            openDialog.InitialDirectory = ConfigManager.ImagePath;
-
-            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openDialog.ShowDialog() ?? false)
             {
                 PendingButton.BackgroundImageUri = openDialog.FileName;
             }

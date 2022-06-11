@@ -1,30 +1,33 @@
-﻿<UserControl x:Class="GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard.MacroBoardLayoutEditor"
+﻿<UserControl x:Class="GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard.MacroBoardLayoutEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:HeliosSDK="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
-             xmlns:local="clr-namespace:GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard"
+             mc:Ignorable="d"
              Background="{StaticResource ToolBackground}"
              Width="Auto" Height="Auto" Name="SteamDeckButtonEditor">
     <UserControl.Resources>
-        <local:ButtonStateConverter x:Key="buttonStateConverter"/>
+        <local:ButtonStateConverter x:Key="buttonStateConverter" />
     </UserControl.Resources>
     <ItemsControl ItemsSource="{Binding Path=Interface.DeckButtons}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <UniformGrid Rows="{Binding Path=Interface.RowCount}" Columns="{Binding Path=Interface.ColumnCount}" HorizontalAlignment="Left"/>
+                <UniformGrid Rows="{Binding Path=Interface.RowCount}" Columns="{Binding Path=Interface.ColumnCount}"
+                             HorizontalAlignment="Left" />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Border Background="{Binding Path=IsPressed, Converter={StaticResource buttonStateConverter}}" Padding="5">
+                <Border Background="{Binding Path=IsPressed, Converter={StaticResource buttonStateConverter}}"
+                        Padding="5">
                     <StackPanel>
-                        <Image Source="{Binding Path=ButtonImage}" Height="72" MinHeight="72" MaxHeight="72" Width="72" MinWidth="72" MaxWidth="72" MouseUp="ButtonPreview_MouseUp">
+                        <Image Source="{Binding Path=ButtonImage}" Height="72" MinHeight="72" MaxHeight="72" Width="72"
+                               MinWidth="72" MaxWidth="72" MouseUp="ButtonPreview_MouseUp">
                             <Image.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Properties..." Click="ButtonPropertiesMenuItem_Click"/>
+                                    <MenuItem Header="Properties..." Click="ButtonPropertiesMenuItem_Click" />
                                 </ContextMenu>
                             </Image.ContextMenu>
                         </Image>

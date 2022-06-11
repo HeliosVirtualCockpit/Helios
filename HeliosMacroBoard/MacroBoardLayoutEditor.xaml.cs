@@ -14,14 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
+namespace GadrocsWorkshop.Helios.Interfaces.HeliosMacroBoard
 {
     [ValueConversion(typeof(bool), typeof(Brush))]
     internal class ButtonStateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var buttonPressed = (bool)value;
+            bool buttonPressed = (bool)value;
             if (buttonPressed)
             {
                 return Brushes.Red;
@@ -42,7 +42,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
     /// </summary>
     public partial class MacroBoardLayoutEditor : UserControl
     {
-        
         public MacroBoardLayoutEditor()
         {
             InitializeComponent();
@@ -50,8 +49,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
 
         public void ButtonPropertiesMenuItem_Click(object source, RoutedEventArgs e)
         {
-            var targetButton = ((Control)source).DataContext as MacroBoardButton;
-            var buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
+            MacroBoardButton targetButton = ((Control)source).DataContext as MacroBoardButton;
+            MacroBoardButtonPropertiesDialog buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
             buttonPropertiesDialog.TargetButton = targetButton;
 
             buttonPropertiesDialog.ShowDialog();
@@ -61,8 +60,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.OpenMacroBoard
         {
             if (e.ClickCount == 2)
             {
-                var targetButton = ((Control)source).DataContext as MacroBoardButton;
-                var buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
+                MacroBoardButton targetButton = ((Control)source).DataContext as MacroBoardButton;
+                MacroBoardButtonPropertiesDialog buttonPropertiesDialog = new MacroBoardButtonPropertiesDialog(targetButton);
                 buttonPropertiesDialog.TargetButton = targetButton;
 
                 buttonPropertiesDialog.ShowDialog();

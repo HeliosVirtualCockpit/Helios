@@ -29,8 +29,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EosSharp.1.1.5488.21795\lib\net45\EosSharp.dll</HintPath>
     </Reference>
-    <Reference Include="HidSharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0867af7205b1c8cf, processorArchitecture=MSIL">
-      <HintPath>..\packages\StreamDeckSharp.3.0.0\lib\netstandard2.0\HidSharp.dll</HintPath>
+    <Reference Include="HidSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HidSharp.2.1.0\lib\net35\HidSharp.dll</HintPath>
     </Reference>
     <Reference Include="KeraLua, Version=1.0.29.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\KeraLua.1.0.29\lib\net45\KeraLua.dll</HintPath>
@@ -47,12 +47,6 @@
     <Reference Include="NLua, Version=1.4.31.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.4.31\lib\net45\NLua.dll</HintPath>
     </Reference>
-    <Reference Include="OpenMacroBoard.SDK, Version=3.0.0.0, Culture=neutral, PublicKeyToken=be9f0b07fc09366f, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenMacroBoard.SDK.3.0.0\lib\netstandard2.0\OpenMacroBoard.SDK.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenMacroBoard.VirtualBoard, Version=4.1.0.0, Culture=neutral, PublicKeyToken=a6830bae1972bbf9, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenMacroBoard.VirtualBoard.4.1.0\lib\net472\OpenMacroBoard.VirtualBoard.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
@@ -61,18 +55,12 @@
     <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
     </Reference>
-    <Reference Include="StreamDeckSharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=e3da2f522ff1f75c, processorArchitecture=MSIL">
-      <HintPath>..\packages\StreamDeckSharp.3.0.0\lib\netstandard2.0\StreamDeckSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -484,19 +472,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Interfaces\OpenMacroBoard\MacroBoardButtonPropertiesDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Interfaces\Profile\ProfileInterfaceEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Interfaces\OpenMacroBoard\MacroBoardLayoutEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Interfaces\OpenMacroBoard\MacroBoardInterfaceEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
