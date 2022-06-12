@@ -17,7 +17,9 @@
 
 namespace GadrocsWorkshop.Helios.Controls
 {
+    using System;
     using System.Windows;
+    using System.Globalization;
     using System.Collections.Generic;
     using System.Windows.Media;
     using GadrocsWorkshop.Helios.Controls.Capabilities;
@@ -82,6 +84,7 @@ namespace GadrocsWorkshop.Helios.Controls
                                 }
                             }
                         }
+                        animation.AnimationIsPng = animation.AnimationFrameImageNamePattern.IndexOf(".png",StringComparison.InvariantCultureIgnoreCase)>=0;
                         animation.AnimationFrameCount = animation.AnimationFrames.Count;
                         animation.AnimationFrameNumber = 0;
                         Logger.Debug($"Loaded animation frame set {animation.AnimationFrameImageNamePattern} with {animation.AnimationFrames.Count} frames");

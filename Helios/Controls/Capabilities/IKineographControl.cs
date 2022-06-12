@@ -9,9 +9,10 @@
     public interface IKineographControl
     {
         #region Properties
-        string AnimationFrameImageNamePattern { get; set; }
+        String AnimationFrameImageNamePattern { get; set; }
         int AnimationFrameNumber { get; set; }
         int AnimationFrameCount { get; set; }
+        bool AnimationIsPng { get; set; }
         List<ImageSource> AnimationFrames { get; set; }
         double Width { get; set; }
         double Height { get; set; }

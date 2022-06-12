@@ -57,10 +57,12 @@ namespace GadrocsWorkshop.Helios.Controls
         private const double SWIPE_SENSITIVY_MODIFIER = 10d;
 
         private List<ImageSource> _animationFrames = new List<ImageSource>();
-        private string _animationFrameImageNamePattern;
+        private String _animationFrameImageNamePattern;
         private int _animationFrameNumber = 0;
         private int _animationFrameCount = 0;
-        private Bitmap _animationFrameBitmap;
+        private Bitmap _animationFrameBitmap =null;
+        private bool _animationIsPng = false;
+        private PixelFormat _animationFormat;
 
 
 
@@ -148,6 +150,11 @@ namespace GadrocsWorkshop.Helios.Controls
                     OnPropertyChanged("StepValue", oldValue, value, true);
                 }
             }
+        }
+        public bool AnimationIsPng
+        {
+            get => _animationIsPng;
+            set => _animationIsPng = value; 
         }
 
         /// <summary>
@@ -248,7 +255,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-        public string AnimationFrameImageNamePattern
+        public String AnimationFrameImageNamePattern
         {
             get => _animationFrameImageNamePattern;
             set
@@ -256,7 +263,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 if ((_animationFrameImageNamePattern == null && value != null)
                     || (_animationFrameImageNamePattern != null && !_animationFrameImageNamePattern.Equals(value)))
                 {
-                    string oldValue = _animationFrameImageNamePattern;
+                    String oldValue = _animationFrameImageNamePattern;
                     _animationFrameImageNamePattern = value;
                     OnPropertyChanged("AnimationFrameImageNamePattern", oldValue, value, true);
                     Refresh();
@@ -274,10 +281,10 @@ namespace GadrocsWorkshop.Helios.Controls
                     _animationFrameNumber = value;
                     OnPropertyChanged("AnimationFrameNumber", oldValue, value, true);
                     Refresh();
-                    // we want to test for transparency in HitTest so we need to make a bitmap
+                    // we test for transparency in HitTest so we need a bitmap
                     // from the image source
                     if (AnimationFrames.Count > 0) {
-                        _animationFrameBitmap = BitmapImage2Bitmap(AnimationFrames[AnimationFrameNumber] as BitmapImage);
+                        _animationFrameBitmap = BitmapImage2Bitmap(AnimationFrames[AnimationFrameNumber]);
                     }
                 }
             }
@@ -430,17 +437,32 @@ namespace GadrocsWorkshop.Helios.Controls
         public override bool HitTest(Point location)
         {
             // The bitmap is unscaled so we adjust the location to be tested
-            return IsTransparent(AdjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height)), _animationFrameBitmap);
+            if (_animationFrameBitmap != null)
+            {
+                return IsTransparent(AdjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height)), _animationFrameBitmap);
+            } else
+            {
+                return true;
+            }
         }
         private bool IsTransparent(Point location, Bitmap bitmap)
         {
-            /// TODO: Find a robust test for pixel transparency in a HeliosVisual
-            /// Alpha channel on PNG pixels seems to be always 255 and the color value returned for a transparent region can also change depending on how it is
-            /// exported.  0xffffffff and 0xff000000 have both been returned for transparent areas from different PNGs.  Testing against Color.Transarent also does not
-            /// seem to produce the hoped for results.
-            System.Drawing.Color pxl = _animationFrameBitmap.GetPixel(Convert.ToInt32(location.X), Convert.ToInt32(location.Y));
-            Logger.Debug($"{Name} HitTest location {location} {pxl} Result {!((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || (pxl.A == 255 && pxl.R == 0 && pxl.G == 0 && pxl.B == 0) || pxl.A == 0)} Transparent {pxl.ToArgb() == System.Drawing.Color.Transparent.ToArgb()} Empty Colour {pxl.IsEmpty}");
-            return !((pxl.A == 255 && pxl.R == 255 && pxl.G == 255 && pxl.B == 255) || (pxl.A == 255 && pxl.R == 0 && pxl.G == 0 && pxl.B == 0) || pxl.A == 0);
+            if(_animationFrameBitmap != null)
+            {
+                switch (_animationFrameBitmap.PixelFormat)
+                {
+                    case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
+                        return _animationFrameBitmap.GetPixel(Convert.ToInt32(location.X), Convert.ToInt32(location.Y)).A != 0;
+                        break;
+                    default:
+                        return true;
+                        break;
+                }
+            }
+            else
+            {
+                return true;
+            }
         }
         private Point AdjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
         {
@@ -453,20 +475,38 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             return value < min ? min : value > max ? max : value ;
         }
-        private Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
+        private Bitmap BitmapImage2Bitmap(ImageSource imageSource)
         {
             using (MemoryStream outStream = new MemoryStream())
             {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
-                enc.Save(outStream);
-                if (_animationFrameBitmap != null)
+                /// TODO: expand to include other formats               
+                BitmapEncoder enc;
+                if (_animationIsPng)
                 {
-                    _animationFrameBitmap.Dispose();
+                    enc = new PngBitmapEncoder();
                 }
-                Bitmap bm = new Bitmap(outStream);
-                outStream.Dispose();    
-                return bm;
+                else
+                {
+                    ///default to a BMP encoder
+                    enc = new BmpBitmapEncoder();
+                }
+                try
+                {
+                    enc.Frames.Add(BitmapFrame.Create(imageSource as BitmapImage));
+                    enc.Save(outStream);
+                    if (_animationFrameBitmap != null)
+                    {
+                        _animationFrameBitmap.Dispose();
+                    }
+                    Bitmap bm = new Bitmap(outStream);
+                    outStream.Dispose();
+                    return bm;
+                }
+                catch {
+                    Logger.Warn($"{Name} Unable to convert new animation frame to bitmap for use in transparency testing.");
+                    return null;
+                }
+                
             }
         }
     }
