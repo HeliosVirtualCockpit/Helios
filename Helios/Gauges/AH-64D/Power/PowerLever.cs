@@ -14,14 +14,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.AH64D.Altimeter
+namespace GadrocsWorkshop.Helios.Gauges.AH64D.AltimeterPowerLevers
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.AH64D.Power", "Power Levers", "AH-64D", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.AH64D.Power", "Power Levers", "AH-64D", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class Lever : BaseGauge
     {
         private int _lastHiddenLeftImageIndex;
