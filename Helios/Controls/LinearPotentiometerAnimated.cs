@@ -435,7 +435,7 @@ namespace GadrocsWorkshop.Helios.Controls
             // The bitmap is unscaled so we adjust the location to be tested
             if (_animationFrameBitmap != null)
             {
-                return IsTransparent(AdjustLocation(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height)), _animationFrameBitmap);
+                return IsTransparent(AdjustLocationForBitmap(location, _animationFrameBitmap.Size, new Size(this.Width, this.Height)), _animationFrameBitmap);
             } else
             {
                 return true;
@@ -458,7 +458,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 return true;
             }
         }
-        private Point AdjustLocation(Point location, System.Drawing.Size bitmapSize, Size visualSize)
+        private Point AdjustLocationForBitmap(Point location, System.Drawing.Size bitmapSize, Size visualSize)
         {
             Point testPoint = new Point();
             testPoint.X = Math.Round(Clamp(location.X * bitmapSize.Width / visualSize.Width, 0, bitmapSize.Width - 1));
@@ -499,8 +499,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 catch {
                     Logger.Warn($"{Name} Unable to convert new animation frame to bitmap for use in transparency testing.");
                     return null;
-                }
-                
+                }               
             }
         }
     }
