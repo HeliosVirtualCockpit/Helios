@@ -922,10 +922,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
             // see if we can restore from JSON
-            if (LoadFunctionsFromJson())
-            {
-                return;
-            }
+            //if (LoadFunctionsFromJson())
+            //{
+            //    return;
+            //}
 
             #region MPDs
             #region Pilot Left
@@ -1343,7 +1343,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             AddFunction(new FlagValue(this, Warning_Lights.FLAG_EmergencyEmergHydPLT.ToString("d"), "Left Console (Pilot)", "Emergency Emerg Hyd Indicator", ""));
             AddFunction(new PushButton(this, HYDRO_INTERFACE, hydraulic_commands.TailWheelUnLock_PLT.ToString("d"), "308", "Left Console (Pilot)", "Tail Wheel Unlocked Pushbutton"));
             AddFunction(new FlagValue(this, Warning_Lights.FLAG_TailWheelUnlockPLT.ToString("d"), "Left Console (Pilot)", "Tail Wheel Unlock Indicator", ""));
-            AddFunction(Switch.CreateThreeWaySwitch(this, JETT_PANEL_PLT, hydraulic_commands.Rotor_Brake.ToString("d"), "314", "0.0", "Off", "0.5", "Brake", "1.0", "Lock", "Left Console (Pilot)", "Rotor Brake Switch", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, HYDRO_INTERFACE, hydraulic_commands.Rotor_Brake.ToString("d"), "314", "1.0", "Off", "0.0", "Brake", "-1.0", "Lock", "Left Console (Pilot)", "Rotor Brake Switch", "%0.1f"));
             AddFunction(new PushButton(this, ENGINE_INTERFACE, engine_commands.APU_StartBtn.ToString("d"), "400", "Left Console (Pilot)", "APU Start Button"));
             AddFunction(new FlagValue(this, Warning_Lights.FLAG_APUPLT.ToString("d"), "Left Console (Pilot)", "APU Indicator", ""));
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE_INTERFACE, engine_commands.APU_StartBtnCover.ToString("d"), "401", "1.0", "Closed", "0.0", "Open", "Left Console (Pilot)", "APU Start Button Cover", "%0.1f"));

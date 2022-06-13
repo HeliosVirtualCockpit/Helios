@@ -62,10 +62,6 @@ namespace GadrocsWorkshop.Helios.Controls
         private int _animationFrameCount = 0;
         private Bitmap _animationFrameBitmap =null;
         private bool _animationIsPng = false;
-        private PixelFormat _animationFormat;
-
-
-
 
         public LinearPotentiometerAnimated( )
             : base( "Linear Potentiometer (Animated)", new Size( 73, 240 ) )
@@ -453,10 +449,8 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
                         return _animationFrameBitmap.GetPixel(Convert.ToInt32(location.X), Convert.ToInt32(location.Y)).A != 0;
-                        break;
                     default:
                         return true;
-                        break;
                 }
             }
             else
