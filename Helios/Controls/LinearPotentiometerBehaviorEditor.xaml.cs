@@ -13,19 +13,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for RotarySwitchAppearanceEditor.xaml
+    /// Interaction logic for LinearPotentiometerBehaviorEditor.xaml
     /// </summary>
-    [HeliosPropertyEditor("Helios.Base.RotarySwitch", "Appearance")]
-    public partial class RotarySwitchAppearanceEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("Helios.Base.LinearPotentiometerAnimated", "Behavior")]
+    public partial class LinearPotentiometerBehaviorEditor : HeliosPropertyEditor
     {
-        public RotarySwitchAppearanceEditor()
+        public LinearPotentiometerBehaviorEditor()
         {
             InitializeComponent();
         }

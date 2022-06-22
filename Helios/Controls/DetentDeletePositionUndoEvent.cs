@@ -16,18 +16,25 @@
 
 namespace GadrocsWorkshop.Helios.Controls
 {
-    using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Windows.Controls;
-
-    /// <summary>
-    /// Interaction logic for RotarySwitchAppearanceEditor.xaml
-    /// </summary>
-    [HeliosPropertyEditor("Helios.Base.RotarySwitch", "Appearance")]
-    public partial class RotarySwitchAppearanceEditor : HeliosPropertyEditor
+    public class DetentDeletePositionUndoEvent : IUndoItem
     {
-        public RotarySwitchAppearanceEditor()
+        private LinearPotentiometerDetentsAnimated _linearPotentiometer;
+        private double _position;
+
+        public DetentDeletePositionUndoEvent(LinearPotentiometerDetentsAnimated linearPotentiometer, double position)
         {
-            InitializeComponent();
+            _linearPotentiometer = linearPotentiometer;
+            _position = position;
+        }
+
+        public void Undo()
+        {
+           _linearPotentiometer.DetentPositions.Add(_position);
+        }
+
+        public void Do()
+        {
+            _linearPotentiometer.DetentPositions.Remove(_position);
         }
     }
 }

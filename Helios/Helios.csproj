@@ -100,8 +100,23 @@
     <Compile Include="Controls\DualIndicatorPushButtonAppearanceEditor.xaml.cs">
       <DependentUpon>DualIndicatorPushButtonAppearanceEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Capabilities\IKineographControl.cs" />
+    <Compile Include="Controls\KineographRenderer.cs" />
+    <Compile Include="Controls\LinearPotentiometerDetentsAnimated.cs" />
     <Compile Include="Controls\NumericTextDisplay.cs" />
+    <Compile Include="Controls\LinearPotentiometerAnimated.cs" />
+    <Compile Include="Controls\AnimationAppearanceEditor.xaml.cs">
+      <DependentUpon>AnimationAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LinearPotentiometerBehaviorEditor.xaml.cs">
+      <DependentUpon>LinearPotentiometerBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RendererCapabilities\IWindowsControl.cs" />
+    <Compile Include="Controls\DetentAddPositionUndoEvent.cs" />
+    <Compile Include="Controls\RotarySwitchBehaviorEditor.xaml.cs">
+      <DependentUpon>RotarySwitchBehaviorEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DetentDeletePositionUndoEvent.cs" />
     <Compile Include="Controls\Special\CalibrationFilter.cs" />
     <Compile Include="Controls\Special\CalibrationFilterBehaviorEditor.xaml.cs">
       <DependentUpon>CalibrationFilterBehaviorEditor.xaml</DependentUpon>
@@ -151,6 +166,7 @@
     <Compile Include="Gauges\AH-64D\MFD\MFD CPG Right.cs" />
     <Compile Include="Gauges\AH-64D\MFD\MFD Pilot Right.cs" />
     <Compile Include="Gauges\AH-64D\MFD\MFD.cs" />
+    <Compile Include="Gauges\AH-64D\Power\PowerLever.cs" />
     <Compile Include="Gauges\AH-64D\SAI\SAI.cs" />
     <Compile Include="Gauges\AH-64D\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\AH-64D\FAT\FAT.cs" />
@@ -333,6 +349,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DualIndicatorPushButtonAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnimationAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LinearPotentiometerBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RotarySwitchBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -817,8 +845,8 @@
     <Compile Include="Controls\RotarySwitchAppearanceEditor.xaml.cs">
       <DependentUpon>RotarySwitchAppearanceEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RotarySwitchBehaviorEditor.xaml.cs">
-      <DependentUpon>RotarySwitchBehaviorEditor.xaml</DependentUpon>
+    <Compile Include="Controls\LinearPotentiometerDetentBehaviorEditor.xaml.cs">
+      <DependentUpon>LinearPotentiometerDetentBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RotarySwitchDeletePositionUndoEvent.cs" />
     <Compile Include="Controls\RotarySwitchPosition.cs" />
@@ -1006,6 +1034,12 @@
     <Resource Include="Images\AH-64D\MFD\MFD_glass.png" />
     <Resource Include="Images\AH-64D\SAI\adi_bezel.png" />
     <Resource Include="Images\AH-64D\TEDAC\TEDAC_frame.png" />
+    <Resource Include="Images\AH-64D\Power\Lever_0.png" />
+    <Resource Include="Images\AH-64D\Power\Lever_1.png" />
+    <Resource Include="Images\AH-64D\Power\Lever_2.png" />
+    <Resource Include="Images\AH-64D\Power\Lever_3.png" />
+    <Resource Include="Images\AH-64D\Power\Lever_4.png" />
+    <Resource Include="Images\AH-64D\Power\Lever_5.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1525,7 +1559,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RotarySwitchBehaviorEditor.xaml">
+    <Page Include="Controls\LinearPotentiometerDetentBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

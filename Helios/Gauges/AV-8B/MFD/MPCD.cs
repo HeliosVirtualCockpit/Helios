@@ -129,10 +129,25 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
 
         private void AddRocker(string name, string imagePrefix, string imageOrientation, double x, double y, string interfaceElementName)
         {
+            Size rockerSize = new Size(0,0);
+            switch (imageOrientation)
+            {
+                case ("V"):
+                    rockerSize = new Size(54, 114);
+                    break;
+                case ("L"):
+                    rockerSize = new Size(120, 110);
+                    break;
+                case ("R"):
+                    rockerSize = new Size(120, 110);
+                    break;
+            }
+
+
             ThreeWayToggleSwitch rocker = AddThreeWayToggle(
                 name: name,
                 posn: new Point(x,y),
-                size: new Size(0,0),
+                size: rockerSize,
                 defaultPosition: ThreeWayToggleSwitchPosition.Two,
                 defaultType: ThreeWayToggleSwitchType.MomOnMom,
                 interfaceDeviceName: _interfaceDeviceName,
@@ -147,21 +162,15 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
                 case ("V"):
                     rocker.PositionOneImage = "{AV-8B}/Images/" + imagePrefix + " " + imageOrientation + " Up.png";
                     rocker.PositionThreeImage = "{AV-8B}/Images/" + imagePrefix + " " + imageOrientation + " Dn.png";
-                    rocker.Width = 54;
-                    rocker.Height = 114;
-                    break;
+                     break;
                 case ("L"):
                     rocker.PositionOneImage = "{AV-8B}/Images/" + imagePrefix + " " + imageOrientation + " Up.png";
                     rocker.PositionThreeImage = "{AV-8B}/Images/" + imagePrefix + " " + imageOrientation + " Dn.png";
-                    rocker.Width = 120;
-                    rocker.Height = 110;
                     break;
                 case ("R"):
                     rocker.PositionOneImage = "{AV-8B}/Images/" + imagePrefix + " " + imageOrientation + " Up.png";
                     rocker.PositionThreeImage = "{AV-8B}/Images/" + imagePrefix + " " + imageOrientation + " Dn.png";
-                    rocker.Width = 120;
-                    rocker.Height = 110;
-                    break;
+                     break;
                 default:
                     break;
             }

@@ -82,7 +82,12 @@ namespace GadrocsWorkshop.Helios
 
         [Description(
             "If the image is loaded from a local file URL and changed on disk, the new version will be used.  In-memory caching of images is disabled.")]
-        ReloadIfChangedExternally = 1
+        ReloadIfChangedExternally = 1,
+
+        [Description(
+            "If the image cannot be loaded, suppress warning / error messages.")]
+        SuppressMissingImageMessages = 2
+
     }
 
     /// <summary>

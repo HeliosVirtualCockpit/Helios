@@ -1,4 +1,4 @@
-﻿//  Copyright 2014 Craig Courtney
+//  Copyright 2014 Craig Courtney
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -13,21 +13,27 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 namespace GadrocsWorkshop.Helios.Controls
 {
-    using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Windows.Controls;
-
-    /// <summary>
-    /// Interaction logic for RotarySwitchAppearanceEditor.xaml
-    /// </summary>
-    [HeliosPropertyEditor("Helios.Base.RotarySwitch", "Appearance")]
-    public partial class RotarySwitchAppearanceEditor : HeliosPropertyEditor
+    public class DetentAddPositionUndoEvent : IUndoItem
     {
-        public RotarySwitchAppearanceEditor()
+        private LinearPotentiometerDetentsAnimated _linearPotentiometer;
+        private double _position;
+
+        public DetentAddPositionUndoEvent(LinearPotentiometerDetentsAnimated linearPotentiometer, double position)
         {
-            InitializeComponent();
+            _linearPotentiometer = linearPotentiometer;
+            _position = position;
+        }
+
+        public void Undo()
+        {
+            _linearPotentiometer.DetentPositions.Remove(_position);
+        }
+
+        public void Do()
+        {
+            _linearPotentiometer.DetentPositions.Add(_position);
         }
     }
 }

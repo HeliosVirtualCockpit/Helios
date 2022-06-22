@@ -53,6 +53,8 @@ namespace GadrocsWorkshop.Helios
         // (actual bitmap contents may be evicted due to system caching)
         private readonly Dictionary<string, ImageSource> _objectCache = new Dictionary<string, ImageSource>();
 
+        private static bool _suppressMissingImageMessages;
+
         /// <summary>
         /// this class represents all the characteristics of an image load that must be identical for
         /// the resulting image to be the same
@@ -137,6 +139,7 @@ namespace GadrocsWorkshop.Helios
             image.CreateOptions = request.Options.HasFlag(LoadImageOptions.ReloadIfChangedExternally) ? BitmapCreateOptions.IgnoreImageCache : BitmapCreateOptions.DelayCreation;
             image.UriSource = imageUri;
 
+            _suppressMissingImageMessages = request.Options.HasFlag(LoadImageOptions.SuppressMissingImageMessages);
             // REVISIT: not clear if it is legal to set decoding in just one axis but we will find out if anyone ever uses this function with only one scaling factor
             if (request.Width.HasValue)
             {
@@ -406,7 +409,13 @@ namespace GadrocsWorkshop.Helios
                 // unless we configure this with a control center preference
                 //
                 // we cannot configure it from the Profile Interface's settings, because that has not been loaded yet
-                Logger.Info("referenced user image not found at {loadName}", Anonymizer.Anonymize(loadName));
+                //
+                // When images for animation frames are being loaded, we do not want to issue a message for the 
+                // post-ultimate image.
+                if (!_suppressMissingImageMessages)
+                {
+                    Logger.Info("referenced user image not found at {loadName}", Anonymizer.Anonymize(loadName));
+                }
             }
 
             return "";
@@ -433,7 +442,10 @@ namespace GadrocsWorkshop.Helios
             }
             catch (Exception e)
             {
-                Logger.Error(e, "Error loading image from pack reference to assembly {URI}.", uri);
+                if (!_suppressMissingImageMessages)
+                {
+                    Logger.Error(e, "Error loading image from pack reference to assembly {URI}.", uri);
+                }
                 return false;
             }
         }
@@ -483,8 +495,11 @@ namespace GadrocsWorkshop.Helios
 
             if (result == null)
             {
-                _failedImagePaths.Add(path);
-                ImageLoadFailure?.Invoke(this, new ImageLoadEventArgs(path));
+                if (!_suppressMissingImageMessages)
+                {
+                    _failedImagePaths.Add(path);
+                    ImageLoadFailure?.Invoke(this, new ImageLoadEventArgs(path));
+                }
             }
             else
             {
