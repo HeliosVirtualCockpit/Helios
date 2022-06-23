@@ -43,7 +43,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.HydraulicPressure
 		private bool _inFlightLastValue = true;
 
 		public HydraulicPressureA()
-			: base("Hydraulic Pressure", new Size(300, 300))
+			: base("Hydraulic Pressure A", new Size(300, 300))
 		{
 			AddComponents();
 		}
