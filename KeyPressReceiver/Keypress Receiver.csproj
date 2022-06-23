@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLineOptions.cs" />
     <Compile Include="KeyPressReceiverForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +94,11 @@
   <ItemGroup>
     <Resource Include="Helios.ico" />
     <Content Include="Text.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser">
+      <Version>2.7.82</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\HeliosExecutable.targets" />
 </Project>

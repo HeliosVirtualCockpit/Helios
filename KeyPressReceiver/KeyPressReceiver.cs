@@ -19,6 +19,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using CommandLine;
 
 namespace GadrocsWorkshop.Helios.KeyPressReceiver
 {
@@ -29,7 +30,7 @@ namespace GadrocsWorkshop.Helios.KeyPressReceiver
     /// </summary>
     static Mutex mutex = new Mutex(false, "Helios.KeypressReceiver");
     [STAThread]
-    static void Main()
+    static void Main(string[] args)
     {
       // Only allow one instance of the Receiver - added due to user error
       if (!mutex.WaitOne(TimeSpan.FromSeconds(2), false))
@@ -39,14 +40,30 @@ namespace GadrocsWorkshop.Helios.KeyPressReceiver
       }
       try
       {
+        Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed(RunOptions).WithNotParsed(HandleParseError);
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
         Application.Run(new KeyPressReceiverForm());
-      }
+      } catch (ArgumentException e)
+            {
+                Console.WriteLine($"Keypress Receiver Error:  Command line input argument error {e}.");
+            }
       finally
       {
         mutex.ReleaseMutex();
       }
     }
-  }
+    static void RunOptions(CommandLineOptions opts)
+        {
+            Properties.Settings.Default.ServerAddress = opts.ServerAddress;
+            Properties.Settings.Default.ServerPort = opts.ServerPort;
+        }
+    static void HandleParseError(IEnumerable<Error> errs)
+        {
+            foreach(Error err in errs)
+            {
+                throw new ArgumentException($"Keypress Receiver Command line input argument error {err}");
+            }
+        }
+    }
 }
