@@ -1434,20 +1434,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
 #region Windshield Panels
 #region Pilot
             AddFunction(new PushButton(this, CPT_MECH, cpt_mech_commands.PLT_DefogBtn.ToString("d"), "356", "Windshield Panel (Pilot)", "Defog Button"));
-            // Wiper is a (new?) pulsed rotary +1.0 for CW and -1.0 for CCW
-            AddFunction(new Switch(this, CPT_MECH, "357", new SwitchPosition[] { new SwitchPosition("0.0", "PARK", cpt_mech_commands.PLT_WiperSw.ToString("d"),null,null, "0.1"), new SwitchPosition("0.1", "OFF", cpt_mech_commands.PLT_WiperSw.ToString("d")), new SwitchPosition("0.2", "LO", cpt_mech_commands.PLT_WiperSw.ToString("d")), new SwitchPosition("0.3", "HI", cpt_mech_commands.PLT_WiperSw.ToString("d")) }, "Windshield Panel (Pilot)", "Wiper Control Switch, PARK/OFF/LO/HI", "%0.1f","1.0"));
+            AddFunction(new Switch(this, CPT_MECH, "357", new SwitchPosition[] { new SwitchPosition("0.0", "PARK", cpt_mech_commands.PLT_WiperSw.ToString("d")), new SwitchPosition("0.1", "OFF", cpt_mech_commands.PLT_WiperSw.ToString("d")), new SwitchPosition("0.2", "LO", cpt_mech_commands.PLT_WiperSw.ToString("d")), new SwitchPosition("0.3", "HI", cpt_mech_commands.PLT_WiperSw.ToString("d")) }, "Windshield Panel (Pilot)", "Wiper Control Switch, PARK/OFF/LO/HI", "%0.1f"));
 #endregion
 #region CP/G
             AddFunction(new PushButton(this, CPT_MECH, cpt_mech_commands.CPG_DefogBtn.ToString("d"), "394", "Windshield Panel (CP/G)", "Defog Button"));
-            // Wiper is a (new?) pulsed rotary +1.0 for CW and -1.0 for CCW  
-            AddFunction(new Switch(this, CPT_MECH, "395", new SwitchPosition[] { new SwitchPosition("0.0", "PARK", cpt_mech_commands.CPG_WiperSw.ToString("d"), null, null, "0.1"), new SwitchPosition("0.1", "OFF", cpt_mech_commands.CPG_WiperSw.ToString("d")), new SwitchPosition("0.2", "LO", cpt_mech_commands.CPG_WiperSw.ToString("d")), new SwitchPosition("0.3", "HI", cpt_mech_commands.CPG_WiperSw.ToString("d")) }, "Windshield Panel (CP/G)", "Wiper Control Switch, PARK/OFF/LO/HI", "%0.1f","1.0"));
+            AddFunction(new Switch(this, CPT_MECH, "395", new SwitchPosition[] { new SwitchPosition("0.0", "PARK", cpt_mech_commands.CPG_WiperSw.ToString("d")), new SwitchPosition("0.1", "OFF", cpt_mech_commands.CPG_WiperSw.ToString("d")), new SwitchPosition("0.2", "LO", cpt_mech_commands.CPG_WiperSw.ToString("d")), new SwitchPosition("0.3", "HI", cpt_mech_commands.CPG_WiperSw.ToString("d")) }, "Windshield Panel (CP/G)", "Wiper Control Switch, PARK/OFF/LO/HI", "%0.1f"));
 #endregion
 #endregion
 #region Gear System
-            AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, gear_commands.AH64_ParkingBrake.ToString("d"), "634", "0.0", "Pull", "1.0", "Stow", "Gear", "Parking Brake Handle", "%0.1f"));
-            #endregion
-            #region Power Lever Quadrant
-            #region Pilot
+            AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, gear_commands.AH64_ParkingBrake.ToString("d"), "634", "1", "Pull", "0", "Stow", "Gear", "Parking Brake Handle", "%0.1f"));
+#endregion
+#region Power Lever Quadrant
+#region Pilot
             AddFunction(new Switch(this, ELEC_INTERFACE, "315", new SwitchPosition[] { new SwitchPosition("0.0", "Off", electric_commands.MIK.ToString("d")), new SwitchPosition("0.5", "Batt", electric_commands.MIK.ToString("d")), new SwitchPosition("1.0", "External Power", electric_commands.MIK.ToString("d")) }, "Left Console (Pilot)", "Master Ignition Switch", "%0.1f"));
             AddFunction(new Axis(this, CONTROL_INTERFACE, ctrl_commands.FrictionLever.ToString("d"), "633", 0.1d, 0d, 1d, "Left Console (Pilot)", "Lever Friction Adjustment", false, "%0.3f"));
             AddFunction(new Axis(this, ENGINE_INTERFACE, engine_commands.PLT_L_PowerLever.ToString("d"), "398", 0.05d, 0d, 1d, "Left Console (Pilot)", "Left Power Lever", false, "%0.3f"));
@@ -1467,15 +1465,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
 #endregion
 #region Generator Reset Panel
 #region Pilot
-            AddFunction(new Switch(this, ELEC_INTERFACE, "355", new SwitchPosition[] { new SwitchPosition("-1.0", "Gen 1", electric_commands.GEN1_RST_SW.ToString("d")), new SwitchPosition("0.0", "Off", electric_commands.GEN1_RST_SW.ToString("d")), new SwitchPosition("1.0", "Gen 2", electric_commands.GEN2_RST_SW.ToString("d")) }, "Generator Reset", "Generator Reset Switch", "%0.1f"));
-            AddFunction(new Switch(this, ENGINE_INTERFACE, "353", new SwitchPosition[] { new SwitchPosition("1.0", "Eng 1", engine_commands.ChkOvspTestSwENG1A.ToString("d")), new SwitchPosition("0.0", "Off", engine_commands.ChkOvspTestSwENG2A.ToString("d")), new SwitchPosition("-1.0", "Eng 2", engine_commands.ChkOvspTestSwENG2A.ToString("d")) }, "Generator Reset", "CKT A Check Overspeed Test", "%0.1f"));
-            AddFunction(new Switch(this, ENGINE_INTERFACE, "354", new SwitchPosition[] { new SwitchPosition("1.0", "Eng 1", engine_commands.ChkOvspTestSwENG1B.ToString("d")), new SwitchPosition("0.0", "Off", engine_commands.ChkOvspTestSwENG2B.ToString("d")), new SwitchPosition("-1.0", "Eng 2", engine_commands.ChkOvspTestSwENG2B.ToString("d")) }, "Generator Reset", "CKT B Check Overspeed Test", "%0.1f"));
-
-            #endregion
-            #endregion
-            #region Handgrip
-            #region CP/G
-            #region Left
+            AddFunction(new Switch(this, ELEC_INTERFACE, "355", new SwitchPosition[] { new SwitchPosition("1.0", "Gen 1", electric_commands.GEN1_RST_SW.ToString("d"), electric_commands.GEN1_RST_SW.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Off", null), new SwitchPosition("-1.0", "Gen 2", electric_commands.GEN2_RST_SW.ToString("d"), electric_commands.GEN2_RST_SW.ToString("d"), "0.0", "0.0") }, "Generator Reset", "Generator Reset Switch", "%0.1f"));
+            AddFunction(new Switch(this, ELEC_INTERFACE, "353", new SwitchPosition[] { new SwitchPosition("1.0", "Eng 2", engine_commands.ChkOvspTestSwENG2A.ToString("d"), engine_commands.ChkOvspTestSwENG2A.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Off", null), new SwitchPosition("-1.0", "Start", engine_commands.ChkOvspTestSwENG1A.ToString("d"), engine_commands.ChkOvspTestSwENG1A.ToString("d"), "0.0", "0.0") }, "Generator Reset", "CKT A Check Overspeed Test", "%0.1f"));
+            AddFunction(new Switch(this, ELEC_INTERFACE, "354", new SwitchPosition[] { new SwitchPosition("1.0", "Eng 2", engine_commands.ChkOvspTestSwENG2B.ToString("d"), engine_commands.ChkOvspTestSwENG2B.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Off", null), new SwitchPosition("-1.0", "Start", engine_commands.ChkOvspTestSwENG1B.ToString("d"), engine_commands.ChkOvspTestSwENG1B.ToString("d"), "0.0", "0.0") }, "Generator Reset", "CKT B Check Overspeed Test", "%0.1f"));
+#endregion
+#endregion
+#region Handgrip
+#region CP/G
+#region Left
             //            elements["pnt_491"] = springloaded_3_pos_tumb(CREW.CPG, _("Image AutoTrack/Offset Switch, OFS(LMB)/IAT(RMB)"), devices.TEDAC, tedac_commands.LHG_IAT_OFS_SW_OFS, tedac_commands.LHG_IAT_OFS_SW_IAT, 491)
             //elements["pnt_491"].side = { }
             //            elements["pnt_492-1"] = knuppel_button(CREW.CPG, _("TADS FOV Select Switch, Z (Zoom)"), devices.TEDAC, tedac_commands.LHG_TADS_FOV_SW_Z, 492, 1.0)
@@ -1524,8 +1521,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             //elements["pnt_489"].side = { }
             //            elements["pnt_490"] = default_button(CREW.CPG, _("Cursor Display Select (L/R) Button - Press to move the cursor to the center of the opposite MPD"), devices.TEDAC, tedac_commands.LHG_LR_BTN, 490)
             //elements["pnt_490"].side = { }
-            #endregion
-            #region Right
+#endregion
+#region Right
             //elements["pnt_508-1"] = knuppel_button(CREW.CPG, _("Sight Select Switch, HMD"), devices.TEDAC, tedac_commands.RHG_SIGHT_SELECT_SW_UP, 508, 1.0)
             //elements["pnt_508-1"].side = { }
             //            elements["pnt_508-2"] = knuppel_button(CREW.CPG, _("Sight Select Switch, LINK"), devices.TEDAC, tedac_commands.RHG_SIGHT_SELECT_SW_DOWN, 508, -1.0)
@@ -1568,11 +1565,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             //elements["pnt_516-2"].side = { }
             //            elements["pnt_507"] = default_3_position_tumb(CREW.CPG, _("Image Auto Tracker (IAT) Polarity Switch, W (White)/A (Auto)/B (Black)"), devices.TEDAC, tedac_commands.RHG_IAT_POLARITY_SW, 507, NOT_CYCLED, anim_speed_default, NOT_INVERSED)
             //elements["pnt_507"].side = { }
-            #endregion
-            #endregion
-            #endregion
-            #region Comm Panel
-            #region Pilot
+#endregion
+#endregion
+#endregion
+#region Comm Panel
+#region Pilot
             AddFunction(new Axis(this, COMM_PANEL_PLT, comm_commands.VHF_volume.ToString("d"), "334", 0.1d, 0d, 1d, "Communications Panel (Pilot)", "VHF Volume Control Knob"));
             AddFunction(new PushButton(this, COMM_PANEL_PLT, comm_commands.VHF_disable.ToString("d"), "449", "Communications Panel (Pilot)", "VHF Volume Control Knob Pull"));  //  (LMB) Pull to disable / (MW) Rotate to adjust volume
             AddFunction(new Axis(this, COMM_PANEL_PLT, comm_commands.UHF_volume.ToString("d"), "335", 0.1d, 0d, 1d, "Communications Panel (Pilot)", "UHF Volume Control Knob"));
@@ -1639,7 +1636,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
 #endregion
 #region CMWS
 #region Pilot
-            AddFunction(new Switch(this, CMWS, "610", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", CMWS_commands.CMWS_PWR.ToString("d")), new SwitchPosition("0.0", "On", CMWS_commands.CMWS_PWR.ToString("d")), new SwitchPosition("1.0", "Test", CMWS_commands.CMWS_PWR_TEST.ToString("d"),null,null,"0.0") }, "CMWS", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, CMWS, "610", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", CMWS_commands.CMWS_PWR.ToString("d")), new SwitchPosition("0.0", "On", CMWS_commands.CMWS_PWR.ToString("d")), new SwitchPosition("1.0", "Test", CMWS_commands.CMWS_PWR_TEST.ToString("d")) }, "CMWS", "Power Switch", "%0.1f"));
             AddFunction(new Axis(this, CMWS, CMWS_commands.CMWS_AUDIO_KNOB.ToString("d"), "611", 0.1d, 0d, 1d, "CMWS", "Audio Volume Knob"));
             AddFunction(new Axis(this, CMWS, CMWS_commands.CMWS_LAMP_KNOB.ToString("d"), "612", 0.1d, 0d, 1d, "CMWS", "Brightness Knob"));
             AddFunction(Switch.CreateToggleSwitch(this, CMWS, CMWS_commands.CMWS_ARM_SAFE_SW.ToString("d"), "614", "1.0", "Arm", "0.0", "Safe", "CMWS", "Arm Switch", "%.1f"));
