@@ -145,6 +145,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             _exitAction = new string[_positions.Length];
             _sendPulse = new string[3];
 
+            _incrementalPulseSwitch = !string.IsNullOrWhiteSpace(_incrementalPulseValue);
+
             ValueDescriptions = "";
             for (int i = 0; i < _positions.Length; i++)
             {
