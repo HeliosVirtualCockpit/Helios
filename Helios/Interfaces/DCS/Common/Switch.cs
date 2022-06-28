@@ -24,6 +24,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
     public class Switch : DCSFunction
     {
+        const int SWITCHINCREMENT = 0;
+        const int SWITCHDECREMENT = 1;
+        const int SWITCHNEUTRAL = 2;
         protected readonly string _id;
         protected readonly string _format;
         protected bool _everyframe;
@@ -31,15 +34,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private string[] _sendAction;
         private string[] _sendStopAction;
         private string[] _exitAction;
+        private string[] _sendPulse;
         private int _currentPosition = -1;
 
         private HeliosValue _value;
         private HeliosAction _releaseAction;
 
         private int _lastSetPosition = -1;
+        private bool _incrementalPulseSwitch = false;
 
         [JsonProperty("deviceId")]
         private string _deviceId;
+
+        [JsonProperty("incrementalPulseValue", NullValueHandling = NullValueHandling.Ignore)]
+        private string _incrementalPulseValue;
 
         [JsonProperty("positions")]
         private SwitchPosition[] _positions;
@@ -80,6 +88,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         }
 
         #endregion
+        public Switch(BaseUDPInterface sourceInterface, string deviceId, string argId, SwitchPosition[] positions, string device, string name, string exportFormat, string incrementalPulseValue = "")
+            : base(sourceInterface, device, name, "Current position of this switch.")
+        {
+            bool build = true;
+            _incrementalPulseValue = incrementalPulseValue;
+            _incrementalPulseSwitch = !string.IsNullOrWhiteSpace(incrementalPulseValue);
+            _id = argId;
+            _format = exportFormat;
+            _everyframe = false;
+            _deviceId = deviceId;
+            _positions = positions;
+            if (build)
+            {
+                DoBuild();
+            }
+        }
 
         public Switch(BaseUDPInterface sourceInterface, string deviceId, string argId, SwitchPosition[] positions, string device, string name, string exportFormat)
             : this(sourceInterface, deviceId, argId, positions, device, name, exportFormat, false)
@@ -119,6 +143,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             _sendAction = new string[_positions.Length];
             _sendStopAction = new string[_positions.Length];
             _exitAction = new string[_positions.Length];
+            _sendPulse = new string[3];
 
             ValueDescriptions = "";
             for (int i = 0; i < _positions.Length; i++)
@@ -145,6 +170,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 {
                     _exitAction[i] = "C" + _deviceId + "," + position.Action + "," + position.ExitValue;
                 }
+            }
+
+            if (_incrementalPulseSwitch)
+            {
+                _sendPulse[SWITCHINCREMENT] = "C" + _deviceId + "," + _positions[0].Action + "," + _incrementalPulseValue;
+                _sendPulse[SWITCHDECREMENT] = "C" + _deviceId + "," + _positions[0].Action + "," + (-1d * double.Parse(_incrementalPulseValue, System.Globalization.CultureInfo.InvariantCulture)).ToString("N1");
+                _sendPulse[SWITCHNEUTRAL] = "C" + _deviceId + "," + _positions[0].Action + "," + "0.0";
             }
 
             _releaseAction = new HeliosAction(SourceInterface, SerializedDeviceName, SerializedFunctionName, "release",
@@ -187,18 +219,29 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             {
                 _value.SetValue(e.Value, e.BypassCascadingTriggers);
 
-                if (_currentPosition > -1 && !string.IsNullOrWhiteSpace(_exitAction[_currentPosition]))
+                if (_currentPosition > -1 && !string.IsNullOrWhiteSpace(_exitAction[_currentPosition]) && !_incrementalPulseSwitch)
                 {
-                    SourceInterface.SendData(_exitAction[_currentPosition]);
+                        SourceInterface.SendData(_exitAction[_currentPosition]);
                 }
 
                 _currentPosition = index;
 
-                if (!string.IsNullOrWhiteSpace(_sendAction[_currentPosition]))
+                if (!_incrementalPulseSwitch)
                 {
-                    SourceInterface.SendData(_sendAction[_currentPosition]);
-                    _lastSetPosition = _currentPosition;
+                    SourceInterface.SendData(_sendAction[ _currentPosition]);
+                } else
+                {
+                    if (_lastSetPosition < _currentPosition)
+                    {
+                        SourceInterface.SendData(_sendPulse[SWITCHINCREMENT]);
+                    }
+                    else
+                    {
+                        SourceInterface.SendData(_sendPulse[SWITCHDECREMENT]);
+                    }
+                    SourceInterface.SendData(_sendPulse[SWITCHNEUTRAL]);
                 }
+                _lastSetPosition = _currentPosition;
             }
         }
 
