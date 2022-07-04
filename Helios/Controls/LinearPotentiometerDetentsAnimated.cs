@@ -48,6 +48,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private List<double> _detents = new List<double>();
         private bool _detentHit = false;
         private int _currentDetentPosition = 0;
+        private HeliosTrigger _minValueTrigger;
 
         public LinearPotentiometerDetentsAnimated( )
             : base( "Linear Potentiometer with Detents (Animated)", new Size( 73, 240 ) )
@@ -55,6 +56,8 @@ namespace GadrocsWorkshop.Helios.Controls
             _clickableVertical = true;
             ClickType = LinearClickType.Swipe;
             _detents.Sort();
+            _minValueTrigger = new HeliosTrigger(this, "", "minimum value position", "released", "Fires when potentiometer moves out of MinValue position");
+            this.Triggers.Add(_minValueTrigger);
         }
 
         #region Properties
@@ -316,7 +319,11 @@ namespace GadrocsWorkshop.Helios.Controls
             } else
             {
                 _detentHit = false;
-            }                  
+            }
+            if (currentValue == MinValue && Value != MinValue)
+            {
+                _minValueTrigger.FireTrigger(BindingValue.Empty);
+            }
             Logger.Debug($"OldValue {currentValue} NewValue {Value} Min {detentMinValue} Max {detentMaxValue} ");
             AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
             if (_detents.Contains(MinValue)) _detents.Remove(MinValue);
