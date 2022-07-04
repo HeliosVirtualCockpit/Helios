@@ -229,10 +229,6 @@ namespace GadrocsWorkshop.Helios.Controls
             double currentValue = Value;
             double detentMinValue = MinValue;
             double detentMaxValue = MaxValue;
-            if (currentValue == MinValue && Value != MinValue)
-            {
-                _minValueTrigger.FireTrigger(BindingValue.Empty);
-            }
             if (!_detents.Contains(MinValue)) _detents.Add(MinValue);
             if (!_detents.Contains(MaxValue)) _detents.Add(MaxValue);
             _detents.Sort();
@@ -323,7 +319,11 @@ namespace GadrocsWorkshop.Helios.Controls
             } else
             {
                 _detentHit = false;
-            }                  
+            }
+            if (currentValue == MinValue && Value != MinValue)
+            {
+                _minValueTrigger.FireTrigger(BindingValue.Empty);
+            }
             Logger.Debug($"OldValue {currentValue} NewValue {Value} Min {detentMinValue} Max {detentMaxValue} ");
             AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
             if (_detents.Contains(MinValue)) _detents.Remove(MinValue);
