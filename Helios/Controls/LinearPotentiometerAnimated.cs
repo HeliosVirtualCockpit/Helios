@@ -47,7 +47,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private bool _clickableHorizontal = false;
         LinearClickType _clickType = LinearClickType.Swipe;
 
-        private HeliosValue _linearPotentiometer;
+        private HeliosValue _linearPotentiometerValue;
 
         private bool _mouseDown = false;
         private Point _mouseDownLocation;
@@ -72,12 +72,12 @@ namespace GadrocsWorkshop.Helios.Controls
             _clickableVertical = true;
             ClickType = LinearClickType.Swipe;
 
-            _linearPotentiometer = new HeliosValue(this, new BindingValue(0d), "", "value", "Current value of potentiometer", "0 to 1", BindingValueUnits.Numeric);
-            _linearPotentiometer.SetValue(new BindingValue(0), true);
-            _linearPotentiometer.Execute += new HeliosActionHandler(SetValuePotentionmeter_Execute);
-            Values.Add(_linearPotentiometer);
-            Actions.Add(_linearPotentiometer);
-            Triggers.Add(_linearPotentiometer);
+            _linearPotentiometerValue = new HeliosValue(this, new BindingValue(0d), "", "value", "Current value of potentiometer", "0 to 1", BindingValueUnits.Numeric);
+            _linearPotentiometerValue.SetValue(new BindingValue(0), true);
+            _linearPotentiometerValue.Execute += new HeliosActionHandler(SetValuePotentionmeter_Execute);
+            Values.Add(_linearPotentiometerValue);
+            Actions.Add(_linearPotentiometerValue);
+            Triggers.Add(_linearPotentiometerValue);
         }
 
         #region Properties
@@ -156,24 +156,23 @@ namespace GadrocsWorkshop.Helios.Controls
 
         /// <summary>
         /// UI access to current value, backed by Helios value of the potentiometer
-        ///
         /// writes to this property do not create Undo events
         /// </summary>
         public double Value
         {
             get
             {
-                return _linearPotentiometer.Value.DoubleValue;
+                return _linearPotentiometerValue.Value.DoubleValue;
             }
             set
             {
-                if (_linearPotentiometer.Value.DoubleValue.Equals(value))
+                if (_linearPotentiometerValue.Value.DoubleValue.Equals(value))
                 {
                     return;
                 }
 
-                double oldValue = _linearPotentiometer.Value.DoubleValue;
-                _linearPotentiometer.SetValue(new BindingValue(value), BypassTriggers);
+                double oldValue = _linearPotentiometerValue.Value.DoubleValue;
+                _linearPotentiometerValue.SetValue(new BindingValue(value), BypassTriggers);
                 OnPropertyChanged("Value", oldValue, value, false);
             }
         }
@@ -308,7 +307,9 @@ namespace GadrocsWorkshop.Helios.Controls
         void SetValuePotentionmeter_Execute(object action, HeliosActionEventArgs e)
         {
             double maxImage = AnimationFrameCount - 1;
+            BeginTriggerBypass(true);
             Value = e.Value.DoubleValue;
+            EndTriggerBypass(true);
             AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(e.Value.DoubleValue * maxImage), 0, maxImage));
         }
 

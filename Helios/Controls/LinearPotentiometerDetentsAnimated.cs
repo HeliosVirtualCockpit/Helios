@@ -34,13 +34,9 @@ namespace GadrocsWorkshop.Helios.Controls
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        //private double _initialValue = 0.0d;
-        //private double _initialPosition = 0d;
-
         private bool _clickableVertical = false;
         private bool _clickableHorizontal = false;
         LinearClickType _clickType = LinearClickType.Swipe;
-
 
         private bool _mouseDown = false;
         private Point _mouseDownLocation;
@@ -48,6 +44,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private List<double> _detents = new List<double>();
         private bool _detentHit = false;
         private int _currentDetentPosition = 0;
+        private double _previousDragPosition = 0;
         private HeliosTrigger _minValueTrigger;
 
         public LinearPotentiometerDetentsAnimated( )
@@ -102,12 +99,6 @@ namespace GadrocsWorkshop.Helios.Controls
         #endregion
 
         #region Actions
-        void SetValuePotentionmeter_Execute(object action, HeliosActionEventArgs e)
-        {
-            double maxImage = AnimationFrameCount - 1;
-            Value = e.Value.DoubleValue;
-            AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(e.Value.DoubleValue * maxImage), 0, maxImage));
-        }
         #endregion
 
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
@@ -192,6 +183,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 _mouseDown = true;
                 _mouseDownLocation = location;
             }
+            base.MouseDown(location);
         }
         public override void MouseDrag(Point location)
         {
@@ -215,119 +207,130 @@ namespace GadrocsWorkshop.Helios.Controls
                         _mouseDownLocation = location;
                     }
                 }
+            } else
+            {
+
             }
         }
         public override void MouseUp(Point location)
         {
             _mouseDown = false;
             _detentHit = false;
+            base.MouseUp(location);
         }
         protected override void CalculateMovement(double pulses)
         {
             double dragProportion = pulses / this.Height * MaxValue * -1;
-            // we want to find out if the drag takes us through a detent, and clamp if it will
-            double currentValue = Value;
-            double detentMinValue = MinValue;
-            double detentMaxValue = MaxValue;
-            if (!_detents.Contains(MinValue)) _detents.Add(MinValue);
-            if (!_detents.Contains(MaxValue)) _detents.Add(MaxValue);
-            _detents.Sort();
-            if (!_detentHit && !BypassTriggers)
+            if (_previousDragPosition != dragProportion)
             {
-                for (int i = 0; i < _detents.Count; i++)
-                {
-                    if (_detents[i] == currentValue)
-                    {
-                        int j = 0;
-                        foreach (IBindingTrigger ibt in this.Triggers)
-                        {
-                            if (ibt.Name == $"detent {i}")
-                            {
-                                HeliosTrigger hTrigger = ibt as HeliosTrigger;
-                                if (hTrigger.TriggerVerb == "released")
-                                {
-                                    hTrigger.FireTrigger(new BindingValue(dragProportion > 0 ? -1 : 1));
-                                    j++;
-                                }
-                                if (hTrigger.TriggerVerb == "holding")
-                                {
-                                    hTrigger.FireTrigger(new BindingValue(false));
-                                    j++;
-                                }
-                            }
-                            if (j == 2) break;
-                        }
-                        break;
-                    }
-                }
-            }
-            if (dragProportion > 0)
-            {
-                double previousDetent = MaxValue;
-                foreach (double detent in _detents)
-                {
-                    if (currentValue >= previousDetent && currentValue <= detent)
-                    {
-                        detentMaxValue = detent;
-                        detentMinValue = previousDetent;
-                        if (currentValue != detent) break;
-                        if (currentValue == previousDetent) break;
-                    }
-                    previousDetent = detent;
-                }
-            }
-            else
-            {
-                _detents.Reverse();
-                double previousDetent = MinValue;
-                foreach (double detent in _detents)
-                {
-                    if (currentValue >= detent && currentValue <= previousDetent)
-                    {
-                        detentMinValue = detent;
-                        detentMaxValue = previousDetent;
-                        if (currentValue != detent) break;
-                        if (currentValue == previousDetent) break;
-                    }
-                    previousDetent = detent;
-                }
+                _previousDragPosition = dragProportion;
+                // we want to find out if the drag takes us through a detent, and clamp if it will
+                double currentValue = Value;
+                double detentMinValue = MinValue;
+                double detentMaxValue = MaxValue;
+                if (!_detents.Contains(MinValue)) _detents.Add(MinValue);
+                if (!_detents.Contains(MaxValue)) _detents.Add(MaxValue);
                 _detents.Sort();
-            }       
-            if(!_detentHit) Value = Math.Round(Math.Max(Math.Min(Value + dragProportion, detentMaxValue), detentMinValue), 3);
-            if (Value == detentMinValue || Value == detentMaxValue) 
-            {
-                _detentHit = true;
-                if (!BypassTriggers)
+                if (!_detentHit && !BypassTriggers)
                 {
                     for (int i = 0; i < _detents.Count; i++)
                     {
-                        if (_detents[i] == Value)
+                        if (_detents[i] == currentValue)
                         {
+                            int j = 0;
                             foreach (IBindingTrigger ibt in this.Triggers)
                             {
-                                if (ibt.Name == $"detent {i}" && ibt.TriggerVerb == "holding")
+                                if (ibt.Name == $"detent {i}")
                                 {
                                     HeliosTrigger hTrigger = ibt as HeliosTrigger;
-                                    hTrigger.FireTrigger(new BindingValue(true));
-                                    break;
+                                    if (hTrigger.TriggerVerb == "released")
+                                    {
+                                        hTrigger.FireTrigger(new BindingValue(dragProportion > 0 ? 1 : -1));
+                                        j++;
+                                    }
+                                    if (hTrigger.TriggerVerb == "holding")
+                                    {
+                                        hTrigger.FireTrigger(new BindingValue(false));
+                                        j++;
+                                    }
                                 }
+                                if (j == 2) break;
                             }
                             break;
                         }
                     }
                 }
-            } else
-            {
-                _detentHit = false;
+                if (dragProportion > 0)
+                {
+                    double previousDetent = MaxValue;
+                    foreach (double detent in _detents)
+                    {
+                        if (currentValue >= previousDetent && currentValue <= detent)
+                        {
+                            detentMaxValue = detent;
+                            detentMinValue = previousDetent;
+                            if (currentValue != detent) break;
+                            if (currentValue == previousDetent) break;
+                        }
+                        previousDetent = detent;
+                    }
+                }
+                else
+                {
+                    _detents.Reverse();
+                    double previousDetent = MinValue;
+                    foreach (double detent in _detents)
+                    {
+                        if (currentValue >= detent && currentValue <= previousDetent)
+                        {
+                            detentMinValue = detent;
+                            detentMaxValue = previousDetent;
+                            if (currentValue != detent) break;
+                            if (currentValue == previousDetent) break;
+                        }
+                        previousDetent = detent;
+                    }
+                    _detents.Sort();
+                }
+                if (!_detentHit)
+                {
+                    Value = Math.Round(Math.Max(Math.Min(Value + dragProportion, detentMaxValue), detentMinValue), 3);
+                }
+                if (Value == detentMinValue || Value == detentMaxValue)
+                {
+                    _detentHit = true;
+                    if (!BypassTriggers)
+                    {
+                        for (int i = 0; i < _detents.Count; i++)
+                        {
+                            if (_detents[i] == Value)
+                            {
+                                foreach (IBindingTrigger ibt in this.Triggers)
+                                {
+                                    if (ibt.Name == $"detent {i}" && ibt.TriggerVerb == "holding")
+                                    {
+                                        HeliosTrigger hTrigger = ibt as HeliosTrigger;
+                                        hTrigger.FireTrigger(new BindingValue(true));
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    _detentHit = false;
+                }
+                if (currentValue == MinValue && Value != MinValue && !BypassTriggers)
+                {
+                    _minValueTrigger.FireTrigger(BindingValue.Empty);
+                }
+                AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
+                if (_detents.Contains(MinValue)) _detents.Remove(MinValue);
+                if (_detents.Contains(MaxValue)) _detents.Remove(MaxValue);
             }
-            if (currentValue == MinValue && Value != MinValue)
-            {
-                _minValueTrigger.FireTrigger(BindingValue.Empty);
-            }
-            Logger.Debug($"OldValue {currentValue} NewValue {Value} Min {detentMinValue} Max {detentMaxValue} ");
-            AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
-            if (_detents.Contains(MinValue)) _detents.Remove(MinValue);
-            if (_detents.Contains(MaxValue)) _detents.Remove(MaxValue);
 
         }
 
