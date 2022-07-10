@@ -36,7 +36,6 @@ namespace GadrocsWorkshop.Helios.Util.Shadow
             _scale = scale;
             Update(data.Monitor);
             Update(data.Visual);
-
             Data.ViewportChanged += Data_ViewportChanged;
             Data.MonitorChanged += Data_MonitorChanged;
         }
@@ -77,23 +76,7 @@ namespace GadrocsWorkshop.Helios.Util.Shadow
 
         public void Update(HeliosVisual viewport)
         {
-            _viewport.X = viewport.Left;
-            _viewport.Y = viewport.Top;
-            _viewport.Width = viewport.Width;
-            _viewport.Height = viewport.Height;
-
-            ///TODO: Re-visit the viewport position determination. There is certainly a proper way to get
-            ///position of the viewport on the monitor
-            Point monitorViewPointOffset = new Point(0, 0);
-            HeliosVisual visual1 = viewport;
-            while (visual1.Parent != null && !visual1.GetType().Equals("GadrocsWorkshop.Helios.Monitor"))
-            {
-                monitorViewPointOffset.X += visual1.Left;
-                monitorViewPointOffset.Y += visual1.Top;
-                visual1 = visual1.Parent;
-            }
-            _viewport.Offset(monitorViewPointOffset.X, monitorViewPointOffset.Y);
-
+            _viewport = viewport.CalculateWindowsDesktopRect();
             Update();
         }
 

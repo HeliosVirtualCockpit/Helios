@@ -234,8 +234,20 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 code = null;
                 return false;
             }
+            string viewportWarning = "";
+            foreach(ShadowVisual shadowVisual in _parent.Viewports)
+            {
+                if(shadowVisual.Viewport.ViewportName == viewport.Key)
+                {
+                    if (!shadowVisual.IsViewportLocationReliable)
+                    {
+                        viewportWarning = " changes to this viewport are not tracked automatically.  If changes have been made to this viewport\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.";
+                    }
+                    break;
+                }
+            }
             ConvertToDCS(ref viewportRect);
-            code = $"{viewport.Key} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
+            code = $"{viewport.Key} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}{viewportWarning}";
             lines.Add(code);
             return true;
         }
