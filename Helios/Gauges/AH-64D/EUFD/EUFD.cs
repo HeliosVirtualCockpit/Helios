@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
     using System;
+    using System.Xml;
     using System.Windows;
     using System.Windows.Media;
 
@@ -31,25 +32,27 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
         private double _size_Multiplier = 1;
         private HeliosPanel _frameGlassPanel;
         private HeliosPanel _frameBezelPanel;
+        private bool _includeViewport = true;
+        private string _vpName = "";
 
         public EUFD(string interfaceDevice)
             : base(interfaceDevice, new Size(1004, 348))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.AH64D.AH64DInterface) };
             _interfaceDevice = interfaceDevice;
-            string vpName = "";
+            _vpName = "";
             switch (_interfaceDevice)
             {
                 case "Up Front Display (Pilot)":
-                    vpName = "AH_64D_EUFD_PLT";
+                    _vpName = "AH_64D_EUFD_PLT";
                     break;
                 case "Up Front Display (CP/G)":
-                    vpName = "AH_64D_EUFD_CPG";
+                    _vpName = "AH_64D_EUFD_CPG";
                     break;
                 default:
                     break;
             }
-            if (vpName != "") AddViewport(vpName);
+            if (_includeViewport) AddViewport(_vpName);
             _frameGlassPanel = AddPanel("EUFD Glass", new Point(Left + (173), Top + (25)), new Size(600d, 300d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = 0.3d;
             _frameGlassPanel.DrawBorder = false;
@@ -75,6 +78,44 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
 
             AddPot("Brightness Control", new Point(821, 88), new Size(60d, 60d), "Brightness Control Knob");
 
+        }
+        public string ViewportName
+        {
+            get => _vpName;
+            set
+            {
+                if (_vpName != value)
+                {
+                    if (_vpName == "")
+                    {
+                        AddViewport(value);
+                        OnDisplayUpdate();
+                    }
+                    else if (value != "")
+                    {
+                        foreach (HeliosVisual visual in this.Children)
+                        {
+                            if (visual.TypeIdentifier == "Helios.Base.ViewportExtent")
+                            {
+                                Controls.Special.ViewportExtent viewportExtent = visual as Controls.Special.ViewportExtent;
+                                viewportExtent.ViewportName = value;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        RemoveViewport(value);
+                    }
+                    OnPropertyChanged("ViewportName", _vpName, value, false);
+                    _vpName = value;
+                }
+            }
+        }
+        public bool RequiresPatches
+        {
+            get => _vpName != "" ? true : false;
+            set => _ = value;
         }
         protected HeliosPanel AddPanel(string name, Point posn, Size size, string background, string interfaceDevice)
         {
@@ -104,23 +145,39 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
         }
         private void AddViewport(string name)
         {
-            Children.Add(new Helios.Controls.Special.ViewportExtent
+            Rect vpRect = new Rect(173, 24, 600, 300);
+            vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
+
+            Children.Insert(0, new Helios.Controls.Special.ViewportExtent
             {
                 FillBackground = true,
                 BackgroundColor = Color.FromArgb(128, 128, 0, 0),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
-                Left = 173,
-                Top = 24,
-                Width = 600,
-                Height = 300
+                Left = vpRect.Left,
+                Top = vpRect.Top,
+                Width = vpRect.Width,
+                Height = vpRect.Height
             });
         }
+        private void RemoveViewport(string name)
+        {
+            _includeViewport = false;
+            foreach (HeliosVisual visual in this.Children)
+            {
+                if (visual.TypeIdentifier == "Helios.Base.ViewportExtent")
+                {
+                    Children.Remove(visual);
+                    break;
+                }
+            }
+        }
+
         private void AddButton(string name, Point pos) { AddButton(name, new Rect(pos.X, pos.Y, 50, 50), true, ""); }
         private void AddButton(string name, Point pos, double buttonWidth, string label) { AddButton(name, new Rect(pos.X, pos.Y, buttonWidth, 50), true, label); }
         private void AddButton(string name, Rect rect, bool horizontal, string label)
         {
-            Helios.Controls.PushButton button = new Helios.Controls.PushButton();
+            PushButton button = new PushButton();
             button.Top = rect.Y * _size_Multiplier;
             button.Left = rect.X * _size_Multiplier;
             button.Width = rect.Width * _size_Multiplier;
@@ -259,7 +316,6 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
             {
                 return false;
             }
-
             return true;
         }
         public override void MouseDown(Point location)
@@ -273,6 +329,34 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
         public override void MouseUp(Point location)
         {
             // No-Op
+        }
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            if (_includeViewport)
+            {
+                writer.WriteElementString("EmbeddedViewportName", _vpName);
+            }
+            else
+            {
+                writer.WriteElementString("EmbeddedViewportName", "");
+            }
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            _includeViewport = true;
+            if (reader.Name != "EmbeddedViewportName")
+            {
+                return;
+            }
+            _vpName = reader.ReadElementString("EmbeddedViewportName");
+            if (_vpName == "")
+            {
+                _includeViewport = false;
+                RemoveViewport("");
+            }
         }
     }
 }

@@ -23,6 +23,13 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// Interaction logic for ViewportExtentBehaviorEditor.xaml
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.ViewportExtent", "Behavior")]
+    [HeliosPropertyEditor("Helios.AH64D.EUFD.CPG", "Behavior")]
+    [HeliosPropertyEditor("Helios.AH64D.EUFD.PILOT", "Behavior")]
+    [HeliosPropertyEditor("Helios.AH64D.MFD.PLTRIGHT", "Behavior")]
+    [HeliosPropertyEditor("Helios.AH64D.MFD.PLTLEFT", "Behavior")]
+    [HeliosPropertyEditor("Helios.AH64D.MFD.CPGRIGHT", "Behavior")]
+    [HeliosPropertyEditor("Helios.AH64D.MFD.CPGLEFT", "Behavior")]
+    [HeliosPropertyEditor("Helios.AH64D.TEDAC", "Behavior")]
     public partial class ViewportExtentBehaviorEditor : HeliosPropertyEditor
     {
         public ViewportExtentBehaviorEditor()

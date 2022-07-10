@@ -21,6 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
     using System;
     using System.Windows;
     using System.Windows.Media;
+    using System.Xml;
 
     [HeliosControl("Helios.AH64D.MFD", "Multi Function Display", "AH-64D", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class MFD : CompositeVisualWithBackgroundImage
@@ -31,31 +32,32 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
         private double _size_Multiplier = 1;
         private HeliosPanel _frameGlassPanel;
         private HeliosPanel _frameBezelPanel;
+        private bool _includeViewport = true;
+        private string _vpName = "";
 
         public MFD(string interfaceDevice)
             : base(interfaceDevice, new Size(1469 / 2, 1381 / 2))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.AH64D.AH64DInterface) };
             _interfaceDevice = interfaceDevice;
-            string vpName = "";
             switch (_interfaceDevice)
             {
                 case "MFD Left (Pilot)":
-                    vpName = "AH_64D_LEFT_MFCD_PLT";
+                    _vpName = "AH_64D_LEFT_MFCD_PLT";
                     break;
                 case "MFD Right (Pilot)":
-                    vpName = "AH_64D_RIGHT_MFCD_PLT";
+                    _vpName = "AH_64D_RIGHT_MFCD_PLT";
                     break;
                 case "MFD Left (CP/G)":
-                    vpName = "AH_64D_LEFT_MFCD_CPG";
+                    _vpName = "AH_64D_LEFT_MFCD_CPG";
                     break;
                 case "MFD Right (CP/G)":
-                    vpName = "AH_64D_RIGHT_MFCD_CPG";
+                    _vpName = "AH_64D_RIGHT_MFCD_CPG";
                     break;
                 default:
                     break;
             }
-            if (vpName != "") AddViewport(vpName);
+            if (_vpName != "" && _includeViewport) AddViewport(_vpName);
             _frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = 0.3d;
             _frameGlassPanel.DrawBorder = false;
@@ -109,6 +111,45 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
             AddPot("Video Control", new Point(114, 13), new Size(50d, 50d), "Video Control Knob");
 
         }
+        public string ViewportName
+        {
+            get => _vpName;
+            set
+            {
+                if (_vpName != value)
+                {
+                    if (_vpName == "")
+                    {
+                        AddViewport(value);
+                        OnDisplayUpdate();
+                    }
+                    else if (value != "")
+                    {
+                        foreach (HeliosVisual visual in this.Children)
+                        {
+                            if (visual.TypeIdentifier == "Helios.Base.ViewportExtent")
+                            {
+                                Controls.Special.ViewportExtent viewportExtent = visual as Controls.Special.ViewportExtent;
+                                viewportExtent.ViewportName = value;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        RemoveViewport(value);
+                    }
+                    OnPropertyChanged("ViewportName", _vpName, value, false);
+                    _vpName = value;
+                }
+            }
+        }
+        public bool RequiresPatches
+        {
+            get => _vpName != "" ? true : false;
+            set => _ = value;
+        }
+
         protected HeliosPanel AddPanel(string name, Point posn, Size size, string background, string interfaceDevice)
         {
             HeliosPanel panel = AddPanel
@@ -139,17 +180,32 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
         }
         private void AddViewport(string name)
         {
+            Rect vpRect = new Rect(109, 93, 500, 500);
+            vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
+
             Children.Add(new Helios.Controls.Special.ViewportExtent
             {
                 FillBackground = true,
                 BackgroundColor = Color.FromArgb(128, 128, 0, 0),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
-                Left = 109,
-                Top = 93,
-                Width = 500,
-                Height = 500
+                Left = vpRect.Left,
+                Top = vpRect.Top,
+                Width = vpRect.Width,
+                Height = vpRect.Height
             });
+        }
+        private void RemoveViewport(string name)
+        {
+            _includeViewport = false;
+            foreach (HeliosVisual visual in this.Children)
+            {
+                if (visual.TypeIdentifier == "Helios.Base.ViewportExtent")
+                {
+                    Children.Remove(visual);
+                    break;
+                }
+            }
         }
         private void AddButton(string name, Point pos) { AddButton(name, new Rect(pos.X, pos.Y, 40, 40), true, ""); }
         private void AddButton(string name, Point pos, double buttonWidth, string label) { AddButton(name, new Rect(pos.X, pos.Y, buttonWidth, 40), true, label); }
@@ -261,22 +317,6 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
             action.Device = ComponentName(name);
             if (!Actions.ContainsKey(Actions.GetKeyForItem(action))) Actions.Add(action);
         }
-        //private new void AddTrigger(IBindingTrigger trigger, string name)
-        //{
-        //    trigger.Device = $"{Name}";
-        //    trigger.Name = name;
-        //    Triggers.Add(trigger);
-        //}
-        //private new void AddAction(IBindingAction action, string name)
-        //{
-        //    action.Device = $"{Name}";
-        //    action.Name = name;
-        //    if (!Actions.ContainsKey(Actions.GetKeyForItem(action)))
-        //    {
-        //        Actions.Add(action);
-        //        //string addedKey = Actions.GetKeyForItem(action);
-        //    }
-        //}
         public override string DefaultBackgroundImage
         {
             get { return null; }
@@ -301,6 +341,35 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
         public override void MouseUp(Point location)
         {
             // No-Op
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            if (_includeViewport)
+            {
+                writer.WriteElementString("EmbeddedViewportName", _vpName);
+            }
+            else
+            {
+                writer.WriteElementString("EmbeddedViewportName", "");
+            }
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            _includeViewport = true;
+            if (reader.Name != "EmbeddedViewportName")
+            {
+                return;
+            }
+            _vpName = reader.ReadElementString("EmbeddedViewportName");
+            if (_vpName == "")
+            {
+                _includeViewport = false;
+                RemoveViewport("");
+            }
         }
     }
 }
