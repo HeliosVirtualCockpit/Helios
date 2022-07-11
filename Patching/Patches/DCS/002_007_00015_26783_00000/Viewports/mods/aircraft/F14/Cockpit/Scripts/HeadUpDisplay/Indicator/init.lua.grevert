@@ -1,0 +1,5 @@
+﻿@@ -1863,104 +1863,676 @@
+ %0D%0A%0D%0A
+-brightness_sensitive_materials %3D%0D%0A%7B%0D%0A%22HUD_MAT%22%2C%0D%0A%22HUD_MAT2%22%2C%0D%0A%22HUD_GLOW_C%22%2C%0D%0A%22HUD_GLOW_NC%22%2C%0D%0A%7D%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_HUD%22%2C %22HUD%22)%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_HUD%22%2C %22HUD%22)%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_HUD%22%2C %22HUD%22)%0D%0A%0D%0Abrightness_sensitive_materials %3D%0D%0A%7B%0D%0A%22HUD_MAT%22%2C%0D%0A%22HUD_MAT2%22%2C%0D%0A%22HUD_GLOW_C%22%2C%0D%0A%22HUD_GLOW_NC%22%2C%0D%0A%7D%0D%0A%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_HUD%22%2C %22HUD%22)%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_HUD%22%2C %22HUD%22)
+ %0D%0Ado

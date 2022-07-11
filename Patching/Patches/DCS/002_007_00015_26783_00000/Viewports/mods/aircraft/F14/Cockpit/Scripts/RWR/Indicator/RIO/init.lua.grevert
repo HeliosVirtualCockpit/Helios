@@ -1,0 +1,3 @@
+﻿@@ -1441,12 +1441,256 @@
+ %22RWR_RIO%22)%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_RWR_RIO%22%2C %22RWR_RIO%22)%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22F_14_RWR_RIO%22%2C %22RWR_RIO%22)%0D%0A
