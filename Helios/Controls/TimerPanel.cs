@@ -112,9 +112,6 @@ namespace GadrocsWorkshop.Helios.Controls
 
             // shut down
             _timer.Stop();
-
-            // unregister to reduce circularity
-            _timer.Tick -= TimerTick;
         }
 
         private void Profile_ProfileStarted(object sender, EventArgs e)
