@@ -58,9 +58,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.CMWS
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
 
-            AddThreePositionRotarySwitch("Power Switch", new Point(80d, 62d), new Size(70d, 70d), _interfaceDeviceName, "Power Switch");
-            AddPot("Audio Volume", new Point(456d, 21d), new Size(50d, 50d), "Audio Volume Knob");
-            AddPot("Display Brightness", new Point(456d, 110d), new Size(50d, 50d), "Brightness Knob");
+            AddThreePositionRotarySwitch("Power Switch", new Point(63d, 45d), new Size(105d, 105d), _interfaceDeviceName, "Power Switch");
+            AddPot("Audio Volume", new Point(450d, 15d), new Size(62d, 62d), "Audio Volume Knob");
+            AddPot("Display Brightness", new Point(450d, 104d), new Size(62d, 62d), "Brightness Knob");
             AddTwoWayToggle("Arm", new Point(127d, 274d), new Size(60d, 120d), _interfaceDeviceName, "Arm Switch");
             AddTwoWayToggle("Mode", new Point(244d, 274d), new Size(60d, 120d), _interfaceDeviceName, "Mode Switch",ToggleSwitchPosition.One);
             AddTwoWayToggle("Operation", new Point(361d, 274d), new Size(60d, 120d), _interfaceDeviceName, "Operation Switch");

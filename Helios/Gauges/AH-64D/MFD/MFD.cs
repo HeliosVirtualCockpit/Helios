@@ -106,9 +106,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
             AddButton("Button B6", new Point(493, ypos));
             AddButton("Button A/C", new Point(553, ypos), 50d,"A/C");
 
-            AddThreePositionRotarySwitch("Display Mode", new Point(557d,13d),new Size(50d,50d), _interfaceDevice, "Mode Knob");
-            AddPot("Brightness Control", new Point(30, 97), new Size(50d, 50d), "Brightness Control Knob");
-            AddPot("Video Control", new Point(114, 13), new Size(50d, 50d), "Video Control Knob");
+            AddThreePositionRotarySwitch("Display Mode", new Point(551d,7d),new Size(62d,62d), _interfaceDevice, "Mode Knob");
+            AddPot("Brightness Control", new Point(24d, 91d), new Size(62d, 62d), "Brightness Control Knob");
+            AddPot("Video Control", new Point(108d, 7d), new Size(62d, 62d), "Video Control Knob");
 
         }
         public string ViewportName

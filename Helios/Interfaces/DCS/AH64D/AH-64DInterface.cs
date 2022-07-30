@@ -938,10 +938,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
 
             // see if we can restore from JSON
             #if (!DEBUG)
-            if (LoadFunctionsFromJson())
-            {
-                return;
-            }
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
             #endif
 #region MPDs
             #region Pilot Left
@@ -1322,7 +1322,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             AddFunction(new PushButton(this, TEDAC, tedac_commands.TDU_B4.ToString("d"), "159", "TEDAC", "FILTER Button"));  // Press to select filter in the TADS FLIR sensor
             AddFunction(new Axis(this, TEDAC, tedac_commands.TDU_GAIN_KNOB.ToString("d"), "148", 0.1d, 0d, 1d, "TEDAC", "FLIR GAIN Control"));
             AddFunction(new Axis(this, TEDAC, tedac_commands.TDU_LEV_KNOB.ToString("d"), "149", 0.1d, 0d, 1d, "TEDAC", "FLIR LEV Control"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, TEDAC, tedac_commands.TDU_MODE_KNOB.ToString("d"), "154", "1.0", "Day", "0.5", "Night", "0.0", "Off", "TEDAC", "Display Mode", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, TEDAC, tedac_commands.TDU_MODE_KNOB.ToString("d"), "154", "0.0", "Day", "0.5", "Night", "1.0", "Off", "TEDAC", "Display Mode", "%0.1f"));
 #endregion
 #region Video Control Panel,
             AddFunction(new Axis(this, ELEC_INTERFACE, electric_commands.VCP_IHADSS_BRT_KNOB.ToString("d"), "278", 0.1d, 0d, 1d, "Video Control Panel", "IHADSS BRT Control Knob"));

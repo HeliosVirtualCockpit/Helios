@@ -72,9 +72,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.TEDAC
             AddRocker("Elevation Rocker", 16, 802, _interfaceDevice, "EL Adjust Rocker Switch");
             AddRocker("Azimuth Rocker", 190, 1003, _interfaceDevice, "AZ Adjust Rocker Switch", true);
 
-            AddThreePositionRotarySwitch("Display Mode", new Point(833d,18d),new Size(75d,75d), _interfaceDevice, "Display Mode");
-            AddPot("FLIR Gain", new Point(10, 427), new Size(75d, 75d), "FLIR GAIN Control");
-            AddPot("FLIR Level", new Point(10, 220), new Size(75d, 75d), "FLIR LEV Control");
+            AddThreePositionRotarySwitch("Display Mode", new Point(823d,12d),new Size(95d,95d), _interfaceDevice, "Display Mode");
+            AddPot("FLIR Gain", new Point(0, 417), new Size(95d, 95d), "FLIR GAIN Control");
+            AddPot("FLIR Level", new Point(0, 210), new Size(95d, 95d), "FLIR LEV Control");
 
         }
         public string ViewportName
@@ -240,10 +240,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.TEDAC
             knob.DrawLabels = false;
             knob.DrawLines = false;
             knob.Positions.Clear();
-            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 0, "Off", 135d));
+            knob.ClickType = RotaryClickType.Swipe;
+            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 0, "Day", 45d));
             knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 1, "Night", 90d));
-            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 2, "Day", 45d));
-            knob.CurrentPosition = 1;
+            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 2, "Off", 135d));
+            knob.CurrentPosition = 0;
             knob.Top = posn.Y;
             knob.Left = posn.X;
             knob.Width = size.Width;
