@@ -76,7 +76,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
             AddRocker("WCA Switch", 91, 24, _interfaceDevice, "WCA Rocker Switch");
             AddRocker("RTS Switch", 91, 181, _interfaceDevice, "RTS Rocker Switch");
 
-            AddPot("Brightness Control", new Point(821, 88), new Size(60d, 60d), "Brightness Control Knob");
+            AddPot("Brightness Control", new Point(814d, 81d), new Size(75d, 75d), "Brightness Control Knob");
 
         }
         public string ViewportName
