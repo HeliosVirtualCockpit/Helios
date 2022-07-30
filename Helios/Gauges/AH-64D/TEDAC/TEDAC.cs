@@ -241,10 +241,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.TEDAC
             knob.DrawLines = false;
             knob.Positions.Clear();
             knob.ClickType = RotaryClickType.Swipe;
-            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 0, "Off", 135d));
+            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 0, "Day", 45d));
             knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 1, "Night", 90d));
-            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 2, "Day", 45d));
-            knob.CurrentPosition = 2;
+            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 2, "Off", 135d));
+            knob.CurrentPosition = 0;
             knob.Top = posn.Y;
             knob.Left = posn.X;
             knob.Width = size.Width;
