@@ -22,6 +22,9 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
     using System;
     using System.Windows.Media;
     using System.Windows;
+   // using System.Drawing;
+    using System.Windows.Forms.VisualStyles;
+    using System.Windows.Forms;
 
     [HeliosControl("Helios.FA18C.UFC", "Up Front Controller", "F/A-18C", typeof(BackgroundImageRenderer))]
     class UFC_FA18C : FA18CDevice
@@ -30,7 +33,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDeviceName = "UFC";
         private string _font = "MS 33558";
-        private string _ufcNumbers16 = "`0=«;`1=¬;`2=­;`3=®;`4=¯;`5=°;`6=±;`7=²;`8=³;`9=´;~0=µ;0=¡;1=¢;2=£;3=¤;4=¥;5=¦;6=§;7=¨;8=©;9=ª;_=É"; //Numeric mapping into characters in the UFC font
+        private string _ufcNumbers16 = "`0=«;`1=¬;`2=Ð;`3=®;`4=¯;`5=°;`6=±;`7=²;`8=³;`9=´;~0=µ;0=¡;1=¢;2=£;3=¤;4=¥;5=¦;6=§;7=¨;8=©;9=ª;_=É"; //Numeric mapping into characters in the UFC font
+        private string _ufcNumbers16Tens = "`0=«;`1=¬;`2=Ð;`3=®;`4=¯;`5=°;`6=±;`7=²;`8=³;`9=´;~0=µ;a=Ñ;b=Ñ;c=Ñ;`=Ò;2=Ó;~=Ó;3=Ô;e=Ô;f=Ô;g=Ô;4=Õ;h=Õ;i=Õ;j=Õ;5=Ö;k=Ö;6=×;l=×;7=Ø;m=Ø;n=Ø;o=Ø;8=Ù;q=Ù;s=Ù;9=Ú;t=Ú;u=Ú;v=Ú;_=É"; //Numeric mapping into characters in the UFC font
         private string _ufcCueing = "!=È"; 
 
         public UFC_FA18C()
@@ -83,8 +87,16 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             AddTextDisplay("OptionDisplay4", 381, 244, new Size(129,42), "Option Display 4", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
             AddTextDisplay("OptionCueing5", 358, 310, new Size(40, 42), "Option Display 5 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
             AddTextDisplay("OptionDisplay5", 381, 310, new Size(129,42), "Option Display 5", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
-            AddTextDisplay("ScratchPadCharacter1", 92, 35, new Size(32, 48), "Scratchpad 1", 30, "~", TextHorizontalAlignment.Left, " =;" + _ufcNumbers16);
-            AddTextDisplay("ScratchPadCharacter2", 122, 35, new Size(32, 48), "Scratchpad 2", 30, "~", TextHorizontalAlignment.Left, " =;" + _ufcNumbers16);
+            ///
+            /// The following overlaying of textdisplays is needed because double digits up to 99 can be sent to a single 16 segment display element
+            /// when precise coordinates are being entered.  The font has numerals which are left aligned and right aligned (handled by different 
+            /// textdisplay dictionaries).  The Tens and Units are split out in their respective UFCTextDsplays.
+            /// Both UFCTextDisplays are bound to the same network value.
+            /// 
+            AddUFCTextDisplay("ScratchPadCharacter1", 92, 35, new Size(32, 48), "Scratchpad 1", 30, "~", TextHorizontalAlignment.Left, " =;" + _ufcNumbers16,1,1);
+            AddUFCTextDisplay("ScratchPadCharacter1a", 92, 35, new Size(32, 48), "Scratchpad 1", 30, "~", TextHorizontalAlignment.Left, " =;" + _ufcNumbers16Tens,0,1);
+            AddUFCTextDisplay("ScratchPadCharacter2", 122, 35, new Size(32, 48), "Scratchpad 2", 30, "~", TextHorizontalAlignment.Left, " =;" + _ufcNumbers16,1,1);
+            AddUFCTextDisplay("ScratchPadCharacter2a", 122, 35, new Size(32, 48), "Scratchpad 2", 30, "~", TextHorizontalAlignment.Left, " =;" + _ufcNumbers16Tens,0,1);
             AddTextDisplay("ScratchPadNumbers", 152, 35, new Size(135, 48), "Scratchpad Number", 30, "~", TextHorizontalAlignment.Right, " =>");
             AddTextDisplay("Comm1", 26, 314, new Size(41, 42), "Comm Channel 1",32, "~", TextHorizontalAlignment.Center, " =;" + _ufcNumbers16);
             AddTextDisplay("Comm2", 538, 309, new Size(40, 42), "Comm Channel 2",32, "~", TextHorizontalAlignment.Center, " =;" + _ufcNumbers16);
@@ -145,12 +157,63 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 verticalAligment: TextVerticalAlignment.Center,
                 testTextDisplay: testDisp,
                 textColor: Color.FromArgb(0xff, 0x7e, 0xde, 0x72),
-                backgroundColor: Color.FromArgb(0xff, 0x26, 0x3f, 0x36),
+                backgroundColor: Color.FromArgb(0x00, 0x26, 0x3f, 0x36),
                 useBackground: false,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: interfaceElementName,
                 textDisplayDictionary: ufcDictionary
                 );
+        }
+        private void AddUFCTextDisplay(string name, double x, double y, Size size,
+            string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string ufcDictionary,int textIndex,int textLength)
+        {
+            string componentName = GetComponentName(name);
+            UFCTextDisplay display = new UFCTextDisplay
+            {
+                TextIndex = textIndex,
+                TextLength = textLength,
+                Top = y,
+                Left = x,
+                Width = size.Width,
+                Height = size.Height,
+                Name = componentName
+            };
+            TextFormat textFormat = new TextFormat
+            {
+                FontFamily = ConfigManager.FontManager.GetFontFamilyByName("Helios Virtual Cockpit F/A-18C_Hornet-Up_Front_Controller"),
+                HorizontalAlignment = hTextAlign,
+                VerticalAlignment = TextVerticalAlignment.Center,
+                FontSize = baseFontsize,
+                ConfiguredFontSize = baseFontsize,
+                PaddingRight = 0,
+                PaddingLeft = 0,
+                PaddingTop = 0,
+                PaddingBottom = 0
+            };
+
+            // NOTE: for scaling purposes, we commit to the reference height at the time we set TextFormat, since that indirectly sets ConfiguredFontSize 
+            display.TextFormat = textFormat;
+            display.OnTextColor = Color.FromArgb(0xff, 0x7e, 0xde, 0x72);
+            display.BackgroundColor = Color.FromArgb(0x00, 0x26, 0x3f, 0x36);
+            display.UseBackground = false;
+
+            if (ufcDictionary.Equals(""))
+            {
+                display.ParserDictionary = "";
+            }
+            else
+            {
+                display.ParserDictionary = ufcDictionary;
+                display.UseParseDictionary = true;
+            }
+            display.TextTestValue = testDisp;
+            Children.Add(display);
+            AddAction(display.Actions["set.TextDisplay"], componentName);
+
+            AddDefaultInputBinding(
+                childName: componentName,
+                interfaceTriggerName: _interfaceDeviceName + "." + interfaceElementName + ".changed",
+                deviceActionName: "set.TextDisplay");
         }
 
 

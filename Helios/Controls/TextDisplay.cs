@@ -26,7 +26,8 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
-    
+    using System.Xml.Schema;
+
     /// <summary>
     /// base class for text displays, does not include any actions or values, just the ability to display text
     /// </summary>
@@ -456,8 +457,9 @@ namespace GadrocsWorkshop.Helios.Controls
     {
         private readonly HeliosValue _value;
 
-        public TextDisplay()
-            : base("TextDisplay", new System.Windows.Size(100, 50))
+        public TextDisplay() : this("TextDisplay", new System.Windows.Size(100, 50)) { }
+        public TextDisplay(string name, System.Windows.Size nativeSize)
+            : base(name,nativeSize)
         {
             _value = new HeliosValue(this, new BindingValue(false), "", "TextDisplay", "Value of this Text Display", "A text string.", BindingValueUnits.Text);
             _value.Execute += On_Execute;
