@@ -34,6 +34,11 @@ namespace GadrocsWorkshop.Helios
         private WeakReference _profile = new WeakReference(null);
         private int _bypassCount;
 
+        /// <summary>
+        /// true if profile reset should act like it did in previous releases and not reset all Lua variables
+        /// </summary>
+        private bool _useLegacyLuaReset = GlobalOptions.HasUseLegacyLuaResetBehavior;
+
         protected HeliosObject(string name)
         {
             _name = name;
@@ -240,6 +245,19 @@ namespace GadrocsWorkshop.Helios
             // behavior.  But do we really want add all those methods throughout the tree?  This is less
             // important that it appears, because writes with cascading enabled don't usually happen during Reset
             // and non-cascading writes don't reset the "not synchronized" state of the values.
+
+            if (!_useLegacyLuaReset)
+			{
+                foreach (HeliosBinding outputBinding in OutputBindings)
+                {
+                    outputBinding.Reset();
+                }
+
+                foreach (HeliosBinding inputBinding in InputBindings)
+                {
+                    inputBinding.Reset();
+                }
+            }
 
             foreach (IBindingAction bindingAction in Actions)
             {

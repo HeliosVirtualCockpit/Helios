@@ -34,6 +34,9 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="120"/>
@@ -59,9 +62,13 @@
                 <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding UseLegacyResetBehavior}"/>
                 <TextBlock Grid.Row="9" Grid.Column="1" Style="{StaticResource Documentation}">Disables improved Profile Reset handling, to act exactly like previous releases.</TextBlock>
 
-                <TextBlock Grid.Row="10" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Cache Images</TextBlock>
-                <CheckBox Grid.Row="10" Grid.Column="1" IsChecked="{Binding CacheImages}"/>
-                <TextBlock Grid.Row="11" Grid.Column="1" Style="{StaticResource Documentation}">Allows caching and reusing of image objects to improve load times.</TextBlock>            
+                <TextBlock Grid.Row="10" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Use Legacy Lua Reset Behavior</TextBlock>
+                <CheckBox Grid.Row="10" Grid.Column="1" IsChecked="{Binding UseLegacyLuaResetBehavior}"/>
+                <TextBlock Grid.Row="11" Grid.Column="1" Style="{StaticResource Documentation}">Disables improved Profile Lua Reset handling, to act exactly like previous releases.</TextBlock>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Cache Images</TextBlock>
+                <CheckBox Grid.Row="12" Grid.Column="1" IsChecked="{Binding CacheImages}"/>
+                <TextBlock Grid.Row="13" Grid.Column="1" Style="{StaticResource Documentation}">Allows caching and reusing of image objects to improve load times.</TextBlock>            
             </Grid>
         </GroupBox>
         <Button Style="{StaticResource InterfaceEditorButton}" IsDefault="True" Content="OK" Click="OK_OnClick"/>

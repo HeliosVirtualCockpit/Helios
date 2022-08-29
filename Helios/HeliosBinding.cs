@@ -68,6 +68,12 @@ namespace GadrocsWorkshop.Helios
             OnPropertyChanged("LongDescription", null, Description, false);
         }
 
+        public void Reset()
+		{
+            // this will reset all lua variables by initiating the creation of a new instance of the Lua Interpreter
+            _luaInterpreter = null;
+        }
+
         #region Properties
 
         /// <summary>

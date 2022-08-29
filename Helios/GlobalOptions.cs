@@ -40,9 +40,14 @@ namespace GadrocsWorkshop.Helios
         private const string SETTING_SCALE_ALL_TEXT = "ScaleAllText";
 
         /// <summary>
-        /// name used in he settings; may differ from property name and must never change
+        /// name used in the settings; may differ from property name and must never change
         /// </summary>
         private const string SETTING_USE_LEGACY_RESET_BEHAVIOR = "UseLegacyResetBehavior";
+
+        /// <summary>
+        /// name used in the settings; may differ from property name and must never change
+        /// </summary>
+        private const string SETTING_USE_LEGACY_LUA_RESET_BEHAVIOR = "UseLegacyLuaResetBehavior";
 
         /// <summary>
         /// global options group name used in the settings, must never change
@@ -63,10 +68,17 @@ namespace GadrocsWorkshop.Helios
         /// </summary>
         private bool _useLegacyResetBehavior;
 
+        /// <summary>
+        /// backing field for property UseLegacyLuaResetBehavior, contains
+        /// true if profile reset should act like it did in previous releases and not reset all Lua variables
+        /// </summary>
+        private bool _useLegacyLuaResetBehavior;
+
         public GlobalOptions()
         {
             _scaleAllText = HasScaleAllText;
             _useLegacyResetBehavior = HasUseLegacyResetBehavior;
+            _useLegacyLuaResetBehavior = HasUseLegacyLuaResetBehavior;
         }
 
         #region Properties
@@ -116,6 +128,26 @@ namespace GadrocsWorkshop.Helios
         }
 
         /// <summary>
+        /// true if profile reset should act like it did in previous releases and not reset all Lua variables
+        /// </summary>
+        public bool UseLegacyLuaResetBehavior
+        {
+            get => _useLegacyLuaResetBehavior;
+            set
+            {
+                if (_useLegacyLuaResetBehavior == value)
+                {
+                    return;
+                }
+
+                bool oldValue = _useLegacyLuaResetBehavior;
+                _useLegacyLuaResetBehavior = value;
+                ConfigManager.SettingsManager.SaveSetting(SETTINGS_GROUP, SETTING_USE_LEGACY_LUA_RESET_BEHAVIOR, value);
+                OnPropertyChanged(nameof(UseLegacyLuaResetBehavior), oldValue, value, true);
+            }
+        }
+
+        /// <summary>
         /// accessible as utility for client code that can't get access to the GlobalOptions instance readily
         /// </summary>
         /// <returns>
@@ -149,6 +181,15 @@ namespace GadrocsWorkshop.Helios
         /// </returns>
         public static bool HasUseLegacyResetBehavior =>
             ConfigManager.SettingsManager.LoadSetting(SETTINGS_GROUP, SETTING_USE_LEGACY_RESET_BEHAVIOR, false);
+
+        /// <summary>
+        /// accessible as utility for client code that can't get access to the GlobalOptions instance readily
+        /// </summary>
+        /// <returns>
+        /// true if profile reset should act like it did in previous releases and not reset all Lua variables
+        /// </returns>
+        public static bool HasUseLegacyLuaResetBehavior =>
+            ConfigManager.SettingsManager.LoadSetting(SETTINGS_GROUP, SETTING_USE_LEGACY_LUA_RESET_BEHAVIOR, false);
 
         #endregion
     }

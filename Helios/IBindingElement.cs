@@ -70,5 +70,10 @@ namespace GadrocsWorkshop.Helios
         /// not guaranteed to be called, so it must only be used for descriptive names, not for functional binding
         /// </summary>
         void RecalculateName();
+
+        /// <summary>
+        /// Called on reset of the containing Helios object
+        /// </summary>
+        void Reset();
     }
 }
