@@ -329,7 +329,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("PFL", "PFL Line 4", "Pilot Fault Lights line 4", "", BindingValueUnits.Text);
             AddValue("PFL", "PFL Line 5", "Pilot Fault Lights line 5", "", BindingValueUnits.Text);
 
-            // Owship Bits
+            // Ownship Bits
             AddValue("Ownship", "latitude", "Ownship latitude", "in degrees (as known by avionics)", BindingValueUnits.Degrees);
             AddValue("Ownship", "longitude", "Ownship longitude", "in degrees (as known by avionics)", BindingValueUnits.Degrees);
             AddValue("Ownship", "x", "Ownship North (Ft)","", BindingValueUnits.Feet);
@@ -338,6 +338,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("Ownship", "distance from bullseye", "Ownship distance from bullseye", "", BindingValueUnits.Feet);
             AddValue("Ownship", "heading from bullseye", "Ownship heading from bullseye", "", BindingValueUnits.Degrees);
             AddValue("Ownship", "heading to bullseye", "Ownship heading to bullseye", "", BindingValueUnits.Degrees);
+            AddValue("Ownship", "orientation to bullseye", "Ownship orientation to bullseye", "", BindingValueUnits.Degrees);
             AddValue("Ownship", "deltaX from bulls", "Delta from bullseye North (Ft)", "", BindingValueUnits.Feet);
             AddValue("Ownship", "deltaY from bulls", "Delta from bullseye East (Ft)", "", BindingValueUnits.Feet);
 
@@ -575,7 +576,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 SetValue("Lighting", "instrument backlight", new BindingValue((int)_lastFlightData2.instrLight));
 
                 //Bullseye                
-                ProcessOwnshipFromBullseye(_lastFlightData.x, _lastFlightData.y, _lastFlightData2.bullseyeX, _lastFlightData2.bullseyeY);
+                ProcessOwnshipFromBullseye(_lastFlightData.x, _lastFlightData.y, _lastFlightData2.bullseyeX, _lastFlightData2.bullseyeY, _lastFlightData.currentHeading);
 
                 //AV8B Values
                 SetValue("AV8B", "vtol exhaust angle position", new BindingValue(_lastFlightData2.vtolPos));
@@ -731,7 +732,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             return sanitized.ToString();
         }
 
-        private void ProcessOwnshipFromBullseye(float ownshipX, float ownshipY, float bullseyeX, float bullseyeY)
+        private void ProcessOwnshipFromBullseye(float ownshipX, float ownshipY, float bullseyeX, float bullseyeY, float currentHeading)
         {
             float deltaX = ownshipX - bullseyeX;
             float deltaY = ownshipY - bullseyeY;
@@ -740,12 +741,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             double distance = Math.Sqrt((deltaX * deltaX) + (deltaY * deltaY)) / nauticalMile;
             double heading = ClampDegrees((Math.Atan2(deltaY, deltaX)) * (180 / Math.PI));
             double reciprocal = ClampDegrees(((Math.Atan2(deltaY, deltaX)) * (180 / Math.PI)) + 180);
+            double orientation = heading - currentHeading - 180;
 
             SetValue("Ownship", "deltaX from bulls", new BindingValue(deltaX));
             SetValue("Ownship", "deltaY from bulls", new BindingValue(deltaY));
-            SetValue("Ownship", "distance from bullseye", new BindingValue(String.Format("{0:0}", Math.Abs(distance))));
-            SetValue("Ownship", "heading from bullseye", new BindingValue(String.Format("{0:0}", heading)));
-            SetValue("Ownship", "heading to bullseye", new BindingValue(String.Format("{0:0}", reciprocal)));
+            SetValue("Ownship", "distance from bullseye", new BindingValue(string.Format("{0:0}", Math.Abs(distance))));
+            SetValue("Ownship", "heading from bullseye", new BindingValue(string.Format("{0:0}", heading)));
+            SetValue("Ownship", "heading to bullseye", new BindingValue(string.Format("{0:0}", reciprocal)));
+            SetValue("Ownship", "orientation to bullseye", new BindingValue(string.Format("{0:0}", orientation)));
         }
 
         protected void ProcessLightBits(BMSLightBits bits)
