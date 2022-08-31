@@ -1,0 +1,12 @@
+﻿<ControlTemplate>
+<Name>UFC Scratchpad</Name>
+<Category>F/A-18C</Category>
+<TypeIdentifier>Helios.FA18C.UFC-Scratchpad</TypeIdentifier>
+<Template>
+<TemplateValues>
+  <Location>0,0</Location>
+  <Size>197,48</Size>
+  <Hidden>False</Hidden>
+</TemplateValues>
+</Template>
+</ControlTemplate>

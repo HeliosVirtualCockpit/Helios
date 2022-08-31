@@ -270,8 +270,16 @@
   <ItemGroup>
     <Resource Include="Images\UFC Rotator_U.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Content Include="Templates\Base\FA-18C\ODU Display Element.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\FA-18C\UFC Scratchpad.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Scratchpad_Background.png" />
     <Content Include="Templates\Base\FA-18C\2-way Toggle Domed.htpl">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

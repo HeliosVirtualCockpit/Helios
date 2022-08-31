@@ -178,6 +178,7 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
+    <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="GlobalOptions.cs" />
