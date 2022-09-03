@@ -36,7 +36,20 @@ namespace GadrocsWorkshop.Helios.Controls
     {
         private bool _timerEnabled;
         private DispatcherTimer _timer;
+        private HeliosValue _timerEnabledValue;
+        private HeliosValue _timerIntervalValue;
+        public TimerPanel() : base()
+        {
+            _timerEnabledValue = new HeliosValue(this, new BindingValue(false), "Timer", "Enable", "Indicates whether the timer used to hide the panel should run.", "True if the timer is enabled.", BindingValueUnits.Boolean);
+            _timerEnabledValue.Execute += SetTimerEnabledAction_Execute;
+            Values.Add(_timerEnabledValue);
+            Actions.Add(_timerEnabledValue);
 
+            _timerIntervalValue = new HeliosValue(this, new BindingValue(false), "Timer", "Interval", "Interval before the panel becomes Hidden.", "Positive numeric value in seconds.", BindingValueUnits.Numeric);
+            _timerIntervalValue.Execute += SetTimerIntervalAction_Execute;
+            Values.Add(_timerIntervalValue);
+            Actions.Add(_timerIntervalValue);
+        }
         #region Properties
 
         public bool TimerEnabled
@@ -58,6 +71,14 @@ namespace GadrocsWorkshop.Helios.Controls
         /// time out after which this panel automatically closes if no input is received
         /// </summary>
         private double _timerInterval = 3d;
+        
+        /// <summary>
+        /// Field to hold the time interval configured in Profile Editor and read from XML
+        /// Even if the time interval is changed via the Timer Interval action, this value is 
+        /// used to set the Timer Interval when the panel is unhidden this providing repeatable
+        /// experience every time the panel is seen
+        /// </summary>
+        private double _configuredTimerInterval = 3d;
 
         /// <summary>
         /// minimum permissible time out
@@ -152,8 +173,9 @@ namespace GadrocsWorkshop.Helios.Controls
                 if ((args.NewValue as bool?) == false)
                 {
                     // just shown, start time out
-                    if (_timer != null)
+                    if (TimerEnabled && _timer != null)
                     {
+                        TimerInterval = _configuredTimerInterval;
                         _timer.Interval = IntervalTimespan;
                         _timer.Start();
                     }
@@ -185,6 +207,7 @@ namespace GadrocsWorkshop.Helios.Controls
             base.ReadXml(reader);
             _timerEnabled = bool.Parse(reader.ReadElementString("TimerEnabled"));
             _timerInterval = double.Parse(reader.ReadElementString("TimerInterval"), CultureInfo.InvariantCulture);
+            _configuredTimerInterval = _timerInterval;
         }
 
         private void RestartTimer()
@@ -198,9 +221,49 @@ namespace GadrocsWorkshop.Helios.Controls
             _timer.Start();
         }
 
+        #region Actions
+
+        /// <summary>
+        /// Set Timer Enabled action on control
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="e"></param>
+        private void SetTimerEnabledAction_Execute(object action, HeliosActionEventArgs e)
+        {
+           TimerEnabled = e.Value.BoolValue;
+            if (_timerEnabled)
+            {
+                RestartTimer();
+            }
+            else
+            {
+                if (_timer != null)
+                {
+                    _timer.Stop();
+                }
+            }
+        }
+        
+        /// Set Timer Interval action on control
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="e"></param>
+        private void SetTimerIntervalAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            TimerInterval = Math.Abs(e.Value.DoubleValue);
+            _timer.Interval = IntervalTimespan;
+
+            if (_timerEnabled)
+            {
+                RestartTimer();
+            }
+        }
+        #endregion
+
+
         public void PreviewMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            RestartTimer();
+            if(_timerEnabled) RestartTimer();
         }
 
         public void PreviewMouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
@@ -210,7 +273,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
         public void PreviewTouchDown(object sender, TouchEventArgs touchEventArgs)
         {
-            RestartTimer();
+            if (_timerEnabled) RestartTimer();
         }
 
         public void PreviewTouchUp(object sender, TouchEventArgs touchEventArgs)
