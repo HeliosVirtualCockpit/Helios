@@ -38,6 +38,9 @@ namespace GadrocsWorkshop.Helios.Controls
         private DispatcherTimer _timer;
         private HeliosValue _timerEnabledValue;
         private HeliosValue _timerIntervalValue;
+
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public TimerPanel() : base()
         {
             _timerEnabledValue = new HeliosValue(this, new BindingValue(false), "Timer", "Enable", "Indicates whether the timer used to hide the panel should run.", "True if the timer is enabled.", BindingValueUnits.Boolean);
@@ -232,16 +235,16 @@ namespace GadrocsWorkshop.Helios.Controls
         private void SetTimerEnabledAction_Execute(object action, HeliosActionEventArgs e)
         {
            TimerEnabled = e.Value.BoolValue;
+           Logger.Debug($"Timer Panel: {this.Name} Set Timer Enabled Action: {_timerEnabled} {(_timer == null ? "No Timer" : "Timer")}");
+            if (_timer == null) _timer = new DispatcherTimer(IntervalTimespan, DispatcherPriority.Input, TimerTick, Dispatcher.CurrentDispatcher);
+
             if (_timerEnabled)
             {
                 RestartTimer();
             }
             else
             {
-                if (_timer != null)
-                {
-                    _timer.Stop();
-                }
+                _timer?.Stop();
             }
         }
         
@@ -252,8 +255,9 @@ namespace GadrocsWorkshop.Helios.Controls
         private void SetTimerIntervalAction_Execute(object action, HeliosActionEventArgs e)
         {
             TimerInterval = Math.Abs(e.Value.DoubleValue);
-            if (_timer == null) _timer = new DispatcherTimer(IntervalTimespan, DispatcherPriority.Input, TimerTick, Dispatcher.CurrentDispatcher);
+            Logger.Debug($"Timer Panel: {this.Name} Set Timer Interval Action: {TimerInterval} Enabled: {_timerEnabled} {(_timer==null?"No Timer":"Timer")}");
 
+            if(_timer != null) _timer.Interval = IntervalTimespan;
             if (_timerEnabled)
             {
                 RestartTimer();
