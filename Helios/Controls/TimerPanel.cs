@@ -252,7 +252,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private void SetTimerIntervalAction_Execute(object action, HeliosActionEventArgs e)
         {
             TimerInterval = Math.Abs(e.Value.DoubleValue);
-            _timer.Interval = IntervalTimespan;
+            if (_timer == null) _timer = new DispatcherTimer(IntervalTimespan, DispatcherPriority.Input, TimerTick, Dispatcher.CurrentDispatcher);
 
             if (_timerEnabled)
             {
