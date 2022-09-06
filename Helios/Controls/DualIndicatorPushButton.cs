@@ -32,12 +32,16 @@ namespace GadrocsWorkshop.Helios.Controls
         private string _additionalIndicatorText = "";
         private TextFormat _additionalTextFormat = new TextFormat();
 
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         private HeliosAction _toggleAction;
         private HeliosValue _value;
 
         public DualIndicatorPushButton()
             : base("Dual Indicator Pushbutton", new Size(75, 75))
         {
+            _referenceHeight = Height;
+
             _additionalTextFormat.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(Format_PropertyChanged);
             _additionalTextFormat.VerticalAlignment = TextVerticalAlignment.Bottom;
             _additionalTextFormat.HorizontalAlignment = TextHorizontalAlignment.Center;
@@ -145,6 +149,31 @@ namespace GadrocsWorkshop.Helios.Controls
             get { return _additionalTextFormat; }
         }
 
+        /// <summary>
+        /// backing field for property ScalingMode, contains
+        /// the selected automatic font size scaling mode
+        /// </summary>
+        private TextScalingMode _scalingMode;
+
+        /// <summary>
+        /// the height this display had when the font size was configured
+        /// </summary>
+        private double _referenceHeight;
+
+        /// <summary>
+        /// the selected automatic font size scaling mode
+        /// </summary>
+        public TextScalingMode ScalingMode
+        {
+            get => _scalingMode;
+            set
+            {
+                if (_scalingMode == value) return;
+                TextScalingMode oldValue = _scalingMode;
+                _scalingMode = value;
+                OnPropertyChanged("ScalingMode", oldValue, value, true);
+            }
+        }
         #endregion
         #region Execution
         void Format_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -179,16 +208,6 @@ namespace GadrocsWorkshop.Helios.Controls
             base.OnPropertyChanged(args);
         }
 
-        public override void ScaleChildren(double scaleX, double scaleY)
-        {
-            if (GlobalOptions.HasScaleAllText)
-            {
-                _additionalTextFormat.FontSize *= Math.Max(scaleX, scaleY);
-            }
-            base.ScaleChildren(scaleX, scaleY);
-        }
-
-
         public override void Reset()
         {
             base.Reset();
@@ -205,6 +224,40 @@ namespace GadrocsWorkshop.Helios.Controls
                 AdditionalIndicator = !AdditionalIndicator;
             }
             base.MouseDown(location);
+        }
+        // WARNING: this virtual method is called from the base constructor (indirectly)
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            switch (ScalingMode)
+            {
+                case TextScalingMode.Height:
+                    if (_referenceHeight < 0.001)
+                    {
+                        TextFormat.FontSize = TextFormat.ConfiguredFontSize;
+                        _additionalTextFormat.FontSize = _additionalTextFormat.ConfiguredFontSize;
+                        break;
+                    }
+                    // avoid accumulating error from repeated resizing by calculating from a reference point
+                    Logger.Debug("Alternate Text scaling font based on new height {Height} versus reference {ReferenceSize} at height {ReferenceHeight}",
+                        current.Height, TextFormat.ConfiguredFontSize, _referenceHeight);
+                    TextFormat.FontSize = Clamp(TextFormat.ConfiguredFontSize * current.Height / _referenceHeight, 1, 2000);
+                    _additionalTextFormat.FontSize = Clamp(_additionalTextFormat.ConfiguredFontSize * current.Height / _referenceHeight, 1, 2000);
+                    break;
+                case TextScalingMode.None:
+                    return;
+                case TextScalingMode.Legacy:
+                    if (previous.Height != 0)
+                    {
+                        double scale = current.Height / previous.Height;
+                        TextFormat.FontSize = Clamp(scale * TextFormat.FontSize, 1, 100);
+                        _additionalTextFormat.FontSize = Clamp(scale * _additionalTextFormat.FontSize, 1, 100);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            Logger.Debug("Alternate Font Size " + TextFormat.FontSize);
+            base.PostUpdateRectangle(previous, current);
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -224,6 +277,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 writer.WriteElementString("OffTextColor", colorConverter.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, AdditionalOffTextColor));
 
                 writer.WriteEndElement();
+                if (ScalingMode != TextScalingMode.Legacy)
+                {
+                    writer.WriteElementString("ScalingMode", ScalingMode.ToString());
+                }
             }
         }
 
@@ -251,7 +308,28 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
                 reader.ReadEndElement();
             }
+
+            if (reader.Name == "ScalingMode" && Enum.TryParse(reader.ReadElementString("ScalingMode"), out TextScalingMode configured))
+            {
+                ScalingMode = configured;
+            }
+            else
+            {
+                ScalingMode = TextScalingMode.Legacy;
+            }
         }
         #endregion
+        private double Clamp(double value, double min, double max)
+        {
+            if (value < min)
+            {
+                return min;
+            }
+            if (value > max)
+            {
+                return max;
+            }
+            return value;
+        }
     }
 }

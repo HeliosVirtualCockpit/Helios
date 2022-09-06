@@ -5,13 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:Helios="clr-namespace:GadrocsWorkshop.Helios"
-             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"                      
+             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls" 
+             xmlns:controls="clr-namespace:GadrocsWorkshop.Helios.Controls"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Height="Auto" d:DesignWidth="180">
     <HeliosSdk:HeliosPropertyEditor.Resources>
         <Helios:EnumConverter Type="{x:Type Helios:TextVerticalAlignment}" x:Key="VertAlignmentTypes" />
         <Helios:EnumConverter Type="{x:Type Helios:TextHorizontalAlignment}" x:Key="HorizAlignmentTypes" />
+        <Helios:EnumConverter Type="{x:Type controls:TextScalingMode}" x:Key="TextScalingModes" />
+
     </HeliosSdk:HeliosPropertyEditor.Resources>
+
     <Grid Background="Transparent" Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -23,6 +27,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -37,7 +42,8 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Text</TextBlock>
         <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
-            <Label.ToolTip>Text which will be rendered on the indicator.</Label.ToolTip>Text</Label>
+            <Label.ToolTip>Text which will be rendered on the indicator.</Label.ToolTip> Text
+        </Label>
         <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding Path=Control.Text}" Margin="2" GotFocus="TurnIndicatorOn" />
         <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Font">
             <Label.ToolTip>Font which will be used to render the text.</Label.ToolTip>
@@ -51,44 +57,48 @@
             <Label.ToolTip>How the text will be aligned horizontally inside the indicator.</Label.ToolTip>
         </Label>
         <ComboBox Grid.Column="1" Grid.Row="4" Margin="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource HorizAlignmentTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.TextFormat.HorizontalAlignment, Converter={StaticResource HorizAlignmentTypes}}" GotFocus="TurnIndicatorOn" />
+        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Auto Scaling">
+            <Label.ToolTip>How font size will be scaled if the control is scaled.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="5" Margin="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource TextScalingModes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.ScalingMode, Converter={StaticResource TextScalingModes}}"/>
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="4,10,2,2" Style="{StaticResource Heading2}">Text Padding</TextBlock>
-        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Left">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="4,10,2,2" Style="{StaticResource Heading2}">Text Padding</TextBlock>
+        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Left">
             <Label.ToolTip>Amount of space on the left edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="6" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingLeft}" Margin="0,2" GotFocus="TurnIndicatorOn" ValueChanged="LeftPaddingChanged" />
-        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Right">
+        <Slider Grid.Column="1" Grid.Row="7" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingLeft}" Margin="0,2" GotFocus="TurnIndicatorOn" ValueChanged="LeftPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Right">
             <Label.ToolTip>Amount of space on the right edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="7" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingRight}" IsDirectionReversed="true" Margin="0,2" GotFocus="TurnIndicatorOn"  ValueChanged="RightPaddingChanged" />
-        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Top">
+        <Slider Grid.Column="1" Grid.Row="8" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingRight}" IsDirectionReversed="true" Margin="0,2" GotFocus="TurnIndicatorOn"  ValueChanged="RightPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Top">
             <Label.ToolTip>Amount of space on the top edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="8" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingTop}" Margin="0,2" GotFocus="TurnIndicatorOn"  ValueChanged="TopPaddingChanged" />
-        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Bottom">
+        <Slider Grid.Column="1" Grid.Row="9" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingTop}" Margin="0,2" GotFocus="TurnIndicatorOn"  ValueChanged="TopPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="10" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Bottom">
             <Label.ToolTip>Amount of space on the bottom edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="9" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingBottom}" IsDirectionReversed="true" Margin="0,2" GotFocus="TurnIndicatorOn"  ValueChanged="BottomPaddingChanged" />
+        <Slider Grid.Column="1" Grid.Row="10" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingBottom}" IsDirectionReversed="true" Margin="0,2" GotFocus="TurnIndicatorOn"  ValueChanged="BottomPaddingChanged" />
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Margin="4,10,2,2" Style="{StaticResource Heading2}">On Appearance</TextBlock>
-        <Label Grid.Column="0" Grid.Row="11" FontSize="10" HorizontalAlignment="Right" Content="Image">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" Margin="4,10,2,2" Style="{StaticResource Heading2}">On Appearance</TextBlock>
+        <Label Grid.Column="0" Grid.Row="12" FontSize="10" HorizontalAlignment="Right" Content="Image">
             <Label.ToolTip>Image which will be displayed when the indicator is on.</Label.ToolTip>
         </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="11" ImageFilename="{Binding Control.OnImage, Mode=TwoWay}"  GotFocus="TurnIndicatorOn" />
-        <Label Grid.Column="0" Grid.Row="12" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Color">
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="12" ImageFilename="{Binding Control.OnImage, Mode=TwoWay}"  GotFocus="TurnIndicatorOn" />
+        <Label Grid.Column="0" Grid.Row="13" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Color">
             <Label.ToolTip>Color text will be rendered in when the indicator is on.</Label.ToolTip>
         </Label>
-        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="12" Color="{Binding Path=Control.OnTextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2"  GotFocus="TurnIndicatorOn" />
+        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="13" Color="{Binding Path=Control.OnTextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2"  GotFocus="TurnIndicatorOn" />
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13" Margin="4,10,2,2" Style="{StaticResource Heading2}">Off Appearance</TextBlock>
-        <Label Grid.Column="0" Grid.Row="14" FontSize="10" HorizontalAlignment="Right" Content="Image">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="14" Margin="4,10,2,2" Style="{StaticResource Heading2}">Off Appearance</TextBlock>
+        <Label Grid.Column="0" Grid.Row="15" FontSize="10" HorizontalAlignment="Right" Content="Image">
             <Label.ToolTip>Image which will be displayed when the indicator is off.</Label.ToolTip>
         </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="14" ImageFilename="{Binding Control.OffImage, Mode=TwoWay}"  GotFocus="TurnIndicatorOff"/>
-        <Label Grid.Column="0" Grid.Row="15" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Text">
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="15" ImageFilename="{Binding Control.OffImage, Mode=TwoWay}"  GotFocus="TurnIndicatorOff"/>
+        <Label Grid.Column="0" Grid.Row="16" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Text">
             <Label.ToolTip>Color text will be rendered in when the indicator is off.</Label.ToolTip>
         </Label>
-        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="15" Color="{Binding Path=Control.OffTextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" GotFocus="TurnIndicatorOff" />
+        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="16" Color="{Binding Path=Control.OffTextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" GotFocus="TurnIndicatorOff" />
 
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

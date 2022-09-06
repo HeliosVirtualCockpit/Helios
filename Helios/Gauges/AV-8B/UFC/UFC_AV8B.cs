@@ -304,6 +304,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             indicator.PushedImage = "{Helios}/Images/Indicators/indicator-push.png";
             indicator.Text = name;
             indicator.Name = name;
+            indicator.ScalingMode = TextScalingMode.Height;
             if (name == "MASTER WARNING")
             {
                 indicator.OnTextColor = Color.FromArgb(0xff, 0xc7, 0x1e, 0x1e);

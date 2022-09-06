@@ -144,6 +144,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
                 indicator.TextFormat.PaddingBottom = 0;
                 indicator.TextFormat.VerticalAlignment = TextVerticalAlignment.Center;
                 indicator.TextFormat.HorizontalAlignment = TextHorizontalAlignment.Center;
+                indicator.ScalingMode = TextScalingMode.Height;
             }
 
 
