@@ -54,7 +54,7 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_timerIntervalDefaultValue);
             Actions.Add(_timerIntervalDefaultValue);
 
-            _timerIntervalOneTimeValue = new HeliosValue(this, new BindingValue(false), "Timer", "Once Only Interval", "Temporary interval to be used until the panel next hides.  The timer then returns to the deault interval.", "Positive numeric value in seconds.", BindingValueUnits.Numeric);
+            _timerIntervalOneTimeValue = new HeliosValue(this, new BindingValue(false), "Timer", "Once Only Interval", "Temporary interval to be used until the panel next hides.  The timer returns to the default interval once hidden.", "Positive numeric value in seconds.", BindingValueUnits.Numeric);
             _timerIntervalOneTimeValue.Execute += SetTimerOneTimeIntervalAction_Execute;
             Values.Add(_timerIntervalOneTimeValue);
             Actions.Add(_timerIntervalOneTimeValue);
