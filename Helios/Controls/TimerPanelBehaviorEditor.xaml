@@ -32,7 +32,7 @@
     </HeliosSdk:HeliosPropertyEditor.Resources>
 
     <Grid
-        Height="72"
+        Height="Auto"
         Margin="4"
         Background="Transparent">
         <Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
             Content="Time Out"
             FontSize="10">
             <!--Style="{StaticResource LabelStyle}">-->
-            <Label.ToolTip>Value in seconds before panel is hidden if enabled</Label.ToolTip>
+            <Label.ToolTip>Default interval before the panel is hidden.  Value in seconds</Label.ToolTip>
         </Label>
         <HeliosSdk:HeliosTextBox
             Grid.Row="2"

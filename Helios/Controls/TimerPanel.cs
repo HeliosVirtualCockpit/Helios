@@ -37,8 +37,9 @@ namespace GadrocsWorkshop.Helios.Controls
         private bool _timerEnabled;
         private DispatcherTimer _timer;
         private HeliosValue _timerEnabledValue;
-        private HeliosValue _timerIntervalValue;
-
+        private HeliosValue _timerIntervalDefaultValue;
+        private HeliosValue _timerIntervalOneTimeValue;
+//
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public TimerPanel() : base()
@@ -48,10 +49,15 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_timerEnabledValue);
             Actions.Add(_timerEnabledValue);
 
-            _timerIntervalValue = new HeliosValue(this, new BindingValue(false), "Timer", "Interval", "Interval before the panel becomes Hidden.", "Positive numeric value in seconds.", BindingValueUnits.Numeric);
-            _timerIntervalValue.Execute += SetTimerIntervalAction_Execute;
-            Values.Add(_timerIntervalValue);
-            Actions.Add(_timerIntervalValue);
+            _timerIntervalDefaultValue = new HeliosValue(this, new BindingValue(false), "Timer", "Default Interval", "Default time before the panel automatically hides.", "Positive numeric value in seconds.", BindingValueUnits.Numeric);
+            _timerIntervalDefaultValue.Execute += SetTimerDefaultIntervalAction_Execute;
+            Values.Add(_timerIntervalDefaultValue);
+            Actions.Add(_timerIntervalDefaultValue);
+
+            _timerIntervalOneTimeValue = new HeliosValue(this, new BindingValue(false), "Timer", "Once Only Interval", "Temporary interval to be used until the panel next hides.  The timer then returns to the deault interval.", "Positive numeric value in seconds.", BindingValueUnits.Numeric);
+            _timerIntervalOneTimeValue.Execute += SetTimerOneTimeIntervalAction_Execute;
+            Values.Add(_timerIntervalOneTimeValue);
+            Actions.Add(_timerIntervalOneTimeValue);
         }
         #region Properties
 
@@ -178,7 +184,6 @@ namespace GadrocsWorkshop.Helios.Controls
                     // just shown, start time out
                     if (TimerEnabled)
                     {
-                        TimerInterval = _configuredTimerInterval;
                         if (_timer == null) _timer = new DispatcherTimer(IntervalTimespan, DispatcherPriority.Input, TimerTick, Dispatcher.CurrentDispatcher);
                         _timer.Interval = IntervalTimespan;
                         _timer.Start();
@@ -188,6 +193,8 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     // hidden, maybe by user or maybe by us
                     _timer?.Stop();
+                    // After the panel hides, we always return to the panel's default interval.
+                    TimerInterval = _configuredTimerInterval;
                 }
             }
         }
@@ -248,16 +255,35 @@ namespace GadrocsWorkshop.Helios.Controls
             }
         }
         
-        /// Set Timer Interval action on control
+        /// <summary>
+        /// Set Default Timer Interval action on control
         /// </summary>
         /// <param name="action"></param>
         /// <param name="e"></param>
-        private void SetTimerIntervalAction_Execute(object action, HeliosActionEventArgs e)
+        private void SetTimerDefaultIntervalAction_Execute(object action, HeliosActionEventArgs e)
         {
             TimerInterval = Math.Abs(e.Value.DoubleValue);
-            Logger.Debug($"Timer Panel: {this.Name} Set Timer Interval Action: {TimerInterval} Enabled: {_timerEnabled} {(_timer==null?"No Timer":"Timer")}");
+            _configuredTimerInterval = TimerInterval;
+            Logger.Debug($"Timer Panel: {this.Name} Set Default Timer Interval Action: {TimerInterval} Enabled: {_timerEnabled} {(_timer==null?"No Timer":"Timer")}");
 
             if(_timer != null) _timer.Interval = IntervalTimespan;
+            if (_timerEnabled)
+            {
+                RestartTimer();
+            }
+        }
+
+        /// <summary>
+        /// Set One-Time Interval action which reverts to the default once the panel hides on control
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="e"></param>
+        private void SetTimerOneTimeIntervalAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            TimerInterval = Math.Abs(e.Value.DoubleValue);
+            Logger.Debug($"Timer Panel: {this.Name} Set One-Time Timer Interval Action: {TimerInterval} Enabled: {_timerEnabled} {(_timer == null ? "No Timer" : "Timer")}");
+
+            if (_timer != null) _timer.Interval = IntervalTimespan;
             if (_timerEnabled)
             {
                 RestartTimer();
