@@ -32,7 +32,7 @@
     </HeliosSdk:HeliosPropertyEditor.Resources>
 
     <Grid
-        Height="72"
+        Height="Auto"
         Margin="4"
         Background="Transparent">
         <Grid.ColumnDefinitions>
@@ -55,9 +55,9 @@
             Grid.Column="0"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Content="Enabled"
+            Content="Timer Enabled"
             FontSize="10">
-            <Label.ToolTip>Enable / Disable Auto Hide</Label.ToolTip>
+            <Label.ToolTip>Enable / Disable Auto Hide Timer</Label.ToolTip>
         </Label>
         <CheckBox
             x:Name="checkBox"
@@ -73,9 +73,9 @@
             Grid.Column="0"
             HorizontalAlignment="Right"
             Content="Time Out"
-            FontSize="10"
-            Style="{StaticResource LabelStyle}">
-            <Label.ToolTip>Value in seconds before panel is hidden</Label.ToolTip>
+            FontSize="10">
+            <!--Style="{StaticResource LabelStyle}">-->
+            <Label.ToolTip>Default interval before the panel is hidden.  Value in seconds</Label.ToolTip>
         </Label>
         <HeliosSdk:HeliosTextBox
             Grid.Row="2"
@@ -83,8 +83,9 @@
             Margin="2"
             FontSize="10"
             IsEnabled="True"
-            Style="{StaticResource TextboxStyle}"
             Text="{Binding Control.TimerInterval}">
+            <!--Style="{StaticResource TextboxStyle}"-->
+
             <HeliosSdk:HeliosTextBox.ToolTip>Value in seconds before panel is hidden</HeliosSdk:HeliosTextBox.ToolTip>
         </HeliosSdk:HeliosTextBox>
     </Grid>
