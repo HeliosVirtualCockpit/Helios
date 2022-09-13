@@ -353,6 +353,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "264", "PCA Panel", "WSS5 P", "WSS5 P"));
             AddFunction(new FlagValue(this, "246", "PCA Panel", "KL1", "KL1"));
             AddFunction(new FlagValue(this, "247", "PCA Panel", "KL2", "KL2"));
+            AddFunction(new Text(this, "2084", "PCA Panel", "PCA Upper Display", "Display Upper Line"));
+            AddFunction(new Text(this, "2085", "PCA Panel", "PCA Lower Display", "Display Lower Line"));
+
             AddFunction(new PushButton(this, PCA_PPA, "3266", "266", "PPA Panel", "S530 Missile Enabler Button"));
             AddFunction(new PushButton(this, PCA_PPA, "3269", "269", "PPA Panel", "Missile Fire Mode Selector"));
             AddFunction(new PushButton(this, PCA_PPA, "3272", "272", "PPA Panel", "Magic II Missile Enabler Button")); 
@@ -390,6 +393,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "274", "PPA Panel", "MAGIC MAG", "MAGIC MAG"));
             AddFunction(new FlagValue(this, "280", "PPA Panel", "TOT Firing Mode", "TOT Firing Mode"));
             AddFunction(new FlagValue(this, "281", "PPA Panel", "PAR Firing Mode", "PAR Firing Mode"));
+            AddFunction(new Text(this, "2086", "PPA Panel", "PPA Display Quantity", "Display Line for the PPA Quantity"));
+            AddFunction(new Text(this, "2186", "PPA Panel", "PPA Display Interval", "Display Line for the PPA Interval"));
+
+
             #endregion
             #region  PCN
             AddFunction(new FlagValue(this, "564", "PCN Panel", "PRET", "PRET"));
@@ -444,6 +451,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, PCN_NAV, "3593", "593", "PCN Panel", "INS Button 0"));
             AddFunction(new PushButton(this, PCN_NAV, "3594", "594", "PCN Panel", "EFF Button"));
             AddFunction(new PushButton(this, PCN_NAV, "3596", "596", "PCN Panel", "INS Button"));
+
+            AddFunction(new Text(this, "2089", "PCN Panel", "PCN Latitude Display", "Display Line for PCN Latitude"));
+            AddFunction(new Text(this, "2297", "PCN Panel", "PCN Left Points Position", "Position of Points for PCN Left"));
+            AddFunction(new Text(this, "2189", "PCN Panel", "PCN Longitude Display", "Display Line for PCN Longitude"));
+            AddFunction(new Text(this, "2298", "PCN Panel", "PCN Right Points Position", "Position of Points for PCN Right"));
+
+            AddFunction(new NetworkValue(this, "2289", "PCN Panel", "PCN North", "North Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2290", "PCN Panel", "PCN South", "South Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2291", "PCN Panel", "PCN East", "East Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2292", "PCN Panel", "PCN West", "West Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2293", "PCN Panel", "PCN Left Plus", "Plus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2294", "PCN Panel", "PCN Left Minus", "Minus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2295", "PCN Panel", "PCN Right Plus", "Plus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2296", "PCN Panel", "PCN Right Minus", "Minus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new Text(this, "2090", "PCN Panel", "PCN Lower Left Display", "Display Lower Line Left Side"));
+            AddFunction(new Text(this, "2190", "PCN Panel", "PCN Lower Right Display", "Display Lower Line Right Side"));
+
             #endregion
             #region TACAN Panel
             AddFunction(new Axis(this, TACAN, "3625", "625", 0.1d, 0d, 1d, "Tacan Panel", "Channel 1 Selector"));
@@ -595,18 +619,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #region U/VHF Panel
             AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "U/VHF", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
             AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "U/VHF", "Preset frequency change"));
-//            AddFunction(new RotaryEncoder(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.1d, "U/VHF", "Preset frequency change"));
-/*            AddFunction(new Switch(this, UVHF, UVHF_CHANNEL, new SwitchPosition[] { 
-                new SwitchPosition("0.05", "Channel 1", CMD+UVHF_CHANNEL), new SwitchPosition("0.1", "Channel 2", CMD+UVHF_CHANNEL), new SwitchPosition("0.15", "Channel 3", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.2", "Channel 4", CMD+UVHF_CHANNEL), new SwitchPosition("0.25", "Channel 5", CMD+UVHF_CHANNEL), new SwitchPosition("0.3", "Channel 6", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.35", "Channel 7", CMD+UVHF_CHANNEL), new SwitchPosition("0.4", "Channel 8", CMD+UVHF_CHANNEL) , new SwitchPosition("0.45", "Channel 9", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.5", "Channel 10", CMD+UVHF_CHANNEL), new SwitchPosition("0.55", "Channel 11", CMD+UVHF_CHANNEL) , new SwitchPosition("0.66", "Channel 12", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.65", "Channel 13", CMD+UVHF_CHANNEL), new SwitchPosition("0.7", "Channel 14", CMD+UVHF_CHANNEL) , new SwitchPosition("0.75", "Channel 15", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.8", "Channel 16", CMD+UVHF_CHANNEL), new SwitchPosition("0.85", "Channel 17", CMD+UVHF_CHANNEL) , new SwitchPosition("0.9", "Channel 18", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.95", "Channel 19", CMD+UVHF_CHANNEL), new SwitchPosition("1", "Channel 20", CMD+UVHF_CHANNEL)}, "Radio Panel", "U/VHF Channel Selector", "%0.2f"));
-                */
+            AddFunction(new Text(this, "2088", UVHF, "VHF Comm Information", "Display Line for the VHF Radio"));
+            AddFunction(new Text(this, "2089", UVHF, "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
+            AddFunction(new Text(this, "2189", UVHF, "UHF Lower Comm Information", "Lower Display Line for the UHF Radio"));
+
+
+            //            AddFunction(new RotaryEncoder(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.1d, "U/VHF", "Preset frequency change"));
+            /*            AddFunction(new Switch(this, UVHF, UVHF_CHANNEL, new SwitchPosition[] { 
+                            new SwitchPosition("0.05", "Channel 1", CMD+UVHF_CHANNEL), new SwitchPosition("0.1", "Channel 2", CMD+UVHF_CHANNEL), new SwitchPosition("0.15", "Channel 3", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.2", "Channel 4", CMD+UVHF_CHANNEL), new SwitchPosition("0.25", "Channel 5", CMD+UVHF_CHANNEL), new SwitchPosition("0.3", "Channel 6", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.35", "Channel 7", CMD+UVHF_CHANNEL), new SwitchPosition("0.4", "Channel 8", CMD+UVHF_CHANNEL) , new SwitchPosition("0.45", "Channel 9", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.5", "Channel 10", CMD+UVHF_CHANNEL), new SwitchPosition("0.55", "Channel 11", CMD+UVHF_CHANNEL) , new SwitchPosition("0.66", "Channel 12", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.65", "Channel 13", CMD+UVHF_CHANNEL), new SwitchPosition("0.7", "Channel 14", CMD+UVHF_CHANNEL) , new SwitchPosition("0.75", "Channel 15", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.8", "Channel 16", CMD+UVHF_CHANNEL), new SwitchPosition("0.85", "Channel 17", CMD+UVHF_CHANNEL) , new SwitchPosition("0.9", "Channel 18", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.95", "Channel 19", CMD+UVHF_CHANNEL), new SwitchPosition("1", "Channel 20", CMD+UVHF_CHANNEL)}, "Radio Panel", "U/VHF Channel Selector", "%0.2f"));
+                            */
             #endregion
-            #region  HUD/VTB"
+            #region  HUD/VTB
             AddFunction(new Switch(this, VTH_VTB, "201", new SwitchPosition[] { }, "HUD/VTB", "HUD Power Switch", "%0.1f"));    // elements["PTN_201"] = multiposition_switch_limited(_("HUD Power Switch"), devices.VTH_VTB, device_commands.Button_201, 201, 3, 0.5, false, 0)
             //AddFunction(Switch.CreateToggleSwitch(this, VTH_VTB, "3203", "203", "HUD/VTB", "HUD Declutter Switch", "%0.1f"));    // elements["PTN_203"] = default_2_way_spring_switch(_("HUD Declutter Switch"), devices.VTH_VTB, device_commands.Button_203, 203, true)
             AddFunction(new Switch(this, VTH_VTB, "204", new SwitchPosition[] { }, "HUD/VTB", "HUD Altimeter Selector Switch", "%0.1f"));    // elements["PTN_204"] = multiposition_switch_limited(_("HUD Altimeter Selector Switch"), devices.VTH_VTB, device_commands.Button_204, 204, 3, 0.5, true, 0)

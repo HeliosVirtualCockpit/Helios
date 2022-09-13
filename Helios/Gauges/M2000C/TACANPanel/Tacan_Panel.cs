@@ -13,7 +13,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACANChannel
+namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACAN
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -21,10 +21,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACANChannel
     using System;
     using System.Globalization;
     using System.Windows;
-    using GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumTacanChannel;
     using System.Windows.Media;
 
-    [HeliosControl("HELIOS.M2000C.TACAN_PANEL", "Tacan Panel", "M2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.TACAN_PANEL", "TACAN Panel", "M2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
     class M2000C_TacanPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 256, 280);
@@ -32,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACANChannel
         private Rect _scaledScreenRect = SCREEN_RECT;
 
         public M2000C_TacanPanel()
-            : base("Tacan Panel", new Size(350, 312))
+            : base("TACAN Panel", new Size(350, 312))
         {
             AddRotarySwitch("X/Y Selector", new Point(83, 193), new Size(133, 133), "low-switch-tacan");
             AddRotarySwitch("Mode Selector", new Point(262, 191), new Size(133, 133), "low-switch-tacan");
@@ -42,10 +41,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACANChannel
             AddPot("Channel 1 Selector", new Point(262, 190), "up-switch-tacan",
                 70d, 324d, 0.0d, 0.9d, 0.6d, 0.1d, false);
             
-            AddDrum("Channel output for display (Ones)", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "ones frequency", "(0 - 9)", "#", 
+            AddDrum("Channel output for display (Ones)", "{Helios}/Gauges/M2000C/TACANPanel/drum_tape.xaml", "ones frequency", "(0 - 9)", "#", 
                 new Point(210, 60), new Size(10d, 15d), new Size(33d, 52d));
-            AddDrum("Channel output for display (Tens)", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "tens frequency", "(0 - 12)", "##", 
-                new Point(144, 60), new Size(10d, 15d), new Size(33d, 52d));
+            AddDrum("Channel output for display (Tens)", "{Helios}/Gauges/M2000C/TACANPanel/drum_tape_twelve.xaml", "tens frequency", "(0 - 12)", "#", 
+                new Point(144, 60), new Size(20d, 15d), new Size(66d, 52d), 14d);
             AddTacanDrum("X/Y Drum", new Point(118, 67), new Size(24d, 36d));
         }
 
@@ -122,7 +121,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACANChannel
             rSwitch.DefaultPosition = 1;
         }
 
-        private void AddDrum(string name, string gaugeImage, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize)
+        private void AddDrum(string name, string gaugeImage, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize, double drumDigits = 10d)
         {
             AddDrumGauge(name: name,
                 gaugeImage: gaugeImage,
@@ -134,7 +133,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACANChannel
                 actionIdentifier: actionIdentifier,
                 valueDescription: valueDescription,
                 format: format,
-                fromCenter: false);
+                fromCenter: false,
+                drumDigits: drumDigits);
         }
 
         private void AddTacanDrum(string name, Point posn, Size size)

@@ -28,6 +28,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 350, 203);
         private string _interfaceDeviceName = "PPA Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
 
         public M2000C_PPAPanel()
             : base("PPA Panel", new Size(350, 203))
@@ -108,6 +109,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicator("MAGIC MAG", "mag", new Point(column2, row1), new Size(16, 9));
             AddIndicator("TOT Firing Mode", "tot", new Point(column3, row2), new Size(16, 9));
             AddIndicator("PAR Firing Mode", "par", new Point(column3, row3), new Size(16, 9));
+
+            AddTextDisplay("PPA Display Quantity", new Point(196d, 89d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Quantity", 50, "00", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PPA Dispaly Interval", new Point(196d, 139d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Interval", 50, "00", TextHorizontalAlignment.Left, "");
+
         }
 
         #region Properties
@@ -181,7 +186,26 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 fromCenter: true,
                 withText: false); //added in Composite Visual as an optional value with a default value set to true
         }
-
+        private void AddTextDisplay(string name, Point posn, Size size,
+    string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
+        {
+            TextDisplay display = AddTextDisplay(
+                name: name,
+                posn: posn,
+                size: size,
+                font: _font,
+                baseFontsize: baseFontsize,
+                horizontalAlignment: hTextAlign,
+                verticalAligment: TextVerticalAlignment.Center,
+                testTextDisplay: testDisp,
+                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
+                backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
+                useBackground: false,
+                interfaceDeviceName: interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                textDisplayDictionary: devDictionary
+                );
+        }
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))

@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CNeedle
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.M2000C.Mk2CNeedle", "Mk2C Needle", "M2000C Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.M2000C.Mk2CNeedle", "Mk2C Needle", "M2000C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class Mk2CNeedle : BaseGauge
     {
         private HeliosValue _value;

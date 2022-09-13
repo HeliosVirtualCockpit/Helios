@@ -28,6 +28,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 690, 300);
         private string _interfaceDeviceName = "PCA Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private string _font = "Helios Virtual Cockpit F/A-18C_Hornet-Up_Front_Controller";
 
         public M2000C_PCAPanel()
             : base("PCA Panel", new Size(690, 300))
@@ -69,6 +70,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             ToggleSwitch selectiveJettisonSwitch = AddSwitch("Selective Jettison Switch", "long-black-", new Point(36, 170), new Size(29, 60), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn, true);
             AddGuard("Selective Jettison Switch Guard", "guard-", new Point(5, 160), new Size(100, 50), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
                 new NonClickableZone[] { new NonClickableZone(new Rect(30, 0, 120, 63), ToggleSwitchPosition.Two, selectiveJettisonSwitch, ToggleSwitchPosition.One) });
+
+            AddTextDisplay("PCA Upper Display", new Point(110d, 35d), new Size(551d, 52d), _interfaceDeviceName, "PCA Upper Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCA Lower Display", new Point(110d, 169d), new Size(551d, 52d), _interfaceDeviceName, "PCA Lower Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
+
         }
 
         #region Properties
@@ -155,6 +160,26 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 horizontalRender: false,
                 nonClickableZones: nonClickableZones,
                 fromCenter: false);
+        }
+        private void AddTextDisplay(string name, Point posn, Size size,
+    string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
+        {
+            TextDisplay display = AddTextDisplay(
+                name: name,
+                posn: posn,
+                size: size,
+                font: _font,
+                baseFontsize: baseFontsize,
+                horizontalAlignment: hTextAlign,
+                verticalAligment: TextVerticalAlignment.Center,
+                testTextDisplay: testDisp,
+                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
+                backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
+                useBackground: false,
+                interfaceDeviceName: interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                textDisplayDictionary: devDictionary
+                );
         }
 
         public override bool HitTest(Point location)

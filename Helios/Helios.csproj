@@ -180,6 +180,10 @@
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
+    <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGauge.cs" />
+    <Compile Include="Gauges\M2000C\Common\Mk2CDrumGauge.cs" />
+    <Compile Include="Gauges\M2000C\TACANPanel\TACANChannelDrum.cs" />
+    <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGaugeCounter.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="GlobalOptions.cs" />
     <Compile Include="HeliosCapabilityEditorDescriptor.cs" />
@@ -494,6 +498,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Resource Include="Gauges\M2000C\TACANPanel\drum_tape_twelve.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\TACANPanel\drum_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\PCNPanel\PCN_d.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\PCNPanel\PCN_r.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Interfaces\DCS\Common\RemoteConfigurationSection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -610,8 +630,6 @@
     <Compile Include="Controls\Special\ViewportExtent.cs" />
     <Compile Include="Gauges\AV-8B\Small Panels\Slip Turn Panel.cs" />
     <Compile Include="Gauges\F-16\HydraulicPressure\HydraulicPressure.cs" />
-    <Compile Include="Gauges\M2000C\Common\Mk2CDrumTacanChannel.cs" />
-    <Compile Include="Gauges\M2000C\Common\Mk2CDrumGauge.cs" />
     <Compile Include="Gauges\M2000C\Common\Mk2CNeedle.cs" />
     <Compile Include="Gauges\M2000C\ECMBox\ECM_Box.cs" />
     <Compile Include="Gauges\M2000C\TestPanel\Test_Panel.cs" />
@@ -1095,7 +1113,7 @@
     <Compile Include="Gauges\KA-50\VVI\VVI.cs" />
     <Compile Include="Gauges\M2000C\M2000CDevice\M2000CDevice.cs" />
     <Compile Include="Gauges\M2000C\MCLPanel\MCL_Panel.cs" />
-    <Compile Include="Gauges\M2000C\TACANChannel\Tacan_Panel.cs" />
+    <Compile Include="Gauges\M2000C\TACANPanel\Tacan_Panel.cs" />
     <Compile Include="Gauges\Mi-8\ADI\ADI.cs" />
     <Compile Include="Gauges\MiG-21\BatteryCapacity\BatteryCapacity.cs" />
     <Compile Include="Gauges\MiG-21\RadioChannelDisplay\RadioChannelDisplay.cs" />
@@ -1391,7 +1409,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Resource>
-    <Resource Include="Gauges\M2000C\TACANChannel\tacan_channel_x_mode.xaml">
+    <Resource Include="Gauges\M2000C\TACANPanel\tacan_channel_x_mode.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Resource>
@@ -3081,7 +3099,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\M2000C\TACANChannel\tacan_channel_y_mode.xaml">
+    <Resource Include="Gauges\M2000C\TACANPanel\tacan_channel_y_mode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

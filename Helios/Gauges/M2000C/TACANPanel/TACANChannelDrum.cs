@@ -13,31 +13,31 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumTacanChannel
+namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACAN
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.M2000C.Mk2CDrumTacanChannel", "Mk2C Drum Tacan Channel", "M2000C Gauges", typeof(GaugeRenderer))]
-    public class Mk2CDrumTacanChannel : BaseGauge
+    [HeliosControl("Helios.M2000C.TacanChannelDrum", "Mk2C Drum Tacan Channel", "M2000C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    public class TACANChannelDrum : BaseGauge
     {
         private HeliosValue _xyMode;
         private GaugeImage _xModeImage;
         private GaugeImage _yModeImage;
 
-        public Mk2CDrumTacanChannel()
+        public TACANChannelDrum()
             : this("Mk2C Drum Tacan Channel", new Point(0,0), new Size(10d, 15d))
         {
         }
 
-        public Mk2CDrumTacanChannel(string name, Point posn, Size size)
+        public TACANChannelDrum(string name, Point posn, Size size)
             : base(name, size)
         {
-            _xModeImage = new GaugeImage("{Helios}/Gauges/M2000C/TACANChannel/tacan_channel_x_mode.xaml", new Rect(posn.X, posn.Y, size.Width, size.Height));
+            _xModeImage = new GaugeImage("{Helios}/Gauges/M2000C/TACANPanel/tacan_channel_x_mode.xaml", new Rect(posn.X, posn.Y, size.Width, size.Height));
             Components.Add(_xModeImage);
 
-            _yModeImage = new GaugeImage("{Helios}/Gauges/M2000C/TACANChannel/tacan_channel_y_mode.xaml", new Rect(posn.X, posn.Y, size.Width, size.Height));
+            _yModeImage = new GaugeImage("{Helios}/Gauges/M2000C/TACANPanel/tacan_channel_y_mode.xaml", new Rect(posn.X, posn.Y, size.Width, size.Height));
             _yModeImage.IsHidden = true;
             Components.Add(_yModeImage);
 
