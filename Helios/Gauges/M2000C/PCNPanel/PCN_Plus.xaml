@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="PCNPlus" Width="16" Height="16">
+    <Canvas.RenderTransform>
+        <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas Name="layer1">
+        <Canvas Name="textPlus">
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="pathPlus" Fill="#cc50c339" Data="m 24.972763 28.340133 h -4.506176 v 4.506176 h -1.372524 v -4.506176 h -4.506176 v -1.322914 h 4.506176 v -4.506176 h 1.372524 v 4.506176 h 4.506176 z" Height="14" Stretch="Fill" Width="14"/>
+        </Canvas>
+    </Canvas>
+</Canvas>
+

@@ -30,11 +30,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
 
-        private PCNPanelGauge _pcnGauge;
-
         public M2000C_PCNPanel()
             : base("PCN Panel", new Size(690, 530))
         {
+            Children.Add(new PCNPanelGauge(this, "PCN Gauge", NativeSize));
             int row0 = 231, row2 = 233, row3 = 316, row4 = 323, row5 = 396, row6 = 394, row7 = 468, row8 = 481, row9 = 127, row10 = 100, row11 = 140;
             int column0 = 123, column2 = 210, column3 = 324, column4 = 327, column5 = 429, column6 = 507, column7 = 587, column8 = 398, column9 = 452, column10 = 503, column11 = 557, column12 = 610;
             AddIndicatorPushButton("PREP", "prep", new Point(column0, row0), new Size(50, 50));
@@ -70,14 +69,14 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
 
             AddSwitch("INS Parameter Selector", "{M2000C}/Images/PCNPanel/ins-parameter-selector.png", new Point(149, 349), new Size(118, 118), true);
 
-            AddTextDisplay("PCN Latitude Display", new Point(76d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Latitude Display", 64, "1234567", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("PCN Longitude Display", new Point(386d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Longitude Display", 64, "123456", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("PCN Left Points Position", new Point(62d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Left Points Position", 64,"   .  .", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("PCN Right Points Position", new Point(372d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Right Points Position", 64, "  .  .", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("PCN Lower Left Display", new Point(72d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Left Display", 64, "01", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("PCN Lower Right Display", new Point(278d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Right Display", 64, "01", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Latitude Display", new Point(96d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Latitude Display", 64, "1234567", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Longitude Display", new Point(406d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Longitude Display", 64, "123456", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Left Points Position", new Point(82d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Left Points Position", 64,"   .  .", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Right Points Position", new Point(392d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Right Points Position", 64, "  .  .", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Lower Left Display", new Point(82d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Left Display", 64, "01", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Lower Right Display", new Point(288d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Right Display", 64, "01", TextHorizontalAlignment.Left, "");
 
-            Children.Add(new PCNPanelGauge("PCN Gauge", NativeSize));
+
         }
 
         #region Properties
