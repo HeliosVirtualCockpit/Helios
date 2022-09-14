@@ -21,6 +21,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
+    using System.Xml;
 
     [HeliosControl("HELIOS.M2000C.PCA_PANEL", "PCA Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer))]
     class M2000C_PCAPanel : M2000CDevice
@@ -29,6 +31,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private string _interfaceDeviceName = "PCA Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _font = "Helios Virtual Cockpit F/A-18C_Hornet-Up_Front_Controller";
+        private bool _useTextualDisplays = false;
+
 
         public M2000C_PCAPanel()
             : base("PCA Panel", new Size(690, 300))
@@ -81,6 +85,25 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         public override string DefaultBackgroundImage
         {
             get { return "{M2000C}/Images/PCAPanel/pca-panel.png"; }
+        }
+        public bool UseTextualDisplays
+        {
+            get => _useTextualDisplays;
+            set
+            {
+                if (value != _useTextualDisplays)
+                {
+                    _useTextualDisplays = value;
+                    foreach (HeliosVisual child in this.Children)
+                    {
+                        if (child is TextDisplay textDisplay)
+                        {
+                            textDisplay.IsHidden = !_useTextualDisplays;
+                        }
+                    }
+                    Refresh();
+                }
+            }
         }
 
         #endregion
@@ -178,8 +201,23 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 useBackground: false,
                 interfaceDeviceName: interfaceDeviceName,
                 interfaceElementName: interfaceElementName,
-                textDisplayDictionary: devDictionary
+                textDisplayDictionary: devDictionary              
                 );
+            display.IsHidden = !_useTextualDisplays; ;
+        }
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            if (reader.Name.Equals("UseTextualDisplays"))
+            {
+                UseTextualDisplays = bool.Parse(reader.ReadElementString("UseTextualDisplays"));
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("UseTextualDisplays", _useTextualDisplays.ToString(CultureInfo.InvariantCulture));
         }
 
         public override bool HitTest(Point location)

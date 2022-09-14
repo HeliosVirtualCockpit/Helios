@@ -132,6 +132,9 @@
       <DependentUpon>RockerSwitchAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RockerSwitchRenderer.cs" />
+    <Compile Include="Controls\TextualDisplayEnablerAppearancePropertyEditor.xaml.cs">
+      <DependentUpon>TextualDisplayEnablerAppearancePropertyEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TimerPanelBehaviorEditor.xaml.cs">
       <DependentUpon>TimerPanelBehaviorEditor.xaml</DependentUpon>
     </Compile>
@@ -384,6 +387,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\RockerSwitchAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TextualDisplayEnablerAppearancePropertyEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

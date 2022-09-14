@@ -21,6 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Xml;
 
     [HeliosControl("HELIOS.M2000C.PPA_PANEL", "PPA Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer))]
     class M2000C_PPAPanel : M2000CDevice
@@ -29,6 +30,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private string _interfaceDeviceName = "PPA Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
+        private bool _useTextualDisplays = false;
 
         public M2000C_PPAPanel()
             : base("PPA Panel", new Size(350, 203))
@@ -122,6 +124,26 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             get { return "{M2000C}/Images/PPAPanel/ppa-panel.png"; }
         }
 
+        public bool UseTextualDisplays
+        {
+            get => _useTextualDisplays;
+            set
+            {
+                if (value != _useTextualDisplays)
+                {
+                    _useTextualDisplays = value;
+                    foreach (HeliosVisual child in this.Children)
+                    {
+                        if (child is TextDisplay textDisplay)
+                        {
+                            textDisplay.IsHidden = !_useTextualDisplays;
+                        }
+                    }
+                    Refresh();
+                }
+            }
+        }
+
         #endregion
 
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
@@ -205,6 +227,22 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 interfaceElementName: interfaceElementName,
                 textDisplayDictionary: devDictionary
                 );
+            display.IsHidden = !_useTextualDisplays;
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            if (reader.Name.Equals("UseTextualDisplays"))
+            {
+                UseTextualDisplays = bool.Parse(reader.ReadElementString("UseTextualDisplays"));
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("UseTextualDisplays", _useTextualDisplays.ToString(CultureInfo.InvariantCulture));
         }
         public override bool HitTest(Point location)
         {

@@ -34,6 +34,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
         internal PCNPanelGauge(M2000C_PCNPanel panel, string name, Size size)
             : base(name, size)
         {
+            IsHidden = true;
             _latitudeNorthIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "North Indicator", "North Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
             _latitudeNorthIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_latitudeNorthIndicator);                 // We autobind against this action
@@ -88,29 +89,29 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
             Components.Add(new GaugeImage("{M2000C}/Images/PCNPanel/PCNScreenBackground.png", new Rect(53, 86, 585, 74)));
 
             _latitudeNorthImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_North.xaml", new Rect(58, 23, 16, 16));
-           _latitudeNorthImage.IsHidden = false;
+           _latitudeNorthImage.IsHidden = true;
             Components.Add(_latitudeNorthImage);
            _latitudeSouthImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_South.xaml", new Rect(58, 52, 16, 16));
-           _latitudeSouthImage.IsHidden = false;
+           _latitudeSouthImage.IsHidden = true;
             Components.Add(_latitudeSouthImage);
            _longitudeEastImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_East.xaml", new Rect(343, 23, 16, 16));
-           _longitudeEastImage.IsHidden = false;
+           _longitudeEastImage.IsHidden = true;
             Components.Add(_longitudeEastImage);
            _longitudeWestImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_West.xaml", new Rect(343, 52, 16, 16));
-           _longitudeWestImage.IsHidden = false;
+           _longitudeWestImage.IsHidden = true;
             Components.Add(_longitudeWestImage);
 
             _leftPlusImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_Plus.xaml", new Rect(78, 23, 16, 16));
-            _leftPlusImage.IsHidden = false;
+            _leftPlusImage.IsHidden = true;
             Components.Add(_leftPlusImage);
             _leftMinusImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_Minus.xaml", new Rect(80, 60, 14, 12));
-            _leftMinusImage.IsHidden = false;
+            _leftMinusImage.IsHidden = true;
             Components.Add(_leftMinusImage);
             _rightPlusImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_Plus.xaml", new Rect(364, 23, 16, 16));
-            _rightPlusImage.IsHidden = false;
+            _rightPlusImage.IsHidden = true;
             Components.Add(_rightPlusImage);
             _rightMinusImage = new GaugeImage("{Helios}/Gauges/M2000C/PCNPanel/PCN_Minus.xaml", new Rect(366, 60, 14, 12));
-            _rightMinusImage.IsHidden = false;
+            _rightMinusImage.IsHidden = true;
             Components.Add(_rightMinusImage);
 
         }
