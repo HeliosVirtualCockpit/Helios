@@ -353,8 +353,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "264", "PCA Panel", "WSS5 P", "WSS5 P"));
             AddFunction(new FlagValue(this, "246", "PCA Panel", "KL1", "KL1"));
             AddFunction(new FlagValue(this, "247", "PCA Panel", "KL2", "KL2"));
-            AddFunction(new Text(this, "2084", "PCA Panel", "PCA Upper Display", "Display Upper Line"));
-            AddFunction(new Text(this, "2085", "PCA Panel", "PCA Lower Display", "Display Lower Line"));
+            AddFunction(new Text(this, "2060", "PCA Panel", "PCA Upper Display", "Display Upper Line"));
+            AddFunction(new Text(this, "2061", "PCA Panel", "PCA Lower Display", "Display Lower Line"));
 
             AddFunction(new PushButton(this, PCA_PPA, "3266", "266", "PPA Panel", "S530 Missile Enabler Button"));
             AddFunction(new PushButton(this, PCA_PPA, "3269", "269", "PPA Panel", "Missile Fire Mode Selector"));
@@ -393,8 +393,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "274", "PPA Panel", "MAGIC MAG", "MAGIC MAG"));
             AddFunction(new FlagValue(this, "280", "PPA Panel", "TOT Firing Mode", "TOT Firing Mode"));
             AddFunction(new FlagValue(this, "281", "PPA Panel", "PAR Firing Mode", "PAR Firing Mode"));
-            AddFunction(new Text(this, "2086", "PPA Panel", "PPA Display Quantity", "Display Line for the PPA Quantity"));
-            AddFunction(new Text(this, "2186", "PPA Panel", "PPA Display Interval", "Display Line for the PPA Interval"));
+            AddFunction(new Text(this, "2065", "PPA Panel", "PPA Display Quantity", "Display Line for the PPA Quantity"));
+            AddFunction(new Text(this, "2066", "PPA Panel", "PPA Display Interval", "Display Line for the PPA Interval"));
 
 
             #endregion
@@ -452,21 +452,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, PCN_NAV, "3594", "594", "PCN Panel", "EFF Button"));
             AddFunction(new PushButton(this, PCN_NAV, "3596", "596", "PCN Panel", "INS Button"));
 
-            AddFunction(new Text(this, "2089", "PCN Panel", "PCN Latitude Display", "Display Line for PCN Latitude"));
-            AddFunction(new Text(this, "2297", "PCN Panel", "PCN Left Points Position", "Position of Points for PCN Left"));
-            AddFunction(new Text(this, "2189", "PCN Panel", "PCN Longitude Display", "Display Line for PCN Longitude"));
-            AddFunction(new Text(this, "2298", "PCN Panel", "PCN Right Points Position", "Position of Points for PCN Right"));
+            AddFunction(new Text(this, "2068", "PCN Panel", "PCN Latitude Display", "Display Line for PCN Latitude"));
+            AddFunction(new Text(this, "2069", "PCN Panel", "PCN Left Points Position", "Position of Points for PCN Left"));
+            AddFunction(new Text(this, "2070", "PCN Panel", "PCN Longitude Display", "Display Line for PCN Longitude"));
+            AddFunction(new Text(this, "2071", "PCN Panel", "PCN Right Points Position", "Position of Points for PCN Right"));
 
-            AddFunction(new NetworkValue(this, "2289", "PCN Panel", "PCN North", "North Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new NetworkValue(this, "2290", "PCN Panel", "PCN South", "South Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new NetworkValue(this, "2291", "PCN Panel", "PCN East", "East Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new NetworkValue(this, "2292", "PCN Panel", "PCN West", "West Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new NetworkValue(this, "2293", "PCN Panel", "PCN Left Plus", "Plus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new NetworkValue(this, "2294", "PCN Panel", "PCN Left Minus", "Minus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new NetworkValue(this, "2295", "PCN Panel", "PCN Right Plus", "Plus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new NetworkValue(this, "2296", "PCN Panel", "PCN Right Minus", "Minus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
-            AddFunction(new Text(this, "2090", "PCN Panel", "PCN Lower Left Display", "Display Lower Line Left Side"));
-            AddFunction(new Text(this, "2190", "PCN Panel", "PCN Lower Right Display", "Display Lower Line Right Side"));
+            AddFunction(new NetworkValue(this, "2072", "PCN Panel", "PCN North", "North Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2073", "PCN Panel", "PCN South", "South Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2074", "PCN Panel", "PCN East", "East Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2075", "PCN Panel", "PCN West", "West Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2076", "PCN Panel", "PCN Left Plus", "Plus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2077", "PCN Panel", "PCN Left Minus", "Minus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2078", "PCN Panel", "PCN Right Plus", "Plus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2079", "PCN Panel", "PCN Right Minus", "Minus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new Text(this, "2080", "PCN Panel", "PCN Lower Left Display", "Display Lower Line Left Side"));
+            AddFunction(new Text(this, "2081", "PCN Panel", "PCN Lower Right Display", "Display Lower Line Right Side"));
 
             #endregion
             #region TACAN Panel
@@ -619,9 +619,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #region U/VHF Panel
             AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "U/VHF", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
             AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "U/VHF", "Preset frequency change"));
-            AddFunction(new Text(this, "2088", UVHF, "VHF Comm Information", "Display Line for the VHF Radio"));
-            AddFunction(new Text(this, "2089", UVHF, "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
-            AddFunction(new Text(this, "2189", UVHF, "UHF Lower Comm Information", "Lower Display Line for the UHF Radio"));
+            AddFunction(new Text(this, "2062", UVHF, "VHF Comm Information", "Display Line for the VHF Radio"));
+            AddFunction(new Text(this, "2063", UVHF, "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
+            AddFunction(new Text(this, "2064", UVHF, "UHF Lower Comm Information", "Lower Display Line for the UHF Radio"));
 
 
             //            AddFunction(new RotaryEncoder(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.1d, "U/VHF", "Preset frequency change"));

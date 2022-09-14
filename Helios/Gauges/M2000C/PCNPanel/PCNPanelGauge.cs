@@ -34,54 +34,54 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
         internal PCNPanelGauge(M2000C_PCNPanel panel, string name, Size size)
             : base(name, size)
         {
-            _latitudeNorthIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "North Indicator", "North Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
+            _latitudeNorthIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "North Indicator", "North Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
             _latitudeNorthIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_latitudeNorthIndicator);                 // We autobind against this action
             panel.Actions.Add(_latitudeNorthIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN North.changed", "PCN Panel.set.North Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN North.changed", "PCN Display Indicators.set.North Indicator");
 
-            _latitudeSouthIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "South Indicator", "South Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
+            _latitudeSouthIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "South Indicator", "South Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
             _latitudeSouthIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_latitudeSouthIndicator);                 // We autobind against this action 
             panel.Actions.Add(_latitudeSouthIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN South.changed", "PCN Panel.set.South Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN South.changed", "PCN Display Indicators.set.South Indicator");
 
-            _longitudeEastIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "East Indicator", "East Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
+            _longitudeEastIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "East Indicator", "East Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
             _longitudeEastIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_longitudeEastIndicator);                 // We autobind against this action
             panel.Actions.Add(_longitudeEastIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN East.changed", "PCN Panel.set.East Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN East.changed", "PCN Display Indicators.set.East Indicator");
 
-            _longitudeWestIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "West Indicator", "West Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
+            _longitudeWestIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "West Indicator", "West Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
             _longitudeWestIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_longitudeWestIndicator);                 // We autobind against this action       
             panel.Actions.Add(_longitudeWestIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN West.changed", "PCN Panel.set.West Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN West.changed", "PCN Display Indicators.set.West Indicator");
 
 
-            _leftPlusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "Left Plus Indicator", "Plus Indicator on the PCN Left Upper display", "True if displayed.", BindingValueUnits.Boolean);
+            _leftPlusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "Left Plus Indicator", "Plus Indicator on the PCN Left Upper display", "True if displayed.", BindingValueUnits.Boolean);
             _leftPlusIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_leftPlusIndicator);                 // We autobind against this action 
             panel.Actions.Add(_leftPlusIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Left Plus.changed", "PCN Panel.set.Left Plus Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Left Plus.changed", "PCN Display Indicators.set.Left Plus Indicator");
 
-            _leftMinusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "Left Minus Indicator", "Minus Indicator on the PCN Left Upper display", "True if displayed.", BindingValueUnits.Boolean);
+            _leftMinusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "Left Minus Indicator", "Minus Indicator on the PCN Left Upper display", "True if displayed.", BindingValueUnits.Boolean);
             _leftMinusIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_leftMinusIndicator);                 // We autobind against this action 
             panel.Actions.Add(_leftMinusIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Left Minus.changed", "PCN Panel.set.Left Minus Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Left Minus.changed", "PCN Display Indicators.set.Left Minus Indicator");
 
-            _rightPlusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "Right Plus Indicator", "Plus Indicator on the PCN Right Upper display", "True if displayed.", BindingValueUnits.Boolean);
+            _rightPlusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "Right Plus Indicator", "Plus Indicator on the PCN Right Upper display", "True if displayed.", BindingValueUnits.Boolean);
             _rightPlusIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_rightPlusIndicator);                 // We autobind against this action 
             panel.Actions.Add(_rightPlusIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Right Plus.changed", "PCN Panel.set.Right Plus Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Right Plus.changed", "PCN Display Indicators.set.Right Plus Indicator");
 
-            _rightMinusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "Right Minus Indicator", "Minus Indicator on the PCN Right Upper display", "True if displayed.", BindingValueUnits.Boolean);
+            _rightMinusIndicator = new HeliosValue(this, new BindingValue(false), "PCN Display Indicators", "Right Minus Indicator", "Minus Indicator on the PCN Right Upper display", "True if displayed.", BindingValueUnits.Boolean);
             _rightMinusIndicator.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_rightMinusIndicator);                 // We autobind against this action 
             panel.Actions.Add(_rightMinusIndicator);           // This input binding is to allow users access to the action
-            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Right Minus.changed", "PCN Panel.set.Right Minus Indicator");
+            AddDefaultInputBinding(panel, "PCN Gauge", "PCN Panel.PCN Right Minus.changed", "PCN Display Indicators.set.Right Minus Indicator");
 
 
             Components.Add(new GaugeImage("{M2000C}/Images/PCNPanel/PCNScreenBackground.png", new Rect(53, 4, 585, 74)));
