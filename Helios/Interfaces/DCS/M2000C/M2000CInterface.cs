@@ -721,6 +721,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
         public M2000CInterface()
             : base("DCS M2000C", "M-2000C", "pack://application:,,,/Helios;component/Interfaces/DCS/M2000C/ExportFunctions.lua")
         {
+
+            // see if we can restore from JSON
+#if (!DEBUG)
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
+#endif
+
+
             #region Caution Panel
             AddFunction(new FlagValue(this, "525", "Caution Panel", "BATT", "WP BATT"));
             AddFunction(new FlagValue(this, "526", "Caution Panel", "TR", "TR"));
