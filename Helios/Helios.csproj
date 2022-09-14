@@ -180,6 +180,7 @@
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
+    <Compile Include="Gauges\M2000C\PCNPanel\PCNPanelGauge.cs" />
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGauge.cs" />
     <Compile Include="Gauges\M2000C\Common\Mk2CDrumGauge.cs" />
     <Compile Include="Gauges\M2000C\TACANPanel\TACANChannelDrum.cs" />
@@ -511,6 +512,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\M2000C\PCNPanel\PCN_r.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\PCNPanel\PCN_All.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

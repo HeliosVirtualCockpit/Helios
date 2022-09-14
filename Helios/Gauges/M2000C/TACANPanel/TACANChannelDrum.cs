@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACAN
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.M2000C.TacanChannelDrum", "Mk2C Drum Tacan Channel", "M2000C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.M2000C.TacanChannelDrum", "Mk2C Drum Tacan Channel", "M-2000C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class TACANChannelDrum : BaseGauge
     {
         private HeliosValue _xyMode;

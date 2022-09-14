@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("HELIOS.M2000C.MCL_PANEL", "Master Caution Lights Panel", "M2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.MCL_PANEL", "Master Caution Lights Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer))]
     class M2000C_MCLPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 66, 66);

@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.M2000C.Mk2CDrumGauge", "Mk2C Drum Gauge", "M2000C Gauges", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.M2000C.Mk2CDrumGauge", "Mk2C Drum Gauge", "M-2000C Gauges", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class Mk2CDrumGauge : BaseGauge
     {
         private HeliosValue _drumValue;

@@ -1,6 +1,6 @@
 ﻿<ControlTemplate>
   <Name>Cockpit Front 16x10</Name>
-  <Category>M2000C</Category>
+  <Category>M-2000C</Category>
   <TypeIdentifier>Helios.Panel</TypeIdentifier>
   <Template>
     <TemplateValues>

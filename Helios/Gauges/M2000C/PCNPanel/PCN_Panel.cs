@@ -13,7 +13,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.M2000C
+namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -22,24 +22,15 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("HELIOS.M2000C.PCN_PANEL", "PCN Panel", "M2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.PCN_PANEL", "PCN Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
     class M2000C_PCNPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 690, 530);
         private string _interfaceDeviceName = "PCN Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
-        private HeliosValue _latitudeNorthIndicator;
-        //private GaugeImage _latitudeNorthImage;
-        private HeliosValue _latitudeSouthIndicator;
-        //private GaugeImage _latitudeSouthImage;
-        private HeliosValue _longitudeEastIndicator;
-        //private GaugeImage _longitudeEastImage;
-        private HeliosValue _longitudeWestIndicator;
-        //private GaugeImage _longitudeWestImage;
 
         private PCNPanelGauge _pcnGauge;
-
 
         public M2000C_PCNPanel()
             : base("PCN Panel", new Size(690, 530))
@@ -86,23 +77,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddTextDisplay("PCN Lower Left Display", new Point(72d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Left Display", 64, "01", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PCN Lower Right Display", new Point(278d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Right Display", 64, "01", TextHorizontalAlignment.Left, "");
 
-            _latitudeNorthIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "North Indicator", "North Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
-            _latitudeNorthIndicator.Execute += new HeliosActionHandler(Flag_Execute);
-            Actions.Add(_latitudeNorthIndicator);
-            _latitudeSouthIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "South Indicator", "South Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
-            _latitudeSouthIndicator.Execute += new HeliosActionHandler(Flag_Execute);
-            Actions.Add(_latitudeSouthIndicator);
-            _longitudeEastIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "East Indicator", "East Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
-            _longitudeEastIndicator.Execute += new HeliosActionHandler(Flag_Execute);
-            Actions.Add(_longitudeEastIndicator);
-            _longitudeWestIndicator = new HeliosValue(this, new BindingValue(false), "PCN Panel", "West Indicator", "West Indicator on the PCN display", "True if displayed.", BindingValueUnits.Boolean);
-            _longitudeWestIndicator.Execute += new HeliosActionHandler(Flag_Execute);
-            Actions.Add(_longitudeWestIndicator);
-
-            _pcnGauge = new PCNPanelGauge("PCN Gauge", new Size(690, 530));
-
-            Children.Add(_pcnGauge);
-
+            Children.Add(new PCNPanelGauge("PCN Gauge", NativeSize));
         }
 
         #region Properties
@@ -219,35 +194,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 );
         }
 
-        void Flag_Execute(object action, HeliosActionEventArgs e)
-        {
-            HeliosValue hAction = (HeliosValue)action;
-            Boolean hActionVal = !(e.Value.DoubleValue > 0d ? true : false);
-            switch (hAction.Name)
-            {
-                case "North Indicator":
-                    _latitudeNorthIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
-                    _pcnGauge.latitudeNorthImage.IsHidden = hActionVal;
-                    break;
-                case "South Indicator":
-                    _latitudeSouthIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
-                    _pcnGauge.latitudeSouthImage.IsHidden = hActionVal;
-                    break;
-                case "East Indicator":
-                    _longitudeEastIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
-                    _pcnGauge.longitudeEastImage.IsHidden = hActionVal;
-                    break;
-                case "West Indicator":
-                    _longitudeWestIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
-                    _pcnGauge.longitudeWestImage.IsHidden = hActionVal;
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))
@@ -273,31 +219,4 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             // No-Op
         }
     }
-
-    public class PCNPanelGauge : BaseGauge
-    {
-        public GaugeImage latitudeNorthImage;
-        public GaugeImage latitudeSouthImage;
-        public GaugeImage longitudeEastImage;
-        public GaugeImage longitudeWestImage;
-
-        public PCNPanelGauge(string name, Size size)
-            : base(name, size)
-        {
-            latitudeNorthImage = new GaugeImage("{M2000C}/Images/PCNPanel/eff-on.png", new Rect(58, 13, 50, 50));
-            latitudeNorthImage.IsHidden = false;
-            Components.Add(latitudeNorthImage);
-            latitudeSouthImage = new GaugeImage("{M2000C}/Images/PCNPanel/eff-on.png", new Rect(58, 42, 50, 50));
-            latitudeSouthImage.IsHidden = false;
-            Components.Add(latitudeSouthImage);
-            longitudeEastImage = new GaugeImage("{M2000C}/Images/PCNPanel/eff-on.png", new Rect(353, 13, 50, 50));
-            longitudeEastImage.IsHidden = false;
-            Components.Add(longitudeEastImage);
-            longitudeWestImage = new GaugeImage("{M2000C}/Images/PCNPanel/eff-on.png", new Rect(353, 42, 50, 50));
-            longitudeWestImage.IsHidden = false;
-            Components.Add(longitudeWestImage);
-        }
-
-    }
-
 }
