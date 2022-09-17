@@ -719,7 +719,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\PPA_Panel%29.htpl">
+    <Content Include="Templates\Base\M2000C\Panels\PPA_Panel.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
