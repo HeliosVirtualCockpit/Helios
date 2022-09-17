@@ -1,0 +1,10 @@
+﻿<ControlTemplate>
+  <Name>PCN Panel</Name>
+  <Category>M-2000C Gauges</Category>
+  <TypeIdentifier>HELIOS.M2000C.PPA_PANEL</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <UseTextualDisplays>False</UseTextualDisplays>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

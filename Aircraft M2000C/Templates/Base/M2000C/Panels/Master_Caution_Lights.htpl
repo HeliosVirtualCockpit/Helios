@@ -1,0 +1,9 @@
+﻿<ControlTemplate>
+  <Name>Master Caution Lights</Name>
+  <Category>M-2000C Gauges</Category>
+  <TypeIdentifier>HELIOS.M2000C.MCL_PANEL</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

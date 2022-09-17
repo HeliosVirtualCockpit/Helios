@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using GadrocsWorkshop.Helios.Controls;
     using System.Windows;
 
-    [HeliosControl("HELIOS.M2000C.ECMBox", "ECM Box", "M-2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.ECMBox", "ECM Box", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_ECMBox : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 296, 359);

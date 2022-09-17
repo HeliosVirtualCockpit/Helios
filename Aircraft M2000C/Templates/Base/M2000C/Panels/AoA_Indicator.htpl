@@ -1,0 +1,9 @@
+﻿<ControlTemplate>
+  <Name>Angle of Attack Indicator</Name>
+  <Category>M-2000C Gauges</Category>
+  <TypeIdentifier>HELIOS.M2000C.AOA_PANEL</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

@@ -1225,43 +1225,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "675", "Indicators", "Indicators 675", "COM Panel, lamp red"));
             AddFunction(new FlagValue(this, "676", "Indicators", "Indicators 676", "COM Panel, lamp red, over COM"));
             #endregion
-            #region Displays
-            //
-            // The following are not FlagValues.  Arguments in the range 2000+ are usually manufactured in the exports.lua from other values.
-            // These particular values were chosen for Ikarus' needs, but there is no published Exports.lua from S-D-A to explain how these are made
-            //
-            //AddFunction(new FlagValue(this, "2001", "Indicators", "Indicators 2001", "ECM_CHF"));
-            //AddFunction(new FlagValue(this, "2002", "Indicators", "Indicators 2002", "ECM_FLR"));
-            //AddFunction(new FlagValue(this, "2003", "Indicators", "Indicators 2003", "FUEL"));
-            //AddFunction(new FlagValue(this, "2010", "Indicators", "Indicators 2010", "PCA_UR1"));
-            //AddFunction(new FlagValue(this, "2011", "Indicators", "Indicators 2011", "PCA_UR2"));
-            //AddFunction(new FlagValue(this, "2012", "Indicators", "Indicators 2012", "PCA_UR3"));
-            //AddFunction(new FlagValue(this, "2013", "Indicators", "Indicators 2013", "PCA_UR4"));
-            //AddFunction(new FlagValue(this, "2014", "Indicators", "Indicators 2014", "PCA_UR5"));
-            //AddFunction(new FlagValue(this, "2015", "Indicators", "Indicators 2015", "PCA_BR1"));
-            //AddFunction(new FlagValue(this, "2016", "Indicators", "Indicators 2016", "PCA_BR2"));
-            //AddFunction(new FlagValue(this, "2017", "Indicators", "Indicators 2017", "PCA_BR3"));
-            //AddFunction(new FlagValue(this, "2018", "Indicators", "Indicators 2018", "PCA_BR4"));
-            //AddFunction(new FlagValue(this, "2019", "Indicators", "Indicators 2019", "PCA_BR5"));
-            //AddFunction(new FlagValue(this, "2020", "Indicators", "Indicators 2020", "COM1"));
-            //AddFunction(new FlagValue(this, "2021", "Indicators", "Indicators 2021", "COM2"));
-            //AddFunction(new FlagValue(this, "2022", "Indicators", "Indicators 2022", "PPA1"));
-            //AddFunction(new FlagValue(this, "2023", "Indicators", "Indicators 2023", "PPA2"));
-            //AddFunction(new FlagValue(this, "2024", "Indicators", "Indicators 2024", "PCN_sub_L_T"));
-            //AddFunction(new FlagValue(this, "2025", "Indicators", "Indicators 2025", "PCN_sub_R_T"));
-            //AddFunction(new FlagValue(this, "2026", "Indicators", "Indicators 2026", "PCN_sub_L_B"));
-            //AddFunction(new FlagValue(this, "2027", "Indicators", "Indicators 2027", "PCN_sub_R_B"));
-            //AddFunction(new FlagValue(this, "2028", "Indicators", "Indicators 2028", "PCN_main_L"));
-            //AddFunction(new FlagValue(this, "2029", "Indicators", "Indicators 2029", "PCN_main_R"));
-            //AddFunction(new FlagValue(this, "2030", "Indicators", "Indicators 2030", "PCN_BR1"));
-            //AddFunction(new FlagValue(this, "2031", "Indicators", "Indicators 2031", "PCN_BR2"));
-            //AddFunction(new FlagValue(this, "2032", "Indicators", "Indicators 2032", "Mode 1. Drum"));
-            //AddFunction(new FlagValue(this, "2033", "Indicators", "Indicators 2033", "Mode 2. Drum"));
-            //AddFunction(new FlagValue(this, "2034", "Indicators", "Indicators 2034", "Mode 3. Drum"));
-            //AddFunction(new FlagValue(this, "2035", "Indicators", "Indicators 2035", "Mode 4. Drum"));
-            //AddFunction(new FlagValue(this, "2036", "Indicators", "Indicators 2036", "Mode VOR ILS"));
-            //AddFunction(new FlagValue(this, "2037", "Indicators", "Indicators 2037", "Mode TACAN"));
-            #endregion
             #region  Infligt Engine Panel
             AddFunction(new PushButton(this, ENGPANEL, "3468", "468", "Engine Start Panel", "Engine In-Flight Start Switch"));    // elements["PTN_468"] = default_2_position_tumb(_("Engine In-Flight Start Switch"), devices.ENGPANEL, device_commands.Button_468, 468, 0, 1)
             AddFunction(new PushButton(this, ENGPANEL, "3467", "467", "Engine Start Panel", "Engine Shutdown Button"));    // elements["PTN_467"] = default_button(_("Engine Shutdown Button"), devices.ENGPANEL, device_commands.Button_467, 467)

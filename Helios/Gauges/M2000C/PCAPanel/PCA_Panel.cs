@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media.Media3D;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.PCA_PANEL", "PCA Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.PCA_PANEL", "PCA Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class M2000C_PCAPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 690, 300);

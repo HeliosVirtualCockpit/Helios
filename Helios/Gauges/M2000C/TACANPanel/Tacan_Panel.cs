@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACAN
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("HELIOS.M2000C.TACAN_PANEL", "TACAN Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("HELIOS.M2000C.TACAN_PANEL", "TACAN Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_TacanPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 256, 280);

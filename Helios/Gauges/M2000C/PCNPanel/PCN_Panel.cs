@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
     using System.Xml;
     using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
-    [HeliosControl("HELIOS.M2000C.PCN_PANEL", "PCN Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("HELIOS.M2000C.PCN_PANEL", "PCN Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_PCNPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 690, 530);

@@ -32,7 +32,7 @@ namespace ToolsCommon
             {"F-16C", "F-16"},
             {"FA-18C", "F/A-18C"},
             {"HEATBLUR_F-14", "F-14"},
-            {"M-2000C", "M2000C"},
+            {"M2000C", "M-2000C"},
             {"Mi-8MTV2", "Mi-8"},
             {"MIG-21bis", "MiG-21"},
             {"POLYCHOPSIM_SA342", "SA342"} // NOTE: no dash in this name
