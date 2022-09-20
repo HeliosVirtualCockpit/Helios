@@ -1243,8 +1243,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "U/VHF", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
             AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "U/VHF", "Preset frequency change"));
             AddFunction(new Text(this, "2062", "U/VHF", "VHF Comm Information", "Display Line for the VHF Radio"));
-            AddFunction(new Text(this, "2063", "U/VHF", "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
-            AddFunction(new Text(this, "2064", "U/VHF", "UHF Lower Comm Information", "Lower Display Line for the UHF Radio"));
+            AddFunction(new Text(this, "2064", "U/VHF", "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
+            AddFunction(new Text(this, "2063", "U/VHF", "UHF Lower Comm Information", "Lower Display Line for the UHF Radio"));
 
 
             //            AddFunction(new RotaryEncoder(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.1d, "U/VHF", "Preset frequency change"));
@@ -1389,8 +1389,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion  
             #region  Fuel Panel 2
             AddFunction(new Switch(this, ENGPANEL, "193", new SwitchPosition[] { }, "Fuel Panel", "Refuel Transfer Switch", "%0.1f"));    // elements["PTN_193"] = multiposition_switch_limited(_("Refuel Transfer Switch"), devices.ENGPANEL, device_commands.Button_193, 193, 3, 0.5, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "360", new SwitchPosition[] { }, "Fuel Panel", "Bingo Fuel 1 000 kg Selector", "%0.1f"));    // elements["PTN_360"] = default_multiposition_knob(_("Bingo Fuel 1,000 kg Selector"), devices.INSTPANEL, device_commands.Button_360, 360,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "361", new SwitchPosition[] { }, "Fuel Panel", "Bingo Fuel 100 kg Selector", "%0.1f"));    // elements["PTN_361"] = default_multiposition_knob(_("Bingo Fuel 100 kg Selector"), devices.INSTPANEL, device_commands.Button_361, 361,  10, 0.1, false, 0)
+            AddFunction(new Switch(this, INSTPANEL, "360", new SwitchPosition[] {
+                new SwitchPosition("0.0", "0.0", "3360"),
+                new SwitchPosition("0.1", "0.1", "3360"),
+                new SwitchPosition("0.2", "0.2", "3360"),
+                new SwitchPosition("0.3", "0.3", "3360")
+            }, "Fuel Panel", "Bingo Fuel 1 000 kg Selector", "%0.1f"));    // elements["PTN_360"] = default_multiposition_knob(_("Bingo Fuel 1,000 kg Selector"), devices.INSTPANEL, device_commands.Button_360, 360,  10, 0.1, false, 0)
+            AddFunction(new Switch(this, INSTPANEL, "361", new SwitchPosition[] {
+                new SwitchPosition("0.0", "0.0", "3361"),
+                new SwitchPosition("0.1", "0.1", "3361"),
+                new SwitchPosition("0.2", "0.2", "3361"),
+                new SwitchPosition("0.3", "0.3", "3361"),
+                new SwitchPosition("0.4", "0.4", "3361"),
+                new SwitchPosition("0.5", "0.5", "3361"),
+                new SwitchPosition("0.6", "0.6", "3361"),
+                new SwitchPosition("0.7", "0.7", "3361"),
+                new SwitchPosition("0.8", "0.8", "3361"),
+                new SwitchPosition("0.9", "0.9", "3361") }, "Fuel Panel", "Bingo Fuel 100 kg Selector", "%0.1f"));    // elements["PTN_361"] = default_multiposition_knob(_("Bingo Fuel 100 kg Selector"), devices.INSTPANEL, device_commands.Button_361, 361,  10, 0.1, false, 0)
             AddFunction(new Text(this, "2067", "Fuel Panel", "Fuel Burn Rate Display", "Three digit display showing Kg/Min Fuel"));
 
             #endregion

@@ -215,13 +215,17 @@ namespace GadrocsWorkshop.Helios.M2000C
         }
 
         protected Mk2CDrumGauge AddDrumGauge(string name, string gaugeImage, Point posn, Size size, Size renderSize, string format,
-            string interfaceDeviceName, string interfaceElementName, string actionIdentifier, string valueDescription, bool fromCenter)
+            string interfaceDeviceName, string interfaceElementName, string actionIdentifier, string valueDescription, bool fromCenter) {
+            return AddDrumGauge(name, gaugeImage, posn, size, renderSize, format, interfaceDeviceName, interfaceElementName, actionIdentifier, valueDescription, fromCenter, 10d, 0d);
+        }
+        protected Mk2CDrumGauge AddDrumGauge(string name, string gaugeImage, Point posn, Size size, Size renderSize, string format,
+            string interfaceDeviceName, string interfaceElementName, string actionIdentifier, string valueDescription, bool fromCenter, double multiplier, double offset)
         {
             if (fromCenter)
                 posn = FromCenter(posn, size);
             string componentName = GetComponentName(name);
 
-            Mk2CDrumGauge newGauge = new Mk2CDrumGauge(componentName, gaugeImage, actionIdentifier, valueDescription, format, posn, size, renderSize);
+            Mk2CDrumGauge newGauge = new Mk2CDrumGauge(componentName, gaugeImage, actionIdentifier, valueDescription, format, posn, size, renderSize, multiplier, offset);
 
             Children.Add(newGauge);
             foreach (IBindingTrigger trigger in newGauge.Triggers)

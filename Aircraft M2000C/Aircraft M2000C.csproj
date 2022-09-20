@@ -673,6 +673,10 @@
     </Resource>
     <Resource Include="Images\VTBPanel\VTB-panel.png" />
     <Resource Include="Images\PCNPanel\PCNScreenBackground.png" />
+    <Resource Include="Images\Miscellaneous\UHF_Repeater.png" />
+    <Resource Include="Images\Miscellaneous\UHF_Repeater_Display_Background.png" />
+    <Resource Include="Images\Miscellaneous\Fuel_Burn_Bingo_Display_Background.png" />
+    <Resource Include="Images\Miscellaneous\Fuel_Burn_Bingo.png" />
     <Content Include="Templates\Base\M2000C\CautionPanelRedIndicator.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -848,6 +852,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Base\M2000C\Panels\UHF_Repeater_Display.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Base\M2000C\Panels\Fuel_Burn_Bingo_Panel.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

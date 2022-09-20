@@ -183,6 +183,8 @@
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\Fuel_Burn_Bingo.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\UHF_Repeater.cs" />
     <Compile Include="Gauges\M2000C\PCNPanel\PCNPanelGauge.cs" />
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGauge.cs" />
     <Compile Include="Gauges\M2000C\Common\Mk2CDrumGauge.cs" />

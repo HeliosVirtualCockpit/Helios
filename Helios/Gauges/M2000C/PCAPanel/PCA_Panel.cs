@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _font = "Helios Virtual Cockpit F/A-18C_Hornet-Up_Front_Controller";
         private bool _useTextualDisplays = false;
+        private ImageDecoration _upperDisplay, _lowerDisplay;
 
 
         public M2000C_PCAPanel()
@@ -75,9 +76,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddGuard("Selective Jettison Switch Guard", "guard-", new Point(5, 160), new Size(100, 50), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
                 new NonClickableZone[] { new NonClickableZone(new Rect(30, 0, 120, 63), ToggleSwitchPosition.Two, selectiveJettisonSwitch, ToggleSwitchPosition.One) });
 
+            _upperDisplay = AddImage("PCA Display Background Upper", new Point(110d, 34d), new Size(554d, 54d));
+            _lowerDisplay = AddImage("PCA Display Background Lower", new Point(110d, 167d), new Size(554d, 54d));
             AddTextDisplay("PCA Upper Display", new Point(110d, 35d), new Size(551d, 52d), _interfaceDeviceName, "PCA Upper Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PCA Lower Display", new Point(110d, 169d), new Size(551d, 52d), _interfaceDeviceName, "PCA Lower Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
-
         }
 
         #region Properties
@@ -101,6 +103,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                             textDisplay.IsHidden = !_useTextualDisplays;
                         }
                     }
+                    _upperDisplay.IsHidden = !_useTextualDisplays;
+                    _lowerDisplay.IsHidden = !_useTextualDisplays;
                     Refresh();
                 }
             }
@@ -203,7 +207,21 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 interfaceElementName: interfaceElementName,
                 textDisplayDictionary: devDictionary              
                 );
-            display.IsHidden = !_useTextualDisplays; ;
+            display.IsHidden = !_useTextualDisplays; 
+        }
+        private ImageDecoration AddImage(string name, Point posn, Size size)
+        {
+            ImageDecoration image = new ImageDecoration();
+            image.Name = name;
+            image.Image = "{M2000C}/Images/PCNPanel/PCNScreenBackground.png";
+            image.Alignment = ImageAlignment.Stretched;
+            image.Top = posn.Y;
+            image.Left = posn.X;
+            image.Width = size.Width;
+            image.Height = size.Height;
+            image.IsHidden = !_useTextualDisplays;
+            Children.Add(image);
+            return image;
         }
         public override void ReadXml(XmlReader reader)
         {

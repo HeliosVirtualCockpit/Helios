@@ -29,6 +29,8 @@ namespace GadrocsWorkshop.Helios.Controls
     /// panels which allow the viewport to show through, and replace them with text boxes
     /// which are populated from the UDP port (usually)</remarks>
 
+    [HeliosPropertyEditor("HELIOS.M2000C.FUEL_BURN_BINGO_PANEL", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.UHF_REPEATER_DISPLAY", "Appearance")]
     [HeliosPropertyEditor("HELIOS.M2000C.PPA_PANEL", "Appearance")]
     [HeliosPropertyEditor("HELIOS.M2000C.PCA_PANEL", "Appearance")]
     [HeliosPropertyEditor("HELIOS.M2000C.PCN_PANEL", "Appearance")]
