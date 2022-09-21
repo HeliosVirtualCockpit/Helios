@@ -677,6 +677,9 @@
     <Resource Include="Images\Miscellaneous\UHF_Repeater_Display_Background.png" />
     <Resource Include="Images\Miscellaneous\Fuel_Burn_Bingo_Display_Background.png" />
     <Resource Include="Images\Miscellaneous\Fuel_Burn_Bingo.png" />
+    <Resource Include="Images\PCAPanel\PCA_Lower_Display.png" />
+    <Resource Include="Images\PCAPanel\PCA_Panel_New.png" />
+    <Resource Include="Images\PCAPanel\PCA_Upper_Display.png" />
     <Content Include="Templates\Base\M2000C\CautionPanelRedIndicator.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

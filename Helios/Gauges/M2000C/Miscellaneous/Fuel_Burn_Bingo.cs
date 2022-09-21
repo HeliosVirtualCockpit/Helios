@@ -47,8 +47,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             _image.Height = Height;
             _image.IsHidden = !_useTextualDisplays;
             Children.Add(_image);
-            AddDrum("Bingo Fuel 1 000 kg Selector", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Selector", "(0-9)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19));
-            AddDrum("Bingo Fuel 100 kg Selector", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Selector", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
+            AddDrum("Bingo Fuel 1 000 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Selector", "(0-9)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19));
+            AddDrum("Bingo Fuel 100 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Selector", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
+            AddRotarySwitch("Bingo Fuel 1 000 kg Selector", new Point(0, 52), new Size(58, 120), 4);
+            AddRotarySwitch("Bingo Fuel 100 kg Selector", new Point(62, 52), new Size(58, 120), 10);
             AddTextDisplay("Fuel Burn Rate Display", new Point(36d, 14d), new Size(68d, 41d), _interfaceDeviceName, "Fuel Burn Rate Display", 32, "000", TextHorizontalAlignment.Center, "");
 
         }
@@ -116,7 +118,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 size: size,
                 renderSize: renderSize,
                 interfaceDeviceName: _interfaceDeviceName,
-                interfaceElementName: name,
+                interfaceElementName: actionIdentifier,
                 actionIdentifier: actionIdentifier,
                 valueDescription: valueDescription,
                 format: format,
@@ -146,6 +148,24 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 textDisplayDictionary: devDictionary
                 );
             display.IsHidden = !_useTextualDisplays;
+        }
+
+        private void AddRotarySwitch(string name, Point posn, Size size, int positions)
+        {
+            RotarySwitch rSwitch = AddRotarySwitch(name: name,
+                posn: posn,
+                size: size,
+                knobImage: "{M2000C}/Images/Miscellaneous/void.png",
+                defaultPosition: 0,
+                clickType: RotaryClickType.Swipe,
+                interfaceDeviceName: _interfaceDeviceName,
+                interfaceElementName: name,
+                fromCenter: false);
+            rSwitch.Positions.Clear();
+            for (int i = 0; i < positions; i++)
+            {
+                rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, i, i.ToString(), 36d * i));
+            }
         }
 
         public override bool HitTest(Point location)
