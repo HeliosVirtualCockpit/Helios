@@ -76,8 +76,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddGuard("Selective Jettison Switch Guard", "guard-", new Point(5, 160), new Size(100, 50), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
                 new NonClickableZone[] { new NonClickableZone(new Rect(30, 0, 120, 63), ToggleSwitchPosition.Two, selectiveJettisonSwitch, ToggleSwitchPosition.One) });
 
-            _upperDisplay = AddImage("PCA Display Background Upper", new Point(110d, 34d), new Size(554d, 52d));
-            _lowerDisplay = AddImage("PCA Display Background Lower", new Point(110d, 167d), new Size(554d, 52d));
+            _upperDisplay = AddImage("PCA Display Background Upper", new Point(110d, 35d), new Size(554d, 52d));
+            _lowerDisplay = AddImage("PCA Display Background Lower", new Point(110d, 168d), new Size(554d, 52d));
             AddTextDisplay("PCA Upper Display", new Point(110d, 35d), new Size(551d, 52d), _interfaceDeviceName, "PCA Upper Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PCA Lower Display", new Point(110d, 169d), new Size(551d, 52d), _interfaceDeviceName, "PCA Lower Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
         }

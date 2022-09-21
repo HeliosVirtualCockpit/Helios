@@ -31,6 +31,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
         private bool _useTextualDisplays = false;
+        private ImageDecoration _displayBackground;
+
 
         public M2000C_PPAPanel()
             : base("PPA Panel", new Size(350, 203))
@@ -112,6 +114,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicator("TOT Firing Mode", "tot", new Point(column3, row2), new Size(16, 9));
             AddIndicator("PAR Firing Mode", "par", new Point(column3, row3), new Size(16, 9));
 
+            _displayBackground = AddImage("PCA Display Background Upper", new Point(190d, 85d), new Size(61d, 107d));
+
             AddTextDisplay("PPA Display Quantity", new Point(196d, 89d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Quantity", 50, "00", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PPA Dispaly Interval", new Point(196d, 139d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Interval", 50, "00", TextHorizontalAlignment.Left, "");
 
@@ -139,6 +143,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                             textDisplay.IsHidden = !_useTextualDisplays;
                         }
                     }
+                    _displayBackground.IsHidden = !_useTextualDisplays;  
                     Refresh();
                 }
             }
@@ -228,6 +233,21 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 textDisplayDictionary: devDictionary
                 );
             display.IsHidden = !_useTextualDisplays;
+        }
+
+        private ImageDecoration AddImage(string name, Point posn, Size size)
+        {
+            ImageDecoration image = new ImageDecoration();
+            image.Name = name;
+            image.Image = "{M2000C}/Images/Miscellaneous/UHF_Repeater_Display_Background.png";
+            image.Alignment = ImageAlignment.Centered;
+            image.Top = posn.Y;
+            image.Left = posn.X;
+            image.Width = size.Width;
+            image.Height = size.Height;
+            image.IsHidden = !_useTextualDisplays;
+            Children.Add(image);
+            return image;
         }
 
         public override void ReadXml(XmlReader reader)
