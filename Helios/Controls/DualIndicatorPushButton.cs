@@ -163,7 +163,7 @@ namespace GadrocsWorkshop.Helios.Controls
         /// <summary>
         /// the selected automatic font size scaling mode
         /// </summary>
-        public TextScalingMode ScalingMode
+        public new TextScalingMode ScalingMode
         {
             get => _scalingMode;
             set
