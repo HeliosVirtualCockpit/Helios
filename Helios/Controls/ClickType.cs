@@ -48,4 +48,18 @@ namespace GadrocsWorkshop.Helios.Controls
         [Description("Swipe over the control in the direction it should move")]
         Swipe,
     }
+
+    /// <summary>
+    /// interaction styles for linear controls that require a direction to work
+    ///
+    /// WARNING: these value names must never be changed, as they are serialized to Profile XML
+    /// </summary>
+    public enum LinearClickTypeDirectional
+    {
+        [Description("Touch the location towards which the control should move")]
+        Touch,
+
+        [Description("Swipe over the control in the direction it should move")]
+        Swipe,
+    }
 }
