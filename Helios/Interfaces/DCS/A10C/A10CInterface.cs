@@ -726,7 +726,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             #region TACAN Control Panel
             AddFunction(new RotaryEncoder(this, TACAN_CTRL_PANEL, BUTTON_1, "256", 0.02, "TACAN", "Channel Selector (Tens)"));
             AddFunction(new RotaryEncoder(this, TACAN_CTRL_PANEL, BUTTON_2, "257", 0.1, "TACAN", "Channel Selector (Ones )"));
-			AddFunction(Switch.CreateToggleSwitch(this, TACAN_CTRL_PANEL, BUTTON_3, "258", "0", "X", "1", "Y", "TACAN", "Channel Selector Mode", "%0.2f"));
+			AddFunction(Switch.CreateToggleSwitch(this, TACAN_CTRL_PANEL, BUTTON_3, "258", "-1", "X", "1", "Y", "TACAN", "Channel Selector Mode", "%0.2f"));
             AddFunction(new PushButton(this, TACAN_CTRL_PANEL, BUTTON_4, "259", "TACAN", "Test"));
             AddFunction(new Axis(this, TACAN_CTRL_PANEL, BUTTON_5, "261", 0.1d, 0.0d, 1.0d, "TACAN", "Volumne"));
             AddFunction(new Switch(this, TACAN_CTRL_PANEL, "262", new SwitchPosition[] { new SwitchPosition("0.0", "Off", BUTTON_6), new SwitchPosition("0.1", "Receive", BUTTON_6), new SwitchPosition("0.2", "T/R", BUTTON_6), new SwitchPosition("0.3", "A/A Receive", BUTTON_6), new SwitchPosition("0.4", "A/A T/R", BUTTON_6) }, "TACAN", "Mode", "%0.1f"));

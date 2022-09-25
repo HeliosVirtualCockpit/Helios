@@ -100,6 +100,12 @@ namespace GadrocsWorkshop.Helios.Controls
             IsSnapTarget = false;
         }
 
+        internal ImageDecorationBase(string name, Size size)
+            : base(name, size)
+        {
+            IsSnapTarget = false;
+        }
+
         #region Properties
 
         public string Image

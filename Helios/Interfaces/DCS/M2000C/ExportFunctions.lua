@@ -6,24 +6,65 @@ function driver.processHighImportance(mainPanelDevice)
 end
 
 function driver.processLowImportance(mainPanelDevice)
- 
-    -- helios.send(2001, string.format("%.0f",mainPanelDevice:get_argument_value(253) * 1000+mainPanelDevice:get_argument_value(254) * 100+mainPanelDevice:get_argument_value(255) * 10))     -- Engine Duct
-    -- helios.send(2002, string.format("%.0f",mainPanelDevice:get_argument_value(256) * 10000+mainPanelDevice:get_argument_value(257) * 1000+mainPanelDevice:get_argument_value(258) * 100+mainPanelDevice:get_argument_value(259) * 10))     -- Engine RPM
-    -- helios.send(2003, string.format("%.0f",mainPanelDevice:get_argument_value(260) * 1000+mainPanelDevice:get_argument_value(261) * 100+mainPanelDevice:get_argument_value(262) * 10))    -- Engine FF
-    -- helios.send(2004, string.format("%.0f",mainPanelDevice:get_argument_value(263) * 1000+mainPanelDevice:get_argument_value(264) * 100+mainPanelDevice:get_argument_value(265) * 10)) -- Engine JPT
-    -- helios.send(2005, string.format("%.0f",mainPanelDevice:get_argument_value(267) * 100+mainPanelDevice:get_argument_value(268) * 10)) -- Engine Stab
-    -- helios.send(2006, string.format("%.0f",mainPanelDevice:get_argument_value(269) * 100+mainPanelDevice:get_argument_value(270) * 10)) -- Engine H2O
-    -- helios.send(2019, string.format("%.4f",mainPanelDevice:get_argument_value(386) * 100+mainPanelDevice:get_argument_value(387) * 10)) -- SMC Fuze
-    -- helios.send(2020, string.format("%.0f",mainPanelDevice:get_argument_value(392) * 1000+mainPanelDevice:get_argument_value(393) * 100+mainPanelDevice:get_argument_value(394) * 10))    -- SMC Interval
-    -- helios.send(2022, string.format("%.0f",mainPanelDevice:get_argument_value(389) * 100+mainPanelDevice:get_argument_value(390) * 10))    -- SMC Quantity
-    -- helios.send(2021, string.format("%.0f",mainPanelDevice:get_argument_value(391) * 10))    -- SMC Mult
-    -- helios.send(2010, string.format("%.0f",mainPanelDevice:get_argument_value(367) * 10000+mainPanelDevice:get_argument_value(368) * 1000+mainPanelDevice:get_argument_value(369) * 100+mainPanelDevice:get_argument_value(370) * 10))    -- Fuel Total
-    -- helios.send(2011, string.format("%.0f",mainPanelDevice:get_argument_value(371) * 10000+mainPanelDevice:get_argument_value(372) * 1000+mainPanelDevice:get_argument_value(373) * 100+mainPanelDevice:get_argument_value(374) * 10))    -- Fuel Left Tank
-    -- helios.send(2012, string.format("%.0f",mainPanelDevice:get_argument_value(375) * 10000+mainPanelDevice:get_argument_value(376) * 1000+mainPanelDevice:get_argument_value(377) * 100+mainPanelDevice:get_argument_value(378) * 10))    -- Fuel Right Tank
-    -- helios.send(2013, string.format("%.0f",mainPanelDevice:get_argument_value(381) * 10000+mainPanelDevice:get_argument_value(382) * 1000+mainPanelDevice:get_argument_value(383) * 100+mainPanelDevice:get_argument_value(384) * 10))    -- Fuel Bingo
-    -- helios.send(2014, string.format("%.0f",mainPanelDevice:get_argument_value(455) * 100+mainPanelDevice:get_argument_value(456) * 10))    -- Flap Position
-    -- helios.send(2015, string.format("%.0f",mainPanelDevice:get_argument_value(550) * 1000+mainPanelDevice:get_argument_value(551) * 100+mainPanelDevice:get_argument_value(552) * 10))    -- Pressure Brake
-    -- helios.send(2016, string.format("%.0f",mainPanelDevice:get_argument_value(553) * 1000+mainPanelDevice:get_argument_value(554) * 100+mainPanelDevice:get_argument_value(555) * 10))    -- Pressure Hyd 1
-    -- helios.send(2017, string.format("%.0f",mainPanelDevice:get_argument_value(556) * 1000+mainPanelDevice:get_argument_value(557) * 100+mainPanelDevice:get_argument_value(558) * 10))    -- Pressure Hyd 2
-     helios.send(2037, string.format("%.4f",mainPanelDevice:get_argument_value(621)))    -- TACAN CHANNEL
+
+    -- PCA_UR structured data
+    li = helios.parseIndication(4) -- 4 for PCA_UR
+    if li then
+        helios.send(2060, string.format("%-3s%-3s%-3s%-3s%-3s", helios.ensureString(li.PCA_LCD_1_0), helios.ensureString(li.PCA_LCD_1_1), helios.ensureString(li.PCA_LCD_1_2), helios.ensureString(li.PCA_LCD_1_3), helios.ensureString(li.PCA_LCD_1_4)))
+    end
+    -- PCA_BR structured data
+    li = helios.parseIndication(5) -- 5 for PCA_BR
+    if li then
+        helios.send(2061, string.format("%-3s%-3s%-3s%-3s%-3s", helios.ensureString(li.PCA_LCD_2_0), helios.ensureString(li.PCA_LCD_2_1), helios.ensureString(li.PCA_LCD_2_2), helios.ensureString(li.PCA_LCD_2_3), helios.ensureString(li.PCA_LCD_2_4)))
+    end
+    -- VHF Comm structured data
+    li = helios.parseIndication(8)
+    if li then
+        helios.send(2062, string.format("%-8s", helios.ensureString(li.text_COM_VHF)))
+    end
+    -- UHF Comm structured data
+    li = helios.parseIndication(7)
+    if li then
+        helios.send(2063, string.format("%-8s", helios.ensureString(li.text_COM_UHF1)))
+        helios.send(2064, string.format("%-8s", helios.ensureString(li.text_COM_UHF2)))
+    end
+    -- PPA structured data
+    li = helios.parseIndication(6)
+    if li then
+        helios.send(2065, string.format("%-2s", helios.ensureString(li.text_PPA_QTY)))
+        helios.send(2066, string.format("%-2s", helios.ensureString(li.text_PPA_INT)))
+    end
+    -- Fuel structured data
+    li = helios.parseIndication(3)
+    if li then
+        helios.send(2067, string.format("%-3s", helios.ensureString(li.txt_fuel_g)))
+    end
+    -- PCN U structured data
+    li = helios.parseIndication(9)
+    if li then
+        helios.send(2068, string.format("%6s", helios.ensureString(li.PCN_UL_DIGITS)))
+        helios.send(2069, string.format("%6s", helios.ensureString(li.PCN_UL_POINTS)))
+        helios.send(2070, string.format("%6s", helios.ensureString(li.PCN_UR_DIGITS)))
+        helios.send(2071, string.format("%6s", helios.ensureString(li.PCN_UR_POINTS)))
+        helios.send(2072, string.format("%1d", li["PCN_UL_N"] and 1 or 0))
+        helios.send(2073, string.format("%1d", li["PCN_UL_S"] and 1 or 0))
+        helios.send(2074, string.format("%1d", li["PCN_UR_E"] and 1 or 0))
+        helios.send(2075, string.format("%1d", li["PCN_UR_W"] and 1 or 0))
+        helios.send(2076, string.format("%1d", li["PCN_UL_P"] and 1 or 0))
+        helios.send(2077, string.format("%1d", li["PCN_UL_M"] and 1 or 0))
+        helios.send(2078, string.format("%1d", li["PCN_UR_P"] and 1 or 0))
+        helios.send(2079, string.format("%1d", li["PCN_UR_M"] and 1 or 0))
+    end    
+    -- PCN B structured data
+    li = helios.parseIndication(10)
+    if li then
+        helios.send(2080, string.format("%s", helios.ensureString(li.PCN_BL_DIGITS)))
+        helios.send(2081, string.format("%s", helios.ensureString(li.PCN_BR_DIGITS)))
+    end
+    -- EVF structured data
+    li = helios.parseIndication(11)
+    if li then
+        helios.send(2082, string.format("%-2s", helios.ensureString(li["evf-digits"])))
+    end
+
 end

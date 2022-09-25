@@ -52,7 +52,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 
         #region Properties
 
-        public string Image
+        public virtual string Image
         {
             get
             {
@@ -68,7 +68,62 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
         }
 
-        public double Value
+        protected ImageSource ImageSource
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                if (value != _image)
+                {
+                    _image = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
+
+        protected Rect ImageRect
+        {
+            get
+            {
+                return _imageRect;
+            }
+            set
+            {
+                if (value != _imageRect)
+                {
+                    _imageRect = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
+
+        protected Point ScaledLocation
+        {
+            get => _scaledLocation;
+            set
+            {
+                if (!_scaledLocation.Equals(value))
+                {
+                    _scaledLocation = value;
+                }
+            }
+        }
+        protected Size DigitRenderSize
+        {
+            get => _digitRenderSize;
+            set
+            {
+                if (!_digitRenderSize.Equals(value))
+                {
+                    _digitRenderSize = value;
+                }
+            }
+        }
+
+        public virtual double Value
         {
             get
             {
@@ -85,7 +140,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
         }
 
-        public double StartRoll
+        public virtual double StartRoll
         {
             get
             {

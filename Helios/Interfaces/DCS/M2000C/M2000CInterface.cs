@@ -29,20 +29,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
         private const string ENGINE = "3";
         private const string INSTPANEL = "4";
         private const string VTH_VTB = "5";
+        private const string VTB = "5";
         private const string PCA_PPA = "6";
+        private const string PCA = "6";
         private const string ENGPANEL = "7";
         private const string PWRPNL = "8";
         private const string PCN_NAV = "9";
+        private const string PCN = "9";
         private const string RADAR_RDI = "10";
+        private const string INS = "10";
         private const string RADAR = "11";
+        private const string PCR = "11";
         private const string EW_RWR = "12";
+        private const string SERVAL = "12";	        // 12	SERVAL & ECLAIR (Counter Measure dispensers)
         private const string RWR = "13";
+        private const string PCCM = "13";		    // 13	Poste de Controle Contre Measures (Countermeasures panel)
         private const string SUBSYSTEMS = "14";
+        private const string HYDRAULICS = "14"; 
         private const string MAGIC = "15";
         private const string SYSLIGHTS = "16";
         private const string AFCS = "17";
+        private const string CDVE = "17";
         private const string ELECTRIC = "18";
         private const string UVHF = "19";
+        private const string VHF = "19";
         private const string UHF = "20";
         private const string INTERCOM = "21";
         private const string MISCPANELS = "22";
@@ -50,9 +60,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
         private const string VORILS = "24";
         private const string ECS = "25";
         private const string FBW = "26";
-        private const string DDM = "27";
+        private const string DDM = "27";	            // 27	Detecteur de Depart Missile (MLWS)
         private const string DDM_IND = "28";
+        private const string SPIRALE = "28";            // 28	SPIRALE (Countermeasure dispenser)
         private const string WEAPONS_CONTROL = "29";
+        private const string CAS = "29";                // 29	Calculateur Air Sol (Air Ground Calculator)
+        private const string SNA = "30";				// 30	Systeme de navigation et d'attaque
+        private const string Helmet_NVG = "31";         // 31
+        private const string PPA = "32";                // 32	Panneau de Préparation Armement (Weapon Preparation Panel)
+        private const string RDI = "33";                // 33	Radar Doppler Impulsions (main radar)
+        private const string DATABUS = "34";            // 34	
+        private const string CCLT = "35";               // 35	Calcul Continu Ligne Tracantes (Gun snake)
+        private const string VTH = "36";                // 36	Visee Tete Haute (Head Up Display)
+        private const string CAA = "37";                // 37	Calculateur Air Air	(Air Air Calculator)
+        private const string RS = "38";                 // 38	Radio Sonde	(Radar Altimeter)
+        private const string TAF = "39";                // 39	Teleaffichage (Datalink)
+        private const string CANOPY = "40";             // 40
+        private const string SABRE = "41";              // 41	SABRE (Jammer)
+
+        private const string KNEEBOARD = "100";
+
         #endregion
         #region Ids
         private const string CMD = "3";
@@ -68,9 +95,642 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
         private const string TACAN_C1_SELECTOR = "625";
         private const string TACAN_MODE_SELECTOR = "626";
         #endregion
+        #region Commands Codes from command_defs.lua (note:  codes do not necessarily match the enumeration name) 
+        private enum initial_Commands
+        {
+            Button_1 = 3001,
+            Button_2 = 3002,
+            Button_3 = 3003,
+            Button_4 = 3004,
+            Button_5 = 3005,
+            Button_6 = 3006,
+            Button_7 = 3007,
+            Button_8 = 3008,
+            Button_9 = 3009,
+            Button_10 = 3010,
+            Button_11 = 3011,
+            Button_12 = 3012,
+            Button_13 = 3013,
+            Button_14 = 3014,
+            Button_15 = 3015,
+            Button_16 = 3016,
+            Button_17 = 3017,
+            Button_18 = 3018,
+            Button_19 = 3019,
+            Button_20 = 3020,
+            Button_21 = 3021,
+            Button_22 = 3022,
+            Button_23 = 3023,
+            Button_24 = 3024,
+            Button_25 = 3025,
+            Button_26 = 3026,
+            Button_27 = 3027,
+            Button_28 = 3028,
+            Button_29 = 3029,
+            Button_30 = 3030,
+            Button_31 = 3031,
+            Button_32 = 3032,
+            Button_33 = 3033,
+            Button_34 = 3034,
+            Button_35 = 3035,
+            Button_36 = 3036,
+            Button_37 = 3037,
+            Button_38 = 3038,
+            Button_39 = 3039,
+            Button_40 = 3040,
+            Button_41 = 3041,
+            Button_42 = 3042,
+            Button_43 = 3043,
+            Button_44 = 3044,
+            Button_45 = 3045,
+            Button_46 = 3046,
+            Button_47 = 3047,
+            Button_48 = 3048,
+            Button_49 = 3049,
+            Button_50 = 3050,
+            Button_51 = 3051,
+            Button_52 = 3052,
+            Button_53 = 3053,
+            Button_54 = 3054,
+            Button_55 = 3055,
+            Button_56 = 3056,
+            Button_57 = 3057,
+            Button_58 = 3058,
+            Button_59 = 3059,
+            Button_60 = 3060,
+            Button_61 = 3061,
+            Button_62 = 3062,
+            Button_63 = 3063,
+            Button_64 = 3064,
+            Button_65 = 3065,
+            Button_66 = 3066,
+            Button_67 = 3067,
+            Button_68 = 3068,
+            Button_69 = 3069,
+            Button_70 = 3070,
+            Button_81 = 3081,
+            Button_82 = 3082,
+            Button_83 = 3083,
+            Button_84 = 3084,
+            Button_85 = 3085,
+            Button_86 = 3086,
+            Button_87 = 3087,
+            Button_88 = 3088,
+            Button_89 = 3089,
+            Button_90 = 3090,
+            Button_91 = 3091,
+            Button_92 = 3092,
+            Button_93 = 3093,
+            Button_94 = 3094,
+            Button_95 = 3095,
+            Button_96 = 3096,
+            Button_97 = 3097,
+            Button_98 = 3098,
+            Button_99 = 3099,
+            Button_100 = 3100,
+            Button_101 = 3101,
+            Button_102 = 3102,
+            Button_103 = 3103,
+            Button_104 = 3104,
+            Button_105 = 3105,
+            Button_106 = 3106,
+            Button_107 = 3107,
+            Button_108 = 3108,
+            Button_109 = 3109,
+            Button_110 = 3110,
+            Button_111 = 3111,
+            Button_112 = 3112,
+            Button_113 = 3113,
+            Button_114 = 3114,
+            Button_115 = 3115,
+            Button_116 = 3116,
+            Button_117 = 3117,
+            Button_118 = 3118,
+            Button_119 = 3119,
+            Button_120 = 3120,
+            Button_121 = 3121,
+            Button_122 = 3122,
+            Button_123 = 3123,
+            Button_124 = 3124,
+            Button_125 = 3125,
+            Button_126 = 3126,
+            Button_127 = 3127,
+            Button_128 = 3128,
+            Button_129 = 3129,
+            Button_130 = 3130,
+            Button_131 = 3131,
+            Button_132 = 3132,
+            Button_133 = 3133,
+            Button_134 = 3134,
+            Button_135 = 3135,
+            Button_136 = 3136,
+            Button_137 = 3137,
+            Button_138 = 3138,
+            Button_139 = 3139,
+            Button_140 = 3140,
+            Button_141 = 3141,
+            Button_142 = 3142,
+            Button_143 = 3143,
+            Button_144 = 3144,
+            Button_145 = 3145,
+            Button_146 = 3146,
+            Button_147 = 3147,
+            Button_148 = 3148,
+            Button_149 = 3149,
+            Button_150 = 3150,
+            Button_151 = 3151,
+            Button_152 = 3152,
+            Button_153 = 3153,
+            Button_154 = 3154,
+            Button_155 = 3155,
+            Button_156 = 3156,
+            Button_157 = 3157,
+            Button_158 = 3158,
+            Button_159 = 3159,
+            Button_160 = 3160,
+            Button_161 = 3161,
+            Button_162 = 3162,
+            Button_163 = 3163,
+            Button_164 = 3164,
+            Button_165 = 3165,
+            Button_166 = 3166,
+            Button_167 = 3167,
+            Button_168 = 3168,
+            Button_169 = 3169,
+            Button_170 = 3170,
+            Button_171 = 3171,
+            Button_172 = 3172,
+            Button_173 = 3173,
+            Button_174 = 3174,
+            Button_175 = 3175,
+            Button_176 = 3176,
+            Button_177 = 3177,
+            Button_178 = 3178,
+            Button_179 = 3179,
+            Button_180 = 3180,
+            Button_181 = 3181,
+            Button_182 = 3182,
+            Button_183 = 3183,
+            Button_184 = 3184,
+            Button_185 = 3185,
+            Button_186 = 3186,
+            Button_187 = 3187,
+            Button_188 = 3188,
+            Button_189 = 3189,
+            Button_190 = 3190,
+            Button_191 = 3191
+        };
+        private enum Unassigned_Commands
+        {
+            Button_198 = 3198,
+            Button_199 = 3199,
+            Button_200 = 3200
+        };
+        private enum ECM_Box_Commands
+        {
+            Button_194 = 3194,
+            Button_195 = 3195,
+            Button_196 = 3196,
+            Button_197 = 3197
+        };
+
+        private enum VTH_VTB_Commands
+        {
+            Button_192 = 3192,
+            Button_201 = 3201,
+            Button_202 = 3202,
+            Button_203 = 3203,
+            Button_204 = 3204,
+            Button_205 = 3205,
+            Button_206 = 3206,
+            Button_207 = 3207,
+            Button_208 = 3208,
+            Button_209 = 3209,
+            Button_210 = 3210,
+            Button_244 = 3244,
+            Button_213 = 3213,
+            Button_214 = 3214,
+            Button_215 = 3215,
+            Button_216 = 3216,
+            Button_217 = 3217,
+            Button_218 = 3218,
+            Button_219 = 3219,
+            Button_220 = 3220,
+            Button_221 = 3221,
+            Button_222 = 3222,
+            Button_223 = 3223,
+            Button_224 = 3224,
+            Button_225 = 3225,
+            Button_226 = 3226,
+            Button_227 = 3227,
+            Button_470 = 3470
+        };
+
+        private enum RWR_Commands
+        {
+            Button_228 = 3228
+        };
+
+        private enum PCA_PPA_Commands
+        {
+            Button_234 = 3234,
+            Button_235 = 3235,
+            Button_237 = 3237,
+            Button_239 = 3239,
+            Button_241 = 3241,
+            Button_243 = 3243,
+            Button_245 = 3245,
+            Button_247 = 3247,
+            Button_248 = 3248,
+            Button_249 = 3249,
+            Button_250 = 3250,
+            Button_253 = 3253,
+            Button_256 = 3256,
+            Button_259 = 3259,
+            Button_262 = 3262,
+            Button_265 = 3265,
+            Button_266 = 3266,
+            Button_269 = 3269,
+            Button_272 = 3272,
+            Button_275 = 3275,
+            Button_276 = 3276,
+            Button_277 = 3277,
+            Button_278 = 3278,
+            Button_279 = 3279,
+            Button_409 = 3409
+        };
+
+        private enum CDVE_Commands
+        {
+            Button_282 = 3282,
+            Button_285 = 3285,
+            Button_288 = 3288,
+            Button_291 = 3291,
+            Button_294 = 3294,
+            Button_299 = 3299,
+            Button_300 = 3300,
+            Button_301 = 3301,
+            Button_302 = 3302,
+            Button_514 = 3514,
+            Button_515 = 3515,
+            Button_516 = 3516,
+            Button_517 = 3517
+        };
+
+        private enum Cpt_Clock_Commands
+        {
+            Button_400 = 3400
+        };
+
+        private enum FBW_Commands
+        {
+            Button_330 = 3330,
+            Button_420 = 3420,
+            Button_421 = 3421,
+            Button_422 = 3422,
+            Button_423 = 3423,
+            Button_479 = 3479,
+            Button_480 = 3480
+        };
+
+        private enum ALT_ADI_Commands
+        {
+            Button_309 = 3309,
+            Button_314 = 3314,
+            Button_315 = 3315,
+            Button_325 = 3325,
+            Button_328 = 3328
+        };
+
+        private enum HSI_Commands
+        {
+            Button_340 = 3340,
+            Button_341 = 3341
+        };
+
+        private enum GMeter_Commands
+        {
+            Button_348 = 3348
+        };
+
+        private enum IFF_Mode_Panel_Commands
+        {
+            Button_377 = 3377,
+            Button_378 = 3378,
+            Button_379 = 3379,
+            Button_380 = 3380,
+            Button_381 = 3381,
+            Button_382 = 3382,
+            Button_383 = 3383,
+            Button_384 = 3384,
+            Button_385 = 3385,
+            Button_386 = 3386,
+            Button_387 = 3387
+        };
+
+        private enum COMM_PANEL_Commands
+        {
+            Button_429 = 3429,
+            Button_430 = 3430,
+            Button_431 = 3431,
+            Button_432 = 3432,
+            Button_433 = 3433,
+            Button_434 = 3434,
+            Button_435 = 3435,
+            Button_437 = 3437,
+            Button_438 = 3438,
+            Button_439 = 3439,
+            Button_440 = 3440,
+            Button_441 = 3441,
+            Button_442 = 3442,
+            Button_443 = 3443,
+            Button_444 = 3444,
+            Button_445 = 3445,
+            Button_446 = 3446,
+            Button_447 = 3447,
+            Button_448 = 3448
+        };
+
+        private enum VOR_ILS_TACAN_Commands
+        {
+            Button_616 = 3616,
+            Button_617 = 3617,
+            Button_618 = 3618,
+            Button_619 = 3619,
+            Button_623 = 3623,
+            Button_624 = 3624,
+            Button_625 = 3625,
+            Button_626 = 3626
+        };
+
+        private enum EXT_LIGHTS_CONTROLS_Commands
+        {
+            Button_449 = 3449,
+            Button_450 = 3450,
+            Button_452 = 3452,
+            Button_453 = 3453,
+            Button_454 = 3454,
+            Button_455 = 3455
+        };
+
+        private enum SKID_SWITCH_Commands
+        {
+            Button_458 = 3458,
+            Button_459 = 3459
+        };
+
+        private enum FLIGHT_CONTROLS_Commands
+        {
+            Button_396 = 3396,
+            Button_404 = 3404,  // Landing Gear lever
+            Button_408 = 3408,  // Landing Gear emergency release lever
+            Button_926 = 3926,  // Landing Gear Beep
+            Button_460 = 3460,
+            Button_461 = 3461,
+            Button_462 = 3462
+        };
+
+
+        private enum THROTTLE_Commands
+        {
+            Button_467 = 3467,
+            Button_468 = 3468
+        };
+
+        private enum RADAR_Commands
+        {
+            Button_109 = 3109,
+            Button_481 = 3481,
+            Button_482 = 3482,
+            Button_483 = 3483,
+            Button_484 = 3484,
+            Button_485 = 3485,
+            Button_486 = 3486,
+            Button_488 = 3488,
+            Button_489 = 3489,
+            Button_491 = 3491,
+            Button_493 = 3493,
+            Button_495 = 3495,
+            Button_497 = 3497,
+            Button_499 = 3499,
+            Button_500 = 3500,
+            Button_501 = 3501,
+            Button_502 = 3502,
+            Button_503 = 3503,
+            Button_504 = 3504,
+            Button_506 = 3506,
+            Button_709 = 3709,
+            Button_710 = 3710,
+            Button_508 = 3508,
+            Button_509 = 3509
+        };
+
+        private enum ELECTRICAL_Commands
+        {
+            Button_520 = 3520,  // Main battery switch
+            Button_521 = 3521,  // Power transfer switch
+            Button_522 = 3522,  // Alternator 1 switch
+            Button_523 = 3523,  // Alternator 2 switch
+            Button_524 = 3524,  // Warning lights test switch
+            Button_654 = 3654   // QRA switch
+        };
+
+        private enum PCN_NAV_Commands
+        {
+            Button_570 = 3570,  // PREP
+            Button_572 = 3572,  // DEST
+            Button_574 = 3574,  // Mode Knob
+            Button_575 = 3575,  // Brightness Knob
+            Button_576 = 3576,  // BAD Button
+            Button_578 = 3578,  // REC Button
+            Button_580 = 3580,  // VAL Button
+            Button_582 = 3582,  // MRQ Button
+            Button_667 = 3667,  // ENC Button
+            Button_584 = 3584,  // Keyb 1
+            Button_585 = 3585,
+            Button_586 = 3586,
+            Button_587 = 3587,
+            Button_588 = 3588,
+            Button_589 = 3589,
+            Button_590 = 3590,
+            Button_591 = 3591,
+            Button_592 = 3592,
+            Button_593 = 3593,  // Keyb 0
+            Button_594 = 3594,  // Clear Button
+            Button_596 = 3596,  // Insert Button
+            Button_627 = 3627,  // INS Op Mode
+            Button_629 = 3629,  // INS Sts Mode
+            Button_665 = 3665,  // Aux gyro
+            Button_628 = 3628,  // MIP slot door
+            Button_673 = 3673,  // MIP label click
+            Button_674 = 3674,  // MIP label wheel
+            Button_675 = 3675   // MIP top click
+        };
+
+        private enum RADAR_IFF_Commands
+        {
+            Button_598 = 3598,
+            Button_599 = 3599,
+            Button_600 = 3600,
+            Button_601 = 3601,
+            Button_602 = 3602,
+            Button_603 = 3603,
+            Button_604 = 3604
+        };
+
+        private enum EW_Commands
+        {
+            Button_605 = 3605,
+            Button_606 = 3606,
+            Button_607 = 3607,
+            Button_608 = 3608,
+            Button_609 = 3609,
+            Button_610 = 3610,
+            Button_990 = 3990
+        };
+
+        private enum ECS_Commands
+        {
+            Button_630 = 3630,
+            Button_631 = 3631,
+            Button_633 = 3633,
+            Button_635 = 3635,
+            Button_636 = 3636,
+            Button_637 = 3637,
+            Button_638 = 3638
+        };
+
+        private enum PANEL_LIGHTS_Commands
+        {
+            Button_639 = 3639,
+            Button_640 = 3640,
+            Button_641 = 3641,
+            Button_642 = 3642,
+            Button_643 = 3643,
+            Button_644 = 3644,
+            Button_672 = 3672
+        };
+
+        private enum ENGINE_START_PANEL
+        {
+            Button_645 = 3645,
+            Button_646 = 3646,
+            Button_647 = 3647,
+            Button_648 = 3648,
+            Button_649 = 3649,
+            Button_650 = 3650,
+            Button_651 = 3651,
+            Button_652 = 3652,
+            Button_477 = 3477,
+            Button_478 = 3478,
+            Button_471 = 3471,
+            Button_472 = 3472,
+            Button_463 = 3463,
+            Button_464 = 3464,
+            Button_465 = 3465,
+            Button_473 = 3473,
+            Button_474 = 3474,
+            Button_475 = 3475,
+            Button_476 = 3476,
+            Button_193 = 3193
+        };
+
+        private enum FUEL_PANEL_Commands
+        {
+            Button_355 = 3355,
+            Button_357 = 3357,
+            Button_360 = 3360,
+            Button_361 = 3361
+        };
+
+        private enum MISC_Commands
+        {
+            Button_395 = 3395,  // Hydraulic System Selector for gauge reading
+            Button_655 = 3655,  // Canopy Open/Close
+            Button_656 = 3656,  // Canopy Open/Close
+            Button_907 = 3907,  // Canopy Open/Close
+            Button_908 = 3908,  // Canopy Open/Close
+            Button_657 = 3657,  // Hydraulic Emergency Pump
+            Button_658 = 3658,  // Audio warning reset
+            Button_659 = 3659,
+            Button_660 = 3660,
+            Button_666 = 3666,  // Parking brake handle
+            Button_900 = 3900,
+            Button_807 = 3807,
+            Button_457 = 3457,
+            Button_456 = 3456
+        };
+
+        private enum Sound_panel_Commands
+        {
+            Button_700 = 3700,
+            Button_701 = 3701,
+            Button_702 = 3702,
+            Button_703 = 3703,
+            Button_704 = 3704,
+            Button_705 = 3705,
+            Button_706 = 3706,
+            Button_707 = 3707,
+            Button_905 = 3905,
+            Button_906 = 3906,
+            Button_909 = 3909,
+            Button_915 = 3915
+        };
+
+        private enum LOX_Commands
+        {
+            Button_910 = 3910,
+            Button_911 = 3911,
+            Button_912 = 3912
+        };
+
+        private enum VHF_Commands
+        {
+            Button_950 = 3950,
+            Button_951 = 3951,
+            Button_952 = 3952,
+            Button_953 = 3953,
+            Button_954 = 3954,
+            Button_955 = 3955,
+            Button_956 = 3956,
+            Button_957 = 3957,
+            Button_958 = 3958,
+            Button_959 = 3959,
+            Button_960 = 3960,
+            Button_961 = 3961,
+            Button_962 = 3962,
+            Button_963 = 3963,
+            Button_964 = 3964,
+            Button_965 = 3965,
+            Button_966 = 3966,
+            Button_967 = 3967,
+            Button_1004 = 3968,
+            Button_1005 = 3969,
+            Button_1006 = 3970
+        };
+
+        private enum EVF_Commands
+        {
+            Button_1004 = 3968,
+            Button_1005 = 3969,
+            Button_1006 = 3970
+        };
+
+        #endregion
+
         public M2000CInterface()
             : base("DCS M2000C", "M-2000C", "pack://application:,,,/Helios;component/Interfaces/DCS/M2000C/ExportFunctions.lua")
         {
+
+            // see if we can restore from JSON
+#if (!DEBUG)
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
+#endif
+
+
             #region Caution Panel
             AddFunction(new FlagValue(this, "525", "Caution Panel", "BATT", "WP BATT"));
             AddFunction(new FlagValue(this, "526", "Caution Panel", "TR", "TR"));
@@ -353,6 +1013,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "264", "PCA Panel", "WSS5 P", "WSS5 P"));
             AddFunction(new FlagValue(this, "246", "PCA Panel", "KL1", "KL1"));
             AddFunction(new FlagValue(this, "247", "PCA Panel", "KL2", "KL2"));
+            AddFunction(new Text(this, "2060", "PCA Panel", "PCA Upper Display", "Display Upper Line"));
+            AddFunction(new Text(this, "2061", "PCA Panel", "PCA Lower Display", "Display Lower Line"));
+
             AddFunction(new PushButton(this, PCA_PPA, "3266", "266", "PPA Panel", "S530 Missile Enabler Button"));
             AddFunction(new PushButton(this, PCA_PPA, "3269", "269", "PPA Panel", "Missile Fire Mode Selector"));
             AddFunction(new PushButton(this, PCA_PPA, "3272", "272", "PPA Panel", "Magic II Missile Enabler Button")); 
@@ -390,6 +1053,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "274", "PPA Panel", "MAGIC MAG", "MAGIC MAG"));
             AddFunction(new FlagValue(this, "280", "PPA Panel", "TOT Firing Mode", "TOT Firing Mode"));
             AddFunction(new FlagValue(this, "281", "PPA Panel", "PAR Firing Mode", "PAR Firing Mode"));
+            AddFunction(new Text(this, "2065", "PPA Panel", "PPA Display Quantity", "Display Line for the PPA Quantity"));
+            AddFunction(new Text(this, "2066", "PPA Panel", "PPA Display Interval", "Display Line for the PPA Interval"));
+
+
             #endregion
             #region  PCN
             AddFunction(new FlagValue(this, "564", "PCN Panel", "PRET", "PRET"));
@@ -444,6 +1111,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, PCN_NAV, "3593", "593", "PCN Panel", "INS Button 0"));
             AddFunction(new PushButton(this, PCN_NAV, "3594", "594", "PCN Panel", "EFF Button"));
             AddFunction(new PushButton(this, PCN_NAV, "3596", "596", "PCN Panel", "INS Button"));
+
+            AddFunction(new Text(this, "2068", "PCN Panel", "PCN Latitude Display", "Display Line for PCN Latitude"));
+            AddFunction(new Text(this, "2069", "PCN Panel", "PCN Left Points Position", "Position of Points for PCN Left"));
+            AddFunction(new Text(this, "2070", "PCN Panel", "PCN Longitude Display", "Display Line for PCN Longitude"));
+            AddFunction(new Text(this, "2071", "PCN Panel", "PCN Right Points Position", "Position of Points for PCN Right"));
+
+            AddFunction(new NetworkValue(this, "2072", "PCN Panel", "PCN North", "North Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2073", "PCN Panel", "PCN South", "South Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2074", "PCN Panel", "PCN East", "East Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2075", "PCN Panel", "PCN West", "West Indicator on the PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2076", "PCN Panel", "PCN Left Plus", "Plus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2077", "PCN Panel", "PCN Left Minus", "Minus Indicator on the Left PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2078", "PCN Panel", "PCN Right Plus", "Plus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new NetworkValue(this, "2079", "PCN Panel", "PCN Right Minus", "Minus Indicator on the Right PCN display", "Boolean True/False", BindingValueUnits.Boolean, null));
+            AddFunction(new Text(this, "2080", "PCN Panel", "PCN Lower Left Display", "Display Lower Line Left Side"));
+            AddFunction(new Text(this, "2081", "PCN Panel", "PCN Lower Right Display", "Display Lower Line Right Side"));
+
             #endregion
             #region TACAN Panel
             AddFunction(new Axis(this, TACAN, "3625", "625", 0.1d, 0d, 1d, "Tacan Panel", "Channel 1 Selector"));
@@ -541,43 +1225,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "675", "Indicators", "Indicators 675", "COM Panel, lamp red"));
             AddFunction(new FlagValue(this, "676", "Indicators", "Indicators 676", "COM Panel, lamp red, over COM"));
             #endregion
-            #region Displays
-            //
-            // The following are not FlagValues.  Arguments in the range 2000+ are usually manufactured in the exports.lua from other values.
-            // These particular values were chosen for Ikarus' needs, but there is no published Exports.lua from S-D-A to explain how these are made
-            //
-            //AddFunction(new FlagValue(this, "2001", "Indicators", "Indicators 2001", "ECM_CHF"));
-            //AddFunction(new FlagValue(this, "2002", "Indicators", "Indicators 2002", "ECM_FLR"));
-            //AddFunction(new FlagValue(this, "2003", "Indicators", "Indicators 2003", "FUEL"));
-            //AddFunction(new FlagValue(this, "2010", "Indicators", "Indicators 2010", "PCA_UR1"));
-            //AddFunction(new FlagValue(this, "2011", "Indicators", "Indicators 2011", "PCA_UR2"));
-            //AddFunction(new FlagValue(this, "2012", "Indicators", "Indicators 2012", "PCA_UR3"));
-            //AddFunction(new FlagValue(this, "2013", "Indicators", "Indicators 2013", "PCA_UR4"));
-            //AddFunction(new FlagValue(this, "2014", "Indicators", "Indicators 2014", "PCA_UR5"));
-            //AddFunction(new FlagValue(this, "2015", "Indicators", "Indicators 2015", "PCA_BR1"));
-            //AddFunction(new FlagValue(this, "2016", "Indicators", "Indicators 2016", "PCA_BR2"));
-            //AddFunction(new FlagValue(this, "2017", "Indicators", "Indicators 2017", "PCA_BR3"));
-            //AddFunction(new FlagValue(this, "2018", "Indicators", "Indicators 2018", "PCA_BR4"));
-            //AddFunction(new FlagValue(this, "2019", "Indicators", "Indicators 2019", "PCA_BR5"));
-            //AddFunction(new FlagValue(this, "2020", "Indicators", "Indicators 2020", "COM1"));
-            //AddFunction(new FlagValue(this, "2021", "Indicators", "Indicators 2021", "COM2"));
-            //AddFunction(new FlagValue(this, "2022", "Indicators", "Indicators 2022", "PPA1"));
-            //AddFunction(new FlagValue(this, "2023", "Indicators", "Indicators 2023", "PPA2"));
-            //AddFunction(new FlagValue(this, "2024", "Indicators", "Indicators 2024", "PCN_sub_L_T"));
-            //AddFunction(new FlagValue(this, "2025", "Indicators", "Indicators 2025", "PCN_sub_R_T"));
-            //AddFunction(new FlagValue(this, "2026", "Indicators", "Indicators 2026", "PCN_sub_L_B"));
-            //AddFunction(new FlagValue(this, "2027", "Indicators", "Indicators 2027", "PCN_sub_R_B"));
-            //AddFunction(new FlagValue(this, "2028", "Indicators", "Indicators 2028", "PCN_main_L"));
-            //AddFunction(new FlagValue(this, "2029", "Indicators", "Indicators 2029", "PCN_main_R"));
-            //AddFunction(new FlagValue(this, "2030", "Indicators", "Indicators 2030", "PCN_BR1"));
-            //AddFunction(new FlagValue(this, "2031", "Indicators", "Indicators 2031", "PCN_BR2"));
-            //AddFunction(new FlagValue(this, "2032", "Indicators", "Indicators 2032", "Mode 1. Drum"));
-            //AddFunction(new FlagValue(this, "2033", "Indicators", "Indicators 2033", "Mode 2. Drum"));
-            //AddFunction(new FlagValue(this, "2034", "Indicators", "Indicators 2034", "Mode 3. Drum"));
-            //AddFunction(new FlagValue(this, "2035", "Indicators", "Indicators 2035", "Mode 4. Drum"));
-            //AddFunction(new FlagValue(this, "2036", "Indicators", "Indicators 2036", "Mode VOR ILS"));
-            //AddFunction(new FlagValue(this, "2037", "Indicators", "Indicators 2037", "Mode TACAN"));
-            #endregion
             #region  Infligt Engine Panel
             AddFunction(new PushButton(this, ENGPANEL, "3468", "468", "Engine Start Panel", "Engine In-Flight Start Switch"));    // elements["PTN_468"] = default_2_position_tumb(_("Engine In-Flight Start Switch"), devices.ENGPANEL, device_commands.Button_468, 468, 0, 1)
             AddFunction(new PushButton(this, ENGPANEL, "3467", "467", "Engine Start Panel", "Engine Shutdown Button"));    // elements["PTN_467"] = default_button(_("Engine Shutdown Button"), devices.ENGPANEL, device_commands.Button_467, 467)
@@ -595,18 +1242,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #region U/VHF Panel
             AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "U/VHF", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
             AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "U/VHF", "Preset frequency change"));
-//            AddFunction(new RotaryEncoder(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.1d, "U/VHF", "Preset frequency change"));
-/*            AddFunction(new Switch(this, UVHF, UVHF_CHANNEL, new SwitchPosition[] { 
-                new SwitchPosition("0.05", "Channel 1", CMD+UVHF_CHANNEL), new SwitchPosition("0.1", "Channel 2", CMD+UVHF_CHANNEL), new SwitchPosition("0.15", "Channel 3", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.2", "Channel 4", CMD+UVHF_CHANNEL), new SwitchPosition("0.25", "Channel 5", CMD+UVHF_CHANNEL), new SwitchPosition("0.3", "Channel 6", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.35", "Channel 7", CMD+UVHF_CHANNEL), new SwitchPosition("0.4", "Channel 8", CMD+UVHF_CHANNEL) , new SwitchPosition("0.45", "Channel 9", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.5", "Channel 10", CMD+UVHF_CHANNEL), new SwitchPosition("0.55", "Channel 11", CMD+UVHF_CHANNEL) , new SwitchPosition("0.66", "Channel 12", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.65", "Channel 13", CMD+UVHF_CHANNEL), new SwitchPosition("0.7", "Channel 14", CMD+UVHF_CHANNEL) , new SwitchPosition("0.75", "Channel 15", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.8", "Channel 16", CMD+UVHF_CHANNEL), new SwitchPosition("0.85", "Channel 17", CMD+UVHF_CHANNEL) , new SwitchPosition("0.9", "Channel 18", CMD+UVHF_CHANNEL),
-                new SwitchPosition("0.95", "Channel 19", CMD+UVHF_CHANNEL), new SwitchPosition("1", "Channel 20", CMD+UVHF_CHANNEL)}, "Radio Panel", "U/VHF Channel Selector", "%0.2f"));
-                */
+            AddFunction(new Text(this, "2062", "U/VHF", "VHF Comm Information", "Display Line for the VHF Radio"));
+            AddFunction(new Text(this, "2064", "U/VHF", "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
+            AddFunction(new Text(this, "2063", "U/VHF", "UHF Lower Comm Information", "Lower Display Line for the UHF Radio"));
+
+
+            //            AddFunction(new RotaryEncoder(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.1d, "U/VHF", "Preset frequency change"));
+            /*            AddFunction(new Switch(this, UVHF, UVHF_CHANNEL, new SwitchPosition[] { 
+                            new SwitchPosition("0.05", "Channel 1", CMD+UVHF_CHANNEL), new SwitchPosition("0.1", "Channel 2", CMD+UVHF_CHANNEL), new SwitchPosition("0.15", "Channel 3", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.2", "Channel 4", CMD+UVHF_CHANNEL), new SwitchPosition("0.25", "Channel 5", CMD+UVHF_CHANNEL), new SwitchPosition("0.3", "Channel 6", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.35", "Channel 7", CMD+UVHF_CHANNEL), new SwitchPosition("0.4", "Channel 8", CMD+UVHF_CHANNEL) , new SwitchPosition("0.45", "Channel 9", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.5", "Channel 10", CMD+UVHF_CHANNEL), new SwitchPosition("0.55", "Channel 11", CMD+UVHF_CHANNEL) , new SwitchPosition("0.66", "Channel 12", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.65", "Channel 13", CMD+UVHF_CHANNEL), new SwitchPosition("0.7", "Channel 14", CMD+UVHF_CHANNEL) , new SwitchPosition("0.75", "Channel 15", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.8", "Channel 16", CMD+UVHF_CHANNEL), new SwitchPosition("0.85", "Channel 17", CMD+UVHF_CHANNEL) , new SwitchPosition("0.9", "Channel 18", CMD+UVHF_CHANNEL),
+                            new SwitchPosition("0.95", "Channel 19", CMD+UVHF_CHANNEL), new SwitchPosition("1", "Channel 20", CMD+UVHF_CHANNEL)}, "Radio Panel", "U/VHF Channel Selector", "%0.2f"));
+                            */
             #endregion
-            #region  HUD/VTB"
+            #region  HUD/VTB
             AddFunction(new Switch(this, VTH_VTB, "201", new SwitchPosition[] { }, "HUD/VTB", "HUD Power Switch", "%0.1f"));    // elements["PTN_201"] = multiposition_switch_limited(_("HUD Power Switch"), devices.VTH_VTB, device_commands.Button_201, 201, 3, 0.5, false, 0)
             //AddFunction(Switch.CreateToggleSwitch(this, VTH_VTB, "3203", "203", "HUD/VTB", "HUD Declutter Switch", "%0.1f"));    // elements["PTN_203"] = default_2_way_spring_switch(_("HUD Declutter Switch"), devices.VTH_VTB, device_commands.Button_203, 203, true)
             AddFunction(new Switch(this, VTH_VTB, "204", new SwitchPosition[] { }, "HUD/VTB", "HUD Altimeter Selector Switch", "%0.1f"));    // elements["PTN_204"] = multiposition_switch_limited(_("HUD Altimeter Selector Switch"), devices.VTH_VTB, device_commands.Button_204, 204, 3, 0.5, true, 0)
@@ -737,31 +1389,48 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion  
             #region  Fuel Panel 2
             AddFunction(new Switch(this, ENGPANEL, "193", new SwitchPosition[] { }, "Fuel Panel", "Refuel Transfer Switch", "%0.1f"));    // elements["PTN_193"] = multiposition_switch_limited(_("Refuel Transfer Switch"), devices.ENGPANEL, device_commands.Button_193, 193, 3, 0.5, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "360", new SwitchPosition[] { }, "Fuel Panel", "Bingo Fuel 1 000 kg Selector", "%0.1f"));    // elements["PTN_360"] = default_multiposition_knob(_("Bingo Fuel 1,000 kg Selector"), devices.INSTPANEL, device_commands.Button_360, 360,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "361", new SwitchPosition[] { }, "Fuel Panel", "Bingo Fuel 100 kg Selector", "%0.1f"));    // elements["PTN_361"] = default_multiposition_knob(_("Bingo Fuel 100 kg Selector"), devices.INSTPANEL, device_commands.Button_361, 361,  10, 0.1, false, 0)
-            #endregion  
-            #region  Radio Panel
-//            AddFunction(new PushButton(this, UHF, "3429", "429", "Radio Panel", "UHF Power 5W/25W Switch"));    // elements["PTN_429"] = default_2_position_tumb(_("UHF Power 5W/25W Switch"), devices.UHF, device_commands.Button_429, 429)
-//            AddFunction(new PushButton(this, UHF, "3430", "430", "Radio Panel", "UHF SIL Switch"));    // elements["PTN_430"] = default_2_position_tumb(_("UHF SIL Switch"), devices.UHF, device_commands.Button_430, 430)
-            //AddFunction(Switch.CreateToggleSwitch(this, UHF, "3431", "431", "Radio Panel", "UHF E+A2 Switch", "%0.1f"));    // elements["PTN_431"] = default_2_way_spring_switch(_("UHF E+A2 Switch"), devices.UHF, device_commands.Button_431, 431, true)
-//            AddFunction(new PushButton(this, UHF, "3432", "432", "Radio Panel", "UHF CDE Switch"));    // elements["PTN_432"] = default_button(_("UHF CDE Switch"), devices.UHF, device_commands.Button_432, 432)
-//            AddFunction(new Switch(this, UHF, "433", new SwitchPosition[] { }, "Radio Panel", "UHF Mode Switch", "%0.1f"));    // elements["PTN_433"] = multiposition_switch_limited(_("UHF Mode Switch"), devices.UHF, device_commands.Button_433, 433, 4, 0.25, false, 0)
-  //          AddFunction(new PushButton(this, UHF, "3434", "434", "Radio Panel", "UHF TEST Switch"));    // elements["PTN_434"] = default_button(_("UHF TEST Switch"), devices.UHF, device_commands.Button_434, 434)
-//            AddFunction(new Switch(this, UHF, "435", new SwitchPosition[] { }, "Radio Panel", "UHF Knob", "%0.1f"));    // elements["PTN_435"] = default_multiposition_knob(_("UHF Knob"), devices.UHF, device_commands.Button_435, 435, 20, 0.05,false,0.05)
-//            AddFunction(new PushButton(this, UVHF, "3437", "437", "Radio Panel", "U/VHF TEST Switch"));    // elements["PTN_437"] = default_button(_("U/VHF TEST Switch"), devices.UVHF, device_commands.Button_437, 437)
-            //AddFunction(Switch.CreateToggleSwitch(this, UVHF, "3438", "438", "Radio Panel", "U/VHF E+A2 Switch", "%0.1f"));    // elements["PTN_438"] = default_2_way_spring_switch(_("U/VHF E+A2 Switch"), devices.UVHF, device_commands.Button_438, 438, true)
-//            AddFunction(new PushButton(this, UVHF, "3439", "439", "Radio Panel", "U/VHF SIL Switch"));    // elements["PTN_439"] = default_2_position_tumb(_("U/VHF SIL Switch"), devices.UVHF, device_commands.Button_439, 439)
-//            AddFunction(new Switch(this, UVHF, "440", new SwitchPosition[] { }, "Radio Panel", "U/VHF 100 MHz Selector", "%0.1f"));    // elements["PTN_440"] = default_multiposition_knob(_("U/VHF 100 MHz Selector"), devices.UVHF, device_commands.Button_440, 440, 4, 0.1, false, 0)
-//            AddFunction(new Switch(this, UVHF, "441", new SwitchPosition[] { }, "Radio Panel", "U/VHF 10 MHz Selector", "%0.1f"));    // elements["PTN_441"] = default_multiposition_knob(_("U/VHF 10 MHz Selector"), devices.UVHF, device_commands.Button_441, 441, 10, 0.1, false, 0)
-//            AddFunction(new Switch(this, UVHF, "442", new SwitchPosition[] { }, "Radio Panel", "U/VHF 1 MHz Selector", "%0.1f"));    // elements["PTN_442"] = default_multiposition_knob(_("U/VHF 1 MHz Selector"), devices.UVHF, device_commands.Button_442, 442, 10, 0.1, false, 0)
-//            AddFunction(new Switch(this, UVHF, "443", new SwitchPosition[] { }, "Radio Panel", "U/VHF 100 KHz Selector", "%0.1f"));    // elements["PTN_443"] = default_multiposition_knob(_("U/VHF 100 KHz Selector"), devices.UVHF, device_commands.Button_443, 443, 10, 0.1, false, 0)
-//            AddFunction(new Switch(this, UVHF, "444", new SwitchPosition[] { }, "Radio Panel", "U/VHF 25 KHz Selector", "%0.1f"));    // elements["PTN_444"] = default_multiposition_knob(_("U/VHF 25 KHz Selector"), devices.UVHF, device_commands.Button_444, 444, 4, 0.25, false, 0)
-//            AddFunction(new Switch(this, UVHF, "445", new SwitchPosition[] { }, "Radio Panel", "U/VHF Knob", "%0.1f"));    // elements["PTN_445"] = default_multiposition_knob(_("U/VHF Knob"), devices.UVHF, device_commands.Button_445, 445, 20, 0.05,false,0.05)
-//            AddFunction(new Switch(this, UVHF, "446", new SwitchPosition[] { }, "Radio Panel", "U/VHF Mode Switch 1", "%0.1f"));    // elements["PTN_446"] = multiposition_switch_limited(_("U/VHF Mode Switch 1"), devices.UVHF, device_commands.Button_446, 446, 5, 0.25, false, 0)
-//            AddFunction(new PushButton(this, UVHF, "3447", "447", "Radio Panel", "U/VHF Power 5W/25W Switch"));    // elements["PTN_447"] = default_2_position_tumb(_("U/VHF Power 5W/25W Switch"), devices.UVHF, device_commands.Button_447, 447)
-//            AddFunction(new Switch(this, UVHF, "448", new SwitchPosition[] { }, "Radio Panel", "U/VHF Manual/Preset Mode Selector", "%0.1f"));    // elements["PTN_448"] = multiposition_switch_limited(_("U/VHF Manual/Preset Mode Selector"), devices.UVHF, device_commands.Button_448, 448, 3, 0.50, false, 0)
+            AddFunction(new Switch(this, INSTPANEL, "360", new SwitchPosition[] {
+                new SwitchPosition("0.0", "0.0", "3360"),
+                new SwitchPosition("0.1", "0.1", "3360"),
+                new SwitchPosition("0.2", "0.2", "3360"),
+                new SwitchPosition("0.3", "0.3", "3360")
+            }, "Fuel Panel", "Bingo Fuel 1 000 kg Selector", "%0.1f"));    // elements["PTN_360"] = default_multiposition_knob(_("Bingo Fuel 1,000 kg Selector"), devices.INSTPANEL, device_commands.Button_360, 360,  10, 0.1, false, 0)
+            AddFunction(new Switch(this, INSTPANEL, "361", new SwitchPosition[] {
+                new SwitchPosition("0.0", "0.0", "3361"),
+                new SwitchPosition("0.1", "0.1", "3361"),
+                new SwitchPosition("0.2", "0.2", "3361"),
+                new SwitchPosition("0.3", "0.3", "3361"),
+                new SwitchPosition("0.4", "0.4", "3361"),
+                new SwitchPosition("0.5", "0.5", "3361"),
+                new SwitchPosition("0.6", "0.6", "3361"),
+                new SwitchPosition("0.7", "0.7", "3361"),
+                new SwitchPosition("0.8", "0.8", "3361"),
+                new SwitchPosition("0.9", "0.9", "3361") }, "Fuel Panel", "Bingo Fuel 100 kg Selector", "%0.1f"));    // elements["PTN_361"] = default_multiposition_knob(_("Bingo Fuel 100 kg Selector"), devices.INSTPANEL, device_commands.Button_361, 361,  10, 0.1, false, 0)
+            AddFunction(new Text(this, "2067", "Fuel Panel", "Fuel Burn Rate Display", "Three digit display showing Kg/Min Fuel"));
+
             #endregion
-           #region  Miscellaneous Left Panel
+            #region  Radio Panel
+            //            AddFunction(new PushButton(this, UHF, "3429", "429", "Radio Panel", "UHF Power 5W/25W Switch"));    // elements["PTN_429"] = default_2_position_tumb(_("UHF Power 5W/25W Switch"), devices.UHF, device_commands.Button_429, 429)
+            //            AddFunction(new PushButton(this, UHF, "3430", "430", "Radio Panel", "UHF SIL Switch"));    // elements["PTN_430"] = default_2_position_tumb(_("UHF SIL Switch"), devices.UHF, device_commands.Button_430, 430)
+            //AddFunction(Switch.CreateToggleSwitch(this, UHF, "3431", "431", "Radio Panel", "UHF E+A2 Switch", "%0.1f"));    // elements["PTN_431"] = default_2_way_spring_switch(_("UHF E+A2 Switch"), devices.UHF, device_commands.Button_431, 431, true)
+            //            AddFunction(new PushButton(this, UHF, "3432", "432", "Radio Panel", "UHF CDE Switch"));    // elements["PTN_432"] = default_button(_("UHF CDE Switch"), devices.UHF, device_commands.Button_432, 432)
+            //            AddFunction(new Switch(this, UHF, "433", new SwitchPosition[] { }, "Radio Panel", "UHF Mode Switch", "%0.1f"));    // elements["PTN_433"] = multiposition_switch_limited(_("UHF Mode Switch"), devices.UHF, device_commands.Button_433, 433, 4, 0.25, false, 0)
+            //          AddFunction(new PushButton(this, UHF, "3434", "434", "Radio Panel", "UHF TEST Switch"));    // elements["PTN_434"] = default_button(_("UHF TEST Switch"), devices.UHF, device_commands.Button_434, 434)
+            //            AddFunction(new Switch(this, UHF, "435", new SwitchPosition[] { }, "Radio Panel", "UHF Knob", "%0.1f"));    // elements["PTN_435"] = default_multiposition_knob(_("UHF Knob"), devices.UHF, device_commands.Button_435, 435, 20, 0.05,false,0.05)
+            //            AddFunction(new PushButton(this, UVHF, "3437", "437", "Radio Panel", "U/VHF TEST Switch"));    // elements["PTN_437"] = default_button(_("U/VHF TEST Switch"), devices.UVHF, device_commands.Button_437, 437)
+            //AddFunction(Switch.CreateToggleSwitch(this, UVHF, "3438", "438", "Radio Panel", "U/VHF E+A2 Switch", "%0.1f"));    // elements["PTN_438"] = default_2_way_spring_switch(_("U/VHF E+A2 Switch"), devices.UVHF, device_commands.Button_438, 438, true)
+            //            AddFunction(new PushButton(this, UVHF, "3439", "439", "Radio Panel", "U/VHF SIL Switch"));    // elements["PTN_439"] = default_2_position_tumb(_("U/VHF SIL Switch"), devices.UVHF, device_commands.Button_439, 439)
+            //            AddFunction(new Switch(this, UVHF, "440", new SwitchPosition[] { }, "Radio Panel", "U/VHF 100 MHz Selector", "%0.1f"));    // elements["PTN_440"] = default_multiposition_knob(_("U/VHF 100 MHz Selector"), devices.UVHF, device_commands.Button_440, 440, 4, 0.1, false, 0)
+            //            AddFunction(new Switch(this, UVHF, "441", new SwitchPosition[] { }, "Radio Panel", "U/VHF 10 MHz Selector", "%0.1f"));    // elements["PTN_441"] = default_multiposition_knob(_("U/VHF 10 MHz Selector"), devices.UVHF, device_commands.Button_441, 441, 10, 0.1, false, 0)
+            //            AddFunction(new Switch(this, UVHF, "442", new SwitchPosition[] { }, "Radio Panel", "U/VHF 1 MHz Selector", "%0.1f"));    // elements["PTN_442"] = default_multiposition_knob(_("U/VHF 1 MHz Selector"), devices.UVHF, device_commands.Button_442, 442, 10, 0.1, false, 0)
+            //            AddFunction(new Switch(this, UVHF, "443", new SwitchPosition[] { }, "Radio Panel", "U/VHF 100 KHz Selector", "%0.1f"));    // elements["PTN_443"] = default_multiposition_knob(_("U/VHF 100 KHz Selector"), devices.UVHF, device_commands.Button_443, 443, 10, 0.1, false, 0)
+            //            AddFunction(new Switch(this, UVHF, "444", new SwitchPosition[] { }, "Radio Panel", "U/VHF 25 KHz Selector", "%0.1f"));    // elements["PTN_444"] = default_multiposition_knob(_("U/VHF 25 KHz Selector"), devices.UVHF, device_commands.Button_444, 444, 4, 0.25, false, 0)
+            //            AddFunction(new Switch(this, UVHF, "445", new SwitchPosition[] { }, "Radio Panel", "U/VHF Knob", "%0.1f"));    // elements["PTN_445"] = default_multiposition_knob(_("U/VHF Knob"), devices.UVHF, device_commands.Button_445, 445, 20, 0.05,false,0.05)
+            //            AddFunction(new Switch(this, UVHF, "446", new SwitchPosition[] { }, "Radio Panel", "U/VHF Mode Switch 1", "%0.1f"));    // elements["PTN_446"] = multiposition_switch_limited(_("U/VHF Mode Switch 1"), devices.UVHF, device_commands.Button_446, 446, 5, 0.25, false, 0)
+            //            AddFunction(new PushButton(this, UVHF, "3447", "447", "Radio Panel", "U/VHF Power 5W/25W Switch"));    // elements["PTN_447"] = default_2_position_tumb(_("U/VHF Power 5W/25W Switch"), devices.UVHF, device_commands.Button_447, 447)
+            //            AddFunction(new Switch(this, UVHF, "448", new SwitchPosition[] { }, "Radio Panel", "U/VHF Manual/Preset Mode Selector", "%0.1f"));    // elements["PTN_448"] = multiposition_switch_limited(_("U/VHF Manual/Preset Mode Selector"), devices.UVHF, device_commands.Button_448, 448, 3, 0.50, false, 0)
+            #endregion
+            #region  Miscellaneous Left Panel
             AddFunction(new PushButton(this, MISCPANELS, "3400", "400", "Miscellaneous Left Panel", "Cockpit Clock"));    // elements["PTN_400"] = default_2_position_tumb(_("Cockpit Clock"), devices.MISCPANELS, device_commands.Button_400, 400)
             AddFunction(new PushButton(this, MISCPANELS, "3458", "458", "Miscellaneous Left Panel", "Anti-Skid Switch Cover"));    // elements["PTN_458"] = default_2_position_tumb(_("Anti-Skid Switch Cover"), devices.MISCPANELS, device_commands.Button_458, 458)
             AddFunction(new PushButton(this, MISCPANELS, "3459", "459", "Miscellaneous Left Panel", "Anti-Skid Switch"));    // elements["PTN_459"] = default_2_position_tumb(_("Anti-Skid Switch"), devices.MISCPANELS, device_commands.Button_459, 459)
@@ -813,18 +1482,25 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
                                                                                                        // 
             #endregion
             #region  IFF
-            AddFunction(new Switch(this, INSTPANEL, "377", new SwitchPosition[] { }, "IFF", "Mode-1 Tens Selector", "%0.1f"));    // elements["PTN_377"] = default_multiposition_knob(_("Mode-1 Tens Selector"), devices.INSTPANEL, device_commands.Button_377, 377,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "378", new SwitchPosition[] { }, "IFF", "Mode-1 Ones Selector", "%0.1f"));    // elements["PTN_378"] = default_multiposition_knob(_("Mode-1 Ones Selector"), devices.INSTPANEL, device_commands.Button_378, 378,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "379", new SwitchPosition[] { }, "IFF", "Mode-3A Thousands Selector", "%0.1f"));    // elements["PTN_379"] = default_multiposition_knob(_("Mode-3A Thousands Selector"), devices.INSTPANEL, device_commands.Button_379, 379,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "380", new SwitchPosition[] { }, "IFF", "Mode-3A Hundreds Selector", "%0.1f"));    // elements["PTN_380"] = default_multiposition_knob(_("Mode-3A Hundreds Selector"), devices.INSTPANEL, device_commands.Button_380, 380,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "381", new SwitchPosition[] { }, "IFF", "Mode-3A Tens Selector", "%0.1f"));    // elements["PTN_381"] = default_multiposition_knob(_("Mode-3A Tens Selector"), devices.INSTPANEL, device_commands.Button_381, 381,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "382", new SwitchPosition[] { }, "IFF", "Mode-3A Ones Selector", "%0.1f"));    // elements["PTN_382"] = default_multiposition_knob(_("Mode-3A Ones Selector"), devices.INSTPANEL, device_commands.Button_382, 382,  10, 0.1, false, 0)
-            AddFunction(new Switch(this, INSTPANEL, "383", new SwitchPosition[] { }, "IFF", "Ident Power Switch", "%0.1f"));    // elements["PTN_383"] = default_3_position_tumb(_("Ident Power Switch"), devices.INSTPANEL, device_commands.Button_383, 383, false, false)
-            AddFunction(new PushButton(this, INSTPANEL, "3384", "384", "IFF", "Mode-1 Switch"));    // elements["PTN_384"] = default_2_position_tumb(_("Mode-1 Switch"), devices.INSTPANEL, device_commands.Button_384, 384)
-            AddFunction(new PushButton(this, INSTPANEL, "3385", "385", "IFF", "Mode-2 Switch"));    // elements["PTN_385"] = default_2_position_tumb(_("Mode-2 Switch"), devices.INSTPANEL, device_commands.Button_385, 385)
-            AddFunction(new PushButton(this, INSTPANEL, "3386", "386", "IFF", "Mode-3A Switch"));    // elements["PTN_386"] = default_2_position_tumb(_("Mode-3A Switch"), devices.INSTPANEL, device_commands.Button_386, 386)
-            AddFunction(new PushButton(this, INSTPANEL, "3387", "387", "IFF", "Mode-C Switch"));    // elements["PTN_387"] = default_2_position_tumb(_("Mode-C Switch"), devices.INSTPANEL, device_commands.Button_387, 387)
-            #endregion  
+            AddFunction(new Switch(this, INSTPANEL, "377", new SwitchPosition[] { }, "IFF", "Mode-1 Tens Selector", "%0.1f"));
+            AddFunction(new Switch(this, INSTPANEL, "378", new SwitchPosition[] { }, "IFF", "Mode-1 Ones Selector", "%0.1f"));
+            AddFunction(new Switch(this, INSTPANEL, "379", new SwitchPosition[] { }, "IFF", "Mode-3A Thousands Selector", "%0.1f"));
+            AddFunction(new Switch(this, INSTPANEL, "380", new SwitchPosition[] { }, "IFF", "Mode-3A Hundreds Selector", "%0.1f"));
+            AddFunction(new Switch(this, INSTPANEL, "381", new SwitchPosition[] { }, "IFF", "Mode-3A Tens Selector", "%0.1f"));
+            AddFunction(new Switch(this, INSTPANEL, "382", new SwitchPosition[] { }, "IFF", "Mode-3A Ones Selector", "%0.1f"));
+            AddFunction(new Switch(this, INSTPANEL, "383", new SwitchPosition[] { }, "IFF", "Ident Power Switch", "%0.1f"));
+            AddFunction(new PushButton(this, INSTPANEL, "3384", "384", "IFF", "Mode-1 Switch"));
+            AddFunction(new PushButton(this, INSTPANEL, "3385", "385", "IFF", "Mode-2 Switch"));
+            AddFunction(new PushButton(this, INSTPANEL, "3386", "386", "IFF", "Mode-3A Switch"));
+            AddFunction(new PushButton(this, INSTPANEL, "3387", "387", "IFF", "Mode-C Switch"));
+            #endregion
+
+            #region EVF (TAF) Panel
+            AddFunction(new PushButton(this, TAF, EVF_Commands.Button_1006.ToString("d"), "1006", "EVF (TAF) Panel", "Test"));
+            AddFunction(new RotaryEncoder(this, TAF, EVF_Commands.Button_1004.ToString("d"), "1004", 0.05d, "EVF (TAF) Panel", "Channel Selector"));
+            AddFunction(new Text(this, "2082", "EVF (TAF) Panel", "EVF Display", "Two digit display on the EVF Panel"));
+
+            #endregion
         }
     }
 }

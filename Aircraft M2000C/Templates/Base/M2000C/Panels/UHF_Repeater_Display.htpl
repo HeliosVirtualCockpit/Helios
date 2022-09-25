@@ -1,0 +1,10 @@
+﻿<ControlTemplate>
+  <Name>UHF Repeater</Name>
+  <Category>M-2000C Gauges</Category>
+  <TypeIdentifier>HELIOS.M2000C.UHF_REPEATER_DISPLAY</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <UseTextualDisplays>True</UseTextualDisplays>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

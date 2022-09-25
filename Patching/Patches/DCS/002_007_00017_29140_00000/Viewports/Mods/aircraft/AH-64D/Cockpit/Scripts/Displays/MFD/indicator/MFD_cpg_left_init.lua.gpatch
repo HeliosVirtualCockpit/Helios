@@ -1,0 +1,7 @@
+﻿@@ -148,32 +148,99 @@
+ aterials.lua%22)%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0A
+ dofile(LockOn_Op
+@@ -602,12 +602,130 @@
+ LMFD_%22 )%0D%0A%0D%0A
++--ViewportHandling Helios Patch%0D%0Atry_find_assigned_viewport(%22AH_64D_LEFT_MFCD_CPG%22)%0D%0A--ViewportHandling Helios Patch%0D%0A

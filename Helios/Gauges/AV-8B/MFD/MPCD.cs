@@ -25,13 +25,13 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
 
     class MPCD : MFD
     {
-        private static readonly Rect SCREEN_RECT = new Rect(80, 204, 754, 703);
+        private static readonly Rect SCREEN_RECT = new Rect(85, 203, 700, 700);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDeviceName;
         private string _side;
 
         public MPCD( string name ,string interfaceDeviceName)
-            : base(name, new Size(924, 1078))
+            : base(name, new Size(872, 1078))
         {
             _interfaceDeviceName = interfaceDeviceName;
             _side = name;
@@ -43,30 +43,30 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             AddButton("OSB4", 5, 427, new Size(56, 56), true, "OSB04");
             AddButton("OSB5", 5, 325, new Size(56, 56), true, "OSB05");
 
-            AddButton("OSB6", 204, 135, new Size(56, 56), false, "OSB06");
-            AddButton("OSB7", 319, 135, new Size(56, 56), false, "OSB07");
-            AddButton("OSB8", 430, 135, new Size(56, 56), false, "OSB08");
-            AddButton("OSB9", 544, 135, new Size(56, 56), false, "OSB09");
-            AddButton("OSB10", 655, 135, new Size(56, 56), false, "OSB10");
+            AddButton("OSB6", 196, 135, new Size(56, 56), false, "OSB06");
+            AddButton("OSB7", 298, 135, new Size(56, 56), false, "OSB07");
+            AddButton("OSB8", 408, 135, new Size(56, 56), false, "OSB08");
+            AddButton("OSB9", 518, 135, new Size(56, 56), false, "OSB09");
+            AddButton("OSB10", 621, 135, new Size(56, 56), false, "OSB10");
 
-            AddButton("OSB11", 855, 325, new Size(56, 56), true, "OSB11");
-            AddButton("OSB12", 855, 427, new Size(56, 56), true, "OSB12");
-            AddButton("OSB13", 855, 534, new Size(56, 56), true, "OSB13");
-            AddButton("OSB14", 855, 643, new Size(56, 56), true, "OSB14");
-            AddButton("OSB15", 855, 740, new Size(56, 56), true, "OSB15");
+            AddButton("OSB11", 810, 325, new Size(56, 56), true, "OSB11");
+            AddButton("OSB12", 810, 427, new Size(56, 56), true, "OSB12");
+            AddButton("OSB13", 810, 534, new Size(56, 56), true, "OSB13");
+            AddButton("OSB14", 810, 643, new Size(56, 56), true, "OSB14");
+            AddButton("OSB15", 810, 740, new Size(56, 56), true, "OSB15");
 
-            AddButton("OSB16", 655, 929, new Size(56, 56), false, "OSB16");
-            AddButton("OSB17", 544, 929, new Size(56, 56), false, "OSB17");
-            AddButton("OSB18", 430, 929, new Size(56, 56), false, "OSB18");
-            AddButton("OSB19", 319, 929, new Size(56, 56), false, "OSB19");
-            AddButton("OSB20", 204, 929, new Size(56, 56), false, "OSB20");
+            AddButton("OSB16", 621, 929, new Size(56, 56), false, "OSB16");
+            AddButton("OSB17", 518, 929, new Size(56, 56), false, "OSB17");
+            AddButton("OSB18", 408, 929, new Size(56, 56), false, "OSB18");
+            AddButton("OSB19", 298, 929, new Size(56, 56), false, "OSB19");
+            AddButton("OSB20", 196, 929, new Size(56, 56), false, "OSB20");
 
             AddRocker("Day / Night", "MFD Rocker", "L", 76, 73, "DAY/NIGHT Mode");
-            AddRocker("Symbols", "MFD Rocker", "R", 720, 74, "Symbology");
+            AddRocker("Symbols", "MFD Rocker", "R", 685, 74, "Symbology");
             AddRocker("Gain", "MFD Rocker", "V", 6, 854, "Gain");
-            AddRocker("Contrast", "MFD Rocker", "V", 857, 854, "Contrast");
+            AddRocker("Contrast", "MFD Rocker", "V", 810, 854, "Contrast");
 
-            AddPot("Brightness Knob", new Point(420,47), new Size(70,70), "Off/Brightness Control");
+            AddPot("Brightness Knob", new Point(401,47), new Size(70,70), "Off/Brightness Control");
         }
         #region Properties
 

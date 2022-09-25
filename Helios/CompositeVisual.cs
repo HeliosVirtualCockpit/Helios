@@ -840,7 +840,7 @@ namespace GadrocsWorkshop.Helios
         protected IndicatorPushButton AddIndicatorPushButton(string name, Point posn, Size size,
             string image, string pushedImage, Color textColor, Color onTextColor, string font,
             string interfaceDeviceName, string interfaceElementName,
-            bool withText = true)
+            bool withText = true, TextScalingMode scalingMode = TextScalingMode.Legacy)
         {
             string componentName = GetComponentName(name);
             IndicatorPushButton indicator = new Helios.Controls.IndicatorPushButton
@@ -853,7 +853,8 @@ namespace GadrocsWorkshop.Helios
                 PushedImage = pushedImage,
                 Name = componentName,
                 OnTextColor = onTextColor,
-                TextColor = textColor
+                TextColor = textColor,
+                ScalingMode = scalingMode
             };
             if (withText)
             {

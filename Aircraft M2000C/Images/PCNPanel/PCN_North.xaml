@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="PCNNorth" Width="16" Height="16">
+    <Canvas.RenderTransform>
+        <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas Name="layer1">
+        <Canvas Name="textNorth">
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="pathNorth" Fill="#cc50c339" Data="m 19.988055 25.908449 q 0 0.5426 -0.527098 0.692462 -0.52193 0.144693 -0.811317 -0.310058 L 14.308833 19.33006 v 6.578389 q -0.113688 0.723467 -0.733803 0.723467 -0.614947 0 -0.723467 -0.723467 V 16.78242 q 0.07751 -0.537434 0.547768 -0.707965 0.475422 -0.170532 0.790647 0.320393 l 4.340806 6.971128 V 16.78242 q 0.09819 -0.738971 0.749306 -0.728636 0.656289 0.0052 0.707965 0.728636 z" Height="16" Stretch="Fill" Width="12"/>
+        </Canvas>
+    </Canvas>
+</Canvas>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="PCNWest" Width="16" Height="16">
+    <Canvas.RenderTransform>
+        <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas Name="layer1">
+        <Canvas Name="textWest">
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="pathWest" Fill="#cc50c339" Data="m 18.701316 16.627391 1.808669 6.180481 1.209225 -6.180481 q 0.21704 -0.69763 0.847491 -0.568439 0.635618 0.129191 0.583942 0.842323 l -1.787999 9.126029 q -0.165364 0.573607 -0.676959 0.594277 -0.506428 0.02067 -0.733803 -0.52193 l -1.953363 -6.666239 -1.93786 6.666239 q -0.237711 0.558103 -0.728636 0.52193 -0.490924 -0.03617 -0.692462 -0.594277 l -1.787998 -9.126029 q 0 -0.738971 0.589109 -0.847491 0.589109 -0.113688 0.857826 0.573607 l 1.193722 6.190817 1.808669 -6.190817 q 0.222208 -0.511595 0.707965 -0.527098 0.490925 -0.0155 0.692462 0.527098 z" Height="16" Stretch="Fill" Width="16"/>
+        </Canvas>
+    </Canvas>
+</Canvas>
+

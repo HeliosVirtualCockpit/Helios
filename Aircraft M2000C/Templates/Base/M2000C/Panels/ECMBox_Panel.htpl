@@ -1,0 +1,9 @@
+﻿<ControlTemplate>
+  <Name>ECM Box</Name>
+  <Category>M-2000C Gauges</Category>
+  <TypeIdentifier>HELIOS.M2000C.ECMBox</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

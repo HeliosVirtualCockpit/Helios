@@ -19,20 +19,24 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.M2000C.Mk2CDrumGauge", "Mk2C Drum Gauge", "M2000C Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.M2000C.Mk2CDrumGauge", "Mk2C Drum Gauge", "M-2000C Gauges", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class Mk2CDrumGauge : BaseGauge
     {
         private HeliosValue _drumValue;
         private GaugeDrumCounter _drum;
+        private double _multiplier = 10d;
+        private double _offset = 0d;
 
         public Mk2CDrumGauge()
-            : this("Mk2C Drum Gauge", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "", "", "#", new Point(0,0), new Size(10d, 15d), new Size(12d, 19d))
+            : this("Mk2C Drum Gauge", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "", "", "#", new Point(0,0), new Size(10d, 15d), new Size(12d, 19d), 10d, 0d)
         {
         }
 
-        public Mk2CDrumGauge(string name, string drumWay, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize)
+        public Mk2CDrumGauge(string name, string drumWay, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize,double multiplier = 10d, double offset = 0d)
             : base(name, new Size(renderSize.Width*format.Length,renderSize.Height))
         {
+            _multiplier = multiplier;
+            _offset = offset;
             _drum = new GaugeDrumCounter(drumWay, posn, format, size, renderSize);
             _drum.Clip = new RectangleGeometry(new Rect(posn.X, posn.Y, renderSize.Width*format.Length, renderSize.Height));
             Components.Add(_drum);
@@ -44,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge
 
         void DrumValue_Execute(object action, HeliosActionEventArgs e)
         {
-            _drum.Value = e.Value.DoubleValue * 10d;
+            _drum.Value = (e.Value.DoubleValue + _offset) * _multiplier;
         }
     }
 }

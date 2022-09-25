@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.M2000C
     using GadrocsWorkshop.Helios.Controls;
     using GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge;
     using GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CNeedle;
-    using GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumTacanChannel;
+    using GadrocsWorkshop.Helios.Gauges.M2000C.TACAN;
 
     public abstract class M2000CCompositeVisual : CompositeVisualWithBackgroundImage
     {
@@ -215,13 +215,43 @@ namespace GadrocsWorkshop.Helios.M2000C
         }
 
         protected Mk2CDrumGauge AddDrumGauge(string name, string gaugeImage, Point posn, Size size, Size renderSize, string format,
-            string interfaceDeviceName, string interfaceElementName, string actionIdentifier, string valueDescription, bool fromCenter)
+            string interfaceDeviceName, string interfaceElementName, string actionIdentifier, string valueDescription, bool fromCenter) {
+            return AddDrumGauge(name, gaugeImage, posn, size, renderSize, format, interfaceDeviceName, interfaceElementName, actionIdentifier, valueDescription, fromCenter, 10d, 0d);
+        }
+        protected Mk2CDrumGauge AddDrumGauge(string name, string gaugeImage, Point posn, Size size, Size renderSize, string format,
+            string interfaceDeviceName, string interfaceElementName, string actionIdentifier, string valueDescription, bool fromCenter, double multiplier, double offset)
         {
             if (fromCenter)
                 posn = FromCenter(posn, size);
             string componentName = GetComponentName(name);
 
-            Mk2CDrumGauge newGauge = new Mk2CDrumGauge(componentName, gaugeImage, actionIdentifier, valueDescription, format, posn, size, renderSize);
+            Mk2CDrumGauge newGauge = new Mk2CDrumGauge(componentName, gaugeImage, actionIdentifier, valueDescription, format, posn, size, renderSize, multiplier, offset);
+
+            Children.Add(newGauge);
+            foreach (IBindingTrigger trigger in newGauge.Triggers)
+            {
+                AddTrigger(trigger, componentName);
+            }
+            foreach (IBindingAction action in newGauge.Actions)
+            {
+                AddAction(action, componentName);
+            }
+
+            AddDefaultInputBinding(
+                childName: componentName,
+                interfaceTriggerName: interfaceDeviceName + "." + interfaceElementName + ".changed",
+                deviceActionName: "set." + actionIdentifier);
+
+            return newGauge;
+        }
+        protected TACANDrumGauge AddDrumGauge(string name, string gaugeImage, Point posn, Size size, Size renderSize, string format,
+            string interfaceDeviceName, string interfaceElementName, string actionIdentifier, string valueDescription, bool fromCenter, double drumDigits = 10d)
+        {
+            if (fromCenter)
+                posn = FromCenter(posn, size);
+            string componentName = GetComponentName(name);
+
+            TACANDrumGauge newGauge = new TACANDrumGauge(componentName, gaugeImage, actionIdentifier, valueDescription, format, posn, size, renderSize, drumDigits);
 
             Children.Add(newGauge);
             foreach (IBindingTrigger trigger in newGauge.Triggers)
@@ -241,14 +271,15 @@ namespace GadrocsWorkshop.Helios.M2000C
             return newGauge;
         }
 
-        protected Mk2CDrumTacanChannel AddTacanDrum(string name, Point posn, Size size, 
+
+        protected TACANChannelDrum AddTacanDrum(string name, Point posn, Size size, 
             string interfaceDeviceName, string interfaceElementName, bool fromCenter)
         {
             if (fromCenter)
                 posn = FromCenter(posn, size);
             string componentName = GetComponentName(name);
 
-            Mk2CDrumTacanChannel newGauge = new Mk2CDrumTacanChannel(componentName, posn, size);
+            TACANChannelDrum newGauge = new TACANChannelDrum(componentName, posn, size);
 
             Children.Add(newGauge);
             foreach (IBindingTrigger trigger in newGauge.Triggers)

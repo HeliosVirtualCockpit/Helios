@@ -21,13 +21,19 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
+    using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.PCA_PANEL", "PCA Panel", "M2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.PCA_PANEL", "PCA Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class M2000C_PCAPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 690, 300);
         private string _interfaceDeviceName = "PCA Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private string _font = "Helios Virtual Cockpit F/A-18C_Hornet-Up_Front_Controller";
+        private bool _useTextualDisplays = false;
+        private ImageDecoration _upperDisplay, _lowerDisplay;
+
 
         public M2000C_PCAPanel()
             : base("PCA Panel", new Size(690, 300))
@@ -69,6 +75,11 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             ToggleSwitch selectiveJettisonSwitch = AddSwitch("Selective Jettison Switch", "long-black-", new Point(36, 170), new Size(29, 60), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn, true);
             AddGuard("Selective Jettison Switch Guard", "guard-", new Point(5, 160), new Size(100, 50), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
                 new NonClickableZone[] { new NonClickableZone(new Rect(30, 0, 120, 63), ToggleSwitchPosition.Two, selectiveJettisonSwitch, ToggleSwitchPosition.One) });
+
+            _upperDisplay = AddImage("PCA Display Background Upper", new Point(110d, 35d), new Size(554d, 52d));
+            _lowerDisplay = AddImage("PCA Display Background Lower", new Point(110d, 168d), new Size(554d, 52d));
+            AddTextDisplay("PCA Upper Display", new Point(110d, 35d), new Size(551d, 52d), _interfaceDeviceName, "PCA Upper Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCA Lower Display", new Point(110d, 169d), new Size(551d, 52d), _interfaceDeviceName, "PCA Lower Display", 36.5, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
         }
 
         #region Properties
@@ -76,6 +87,27 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         public override string DefaultBackgroundImage
         {
             get { return "{M2000C}/Images/PCAPanel/pca-panel.png"; }
+        }
+        public bool UseTextualDisplays
+        {
+            get => _useTextualDisplays;
+            set
+            {
+                if (value != _useTextualDisplays)
+                {
+                    _useTextualDisplays = value;
+                    foreach (HeliosVisual child in this.Children)
+                    {
+                        if (child is TextDisplay textDisplay)
+                        {
+                            textDisplay.IsHidden = !_useTextualDisplays;
+                        }
+                    }
+                    _upperDisplay.IsHidden = !_useTextualDisplays;
+                    _lowerDisplay.IsHidden = !_useTextualDisplays;
+                    Refresh();
+                }
+            }
         }
 
         #endregion
@@ -155,6 +187,55 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 horizontalRender: false,
                 nonClickableZones: nonClickableZones,
                 fromCenter: false);
+        }
+        private void AddTextDisplay(string name, Point posn, Size size,
+    string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
+        {
+            TextDisplay display = AddTextDisplay(
+                name: name,
+                posn: posn,
+                size: size,
+                font: _font,
+                baseFontsize: baseFontsize,
+                horizontalAlignment: hTextAlign,
+                verticalAligment: TextVerticalAlignment.Center,
+                testTextDisplay: testDisp,
+                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
+                backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
+                useBackground: false,
+                interfaceDeviceName: interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                textDisplayDictionary: devDictionary              
+                );
+            display.IsHidden = !_useTextualDisplays; 
+        }
+        private ImageDecoration AddImage(string name, Point posn, Size size)
+        {
+            ImageDecoration image = new ImageDecoration();
+            image.Name = name;
+            image.Image = "{M2000C}/Images/PCAPanel/PCA_Lower_Display.png";
+            image.Alignment = ImageAlignment.Stretched;
+            image.Top = posn.Y;
+            image.Left = posn.X;
+            image.Width = size.Width;
+            image.Height = size.Height;
+            image.IsHidden = !_useTextualDisplays;
+            Children.Add(image);
+            return image;
+        }
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            if (reader.Name.Equals("UseTextualDisplays"))
+            {
+                UseTextualDisplays = bool.Parse(reader.ReadElementString("UseTextualDisplays"));
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("UseTextualDisplays", _useTextualDisplays.ToString(CultureInfo.InvariantCulture));
         }
 
         public override bool HitTest(Point location)

@@ -1,0 +1,9 @@
+﻿<ControlTemplate>
+  <Name>TACAN Panel</Name>
+  <Category>M-2000C Gauges</Category>
+  <TypeIdentifier>HELIOS.M2000C.TACAN_PANEL</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

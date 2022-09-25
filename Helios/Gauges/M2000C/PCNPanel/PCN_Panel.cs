@@ -13,25 +13,34 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.M2000C
+namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
     using System;
+    using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Xml;
+    using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
-    [HeliosControl("HELIOS.M2000C.PCN_PANEL", "PCN Panel", "M2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.PCN_PANEL", "PCN Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_PCNPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 690, 530);
         private string _interfaceDeviceName = "PCN Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
+        private bool _useTextualDisplays = false;
+        private PCNPanelGauge _pcnGauge;
 
         public M2000C_PCNPanel()
             : base("PCN Panel", new Size(690, 530))
         {
+            _pcnGauge = new PCNPanelGauge(this, "PCN Gauge", NativeSize);
+            Children.Add(_pcnGauge);
+            //Children.Add(new PCNPanelGauge(this, "PCN Gauge", NativeSize));
             int row0 = 231, row2 = 233, row3 = 316, row4 = 323, row5 = 396, row6 = 394, row7 = 468, row8 = 481, row9 = 127, row10 = 100, row11 = 140;
             int column0 = 123, column2 = 210, column3 = 324, column4 = 327, column5 = 429, column6 = 507, column7 = 587, column8 = 398, column9 = 452, column10 = 503, column11 = 557, column12 = 610;
             AddIndicatorPushButton("PREP", "prep", new Point(column0, row0), new Size(50, 50));
@@ -66,6 +75,15 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicator("UNI", "uni", new Point(column9, row11), new Size(24, 13));
 
             AddSwitch("INS Parameter Selector", "{M2000C}/Images/PCNPanel/ins-parameter-selector.png", new Point(149, 349), new Size(118, 118), true);
+
+            AddTextDisplay("PCN Latitude Display", new Point(96d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Latitude Display", 64, "1234567", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Longitude Display", new Point(406d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Longitude Display", 64, "123456", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Left Points Position", new Point(82d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Left Points Position", 64,"   .  .", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Right Points Position", new Point(392d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Right Points Position", 64, "  .  .", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Lower Left Display", new Point(82d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Left Display", 64, "01", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Lower Right Display", new Point(288d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Right Display", 64, "01", TextHorizontalAlignment.Left, "");
+
+
         }
 
         #region Properties
@@ -73,6 +91,20 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         public override string DefaultBackgroundImage
         {
             get { return "{M2000C}/Images/PCNPanel/pcn-panel.png"; }
+        }
+
+        public bool UseTextualDisplays
+        {
+            get => _useTextualDisplays;
+            set
+            {
+                if (value != _useTextualDisplays)
+                {
+                    _useTextualDisplays = value;
+                    _pcnGauge.IsHidden = !_useTextualDisplays;
+                    Refresh();
+                }
+            }
         }
 
         #endregion
@@ -160,6 +192,41 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 8, "P/t", 95d));
             rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 9, "REC", 135d));
             rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 10, "DV/FV", 185d));
+        }
+        private void AddTextDisplay(string name, Point posn, Size size,
+                string interfaceDeviceName, string interfaceElementName, double baseFontsize, 
+                string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
+        {
+            TextDisplay display = AddTextDisplay(
+                name: name,
+                posn: posn,
+                size: size,
+                font: _font,
+                baseFontsize: baseFontsize,
+                horizontalAlignment: hTextAlign,
+                verticalAligment: TextVerticalAlignment.Center,
+                testTextDisplay: testDisp,
+                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
+                backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
+                useBackground: false,
+                interfaceDeviceName: interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                textDisplayDictionary: devDictionary
+                );
+        }
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            if (reader.Name.Equals("UseTextualDisplays"))
+            {
+                UseTextualDisplays = bool.Parse(reader.ReadElementString("UseTextualDisplays"));
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("UseTextualDisplays", _useTextualDisplays.ToString(CultureInfo.InvariantCulture));
         }
 
         public override bool HitTest(Point location)

@@ -1,6 +1,6 @@
 ﻿<ControlTemplate>
   <Name>Switch Short Black</Name>
-  <Category>M2000C</Category>
+  <Category>M-2000C</Category>
   <TypeIdentifier>Helios.Base.ToggleSwitch</TypeIdentifier>
   <Template>
     <TemplateValues>

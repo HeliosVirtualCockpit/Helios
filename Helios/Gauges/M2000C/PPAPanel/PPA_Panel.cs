@@ -21,13 +21,18 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.PPA_PANEL", "PPA Panel", "M2000C Gauges", typeof(BackgroundImageRenderer))]
+    [HeliosControl("HELIOS.M2000C.PPA_PANEL", "PPA Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class M2000C_PPAPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 350, 203);
         private string _interfaceDeviceName = "PPA Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
+        private bool _useTextualDisplays = false;
+        private ImageDecoration _displayBackground;
+
 
         public M2000C_PPAPanel()
             : base("PPA Panel", new Size(350, 203))
@@ -108,6 +113,12 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicator("MAGIC MAG", "mag", new Point(column2, row1), new Size(16, 9));
             AddIndicator("TOT Firing Mode", "tot", new Point(column3, row2), new Size(16, 9));
             AddIndicator("PAR Firing Mode", "par", new Point(column3, row3), new Size(16, 9));
+
+            _displayBackground = AddImage("PCA Display Background Upper", new Point(190d, 85d), new Size(61d, 107d));
+
+            AddTextDisplay("PPA Display Quantity", new Point(196d, 89d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Quantity", 50, "00", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PPA Dispaly Interval", new Point(196d, 139d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Interval", 50, "00", TextHorizontalAlignment.Left, "");
+
         }
 
         #region Properties
@@ -115,6 +126,27 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         public override string DefaultBackgroundImage
         {
             get { return "{M2000C}/Images/PPAPanel/ppa-panel.png"; }
+        }
+
+        public bool UseTextualDisplays
+        {
+            get => _useTextualDisplays;
+            set
+            {
+                if (value != _useTextualDisplays)
+                {
+                    _useTextualDisplays = value;
+                    foreach (HeliosVisual child in this.Children)
+                    {
+                        if (child is TextDisplay textDisplay)
+                        {
+                            textDisplay.IsHidden = !_useTextualDisplays;
+                        }
+                    }
+                    _displayBackground.IsHidden = !_useTextualDisplays;  
+                    Refresh();
+                }
+            }
         }
 
         #endregion
@@ -181,7 +213,57 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 fromCenter: true,
                 withText: false); //added in Composite Visual as an optional value with a default value set to true
         }
+        private void AddTextDisplay(string name, Point posn, Size size,
+    string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
+        {
+            TextDisplay display = AddTextDisplay(
+                name: name,
+                posn: posn,
+                size: size,
+                font: _font,
+                baseFontsize: baseFontsize,
+                horizontalAlignment: hTextAlign,
+                verticalAligment: TextVerticalAlignment.Center,
+                testTextDisplay: testDisp,
+                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
+                backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
+                useBackground: false,
+                interfaceDeviceName: interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                textDisplayDictionary: devDictionary
+                );
+            display.IsHidden = !_useTextualDisplays;
+        }
 
+        private ImageDecoration AddImage(string name, Point posn, Size size)
+        {
+            ImageDecoration image = new ImageDecoration();
+            image.Name = name;
+            image.Image = "{M2000C}/Images/Miscellaneous/UHF_Repeater_Display_Background.png";
+            image.Alignment = ImageAlignment.Centered;
+            image.Top = posn.Y;
+            image.Left = posn.X;
+            image.Width = size.Width;
+            image.Height = size.Height;
+            image.IsHidden = !_useTextualDisplays;
+            Children.Add(image);
+            return image;
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            if (reader.Name.Equals("UseTextualDisplays"))
+            {
+                UseTextualDisplays = bool.Parse(reader.ReadElementString("UseTextualDisplays"));
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("UseTextualDisplays", _useTextualDisplays.ToString(CultureInfo.InvariantCulture));
+        }
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="PCNMinus" Width="16" Height="16">
+    <Canvas.RenderTransform>
+        <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas Name="layer1">
+        <Canvas Name="textMinus">
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="pathMinus" Fill="#cc50c339" Data="m 19.275964 28.431083 h -5.159365 v -1.496546 h 5.159365 z" Height="4" Stretch="Fill" Width="14"/>
+        </Canvas>
+    </Canvas>
+</Canvas>
+

@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDeviceName = "AV-8B Cockpit";
-        private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI"; // "Segment7 Standard"; //"Seven Segment";
+        private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI"; // "Segment7 Standard"
         private Color _textColor = Color.FromArgb(0xff, 220, 220, 220);
         private Color _backGroundColor = Color.FromArgb(100, 100, 20, 50);
         private string _imageLocation = "{AV-8B}/Images/";
@@ -42,16 +42,16 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             AddPanel("EDP Surround", new Point(1673 , 55), new Size(624 , 292), _imageLocation + "WQHD/Panel/EDP Surround.png", _interfaceDeviceName,"EDP Surround Panel Element");
             AddPart("Master Arm Device", new MasterArmPanel(), new Point(164, 304), new Size(138, 617), _interfaceDeviceName, "Master Arm Element");
             AddPart("ODU Device", new ODU_1(), new Point(351 , 42), new Size(546 , 313), _interfaceDeviceName, "ODU Element");
-            AddPart("MFD Left Device", new Left_MPCD_1(), new Point(301 , 347), new Size(560 , 632), _interfaceDeviceName, "MFD Left Element");
-            AddPart("MFD Right Device", new Right_MPCD_1(), new Point(1707 , 347), new Size(560 , 632), _interfaceDeviceName, "MFD Left Element");
+            AddPart("MFD Left Device", new Left_MPCD_1(), new Point(301 , 347), new Size(560 , 692), _interfaceDeviceName, "MFD Left Element");
+            AddPart("MFD Right Device", new Right_MPCD_1(), new Point(1707 , 347), new Size(560 , 692), _interfaceDeviceName, "MFD Right Element");
             AddPart("EDP Device", new EDP(), new Point(1769, 85), new Size(405, 233), _interfaceDeviceName, "EDP Element");
             AddPart("Landing Gear Indicators", new GearIndicatorPanel(), new Point(859, 759), new Size(135, 225), _interfaceDeviceName, "Gear Indicator Element");
             AddButton("Landing Gear Indicators", 859, 759, new Size(135, 225), _interfaceDeviceName, "Gear Indicator Button");  // this is to allow pressing the indicator panel to activate something
             AddPart("UFC Device", new UFC_1(), new Point(856 , 20), new Size(872 , 876), _interfaceDeviceName, "UFC Element");
             AddPart("Flight Instrument Device", new FlightInstrumentPanel(), new Point(998 , 858), new Size(774 , 556), _interfaceDeviceName, "Flight Instrument Panel");
-            AddPart("Slip Turn Indicator", new SlipTurnPanel(), new Point(765, 1261), new Size(225, 114), _interfaceDeviceName, "Slip Ball");
-            AddPart("SMC Device", new SMC_1(), new Point(275 , 987), new Size(708 , 271), _interfaceDeviceName, "SMC Element");
-            AddPart("FQIS Device", new FuelPanel.FQIS(), new Point(1774 , 983), new Size(484 , 191), _interfaceDeviceName, "FQIS Element");
+            AddPart("Slip Turn Indicator", new SlipTurnPanel(), new Point(765, 1321), new Size(225, 114), _interfaceDeviceName, "Slip Ball");
+            AddPart("SMC Device", new SMC_1(), new Point(275 , 1047), new Size(708 , 271), _interfaceDeviceName, "SMC Element");
+            AddPart("FQIS Device", new FuelPanel.FQIS(), new Point(1774 , 1043), new Size(484 , 191), _interfaceDeviceName, "FQIS Element");
             AddPart("H2O Device", new H2OPanel(), new Point(165 , 987), new Size(108 , 321), _interfaceDeviceName, "H2O Element");
             AddPart("RWR / ECM Device", new RWRPanel(), new Point(2291 , 410), new Size(141 , 521), _interfaceDeviceName, "RWR Element");
             AddPart("Threat Indicator Device", new ThreatIndicatorPanel(), new Point(2184 , 122), new Size(186 , 268), _interfaceDeviceName, "Threat Indicator Element");
