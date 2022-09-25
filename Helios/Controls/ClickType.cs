@@ -47,6 +47,9 @@ namespace GadrocsWorkshop.Helios.Controls
 
         [Description("Swipe over the control in the direction it should move")]
         Swipe,
+
+        [Description("Touch the control anywhere to switch it")]
+        OneTouch,
     }
 
     /// <summary>

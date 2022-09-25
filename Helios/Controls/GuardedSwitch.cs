@@ -285,7 +285,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 _mouseDownLocation = location;
                 _mouseAction = false;
             }
-            else if (ClickType == LinearClickType.Touch)
+            else if (ClickType == LinearClickType.Touch || ClickType == LinearClickType.OneTouch)
             {
                 switch (GuardPosition)
                 {
