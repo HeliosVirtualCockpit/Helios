@@ -10,7 +10,7 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Height="609.143" Width="176.5">
     <HeliosSdk:HeliosPropertyEditor.Resources>
-        <Helios:EnumConverter Type="{x:Type HeliosBase:LinearClickType}" x:Key="ClickTypes" />
+        <Helios:EnumConverter Type="{x:Type HeliosBase:LinearClickTypeDirectional}" x:Key="ClickTypes" />
 
         <Style x:Key="NoTouchStyle" TargetType="FrameworkElement">
             <Style.Triggers>
