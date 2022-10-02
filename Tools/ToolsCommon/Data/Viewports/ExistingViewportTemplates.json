@@ -270,5 +270,68 @@
         "height": 27
       }
     ]
+  },
+  {
+    "templateName": "A-4E-C",
+    "moduleId": "A-4E-C",
+    "viewports": [
+      {
+        "viewportName": "A4E_RADAR",
+        "relativeInitFilePath": "",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1030,
+        "y": 419,
+        "width": 250,
+        "height": 250
+      }
+    ]
+  },
+  {
+    "templateName": "A29B",
+    "moduleId": "A-29B",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "A29B_LEFT_MFCD",
+        "relativeInitFilePath": "",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 392,
+        "y": 335,
+        "width": 350,
+        "height": 500
+      },
+      {
+        "viewportName": "A29B_RIGHT_MFCD",
+        "relativeInitFilePath": "",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 1209,
+        "y": 335,
+        "width": 350,
+        "height": 500
+      },
+      {
+        "viewportName": "A29B_UFCP",
+        "relativeInitFilePath": "",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 860,
+        "y": 50,
+        "width": 240,
+        "height": 90
+      },
+      {
+        "viewportName": "A29B_BFI",
+        "relativeInitFilePath": "",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 900,
+        "y": 340,
+        "width": 140,
+        "height": 160
+      }
+    ]
   }
 ]
