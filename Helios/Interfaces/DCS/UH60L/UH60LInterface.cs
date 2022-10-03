@@ -886,10 +886,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
 
             //-- Electric system
             AddFunction(Switch.CreateToggleSwitch(this, devices.EFM_HELPER.ToString("d"), EFM_commands.batterySwitch.ToString("d"), "17", "1.0", "On", "0.0", "Off", "EFM", "Battery Switch, ON/OFF", "%.1f"));
-            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "18", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.extPwrSwitch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.extPwrSwitch.ToString("d")), new SwitchPosition("1.0", "Reset", EFM_commands.extPwrSwitch2.ToString("d"), null, null, "0.0") }, "EFM", "External Power Switch, ON/OFF/RESET", "%0.1f"));
-            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "19", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.apuGenSwitch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.apuGenSwitch.ToString("d")), new SwitchPosition("1.0", "Test", EFM_commands.apuGenSwitch2.ToString("d"), null, null, "0.0") }, "EFM", "APU GEN Switch, ON/OFF/TEST", "%0.1f"));
-            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "20", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.gen1Switch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.gen1Switch.ToString("d")), new SwitchPosition("1.0", "Test", EFM_commands.gen1Switch2.ToString("d"), null, null, "0.0") }, "EFM", "GEN 1 Switch, ON/OFF/TEST", "%0.1f"));
-            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "21", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.gen2Switch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.gen2Switch.ToString("d")), new SwitchPosition("1.0", "Test", EFM_commands.gen2Switch2.ToString("d"), null, null, "0.0") }, "EFM", "GEN 2 Switch, ON/OFF/TEST", "%0.1f"));
+            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "18", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.extPwrSwitch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.extPwrSwitch.ToString("d")), new SwitchPosition("1.0", "Reset", EFM_commands.extPwrSwitch2.ToString("d"), null, null, "0.0") }, "EFM", "External Power Switch, ON/OFF/RESET", "%.1f"));
+            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "19", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.apuGenSwitch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.apuGenSwitch.ToString("d")), new SwitchPosition("1.0", "Test", EFM_commands.apuGenSwitch2.ToString("d"), null, null, "0.0") }, "EFM", "APU GEN Switch, ON/OFF/TEST", "%.1f"));
+            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "20", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.gen1Switch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.gen1Switch.ToString("d")), new SwitchPosition("1.0", "Test", EFM_commands.gen1Switch2.ToString("d"), null, null, "0.0") }, "EFM", "GEN 1 Switch, ON/OFF/TEST", "%.1f"));
+            AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "21", new SwitchPosition[] { new SwitchPosition("-1.0", "Off", EFM_commands.gen2Switch.ToString("d")), new SwitchPosition("0.0", "On", EFM_commands.gen2Switch.ToString("d")), new SwitchPosition("1.0", "Test", EFM_commands.gen2Switch2.ToString("d"), null, null, "0.0") }, "EFM", "GEN 2 Switch, ON/OFF/TEST", "%.1f"));
 
             //-- Fuel and Engines
             AddFunction(new Switch(this, devices.EFM_HELPER.ToString("d"), "22", new SwitchPosition[] { new SwitchPosition("-1.0", "Fuel Prime", EFM_commands.switchFuelPump.ToString("d")), new SwitchPosition("0.0", "Off", EFM_commands.switchFuelPump.ToString("d")), new SwitchPosition("1.0", "APU Boost", EFM_commands.switchFuelPump.ToString("d"), null, null, "0.0") }, "EFM", "Fuel Pump Switch, FUEL PRIME/OFF/APU BOOST", "%0.1f"));
@@ -907,14 +907,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.ECQ.ToString("d"), device_commands.eng2Starter.ToString("d"), "31", "Engine Control", "Engine 2 Starter"));
             //
             //-- STAB PANEL
-            AddFunction(new Switch(this, devices.ECQ.ToString("d"), "32", new SwitchPosition[] { new SwitchPosition("0.0", "Up", device_commands.slewStabUp.ToString("d")), new SwitchPosition("0.5", "Off", device_commands.slewStabUp.ToString("d")), new SwitchPosition("1.0", "Down", device_commands.slewStabDown.ToString("d"), null, null, "0.0") }, "Stability Control", "Stabilator Manual Slew UP/DOWN", "%0.1f"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsStabAuto.ToString("d"), "33", "Stability Control", "Stabilator Auto ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS1.ToString("d"), "34", "Stability Control", "SAS 1 ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS2.ToString("d"), "35", "Stability Control", "SAS 2 ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsTrim.ToString("d"), "36", "Stability Control", "Trim ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsFPS.ToString("d"), "37", "Stability Control", "FPS ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsBoost.ToString("d"), "38", "Stability Control", "SAS Boost ON/OFF"));
-            AddFunction(new PushButton(this, devices.EFM_HELPER.ToString("d"), EFM_commands.stabPwrReset.ToString("d"), "39", "Stability Control", "SAS Power On Reset"));
+            AddFunction(new Switch(this, devices.ECQ.ToString("d"), "32", new SwitchPosition[] { new SwitchPosition("0.0", "Up", device_commands.slewStabUp.ToString("d")), new SwitchPosition("0.5", "Off", device_commands.slewStabUp.ToString("d")), new SwitchPosition("1.0", "Down", device_commands.slewStabDown.ToString("d"), null, null, "0.0") }, "Stabilator Control", "Stabilator Manual Slew UP/DOWN", "%0.1f"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsStabAuto.ToString("d"), "33", "Stabilator Control", "Stabilator Auto ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS1.ToString("d"), "34", "Stabilator Control", "SAS 1 ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS2.ToString("d"), "35", "Stabilator Control", "SAS 2 ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsTrim.ToString("d"), "36", "Stabilator Control", "Trim ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsFPS.ToString("d"), "37", "Stabilator Control", "FPS ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsBoost.ToString("d"), "38", "Stabilator Control", "SAS Boost ON/OFF"));
+            AddFunction(new PushButton(this, devices.EFM_HELPER.ToString("d"), EFM_commands.stabPwrReset.ToString("d"), "39", "Stabilator Control", "SAS Power On Reset"));
 
             //
             //--FUEL PUMPS
@@ -951,10 +951,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
 
             //
             //-- MISC
-            AddFunction(new PushButton(this, devices.MISC.ToString("d"), device_commands.miscFuelIndTest.ToString("d"), "305", "Misc", "Fuel Indicator Test")); // Inop
-            AddFunction(new PushButton(this, devices.MISC.ToString("d"), device_commands.miscTailWheelLock.ToString("d"), "291", "Misc", "Wheel Lock"));
-            AddFunction(new PushButton(this, devices.MISC.ToString("d"), device_commands.miscGyroEffect.ToString("d"), "292", "Misc", "Gyro Select"));  // Inop
-            AddFunction(Switch.CreateToggleSwitch(this, devices.MISC.ToString("d"), device_commands.miscTailServo.ToString("d"), "296", "1.0", "Normal", "0.0", "Backup", "Misc", "Servo Select NORMAL/BACKUP", "%.1f")); // Inop
+            AddFunction(new PushButton(this, devices.MISC.ToString("d"), device_commands.miscFuelIndTest.ToString("d"), "290", "Misc Panel", "Fuel Indicator Test")); // Inop
+            AddFunction(new PushButton(this, devices.MISC.ToString("d"), device_commands.miscTailWheelLock.ToString("d"), "291", "Misc Panel", "Wheel Lock"));
+            AddFunction(new PushButton(this, devices.MISC.ToString("d"), device_commands.miscGyroEffect.ToString("d"), "292", "Misc Panel", "Gyro Select"));  // Inop
+            AddFunction(Switch.CreateToggleSwitch(this, devices.MISC.ToString("d"), device_commands.miscTailServo.ToString("d"), "296", "1.0", "Normal", "0.0", "Backup", "Misc Panel", "Servo Select NORMAL/BACKUP", "%.1f")); // Inop
 
             //
             //-- CAUTION/DISPLAY PANELS
@@ -968,8 +968,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.CAUTION_ADVISORY_PANEL.ToString("d"), device_commands.CAPMasterCautionReset.ToString("d"), "306", "Caution Panel", "Master Caution Reset (306)"));  // not sure why this has two codes CPLT/Pilot maybe
 
             //
-            AddFunction(new Switch(this, devices.ASN128B.ToString("d"), "500", GetSwitchPositions(7, 0.01, device_commands.SelectDisplay.ToString("d")), "AN/ASN-128B", "Display Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ASN128B.ToString("d"), "501", GetSwitchPositions(6, 0.01, device_commands.SelectMode.ToString("d")), "AN/ASN-128B", "Mode Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ASN128B.ToString("d"), "500", CreateSwitchPositions(7, 0.01, device_commands.SelectDisplay.ToString("d")), "AN/ASN-128B", "Display Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ASN128B.ToString("d"), "501", CreateSwitchPositions(6, 0.01, device_commands.SelectMode.ToString("d")), "AN/ASN-128B", "Mode Selector", "%0.2f"));
             AddFunction(new PushButton(this, devices.ASN128B.ToString("d"), device_commands.SelectBtnKybd.ToString("d"), "502", "AN/ASN-128B", "Button Keyboard"));
             AddFunction(new PushButton(this, devices.ASN128B.ToString("d"), device_commands.SelectBtnLtrLeft.ToString("d"), "503", "AN/ASN-128B", "Button Letter Left"));
             AddFunction(new PushButton(this, devices.ASN128B.ToString("d"), device_commands.SelectBtnLtrMid.ToString("d"), "504", "AN/ASN-128B", "Button Letter Middle"));
@@ -1055,12 +1055,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
                 new SwitchPosition("-1.0", "Up", device_commands.foo.ToString("d")),
                 new SwitchPosition("0.0", "Off", device_commands.foo.ToString("d")),
                 new SwitchPosition("1.0", "Down", device_commands.foo.ToString("d"))
-                }, "AN/AVS-7", "Pilot DSPL POS Down/Up", " %0.1f"));  //Inop
+                }, "AN/AVS-7", "Pilot DSPL POS Down/Up", "%0.1f"));  //Inop
             AddFunction(new Switch(this, devices.AVS7.ToString("d"), "1108", new SwitchPosition[] {
                 new SwitchPosition("-1.0", "Left", device_commands.foo.ToString("d")),
                 new SwitchPosition("0.0", "Off", device_commands.foo.ToString("d")),
                 new SwitchPosition("1.0", "Right", device_commands.foo.ToString("d"))
-                }, "AN/AVS-7", "Pilot DSPL POS Left/Right", " %0.1f"));  //Inop
+                }, "AN/AVS-7", "Pilot DSPL POS Left/Right", "%0.1f"));  //Inop
             AddFunction(new Switch(this, devices.AVS7.ToString("d"), "1109", new SwitchPosition[] {
                 new SwitchPosition("-1.0", "Bright", device_commands.incAVS7Brightness.ToString("d")),
                 new SwitchPosition("0.0", "Off", device_commands.incAVS7Brightness.ToString("d")),
@@ -1070,23 +1070,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
                 new SwitchPosition("-1.0", "Up", device_commands.foo.ToString("d")),
                 new SwitchPosition("0.0", "Off", device_commands.foo.ToString("d")),
                 new SwitchPosition("1.0", "Down", device_commands.foo.ToString("d"))
-                }, "AN/AVS-7", "Copilot DSPL POS Down/Up", " %0.1f"));  //Inop
+                }, "AN/AVS-7", "Copilot DSPL POS Down/Up", "%0.1f"));  //Inop
             AddFunction(new Switch(this, devices.AVS7.ToString("d"), "1111", new SwitchPosition[] {
                 new SwitchPosition("-1.0", "Left", device_commands.foo.ToString("d")),
                 new SwitchPosition("0.0", "Off", device_commands.foo.ToString("d")),
                 new SwitchPosition("1.0", "Right", device_commands.foo.ToString("d"))
-                }, "AN/AVS-7", "Copilot DSPL POS Left/Right", " %0.1f"));  //Inop
+                }, "AN/AVS-7", "Copilot DSPL POS Left/Right", "%0.1f"));  //Inop
 
             //-- AN/ARC-164
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "50", GetSwitchPositions(4 ,0.01, device_commands.arc164_mode.ToString("d")), "AN/ARC-164", "Mode", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "50", CreateSwitchPositions(4 ,0.01, device_commands.arc164_mode.ToString("d")), "AN/ARC-164", "Mode", "%0.2f"));
             AddFunction(new Axis(this, devices.ARC164.ToString("d"), device_commands.arc164_volume.ToString("d"), "51", 0.1d, 0d, 1d, "AN/ARC-164", "Volume"));
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "52", GetSwitchPositions(4, 0.01, device_commands.arc164_freq_Xooooo.ToString("d")), "AN/ARC-164", "Manual/Preset/Guard", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "53", GetSwitchPositions(2, 0.1, device_commands.arc164_freq_Xooooo.ToString("d")), "AN/ARC-164", "Digit 100", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "54", GetSwitchPositions(10, 0.1, device_commands.arc164_freq_oXoooo.ToString("d")), "AN/ARC-164", "Digit 10", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "55", GetSwitchPositions(10, 0.1, device_commands.arc164_freq_ooXooo.ToString("d")), "AN/ARC-164", "Digit 1", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "56", GetSwitchPositions(10, 0.1, device_commands.arc164_freq_oooXoo.ToString("d")), "AN/ARC-164", "Digit 0.1", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "57", GetSwitchPositions(4, 0.1, device_commands.arc164_freq_ooooXX.ToString("d")), "AN/ARC-164", "Digit 0.010", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "58", GetSwitchPositions(20, 0.05, device_commands.arc164_preset.ToString("d")), "AN/ARC-164", "Preset", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "52", CreateSwitchPositions(4, 0.01, device_commands.arc164_freq_Xooooo.ToString("d")), "AN/ARC-164", "Manual/Preset/Guard", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "53", CreateSwitchPositions(2, 0.1, device_commands.arc164_freq_Xooooo.ToString("d")), "AN/ARC-164", "Digit 100", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "54", CreateSwitchPositions(10, 0.1, device_commands.arc164_freq_oXoooo.ToString("d")), "AN/ARC-164", "Digit 10", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "55", CreateSwitchPositions(10, 0.1, device_commands.arc164_freq_ooXooo.ToString("d")), "AN/ARC-164", "Digit 1", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "56", CreateSwitchPositions(10, 0.1, device_commands.arc164_freq_oooXoo.ToString("d")), "AN/ARC-164", "Digit 0.1", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "57", CreateSwitchPositions(4, 0.1, device_commands.arc164_freq_ooooXX.ToString("d")), "AN/ARC-164", "Digit 0.010", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC164.ToString("d"), "58", CreateSwitchPositions(20, 0.05, device_commands.arc164_preset.ToString("d")), "AN/ARC-164", "Preset", "%0.2f"));
 
             //
             //-- Pilot APN-209 Radar Altimeter
@@ -1236,7 +1236,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
                 new SwitchPosition("1.00", "3",device_commands.arc186FreqSelector.ToString("d"))
                 }, "AN/ARC-186", "Frequency Control Selector", "%0.2f"));
             AddFunction(new PushButton(this, devices.ARC186.ToString("d"), device_commands.arc186Load.ToString("d"), "417", "AN/ARC-186", "Load Pushbutton"));
-            AddFunction(new Switch(this, devices.ARC186.ToString("d"), "418", GetSwitchPositions(20,0.05, device_commands.arc186PresetSelector.ToString("d")), "AN/ARC-186", "Preset Channel Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC186.ToString("d"), "418", CreateSwitchPositions(20,0.05, device_commands.arc186PresetSelector.ToString("d")), "AN/ARC-186", "Preset Channel Selector", "%0.2f"));
             AddFunction(new Switch(this, devices.ARC186.ToString("d"), "419", new SwitchPosition[] {
                 new SwitchPosition("0.0", "0",device_commands.arc186ModeSelector.ToString("d")),
                 new SwitchPosition("0.5", "1",device_commands.arc186ModeSelector.ToString("d")),
@@ -1254,7 +1254,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
                 new SwitchPosition("0.5", "Both", device_commands.afmcpXferFrom.ToString("d")),
                 new SwitchPosition("1.0", "Left", device_commands.afmcpXferFrom.ToString("d"))
                 }, "Aux Fuel", "Manual Transfer RIGHT/BOTH/LEFT", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, devices.AFMS.ToString("d"), device_commands.afmcpXferFrom.ToString("d"), "470", "1.0", "OUTBD", "0.0", "INBD", "Aux Fuel", "Transfer From OUTBD/INBD", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.AFMS.ToString("d"), device_commands.afmcpXferFrom.ToString("d"), "462", "1.0", "OUTBD", "0.0", "INBD", "Aux Fuel", "Transfer From OUTBD/INBD", "%.1f"));
             AddFunction(new Switch(this, devices.AFMS.ToString("d"), "463", new SwitchPosition[] {
                 new SwitchPosition("0.0", "1", device_commands.afmcpPress.ToString("d")),
                 new SwitchPosition("0.33", "2", device_commands.afmcpPress.ToString("d")),
@@ -1275,8 +1275,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             //-- M130 CM System
             AddFunction(Switch.CreateToggleSwitch(this, devices.M130.ToString("d"), device_commands.cmFlareDispenseModeCover.ToString("d"), "550", "1.0", "Open", "0.0", "Closed", "Counter Measures", "Flare Dispenser Mode Cover", "%.1f"));
             //--cmFlareDispenseMode
-            //elements["PNT-552"]	= multiposition_switch_relative(_("Flare Counter"),                      devices.M130, device_commands.cmFlareCounterDial, 552, 10, 1/9, false, 0, 16, true)
-            //elements["PNT-553"]	= multiposition_switch_relative(_("Chaff Counter"),                      devices.M130, device_commands.cmChaffCounterDial, 553, 10, 1/9, false, 0, 16, true)
+            AddFunction(new Switch(this, devices.M130.ToString("d"), "552", CreateSwitchPositions(10, 1 / 9, device_commands.cmFlareCounterDial.ToString("d")), "Counter Measures", "Flare Counter Encoder", "%0.2f"));
+            AddFunction(new Switch(this, devices.M130.ToString("d"), "553", CreateSwitchPositions(10, 1 / 9, device_commands.cmChaffCounterDial.ToString("d")), "Counter Measures", "Chaff Counter Encoder", "%0.2f"));
+            AddFunction(new NetworkValue(this, mainpanel.cmFlareCounterTens.ToString("d"), "Counter Measures", "M130 Flare Counter Tens Digit", "Number", "", BindingValueUnits.Numeric, "%0.2f"));
+            AddFunction(new NetworkValue(this, mainpanel.cmFlareCounterOnes.ToString("d"), "Counter Measures", "M130 Flare Counter Ones Digit", "Number", "", BindingValueUnits.Numeric, "%0.2f"));
+            AddFunction(new NetworkValue(this, mainpanel.cmChaffCounterTens.ToString("d"), "Counter Measures", "M130 Chaff Counter Tens Digit", "Number", "", BindingValueUnits.Numeric, "%0.2f"));
+            AddFunction(new NetworkValue(this, mainpanel.cmChaffCounterOnes.ToString("d"), "Counter Measures", "M130 Chaff Counter Ones Digit", "Number", "", BindingValueUnits.Numeric, "%0.2f"));
+            AddFunction(new FlagValue(this, mainpanel.cmArmedLight.ToString("d"), "Counter Measures", "M130 Armed Indicator", ""));
             AddFunction(Switch.CreateToggleSwitch(this, devices.M130.ToString("d"), device_commands.cmArmSwitch.ToString("d"), "559", "1.0", "Arm", "0.0", "Safe", "Counter Measures", "Arming Switch", "%.1f"));
             AddFunction(new Switch(this, devices.M130.ToString("d"), "560", new SwitchPosition[] {
                 new SwitchPosition("0.0", "0",device_commands.cmProgramDial.ToString("d")),
@@ -1286,10 +1291,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.M130.ToString("d"), device_commands.cmChaffDispense.ToString("d"), "561", "Counter Measures", "Chaff Dispense"));
 
             //-- ARC-201 FM1
-            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "600", GetSwitchPositions(8, 0.01, device_commands.fm1PresetSelector.ToString("d")), "AN/ARC-201 FM1", "Preset Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "601", GetSwitchPositions(9, 0.01, device_commands.fm1FunctionSelector.ToString("d")), "AN/ARC-201 FM1", "Function Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "602", GetSwitchPositions(4, 0.01, device_commands.fm1PwrSelector.ToString("d")), "AN/ARC-201 FM1", "PWR Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "603", GetSwitchPositions(4, 0.01, device_commands.fm1ModeSelector.ToString("d")), "AN/ARC-201 FM1", "Mode Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "600", CreateSwitchPositions(8, 0.01, device_commands.fm1PresetSelector.ToString("d")), "AN/ARC-201 FM1", "Preset Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "601", CreateSwitchPositions(9, 0.01, device_commands.fm1FunctionSelector.ToString("d")), "AN/ARC-201 FM1", "Function Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "602", CreateSwitchPositions(4, 0.01, device_commands.fm1PwrSelector.ToString("d")), "AN/ARC-201 FM1", "PWR Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM1.ToString("d"), "603", CreateSwitchPositions(4, 0.01, device_commands.fm1ModeSelector.ToString("d")), "AN/ARC-201 FM1", "Mode Selector", "%0.2f"));
             AddFunction(new Axis(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1Volume.ToString("d"), "604", 0.1d, 0d, 1d, "AN/ARC-201 FM1", "Volume"));
             AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1Btn1.ToString("d"), "605", "AN/ARC-201 FM1", "Button 1"));
             AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1Btn2.ToString("d"), "606", "AN/ARC-201 FM1", "Button 2"));
@@ -1308,21 +1313,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1BtnTime.ToString("d"), "619", "AN/ARC-201 FM1", "Button Time"));
             //
             //-- AN/ARN-149
-            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "620", GetSwitchPositions(3, 0.5, device_commands.arn149Preset.ToString("d")), "AN/ARN-149", "Preset Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "620", CreateSwitchPositions(3, 0.5, device_commands.arn149Preset.ToString("d")), "AN/ARN-149", "Preset Selector", "%0.2f"));
             AddFunction(new Switch(this, devices.ARN149.ToString("d"), "621", new SwitchPosition[] { new SwitchPosition("-1.0", "Tone", device_commands.arn149ToneTest.ToString("d")), new SwitchPosition("0.0", "Off", device_commands.arn149ToneTest.ToString("d")), new SwitchPosition("1.0", "Test", device_commands.arn149ToneTest.ToString("d"), null, null, "0.0") }, "AN/ARN-149", "TONE/OFF/TEST", "%0.1f"));
             AddFunction(new Axis(this, devices.ARN149.ToString("d"), device_commands.fm2Volume.ToString("d"), "622", 0.1d, 0d, 1d, "AN/ARN-149", "Volume"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.ARN149.ToString("d"), device_commands.foo.ToString("d"), "623", "1.0", "On", "0.0", "Off", "AN/ARN-149", "Take CMD", "%.1f"));  // Inop
-            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "624", GetSwitchPositions(3, 0.5, device_commands.arn149Power.ToString("d")), "AN/ARN-149", "Power Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "625", GetSwitchPositions(3, 0.5, device_commands.arn149thousands.ToString("d")), "AN/ARN-149", "1000s Khz Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "626", GetSwitchPositions(10, 0.1, device_commands.arn149hundreds.ToString("d")), "AN/ARN-149", "100s Khz Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "627", GetSwitchPositions(10, 0.1, device_commands.arn149tens.ToString("d")), "AN/ARN-149", "10s Khz Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "628", GetSwitchPositions(10, 0.1, device_commands.arn149ones.ToString("d")), "AN/ARN-149", "1s Khz Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "629", GetSwitchPositions(10, 0.1, device_commands.arn149tenths.ToString("d")), "AN/ARN-149", ".1s Khz Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "624", CreateSwitchPositions(3, 0.5, device_commands.arn149Power.ToString("d")), "AN/ARN-149", "Power Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "625", CreateSwitchPositions(3, 0.5, device_commands.arn149thousands.ToString("d")), "AN/ARN-149", "1000s Khz Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "626", CreateSwitchPositions(10, 0.1, device_commands.arn149hundreds.ToString("d")), "AN/ARN-149", "100s Khz Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "627", CreateSwitchPositions(10, 0.1, device_commands.arn149tens.ToString("d")), "AN/ARN-149", "10s Khz Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "628", CreateSwitchPositions(10, 0.1, device_commands.arn149ones.ToString("d")), "AN/ARN-149", "1s Khz Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN149.ToString("d"), "629", CreateSwitchPositions(10, 0.1, device_commands.arn149tenths.ToString("d")), "AN/ARN-149", ".1s Khz Selector", "%0.2f"));
 
             //
             //-- AN/ARN-147
-            AddFunction(new Switch(this, devices.ARN147.ToString("d"), "650", GetSwitchPositions(10, 0.1, device_commands.arn147MHz.ToString("d")), "AN/ARN-147", "MHz Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARN147.ToString("d"), "651", GetSwitchPositions(10, 0.1, device_commands.arn147KHz.ToString("d")), "AN/ARN-147", "KHz Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN147.ToString("d"), "650", CreateSwitchPositions(10, 0.1, device_commands.arn147MHz.ToString("d")), "AN/ARN-147", "MHz Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARN147.ToString("d"), "651", CreateSwitchPositions(10, 0.1, device_commands.arn147KHz.ToString("d")), "AN/ARN-147", "KHz Selector", "%0.2f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.ARN147.ToString("d"), device_commands.foo.ToString("d"), "652", "1.0", "High", "0.0", "Low", "AN/ARN-147", "Marker Beacon HI/LO", "%.1f"));  // Inop
             AddFunction(new Switch(this, devices.ARN147.ToString("d"), "653", new SwitchPosition[] {
                 new SwitchPosition("-1.0", "Off", device_commands.arn147Power.ToString("d")),
@@ -1340,10 +1345,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
                 }, "Wipers", "Wipers PARK/OFF/LOW/HI", "%0.2f"));
             //
             //-- ARC-201 FM2
-            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "700", GetSwitchPositions(8, 0.01, device_commands.fm2PresetSelector.ToString("d")), "AN/ARC-201 FM2", "Preset Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "701", GetSwitchPositions(9, 0.01, device_commands.fm2FunctionSelector.ToString("d")), "AN/ARC-201 FM2", "Function Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "702", GetSwitchPositions(4, 0.01, device_commands.fm2PwrSelector.ToString("d")), "AN/ARC-201 FM2", "PWR Selector", "%0.2f"));
-            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "703", GetSwitchPositions(4, 0.01, device_commands.fm2ModeSelector.ToString("d")), "AN/ARC-201 FM2", "Mode Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "700", CreateSwitchPositions(8, 0.01, device_commands.fm2PresetSelector.ToString("d")), "AN/ARC-201 FM2", "Preset Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "701", CreateSwitchPositions(9, 0.01, device_commands.fm2FunctionSelector.ToString("d")), "AN/ARC-201 FM2", "Function Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "702", CreateSwitchPositions(4, 0.01, device_commands.fm2PwrSelector.ToString("d")), "AN/ARC-201 FM2", "PWR Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC201_FM2.ToString("d"), "703", CreateSwitchPositions(4, 0.01, device_commands.fm2ModeSelector.ToString("d")), "AN/ARC-201 FM2", "Mode Selector", "%0.2f"));
             AddFunction(new Axis(this, devices.ARC201_FM2.ToString("d"), device_commands.fm2Volume.ToString("d"), "704", 0.1d, 0d, 1d, "AN/ARC-201 FM2", "Volume"));
             AddFunction(new PushButton(this, devices.ARC201_FM2.ToString("d"), device_commands.fm2Btn1.ToString("d"), "705", "AN/ARC-201 FM2", "Button 1"));
             AddFunction(new PushButton(this, devices.ARC201_FM2.ToString("d"), device_commands.fm2Btn2.ToString("d"), "706", "AN/ARC-201 FM2", "Button 2"));
@@ -1381,24 +1386,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             // Indicators / Lamps / Flags
 
             // PILOT BARO ALTIMETER
-            //AddFunction(new FlagValue(this, mainpanel.pilotBaroAlt100s.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT 100", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pilotBaroAlt1000s.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT 1000", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pilotBaroAlt10000s.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT 10000", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pilotPressureScale1.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ADJ Nxxx", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pilotPressureScale2.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ADJ xNxx", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pilotPressureScale3.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ADJ xxNx", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pilotPressureScale4.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ADJ xxxN", ""));
             AddFunction(new Altimeter(this, Cockpit.Pilot));
             AddFunction(new FlagValue(this, mainpanel.pilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ENCODER FLAG", ""));
 
             // COPILOT ALTIMETER
-            //AddFunction(new FlagValue(this, mainpanel.copilotBaroAlt100s.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT 100", ""));|
-            //AddFunction(new FlagValue(this, mainpanel.copilotBaroAlt1000s.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT 1000", ""));
-            //AddFunction(new FlagValue(this, mainpanel.copilotBaroAlt10000s.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT 10000", ""));
-            //AddFunction(new FlagValue(this, mainpanel.copilotPressureScale1.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ADJ Nxxx", ""));
-            //AddFunction(new FlagValue(this, mainpanel.copilotPressureScale2.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ADJ xNxx", ""));
-            //AddFunction(new FlagValue(this, mainpanel.copilotPressureScale3.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ADJ xxNx", ""));
-            //AddFunction(new FlagValue(this, mainpanel.copilotPressureScale4.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ADJ xxxN", ""));
             AddFunction(new Altimeter(this, Cockpit.Copilot));
             AddFunction(new FlagValue(this, mainpanel.copilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ENCODER FLAG", ""));
 
@@ -1552,6 +1543,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.capExtPwr.ToString("d"), "Indicators/Lamps/Flags", "DISPLAY CAP EXTPWRCONNECTED", ""));
             AddFunction(new FlagValue(this, mainpanel.capBlank.ToString("d"), "Indicators/Lamps/Flags", "DISPLAY CAP BLANK", ""));
 
+            AddFunction(new NetworkValue(this, mainpanel.pduPltOverspeed1.ToString("d"), "PDU (Pilot)", "Rotor Overspeed 1 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent,"%0.4f"));
+            AddFunction(new NetworkValue(this, mainpanel.pduPltOverspeed2.ToString("d"), "PDU (Pilot)", "Rotor Overspeed 2 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
+            AddFunction(new NetworkValue(this, mainpanel.pduPltOverspeed3.ToString("d"), "PDU (Pilot)", "Rotor Overspeed 3 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
+            AddFunction(new NetworkValue(this, mainpanel.pduCpltOverspeed1.ToString("d"), "PDU (Copilot)", "Rotor Overspeed 1 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
+            AddFunction(new NetworkValue(this, mainpanel.pduCpltOverspeed2.ToString("d"), "PDU (Copilot)", "Rotor Overspeed 2 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
+            AddFunction(new NetworkValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "PDU (Copilot)", "Rotor Overspeed 3 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
             //AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed1.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED1", ""));
             //AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED2", ""));
             //AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED3", ""));
@@ -1564,7 +1561,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             //AddFunction(new FlagValue(this, mainpanel.cmFlareCounterOnes.ToString("d"), "Indicators/Lamps/Flags", "M130 FLARECOUNTER ONES", ""));
             //AddFunction(new FlagValue(this, mainpanel.cmChaffCounterTens.ToString("d"), "Indicators/Lamps/Flags", "M130 CHAFFCOUNTER TENS", ""));
             //AddFunction(new FlagValue(this, mainpanel.cmChaffCounterOnes.ToString("d"), "Indicators/Lamps/Flags", "M130 CHAFFCOUNTER ONES", ""));
-            AddFunction(new FlagValue(this, mainpanel.cmArmedLight.ToString("d"), "Indicators/Lamps/Flags", "M130 ARMED LIGHT", ""));
 
             AddFunction(new FlagValue(this, mainpanel.pltDoorGlass.ToString("d"), "Indicators/Lamps/Flags", "Pilot Door Glass", ""));
             AddFunction(new FlagValue(this, mainpanel.cpltDoorGlass.ToString("d"), "Indicators/Lamps/Flags", "Co-Pilot Door Glass", ""));
@@ -1574,7 +1570,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.rCargoDoorGlass.ToString("d"), "Indicators/Lamps/Flags", "Right Cargo Door Glass", ""));
         }
 
-        private SwitchPosition[] GetSwitchPositions(int numPositions, double incrementalValue, string command)
+        private SwitchPosition[] CreateSwitchPositions(int numPositions, double incrementalValue, string command)
         {
             SwitchPosition[] switchPositions = new SwitchPosition[numPositions];
             for(int i = 1; i<= numPositions; i++)

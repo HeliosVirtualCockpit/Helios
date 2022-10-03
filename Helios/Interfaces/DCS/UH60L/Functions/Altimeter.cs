@@ -92,12 +92,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
                     break;
                 case "2052":
                 case "2054":
-                    parts = Tokenizer.TokenizeAtLeast(value, 3, ';');
-                    double tensOne = ClampedParse(parts[0], 1d, 26d, 5d);
-                    double tenths = ClampedParse(parts[1], .1d);
-                    double hundredths = Parse(parts[2], .01d);
+                    parts = Tokenizer.TokenizeAtLeast(value, 4, ';');
+                    double tens = ClampedParse(parts[0], 10d);
+                    double ones = ClampedParse(parts[1], 1d);
+                    double tenths = ClampedParse(parts[2], .1d);
+                    double hundredths = Parse(parts[3], .01d);
 
-                    double pressure = tensOne + tenths + hundredths;
+                    double pressure = tens + ones + tenths + hundredths;
                     _pressure.SetValue(new BindingValue(pressure), false);
                     break;
             }
