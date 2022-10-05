@@ -16,12 +16,12 @@
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
 {
     using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions;
     using static System.Net.Mime.MediaTypeNames;
     using System.Security.Policy;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions.Altimeter;
+    //using GadrocsWorkshop.Helios.Controls;
 
     /* enabling this attribute will cause Helios to discover this new interface and make it available for use    */
     [HeliosInterface(
@@ -940,6 +940,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.AHRU.ToString("d"), device_commands.ahruUp.ToString("d"), "91", "AHRU", "AHRU Display Cursor Movement UP")); // Inop
             AddFunction(new PushButton(this, devices.AHRU.ToString("d"), device_commands.ahruRight.ToString("d"), "92", "AHRU", "Display Cursor Movement RIGHT")); // Inop
             AddFunction(new PushButton(this, devices.AHRU.ToString("d"), device_commands.ahruEnter.ToString("d"), "93", "AHRU", "Enter Selection")); // Inop
+            AddFunction(new NetworkValue(this, "2106", "AHRU", "Display Text", "Text line displayed in  AHRU", "Text", BindingValueUnits.Text, null));
+
+            AddFunction(new FlagValue(this, mainpanel.ahruIndSlave.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND SLAVE", ""));
+            AddFunction(new FlagValue(this, mainpanel.ahruIndDG.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND DG", ""));
+            AddFunction(new FlagValue(this, mainpanel.ahruIndCcal.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND CCAL", ""));
+            AddFunction(new FlagValue(this, mainpanel.ahruIndFail.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND FAIL", ""));
+            AddFunction(new FlagValue(this, mainpanel.ahruIndAln.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND ALIGN", ""));
 
             //
             //-- PILOT HSI
@@ -990,6 +997,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.ASN128B.ToString("d"), device_commands.SelectBtn0.ToString("d"), "520", "AN/ASN-128B", "Button 0"));
             AddFunction(new PushButton(this, devices.ASN128B.ToString("d"), device_commands.SelectBtnClr.ToString("d"), "519", "AN/ASN-128B", "Button Clear"));
             AddFunction(new PushButton(this, devices.ASN128B.ToString("d"), device_commands.SelectBtnEnt.ToString("d"), "521", "AN/ASN-128B", "Button Enter"));
+            AddFunction(new NetworkValue(this, "2091", "AN/ASN-128B", "Display Line 1", "Nav Computer first display line", "Text", BindingValueUnits.Text, null));
+            AddFunction(new NetworkValue(this, "2092", "AN/ASN-128B", "Display Line 2", "Nav Computer second display line", "Text", BindingValueUnits.Text, null));
+            AddFunction(new NetworkValue(this, "2093", "AN/ASN-128B", "Display Line 3", "Nav Computer third display line", "Text", BindingValueUnits.Text, null));
+            AddFunction(new NetworkValue(this, "2094", "AN/ASN-128B", "Display Line 4", "Nav Computer fourth display line", "Text", BindingValueUnits.Text, null));
 
             //
             //-- CIS/MODE SEL
@@ -1261,6 +1272,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
                 new SwitchPosition("0.67", "3", device_commands.afmcpPress.ToString("d")),
                 new SwitchPosition("1.0", "4", device_commands.afmcpPress.ToString("d"))
                 }, "Aux Fuel", "Pressurization Selector", "%0.2f"));
+            AddFunction(new NetworkValue(this, "2107", "Aux Fuel", "Left Outboard Fuel Quantity", "Display of the fuel quantity", "Text", BindingValueUnits.Text, null));
+            AddFunction(new NetworkValue(this, "2108", "Aux Fuel", "Left Inboard Fuel Quantity", "Display of the fuel quantity", "Text", BindingValueUnits.Text, null));
+            AddFunction(new NetworkValue(this, "2109", "Aux Fuel", "Right Outboard Fuel Quantity", "Display of the fuel quantity", "Text", BindingValueUnits.Text, null));
+            AddFunction(new NetworkValue(this, "2110", "Aux Fuel", "Right Inboard Fuel Quantity", "Display of the fuel quantity", "Text", BindingValueUnits.Text, null));
+
 
             //
             //-- DOORS
@@ -1309,8 +1325,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1BtnClr.ToString("d"), "615", "AN/ARC-201 FM1", "Button Clear"));
             AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1BtnEnt.ToString("d"), "616", "AN/ARC-201 FM1", "Button Enter"));
             AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1BtnFreq.ToString("d"), "617", "AN/ARC-201 FM1", "Button Frequency"));
-            AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1BtnErfOfst.ToString("d"), "618", "AN/ARC-201 FM1", "Button ERF/OFST"));
+            AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1BtnErfOfst.ToString("d"), "618", "AN/ARC-201 FM1", "Button EFF/OFST"));
             AddFunction(new PushButton(this, devices.ARC201_FM1.ToString("d"), device_commands.fm1BtnTime.ToString("d"), "619", "AN/ARC-201 FM1", "Button Time"));
+            AddFunction(new NetworkValue(this, "2104", "AN/ARC-201 FM1", "Display Text", "Flight Management text", "Text", BindingValueUnits.Text, null));
+
             //
             //-- AN/ARN-149
             AddFunction(new Switch(this, devices.ARN149.ToString("d"), "620", CreateSwitchPositions(3, 0.5, device_commands.arn149Preset.ToString("d")), "AN/ARN-149", "Preset Selector", "%0.2f"));
@@ -1365,6 +1383,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.ARC201_FM2.ToString("d"), device_commands.fm2BtnFreq.ToString("d"), "717", "AN/ARC-201 FM2", "Button Frequency"));
             AddFunction(new PushButton(this, devices.ARC201_FM2.ToString("d"), device_commands.fm2BtnErfOfst.ToString("d"), "718", "AN/ARC-201 FM2", "Button ERF/OFST"));
             AddFunction(new PushButton(this, devices.ARC201_FM2.ToString("d"), device_commands.fm2BtnTime.ToString("d"), "719", "AN/ARC-201 FM2", "Button Time"));
+            AddFunction(new NetworkValue(this, "2105", "AN/ARC-201 FM2", "Display Text", "Flight Management text", "Text", BindingValueUnits.Text, null));
 
             //
             //-- CPLT ICP
@@ -1396,13 +1415,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             // MISC
             AddFunction(new FlagValue(this, mainpanel.parkingBrakeHandle.ToString("d"), "Indicators/Lamps/Flags", "PARKING BRAKE HANDLE", ""));
             AddFunction(new FlagValue(this, mainpanel.pilotPTT.ToString("d"), "Indicators/Lamps/Flags", "PILOT PTT", ""));
-
-            // AHRU
-            AddFunction(new FlagValue(this, mainpanel.ahruIndSlave.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND SLAVE", ""));
-            AddFunction(new FlagValue(this, mainpanel.ahruIndDG.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND DG", ""));
-            AddFunction(new FlagValue(this, mainpanel.ahruIndCcal.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND CCAL", ""));
-            AddFunction(new FlagValue(this, mainpanel.ahruIndFail.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND FAIL", ""));
-            AddFunction(new FlagValue(this, mainpanel.ahruIndAln.ToString("d"), "Indicators/Lamps/Flags", "AHRU IND ALIGN", ""));
 
             // CIS MODE LIGHTS
             AddFunction(new FlagValue(this, mainpanel.cisHdgOnLight.ToString("d"), "Indicators/Lamps/Flags", "LIGHTING CIS HDG ON", ""));
@@ -1543,18 +1555,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.capExtPwr.ToString("d"), "Indicators/Lamps/Flags", "DISPLAY CAP EXTPWRCONNECTED", ""));
             AddFunction(new FlagValue(this, mainpanel.capBlank.ToString("d"), "Indicators/Lamps/Flags", "DISPLAY CAP BLANK", ""));
 
-            AddFunction(new NetworkValue(this, mainpanel.pduPltOverspeed1.ToString("d"), "PDU (Pilot)", "Rotor Overspeed 1 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent,"%0.4f"));
-            AddFunction(new NetworkValue(this, mainpanel.pduPltOverspeed2.ToString("d"), "PDU (Pilot)", "Rotor Overspeed 2 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
-            AddFunction(new NetworkValue(this, mainpanel.pduPltOverspeed3.ToString("d"), "PDU (Pilot)", "Rotor Overspeed 3 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
-            AddFunction(new NetworkValue(this, mainpanel.pduCpltOverspeed1.ToString("d"), "PDU (Copilot)", "Rotor Overspeed 1 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
-            AddFunction(new NetworkValue(this, mainpanel.pduCpltOverspeed2.ToString("d"), "PDU (Copilot)", "Rotor Overspeed 2 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
-            AddFunction(new NetworkValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "PDU (Copilot)", "Rotor Overspeed 3 Value", "Percentage rotor overspeed", "", BindingValueUnits.RPMPercent, "%0.4f"));
-            //AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed1.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED1", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED2", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED3", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED1", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED2", ""));
-            //AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED3", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed1.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED1", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED2", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED3", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED1", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED2", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED3", ""));
 
             // M130 CM System
             //AddFunction(new FlagValue(this, mainpanel.cmFlareCounterTens.ToString("d"), "Indicators/Lamps/Flags", "M130 FLARECOUNTER TENS", ""));
@@ -1568,6 +1574,48 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.rGnrDoorGlass.ToString("d"), "Indicators/Lamps/Flags", "Right Gunner Door Glass", ""));
             AddFunction(new FlagValue(this, mainpanel.lCargoDoorGlass.ToString("d"), "Indicators/Lamps/Flags", "Left Cargo Door Glass", ""));
             AddFunction(new FlagValue(this, mainpanel.rCargoDoorGlass.ToString("d"), "Indicators/Lamps/Flags", "Right Cargo Door Glass", ""));
+
+
+            #region Network Values
+
+            AddFunction(new SegmentedMeter(this, "2065", 30, "Engine Management", "Fuel Quantity Left", "Bar display of the left fuel quantity"));
+            AddFunction(new SegmentedMeter(this, "2066", 30, "Engine Management", "Fuel Quantity Right", "Bar display of the right fuel quantity"));
+            AddFunction(new NetworkValue(this, "2060", "Engine Management", "Total Fuel Quantity", "Display of the total fuel amount.", "Text", BindingValueUnits.Text, null));
+            AddFunction(new SegmentedMeter(this, "2067", 30, "Engine Management", "Transmission Temperature", "Bar display of the transmission temp in celsius"));
+            AddFunction(new SegmentedMeter(this, "2068", 30, "Engine Management", "Transmission pressure", "Pressure in transmission in PSI"));
+            AddFunction(new SegmentedMeter(this, "2069", 29, "Engine Management", "Engine 1 Oil Temperature", "Bar display of the oil temperature in celsius"));
+            AddFunction(new SegmentedMeter(this, "2070", 29, "Engine Management", "Engine 2 Oil Temperature", "Bar display of the oil temperature in celsius"));
+            AddFunction(new SegmentedMeter(this, "2071", 30, "Engine Management", "Engine 1 Oil Pressure", "Bar display of the oil pressure in PSI"));
+            AddFunction(new SegmentedMeter(this, "2072", 30, "Engine Management", "Engine 2 Oil Pressure", "Bar display of the oil pressure in PSI"));
+            AddFunction(new SegmentedMeter(this, "2073", 30, "Engine Management", "Engine 1 TGT", "Bar display of the Turbine Gas Temperature in celsius"));
+            AddFunction(new NetworkValue(this, "2061", "Engine Management", "Engine 1 TGT Text", "Display of the Turbine Gas Temperature", "Text", BindingValueUnits.Text, null));
+            AddFunction(new SegmentedMeter(this, "2074", 30, "Engine Management", "Engine 2 TGT", "Bar display of the Turbine Gas Temperature in celsius"));
+            AddFunction(new NetworkValue(this, "2062", "Engine Management", "Engine 2 TGT Text", "Display of the Turbine Gas Temperature", "Text", BindingValueUnits.Text, null));
+            AddFunction(new SegmentedMeter(this, "2075", 30, "Engine Management", "Engine 1 Ng", "Bar display of the Gas Generator Speed in RPM"));
+            AddFunction(new NetworkValue(this, "2063", "Engine Management", "Engine 1 Ng Text", "Display of the Gas Generator Speed", "Text", BindingValueUnits.Text, null));
+            AddFunction(new SegmentedMeter(this, "2076", 30, "Engine Management", "Engine 2 Ng", "Bar display of the Gas Generator Speed in RPM"));
+            AddFunction(new NetworkValue(this, "2064", "Engine Management", "Engine 2 Ng Text", "Display of the Gas Generator Speed", "Text", BindingValueUnits.Text, null));
+
+            AddFunction(new SegmentedMeter(this, "2079", 41, "Engine Management (Pilot)", "Engine 1 RPM", "Bar display of Engine 1 RPM (percentage)"));
+            AddFunction(new SegmentedMeter(this, "2080", 41, "Engine Management (Pilot)", "Rotor RPM", "Bar display of Rotor RPM (percentage)"));
+            AddFunction(new SegmentedMeter(this, "2081", 41, "Engine Management (Pilot)", "Engine 2 RPM", "Bar display of Engine 2 RPM (percentage)"));
+            AddFunction(new SegmentedMeter(this, "2082", 30, "Engine Management (Pilot)", "Engine 1 Torque", "Bar display of Engine 1 Torque (percentage)"));
+            AddFunction(new NetworkValue(this, "2077", "Engine Management (Pilot)", "Engine 1 Torque Text", "Display of the engine torque percentage", "Text", BindingValueUnits.Text, null));
+            AddFunction(new SegmentedMeter(this, "2083", 30, "Engine Management (Pilot)", "Engine 2 Torque", "Bar display of Engine 2 Torque (percentage)"));
+            AddFunction(new NetworkValue(this, "2078", "Engine Management (Pilot)", "Engine 2 Torque Text", "Display of the engine torque percentage", "Text", BindingValueUnits.Text, null));
+
+            AddFunction(new SegmentedMeter(this, "2086", 41, "Engine Management (Copilot)", "Engine 1 RPM", "Bar display of Engine 1 RPM (percentage)"));
+            AddFunction(new SegmentedMeter(this, "2087", 41, "Engine Management (Copilot)", "Rotor RPM", "Bar display of Rotor RPM (percentage)"));
+            AddFunction(new SegmentedMeter(this, "2088", 41, "Engine Management (Copilot)", "Engine 2 RPM", "Bar display of Engine 2 RPM (percentage)"));
+            AddFunction(new SegmentedMeter(this, "2089", 30, "Engine Management (Copilot)", "Engine 1 Torque", "Bar display of Engine 1 Torque (percentage)"));
+            AddFunction(new NetworkValue(this, "2084", "Engine Management (Copilot)", "Engine 1 Torque Text", "Display of the engine torque percentage", "Text", BindingValueUnits.Text, null));
+            AddFunction(new SegmentedMeter(this, "2090", 30, "Engine Management (Copilot)", "Engine 2 Torque", "Bar display of Engine 2 Torque (percentage)"));
+            AddFunction(new NetworkValue(this, "2085", "Engine Management (Copilot)", "Engine 2 Torque Text", "Display of the engine torque percentage", "Text", BindingValueUnits.Text, null));
+
+
+
+            #endregion
+
         }
 
         private SwitchPosition[] CreateSwitchPositions(int numPositions, double incrementalValue, string command)

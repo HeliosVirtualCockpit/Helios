@@ -210,6 +210,7 @@
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceFactory.cs" />
     <Compile Include="Interfaces\DCS\AH64D\Functions\AH-64DFunction.cs" />
     <Compile Include="Interfaces\DCS\AH64D\AH-64DInterface.cs" />
+    <Compile Include="Interfaces\DCS\UH60L\Functions\SegmentedMeter.cs" />
     <Compile Include="Interfaces\DCS\UH60L\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\UH60L\Functions\UH60LFunction.cs" />
     <Compile Include="Interfaces\DCS\UH60L\UH60LInterface.cs" />
