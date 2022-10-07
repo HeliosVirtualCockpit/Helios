@@ -78,32 +78,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
         {
             string[] parts;
             parts = Tokenizer.TokenizeAtLeast(value, 4, ';');
-            double startValue = Parse(parts[0], 1d);
+            double startValue = Parse(parts[0]);
             _startValue.SetValue(new BindingValue(startValue), false);
-            double endValue = Parse(parts[2], 1d);
+            double endValue = Parse(parts[1]);
             _endValue.SetValue(new BindingValue(endValue), false);
-            double startSegment = Parse(parts[1], 1d);
+            double startSegment = Parse(parts[2]);
             _startSegment.SetValue(new BindingValue(startSegment), false);
-            double endSegment = Parse(parts[3], 1d);
+            double endSegment = Parse(parts[3]);
             _endSegment.SetValue(new BindingValue(endSegment), false);
 
         }
 
-        private double Parse(string value, double scale)
+        private double Parse(string value)
         {
             if (!double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat,
                 out double scaledValue))
             {
-                return scaledValue;
-            }
-
-            if (scaledValue < 1.0d)
-            {
-                scaledValue *= scale * 10d;
-            }
-            else
-            {
-                scaledValue = 0d;
+                return 0d;
             }
             return scaledValue;
         }

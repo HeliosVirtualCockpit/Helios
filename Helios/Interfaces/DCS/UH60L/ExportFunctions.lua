@@ -96,7 +96,7 @@ local li
 			while true do
 				local name, value = m()
 				if not name then
-					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segNumberStart, segCursor, currentSegment)	
+					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segCursor, segNumberStart, currentSegment)	
 					break 
 				end
 				local seg = name:gsub("segment_","")
@@ -131,7 +131,7 @@ local li
 							segNextValue = driver.UH60Lindicator[1][currentGaugeNumber][currentSegment+1]					
 							segCursor = segNumeric
 						else
-							results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segNumberStart, segCursor, currentSegment)
+							results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segCursor, segNumberStart, currentSegment)
 							currentGaugeNumber = currentGaugeNumber + 1	
 							for currSegment = 1,30,1 do
 								if segNumeric == driver.UH60Lindicator[1][currentGaugeNumber][currSegment] then 
@@ -187,7 +187,7 @@ local li
 			while true do
 				local name, value = m()
 				if not name then
-					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segNumberStart, segCursor, currentSegment)	
+					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segCursor, segNumberStart, currentSegment)	
 					break 
 				end
 				local seg = name:gsub("segment_","")
@@ -222,7 +222,7 @@ local li
 							segNextValue = driver.UH60Lindicator[jj+1][currentGaugeNumber][currentSegment+1]					
 							segCursor = segNumeric
 						else
-							results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segNumberStart, segCursor, currentSegment)
+							results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segCursor, segNumberStart, currentSegment)
 							currentGaugeNumber = currentGaugeNumber + 1	
 							for currSegment = 1,30,1 do
 								if segNumeric == driver.UH60Lindicator[jj+1][currentGaugeNumber][currSegment] then 

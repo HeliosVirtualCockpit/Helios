@@ -92,6 +92,9 @@
     <Compile Include="Controls\Capabilities\IWindowsManipulationAware.cs" />
     <Compile Include="Controls\Capabilities\IWindowsMouseInput.cs" />
     <Compile Include="Controls\Capabilities\IWindowsPreviewInput.cs" />
+    <Compile Include="Controls\BarGaugeAppearanceEditor.xaml.cs">
+      <DependentUpon>BarGaugeAppearanceEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageTranslucentBehaviorEditor.xaml.cs">
       <DependentUpon>ImageTranslucentBehaviorEditor.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,11 @@
     <Compile Include="Gauges\M2000C\TACANPanel\TACANChannelDrum.cs" />
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGaugeCounter.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
+    <Compile Include="Gauges\UH60L\BarGauge29.cs" />
+    <Compile Include="Gauges\UH60L\BarGauge30.cs" />
+    <Compile Include="Gauges\UH60L\BarGauge41.cs" />
+    <Compile Include="Gauges\UH60L\BarGauge40.cs" />
+    <Compile Include="Gauges\UH60L\BarGauge.cs" />
     <Compile Include="GlobalOptions.cs" />
     <Compile Include="HeliosCapabilityEditorDescriptor.cs" />
     <Compile Include="HeliosVisualWithXml.cs" />
@@ -363,6 +371,33 @@
     <Content Include="Templates\Base\Simulator Viewports\A4E_RADAR.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Base\UH60L\FuelBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\RPMBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\TransmissionTempBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\TransmissionPressureBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\TorqueBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\TGTBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\NgBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\OilTempBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\OilPressureBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -372,6 +407,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\HeliosPanelBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BarGaugeAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -532,6 +571,66 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\M2000C\TACANPanel\drum_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay40Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay41Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay29Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30Fuel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30TransmissionTemp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30TransmissionPressure.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay29OilTemp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30OilPressure.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30Ng.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30TGT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay30Torque.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\SegmentBarDisplay41RPM.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -1033,6 +1132,9 @@
     <Resource Include="Interfaces\DCS\A10C\ExportFunctionsA10C2.lua" />
     <Resource Include="Interfaces\DCS\AH64D\ExportFunctions.lua" />
     <Resource Include="Interfaces\DCS\UH60L\ExportFunctions.lua" />
+    <Content Include="Images\UH60L\FuelBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Interfaces\Falcon\readme.md" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\ded.png" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\hud.png" />

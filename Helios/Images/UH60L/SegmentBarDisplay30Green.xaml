@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Canvas
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            Height="540" Width="40" Name="SegmentBarDisplay">
+    <Canvas.Resources>
+<ResourceDictionary Source="pack://application:,,,/Helios;component/Images/UH60L/SegmentBarResources.xaml"/>
+    </Canvas.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Canvas Grid.Row="0"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="1"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="2"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="3"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="4"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="5"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="6"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="7"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="8"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="9"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="10"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="11"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="12"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="13"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="14"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="15"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="16"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="17"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="18"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="19"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="20"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="21"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="22"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="23"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="24"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="25"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="26"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="27"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="28"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="29"  Style="{StaticResource LED1}" />
+    </Grid>
+</Canvas>
