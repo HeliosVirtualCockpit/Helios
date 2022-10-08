@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
     using System.ComponentModel;
+    //using System.Drawing;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
@@ -67,8 +68,8 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
             _barSegmentEnd = new HeliosValue(this, new BindingValue(false), "Bar Segment Display", "Finish Segment", "The last segment of a run.", "Number", BindingValueUnits.Numeric);
             _barSegmentEnd.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_barSegmentEnd);
-
         }
+
         protected void Flag_Execute(object action, HeliosActionEventArgs e)
         {
             HeliosValue hAction = (HeliosValue)action;
@@ -82,7 +83,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
                 case "Finish Segment":
                     _barSegmentEndValue = e.Value.DoubleValue;
                     _barSegmentEnd.SetValue(e.Value, e.BypassCascadingTriggers);
-                    _barImage.Clip = new RectangleGeometry(new Rect(0, (_size.Height - (_barSegmentEndValue +1 ) * _segmentHeight), _size.Width, (_barSegmentEndValue  - _barSegmentStartValue +1 ) * _segmentHeight));
+                    _barImage.Clip = new RectangleGeometry(new Rect(0, (_size.Height - (_barSegmentEndValue + 0 ) * _segmentHeight), _size.Width, (_barSegmentEndValue  - _barSegmentStartValue +1 ) * _segmentHeight));
                     Refresh();
                     break;
                 default:
@@ -108,9 +109,9 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
                     ImageSource image = ConfigManager.ImageManager.LoadImage(_imageFile);
                     if (image != null)
                     {
+                        _barImage.Clip = new RectangleGeometry(new Rect(0, 0, image.Width, image.Height));
                         _barImage.Image = _imageFile;
-                        Width = image.Width;
-                        Height = image.Height;
+                        _segmentHeight = image.Height / _segmentCount;
                     }
                     OnPropertyChanged("Image", oldValue, value, true);
                     Refresh();
@@ -203,6 +204,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
                 {
                     double oldValue = _segmentCount;
                     _segmentCount = value;
+                    _segmentHeight = _size.Height / _segmentCount;
                     OnPropertyChanged("SegmentCount", oldValue, value, true);
                     Refresh();
                 }
@@ -263,7 +265,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
         public override void WriteXml(XmlWriter writer)
         {
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
-
+            
             writer.WriteElementString("Image", Image);
             writer.WriteElementString("Alignment", Alignment.ToString());
             writer.WriteElementString("CornerRadius", CornerRadius.ToString(CultureInfo.InvariantCulture));

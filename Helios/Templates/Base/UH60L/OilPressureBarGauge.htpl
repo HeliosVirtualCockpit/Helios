@@ -1,5 +1,5 @@
 ﻿<ControlTemplate>
-  <Name>Oil Pressurw Bar Gauge</Name>
+  <Name>Oil Pressure Bar Gauge</Name>
   <Category>UH-60L</Category>
   <TypeIdentifier>Helios.UH60L.BarGauge</TypeIdentifier>
   <Template>

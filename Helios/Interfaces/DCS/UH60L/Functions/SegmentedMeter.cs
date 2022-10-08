@@ -54,7 +54,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
             Values.Add(_startValue);
             Triggers.Add(_startValue);
 
-            _endValue = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} End Value",
+            _endValue = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} Finish Value",
                 SerializedDescription, "Value is changed when the meter finishing value changes.", BindingValueUnits.Numeric);
             Values.Add(_endValue);
             Triggers.Add(_endValue);
@@ -64,7 +64,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
             Values.Add(_startSegment);
             Triggers.Add(_startSegment);
 
-            _endSegment = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} End Segment",
+            _endSegment = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} Finish Segment",
                 SerializedDescription, "Value is changed when the meter finishing segment changes.", BindingValueUnits.Numeric);
             Values.Add(_endSegment);
             Triggers.Add(_endSegment);
