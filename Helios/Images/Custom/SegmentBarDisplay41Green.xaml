@@ -1,12 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Canvas
 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            Height="540" Width="40" Name="SegmentBarDisplay">
+            Height="738" Width="40" Name="SegmentBarDisplay41Green">
     <Canvas.Resources>
-<ResourceDictionary Source="pack://application:,,,/Helios;component/Images/UH60L/SegmentBarResources.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Helios;component/Images/Custom/SegmentBarResources.xaml"/>
     </Canvas.Resources>
     <Grid >
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -68,5 +79,16 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http:
         <Canvas Grid.Row="27"  Style="{StaticResource LED1}" />
         <Canvas Grid.Row="28"  Style="{StaticResource LED1}" />
         <Canvas Grid.Row="29"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="30"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="31"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="32"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="33"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="34"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="35"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="36"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="37"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="38"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="39"  Style="{StaticResource LED1}" />
+        <Canvas Grid.Row="40"  Style="{StaticResource LED1}" />
     </Grid>
 </Canvas>

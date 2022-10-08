@@ -14,18 +14,17 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
+namespace GadrocsWorkshop.Helios.Gauges
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
     using System.ComponentModel;
-    //using System.Drawing;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.UH60L.BarGauge", "Bar Gauge", "UH-60L", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Gauges.BarGauge", "Bar Gauge", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.None)]
     internal class BarGauge : BaseGauge
     {
 
@@ -47,7 +46,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.BarGauge
 
         private GaugeImage _barImage;
 
-        public BarGauge() : this("Segmented Gauge", new Size(40,540), "{Helios}/Images/UH60L/SegmentBarDisplay30Green.xaml", 30) 
+        public BarGauge() : this("Segmented Gauge", new Size(40,540), "{Helios}/Images/Custom/SegmentBarDisplay30.xaml", 30) 
         { }
         protected BarGauge(string name, Size size, string image, double segmentCount)
             : base(name, size)

@@ -3,7 +3,7 @@
 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             Height="540" Width="40" Name="SegmentBarDisplay">
         <Canvas.Resources>
-    <ResourceDictionary Source="pack://application:,,,/Helios;component/Images/UH60L/SegmentBarResources.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/Helios;component/Images/Custom/SegmentBarResources.xaml"/>
         </Canvas.Resources>
     <Grid >
         <Grid.RowDefinitions>

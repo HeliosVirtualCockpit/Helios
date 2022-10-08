@@ -21,8 +21,7 @@ namespace GadrocsWorkshop.Helios.Controls
     /// <summary>
     /// Interaction logic for ImageAppearanceEditor.xaml
     /// </summary>
-    [HeliosPropertyEditor("Helios.UH60L.BarGauge29Green", "Appearance")]
-    [HeliosPropertyEditor("Helios.UH60L.BarGauge", "Appearance")]
+    [HeliosPropertyEditor("Helios.Gauges.BarGauge", "Appearance")]
     public partial class BarGaugeAppearanceEditor : HeliosPropertyEditor
     {
         public BarGaugeAppearanceEditor()

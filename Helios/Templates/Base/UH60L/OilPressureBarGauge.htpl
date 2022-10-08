@@ -1,7 +1,7 @@
 ﻿<ControlTemplate>
   <Name>Oil Pressure Bar Gauge</Name>
   <Category>UH-60L</Category>
-  <TypeIdentifier>Helios.UH60L.BarGauge</TypeIdentifier>
+  <TypeIdentifier>Helios.Gauges.BarGauge</TypeIdentifier>
   <Template>
     <TemplateValues>
       <Image>{Helios}/Images/UH60L/SegmentBarDisplay30OilPressure.xaml</Image>
