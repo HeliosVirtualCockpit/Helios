@@ -7,7 +7,7 @@
       <Image>{Helios}/Images/UH60L/SegmentBarDisplay30Torque.xaml</Image>
       <Alignment>Centered</Alignment>
       <CornerRadius>0</CornerRadius>
-      <SegmentCount>30</SegmentCount>
+      <SegmentCount>22</SegmentCount>
       <Location>392,54</Location>
       <Size>40,540</Size>
       <Hidden>False</Hidden>

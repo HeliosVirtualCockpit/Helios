@@ -1,4 +1,5 @@
 -- Exports.Lua from Helios UH-60L interface
+driver.state = {}
 
 function driver.processHighImportance(mainPanelDevice)
     -- Pilot Barometric Altimeter
@@ -67,14 +68,14 @@ driver.UH60Lindicator = {{{0,50,100,150,200,250,300,350,400,450,500,550,600,650,
 							{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29}}
 							}
 driver.displayNames = {"TotalFuel","TGT1","TGT2","Ng1","Ng2","Torque1","Torque2"}
-driver.indicators = {}
+driver.state.indications = {}
 function driver.processLowImportance(mainPanelDevice)
 local li
 	do -- constrain variable scope
 		local results={}
 		-- Indicator 0 for the Center panel bar graphs and numeric displays
 		li = list_indication(0)
-		if li ~= driver.indicators[0] then
+		if li ~= driver.state.indications[0] then
 			local currentGaugeNumber = 1
 			local currentSegment = 1
 			local segNextValue = 9999
@@ -158,7 +159,7 @@ local li
 					helios.send(2064+ii,string.format("%s", helios.ensureString(results["gauge"..ii]))) -- bar gauge
 				end
 			end
-			driver.indicators[0] = li
+			driver.state.indications[0] = li
 		end
 	end
 	
@@ -166,7 +167,7 @@ local li
 		local results={}
 		-- Indicator 1 and 2 for the RPM and Torque bar graphs and numeric displays for Pilot and Copilot
 		li = list_indication(jj)
-		if li ~= driver.indicators[jj] then
+		if li ~= driver.state.indications[jj] then
 
 			local currentGaugeNumber = 1
 			local currentSegment = 1
@@ -245,7 +246,7 @@ local li
 					helios.send(2078+((jj-1)*7)+ii,string.format("%s", helios.ensureString(results["gauge"..ii]))) -- bar gauge
 				end
 			end
-			driver.indicators[jj] = li
+			driver.state.indications[jj] = li
 		end
 	end
 	do
@@ -253,7 +254,7 @@ local li
 		local results={}
 		-- Indicator 5 for the nav computer
 		li = list_indication(jj)
-		if li ~= driver.indicators[jj] then
+		if li ~= driver.state.indications[jj] then
 		    local z = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 			local currentLine = 0
 			while true do
@@ -280,19 +281,49 @@ local li
 					helios.send(2091+ii,string.format("%-16s", helios.ensureString(results["Line"..ii]:gsub(":","!"))))
 				end
 			end
-			driver.indicators[jj] = li
+			driver.state.indications[jj] = li
 		end
 	end
 	
 	for jj = 6,7,1 do
 	-- These are the two chronographs  Reserve 4 codes for each Codes run 2095 - 2103 
+		li = list_indication(jj)
+		local results={}
+		local currentLine = 0
+
+		if li ~= driver.state.indications[jj] then
+		    local z = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+			while true do
+				local name, value = z()
+				if not name then
+					break
+				end
+				if value ~= "" and value ~= ":" then
+					if  currentLine < 3 then
+						results["Line"..currentLine]= string.format("%02d",value)
+						currentLine = currentLine + 1
+					else
+						if currentLine == 3 then
+							results["Line3"] = string.format("%s",value)
+						else
+							results["Line4"] = value
+						end
+					end
+				end
+
+			end
+			helios.send(2096+((jj-6)*2),string.format("%s!%s  %s", helios.ensureString(results["Line0"]), helios.ensureString(results["Line1"]), helios.ensureString(results["Line2"])))			
+			helios.send(2097+((jj-6)*2),string.format("%s", helios.ensureString(results["Line3"])))			
+
+			driver.state.indications[jj] = li
+		end
 	end
 	-- 8 are the frequency preset frequencies
 	for jj = 9,10,1 do
 		local results={}
 		-- Indicators 9 and 10 are the AN/ARC-201 FM 1 &  2 displays
 		li = list_indication(jj)
-		if li ~= driver.indicators[jj] then
+		if li ~= driver.state.indications[jj] then
 		    local z = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 			local currentLine = 0
 			while true do
@@ -307,7 +338,7 @@ local li
 			if results["Line"] then
 				helios.send(2104+jj-9,string.format("%s", helios.ensureString(results["Line"]:gsub(":","!"))))
 			end
-			driver.indicators[jj] = li
+			driver.state.indications[jj] = li
 		end
 	end	
 
@@ -316,7 +347,7 @@ local li
 		local results={}
 		-- Indicator 11 for the AHRU display
 		li = list_indication(jj)
-		if li ~= driver.indicators[jj] then
+		if li ~= driver.state.indications[jj] then
 		    local z = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 			local currentLine = 0
 			while true do
@@ -331,7 +362,7 @@ local li
 			if results["Line"] then
 				helios.send(2106,string.format("%-16s", helios.ensureString(results["Line"]:gsub(":","!"))))
 			end
-			driver.indicators[jj] = li
+			driver.state.indications[jj] = li
 		end
 	end	
 	do
@@ -339,7 +370,7 @@ local li
 		local results={}
 		-- Indicator 12 for the Aux Fuel display
 		li = list_indication(jj)
-		if li ~= driver.indicators[jj] then
+		if li ~= driver.state.indications[jj] then
 		    local z = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 			local currentLine = 0
 			while true do
@@ -357,8 +388,12 @@ local li
 					helios.send(2107+ii,string.format("%s", helios.ensureString(results["AuxFuel"..ii]:gsub(":","!"))))
 				end
 			end
-			driver.indicators[jj] = li
+			driver.state.indications[jj] = li
 		end
 	end	
 	-- next code is 2111
+end
+function driver.clearState() 
+	log.write("Helios.Export",log.INFO,"Driver: UH-60L - Driver clearState() called")
+	driver.state.indications = {}
 end

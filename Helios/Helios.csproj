@@ -195,6 +195,11 @@
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGaugeCounter.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="Gauges\BarGauge.cs" />
+    <Compile Include="Gauges\UH60L\ChronographPilotDisplay.cs" />
+    <Compile Include="Gauges\UH60L\ChronographCopilotDisplay.cs" />
+    <Compile Include="Gauges\UH60L\ChronographDisplay.cs" />
+    <Compile Include="Gauges\UH60L\DopplerNavDisplay.cs" />
+    <Compile Include="Gauges\UH60L\AHRUDisplay.cs" />
     <Compile Include="GlobalOptions.cs" />
     <Compile Include="HeliosCapabilityEditorDescriptor.cs" />
     <Compile Include="HeliosVisualWithXml.cs" />
@@ -392,6 +397,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\UH60L\OilPressureBarGauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\AHRU Display.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\ASN128B Display.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
@@ -1128,6 +1139,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="BindingValueUnits.cd" />
+    <Content Include="Fonts\DSEG14Classic-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\DSEG7Classic-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Fonts\MonospacedLEDCounter7.ttf" />
     <None Include="Images\A-10\readme.md" />
     <Resource Include="Interfaces\DCS\A10C\ExportFunctionsA10C2.lua" />
     <Resource Include="Interfaces\DCS\AH64D\ExportFunctions.lua" />

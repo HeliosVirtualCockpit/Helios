@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+  <Name>AHRU Display</Name>
+  <Category>UH-60L</Category>
+  <TypeIdentifier>Helios.UH60L.AHRU</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Location>100,200</Location>
+      <Size>280,32</Size>
+      <Hidden>False</Hidden>
+      <BackgroundImage></BackgroundImage>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>
