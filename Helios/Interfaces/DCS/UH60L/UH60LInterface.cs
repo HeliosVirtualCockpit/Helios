@@ -21,7 +21,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
     using static System.Net.Mime.MediaTypeNames;
     using System.Security.Policy;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions.Altimeter;
-    using GadrocsWorkshop.Helios.Gauges.AV8B;
 
     //using GadrocsWorkshop.Helios.Controls;
 
