@@ -21,6 +21,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
     using static System.Net.Mime.MediaTypeNames;
     using System.Security.Policy;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions.Altimeter;
+    using GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph;
 
     //using GadrocsWorkshop.Helios.Controls;
 
@@ -703,6 +704,27 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             ahruIndFail = 98,
             ahruIndAln = 99,
 
+            apn209PilotAltNeedle = 173,
+            apn209PilotAltDigit1 = 174,
+            apn209PilotAltDigit2 = 175,
+            apn209PilotAltDigit3 = 176,
+            apn209PilotAltDigit4 = 177,
+            apn209PilotLoBug = 178,
+            apn209PilotHiBug = 179,
+            apn209PilotLoLight = 180,
+            apn209PilotHiLight = 181,
+            apn209PilotFlag = 182,   // off
+            apn209CopilotAltNeedle = 186,
+            apn209CopilotAltDigit1 = 187,
+            apn209CopilotAltDigit2 = 188,
+            apn209CopilotAltDigit3 = 189,
+            apn209CopilotAltDigit4 = 190,
+            apn209CopilotLoBug = 191,
+            apn209CopilotHiBug = 192,
+            apn209CopilotLoLight = 193,
+            apn209CopilotHiLight = 194,
+            apn209CopilotFlag = 195,   // off
+
             // CIS MODE LIGHTS
             cisHdgOnLight = 212,
             cisNavOnLight = 213,
@@ -863,6 +885,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             lCargoDoorGlass = 1205,
             rCargoDoorGlass = 1206,
 
+            StabInd = 3406,  // -1 to 1
+            StabIndFlag = 3407,
+
         }
 
         public UH60LInterface(string name)
@@ -916,6 +941,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsFPS.ToString("d"), "37", "Stabilator Control", "FPS ON/OFF"));
             AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsBoost.ToString("d"), "38", "Stabilator Control", "SAS Boost ON/OFF"));
             AddFunction(new PushButton(this, devices.EFM_HELPER.ToString("d"), EFM_commands.stabPwrReset.ToString("d"), "39", "Stabilator Control", "SAS Power On Reset"));
+            AddFunction(new NetworkValue(this, mainpanel.StabInd.ToString("d"), "Stabilator Control", "Position Indicator", "Needle indicator", "-1 to 1", BindingValueUnits.Numeric, null));
+            AddFunction(new FlagValue(this, mainpanel.StabIndFlag.ToString("d"), "Stabilator Control", "Stabilator indicator flag", ""));
 
             //
             //--FUEL PUMPS
@@ -1100,12 +1127,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new Switch(this, devices.ARC164.ToString("d"), "57", CreateSwitchPositions(4, 0.1, device_commands.arc164_freq_ooooXX.ToString("d")), "UHF Radio", "Digit 0.010", "%0.2f"));
             AddFunction(new Switch(this, devices.ARC164.ToString("d"), "58", CreateSwitchPositions(20, 0.05, device_commands.arc164_preset.ToString("d")), "UHF Radio", "Preset", "%0.2f"));
 
-            //
-            //-- Pilot APN-209 Radar Altimeter
+
+            //-- APN-209 Radar Altimeter
             AddFunction(new Axis(this, devices.PLTAPN209.ToString("d"), device_commands.apn209PilotLoSet.ToString("d"), "170", 0.1d, 0d, 1d, "RADAR Alt (Pilot)", "Low Altitude Set"));
             AddFunction(new Axis(this, devices.PLTAPN209.ToString("d"), device_commands.apn209PilotHiSet.ToString("d"), "171", 0.1d, 0d, 1d, "RADAR Alt (Pilot)", "High Altitude Set"));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.apn209PilotAltNeedle.ToString("d"), 360d, "RADAR Alt (Pilot)", "Altitude Needle", "Position of the altitude needle", "Rotational position of the needle 0-360", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.apn209PilotLoBug.ToString("d"), 360d, "RADAR Alt (Pilot)", "Low Altitude Bug Marker", "Position of the indicator showing the low altitude", "Rotational position of the marker 0-360", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.apn209PilotHiBug.ToString("d"), 360d, "RADAR Alt (Pilot)", "High Altitude Bug Marker", "Position of the indicator showing the high altitude", "Rotational position of the marker 0-360", BindingValueUnits.Degrees));
+            AddFunction(new FlagValue(this, mainpanel.apn209PilotLoLight.ToString("d"), "RADAR Alt (Pilot)", "Low flag", ""));
+            AddFunction(new FlagValue(this, mainpanel.apn209PilotHiLight.ToString("d"), "RADAR Alt (Pilot)", "High flag", ""));
+            AddFunction(new FlagValue(this, mainpanel.apn209PilotFlag.ToString("d"), "RADAR Alt (Pilot)", "Off flag", ""));
+            AddFunction(new RADARAltimeter(this, "2055", RADARAltimeter.FLYER.Pilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
+
+            // 174-176 are the altitude digits 
             AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), device_commands.apn209CopilotLoSet.ToString("d"), "183", 0.1d, 0d, 1d, "RADAR Alt (Copilot)", "Low Altitude Set"));
             AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), device_commands.apn209CopilotHiSet.ToString("d"), "184", 0.1d, 0d, 1d, "RADAR Alt (Copilot)", "High Altitude Set"));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.apn209CopilotAltNeedle.ToString("d"), 360d, "RADAR Alt (Copilot)", "Altitude Needle", "Position of the altitude needle", "Rotational position of the needle 0-360", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.apn209CopilotLoBug.ToString("d"), 360d, "RADAR Alt (Copilot)", "Low Altitude Bug Marker", "Position of the indicator showing the low altitude", "Rotational position of the marker 0-360", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.apn209CopilotHiBug.ToString("d"), 360d,  "RADAR Alt (Copilot)", "High Altitude Bug Marker", "Position of the indicator showing the high altitude", "Rotational position of the marker 0-360", BindingValueUnits.Degrees));
+            AddFunction(new FlagValue(this, mainpanel.apn209CopilotLoLight.ToString("d"), "RADAR Alt (Copilot)", "Low flag", ""));
+            AddFunction(new FlagValue(this, mainpanel.apn209CopilotHiLight.ToString("d"), "RADAR Alt (Copilot)", "High flag", ""));
+            AddFunction(new FlagValue(this, mainpanel.apn209CopilotFlag.ToString("d"), "RADAR Alt (Copilot)", "Off flag", ""));
+            AddFunction(new RADARAltimeter(this, "2056", RADARAltimeter.FLYER.Copilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
+
+            // 187-190 are the altitude digits 
 
             //
             //-- Lighting
@@ -1166,14 +1211,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.resetSetBtn.ToString("d"), "280", "Chronometer (Pilot)", "RESET/SET Button"));
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.modeBtn.ToString("d"), "281", "Chronometer (Pilot)", "MODE Button"));
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.startStopAdvBtn.ToString("d"), "282", "Chronometer (Pilot)", "START/STOP/ADVANCE Button"));
-            AddFunction(new NetworkValue(this, "2096", "Chronometer (Pilot)", "Time Display", "Display of the Chronometer Time", "Text", BindingValueUnits.Text, null));
+            AddFunction(new Chronometer(this, "2096", Chronometer.Flyer.Pilot));
             AddFunction(new NetworkValue(this, "2097", "Chronometer (Pilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
 
             //-- COPILOT LC6 CHRONOMETER
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.resetSetBtn.ToString("d"), "283", "Chronometer (Copilot)", "RESET/SET Button"));
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.modeBtn.ToString("d"), "284", "Chronometer (Copilot)", "MODE Button"));
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.startStopAdvBtn.ToString("d"), "285", "Chronometer (Copilot)", "START/STOP/ADVANCE Button"));
-            AddFunction(new NetworkValue(this, "2098", "Chronometer (Copilot)", "Time Display", "Display of the Chronometer Time", "Text", BindingValueUnits.Text, null));
+            AddFunction(new Chronometer(this, "2098", Chronometer.Flyer.Copilot));
             AddFunction(new NetworkValue(this, "2099", "Chronometer (Copilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
 
             //
@@ -1564,8 +1609,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed1.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED1", ""));
             AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED2", ""));
             AddFunction(new FlagValue(this, mainpanel.pduPltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU PLT OVERSPEED3", ""));
-            AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED1", ""));
-            AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED2", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed1.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED1", ""));
+            AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed2.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED2", ""));
             AddFunction(new FlagValue(this, mainpanel.pduCpltOverspeed3.ToString("d"), "Indicators/Lamps/Flags", "PDU CPLT OVERSPEED3", ""));
 
             // M130 CM System

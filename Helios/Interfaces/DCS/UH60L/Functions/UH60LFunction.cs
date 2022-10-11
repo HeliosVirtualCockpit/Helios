@@ -26,11 +26,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
         // code becomes more complicated.  See the GuardedSwitch class for a complicated example.
         private static readonly ExportDataElement[] Elements =
         {
-            new DCSDataElement("4000", null), // no format means we export it ourselves in our ExportFunctions.lua 
-            new DCSDataElement("4001", null), // no format means we export it ourselves in our ExportFunctions.lua 
-            new DCSDataElement("4002", null), // no format means we export it ourselves in our ExportFunctions.lua 
-            new DCSDataElement("12",
-                "%s") // this will export mainPanelDevice argument number 12 as a string and send it to this function
+            new DCSDataElement("2055", null), // no format means we export it ourselves in our ExportFunctions.lua 
+            new DCSDataElement("2056", null)  // no format means we export it ourselves in our ExportFunctions.lua 
+            //new DCSDataElement("12",
+            //    "%s") // this will export mainPanelDevice argument number 12 as a string and send it to this function
         };
 
         public UH60LFunction(BaseUDPInterface sourceInterface, string device, string name, string description)
@@ -60,16 +59,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
             // handle the received data for our id values
             switch (id)
             {
-                case "12":
-                    // do stuff with received valued here
-                    break;
-                case "4000":
-                    // do stuff with received valued here
-                    break;
-                case "4001":
-                    // do stuff with received valued here
-                    break;
-                case "4002":
+                case "2055":
+                case "2056":
                     // do stuff with received valued here
                     break;
             }

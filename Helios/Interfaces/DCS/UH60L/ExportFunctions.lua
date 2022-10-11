@@ -42,6 +42,28 @@ function driver.processHighImportance(mainPanelDevice)
             mainPanelDevice:get_argument_value(77)
         )
     )
+	-- Pilot RADAR Altimeter
+    helios.send(
+        2055,
+        string.format(
+            "%0.2f;%0.2f;%0.2f;%0.3f",
+            mainPanelDevice:get_argument_value(174),
+            mainPanelDevice:get_argument_value(175),
+            mainPanelDevice:get_argument_value(176),
+            mainPanelDevice:get_argument_value(177)
+        )
+    )
+	-- Copilot RADAR Altimeter
+    helios.send(
+        2056,
+        string.format(
+            "%0.2f;%0.2f;%0.2f;%0.3f",
+            mainPanelDevice:get_argument_value(187),
+            mainPanelDevice:get_argument_value(188),
+            mainPanelDevice:get_argument_value(189),
+            mainPanelDevice:get_argument_value(190)
+        )
+    )
 end
 
 driver.UH60Lindicator = {{{0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000,1050,1100,1150,1200,1250,1300,1350,1400,1450},
@@ -385,7 +407,7 @@ local li
 			end
 			for ii=0,3,1 do
 				if results["AuxFuel"..ii] then
-					helios.send(2107+ii,string.format("%s", helios.ensureString(results["AuxFuel"..ii]:gsub(":","!"))))
+					helios.send(2107+ii,string.format("%s", helios.ensureString(results["AuxFuel"..ii]:gsub(":","!"):gsub("%%",""))))
 				end
 			end
 			driver.state.indications[jj] = li

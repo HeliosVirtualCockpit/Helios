@@ -31,11 +31,12 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
         public ChronographDisplay(FLYER flyer)
-            : base($"Chronograph Display ({flyer})", new Size(96d, 32d))
+            : base($"Chronograph Display ({flyer})", new Size(80d, 32d))
         {
             _interfaceDeviceName = $"Chronometer ({flyer})";
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
-            AddTextDisplay("Time Display", new Point(0d, 0d), new Size(96d, 32d), _interfaceDeviceName, "Time Display", 20, "", TextHorizontalAlignment.Left, "!=:");
+            AddTextDisplay("Time HH:MM", new Point(0d, 0d), new Size(60d, 32d), _interfaceDeviceName, "Time hh:mm", 20, "88:88", TextHorizontalAlignment.Left, "!=:");
+            AddTextDisplay("Time ss", new Point(60d, 0d), new Size(20d, 32d), _interfaceDeviceName, "Time ss", 14, "88", TextHorizontalAlignment.Left, "!=:");
         }
         private void AddTextDisplay(string name, Point posn, Size size,
     string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
@@ -51,7 +52,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph
                 testTextDisplay: testDisp,
                 textColor: Color.FromArgb(0xf0, 0x93, 0x7d, 0x36),
                 backgroundColor: Color.FromArgb(0xff, 0x10, 0x13, 0x17),
-                useBackground: true,
+                useBackground: false,
                 interfaceDeviceName: interfaceDeviceName,
                 interfaceElementName: interfaceElementName,
                 textDisplayDictionary: devDictionary

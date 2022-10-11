@@ -200,6 +200,7 @@
     <Compile Include="Gauges\UH60L\ChronographDisplay.cs" />
     <Compile Include="Gauges\UH60L\DopplerNavDisplay.cs" />
     <Compile Include="Gauges\UH60L\AHRUDisplay.cs" />
+    <Compile Include="Gauges\UH60L\RADARAltimeter.cs" />
     <Compile Include="GlobalOptions.cs" />
     <Compile Include="HeliosCapabilityEditorDescriptor.cs" />
     <Compile Include="HeliosVisualWithXml.cs" />
@@ -219,6 +220,8 @@
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceFactory.cs" />
     <Compile Include="Interfaces\DCS\AH64D\Functions\AH-64DFunction.cs" />
     <Compile Include="Interfaces\DCS\AH64D\AH-64DInterface.cs" />
+    <Compile Include="Interfaces\DCS\UH60L\Functions\RADARAltimeter.cs" />
+    <Compile Include="Interfaces\DCS\UH60L\Functions\Chronometer.cs" />
     <Compile Include="Interfaces\DCS\UH60L\Functions\SegmentedMeter.cs" />
     <Compile Include="Interfaces\DCS\UH60L\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\UH60L\Functions\UH60LFunction.cs" />
@@ -403,6 +406,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\UH60L\ASN128B Display.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\4Dig7SegDisplay.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\2Dig7SegDisplay.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\3Dig7SegDisplay.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
@@ -642,6 +654,42 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Images\Custom\SegmentBarDisplay30.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltFaceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltBugHi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltBugLo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\StabScale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\StabSurface.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltIndicatorHi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltIndicatorLo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltIndicatorOff.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltFlagOff.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
