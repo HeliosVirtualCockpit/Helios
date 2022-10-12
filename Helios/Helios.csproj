@@ -200,6 +200,7 @@
     <Compile Include="Gauges\UH60L\ChronographCopilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronographDisplay.cs" />
     <Compile Include="Gauges\UH60L\RadAltCopilot.cs" />
+    <Compile Include="Gauges\UH60L\StabilatorInstrument.cs" />
     <Compile Include="Gauges\UH60L\RadAltPilot.cs" />
     <Compile Include="Gauges\UH60L\RadAlt.cs" />
     <Compile Include="Gauges\UH60L\DopplerNavDisplay.cs" />

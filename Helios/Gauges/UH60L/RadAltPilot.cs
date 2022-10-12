@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using GadrocsWorkshop.Helios.Controls;
     using System.Windows;
 
-    [HeliosControl("Helios.UH60L.RadAlt.Pilot", "RADAR Altimeter (Pilot)", "UH-60L", typeof(BackgroundImageRenderer))]
+    [HeliosControl("Helios.UH60L.Instruments.RadAlt.Pilot", "RADAR Altimeter (Pilot)", "UH-60L", typeof(BackgroundImageRenderer))]
     public class RadAltPilot : RadAlt
     {
         public RadAltPilot()
