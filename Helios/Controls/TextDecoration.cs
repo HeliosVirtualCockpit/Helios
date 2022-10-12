@@ -19,10 +19,14 @@ using System;
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
+    using System.Xml.Schema;
 
     [HeliosControl("Helios.Base.Text", "Label", "Panel Decorations", typeof(TextDecorationRenderer))]
     public class TextDecoration : HeliosVisual
@@ -33,6 +37,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private Color _fontColor = Colors.White;
         private Color _backgroundColor = Color.FromRgb(30,30,30);
         private bool _fillBackground = false;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public TextDecoration()
             : this("Label")
@@ -43,9 +48,12 @@ namespace GadrocsWorkshop.Helios.Controls
         protected TextDecoration(string name)
         : base(name, new Size(60, 20))
         {
-            _format.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(Format_PropertyChanged);
+            _format.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(TextFormat_PropertyChanged);
             _textValue = new HeliosValue(this, new BindingValue("Label"), "", "Text", "Text for this label.", "", BindingValueUnits.Text);
             _textValue.Execute += new HeliosActionHandler(TextValue_Execute);
+            _format.VerticalAlignment = TextVerticalAlignment.Center;
+            _format.HorizontalAlignment = TextHorizontalAlignment.Left;
+            _referenceHeight = Height;
             Actions.Add(_textValue);
             Values.Add(_textValue);
         }
@@ -145,17 +153,107 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        public TextFormat TextFormat
+        {
+            get
+            {
+                return _format;
+            }
+            set
+            {
+                if (_format == value)
+                {
+                    return;
+                }
+                TextFormat oldValue = _format;
+                if (oldValue != null)
+                {
+                    oldValue.PropertyChanged -= TextFormat_PropertyChanged;
+                }
+                _format = value;
+                if (_format != null)
+                {
+                    // NOTE: we indirectly set ConfiguredFontSize by changing text format object
+                    _referenceHeight = Height;
+                    _format.PropertyChanged += TextFormat_PropertyChanged;
+                }
+                OnPropertyChanged("TextFormat", oldValue, value, true);
+                Refresh();
+            }
+        }
+        /// <summary>
+        /// backing field for property ScalingMode, contains
+        /// the selected automatic font size scaling mode
+        /// </summary>
+        private TextScalingMode _scalingMode;
+
+        /// <summary>
+        /// the height this display had when the font size was configured
+        /// </summary>
+        private double _referenceHeight;
+
+        /// <summary>
+        /// the selected automatic font size scaling mode
+        /// </summary>
+        public TextScalingMode ScalingMode
+        {
+            get => _scalingMode;
+            set
+            {
+                if (_scalingMode == value) return;
+                TextScalingMode oldValue = _scalingMode;
+                _scalingMode = value;
+                OnPropertyChanged("ScalingMode", oldValue, value, true);
+            }
+        }
+        // WARNING: this virtual method is called from the base constructor (indirectly)
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            switch (ScalingMode)
+            {
+                case TextScalingMode.Height:
+                    if (_referenceHeight < 0.001)
+                    {
+                        TextFormat.FontSize = TextFormat.ConfiguredFontSize;
+                        break;
+                    }
+                    // avoid accumulating error from repeated resizing by calculating from a reference point
+                    Logger.Debug("scaling font based on new height {Height} versus reference {ReferenceSize} at height {ReferenceHeight}",
+                        current.Height, TextFormat.ConfiguredFontSize, _referenceHeight);
+                    Format.FontSize = Clamp(TextFormat.ConfiguredFontSize * current.Height / _referenceHeight, 1, 2000);
+                    break;
+                case TextScalingMode.None:
+                    return;
+                case TextScalingMode.Legacy:
+                    if (previous.Height != 0)
+                    {
+                        double scale = current.Height / previous.Height;
+                        TextFormat.FontSize = Clamp(scale * TextFormat.FontSize, 1, 100);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            Logger.Debug("Font Size " + TextFormat.FontSize);
+        }
 
         #endregion
 
-        void Format_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void TextFormat_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e is PropertyNotificationEventArgs origArgs)
+            if (e.PropertyName == nameof(TextFormat.ConfiguredFontSize))
             {
-                OnPropertyChanged("Format", origArgs);
+                // track these for recalculation of automatic scaling
+                _referenceHeight = Height;
             }
+
+            // invalidate entire TextFormat
+            OnPropertyChanged("TextFormat", (PropertyNotificationEventArgs)e);
+
+            // recalculate rendering
             OnDisplayUpdate();
         }
+
 
         void TextValue_Execute(object action, HeliosActionEventArgs e)
         {
@@ -168,11 +266,11 @@ namespace GadrocsWorkshop.Helios.Controls
             FontColor = Color.FromRgb(30, 30, 30);
         }
 
-        public override void ScaleChildren(double scaleX, double scaleY)
-        {
-            double scale = scaleX > scaleY ? scaleX : scaleY;
-            Format.FontSize *= scale;
-        }
+        //public override void ScaleChildren(double scaleX, double scaleY)
+        //{
+        //    double scale = scaleX > scaleY ? scaleX : scaleY;
+        //    Format.FontSize *= scale;
+        //}
 
         public override bool HitTest(Point location)
         {
@@ -208,7 +306,10 @@ namespace GadrocsWorkshop.Helios.Controls
             writer.WriteEndElement();
 
             writer.WriteElementString("Text", Text);
-
+            if (ScalingMode != TextScalingMode.Legacy)
+            {
+                writer.WriteElementString("ScalingMode", ScalingMode.ToString());
+            }
             base.WriteXml(writer);
         }
 
@@ -226,8 +327,33 @@ namespace GadrocsWorkshop.Helios.Controls
             reader.ReadEndElement();
 
             Text = reader.ReadElementString("Text");
-
+            if (reader.Name == "ScalingMode" && Enum.TryParse(reader.ReadElementString("ScalingMode"), out TextScalingMode configured))
+            {
+                ScalingMode = configured;
+            }
+            else
+            {
+                ScalingMode = TextScalingMode.Legacy;
+            }
             base.ReadXml(reader);
+
+            // now the auto scaling has messed up our font size, so we restore it
+            _format.FontSize = _format.ConfiguredFontSize;
+            _referenceHeight = Height;
         }
+
+        private double Clamp(double value, double min, double max)
+        {
+            if (value < min)
+            {
+                return min;
+            }
+            if (value > max)
+            {
+                return max;
+            }
+            return value;
+        }
+
     }
 }

@@ -195,9 +195,12 @@
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGaugeCounter.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="Gauges\BarGauge.cs" />
+    <Compile Include="Gauges\UH60L\Flyer.cs" />
     <Compile Include="Gauges\UH60L\ChronographPilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronographCopilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronographDisplay.cs" />
+    <Compile Include="Gauges\UH60L\RadAltCopilot.cs" />
+    <Compile Include="Gauges\UH60L\RadAltPilot.cs" />
     <Compile Include="Gauges\UH60L\RadAlt.cs" />
     <Compile Include="Gauges\UH60L\DopplerNavDisplay.cs" />
     <Compile Include="Gauges\UH60L\AHRUDisplay.cs" />
@@ -691,6 +694,18 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Images\UH60L\RadAltFlagOff.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\StabOffFlag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\StabNeedle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\RadAltNeedle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

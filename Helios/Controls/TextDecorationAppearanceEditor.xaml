@@ -12,10 +12,10 @@
     <HeliosSdk:HeliosPropertyEditor.Resources>
         <Helios:EnumConverter Type="{x:Type Helios:TextVerticalAlignment}" x:Key="VertAlignmentTypes" />
         <Helios:EnumConverter Type="{x:Type Helios:TextHorizontalAlignment}" x:Key="HorizAlignmentTypes" />
+        <Helios:EnumConverter Type="{x:Type HeliosBase:TextScalingMode}" x:Key="TextScalingModes" />
     </HeliosSdk:HeliosPropertyEditor.Resources>
     <Grid Background="Transparent" Margin="4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -26,6 +26,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right">Text</Label>
         <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontSize="10" Text="{Binding Path=Control.Text}" Margin="2" />
@@ -35,10 +37,15 @@
         <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="2" HorizontalAlignment="Left" FontSize="10"  ItemsSource="{Binding Source={StaticResource VertAlignmentTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.Format.VerticalAlignment, Converter={StaticResource VertAlignmentTypes}}" />
         <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top">Horiz Align</Label>
         <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="2" HorizontalAlignment="Left" FontSize="10"  ItemsSource="{Binding Source={StaticResource HorizAlignmentTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.Format.HorizontalAlignment, Converter={StaticResource HorizAlignmentTypes}}" />
-        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top">Font Color</Label>
-        <HeliosSdk:ColorWell Grid.Column="2" Grid.Row="4" Color="{Binding Path=Control.FontColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" />
-        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top">Bacgkround</Label>
-        <CheckBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6" IsChecked="{Binding Path=Control.FillBackground}" />
-        <HeliosSdk:ColorWell Grid.Row="5" Grid.Column="2" Color="{Binding Path=Control.BackgroundColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" />
+        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Auto Scaling">
+            <Label.ToolTip>How font size will be scaled if the control is scaled.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="4" Margin="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource TextScalingModes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.ScalingMode, Converter={StaticResource TextScalingModes}}"/>
+        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top">Font Color</Label>
+        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="5" Color="{Binding Path=Control.FontColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" />
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top">Use Background</Label>
+        <CheckBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6" IsChecked="{Binding Path=Control.FillBackground}" />
+        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top">Background</Label>
+        <HeliosSdk:ColorWell Grid.Row="7" Grid.Column="1" Color="{Binding Path=Control.BackgroundColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" />
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

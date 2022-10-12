@@ -36,30 +36,34 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         private GaugeImage _giLowIndicator;
         private GaugeImage _giHighIndicator;
         private GaugeImage _giOffIndicator;
+        private bool _lowIndicatorState;
+        private bool _highIndicatorState;   
+        private RadAlt _radAltGauge;
+        private bool _instrumentOn = false;
 
-        public RadAltInstrument(string name, Size size)
+        public RadAltInstrument(string name, Size size, RadAlt radAltGauge)
             : base(name, size)
         {
+            _radAltGauge = radAltGauge; 
             //  The first three images are the default images which appear behind the indicators.
             Components.Add(new GaugeImage("{Helios}/Images/UH60L/RadAltIndicatorOff.xaml", new Rect(65d, 184d, 44d, 30d)));
             Components.Add(new GaugeImage("{Helios}/Images/UH60L/RadAltIndicatorOff.xaml", new Rect(133d, 47d, 44d, 30d)));
-            //Components.Add(new GaugeImage("{FA-18C}/Images/Radar Altimeter Blank.png", new Rect(263d, 300d, 60d, 35d)));
 
             _giLowIndicator = new GaugeImage("{Helios}/Images/UH60L/RadAltIndicatorLo.xaml", new Rect(65d, 184d, 44d, 30d));
             Components.Add(_giLowIndicator);
             _lowIndicator = new HeliosValue(this, new BindingValue(0d), "", "Low flag", "Low Altitude Indicator.", "", BindingValueUnits.Boolean);
-            _lowIndicator.Execute += new HeliosActionHandler(RedIndicator_Execute);
+            _lowIndicator.Execute += new HeliosActionHandler(LowIndicator_Execute);
             Values.Add(_lowIndicator);
             Actions.Add(_lowIndicator);
 
             _giHighIndicator = new GaugeImage("{Helios}/Images/UH60L/RadAltIndicatorHi.xaml", new Rect(133d, 47d, 44d, 30d));
             Components.Add(_giHighIndicator);
             _HighIndicator = new HeliosValue(this, new BindingValue(0d), "", "High flag", "High Altitude Indicator.", "", BindingValueUnits.Boolean);
-            _HighIndicator.Execute += new HeliosActionHandler(GreenIndicator_Execute);
+            _HighIndicator.Execute += new HeliosActionHandler(HighIndicator_Execute);
             Values.Add(_HighIndicator);
             Actions.Add(_HighIndicator);
 
-            _giOffIndicator = new GaugeImage("{Helios}/Images/UH60L/RadAltFlagOff.xaml", new Rect(240d, 290d, 80d, 44d));
+            _giOffIndicator = new GaugeImage("{Helios}/Images/UH60L/RadAltFlagOff.xaml", new Rect(238d, 290d, 74d, 42d));
             Components.Add(_giOffIndicator);
             _offIndicator = new HeliosValue(this, new BindingValue(0d), "", "Off flag", "Indicator to show instrument is off.", "", BindingValueUnits.Boolean);
             _offIndicator.Execute += new HeliosActionHandler(OffIndicator_Execute);
@@ -74,10 +78,8 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             Components.Add(_loNeedle);
             _hiNeedle = new GaugeNeedle("{Helios}/Images/UH60L/RadAltBugHi.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 180d);
             Components.Add(_hiNeedle);
-            _needle = new GaugeNeedle("{Helios}/Gauges/FA-18C/Altimeter/altimeter_needle.xaml", new Point(210d, 210d), new Size(16d, 220d), new Point(8d, 200d), 180d);
+            _needle = new GaugeNeedle("{Helios}/Images/UH60L/RadAltNeedle.xaml", new Point(210d, 210d), new Size(40d, 193d), new Point(20d, 20d), 0d);
             Components.Add(_needle);
-
-            //Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/Common/engine_bezel.png", new Rect(0d, 0d, 400d, 400d)));
 
             _altitude = new HeliosValue(this, new BindingValue(0d), "", "Altitude Needle", "Current RADAR altitude needle rotational position.", "", BindingValueUnits.Degrees);
             _altitude.Execute += new HeliosActionHandler(AltitudeExecute);
@@ -88,7 +90,6 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             _hiAltitude = new HeliosValue(this, new BindingValue(0d), "", "High Altitude Bug Marker", "High altitude marker rotational position.", "", BindingValueUnits.Degrees);
             _hiAltitude.Execute += new HeliosActionHandler(HiAltitudeExecute);
             Actions.Add(_hiAltitude);
-
         }
 
         void AltitudeExecute(object action, HeliosActionEventArgs e)
@@ -103,17 +104,27 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         {
             _hiNeedle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
         }
-        void RedIndicator_Execute(object action, HeliosActionEventArgs e)
+        void LowIndicator_Execute(object action, HeliosActionEventArgs e)
         {
-            Components[Components.IndexOf(_giLowIndicator)].IsHidden = !e.Value.BoolValue;
+            _lowIndicatorState = e.Value.BoolValue;
+            Components[Components.IndexOf(_giLowIndicator)].IsHidden = !_lowIndicatorState;
         }
-        void GreenIndicator_Execute(object action, HeliosActionEventArgs e)
+        void HighIndicator_Execute(object action, HeliosActionEventArgs e)
         {
-            Components[Components.IndexOf(_giHighIndicator)].IsHidden = !e.Value.BoolValue;
+            _highIndicatorState = e.Value.BoolValue;
+            Components[Components.IndexOf(_giHighIndicator)].IsHidden = !_highIndicatorState;
         }
         void OffIndicator_Execute(object action, HeliosActionEventArgs e)
         {
             Components[Components.IndexOf(_giOffIndicator)].IsHidden = e.Value.BoolValue;
+            _instrumentOn = !e.Value.BoolValue;
+            if (!_instrumentOn)
+            {
+                Components[Components.IndexOf(_giLowIndicator)].IsHidden = !_lowIndicatorState;
+                Components[Components.IndexOf(_giHighIndicator)].IsHidden = !_highIndicatorState;
+            }
+            _radAltGauge.TextVisibility = e.Value.BoolValue;
+
         }
     }
 }

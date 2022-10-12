@@ -14,18 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph.Copilot
+namespace GadrocsWorkshop.Helios.Gauges.UH60L
 {
-    using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Controls;
-
-    [HeliosControl("Helios.UH60L.Chronograph.Copilot", "Chronograph Display (Copilot)", "UH-60L", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class ChronographDisplayCopilot : ChronographDisplay
-    {
-        public ChronographDisplayCopilot()
-            : base(FLYER.Copilot)
-        {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
-        }
-    }
+    public enum FLYER { Pilot, Copilot };
 }

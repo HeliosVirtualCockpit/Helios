@@ -22,8 +22,6 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph
     using System.Windows;
     using System.Windows.Media;
 
-    public enum FLYER { Pilot, Copilot };
-
     public class ChronographDisplay : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "";

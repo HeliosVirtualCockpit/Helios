@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows.Forms;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.RadAlt", "RADAR Altimeter", "UH-60L", typeof(BackgroundImageRenderer))]
+    [HeliosControl("Helios.UH60L.RadAlt", "RADAR Altimeter", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt (Pilot)";
@@ -37,23 +37,21 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private RadAltInstrument _digitalAltitudeDisplay;
-        private TextDisplay _digitalDisplay;
         private Controls.TextDecoration _digitalDisplayBackground;
-        //private HeliosPanel _frameBezelPanel;
-        //private HeliosPanel _displayBackgroundPanel;
+        private NumericTextDisplay _digitalAltDisplay;
 
-        public RadAlt()
-            : base("RADAR Altimeter", new Size(420, 420))
+        public RadAlt( FLYER flyer, Size size)
+            : base($"RADAR Altimeter ({flyer})", size)
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
-            AddNumericTextDisplay("Digital Altitude", new Point(55d, 239d), new Size(300d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
-            AddLabel("Digital Altitude Background", new Point(55d, 239d), new Size(300d, 113d), 81, "~~~~", TextHorizontalAlignment.Right);
+            AddLabel("Digital Altitude Background", new Point(63d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);
+            AddNumericTextDisplay("Digital Altitude", new Point(63d, 239d), new Size(296d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
             AddPart("Instrument", new Point(0d, 0d), new Size(420d, 420d), _interfaceDeviceName, "Instrument");
         }
         private void AddNumericTextDisplay(string name, Point posn, Size size,
     string interfaceDevice, string interfaceElement, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
         {
-            NumericTextDisplay _digitalAltDisplay = new NumericTextDisplay()
+            _digitalAltDisplay = new NumericTextDisplay()
             {
                 Name = GetComponentName(name),
                 Width = size.Width,
@@ -62,7 +60,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
                 Left = posn.X,
                 ParserDictionary = devDictionary,
                 UseParseDictionary = true,
-                OnTextColor = Color.FromArgb(0xcc, 0x99, 0xdd, 0x07),               
+                OnTextColor = Color.FromArgb(0xff, 0xa9, 0xed, 0x07),               
                 ScalingMode = TextScalingMode.Height,
                 UseBackground = false,
                 TextTestValue = testDisp,
@@ -76,7 +74,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
                     VerticalAlignment = TextVerticalAlignment.Center,
                     FontSize = baseFontsize,
                     ConfiguredFontSize = baseFontsize,
-                    PaddingRight = 0,
+                    PaddingRight = 0.006,
                     PaddingLeft = 0,
                     PaddingTop = 0,
                     PaddingBottom = 0
@@ -109,7 +107,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
                 Top = posn.Y,
                 Left = posn.X,
                 Text = testDisp,
-                FontColor = Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
+                FontColor = Color.FromArgb(0x20, 0xa9, 0xed, 0x07),
                 FillBackground = true,
                 BackgroundColor = Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
                 Format = new TextFormat
@@ -121,7 +119,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
                     VerticalAlignment = TextVerticalAlignment.Center,
                     FontSize = baseFontsize,
                     ConfiguredFontSize = baseFontsize,
-                    PaddingRight = 0,
+                    PaddingRight = 0.006,
                     PaddingLeft = 0,
                     PaddingTop = 0,
                     PaddingBottom = 0
@@ -132,7 +130,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         }
         private void AddPart(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _digitalAltitudeDisplay = new RadAltInstrument(GetComponentName(name), size)
+            _digitalAltitudeDisplay = new RadAltInstrument(GetComponentName(name), size, this)
             {
                 Top = pos.Y,
                 Left = pos.X,
@@ -189,6 +187,8 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         {
             get { return null; }
         }
+        internal bool TextVisibility { get => !_digitalAltDisplay.IsHidden; set => _digitalAltDisplay.IsHidden = !value; } 
+
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))
