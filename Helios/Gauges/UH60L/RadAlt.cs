@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows.Forms;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.Instruments.RadAlt", "RADAR Altimeter", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.UH60L.RadAlt", "RADAR Altimeter", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt (Pilot)";

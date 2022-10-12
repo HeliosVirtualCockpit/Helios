@@ -20,14 +20,14 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.Instruments", "Stabilator Position Instrument", "UH-60L", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.UH60L.StabilatorIndicator", "Stabilator Position Indicator", "UH-60L", typeof(GaugeRenderer),HeliosControlFlags.None)]
     public class StabInstrument : BaseGauge
     {
         private HeliosValue _stabPosition;
         private GaugeNeedle _needle;
+        private GaugeNeedle _offFlagNeedle;
         private HeliosValue _offIndicator;
         private CalibrationPointCollectionDouble _needleCalibration;
-        private GaugeImage _giOffIndicator;
 
         public StabInstrument()
             : base("Stabilator Position", new Size(276,233))
@@ -35,21 +35,21 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
              //  The first three images are the default images which appear behind the indicators.
             Components.Add(new GaugeImage("{Helios}/Images/UH60L/StabScale.xaml", new Rect(0d, 0d, 276d, 233d)));
 
-            _giOffIndicator = new GaugeImage("{Helios}/Images/UH60L/StabOffFlag.xaml", new Rect(122d, 132d, 25d, 59d));
-            Components.Add(_giOffIndicator);
+            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 180d, 180d);
+            _needleCalibration.Add(new CalibrationPointDouble(360d, 270d));
+            _needle = new GaugeNeedle("{Helios}/Images/UH60L/StabNeedle.xaml", new Point(77d, 81d), new Size(171d, 28d), new Point(14d, 14d), 0d);
+            Components.Add(_needle);
+            _stabPosition = new HeliosValue(this, new BindingValue(0d), "", "Stab Position Needle", "Current position of Stabilator.", "Degrees", BindingValueUnits.Degrees);
+            _stabPosition.Execute += new HeliosActionHandler(StabPositionExecute);
+            Actions.Add(_stabPosition);
+
+            _offFlagNeedle = new GaugeNeedle("{Helios}/Images/UH60L/StabOffFlag.xaml", new Point(77d, 81d), new Size(25d, 59d), new Point(0d, -80d), -20d);
+            Components.Add(_offFlagNeedle);
             _offIndicator = new HeliosValue(this, new BindingValue(0d), "", "Off flag", "Indicator to show instrument is off.", "", BindingValueUnits.Boolean);
             _offIndicator.Execute += new HeliosActionHandler(OffIndicator_Execute);
             Values.Add(_offIndicator);
             Actions.Add(_offIndicator);
 
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 180d, 180d);
-            _needleCalibration.Add(new CalibrationPointDouble(360d, 270d));
-            _needle = new GaugeNeedle("{Helios}/Images/UH60L/StabNeedle.xaml", new Point(77d, 81d), new Size(171d, 28d), new Point(14d, 14d), 0d);
-            Components.Add(_needle);
-
-            _stabPosition = new HeliosValue(this, new BindingValue(0d), "", "Stab Position Needle", "Current position of Stabilator.", "Degrees", BindingValueUnits.Degrees);
-            _stabPosition.Execute += new HeliosActionHandler(StabPositionExecute);
-            Actions.Add(_stabPosition);
             Components.Add(new GaugeImage("{Helios}/Images/UH60L/StabSurface.xaml", new Rect(0d, 0d, 276d, 233d)));
 
         }
@@ -60,7 +60,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         }
         void OffIndicator_Execute(object action, HeliosActionEventArgs e)
         {
-            Components[Components.IndexOf(_giOffIndicator)].IsHidden = e.Value.BoolValue;
+            _offFlagNeedle.Rotation = e.Value.BoolValue ? 30d:0d ;
         }
     }
 }
