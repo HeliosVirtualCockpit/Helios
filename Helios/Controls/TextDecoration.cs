@@ -58,6 +58,17 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 return _format;
             }
+            set
+            {
+                if ((_format == null && value != null)
+                    || (_format != null && !_format.Equals(value)))
+                {
+                    TextFormat oldValue = _format;
+                    _format = value;
+                    OnPropertyChanged("Format", oldValue, value, true);
+                    Refresh();
+                }
+            }
         }
 
         public string Text

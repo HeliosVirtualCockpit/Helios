@@ -198,9 +198,10 @@
     <Compile Include="Gauges\UH60L\ChronographPilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronographCopilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronographDisplay.cs" />
+    <Compile Include="Gauges\UH60L\RadAlt.cs" />
     <Compile Include="Gauges\UH60L\DopplerNavDisplay.cs" />
     <Compile Include="Gauges\UH60L\AHRUDisplay.cs" />
-    <Compile Include="Gauges\UH60L\RADARAltimeter.cs" />
+    <Compile Include="Gauges\UH60L\RadAltInstrument.cs" />
     <Compile Include="GlobalOptions.cs" />
     <Compile Include="HeliosCapabilityEditorDescriptor.cs" />
     <Compile Include="HeliosVisualWithXml.cs" />
