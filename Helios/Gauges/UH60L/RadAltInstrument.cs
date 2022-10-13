@@ -41,7 +41,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         private RadAlt _radAltGauge;
         private bool _instrumentOn = false;
 
-        public RadAltInstrument(string name, Size size, RadAlt radAltGauge)
+        public RadAltInstrument(string name, Size size, RadAlt radAltGauge, FLYER flyer)
             : base(name, size)
         {
             _radAltGauge = radAltGauge; 
@@ -51,21 +51,21 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
 
             _giLowIndicator = new GaugeImage("{Helios}/Images/UH60L/RadAltIndicatorLo.xaml", new Rect(65d, 184d, 44d, 30d));
             Components.Add(_giLowIndicator);
-            _lowIndicator = new HeliosValue(this, new BindingValue(0d), "", "Low flag", "Low Altitude Indicator.", "", BindingValueUnits.Boolean);
+            _lowIndicator = new HeliosValue(this, new BindingValue(0d), name, "Low flag", "Low Altitude Indicator.", "", BindingValueUnits.Boolean);
             _lowIndicator.Execute += new HeliosActionHandler(LowIndicator_Execute);
             Values.Add(_lowIndicator);
             Actions.Add(_lowIndicator);
 
             _giHighIndicator = new GaugeImage("{Helios}/Images/UH60L/RadAltIndicatorHi.xaml", new Rect(133d, 47d, 44d, 30d));
             Components.Add(_giHighIndicator);
-            _HighIndicator = new HeliosValue(this, new BindingValue(0d), "", "High flag", "High Altitude Indicator.", "", BindingValueUnits.Boolean);
+            _HighIndicator = new HeliosValue(this, new BindingValue(0d), name, "High flag", "High Altitude Indicator.", "", BindingValueUnits.Boolean);
             _HighIndicator.Execute += new HeliosActionHandler(HighIndicator_Execute);
             Values.Add(_HighIndicator);
             Actions.Add(_HighIndicator);
 
             _giOffIndicator = new GaugeImage("{Helios}/Images/UH60L/RadAltFlagOff.xaml", new Rect(238d, 290d, 74d, 42d));
             Components.Add(_giOffIndicator);
-            _offIndicator = new HeliosValue(this, new BindingValue(0d), "", "Off flag", "Indicator to show instrument is off.", "", BindingValueUnits.Boolean);
+            _offIndicator = new HeliosValue(this, new BindingValue(0d), name, "Off flag", "Indicator to show instrument is off.", "", BindingValueUnits.Boolean);
             _offIndicator.Execute += new HeliosActionHandler(OffIndicator_Execute);
             Values.Add(_offIndicator);
             Actions.Add(_offIndicator);
@@ -74,20 +74,20 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
 
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 180d, 180d);
             _needleCalibration.Add(new CalibrationPointDouble(360d, 270d));
-            _loNeedle = new GaugeNeedle("{Helios}/Images/UH60L/RadAltBugLo.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 180d);
+            _loNeedle = new GaugeNeedle("{Helios}/Images/UH60L/RadAltBugLo.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 183d);
             Components.Add(_loNeedle);
-            _hiNeedle = new GaugeNeedle("{Helios}/Images/UH60L/RadAltBugHi.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 180d);
+            _hiNeedle = new GaugeNeedle("{Helios}/Images/UH60L/RadAltBugHi.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 183d);
             Components.Add(_hiNeedle);
             _needle = new GaugeNeedle("{Helios}/Images/UH60L/RadAltNeedle.xaml", new Point(210d, 210d), new Size(40d, 193d), new Point(20d, 20d), 0d);
             Components.Add(_needle);
 
-            _altitude = new HeliosValue(this, new BindingValue(0d), "", "Altitude Needle", "Current RADAR altitude needle rotational position.", "", BindingValueUnits.Degrees);
+            _altitude = new HeliosValue(this, new BindingValue(0d), name, "Altitude Needle", "Current RADAR altitude needle rotational position.", "", BindingValueUnits.Degrees);
             _altitude.Execute += new HeliosActionHandler(AltitudeExecute);
             Actions.Add(_altitude);
-            _loAltitude = new HeliosValue(this, new BindingValue(0d), "", "Low Altitude Bug Marker", "Low altitude marker rotational position.", "", BindingValueUnits.Degrees);
+            _loAltitude = new HeliosValue(this, new BindingValue(0d), name, "Low Altitude Bug Marker", "Low altitude marker rotational position.", "", BindingValueUnits.Degrees);
             _loAltitude.Execute += new HeliosActionHandler(LoAltitudeExecute);
             Actions.Add(_loAltitude);
-            _hiAltitude = new HeliosValue(this, new BindingValue(0d), "", "High Altitude Bug Marker", "High altitude marker rotational position.", "", BindingValueUnits.Degrees);
+            _hiAltitude = new HeliosValue(this, new BindingValue(0d), name, "High Altitude Bug Marker", "High altitude marker rotational position.", "", BindingValueUnits.Degrees);
             _hiAltitude.Execute += new HeliosActionHandler(HiAltitudeExecute);
             Actions.Add(_hiAltitude);
         }

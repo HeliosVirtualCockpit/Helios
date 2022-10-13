@@ -199,6 +199,7 @@
     <Compile Include="Gauges\UH60L\ChronographPilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronographCopilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronographDisplay.cs" />
+    <Compile Include="Gauges\UH60L\StabilatorPositionIndicator.cs" />
     <Compile Include="Gauges\UH60L\RadAltCopilot.cs" />
     <Compile Include="Gauges\UH60L\StabilatorInstrument.cs" />
     <Compile Include="Gauges\UH60L\RadAltPilot.cs" />

@@ -334,7 +334,7 @@ local li
 				end
 
 			end
-			helios.send(2096+((jj-6)*2),string.format("%s!%s  %s", helios.ensureString(results["Line0"]), helios.ensureString(results["Line1"]), helios.ensureString(results["Line2"])))			
+			helios.send(2096+((jj-6)*2),string.format("%s!%s %s", helios.ensureString(results["Line0"]), helios.ensureString(results["Line1"]), helios.ensureString(results["Line2"])))			
 			helios.send(2097+((jj-6)*2),string.format("%s", helios.ensureString(results["Line3"])))			
 
 			driver.state.indications[jj] = li

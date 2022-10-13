@@ -933,16 +933,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.ECQ.ToString("d"), device_commands.eng2Starter.ToString("d"), "31", "Engine Control", "Engine 2 Starter"));
             //
             //-- STAB PANEL
-            AddFunction(new Switch(this, devices.ECQ.ToString("d"), "32", new SwitchPosition[] { new SwitchPosition("0.0", "Up", device_commands.slewStabUp.ToString("d")), new SwitchPosition("0.5", "Off", device_commands.slewStabUp.ToString("d")), new SwitchPosition("1.0", "Down", device_commands.slewStabDown.ToString("d"), null, null, "0.0") }, "Stabilator Control", "Stabilator Manual Slew UP/DOWN", "%0.1f"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsStabAuto.ToString("d"), "33", "Stabilator Control", "Stabilator Auto ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS1.ToString("d"), "34", "Stabilator Control", "SAS 1 ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS2.ToString("d"), "35", "Stabilator Control", "SAS 2 ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsTrim.ToString("d"), "36", "Stabilator Control", "Trim ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsFPS.ToString("d"), "37", "Stabilator Control", "FPS ON/OFF"));
-            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsBoost.ToString("d"), "38", "Stabilator Control", "SAS Boost ON/OFF"));
-            AddFunction(new PushButton(this, devices.EFM_HELPER.ToString("d"), EFM_commands.stabPwrReset.ToString("d"), "39", "Stabilator Control", "SAS Power On Reset"));
-            AddFunction(new NetworkValue(this, mainpanel.StabInd.ToString("d"), "Stabilator Control", "Position Indicator", "Needle indicator", "-1 to 1", BindingValueUnits.Numeric, null));
-            AddFunction(new FlagValue(this, mainpanel.StabIndFlag.ToString("d"), "Stabilator Control", "Stabilator indicator flag", ""));
+            AddFunction(new Switch(this, devices.ECQ.ToString("d"), "32", new SwitchPosition[] { new SwitchPosition("0.0", "Up", device_commands.slewStabUp.ToString("d")), new SwitchPosition("0.5", "Off", device_commands.slewStabUp.ToString("d")), new SwitchPosition("1.0", "Down", device_commands.slewStabDown.ToString("d"), null, null, "0.0") }, "Stability Control", "Stabilator Manual Slew UP/DOWN", "%0.1f"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsStabAuto.ToString("d"), "33", "Stability Control", "Stabilator Auto ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS1.ToString("d"), "34", "Stability Control", "SAS 1 ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsSAS2.ToString("d"), "35", "Stability Control", "SAS 2 ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsTrim.ToString("d"), "36", "Stability Control", "Trim ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsFPS.ToString("d"), "37", "Stability Control", "FPS ON/OFF"));
+            AddFunction(new PushButton(this, devices.AFCS.ToString("d"), device_commands.afcsBoost.ToString("d"), "38", "Stability Control", "SAS Boost ON/OFF"));
+            AddFunction(new PushButton(this, devices.EFM_HELPER.ToString("d"), EFM_commands.stabPwrReset.ToString("d"), "39", "Stability Control", "SAS Power On Reset"));
+            AddFunction(new NetworkValue(this, mainpanel.StabInd.ToString("d"), "Stability Control", "Stabilator Position", "Needle indicator", "-1 to 1", BindingValueUnits.Numeric, "%0.2f"));
+            AddFunction(new FlagValue(this, mainpanel.StabIndFlag.ToString("d"), "Stability Control", "Off flag", "Flag indicating the stabilator position indicator is off"));
 
             //
             //--FUEL PUMPS

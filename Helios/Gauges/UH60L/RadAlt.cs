@@ -39,11 +39,14 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         private RadAltInstrument _digitalAltitudeDisplay;
         private Controls.TextDecoration _digitalDisplayBackground;
         private NumericTextDisplay _digitalAltDisplay;
+        private FLYER _flyer;
 
         public RadAlt( FLYER flyer, Size size)
             : base($"RADAR Altimeter ({flyer})", size)
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            _flyer = flyer;
+            _interfaceDeviceName = $"RADAR Alt ({flyer})";
             AddLabel("Digital Altitude Background", new Point(63d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);
             AddNumericTextDisplay("Digital Altitude", new Point(63d, 239d), new Size(296d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
             AddPart("Instrument", new Point(0d, 0d), new Size(420d, 420d), _interfaceDeviceName, "Instrument");
@@ -53,7 +56,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         {
             _digitalAltDisplay = new NumericTextDisplay()
             {
-                Name = GetComponentName(name),
+                Name = $"{name}",
                 Width = size.Width,
                 Height = size.Height,
                 Top = posn.Y,
@@ -87,12 +90,12 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
                 if (action.Name != "hidden")
                 {
 
-                    AddAction(action, _digitalAltDisplay.Name);
+                    AddAction(action, name);
                     //Create the automatic input bindings for the sub component
                     AddDefaultInputBinding(
                        childName: _digitalAltDisplay.Name,
-                       deviceActionName: _digitalAltDisplay.Name + "." + action.ActionVerb + "." + action.Name,
-                       interfaceTriggerName: interfaceDevice + "." + action.Name + ".changed"
+                       deviceActionName: action.ActionVerb + "." + action.Name,
+                       interfaceTriggerName: $"{interfaceDevice}.{name}.changed"
                        );
                 }
             }
@@ -107,6 +110,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
                 Top = posn.Y,
                 Left = posn.X,
                 Text = testDisp,
+                ScalingMode = TextScalingMode.Height,
                 FontColor = Color.FromArgb(0x20, 0xa9, 0xed, 0x07),
                 FillBackground = true,
                 BackgroundColor = Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
@@ -130,7 +134,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         }
         private void AddPart(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _digitalAltitudeDisplay = new RadAltInstrument(GetComponentName(name), size, this)
+            _digitalAltitudeDisplay = new RadAltInstrument(name, size, this, _flyer)
             {
                 Top = pos.Y,
                 Left = pos.X,
