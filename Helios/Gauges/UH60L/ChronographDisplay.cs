@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
     using System;
+    //using System.Drawing;
     using System.Windows;
     using System.Windows.Media;
 
@@ -28,9 +29,11 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph
         private string _font = "Helios Virtual Cockpit A-10C_Digital_Clock";
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private FLYER _flyer;
         public ChronographDisplay(FLYER flyer)
             : base($"Chronograph Display ({flyer})", new Size(80d, 32d))
         {
+            _flyer = flyer;
             _interfaceDeviceName = $"Chronometer ({flyer})";
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
             AddTextDisplay("Time HH:MM", new Point(0d, 0d), new Size(60d, 32d), _interfaceDeviceName, "Time hh:mm", 20, "88:88", TextHorizontalAlignment.Left, "!=:");
@@ -39,8 +42,38 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph
         private void AddTextDisplay(string name, Point posn, Size size,
     string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
         {
+            Controls.TextDecoration displayBackground = new Controls.TextDecoration()
+            {
+                Name = $"{name}_background",
+                Width = size.Width,
+                Height = size.Height,
+                Top = posn.Y,
+                Left = posn.X,
+                Text = testDisp,
+                ScalingMode = TextScalingMode.Height,
+                FontColor = Color.FromArgb(0x20, 0xa9, 0xed, 0x07),
+                FillBackground = true,
+                BackgroundColor = Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
+                Format = new TextFormat
+                {
+                    FontFamily = ConfigManager.FontManager.GetFontFamilyByName(_font),
+                    FontStyle = FontStyles.Normal,
+                    FontWeight = FontWeights.Normal,
+                    HorizontalAlignment = hTextAlign,
+                    VerticalAlignment = TextVerticalAlignment.Center,
+                    FontSize = baseFontsize,
+                    ConfiguredFontSize = baseFontsize,
+                    PaddingRight = 0,
+                    PaddingLeft = 0,
+                    PaddingTop = 0,
+                    PaddingBottom = 0
+                },
+                IsHidden = false,
+            };
+            Children.Add(displayBackground);
+
             TextDisplay display = AddTextDisplay(
-                name: name,
+                name: $"{name}",
                 posn: posn,
                 size: size,
                 font: _font,
@@ -48,13 +81,15 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph
                 horizontalAlignment: hTextAlign,
                 verticalAligment: TextVerticalAlignment.Center,
                 testTextDisplay: testDisp,
-                textColor: Color.FromArgb(0xf0, 0x93, 0x7d, 0x36),
+                textColor: Color.FromArgb(0xff, 0xa3, 0x8d, 0x36),
                 backgroundColor: Color.FromArgb(0xff, 0x10, 0x13, 0x17),
                 useBackground: false,
                 interfaceDeviceName: interfaceDeviceName,
                 interfaceElementName: interfaceElementName,
                 textDisplayDictionary: devDictionary
                 );
+            display.ScalingMode = TextScalingMode.Height;
+            Children.Add(display);
         }
         private string ComponentName(string name)
         {
