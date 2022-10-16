@@ -1,0 +1,4 @@
+﻿DSEG7Classic-Regular.ttf and DSEG14Classic-Regular.ttf come from https://www.keshikan.net/fonts-e.html and are
+maintained at https://github.com/keshikan/DSEG.  These fonts are Licensed under SIL OPEN FONT LICENSE Version 1.1. 
+"You can use DSEG for non-commercial and commercial purposes."
+

@@ -1,0 +1,16 @@
+﻿<!-- Created with Ai->XAML Export Plug-In Version 0.7 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="49.000" Height="230.729"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+
+        <!-- Layer 1/<Path> -->
+        <Path StrokeThickness="1.0" Stroke="#ffa7a9ab" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 31.200,183.184 L 31.200,141.450 C 36.117,138.988 39.500,133.917 39.500,128.043 C 39.500,122.170 36.117,117.099 31.200,114.637 L 31.200,95.289 L 17.304,95.289 L 17.414,114.823 C 12.704,117.353 9.500,122.323 9.500,128.043 C 9.500,133.823 12.774,138.831 17.564,141.336 L 17.800,183.184 C 7.807,186.085 0.500,195.301 0.500,206.229 C 0.500,219.484 11.245,230.229 24.500,230.229 C 37.755,230.229 48.500,219.484 48.500,206.229 C 48.500,195.301 41.193,186.085 31.200,183.184 Z"/>
+
+        <!-- Layer 1/<Path> -->
+        <Path StrokeThickness="1.0" Stroke="#ff404041" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 17.304,95.289 L 17.304,17.870 L 21.803,2.122 C 22.078,1.162 22.955,0.500 23.954,0.500 L 24.037,0.500 C 25.043,0.500 25.926,1.172 26.193,2.143 L 30.455,17.622 L 31.200,95.289 L 17.304,95.289 Z"/>
+
+    </Canvas>
+</Canvas>

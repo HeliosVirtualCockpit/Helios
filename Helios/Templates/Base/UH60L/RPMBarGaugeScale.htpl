@@ -1,0 +1,15 @@
+﻿<ControlTemplate>
+  <Name>RPM Bar Gauge Scale</Name>
+  <Category>UH-60L</Category>
+  <TypeIdentifier>Helios.Base.Image</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Image>{Helios}/Images/UH60L/LEDRPMPanel.xaml</Image>
+      <Alignment>Stretched</Alignment>
+      <CornerRadius>0</CornerRadius>
+      <Location>194,0</Location>
+      <Size>285,841</Size>
+      <Hidden>False</Hidden>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

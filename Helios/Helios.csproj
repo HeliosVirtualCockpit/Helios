@@ -195,10 +195,13 @@
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGaugeCounter.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="Gauges\BarGauge.cs" />
+    <Compile Include="Gauges\UH60L\CenterDisplayUnit.cs" />
     <Compile Include="Gauges\UH60L\Flyer.cs" />
-    <Compile Include="Gauges\UH60L\ChronographPilotDisplay.cs" />
-    <Compile Include="Gauges\UH60L\ChronographCopilotDisplay.cs" />
-    <Compile Include="Gauges\UH60L\ChronographDisplay.cs" />
+    <Compile Include="Gauges\UH60L\ChronometerPilotDisplay.cs" />
+    <Compile Include="Gauges\UH60L\ChronometerCopilotDisplay.cs" />
+    <Compile Include="Gauges\UH60L\ChronometerDisplay.cs" />
+    <Compile Include="Gauges\UH60L\IASInstrument.cs" />
+    <Compile Include="Gauges\UH60L\DisplayUnit.cs" />
     <Compile Include="Gauges\UH60L\StabilatorPositionIndicator.cs" />
     <Compile Include="Gauges\UH60L\RadAltCopilot.cs" />
     <Compile Include="Gauges\UH60L\StabilatorInstrument.cs" />
@@ -366,6 +369,12 @@
     <Compile Include="Windows\ViewModel\InstallationResultViewModel.cs" />
     <Compile Include="Windows\ViewModel\ShareInstallationResults.cs" />
     <Compile Include="Windows\ViewModel\VersionCheckViewModel.cs" />
+    <Content Include="Docs\Licenses\Fonts\DSEGxClassic keshikan.net\DSEGxClassic License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Docs\Licenses\Fonts\LED Counter-7\LED Counter-7.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Base\Simulator Viewports\A29B_BFI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -424,6 +433,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\Text Displays\Label.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\RPMBarGaugeScale.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\TorqueBarGaugeScale.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH60L\CenterPanel.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
@@ -711,6 +729,30 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Images\UH60L\RadAltNeedle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\ChronometerPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\IASNeedle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\IAS.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\LEDRPMPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\LEDTorquePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\CenterDisplayUnitBackground.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

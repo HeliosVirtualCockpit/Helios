@@ -21,7 +21,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
     using static System.Net.Mime.MediaTypeNames;
     using System.Security.Policy;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions.Altimeter;
-    using GadrocsWorkshop.Helios.Gauges.UH60L.Chronograph;
 
     //using GadrocsWorkshop.Helios.Controls;
 
@@ -1211,15 +1210,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.resetSetBtn.ToString("d"), "280", "Chronometer (Pilot)", "RESET/SET Button"));
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.modeBtn.ToString("d"), "281", "Chronometer (Pilot)", "MODE Button"));
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.startStopAdvBtn.ToString("d"), "282", "Chronometer (Pilot)", "START/STOP/ADVANCE Button"));
-            AddFunction(new Chronometer(this, "2096", Chronometer.Flyer.Pilot));
-            AddFunction(new NetworkValue(this, "2097", "Chronometer (Pilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
+            AddFunction(new Chronometer(this, "2096", "2097", Chronometer.Flyer.Pilot));
+            //AddFunction(new NetworkValue(this, "2097", "Chronometer (Pilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
 
             //-- COPILOT LC6 CHRONOMETER
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.resetSetBtn.ToString("d"), "283", "Chronometer (Copilot)", "RESET/SET Button"));
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.modeBtn.ToString("d"), "284", "Chronometer (Copilot)", "MODE Button"));
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.startStopAdvBtn.ToString("d"), "285", "Chronometer (Copilot)", "START/STOP/ADVANCE Button"));
-            AddFunction(new Chronometer(this, "2098", Chronometer.Flyer.Copilot));
-            AddFunction(new NetworkValue(this, "2099", "Chronometer (Copilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
+            AddFunction(new Chronometer(this, "2098", "2099", Chronometer.Flyer.Copilot));
+            //AddFunction(new NetworkValue(this, "2099", "Chronometer (Copilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
 
             //
             //-- PILOT ICS PANEL

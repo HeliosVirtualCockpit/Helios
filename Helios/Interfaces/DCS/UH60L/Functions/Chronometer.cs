@@ -1,5 +1,5 @@
 //  Copyright 2014 Craig Courtney
-//  Copyright 2020 Ammo Goettsch
+//  Copyright 2022 Helios Contributers
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,19 +22,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
     using System;
     using System.Globalization;
 
-    public class Chronometer : DCSFunction
+    public class Chronometer : DCSFunctionPair
     {
-        private ExportDataElement[] DataElementsTemplate = new ExportDataElement[1];
+        private ExportDataElement[] DataElementsTemplate = new ExportDataElement[2];
 
         private HeliosValue _timeHHmm;
         private HeliosValue _timeSS;
+        private HeliosValue _timeMode;
         public enum Flyer {Pilot,Copilot };
 
-        public Chronometer(BaseUDPInterface sourceInterface, string id, Flyer cockpit)
+        public Chronometer(BaseUDPInterface sourceInterface, string id1, string id2, Flyer cockpit)
             : base(sourceInterface,
-                  $"Chronometer ({cockpit})", "Time", "Time in hours, minutes and delimited seconds")
+                  $"Chronometer ({cockpit})", "Time", "Time in hours, minutes and delimited seconds",
+                  $"Chronometer ({cockpit})", "Mode", "Chronometer mode setting.")
         {
-            DataElementsTemplate[0] = new DCSDataElement(id, null, true);
+            DataElementsTemplate[0] = new DCSDataElement(id1, null, true);
+            DataElementsTemplate[1] = new DCSDataElement(id2, null, true);
             DoBuild();
         }
 
@@ -61,6 +64,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
                 SerializedDescription, "Text ss", BindingValueUnits.Text);
             Values.Add(_timeSS);
             Triggers.Add(_timeSS);
+
+            _timeMode = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName2, $"{SerializedFunctionName2} Mode",
+                SerializedDescription2, "Text Mode", BindingValueUnits.Text);
+            Values.Add(_timeMode);
+            Triggers.Add(_timeMode);
         }
 
         protected override ExportDataElement[] DefaultDataElements => DataElementsTemplate;
@@ -72,10 +80,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
             {
                 case "2096":
                 case "2098":
-                    parts = Tokenizer.TokenizeAtLeast(value, 2, ';');
+                    parts = Tokenizer.TokenizeAtLeast(value, 2, ' ');
                     _timeHHmm.SetValue(new BindingValue(parts[0]), false);
                     _timeSS.SetValue(new BindingValue(parts[1]), false);
                     break;
+                case "2097":
+                case "2099":
+                    _timeMode.SetValue(new BindingValue(value), false);
+                    break;
+
             }
         }
 
@@ -83,6 +96,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
         {
             _timeHHmm.SetValue(BindingValue.Empty, true);
             _timeSS.SetValue(BindingValue.Empty, true);
+            _timeMode.SetValue(BindingValue.Empty, true);
         }
 
     }

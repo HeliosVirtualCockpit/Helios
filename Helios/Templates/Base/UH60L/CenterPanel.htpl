@@ -1,0 +1,15 @@
+﻿<ControlTemplate>
+  <Name>Center Bar Panel</Name>
+  <Category>UH-60L</Category>
+  <TypeIdentifier>Helios.Base.Image</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Image>{Helios}/Images/UH60L/BarGraphPanel.xaml</Image>
+      <Alignment>Stretched</Alignment>
+      <CornerRadius>0</CornerRadius>
+      <Location>0,0</Location>
+      <Size>1250,842</Size>
+      <Hidden>False</Hidden>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>
