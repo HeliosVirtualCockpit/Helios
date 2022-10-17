@@ -1632,7 +1632,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new SegmentedMeter(this, "2066", 30, "Engine Management", "Fuel Quantity Right", "Bar display of the right fuel quantity"));
             AddFunction(new NetworkValue(this, "2060", "Engine Management", "Total Fuel Quantity", "Display of the total fuel amount.", "Text", BindingValueUnits.Text, null));
             AddFunction(new SegmentedMeter(this, "2067", 30, "Engine Management", "Transmission Temperature", "Bar display of the transmission temp in celsius"));
-            AddFunction(new SegmentedMeter(this, "2068", 30, "Engine Management", "Transmission pressure", "Pressure in transmission in PSI"));
+            AddFunction(new SegmentedMeter(this, "2068", 30, "Engine Management", "Transmission Pressure", "Pressure in transmission in PSI"));
             AddFunction(new SegmentedMeter(this, "2069", 29, "Engine Management", "Engine 1 Oil Temperature", "Bar display of the oil temperature in celsius"));
             AddFunction(new SegmentedMeter(this, "2070", 29, "Engine Management", "Engine 2 Oil Temperature", "Bar display of the oil temperature in celsius"));
             AddFunction(new SegmentedMeter(this, "2071", 30, "Engine Management", "Engine 1 Oil Pressure", "Bar display of the oil pressure in PSI"));

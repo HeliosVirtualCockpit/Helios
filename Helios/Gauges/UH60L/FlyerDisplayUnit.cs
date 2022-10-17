@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
+namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.DisplayUnit
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -25,31 +25,25 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
     using System.Windows.Forms;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.CenterDisplayUnit", "Center Display Unit", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
-    public class CenterDisplayUnit : CompositeVisualWithBackgroundImage
+    [HeliosControl("Helios.UH60L.FlyerDisplayUnit", "Flyer Display Unit", "UH-60L", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    public class FlyerDisplayUnit : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Engine Management";
 
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
 
- 
-        public CenterDisplayUnit()
-            : base("Center Display Unit", new Size(1250,712))
+
+        public FlyerDisplayUnit(FLYER flyer)
+            : base($"{flyer} Display Unit", new Size(492, 840))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
-            AddBarGauge("Fuel Quantity L", new Point(19, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Fuel.xaml", _interfaceDeviceName, "Fuel Quantity Left");
-            AddBarGauge("Fuel Quantity R", new Point(140, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Fuel.xaml", _interfaceDeviceName, "Fuel Quantity Right");
-            AddBarGauge("Transmission Temp Gauge", new Point(220, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30TransmissionTemp.xaml", _interfaceDeviceName, "Transmission Temperature");
-            AddBarGauge("Transmission Pressure Gauge", new Point(319, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30TransmissionPressure.xaml", _interfaceDeviceName, "Transmission Pressure");
-            AddBarGauge("Oil Temp 1", new Point(420, 145), new Size(40, 522), 29d, "{Helios}/Images/UH60L/SegmentBarDisplay29OilTemp.xaml", _interfaceDeviceName, "Engine 1 Oil Temperature");
-            AddBarGauge("Oil Temp 2", new Point(540, 145), new Size(40, 522), 29d, "{Helios}/Images/UH60L/SegmentBarDisplay29OilTemp.xaml", _interfaceDeviceName, "Engine 2 Oil Temperature");
-            AddBarGauge("Oil Pressure 1", new Point(619, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30OilPressure.xaml", _interfaceDeviceName, "Engine 1 Oil Pressure");
-            AddBarGauge("Oil Pressure 2", new Point(740, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30OilPressure.xaml", _interfaceDeviceName, "Engine 2 Oil Pressure");
-            AddBarGauge("Engine 1 TGT Temp", new Point(840, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30TGT.xaml", _interfaceDeviceName, "Engine 1 TGT");
-            AddBarGauge("Engine 2 TGT Temp", new Point(960, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30TGT.xaml", _interfaceDeviceName, "Engine 2 TGT");
-            AddBarGauge("Engine 1 Ng Speed", new Point(1060, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Ng.xaml", _interfaceDeviceName, "Engine 1 Ng");
-            AddBarGauge("Engine 2 Ng Speed", new Point(1180, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Ng.xaml", _interfaceDeviceName, "Engine 2 Ng");
+            _interfaceDeviceName = $"Engine Management ({flyer})";
+            AddBarGauge("RPM Engine 1", new Point(59, 50), new Size(40, 738), 41d, "{Helios}/Images/UH60L/SegmentBarDisplay41RPM.xaml", _interfaceDeviceName, "Engine 1 RPM");
+            AddBarGauge("RPM Rotor", new Point(119, 50), new Size(40, 738), 41d, "{Helios}/Images/UH60L/SegmentBarDisplay41RPM.xaml", _interfaceDeviceName, "Rotor RPM");
+            AddBarGauge("RPM Engine 2", new Point(179, 50), new Size(40, 738), 41d, "{Helios}/Images/UH60L/SegmentBarDisplay41RPM.xaml", _interfaceDeviceName, "Engine 2 RPM");
+            AddBarGauge("Torque Engine 1", new Point(358, 50), new Size(20, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Torque.xaml", _interfaceDeviceName, "Engine 1 Torque");
+            AddBarGauge("Torque Engine 2", new Point(409, 50), new Size(20, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Torque.xaml", _interfaceDeviceName, "Engine 2 Torque");
         }
         private void AddBarGauge(string name, Point posn, Size size, double segmentCount, string imageName, string interfaceDevice, string interfaceElement)
         {
@@ -74,7 +68,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
                 }
             }
         }
- 
+
         private string ComponentName(string name)
         {
             return $"{Name}_{name}";
@@ -93,7 +87,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
 
         public override string DefaultBackgroundImage
         {
-            get { return "{helios}/Images/UH60L/CenterDisplayUnitBackground.xaml"; }
+            get { return "{helios}/Images/UH60L/FlyerDisplayUnitBackground.xaml"; }
         }
 
         public override bool HitTest(Point location)

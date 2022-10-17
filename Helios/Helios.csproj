@@ -200,8 +200,10 @@
     <Compile Include="Gauges\UH60L\ChronometerPilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronometerCopilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronometerDisplay.cs" />
+    <Compile Include="Gauges\UH60L\CopilotDisplayUnit.cs" />
+    <Compile Include="Gauges\UH60L\PilotDisplayUnit.cs" />
     <Compile Include="Gauges\UH60L\IASInstrument.cs" />
-    <Compile Include="Gauges\UH60L\DisplayUnit.cs" />
+    <Compile Include="Gauges\UH60L\FlyerDisplayUnit.cs" />
     <Compile Include="Gauges\UH60L\StabilatorPositionIndicator.cs" />
     <Compile Include="Gauges\UH60L\RadAltCopilot.cs" />
     <Compile Include="Gauges\UH60L\StabilatorInstrument.cs" />
@@ -433,15 +435,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\Text Displays\Label.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\UH60L\RPMBarGaugeScale.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\UH60L\TorqueBarGaugeScale.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\UH60L\CenterPanel.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
@@ -753,6 +746,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Images\UH60L\CenterDisplayUnitBackground.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\UH60L\FlyerDisplayUnitBackground.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

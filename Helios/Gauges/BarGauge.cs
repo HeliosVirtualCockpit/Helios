@@ -48,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 
         public BarGauge() : this("Segmented Gauge", new Size(40,540), "{Helios}/Images/Custom/SegmentBarDisplay30.xaml", 30) 
         { }
-        protected BarGauge(string name, Size size, string image, double segmentCount)
+        public BarGauge(string name, Size size, string image, double segmentCount)
             : base(name, size)
         {
             _imageFile = image;
