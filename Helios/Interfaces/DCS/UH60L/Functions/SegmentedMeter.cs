@@ -49,22 +49,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
 
         private void DoBuild()
         {
-            _startValue = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} Start Value",
+            _startValue = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName}.Start Value",
                 SerializedDescription, "Value is changed when the meter starting value changes.", BindingValueUnits.Numeric);
             Values.Add(_startValue);
             Triggers.Add(_startValue);
 
-            _endValue = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} Finish Value",
+            _endValue = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName}.Finish Value",
                 SerializedDescription, "Value is changed when the meter finishing value changes.", BindingValueUnits.Numeric);
             Values.Add(_endValue);
             Triggers.Add(_endValue);
 
-            _startSegment = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} Start Segment",
+            _startSegment = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName}.Start Segment",
                 SerializedDescription, "Value is changed when the meter starting segment changes.", BindingValueUnits.Numeric);
             Values.Add(_startSegment);
             Triggers.Add(_startSegment);
 
-            _endSegment = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} Finish Segment",
+            _endSegment = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName}.Finish Segment",
                 SerializedDescription, "Value is changed when the meter finishing segment changes.", BindingValueUnits.Numeric);
             Values.Add(_endSegment);
             Triggers.Add(_endSegment);

@@ -200,10 +200,10 @@
     <Compile Include="Gauges\UH60L\ChronometerPilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronometerCopilotDisplay.cs" />
     <Compile Include="Gauges\UH60L\ChronometerDisplay.cs" />
-    <Compile Include="Gauges\UH60L\CopilotDisplayUnit.cs" />
-    <Compile Include="Gauges\UH60L\PilotDisplayUnit.cs" />
+    <Compile Include="Gauges\UH60L\DisplayUnitCopilot.cs" />
+    <Compile Include="Gauges\UH60L\DisplayUnitPilot.cs" />
     <Compile Include="Gauges\UH60L\IASInstrument.cs" />
-    <Compile Include="Gauges\UH60L\FlyerDisplayUnit.cs" />
+    <Compile Include="Gauges\UH60L\DisplayUnitFlyer.cs" />
     <Compile Include="Gauges\UH60L\StabilatorPositionIndicator.cs" />
     <Compile Include="Gauges\UH60L\RadAltCopilot.cs" />
     <Compile Include="Gauges\UH60L\StabilatorInstrument.cs" />

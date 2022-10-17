@@ -18,12 +18,8 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.DisplayUnit
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
-    using System;
-    //using System.Drawing;
     using System.Windows;
-    using System.Windows.Forms.VisualStyles;
-    using System.Windows.Forms;
-    using System.Windows.Media;
+
 
     [HeliosControl("Helios.UH60L.FlyerDisplayUnit", "Flyer Display Unit", "UH-60L", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class FlyerDisplayUnit : CompositeVisualWithBackgroundImage
@@ -47,7 +43,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.DisplayUnit
         }
         private void AddBarGauge(string name, Point posn, Size size, double segmentCount, string imageName, string interfaceDevice, string interfaceElement)
         {
-            BarGauge barGauge = new BarGauge(name, size, imageName, segmentCount)
+            BarGauge barGauge = new BarGauge($"{Name}_{name}", size, imageName, segmentCount)
             {
                 Top = posn.Y,
                 Left = posn.X
@@ -57,13 +53,12 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.DisplayUnit
             {
                 if (action.Name != "hidden")
                 {
-
-                    AddAction(action, name);
+                    AddAction(action, $"{name}");
                     //Create the automatic input bindings for the sub component
                     AddDefaultInputBinding(
                        childName: barGauge.Name,
-                       deviceActionName: action.ActionVerb + "." + action.Name,
-                       interfaceTriggerName: $"{interfaceDevice}.{name}.changed"
+                       deviceActionName: $"{barGauge.Name}.{action.ActionVerb}.{action.Name}",
+                       interfaceTriggerName: $"{interfaceDevice}.{interfaceElement}.{action.Name}.changed"
                        );
                 }
             }

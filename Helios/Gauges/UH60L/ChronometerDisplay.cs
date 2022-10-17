@@ -39,7 +39,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronometer
             _flyer = flyer;
             _interfaceDeviceName = $"Chronometer ({flyer})";
             AddTextDisplay("Time HH:MM", new Point(44d, 91d), new Size(180d, 74d), _interfaceDeviceName, "Time hh:mm", 50, "88:88", TextHorizontalAlignment.Center, "!=:",_font1,true);
-            AddTextDisplay("Time ss", new Point(224d, 91d), new Size(83d, 74d), _interfaceDeviceName, "Time ss", 40, "88", TextHorizontalAlignment.Left, "!=:", _font1, true);
+            AddTextDisplay("Time ss", new Point(222d, 91d), new Size(87d, 74d), _interfaceDeviceName, "Time ss", 40, "88", TextHorizontalAlignment.Left, "!=:", _font1, true);
             AddTextDisplay("Time Mode", new Point(44d, 144d), new Size(224d,24d), _interfaceDeviceName, "Time Mode", 12, "", TextHorizontalAlignment.Center, "!=:", _font2, true);
             _panel = AddPanel("Panel Visibility", new Point(0d, 0d), new Size(322d, 322d), "{Helios}/Images/UH60L/ChronometerPanel.xaml", _interfaceDeviceName);
             _panel.Opacity = 1.0d;

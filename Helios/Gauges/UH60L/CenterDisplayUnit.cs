@@ -53,7 +53,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
         }
         private void AddBarGauge(string name, Point posn, Size size, double segmentCount, string imageName, string interfaceDevice, string interfaceElement)
         {
-            BarGauge barGauge = new BarGauge(name, size, imageName, segmentCount)
+            BarGauge barGauge = new BarGauge($"{Name}_{name}", size, imageName, segmentCount)
             {
                 Top = posn.Y,
                 Left = posn.X
@@ -63,13 +63,12 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
             {
                 if (action.Name != "hidden")
                 {
-
-                    AddAction(action, name);
+                    AddAction(action, $"{name}");
                     //Create the automatic input bindings for the sub component
                     AddDefaultInputBinding(
                        childName: barGauge.Name,
-                       deviceActionName: action.ActionVerb + "." + action.Name,
-                       interfaceTriggerName: $"{interfaceDevice}.{name}.changed"
+                       deviceActionName: $"{barGauge.Name}.{action.ActionVerb}.{action.Name}",
+                       interfaceTriggerName: $"{interfaceDevice}.{interfaceElement}.{action.Name}.changed"
                        );
                 }
             }

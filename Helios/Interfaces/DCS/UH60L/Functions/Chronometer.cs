@@ -34,7 +34,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
         public Chronometer(BaseUDPInterface sourceInterface, string id1, string id2, Flyer cockpit)
             : base(sourceInterface,
                   $"Chronometer ({cockpit})", "Time", "Time in hours, minutes and delimited seconds",
-                  $"Chronometer ({cockpit})", "Mode", "Chronometer mode setting.")
+                  $"Chronometer ({cockpit})", "Time", "Chronometer mode setting.")
         {
             DataElementsTemplate[0] = new DCSDataElement(id1, null, true);
             DataElementsTemplate[1] = new DCSDataElement(id2, null, true);
@@ -55,17 +55,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
 
         private void DoBuild()
         {
-            _timeHHmm = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} hh:mm",
+            _timeHHmm = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName}.hh:mm",
                 SerializedDescription, "Text HH:MM.", BindingValueUnits.Text);
             Values.Add(_timeHHmm);
             Triggers.Add(_timeHHmm);
 
-            _timeSS = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} ss",
+            _timeSS = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName}.ss",
                 SerializedDescription, "Text ss", BindingValueUnits.Text);
             Values.Add(_timeSS);
             Triggers.Add(_timeSS);
 
-            _timeMode = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName2, $"{SerializedFunctionName2} Mode",
+            _timeMode = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName2, $"{SerializedFunctionName2}.Mode",
                 SerializedDescription2, "Text Mode", BindingValueUnits.Text);
             Values.Add(_timeMode);
             Triggers.Add(_timeMode);

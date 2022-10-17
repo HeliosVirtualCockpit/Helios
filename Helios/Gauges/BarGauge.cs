@@ -61,10 +61,10 @@ namespace GadrocsWorkshop.Helios.Gauges
             _barImage.IsHidden = false;
             Components.Add(_barImage);
 
-            _barSegmentStart = new HeliosValue(this, new BindingValue(false), "Bar Segment Display", "Start Segment", "The first segment of a run.", "Number", BindingValueUnits.Numeric);
+            _barSegmentStart = new HeliosValue(this, new BindingValue(false), name, "Start Segment", "The first segment of a run.", "Number", BindingValueUnits.Numeric);
             _barSegmentStart.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_barSegmentStart);
-            _barSegmentEnd = new HeliosValue(this, new BindingValue(false), "Bar Segment Display", "Finish Segment", "The last segment of a run.", "Number", BindingValueUnits.Numeric);
+            _barSegmentEnd = new HeliosValue(this, new BindingValue(false), name, "Finish Segment", "The last segment of a run.", "Number", BindingValueUnits.Numeric);
             _barSegmentEnd.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_barSegmentEnd);
         }
