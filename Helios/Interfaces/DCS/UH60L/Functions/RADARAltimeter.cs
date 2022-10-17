@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Util;
+    using GadrocsWorkshop.Helios.Gauges.UH60L;
     using System;
     using System.Globalization;
 
@@ -27,7 +28,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
         private ExportDataElement[] DataElementsTemplate = new ExportDataElement[1];
 
         private HeliosValue _digitalAltitude;
-        public enum FLYER {Pilot,Copilot };
 
         public RADARAltimeter(BaseUDPInterface sourceInterface, string id, FLYER cockpit, string deviceName, string deviceDescription)
             : base(sourceInterface,

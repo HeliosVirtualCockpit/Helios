@@ -19,22 +19,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Util;
+    using GadrocsWorkshop.Helios.Gauges.UH60L;
     using System;
     using System.Globalization;
 
-    public class Chronometer : DCSFunctionPair
+    public class Chronometer : DCSFunction
     {
         private ExportDataElement[] DataElementsTemplate = new ExportDataElement[2];
 
         private HeliosValue _timeHHmm;
         private HeliosValue _timeSS;
         private HeliosValue _timeMode;
-        public enum Flyer {Pilot,Copilot };
 
-        public Chronometer(BaseUDPInterface sourceInterface, string id1, string id2, Flyer cockpit)
+        public Chronometer(BaseUDPInterface sourceInterface, string id1, string id2, FLYER cockpit)
             : base(sourceInterface,
-                  $"Chronometer ({cockpit})", "Time", "Time in hours, minutes and delimited seconds",
-                  $"Chronometer ({cockpit})", "Time", "Chronometer mode setting.")
+                  $"Chronometer ({cockpit})", "Time", "Time in hours, minutes, delimited seconds and Chronometer Mode")
         {
             DataElementsTemplate[0] = new DCSDataElement(id1, null, true);
             DataElementsTemplate[1] = new DCSDataElement(id2, null, true);
@@ -65,8 +64,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
             Values.Add(_timeSS);
             Triggers.Add(_timeSS);
 
-            _timeMode = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName2, $"{SerializedFunctionName2}.Mode",
-                SerializedDescription2, "Text Mode", BindingValueUnits.Text);
+            _timeMode = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName}.Mode",
+                SerializedDescription, "Text Mode", BindingValueUnits.Text);
             Values.Add(_timeMode);
             Triggers.Add(_timeMode);
         }

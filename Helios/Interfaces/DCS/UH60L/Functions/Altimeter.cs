@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Util;
+    using GadrocsWorkshop.Helios.Gauges.UH60L;
     using System;
     using System.Globalization;
 
@@ -29,14 +30,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions
 
         private HeliosValue _altitude;
         private HeliosValue _pressure;
-        public enum Cockpit {Pilot,Copilot };
 
-        public Altimeter(BaseUDPInterface sourceInterface, Cockpit cockpit)
+        public Altimeter(BaseUDPInterface sourceInterface, FLYER cockpit)
             : base(sourceInterface,
                   $"Altimeter ({cockpit})", "Altitude", "Barometric altitude above sea level of the aircraft.",
                   $"Altimeter ({cockpit})", "Pressure", "Manually set barometric altitude.")
         {
-            if(cockpit == Cockpit.Pilot)
+            if(cockpit == FLYER.Pilot)
             {
                 DataElementsTemplate[0] = new DCSDataElement("2051", null, true);
                 DataElementsTemplate[1] = new DCSDataElement("2052", null, true);

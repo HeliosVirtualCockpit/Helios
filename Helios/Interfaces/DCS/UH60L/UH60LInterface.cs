@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions;
+    using GadrocsWorkshop.Helios.Gauges.UH60L;
     using static System.Net.Mime.MediaTypeNames;
     using System.Security.Policy;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.UH60L.Functions.Altimeter;
@@ -1136,7 +1137,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.apn209PilotLoLight.ToString("d"), "RADAR Alt (Pilot)", "Low flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209PilotHiLight.ToString("d"), "RADAR Alt (Pilot)", "High flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209PilotFlag.ToString("d"), "RADAR Alt (Pilot)", "Off flag", ""));
-            AddFunction(new RADARAltimeter(this, "2055", RADARAltimeter.FLYER.Pilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
+            AddFunction(new RADARAltimeter(this, "2055", FLYER.Pilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
 
             // 174-176 are the altitude digits 
             AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), device_commands.apn209CopilotLoSet.ToString("d"), "183", 0.1d, 0d, 1d, "RADAR Alt (Copilot)", "Low Altitude Set"));
@@ -1147,7 +1148,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.apn209CopilotLoLight.ToString("d"), "RADAR Alt (Copilot)", "Low flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209CopilotHiLight.ToString("d"), "RADAR Alt (Copilot)", "High flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209CopilotFlag.ToString("d"), "RADAR Alt (Copilot)", "Off flag", ""));
-            AddFunction(new RADARAltimeter(this, "2056", RADARAltimeter.FLYER.Copilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
+            AddFunction(new RADARAltimeter(this, "2056", FLYER.Copilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
 
             // 187-190 are the altitude digits 
 
@@ -1210,14 +1211,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.resetSetBtn.ToString("d"), "280", "Chronometer (Pilot)", "RESET/SET Button"));
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.modeBtn.ToString("d"), "281", "Chronometer (Pilot)", "MODE Button"));
             AddFunction(new PushButton(this, devices.PLTLC6.ToString("d"), device_commands.startStopAdvBtn.ToString("d"), "282", "Chronometer (Pilot)", "START/STOP/ADVANCE Button"));
-            AddFunction(new Chronometer(this, "2096", "2097", Chronometer.Flyer.Pilot));
+            AddFunction(new Chronometer(this, "2096", "2097", FLYER.Pilot));
             //AddFunction(new NetworkValue(this, "2097", "Chronometer (Pilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
 
             //-- COPILOT LC6 CHRONOMETER
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.resetSetBtn.ToString("d"), "283", "Chronometer (Copilot)", "RESET/SET Button"));
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.modeBtn.ToString("d"), "284", "Chronometer (Copilot)", "MODE Button"));
             AddFunction(new PushButton(this, devices.CPLTLC6.ToString("d"), device_commands.startStopAdvBtn.ToString("d"), "285", "Chronometer (Copilot)", "START/STOP/ADVANCE Button"));
-            AddFunction(new Chronometer(this, "2098", "2099", Chronometer.Flyer.Copilot));
+            AddFunction(new Chronometer(this, "2098", "2099", FLYER.Copilot));
             //AddFunction(new NetworkValue(this, "2099", "Chronometer (Copilot)", "Mode Display", "Display of the Chronometer Mode", "Text", BindingValueUnits.Text, null));
 
             //
@@ -1455,11 +1456,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             // Indicators / Lamps / Flags
 
             // PILOT BARO ALTIMETER
-            AddFunction(new Altimeter(this, Cockpit.Pilot));
+            AddFunction(new Altimeter(this, FLYER.Pilot));
             AddFunction(new FlagValue(this, mainpanel.pilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ENCODER FLAG", ""));
 
             // COPILOT ALTIMETER
-            AddFunction(new Altimeter(this, Cockpit.Copilot));
+            AddFunction(new Altimeter(this, FLYER.Copilot));
             AddFunction(new FlagValue(this, mainpanel.copilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ENCODER FLAG", ""));
 
             // MISC
