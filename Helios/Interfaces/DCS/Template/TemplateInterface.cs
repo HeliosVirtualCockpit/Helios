@@ -27,9 +27,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Template
         typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
         UniquenessKey="Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
     */
-    public class TemplateInterface : DCSInterface
+    public class UH60LInterface : DCSInterface
     {
-        public TemplateInterface(string name)
+        public UH60LInterface(string name)
             : base(name, "this must the name of primary aircraft in the supported module", "pack://application:,,,/Helios;component/Interfaces/DCS/Template/ExportFunctions.lua")
         {
             // optionally support more than just the base aircraft, or even use a module

@@ -1,0 +1,19 @@
+﻿<!-- Created with Ai->XAML Export Plug-In Version 0.7 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="40.432" Height="193.845"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+
+        <!-- Layer 1/<Path> -->
+        <Path StrokeThickness="1.5" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#fffffeff" Data="F1 M 29.693,171.599 L 21.850,191.974 C 21.274,193.469 19.158,193.469 18.583,191.974 L 10.739,171.599 L 10.739,32.384 L 29.693,32.384 L 29.693,171.599 Z"/>
+
+        <!-- Layer 1/<Ellipse> -->
+        <Path StrokeThickness="1.5" Stroke="#ff58585b" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 0.750,20.216 C 0.750,9.465 9.465,0.750 20.216,0.750 C 30.967,0.750 39.682,9.465 39.682,20.216 C 39.682,30.967 30.967,39.682 20.216,39.682 C 9.465,39.682 0.750,30.967 0.750,20.216 Z"/>
+
+        <!-- Layer 1/<Ellipse> -->
+        <Path Fill="#00ed1c24" Data="F1 M 18.728,20.216 C 18.728,19.395 19.395,18.728 20.216,18.728 C 21.038,18.728 21.704,19.395 21.704,20.216 C 21.704,21.038 21.038,21.704 20.216,21.704 C 19.395,21.704 18.728,21.038 18.728,20.216 Z"/>
+
+    </Canvas>
+</Canvas>

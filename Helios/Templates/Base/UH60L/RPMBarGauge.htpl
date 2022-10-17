@@ -1,0 +1,16 @@
+﻿<ControlTemplate>
+  <Name>RPM Bar Gauge</Name>
+  <Category>UH-60L</Category>
+  <TypeIdentifier>Helios.Gauges.BarGauge</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Image>{Helios}/Images/UH60L/SegmentBarDisplay41RPM.xaml</Image>
+      <Alignment>Centered</Alignment>
+      <CornerRadius>0</CornerRadius>
+      <SegmentCount>41</SegmentCount>
+      <Location>392,54</Location>
+      <Size>40,738</Size>
+      <Hidden>False</Hidden>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

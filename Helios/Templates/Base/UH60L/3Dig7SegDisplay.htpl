@@ -1,0 +1,33 @@
+﻿<ControlTemplate>
+  <Name>3 Digit 7 Segment Display</Name>
+  <Category>UH-60L</Category>
+  <TypeIdentifier>Helios.Base.TextDisplay</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Font>
+        <FontFamily>DSEG7 Classic</FontFamily>
+        <FontStyle>Normal</FontStyle>
+        <FontWeight>Normal</FontWeight>
+        <FontSize>32</FontSize>
+        <HorizontalAlignment>Left</HorizontalAlignment>
+        <VerticalAlignment>Center</VerticalAlignment>
+        <Padding>
+          <Left>0</Left>
+          <Top>0</Top>
+          <Right>0</Right>
+          <Bottom>0</Bottom>
+        </Padding>
+      </Font>
+      <OnTextColor>#FF40B329</OnTextColor>
+      <BackgroundColor>#FF000000</BackgroundColor>
+      <TextTest>123</TextTest>
+      <ParserDictionary />
+      <UseBackground>True</UseBackground>
+      <UseParserDictionary>False</UseParserDictionary>
+      <ScalingMode>Height</ScalingMode>
+      <Location>525,243</Location>
+      <Size>90,50</Size>
+      <Hidden>False</Hidden>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

@@ -1,0 +1,16 @@
+﻿<ControlTemplate>
+  <Name>TGT Bar Gauge</Name>
+  <Category>UH-60L</Category>
+  <TypeIdentifier>Helios.Gauges.BarGauge</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Image>{Helios}/Images/UH60L/SegmentBarDisplay30TGT.xaml</Image>
+      <Alignment>Centered</Alignment>
+      <CornerRadius>0</CornerRadius>
+      <SegmentCount>30</SegmentCount>
+      <Location>392,54</Location>
+      <Size>40,540</Size>
+      <Hidden>False</Hidden>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

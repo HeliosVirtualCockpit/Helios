@@ -1,0 +1,31 @@
+﻿<ControlTemplate>
+  <Name>Label</Name>
+  <Category>Text Displays</Category>
+  <TypeIdentifier>Helios.Base.Text</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <FillBackground>True</FillBackground>
+      <BackgroundColor>#FF1E1E1E</BackgroundColor>
+      <FontColor>#FFFFFFFF</FontColor>
+      <Font>
+        <FontFamily>Franklin Gothic</FontFamily>
+        <FontStyle>Normal</FontStyle>
+        <FontWeight>Normal</FontWeight>
+        <FontSize>12</FontSize>
+        <HorizontalAlignment>Left</HorizontalAlignment>
+        <VerticalAlignment>Center</VerticalAlignment>
+        <Padding>
+          <Left>0</Left>
+          <Top>0</Top>
+          <Right>0</Right>
+          <Bottom>0</Bottom>
+        </Padding>
+      </Font>
+      <Text>Label</Text>
+      <ScalingMode>Height</ScalingMode>
+      <Location>0,0</Location>
+      <Size>60,20</Size>
+      <Hidden>False</Hidden>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

@@ -1,0 +1,67 @@
+﻿<HeliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.BarGaugeAppearanceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Helios="clr-namespace:GadrocsWorkshop.Helios"
+             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"                      
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" 
+             d:DesignWidth="180">
+    <HeliosSdk:HeliosPropertyEditor.Resources>
+        <Helios:EnumConverter Type="{x:Type Helios:ImageAlignment}" x:Key="AlignmentTypes" />
+    </HeliosSdk:HeliosPropertyEditor.Resources>
+    <Grid Background="Transparent" Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid  Visibility="Visible" Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right">Image</Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" ImageFilename="{Binding Control.Image, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">Alignment</Label>
+        <ComboBox Grid.Column="1" Grid.Row="1" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource AlignmentTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.Alignment, Converter={StaticResource AlignmentTypes}}" />
+    </Grid>
+        <Grid  Visibility="Collapsed" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right">Corner Radius</Label>
+            <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="0" FontSize="10" Text="{Binding Path=Control.CornerRadius}" Margin="2" />
+            <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">Border Thickness</Label>
+            <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding Path=Control.BorderThickness}" Margin="2" />
+            <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">Border Color</Label>
+            <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="2" Color="{Binding Path=Control.BorderColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" />
+        </Grid>
+        <Grid Grid.Row="2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right" Content="Segment Count"/>
+            <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="0" FontSize="10" Text="{Binding Path=Control.SegmentCount}" ToolTip="The number of segments in this display"  Margin="2" />
+
+        </Grid>
+    </Grid>
+</HeliosSdk:HeliosPropertyEditor>

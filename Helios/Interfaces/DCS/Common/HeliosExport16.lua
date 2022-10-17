@@ -639,6 +639,11 @@ function helios_private.clearState()
     -- sent updates and received commands, just for reporting
     helios_private.state.sendCount = 0
     helios_private.state.receiveCount = 0
+
+    -- Inform driver to clear any local state it might be keeping
+    if helios_private.driver.clearState ~= nil then
+        helios_private.driver.clearState()
+    end
 end
 
 function helios_private.processArguments(device, arguments)
@@ -686,6 +691,11 @@ function helios_private.resetCachedValues()
 
     -- make sure low priority is sent also
     helios_private.state.nextLowUpdate = helios_private.state.nextHighUpdate
+
+     -- inform driver to clear any local state it might be keeping	
+	if helios_private.driver.clearState ~= nil then
+        helios_private.driver.clearState()
+    end
 end
 
 function helios_private.processInput()
