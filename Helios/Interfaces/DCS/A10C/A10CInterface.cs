@@ -567,7 +567,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             #endregion
 
             #region Cockpit Mechanical Controls
-            AddFunction(new Switch(this, CPT_MECH, "712", new SwitchPosition[] { new SwitchPosition("1.0", "Open", BUTTON_6), new SwitchPosition("0.5", "Hold", BUTTON_6), new SwitchPosition("0.0", "Close", BUTTON_7, BUTTON_7, "0.5") }, "Mechanical", "Canopy Open/Hold/Close", "%0.2f"));
+            AddFunction(new Switch(this, CPT_MECH, "712", new SwitchPosition[] { new SwitchPosition("1.0", "Close", BUTTON_7, BUTTON_7, "0.5", "0.5"), new SwitchPosition("0.5", "Hold", null), new SwitchPosition("0.0", "Open", BUTTON_6, BUTTON_6, "0.5", "0.5") }, "Mechanical", "Canopy Open/Hold/Close", "%0.2f"));
 			AddFunction(Switch.CreateToggleSwitch(this, CPT_MECH, BUTTON_11, "787", "1", "Open", "0", "Closed", "Mechanical", "Extend boarding ladder cover", "%1d"));
 			AddFunction(new PushButton(this, CPT_MECH, BUTTON_12, "788", "Mechanical", "Extend boarding ladder button"));
 			AddFunction(Switch.CreateToggleSwitch(this, CPT_MECH, BUTTON_15, "786", "0", "Down", "1", "Up", "Mechanical", "Canopy Jettison Lever Unlock Button", "%1d"));
