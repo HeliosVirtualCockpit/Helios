@@ -392,7 +392,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
 
         private void Visual_DisplayUpdate(object sender, EventArgs e)
         {
-            if (Visual.IsVisible)
+            if (Visual.IsVisible || Visual.DesignMode)
             {
                 // Logger.Debug("Invalidating Helios control due to requested display update");
                 InvalidateVisual();
