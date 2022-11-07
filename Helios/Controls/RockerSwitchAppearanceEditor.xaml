@@ -13,9 +13,8 @@
     <HeliosSdk:HeliosPropertyEditor.Resources>
         <Helios:EnumConverter Type="{x:Type Helios:TextVerticalAlignment}" x:Key="VertAlignmentTypes" />
         <Helios:EnumConverter Type="{x:Type Helios:TextHorizontalAlignment}" x:Key="HorizAlignmentTypes" />
-
         <Helios:EnumConverter Type="{x:Type HeliosTouch:ThreeWayToggleSwitchType}" x:Key="ToggleSwitchTypes" />
-        
+        <Helios:EnumConverter Type="{x:Type HeliosTouch:TextScalingMode}" x:Key="TextScalingModes" />
         <Style x:Key="IndicatorLabelStyle" TargetType="Label">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Control.HasIndicator}" Value="False">
@@ -76,6 +75,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -85,11 +85,17 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Position Images</TextBlock>
-        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right"><Label.ToolTip>Image displayed when the switch is in position one (up).</Label.ToolTip>One</Label>
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image displayed when the switch is in position one (up).</Label.ToolTip> One
+        </Label>
         <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="1" ImageFilename="{Binding Control.PositionOneImage, Mode=TwoWay}" />
-        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right"><Label.ToolTip>Image displayed when the switch is in position two (center).</Label.ToolTip> Two</Label>
+        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image displayed when the switch is in position two (center).</Label.ToolTip> Two
+        </Label>
         <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="2" ImageFilename="{Binding Control.PositionTwoImage, Mode=TwoWay}" />
-        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right"><Label.ToolTip>Image displayed when the switch is in position three (down).</Label.ToolTip> Three</Label>
+        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image displayed when the switch is in position three (down).</Label.ToolTip> Three
+        </Label>
         <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="3" ImageFilename="{Binding Control.PositionThreeImage, Mode=TwoWay}" />
 
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="4,10,2,2" Style="{StaticResource IndicatorTextBlockStyle}">Indicator On Images</TextBlock>
@@ -122,33 +128,36 @@
             <Label.ToolTip>How the text will be aligned horizontally inside the indicator.</Label.ToolTip>
         </Label>
         <ComboBox Grid.Column="1" Grid.Row="12" Margin="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource HorizAlignmentTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.TextFormat.HorizontalAlignment, Converter={StaticResource HorizAlignmentTypes}}" />
-
-        <Label Grid.Column="0" Grid.Row="13" FontSize="10" HorizontalAlignment="Right" Content="Color" Style="{StaticResource LabelLabelStyle}">
+        <Label  Grid.Column="0" Grid.Row="13" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Text Scaling">
+            <Label.ToolTip>How font size will be scaled if the control is scaled.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="13" Margin="2,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource TextScalingModes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.ScalingMode, Converter={StaticResource TextScalingModes}}"/>
+        <Label Grid.Column="0" Grid.Row="14" FontSize="10" HorizontalAlignment="Right" Content="Color" Style="{StaticResource LabelLabelStyle}">
             <Label.ToolTip>Color in which the text will be rendered.</Label.ToolTip>
         </Label>
-        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="13" Color="{Binding Control.TextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="2" />
-        <Label Grid.Column="0" Grid.Row="14" FontSize="10" HorizontalAlignment="Right" Content="Push Offset">
+        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="14" Color="{Binding Control.TextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="2" />
+        <Label Grid.Column="0" Grid.Row="15" FontSize="10" HorizontalAlignment="Right" Content="Push Offset">
             <Label.ToolTip>Offset which will be used to move text and decorations when the button is pushed.</Label.ToolTip>
         </Label>
-        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding Control.TextPushOffset, Mode=TwoWay}" Margin="2" />
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="15" FontSize="10" Text="{Binding Control.TextPushOffset, Mode=TwoWay}" Margin="2" />
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15" Margin="4,10,2,2"  Style="{StaticResource LabelTextBlockStyle}">Text Padding</TextBlock>
-        <Label Grid.Column="0" Grid.Row="16" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Left" Style="{StaticResource LabelLabelStyle}">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="16" Margin="4,10,2,2"  Style="{StaticResource LabelTextBlockStyle}">Text Padding</TextBlock>
+        <Label Grid.Column="0" Grid.Row="17" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Left" Style="{StaticResource LabelLabelStyle}">
             <Label.ToolTip>Amount of space on the left edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="16" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingLeft}" Margin="0,2" ValueChanged="LeftPaddingChanged" />
-        <Label Grid.Column="0" Grid.Row="17" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Right" Style="{StaticResource LabelLabelStyle}">
+        <Slider Grid.Column="1" Grid.Row="17" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingLeft}" Margin="0,2" ValueChanged="LeftPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="18" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Right" Style="{StaticResource LabelLabelStyle}">
             <Label.ToolTip>Amount of space on the right edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="17" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingRight}" IsDirectionReversed="true" Margin="0,2" ValueChanged="RightPaddingChanged" />
-        <Label Grid.Column="0" Grid.Row="18" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Top" Style="{StaticResource LabelLabelStyle}">
+        <Slider Grid.Column="1" Grid.Row="18" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingRight}" IsDirectionReversed="true" Margin="0,2" ValueChanged="RightPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="19" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Top" Style="{StaticResource LabelLabelStyle}">
             <Label.ToolTip>Amount of space on the top edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="18" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingTop}" Margin="0,2" ValueChanged="TopPaddingChanged" />
-        <Label Grid.Column="0" Grid.Row="19" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Bottom" Style="{StaticResource LabelLabelStyle}">
+        <Slider Grid.Column="1" Grid.Row="19" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingTop}" Margin="0,2" ValueChanged="TopPaddingChanged" />
+        <Label Grid.Column="0" Grid.Row="20" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Bottom" Style="{StaticResource LabelLabelStyle}">
             <Label.ToolTip>Amount of space on the bottom edge where text will not be rendered. Hold shift to move individually.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="19" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingBottom}" IsDirectionReversed="true" Margin="0,2" ValueChanged="BottomPaddingChanged" />
+        <Slider Grid.Column="1" Grid.Row="20" Minimum="0" Maximum="1" Value="{Binding Path=Control.TextFormat.PaddingBottom}" IsDirectionReversed="true" Margin="0,2" ValueChanged="BottomPaddingChanged" />
 
 
     </Grid>

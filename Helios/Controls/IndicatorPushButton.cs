@@ -43,7 +43,6 @@ namespace GadrocsWorkshop.Helios.Controls
         public IndicatorPushButton(string name, Size size)
             : base(name, size)
         {
-            _referenceHeight = Height;
             Image = "{Helios}/Images/Indicators/caution-indicator-off.png";
             PushedImage = "{Helios}/Images/Indicators/caution-indicator-off-pushed.png";
             TextColor = Color.FromRgb(28, 28, 28);
@@ -156,63 +155,7 @@ namespace GadrocsWorkshop.Helios.Controls
             }
         }
 
-        /// <summary>
-        /// backing field for property ScalingMode, contains
-        /// the selected automatic font size scaling mode
-        /// </summary>
-        private TextScalingMode _scalingMode;
-
-        /// <summary>
-        /// the height this display had when the font size was configured
-        /// </summary>
-        private double _referenceHeight;
-
-        /// <summary>
-        /// the selected automatic font size scaling mode
-        /// </summary>
-        public TextScalingMode ScalingMode
-        {
-            get => _scalingMode;
-            set
-            {
-                if (_scalingMode == value) return;
-                TextScalingMode oldValue = _scalingMode;
-                _scalingMode = value;
-                OnPropertyChanged("ScalingMode", oldValue, value, true);
-            }
-        }
         #endregion
-
-        // WARNING: this virtual method is called from the base constructor (indirectly)
-        protected override void PostUpdateRectangle(Rect previous, Rect current)
-        {
-            switch (ScalingMode)
-            {
-                case TextScalingMode.Height:
-                    if (_referenceHeight < 0.001)
-                    {
-                        TextFormat.FontSize = TextFormat.ConfiguredFontSize;
-                        break;
-                    }
-                    // avoid accumulating error from repeated resizing by calculating from a reference point
-                    Logger.Debug("scaling font based on new height {Height} versus reference {ReferenceSize} at height {ReferenceHeight}",
-                        current.Height, TextFormat.ConfiguredFontSize, _referenceHeight);
-                    TextFormat.FontSize = Clamp(TextFormat.ConfiguredFontSize * current.Height / _referenceHeight, 1, 2000);
-                    break;
-                case TextScalingMode.None:
-                    return;
-                case TextScalingMode.Legacy:
-                    if (previous.Height != 0)
-                    {
-                        double scale = current.Height / previous.Height;
-                        TextFormat.FontSize = Clamp(scale * TextFormat.FontSize, 1, 100);
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            Logger.Debug("Font Size " + TextFormat.FontSize);
-        }
 
         void ToggleAction_Execute(object action, HeliosActionEventArgs e)
         {
@@ -261,10 +204,6 @@ namespace GadrocsWorkshop.Helios.Controls
             writer.WriteElementString("IndicatorOnImage", IndicatorOnImage);
             writer.WriteElementString("PushedIndicatorOnImage", PushedIndicatorOnImage);
             writer.WriteElementString("OnTextColor", colorConverter.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, OnTextColor));
-            if (ScalingMode != TextScalingMode.Legacy)
-            {
-                writer.WriteElementString("ScalingMode", ScalingMode.ToString());
-            }
             base.WriteXml(writer);
         }
 
@@ -290,28 +229,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 TextColor = (Color)colorConverter.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("OffTextColor"));
             }
             if (reader.Name == "ScalingMode" && Enum.TryParse(reader.ReadElementString("ScalingMode"), out TextScalingMode configured))
-
             {
-                ScalingMode = configured;
-            }
-            else
-            {
-                ScalingMode = TextScalingMode.Legacy;
+                Logger.Info("Profile load encountered historical \"ScalingMode\" parameter.");
             }
             base.ReadXml(reader);
         }
-        private double Clamp(double value, double min, double max)
-        {
-            if (value < min)
-            {
-                return min;
-            }
-            if (value > max)
-            {
-                return max;
-            }
-            return value;
-        }
-
     }
 }

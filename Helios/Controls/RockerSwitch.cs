@@ -32,6 +32,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private Color _labelColor = Color.FromArgb(0xe0,0xff,0xff,0xff);
         private Point _labelPushedOffset = new Point(0, 0);
 
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public RockerSwitch()
             : base("Rocker Switch", new Size(50,100))
         {
@@ -40,6 +42,7 @@ namespace GadrocsWorkshop.Helios.Controls
             _labelFormat.FontSize = 20;
             _labelFormat.HorizontalAlignment = TextHorizontalAlignment.Center;
             _labelFormat.VerticalAlignment = TextVerticalAlignment.Center;
+            _referenceHeight = Height;
 
             PositionOneImage = "{Helios}/Images/Rockers/arrows-dark-up.png";
             PositionTwoImage = "{Helios}/Images/Rockers/arrows-dark-norm.png";
@@ -111,8 +114,32 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        /// <summary>
+        /// backing field for property ScalingMode, contains
+        /// the selected automatic font size scaling mode
+        /// </summary>
+        private TextScalingMode _scalingMode;
 
-        #endregion
+        /// <summary>
+        /// the height this display had when the font size was configured
+        /// </summary>
+        private double _referenceHeight;
+
+        /// <summary>
+        /// the selected automatic font size scaling mode
+        /// </summary>
+        public TextScalingMode ScalingMode
+        {
+            get => _scalingMode;
+            set
+            {
+                if (_scalingMode == value) return;
+                TextScalingMode oldValue = _scalingMode;
+                _scalingMode = value;
+                OnPropertyChanged("ScalingMode", oldValue, value, true);
+            }
+        }
+#endregion
 
         void Format_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -164,6 +191,36 @@ namespace GadrocsWorkshop.Helios.Controls
                     break;
             }
         }
+        // WARNING: this virtual method is called from the base constructor (indirectly)
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            switch (ScalingMode)
+            {
+                case TextScalingMode.Height:
+                    if (_referenceHeight < 0.001)
+                    {
+                        _labelFormat.FontSize = _labelFormat.ConfiguredFontSize;
+                        break;
+                    }
+                    // avoid accumulating error from repeated resizing by calculating from a reference point
+                    Logger.Debug("scaling font based on new height {Height} versus reference {ReferenceSize} at height {ReferenceHeight}",
+                        current.Height, _labelFormat.ConfiguredFontSize, _referenceHeight);
+                    _labelFormat.FontSize = Clamp(_labelFormat.ConfiguredFontSize * current.Height / _referenceHeight, 1, 2000);
+                    break;
+                case TextScalingMode.None:
+                    return;
+                case TextScalingMode.Legacy:
+                    if (previous.Height != 0)
+                    {
+                        double scale = current.Height / previous.Height;
+                        _labelFormat.FontSize = Clamp(scale * _labelFormat.FontSize, 1, 100);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            Logger.Debug("Font Size " + _labelFormat.FontSize);
+        }
 
         public override void WriteXml(XmlWriter writer)
         {
@@ -185,6 +242,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 if (TextPushOffset != new Point(0, 0))
                 {
                     writer.WriteElementString("TextPushOffset", pointConverter.ConvertToString(null, CultureInfo.InvariantCulture, TextPushOffset));
+                }
+                if (ScalingMode != TextScalingMode.Legacy)
+                {
+                    writer.WriteElementString("ScalingMode", ScalingMode.ToString());
                 }
                 writer.WriteEndElement();
             }
@@ -215,7 +276,19 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     TextPushOffset = (Point)pointConverter.ConvertFromInvariantString(reader.ReadElementString("TextPushOffset"));
                 }
+                if (reader.Name.Equals("ScalingMode") && Enum.TryParse(reader.ReadElementString("ScalingMode"), out TextScalingMode configured))
+                {
+                    ScalingMode = configured;
+                }
+                else
+                {
+                    ScalingMode = TextScalingMode.Legacy;
+                }
                 reader.ReadEndElement();
+
+                // now the auto scaling has messed up our font size, so we restore it
+                TextFormat.FontSize = TextFormat.ConfiguredFontSize;
+                _referenceHeight = Height;
             }
 
         }
@@ -246,5 +319,19 @@ namespace GadrocsWorkshop.Helios.Controls
         }
 
         #endregion
+        private double Clamp(double value, double min, double max)
+        {
+            if (value < min)
+            {
+                return min;
+            }
+            if (value > max)
+            {
+                return max;
+            }
+            return value;
+        }
+
+
     }
 }

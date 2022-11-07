@@ -233,14 +233,13 @@ namespace GadrocsWorkshop.Helios.Controls
                 case TextScalingMode.Height:
                     if (_referenceHeight < 0.001)
                     {
-                        TextFormat.FontSize = TextFormat.ConfiguredFontSize;
+                        //TextFormat.FontSize = TextFormat.ConfiguredFontSize;
                         _additionalTextFormat.FontSize = _additionalTextFormat.ConfiguredFontSize;
                         break;
                     }
                     // avoid accumulating error from repeated resizing by calculating from a reference point
                     Logger.Debug("Alternate Text scaling font based on new height {Height} versus reference {ReferenceSize} at height {ReferenceHeight}",
                         current.Height, TextFormat.ConfiguredFontSize, _referenceHeight);
-                    TextFormat.FontSize = Clamp(TextFormat.ConfiguredFontSize * current.Height / _referenceHeight, 1, 2000);
                     _additionalTextFormat.FontSize = Clamp(_additionalTextFormat.ConfiguredFontSize * current.Height / _referenceHeight, 1, 2000);
                     break;
                 case TextScalingMode.None:
@@ -257,7 +256,6 @@ namespace GadrocsWorkshop.Helios.Controls
                     throw new ArgumentOutOfRangeException();
             }
             Logger.Debug("Alternate Font Size " + TextFormat.FontSize);
-            base.PostUpdateRectangle(previous, current);
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -317,6 +315,7 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 ScalingMode = TextScalingMode.Legacy;
             }
+            _referenceHeight = Height;
         }
         #endregion
         private double Clamp(double value, double min, double max)

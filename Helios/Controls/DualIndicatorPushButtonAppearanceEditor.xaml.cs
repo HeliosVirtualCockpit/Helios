@@ -36,18 +36,22 @@ namespace GadrocsWorkshop.Helios.Controls
         private void TurnIndicatorOn(object sender, RoutedEventArgs e)
         {
             var caller = sender as Control;
-            string tag = caller.Tag.ToString();
-            DualIndicatorPushButton indicator = Control as DualIndicatorPushButton;
-            if (tag.Length >= 10 && indicator != null)
+            if(!(caller.Tag is null))
             {
-                if (tag.Substring(0,7) == "Primary")
+                string tag = caller.Tag.ToString();
+                DualIndicatorPushButton indicator = Control as DualIndicatorPushButton;
+                if (tag.Length >= 10 && indicator != null)
                 {
-                    indicator.Indicator = true;
-                } else if(tag.Substring(0,10) == "Additional")
-                {
-                    indicator.AdditionalIndicator = true;
+                    if (tag.Substring(0, 7) == "Primary")
+                    {
+                        indicator.Indicator = true;
+                    }
+                    else if (tag.Substring(0, 10) == "Additional")
+                    {
+                        indicator.AdditionalIndicator = true;
+                    }
+                    else { }
                 }
-                else { }
             }
         }
 

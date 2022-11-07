@@ -356,6 +356,11 @@ namespace GadrocsWorkshop.Helios.Controls
                 ScalingMode = TextScalingMode.Legacy;
             }
             base.ReadXml(reader);
+
+            // now the auto scaling has messed up our font size, so we restore it
+            _textFormat.FontSize = _textFormat.ConfiguredFontSize;
+            _referenceHeight = Height;
+
         }
 
         private double Clamp(double value, double min, double max)
