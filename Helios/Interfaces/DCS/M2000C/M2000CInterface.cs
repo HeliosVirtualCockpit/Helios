@@ -974,16 +974,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion
             #region  PCA/PPA
             AddFunction(new Switch(this, PCA_PPA, "234", new SwitchPosition[] {
-                new SwitchPosition("1.0", "ON", "3234"),
-                new SwitchPosition("0.0", "OFF", "3234")},
+                new SwitchPosition("1.0", "On", "3234"),
+                new SwitchPosition("0.0", "Off", "3234")},
                 "PCA Panel", "Master Arm Switch", "%0.1f"));
             AddFunction(new Switch(this, PCA_PPA, "248", new SwitchPosition[] {
-                new SwitchPosition("0.0", "CLOSE", "3248"),
-                new SwitchPosition("1.0", "OPEN", "3248")},
+                new SwitchPosition("1.0", "Open", "3248"),
+                new SwitchPosition("0.0", "Close", "3248")},
                 "PCA Panel", "Selective Jettison Switch Guard", "%0.1f"));
             AddFunction(new Switch(this, PCA_PPA, "249", new SwitchPosition[] {
-                new SwitchPosition("0.0", "OFF", "3249"),
-                new SwitchPosition("1.0", "ON", "3249")},
+                new SwitchPosition("1.0", "On", "3249"),
+                new SwitchPosition("0.0", "Off", "3249")},
                 "PCA Panel", "Selective Jettison Switch", "%0.1f"));
             AddFunction(new PushButton(this, PCA_PPA, "3235", "235", "PCA Panel", "Targeting Mode Selection"));
             AddFunction(new PushButton(this, PCA_PPA, "3237", "237", "PCA Panel", "Master Mode Selection"));
@@ -1021,14 +1021,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, PCA_PPA, "3272", "272", "PPA Panel", "Magic II Missile Enabler Button")); 
             AddFunction(new PushButton(this, PCA_PPA, "3279", "279", "PPA Panel", "Guns/Rockets/Missiles Firing Mode Selector"));
             AddFunction(new Switch(this, PCA_PPA, "265", new SwitchPosition[] {
-                new SwitchPosition("-1.0", "Gauche","3265"),
-                new SwitchPosition("0.0", "Droite","3265"),
-                new SwitchPosition("1.0", "Auto","3265")},
+                new SwitchPosition("1.0", "Droite","3265"),
+                new SwitchPosition("0.0", "Auto","3265"),
+                new SwitchPosition("-1.0", "Gauche","3265")},
                 "PPA Panel", "Missile Selector Switch", "%0.1f"));
             AddFunction(new Switch(this, PCA_PPA, "275", new SwitchPosition[] {
-                new SwitchPosition("-1.0", "TEST","3275"),
-                new SwitchPosition("0.0", "NEUTRE","3275"),
-                new SwitchPosition("1.0", "PRES","3275")},
+                new SwitchPosition("1.0", "Pres","3275"),
+                new SwitchPosition("0.0", "Neutral","3275"),
+                new SwitchPosition("-1.0", "Test","3275")},
                 "PPA Panel", "Test Switch", "%0.1f"));
             AddFunction(new Switch(this, PCA_PPA, "276", new SwitchPosition[] {
                 new SwitchPosition("0.0", "INST.","3276"),
@@ -1036,14 +1036,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
                 new SwitchPosition("1.0", "INERT.","3276")},
                 "PPA Panel", "Bomb Fuse Selector", "%0.1f")); 
             AddFunction(new Switch(this, PCA_PPA, "277", new SwitchPosition[] {
-                new SwitchPosition("1.0", "-","3277"),
-                new SwitchPosition("0.0", "+","3277"),
-                new SwitchPosition("-1.0", "Neutre","3277")},
+                new SwitchPosition("1.0", "+","3277"),
+                new SwitchPosition("0.0", "Neutral","3277"),
+                new SwitchPosition("-1.0", "-","3277")},
                 "PPA Panel", "Release Quantity Selector", "%0.1f"));
             AddFunction(new Switch(this, PCA_PPA, "278", new SwitchPosition[] {
-                new SwitchPosition("1.0", "-","3278"),
-                new SwitchPosition("0.0", "+","3278"),
-                new SwitchPosition("-1.0", "Neutre","3278")},
+                new SwitchPosition("1.0", "+","3278"),
+                new SwitchPosition("0.0", "Neutral","3278"),
+                new SwitchPosition("-1.0", "-","3278")},
                 "PPA Panel", "Bomb Drop Interval", "%0.1f"));
             AddFunction(new FlagValue(this, "267", "PPA Panel", "S530D P", "S530D P"));
             AddFunction(new FlagValue(this, "268", "PPA Panel", "S530D MIS", "S530D MIS"));
@@ -1183,7 +1183,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
                 "VOR/ILS Panel", "Mode Selector", "%0.1f"));
             #endregion
             #region Indicators
-            // !!!! Any duplicate "name" values in a function will cause Helios to go bang.  Make sure that when you change the name, that it is unique
             AddFunction(new FlagValue(this, "185", "Indicators", "Indicators 185", "LIM, MIP,"));
             AddFunction(new FlagValue(this, "186", "Indicators", "Indicators 186", "IFF, MIP, Acc"));
             AddFunction(new FlagValue(this, "187", "Indicators", "Indicators 187", "LED green, ADI"));
@@ -1252,26 +1251,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, VTH, "201", new SwitchPosition[] { new SwitchPosition("1.0", "Up", "3201"), new SwitchPosition("0.5", "Middle", "3201"), new SwitchPosition("0.0", "Down", "3201") }, "HUD/VTB", "HUD Power Switch", "%0.1f"));
             AddFunction(new Axis(this, VTH, "3202", "202", 0.1d, 0d, 1d, "HUD/VTB", "HUD Brightness Knob"));
             AddFunction(Switch.CreateThreeWaySwitch(this, VTH, "3203", "203", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "HUD Declutter Switch", "%0.1f"));
-            AddFunction(new Switch(this, RS, "204", new SwitchPosition[] { new SwitchPosition("1.0", "Up", "3204"), new SwitchPosition("0.5", "Middle", "3204"), new SwitchPosition("0.0", "Down", "3204") }, "HUD/VTB", "HUD Altimeter Selector Switch", "%0.1f"));
-            AddFunction(new Switch(this, RS, "205", new SwitchPosition[] { new SwitchPosition("1.0", "Up", "3205"), new SwitchPosition("0.5", "Middle", "3205"), new SwitchPosition("0.0", "Down", "3205") }, "HUD/VTB", "Radar Altimeter Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, RS, "204", new SwitchPosition[] { new SwitchPosition("1.0", "ZB", "3204"), new SwitchPosition("0.5", "H", "3204"), new SwitchPosition("0.0", "SELH", "3204") }, "HUD/VTB", "HUD Altimeter Selector Switch", "%0.1f"));
+            AddFunction(new Switch(this, RS, "205", new SwitchPosition[] { new SwitchPosition("1.0", "Test", "3205"), new SwitchPosition("0.5", "M", "3205"), new SwitchPosition("0.0", "A", "3205") }, "HUD/VTB", "RADAR Altimeter Power Switch", "%0.1f"));
             AddFunction(new PushButton(this, VTH, "3206", "206", "HUD/VTB", "Auxiliary Gunsight"));
             AddFunction(new Axis(this,VTH, "3207", "207", 0.15d, 0d, 1d, "HUD/VTB", "Auxiliary Gunsight Deflection"));
             AddFunction(new PushButton(this,VTH, "3208", "208", "HUD/VTB", "A/G Gun Reticle Switch"));
             AddFunction(new Axis(this,VTH, "3209", "209", 0.15d, 0d, 1d, "HUD/VTB", "Target Wingspan Knob"));
             AddFunction(new PushButton(this,VTH, "3210", "210", "HUD/VTB", "HUD Clear Button"));
             AddFunction(new Axis(this, RS, "3192", "192", 0.15d, 0d, 1d, "HUD/VTB", "Minimum Altitude Selector"));
-            AddFunction(new PushButton(this,VTB, "3470", "470", "HUD/VTB", "Radar WOW Emitter Authorize Switch"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3213", "213", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Data Manual Entry Begin/End", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3214", "214", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Bullseye Waypoint Selector", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3215", "215", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Range from Bullseye", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3216", "216", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Bearing from Bullseye", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3217", "217", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Heading", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3218", "218", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Altitude", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3219", "219", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Mach Number", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3220", "220", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Age", "%0.1f"));
+            AddFunction(new PushButton(this,VTB, "3470", "470", "HUD/VTB", "RADAR WOW Emitter Authorize Switch"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3213", "213", "1.0", "Deb", "0.0", "Neutral", "-1.0", "Fin", "HUD/VTB", "Target Data Manual Entry Begin/End", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3214", "214", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Bullseye Waypoint Selector N", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3215", "215", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Range from Bullseye Rho", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3216", "216", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Bearing from Bullseye Theta", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3217", "217", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Heading C", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3218", "218", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Altitude Z", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3219", "219", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Mach Number M", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this,VTB, "3220", "220", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "Target Age T", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this,VTB, "3221", "221", "1.0", "ON", "0.0", "OFF", "HUD/VTB", "VTB Power Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this,VTB, "3222", "222", "1.0", "Declutter", "0.0", "Neutral", "HUD/VTB", "VTB Declutter",    "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this,VTB, "3223", "223", "0.0", "AV", "1.0", "AR", "HUD/VTB", "VTB Map Forward/Centered", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this,VTB, "3223", "223", "1.0", "AV", "0.0", "AR", "HUD/VTB", "VTB Map Forward/Centered", "%0.1f"));
             AddFunction(new Switch(this,VTB, "224", CreateSwitchPositions(8, 0, 0.1, "3224"), "HUD/VTB", "Markers Brightness", "%0.1f"));
             AddFunction(new Switch(this,VTB, "225", CreateSwitchPositions(8, 0, 0.1, "3225"), "HUD/VTB", "Main Brightness", "%0.1f"));
             AddFunction(new Switch(this,VTB, "226", CreateSwitchPositions(8, 0, 0.1, "3226"), "HUD/VTB", "Video Brightness", "%0.1f"));
@@ -1353,11 +1352,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion  
             #region  Panel Lights
             AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3449", "449", "1.0", "On", "0.0", "Off", "Panel Lights", "Police Lights Switch", "%0.1f"));
-            AddFunction(new Switch(this, SYSLIGHTS, "450", CreateSwitchPositions(3, 0.0, 0.5, "3450"), "Panel Lights", "Landing Lights Switch", "%0.1f"));
-            AddFunction(new Switch(this, SYSLIGHTS, "452", CreateSwitchPositions(3, 0.0, 0.5, "3452"), "Panel Lights", "SERPAM Recorder Switch", "%0.1f"));
-            AddFunction(new Switch(this, SYSLIGHTS, "453", CreateSwitchPositions(3, 0.0, 0.5, "3453"), "Panel Lights", "Anti-Collision Lights Switch", "%0.1f"));
-            AddFunction(new Switch(this, SYSLIGHTS, "454", CreateSwitchPositions(3, 0.0, 0.5, "3454"), "Panel Lights", "Navigation Lights Switch", "%0.1f"));
-            AddFunction(new Switch(this, SYSLIGHTS, "455", CreateSwitchPositions(3, 0.0, 0.5, "3455"), "Panel Lights", "Formation Lights Switch", "%0.1f"));
+            AddFunction(new Switch(this, SYSLIGHTS, "450", CreateSwitchPositions(3, 1.0, -0.5, "3450", new string[] { "Att", "Roul", "A" }), "Panel Lights", "Landing Lights Switch", "%0.1f"));
+            AddFunction(new Switch(this, SYSLIGHTS, "452", CreateSwitchPositions(3, 1.0, -0.5, "3452", new string[] {"TB","TH","A" }), "Panel Lights", "SERPAM Recorder Switch", "%0.1f"));
+            AddFunction(new Switch(this, SYSLIGHTS, "453", CreateSwitchPositions(3, 1.0, -0.5, "3453", new string[] { "Fort", "Faib", "A" }), "Panel Lights", "Anti-Collision Lights Switch", "%0.1f"));
+            AddFunction(new Switch(this, SYSLIGHTS, "454", CreateSwitchPositions(3, 1.0, -0.5, "3454", new string[] { "Fort", "Faib", "A" }), "Panel Lights", "Navigation Lights Switch", "%0.1f"));
+            AddFunction(new Switch(this, SYSLIGHTS, "455", CreateSwitchPositions(3, 1.0, -0.5, "3455", new string[] { "Fort", "Faib", "A" }), "Panel Lights", "Formation Lights Switch", "%0.1f"));
             AddFunction(new Axis(this, SYSLIGHTS, "3639", "639", 0.15d, 0d, 1d, "Panel Lights", "Dashboard U.V. Lights Knob"));    // elements["PTN_639"] = default_axis_limited(_("Dashboard U.V. Lights Knob"), devices.SYSLIGHTS, device_commands.Button_639, 639, 10, 0.3, false, 0)
             AddFunction(new Axis(this, SYSLIGHTS, "3640", "640", 0.15d, 0d, 1d, "Panel Lights", "Dashboard Panel Lights Knob"));    // elements["PTN_640"] = default_axis_limited(_("Dashboard Panel Lights Knob"), devices.SYSLIGHTS, device_commands.Button_640, 640, 10, 0.3, false, 0)
             AddFunction(new Axis(this, SYSLIGHTS, "3641", "641", 0.15d, 0d, 1d, "Panel Lights", "Red Flood Lights Knob"));    // elements["PTN_641"] = default_axis_limited(_("Red Flood Lights Knob"), devices.SYSLIGHTS, device_commands.Button_641, 641, 10, 0.3, false, 0)
@@ -1374,15 +1373,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
 
             #endregion
             #region  Radio Panel
-            AddFunction(new PushButton(this, UHF, "3429", "429", "Radio Panel", "UHF Power 5W/25W Switch"));
-            AddFunction(new PushButton(this, UHF, "3430", "430", "Radio Panel", "UHF SIL Switch"));
-            AddFunction(Switch.CreateToggleSwitch(this, UHF, "3431", "431", "1.0", "E", "0.0", "A2", "Radio Panel", "UHF E+A2 Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, UHF, "3429", "429", "1.0", "5W", "0.0", "25W", "Radio Panel", "UHF Power 5W/25W Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, UHF, "3430", "430", "1.0", "SIL", "0.0", "Off", "Radio Panel", "UHF SIL Switch", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, UHF, "3431", "431", "1.0", "E+A2", "0.5", "Neutral", "0.0", "R", "Radio Panel", "UHF E+A2 Switch", "%0.1f"));
             AddFunction(new PushButton(this, UHF, "3432", "432", "Radio Panel", "UHF CDE Switch"));
-            AddFunction(new Switch(this, UHF, "433", CreateSwitchPositions(4, 0.0, 0.25, "3433"), "Radio Panel", "UHF Mode Switch", "%0.2f"));
+            AddFunction(new Switch(this, UHF, "433", CreateSwitchPositions(4, 0.0, 0.25, "3433", new string[] { "AR", "M", "FI", "H" }), "Radio Panel", "UHF Mode Switch", "%0.2f"));
             AddFunction(new PushButton(this, UHF, "3434", "434", "Radio Panel", "UHF TEST Switch"));
             AddFunction(new Switch(this, UHF, "435", CreateSwitchPositions(20, 0.0, 0.05, "3435"), "Radio Panel", "UHF Knob", "%0.2f"));
             AddFunction(new PushButton(this, UVHF, "3437", "437", "Radio Panel", "U/VHF TEST Switch"));
-            AddFunction(Switch.CreateToggleSwitch(this, UVHF, "3438", "438", "1.0","E","0.0","A2","Radio Panel", "U/VHF E+A2 Switch", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, UVHF, "3438", "438", "1.0", "E+A2", "0.5", "Neutral", "0.0","R","Radio Panel", "U/VHF E+A2 Switch", "%0.1f"));
             AddFunction(new PushButton(this, UVHF, "3439", "439", "Radio Panel", "U/VHF SIL Switch"));
             AddFunction(new Switch(this, UVHF, "440", CreateSwitchPositions(4, 0.0, 0.1, "3440", "100MHz"), "Radio Panel", "U/VHF 100 MHz Selector", "%0.1f"));
             AddFunction(new Switch(this, UVHF, "441", CreateSwitchPositions(10, 0.0, 0.1, "3441","10 MHz"), "Radio Panel", "U/VHF 10 MHz Selector", "%0.1f"));
@@ -1395,33 +1394,33 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, UVHF, "448", CreateSwitchPositions(3, 0.0, 0.5, "3448"), "Radio Panel", "U/VHF Manual/Preset Mode Selector", "%0.1f"));
             #endregion
             #region  Miscellaneous Left Panel
-            AddFunction(new PushButton(this, MISCPANELS, "3400", "400", "Miscellaneous Left Panel", "Cockpit Clock"));    // elements["PTN_400"] = default_2_position_tumb(_("Cockpit Clock"), devices.MISCPANELS, device_commands.Button_400, 400)
-            AddFunction(new PushButton(this, MISCPANELS, "3458", "458", "Miscellaneous Left Panel", "Anti-Skid Switch Cover"));    // elements["PTN_458"] = default_2_position_tumb(_("Anti-Skid Switch Cover"), devices.MISCPANELS, device_commands.Button_458, 458)
-            AddFunction(new PushButton(this, MISCPANELS, "3459", "459", "Miscellaneous Left Panel", "Anti-Skid Switch"));    // elements["PTN_459"] = default_2_position_tumb(_("Anti-Skid Switch"), devices.MISCPANELS, device_commands.Button_459, 459)
-            //AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3666", "666", "Miscellaneous Left Panel", "Parking Brake Lever", "%0.1f"));    // elements["PTN_666"] = default_animated_lever(_("Parking Brake Lever"), devices.MISCPANELS, device_commands.Button_666, 666,5.0)
-            //AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3456", "456", "Miscellaneous Left Panel", "Canopy Jettison", "%0.1f"));    // elements["PTN_456"] = default_animated_lever(_("Canopy Jettison"),devices.SUBSYSTEMS, device_commands.Button_456, 456,5.0)
-            //AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3457", "457", "Miscellaneous Left Panel", "Drag Chute Lever", "%0.1f"));    // elements["PTN_457"] = default_animated_lever(_("Drag Chute Lever"), devices.MISCPANELS, device_commands.Button_457, 457,5.0)
-            //AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3807", "807", "Miscellaneous Left Panel", "Nose Wheel Steering / IFF Interrogation Button", "%0.1f"));    // elements["PTN_807"] = default_2_way_spring_switch(_("Nose Wheel Steering / IFF Interrogation Button"), devices.MISCPANELS, device_commands.Button_807, 807)
-            AddFunction(new PushButton(this, SUBSYSTEMS, "3655", "655", "Miscellaneous Left Panel", "Canopy Rest"));    // elements["PTN_655"] = default_2_position_tumb(_("Canopy Rest"),devices.SUBSYSTEMS, device_commands.Button_655, 655)
-            //AddFunction((this, SUBSYSTEMS, "3656", "656", "Miscellaneous Left Panel", "Canopy Lock/Neutral/Lower Lever"));    // elements["PTN_656"] = default_multiposition_animated_lever(_("Canopy Lock/Neutral/Lower Lever"), devices.SUBSYSTEMS, device_commands.Button_656, 656, 3, 0.5, false, 0,2.5)
-            AddFunction(new PushButton(this, PCN_NAV, "3905", "905", "Miscellaneous Left Panel", "Emergency Compass"));    // elements["PTN_905"] = default_2_position_tumb(_("Emergency Compass"),devices.PCN_NAV, device_commands.Button_905, 905)
-            AddFunction(new PushButton(this, SUBSYSTEMS, "3907", "907", "Miscellaneous Left Panel", "Canopy Handle"));    // elements["PTN_907"] = default_2_position_tumb(_("Canopy Handle"),devices.SUBSYSTEMS, device_commands.Button_907, 907)
-            AddFunction(new PushButton(this, SUBSYSTEMS, "3908", "908", "Miscellaneous Left Panel", "Canopy Handle (alt?)"));    // elements["PTN_908"] = default_2_position_tumb(_("Canopy Handle"),devices.SUBSYSTEMS, device_commands.Button_908, 908)
-            AddFunction(new PushButton(this, MISCPANELS, "3909", "909", "Miscellaneous Left Panel", "Mirror Rendering Toggle"));    // elements["PTN_909"] = default_2_position_tumb(_("Mirror Rendering Toggle"), devices.MISCPANELS, device_commands.Button_909, 909)
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3400", "400", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Cockpit Clock", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3458", "458", "1.0", "Open", "0,0", "Closed", "Miscellaneous Left Panel", "Anti-Skid Switch Cover", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3459", "459", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Anti-Skid Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3666", "666", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Parking Brake Lever", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3456", "456", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Jettison", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3457", "457", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Drag Chute Lever", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3807", "807", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Nose Wheel Steering / IFF Interrogation Button", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3655", "655", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Rest", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, SUBSYSTEMS, "3656", "656", "1.0", "Lock", "0.5", "Neutral", "0.0", "Lower", "Miscellaneous Left Panel", "Canopy Lock/Neutral/Lower Lever", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, PCN_NAV, "3905", "905", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Emergency Compass", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3907", "907", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Handle", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3908", "908", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Handle (Emergency)", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3909", "909","1.0","On","0,0","Off", "Miscellaneous Left Panel", "Mirror Rendering Toggle", "%0.1f"));
             #endregion  
             #region  Miscellaneous Right Panel
-            AddFunction(new Switch(this, ENGINE, "657", CreateSwitchPositions(3,0.0,0.5,"3657"), "Miscellaneous Right Panel", "Emergency Hydraulic Pump Switch", "%0.1f"));    // ???? 
-            AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3658", "658", "0.0", "On", "1.0", "Off", "Miscellaneous Right Panel", "Audio Warning Switch", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3659", "659", "0.0", "On", "1.0", "Off", "Miscellaneous Right Panel", "Pitot Heat Cover", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3660", "660", "0.0", "On", "1.0", "Off", "Miscellaneous Right Panel", "Pitot Heat Switch", "%0.1f"));
+            AddFunction(new Switch(this, ENGINE, "657", CreateSwitchPositions(3,1.0,-0.5,"3657"), "Miscellaneous Right Panel", "Emergency Hydraulic Pump Switch", "%0.1f"));    // ???? 
+            AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3658", "658", "1.0", "On", "0.0", "Off", "Miscellaneous Right Panel", "Audio Warning Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3659", "659", "1.0", "On", "0.0", "Off", "Miscellaneous Right Panel", "Pitot Heat Cover", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3660", "660", "1.0", "On", "0.0", "Off", "Miscellaneous Right Panel", "Pitot Heat Switch", "%0.1f"));
             #endregion  
             #region  Miscellaneous Seat
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3900", "900", "0.0", "On", "1.0", "Off", "Miscellaneous Seat", "Seat Adjustment Switch", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3910", "910", "0.0", "On", "1.0", "Off", "Miscellaneous Seat", "LOX Dilution Lever", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3912", "912", "0.0", "On", "1.0", "Off", "Miscellaneous Seat", "LOX Emergency Supply", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3900", "900", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "Seat Adjustment Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3910", "910", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "LOX Dilution Lever", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3912", "912", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "LOX Emergency Supply", "%0.1f"));
             #endregion  
             #region  Sound Panel
-            AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3700", "700", "0.0", "On", "1.0", "Off", "Sound Panel", "AMPLIS Selector Knob", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3700", "700", "1.0", "On", "0.0", "Off", "Sound Panel", "AMPLIS Selector Knob", "%0.1f"));
             AddFunction(new Axis(this, SYSLIGHTS, "3701", "701", 0.15d, 0d, 1d, "Sound Panel", "VOR/ILS Volume Knob"));    // elements["PTN_701"] = default_axis_limited(_("VOR/ILS Volume Knob"), devices.SYSLIGHTS, device_commands.Button_701, 701, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3702", "702", 0.15d, 0d, 1d, "Sound Panel", "TACAN Volume Knob"));    // elements["PTN_702"] = default_axis_limited(_("TACAN Volume Knob"), devices.SYSLIGHTS, device_commands.Button_702, 702, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3703", "703", 0.15d, 0d, 1d, "Sound Panel", "MAGIC Tone Volume Knob"));    // elements["PTN_703"] = default_axis_limited(_("MAGIC Tone Volume Knob"), devices.SYSLIGHTS, device_commands.Button_703, 703, 0.8, 0.5, true, false, {0.0, 1.0})
@@ -1481,14 +1480,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             {
                 if (positionLabels.Length == numberOfPositions)
                 {
-                    positions[i - 1] = new SwitchPosition(((i - 1) * incrementalValue).ToString("0.##"), positionLabels[i-1], arg);
+                    positions[i - 1] = new SwitchPosition(PositionValue(i,startValue,incrementalValue).ToString("0.##"), positionLabels[i-1], arg);
 
                 } else
                 {
-                    positions[i - 1] = new SwitchPosition(((i - 1) * incrementalValue).ToString("0.##"), $"{positionName} {i}", arg);
+                    positions[i - 1] = new SwitchPosition(PositionValue(i, startValue, incrementalValue).ToString("0.##"), $"{positionName} {i}", arg);
                 }
             }
             return positions;
+        }
+        private double PositionValue(int i, double startValue, double incrementValue)
+        {
+            return startValue + ((i - 1) * incrementValue); 
         }
     }
 }
