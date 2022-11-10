@@ -1318,10 +1318,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, PWRPNL, "3654", "654", "1.0", "On", "0.0", "Off", "ELECTRICAL PANEL", "Alert Network (QRA) Switch", "%0.1f"));
 
             #endregion
-            #region  PSM
-            AddFunction(new Switch(this, PCN_NAV, "665", CreateSwitchPositions(3, 0.0, 0.5, "3665"), "PSM", "INS Auxiliary Heading/Horizon", "%0.1f")); 
-                                                                                                                                         // 
-            #endregion
+
             #region  EW PANEL
             AddFunction(new Axis(this, SYSLIGHTS, "3228", "228", 0.15d, 0d, 1d, "EW PANEL", "RWR Light Brightnes Control"));
             AddFunction(new Switch(this, RWR, "605", CreateSwitchPositions(3, 0.0, 0.5, "3605"), "EW PANEL", "EW Mode Selector Switch", "%0.1f"));
@@ -1435,12 +1432,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Axis(this, SYSLIGHTS, "3705", "705", 0.15d, 0d, 1d, "Sound Panel", "Marker Signal Volume Knob"));    //default_axis_limited(_("Marker Signal Volume Knob"), devices.SYSLIGHTS, device_commands.Button_705, 705, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3706", "706", 0.15d, 0d, 1d, "Sound Panel", "UHF Radio Volume Knob"));    //default_axis_limited(_("UHF Radio Volume Knob"), devices.SYSLIGHTS, device_commands.Button_706, 706, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3707", "707", 0.15d, 0d, 1d, "Sound Panel", "V/UHF Radio Volume Knob"));    //default_axis_limited(_("V/UHF Radio Volume Knob"), devices.SYSLIGHTS, device_commands.Button_707, 707, 0.8, 0.5, true, false, {0.0, 1.0})
-            #endregion  
+            #endregion
+
             #region  Flight Instruments
+            AddFunction(new PushButton(this, FLIGHTINST, "3308", "308", "Flight Instruments", "G-Meter Reset"));
             AddFunction(new Axis(this, FLIGHTINST, "3309", "309", 0.15d, 0d, 1d, "Flight Instruments", "Barometric Pressure Calibration"));    // elements["PTN_309"] = default_axis(_("Barometric Pressure Calibration"),devices.FLIGHTINST,device_commands.Button_309,309)
+            AddFunction(new Switch(this, FLIGHTINST, "665", CreateSwitchPositions(3, 0.0, 0.5, "3665"), "Flight Instruments", "Backup ADI Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3314", "314", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Cage Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3315", "315", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Backlight Switch", "%0.1f"));
-            #endregion  
+            AddFunction(new Axis(this, FLIGHTINST, "3325", "325", 0.15d, 0d, 1d, "Flight Instruments", "Backup ADI Pitch Adjust Knob"));
+            AddFunction(new PushButton(this, FLIGHTINST, "3328", "328", "Flight Instruments", "Backup ADI Cage / Uncage"));
+
+            #endregion
             #region  ECS Panel
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3630", "630", "1.0", "On", "0.0", "Off", "ECS Panel", "ECS Main Mode Switch", "%0.1f"));
             AddFunction(new PushButton(this, ECS, "3631", "631", "ECS Panel", "ECS C Button"));
@@ -1471,6 +1474,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Text(this, "2082", "EVF (TAF) Panel", "EVF Display", "Two digit display on the EVF Panel"));
 
             #endregion
+
+            #region NVG
+            AddFunction(Switch.CreateToggleSwitch(this, Helmet_NVG, "4001", "1001", "1.0", "Mount", "0.0", "Unmount", "Night Vision", "Mount/Unmount NVG on Helmet", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, Helmet_NVG, "4002", "1002", "1.0", "Stow", "0.0", "Unstow", "Night Vision", "STOW/UNSTOW NVG", "%0.1f"));
+            #endregion
+
         }
         private SwitchPosition[] CreateSwitchPositions(int numberOfPositions, double startValue, double incrementalValue, string arg, string positionName = "position")
         {
