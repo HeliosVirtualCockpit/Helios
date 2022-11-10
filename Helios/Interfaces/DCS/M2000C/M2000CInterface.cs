@@ -1404,15 +1404,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3458", "458", "1.0", "Open", "0,0", "Closed", "Miscellaneous Left Panel", "Anti-Skid Switch Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3459", "459", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Anti-Skid Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3666", "666", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Parking Brake Lever", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3456", "456", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Jettison", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3457", "457", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Drag Chute Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3807", "807", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Nose Wheel Steering / IFF Interrogation Button", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3655", "655", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Rest", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, SUBSYSTEMS, "3656", "656", "1.0", "Lock", "0.5", "Neutral", "0.0", "Lower", "Miscellaneous Left Panel", "Canopy Lock/Neutral/Lower Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, PCN_NAV, "3905", "905", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Emergency Compass", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3907", "907", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Handle", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, SUBSYSTEMS, "3908", "908", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Canopy Handle (Emergency)", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3909", "909", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Mirror Rendering Toggle", "%0.1f"));
+
+            AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3456", "456", "1.0", "On", "0,0", "Off", "Canopy", "Canopy Jettison", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3655", "655", "1.0", "Unfold", "0,0", "Auto", "Canopy", "ajar stick L (un)fold / R auto", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, CANOPY, "3656", "656", "1.0", "Lock", "0.5", "Neutral", "0.0", "Lower", "Canopy", "Canopy Lock/Neutral/Lower Lever", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3907", "907", "1.0", "Manual", "0,0", "Auto", "Canopy", "Canopy Handle (L drag(manual) / R click(auto)", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3908", "908", "1.0", "Manual", "0,0", "Auto", "Canopy", "Canopy Handle (Emergency)", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3909", "909", "1.0", "On", "0,0", "Off", "Canopy", "Mirror Rendering Toggle", "%0.1f"));
             #endregion  
             #region  Miscellaneous Right Panel
             AddFunction(new Switch(this, ENGINE, "657", CreateSwitchPositions(3,1.0,-0.5,"3657"), "Miscellaneous Right Panel", "Emergency Hydraulic Pump Switch", "%0.1f"));    // ???? 
