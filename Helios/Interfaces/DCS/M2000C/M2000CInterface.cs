@@ -895,7 +895,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new ScaledNetworkValue(this, "333", 1d, "HSI Panel", "Direction Needle", "Direction Needle.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "334", 1d, "HSI Panel", "Big Needle", "Big Needle.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "335", 1d, "HSI Panel", "Small Needle", "Small Needle.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "341", 1d, "HSI Panel", "Mode Needle", "Mode Needle.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));
+            //AddFunction(new ScaledNetworkValue(this, "341", 1d, "HSI Panel", "Mode Needle", "Mode Needle.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));  /// Todo: work out what this code should be
             #endregion
             #region INS Panel
             AddFunction(new Switch(this, PCN_NAV, "627", new SwitchPosition[] {
@@ -930,25 +930,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "418", "Landing Gear Panel", "nose-gear", "Nose Gear"));
             AddFunction(new FlagValue(this, "419", "Landing Gear Panel", "right-gear", "Right Gear"));
             AddFunction(new Switch(this, INSTPANEL, "404", new SwitchPosition[] {
-                new SwitchPosition("0.0", "UP", "3404"),
-                new SwitchPosition("1.0", "DOWN", "3404") },
+                new SwitchPosition("1.0", "UP", "3404"),
+                new SwitchPosition("0.0", "DOWN", "3404") },
                 "Landing Gear Panel", "Landing Gear Lever", "%0.1f"));
-            AddFunction(new Switch(this, PCA_PPA, "463", new SwitchPosition[] {
-                new SwitchPosition("1.0", "SECU", "3463"),
-                new SwitchPosition("0.0", "ARMED", "3463") },
-                "Landing Gear Panel", "Gun Arming Switch", "%0.1f"));
-            AddFunction(new Switch(this, ENGPANEL, "420", new SwitchPosition[] {
-                new SwitchPosition("0.0", "CLOSE", "3420"),
-                new SwitchPosition("1.0", "OPEN", "3420") },
-                "Landing Gear Panel", "Fly By Wire Gain Switch Guard", "%0.1f"));
-            AddFunction(new Switch(this, ENGINE, "421", new SwitchPosition[] {
-                new SwitchPosition("0.0", "NORM", "3421"),
-                new SwitchPosition("1.0", "GAIN CDVE", "3421") },
-                "Landing Gear Panel", "Fly by Wire Gain Mode Switch", "%0.1f"));
-            AddFunction(new Switch(this, ENGINE, "422", new SwitchPosition[] {
-                new SwitchPosition("0.0", "AA", "3422"),
-                new SwitchPosition("1.0", "CHARGES", "3422") },
-                "Landing Gear Panel", "Fly by Wire G Limiter Switch", "%0.1f"));
             AddFunction(new Switch(this, INSTPANEL, "408", new SwitchPosition[] {
                 new SwitchPosition("1.0", "On", "3408"),
                 new SwitchPosition("0.0", "Off", "3408") },
@@ -958,7 +942,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #region MCL Panel
             AddFunction(new FlagValue(this, "199", "Master Caution Lights Panel", "Panne Yellow", "Master-warning"));
             AddFunction(new FlagValue(this, "200", "Master Caution Lights Panel", "Panne Red", "Master-caution"));
-            AddFunction(new PushButton(this, SYSLIGHTS, "3191", "191", "Master Caution Lights Panel", "Acknowledge alarms"));
             #endregion
             #region Miscellaneous Panels and indicators
             AddFunction(new FlagValue(this, "229", "RWR Panel", "RWR V", "RWR V"));
@@ -973,6 +956,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new ScaledNetworkValue(this, "331", 3.7d, "AOA Panel", "AOA Needle", "Angle Of Attack Needle.", "0-7", BindingValueUnits.Numeric, 0.08d, "%.4f"));
             #endregion
             #region  PCA/PPA
+            AddFunction(new Switch(this, PCA_PPA, "463", new SwitchPosition[] {
+                new SwitchPosition("1.0", "SECU", "3463"),
+                new SwitchPosition("0.0", "ARMED", "3463") },
+                "PCA Panel", "Gun Arming Switch", "%0.1f"));
             AddFunction(new Switch(this, PCA_PPA, "234", new SwitchPosition[] {
                 new SwitchPosition("1.0", "On", "3234"),
                 new SwitchPosition("0.0", "Off", "3234")},
@@ -1055,8 +1042,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "281", "PPA Panel", "PAR Firing Mode", "PAR Firing Mode"));
             AddFunction(new Text(this, "2065", "PPA Panel", "PPA Display Quantity", "Display Line for the PPA Quantity"));
             AddFunction(new Text(this, "2066", "PPA Panel", "PPA Display Interval", "Display Line for the PPA Interval"));
-
-
             #endregion
             #region  PCN
             AddFunction(new FlagValue(this, "564", "PCN Panel", "PRET", "PRET"));
@@ -1190,7 +1175,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             //elements["PTN_626"] = knob_limited(_("TACAN Mode"), devices.TACAN, cmds.Button_626, 626, 4, { sound = "ils-mode", limits ={ 0,1} })
             //elements["PTN_624"] = knob_limited(_("TACAN X/Y"), devices.TACAN, cmds.Button_624, 624, 2, { sound = "ils-mode", limits ={ 0,1} })
             #endregion
-
             #region Indicators
             AddFunction(new FlagValue(this, "185", "Indicators", "Indicators 185", "LIM, MIP,"));
             AddFunction(new FlagValue(this, "186", "Indicators", "Indicators 186", "IFF, MIP, Acc"));
@@ -1236,7 +1220,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3475", "475", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Engine Emergency Control Cover", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, VTB, "3476", "476", "1.0", "position 1", "0.5", "position 2", "0.0", "position 3", "Engine Start Panel", "Engine Emergency Control Switch", "%0.1f"));
             #endregion  
-
             #region  HUD/VTB
             AddFunction(new Switch(this, VTH, "201", new SwitchPosition[] { new SwitchPosition("1.0", "Up", "3201"), new SwitchPosition("0.5", "Middle", "3201"), new SwitchPosition("0.0", "Down", "3201") }, "HUD/VTB", "HUD Power Switch", "%0.1f"));
             AddFunction(new Axis(this, VTH, "3202", "202", 0.1d, 0d, 1d, "HUD/VTB", "HUD Brightness Knob"));
@@ -1277,13 +1260,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, AFCS, "301", CreateSwitchPositions(10, 0.0, 0.1, "3301", "Hundreds"), "AFCS", "Altitude 100 ft Selector", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, AFCS, "3508", "508", "1.0", "On", "0.0", "Off", "AFCS", "Trim Control Mode Dial", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, AFCS, "3509", "509", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "AFCS", "Rudder Trim Paddle", "%0.1f"));
-
             #endregion
-            #region  FBW
-            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3330", "330", "1.0", "On", "0.0", "Off", "FBW", "FBW Spin Mode Switch", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3420", "420", "1.0", "Open", "0.0", "Closed", "FBW", "FBW Gain Mode Switch Cover", "%0.1f"));
-            AddFunction(new PushButton(this, AFCS, "3423", "423", "FBW", "FBW Reset Button"));
-
+            #region  Fly-By-Wire
+            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3330", "330", "1.0", "On", "0.0", "Off", "Fly By Wire", "FBW Spin Mode Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3420", "420", "1.0", "Open", "0.0", "Closed", "Fly By Wire", "FBW Gain Mode Switch Cover", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3421", "421", "1.0", "Norm", "0.0", "Gain CDVE", "Fly By Wire", "Fly by Wire Gain Mode Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3422", "422", "1.0", "AA", "0.0", "Charges", "Fly By Wire", "Fly by Wire G Limiter Switch", "%0.1f"));
+            AddFunction(new PushButton(this, AFCS, "3423", "423", "Fly By Wire", "FBW Reset Button"));
             #endregion
             #region  PELLES, SOURIES AND BECS
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3460", "460", "1.0", "On", "0.0", "Off", "PELLES, SOURIES AND BECS", "Intake Slats Operation Switch", "%0.1f"));
@@ -1327,7 +1310,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, PWRPNL, "3654", "654", "1.0", "On", "0.0", "Off", "ELECTRICAL PANEL", "Alert Network (QRA) Switch", "%0.1f"));
 
             #endregion
-
             #region  EW PANEL
             AddFunction(new Axis(this, SYSLIGHTS, "3228", "228", 0.15d, 0d, 1d, "EW PANEL", "RWR Light Brightnes Control"));
             AddFunction(new Switch(this, RWR, "605", CreateSwitchPositions(3, 0.0, 0.5, "3605"), "EW PANEL", "EW Mode Selector Switch", "%0.1f"));
@@ -1405,7 +1387,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             //AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "Radio Panel (deprecated)", "Preset frequency change"));
 
             #endregion
-
             #region  Miscellaneous Left Panel
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3400", "400", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Cockpit Clock", "%0.1f"));
             AddFunction(new PushButton(this, SYSLIGHTS, "3191", "191", "Miscellaneous Left Panel", "Audio Warning Reset"));
@@ -1446,7 +1427,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Axis(this, SYSLIGHTS, "3706", "706", 0.15d, 0d, 1d, "Sound Panel", "UHF Radio Volume Knob"));    //default_axis_limited(_("UHF Radio Volume Knob"), devices.SYSLIGHTS, device_commands.Button_706, 706, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3707", "707", 0.15d, 0d, 1d, "Sound Panel", "V/UHF Radio Volume Knob"));    //default_axis_limited(_("V/UHF Radio Volume Knob"), devices.SYSLIGHTS, device_commands.Button_707, 707, 0.8, 0.5, true, false, {0.0, 1.0})
             #endregion
-
             #region  Flight Instruments
             AddFunction(new PushButton(this, FLIGHTINST, "3308", "308", "Flight Instruments", "G-Meter Reset"));
             AddFunction(new Axis(this, FLIGHTINST, "3309", "309", 0.15d, 0d, 1d, "Flight Instruments", "Barometric Pressure Calibration"));    // elements["PTN_309"] = default_axis(_("Barometric Pressure Calibration"),devices.FLIGHTINST,device_commands.Button_309,309)
@@ -1480,7 +1460,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3386", "386", "1.0", "On", "0.0", "Off", "IFF", "Mode-3A Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3387", "387", "1.0", "On", "0.0", "Off", "IFF", "Mode-C Switch", "%0.1f"));
             #endregion
-
             #region EVF (TAF) Panel
             AddFunction(new PushButton(this, TAF, EVF_Commands.Button_1006.ToString("d"), "1006", "EVF (TAF) Panel", "Test"));
             AddFunction(new RotaryEncoder(this, TAF, EVF_Commands.Button_1004.ToString("d"), "1004", 0.05d, "EVF (TAF) Panel", "Channel Selector"));
