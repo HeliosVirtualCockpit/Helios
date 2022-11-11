@@ -1,1 +1,28 @@
-﻿<ControlTemplate><Name>Push Indicator - Square</Name><Category>Push Button Indicators</Category><TypeIdentifier>Helios.Base.IndicatorPushButton</TypeIdentifier><Template><TemplateValues><IndicatorOnImage>{Helios}/Images/Indicators/indicator.png</IndicatorOnImage><PushedIndicatorOnImage>{Helios}/Images/Indicators/indicator-push.png</PushedIndicatorOnImage><Font><FontFamily>Franklin Gothic</FontFamily><FontStyle>Normal</FontStyle><FontWeight>Normal</FontWeight><FontSize>12</FontSize><HorizontalAlignment>Center</HorizontalAlignment><VerticalAlignment>Center</VerticalAlignment></Font><Text>Fault</Text><OnTextColor>#FFB3A229</OnTextColor><OffTextColor>#FF1C1C1C</OffTextColor><Location>74.937721088436,710.04</Location><Size>75,75</Size><Type>Momentary</Type><Image>{Helios}/Images/Indicators/indicator.png</Image><PushedImage>{Helios}/Images/Indicators/indicator-push.png</PushedImage></TemplateValues></Template></ControlTemplate>
+﻿<ControlTemplate>
+  <Name>Push Indicator - Square</Name>
+  <Category>Push Button Indicators</Category>
+  <TypeIdentifier>Helios.Base.IndicatorPushButton</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <IndicatorOnImage>{Helios}/Images/Indicators/indicator.png</IndicatorOnImage>
+      <PushedIndicatorOnImage>{Helios}/Images/Indicators/indicator-push.png</PushedIndicatorOnImage>
+      <Font>
+        <FontFamily>Franklin Gothic</FontFamily>
+        <FontStyle>Normal</FontStyle>
+        <FontWeight>Normal</FontWeight>
+        <FontSize>12</FontSize>
+        <HorizontalAlignment>Center</HorizontalAlignment>
+        <VerticalAlignment>Center</VerticalAlignment>
+      </Font>
+      <Text>Fault</Text>
+      <OnTextColor>#FFB3A229</OnTextColor>
+      <OffTextColor>#FF1C1C1C</OffTextColor>
+      <ScalingMode>Height</ScalingMode>
+      <Location>74.937721088436,710.04</Location>
+      <Size>75,75</Size>
+      <Type>Momentary</Type>
+      <Image>{Helios}/Images/Indicators/indicator.png</Image>
+      <PushedImage>{Helios}/Images/Indicators/indicator-push.png</PushedImage>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

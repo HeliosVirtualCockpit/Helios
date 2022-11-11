@@ -17,6 +17,7 @@
       <Text>Fault</Text>
       <OnTextColor>#FFB3A229</OnTextColor>
       <OffTextColor>#FF1C1C1C</OffTextColor>
+      <ScalingMode>Height</ScalingMode>
       <Location>37.150238095238,725.04</Location>
       <Size>75,75</Size>
     </TemplateValues>

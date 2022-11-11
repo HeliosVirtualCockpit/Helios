@@ -17,6 +17,7 @@
       <Text />
       <OnTextColor>#FFB3A229</OnTextColor>
       <OffTextColor>#FF1C1C1C</OffTextColor>
+      <ScalingMode>Height</ScalingMode>
       <Location>86.714285714286,710.04</Location>
       <Size>50,54</Size>
     </TemplateValues>
