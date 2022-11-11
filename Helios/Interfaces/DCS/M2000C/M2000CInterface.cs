@@ -874,7 +874,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion
             #region  HSI
             AddFunction(new Axis(this, NAVINST, "3340", "340", 0.015d, 0d, 1d, "HSI Panel", "VAD Selector"));    // elements["PTN_340"] = default_axis_cycle(_("HSI VAD Selector"),devices.NAVINST, device_commands.Button_340, 340)
-            AddFunction(new Switch(this, NAVINST, "3341", new SwitchPosition[] {//need to be "341" but in that case, the needle doesn’t work anymore from DCS. 
+            AddFunction(new Switch(this, NAVINST, "341", new SwitchPosition[] {//need to be "341" but in that case, the needle doesn’t work anymore from DCS. 
                 new SwitchPosition("0.0", "Cv/NAV", "3341"),                    //So better that way because the only problem is that doesn’t work from DCS to Helios
                 new SwitchPosition("0.1", "NAV", "3341"),
                 new SwitchPosition("0.2", "TAC", "3341"),
@@ -1118,23 +1118,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Text(this, "2081", "PCN Panel", "PCN Lower Right Display", "Display Lower Line Right Side"));
 
             #endregion
-            #region TACAN Panel
-            AddFunction(new Axis(this, TACAN, "3625", "625", 0.1d, 0d, 1d, "Tacan Panel", "Channel 1 Selector"));
-            AddFunction(new Axis(this, TACAN, "3623", "623", 0.077d, 0d, 0.923d, "Tacan Panel", "Channel 10 Selector"));
-            AddFunction(new ScaledNetworkValue(this, "622", 1d, "Tacan Panel", "Channel output for display (Ones)", "Current channel (Ones)", "(0-9)", BindingValueUnits.Numeric));
-            AddFunction(new ScaledNetworkValue(this, "621", 1d, "Tacan Panel", "Channel output for display (Tens)", "Current channel (Tens)", "(0-12)", BindingValueUnits.Numeric, 0.3d, "%.1f"));
-            AddFunction(new ScaledNetworkValue(this, "620", 1d, "Tacan Panel", "X/Y Drum", "X/Y Mode", "(1 - 2)", BindingValueUnits.Numeric));
-            AddFunction(new Switch(this, TACAN, TACAN_XY_SELECTOR, new SwitchPosition[] {
-                new SwitchPosition("0.0", "X", CMD + TACAN_XY_SELECTOR),
-                new SwitchPosition("1.0", "Y", CMD + TACAN_XY_SELECTOR) },
-                "Tacan Panel", "X/Y Selector", "%0.1f"));
-            AddFunction(new Switch(this, TACAN, TACAN_MODE_SELECTOR, new SwitchPosition[] {
-                new SwitchPosition("0.0", "OFF", CMD + TACAN_MODE_SELECTOR),
-                new SwitchPosition("0.3", "REC", CMD + TACAN_MODE_SELECTOR),
-                new SwitchPosition("0.7", "T/R", CMD + TACAN_MODE_SELECTOR),
-                new SwitchPosition("1.0", "A/A", CMD + TACAN_MODE_SELECTOR) },
-                "Tacan Panel", "Mode Selector", " %0.1f"));
-            #endregion
             #region Test Panel
             AddFunction(new FlagValue(this, "510", "Test Panel", "ELEC", "ELEC indicator"));
             AddFunction(new FlagValue(this, "511", "Test Panel", "HYD", "HYD indicator"));
@@ -1171,17 +1154,43 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new ScaledNetworkValue(this, "614", 1d, "VOR/ILS Panel", "Channel output for display (Decimal Tens)", "Current channel", "0 - 9", BindingValueUnits.Numeric));
             AddFunction(new ScaledNetworkValue(this, "613", 1d, "VOR/ILS Panel", "Channel output for display (Ones)", "Current channel", "0 - 9", BindingValueUnits.Numeric));
             AddFunction(new ScaledNetworkValue(this, "612", 1d, "VOR/ILS Panel", "Channel output for display (Tens)", "Current channel", "0 - 1", BindingValueUnits.Numeric));
-            AddFunction(new Axis(this, VORILS, CMD + VORILS_FREQUENCY_CHANGE_WHOLE, VORILS_FREQUENCY_CHANGE_WHOLE, 0.1d, 0.0d, 1.0d, "VOR/ILS Panel", "Frequency Change whole"));
-            AddFunction(new Axis(this, VORILS, CMD + VORILS_FREQUENCY_CHANGE_DECIMAL, VORILS_FREQUENCY_CHANGE_DECIMAL, 0.05d, 0.0d, 1.0d, "VOR/ILS Panel", "Frequency Change Decimal"));
-            AddFunction(new Switch(this, VORILS, VORILS_POWER, new SwitchPosition[] {
-                new SwitchPosition("1.0", "On", CMD + VORILS_POWER),
-                new SwitchPosition("0.0", "Off", CMD + VORILS_POWER)},
-                "VOR/ILS Panel", "Power Selector", "%0.1f"));
-            AddFunction(new Switch(this, VORILS, "619", new SwitchPosition[] {
-                new SwitchPosition("0.0", "HG", "3619"),
-                new SwitchPosition("1.0", "BD", "3619")},
-                "VOR/ILS Panel", "Mode Selector", "%0.1f"));
+            AddFunction(new Switch(this, VORILS, "616", CreateSwitchPositions(10, 0.0, 0.1, "3616"), "VOR/ILS Panel", "Frequency Change whole", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, VORILS, "3617", "617", "1.0", "A", "0.0", "M", "VOR/ILS Panel", "Power Selector", "%0.1f"));
+            AddFunction(new Switch(this, VORILS, "618", CreateSwitchPositions(20, 0.0, 0.05, "3618"), "VOR/ILS Panel", "Frequency Change Decimal", "%0.2f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, VORILS, "3619", "619", "1.0", "HG", "0.5", "Test", "0.0", "BD", "VOR/ILS Panel", "Mode Selector", "%0.1f"));
+
             #endregion
+            #region TACAN Panel
+            AddFunction(new Switch(this, TACAN, "623", CreateSwitchPositions(13, 0.0, 1.0/13, "3623"), "TACAN Panel", "Channel 10 Selector", "%0.1f"));
+            AddFunction(new Switch(this, TACAN, "625", CreateSwitchPositions(10, 0.0, 0.1, "3625"), "TACAN Panel", "Channel 1 Selector", "%0.1f"));
+            //AddFunction(new Axis(this, TACAN, "3625", "625", 0.1d, 0d, 1d, "Tacan Panel", "Channel 1 Selector"));
+            //AddFunction(new Axis(this, TACAN, "3623", "623", 0.077d, 0d, 0.923d, "Tacan Panel", "Channel 10 Selector"));
+            AddFunction(new ScaledNetworkValue(this, "622", 1d, "Tacan Panel", "Channel output for display (Ones)", "Current channel (Ones)", "(0-9)", BindingValueUnits.Numeric));
+            AddFunction(new ScaledNetworkValue(this, "621", 1d, "Tacan Panel", "Channel output for display (Tens)", "Current channel (Tens)", "(0-12)", BindingValueUnits.Numeric, 0.3d, "%.1f"));
+            AddFunction(new ScaledNetworkValue(this, "620", 1d, "Tacan Panel", "X/Y Drum", "X/Y Mode", "(1 - 2)", BindingValueUnits.Numeric));
+            AddFunction(Switch.CreateToggleSwitch(this, TACAN, "3624", "624", "1.0", "X", "0.0", "Y", "TACAN Panel", "X/Y Selector", "%0.1f"));
+            AddFunction(new Switch(this, TACAN, "626", CreateSwitchPositions(4, 0.0, 0.3, "3626", new string[] { "OFF", "REC", "T/R", "A/A" }), "TACAN Panel", "Mode Selector", "%0.1f"));
+
+            
+            //AddFunction(new Switch(this, TACAN, TACAN_XY_SELECTOR, new SwitchPosition[] {
+            //    new SwitchPosition("0.0", "X", CMD + TACAN_XY_SELECTOR),
+            //    new SwitchPosition("1.0", "Y", CMD + TACAN_XY_SELECTOR) },
+            //    "Tacan Panel", "X/Y Selector", "%0.1f"));
+            //AddFunction(new Switch(this, TACAN, TACAN_MODE_SELECTOR, new SwitchPosition[] {
+            //    new SwitchPosition("0.0", "OFF", CMD + TACAN_MODE_SELECTOR),
+            //    new SwitchPosition("0.3", "REC", CMD + TACAN_MODE_SELECTOR),
+            //    new SwitchPosition("0.7", "T/R", CMD + TACAN_MODE_SELECTOR),
+            //    new SwitchPosition("1.0", "A/A", CMD + TACAN_MODE_SELECTOR) },
+            //    "Tacan Panel", "Mode Selector", " %0.1f"));
+            #endregion
+            #region Navigational Antennas
+
+            //elements["PTN_623"] = knob_encoder_with_ring(_("TACAN Channel 10s & X/Y"), devices.TACAN, cmds.Button_624, cmds.Button_623, 624, 623, 2, 13, { sound = "ils-mode", limits ={ 0,1} }, { sound = "tacan-knob"})
+            //elements["PTN_625"] = knob_encoder_with_ring(_("TACAN Channel 1s & Mode"), devices.TACAN, cmds.Button_626, cmds.Button_625, 626, 625, 4, 10, { sound = "ils-mode", limits ={ 0,1} }, { sound = "tacan-knob"})
+            //elements["PTN_626"] = knob_limited(_("TACAN Mode"), devices.TACAN, cmds.Button_626, 626, 4, { sound = "ils-mode", limits ={ 0,1} })
+            //elements["PTN_624"] = knob_limited(_("TACAN X/Y"), devices.TACAN, cmds.Button_624, 624, 2, { sound = "ils-mode", limits ={ 0,1} })
+            #endregion
+
             #region Indicators
             AddFunction(new FlagValue(this, "185", "Indicators", "Indicators 185", "LIM, MIP,"));
             AddFunction(new FlagValue(this, "186", "Indicators", "Indicators 186", "IFF, MIP, Acc"));
@@ -1393,18 +1402,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, UVHF, "445", CreateSwitchPositions(20, 0.0, 0.05, "3445"), "Radio Panel (deprecated)", "U/VHF Knob", "%0.2f"));
             AddFunction(new Switch(this, UVHF, "446", CreateSwitchPositions(5, 0.0, 0.25, "3446"), "Radio Panel (deprecated)", "U/VHF Mode Switch 1", "%0.2f"));
             AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "Radio Panel (deprecated)", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
-            AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "Radio Panel (deprecated)", "Preset frequency change"));
+            //AddFunction(new Axis(this, UVHF, "445", "3445", 0.05d, 0d, 1.0d, "Radio Panel (deprecated)", "Preset frequency change"));
 
             #endregion
+
             #region  Miscellaneous Left Panel
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3400", "400", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Cockpit Clock", "%0.1f"));
+            AddFunction(new PushButton(this, SYSLIGHTS, "3191", "191", "Miscellaneous Left Panel", "Audio Warning Reset"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3458", "458", "1.0", "Open", "0,0", "Closed", "Miscellaneous Left Panel", "Anti-Skid Switch Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3459", "459", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Anti-Skid Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3666", "666", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Parking Brake Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3457", "457", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Drag Chute Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3807", "807", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Nose Wheel Steering / IFF Interrogation Button", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, PCN_NAV, "3905", "905", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Emergency Compass", "%0.1f"));
-
+            #endregion
+            #region Canopy
             AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3456", "456", "1.0", "On", "0,0", "Off", "Canopy", "Canopy Jettison", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3655", "655", "1.0", "Unfold", "0,0", "Auto", "Canopy", "ajar stick L (un)fold / R auto", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, CANOPY, "3656", "656", "1.0", "Lock", "0.5", "Neutral", "0.0", "Lower", "Canopy", "Canopy Lock/Neutral/Lower Lever", "%0.1f"));
@@ -1419,8 +1431,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3660", "660", "1.0", "On", "0.0", "Off", "Miscellaneous Right Panel", "Pitot Heat Switch", "%0.1f"));
             #endregion  
             #region  Miscellaneous Seat
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3900", "900", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "Seat Adjustment Switch", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, MISCPANELS, "3900", "900", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "Miscellaneous Seat", "Seat Adjustment Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3910", "910", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "LOX Dilution Lever", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3911", "911", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "LOX Test Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3912", "912", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "LOX Emergency Supply", "%0.1f"));
             #endregion  
             #region  Sound Panel
