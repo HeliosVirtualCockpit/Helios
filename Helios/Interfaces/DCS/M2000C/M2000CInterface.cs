@@ -1078,13 +1078,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             //AddFunction(new PushButton(this, PCN_NAV, "3667", "667", "PCN Panel", "Offset Waypoint/Target Button"));
             //AddFunction(new FlagValue(this, "668", "PCN Panel", "Offset Waypoint/Target", "ENC"));
             AddFunction(new PushButton(this, PCN_NAV, "3578", "578", "PCN Panel", "INS Update Button"));
-            AddFunction(new FlagValue(this, "579", "PCN Panel", "INS Update", "REC"));
+            AddFunction(new FlagValue(this, "438", "PCN Panel", "INS Update", "REC Indicator"));
             AddFunction(new PushButton(this, PCN_NAV, "3580", "580", "PCN Panel", "Validate Data Entry Button"));
-            AddFunction(new FlagValue(this, "581", "PCN Panel", "Validate Data Entry", "VAL"));
+            AddFunction(new FlagValue(this, "440", "PCN Panel", "Validate Data Entry", "VAL Indicator"));
             AddFunction(new PushButton(this, PCN_NAV, "3582", "582", "PCN Panel", "Marq Position Button"));
-            AddFunction(new FlagValue(this, "583", "PCN Panel", "Marq Position", "MRQ"));
+            AddFunction(new FlagValue(this, "439", "PCN Panel", "Marq Position", "MRQ Indicator"));
             AddFunction(new PushButton(this, PCN_NAV, "3576", "576", "PCN Panel", "AUTO Navigation Button"));
-            AddFunction(new FlagValue(this, "577", "PCN Panel", "AUTO Navigation", "BAD"));
+            AddFunction(new FlagValue(this, "437", "PCN Panel", "AUTO Navigation", "BAD Indicator"));
             AddFunction(new Switch(this, PCN_NAV, "574", CreateSwitchPositions(11,0.0,0.1 , "3574",new string[]{"TR/VS","D/RLT","CP/PD","ALT","L/G","RT/TD","dL/dG","dALT","P/t","DEC","DV/FV" }),
                 "PCN Panel", "INS Parameter Selector", "%0.2f"));
             AddFunction(new Axis(this, SYSLIGHTS, "3575", "575", 0.15d, 0d, 1d, "PCN Panel", "Light Brightnes Control/Test"));
@@ -1379,21 +1379,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, VHF, "3963", "963", "VHF Radio Panel", "Key 0"));
             AddFunction(new PushButton(this, VHF, "3964", "964", "VHF Radio Panel", "VHF CONF"));
 
-            // The following VHF functions no longer appear in the ClickableData.lua and are presumed to be deprecated 2022
-            AddFunction(new PushButton(this, UVHF, "3437", "437", "Radio Panel (deprecated)", "U/VHF TEST Switch"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, UVHF, "3438", "438", "1.0", "E+A2", "0.5", "Neutral", "0.0", "R", "Radio Panel (deprecated)", "U/VHF E+A2 Switch", "%0.1f"));
-            AddFunction(new PushButton(this, UVHF, "3439", "439", "Radio Panel (deprecated)", "U/VHF SIL Switch"));
-            AddFunction(new PushButton(this, UVHF, "3447", "447", "Radio Panel", "U/VHF Power 5W/25W Switch"));
-            AddFunction(new Switch(this, UVHF, "448", CreateSwitchPositions(3, 0.0, 0.5, "3448"), "Radio Panel (deprecated)", "U/VHF Manual/Preset Mode Selector", "%0.1f"));
-            AddFunction(new Switch(this, UVHF, "440", CreateSwitchPositions(4, 0.0, 0.1, "3440", "100MHz"), "Radio Panel (deprecated)", "U/VHF 100 MHz Selector", "%0.1f"));
-            AddFunction(new Switch(this, UVHF, "441", CreateSwitchPositions(10, 0.0, 0.1, "3441", "10 MHz"), "Radio Panel (deprecated)", "U/VHF 10 MHz Selector", "%0.1f"));
-            AddFunction(new Switch(this, UVHF, "442", CreateSwitchPositions(10, 0.0, 0.1, "3442", "1MHz"), "Radio Panel (deprecated)", "U/VHF 1 MHz Selector", "%0.1f"));
-            AddFunction(new Switch(this, UVHF, "443", CreateSwitchPositions(10, 0.0, 0.1, "3443", "100 KHz"), "Radio Panel (deprecated)", "U/VHF 100 KHz Selector", "%0.1f"));
-            AddFunction(new Switch(this, UVHF, "444", CreateSwitchPositions(4, 0.0, 0.25, "3444", "25KHz"), "Radio Panel (deprecated)", "U/VHF 25 KHz Selector", "%0.2f"));
-            AddFunction(new Switch(this, UVHF, "445", CreateSwitchPositions(20, 0.0, 0.05, "3445"), "Radio Panel (deprecated)", "U/VHF Knob", "%0.2f"));
-            AddFunction(new Switch(this, UVHF, "446", CreateSwitchPositions(5, 0.0, 0.25, "3446"), "Radio Panel (deprecated)", "U/VHF Mode Switch 1", "%0.2f"));
-            AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "Radio Panel (deprecated)", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
-            AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "Radio Panel (deprecated)", "Preset frequency change"));
+            // The following VHF functions no longer appear in the ClickableData.lua and are presumed to be deprecated 2022.  It also appears as if the IDs have been reused
+            //AddFunction(new PushButton(this, UVHF, "3437", "437", "Radio Panel (deprecated)", "U/VHF TEST Switch"));
+            //AddFunction(Switch.CreateThreeWaySwitch(this, UVHF, "3438", "438", "1.0", "E+A2", "0.5", "Neutral", "0.0", "R", "Radio Panel (deprecated)", "U/VHF E+A2 Switch", "%0.1f"));
+            //AddFunction(new PushButton(this, UVHF, "3439", "439", "Radio Panel (deprecated)", "U/VHF SIL Switch"));
+            //AddFunction(new PushButton(this, UVHF, "3447", "447", "Radio Panel", "U/VHF Power 5W/25W Switch"));
+            //AddFunction(new Switch(this, UVHF, "448", CreateSwitchPositions(3, 0.0, 0.5, "3448"), "Radio Panel (deprecated)", "U/VHF Manual/Preset Mode Selector", "%0.1f"));
+            //AddFunction(new Switch(this, UVHF, "440", CreateSwitchPositions(4, 0.0, 0.1, "3440", "100MHz"), "Radio Panel (deprecated)", "U/VHF 100 MHz Selector", "%0.1f"));
+            //AddFunction(new Switch(this, UVHF, "441", CreateSwitchPositions(10, 0.0, 0.1, "3441", "10 MHz"), "Radio Panel (deprecated)", "U/VHF 10 MHz Selector", "%0.1f"));
+            //AddFunction(new Switch(this, UVHF, "442", CreateSwitchPositions(10, 0.0, 0.1, "3442", "1MHz"), "Radio Panel (deprecated)", "U/VHF 1 MHz Selector", "%0.1f"));
+            //AddFunction(new Switch(this, UVHF, "443", CreateSwitchPositions(10, 0.0, 0.1, "3443", "100 KHz"), "Radio Panel (deprecated)", "U/VHF 100 KHz Selector", "%0.1f"));
+            //AddFunction(new Switch(this, UVHF, "444", CreateSwitchPositions(4, 0.0, 0.25, "3444", "25KHz"), "Radio Panel (deprecated)", "U/VHF 25 KHz Selector", "%0.2f"));
+            //AddFunction(new Switch(this, UVHF, "445", CreateSwitchPositions(20, 0.0, 0.05, "3445"), "Radio Panel (deprecated)", "U/VHF Knob", "%0.2f"));
+            //AddFunction(new Switch(this, UVHF, "446", CreateSwitchPositions(5, 0.0, 0.25, "3446"), "Radio Panel (deprecated)", "U/VHF Mode Switch 1", "%0.2f"));
+            //AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "Radio Panel (deprecated)", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
+            //AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "Radio Panel (deprecated)", "Preset frequency change"));
 
             #endregion
             #region  Miscellaneous Left Panel
