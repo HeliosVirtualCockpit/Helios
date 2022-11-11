@@ -25,6 +25,7 @@
     <Reference Include="CommandLine, Version=2.7.82.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.2.7.82\lib\net461\CommandLine.dll</HintPath>
     </Reference>
+    <Reference Include="CustomMarshalers" />
     <Reference Include="EosSharp, Version=1.1.5488.21795, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EosSharp.1.1.5488.21795\lib\net45\EosSharp.dll</HintPath>
@@ -34,6 +35,12 @@
     </Reference>
     <Reference Include="KeraLua, Version=1.0.29.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\KeraLua.1.0.29\lib\net45\KeraLua.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.4.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft-WindowsAPICodePack-Core.1.1.4\lib\net472\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.4.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft-WindowsAPICodePack-Shell.1.1.4\lib\net472\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -70,6 +77,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentModel\HeliosCapabilityEditorAttribute.cs" />
@@ -80,6 +88,7 @@
       <DependentUpon>BacklitPushButtonAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\BacklitPushButtonRenderer.cs" />
+    <Compile Include="Controls\Capabilities\IConfigurableImageLocation.cs" />
     <Compile Include="Controls\Capabilities\IBackgroundImage.cs" />
     <Compile Include="Controls\Capabilities\IConfigurableBackgroundImage.cs" />
     <Compile Include="Controls\Capabilities\IControlWithProfileInstance.cs" />
@@ -94,6 +103,9 @@
     <Compile Include="Controls\Capabilities\IWindowsPreviewInput.cs" />
     <Compile Include="Controls\BarGaugeAppearanceEditor.xaml.cs">
       <DependentUpon>BarGaugeAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageAssetLocationAppearanceEditor.xaml.cs">
+      <DependentUpon>ImageAssetLocationAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ImageTranslucentBehaviorEditor.xaml.cs">
       <DependentUpon>ImageTranslucentBehaviorEditor.xaml</DependentUpon>
@@ -186,8 +198,14 @@
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
+    <Compile Include="Gauges\M2000C\LGPanel\LandingGear_Panel_V2.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\RADAR_IFF_Mode_Panel.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\Low_Altitude_Height.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\IFF_Mode_Setrtings.cs" />
     <Compile Include="Gauges\M2000C\Miscellaneous\Fuel_Burn_Bingo.cs" />
-    <Compile Include="Gauges\M2000C\Miscellaneous\UHF_Repeater.cs" />
+    <Compile Include="Gauges\M2000C\Radios\UHF_Radio.cs" />
+    <Compile Include="Gauges\M2000C\Radios\VHF_Radio.cs" />
+    <Compile Include="Gauges\M2000C\Radios\Radio_Repeater.cs" />
     <Compile Include="Gauges\M2000C\PCNPanel\PCNPanelGauge.cs" />
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGauge.cs" />
     <Compile Include="Gauges\M2000C\Common\Mk2CDrumGauge.cs" />
@@ -358,6 +376,9 @@
     <Compile Include="Windows\Controls\CalibrationEditorDouble.xaml.cs">
       <DependentUpon>CalibrationEditorDouble.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Controls\FolderPicker.xaml.cs">
+      <DependentUpon>FolderPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Controls\InterfaceStatusItemControl.xaml.cs">
       <DependentUpon>InterfaceStatusItemControl.xaml</DependentUpon>
     </Compile>
@@ -450,6 +471,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\BarGaugeAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageAssetLocationAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -766,6 +791,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Controls\CalibrationEditorDouble.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Controls\FolderPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

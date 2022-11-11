@@ -17,6 +17,7 @@
 namespace GadrocsWorkshop.Helios.Gauges
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.ComponentModel;
     using System.Globalization;
@@ -25,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System.Xml;
 
     [HeliosControl("Helios.Gauges.BarGauge", "Bar Gauge", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.None)]
-    internal class BarGauge : BaseGauge
+    internal class BarGauge : BaseGauge, IConfigurableImageLocation
     {
 
         private string _imageFile = "";
@@ -228,6 +229,16 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
 
         #endregion
+
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            Image = string.IsNullOrEmpty(Image) ? Image : string.IsNullOrEmpty(oldName) ? newName + Image : Image.Replace(oldName, newName);
+        }
 
         public override void ReadXml(XmlReader reader)
         {

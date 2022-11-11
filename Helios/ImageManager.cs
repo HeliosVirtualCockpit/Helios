@@ -263,7 +263,7 @@ namespace GadrocsWorkshop.Helios
         private ImageSource LoadXamlFile(Uri imageUri, int? width, int? height)
         {
             Logger.Debug("XAML being loaded as vector drawing from {URI}", Anonymizer.Anonymize(imageUri));
-            using (Stream xamlStream = new FileStream(imageUri.AbsolutePath, FileMode.Open))
+            using (Stream xamlStream = new FileStream(imageUri.LocalPath, FileMode.Open))
             {
                 try
                 {
@@ -356,7 +356,14 @@ namespace GadrocsWorkshop.Helios
                     string fullFilename = Path.GetFullPath(filename);
                     if (fullFilename.StartsWith(ConfigManager.ImagePath, StringComparison.CurrentCulture))
                     {
-                        newFilename = fullFilename.Substring(ConfigManager.ImagePath.Length + 1);
+                        if (fullFilename.Equals(ConfigManager.ImagePath))
+                        {
+                            newFilename ="";
+                        }
+                        else
+                        {
+                            newFilename = fullFilename.Substring(ConfigManager.ImagePath.Length + 1);
+                        }
                     }
                 }
             }

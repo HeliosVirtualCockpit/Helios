@@ -25,82 +25,53 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.FUEL_BURN_BINGO_PANEL", "Fuel Burn / Bingo Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
-    class Fuel_Burn_Bingo : M2000CDevice
+    [HeliosControl("HELIOS.M2000C.LOW_ALTITUDE_SETTING", "Low Altitude Setting Display", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    class LowAltitudeSetting : M2000CDevice
     {
-        private static readonly Rect SCREEN_RECT = new Rect(0, 0, 140, 172);
-        private string _interfaceDeviceName = "Fuel Panel";
-        private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
+        private static readonly Rect SCREEN_RECT = new Rect(0, 0, 400, 205);
+        private string _interfaceDeviceName = "AFCS";
+        private string _imageAssetLocation = "Helios Assets/M-2000C/";
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private bool _useTextualDisplays = true;
-        private ImageDecoration _image;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
 
-        public Fuel_Burn_Bingo()
-            : base("Fuel Burn / Bingo Panel", new Size(140, 172))
+        public LowAltitudeSetting()
+            : base("Low Altitude Setting Display", new Size(400, 205))
         {
-            _image = new ImageDecoration();
-            _image.Name = "Fuel Burn Display Background";
-            _image.Image = "{M2000C}/Images/Miscellaneous/Fuel_Burn_Bingo_Display_Background.png";
-            _image.Alignment = ImageAlignment.Stretched;
-            _image.Top = 0d;
-            _image.Left = 0d;
-            _image.Width = Width;
-            _image.Height = Height;
-            _image.IsHidden = !_useTextualDisplays;
-            Children.Add(_image);
-            AddRotarySwitch("Bingo Fuel 1 000 kg Selector", new Point(0, 52), new Size(58, 120), 4);
-            AddDrum("Bingo Fuel 1 000 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Drum", "(0-3)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19)); 
-            AddRotarySwitch("Bingo Fuel 100 kg Selector", new Point(62, 52), new Size(58, 120), 10);
-            AddDrum("Bingo Fuel 100 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Drum", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
-            AddTextDisplay("Fuel Burn Rate Display", new Point(36d, 14d), new Size(68d, 41d), _interfaceDeviceName, "Fuel Burn Rate Display", 32, "000", TextHorizontalAlignment.Center, "");
-
+            Children.Add(AddImage($"{Name}_ThumbWheel1", new Point(90d, 46d)));
+            Children.Add(AddImage($"{Name}_ThumbWheel2", new Point(168d, 46d)));
+            Children.Add(AddImage($"{Name}_ThumbWheel3", new Point(249d, 46d)));
+            AddRotarySwitch("Altitude 10 000 ft Selector", new Point(90, 46), new Size(68, 111), 6);
+            AddDrum("Altitude 10 000 ft Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Altitude 10 000 ft Drum", "(0-3)", "#", new Point(115,79), new Size(10, 15), new Size(24,44));
+            AddRotarySwitch("Altitude 1 000 ft Selector", new Point(168, 46), new Size(68, 111), 10);
+            AddDrum("Altitude 1 000 ft Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Altitude 1 000 ft Drum", "(0-9)", "#", new Point(193, 79), new Size(10, 15), new Size(24, 44));
+            AddRotarySwitch("Altitude 100 ft Selector", new Point(240, 46), new Size(68, 111), 10);
+            AddDrum("Altitude 100 ft Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Altitude 100 ft Drum", "(0-9)", "#", new Point(274, 79), new Size(10, 15), new Size(24, 44));
         }
 
         #region Properties
 
         public override string DefaultBackgroundImage
         {
-            get { return "{M2000C}/Images/Miscellaneous/Fuel_Burn_Bingo.png"; }
+            get { return $"{_imageAssetLocation}{Name}/Low_Altitude_Setting.png"; }
         }
 
-        public bool UseTextualDisplays
+        public string ImageAssetLocation
         {
-            get => _useTextualDisplays;
+            get => _imageAssetLocation;
             set
             {
-                if (value != _useTextualDisplays)
+                if (value != null && !_imageAssetLocation.Equals(value))
                 {
-                    _useTextualDisplays = value;
-                    foreach (HeliosVisual child in this.Children)
-                    {
-                        if (child is TextDisplay textDisplay)
-                        {
-                            textDisplay.IsHidden = !_useTextualDisplays;
-                        }
-                    }
-                    _image.IsHidden = !_useTextualDisplays;
+                    string oldValue = _imageAssetLocation;
+                    _imageAssetLocation = value;
+                    OnPropertyChanged("ImageAssetLocation", oldValue, value, false);
                     Refresh();
                 }
             }
         }
 
         #endregion
-        public override void ReadXml(XmlReader reader)
-        {
-            base.ReadXml(reader);
-            if (reader.Name.Equals("UseTextualDisplays"))
-            {
-                UseTextualDisplays = bool.Parse(reader.ReadElementString("UseTextualDisplays"));
-            }
-        }
-
-        public override void WriteXml(XmlWriter writer)
-        {
-            base.WriteXml(writer);
-            writer.WriteElementString("UseTextualDisplays", _useTextualDisplays.ToString(CultureInfo.InvariantCulture));
-        }
 
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
         {
@@ -128,6 +99,12 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 fromCenter: false,
                 multiplier: 1d,
                 offset: -1d);
+
+            AddDefaultInputBinding(
+                childName: $"{Name}_{name}",
+                interfaceTriggerName: $"{_interfaceDeviceName}.{name.Replace("Drum","Selector")}.changed",
+                deviceActionName: "set." + name);
+
             try
             {
                 /// This is an internal binding within the gauge as opposed to a binding to the default interface
@@ -141,29 +118,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 
         }
 
-        private void AddTextDisplay(string name, Point posn, Size size,
-                string interfaceDeviceName, string interfaceElementName, double baseFontsize,
-                string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
-        {
-            TextDisplay display = AddTextDisplay(
-                name: name,
-                posn: posn,
-                size: size,
-                font: _font,
-                baseFontsize: baseFontsize,
-                horizontalAlignment: hTextAlign,
-                verticalAligment: TextVerticalAlignment.Center,
-                testTextDisplay: testDisp,
-                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
-                backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
-                useBackground: false,
-                interfaceDeviceName: interfaceDeviceName,
-                interfaceElementName: interfaceElementName,
-                textDisplayDictionary: devDictionary
-                );
-            display.IsHidden = !_useTextualDisplays;
-        }
-
         private void AddRotarySwitch(string name, Point posn, Size size, int positions)
         {
             RotarySwitch rSwitch = AddRotarySwitch(name: name,
@@ -174,7 +128,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 clickType: RotaryClickType.Swipe,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,
-                fromCenter: false);
+                fromCenter: false
+                );
+            rSwitch.IsContinuous = false;
             rSwitch.Positions.Clear();
             for (int i = 0; i < positions; i++)
             {
@@ -183,10 +139,40 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             string drum = name.Replace("Selector", "Drum");
             AddDefaultInputBinding(
                  childName: $"{Name}_{drum}",
-                 interfaceTriggerName: $"Fuel Panel.{name}.changed",
+                 interfaceTriggerName: $"{_interfaceDeviceName}.{name}.changed",
                  deviceActionName: $"set.{drum}");
         }
 
+
+        private ImageDecoration AddImage(string name, Point posn)
+        {
+            return (new ImageDecoration()
+            {
+                Name = name,
+                Image = $"{_imageAssetLocation}{Name}/Altitude_ThumbWheel_1.png",
+                Alignment = ImageAlignment.Stretched,
+                Left = posn.X,
+                Top = posn.Y,
+                Width = 22,
+                Height = 110,
+                IsHidden = false
+            });
+
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            if (reader.Name.Equals("ImageAssetLocation"))
+            {
+                ImageAssetLocation = reader.ReadElementString("ImageAssetLocation");
+            }
+        }
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("ImageAssetLocation", _imageAssetLocation.ToString(CultureInfo.InvariantCulture));
+        }
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))

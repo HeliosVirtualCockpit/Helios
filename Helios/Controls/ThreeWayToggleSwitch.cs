@@ -16,11 +16,12 @@
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.Xml;
 
     [HeliosControl("Helios.Base.ThreeWayToggleSwitch", "Three Way Toggle Switch", "Three Way Toggle Switches", typeof(ThreeWayToggleSwitchRenderer))]
-    public class ThreeWayToggleSwitch : ToggleSwitchBase
+    public class ThreeWayToggleSwitch : ToggleSwitchBase, IConfigurableImageLocation
     {
         private ThreeWayToggleSwitchType _switchType = ThreeWayToggleSwitchType.OnOnOn;
         private ThreeWayToggleSwitchPosition _position = ThreeWayToggleSwitchPosition.Two;
@@ -285,6 +286,20 @@ namespace GadrocsWorkshop.Helios.Controls
             BeginTriggerBypass(true);
             SwitchPosition = DefaultPosition;
             EndTriggerBypass(true);
+        }
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            PositionOneImage = string.IsNullOrEmpty(PositionOneImage) ? PositionOneImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneImage : PositionOneImage.Replace(oldName, newName);
+            PositionOneIndicatorOnImage = string.IsNullOrEmpty(PositionOneIndicatorOnImage) ? PositionOneIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneIndicatorOnImage : PositionOneIndicatorOnImage.Replace(oldName, newName);
+            PositionTwoImage = string.IsNullOrEmpty(PositionTwoImage) ? PositionTwoImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoImage : PositionTwoImage.Replace(oldName, newName);
+            PositionTwoIndicatorOnImage = string.IsNullOrEmpty(PositionTwoIndicatorOnImage) ? PositionTwoIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoIndicatorOnImage : PositionTwoIndicatorOnImage.Replace(oldName, newName);
+            PositionThreeImage = string.IsNullOrEmpty(PositionThreeImage) ? PositionThreeImage : string.IsNullOrEmpty(oldName) ? newName + PositionThreeImage : PositionThreeImage.Replace(oldName, newName);
+            PositionThreeIndicatorOnImage = string.IsNullOrEmpty(PositionThreeIndicatorOnImage) ? PositionThreeIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionThreeIndicatorOnImage : PositionThreeIndicatorOnImage.Replace(oldName, newName);
         }
 
         protected override void ThrowSwitch(ToggleSwitchBase.SwitchAction action)

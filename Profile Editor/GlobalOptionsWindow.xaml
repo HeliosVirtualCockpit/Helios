@@ -37,6 +37,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="120"/>
@@ -68,7 +70,11 @@
 
                 <TextBlock Grid.Row="12" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Cache Images</TextBlock>
                 <CheckBox Grid.Row="12" Grid.Column="1" IsChecked="{Binding CacheImages}"/>
-                <TextBlock Grid.Row="13" Grid.Column="1" Style="{StaticResource Documentation}">Allows caching and reusing of image objects to improve load times.</TextBlock>            
+                <TextBlock Grid.Row="13" Grid.Column="1" Style="{StaticResource Documentation}">Allows caching and reusing of image objects to improve load times.</TextBlock>
+
+                <TextBlock Grid.Row="14" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Save Composite Controls</TextBlock>
+                <CheckBox Grid.Row="14" Grid.Column="1" IsChecked="{Binding PersistChildrenAsComment}"/>
+                <TextBlock Grid.Row="15" Grid.Column="1" Style="{StaticResource Documentation}">The configuration for internal controls within Composite Gauges or Panels will be saved to the profile as comments.</TextBlock>
             </Grid>
         </GroupBox>
         <Button Style="{StaticResource InterfaceEditorButton}" IsDefault="True" Content="OK" Click="OK_OnClick"/>

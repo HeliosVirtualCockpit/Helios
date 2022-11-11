@@ -67,7 +67,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     OnPropertyChanged("IsContinuous", oldValue, value, true);
                     if (value)
                     {
-                        // implementation limitationg
+                        // implementation limitation
                         RotationTravel = 360d;
                     }
                     Refresh();
@@ -166,6 +166,17 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
 
                 double oldValue = _heliosValue.Value.DoubleValue;
+                if (IsContinuous)
+                {
+                    if (value < MinValue)
+                    {
+                        value += MaxValue - MinValue;
+                    }
+                    else if (value > MaxValue)
+                    {
+                        value -= MaxValue - MinValue;
+                    }
+                }
                 _heliosValue.SetValue(new BindingValue(value), BypassTriggers);
                 OnPropertyChanged("Value", oldValue, value, false);
                 SetRotation();

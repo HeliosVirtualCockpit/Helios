@@ -15,8 +15,11 @@
 // 
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Xml;
+using GadrocsWorkshop.Helios.ComponentModel;
+using GadrocsWorkshop.Helios.Controls;
 using GadrocsWorkshop.Helios.Controls.Capabilities;
 
 namespace GadrocsWorkshop.Helios.Gauges
@@ -102,5 +105,43 @@ namespace GadrocsWorkshop.Helios.Gauges
             _backgroundImage = reader.ReadElementString("BackgroundImage");
             OnBackgroundImageChange();
         }
+        protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
+        {
+            if (args.PropertyName.Equals("ImageAssetLocation"))
+            {
+                UpdateImageAssets(args);
+            }
+            base.OnPropertyChanged(args);
+        }
+        /// <summary>
+        /// Used to update image names in children of this control
+        /// </summary>
+        /// <param name="PropertyChangedArgs"></param>
+        protected void UpdateImageAssets(PropertyNotificationEventArgs args)
+        {
+            foreach (HeliosVisual child in Children)
+            {
+                (child as IConfigurableImageLocation)?.ReplaceImageNames(args.OldValue.ToString(), args.NewValue.ToString());
+            }
+        }
+
+        protected virtual string UpdateImageName(string imageName, string oldValue, string newValue)
+            {
+                if (string.IsNullOrEmpty(imageName))
+                {
+                    return imageName;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(oldValue))
+                    {
+                        return newValue + imageName;
+                    }
+                    else
+                    {
+                        return imageName.Replace(oldValue, newValue);
+                    }
+                }
+            }
     }
 }

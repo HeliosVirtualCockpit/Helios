@@ -25,83 +25,56 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.FUEL_BURN_BINGO_PANEL", "Fuel Burn / Bingo Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
-    class Fuel_Burn_Bingo : M2000CDevice
+    [HeliosControl("HELIOS.M2000C.RADAR_IFF_MODE_PANEL", "RADAR IFF Mode Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    class RADARIFFMode : M2000CDevice
     {
-        private static readonly Rect SCREEN_RECT = new Rect(0, 0, 140, 172);
-        private string _interfaceDeviceName = "Fuel Panel";
-        private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
+        private static readonly Rect SCREEN_RECT = new Rect(0, 0, 600, 186);
+        private string _interfaceDeviceName = "RADAR IFF";
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private bool _useTextualDisplays = true;
-        private ImageDecoration _image;
+        private string _imageAssetLocation = "Helios Assets/M-2000C/";
+
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
 
-        public Fuel_Burn_Bingo()
-            : base("Fuel Burn / Bingo Panel", new Size(140, 172))
+        public RADARIFFMode()
+            : base("RADAR IFF Mode Panel", new Size(600, 186))
         {
-            _image = new ImageDecoration();
-            _image.Name = "Fuel Burn Display Background";
-            _image.Image = "{M2000C}/Images/Miscellaneous/Fuel_Burn_Bingo_Display_Background.png";
-            _image.Alignment = ImageAlignment.Stretched;
-            _image.Top = 0d;
-            _image.Left = 0d;
-            _image.Width = Width;
-            _image.Height = Height;
-            _image.IsHidden = !_useTextualDisplays;
-            Children.Add(_image);
-            AddRotarySwitch("Bingo Fuel 1 000 kg Selector", new Point(0, 52), new Size(58, 120), 4);
-            AddDrum("Bingo Fuel 1 000 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Drum", "(0-3)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19)); 
-            AddRotarySwitch("Bingo Fuel 100 kg Selector", new Point(62, 52), new Size(58, 120), 10);
-            AddDrum("Bingo Fuel 100 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Drum", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
-            AddTextDisplay("Fuel Burn Rate Display", new Point(36d, 14d), new Size(68d, 41d), _interfaceDeviceName, "Fuel Burn Rate Display", 32, "000", TextHorizontalAlignment.Center, "");
 
+            AddRotarySwitch("Radar IFF Code-4 Selector", new Point(206, 47), new Size(40, 84), 10);
+            AddDrum("Radar IFF Code-4 Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Radar IFF Code-4 Drum", "(0-9)", "#", new Point(212, 75), new Size(10, 15), new Size(18, 23));
+            AddRotarySwitch("Radar IFF Code-3 Selector", new Point(259, 47), new Size(40, 84), 10);
+            AddDrum("Radar IFF Code-3 Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Radar IFF Code-3 Drum", "(0-9)", "#", new Point(264, 75), new Size(10, 15), new Size(18, 23));
+            AddRotarySwitch("Radar IFF Code-2 Selector", new Point(315, 47), new Size(40, 84), 10);
+            AddDrum("Radar IFF Code-2 Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Radar IFF Code-2 Drum", "(0-9)", "#", new Point(319, 75), new Size(10, 15), new Size(18, 23));
+            AddRotarySwitch("Radar IFF Code-1 Selector", new Point(367, 47), new Size(40, 84), 10);
+            AddDrum("Radar IFF Code-1 Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Radar IFF Code-1 Drum", "(0-9)", "#", new Point(370, 75), new Size(10, 15), new Size(18, 23));
+            AddRotarySwitch1("Radar IFF Mode Switch", new Point(47, -5), new Size(137, 136), 6, new String[] { "1", "4", "3/2", "3/3", "3/4", "2" }, new Double[] { 280, 305, 330, 0, 28, 53 });
+            AddRotarySwitch1("Radar IFF Power Switch", new Point(414, -5), new Size(137, 136), 3, new String[] { "Off", "Sect", "blank" }, new Double[] { 280, 0, 85 });
+            AddToggleSwitch("Radar IFF L/R Selector", new Point(78, 136), new Size(32, 77), ToggleSwitchPosition.One, $"{_imageAssetLocation}{Name}/black-circle-up.png", $"{_imageAssetLocation}{Name}/black-circle-down.png", ToggleSwitchType.OnOn, LinearClickType.Swipe,_interfaceDeviceName, "Radar IFF L/R Selector", false, true);
         }
 
         #region Properties
 
         public override string DefaultBackgroundImage
         {
-            get { return "{M2000C}/Images/Miscellaneous/Fuel_Burn_Bingo.png"; }
+            get { return $"{_imageAssetLocation}{Name}/RADAR_IFF_Panel.png"; }
         }
 
-        public bool UseTextualDisplays
+        public string ImageAssetLocation
         {
-            get => _useTextualDisplays;
+            get => _imageAssetLocation;
             set
             {
-                if (value != _useTextualDisplays)
+                if (value != null && !_imageAssetLocation.Equals(value))
                 {
-                    _useTextualDisplays = value;
-                    foreach (HeliosVisual child in this.Children)
-                    {
-                        if (child is TextDisplay textDisplay)
-                        {
-                            textDisplay.IsHidden = !_useTextualDisplays;
-                        }
-                    }
-                    _image.IsHidden = !_useTextualDisplays;
+                    string oldValue = _imageAssetLocation;
+                    _imageAssetLocation = value;
+                    OnPropertyChanged("ImageAssetLocation", oldValue, value, false);
                     Refresh();
                 }
             }
         }
-
         #endregion
-        public override void ReadXml(XmlReader reader)
-        {
-            base.ReadXml(reader);
-            if (reader.Name.Equals("UseTextualDisplays"))
-            {
-                UseTextualDisplays = bool.Parse(reader.ReadElementString("UseTextualDisplays"));
-            }
-        }
-
-        public override void WriteXml(XmlWriter writer)
-        {
-            base.WriteXml(writer);
-            writer.WriteElementString("UseTextualDisplays", _useTextualDisplays.ToString(CultureInfo.InvariantCulture));
-        }
-
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
         {
             if (args.PropertyName.Equals("Width") || args.PropertyName.Equals("Height"))
@@ -128,6 +101,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 fromCenter: false,
                 multiplier: 1d,
                 offset: -1d);
+
             try
             {
                 /// This is an internal binding within the gauge as opposed to a binding to the default interface
@@ -139,29 +113,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 Logger.Error($"Unable to create self-binding for gauge {Name}_{actionIdentifier.Replace("Drum", "Selector")} trigger: {actionIdentifier.Replace("Drum", "Selector")} \"position.changed\" action: {drum.Name} \"set.Drum tape offset\" ");
             }
 
-        }
-
-        private void AddTextDisplay(string name, Point posn, Size size,
-                string interfaceDeviceName, string interfaceElementName, double baseFontsize,
-                string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)
-        {
-            TextDisplay display = AddTextDisplay(
-                name: name,
-                posn: posn,
-                size: size,
-                font: _font,
-                baseFontsize: baseFontsize,
-                horizontalAlignment: hTextAlign,
-                verticalAligment: TextVerticalAlignment.Center,
-                testTextDisplay: testDisp,
-                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
-                backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
-                useBackground: false,
-                interfaceDeviceName: interfaceDeviceName,
-                interfaceElementName: interfaceElementName,
-                textDisplayDictionary: devDictionary
-                );
-            display.IsHidden = !_useTextualDisplays;
         }
 
         private void AddRotarySwitch(string name, Point posn, Size size, int positions)
@@ -183,10 +134,54 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             string drum = name.Replace("Selector", "Drum");
             AddDefaultInputBinding(
                  childName: $"{Name}_{drum}",
-                 interfaceTriggerName: $"Fuel Panel.{name}.changed",
+                 interfaceTriggerName: $"{_interfaceDeviceName}.{name}.changed",
                  deviceActionName: $"set.{drum}");
         }
+        private void AddRotarySwitch1(string name, Point posn, Size size, int positions, String[] switchLabels, Double[] switchAngles)
+        {
+            RotarySwitch rSwitch = AddRotarySwitch(name: name,
+                posn: posn,
+                size: size,
+                knobImage: $"{_imageAssetLocation}{Name}/RADAR_IFF_Knob.png",
+                defaultPosition: 0,
+                clickType: RotaryClickType.Swipe,
+                interfaceDeviceName: _interfaceDeviceName,
+                interfaceElementName: name,
+                fromCenter: false);
+            rSwitch.Positions.Clear();
+            for (int i = 0; i < positions; i++)
+            {
+                rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, i, switchLabels[i], switchAngles[i]));
+            }
+        }
+            private ImageDecoration AddImage(string name, Point posn)
+        {
+            return(new ImageDecoration()
+            {
+                Name = name,
+                Image = $"{_imageAssetLocation}{Name}/IFF_Thumbwheel_1.png",
+                Alignment = ImageAlignment.Stretched,
+                Left = posn.X,
+                Top = posn.Y,
+                Width = 18,
+                Height = 81,
+                IsHidden = false
+            });
 
+        }
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            if (reader.Name.Equals("ImageAssetLocation"))
+            {
+                ImageAssetLocation = reader.ReadElementString("ImageAssetLocation");
+            }
+        }
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            writer.WriteElementString("ImageAssetLocation", _imageAssetLocation.ToString(CultureInfo.InvariantCulture));
+        }
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))

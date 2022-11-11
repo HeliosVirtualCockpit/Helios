@@ -17,17 +17,21 @@
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using NLog;
     using System;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
     
     [HeliosControl("Helios.Base.Indicator", "Caution Indicator", "Indicators", typeof(IndicatorRenderer))]
-    public class Indicator : HeliosVisual
+    public class Indicator : HeliosVisual, IConfigurableImageLocation
     {
         private bool _on;
+
+        private bool _allowInteraction;
 
         private string _onImage = "{Helios}/Images/Indicators/caution-indicator-on.png";
         private string _offImage = "{Helios}/Images/Indicators/caution-indicator-off.png";
@@ -42,11 +46,12 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-
-        public Indicator()
+         public Indicator()
             : base("Indicator", new System.Windows.Size(100, 50))
         {
             _referenceHeight = Height;
+
+            _allowInteraction = true;
 
             _textFormat.VerticalAlignment = TextVerticalAlignment.Center;
             _textFormat.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(TextFormat_PropertyChanged);
@@ -210,6 +215,13 @@ namespace GadrocsWorkshop.Helios.Controls
                 OnPropertyChanged("ScalingMode", oldValue, value, true);
             }
         }
+
+        public bool AllowInteraction
+        {
+            get => _allowInteraction;
+            set => _allowInteraction = value;
+        }
+
         #endregion
 
         void TextFormat_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -290,6 +302,17 @@ namespace GadrocsWorkshop.Helios.Controls
             }
         }
 
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            OffImage = string.IsNullOrEmpty(OffImage) ? OffImage : string.IsNullOrEmpty(oldName) ? newName + OffImage : OffImage.Replace(oldName, newName);
+            OnImage = string.IsNullOrEmpty(OnImage) ? OnImage : string.IsNullOrEmpty(oldName) ? newName + OnImage : OnImage.Replace(oldName, newName);
+        }
+
         #region Overrides of HeliosVisual
 
         public override void ConfigureIconInstance()
@@ -316,6 +339,11 @@ namespace GadrocsWorkshop.Helios.Controls
             // No-Op
         }
 
+        public override bool HitTest(Point location)
+        {
+            return _allowInteraction;
+        }
+
         public override void WriteXml(XmlWriter writer)
         {
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
@@ -332,6 +360,11 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 writer.WriteElementString("ScalingMode", ScalingMode.ToString());
             }
+
+            writer.WriteStartElement("Interaction");
+            writer.WriteElementString("AllowInteraction", AllowInteraction.ToString(CultureInfo.InvariantCulture));
+            writer.WriteEndElement();
+
             base.WriteXml(writer);
         }
 
@@ -354,6 +387,13 @@ namespace GadrocsWorkshop.Helios.Controls
             else
             {
                 ScalingMode = TextScalingMode.Legacy;
+            }
+
+            if (reader.Name.Equals("Interaction"))
+            {
+                reader.ReadStartElement("Interaction");
+                AllowInteraction = bool.Parse(reader.ReadElementString("AllowInteraction"));
+                reader.ReadEndElement();
             }
             base.ReadXml(reader);
 

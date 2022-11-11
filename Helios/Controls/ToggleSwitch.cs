@@ -16,11 +16,12 @@
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.Xml;
 
     [HeliosControl("Helios.Base.ToggleSwitch", "Toggle Switch", "Toggle Switches", typeof(ToggleSwitchRenderer))]
-    public class ToggleSwitch : ToggleSwitchBase
+    public class ToggleSwitch : ToggleSwitchBase, IConfigurableImageLocation
     {
         private ToggleSwitchType _switchType = ToggleSwitchType.OnOn;
         private ToggleSwitchPosition _position = ToggleSwitchPosition.Two;
@@ -228,8 +229,19 @@ namespace GadrocsWorkshop.Helios.Controls
             SwitchPosition = DefaultPosition;
             EndTriggerBypass(true);
         }
-
-       protected override void ThrowSwitch(SwitchAction action)
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            PositionOneImage = string.IsNullOrEmpty(PositionOneImage) ? PositionOneImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneImage : PositionOneImage.Replace(oldName, newName);
+            PositionOneIndicatorOnImage = string.IsNullOrEmpty(PositionOneIndicatorOnImage) ? PositionOneIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneIndicatorOnImage : PositionOneIndicatorOnImage.Replace(oldName, newName);
+            PositionTwoImage = string.IsNullOrEmpty(PositionTwoImage) ? PositionTwoImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoImage : PositionTwoImage.Replace(oldName, newName);
+            PositionTwoIndicatorOnImage = string.IsNullOrEmpty(PositionTwoIndicatorOnImage) ? PositionTwoIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoIndicatorOnImage : PositionTwoIndicatorOnImage.Replace(oldName, newName);
+        }
+        protected override void ThrowSwitch(SwitchAction action)
        {
             if (action == SwitchAction.Increment)
             {

@@ -16,6 +16,7 @@
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+	using GadrocsWorkshop.Helios.Controls.Capabilities;
 	using System.Globalization;
 	using System.Windows;
     using System.Windows.Media;
@@ -23,8 +24,8 @@ namespace GadrocsWorkshop.Helios.Controls
 
 	[HeliosControl("Helios.Base.CustomDrum", "Custom Drum", "Custom Controls", typeof(Gauges.GaugeRenderer))]
 
-    public class CustomDrum : Gauges.BaseGauge
-	{
+    public class CustomDrum : Gauges.BaseGauge, IConfigurableImageLocation
+    {
 
         private HeliosValue _drumOffset;
 
@@ -41,16 +42,15 @@ namespace GadrocsWorkshop.Helios.Controls
 		private int _verticalTravel = 10;
 		private double _minInputVertical = 0d;
 		private double _maxInputVertical = 1d;
-		
 
-
-		public CustomDrum()
-            : base("CustomDrum", new Size(50d, 100d))
+		public CustomDrum() : this("CustomDrum", new Size(50d, 100d)) { }
+        public CustomDrum(string name, Size size)
+            : base(name, size)
         {
 	
 
-			_Drum = new Gauges.CustomGaugeNeedle(_drumImage, new Point(0, 0), new Size(50, 1000), new Point(0, 0));
-            _Drum.Clip = new RectangleGeometry(new Rect(1d, 1d,50d, 100d));
+			_Drum = new Gauges.CustomGaugeNeedle(_drumImage, new Point(0, 0), new Size(size.Width, size.Height*10), new Point(0, 0));
+            _Drum.Clip = new RectangleGeometry(new Rect(0d, 0d,size.Width, size.Height));
             Components.Add(_Drum);
 
             _drumOffset = new HeliosValue(this, new BindingValue(0d), "", "Drum tape offset", "Value between configured Min and Max", "", BindingValueUnits.Numeric);
@@ -59,7 +59,6 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_drumOffset);
 
 		}
-
 
 		#region Properties
 
@@ -220,7 +219,6 @@ namespace GadrocsWorkshop.Helios.Controls
 		}
 
 
-
 		public double MinInputVertical
 		{
 			get
@@ -263,8 +261,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-
-		public override void Reset()
+        public override void Reset()
         {
             base.Reset();
 			BeginTriggerBypass(true);
@@ -280,22 +277,27 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		}
 
+        #endregion
+
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            DrumImage = string.IsNullOrEmpty(DrumImage) ? DrumImage : string.IsNullOrEmpty(oldName) ? newName + DrumImage : DrumImage.Replace(oldName, newName);
+        }
+
+        #region Actions
 
 
-		#endregion
-
-
-		#region Actions
-
-
-		void DrumOffset_Execute(object action, HeliosActionEventArgs e)
+        void DrumOffset_Execute(object action, HeliosActionEventArgs e)
         {
             _drumOffset.SetValue(e.Value, e.BypassCascadingTriggers);
 			double vValue = (_drumOffset.Value.DoubleValue + ((_maxInputVertical - _minInputVertical) - _maxInputVertical)) / (_maxInputVertical - _minInputVertical); // convert to to 0-1
 			_Drum.VerticalOffset = (_minVertical * (1 - vValue)) + (_verticalTravel * vValue); // lerp vertical 
 		}
-
-	
 
 		#endregion
 
@@ -342,8 +344,5 @@ namespace GadrocsWorkshop.Helios.Controls
 					EndTriggerBypass(true);
 				}
 		}
-
-
-
 	}
 }

@@ -23,8 +23,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.UHF_REPEATER_DISPLAY", "UHF Repeater Display", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
-    class UHF_Repeater : M2000CDevice
+    [HeliosControl("HELIOS.M2000C.RADIO_REPEATER_DISPLAY", "Radio Repeater Display", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    class Radio_Repeater : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 130, 148);
         private string _interfaceDeviceName = "U/VHF";
@@ -33,8 +33,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private bool _useTextualDisplays = true;
         private ImageDecoration _image;
 
-        public UHF_Repeater()
-            : base("UHF Repeater Display", new Size(130, 148))
+        public Radio_Repeater()
+            : base("Radio Repeater Display", new Size(130, 148))
         {
             _image = new ImageDecoration();
             _image.Name = "UHF Repeater Display Background";
@@ -48,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             Children.Add(_image);
 
             AddTextDisplay("UHF Upper Comm Information", new Point(5d, 38d), new Size(122d, 36d), _interfaceDeviceName, "UHF Upper Comm Information", 32, "********", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("UHF Lower Comm Information", new Point(5d, 75d), new Size(122d, 36d), _interfaceDeviceName, "UHF Lower Comm Information", 32, "********", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("VHF Lower Comm Information", new Point(5d, 75d), new Size(122d, 36d), _interfaceDeviceName, "VHF Lower Comm Information", 32, "********", TextHorizontalAlignment.Left, "");
 
         }
 

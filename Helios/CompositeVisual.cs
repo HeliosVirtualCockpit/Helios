@@ -241,7 +241,7 @@ namespace GadrocsWorkshop.Helios
                 ));
         }
 
-        private HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action)
+        protected HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action)
         {
            return CreateNewBinding(trigger, action, new BindingValue(null));
         }
@@ -320,7 +320,7 @@ namespace GadrocsWorkshop.Helios
                         continue;
                     }
 
-                    Logger.Debug("Auto binding trigger " + defaultBinding.InterfaceTriggerName + " to " + defaultBinding.ChildName + defaultBinding.DeviceActionName);
+                    Logger.Debug("Auto binding interface trigger " + defaultBinding.InterfaceTriggerName + " to " + defaultBinding.ChildName + "." + defaultBinding.DeviceActionName);
                     child.OutputBindings.Add(CreateNewBinding(_defaultInterface.Triggers[defaultBinding.InterfaceTriggerName],
                         child.Actions[defaultBinding.DeviceActionName]));
                 } else
@@ -332,7 +332,7 @@ namespace GadrocsWorkshop.Helios
                         continue;
                     }
 
-                    Logger.Debug("Auto binding trigger " + defaultBinding.DeviceTriggerName + " to " + defaultBinding.ChildName + defaultBinding.DeviceActionName);
+                    Logger.Debug("Auto binding device trigger " + defaultBinding.DeviceTriggerName + " to " + defaultBinding.ChildName + "." + defaultBinding.DeviceActionName);
                     child.OutputBindings.Add(CreateNewBinding(Triggers[defaultBinding.DeviceTriggerName],
                         child.Actions[defaultBinding.DeviceActionName],defaultBinding.DeviceTriggerBindingValue));
 

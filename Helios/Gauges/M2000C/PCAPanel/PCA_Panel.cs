@@ -58,8 +58,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicator("AMS", "s", new Point(column3 + offsetXc, row0 + offsetY), new Size(5, 9));
             AddIndicator("FPRS", "s", new Point(column4 + offsetXc, row0 + offsetY), new Size(5, 9));
             AddIndicator("INS C", "s", new Point(column5 + offsetXc, row0 + offsetY), new Size(5, 9));
-            AddIndicator("KL1", "kl1", new Point(column0 + offsetXg, row1 + offsetY), new Size(16, 9));
-            AddIndicator("KL2", "kl2", new Point(column0 + offsetXd, row1 + offsetY), new Size(16, 9));
+            AddIndicator("KL1", "s", new Point(column0 + offsetXg, row1 + offsetY), new Size(5, 9));
+            AddIndicator("KL2", "p", new Point(column0 + offsetXd, row1 + offsetY), new Size(5, 9));
             AddIndicator("WSS1 S", "s", new Point(column1 + offsetXg, row1 + offsetY), new Size(5, 9));
             AddIndicator("WSS2 S", "s", new Point(column2 + offsetXg, row1 + offsetY), new Size(5, 9));
             AddIndicator("WSS3 S", "s", new Point(column3 + offsetXg, row1 + offsetY), new Size(5, 9));
@@ -68,13 +68,13 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicator("WSS1 P", "p", new Point(column1 + offsetXd, row1 + offsetY), new Size(5, 9));
             AddIndicator("WSS2 P", "p", new Point(column2 + offsetXd, row1 + offsetY), new Size(5, 9));
             AddIndicator("WSS3 P", "p", new Point(column3 + offsetXd, row1 + offsetY), new Size(5, 9));
-            AddIndicator("WSS4 P", "P", new Point(column4 + offsetXd, row1 + offsetY), new Size(5, 9));
+            AddIndicator("WSS4 P", "p", new Point(column4 + offsetXd, row1 + offsetY), new Size(5, 9));
             AddIndicator("WSS5 P", "p", new Point(column5 + offsetXd, row1 + offsetY), new Size(5, 9));
 
             AddSwitch("Master Arm Switch", "red-", new Point(32, 28), new Size(30, 90), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn, false);
             ToggleSwitch selectiveJettisonSwitch = AddSwitch("Selective Jettison Switch", "long-black-", new Point(36, 170), new Size(29, 60), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn, true);
             AddGuard("Selective Jettison Switch Guard", "guard-", new Point(5, 160), new Size(100, 50), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
-                new NonClickableZone[] { new NonClickableZone(new Rect(30, 0, 120, 63), ToggleSwitchPosition.Two, selectiveJettisonSwitch, ToggleSwitchPosition.One) });
+                new NonClickableZone[] { new NonClickableZone(new Rect(30, 0, 120, 63), ToggleSwitchPosition.One, selectiveJettisonSwitch, ToggleSwitchPosition.One) });
 
             _upperDisplay = AddImage("PCA Display Background Upper", new Point(110d, 35d), new Size(554d, 52d));
             _lowerDisplay = AddImage("PCA Display Background Lower", new Point(110d, 168d), new Size(554d, 52d));
@@ -163,6 +163,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 positionOneImage: "{M2000C}/Images/Switches/" + imagePrefix + "up.png",
                 positionTwoImage: "{M2000C}/Images/Switches/" + imagePrefix + "down.png",
                 defaultType: defaultType,
+                clickType: LinearClickType.Touch,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,
                 horizontal: horizontal,
@@ -174,19 +175,21 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private void AddGuard(string name, string imagePrefix, Point posn, Size size, ToggleSwitchPosition defaultPosition,
             ToggleSwitchType defaultType, NonClickableZone[] nonClickableZones)
         {
-            AddToggleSwitch(name: name,
+            ToggleSwitch cover =  AddToggleSwitch(name: name,
                 posn: posn,
                 size: size,
                 defaultPosition: defaultPosition,
-                positionOneImage: "{M2000C}/Images/PCAPanel/" + imagePrefix + "down.png",
-                positionTwoImage: "{M2000C}/Images/PCAPanel/" + imagePrefix + "up.png",
+                positionOneImage: "{M2000C}/Images/PCAPanel/" + imagePrefix + "up.png",
+                positionTwoImage: "{M2000C}/Images/PCAPanel/" + imagePrefix + "down.png",
                 defaultType: defaultType,
+                clickType: LinearClickType.Swipe,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,
                 horizontal: false,
                 horizontalRender: false,
                 nonClickableZones: nonClickableZones,
                 fromCenter: false);
+                cover.Orientation = ToggleSwitchOrientation.Horizontal;
         }
         private void AddTextDisplay(string name, Point posn, Size size,
     string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign, string devDictionary)

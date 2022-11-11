@@ -18,6 +18,7 @@ using GadrocsWorkshop.Helios.ComponentModel;
 using GadrocsWorkshop.Helios.Controls.Capabilities;
 using System;
 using System.Globalization;
+using System.Net.Cache;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml;
@@ -39,6 +40,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private HeliosValue _timerEnabledValue;
         private HeliosValue _timerIntervalDefaultValue;
         private HeliosValue _timerIntervalOneTimeValue;
+        private HeliosTrigger _hiddenTrigger;
 //
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -58,6 +60,8 @@ namespace GadrocsWorkshop.Helios.Controls
             _timerIntervalOneTimeValue.Execute += SetTimerOneTimeIntervalAction_Execute;
             Values.Add(_timerIntervalOneTimeValue);
             Actions.Add(_timerIntervalOneTimeValue);
+            _hiddenTrigger = new HeliosTrigger(this, "", "", "hidden", "Fired when this panel becomes hidden.", "Always returns true.", BindingValueUnits.Boolean);
+            Triggers.Add(_hiddenTrigger);
         }
         #region Properties
 
@@ -165,6 +169,7 @@ namespace GadrocsWorkshop.Helios.Controls
             if(_timer != null)
             {
                 _timer.Tick += TimerTick;
+                _timer.IsEnabled = _timerEnabled;
             }
             else
             {
@@ -193,8 +198,14 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     // hidden, maybe by user or maybe by us
                     _timer?.Stop();
+                    // unregister to reduce circularity
+                    if(_timer != null)
+                    {
+                        _timer.Tick -= TimerTick;
+                    }
                     // After the panel hides, we always return to the panel's default interval.
                     TimerInterval = _configuredTimerInterval;
+                    _hiddenTrigger.FireTrigger(new BindingValue(true));
                 }
             }
         }
@@ -252,6 +263,10 @@ namespace GadrocsWorkshop.Helios.Controls
             else
             {
                 _timer?.Stop();
+                if(_timer != null)
+                {
+                    _timer.Tick -= TimerTick;
+                }
             }
         }
         

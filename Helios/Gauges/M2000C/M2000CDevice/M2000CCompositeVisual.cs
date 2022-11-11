@@ -326,10 +326,18 @@ namespace GadrocsWorkshop.Helios.M2000C
 
             return newNeedle;
         }
-
-        protected ToggleSwitch AddToggleSwitch(string name, Point posn, Size size, ToggleSwitchPosition defaultPosition, 
-            string positionOneImage, string positionTwoImage, ToggleSwitchType defaultType, string interfaceDeviceName, string interfaceElementName, 
-            bool fromCenter, NonClickableZone[] nonClickableZones = null, bool horizontal = false, bool horizontalRender = false)
+        protected ToggleSwitch AddToggleSwitch(string name, Point posn, Size size, ToggleSwitchPosition defaultPosition,
+            string positionOneImage, string positionTwoImage, ToggleSwitchType defaultType, string interfaceDeviceName, string interfaceElementName,
+            bool fromCenter, NonClickableZone[] nonClickableZones = null, bool horizontal = false, bool horizontalRender = false, LinearClickType clickType = LinearClickType.Touch)
+        {
+            return AddToggleSwitch(name, posn, size, defaultPosition,
+            positionOneImage, positionTwoImage, "", "", defaultType, interfaceDeviceName, interfaceElementName,
+             fromCenter, nonClickableZones, horizontal, horizontalRender, false, "", clickType);
+        }
+            protected ToggleSwitch AddToggleSwitch(string name, Point posn, Size size, ToggleSwitchPosition defaultPosition, 
+            string positionOneImage, string positionTwoImage,
+            string positionOneIndicatorImage, string positionTwoIndicatorImage, ToggleSwitchType defaultType, string interfaceDeviceName, string interfaceElementName, 
+            bool fromCenter, NonClickableZone[] nonClickableZones = null, bool horizontal = false, bool horizontalRender = false, bool indicator = false, string interfaceElementNameIndicator = "", LinearClickType clickType = LinearClickType.Touch)
         {
             if (fromCenter)
                 posn = FromCenter(posn, size);
@@ -338,13 +346,19 @@ namespace GadrocsWorkshop.Helios.M2000C
             ToggleSwitch newSwitch = new ToggleSwitch();
             newSwitch.Name = componentName;
             newSwitch.SwitchType = defaultType;
-            newSwitch.ClickType = LinearClickType.Touch;
+            newSwitch.ClickType = clickType;
             newSwitch.DefaultPosition = defaultPosition;
             newSwitch.PositionOneImage = positionOneImage;
             newSwitch.PositionTwoImage = positionTwoImage;
             newSwitch.Width = size.Width;
             newSwitch.Height = size.Height;
+            newSwitch.HasIndicator = indicator;
             newSwitch.NonClickableZones = nonClickableZones;
+            if (indicator)
+            {
+                newSwitch.PositionOneIndicatorOnImage = positionOneIndicatorImage;
+                newSwitch.PositionTwoIndicatorOnImage = positionTwoIndicatorImage;
+            }
             if (horizontal)
             {
                 newSwitch.Orientation = ToggleSwitchOrientation.Horizontal;
@@ -369,6 +383,8 @@ namespace GadrocsWorkshop.Helios.M2000C
                 AddTrigger(trigger, componentName);
             }
             AddAction(newSwitch.Actions["set.position"], componentName);
+            
+            if(indicator) AddAction(newSwitch.Actions["set.indicator"], componentName);
 
             AddDefaultOutputBinding(
                 childName: componentName,
@@ -380,6 +396,13 @@ namespace GadrocsWorkshop.Helios.M2000C
                 interfaceTriggerName: interfaceDeviceName + "." + interfaceElementName + ".changed",
                 deviceActionName: "set.position");
 
+            if (indicator)
+            {
+                AddDefaultInputBinding(
+                    childName: componentName,
+                    interfaceTriggerName: interfaceDeviceName + "." + interfaceElementNameIndicator + ".changed",
+                    deviceActionName: "set.indicator");
+            }
             return newSwitch;
         }
 

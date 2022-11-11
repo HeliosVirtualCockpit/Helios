@@ -54,16 +54,14 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             //Sixth row
             AddIndicator("nose-gear", new Point(242, row6), new Size(7, 17));
 
-            AddSwitch("Gun Arming Switch", "{M2000C}/Images/LGPanel/gun-arming-guard-", new Point(146, 173), new Size(47, 63), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
-            ToggleSwitch fbwgSwitch = AddSwitch("Fly by Wire Gain Mode Switch", "{M2000C}/Images/Switches/black-circle-", new Point(163, 257), new Size(25, 70), ToggleSwitchPosition.One, ToggleSwitchType.OnOn);
-            AddSwitch("Fly by Wire G Limiter Switch", "{M2000C}/Images/Switches/black-circle-", new Point(241, 255), new Size(25, 70), ToggleSwitchPosition.One, ToggleSwitchType.OnOn);
+            AddSwitch("Gun Arm/Safe Switch", "{M2000C}/Images/LGPanel/gun-arming-guard-", new Point(146, 173), new Size(47, 63), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn,false,false);
+            ToggleSwitch fbwgSwitch = AddSwitch("Fly by Wire Gain Mode Switch", "{M2000C}/Images/Switches/black-circle-", new Point(163, 257), new Size(25, 70), ToggleSwitchPosition.One, ToggleSwitchType.OnOn, false, true);
+            fbwgSwitch.ClickType = LinearClickType.Touch;
+            AddGuard("FBW Gain Mode Switch Cover", "fbwg-guard-", new Point(152, 242), new Size(43, 90), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn,
+                new NonClickableZone[] { new NonClickableZone(new Rect(0, 0, 43, 75), ToggleSwitchPosition.One, fbwgSwitch, ToggleSwitchPosition.One) },
+                false, false,true);
+            AddSwitch("Fly by Wire G Limiter Switch", "{M2000C}/Images/Switches/black-circle-", new Point(241, 255), new Size(25, 70), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
             AddSwitch("Landing Gear Lever", "{M2000C}/Images/LGPanel/landing-gear-", new Point(70, 140), new Size(50, 170), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
-
-            /*            AddGuard("Fly By Wire Gain Switch Guard", "fbwg-guard-", new Point(152, 242), new Size(43, 90), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
-                            new NonClickableZone[] { new NonClickableZone(new Rect(0, 0, 43, 70), ToggleSwitchPosition.Two, fbwgSwitch, ToggleSwitchPosition.One) },
-                            false, false);
-            */
-            
             AddRotarySwitch("Emergency Landing Gear Lever", new NonClickableZone[] {
                     new NonClickableZone(new Rect(123, 81, 37, 70), true, emergencyJettisonButton)});
         }
@@ -106,9 +104,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 withText: false); //added in Composite Visual as an optional value with a default value set to true
         }
 
-        private ToggleSwitch AddSwitch(string name, string imagePrefix, Point posn, Size size, ToggleSwitchPosition defaultPosition, ToggleSwitchType defaultType, bool horizontal = false)
+        private ToggleSwitch AddSwitch(string name, string imagePrefix, Point posn, Size size, ToggleSwitchPosition defaultPosition, ToggleSwitchType defaultType, bool horizontal = false, bool verticalReversed = false)
         {
-            return AddToggleSwitch(name: name,
+            ToggleSwitch togSwitch = AddToggleSwitch(name: name,
                 posn: posn,
                 size: size,
                 defaultPosition: defaultPosition,
@@ -119,17 +117,20 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 interfaceElementName: name,
                 horizontal: horizontal,
                 fromCenter: false);
-         }
+            togSwitch.Orientation = verticalReversed ? ToggleSwitchOrientation.VerticalReversed : ToggleSwitchOrientation.Vertical;
+            togSwitch.ClickType = LinearClickType.Swipe;
+            return togSwitch;
+        }
 
         private void AddGuard(string name, string imagePrefix, Point posn, Size size, ToggleSwitchPosition defaultPosition,
-            ToggleSwitchType defaultType, NonClickableZone[] nonClickableZones, bool horizontal = true, bool horizontalRender = true)
+            ToggleSwitchType defaultType, NonClickableZone[] nonClickableZones, bool horizontal = true, bool horizontalRender = true, bool verticalReversed = false)
         {
-            AddToggleSwitch(name: name,
+            ToggleSwitch cover = AddToggleSwitch(name: name,
                 posn: posn,
                 size: size,
                 defaultPosition: defaultPosition,
-                positionOneImage: "{M2000C}/Images/LGPanel/" + imagePrefix + "down.png",
-                positionTwoImage: "{M2000C}/Images/LGPanel/" + imagePrefix + "up.png",
+                positionOneImage: "{M2000C}/Images/LGPanel/" + imagePrefix + "up.png",
+                positionTwoImage: "{M2000C}/Images/LGPanel/" + imagePrefix + "down.png",
                 defaultType: defaultType,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,
@@ -137,6 +138,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 horizontalRender: horizontalRender,
                 nonClickableZones: nonClickableZones,
                 fromCenter: false);
+            cover.Orientation = verticalReversed ? ToggleSwitchOrientation.VerticalReversed : ToggleSwitchOrientation.Vertical;
+            cover.ClickType = LinearClickType.Swipe;
         }
 
         private PushButton AddPushButton(string name)

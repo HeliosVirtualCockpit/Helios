@@ -1,6 +1,5 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2021 Helios Contributors
-//
+//    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -18,17 +17,19 @@ namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Windows.Controls;
-	using System.Windows;
 
     /// <summary>
-    /// Panel behavior for pass through interaction with underlying controls
+    /// Interaction logic for ImageAppearanceEditor.xaml
     /// </summary>
-    [HeliosPropertyEditor("Helios.Base.Indicator", "Behavior")]
-    [HeliosPropertyEditor("Helios.Base.ImageTranslucent", "Behavior")]
-
-    public partial class ImageTranslucentBehaviorEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("HELIOS.M2000C.LANDING_GEAR_PANEL_V2", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.UHF_RADIO", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.VHF_RADIO", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.IFF_MODE_SETTING", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.RADAR_IFF_MODE_PANEL", "Appearance")]    
+    [HeliosPropertyEditor("HELIOS.M2000C.LOW_ALTITUDE_SETTING", "Appearance")]
+    public partial class ImageAssetLocationAppearanceEditor : HeliosPropertyEditor
     {
-        public ImageTranslucentBehaviorEditor()
+        public ImageAssetLocationAppearanceEditor()
         {
             InitializeComponent();
         }

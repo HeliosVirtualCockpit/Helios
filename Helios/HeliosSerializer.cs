@@ -121,9 +121,30 @@ namespace GadrocsWorkshop.Helios
             xmlWriter.WriteAttributeString("SnapTarget", boolConverter.ConvertToInvariantString(control.IsSnapTarget));
             xmlWriter.WriteAttributeString("Locked", boolConverter.ConvertToInvariantString(control.IsLocked));
             control.WriteXml(xmlWriter);
+            bool childrenAsComment = (control.PersistChildrenAsComment || GlobalOptions.HasPersistChildrenAsComment);
             if (control.PersistChildren)
             {
                 SerializeControls(control.Children, xmlWriter);
+            }
+            else if (childrenAsComment && control.Children.Count > 0)
+            {
+                    control.InsideCommentBlock = control.Parent.InsideCommentBlock;
+                    if (!control.InsideCommentBlock)
+                    {
+                        xmlWriter.WriteStartElement("Children");
+                        xmlWriter.WriteEndElement();
+                        xmlWriter.WriteComment($"Internal Child Controls for CompositeVisual {control.Name}");
+                        xmlWriter.WriteRaw($"{Environment.NewLine}<!-- {Environment.NewLine}");
+                        control.InsideCommentBlock = true;
+                    }
+
+                    SerializeControls(control.Children, xmlWriter);
+
+                    if (!control.Parent.InsideCommentBlock)
+                    {
+                        xmlWriter.WriteRaw($"{Environment.NewLine} -->{Environment.NewLine}");
+                        control.InsideCommentBlock = false;
+                    }
             }
             else
             {
@@ -172,12 +193,44 @@ namespace GadrocsWorkshop.Helios
                     xmlReader.ReadStartElement("Control");
                     control.ReadXml(xmlReader);
                     foreach (string progress in DeserializeControls(control.Children, xmlReader))
-                    {
+                    {       
                         yield return progress;
                     };
                     xmlReader.ReadEndElement();
                 }
                 control.Name = name;
+                if (controls.ContainsKey(name))
+                {
+                    /// ToDo:  Complete PersistChildren implimentation for Composite Visual.
+                    /// 
+                    /// * * * Currently no composite visual has PersistChidren or should have PersistChidren specified.
+                    /// 
+                    /// This code is for the situation where a composite visual has been saved with
+                    /// PersistChidren so the controls added by the composite visual reappear in the 
+                    /// profile.  This child controls take precedence over the composite visual
+                    /// control which allows the ability to override control positions and images.
+                    /// There is no user interface mechanism to override the settings.
+                    foreach (HeliosBinding bind in controls[name].InputBindings)
+                    {
+                        control.InputBindings.Add(bind);
+                    }
+                    foreach (HeliosBinding bind in controls[name].OutputBindings)
+                    {
+                        control.OutputBindings.Add(bind);
+                    }
+                    if (controls[name] is CompositeVisual)
+                    {
+                        foreach (DefaultInputBinding bind in (controls[name] as CompositeVisual)?.DefaultInputBindings)
+                        {
+                            (control as CompositeVisual)?.DefaultInputBindings.Add(bind);
+                        }
+                        foreach (DefaultOutputBinding bind in (controls[name] as CompositeVisual)?.DefaultOutputBindings)
+                        {
+                            (control as CompositeVisual)?.DefaultOutputBindings.Add(bind);
+                        }
+                    }
+                    controls.RemoveKey(name);
+                }
                 controls.Add(control);
                 control.ResumeRendering();
                 yield return $"loaded {control.TypeIdentifier}";

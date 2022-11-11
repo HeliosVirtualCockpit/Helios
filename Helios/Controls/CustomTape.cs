@@ -24,8 +24,8 @@ namespace GadrocsWorkshop.Helios.Controls
 
 	[HeliosControl("Helios.Base.CustomTape", "Custom Tape", "Custom Controls", typeof(Gauges.GaugeRenderer))]
 
-    public class CustomTape : Gauges.BaseGauge
-	{
+    public class CustomTape : Gauges.BaseGauge, Capabilities.IConfigurableImageLocation
+    {
         private HeliosValue _offFlag;
         private HeliosValue _tapeOffset;
 		private HeliosValue _tapeHOffset;
@@ -213,8 +213,20 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            OffFlagImage = !string.IsNullOrEmpty(OffFlagImage) ? OffFlagImage : string.IsNullOrEmpty(oldName) ? newName + OffFlagImage : OffFlagImage.Replace(oldName, newName);
+            BackgroundImage = !string.IsNullOrEmpty(BackgroundImage) ? BackgroundImage : string.IsNullOrEmpty(oldName) ? newName + BackgroundImage : BackgroundImage.Replace(oldName, newName);
+            ForegroundImage = !string.IsNullOrEmpty(ForegroundImage) ? ForegroundImage : string.IsNullOrEmpty(oldName) ? newName + ForegroundImage : ForegroundImage.Replace(oldName, newName);
+            TapeImage = !string.IsNullOrEmpty(TapeImage) ? TapeImage : string.IsNullOrEmpty(oldName) ? newName + TapeImage : TapeImage.Replace(oldName, newName);
+        }
 
-		public double Tape_PosX
+        public double Tape_PosX
 		{
 			get
 			{
