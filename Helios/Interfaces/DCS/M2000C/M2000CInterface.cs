@@ -874,15 +874,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion
             #region  HSI
             AddFunction(new Axis(this, NAVINST, "3340", "340", 0.015d, 0d, 1d, "HSI Panel", "VAD Selector"));    // elements["PTN_340"] = default_axis_cycle(_("HSI VAD Selector"),devices.NAVINST, device_commands.Button_340, 340)
-            AddFunction(new Switch(this, NAVINST, "341", new SwitchPosition[] {//need to be "341" but in that case, the needle doesn’t work anymore from DCS. 
-                new SwitchPosition("0.0", "Cv/NAV", "3341"),                    //So better that way because the only problem is that doesn’t work from DCS to Helios
-                new SwitchPosition("0.1", "NAV", "3341"),
-                new SwitchPosition("0.2", "TAC", "3341"),
-                new SwitchPosition("0.3", "VAD", "3341"),
-                new SwitchPosition("0.4", "rho", "3341"),
-                new SwitchPosition("0.5", "theta", "3341"),
-                new SwitchPosition("0.6", "TEL", "3341")},
-                "HSI Panel", "Mode Selector", "%0.1f"));
+            AddFunction(new Switch(this, NAVINST, "341", CreateSwitchPositions(7, 0.0, 0.1, "3341", new string[] {"Cv/NAV", "NAV", "TAC", "VAD", "rho", "theta", "TEL"}),"HSI Panel", "Mode Selector", "%0.1f"));
             AddFunction(new ScaledNetworkValue(this, "342", 1d, "HSI Panel", "Compass Rose", "Compass Rose.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "336", 1d, "HSI Panel", "Distance (Hundreds)", "Distance (Hundreds).", "0 - 9", BindingValueUnits.Numeric));
             AddFunction(new ScaledNetworkValue(this, "337", 1d, "HSI Panel", "Distance (Tens)", "Engine RPM (Tens).", "0 - 9", BindingValueUnits.Numeric));
@@ -898,25 +890,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             //AddFunction(new ScaledNetworkValue(this, "341", 1d, "HSI Panel", "Mode Needle", "Mode Needle.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));  /// Todo: work out what this code should be
             #endregion
             #region INS Panel
-            AddFunction(new Switch(this, PCN_NAV, "627", new SwitchPosition[] {
-                new SwitchPosition("0.0", "AR", "3627"),
-                new SwitchPosition("0.1", "VEI", "3627"),
-                new SwitchPosition("0.2", "CAL", "3627"),
-                new SwitchPosition("0.3", "TST", "3627"),
-                new SwitchPosition("0.4", "ALN", "3627"),
-                new SwitchPosition("0.5", "ALCM", "3627"),
-                new SwitchPosition("0.6", "NAV", "3627"),
-                new SwitchPosition("0.7", "SEC", "3627")
-                },
-                "INS Panel", "Mode Selector", "%0.1f"));
-            AddFunction(new Switch(this, PCN_NAV, "629", new SwitchPosition[] {
-                new SwitchPosition("0.0", "N", "3629"),
-                new SwitchPosition("0.1", "STS", "3629"),
-                new SwitchPosition("0.2", "DCI", "3629"),
-                new SwitchPosition("0.3", "CRV", "3629"),
-                new SwitchPosition("0.4", "MAIN", "3629"),
-                },
-                "INS Panel", "Operation Selector", "%0.1f"));
+            AddFunction(new Switch(this, PCN_NAV, "627", CreateSwitchPositions(8, 0.0, 0.1, "3627", new string[] { "AR", "VEI", "CAL", "TST", "ALN", "ALCM", "NAV", "SEC" }),"INS Panel", "Mode Selector", "%0.1f"));
+            AddFunction(new Switch(this, PCN_NAV, "629", CreateSwitchPositions(5, 0.0, 0.1, "3629", new string[] { "N", "STS", "DCI", "CRV", "MAIN" }), "INS Panel", "Operation Selector", "%0.1f"));
             #endregion
             #region Landing Gear Panel
             AddFunction(new FlagValue(this, "410", "Landing Gear Panel", "A", "A Warnlamp"));
@@ -956,33 +931,33 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new ScaledNetworkValue(this, "331", 3.7d, "AOA Panel", "AOA Needle", "Angle Of Attack Needle.", "0-7", BindingValueUnits.Numeric, 0.08d, "%.4f"));
             #endregion
             #region  PCA/PPA
-            AddFunction(new Switch(this, PCA_PPA, "463", new SwitchPosition[] {
+            AddFunction(new Switch(this, PCA, "463", new SwitchPosition[] {
                 new SwitchPosition("1.0", "SECU", "3463"),
                 new SwitchPosition("0.0", "ARMED", "3463") },
                 "PCA Panel", "Gun Arming Switch", "%0.1f"));
-            AddFunction(new Switch(this, PCA_PPA, "234", new SwitchPosition[] {
+            AddFunction(new Switch(this, PCA, "234", new SwitchPosition[] {
                 new SwitchPosition("1.0", "On", "3234"),
                 new SwitchPosition("0.0", "Off", "3234")},
                 "PCA Panel", "Master Arm Switch", "%0.1f"));
-            AddFunction(new Switch(this, PCA_PPA, "248", new SwitchPosition[] {
+            AddFunction(new Switch(this, PCA, "248", new SwitchPosition[] {
                 new SwitchPosition("1.0", "Open", "3248"),
                 new SwitchPosition("0.0", "Close", "3248")},
                 "PCA Panel", "Selective Jettison Switch Guard", "%0.1f"));
-            AddFunction(new Switch(this, PCA_PPA, "249", new SwitchPosition[] {
+            AddFunction(new Switch(this, PCA, "249", new SwitchPosition[] {
                 new SwitchPosition("1.0", "On", "3249"),
                 new SwitchPosition("0.0", "Off", "3249")},
                 "PCA Panel", "Selective Jettison Switch", "%0.1f"));
-            AddFunction(new PushButton(this, PCA_PPA, "3235", "235", "PCA Panel", "Targeting Mode Selection"));
-            AddFunction(new PushButton(this, PCA_PPA, "3237", "237", "PCA Panel", "Master Mode Selection"));
-            AddFunction(new PushButton(this, PCA_PPA, "3239", "239", "PCA Panel", "Approach Mode Selection"));
-            AddFunction(new PushButton(this, PCA_PPA, "3241", "241", "PCA Panel", "Fligt Plan Route Selection"));
-            AddFunction(new PushButton(this, PCA_PPA, "3243", "243", "PCA Panel", "INS Calibration"));
-            AddFunction(new PushButton(this, PCA_PPA, "3245", "245", "PCA Panel", "Gun Mode Selector"));
-            AddFunction(new PushButton(this, PCA_PPA, "3250", "250", "PCA Panel", "Weapon Store Selector 1"));
-            AddFunction(new PushButton(this, PCA_PPA, "3253", "253", "PCA Panel", "Weapon Store Selector 2"));
-            AddFunction(new PushButton(this, PCA_PPA, "3256", "256", "PCA Panel", "Weapon Store Selector 3"));
-            AddFunction(new PushButton(this, PCA_PPA, "3259", "259", "PCA Panel", "Weapon Store Selector 4"));
-            AddFunction(new PushButton(this, PCA_PPA, "3262", "262", "PCA Panel", "Weapon Store Selector 5"));
+            AddFunction(new PushButton(this, PCA, "3235", "235", "PCA Panel", "Targeting Mode Selection"));
+            AddFunction(new PushButton(this, PCA, "3237", "237", "PCA Panel", "Master Mode Selection"));
+            AddFunction(new PushButton(this, PCA, "3239", "239", "PCA Panel", "Approach Mode Selection"));
+            AddFunction(new PushButton(this, PCA, "3241", "241", "PCA Panel", "Fligt Plan Route Selection"));
+            AddFunction(new PushButton(this, PCA, "3243", "243", "PCA Panel", "INS Calibration"));
+            AddFunction(new PushButton(this, PCA, "3245", "245", "PCA Panel", "Gun Mode Selector"));
+            AddFunction(new PushButton(this, PCA, "3250", "250", "PCA Panel", "Weapon Store Selector 1"));
+            AddFunction(new PushButton(this, PCA, "3253", "253", "PCA Panel", "Weapon Store Selector 2"));
+            AddFunction(new PushButton(this, PCA, "3256", "256", "PCA Panel", "Weapon Store Selector 3"));
+            AddFunction(new PushButton(this, PCA, "3259", "259", "PCA Panel", "Weapon Store Selector 4"));
+            AddFunction(new PushButton(this, PCA, "3262", "262", "PCA Panel", "Weapon Store Selector 5"));
             AddFunction(new FlagValue(this, "236", "PCA Panel", "TMS S", "TMS S"));
             AddFunction(new FlagValue(this, "238", "PCA Panel", "MMS", "MMS"));
             AddFunction(new FlagValue(this, "240", "PCA Panel", "AMS", "AMS"));
@@ -1002,36 +977,40 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "247", "PCA Panel", "KL2", "KL2"));
             AddFunction(new Text(this, "2060", "PCA Panel", "PCA Upper Display", "Display Upper Line"));
             AddFunction(new Text(this, "2061", "PCA Panel", "PCA Lower Display", "Display Lower Line"));
+            #endregion
 
-            AddFunction(new PushButton(this, PCA_PPA, "3266", "266", "PPA Panel", "S530 Missile Enabler Button"));
-            AddFunction(new PushButton(this, PCA_PPA, "3269", "269", "PPA Panel", "Missile Fire Mode Selector"));
-            AddFunction(new PushButton(this, PCA_PPA, "3272", "272", "PPA Panel", "Magic II Missile Enabler Button")); 
-            AddFunction(new PushButton(this, PCA_PPA, "3279", "279", "PPA Panel", "Guns/Rockets/Missiles Firing Mode Selector"));
-            AddFunction(new Switch(this, PCA_PPA, "265", new SwitchPosition[] {
+            #region PPA Panel
+            AddFunction(new PushButton(this, PPA, "3266", "266", "PPA Panel", "S530 Missile Enabler Button"));
+            AddFunction(new PushButton(this, PPA, "3269", "269", "PPA Panel", "Missile Fire Mode Selector"));
+            AddFunction(new PushButton(this, PPA, "3272", "272", "PPA Panel", "Magic II Missile Enabler Button")); 
+            AddFunction(new PushButton(this, PPA, "3279", "279", "PPA Panel", "Guns/Rockets/Missiles Firing Mode Selector"));
+            AddFunction(new Switch(this, PPA, "265", new SwitchPosition[] {
                 new SwitchPosition("1.0", "Droite","3265"),
                 new SwitchPosition("0.0", "Auto","3265"),
                 new SwitchPosition("-1.0", "Gauche","3265")},
                 "PPA Panel", "Missile Selector Switch", "%0.1f"));
-            AddFunction(new Switch(this, PCA_PPA, "275", new SwitchPosition[] {
+            AddFunction(new Switch(this, PPA, "275", new SwitchPosition[] {
                 new SwitchPosition("1.0", "Pres","3275"),
                 new SwitchPosition("0.0", "Neutral","3275"),
                 new SwitchPosition("-1.0", "Test","3275")},
                 "PPA Panel", "Test Switch", "%0.1f"));
-            AddFunction(new Switch(this, PCA_PPA, "276", new SwitchPosition[] {
+            AddFunction(new Switch(this, PPA, "276", new SwitchPosition[] {
                 new SwitchPosition("0.0", "INST.","3276"),
                 new SwitchPosition("0.5", "RET.","3276"),
                 new SwitchPosition("1.0", "INERT.","3276")},
                 "PPA Panel", "Bomb Fuse Selector", "%0.1f")); 
-            AddFunction(new Switch(this, PCA_PPA, "277", new SwitchPosition[] {
+            AddFunction(new Switch(this, PPA, "277", new SwitchPosition[] {
                 new SwitchPosition("1.0", "+","3277"),
                 new SwitchPosition("0.0", "Neutral","3277"),
                 new SwitchPosition("-1.0", "-","3277")},
                 "PPA Panel", "Release Quantity Selector", "%0.1f"));
-            AddFunction(new Switch(this, PCA_PPA, "278", new SwitchPosition[] {
+            AddFunction(new Switch(this, PPA, "278", new SwitchPosition[] {
                 new SwitchPosition("1.0", "+","3278"),
                 new SwitchPosition("0.0", "Neutral","3278"),
                 new SwitchPosition("-1.0", "-","3278")},
                 "PPA Panel", "Bomb Drop Interval", "%0.1f"));
+            AddFunction(new Text(this, "2065", "PPA Panel", "PPA Display Quantity", "Display Line for the PPA Quantity"));
+            AddFunction(new Text(this, "2066", "PPA Panel", "PPA Display Interval", "Display Line for the PPA Interval"));
             AddFunction(new FlagValue(this, "267", "PPA Panel", "S530D P", "S530D P"));
             AddFunction(new FlagValue(this, "268", "PPA Panel", "S530D MIS", "S530D MIS"));
             AddFunction(new FlagValue(this, "270", "PPA Panel", "Missile AUT Mode", "Missile AUT Mode"));
@@ -1040,8 +1019,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "274", "PPA Panel", "MAGIC MAG", "MAGIC MAG"));
             AddFunction(new FlagValue(this, "280", "PPA Panel", "TOT Firing Mode", "TOT Firing Mode"));
             AddFunction(new FlagValue(this, "281", "PPA Panel", "PAR Firing Mode", "PAR Firing Mode"));
-            AddFunction(new Text(this, "2065", "PPA Panel", "PPA Display Quantity", "Display Line for the PPA Quantity"));
-            AddFunction(new Text(this, "2066", "PPA Panel", "PPA Display Interval", "Display Line for the PPA Interval"));
             #endregion
             #region  PCN
             AddFunction(new FlagValue(this, "564", "PCN Panel", "PRET", "PRET"));
@@ -1312,13 +1289,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion
             #region  EW PANEL
             AddFunction(new Axis(this, SYSLIGHTS, "3228", "228", 0.15d, 0d, 1d, "EW PANEL", "RWR Light Brightnes Control"));
-            AddFunction(new Switch(this, RWR, "605", CreateSwitchPositions(3, 0.0, 0.5, "3605"), "EW PANEL", "EW Mode Selector Switch", "%0.1f"));
-            AddFunction(new Switch(this, RWR, "606", CreateSwitchPositions(3, 0.0, 0.5, "3606"), "EW PANEL", "BR Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, RWR, "607", CreateSwitchPositions(3, 0.0, 0.5, "3607"), "EW PANEL", "RWR Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, DDM_IND, "608", CreateSwitchPositions(3, 0.0, 0.5, "3608"), "EW PANEL", "D2M Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, RWR, "609", CreateSwitchPositions(3, 0.0, 0.5, "3609"), "EW PANEL", "Decoy Release Mode Switch", "%0.1f"));
+            AddFunction(new Switch(this, PCCM, "605", CreateSwitchPositions(3, 1.0, -1.0, "3605"), "EW PANEL", "EW Mode Selector Switch", "%0.1f"));
+            AddFunction(new Switch(this, PCCM, "606", CreateSwitchPositions(3, 0.0, 0.5, "3606"), "EW PANEL", "BR Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, PCCM, "607", CreateSwitchPositions(3, 0.0, 0.5, "3607"), "EW PANEL", "RWR Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, PCCM, "608", CreateSwitchPositions(3, 0.0, 0.5, "3608"), "EW PANEL", "D2M Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, PCCM, "609", CreateSwitchPositions(3, 0.0, 0.5, "3609"), "EW PANEL", "Decoy Release Mode Switch", "%0.1f"));
             AddFunction(new Switch(this, RWR, "610", CreateSwitchPositions(11, 0.0, 0.1, "3610"), "EW PANEL", "Decoy Release Program Knob", "%0.1f"));
-            #endregion  
+            AddFunction(new PushButton(this,SPIRALE,"3990","990","EW PANEL", "ECM Box Clear Button"));
+            #endregion
             #region  Panel Lights
             AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3449", "449", "1.0", "On", "0.0", "Off", "Panel Lights", "Police Lights Switch", "%0.1f"));
             AddFunction(new Switch(this, SYSLIGHTS, "450", CreateSwitchPositions(3, 1.0, -0.5, "3450", new string[] { "Att", "Roul", "A" }), "Panel Lights", "Landing Lights Switch", "%0.1f"));
