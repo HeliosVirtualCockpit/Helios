@@ -41,14 +41,21 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.Fuel
 		private const string _fuelDrumOffImage = "{HeliosFalcon}/Gauges/Common/drum_tape_off.xaml";
 		private const string _fuelDrumDimImage = "{HeliosFalcon}/Gauges/Common/drum_tape_dim.xaml";
 		private const string _fuelDrumBrtImage = "{HeliosFalcon}/Gauges/Common/drum_tape_brt.xaml";
-		private const string _needleAftOffImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_aft_off.xaml";
-		private const string _needleAftDimImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_aft_dim.xaml";
-		private const string _needleAftBrtImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_aft_brt.xaml";
-		private const string _needleFwdOffImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_fwd_off.xaml";
-		private const string _needleFwdDimImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_fwd_dim.xaml";
-		private const string _needleFwdBrtImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_fwd_brt.xaml";
+		private const string _needleV1AftOffImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v1_aft_off.xaml";
+		private const string _needleV1AftDimImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v1_aft_dim.xaml";
+		private const string _needleV1AftBrtImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v1_aft_brt.xaml";
+		private const string _needleV1FwdOffImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v1_fwd_off.xaml";
+		private const string _needleV1FwdDimImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v1_fwd_dim.xaml";
+		private const string _needleV1FwdBrtImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v1_fwd_brt.xaml";
+		private const string _needleV2AftOffImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v2_aft_off.xaml";
+		private const string _needleV2AftDimImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v2_aft_dim.xaml";
+		private const string _needleV2AftBrtImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v2_aft_brt.xaml";
+		private const string _needleV2FwdOffImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v2_fwd_off.xaml";
+		private const string _needleV2FwdDimImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v2_fwd_dim.xaml";
+		private const string _needleV2FwdBrtImage = "{HeliosFalcon}/Gauges/Fuel/fuel_needle_v2_fwd_brt.xaml";
 
-		private double _backlight;
+		private double _backlight = 1;
+		private string _aircraftName = "";
 		private bool _inFlightLastValue = true;
 
 		public Fuel()
@@ -73,10 +80,10 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.Fuel
 
 			_needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 42000d, 252d);
 
-			_needleAFT = new GaugeNeedle(_needleAftOffImage, new Point(150d, 150d), new Size(120d, 200d), new Point(60d, 150d), 235d);
+			_needleAFT = new GaugeNeedle(_needleV2AftOffImage, new Point(150d, 150d), new Size(120d, 200d), new Point(60d, 150d), 235d);
 			Components.Add(_needleAFT);
-			
-			_needleFWD = new GaugeNeedle(_needleFwdOffImage, new Point(150d, 150d), new Size(120d, 200d), new Point(60d, 150d), 235d);
+
+			_needleFWD = new GaugeNeedle(_needleV2FwdOffImage, new Point(150d, 150d), new Size(120d, 200d), new Point(60d, 150d), 235d);
 			Components.Add(_needleFWD);
 		}
 
@@ -142,6 +149,9 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.Fuel
 
 		private void ProcessBindingValues()
 		{
+			BindingValue aircraftName = GetValue("Runtime", "Aircraft Name");
+			AircraftName = aircraftName.StringValue;
+
 			BindingValue backlight = GetValue("Lighting", "instrument backlight");
 			Backlight = backlight.DoubleValue;
 
@@ -165,38 +175,41 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.Fuel
 
 		private void ProcessBacklightValues()
 		{
+			bool isVersionOneGauge = AircraftName == "F-16DM-40" || AircraftName == "F-16DM-52";
+
 			if (Backlight == 1)
 			{
 				_fuelDrum.Image = _fuelDrumDimImage;
 				_faceplate.Image = _faceplateDimImage;
-				_needleAFT.Image = _needleAftDimImage;
-				_needleFWD.Image = _needleFwdDimImage;
+				_needleAFT.Image = isVersionOneGauge ? _needleV1AftDimImage : _needleV2AftDimImage;
+				_needleFWD.Image = isVersionOneGauge ? _needleV1FwdDimImage : _needleV2FwdDimImage;
 			}
 			else if (Backlight == 2)
 			{
 				_fuelDrum.Image = _fuelDrumBrtImage;
 				_faceplate.Image = _faceplateBrtImage;
-				_needleAFT.Image = _needleAftBrtImage;
-				_needleFWD.Image = _needleFwdBrtImage;
+				_needleAFT.Image = isVersionOneGauge ? _needleV1AftBrtImage : _needleV2AftBrtImage; ;
+				_needleFWD.Image = isVersionOneGauge ? _needleV1FwdBrtImage : _needleV2FwdBrtImage;
 			}
 			else
 			{
 				_fuelDrum.Image = _fuelDrumOffImage;
 				_faceplate.Image = _faceplateOffImage;
-				_needleAFT.Image = _needleAftOffImage;
-				_needleFWD.Image = _needleFwdOffImage;
+				_needleAFT.Image = isVersionOneGauge ? _needleV1AftOffImage : _needleV2AftOffImage;
+				_needleFWD.Image = isVersionOneGauge ? _needleV1FwdOffImage : _needleV2FwdOffImage;
 			}
 
 			Refresh();
 		}
 
-		public override void Reset() 
+		public override void Reset()
 		{
 			ResetFuel();
 		}
 
 		private void ResetFuel()
 		{
+			AircraftName = "";
 			Backlight = 0d;
 			FuelAFT = 0d;
 			FuelFWD = 0d;
@@ -219,12 +232,23 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.Fuel
 		private double FuelFWD { get; set; }
 		private double FuelTotal { get; set; }
 
+		private string AircraftName
+		{
+			get => _aircraftName;
+			set
+			{
+				string oldValue = _aircraftName;
+				_aircraftName = value;
+				if (!_aircraftName.Equals(oldValue))
+				{
+					ProcessBacklightValues();
+				}
+			}
+		}
+
 		private double Backlight
 		{
-			get
-			{
-				return _backlight;
-			}
+			get => _backlight;
 			set
 			{
 				double oldValue = _backlight;

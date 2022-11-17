@@ -349,27 +349,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Fuel\fuel_needle_aft_brt.xaml">
+    <Resource Include="Gauges\Fuel\fuel_needle_v1_aft_brt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Fuel\fuel_needle_aft_dim.xaml">
+    <Resource Include="Gauges\Fuel\fuel_needle_v1_aft_dim.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Fuel\fuel_needle_aft_off.xaml">
+    <Resource Include="Gauges\Fuel\fuel_needle_v1_aft_off.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Fuel\fuel_needle_fwd_brt.xaml">
+    <Resource Include="Gauges\Fuel\fuel_needle_v2_aft_brt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Fuel\fuel_needle_fwd_dim.xaml">
+    <Resource Include="Gauges\Fuel\fuel_needle_v2_aft_dim.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Fuel\fuel_needle_fwd_off.xaml">
+    <Resource Include="Gauges\Fuel\fuel_needle_v2_aft_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_v1_fwd_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_v1_fwd_off.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_v1_fwd_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_v2_fwd_brt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_v2_fwd_dim.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Fuel\fuel_needle_v2_fwd_off.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
