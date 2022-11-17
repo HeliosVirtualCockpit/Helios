@@ -175,28 +175,37 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.Fuel
 
 		private void ProcessBacklightValues()
 		{
-			bool isVersionOneGauge = AircraftName == "F-16DM-40" || AircraftName == "F-16DM-52";
+			bool VersionOneGauge = false;
+
+			string AN8 = AircraftName.Substring(0, Math.Min(AircraftName.Length, 8));
+			string AN9 = AircraftName.Substring(0, Math.Min(AircraftName.Length, 9));
+
+			if (AN8 == "F-16B-15" || AN8 == "F-16D-52" || AN8 == "F-16I-52" || AN9 == "F-16DM-40" ||
+				AN9 == "F-16DM-52" || AN9 == "F-16DG-30" || AN9 == "F-16DG-40")
+			{
+				VersionOneGauge = true;
+			}
 
 			if (Backlight == 1)
 			{
 				_fuelDrum.Image = _fuelDrumDimImage;
 				_faceplate.Image = _faceplateDimImage;
-				_needleAFT.Image = isVersionOneGauge ? _needleV1AftDimImage : _needleV2AftDimImage;
-				_needleFWD.Image = isVersionOneGauge ? _needleV1FwdDimImage : _needleV2FwdDimImage;
+				_needleAFT.Image = VersionOneGauge ? _needleV1AftDimImage : _needleV2AftDimImage;
+				_needleFWD.Image = VersionOneGauge ? _needleV1FwdDimImage : _needleV2FwdDimImage;
 			}
 			else if (Backlight == 2)
 			{
 				_fuelDrum.Image = _fuelDrumBrtImage;
 				_faceplate.Image = _faceplateBrtImage;
-				_needleAFT.Image = isVersionOneGauge ? _needleV1AftBrtImage : _needleV2AftBrtImage; ;
-				_needleFWD.Image = isVersionOneGauge ? _needleV1FwdBrtImage : _needleV2FwdBrtImage;
+				_needleAFT.Image = VersionOneGauge ? _needleV1AftBrtImage : _needleV2AftBrtImage; ;
+				_needleFWD.Image = VersionOneGauge ? _needleV1FwdBrtImage : _needleV2FwdBrtImage;
 			}
 			else
 			{
 				_fuelDrum.Image = _fuelDrumOffImage;
 				_faceplate.Image = _faceplateOffImage;
-				_needleAFT.Image = isVersionOneGauge ? _needleV1AftOffImage : _needleV2AftOffImage;
-				_needleFWD.Image = isVersionOneGauge ? _needleV1FwdOffImage : _needleV2FwdOffImage;
+				_needleAFT.Image = VersionOneGauge ? _needleV1AftOffImage : _needleV2AftOffImage;
+				_needleFWD.Image = VersionOneGauge ? _needleV1FwdOffImage : _needleV2FwdOffImage;
 			}
 
 			Refresh();

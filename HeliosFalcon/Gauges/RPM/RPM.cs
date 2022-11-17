@@ -43,8 +43,10 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.RPM
 		private const string _needleDimImage = "{HeliosFalcon}/Gauges/Common/needle_long_dim.xaml";
 		private const string _needleBrtImage = "{HeliosFalcon}/Gauges/Common/needle_long_brt.xaml";
 
+		private int _gaugeType = 0;
 		private double _backlight;
-		private double _gaugeType;
+		private double _gaugeTypeSetting = 2d;
+		private string _aircraftName = "";
 		private bool _inFlightLastValue = true;
 
 		public RPM()
@@ -77,7 +79,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.RPM
 			_needle.Rotation = _needleCalibrationGE.Interpolate(0);
 			Components.Add(_needle);
 
-			_setGaugeType = new HeliosValue(this, new BindingValue(0d), "", "rpm gauge type", "Sets the type of RPM gauge.", "0 = GE, 1 = PW", BindingValueUnits.Numeric);
+			_setGaugeType = new HeliosValue(this, new BindingValue(0d), "", "rpm gauge type", "Sets the type of RPM gauge.", "0 = GE, 1 = PW, 2 = Auto (Default Value)", BindingValueUnits.Numeric);
 			_setGaugeType.SetValue(new BindingValue(0), true);
 			_setGaugeType.Execute += new HeliosActionHandler(SetGaugeType_Execute);
 			Actions.Add(_setGaugeType);
@@ -145,6 +147,9 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.RPM
 
 		private void ProcessBindingValues()
 		{
+			BindingValue aircraftName = GetValue("Runtime", "Aircraft Name");
+			AircraftName = aircraftName.StringValue;
+
 			BindingValue backlight = GetValue("Lighting", "instrument backlight");
 			Backlight = backlight.DoubleValue;
 
@@ -154,7 +159,40 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.RPM
 
 		private void SetGaugeType_Execute(object action, HeliosActionEventArgs e)
 		{
-			GaugeType = e.Value.DoubleValue;
+			GaugeTypeSetting = e.Value.DoubleValue;
+		}
+
+		private void SetGaugeType()
+		{
+			if (GaugeTypeSetting == 0d)
+			{
+				GaugeType = 0;
+			}
+			else if (GaugeTypeSetting == 1d)
+			{
+				GaugeType = 1;
+			}
+			else
+			{
+				string AN6 = AircraftName.Substring(0, Math.Min(AircraftName.Length, 6));
+				string AN8 = AircraftName.Substring(0, Math.Min(AircraftName.Length, 8));
+				string AN9 = AircraftName.Substring(0, Math.Min(AircraftName.Length, 9));
+
+				if (AN8 == "F-16C-30" || AN8 == "F-16C-40" || AN8 == "F-16C-50" || AN9 == "F-16CM-40" ||
+					AN9 == "F-16CM-50" || AN9 == "F-16DM-40" || AN9 == "F-16DG-30" || AN9 == "F-16DG-40")
+				{
+					GaugeType = 0;
+				}
+				else if (AN6 == "F-16AM" || AN8 == "F-16A-15" || AN8 == "F-16B-15" || AN8 == "F-16C-25" || AN8 == "F-16C-32" ||
+                         AN8 == "F-16C-52" || AN8 == "F-16D-52" || AN8 == "F-16I-52" || AN9 == "F-16CM-42" || AN9 == "F-16CM-52" || AN9 == "F-16DM-52")
+				{
+					GaugeType = 1;
+				}
+				else
+				{
+					GaugeType = 0;
+				}
+			}
 		}
 
 		private void ProcessRPMValues()
@@ -231,10 +269,14 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.RPM
 
 		private void ResetRPM()
 		{
-			Backlight = 0d;
+			_gaugeType = 0;
+			_backlight = 0d;
+			_gaugeTypeSetting = 2d;
+			_aircraftName = "";
 			RPMPercent = 0d;
 
 			ProcessRPMValues();
+			SetGaugeType();
 			ProcessGaugeValues();
 		}
 
@@ -249,12 +291,23 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.RPM
 
 		private double RPMPercent { get; set; }
 
+		private string AircraftName
+		{
+			get => _aircraftName;
+			set
+			{
+				string oldValue = _aircraftName;
+				_aircraftName = value;
+				if (!_aircraftName.Equals(oldValue))
+				{
+					SetGaugeType();
+				}
+			}
+		}
+
 		private double Backlight
 		{
-			get
-			{
-				return _backlight;
-			}
+			get => _backlight;
 			set
 			{
 				double oldValue = _backlight;
@@ -266,15 +319,26 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.RPM
 			}
 		}
 
-		private double GaugeType
+		private double GaugeTypeSetting
 		{
-			get
-			{
-				return _gaugeType;
-			}
+			get => _gaugeTypeSetting;
 			set
 			{
-				double oldValue = _gaugeType;
+				double oldValue = _gaugeTypeSetting;
+				_gaugeTypeSetting = value;
+				if (!_gaugeTypeSetting.Equals(oldValue))
+				{
+					SetGaugeType();
+				}
+			}
+		}
+
+		private int GaugeType
+		{
+			get => _gaugeType;
+			set
+			{
+				int oldValue = _gaugeType;
 				_gaugeType = value;
 				if (!_gaugeType.Equals(oldValue))
 				{
