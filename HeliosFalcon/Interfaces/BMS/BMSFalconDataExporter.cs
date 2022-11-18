@@ -66,6 +66,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         private string _acNCTR;
         private bool _stringDataUpdated;
         private uint _lastStringAreaTime;
+        private bool _panelTypeIFF;
 
         public BMSFalconDataExporter(FalconInterface falconInterface)
             : base(falconInterface)
@@ -381,6 +382,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("Runtime", "RTT Enabled", "RTT texture extraction state", "True if RTT enabled.", BindingValueUnits.Boolean);
             AddValue("Runtime", "Aircraft Name", "The name of the aircraft", "Example: F-16B-15 or F/A-18D", BindingValueUnits.Text);
             AddValue("Runtime", "Aircraft Nomenclature", "The nomenclature of the aircraft", "Example: F16 or F18", BindingValueUnits.Text);
+            AddValue("Runtime", "Aircraft IFF Panel", "Type of panel IFF or AUX COMM", "True if IFF, False if AUX COMM. ", BindingValueUnits.Boolean);
         }
 
         internal override void InitData()
@@ -617,10 +619,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 }
             }
 
+            string AN6 = _acName.Substring(0, Math.Min(_acName.Length, 6));
+            string AN8 = _acName.Substring(0, Math.Min(_acName.Length, 8));
+            string AN9 = _acName.Substring(0, Math.Min(_acName.Length, 9));
+
+            if (AN6 == "F-16AM" || AN8 == "F-16C-52" || AN8 == "F-16D-52" || AN8 == "F-16I-52" || AN9 == "F-16CM-40" ||
+                AN9 == "F-16CM-42" || AN9 == "F-16CM-50" || AN9 == "F-16CM-52" || AN9 == "F-16DM-40" || AN9 == "F-16DM-52")
+            {
+                _panelTypeIFF = true;
+            }
+            else if (AN8 == "F-16A-15" || AN8 == "F-16B-15" || AN8 == "F-16C-25" || AN8 == "F-16C-30" || AN8 == "F-16C-32" ||
+                     AN8 == "F-16C-40" || AN8 == "F-16C-50" || AN9 == "F-16DG-30" || AN9 == "F-16DG-40")
+            {
+                _panelTypeIFF = false;
+            }
+            else
+            {
+                _panelTypeIFF = true;
+            }
+
             //Runtime bindings
             SetValue("Runtime", "Current Theater", new BindingValue(FalconInterface.CurrentTheater));
             SetValue("Runtime", "Aircraft Name", new BindingValue(_acName));
             SetValue("Runtime", "Aircraft Nomenclature", new BindingValue(_acNCTR));
+            SetValue("Runtime", "Aircraft IFF Panel", new BindingValue(_panelTypeIFF));
         }
 
         internal float ClampAOA(float alpha)
