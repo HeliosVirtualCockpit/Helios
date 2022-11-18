@@ -112,7 +112,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.VorIlsChannel
                     break;
                 case "Mode Selector":
                     rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 1, "HG", -40d));
-                    rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 2, "BD", 40d));
+                    rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 2, "Test", 0d));
+                    rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 3, "BD", 40d));
                     break;
             }
             foreach (RotarySwitchPosition position in rSwitch.Positions)

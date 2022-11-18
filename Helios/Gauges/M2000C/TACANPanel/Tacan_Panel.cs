@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACAN
     class M2000C_TacanPanel : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 256, 280);
-        private string _interfaceDeviceName = "Tacan Panel";
+        private string _interfaceDeviceName = "TACAN Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
 
         public M2000C_TacanPanel()
@@ -37,9 +37,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.TACAN
             AddRotarySwitch("Mode Selector", new Point(262, 191), new Size(133, 133), "low-switch-tacan");
             
             AddPot("Channel 10 Selector", new Point(83, 193), "up-switch-tacan",
-                80d, 332d, 0.0d, 0.923d, 0.077d, 0.077d, false);
+                360d/12d*2d, 360d, 0.0d, 1.0d, 1.0d/12d, 1.0d/12d, false);
             AddPot("Channel 1 Selector", new Point(262, 190), "up-switch-tacan",
-                70d, 324d, 0.0d, 0.9d, 0.6d, 0.1d, false);
+                0d, 360d, 0.0d, 1.0d, 1.0d/10d, 1.0d/10d, false);
             
             AddDrum("Channel output for display (Ones)", "{Helios}/Gauges/M2000C/TACANPanel/drum_tape.xaml", "ones frequency", "(0 - 9)", "#", 
                 new Point(210, 60), new Size(10d, 15d), new Size(33d, 52d));
