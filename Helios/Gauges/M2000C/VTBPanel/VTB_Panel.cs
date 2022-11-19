@@ -17,15 +17,18 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using System;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Net.NetworkInformation;
     using System.Windows;
     using System.Windows.Media;
 
     [HeliosControl("HELIOS.M2000C.VTB_PANEL", "VTB Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_VTBPanel : M2000CDevice
     {
-        private static readonly Rect SCREEN_RECT = new Rect(0, 0, 531, 586);
+        private static readonly Rect SCREEN_RECT = new Rect(51, 9, 434, 420);
         private string _interfaceDeviceName = "HUD/VTB";
         private Rect _scaledScreenRect = SCREEN_RECT;
 
@@ -36,30 +39,44 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             int column1 = 15, column2 = 500;
             Size VTB_switch_size = new Size(20, 40);
 
+            //Brightness switches and indicators
+            ///ToDo:  Work out why the drums are eclipsing other controls outside of their render position.  
+            ///temporarily moved to the back to avoid the problem
+            AddDrum("Markers Brightness Indicator", "(0-7)", new Point(222, 506), new Size(10d, 15d), new Size(16d, 24d));
+            AddDrum("Main Brightness Indicator", "(0-7)", new Point(290, 506), new Size(10d, 15d), new Size(16d, 24d));
+            AddDrum("Video Brightness Indicator", "(0-7)", new Point(359, 506), new Size(10d, 15d), new Size(16d, 24d));
+            AddDrum("Cavalier Brightness Indicator", "(0-7)", new Point(428, 506), new Size(10d, 15d), new Size(16d, 24d));
+            
+            AddRotarySwitch("Markers Brightness", new Point(222, 473), new Size(46, 90), 8);
+            AddRotarySwitch("Main Brightness", new Point(290, 473), new Size(46, 90), 8);
+            AddRotarySwitch("Video Brightness", new Point(359, 473), new Size(46, 90), 8);
+            AddRotarySwitch("Cavalier Brightness", new Point(428, 473), new Size(46, 90), 8);
+
             //Left Switches
-            Add3PosnToggle("Target Data Manual Entry Begin/End", new Point(column1, row1), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+            Add3PosnToggle("Target Data Manual Entry Begin/End", new Point(column1, row1), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
                 ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Data Manual Entry Begin/End", false, false);
-            Add3PosnToggle("Bullseye Waypoint Selector",         new Point(column1, row2), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
-                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Bullseye Waypoint Selector", false, false);
-            Add3PosnToggle("Target Range from Bullseye",         new Point(column1, row3), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
-                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Range from Bullseye", false, false);
-            Add3PosnToggle("Target Bearing from Bullseye",       new Point(column1, row4), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
-                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Bearing from Bullseye", false, false);
+            Add3PosnToggle("Bullseye Waypoint Selector N",         new Point(column1, row2), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Bullseye Waypoint Selector N", false, false);
+            Add3PosnToggle("Target Range from Bullseye Rho",         new Point(column1, row3), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Range from Bullseye Rho", false, false);
+            Add3PosnToggle("Target Bearing from Bullseye Theta",       new Point(column1, row4), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Bearing from Bullseye Theta", false, false);
 
             //Right Switches
-            Add3PosnToggle("Target Heading",     new Point(column2, row1), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
-                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Heading", false, false);
-            Add3PosnToggle("Target Altitude",    new Point(column2, row2), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
-                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Altitude", false, false);
-            Add3PosnToggle("Target Mach Number", new Point(column2, row3), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
-                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Mach Number", false, false);
-            Add3PosnToggle("Target Age",         new Point(column2, row4), VTB_switch_size, "{M2000C}/Images/switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
-                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Age", false, false);
+            Add3PosnToggle("Target Heading C",     new Point(column2, row1), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Heading C", false, false);
+            Add3PosnToggle("Target Altitude Z",    new Point(column2, row2), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Altitude Z", false, false);
+            Add3PosnToggle("Target Mach Number M", new Point(column2, row3), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Mach Number M", false, false);
+            Add3PosnToggle("Target Age T",         new Point(column2, row4), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
+                ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Target Age T", false, false);
 
             //Bottom Switches
-            AddSwitch("VTB Declutter", new Point(76, 501), ToggleSwitchPosition.Two, ToggleSwitchType.MomOn);
-            AddSwitch("VTB Orientation Selector (Inop)", new Point(134, 501), ToggleSwitchPosition.One, ToggleSwitchType.OnOn);
+            AddSwitch("VTB Declutter", new Point(76, 501), ToggleSwitchPosition.Two, ToggleSwitchType.OnMom);
+            AddSwitch("VTB Map Forward/Centered", new Point(134, 501), ToggleSwitchPosition.One, ToggleSwitchType.OnOn);
             AddSwitch("VTB Power Switch", new Point(500, 452), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
+
         }
 
         #region Properties
@@ -81,22 +98,11 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             }
             base.OnPropertyChanged(args);
         }
-
+ 
         private void AddSwitch(string name, Point posn, ToggleSwitchPosition defaultPosition, ToggleSwitchType defaultType)
         {
-            AddToggleSwitch(name: name,
-                posn: posn,
-                size: new Size(20, 40),
-                defaultPosition: defaultPosition,
-                positionOneImage: "{M2000C}/Images/Switches/short-black-up.png",
-                positionTwoImage: "{M2000C}/Images/Switches/short-black-down.png",
-                defaultType: defaultType,
-                interfaceDeviceName: _interfaceDeviceName,
-                interfaceElementName: name,
-                horizontal: false,
-                horizontalRender: false,
-                nonClickableZones: null,
-                fromCenter: false);
+            ToggleSwitch tswitch = AddToggleSwitch(name,posn,new Size(20, 40),defaultPosition,"{M2000C}/Images/Switches/short-black-up.png","{M2000C}/Images/Switches/short-black-down.png",defaultType,_interfaceDeviceName,name,false,null,false,false);
+            tswitch.ClickType = LinearClickType.Swipe;
         }
 
         private void Add3PosnToggle(string name, Point posn, Size size, string image, ThreeWayToggleSwitchType switchType, ThreeWayToggleSwitchPosition defaultPosition,
@@ -120,13 +126,45 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 );
         }
 
+        private void AddRotarySwitch(string name, Point posn, Size size, int positions)
+        {
+            RotarySwitch rSwitch = AddRotarySwitch(name: name,
+                posn: posn,
+                size: size,
+                knobImage: "{M2000C}/Images/Miscellaneous/void.png",
+                //knobImage: "{M2000C}/Images/Switches/short-black-up.png",
+                defaultPosition: 0,
+                clickType: RotaryClickType.Swipe,
+                interfaceDeviceName: _interfaceDeviceName,
+                interfaceElementName: name,
+                fromCenter: false);
+            rSwitch.Positions.Clear();
+            for (int i = 0; i < positions; i++)
+            {
+                rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, i, i.ToString(), i));
+            }
+        }
+
+        private void AddDrum(string name, string valueDescription, Point posn, Size size, Size renderSize)
+        {
+            Mk2CDrumGauge.Mk2CDrumGauge newGauge = new Mk2CDrumGauge.Mk2CDrumGauge(name, "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", name, valueDescription, "#", posn, size, renderSize, 1d, -1d, 7d);
+            Children.Add(newGauge);
+            foreach (IBindingTrigger trigger in newGauge.Triggers)
+            {
+                AddTrigger(trigger, $"{Name}_{name}");
+            }
+            foreach (IBindingAction action in newGauge.Actions)
+            {
+                AddAction(action, $"{Name}_{name}");
+            }
+
+        }
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))
             {
                 return false;
             }
-
             return true;
         }
 

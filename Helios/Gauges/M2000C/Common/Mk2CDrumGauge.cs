@@ -32,7 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge
         {
         }
 
-        public Mk2CDrumGauge(string name, string drumWay, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize,double multiplier = 10d, double offset = 0d)
+        public Mk2CDrumGauge(string name, string drumWay, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize,double multiplier = 10d, double offset = 0d, double initialValue = 0d)
             : base(name, new Size(renderSize.Width*format.Length,renderSize.Height))
         {
             _multiplier = multiplier;
@@ -41,7 +41,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge
             _drum.Clip = new RectangleGeometry(new Rect(posn.X, posn.Y, renderSize.Width*format.Length, renderSize.Height));
             Components.Add(_drum);
 
-            _drumValue = new HeliosValue(this, new BindingValue(0d), "", actionIdentifier, name + " - " + actionIdentifier, valueDescription, BindingValueUnits.Numeric);
+            _drumValue = new HeliosValue(this, new BindingValue(initialValue), "", actionIdentifier, name + " - " + actionIdentifier, valueDescription, BindingValueUnits.Numeric);
             _drumValue.Execute += new HeliosActionHandler(DrumValue_Execute);
             Actions.Add(_drumValue);
         }

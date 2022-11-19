@@ -1015,7 +1015,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "439", "PCN Panel", "Marq Position", "MRQ Indicator"));
             AddFunction(new PushButton(this, PCN_NAV, "3576", "576", "PCN Panel", "AUTO Navigation Button"));
             AddFunction(new FlagValue(this, "437", "PCN Panel", "AUTO Navigation", "BAD Indicator"));
-            AddFunction(new Switch(this, PCN_NAV, "574", CreateSwitchPositions(11,0.0,0.1 , "3574",new string[]{"TR/VS","D/RLT","CP/PD","ALT","L/G","RT/TD","dL/dG","dALT","P/t","DEC","DV/FV" }),
+            AddFunction(new Switch(this, PCN_NAV, "574", CreateSwitchPositions(11,0.0,0.1 , "3574",new string[]{"TR/VS","D/RLT","CP/PD","ALT","L/G","RT/TD","dL/dG","dALT","P/t","DEC","DV/FV" }, "N2"),
                 "PCN Panel", "INS Parameter Selector", "%0.2f"));
             AddFunction(new Axis(this, SYSLIGHTS, "3575", "575", 0.15d, 0d, 1d, "PCN Panel", "Light Brightnes Control/Test"));
             AddFunction(new PushButton(this, PCN_NAV, "3584", "584", "PCN Panel", "INS Button 1"));
@@ -1097,7 +1097,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new ScaledNetworkValue(this, "621", 1d, "TACAN Panel", "Channel output for display (Tens)", "Current channel (Tens)", "(0-12)", BindingValueUnits.Numeric, 0.3d, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "620", 1d, "TACAN Panel", "X/Y Drum", "X/Y Mode", "(1 - 2)", BindingValueUnits.Numeric));
             AddFunction(Switch.CreateToggleSwitch(this, TACAN, "3624", "624", "0.0", "X", "1.0", "Y", "TACAN Panel", "X/Y Selector", "%0.1f"));
-            AddFunction(new Switch(this, TACAN, "626", CreateSwitchPositions(4, 0.0, 1.0/3, "3626", new string[] { "OFF", "REC", "T/R", "A/A" }), "TACAN Panel", "Mode Selector", "%0.3f"));
+            AddFunction(new Switch(this, TACAN, "626", CreateSwitchPositions(4, 0.0, 1.0/3, "3626", new string[] { "OFF", "REC", "T/R", "A/A" }, "N3"), "TACAN Panel", "Mode Selector", "%0.3f"));
             #endregion
             #endregion
             #region Indicators
@@ -1143,7 +1143,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3473", "473", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Secondary Oil Control Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3474", "474", "1.0", "On", "0.0", "Off", "Engine Start Panel", "Secondary Oil Control Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3475", "475", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Engine Emergency Control Cover", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, VTB, "3476", "476", "1.0", "position 1", "0.5", "position 2", "0.0", "position 3", "Engine Start Panel", "Engine Emergency Control Switch", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, ENGPANEL, "3476", "476", "1.0", "position 1", "0.5", "position 2", "0.0", "position 3", "Engine Start Panel", "Engine Emergency Control Switch", "%0.1f"));
             #endregion  
             #region  HUD/VTB
             AddFunction(new Switch(this, VTH, "201", new SwitchPosition[] { new SwitchPosition("1.0", "Up", "3201"), new SwitchPosition("0.5", "Middle", "3201"), new SwitchPosition("0.0", "Down", "3201") }, "HUD/VTB", "HUD Power Switch", "%0.1f"));
@@ -1169,8 +1169,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this,VTB, "3221", "221", "1.0", "ON", "0.0", "OFF", "HUD/VTB", "VTB Power Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this,VTB, "3222", "222", "1.0", "Declutter", "0.0", "Neutral", "HUD/VTB", "VTB Declutter",    "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this,VTB, "3223", "223", "0.0", "AV", "1.0", "AR", "HUD/VTB", "VTB Map Forward/Centered", "%0.1f"));
-            AddFunction(new Switch(this, VTB, "225", CreateSwitchPositions(8, 0.0, 0.1, "3225"), "HUD/VTB", "Main Brightness", "%0.1f"));
             AddFunction(new Switch(this, VTB, "224", CreateSwitchPositions(8, 0.0, 0.1, "3224"), "HUD/VTB", "Markers Brightness", "%0.1f"));
+            AddFunction(new Switch(this, VTB, "225", CreateSwitchPositions(8, 0.0, 0.1, "3225"), "HUD/VTB", "Main Brightness", "%0.1f"));
             AddFunction(new Switch(this, VTB, "226", CreateSwitchPositions(8, 0.0, 0.1, "3226"), "HUD/VTB", "Video Brightness", "%0.1f"));
             AddFunction(new Switch(this, VTB, "227", CreateSwitchPositions(8, 0.0, 0.1, "3227"), "HUD/VTB", "Cavalier Brightness", "%0.1f"));
             #endregion
@@ -1243,7 +1243,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, PCCM, "607", CreateSwitchPositions(3, 1.0, -0.5, "3607", new string[] { "A", "M", "T" }), "EW PANEL", "RWR Power Switch", "%0.1f"));
             AddFunction(new Switch(this, PCCM, "608", CreateSwitchPositions(3, 1.0, -0.5, "3608", new string[] { "A", "M", "T" }), "EW PANEL", "D2M Power Switch", "%0.1f"));
             AddFunction(new Switch(this, PCCM, "609", CreateSwitchPositions(3, 1.0, -0.5, "3609", new string[] { "A", "S.A.", "AU"}), "EW PANEL", "Decoy Release Mode Switch", "%0.1f"));
-            AddFunction(new Switch(this, RWR, "610", CreateSwitchPositions(11, 0.0, 0.1, "3610",new string[] { "A","1","2","3","4","5","6","7","8","9","10"}), "EW PANEL", "Decoy Release Program Knob", "%0.2f"));
+            AddFunction(new Switch(this, RWR, "610", CreateSwitchPositions(11, 0.0, 0.1, "3610",new string[] { "A","1","2","3","4","5","6","7","8","9","10"}, "N2"), "EW PANEL", "Decoy Release Program Knob", "%0.2f"));
             AddFunction(new PushButton(this,SPIRALE,"3990","990","EW PANEL", "ECM Box Clear Button"));
             #endregion
             #region  Panel Lights
@@ -1275,14 +1275,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, UHF, "3430", "430", "1.0", "SIL", "0.0", "Off", "UHF Radio Panel", "UHF SIL Switch", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, UHF, "3431", "431", "1.0", "E+A2", "0.5", "Neutral", "0.0", "R", "UHF Radio Panel", "UHF E+A2 Switch", "%0.1f"));
             AddFunction(new PushButton(this, UHF, "3432", "432", "UHF Radio Panel", "UHF CDE Switch"));
-            AddFunction(new Switch(this, UHF, "433", CreateSwitchPositions(4, 0.0, 1.0d/3d, "3433", new string[] { "AR", "M", "FI", "H" }), "UHF Radio Panel", "UHF Mode Switch", "%0.2f"));
+            AddFunction(new Switch(this, UHF, "433", CreateSwitchPositions(4, 0.0, 1.0d/3d, "3433", new string[] { "AR", "M", "FI", "H" }, "N2"), "UHF Radio Panel", "UHF Mode Switch", "%0.2f"));
             AddFunction(new PushButton(this, UHF, "3434", "434", "UHF Radio Panel", "UHF TEST Switch"));
             AddFunction(new Axis(this, UHF, "3435", "435", 1.0d / 20d, 0.0d, 1.0d, "UHF Radio Panel", "UHF Knob"));
 
             #endregion
             #region VHF Radio Panel
             AddFunction(new Text(this, "2062", "VHF Radio Panel", "VHF Comm Information", "Display Line for the VHF Radio"));
-            AddFunction(new Switch(this, VHF, "950", CreateSwitchPositions(7, 0.0, 0.1, "3950", new string[] {"0","FF","HQ","SV","DL","G","EN" }), "VHF Radio Panel", "VHF MODE", "%0.2f"));
+            AddFunction(new Switch(this, VHF, "950", CreateSwitchPositions(7, 0.0, 0.1, "3950", new string[] {"0","FF","HQ","SV","DL","G","EN" }, "N2"), "VHF Radio Panel", "VHF MODE", "%0.2f"));
             AddFunction(new Axis(this, VHF, "3951", "951", 1.0d / 20d, 0.0d, 1.0d, "VHF Radio Panel", "VHF CH Sel"));
             AddFunction(new PushButton(this, VHF, "3952", "952", "VHF Radio Panel", "VHF MEM/CLR"));
             AddFunction(new PushButton(this, VHF, "3953", "953", "VHF Radio Panel", "VHF VLD/XFR"));
@@ -1401,26 +1401,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion
 
         }
-        private SwitchPosition[] CreateSwitchPositions(int numberOfPositions, double startValue, double incrementalValue, string arg, string positionName = "position")
+        private SwitchPosition[] CreateSwitchPositions(int numberOfPositions, double startValue, double incrementalValue, string arg, string[] positionLabels, string valueFormat = "N1")
         {
-            return CreateSwitchPositions(numberOfPositions, startValue, incrementalValue, arg, new string[] { }, positionName);
+            return CreateSwitchPositions(numberOfPositions, startValue, incrementalValue, arg, positionLabels, null, valueFormat);
         }
-        private SwitchPosition[] CreateSwitchPositions(int numberOfPositions, double startValue, double incrementalValue, string arg, string[] positionLabels)
+        private SwitchPosition[] CreateSwitchPositions(int numberOfPositions, double startValue, double incrementalValue, string arg, string positionName = "position", string valueFormat = "N1")
         {
-            return CreateSwitchPositions(numberOfPositions, startValue, incrementalValue, arg, positionLabels, null);
+            return CreateSwitchPositions(numberOfPositions, startValue, incrementalValue, arg, new string[] { }, positionName,valueFormat);
         }
-        private SwitchPosition[] CreateSwitchPositions(int numberOfPositions, double startValue, double incrementalValue, string arg, string[] positionLabels, string positionName)
+        private SwitchPosition[] CreateSwitchPositions(int numberOfPositions, double startValue, double incrementalValue, string arg, string[] positionLabels, string positionName,string valueFormat = "N1")
         {
             SwitchPosition[] positions = new SwitchPosition[numberOfPositions];
             for (int i = 1; i <= numberOfPositions; i++)
             {
                 if (positionLabels.Length == numberOfPositions)
                 {
-                    positions[i - 1] = new SwitchPosition(PositionValue(i,startValue,incrementalValue).ToString("0.##"), positionLabels[i-1], arg);
+                    positions[i - 1] = new SwitchPosition(PositionValue(i,startValue,incrementalValue).ToString(valueFormat), positionLabels[i-1], arg);
 
                 } else
                 {
-                    positions[i - 1] = new SwitchPosition(PositionValue(i, startValue, incrementalValue).ToString("0.##"), $"{positionName} {i}", arg);
+                    positions[i - 1] = new SwitchPosition(PositionValue(i, startValue, incrementalValue).ToString(valueFormat), $"{positionName} {i}", arg);
                 }
             }
             return positions;
