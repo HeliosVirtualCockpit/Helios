@@ -44,11 +44,11 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 
             AddGuard("Engine Start Switch Guard", "engine-start-", new Point(82, 37), new Size(206, 169), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
                 new NonClickableZone[] {
-                    new NonClickableZone(new Rect(0, 50, 90, 119), ToggleSwitchPosition.Two, engineStartButton, ToggleSwitchPosition.Two),
-                    new NonClickableZone(new Rect(125, 0, 81, 50), ToggleSwitchPosition.One, starterFuelPumpSwitch, ToggleSwitchPosition.Two) },
-                false, false);
+                    new NonClickableZone(new Rect(0, 50, 90, 119), ToggleSwitchPosition.One, engineStartButton, ToggleSwitchPosition.Two),
+                    new NonClickableZone(new Rect(125, 0, 81, 50), ToggleSwitchPosition.Two, starterFuelPumpSwitch, ToggleSwitchPosition.Two) },
+                false, false, true);
             AddGuard("Fuel Shut-Off Switch Guard", "coupe-feu-", new Point(385, 160), new Size(150,54), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn, 
-                new NonClickableZone[] { new NonClickableZone(new Rect(30,0,140,50), ToggleSwitchPosition.Two, fuelShutOffSwitch, ToggleSwitchPosition.Two) }, false, false);
+                new NonClickableZone[] { new NonClickableZone(new Rect(30,0,140,50), ToggleSwitchPosition.One, fuelShutOffSwitch, ToggleSwitchPosition.Two) }, false, false);
 
             Add3PosnToggle(
                 name: "Ignition Ventilation Selector Switch",
@@ -99,14 +99,14 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         }
 
         private void AddGuard(string name, string imagePrefix, Point posn, Size size, ToggleSwitchPosition defaultPosition, 
-            ToggleSwitchType defaultType, NonClickableZone[] nonClickableZones, bool horizontal = true, bool horizontalRender = true)
+            ToggleSwitchType defaultType, NonClickableZone[] nonClickableZones, bool horizontal = true, bool horizontalRender = true,bool horizontalReversed = false)
         {
-            AddToggleSwitch(name: name,
+            ToggleSwitch cover = AddToggleSwitch(name: name,
                 posn: posn,
                 size: size,
                 defaultPosition: defaultPosition,
-                positionOneImage: "{M2000C}/Images/EnginePanel/" + imagePrefix + "down.png",
-                positionTwoImage: "{M2000C}/Images/EnginePanel/" + imagePrefix + "up.png",
+                positionOneImage: "{M2000C}/Images/EnginePanel/" + imagePrefix + "up.png",
+                positionTwoImage: "{M2000C}/Images/EnginePanel/" + imagePrefix + "down.png",
                 defaultType: defaultType,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,
@@ -114,6 +114,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 horizontalRender: horizontalRender,
                 nonClickableZones: nonClickableZones,
                 fromCenter: false);
+            cover.Orientation = horizontalReversed?ToggleSwitchOrientation.HorizontalReversed:ToggleSwitchOrientation.Horizontal;
+            cover.ClickType = LinearClickType.Swipe;
         }
 
         private void Add3PosnToggle(string name, Point posn, string image, string interfaceDevice, string interfaceElement, bool fromCenter)

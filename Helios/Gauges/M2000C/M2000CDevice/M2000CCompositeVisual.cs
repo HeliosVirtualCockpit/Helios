@@ -329,7 +329,7 @@ namespace GadrocsWorkshop.Helios.M2000C
 
         protected ToggleSwitch AddToggleSwitch(string name, Point posn, Size size, ToggleSwitchPosition defaultPosition, 
             string positionOneImage, string positionTwoImage, ToggleSwitchType defaultType, string interfaceDeviceName, string interfaceElementName, 
-            bool fromCenter, NonClickableZone[] nonClickableZones = null, bool horizontal = false, bool horizontalRender = false)
+            bool fromCenter, NonClickableZone[] nonClickableZones = null, bool horizontal = false, bool horizontalRender = false,LinearClickType clickType = LinearClickType.Touch)
         {
             if (fromCenter)
                 posn = FromCenter(posn, size);
@@ -338,7 +338,7 @@ namespace GadrocsWorkshop.Helios.M2000C
             ToggleSwitch newSwitch = new ToggleSwitch();
             newSwitch.Name = componentName;
             newSwitch.SwitchType = defaultType;
-            newSwitch.ClickType = LinearClickType.Touch;
+            newSwitch.ClickType = clickType;
             newSwitch.DefaultPosition = defaultPosition;
             newSwitch.PositionOneImage = positionOneImage;
             newSwitch.PositionTwoImage = positionTwoImage;
