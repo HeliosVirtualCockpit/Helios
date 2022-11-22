@@ -49,8 +49,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 
             //            AddPot();
             AddSwitch("Fuel CrossFeed Switch", new Point(112, 360), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
-            Add3PosnToggle("Fuel Detotalizer Switch", new Point(101, 110), new Size(20, 60), "{M2000C}/Images/switches/long-black-", ThreeWayToggleSwitchType.MomOnMom, 
+            Add3PosnToggle("Fuel Detotalizer Switch", new Point(101, 110), new Size(20, 60), "{M2000C}/Images/switches/long-black-", ThreeWayToggleSwitchType.MomOnMom,
                 ThreeWayToggleSwitchPosition.Two, _interfaceDeviceName, "Fuel Detotalizer Switch", false, false);
+            Add3PosnToggle("Fuel Panel Transfer Switch", new Point(101, 258), new Size(20, 60), "{M2000C}/Images/switches/long-black-", ThreeWayToggleSwitchType.OnOnOn,
+                ThreeWayToggleSwitchPosition.Three, _interfaceDeviceName, "Fuel Panel Transfer Switch", false, false);
 
             AddRectangleFill("Internal Fuel Quantity Needle", new Point(41, row5));
             AddRectangleFill("Total Fuel Quantity Needle", new Point(192, row5));

@@ -47,8 +47,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             _image.Height = Height;
             _image.IsHidden = !_useTextualDisplays;
             Children.Add(_image);
-            AddDrum("Bingo Fuel 1 000 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Selector", "(0-9)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19));
-            AddDrum("Bingo Fuel 100 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Selector", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
+            AddDrum("Bingo Fuel 1 000 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Drum", "(0-3)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19));
+            AddDrum("Bingo Fuel 100 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Drum", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
             AddRotarySwitch("Bingo Fuel 1 000 kg Selector", new Point(0, 52), new Size(58, 120), 4);
             AddRotarySwitch("Bingo Fuel 100 kg Selector", new Point(62, 52), new Size(58, 120), 10);
             AddTextDisplay("Fuel Burn Rate Display", new Point(36d, 14d), new Size(68d, 41d), _interfaceDeviceName, "Fuel Burn Rate Display", 32, "000", TextHorizontalAlignment.Center, "");
@@ -164,8 +164,13 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             rSwitch.Positions.Clear();
             for (int i = 0; i < positions; i++)
             {
-                rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, i, i.ToString(), 36d * i));
+                rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, i, i.ToString(), i));
             }
+            string drum = name.Replace("Selector", "Drum");
+            AddDefaultInputBinding(
+                 childName: $"{Name}_{drum}",
+                 interfaceTriggerName: $"Fuel Panel.{name}.changed",
+                 deviceActionName: $"set.{drum}");
         }
 
         public override bool HitTest(Point location)

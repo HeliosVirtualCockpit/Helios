@@ -14,6 +14,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -680,6 +681,66 @@
     <Resource Include="Images\PCAPanel\PCA_Lower_Display.png" />
     <Resource Include="Images\PCAPanel\PCA_Panel_New.png" />
     <Resource Include="Images\PCAPanel\PCA_Upper_Display.png" />
+    <Resource Include="Images\PCNPanel\Button_Down.png" />
+    <Resource Include="Images\PCNPanel\Button_Up.png" />
+    <Resource Include="Images\V2\LGPanel\a-off.png" />
+    <Resource Include="Images\V2\LGPanel\a-on.png" />
+    <Resource Include="Images\V2\LGPanel\bip-off.png" />
+    <Resource Include="Images\V2\LGPanel\bip-on.png" />
+    <Resource Include="Images\V2\LGPanel\cross-off.png" />
+    <Resource Include="Images\V2\LGPanel\cross-on.png" />
+    <Resource Include="Images\V2\LGPanel\dirav-off.png" />
+    <Resource Include="Images\V2\LGPanel\dirav-on.png" />
+    <Resource Include="Images\V2\LGPanel\emergency-jettison-not-pushed.png" />
+    <Resource Include="Images\V2\LGPanel\emergency-jettison-pushed.png" />
+    <Resource Include="Images\V2\LGPanel\emergency-landing-gear-lever.png" />
+    <Resource Include="Images\V2\LGPanel\f-off.png" />
+    <Resource Include="Images\V2\LGPanel\f-on.png" />
+    <Resource Include="Images\V2\LGPanel\fbwg-guard-down.png" />
+    <Resource Include="Images\V2\LGPanel\fbwg-guard-up.png" />
+    <Resource Include="Images\V2\LGPanel\frein-off.png" />
+    <Resource Include="Images\V2\LGPanel\frein-on.png" />
+    <Resource Include="Images\V2\LGPanel\gun-arming-guard-down.png" />
+    <Resource Include="Images\V2\LGPanel\gun-arming-guard-up.png" />
+    <Resource Include="Images\V2\LGPanel\landing-gear-down.png" />
+    <Resource Include="Images\V2\LGPanel\landing-gear-up.png" />
+    <Resource Include="Images\V2\LGPanel\left-gear-off.png" />
+    <Resource Include="Images\V2\LGPanel\left-gear-on.png" />
+    <Resource Include="Images\V2\LGPanel\lg-panel.png" />
+    <Resource Include="Images\V2\LGPanel\nose-gear-off.png" />
+    <Resource Include="Images\V2\LGPanel\nose-gear-on.png" />
+    <Resource Include="Images\V2\LGPanel\right-gear-off.png" />
+    <Resource Include="Images\V2\LGPanel\right-gear-on.png" />
+    <Resource Include="Images\V2\LGPanel\spad-off.png" />
+    <Resource Include="Images\V2\LGPanel\spad-on.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Encoder_Knob.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_0.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_1.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_2.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_2_Lit.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_3.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_3_Lit.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_4.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_5.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_6.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_7.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_8.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_9.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_CLR_MEM.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_CONF.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_Lit.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Key_VLD_XFR.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\M-2000C_UHF_Radio_Background.png" />
+    <Resource Include="Images\V2\UHFRadioPanel\Mode_Knob.png" />
+    <Resource Include="Images\V2\LGPanel\Bar-Indicator-Horizontal.png" />
+    <Resource Include="Images\V2\LGPanel\Bar-Indicator-Vertical.png" />
+    <Resource Include="Images\V2\LGPanel\emergency-landing-gear-lever-horizontal.png" />
+    <Resource Include="Images\V2\LGPanel\FBW-G-Limit-Switch-Down.png" />
+    <Resource Include="Images\V2\LGPanel\FBW-G-Limit-Switch-Up.png" />
+    <Resource Include="Images\V2\LGPanel\FBW-Gain-Switch-Down.png" />
+    <Resource Include="Images\V2\LGPanel\FBW-Gain-Switch-Up.png" />
+    <Resource Include="Images\V2\LGPanel\FBW-Reset-Button-Down.png" />
+    <Resource Include="Images\V2\LGPanel\FBW-Reset-Button-Up.png" />
     <Content Include="Templates\Base\M2000C\CautionPanelRedIndicator.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -866,5 +927,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HSIPanel\big-needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HSIPanel\small-needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Helios.targets" />
 </Project>

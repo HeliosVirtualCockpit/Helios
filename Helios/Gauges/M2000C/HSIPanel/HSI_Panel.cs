@@ -22,6 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows;
     using System.Windows.Media;
     using GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CNeedle;
+    using System.Windows.Controls.Primitives;
 
     [HeliosControl("HELIOS.M2000C.HSI_PANEL", "HSI Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_HSIPanel : M2000CDevice
@@ -55,21 +56,27 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 
             AddNeedle("Direction Needle", "{M2000C}/Images/HSIPanel/direction-needle.png", "direction needle", "(0 - 360)",
                 new Point(152, 141), new Size(40d, 20d), new Point(20d, 130d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
-            double[,] modeCalibrationPoints = new double[,] {
-                 { 0.2d, 186d },
-                 { 0.3d, 169d },
-                 { 0.4d, 154d },
-                 { 0.5d, 138d },
-                };
-            AddNeedle("Mode Needle", "{M2000C}/Images/HSIPanel/mode-selector-needle.png", "mode needle", "(0 - 6)",
-                new Point(150, 125), new Size(23d, 23d), new Point(11d, 100d), BindingValueUnits.Degrees, new double[] { 0d, 220d, 0.6d, 120d }, modeCalibrationPoints);
-            AddNeedle("Big Needle", "{M2000C}/Images/HSIPanel/big-needle.png", "big needle", "(0 - 360)",
-                new Point(152, 141), new Size(20d, 184d), new Point(10d, 100d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
-            AddNeedle("Small Needle", "{M2000C}/Images/HSIPanel/small-needle.png", "small needle", "(0 - 360)",
-                new Point(152, 141), new Size(8d, 202d), new Point(4d, 101d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
-
+            //AddNeedle("Big Needle", "{M2000C}/Images/HSIPanel/big-needle.png", "big needle", "(0 - 360)",
+            //    new Point(152, 141), new Size(20d, 184d), new Point(10d, 100d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
+            AddNeedle("Big Needle", "{M2000C}/Images/HSIPanel/big-needle.xaml", "big needle", "(0 - 360)",
+                new Point(152, 141), new Size(27d, 200d), new Point(13.5d, 100d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
+            AddNeedle("Small Needle", "{M2000C}/Images/HSIPanel/small-needle.xaml", "small needle", "(0 - 360)",
+                new Point(152, 141), new Size(18d, 200d), new Point(9d, 100d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
             AddPot("VAD Selector", new Point(30,260), new Size(45, 45), "vad-selector", 0d, 0d, 0d, 1000d, 0d, 0.1d, true);
             AddRotarySwitch("Mode Selector", new Point(270, 260), new Size(45, 45), "mode-selector");
+            double[,] modeCalibrationPoints = new double[,] {
+                 { 2d, 204d },
+                 { 3d, 186d },
+                 { 4d, 169d },
+                 { 5d, 154d },
+                 { 6d, 138d },
+                };
+            AddNeedle("Mode Indicator", "{M2000C}/Images/HSIPanel/mode-selector-needle.png", "mode indicator needle", "(0 - 6)",
+                new Point(150, 125), new Size(23d, 23d), new Point(11d, 100d), BindingValueUnits.Degrees, new double[] { 1d, 220d, 7d, 120d }, modeCalibrationPoints);
+            AddDefaultInputBinding(
+                childName: "HSI Panel_Mode Indicator",
+                interfaceTriggerName: "HSI Panel.Mode Selector.changed",
+                deviceActionName: "set.mode indicator needle");
         }
 
         #region Properties
@@ -98,7 +105,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,
                 fromCenter: true,
-                clickType: RotaryClickType.Touch);
+                clickType: RotaryClickType.Swipe);
         }
 
         private void AddRotarySwitch(string name, Point posn, Size size, string imagePrefix)
@@ -108,18 +115,18 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 size: size,
                 knobImage: "{M2000C}/Images/HSIPanel/" + imagePrefix + ".png",
                 defaultPosition: 0,
-                clickType: RotaryClickType.Touch,
+                clickType: RotaryClickType.Swipe,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,
                 fromCenter: true);
             rSwitch.Positions.Clear();
-            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 1, "Cv/NAV", 0d));
-            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 2, "NAV", 20d));
-            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 3, "TAC", 40d));
-            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 4, "VAD", 60d));
-            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 5, "rho", 80d));
-            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 6, "theta", 100d));
-            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 7, "TEL", 120d));
+            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 1, "Cv/NAV", 300d));
+            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 2, "NAV", 240d));
+            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 3, "TAC", 180d));
+            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 4, "VAD", 120d));
+            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 5, "rho", 60d));
+            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 6, "theta", 0d));
+            rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 7, "TEL", 300d));
             rSwitch.DefaultPosition = 2;
         }
 

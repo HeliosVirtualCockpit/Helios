@@ -64,25 +64,28 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
             AddIndicatorPushButton("Marq Position", "mrq", new Point(column4, row7), new Size(58, 40));
             AddIndicatorPushButton("Validate Data Entry", "val", new Point(column2, row7), new Size(58, 40));
 
-            AddIndicator("M91", "m91", new Point(column8, row10), new Size(25, 13));
-            AddIndicator("M92", "m92", new Point(column9, row10), new Size(27, 13));
-            AddIndicator("M93", "m93", new Point(column10, row10), new Size(27, 13));
-            AddIndicator("PRET", "pret", new Point(column8, row9), new Size(40, 13));
-            AddIndicator("ALN", "aln", new Point(column9, row9), new Size(30, 13));
-            AddIndicator("MIP", "mip", new Point(column10, row9), new Size(25, 13));
-            AddIndicator("NDEG", "ndeg", new Point(column11, row9), new Size(45, 13));
-            AddIndicator("SEC", "sec", new Point(column12, row9), new Size(32, 13));
-            AddIndicator("UNI", "uni", new Point(column9, row11), new Size(24, 13));
+            //AddPushButton("Light Brightnes Control/Test", "Button_Up", "Button_Down", new Point(116, 465), new Size(50, 50));
+            AddPot("Light Brightnes Control/Test", new Point(116, 465), "Button_Up",
+                0d, 270d, 0.0d, 1.0d, 0.1d, 0.1d, true);
 
             AddSwitch("INS Parameter Selector", "{M2000C}/Images/PCNPanel/ins-parameter-selector.png", new Point(149, 349), new Size(118, 118), true);
 
             AddTextDisplay("PCN Latitude Display", new Point(96d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Latitude Display", 64, "1234567", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PCN Longitude Display", new Point(406d, 6d), new Size(251d, 72d), _interfaceDeviceName, "PCN Longitude Display", 64, "123456", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("PCN Left Points Position", new Point(82d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Left Points Position", 64,"   .  .", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCN Left Points Position", new Point(82d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Left Points Position", 64, "   .  .", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PCN Right Points Position", new Point(392d, 13d), new Size(251d, 72d), _interfaceDeviceName, "PCN Right Points Position", 64, "  .  .", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PCN Lower Left Display", new Point(82d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Left Display", 64, "01", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PCN Lower Right Display", new Point(288d, 82d), new Size(120d, 72d), _interfaceDeviceName, "PCN Lower Right Display", 64, "01", TextHorizontalAlignment.Left, "");
 
+            AddIndicator("M91", "M91", new Point(column8, row10), new Size(25, 13));
+            AddIndicator("M92", "M92", new Point(column9, row10), new Size(27, 13));
+            AddIndicator("M93", "M93", new Point(column10, row10), new Size(27, 13));
+            AddIndicator("PRET", "PRET", new Point(column8, row9), new Size(40, 13));
+            AddIndicator("ALN", "ALN", new Point(column9, row9), new Size(30, 13));
+            AddIndicator("MIP", "MIP", new Point(column10, row9), new Size(25, 13));
+            AddIndicator("NDEG", "NDEG", new Point(column11, row9), new Size(45, 13));
+            AddIndicator("SEC", "SEC", new Point(column12, row9), new Size(32, 13));
+            AddIndicator("UNI", "UNI", new Point(column9, row11), new Size(24, 13));
 
         }
 
@@ -119,14 +122,38 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.PCNPanel
             }
             base.OnPropertyChanged(args);
         }
-
+        private void AddPot(string name, Point posn, string imagePrefix, double initialRotation, double rotationTravel, double minValue, double maxValue,
+            double initialValue, double stepValue, bool fromCenter)
+        {
+            AddPot(
+                name: name,
+                posn: posn,
+                size: new Size(50, 50),
+                knobImage: "{M2000C}/Images/PCNPanel/" + imagePrefix + ".png",
+                initialRotation: initialRotation,
+                rotationTravel: rotationTravel,
+                minValue: minValue,
+                maxValue: maxValue,
+                initialValue: initialValue,
+                stepValue: stepValue,
+                interfaceDeviceName: _interfaceDeviceName,
+                interfaceElementName: $"{Name}_{name}",
+                fromCenter: fromCenter,
+                clickType: RotaryClickType.Touch,
+                isContinuous: false);
+        }
         private void AddPushButton(string name, string imagePrefix, Point posn, Size size)
+        {
+            AddPushButton(name,imagePrefix,imagePrefix,posn,size);  
+        }
+
+            private void AddPushButton(string name, string imagePrefix, string imagePrefixPushed, Point posn, Size size)
         {
             AddButton(name: name,
                 posn: posn,
                 size: size,
                 image: "{M2000C}/Images/PCNPanel/" + imagePrefix + ".png",
-                pushedImage: "{M2000C}/Images/PCNPanel/" + imagePrefix + ".png",
+                pushedImage: "{M2000C}/Images/PCNPanel/" + imagePrefixPushed + ".png",
                 buttonText: "",
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: name,

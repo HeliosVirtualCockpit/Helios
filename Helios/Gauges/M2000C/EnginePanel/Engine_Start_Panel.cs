@@ -38,10 +38,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddSwitch("Left Fuel Pump Switch", "long-black-", new Point(343, row0), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
             AddSwitch("Right Fuel Pump Switch", "long-black-", new Point(484, row0), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
             ToggleSwitch fuelShutOffSwitch = AddSwitch("Fuel Shut-Off Switch", "long-black-", new Point(440, 165), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
-
             PushButton engineStartButton = AddPushButton("Engine Start Button");
-
-
             AddGuard("Engine Start Switch Guard", "engine-start-", new Point(82, 37), new Size(206, 169), ToggleSwitchPosition.One, ToggleSwitchType.OnOn,
                 new NonClickableZone[] {
                     new NonClickableZone(new Rect(0, 50, 90, 119), ToggleSwitchPosition.One, engineStartButton, ToggleSwitchPosition.Two),

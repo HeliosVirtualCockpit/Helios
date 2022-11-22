@@ -143,11 +143,15 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             {
                 rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, i, i.ToString(), i));
             }
+            AddDefaultInputBinding(
+                childName: $"{Name}_{name} Indicator",
+                interfaceTriggerName: $"HUD/VTB.{name}.changed",
+                deviceActionName: $"set.{name} Indicator");
         }
 
         private void AddDrum(string name, string valueDescription, Point posn, Size size, Size renderSize)
         {
-            Mk2CDrumGauge.Mk2CDrumGauge newGauge = new Mk2CDrumGauge.Mk2CDrumGauge(name, "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", name, valueDescription, "#", posn, size, renderSize, 1d, -1d, 7d);
+            Mk2CDrumGauge.Mk2CDrumGauge newGauge = new Mk2CDrumGauge.Mk2CDrumGauge($"{Name}_{name}", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", name, valueDescription, "#", posn, size, renderSize, 1d, -1d, 7d);
             Children.Add(newGauge);
             foreach (IBindingTrigger trigger in newGauge.Triggers)
             {
