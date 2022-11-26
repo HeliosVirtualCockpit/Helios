@@ -1,0 +1,9 @@
+﻿<ControlTemplate>
+  <Name>Landing Gear Panel V2</Name>
+  <Category>M-2000C Gauges</Category>
+  <TypeIdentifier>HELIOS.M2000C.Landing__Gear_Panel_V2</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

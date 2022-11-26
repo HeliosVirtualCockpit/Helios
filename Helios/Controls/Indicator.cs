@@ -29,6 +29,8 @@ namespace GadrocsWorkshop.Helios.Controls
     {
         private bool _on;
 
+        private bool _allowInteraction = true;
+
         private string _onImage = "{Helios}/Images/Indicators/caution-indicator-on.png";
         private string _offImage = "{Helios}/Images/Indicators/caution-indicator-off.png";
 
@@ -47,6 +49,8 @@ namespace GadrocsWorkshop.Helios.Controls
             : base("Indicator", new System.Windows.Size(100, 50))
         {
             _referenceHeight = Height;
+
+            _allowInteraction = true;
 
             _textFormat.VerticalAlignment = TextVerticalAlignment.Center;
             _textFormat.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(TextFormat_PropertyChanged);
@@ -210,6 +214,13 @@ namespace GadrocsWorkshop.Helios.Controls
                 OnPropertyChanged("ScalingMode", oldValue, value, true);
             }
         }
+
+        public bool AllowInteraction
+        {
+            get => _allowInteraction;
+            set => _allowInteraction = value;
+        }
+
         #endregion
 
         void TextFormat_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -314,6 +325,18 @@ namespace GadrocsWorkshop.Helios.Controls
         public override void MouseUp(Point location)
         {
             // No-Op
+        }
+
+        public override bool HitTest(Point location)
+        {
+            if (_allowInteraction)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void WriteXml(XmlWriter writer)

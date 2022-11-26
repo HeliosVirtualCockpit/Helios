@@ -356,7 +356,14 @@ namespace GadrocsWorkshop.Helios
                     string fullFilename = Path.GetFullPath(filename);
                     if (fullFilename.StartsWith(ConfigManager.ImagePath, StringComparison.CurrentCulture))
                     {
-                        newFilename = fullFilename.Substring(ConfigManager.ImagePath.Length + 1);
+                        if (fullFilename.Equals(ConfigManager.ImagePath))
+                        {
+                            newFilename ="";
+                        }
+                        else
+                        {
+                            newFilename = fullFilename.Substring(ConfigManager.ImagePath.Length + 1);
+                        }
                     }
                 }
             }

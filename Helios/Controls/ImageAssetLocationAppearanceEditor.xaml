@@ -1,0 +1,42 @@
+﻿<HeliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.ImageAssetLocationAppearanceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Helios="clr-namespace:GadrocsWorkshop.Helios"
+             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"                      
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" 
+             d:DesignWidth="180">
+    <HeliosSdk:HeliosPropertyEditor.Resources>
+    </HeliosSdk:HeliosPropertyEditor.Resources>
+    <Grid Background="Transparent" Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right">
+            <Label.Content >
+                <TextBlock Width="60" TextWrapping="WrapWithOverflow">
+                Image Asset Directory
+                </TextBlock>
+            </Label.Content>
+            <Label.ToolTip>
+                <TextBlock Width="400" TextWrapping="WrapWithOverflow">
+The folder where the images for this control are located.
+                </TextBlock>
+            </Label.ToolTip>
+        </Label>
+        <HeliosSdk:FolderPicker
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        FolderDescription="Folder"
+                        Text="{Binding Control.ImageAssetLocation}" 
+                        SelectedFolderPath="{Binding Control.ImageAssetLocation, Mode=TwoWay}"
+                        FolderGuess="{Binding Control.ImageAssetLocation}" />
+    </Grid>
+</HeliosSdk:HeliosPropertyEditor>

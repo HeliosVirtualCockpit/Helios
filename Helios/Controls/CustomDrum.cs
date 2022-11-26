@@ -41,11 +41,10 @@ namespace GadrocsWorkshop.Helios.Controls
 		private int _verticalTravel = 10;
 		private double _minInputVertical = 0d;
 		private double _maxInputVertical = 1d;
-		
 
-
-		public CustomDrum()
-            : base("CustomDrum", new Size(50d, 100d))
+		public CustomDrum() : this("CustomDrum", new Size(50d, 100d)) { }
+        public CustomDrum(string name, Size size)
+            : base(name, size)
         {
 	
 
@@ -59,7 +58,6 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_drumOffset);
 
 		}
-
 
 		#region Properties
 
@@ -220,7 +218,6 @@ namespace GadrocsWorkshop.Helios.Controls
 		}
 
 
-
 		public double MinInputVertical
 		{
 			get
@@ -263,8 +260,7 @@ namespace GadrocsWorkshop.Helios.Controls
 			}
 		}
 
-
-		public override void Reset()
+        public override void Reset()
         {
             base.Reset();
 			BeginTriggerBypass(true);
@@ -280,8 +276,6 @@ namespace GadrocsWorkshop.Helios.Controls
 
 		}
 
-
-
 		#endregion
 
 
@@ -294,8 +288,6 @@ namespace GadrocsWorkshop.Helios.Controls
 			double vValue = (_drumOffset.Value.DoubleValue + ((_maxInputVertical - _minInputVertical) - _maxInputVertical)) / (_maxInputVertical - _minInputVertical); // convert to to 0-1
 			_Drum.VerticalOffset = (_minVertical * (1 - vValue)) + (_verticalTravel * vValue); // lerp vertical 
 		}
-
-	
 
 		#endregion
 
@@ -342,8 +334,5 @@ namespace GadrocsWorkshop.Helios.Controls
 					EndTriggerBypass(true);
 				}
 		}
-
-
-
 	}
 }

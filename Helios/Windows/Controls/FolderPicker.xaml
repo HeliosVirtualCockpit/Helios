@@ -1,0 +1,21 @@
+<UserControl x:Class="GadrocsWorkshop.Helios.Windows.Controls.FolderPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:heliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
+    Width="Auto">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="14" />
+            <ColumnDefinition Width="16" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" MinWidth="232" BorderThickness="0.25" Margin="0,0,2,0" BorderBrush="Black">
+            <TextBlock MinHeight="24" Margin="2" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type heliosSdk:FolderPicker}}, Path=Text}" FontSize="10" />
+        </Border>
+        <Button Grid.Column="1" Height="15" Width="14" FontSize="10" Padding="0" Margin="0,0,0,0" Click="BrowseButton_Click">...</Button>
+        <Button Grid.Column="2" Height="24" Width="16" FontSize="10" Padding="0" Margin="0,0,0,0" Template="{StaticResource DeleteButton}" Click="DeleteButton_Click"/>
+    </Grid>
+</UserControl>

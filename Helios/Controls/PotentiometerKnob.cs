@@ -67,7 +67,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     OnPropertyChanged("IsContinuous", oldValue, value, true);
                     if (value)
                     {
-                        // implementation limitationg
+                        // implementation limitation
                         RotationTravel = 360d;
                     }
                     Refresh();

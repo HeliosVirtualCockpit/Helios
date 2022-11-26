@@ -698,7 +698,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
                         }
 #endif
 
-
             #region Caution Panel
             AddFunction(new FlagValue(this, "525", "Caution Panel", "BATT", "WP BATT"));
             AddFunction(new FlagValue(this, "526", "Caution Panel", "TR", "TR"));
@@ -876,16 +875,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
                 new SwitchPosition("0.0", "UP", "3404"),
                 new SwitchPosition("1.0", "DOWN", "3404") },
                 "Landing Gear Panel", "Landing Gear Lever", "%0.1f"));
+            AddFunction(new FlagValue(this, "405", "Landing Gear Panel", "Landing Gear Handle Indicator", "Red indicator inside the handle"));
+
             AddFunction(new Switch(this, INSTPANEL, "408", new SwitchPosition[] {
                 new SwitchPosition("1.0", "On", "3408"),
                 new SwitchPosition("0.0", "Off", "3408") },
                 "Landing Gear Panel", "Emergency Landing Gear Lever", "%0.1f"));
-            AddFunction(new ScaledNetworkValue(this, "424", 1d, "Landing Gear Panel", "Outter Left Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "424", 1d, "Landing Gear Panel", "Outer Left Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "425", 1d, "Landing Gear Panel", "Inner Left Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "426", 1d, "Landing Gear Panel", "Rudder Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "427", 1d, "Landing Gear Panel", "Outter Right Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "428", 1d, "Landing Gear Panel", "Inner Right Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "427", 1d, "Landing Gear Panel", "Inner Right Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "428", 1d, "Landing Gear Panel", "Outer Right Indicator", "Control Surface Indicator.", "-1.0 to 1.0", BindingValueUnits.Numeric, 0d, "%.4f"));
             AddFunction(new PushButton(this, PCA_PPA, "3409", "409", "Landing Gear Panel", "Emergency Jettison Lever"));
+            AddFunction(new PushButton(this, INSTPANEL, "3926", "926", "Landing Gear Panel", "Landing Gear Tone"));
             #endregion
             #region MCL Panel
             AddFunction(new FlagValue(this, "199", "Master Caution Lights Panel", "Panne Yellow", "Master Warning"));
@@ -1123,7 +1125,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "296", "Indicators", "Indicators 296", "AUTOPILOT blank L"));
             AddFunction(new FlagValue(this, "297", "Indicators", "Indicators 297", "AUTOPILOT G"));
             AddFunction(new FlagValue(this, "298", "Indicators", "Indicators 298", "AUTOPILOT blank G"));
-            AddFunction(new FlagValue(this, "405", "Indicators", "Indicators 405", "Gearhandle Innenleuchte, red"));
             AddFunction(new FlagValue(this, "677", "Indicators", "Indicators 677", "COM left green lamp"));
             AddFunction(new FlagValue(this, "519", "Indicators", "Indicators 519", "Oxy flow lamp"));
             AddFunction(new FlagValue(this, "632", "Indicators", "Indicators 632", "TACAN C"));
@@ -1191,7 +1192,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3420", "420", "1.0", "Open", "0.0", "Closed", "Landing Gear Panel", "FBW Gain Mode Switch Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3421", "421", "0.0", "Norm", "1.0", "Gain CDVE", "Landing Gear Panel", "Fly by Wire Gain Mode Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3422", "422", "0.0", "AA", "1.0", "Charges", "Landing Gear Panel", "Fly by Wire G Limiter Switch", "%0.1f"));
-            AddFunction(new PushButton(this, CDVE, "3423", "423", "Fly By Wire", "FBW Reset Button"));
+            AddFunction(new PushButton(this, CDVE, "3423", "423", "Landing Gear Panel", "FBW Reset Button"));
             #endregion
             #region  PELLES, SOURIES AND BECS
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3460", "460", "0.0", "Auto", "1.0", "Go", "PELLES, SOURIES AND BECS", "Intake Slats Operation Switch", "%0.1f"));
@@ -1279,23 +1280,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
 
             #endregion
             #region  UHF Radio Panel
-            AddFunction(new Text(this, "2064", "UHF Radio Panel", "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
-            AddFunction(new Text(this, "2063", "UHF Radio Panel", "UHF Lower Comm Information", "Lower Display Line for the UHF Radio"));
-            AddFunction(Switch.CreateToggleSwitch(this, UHF, "3429", "429", "1.0", "5W", "0.0", "25W", "UHF Radio Panel", "UHF Power 5W/25W Switch", "%0.1f"));
+            AddFunction(new Text(this, "2064", "Radio Panel", "UHF Upper Comm Information", "Upper Display Line for the UHF Radio"));
+            AddFunction(new Text(this, "2063", "Radio Panel", "VHF Lower Comm Information", "Lower Display Line for the VHF Radio"));
+
+            AddFunction(Switch.CreateToggleSwitch(this, UHF, "3429", "429", "0.0", "5W", "1.0", "25W", "UHF Radio Panel", "UHF Power 5W/25W Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, UHF, "3430", "430", "1.0", "SIL", "0.0", "Off", "UHF Radio Panel", "UHF SIL Switch", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, UHF, "3431", "431", "1.0", "E+A2", "0.5", "Neutral", "0.0", "R", "UHF Radio Panel", "UHF E+A2 Switch", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, UHF, "3431", "431", "1.0", "E+A2", "0.0", "Neutral", "-1.0", "R", "UHF Radio Panel", "UHF E+A2 Switch", "%0.1f"));
             AddFunction(new PushButton(this, UHF, "3432", "432", "UHF Radio Panel", "UHF CDE Switch"));
-            AddFunction(new Switch(this, UHF, "433", CreateSwitchPositions(4, 0.0, 1.0d/3d, "3433", new string[] { "AR", "M", "FI", "H" }, "N2"), "UHF Radio Panel", "UHF Mode Switch", "%0.2f"));
+            AddFunction(new Switch(this, UHF, "433", CreateSwitchPositions(4, 0.0, 0.75d/3d, "3433", new string[] { "AR", "M", "FI", "H" }, "N2"), "UHF Radio Panel", "UHF Mode Switch", "%0.2f"));
             AddFunction(new PushButton(this, UHF, "3434", "434", "UHF Radio Panel", "UHF TEST Switch"));
-            AddFunction(new Axis(this, UHF, "3435", "435", 1.0d / 20d, 0.0d, 1.0d, "UHF Radio Panel", "UHF Knob"));
+            AddFunction(new AbsoluteEncoder(this, UHF, "3435", "3435", "435", 1.0d / 20d, 0.0d, 1.0d, "UHF Radio Panel", "UHF Channel Select", true, "%0.2f"));
 
             #endregion
             #region VHF Radio Panel
             AddFunction(new Text(this, "2062", "VHF Radio Panel", "VHF Comm Information", "Display Line for the VHF Radio"));
-            AddFunction(new Switch(this, VHF, "950", CreateSwitchPositions(7, 0.0, 0.1, "3950", new string[] {"0","FF","HQ","SV","DL","G","EN" }, "N2"), "VHF Radio Panel", "VHF MODE", "%0.2f"));
-            AddFunction(new Axis(this, VHF, "3951", "951", 1.0d / 20d, 0.0d, 1.0d, "VHF Radio Panel", "VHF CH Sel"));
-            AddFunction(new PushButton(this, VHF, "3952", "952", "VHF Radio Panel", "VHF MEM/CLR"));
-            AddFunction(new PushButton(this, VHF, "3953", "953", "VHF Radio Panel", "VHF VLD/XFR"));
+            AddFunction(new Switch(this, VHF, "950", CreateSwitchPositions(7, 0.0, 0.1, "3950", new string[] {"O","FF","HQ","SV","DL","G","EN" }, "N2"), "VHF Radio Panel", "VHF MODE", "%0.2f"));
+            AddFunction(new AbsoluteEncoder(this, VHF, "3951", "3951", "951", 1.0d / 20d, 0.0d, 1.0d, "VHF Radio Panel", "VHF Channel Select",true,"%0.2f"));
+            AddFunction(new PushButton(this, VHF, "3952", "952", "VHF Radio Panel", "Key CLR/MEM"));
+            AddFunction(new PushButton(this, VHF, "3953", "953", "VHF Radio Panel", "Key VLD/XFR"));
             AddFunction(new PushButton(this, VHF, "3954", "954", "VHF Radio Panel", "Key 1/READ"));
             AddFunction(new PushButton(this, VHF, "3955", "955", "VHF Radio Panel", "Key 2/SQL"));
             AddFunction(new PushButton(this, VHF, "3956", "956", "VHF Radio Panel", "Key 3/GR"));
@@ -1306,23 +1308,33 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, VHF, "3961", "961", "VHF Radio Panel", "Key 8/TOD"));
             AddFunction(new PushButton(this, VHF, "3962", "962", "VHF Radio Panel", "Key 9/ZERO"));
             AddFunction(new PushButton(this, VHF, "3963", "963", "VHF Radio Panel", "Key 0"));
-            AddFunction(new PushButton(this, VHF, "3964", "964", "VHF Radio Panel", "VHF CONF"));
+            AddFunction(new PushButton(this, VHF, "3964", "964", "VHF Radio Panel", "Key CONF"));
 
-            // The following VHF functions no longer appear in the ClickableData.lua and are presumed to be deprecated 2022.  It also appears as if the IDs have been reused
-            //AddFunction(new PushButton(this, UVHF, "3437", "437", "Radio Panel (deprecated)", "U/VHF TEST Switch"));
-            //AddFunction(Switch.CreateThreeWaySwitch(this, UVHF, "3438", "438", "1.0", "E+A2", "0.5", "Neutral", "0.0", "R", "Radio Panel (deprecated)", "U/VHF E+A2 Switch", "%0.1f"));
-            //AddFunction(new PushButton(this, UVHF, "3439", "439", "Radio Panel (deprecated)", "U/VHF SIL Switch"));
-            //AddFunction(new PushButton(this, UVHF, "3447", "447", "Radio Panel", "U/VHF Power 5W/25W Switch"));
-            //AddFunction(new Switch(this, UVHF, "448", CreateSwitchPositions(3, 0.0, 0.5, "3448"), "Radio Panel (deprecated)", "U/VHF Manual/Preset Mode Selector", "%0.1f"));
-            //AddFunction(new Switch(this, UVHF, "440", CreateSwitchPositions(4, 0.0, 0.1, "3440", "100MHz"), "Radio Panel (deprecated)", "U/VHF 100 MHz Selector", "%0.1f"));
-            //AddFunction(new Switch(this, UVHF, "441", CreateSwitchPositions(10, 0.0, 0.1, "3441", "10 MHz"), "Radio Panel (deprecated)", "U/VHF 10 MHz Selector", "%0.1f"));
-            //AddFunction(new Switch(this, UVHF, "442", CreateSwitchPositions(10, 0.0, 0.1, "3442", "1MHz"), "Radio Panel (deprecated)", "U/VHF 1 MHz Selector", "%0.1f"));
-            //AddFunction(new Switch(this, UVHF, "443", CreateSwitchPositions(10, 0.0, 0.1, "3443", "100 KHz"), "Radio Panel (deprecated)", "U/VHF 100 KHz Selector", "%0.1f"));
-            //AddFunction(new Switch(this, UVHF, "444", CreateSwitchPositions(4, 0.0, 0.25, "3444", "25KHz"), "Radio Panel (deprecated)", "U/VHF 25 KHz Selector", "%0.2f"));
-            //AddFunction(new Switch(this, UVHF, "445", CreateSwitchPositions(20, 0.0, 0.05, "3445"), "Radio Panel (deprecated)", "U/VHF Knob", "%0.2f"));
-            //AddFunction(new Switch(this, UVHF, "446", CreateSwitchPositions(5, 0.0, 0.25, "3446"), "Radio Panel (deprecated)", "U/VHF Mode Switch 1", "%0.2f"));
-            //AddFunction(new ScaledNetworkValue(this, UVHF_PRESET_DISPLAY, 0d, "Radio Panel (deprecated)", "Preset output for display", "Current preset channel", "use rotary encoder with initial 0, min0, max 20, step 0.1", BindingValueUnits.Numeric, 0d, "%.4f"));
-            //AddFunction(new Axis(this, UVHF, UVHF_PRESET_KNOB, CMD + UVHF_PRESET_KNOB, 0.05d, 0d, 1.0d, "Radio Panel (deprecated)", "Preset frequency change"));
+            AddFunction(new FlagValue(this, "965", "VHF Radio Panel", "Indicator CLR", "Legend on key"));
+            AddFunction(new FlagValue(this, "966", "VHF Radio Panel", "Indicator MEM", "Legend on key"));
+            AddFunction(new FlagValue(this, "967", "VHF Radio Panel", "Indicator VLD", "Legend on key"));
+            AddFunction(new FlagValue(this, "968", "VHF Radio Panel", "Indicator XFR", "Legend on key"));
+            AddFunction(new FlagValue(this, "969", "VHF Radio Panel", "Indicator 1", "Legend on key"));
+            AddFunction(new FlagValue(this, "970", "VHF Radio Panel", "Indicator READ", "Legend on key"));
+            AddFunction(new FlagValue(this, "971", "VHF Radio Panel", "Indicator 2", "Legend on key"));
+            AddFunction(new FlagValue(this, "972", "VHF Radio Panel", "Indicator 2LIGHT", "Legend on key"));
+            AddFunction(new FlagValue(this, "973", "VHF Radio Panel", "Indicator SQL", "Legend on key"));
+            AddFunction(new FlagValue(this, "974", "VHF Radio Panel", "Indicator 3", "Legend on key"));
+            AddFunction(new FlagValue(this, "975", "VHF Radio Panel", "Indicator 3LIGHT", "Legend on key"));
+            AddFunction(new FlagValue(this, "976", "VHF Radio Panel", "Indicator GR", "Legend on key"));
+            AddFunction(new FlagValue(this, "977", "VHF Radio Panel", "Indicator 4", "Legend on key"));
+            AddFunction(new FlagValue(this, "978", "VHF Radio Panel", "Indicator 5", "Legend on key"));
+            AddFunction(new FlagValue(this, "979", "VHF Radio Panel", "Indicator 20", "Legend on key"));
+            AddFunction(new FlagValue(this, "980", "VHF Radio Panel", "Indicator LOW", "Legend on key"));
+            AddFunction(new FlagValue(this, "981", "VHF Radio Panel", "Indicator 6", "Legend on key"));
+            AddFunction(new FlagValue(this, "982", "VHF Radio Panel", "Indicator TONE", "Legend on key"));
+            AddFunction(new FlagValue(this, "983", "VHF Radio Panel", "Indicator 7", "Legend on key"));
+            AddFunction(new FlagValue(this, "984", "VHF Radio Panel", "Indicator 8", "Legend on key"));
+            AddFunction(new FlagValue(this, "985", "VHF Radio Panel", "Indicator TOD", "Legend on key"));
+            AddFunction(new FlagValue(this, "986", "VHF Radio Panel", "Indicator 9", "Legend on key"));
+            AddFunction(new FlagValue(this, "987", "VHF Radio Panel", "Indicator ZERO", "Legend on key"));
+            AddFunction(new FlagValue(this, "988", "VHF Radio Panel", "Indicator 0", "Legend on key"));
+            AddFunction(new FlagValue(this, "989", "VHF Radio Panel", "Indicator CONF", "Legend on key"));
 
             #endregion
             #region  Miscellaneous Left Panel

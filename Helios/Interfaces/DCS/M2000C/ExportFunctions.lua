@@ -20,13 +20,13 @@ function driver.processLowImportance(mainPanelDevice)
     -- VHF Comm structured data
     li = helios.parseIndication(8)
     if li then
-        helios.send(2062, string.format("%-8s", helios.ensureString(li.text_COM_VHF)))
+        helios.send(2062, string.format("%.8s", helios.ensureString(li.text_COM_VHF):reverse():sub(1,8):reverse()))
     end
     -- UHF Comm structured data
     li = helios.parseIndication(7)
     if li then
-        helios.send(2063, string.format("%-8s", helios.ensureString(li.text_COM_UHF1)))
-        helios.send(2064, string.format("%-8s", helios.ensureString(li.text_COM_UHF2)))
+        helios.send(2063, string.format("%.8s", helios.ensureString(li.text_COM_UHF1):reverse():sub(1,8):reverse()))
+        helios.send(2064, string.format("%.8s", helios.ensureString(li.text_COM_UHF2):reverse():sub(1,8):reverse()))
     end
     -- PPA structured data
     li = helios.parseIndication(6)

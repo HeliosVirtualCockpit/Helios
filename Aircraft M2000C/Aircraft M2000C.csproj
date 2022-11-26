@@ -683,64 +683,103 @@
     <Resource Include="Images\PCAPanel\PCA_Upper_Display.png" />
     <Resource Include="Images\PCNPanel\Button_Down.png" />
     <Resource Include="Images\PCNPanel\Button_Up.png" />
-    <Resource Include="Images\V2\LGPanel\a-off.png" />
-    <Resource Include="Images\V2\LGPanel\a-on.png" />
-    <Resource Include="Images\V2\LGPanel\bip-off.png" />
-    <Resource Include="Images\V2\LGPanel\bip-on.png" />
-    <Resource Include="Images\V2\LGPanel\cross-off.png" />
-    <Resource Include="Images\V2\LGPanel\cross-on.png" />
-    <Resource Include="Images\V2\LGPanel\dirav-off.png" />
-    <Resource Include="Images\V2\LGPanel\dirav-on.png" />
-    <Resource Include="Images\V2\LGPanel\emergency-jettison-not-pushed.png" />
-    <Resource Include="Images\V2\LGPanel\emergency-jettison-pushed.png" />
-    <Resource Include="Images\V2\LGPanel\emergency-landing-gear-lever.png" />
-    <Resource Include="Images\V2\LGPanel\f-off.png" />
-    <Resource Include="Images\V2\LGPanel\f-on.png" />
-    <Resource Include="Images\V2\LGPanel\fbwg-guard-down.png" />
-    <Resource Include="Images\V2\LGPanel\fbwg-guard-up.png" />
-    <Resource Include="Images\V2\LGPanel\frein-off.png" />
-    <Resource Include="Images\V2\LGPanel\frein-on.png" />
-    <Resource Include="Images\V2\LGPanel\gun-arming-guard-down.png" />
-    <Resource Include="Images\V2\LGPanel\gun-arming-guard-up.png" />
-    <Resource Include="Images\V2\LGPanel\landing-gear-down.png" />
-    <Resource Include="Images\V2\LGPanel\landing-gear-up.png" />
-    <Resource Include="Images\V2\LGPanel\left-gear-off.png" />
-    <Resource Include="Images\V2\LGPanel\left-gear-on.png" />
-    <Resource Include="Images\V2\LGPanel\lg-panel.png" />
-    <Resource Include="Images\V2\LGPanel\nose-gear-off.png" />
-    <Resource Include="Images\V2\LGPanel\nose-gear-on.png" />
-    <Resource Include="Images\V2\LGPanel\right-gear-off.png" />
-    <Resource Include="Images\V2\LGPanel\right-gear-on.png" />
-    <Resource Include="Images\V2\LGPanel\spad-off.png" />
-    <Resource Include="Images\V2\LGPanel\spad-on.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Encoder_Knob.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_0.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_1.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_2.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_2_Lit.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_3.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_3_Lit.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_4.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_5.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_6.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_7.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_8.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_9.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_CLR_MEM.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_CONF.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_Lit.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Key_VLD_XFR.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\M-2000C_UHF_Radio_Background.png" />
-    <Resource Include="Images\V2\UHFRadioPanel\Mode_Knob.png" />
-    <Resource Include="Images\V2\LGPanel\Bar-Indicator-Horizontal.png" />
-    <Resource Include="Images\V2\LGPanel\Bar-Indicator-Vertical.png" />
-    <Resource Include="Images\V2\LGPanel\emergency-landing-gear-lever-horizontal.png" />
-    <Resource Include="Images\V2\LGPanel\FBW-G-Limit-Switch-Down.png" />
-    <Resource Include="Images\V2\LGPanel\FBW-G-Limit-Switch-Up.png" />
-    <Resource Include="Images\V2\LGPanel\FBW-Gain-Switch-Down.png" />
-    <Resource Include="Images\V2\LGPanel\FBW-Gain-Switch-Up.png" />
-    <Resource Include="Images\V2\LGPanel\FBW-Reset-Button-Down.png" />
-    <Resource Include="Images\V2\LGPanel\FBW-Reset-Button-Up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\a-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\a-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\bip-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\bip-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\cross-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\cross-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\dirav-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\dirav-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\emergency-jettison-not-pushed.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\emergency-jettison-pushed.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\emergency-landing-gear-lever-vertical.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\f-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\f-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\fbwg-guard-down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\fbwg-guard-up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\frein-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\frein-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\gun-arming-guard-down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\gun-arming-guard-up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\left-gear-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\left-gear-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\lg-panel.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\nose-gear-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\nose-gear-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\right-gear-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\right-gear-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\spad-off.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\spad-on.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\Bar-Indicator-Horizontal.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\Bar-Indicator-Vertical.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\emergency-landing-gear-lever.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\FBW-G-Limit-Switch-Down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\FBW-G-Limit-Switch-Up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\FBW-Gain-Switch-Down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\FBW-Gain-Switch-Up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\FBW-Reset-Button-Down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\FBW-Reset-Button-Up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\BIP-Button-Down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\BIP-Button-Up.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-lit-down.png" />
+    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-lit-up.png" />
+    <Resource Include="Images\V2\VHF Radio\Encoder_Knob.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_0.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_0_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_1.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_1_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_2.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_20.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_2_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_2_Light.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_3.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_3_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_3_Light.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_3_Lit.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_4.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_4_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_5.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_5_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_6.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_6_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_7.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_7_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_8.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_8_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_9.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_9_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_Zero.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_CLR.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_CLR_MEM_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_CONF.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_CONF_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_GR.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_Lit.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_LOW.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_Mem.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_READ.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_SQL.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_TONE.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_VLD.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_VLD_XFR_Blank.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_XFR.png" />
+    <Resource Include="Images\V2\VHF Radio\M-2000C_VHF_Radio_Background.png" />
+    <Resource Include="Images\V2\VHF Radio\Mode_Knob.png" />
+    <Resource Include="Images\V2\VHF Radio\Key_TOD.png" />
+    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Down.png" />
+    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Lit_Down.png" />
+    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Lit_Up.png" />
+    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Up.png" />
+    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Down.png" />
+    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Lit_Down.png" />
+    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Lit_Up.png" />
+    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Up.png" />
+    <Resource Include="Images\V2\UHF Radio\UHF_Radio_Panel.png" />
+    <Resource Include="Images\V2\UHF Radio\UHF_Channel_Knob.png" />
+    <Resource Include="Images\V2\UHF Radio\UHF_Mode_Knob.png" />
     <Content Include="Templates\Base\M2000C\CautionPanelRedIndicator.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -918,7 +957,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\UHF_Repeater_Display.htpl">
+    <Content Include="Templates\Base\M2000C\Panels\Radio_Repeater_Display.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -939,6 +978,16 @@
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\V2\Landing Gear Panel\Bar-Indicator-Horizontal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Base\M2000C\Panels\Landing_Gear_Panel_V2.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>
