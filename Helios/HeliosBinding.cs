@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2020 Helios Contributors
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -271,13 +271,16 @@ namespace GadrocsWorkshop.Helios
                 if (_luaInterpreter == null)
                 {
                     _luaInterpreter = new Lua();
+
+                    // add lua environment variables
+                    _luaInterpreter.DoString("HeliosPath = " + "'" + ConfigManager.DocumentPath.Replace("\\", "\\\\") + "'");
+                    _luaInterpreter.DoString("BMSFalconPath = " + "'" + ConfigManager.BMSFalconPath.Replace("\\", "\\\\") + "'");
                 }
                 return _luaInterpreter;
             }
         }
 
         #endregion
-
 
         private string ReplaceValue(string inputString)
         {

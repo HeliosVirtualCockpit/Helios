@@ -94,7 +94,7 @@ namespace GadrocsWorkshop.Helios.Controls
             Actions.Add(_pushAction);
             Actions.Add(_releaseAction);
 
-            _pushedValue = new HeliosValue(this, new BindingValue(false), "", "physical state", "Current state of this button.", "True if the button is currently pushed(either via pressure or toggle), otherwise false.  Setting this value will not fire pushed/released triggers, but will fire on/off triggers.  Directly setting this state to on for a momentary buttons will not auto release, the state must be manually reset to false.", BindingValueUnits.Boolean);
+            _pushedValue = new HeliosValue(this, new BindingValue(false), "", "physical state", "Current state of this button.", "True if the button is currently pushed (either via pressure or toggle), otherwise false.  Setting this value will not fire pushed/released triggers, but will fire on/off triggers.  Directly setting this state to on for a momentary buttons will not auto release, the state must be manually reset to false.", BindingValueUnits.Boolean);
             _pushedValue.Execute += new HeliosActionHandler(PushedValue_Execute);
             Values.Add(_pushedValue);
             Actions.Add(_pushedValue);

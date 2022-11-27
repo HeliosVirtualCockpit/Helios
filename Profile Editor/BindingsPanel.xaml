@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:helios="clr-namespace:GadrocsWorkshop.Helios;assembly=Helios"
              xmlns:local="clr-namespace:GadrocsWorkshop.Helios.ProfileEditor"
-             xmlns:vm="clr-namespace:GadrocsWorkshop.Helios.ProfileEditor.ViewModel"             
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" Background="{StaticResource ToolBackground}">
     <UserControl.Resources>
@@ -136,9 +135,29 @@
                                             </MultiDataTrigger.Conditions>
                                             <Setter Property="Visibility" Value="Visible" />
                                         </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Style="{StaticResource PropertyName}">Trigger Value</TextBlock>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="100">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding SelectedBinding.Trigger.Unit.LongName}" />
+                                        <TextBlock Text="{Binding SelectedBinding.Trigger.TriggerValueDescription}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="#FF808080" BorderThickness="1" CornerRadius="2" Margin="4" Padding="4">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
                                                 <Condition Binding="{Binding SelectedBinding.ValueSource}" Value="LuaScript"/>
+                                                <Condition Binding="{Binding Path=BMSFalconPathExists}" Value="False"/>
                                                 <Condition Binding="{Binding SelectedBinding.Trigger.TriggerSuppliesValue}" Value="True"/>
                                             </MultiDataTrigger.Conditions>
                                             <Setter Property="Visibility" Value="Visible" />
@@ -148,10 +167,43 @@
                             </Border.Style>
                             <StackPanel Grid.Column="0">
                                 <TextBlock Style="{StaticResource PropertyName}">Trigger Value</TextBlock>
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="80">
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="100">
                                     <StackPanel>
                                         <TextBlock Text="{Binding SelectedBinding.Trigger.Unit.LongName}" />
                                         <TextBlock Text="{Binding SelectedBinding.Trigger.TriggerValueDescription}" TextWrapping="Wrap" />
+                                        <TextBlock Text="HeliosPath" TextWrapping="Wrap" />
+                                        <TextBlock Text="returns Helios Path." TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="#FF808080" BorderThickness="1" CornerRadius="2" Margin="4" Padding="4">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding SelectedBinding.ValueSource}" Value="LuaScript"/>
+                                                <Condition Binding="{Binding Path=BMSFalconPathExists}" Value="True"/>
+                                                <Condition Binding="{Binding SelectedBinding.Trigger.TriggerSuppliesValue}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Style="{StaticResource PropertyName}">Trigger Value</TextBlock>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="100">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding SelectedBinding.Trigger.Unit.LongName}" />
+                                        <TextBlock Text="{Binding SelectedBinding.Trigger.TriggerValueDescription}" TextWrapping="Wrap" />
+                                        <TextBlock Text="HeliosPath" TextWrapping="Wrap" />
+                                        <TextBlock Text="returns Helios Path." TextWrapping="Wrap" />
+                                        <TextBlock Text="BMSFalconPath" TextWrapping="Wrap" />
+                                        <TextBlock Text="returns BMS Falcon Path." TextWrapping="Wrap" />
                                     </StackPanel>
                                 </ScrollViewer>
                             </StackPanel>
@@ -160,7 +212,7 @@
                         <Border Grid.Column="1" Grid.Row="1" BorderBrush="#FF808080" BorderThickness="1" CornerRadius="2" Margin="4" Padding="4">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource PropertyName}">Action Value</TextBlock>
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="80">
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="100">
                                     <StackPanel>
                                         <TextBlock Text="{Binding SelectedBinding.Action.Unit.LongName}" />
                                         <TextBlock Text="{Binding SelectedBinding.Action.ActionValueDescription}" TextWrapping="Wrap" />
@@ -180,7 +232,7 @@
                                         <Style.Triggers>
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding SelectedBinding.ValueSource}" Value="LuaScript"/>
+                                                    <Condition Binding="{Binding SelectedBinding.ValueSource}" Value="TriggerValue"/>
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
                                             </MultiDataTrigger>
@@ -188,6 +240,48 @@
                                     </Style>
                                 </TextBlock.Style>
                                 <TextBlock.Text>Return value from the script will be passed to the action. A global variable named "TriggerValue" will be populated with the value passed in from the trigger.</TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                            <TextBlock FontSize="10" TextWrapping="Wrap" Margin="4,4,4,0" Text="{Binding SelectedBinding.ErrorMessage}" Foreground="Red" Style="{StaticResource ErrorMessageStyle}" />
+                            <TextBlock FontSize="9" TextWrapping="Wrap" Margin="4,1,4,4">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource Documentation}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding SelectedBinding.ValueSource}" Value="LuaScript"/>
+                                                    <Condition Binding="{Binding Path=BMSFalconPathExists}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                                <TextBlock.Text>Return value from the script will be passed to the action. A global variable named "TriggerValue" will be populated with the value passed in from the trigger. A global variable named "HeliosPath" will be populated with the Helios Path value.</TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                            <TextBlock FontSize="10" TextWrapping="Wrap" Margin="4,4,4,0" Text="{Binding SelectedBinding.ErrorMessage}" Foreground="Red" Style="{StaticResource ErrorMessageStyle}" />
+                            <TextBlock FontSize="9" TextWrapping="Wrap" Margin="4,1,4,4">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource Documentation}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding SelectedBinding.ValueSource}" Value="LuaScript"/>
+                                                    <Condition Binding="{Binding Path=BMSFalconPathExists}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                                <TextBlock.Text>Return value from the script will be passed to the action. A global variable named "TriggerValue" will be populated with the value passed in from the trigger. Global variables named "HeliosPath" and "BMSFalconPath" will be populated with the Helios and BMS Falcon Path values respectively.</TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
                     </Grid>

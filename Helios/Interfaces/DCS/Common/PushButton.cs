@@ -83,7 +83,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
             _value = new HeliosValue(SourceInterface, new BindingValue(false), SerializedDeviceName, SerializedFunctionName,
                 SerializedDescription,
-                "True if the button is currently pushed(either via pressure or toggle), otherwise false.",
+                "True if the button is currently pushed (either via pressure or toggle), otherwise false.",
                 BindingValueUnits.Boolean);
             Values.Add(_value);
             Triggers.Add(_value);

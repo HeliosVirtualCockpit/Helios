@@ -1,5 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -13,14 +14,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.IO;
 using System.Windows;
+using System.Collections.Generic;
+using Microsoft.Win32;
 
 namespace GadrocsWorkshop.Helios
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
     public class ConfigManager
     {
         private static string _documentPath;
@@ -32,6 +33,7 @@ namespace GadrocsWorkshop.Helios
         {
             string assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
             ApplicationPath = Path.GetDirectoryName(assemblyLocation);
+            BMSFalconPath = GetBMSFalconPath();
         }
 
         #region Properties
@@ -111,6 +113,7 @@ namespace GadrocsWorkshop.Helios
         public static string ProfilePath { get; private set; }
         public static string ImagePath { get; private set; }
         public static string TemplatePath { get; private set; }
+        public static string BMSFalconPath { get; private set; }
 
         public static IImageManager ImageManager { get; internal set; }
 
@@ -135,6 +138,34 @@ namespace GadrocsWorkshop.Helios
         /// private fonts for use in Helios
         /// </summary>
         public static FontManager FontManager { get; internal set; }
+
         #endregion
+
+        private static string GetBMSFalconPath()
+        {
+            RegistryKey pathKey;
+            string[] subkeys;
+            string falconRootKey = @"SOFTWARE\WOW6432Node\Benchmark Sims\";
+            string falconVersion = "";
+            string pathValue = "";
+
+            if (Registry.LocalMachine.OpenSubKey(falconRootKey) != null)
+            {
+                subkeys = Registry.LocalMachine.OpenSubKey(falconRootKey).GetSubKeyNames();
+                if (subkeys.Length > 0)
+                {
+                    Array.Reverse(subkeys);
+                    falconVersion = subkeys[0];
+                }
+            }
+
+            pathKey = Registry.LocalMachine.OpenSubKey(falconRootKey + falconVersion);
+
+            if (pathKey != null)
+            {
+                pathValue = (string)pathKey.GetValue("baseDir") ?? "";
+            }
+            return pathValue;
+        }
     }
 }

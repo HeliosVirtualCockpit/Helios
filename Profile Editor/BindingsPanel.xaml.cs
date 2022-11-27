@@ -1,5 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -120,6 +121,11 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
         // Using a DependencyProperty as the backing store for ValueEditor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueEditorProperty =
             DependencyProperty.Register("ValueEditor", typeof(StaticValueEditor), typeof(BindingsPanel), new PropertyMetadata(null));
+
+        public bool BMSFalconPathExists
+        {
+            get => ConfigManager.BMSFalconPath.Length > 0;
+        }
 
         #endregion
 
