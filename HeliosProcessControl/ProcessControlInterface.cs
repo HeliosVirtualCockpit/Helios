@@ -45,6 +45,10 @@ namespace GadrocsWorkshop.Helios.HeliosProcessControl
             HeliosAction killApplication = new HeliosAction(this, "", "", "kill application", "Kills an external process", "Process Image name of the process to be killed.", BindingValueUnits.Text);
             killApplication.Execute += KillApplication_Execute;
             Actions.Add(killApplication);
+
+            // Add environmental variables for this process only.
+            SetEnvironmentVariable("HeliosPath", ConfigManager.DocumentPath);
+            SetEnvironmentVariable("BMSFalconPath", ConfigManager.BMSFalconPath);
         }
 
         protected override void AttachToProfileOnMainThread()
@@ -338,6 +342,14 @@ namespace GadrocsWorkshop.Helios.HeliosProcessControl
             // Possibly a URI
             return ExtractURICheck(proposedPath);
         }
+
+        private void SetEnvironmentVariable(string envVar, string envVarPath)
+		{
+            if (Environment.GetEnvironmentVariable(envVar) == null)
+			{
+                Environment.SetEnvironmentVariable(envVar, envVarPath);
+            }
+		}
 
         public IEnumerable<StatusReportItem> PerformReadyCheck()
         {

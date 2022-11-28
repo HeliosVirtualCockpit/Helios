@@ -33,11 +33,19 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding Data.Name}"/>
         <!-- if there was any XML config, it would be here: <TextBlock Grid.Row="1" Text="{Binding Data.Model.xyz}"/> -->
         <ItemsControl Grid.Row="2" Margin="12,0,0,0" ItemsSource="{Binding Data.InputBindings}"/>
-        <CheckBox Grid.Row="3" IsChecked="{Binding Data.Model.AllowLaunch}" Margin="12">Allow Helios profiles on this computer to start (launch) external programs</CheckBox>
-        <CheckBox Grid.Row="4" IsChecked="{Binding Data.Model.AllowKill}" Margin="12">Allow Helios profiles on this computer to stop (kill) external programs</CheckBox>
+        <CheckBox Grid.Row="3" IsChecked="{Binding Data.Model.AllowLaunch}" Margin="12">Allow Helios profiles on this computer to start (launch) external applications.</CheckBox>
+        <CheckBox Grid.Row="4" IsChecked="{Binding Data.Model.AllowKill}" Margin="12">Allow Helios profiles on this computer to stop (kill) external applications.</CheckBox>
+        <TextBlock Grid.Row="5" Text="All standard environmental variables, of the form %EnvVarName%, are available for use in the launch applications path." />
+        <TextBlock Grid.Row="6" Text="In addition the following environmental variables are available:" />
+        <TextBlock Grid.Row="7" Text="%HeliosPath% which returns the path to the current Helios/HeliosDev folder in documents." />
+        <TextBlock Grid.Row="8" Text="%BMSFalconPath% which returns the path to the BMS Falcon root folder providing the application is installed." />
     </Grid>
 </controls:HeliosInterfaceEditor>
