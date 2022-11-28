@@ -50,5 +50,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge
         {
             _drum.Value = (e.Value.DoubleValue + _offset) * _multiplier;
         }
+
+        public override bool HitTest(Point location)
+        {
+            return false;
+        }
     }
 }

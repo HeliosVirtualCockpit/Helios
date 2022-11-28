@@ -18,12 +18,14 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+    using NLog;
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.Net.NetworkInformation;
     using System.Windows;
     using System.Windows.Media;
+    using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
     [HeliosControl("HELIOS.M2000C.VTB_PANEL", "VTB Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_VTBPanel : M2000CDevice
@@ -31,6 +33,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private static readonly Rect SCREEN_RECT = new Rect(51, 9, 434, 420);
         private string _interfaceDeviceName = "HUD/VTB";
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
 
         public M2000C_VTBPanel()
             : base("VTB Panel", new Size(531, 586))
@@ -40,17 +44,16 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             Size VTB_switch_size = new Size(20, 40);
 
             //Brightness switches and indicators
-            ///ToDo:  Work out why the drums are eclipsing other controls outside of their render position.  
-            ///temporarily moved to the back to avoid the problem
+            AddRotarySwitch("Markers Brightness", new Point(222, 473), new Size(46, 90), 8);
+            AddRotarySwitch("Main Brightness", new Point(290, 473), new Size(46, 90), 8);
+            AddRotarySwitch("Video Brightness", new Point(359, 473), new Size(46, 90), 8);
+            AddRotarySwitch("Cavalier Brightness", new Point(428, 473), new Size(46, 90), 8);
             AddDrum("Markers Brightness Indicator", "(0-7)", new Point(222, 506), new Size(10d, 15d), new Size(16d, 24d));
             AddDrum("Main Brightness Indicator", "(0-7)", new Point(290, 506), new Size(10d, 15d), new Size(16d, 24d));
             AddDrum("Video Brightness Indicator", "(0-7)", new Point(359, 506), new Size(10d, 15d), new Size(16d, 24d));
             AddDrum("Cavalier Brightness Indicator", "(0-7)", new Point(428, 506), new Size(10d, 15d), new Size(16d, 24d));
             
-            AddRotarySwitch("Markers Brightness", new Point(222, 473), new Size(46, 90), 8);
-            AddRotarySwitch("Main Brightness", new Point(290, 473), new Size(46, 90), 8);
-            AddRotarySwitch("Video Brightness", new Point(359, 473), new Size(46, 90), 8);
-            AddRotarySwitch("Cavalier Brightness", new Point(428, 473), new Size(46, 90), 8);
+
 
             //Left Switches
             Add3PosnToggle("Target Data Manual Entry Begin/End", new Point(column1, row1), VTB_switch_size, "{M2000C}/Images/Switches/black-circle-", ThreeWayToggleSwitchType.MomOnMom,
@@ -161,7 +164,16 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             {
                 AddAction(action, $"{Name}_{name}");
             }
-
+            try
+            {
+                /// This is an internal binding within the gauge as opposed to a binding to the default interface
+                /// and it is required because the data for the drum is not passed explicity over tbe interface.
+                InputBindings.Add(CreateNewBinding(Children[$"{Name}_{name.Replace(" Indicator", "")}"].Triggers["position.changed"], newGauge.Actions[$"set.{name}"]));
+            }
+            catch
+            {
+                Logger.Error($"Unable to create self-binding for gauge {Name}_{name.Replace(" Indicator", "")} trigger: {name.Replace(" Indicator", "")} \"position.changed\" action: {newGauge.Name} \"set.{name}\" ");
+            }
         }
         public override bool HitTest(Point location)
         {

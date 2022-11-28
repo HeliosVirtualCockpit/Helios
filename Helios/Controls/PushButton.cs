@@ -459,8 +459,8 @@ namespace GadrocsWorkshop.Helios.Controls
         /// <param name="newName"></param>
         public void ReplaceImageNames(string oldName, string newName)
         {
-            Image = !string.IsNullOrEmpty(Image) ? Image : string.IsNullOrEmpty(oldName) ? newName + Image : Image.Replace(oldName, newName);
-            PushedImage = !string.IsNullOrEmpty(PushedImage) ? PushedImage : string.IsNullOrEmpty(oldName) ? newName + PushedImage : PushedImage.Replace(oldName, newName);
+            Image = string.IsNullOrEmpty(Image) ? Image : string.IsNullOrEmpty(oldName) ? newName + Image : Image.Replace(oldName, newName);
+            PushedImage = string.IsNullOrEmpty(PushedImage) ? PushedImage : string.IsNullOrEmpty(oldName) ? newName + PushedImage : PushedImage.Replace(oldName, newName);
         }
         public override void MouseDown(Point location)
         {

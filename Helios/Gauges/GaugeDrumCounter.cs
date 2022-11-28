@@ -16,12 +16,13 @@
 
 namespace GadrocsWorkshop.Helios.Gauges
 {
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.Linq;
     using System.Windows;
     using System.Windows.Media;
 
-    public class GaugeDrumCounter : GaugeComponent
+    public class GaugeDrumCounter : GaugeComponent, IConfigurableImageLocation
     {
         private string _imageFile;
         private ImageSource _image;
@@ -217,6 +218,15 @@ namespace GadrocsWorkshop.Helios.Gauges
                 _imageRect = new Rect(0, 0, (originalImage.Width * scaleX), (originalImage.Height * scaleY));
                 _image = ConfigManager.ImageManager.LoadImage(_imageFile, (int)_imageRect.Width, (int)_imageRect.Height);                
             }
+        }
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            Image = string.IsNullOrEmpty(Image) ? Image : string.IsNullOrEmpty(oldName) ? newName + Image : Image.Replace(oldName, newName);
         }
     }
 }

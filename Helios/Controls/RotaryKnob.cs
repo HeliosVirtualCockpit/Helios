@@ -56,7 +56,7 @@ namespace GadrocsWorkshop.Helios.Controls
         /// <param name="newName"></param>
         public void ReplaceImageNames(string oldName, string newName)
         {
-            KnobImage = !string.IsNullOrEmpty(KnobImage) ? KnobImage : string.IsNullOrEmpty(oldName) ? newName + KnobImage : KnobImage.Replace(oldName, newName);
+            KnobImage = string.IsNullOrEmpty(KnobImage) ? KnobImage : string.IsNullOrEmpty(oldName) ? newName + KnobImage : KnobImage.Replace(oldName, newName);
         }
 
         public double KnobRotation

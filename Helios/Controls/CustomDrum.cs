@@ -286,7 +286,7 @@ namespace GadrocsWorkshop.Helios.Controls
         /// <param name="newName"></param>
         public void ReplaceImageNames(string oldName, string newName)
         {
-            DrumImage = !string.IsNullOrEmpty(DrumImage) ? DrumImage : string.IsNullOrEmpty(oldName) ? newName + DrumImage : DrumImage.Replace(oldName, newName);
+            DrumImage = string.IsNullOrEmpty(DrumImage) ? DrumImage : string.IsNullOrEmpty(oldName) ? newName + DrumImage : DrumImage.Replace(oldName, newName);
         }
 
         #region Actions

@@ -309,8 +309,8 @@ namespace GadrocsWorkshop.Helios.Controls
         /// <param name="newName"></param>
         public void ReplaceImageNames(string oldName, string newName)
         {
-            OffImage = !string.IsNullOrEmpty(OffImage) ? OffImage : string.IsNullOrEmpty(oldName) ? newName + OffImage : OffImage.Replace(oldName, newName);
-            OnImage = !string.IsNullOrEmpty(OnImage) ? OnImage : string.IsNullOrEmpty(oldName) ? newName + OnImage : OnImage.Replace(oldName, newName);
+            OffImage = string.IsNullOrEmpty(OffImage) ? OffImage : string.IsNullOrEmpty(oldName) ? newName + OffImage : OffImage.Replace(oldName, newName);
+            OnImage = string.IsNullOrEmpty(OnImage) ? OnImage : string.IsNullOrEmpty(oldName) ? newName + OnImage : OnImage.Replace(oldName, newName);
         }
 
         #region Overrides of HeliosVisual

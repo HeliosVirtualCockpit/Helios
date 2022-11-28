@@ -119,9 +119,9 @@ namespace GadrocsWorkshop.Helios.Gauges
         /// <param name="PropertyChangedArgs"></param>
         protected void UpdateImageAssets(PropertyNotificationEventArgs args)
         {
-            foreach (IConfigurableImageLocation child in Children)
+            foreach (HeliosVisual child in Children)
             {
-                child.ReplaceImageNames(args.OldValue.ToString(), args.NewValue.ToString());
+                (child as IConfigurableImageLocation)?.ReplaceImageNames(args.OldValue.ToString(), args.NewValue.ToString());
             }
         }
 

@@ -1289,7 +1289,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, UHF, "3432", "432", "UHF Radio Panel", "UHF CDE Switch"));
             AddFunction(new Switch(this, UHF, "433", CreateSwitchPositions(4, 0.0, 0.75d/3d, "3433", new string[] { "AR", "M", "FI", "H" }, "N2"), "UHF Radio Panel", "UHF Mode Switch", "%0.2f"));
             AddFunction(new PushButton(this, UHF, "3434", "434", "UHF Radio Panel", "UHF TEST Switch"));
-            AddFunction(new AbsoluteEncoder(this, UHF, "3435", "3435", "435", 1.0d / 20d, 0.0d, 1.0d, "UHF Radio Panel", "UHF Channel Select", true, "%0.2f"));
+            AddFunction(new Axis(this, UHF, "3435", "435", 1.0d / 20d, 0.0d, 1.0d, "UHF Radio Panel", "UHF Channel Select", true, "%0.2f"));
 
             #endregion
             #region VHF Radio Panel

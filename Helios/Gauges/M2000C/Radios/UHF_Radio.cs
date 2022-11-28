@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private string _interfaceDeviceName = "UHF Radio Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _imageAssetLocation = "{M2000C}/Images/V2/";
-        private RotaryEncoder _encoder;
+        private Potentiometer _potentiometer;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
 
@@ -44,9 +44,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicatorPushButton("UHF CDE Switch", new Point(82, 118), new Size(32, 30), "Green_UHF_Button", _interfaceDeviceName, "UHF CDE Switch", "UHF CDE Indicator");
             AddRotarySwitch("UHF Mode Switch", new Point(140d, 98d), new Size(80d, 80d));
             AddIndicatorPushButton("UHF Test Switch", new Point(250, 118), new Size(31,30), "Orange_UHF_Button", _interfaceDeviceName, "UHF TEST Switch", "UHF TEST Indicator");
-            _encoder = AddEncoder("UHF Channel Sel", new Point(320d, 6d), new Size(140d, 140d), $"{_imageAssetLocation}{Name}/UHF_Channel_Knob.png", 0.1d, 20d, _interfaceDeviceName, "UHF Channel Select", false);
+            _potentiometer = AddPot("UHF Channel Sel", new Point(320d, 6d), new Size(140d, 140d), $"{_imageAssetLocation}{Name}/UHF_Channel_Knob.png", 0d, 360d, 0.0d, 1.0d, 0.0d, 0.05d, _interfaceDeviceName, "UHF Channel Select", false, RotaryClickType.Swipe, true);
             AddIndicatorDrum("UHF Channel Display", new Point(471, 44));
-
             PersistChildren = false;
          }
 
@@ -136,11 +135,11 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             try
             {
                 /// This is an internal binding within the gauge as opposed to a binding to the default interface
-                InputBindings.Add(CreateNewBinding(_encoder.Triggers["encoder.incremented"], customDrum.Actions["set.Drum tape offset"]));
+                InputBindings.Add(CreateNewBinding(_potentiometer.Triggers["value.changed"], customDrum.Actions["set.Drum tape offset"]));
             }
             catch
             {
-                Logger.Error($"Unable to create self-binding for gauge {Name} control {name} trigger: {_encoder.Name} \"encoder.incremented\" action: {customDrum.Name} \"set.Drum tape offset\" ");
+                Logger.Error($"Unable to create self-binding for gauge {Name} control {name} trigger: {_potentiometer.Name} \"value.changed\" action: {customDrum.Name} \"set.Drum tape offset\" ");
             }
         }
 

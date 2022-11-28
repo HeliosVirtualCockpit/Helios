@@ -236,10 +236,10 @@ namespace GadrocsWorkshop.Helios.Controls
         /// <param name="newName"></param>
         public void ReplaceImageNames(string oldName, string newName)
         {
-            PositionOneImage = !string.IsNullOrEmpty(PositionOneImage) ? PositionOneImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneImage : PositionOneImage.Replace(oldName, newName);
-            PositionOneIndicatorOnImage = !string.IsNullOrEmpty(PositionOneIndicatorOnImage) ? PositionOneIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneIndicatorOnImage : PositionOneIndicatorOnImage.Replace(oldName, newName);
-            PositionTwoImage = !string.IsNullOrEmpty(PositionTwoImage) ? PositionTwoImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoImage : PositionTwoImage.Replace(oldName, newName);
-            PositionTwoIndicatorOnImage = !string.IsNullOrEmpty(PositionTwoIndicatorOnImage) ? PositionTwoIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoIndicatorOnImage : PositionTwoIndicatorOnImage.Replace(oldName, newName);
+            PositionOneImage = string.IsNullOrEmpty(PositionOneImage) ? PositionOneImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneImage : PositionOneImage.Replace(oldName, newName);
+            PositionOneIndicatorOnImage = string.IsNullOrEmpty(PositionOneIndicatorOnImage) ? PositionOneIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionOneIndicatorOnImage : PositionOneIndicatorOnImage.Replace(oldName, newName);
+            PositionTwoImage = string.IsNullOrEmpty(PositionTwoImage) ? PositionTwoImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoImage : PositionTwoImage.Replace(oldName, newName);
+            PositionTwoIndicatorOnImage = string.IsNullOrEmpty(PositionTwoIndicatorOnImage) ? PositionTwoIndicatorOnImage : string.IsNullOrEmpty(oldName) ? newName + PositionTwoIndicatorOnImage : PositionTwoIndicatorOnImage.Replace(oldName, newName);
         }
         protected override void ThrowSwitch(SwitchAction action)
        {
