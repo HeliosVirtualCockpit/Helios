@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.VHF_RADIO", "VHF Radio", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("HELIOS.M2000C.VHF_RADIO", "VHF Radio", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class VHFRadio : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 600, 211);
@@ -37,32 +37,34 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         public VHFRadio()
             : base("VHF Radio", new Size(600, 211))
         {
+
+            PersistChildren = false;
             AddTextDisplay("VHF Comm Information", new Point(166d, 20d), new Size(222d, 40d), _interfaceDeviceName, "VHF Comm Information", 26, "********", TextHorizontalAlignment.Left, "");
             AddRotarySwitch("VHF MODE", new Point(41d, 104d), new Size(77d, 77d));
             AddEncoder("VHF Channel Sel", new Point(474d, 29d), new Size(90d, 90d), $"{_imageAssetLocation}{Name}/Encoder_Knob.png", 0.1d, 20d, _interfaceDeviceName, "VHF Channel Select", false);
             AddIndicatorPushButton("Key CLR/MEM", new Point(84, 12), new Size(51, 50), "CLR_MEM", "CLR", _interfaceDeviceName, "Key CLR/MEM", "Indicator CLR");
-            AddIndicator("Indicator MEM", new Point(84, 12), new Size(51, 50), $"{Name}/Key_MEM.png", null, _interfaceDeviceName, "Indicator MEM");
+            AddIndicator("Indicator MEM", new Point(84, 12), new Size(51, 50), $"{_imageAssetLocation}{Name}/Key_MEM.png", null, _interfaceDeviceName, "Indicator MEM");
             AddIndicatorPushButton("Key VLD/XFR", new Point(397, 13), new Size(51, 50), "VLD_XFR", "VLD", _interfaceDeviceName, "Key VLD/XFR", "Indicator VLD");
-            AddIndicator("Indicator XFR", new Point(397, 13), new Size(51, 50), $"{Name}/Key_XFR.png", null, _interfaceDeviceName, "Indicator XFR");
+            AddIndicator("Indicator XFR", new Point(397, 13), new Size(51, 50), $"{_imageAssetLocation}{Name}/Key_XFR.png", null, _interfaceDeviceName, "Indicator XFR");
             AddIndicatorPushButton("Key 1", new Point(148, 75), new Size(50, 50), "1", "1", _interfaceDeviceName, "Key 1/READ", "Indicator 1");
-            AddIndicator("Indicator READ", new Point(148, 75), new Size(51, 50), $"{Name}/Key_READ.png", null, _interfaceDeviceName, "Indicator READ");
+            AddIndicator("Indicator READ", new Point(148, 75), new Size(51, 50), $"{_imageAssetLocation}{Name}/Key_READ.png", null, _interfaceDeviceName, "Indicator READ");
             AddIndicatorPushButton("Key 2", new Point(211, 75), new Size(50, 50), "2", "2", _interfaceDeviceName, "Key 2/SQL", "Indicator 2");
-            AddIndicator("Indicator 2 Light", new Point(211, 75), new Size(50, 50), $"{Name}/Key_2_LIGHT.png", null, _interfaceDeviceName, "Indicator 2LIGHT");
-            AddIndicator("Indicator SQL", new Point(211, 75), new Size(50, 50), $"{Name}/Key_SQL.png", null, _interfaceDeviceName, "Indicator SQL");
+            AddIndicator("Indicator 2 Light", new Point(211, 75), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_2_LIGHT.png", null, _interfaceDeviceName, "Indicator 2LIGHT");
+            AddIndicator("Indicator SQL", new Point(211, 75), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_SQL.png", null, _interfaceDeviceName, "Indicator SQL");
             AddIndicatorPushButton("Key 3", new Point(274, 75), new Size(50, 50), "3", "3", _interfaceDeviceName, "Key 3/GR", "Indicator 3");
-            AddIndicator("Indicator 3 Light", new Point(274, 75), new Size(50, 50), $"{Name}/Key_3_LIGHT.png", null, _interfaceDeviceName, "Indicator 3LIGHT");
-            AddIndicator("Indicator GR", new Point(274, 75), new Size(50, 50), $"{Name}/Key_GR.png", null, _interfaceDeviceName, "Indicator GR");
+            AddIndicator("Indicator 3 Light", new Point(274, 75), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_3_LIGHT.png", null, _interfaceDeviceName, "Indicator 3LIGHT");
+            AddIndicator("Indicator GR", new Point(274, 75), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_GR.png", null, _interfaceDeviceName, "Indicator GR");
             AddIndicatorPushButton("Key 4", new Point(335, 75), new Size(50, 50), "4", "4", _interfaceDeviceName, "Key 4", "Indicator 4");
             AddIndicatorPushButton("Key 5", new Point(398, 75), new Size(50, 50), "5", "5", _interfaceDeviceName, "Key 5/20/LOW", "Indicator 5");
-            AddIndicator("Indicator 20", new Point(398, 75), new Size(50, 50), $"{Name}/Key_20.png", null, _interfaceDeviceName, "Indicator 20");
-            AddIndicator("Indicator LOW", new Point(398, 75), new Size(50, 50), $"{Name}/Key_LOW.png", null, _interfaceDeviceName, "Indicator LOW");
+            AddIndicator("Indicator 20", new Point(398, 75), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_20.png", null, _interfaceDeviceName, "Indicator 20");
+            AddIndicator("Indicator LOW", new Point(398, 75), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_LOW.png", null, _interfaceDeviceName, "Indicator LOW");
             AddIndicatorPushButton("Key 6", new Point(148, 141), new Size(50, 50), "6", "6", _interfaceDeviceName, "Key 6/TONE", "Indicator 6");
-            AddIndicator("Indicator TONE", new Point(148, 141), new Size(50, 50), $"{Name}/Key_TONE.png", null, _interfaceDeviceName, "Indicator TONE");
+            AddIndicator("Indicator TONE", new Point(148, 141), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_TONE.png", null, _interfaceDeviceName, "Indicator TONE");
             AddIndicatorPushButton("Key 7", new Point(211, 141), new Size(50, 50), "7", "7", _interfaceDeviceName, "Key 7", "Indicator 7");
             AddIndicatorPushButton("Key 8", new Point(274, 141), new Size(50, 50), "8", "8", _interfaceDeviceName, "Key 8/TOD", "Indicator 8");
-            AddIndicator("Indicator TOD", new Point(274, 141), new Size(50, 50), $"{Name}/Key_TOD.png", null, _interfaceDeviceName, "Indicator TOD");
+            AddIndicator("Indicator TOD", new Point(274, 141), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_TOD.png", null, _interfaceDeviceName, "Indicator TOD");
             AddIndicatorPushButton("Key 9", new Point(335, 141), new Size(50, 50), "9", "9", _interfaceDeviceName, "Key 9/ZERO", "Indicator 9");
-            AddIndicator("Indicator ZERO", new Point(335, 141), new Size(50, 50), $"{Name}/Key_ZERO.png", null, _interfaceDeviceName, "Indicator ZERO");
+            AddIndicator("Indicator ZERO", new Point(335, 141), new Size(50, 50), $"{_imageAssetLocation}{Name}/Key_ZERO.png", null, _interfaceDeviceName, "Indicator ZERO");
             AddIndicatorPushButton("Key 0", new Point(398, 141), new Size(50, 50), "0", "0", _interfaceDeviceName, "Key 0", "Indicator 0");
             AddIndicatorPushButton("Key Conf", new Point(464, 141), new Size(66, 47), "CONF", "CONF", _interfaceDeviceName, "Key CONF", "Indicator CONF");
 
@@ -245,8 +247,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 Left = posn.X,
                 Width = size.Width,
                 Height = size.Height,
-                OnImage = $"{_imageAssetLocation}{onImage}",
-                OffImage = $"{_imageAssetLocation}{offImage}",
+                OnImage = onImage,
+                OffImage = offImage,
                 Name = componentName
             };
             indicator.Text = "";

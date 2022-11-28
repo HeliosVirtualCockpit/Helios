@@ -17,6 +17,7 @@
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.ComponentModel;
     using System.Globalization;
@@ -25,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Xml;
 
     [HeliosControl("Helios.Panel", "Generic Bezel", "Panels", typeof(HeliosPanelRenderer))]
-    public class HeliosPanel : HeliosVisualContainer
+    public class HeliosPanel : HeliosVisualContainer, IConfigurableImageLocation
     {
         private bool _drawBorder = true;
 
@@ -317,6 +318,23 @@ namespace GadrocsWorkshop.Helios.Controls
         }
 
         #endregion
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            BackgroundImage = !string.IsNullOrEmpty(BackgroundImage) ? BackgroundImage : string.IsNullOrEmpty(oldName) ? newName + BackgroundImage : BackgroundImage.Replace(oldName, newName);
+            TopBorderImage = !string.IsNullOrEmpty(TopBorderImage) ? TopBorderImage : string.IsNullOrEmpty(oldName) ? newName + TopBorderImage : TopBorderImage.Replace(oldName, newName);
+            RightBorderImage = !string.IsNullOrEmpty(RightBorderImage) ? RightBorderImage : string.IsNullOrEmpty(oldName) ? newName + RightBorderImage : RightBorderImage.Replace(oldName, newName);
+            BottomBorderImage = !string.IsNullOrEmpty(BottomBorderImage) ? BottomBorderImage : string.IsNullOrEmpty(oldName) ? newName + BottomBorderImage : BottomBorderImage.Replace(oldName, newName);
+            LeftBorderImage = !string.IsNullOrEmpty(LeftBorderImage) ? LeftBorderImage : string.IsNullOrEmpty(oldName) ? newName + LeftBorderImage : LeftBorderImage.Replace(oldName, newName);
+            TopLeftCornerImage = !string.IsNullOrEmpty(TopLeftCornerImage) ? TopLeftCornerImage : string.IsNullOrEmpty(oldName) ? newName + TopLeftCornerImage : TopLeftCornerImage.Replace(oldName, newName);
+            TopRightCornerImage = !string.IsNullOrEmpty(TopRightCornerImage) ? TopRightCornerImage : string.IsNullOrEmpty(oldName) ? newName + TopRightCornerImage : TopRightCornerImage.Replace(oldName, newName);
+            BottomLeftCornerImage = !string.IsNullOrEmpty(BottomLeftCornerImage) ? BottomLeftCornerImage : string.IsNullOrEmpty(oldName) ? newName + BottomLeftCornerImage : BottomLeftCornerImage.Replace(oldName, newName);
+            BottomRightCornerImage = !string.IsNullOrEmpty(BottomRightCornerImage) ? BottomRightCornerImage : string.IsNullOrEmpty(oldName) ? newName + BottomRightCornerImage : BottomRightCornerImage.Replace(oldName, newName);
+        }
 
         public override void WriteXml(XmlWriter writer)
         {

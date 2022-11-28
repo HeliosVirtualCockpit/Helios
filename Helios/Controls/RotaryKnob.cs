@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Controls
     /// <summary>
     /// base class for analog rotary knobs rather than rotary switches
     /// </summary>
-    public abstract class RotaryKnob : Rotary
+    public abstract class RotaryKnob : Rotary, Capabilities.IConfigurableImageLocation
     {
         private string _knobImage;
         private double _rotation;
@@ -46,6 +46,17 @@ namespace GadrocsWorkshop.Helios.Controls
                     Refresh();
                 }
             }
+        }
+
+
+        /// <summary>
+        /// Performs a replace of text in this controls image names
+        /// </summary>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public void ReplaceImageNames(string oldName, string newName)
+        {
+            KnobImage = !string.IsNullOrEmpty(KnobImage) ? KnobImage : string.IsNullOrEmpty(oldName) ? newName + KnobImage : KnobImage.Replace(oldName, newName);
         }
 
         public double KnobRotation

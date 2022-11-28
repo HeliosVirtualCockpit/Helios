@@ -23,6 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls
     /// <summary>
     /// Panel behavior for pass through interaction with underlying controls
     /// </summary>
+    [HeliosPropertyEditor("Helios.Base.Indicator", "Behavior")]
     [HeliosPropertyEditor("Helios.Base.ImageTranslucent", "Behavior")]
 
     public partial class ImageTranslucentBehaviorEditor : HeliosPropertyEditor

@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
+    using NLog;
     using System;
     using System.Globalization;
     using System.Windows;
@@ -33,6 +34,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private Rect _scaledScreenRect = SCREEN_RECT;
         private bool _useTextualDisplays = true;
         private ImageDecoration _image;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
 
         public Fuel_Burn_Bingo()
             : base("Fuel Burn / Bingo Panel", new Size(140, 172))
@@ -47,10 +50,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             _image.Height = Height;
             _image.IsHidden = !_useTextualDisplays;
             Children.Add(_image);
-            AddDrum("Bingo Fuel 1 000 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Drum", "(0-3)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19));
-            AddDrum("Bingo Fuel 100 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Drum", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
             AddRotarySwitch("Bingo Fuel 1 000 kg Selector", new Point(0, 52), new Size(58, 120), 4);
+            AddDrum("Bingo Fuel 1 000 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 1 000 kg Drum", "(0-3)", "#", new Point(24, 104), new Size(10, 15), new Size(12, 19)); 
             AddRotarySwitch("Bingo Fuel 100 kg Selector", new Point(62, 52), new Size(58, 120), 10);
+            AddDrum("Bingo Fuel 100 kg Drum", "{Helios}/Gauges/M2000C/Common/drum_tape.xaml", "Bingo Fuel 100 kg Drum", "(0-9)", "#", new Point(65, 104), new Size(10, 15), new Size(12, 19));
             AddTextDisplay("Fuel Burn Rate Display", new Point(36d, 14d), new Size(68d, 41d), _interfaceDeviceName, "Fuel Burn Rate Display", 32, "000", TextHorizontalAlignment.Center, "");
 
         }
@@ -112,7 +115,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 
         private void AddDrum(string name, string gaugeImage, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize)
         {
-            AddDrumGauge(name: name,
+            Mk2CDrumGauge.Mk2CDrumGauge drum = AddDrumGauge(name: name,
                 gaugeImage: gaugeImage,
                 posn: posn,
                 size: size,
@@ -125,6 +128,17 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 fromCenter: false,
                 multiplier: 1d,
                 offset: -1d);
+            try
+            {
+                /// This is an internal binding within the gauge as opposed to a binding to the default interface
+                /// and it is required because the data for the drum is not passed explicity over tbe interface.
+                InputBindings.Add(CreateNewBinding(Children[$"{Name}_{actionIdentifier.Replace("Drum", "Selector")}"].Triggers["position.changed"], drum.Actions[$"set.{name}"]));
+            }
+            catch
+            {
+                Logger.Error($"Unable to create self-binding for gauge {Name}_{actionIdentifier.Replace("Drum", "Selector")} trigger: {actionIdentifier.Replace("Drum", "Selector")} \"position.changed\" action: {drum.Name} \"set.Drum tape offset\" ");
+            }
+
         }
 
         private void AddTextDisplay(string name, Point posn, Size size,

@@ -88,6 +88,7 @@
       <DependentUpon>BacklitPushButtonAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\BacklitPushButtonRenderer.cs" />
+    <Compile Include="Controls\Capabilities\IConfigurableImageLocation.cs" />
     <Compile Include="Controls\Capabilities\IBackgroundImage.cs" />
     <Compile Include="Controls\Capabilities\IConfigurableBackgroundImage.cs" />
     <Compile Include="Controls\Capabilities\IControlWithProfileInstance.cs" />

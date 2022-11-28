@@ -241,7 +241,7 @@ namespace GadrocsWorkshop.Helios
                 ));
         }
 
-        private HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action)
+        protected HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action)
         {
            return CreateNewBinding(trigger, action, new BindingValue(null));
         }

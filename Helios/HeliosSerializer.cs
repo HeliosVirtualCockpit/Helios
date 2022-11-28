@@ -172,12 +172,39 @@ namespace GadrocsWorkshop.Helios
                     xmlReader.ReadStartElement("Control");
                     control.ReadXml(xmlReader);
                     foreach (string progress in DeserializeControls(control.Children, xmlReader))
-                    {
-                        yield return progress;
+                    {                        yield return progress;
                     };
                     xmlReader.ReadEndElement();
                 }
                 control.Name = name;
+                if (controls.ContainsKey(name))
+                {
+                    /// This code is for the situation where a composite visual has been saved with
+                    /// PersistChidren so the controls added by the composite visual reappear in the 
+                    /// profile.  This child controls take precedence over the composite visual
+                    /// control which allows the ability to override control positions and images.
+                    /// There is no user interface mechanism to override the settings.
+                    foreach (HeliosBinding bind in controls[name].InputBindings)
+                    {
+                        control.InputBindings.Add(bind);
+                    }
+                    foreach (HeliosBinding bind in controls[name].OutputBindings)
+                    {
+                        control.OutputBindings.Add(bind);
+                    }
+                    if (controls[name] is CompositeVisual)
+                    {
+                        foreach (DefaultInputBinding bind in (controls[name] as CompositeVisual)?.DefaultInputBindings)
+                        {
+                            (control as CompositeVisual)?.DefaultInputBindings.Add(bind);
+                        }
+                        foreach (DefaultOutputBinding bind in (controls[name] as CompositeVisual)?.DefaultOutputBindings)
+                        {
+                            (control as CompositeVisual)?.DefaultOutputBindings.Add(bind);
+                        }
+                    }
+                    controls.RemoveKey(name);
+                }
                 controls.Add(control);
                 control.ResumeRendering();
                 yield return $"loaded {control.TypeIdentifier}";

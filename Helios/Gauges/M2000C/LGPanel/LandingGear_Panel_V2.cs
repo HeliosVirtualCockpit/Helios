@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.Landing__Gear_Panel_V2", "Landing Gear Panel V2", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("HELIOS.M2000C.Landing__Gear_Panel_V2", "Landing Gear Panel V2", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class LandingGearPanelV2 : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 587, 800);
@@ -35,8 +35,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         public LandingGearPanelV2()
             : base("Landing Gear Panel", new Size(587, 800))
         {
+            PersistChildren = false;
             PushButton emergencyJettisonButton = AddPushButton("Emergency Jettison Lever");
-
             AddIndicator("A", new Point(409, 340), new Size(51, 28));
             AddIndicator("F", new Point(472, 340), new Size(51, 28));
             AddIndicator("DIRAV", new Point(377, 375), new Size(52, 30));
@@ -60,18 +60,18 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddSwitch("Landing Gear Lever", $"{Name}/landing-gear-", new Point(122, 267), new Size(88, 328), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn, false, false, true, "Landing Gear Handle Indicator");
             AddRotarySwitch("Emergency Landing Gear Lever", new Point(162, 7), new Size(290, 294), new NonClickableZone[] {
                     new NonClickableZone(new Rect(221, 124, 69, 170), true, emergencyJettisonButton)});
-            AddIndicatorDrum("Outer Left Indicator", new Point(161, 706));
-            AddIndicatorDrum("Inner Left Indicator", new Point(241, 706));
-            AddIndicatorDrum("Rudder Indicator", new Point(318, 707), new Size(52,51),true);
-            AddIndicatorDrum("Inner Right Indicator", new Point(395, 706));
-            AddIndicatorDrum("Outer Right Indicator", new Point(475, 706));
+            AddIndicatorDrum("Outer Left Indicator", new Point(160, 706));
+            AddIndicatorDrum("Inner Left Indicator", new Point(239, 706));
+            AddIndicatorDrum("Rudder Indicator", new Point(315, 709), new Size(52,51),true);
+            AddIndicatorDrum("Inner Right Indicator", new Point(393, 706));
+            AddIndicatorDrum("Outer Right Indicator", new Point(474, 706));
         }
 
         #region Properties
 
         public override string DefaultBackgroundImage
         {
-            get { return $"{_imageAssetLocation}LGPanel/lg-panel.png"; }
+            get { return $"{_imageAssetLocation}{Name}/lg-panel.png"; }
         }
 
         public string ImageAssetLocation

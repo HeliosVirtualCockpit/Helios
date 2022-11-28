@@ -18,36 +18,43 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
     using System;
+    using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.UHF_RADIO", "UHF Radio", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("HELIOS.M2000C.UHF_RADIO", "UHF Radio", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class UHFRadio : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 600, 189);
         private string _interfaceDeviceName = "UHF Radio Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private string _imageAssetLocation = "{M2000C}/Images/V2/"; 
+        private string _imageAssetLocation = "{M2000C}/Images/V2/";
+        private RotaryEncoder _encoder;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
 
         public UHFRadio()
             : base("UHF Radio", new Size(600, 189))
         {
-            AddRotarySwitch("UHF Mode Switch", new Point(140d, 98d), new Size(80d, 80d));
-            AddEncoder("UHF Channel Sel", new Point(320d, 6d), new Size(140d, 140d), _imageAssetLocation + "UHFRadioPanel/UHF_Channel_Knob.png", 0.1d, 20d, _interfaceDeviceName, "UHF Channel Select", false);
-            AddIndicatorPushButton("UHF CDE Switch", new Point(82, 118), new Size(32,30), "Green_UHF_Button", _interfaceDeviceName, "UHF CDE Switch", "UHF CDE Indicator");
-            AddIndicatorPushButton("UHF Test Switch", new Point(250, 118), new Size(31,30), "Orange_UHF_Button", _interfaceDeviceName, "UHF TEST Switch", "UHF TEST Indicator");
             AddSwitch("UHF Power 5W/25W Switch", "{M2000C}/Images/Switches/short-black-", new Point(106, 12), new Size(40, 80), ToggleSwitchPosition.One, ToggleSwitchType.OnOn);
             AddSwitch("UHF SIL Switch", "{M2000C}/Images/Switches/long-black-", new Point(180, 8), new Size(30, 80), ToggleSwitchPosition.Two, ToggleSwitchType.OnOn);
             AddThreeWayToggle("UHF E+A2 Switch", new Point(250, 20), new Size(30, 80), "UHF E+A2 Switch", "{M2000C}/Images/Switches/long-black-");
+            AddIndicatorPushButton("UHF CDE Switch", new Point(82, 118), new Size(32, 30), "Green_UHF_Button", _interfaceDeviceName, "UHF CDE Switch", "UHF CDE Indicator");
+            AddRotarySwitch("UHF Mode Switch", new Point(140d, 98d), new Size(80d, 80d));
+            AddIndicatorPushButton("UHF Test Switch", new Point(250, 118), new Size(31,30), "Orange_UHF_Button", _interfaceDeviceName, "UHF TEST Switch", "UHF TEST Indicator");
+            _encoder = AddEncoder("UHF Channel Sel", new Point(320d, 6d), new Size(140d, 140d), $"{_imageAssetLocation}{Name}/UHF_Channel_Knob.png", 0.1d, 20d, _interfaceDeviceName, "UHF Channel Select", false);
+            AddIndicatorDrum("UHF Channel Display", new Point(471, 44));
+
+            PersistChildren = false;
          }
 
         #region Properties
 
         public override string DefaultBackgroundImage
         {
-            get { return _imageAssetLocation + "UHFRadioPanel/UHF_Radio_Panel.png"; }
+            get { return $"{_imageAssetLocation}{Name}/UHF_Radio_Panel.png"; }
         }
         public string ImageAssetLocation
         {
@@ -82,7 +89,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             RotarySwitch rSwitch = AddRotarySwitch(name: name,
                 posn: posn,
                 size: size,
-                knobImage: _imageAssetLocation + "UHFRadioPanel/UHF_Mode_Knob.png",
+                knobImage: $"{_imageAssetLocation}{Name}/UHF_Mode_Knob.png",
                 defaultPosition: 0,
                 clickType: RotaryClickType.Swipe,
                 interfaceDeviceName: _interfaceDeviceName,
@@ -96,6 +103,46 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             rSwitch.Positions.Add(new RotarySwitchPosition(rSwitch, 4, "H", 135d));
         }
 
+        private void AddIndicatorDrum(string name, Point posn)
+        {
+            AddIndicatorDrum(name, posn, new Size(42, 54), false);
+        }
+        private void AddIndicatorDrum(string name, Point posn, Size size, bool vertical = false)
+        {
+            CustomDrum customDrum = new CustomDrum($"{Name}_{name}", size);
+            customDrum.Left = posn.X;
+            customDrum.Top = posn.Y;
+            customDrum.DrumImage = $"{_imageAssetLocation}{Name}/Channel_Drum_Tape.xaml";
+            customDrum.Drum_PosX = 4;
+            customDrum.Drum_PosY = 4;
+            customDrum.Drum_Width = 46;
+            customDrum.Drum_Height = 1188;
+            customDrum.MinVertical = -54;
+            customDrum.VerticalTravel = -1134;
+            customDrum.InitialVertical = -54;
+            customDrum.MinInputVertical = 0;
+            customDrum.MaxInputVertical = 1;
+            if (vertical) { customDrum.Rotation = HeliosVisualRotation.CW; }
+            Children.Add(customDrum);
+            foreach (IBindingAction action in customDrum.Actions)
+            {
+                AddAction(action, $"{Name}_{name}");
+            }
+
+            AddDefaultInputBinding(
+                childName: $"{Name}_{name}",
+                interfaceTriggerName: _interfaceDeviceName + "." + "UHF Channel Select" + ".changed",
+                deviceActionName: "set." + "Drum tape offset");
+            try
+            {
+                /// This is an internal binding within the gauge as opposed to a binding to the default interface
+                InputBindings.Add(CreateNewBinding(_encoder.Triggers["encoder.incremented"], customDrum.Actions["set.Drum tape offset"]));
+            }
+            catch
+            {
+                Logger.Error($"Unable to create self-binding for gauge {Name} control {name} trigger: {_encoder.Name} \"encoder.incremented\" action: {customDrum.Name} \"set.Drum tape offset\" ");
+            }
+        }
 
         private ToggleSwitch AddSwitch(string name, string imagePrefix, Point posn, Size size, ToggleSwitchPosition defaultPosition, ToggleSwitchType defaultType, bool horizontal = false, bool verticalReversed = false, bool indicator = false)
         {
@@ -149,10 +196,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 Left = pos.X,
                 Width = size.Width,
                 Height = size.Height,
-                Image = $"{_imageAssetLocation}UHFRadioPanel/{image}_Up.png",
-                PushedImage = $"{_imageAssetLocation}UHFRadioPanel/{image}_Down.png",
-                IndicatorOnImage = $"{_imageAssetLocation}UHFRadioPanel/{image}_Lit_Up.png",
-                PushedIndicatorOnImage = $"{_imageAssetLocation}UHFRadioPanel/{image}_Lit_Down.png",
+                Image = $"{_imageAssetLocation}{Name}/{image}_Up.png",
+                PushedImage = $"{_imageAssetLocation}{Name}/{image}_Down.png",
+                IndicatorOnImage = $"{_imageAssetLocation}{Name}/{image}_Lit_Up.png",
+                PushedIndicatorOnImage = $"{_imageAssetLocation}{Name}/{image}_Lit_Down.png",
                 Name = componentName,
                 OnTextColor = Color.FromArgb(0x00, 0x00, 0x00, 0x00),
                 TextColor = Color.FromArgb(0x00, 0x00, 0x00, 0x00)

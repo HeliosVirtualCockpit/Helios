@@ -118,7 +118,17 @@ namespace GadrocsWorkshop.Helios
                 XmlReader xmlReader = XmlReader.Create(templateReader, settings);
                 xmlReader.ReadStartElement("TemplateValues");
                 control.ReadXml(xmlReader);
-                xmlReader.ReadEndElement();
+                if (xmlReader.Name.Equals("Children"))
+                {
+                    HeliosSerializer deserializer = new HeliosSerializer();
+                    foreach (string progress in deserializer.DeserializeControls(control.Children, xmlReader))
+                    {
+                        //yield return progress;
+                    }
+                } else
+                {
+                    xmlReader.ReadEndElement();
+                }
                 xmlReader.Close();
                 templateReader.Close();
 
