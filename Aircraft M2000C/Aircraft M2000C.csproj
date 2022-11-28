@@ -24,6 +24,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\CautionPanel\5mno2-off.png" />
@@ -683,129 +693,8 @@
     <Resource Include="Images\PCAPanel\PCA_Upper_Display.png" />
     <Resource Include="Images\PCNPanel\Button_Down.png" />
     <Resource Include="Images\PCNPanel\Button_Up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\a-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\a-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\bip-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\bip-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\cross-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\cross-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\dirav-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\dirav-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\emergency-jettison-not-pushed.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\emergency-jettison-pushed.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\emergency-landing-gear-lever-vertical.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\f-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\f-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\fbwg-guard-down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\fbwg-guard-up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\frein-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\frein-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\gun-arming-guard-down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\gun-arming-guard-up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\left-gear-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\left-gear-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\lg-panel.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\nose-gear-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\nose-gear-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\right-gear-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\right-gear-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\spad-off.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\spad-on.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\Bar-Indicator-Horizontal.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\Bar-Indicator-Vertical.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\emergency-landing-gear-lever.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\FBW-G-Limit-Switch-Down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\FBW-G-Limit-Switch-Up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\FBW-Gain-Switch-Down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\FBW-Gain-Switch-Up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\FBW-Reset-Button-Down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\FBW-Reset-Button-Up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\BIP-Button-Down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\BIP-Button-Up.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-lit-down.png" />
-    <Resource Include="Images\V2\Landing Gear Panel\landing-gear-lit-up.png" />
-    <Resource Include="Images\V2\VHF Radio\Encoder_Knob.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_0.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_0_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_1.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_1_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_2.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_20.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_2_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_2_Light.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_3.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_3_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_3_Light.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_3_Lit.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_4.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_4_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_5.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_5_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_6.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_6_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_7.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_7_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_8.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_8_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_9.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_9_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_Zero.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_CLR.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_CLR_MEM_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_CONF.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_CONF_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_GR.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_Lit.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_LOW.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_Mem.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_READ.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_SQL.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_TONE.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_VLD.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_VLD_XFR_Blank.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_XFR.png" />
-    <Resource Include="Images\V2\VHF Radio\M-2000C_VHF_Radio_Background.png" />
-    <Resource Include="Images\V2\VHF Radio\Mode_Knob.png" />
-    <Resource Include="Images\V2\VHF Radio\Key_TOD.png" />
-    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Down.png" />
-    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Lit_Down.png" />
-    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Lit_Up.png" />
-    <Resource Include="Images\V2\UHF Radio\Green_UHF_Button_Up.png" />
-    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Down.png" />
-    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Lit_Down.png" />
-    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Lit_Up.png" />
-    <Resource Include="Images\V2\UHF Radio\Orange_UHF_Button_Up.png" />
-    <Resource Include="Images\V2\UHF Radio\UHF_Radio_Panel.png" />
-    <Resource Include="Images\V2\UHF Radio\UHF_Channel_Knob.png" />
-    <Resource Include="Images\V2\UHF Radio\UHF_Mode_Knob.png" />
-    <Content Include="Templates\Base\M2000C\CautionPanelRedIndicator.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Images\M2000C_16x10.png" />
     <Resource Include="Images\M2000C_16x9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\CautionPanelYellowIndicator.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\M2000C\Cockpit Front 16x10.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\M2000C\Cockpit Front 16x9.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\long-black-switch-toggle.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\M2000C\Red-switch-toggle.htpl">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\M2000C\short-black-switch-toggle.htpl" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\MCLPanel\mcl-panel.png">
@@ -814,111 +703,6 @@
     </Resource>
     <Resource Include="Images\MCLPanel\panne-yellow-on.png">
     </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\PCN_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\PCA_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\PPA_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\ECMBox_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Engine_Start_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Caution_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Engine_Sensor_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Fuel_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Landing_Gear_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Master_Caution_Lights.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\TACAN_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\VOR_ILS_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\VTB_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Test_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\AoA_Indicator.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\HSI_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\INS_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\DEMAR_Indicator.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\After_Burner_Indicator.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\RWR_Indicators.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Fire_Indicators.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\PCNPanel\PCN_West.xaml">
@@ -957,16 +741,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Radio_Repeater_Display.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Fuel_Burn_Bingo_Panel.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\HSIPanel\big-needle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -979,21 +753,19 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\V2\Landing Gear Panel\Bar-Indicator-Horizontal.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Base\M2000C\Panels\Landing_Gear_Panel_V2.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\V2\UHF Radio\Channel_Drum_Tape.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
+    <Folder Include="Templates\" />
   </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>
