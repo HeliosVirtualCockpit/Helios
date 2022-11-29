@@ -139,6 +139,15 @@ namespace GadrocsWorkshop.Helios
         /// </summary>
         public static FontManager FontManager { get; internal set; }
 
+        public static string HeliosVersion
+		{
+            get
+			{
+                Version ver = RunningVersion.FromHeliosAssembly();
+                return ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString("0000") + "." + ver.Revision.ToString("0000");
+            }
+		}
+
         #endregion
 
         private static string GetBMSFalconPath()

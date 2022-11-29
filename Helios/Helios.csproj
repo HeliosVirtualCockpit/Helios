@@ -267,6 +267,11 @@
     <Compile Include="Interfaces\DCS\Common\RemoteConfigurationSection.xaml.cs">
       <DependentUpon>RemoteConfigurationSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\Helios\HeliosInformationInterfaceEditor.xaml.cs">
+      <DependentUpon>HeliosInformationInterfaceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\Keyboard\Input\KeyboardInput.cs" />
+    <Compile Include="Interfaces\Helios\HeliosInformationInterface.cs" />
     <Compile Include="Interfaces\Profile\ProfileInterfaceEditor.xaml.cs">
       <DependentUpon>ProfileInterfaceEditor.xaml</DependentUpon>
     </Compile>
@@ -758,6 +763,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Interfaces\DCS\Soft\SoftInterfaceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Interfaces\Helios\HeliosInformationInterfaceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
