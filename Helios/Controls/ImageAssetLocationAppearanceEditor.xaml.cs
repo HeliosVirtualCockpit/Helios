@@ -21,9 +21,12 @@ namespace GadrocsWorkshop.Helios.Controls
     /// <summary>
     /// Interaction logic for ImageAppearanceEditor.xaml
     /// </summary>
-    [HeliosPropertyEditor("HELIOS.M2000C.Landing__Gear_Panel_V2", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.LANDING_GEAR_PANEL_V2", "Appearance")]
     [HeliosPropertyEditor("HELIOS.M2000C.UHF_RADIO", "Appearance")]
     [HeliosPropertyEditor("HELIOS.M2000C.VHF_RADIO", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.IFF_MODE_SETTING", "Appearance")]
+    [HeliosPropertyEditor("HELIOS.M2000C.RADAR_IFF_MODE_PANEL", "Appearance")]    
+    [HeliosPropertyEditor("HELIOS.M2000C.LOW_ALTITUDE_SETTING", "Appearance")]
     public partial class ImageAssetLocationAppearanceEditor : HeliosPropertyEditor
     {
         public ImageAssetLocationAppearanceEditor()

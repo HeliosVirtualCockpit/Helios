@@ -199,6 +199,9 @@
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
     <Compile Include="Gauges\M2000C\LGPanel\LandingGear_Panel_V2.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\RADAR_IFF_Mode_Panel.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\Low_Altitude_Height.cs" />
+    <Compile Include="Gauges\M2000C\Miscellaneous\IFF_Mode_Setrtings.cs" />
     <Compile Include="Gauges\M2000C\Miscellaneous\Fuel_Burn_Bingo.cs" />
     <Compile Include="Gauges\M2000C\Radios\UHF_Radio.cs" />
     <Compile Include="Gauges\M2000C\Radios\VHF_Radio.cs" />

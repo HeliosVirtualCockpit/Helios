@@ -24,13 +24,13 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.Landing__Gear_Panel_V2", "Landing Gear Panel V2", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("HELIOS.M2000C.LANDING_GEAR_PANEL_V2", "Landing Gear Panel V2", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class LandingGearPanelV2 : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 587, 800);
         private string _interfaceDeviceName = "Landing Gear Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private string _imageAssetLocation = "HeliosVirtualCockpitAssets/M-2000C_V2/";
+        private string _imageAssetLocation = "Helios Assets/M-2000C_V2/";
 
         public LandingGearPanelV2()
             : base("Landing Gear Panel", new Size(587, 800))
