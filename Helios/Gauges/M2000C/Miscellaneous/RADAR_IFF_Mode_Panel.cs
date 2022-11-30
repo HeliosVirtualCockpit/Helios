@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.RADAR_IFF_MODE_PANEL", "RADAR IFF Mode Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("HELIOS.M2000C.RADAR_IFF_MODE_PANEL", "RADAR IFF Mode Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class RADARIFFMode : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 600, 186);

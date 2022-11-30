@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("HELIOS.M2000C.LOW_ALTITUDE_SETTING", "Low Altitude Setting Display", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("HELIOS.M2000C.LOW_ALTITUDE_SETTING", "Low Altitude Setting Display", "M-2000C Gauges", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class LowAltitudeSetting : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 400, 205);
