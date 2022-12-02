@@ -172,7 +172,8 @@ namespace GadrocsWorkshop.Helios
                     xmlReader.ReadStartElement("Control");
                     control.ReadXml(xmlReader);
                     foreach (string progress in DeserializeControls(control.Children, xmlReader))
-                    {                        yield return progress;
+                    {       
+                        yield return progress;
                     };
                     xmlReader.ReadEndElement();
                 }

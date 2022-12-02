@@ -32,7 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private Rect _scaledScreenRect = SCREEN_RECT;
         private bool _useTextualDisplays = true;
         private TextDisplay _textDisplay;
-        private string _imageAssetLocation = "Helios Assets/M-2000C_V2/";
+        private string _imageAssetLocation = "Helios Assets/M-2000C/";
 
         public VHFRadio()
             : base("VHF Radio", new Size(600, 211))
