@@ -91,6 +91,10 @@ namespace GadrocsWorkshop.Helios
 
         public bool PersistChildren { get; set; } = true;
 
+        public bool PersistChildrenAsComment { get; set; } = false;
+
+        public bool InsideCommentBlock { get; set; } = false;
+
         public override string TypeIdentifier
         {
             get
@@ -784,6 +788,11 @@ namespace GadrocsWorkshop.Helios
             }
 
             writer.WriteElementString("Hidden", boolConverter.ConvertToInvariantString(IsDefaultHidden));
+ 
+            if (PersistChildrenAsComment)
+            {
+                writer.WriteElementString("PersistChildrenAsComment", boolConverter.ConvertToInvariantString(PersistChildrenAsComment));
+            }
         }
 
         public override void ReadXml(XmlReader reader)
@@ -810,6 +819,10 @@ namespace GadrocsWorkshop.Helios
             {
                 IsDefaultHidden = (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("Hidden"));
                 IsHidden = IsDefaultHidden;
+            }
+            if (reader.Name.Equals("PersistChildrenAsComment"))
+            {
+                PersistChildrenAsComment = (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("PersistChildrenAsComment"));
             }
         }
     }

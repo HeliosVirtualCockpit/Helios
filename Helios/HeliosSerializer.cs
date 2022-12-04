@@ -121,9 +121,30 @@ namespace GadrocsWorkshop.Helios
             xmlWriter.WriteAttributeString("SnapTarget", boolConverter.ConvertToInvariantString(control.IsSnapTarget));
             xmlWriter.WriteAttributeString("Locked", boolConverter.ConvertToInvariantString(control.IsLocked));
             control.WriteXml(xmlWriter);
+            bool childrenAsComment = (control.PersistChildrenAsComment || GlobalOptions.HasPersistChildrenAsComment);
             if (control.PersistChildren)
             {
                 SerializeControls(control.Children, xmlWriter);
+            }
+            else if (childrenAsComment && control.Children.Count > 0)
+            {
+                    control.InsideCommentBlock = control.Parent.InsideCommentBlock;
+                    if (!control.InsideCommentBlock)
+                    {
+                        xmlWriter.WriteStartElement("Children");
+                        xmlWriter.WriteEndElement();
+                        xmlWriter.WriteComment($"Internal Child Controls for CompositeVisual {control.Name}");
+                        xmlWriter.WriteRaw($"{Environment.NewLine}<!-- {Environment.NewLine}");
+                        control.InsideCommentBlock = true;
+                    }
+
+                    SerializeControls(control.Children, xmlWriter);
+
+                    if (!control.Parent.InsideCommentBlock)
+                    {
+                        xmlWriter.WriteRaw($"{Environment.NewLine} -->{Environment.NewLine}");
+                        control.InsideCommentBlock = false;
+                    }
             }
             else
             {
@@ -180,6 +201,10 @@ namespace GadrocsWorkshop.Helios
                 control.Name = name;
                 if (controls.ContainsKey(name))
                 {
+                    /// ToDo:  Complete PersistChildren implimentation for Composite Visual.
+                    /// 
+                    /// * * * Currently no composite visual has PersistChidren or should have PersistChidren specified.
+                    /// 
                     /// This code is for the situation where a composite visual has been saved with
                     /// PersistChidren so the controls added by the composite visual reappear in the 
                     /// profile.  This child controls take precedence over the composite visual

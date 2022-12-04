@@ -50,6 +50,11 @@ namespace GadrocsWorkshop.Helios
         private const string SETTING_USE_LEGACY_LUA_RESET_BEHAVIOR = "UseLegacyLuaResetBehavior";
 
         /// <summary>
+        /// Name used in the settings
+        /// </summary>
+        private const string SETTING_PERSIST_CHILDREN_AS_COMMENT = "PersistChildrenAsComment";
+
+        /// <summary>
         /// global options group name used in the settings, must never change
         /// </summary>
         private const string SETTINGS_GROUP = "Helios";
@@ -74,11 +79,19 @@ namespace GadrocsWorkshop.Helios
         /// </summary>
         private bool _useLegacyLuaResetBehavior;
 
+        /// <summary>
+        /// backing field for propert PersistChildrenAsComment / "Expose Internal Controls"
+        /// if True, the serialization will wrapper the output of PersistChildren with a block comment
+        /// so that the data appears in the profile.
+        /// </summary>
+        private bool _persistChildrenAsComment;
+
         public GlobalOptions()
         {
             _scaleAllText = HasScaleAllText;
             _useLegacyResetBehavior = HasUseLegacyResetBehavior;
             _useLegacyLuaResetBehavior = HasUseLegacyLuaResetBehavior;
+            _persistChildrenAsComment = HasPersistChildrenAsComment;
         }
 
         #region Properties
@@ -148,6 +161,26 @@ namespace GadrocsWorkshop.Helios
         }
 
         /// <summary>
+        /// true if composite visual controls should serialize their internal controls to the profile as a comment.
+        /// </summary>
+        public bool PersistChildrenAsComment
+        {
+            get => _persistChildrenAsComment;
+            set
+            {
+                if (value == _persistChildrenAsComment)
+                {
+                    return;
+                }
+                bool oldValue = _persistChildrenAsComment;
+                ConfigManager.SettingsManager.SaveSetting(SETTINGS_GROUP, SETTING_PERSIST_CHILDREN_AS_COMMENT, value);
+                _persistChildrenAsComment = value;
+                OnPropertyChanged(nameof(PersistChildrenAsComment), oldValue, value, true);
+
+            }
+        }
+
+        /// <summary>
         /// accessible as utility for client code that can't get access to the GlobalOptions instance readily
         /// </summary>
         /// <returns>
@@ -190,6 +223,15 @@ namespace GadrocsWorkshop.Helios
         /// </returns>
         public static bool HasUseLegacyLuaResetBehavior =>
             ConfigManager.SettingsManager.LoadSetting(SETTINGS_GROUP, SETTING_USE_LEGACY_LUA_RESET_BEHAVIOR, false);
+
+        /// <summary>
+        /// accessible as utility for client code that can't get access to the GlobalOptions instance readily
+        /// </summary>
+        /// <returns>
+        /// true if composite visual controls should serialize their internal controls to the profile as a comment.
+        /// </returns>
+        public static bool HasPersistChildrenAsComment =>
+            ConfigManager.SettingsManager.LoadSetting(SETTINGS_GROUP, SETTING_PERSIST_CHILDREN_AS_COMMENT, false);
 
         #endregion
     }

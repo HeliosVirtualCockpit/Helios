@@ -46,7 +46,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicatorPushButton("UHF Test Switch", new Point(250, 118), new Size(31,30), "Orange_UHF_Button", _interfaceDeviceName, "UHF TEST Switch", "UHF TEST Indicator");
             _potentiometer = AddPot("UHF Channel Sel", new Point(320d, 6d), new Size(140d, 140d), $"{_imageAssetLocation}{Name}/UHF_Channel_Knob.png", 0d, 360d, 0.0d, 1.0d, 0.0d, 0.05d, _interfaceDeviceName, "UHF Channel Select", false, RotaryClickType.Swipe, true);
             AddIndicatorDrum("UHF Channel Display", new Point(471, 44));
-            PersistChildren = false;
          }
 
         #region Properties
