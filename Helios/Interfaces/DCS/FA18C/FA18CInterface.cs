@@ -306,25 +306,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, "3004", "238", "1.0", "ON", "0.0", "OFF", "Gear system", "Anti Skid Switch", "%0.1f"));    // elements["pnt_238"]     = default_2_position_tumb(_("Anti Skid Switch, ON/OFF"),            devices.GEAR_INTERFACE, gear_commands.AntiSkidSw,           238)
             AddFunction(new Switch(this, GEAR_INTERFACE, "233", new SwitchPosition[] { new SwitchPosition("-1.0", "Retract", "3008", "3008", "0.3"), new SwitchPosition("1.0", "Extend", "3008") }, "Gear system", "Launch Bar Control Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, "3009", "293", "1.0", "UP", "0.0", "DOWN", "Gear system", "Arresting Hook Handle", "%0.1f"));    // elements["pnt_293"]     = default_2_position_tumb(_("Arresting Hook Handle, UP/DOWN"),      devices.GEAR_INTERFACE, gear_commands.HookHandle,   293)
-            //AddFunction(new Switch(this, GEAR_INTERFACE, "241", new SwitchPosition[] { new SwitchPosition("-1", "Park", "3006", "3006", "0"), new SwitchPosition("0", "Emergency", "3007") }, "Gear system", "Emergency / Parking Brake Handle Park/Emergency", "%1d"));
-            AddFunction(new PushButton(this, GEAR_INTERFACE, gear_commands.EmergParkHandleSelectPark.ToString("d"), "241", "Gear system", "Brake Handle Park/Emergency", "1.0", "0.0", "%0.1f"));
-            AddFunction(new Switch(this, GEAR_INTERFACE, "240", new SwitchPosition[] { new SwitchPosition("1.0", "On", gear_commands.EmergParkHandleOnOff.ToString("d")), new SwitchPosition("0.0", "Off", gear_commands.EmergParkHandleOnOff.ToString("d")) }, "Gear system", "Emergency / Parking Brake Handle On/Off", "%0.3f"));
-//            elements["pnt_240"] = {
-//
-//    class               = {class_type.BTN, class_type.TUMB, class_type.LEV
-//    },
-//	hint				= _("Emergency/Parking Brake Handle, (LMB)Rotate Left/(RMB)Rotate Right/(MW)Pull-Stow"),
-//	device				= devices.GEAR_INTERFACE,
-//	action				= {gear_commands.EmergParkHandleSelectPark, gear_commands.EmergParkHandleSelectEmerg, gear_commands.EmergParkHandleOnOff
-//},
-//	stop_action = { gear_commands.EmergParkHandleSelectPark, 0, 0}, 
-//	arg = { 241, 241, 240},
-//	arg_value = { 0.333, -0.666, 1},
-//	arg_lim = { { 0,0.999}, { 0,0.999}, { 0,1} },
-//	gain = { 1,1,1},
-//	relative = { false,false,true},
-//	updatable = true,
-
+            AddFunction(new Switch(this, GEAR_INTERFACE, "240", new SwitchPosition[] { new SwitchPosition("0.0", "Brake Off", gear_commands.EmergParkHandleOnOff.ToString("d"), gear_commands.EmergParkHandleOnOff.ToString("d"), null, "0.0"), new SwitchPosition("1.0", "Parking Brake On", gear_commands.EmergParkHandleOnOff.ToString("d"), gear_commands.EmergParkHandleOnOff.ToString("d"), null, "1.0") }, "Gear system", "Emergency / Parking Brake Handle On/Off", "%0.1f"));
+            AddFunction(new Switch(this, GEAR_INTERFACE, "241", new SwitchPosition[] { new SwitchPosition("0.999", "Release", gear_commands.EmergParkHandleSelectPark.ToString("d"), gear_commands.EmergParkHandleSelectPark.ToString("d"), "0.000", "0.000"), new SwitchPosition("0.666", "Park", gear_commands.EmergParkHandleSelectEmerg.ToString("d"), gear_commands.EmergParkHandleSelectEmerg.ToString("d"), "0.666", "0.666"), new SwitchPosition("0.000", "Emergency", gear_commands.EmergParkHandleSelectEmerg.ToString("d"), gear_commands.EmergParkHandleSelectEmerg.ToString("d"),"0.000", "0.000") }, "Gear system", "Emergency / Parking Brake Handle Park/Emergency", "%0.3f"));
 
             #endregion
             #region  Fuel system
