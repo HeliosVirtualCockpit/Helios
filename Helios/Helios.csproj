@@ -270,7 +270,6 @@
     <Compile Include="Interfaces\HeliosInformation\HeliosInformationInterfaceEditor.xaml.cs">
       <DependentUpon>HeliosInformationInterfaceEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\Keyboard\Input\KeyboardInput.cs" />
     <Compile Include="Interfaces\HeliosInformation\HeliosInformationInterface.cs" />
     <Compile Include="Interfaces\Profile\ProfileInterfaceEditor.xaml.cs">
       <DependentUpon>ProfileInterfaceEditor.xaml</DependentUpon>
