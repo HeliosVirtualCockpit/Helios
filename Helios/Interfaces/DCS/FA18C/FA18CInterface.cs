@@ -109,6 +109,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
         private const string KNEEBOARD = "68";
         private const string LINK4 = "69";
 
+        private enum gear_commands {
+            GearHandle = 3001,
+            EmergDown = 3002,
+            DownLockOverrideBtn = 3003,
+            AntiSkidSw = 3004,
+            EmergParkHandleOnOff = 3005,
+            EmergParkHandleSelectPark = 3006,
+            EmergParkHandleSelectEmerg = 3007,
+            LaunchBarSw = 3008,
+            HookHandle = 3009,
+            AntiSkidSw_EXT = 3010,
+            EmergParkHandleOnOff_EXT = 3011,
+            EmergParkHandleSelect_EXT = 3012,
+            HookHandle_EXT = 3013,
+            LaunchBarSw_EXT = 3014,
+        }; 
         #endregion
 
         public FA18CInterface(string name)
@@ -291,8 +307,25 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new Switch(this, GEAR_INTERFACE, "233", new SwitchPosition[] { new SwitchPosition("-1.0", "Retract", "3008", "3008", "0.3"), new SwitchPosition("1.0", "Extend", "3008") }, "Gear system", "Launch Bar Control Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, GEAR_INTERFACE, "3009", "293", "1.0", "UP", "0.0", "DOWN", "Gear system", "Arresting Hook Handle", "%0.1f"));    // elements["pnt_293"]     = default_2_position_tumb(_("Arresting Hook Handle, UP/DOWN"),      devices.GEAR_INTERFACE, gear_commands.HookHandle,   293)
             //AddFunction(new Switch(this, GEAR_INTERFACE, "241", new SwitchPosition[] { new SwitchPosition("-1", "Park", "3006", "3006", "0"), new SwitchPosition("0", "Emergency", "3007") }, "Gear system", "Emergency / Parking Brake Handle Park/Emergency", "%1d"));
-            AddFunction(new PushButton(this, GEAR_INTERFACE, "3006", "241", "Gear system", "Brake Handle Park/Emergency", "1", "0", "%0.1f"));
-            AddFunction(new Switch(this, GEAR_INTERFACE, "240", new SwitchPosition[] { new SwitchPosition("1", "On", "3005"), new SwitchPosition("0", "Off", "3005") }, "Gear system", "Emergency / Parking Brake Handle On/Off", "%0.1f"));
+            AddFunction(new PushButton(this, GEAR_INTERFACE, gear_commands.EmergParkHandleSelectPark.ToString("d"), "241", "Gear system", "Brake Handle Park/Emergency", "1.0", "0.0", "%0.1f"));
+            AddFunction(new Switch(this, GEAR_INTERFACE, "240", new SwitchPosition[] { new SwitchPosition("1.0", "On", gear_commands.EmergParkHandleOnOff.ToString("d")), new SwitchPosition("0.0", "Off", gear_commands.EmergParkHandleOnOff.ToString("d")) }, "Gear system", "Emergency / Parking Brake Handle On/Off", "%0.3f"));
+//            elements["pnt_240"] = {
+//
+//    class               = {class_type.BTN, class_type.TUMB, class_type.LEV
+//    },
+//	hint				= _("Emergency/Parking Brake Handle, (LMB)Rotate Left/(RMB)Rotate Right/(MW)Pull-Stow"),
+//	device				= devices.GEAR_INTERFACE,
+//	action				= {gear_commands.EmergParkHandleSelectPark, gear_commands.EmergParkHandleSelectEmerg, gear_commands.EmergParkHandleOnOff
+//},
+//	stop_action = { gear_commands.EmergParkHandleSelectPark, 0, 0}, 
+//	arg = { 241, 241, 240},
+//	arg_value = { 0.333, -0.666, 1},
+//	arg_lim = { { 0,0.999}, { 0,0.999}, { 0,1} },
+//	gain = { 1,1,1},
+//	relative = { false,false,true},
+//	updatable = true,
+
+
             #endregion
             #region  Fuel system
             AddFunction(Switch.CreateToggleSwitch(this, FUEL_INTERFACE, "3001", "340", "1.0", "INHIBIT", "0.0", "NORM", "Fuel system", "Internal Wing Tank Fuel Control Switch", "%0.1f"));    // elements["pnt_340"]     = default_2_position_tumb(_("Internal Wing Tank Fuel Control Switch, INHIBIT/NORM"),            devices.FUEL_INTERFACE, fuel_commands.IntrWingInhibitSw,    340)
