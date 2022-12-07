@@ -5,8 +5,9 @@ This file's master distribution is located at:
 https://github.com/jeffboulanger/DCS-Alternative-Launcher/blob/master/DCS.Alternative.Launcher.Plugin.Viewports/Data/Viewports/ViewportTemplates.json
 
 however after discussion with derammo, as of 2021/22, the parent is dormant and changes in Helios are ahead of this nominated parent.  
-Additions can either be made to ViewportTemplates.json or a new file with the name in teh following format ViewportTemplates_*.json.
+Additions can either be made to ViewportTemplates.json or a new file with the name in the following format ViewportTemplates_*.json.
 
+New ViewportTemplates_*.json files are not cumulative, they should only contain the additions.
 
 The files named ViewportTemplates_*.json are changes that are merged for
 DCS releases starting at specific versions to account for changes in which 

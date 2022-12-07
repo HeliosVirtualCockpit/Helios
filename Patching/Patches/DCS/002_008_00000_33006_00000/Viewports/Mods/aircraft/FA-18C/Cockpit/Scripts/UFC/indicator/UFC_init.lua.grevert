@@ -1,0 +1,3 @@
+﻿@@ -643,122 +643,4 @@
+ alse
+-%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22FA_18C_UFC%22%2C %22UFC%22)%0D%0A

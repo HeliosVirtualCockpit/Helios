@@ -1,0 +1,8 @@
+﻿@@ -24818,44 +24818,8 @@
+ %7D%7D%0D%0A
+--- Helios Viewport Patch Change%0D%0A-- 
+ indi
+@@ -25041,255 +25041,8 @@
+ %7D%7D%0D%0A
+-indicators%5B#indicators %2B 1%5D %3D %7B%22Ka50%3A%3AccHUD%22                %2C LockOn_Options.script_path..%22HUD%2FHUD_init.lua%22                       %2Cdevices.HUD             %2C%7B%7B%22HUD-CENTER%22%2C %22HUD-DOWN%22%2C %22HUD-RIGHT%22%7D%2C%7Bsy_l %3D 0.0%7D%7D%7D%0D%0A-- Helios Viewport Patch Change%0D%0A
+ indi
