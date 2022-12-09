@@ -31,6 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private string _interfaceDeviceName = "UHF Radio Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _imageAssetLocation = "Helios Assets/M-2000C/";
+        private string _xamlLocation = "{M2000C}xaml/M-2000C/";
         private Potentiometer _potentiometer;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -110,7 +111,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             CustomDrum customDrum = new CustomDrum($"{Name}_{name}", size);
             customDrum.Left = posn.X;
             customDrum.Top = posn.Y;
-            customDrum.DrumImage = $"{_imageAssetLocation}{Name}/Channel_Drum_Tape.xaml";
+            customDrum.DrumImage = $"{_xamlLocation}{Name}/Channel_Drum_Tape.xaml";
             customDrum.Drum_PosX = 4;
             customDrum.Drum_PosY = 4;
             customDrum.Drum_Width = 46;

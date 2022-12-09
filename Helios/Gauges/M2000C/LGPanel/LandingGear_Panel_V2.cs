@@ -31,6 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private string _interfaceDeviceName = "Landing Gear Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _imageAssetLocation = "Helios Assets/M-2000C/";
+        private string _xamlLocation = "{M2000C}xaml/M-2000C/";
 
         public LandingGearPanelV2()
             : base("Landing Gear Panel", new Size(587, 800))
@@ -205,7 +206,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             CustomDrum customDrum = new CustomDrum( $"{Name}_{name}", size);
             customDrum.Left = posn.X;
             customDrum.Top = posn.Y;
-            customDrum.DrumImage = $"{_imageAssetLocation}{Name}/Bar-Indicator-Horizontal.xaml";
+            customDrum.DrumImage = $"{_xamlLocation}{Name}/Bar-Indicator-Horizontal.xaml";
             customDrum.Drum_PosX = 0;
             customDrum.Drum_PosY = -28;
             customDrum.Drum_Width = 46;
