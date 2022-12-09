@@ -114,7 +114,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             AddIndicator("TOT Firing Mode", "tot", new Point(column3, row2), new Size(16, 9));
             AddIndicator("PAR Firing Mode", "par", new Point(column3, row3), new Size(16, 9));
 
-            _displayBackground = AddImage("PCA Display Background Upper", new Point(190d, 85d), new Size(61d, 107d));
+            _displayBackground = AddImage("PPA Display Background", new Point(190d, 85d), new Size(62d, 107d));
 
             AddTextDisplay("PPA Display Quantity", new Point(196d, 89d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Quantity", 50, "00", TextHorizontalAlignment.Left, "");
             AddTextDisplay("PPA Dispaly Interval", new Point(196d, 139d), new Size(55d, 50d), _interfaceDeviceName, "PPA Display Interval", 50, "00", TextHorizontalAlignment.Left, "");
@@ -239,8 +239,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         {
             ImageDecoration image = new ImageDecoration();
             image.Name = name;
-            image.Image = "{M2000C}/Images/Miscellaneous/UHF_Repeater_Display_Background.png";
-            image.Alignment = ImageAlignment.Centered;
+            image.Image = "{M2000C}/Images/Miscellaneous/PPA_Display_Background.png";
+            image.Alignment = ImageAlignment.Stretched;
             image.Top = posn.Y;
             image.Left = posn.X;
             image.Width = size.Width;
