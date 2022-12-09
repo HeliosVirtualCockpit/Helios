@@ -770,17 +770,5 @@
   <ItemGroup>
     <Resource Include="Images\Miscellaneous\PPA_Display_Background.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="xaml\LGPanel\Bar-Indicator-Horizontal.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="xaml\UHF Radio\Channel_Drum_Tape.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>
