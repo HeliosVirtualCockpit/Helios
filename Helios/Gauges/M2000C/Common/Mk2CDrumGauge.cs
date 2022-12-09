@@ -35,10 +35,12 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CDrumGauge
         public Mk2CDrumGauge(string name, string drumWay, string actionIdentifier, string valueDescription, string format, Point posn, Size size, Size renderSize,double multiplier = 10d, double offset = 0d, double initialValue = 0d)
             : base(name, new Size(renderSize.Width*format.Length,renderSize.Height))
         {
+            Left = posn.X;
+            Top = posn.Y;
             _multiplier = multiplier;
             _offset = offset;
-            _drum = new GaugeDrumCounter(drumWay, posn, format, size, renderSize);
-            _drum.Clip = new RectangleGeometry(new Rect(posn.X, posn.Y, renderSize.Width*format.Length, renderSize.Height));
+            _drum = new GaugeDrumCounter(drumWay, new Point(0,0), format, size, renderSize);
+            _drum.Clip = new RectangleGeometry(new Rect(0,0, renderSize.Width*format.Length, renderSize.Height));
             Components.Add(_drum);
 
             _drumValue = new HeliosValue(this, new BindingValue(initialValue), "", actionIdentifier, name + " - " + actionIdentifier, valueDescription, BindingValueUnits.Numeric);
