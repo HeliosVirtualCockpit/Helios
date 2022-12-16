@@ -770,5 +770,8 @@
   <ItemGroup>
     <Resource Include="Images\Miscellaneous\PPA_Display_Background.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Miscellaneous\RadAlt_Knob.png" />
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>
