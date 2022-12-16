@@ -135,7 +135,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
                 }
                 else
                 {
-                    indicator.TextFormat.FontSize = 12;
+                    indicator.TextFormat.FontSize = 15;
                 }
                 indicator.TextFormat.FontFamily = ConfigManager.FontManager.GetFontFamilyByName(_font);  // this probably needs to change before release
                 indicator.TextFormat.PaddingLeft = 0;

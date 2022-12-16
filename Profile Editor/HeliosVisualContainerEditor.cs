@@ -1289,10 +1289,26 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
 
                     foreach (HeliosBinding binding in bindings)
                     {
-                        ConfigManager.UndoManager.AddUndoItem(new BindingAddUndoEvent(binding));
-                        binding.Trigger.Source.OutputBindings.Add(binding);
-                        binding.Action.Target.InputBindings.Add(binding);
-                    }
+                        /// Revisit: The following test guarding the binding is part of the ugly Reset Monitors /  Cut/Paste
+                        /// functionality.  In this case the test is to avoid the accummulation of identical bindings
+                        /// when *paste* is performed on a compositevisual.  CompositeVisual has already got in and created
+                        /// bindings for this compositevisual so before we re-add the bindings from the cut/copied visual,
+                        /// we check to see if identical bindings are already there, and if they are, we skip this Add for 
+                        /// the original binding.
+                        /// 
+                        if (!(binding.Trigger.Source.OutputBindings.Any(OutputBinding => OutputBinding.Description == binding.Description) 
+                            && binding.Action.Target.InputBindings.Any(InputBinding => InputBinding.Description == binding.Description)))
+                        {
+                            ConfigManager.UndoManager.AddUndoItem(new BindingAddUndoEvent(binding));
+                            binding.Trigger.Source.OutputBindings.Add(binding);
+                            binding.Action.Target.InputBindings.Add(binding);
+                        }
+                        else
+                        {
+                            Logger.Debug($"Duplicate Binding for {binding.Description} detected and suppressed");
+
+    }
+}
                 }
 
                 ConfigManager.UndoManager.CloseBatch();

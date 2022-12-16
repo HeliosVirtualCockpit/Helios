@@ -217,7 +217,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
 
             #region Flight Gauges
             AddFunction(new Altimeter(this));
-            AddFunction(new RotaryEncoder(this, AAU34, BUTTON_1, "62", 0.04d, "Altimeter", "Pressure"));
+            AddFunction(new RotaryEncoder(this, FM_PROXY, BUTTON_1, "62", 0.04d, "Altimeter", "Pressure"));
 			AddFunction(Switch.CreateThreeWaySwitch(this, AAU34, BUTTON_2, "60", "1.0", "PNEU", "0.0", "NONE", "-1.0", "ELECT", "Altimeter", "ELECT/PNEU switch", "%0.1f"));
 
 			AddFunction(new PushButton(this, ACCELEROMETER, BUTTON_1, "904", "Accelerometer", "Push to set"));
@@ -387,11 +387,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             AddFunction(new PushButton(this, UFC, BUTTON_16, "400", "UFC", "Enter"));
             AddFunction(new PushButton(this, UFC, BUTTON_17, "401", "UFC", "Create Overhead Mark Point"));
             AddFunction(new PushButton(this, UFC, BUTTON_18, "402", "UFC", "Display and Adjust Altitude Alert Values"));
-            AddFunction(new Rocker(this, UFC, BUTTON_20, BUTTON_21, BUTTON_20, BUTTON_21, "405", "UFC", "Steer", true));
-            AddFunction(new Rocker(this, UFC, BUTTON_22, BUTTON_23, BUTTON_22, BUTTON_23, "406", "UFC", "Data", true));
-            AddFunction(new Rocker(this, UFC, BUTTON_24, BUTTON_25, BUTTON_24, BUTTON_25, "407", "UFC", "Select", true));
-            AddFunction(new Rocker(this, UFC, BUTTON_26, BUTTON_27, BUTTON_26, BUTTON_27, "408", "UFC", "Adjust Depressible Pipper", true));
-            AddFunction(new Rocker(this, UFC, BUTTON_28, BUTTON_29, BUTTON_28, BUTTON_29, "409", "UFC", "HUD Brightness", false));
+            AddFunction(new Switch(this, UFC, "405", new SwitchPosition[] { new SwitchPosition("1.0", "Up", BUTTON_20, BUTTON_20, "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Down", BUTTON_21, BUTTON_21, "0.0", "0.0") }, "UFC", "Steer", "%0.1f"));
+            AddFunction(new Switch(this, UFC, "406", new SwitchPosition[] { new SwitchPosition("1.0", "Up", BUTTON_22, BUTTON_22, "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Down", BUTTON_23, BUTTON_23, "0.0", "0.0") }, "UFC", "Data", "%0.1f"));
+            AddFunction(new Switch(this, UFC, "407", new SwitchPosition[] { new SwitchPosition("1.0", "Up", BUTTON_24, BUTTON_24, "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Down", BUTTON_25, BUTTON_25, "0.0", "0.0") }, "UFC", "Select", "%0.1f"));
+            AddFunction(new Switch(this, UFC, "408", new SwitchPosition[] { new SwitchPosition("1.0", "Up", BUTTON_26, BUTTON_26, "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Down", BUTTON_27, BUTTON_27, "0.0", "0.0") }, "UFC", "Adjust Depressible Pipper", "%0.1f"));
+            AddFunction(new Switch(this, UFC, "409", new SwitchPosition[] { new SwitchPosition("-1.0", "Left", BUTTON_29, BUTTON_29, "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Right", BUTTON_28, BUTTON_28, "0.0", "0.0") }, "UFC", "HUD Brightness", "%0.1f"));
             AddFunction(new PushButton(this, UFC, BUTTON_30, "531", "UFC", "FWD"));
             AddFunction(new PushButton(this, UFC, BUTTON_31, "532", "UFC", "MID"));
             AddFunction(new PushButton(this, UFC, BUTTON_32, "533", "UFC", "AFT"));

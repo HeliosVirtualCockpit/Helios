@@ -1144,13 +1144,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3473", "473", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Secondary Oil Control Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3474", "474", "1.0", "On", "0.0", "Off", "Engine Start Panel", "Secondary Oil Control Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3475", "475", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Engine Emergency Control Cover", "%0.1f"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, ENGPANEL, "3476", "476", "1.0", "position 1", "0.5", "position 2", "0.0", "position 3", "Engine Start Panel", "Engine Emergency Control Switch", "%0.1f"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, ENGPANEL, "3476", "476", "0.0", "Rearm", "0.5", "Off", "1.0", "On", "Engine Start Panel", "Engine Emergency Control Switch", "%0.1f"));
             #endregion  
             #region  HUD/VTB
             AddFunction(new Switch(this, VTH, "201", new SwitchPosition[] { new SwitchPosition("1.0", "Up", "3201"), new SwitchPosition("0.5", "Middle", "3201"), new SwitchPosition("0.0", "Down", "3201") }, "HUD/VTB", "HUD Power Switch", "%0.1f"));
             AddFunction(new Axis(this, VTH, "3202", "202", 0.1d, 0d, 1d, "HUD/VTB", "HUD Brightness Knob"));
             AddFunction(Switch.CreateThreeWaySwitch(this, VTH, "3203", "203", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "HUD Declutter Switch", "%0.1f"));
-            AddFunction(new Switch(this, RS, "204", new SwitchPosition[] { new SwitchPosition("1.0", "ZB", "3204"), new SwitchPosition("0.5", "H", "3204"), new SwitchPosition("0.0", "SELH", "3204") }, "HUD/VTB", "HUD Altimeter Selector Switch", "%0.1f"));
+            AddFunction(new Switch(this, RS, "204", new SwitchPosition[] { new SwitchPosition("0.0", "SELH", "3204"), new SwitchPosition("0.5", "H", "3204"), new SwitchPosition("1.0", "ZB", "3204") }, "HUD/VTB", "HUD Altimeter Selector Switch", "%0.1f"));
             AddFunction(new Switch(this, RS, "205", new SwitchPosition[] { new SwitchPosition("1.0", "Test", "3205"), new SwitchPosition("0.5", "M", "3205"), new SwitchPosition("0.0", "A", "3205") }, "HUD/VTB", "RADAR Altimeter Power Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, VTH, "3206", "206","1.0","High","0.5","Low", "HUD/VTB", "Auxiliary Gunsight","%0.1f"));
             AddFunction(new Axis(this,VTH, "3207", "207", 0.15d, 0d, 1d, "HUD/VTB", "Auxiliary Gunsight Deflection"));
@@ -1188,7 +1188,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateThreeWaySwitch(this, AFCS, "3509", "509", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "AFCS", "Rudder Trim Paddle", "%0.1f"));
             #endregion
             #region  Fly-By-Wire
-            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3330", "330", "1.0", "On", "0.0", "Off", "Fly By Wire", "FBW Spin Mode Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3330", "330", "0.0", "Norm", "1.0", "Vrill", "Fly By Wire", "FBW Spin Mode Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3420", "420", "1.0", "Open", "0.0", "Closed", "Landing Gear Panel", "FBW Gain Mode Switch Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3421", "421", "0.0", "Norm", "1.0", "Gain CDVE", "Landing Gear Panel", "Fly by Wire Gain Mode Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGINE, "3422", "422", "0.0", "AA", "1.0", "Charges", "Landing Gear Panel", "Fly by Wire G Limiter Switch", "%0.1f"));
@@ -1344,8 +1344,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3459", "459", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Anti-Skid Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3666", "666", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Parking Brake Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3457", "457", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Drag Chute Lever", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3807", "807", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Nose Wheel Steering / IFF Interrogation Button", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, PCN, "3905", "905", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Emergency Compass", "%0.1f"));
+            #endregion
+            #region  HOTAS / Stick
+            AddFunction(Switch.CreateThreeWaySwitch(this, MISCPANELS, "3807", "807", "-1.0", "Pushed", "0.0", "Neutral", "1.0", "Pulled", "Stick", "Nose Wheel Steering / IFF Interrogation Button", "%0.1f"));
             #endregion
             #region Canopy
             AddFunction(Switch.CreateToggleSwitch(this, CANOPY, "3456", "456", "1.0", "On", "0,0", "Off", "Canopy", "Canopy Jettison", "%0.1f"));
@@ -1368,7 +1370,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3912", "912", "1.0", "On", "0.0", "Off", "Miscellaneous Seat", "LOX Emergency Supply", "%0.1f"));
             #endregion  
             #region  Sound Panel
-            AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3700", "700", "1.0", "On", "0.0", "Off", "Sound Panel", "AMPLIS Selector Knob", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3700", "700", "1.0", "2", "0.0", "1", "Sound Panel", "AMPLIS Selector Knob", "%0.1f"));
             AddFunction(new Axis(this, SYSLIGHTS, "3701", "701", 0.15d, 0d, 1d, "Sound Panel", "VOR/ILS Volume Knob"));    //default_axis_limited(_("VOR/ILS Volume Knob") device_commands.Button_701, 701, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3702", "702", 0.15d, 0d, 1d, "Sound Panel", "TACAN Volume Knob"));    //default_axis_limited(_("TACAN Volume Knob"), devices.SYSLIGHTS, device_commands.Button_702, 702, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3703", "703", 0.15d, 0d, 1d, "Sound Panel", "MAGIC Tone Volume Knob"));    //default_axis_limited(_("MAGIC Tone Volume Knob"), devices.SYSLIGHTS, device_commands.Button_703, 703, 0.8, 0.5, true, false, {0.0, 1.0})
@@ -1388,7 +1390,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
 
             #endregion
             #region  ECS Panel
-            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3630", "630", "1.0", "On", "0.0", "Off", "ECS Panel", "ECS Main Mode Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3630", "630", "0.0", "Manual", "1.0", "Auto", "ECS Panel", "ECS Main Mode Switch", "%0.1f"));
             AddFunction(new PushButton(this, ECS, "3631", "631", "ECS Panel", "ECS C Button"));
             AddFunction(new PushButton(this, ECS, "3633", "633", "ECS Panel", "ECS F Button"));
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3635", "635", "1.0", "On", "0.0", "Off", "ECS Panel", "ECS Cond Switch", "%0.1f"));

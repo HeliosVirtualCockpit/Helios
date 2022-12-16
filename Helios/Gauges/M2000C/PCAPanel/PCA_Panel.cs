@@ -78,8 +78,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 
             _upperDisplay = AddImage("PCA Display Background Upper", new Point(110d, 35d), new Size(554d, 52d));
             _lowerDisplay = AddImage("PCA Display Background Lower", new Point(110d, 168d), new Size(554d, 52d));
-            AddTextDisplay("PCA Upper Display", new Point(110d, 35d), new Size(554d, 52d), _interfaceDeviceName, "PCA Upper Display", 30.75, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("PCA Lower Display", new Point(110d, 169d), new Size(554d, 52d), _interfaceDeviceName, "PCA Lower Display", 30.75, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCA Upper Display", new Point(110d, 35d), new Size(554d, 52d), _interfaceDeviceName, "PCA Upper Display", 30, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("PCA Lower Display", new Point(110d, 169d), new Size(554d, 52d), _interfaceDeviceName, "PCA Lower Display", 30, "MMMMMMMMMMMMMMM", TextHorizontalAlignment.Left, "");
         }
 
         #region Properties

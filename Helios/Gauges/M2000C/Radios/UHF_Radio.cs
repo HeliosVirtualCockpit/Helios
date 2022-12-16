@@ -132,15 +132,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 childName: $"{Name}_{name}",
                 interfaceTriggerName: _interfaceDeviceName + "." + "UHF Channel Select" + ".changed",
                 deviceActionName: "set." + "Drum tape offset");
-            try
-            {
-                /// This is an internal binding within the gauge as opposed to a binding to the default interface
-                InputBindings.Add(CreateNewBinding(_potentiometer.Triggers["value.changed"], customDrum.Actions["set.Drum tape offset"]));
-            }
-            catch
-            {
-                Logger.Error($"Unable to create self-binding for gauge {Name} control {name} trigger: {_potentiometer.Name} \"value.changed\" action: {customDrum.Name} \"set.Drum tape offset\" ");
-            }
+
+            /// This is an internal binding within the gauge as opposed to a binding to the default interface
+            AddDefaultSelfBinding($"{Name}_{name.Replace("Display", "Sel")}", "value.changed", $"{Name}_{name}", "set.Drum tape offset");
         }
 
         private ToggleSwitch AddSwitch(string name, string imagePrefix, Point posn, Size size, ToggleSwitchPosition defaultPosition, ToggleSwitchType defaultType, bool horizontal = false, bool verticalReversed = false, bool indicator = false)

@@ -168,7 +168,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             {
                 /// This is an internal binding within the gauge as opposed to a binding to the default interface
                 /// and it is required because the data for the drum is not passed explicity over tbe interface.
-                InputBindings.Add(CreateNewBinding(Children[$"{Name}_{name.Replace(" Indicator", "")}"].Triggers["position.changed"], newGauge.Actions[$"set.{name}"]));
+                AddDefaultSelfBinding($"{Name}_{name.Replace(" Indicator", "")}", "position.changed", $"{Name}_{name}", $"set.{name}");
+
             }
             catch
             {

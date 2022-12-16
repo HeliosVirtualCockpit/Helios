@@ -75,11 +75,30 @@ namespace GadrocsWorkshop.Helios
         }
     }
 
+    /// <summary>
+    /// for binding between actions and triggers withing the CompositeVisual
+    /// </summary>
+    public struct DefaultSelfBinding
+    {
+        public string TriggerChildName, DeviceTriggerName, ActionChildName, DeviceActionName;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
+        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName)
+        {
+            TriggerChildName = triggerChildName;
+            DeviceTriggerName = deviceTriggerName;
+            ActionChildName = actionChildName;
+            DeviceActionName = deviceActionName;
+            Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName}");
+        }
+    }
+
     public abstract class CompositeVisual : HeliosVisual
     {
         private Dictionary<HeliosVisual, Rect> _nativeSizes = new Dictionary<HeliosVisual, Rect>();
         protected List<DefaultOutputBinding> _defaultOutputBindings;
         protected List<DefaultInputBinding> _defaultInputBindings;
+        protected List<DefaultSelfBinding> _defaultSelfBindings;
         protected string _defaultBindingName;   // the name of the default binding in the interface
         protected HeliosInterface _defaultInterface;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -95,6 +114,7 @@ namespace GadrocsWorkshop.Helios
             _defaultInterface = null;
             _defaultInputBindings = new List<DefaultInputBinding>();
             _defaultOutputBindings = new List<DefaultOutputBinding>();
+            _defaultSelfBindings = new List<DefaultSelfBinding>();
         }
 
         void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -146,6 +166,14 @@ namespace GadrocsWorkshop.Helios
             get
             {
                 return _defaultOutputBindings;
+            }
+        }
+
+        public List<DefaultSelfBinding> DefaultSelfBindings
+        {
+            get
+            {
+                return _defaultSelfBindings;
             }
         }
 
@@ -241,6 +269,16 @@ namespace GadrocsWorkshop.Helios
                 ));
         }
 
+        protected virtual void AddDefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName)
+        {
+            DefaultSelfBindings.Add(new DefaultSelfBinding(
+                triggerChildName: triggerChildName,
+                deviceTriggerName: deviceTriggerName,
+                actionChildName: actionChildName,
+                deviceActionName: deviceActionName
+                ));
+        }
+
         protected HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action)
         {
            return CreateNewBinding(trigger, action, new BindingValue(null));
@@ -277,7 +315,7 @@ namespace GadrocsWorkshop.Helios
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {
             base.OnProfileChanged(oldProfile);
-            if (!DesignMode)
+            if (!DesignMode || (oldProfile != null && !oldProfile.DesignMode))
                 return;
 
             // grab the default interface, if it exists
@@ -337,10 +375,6 @@ namespace GadrocsWorkshop.Helios
                         child.Actions[defaultBinding.DeviceActionName],defaultBinding.DeviceTriggerBindingValue));
 
                 }
-
-                //child.OutputBindings.Add(
-                //    new HeliosBinding(_defaultInterface.Triggers[defaultBinding.InterfaceTriggerName],
-                //        child.Actions[defaultBinding.DeviceActionName]));
             }
 
             // now looping for all default output bindings to assign the value
@@ -366,10 +400,39 @@ namespace GadrocsWorkshop.Helios
                 child.OutputBindings.Add(CreateNewBinding(child.Triggers[defaultBinding.DeviceTriggerName],
                                       _defaultInterface.Actions[defaultBinding.InterfaceActionName]));
 
-                //            child.OutputBindings.Add(
-                //new HeliosBinding(child.Triggers[defaultBinding.DeviceTriggerName],
-                //                  _defaultInterface.Actions[defaultBinding.InterfaceActionName]));
             }
+
+            // now looping for all default self bindings to link trigger with actions
+            foreach (DefaultSelfBinding defaultBinding in _defaultSelfBindings)
+            {
+                if (!Children.ContainsKey(defaultBinding.TriggerChildName))
+                {
+                    Logger.Error($"Cannot find Trigger child for Self Bind {defaultBinding.TriggerChildName}");
+                    continue;
+                }
+                if (!Children.ContainsKey(defaultBinding.ActionChildName))
+                {
+                    Logger.Error($"Cannot find Action child for Self Bind {defaultBinding.ActionChildName}");
+                    continue;
+                }
+                HeliosVisual triggerChild = Children[defaultBinding.TriggerChildName];
+                HeliosVisual actionChild = Children[defaultBinding.ActionChildName];
+                if (!triggerChild.Triggers.ContainsKey(defaultBinding.DeviceTriggerName))
+                {
+                    Logger.Error("Cannot find trigger " + defaultBinding.DeviceTriggerName);
+                    continue;
+                }
+                if (!actionChild.Actions.ContainsKey(defaultBinding.DeviceActionName))
+                {
+                    Logger.Error("Cannot find action " + defaultBinding.DeviceActionName);
+                    continue;
+                }
+                Logger.Debug($"Child Self binding trigger {defaultBinding.TriggerChildName} {defaultBinding.DeviceTriggerName} to action {defaultBinding.ActionChildName} {defaultBinding.DeviceActionName}");
+                actionChild.InputBindings.Add(CreateNewBinding(triggerChild.Triggers[defaultBinding.DeviceTriggerName],
+                                      actionChild.Actions[defaultBinding.DeviceActionName]));
+
+            }
+
         }
 
         private Point FromCenter(Point posn, Size size)

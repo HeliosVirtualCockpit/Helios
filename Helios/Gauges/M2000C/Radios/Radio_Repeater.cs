@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     class Radio_Repeater : M2000CDevice
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 130, 148);
-        private string _interfaceDeviceName = "U/VHF";
+        private string _interfaceDeviceName = "Radio Panel";
         private string _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI";
         private Rect _scaledScreenRect = SCREEN_RECT;
         private bool _useTextualDisplays = true;
