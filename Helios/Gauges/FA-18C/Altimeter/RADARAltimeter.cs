@@ -80,7 +80,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             _altitude = new HeliosValue(this, new BindingValue(0d), "", "RADAR altitude", "Current RADAR altitude of the aircraft.", "", BindingValueUnits.Feet);
             _altitude.Execute += new HeliosActionHandler(Altitude_Execute);
             Actions.Add(_altitude);
-            _min_altitude = new HeliosValue(this, new BindingValue(0d), "", "RADAR Altimeter Minimum", "Minimum Altitude setting for the aricraft in feet.", "", BindingValueUnits.Feet);
+            _min_altitude = new HeliosValue(this, new BindingValue(0d), "", "RADAR Altimeter Minimum", "Minimum Altitude setting for the aircraft in feet.", "", BindingValueUnits.Feet);
             _min_altitude.Execute += new HeliosActionHandler(Min_Altitude_Execute);
             Actions.Add(_min_altitude);
 

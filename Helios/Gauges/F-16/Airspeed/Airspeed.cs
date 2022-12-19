@@ -53,11 +53,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.Airspeed
 
             Components.Add(new GaugeImage("{Helios}/Gauges/F-16/Common/f16_gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
 
-            _airspeed = new HeliosValue(this, new BindingValue(0d), "", "indicated air speed", "Current airspeed of the aricraft.", "", BindingValueUnits.Knots);
+            _airspeed = new HeliosValue(this, new BindingValue(0d), "", "indicated air speed", "Current airspeed of the aircraft.", "", BindingValueUnits.Knots);
             _airspeed.Execute += new HeliosActionHandler(Airspeed_Execute);
             Actions.Add(_airspeed);
 
-            _mach = new HeliosValue(this, new BindingValue(0d), "", "mach", "Current airspeed of the aricraft.", "", BindingValueUnits.Numeric);
+            _mach = new HeliosValue(this, new BindingValue(0d), "", "mach", "Current airspeed of the aircraft.", "", BindingValueUnits.Numeric);
             _mach.Execute += new HeliosActionHandler(Mach_Execute);
             Actions.Add(_mach);
         }

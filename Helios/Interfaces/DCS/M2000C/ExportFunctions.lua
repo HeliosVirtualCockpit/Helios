@@ -1,8 +1,8 @@
 -- Exports.Lua from Helios Mirage-2000C interface
 function driver.processHighImportance(mainPanelDevice)
 	-- Send Altimeter Values	
-	-- helios.send(2051, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(355), mainPanelDevice:get_argument_value(354), mainPanelDevice:get_argument_value(352)))
-	-- helios.send(2059, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(356), mainPanelDevice:get_argument_value(357), mainPanelDevice:get_argument_value(358), mainPanelDevice:get_argument_value(359)))		
+	helios.send(2051, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(306), mainPanelDevice:get_argument_value(307), mainPanelDevice:get_argument_value(305)))
+	helios.send(2059, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(310), mainPanelDevice:get_argument_value(311), mainPanelDevice:get_argument_value(312), mainPanelDevice:get_argument_value(313)))		
 end
 
 function driver.processLowImportance(mainPanelDevice)

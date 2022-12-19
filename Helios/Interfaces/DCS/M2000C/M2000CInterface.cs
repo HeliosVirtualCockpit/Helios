@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.M2000C.Functions;
     using System.Windows.Forms.VisualStyles;
 
     [HeliosInterface("Helios.M2000C", "DCS M-2000C", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
@@ -953,7 +954,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Text(this, "2060", "PCA Panel", "PCA Upper Display", "Display Upper Line"));
             AddFunction(new Text(this, "2061", "PCA Panel", "PCA Lower Display", "Display Lower Line"));
             #endregion
-
             #region PPA Panel
             AddFunction(new PushButton(this, PPA, "3266", "266", "PPA Panel", "S530 Missile Enabler Button"));
             AddFunction(new PushButton(this, PPA, "3269", "269", "PPA Panel", "Missile Fire Mode Selector"));
@@ -1228,7 +1228,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "505", "RADAR", "PSIC Indicator", "Left consule PSIC"));
             AddFunction(new Switch(this, PCR, "506", CreateSwitchPositions(3, 1.0, -0.5, "3506",new string[] { "60","30","15"}), "RADAR", "Azimuth Selector", "%0.1f"));
             #endregion
-
             #region  RADAR IFF
             AddFunction(new Switch(this, RADAR, "598", CreateSwitchPositions(6, 0.0, 0.2, "3598", new string[] { "1", "4","3/2","3/3","3/4", "2" }), "RADAR IFF", "Radar IFF Mode Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, RADAR, "3599", "599","1.0","L","0.0","R", "RADAR IFF", "Radar IFF L/R Selector", "%0.1f"));
@@ -1381,13 +1380,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             #endregion
             #region  Flight Instruments
             AddFunction(new PushButton(this, FLIGHTINST, "3308", "308", "Flight Instruments", "G-Meter Reset"));
-            AddFunction(new Axis(this, FLIGHTINST, "3309", "309", 0.15d, 0d, 1d, "Flight Instruments", "Barometric Pressure Calibration"));    // elements["PTN_309"] = default_axis(_("Barometric Pressure Calibration"),devices.FLIGHTINST,device_commands.Button_309,309)
+            AddFunction(new Altimeter(this));
+            AddFunction(new RotaryEncoder(this, FLIGHTINST, "3309", "309", 0.01d, "Flight Instruments", "Barometric Pressure Calibration Knob"));
             AddFunction(new Switch(this, FLIGHTINST, "665", CreateSwitchPositions(3, 0.0, 0.5, "3665"), "Flight Instruments", "Backup ADI Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3314", "314", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Cage Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3315", "315", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Backlight Switch", "%0.1f"));
             AddFunction(new Axis(this, FLIGHTINST, "3325", "325", 0.15d, 0d, 1d, "Flight Instruments", "Backup ADI Pitch Adjust Knob"));
             AddFunction(new PushButton(this, FLIGHTINST, "3328", "328", "Flight Instruments", "Backup ADI Cage / Uncage"));
-
             #endregion
             #region  ECS Panel
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3630", "630", "0.0", "Manual", "1.0", "Auto", "ECS Panel", "ECS Main Mode Switch", "%0.1f"));
@@ -1418,7 +1417,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Text(this, "2082", "EVF (TAF) Panel", "EVF Display", "Two digit display on the EVF Panel"));
 
             #endregion
-
             #region NVG
             AddFunction(Switch.CreateToggleSwitch(this, Helmet_NVG, "4001", "1001", "1.0", "Mount", "0.0", "Unmount", "Night Vision", "Mount/Unmount NVG on Helmet", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, Helmet_NVG, "4002", "1002", "1.0", "Stow", "0.0", "Unstow", "Night Vision", "STOW/UNSTOW NVG", "%0.1f"));

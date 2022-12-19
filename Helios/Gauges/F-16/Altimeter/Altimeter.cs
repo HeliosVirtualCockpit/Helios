@@ -62,7 +62,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.Altimeter
             _airPressure.Execute += new HeliosActionHandler(AirPressure_Execute);
             Actions.Add(_airPressure);
 
-            _altitdue = new HeliosValue(this, new BindingValue(0d), "", "altitude", "Current altitude of the aricraft.", "", BindingValueUnits.Feet);
+            _altitdue = new HeliosValue(this, new BindingValue(0d), "", "altitude", "Current altitude of the aircraft.", "", BindingValueUnits.Feet);
             _altitdue.Execute += new HeliosActionHandler(Altitude_Execute);
             Actions.Add(_altitdue);
         }

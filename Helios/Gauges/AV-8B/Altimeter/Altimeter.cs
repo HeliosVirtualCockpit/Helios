@@ -66,7 +66,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _airPressure.Execute += new HeliosActionHandler(AirPressure_Execute);
             Actions.Add(_airPressure);
 
-            _altitdue = new HeliosValue(this, new BindingValue(0d), "Flight Instruments", "Altitude", "Current altitude of the aricraft.", "Value in Feet", BindingValueUnits.Feet);
+            _altitdue = new HeliosValue(this, new BindingValue(0d), "Flight Instruments", "Altitude", "Current altitude of the aircraft.", "Value in Feet", BindingValueUnits.Feet);
             _altitdue.Execute += new HeliosActionHandler(Altitude_Execute);
             Actions.Add(_altitdue);
         }

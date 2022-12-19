@@ -198,6 +198,7 @@
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
+    <Compile Include="Gauges\M2000C\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\M2000C\LGPanel\LandingGear_Panel_V2.cs" />
     <Compile Include="Gauges\M2000C\Miscellaneous\RADAR_IFF_Mode_Panel.cs" />
     <Compile Include="Gauges\M2000C\Miscellaneous\Low_Altitude_Height.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Interfaces\Common\Ignored.cs" />
     <Compile Include="Interfaces\DCS\AH64D\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSInterfaceEditorBase.cs" />
+    <Compile Include="Interfaces\DCS\M2000C\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceEditor.xaml.cs">
       <DependentUpon>SoftInterfaceEditor.xaml</DependentUpon>
     </Compile>
@@ -269,6 +271,7 @@
     <Compile Include="Json\InterfaceFile.cs" />
     <Compile Include="Json\NetworkFunction\SchemaGenerationProviderForJsonNet.cs" />
     <Compile Include="UnitConverters\RawConverters.cs" />
+    <Compile Include="Units\MillbarUnit.cs" />
     <Compile Include="Util\FileUtility.cs" />
     <Compile Include="Util\ModuleUtility.cs" />
     <Compile Include="ProfileInstances.cs" />
@@ -787,6 +790,22 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Images\M-2000C\UHF Radio\Channel_Drum_Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\Altimeter\alt_drum_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\Altimeter\altimeter_backplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\Altimeter\altimeter_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\M2000C\Altimeter\altimeter_needle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -3854,7 +3873,6 @@
   <ItemGroup>
     <Folder Include="Gauges\FA-18C\Controls\" />
     <Folder Include="Interfaces\DCS\F14B\Functions\" />
-    <Folder Include="Interfaces\DCS\M2000C\Functions\" />
     <Folder Include="Interfaces\DCS\Mi8Simple\Functions\" />
     <Folder Include="Interfaces\DCS\MiG21\Functions\" />
   </ItemGroup>
