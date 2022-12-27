@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2020 Helios Contributors
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -48,6 +48,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private Color _labelColor = Colors.White;
         private readonly HeliosValue _positionValue;
         private readonly HeliosValue _positionNameValue;
+        private readonly HeliosValue _incrementValue;
+        private readonly HeliosValue _decrementValue;
 
         private bool _isContinuous;
 
@@ -68,6 +70,14 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_positionValue);
             Actions.Add(_positionValue);
             Triggers.Add(_positionValue);
+
+            _incrementValue = new HeliosValue(this, new BindingValue(1), "", "increment", "Increment current position of the switch.", "Set true to increment position.", BindingValueUnits.Boolean);
+            _incrementValue.Execute += IncrementPositionAction_Execute;
+            Actions.Add(_incrementValue);
+
+            _decrementValue = new HeliosValue(this, new BindingValue(1), "", "decrement", "Decrement current position of the switch.", "Set true to decrement position.", BindingValueUnits.Boolean);
+            _decrementValue.Execute += DecrementPositionAction_Execute;
+            Actions.Add(_decrementValue);
 
             _positionNameValue = new HeliosValue(this, new BindingValue("0"), "", "position name", "Name of the current position of the switch.", "", BindingValueUnits.Text);
             Values.Add(_positionNameValue);
@@ -601,6 +611,40 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     CurrentPosition = index;
                 }
+            }
+            EndTriggerBypass(e.BypassCascadingTriggers);
+        }
+
+        void IncrementPositionAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            int newPosition = CurrentPosition + 1;
+
+            BeginTriggerBypass(e.BypassCascadingTriggers);
+            // WARNING: rotary switch positions are 1-based
+            if (newPosition <= Positions.Count)
+            {
+                CurrentPosition = newPosition;
+            }
+            else if (IsContinuous)
+            {
+                CurrentPosition = 1;
+            }
+            EndTriggerBypass(e.BypassCascadingTriggers);
+        }
+
+        void DecrementPositionAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            int newPosition = CurrentPosition - 1;
+
+            BeginTriggerBypass(e.BypassCascadingTriggers);
+            // WARNING: rotary switch positions are 1-based
+            if (newPosition >= 1)
+            {
+                CurrentPosition = newPosition;
+            }
+            else if (IsContinuous)
+            {
+                CurrentPosition = Positions.Count;
             }
             EndTriggerBypass(e.BypassCascadingTriggers);
         }
