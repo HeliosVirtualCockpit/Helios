@@ -1,5 +1,6 @@
 //  Copyright 2014 Craig Courtney
-//    
+//  Copyright 2022 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -124,6 +125,8 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
         {
             get
             {
+                string result = "Name cannot be blank or contain special characters and must be unique.";
+
                 if (!columnName.Equals("VisualName"))
                 {
                     return null;
@@ -131,18 +134,18 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
 
                 if (string.IsNullOrWhiteSpace(VisualName))
                 {
-                    return "Name cannot be blank.";
+                    return result;
                 }
 
-                if (!Regex.IsMatch(VisualName, "^[a-zA-Z0-9_ ]*$"))
+                if (!Regex.IsMatch(VisualName, "^[a-zA-Z0-9-_ ]*$"))
                 {
-                    return "Name must not contain special characters.";
+                    return result;
                 }
 
                 if (Control != null && Control.Parent != null && !VisualName.Equals(Control.Name) &&
                     Control.Parent.Children.ContainsKey(VisualName))
                 {
-                    return "Name must be unique.";
+                    return result;
                 }
 
                 return null;
