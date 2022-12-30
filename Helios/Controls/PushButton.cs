@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.PushButton", "Tactile Square", "Buttons", typeof(PushButtonRenderer))]
+    [HeliosControl("Helios.Base.PushButton", "Tactile Square", "Push Buttons", typeof(PushButtonRenderer))]
     public class PushButton : HeliosVisual, IConfigurableImageLocation
     {
         private PushButtonType _buttonType;

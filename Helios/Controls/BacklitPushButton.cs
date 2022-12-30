@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.BacklitPushButton", "Backlit Button", "Buttons", typeof(BacklitPushButtonRenderer))]
+    [HeliosControl("Helios.Base.BacklitPushButton", "Backlit Button", "Push Buttons", typeof(BacklitPushButtonRenderer))]
     public class BacklitPushButton : HeliosVisual
     {
         private PushButtonType _buttonType;

@@ -1,6 +1,6 @@
 ﻿<ControlTemplate>
   <Name>Push Indicator - Square</Name>
-  <Category>Push Button Indicators</Category>
+  <Category>Push Buttons</Category>
   <TypeIdentifier>Helios.Base.IndicatorPushButton</TypeIdentifier>
   <Template>
     <TemplateValues>

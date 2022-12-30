@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.DualIndicatorPushButton", "Dual Indicator Push Button", "Push Button Indicators", typeof(DualIndicatorPushButtonRenderer))]
+    [HeliosControl("Helios.Base.DualIndicatorPushButton", "Dual Indicator Push Button", "Push Buttons", typeof(DualIndicatorPushButtonRenderer))]
     public class DualIndicatorPushButton : IndicatorPushButton
     {
         private Color _additionalOnTextColor = Color.FromArgb(0xF0,0x34, 0xAE,0x00);
