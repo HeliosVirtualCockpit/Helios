@@ -383,6 +383,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("Runtime", "Aircraft Name", "The name of the aircraft", "Example: F-16B-15 or F/A-18D", BindingValueUnits.Text);
             AddValue("Runtime", "Aircraft Nomenclature", "The nomenclature of the aircraft", "Example: F16 or F18", BindingValueUnits.Text);
             AddValue("Runtime", "Aircraft IFF Panel", "Type of panel IFF or AUX COMM", "True if IFF, False if AUX COMM. ", BindingValueUnits.Boolean);
+            AddValue("Runtime", "Aircraft ECM Panel", "Type of panel ECM or IDIAS", "True if ECM, False if IDIAS. ", BindingValueUnits.Boolean);
         }
 
         internal override void InitData()
@@ -643,6 +644,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             SetValue("Runtime", "Aircraft Name", new BindingValue(_acName));
             SetValue("Runtime", "Aircraft Nomenclature", new BindingValue(_acNCTR));
             SetValue("Runtime", "Aircraft IFF Panel", new BindingValue(_panelTypeIFF));
+            SetValue("Runtime", "Aircraft ECM Panel", new BindingValue(!_acName.Contains("HAF")));
         }
 
         internal float ClampAOA(float alpha)
