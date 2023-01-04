@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2020 Helios Contributors
-//    
+//  Copyright 2023 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -61,6 +61,32 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
 
         private DateTime _unkLastTick;
         private bool _unkOnState;
+
+        private DateTime _ecmBits0_StandbyLastTick;
+        private bool _ecmBits0_StandbyOnState;
+
+        private DateTime _ecmBits1_StandbyLastTick;
+        private bool _ecmBits1_StandbyOnState;
+
+        private DateTime _ecmBits2_StandbyLastTick;
+        private bool _ecmBits2_StandbyOnState;
+
+        private DateTime _ecmBits3_StandbyLastTick;
+        private bool _ecmBits3_StandbyOnState;
+
+        private DateTime _ecmBits4_StandbyLastTick;
+        private bool _ecmBits4_StandbyOnState;
+
+        private DateTime _ecmOperStandbyLastTick;
+        private bool _ecmOperStandbyOnState;
+
+        private bool _ecmButtonPressed;
+        private bool _ecmButtonStandby;
+        private bool _ecmButtonActive;
+        private bool _ecmButtonTransmit;
+        private bool _ecmButtonFail;
+        private bool _ecmBitRunning;
+
         private List<string> _navPoints;
         private string _acName;
         private string _acNCTR;
@@ -128,7 +154,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("Gear Handle", "gear handle solenoid", "Landing gear handle solenoid status", "True if failed", BindingValueUnits.Boolean);
             AddValue("Gear Handle", "handle indicator", "Landing gear handle indicator light.", "True if lit.", BindingValueUnits.Boolean, "Landing Gear");
             
-
             // CMDS Bits
             AddValue("CMDS", "chaff remaining", "Number chaff charges remaining.", "", BindingValueUnits.Numeric);
             AddValue("CMDS", "flares remaining", "Number of flares remaining.", "", BindingValueUnits.Numeric);
@@ -139,10 +164,46 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("CMDS", "Rdy", "Status message DISPENSE RDY should be displayed.", "True if DISPENSE RDY should be displayed", BindingValueUnits.Boolean);
             AddValue("CMDS", "ChaffLo", "Indicates bingo chaff quantity is reached.", "True if bingo quantity reached", BindingValueUnits.Boolean);
             AddValue("CMDS", "FlareLo", "Inidcates bingo flare quantity is reached.", "True if bingo quantity reached", BindingValueUnits.Boolean);
-            
+
             // ECM Bits
             AddValue("ECM", "power indicator", "ECM power indicator.", "True if lit.", BindingValueUnits.Boolean);
             AddValue("ECM", "fail indicator", "ECM failure indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "bit running", "ECM built in test running.", "True if running.", BindingValueUnits.Boolean);
+
+            AddValue("ECM", "button 1 pressed state", "Program button 1 pressed state.", "True if pressed.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 1 standby indicator", "Program button 1 standby indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 1 active indicator", "Program button 1 active indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 1 transmit indicator", "Program button 1 transmit indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 1 fail indicator", "Program button 1 fail indicator.", "True if lit.", BindingValueUnits.Boolean);
+
+            AddValue("ECM", "button 2 pressed state", "Program button 2 pressed state.", "True if pressed.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 2 standby indicator", "Program button 2 standby indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 2 active indicator", "Program button 2 active indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 2 transmit indicator", "Program button 2 transmit indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 2 fail indicator", "Program button 2 fail indicator.", "True if lit.", BindingValueUnits.Boolean);
+
+            AddValue("ECM", "button 3 pressed state", "Program button 3 pressed state.", "True if pressed.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 3 standby indicator", "Program button 3 standby indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 3 active indicator", "Program button 3 active indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 3 transmit indicator", "Program button 3 transmit indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 3 fail indicator", "Program button 3 fail indicator.", "True if lit.", BindingValueUnits.Boolean);
+
+            AddValue("ECM", "button 4 pressed state", "Program button 4 pressed state.", "True if pressed.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 4 standby indicator", "Program button 4 standby indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 4 active indicator", "Program button 4 active indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 4 transmit indicator", "Program button 4 transmit indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 4 fail indicator", "Program button 4 fail indicator.", "True if lit.", BindingValueUnits.Boolean);
+
+            AddValue("ECM", "button 5 pressed state", "Program button 5 pressed state.", "True if pressed.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 5 standby indicator", "Program button 5 standby indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 5 active indicator", "Program button 5 active indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 5 transmit indicator", "Program button 5 transmit indicator.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("ECM", "button 5 fail indicator", "Program button 5 fail indicator.", "True if lit.", BindingValueUnits.Boolean);
+
+            // IDIAS Bits
+            AddValue("IDIAS", "power switch", "Power switch position.", "1 = Off, 2 = On", BindingValueUnits.Numeric);
+            AddValue("IDIAS", "operating state standby", "Operating state standby indication.", "True if lit.", BindingValueUnits.Boolean);
+            AddValue("IDIAS", "operating state active", "Operating state active indication.", "True if lit.", BindingValueUnits.Boolean);
 
             // Trim Bits
             AddValue("Trim", "roll trim", "Amount of roll trim currently set.", "(-0.5 to 0.5)", BindingValueUnits.Numeric);
@@ -351,6 +412,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
 
             // Lighting
             AddValue("Lighting", "instrument backlight", "Instrument panel backlight brightness.", "0 = Off, 1 = Dim, 2 = Bright", BindingValueUnits.Numeric);
+            AddValue("Lighting", "console floodlight", "Console floodlight brightness.", "0 = Off to 6 = Bright", BindingValueUnits.Numeric);
 
             // Misc Bits
             AddValue("Misc", "tfs stanby indicator", "Misc panel Terrain Following(TFS) standby indicator.", "True if lit.", BindingValueUnits.Boolean);
@@ -577,6 +639,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 SetValue("Hydraulic", "Pressure B", new BindingValue(_lastFlightData2.hydPressureB));
                 SetValue("Time", "Time", new BindingValue(_lastFlightData2.currentTime));
                 SetValue("Lighting", "instrument backlight", new BindingValue((int)_lastFlightData2.instrLight));
+                SetValue("Lighting", "console floodlight", new BindingValue((int)_lastFlightData2.floodConsole));
 
                 //Bullseye                
                 ProcessOwnshipFromBullseye(_lastFlightData.x, _lastFlightData.y, _lastFlightData2.bullseyeX, _lastFlightData2.bullseyeY, _lastFlightData.currentHeading);
@@ -591,6 +654,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 SetValue("IFF", "backup mode 3 digit 2", new BindingValue(_lastFlightData2.iffBackupMode3ADigit2));
 
                 ProcessRwrInfo(_lastFlightData2);
+                ProcessEcmBits(_lastFlightData2.ecmBits, _lastFlightData2.blinkBits);
+                ProcessEcmOperStates(_lastFlightData2.ecmOperState, _lastFlightData2.blinkBits);
                 ProcessMiscBits(_lastFlightData2.miscBits, _lastFlightData2.RALT);
                 ProcessHsiBits(_lastFlightData.hsiBits, _lastFlightData2.blinkBits);
                 ProcessLightBits(_lastFlightData.lightBits);
@@ -644,7 +709,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             SetValue("Runtime", "Aircraft Name", new BindingValue(_acName));
             SetValue("Runtime", "Aircraft Nomenclature", new BindingValue(_acNCTR));
             SetValue("Runtime", "Aircraft IFF Panel", new BindingValue(_panelTypeIFF));
-            SetValue("Runtime", "Aircraft ECM Panel", new BindingValue(!_acName.Contains("HAF")));
+            SetValue("Runtime", "Aircraft ECM Panel", new BindingValue(!(_acName.Contains("F-16C-52+") || _acName.Contains("EAF") || _acName.Contains("HAF"))));
         }
 
         internal float ClampAOA(float alpha)
@@ -704,6 +769,81 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             return finalDeviation;
         }
 
+        private void ProcessEcmBits(EcmBits[] ecmBits, BlinkBits blinkBits)
+        {
+            _ecmBitRunning = false;
+
+            SetEcmBitVariables(ecmBits, 0);
+            UpdateBlinkingLightState(_ecmButtonStandby, _ecmButtonStandby & blinkBits.HasFlag(BlinkBits.ECM_Oper), ref _ecmBits0_StandbyLastTick, ref _ecmBits0_StandbyOnState);
+
+            SetValue("ECM", "button 1 pressed state", new BindingValue(_ecmButtonPressed));
+            SetValue("ECM", "button 1 standby indicator", new BindingValue(_ecmBits0_StandbyOnState));
+            SetValue("ECM", "button 1 active indicator", new BindingValue(_ecmButtonActive));
+            SetValue("ECM", "button 1 transmit indicator", new BindingValue(_ecmButtonTransmit));
+            SetValue("ECM", "button 1 fail indicator", new BindingValue(_ecmButtonFail));
+
+            SetEcmBitVariables(ecmBits, 1);
+            UpdateBlinkingLightState(_ecmButtonStandby, _ecmButtonStandby & blinkBits.HasFlag(BlinkBits.ECM_Oper), ref _ecmBits1_StandbyLastTick, ref _ecmBits1_StandbyOnState);
+
+            SetValue("ECM", "button 2 pressed state", new BindingValue(_ecmButtonPressed));
+            SetValue("ECM", "button 2 standby indicator", new BindingValue(_ecmBits1_StandbyOnState));
+            SetValue("ECM", "button 2 active indicator", new BindingValue(_ecmButtonActive));
+            SetValue("ECM", "button 2 transmit indicator", new BindingValue(_ecmButtonTransmit));
+            SetValue("ECM", "button 2 fail indicator", new BindingValue(_ecmButtonFail));
+
+            SetEcmBitVariables(ecmBits, 2);
+            UpdateBlinkingLightState(_ecmButtonStandby, _ecmButtonStandby & blinkBits.HasFlag(BlinkBits.ECM_Oper), ref _ecmBits2_StandbyLastTick, ref _ecmBits2_StandbyOnState);
+
+            SetValue("ECM", "button 3 pressed state", new BindingValue(_ecmButtonPressed));
+            SetValue("ECM", "button 3 standby indicator", new BindingValue(_ecmBits2_StandbyOnState));
+            SetValue("ECM", "button 3 active indicator", new BindingValue(_ecmButtonActive));
+            SetValue("ECM", "button 3 transmit indicator", new BindingValue(_ecmButtonTransmit));
+            SetValue("ECM", "button 3 fail indicator", new BindingValue(_ecmButtonFail));
+
+            SetEcmBitVariables(ecmBits, 3);
+            UpdateBlinkingLightState(_ecmButtonStandby, _ecmButtonStandby & blinkBits.HasFlag(BlinkBits.ECM_Oper), ref _ecmBits3_StandbyLastTick, ref _ecmBits3_StandbyOnState);
+
+            SetValue("ECM", "button 4 pressed state", new BindingValue(_ecmButtonPressed));
+            SetValue("ECM", "button 4 standby indicator", new BindingValue(_ecmBits3_StandbyOnState));
+            SetValue("ECM", "button 4 active indicator", new BindingValue(_ecmButtonActive));
+            SetValue("ECM", "button 4 transmit indicator", new BindingValue(_ecmButtonTransmit));
+            SetValue("ECM", "button 4 fail indicator", new BindingValue(_ecmButtonFail));
+
+            SetEcmBitVariables(ecmBits, 4);
+            UpdateBlinkingLightState(_ecmButtonStandby, _ecmButtonStandby & blinkBits.HasFlag(BlinkBits.ECM_Oper), ref _ecmBits4_StandbyLastTick, ref _ecmBits4_StandbyOnState);
+
+            SetValue("ECM", "button 5 pressed state", new BindingValue(_ecmButtonPressed));
+            SetValue("ECM", "button 5 standby indicator", new BindingValue(_ecmBits4_StandbyOnState));
+            SetValue("ECM", "button 5 active indicator", new BindingValue(_ecmButtonActive));
+            SetValue("ECM", "button 5 transmit indicator", new BindingValue(_ecmButtonTransmit));
+            SetValue("ECM", "button 5 fail indicator", new BindingValue(_ecmButtonFail));
+
+            SetValue("ECM", "bit running", new BindingValue(_ecmBitRunning));
+        }
+
+        private void SetEcmBitVariables(EcmBits[] ecmBits, int index)
+        {
+            _ecmButtonPressed = !(ecmBits[index].HasFlag(EcmBits.ECM_UNPRESSED_NO_LIT) || ecmBits[index].HasFlag(EcmBits.ECM_UNPRESSED_ALL_LIT));
+            _ecmButtonStandby = ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_STANDBY) || ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_ALL_LIT);
+            _ecmButtonActive = ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_ACTIVE) || ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_ALL_LIT);
+            _ecmButtonTransmit = ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_TRANSMIT) || ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_ALL_LIT);
+            _ecmButtonFail = ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_FAIL) || ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_ALL_LIT);
+            _ecmBitRunning = _ecmBitRunning || ecmBits[index].HasFlag(EcmBits.ECM_PRESSED_ALL_LIT) || ecmBits[index].HasFlag(EcmBits.ECM_UNPRESSED_ALL_LIT);
+        }
+
+        private void ProcessEcmOperStates(EcmOperStates ecmOperState, BlinkBits blinkBits)
+        {
+            bool power = ecmOperState.HasFlag(EcmOperStates.ECM_OPER_STDBY) || ecmOperState.HasFlag(EcmOperStates.ECM_OPER_ACTIVE);
+            bool standby = ecmOperState.HasFlag(EcmOperStates.ECM_OPER_STDBY) || ecmOperState.HasFlag(EcmOperStates.ECM_OPER_ALL_LIT);
+            bool active = ecmOperState.HasFlag(EcmOperStates.ECM_OPER_ACTIVE) || ecmOperState.HasFlag(EcmOperStates.ECM_OPER_ALL_LIT);
+
+            UpdateBlinkingLightState(standby, standby & blinkBits.HasFlag(BlinkBits.ECM_Oper), ref _ecmOperStandbyLastTick, ref _ecmOperStandbyOnState);
+
+            SetValue("IDIAS", "power switch", new BindingValue(power ? 2 : 1));
+            SetValue("IDIAS", "operating state standby", new BindingValue(_ecmOperStandbyOnState));
+            SetValue("IDIAS", "operating state active", new BindingValue(active));
+        }
+
         private void ProcessMiscBits(MiscBits miscBits, float rALT)
         {
             var rAltString = "";
@@ -716,9 +856,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
 
             //BMS 4.35 additions
             SetValue("Test Panel", "FLCS channel lamp A", new BindingValue(miscBits.HasFlag(MiscBits.Flcs_Flcc_A)));
-            SetValue("Test Panel", "FLCS channel lamp B", new BindingValue(miscBits.HasFlag(MiscBits.Flcs_Flcc_A)));
-            SetValue("Test Panel", "FLCS channel lamp C", new BindingValue(miscBits.HasFlag(MiscBits.Flcs_Flcc_A)));
-            SetValue("Test Panel", "FLCS channel lamp D", new BindingValue(miscBits.HasFlag(MiscBits.Flcs_Flcc_A)));
+            SetValue("Test Panel", "FLCS channel lamp B", new BindingValue(miscBits.HasFlag(MiscBits.Flcs_Flcc_B)));
+            SetValue("Test Panel", "FLCS channel lamp C", new BindingValue(miscBits.HasFlag(MiscBits.Flcs_Flcc_C)));
+            SetValue("Test Panel", "FLCS channel lamp D", new BindingValue(miscBits.HasFlag(MiscBits.Flcs_Flcc_D)));
             SetValue("Gear Handle", "gear handle solenoid", new BindingValue(miscBits.HasFlag(MiscBits.SolenoidStatus)));
         }
 

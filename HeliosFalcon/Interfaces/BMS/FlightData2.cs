@@ -1,6 +1,6 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2020 Helios Contributors
-//    
+//  Copyright 2023 Helios Contributors
+//
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
@@ -68,8 +68,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         Elec_Fault = 0x80,  // defined in LightBits3 - non-resetting fault
         OXY_BROW = 0x100,   // defined in LightBits  - monitor fault during Obogs
         EPUOn = 0x200,  // defined in LightBits3 - abnormal EPU operation
+
+        // working
         JFSOn_Slow = 0x400, // defined in LightBits3 - slow blinking: non-critical failure
-        JFSOn_Fast = 0x800	// defined in LightBits3 - fast blinking: critical failure
+        JFSOn_Fast = 0x800,	// defined in LightBits3 - fast blinking: critical failure
+
+        // VERSION 19
+        ECM_Oper = 0x1000  // defined in EcmOperStates - system warming up
     }
 
     public enum CmdsModes : int
@@ -118,7 +123,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
     {
         INSTR_LIGHT_OFF = 0,
         INSTR_LIGHT_DIM = 1,
-        INSTR_LIGHT_BRT = 2,
+        INSTR_LIGHT_BRT = 2
+    };
+
+    // flood console brightness
+    enum FloodConsole : byte
+    {
+        FLOOD_CONSOLE_OFF = 0,
+        FLOOD_CONSOLE_1   = 1,
+        FLOOD_CONSOLE_2   = 2,
+        FLOOD_CONSOLE_3   = 3,
+        FLOOD_CONSOLE_4   = 4,
+        FLOOD_CONSOLE_5   = 5,
+        FLOOD_CONSOLE_6   = 6
     };
 
     [Flags]
@@ -129,9 +146,41 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         Flcs_Flcc_B = 0x04,
         Flcs_Flcc_C = 0x08,
         Flcs_Flcc_D = 0x10,
-        SolenoidStatus = 0x20, //0 not powered or failed or WOW  , 1 is working OK
+        SolenoidStatus = 0x20, // 0 not powered or failed or WOW, 1 is working OK
 
-        AllLampBitsFlccOn = 0x1e
+        AllLampBitsFlccOn = 0x1e // Not bit by itself! This is the check mask for ALL the Flcs bits
+    };
+
+    // ECM indicator states
+    [Flags]
+    enum EcmBits : uint  // Note: these are currently not combinable bits, but mutually exclusive states
+    {
+        ECM_UNPRESSED_NO_LIT  = 0x01,
+        ECM_UNPRESSED_ALL_LIT = 0x02,
+        ECM_PRESSED_NO_LIT    = 0x04,
+        ECM_PRESSED_STANDBY   = 0x08,
+        ECM_PRESSED_ACTIVE    = 0x10,
+        ECM_PRESSED_TRANSMIT  = 0x20,
+        ECM_PRESSED_FAIL      = 0x40,
+        ECM_PRESSED_ALL_LIT   = 0x80
+    };
+
+    // IDIAS operating states
+    [Flags]
+    enum EcmOperStates : byte  // Note: these are currently not combinable bits, but mutually exclusive states
+    {
+        ECM_OPER_NO_LIT = 0,
+        ECM_OPER_STDBY = 1,
+        ECM_OPER_ACTIVE = 2,
+        ECM_OPER_ALL_LIT = 3
+    };
+
+    // RWR jamming states
+    enum JammingStates : byte
+    {
+        JAMMED_NO     = 0,
+        JAMMED_YES    = 1,
+        JAMMED_SHOULD = 2
     };
 
 [Serializable]
@@ -155,10 +204,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         // 14: added instrument backlight brightness
         // 15: added MiscBits, BettyBits, radar altitude, bingo fuel, cara alow, bullseye, BMS version information, string area size/time
         // 16: added turn rate
+        // 17: added Flcs_Flcc, SolenoidStatus to MiscBits
+        // 18. added console floodlight brightness
+        // 19: added ECM_M1-5, ECM oper + blinkbit, magnetic deviation, RWR jamming status
+
 
         public const int RWRINFO_SIZE = 512;
         public const int MAX_CALLSIGNS = 32;
         public const int CALLSIGN_LEN = 12;
+        public const int MAX_ECM_PROGRAMS = 5;
+        public const int MAX_RWR_OBJECTS = 40;
 
 
         // VERSION 1
@@ -234,11 +289,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         public byte iffBackupMode3ADigit2;                    // IFF panel backup Mode3A digit 2
 
         // VERSION 14
-        public InstrLight instrLight;  // (unsigned char) current instrument backlight brightness setting, see InstrLight enum for details
+        public InstrLight instrLight;       // (unsigned char) current instrument backlight brightness setting, see InstrLight enum for details
 
         // VERSION 15
-        public uint bettyBits;      // see BettyBits enum for details
-        public MiscBits miscBits;        // see MiscBits enum for details
+        public uint bettyBits;              // see BettyBits enum for details
+        public MiscBits miscBits;           // see MiscBits enum for details
         public float RALT;                  // radar altitude (only valid/ reliable if MiscBit "RALT_Valid" is set)
         public float bingoFuel;             // bingo fuel level
         public float caraAlow;              // cara alow setting
@@ -248,12 +303,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         public int BMSVersionMinor;         //         34.
         public int BMSVersionMicro;         //            1
         public int BMSBuildNumber;          //              build 20050
-        public uint StringAreaSize; // the overall size of the StringData/FalconSharedMemoryAreaString shared memory area
-        public uint StringAreaTime; // last time the StringData/FalconSharedMemoryAreaString shared memory area has been changed - you only need to re-read the string shared mem if this changes
-        public uint DrawingAreaSize;// the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
+        public uint StringAreaSize;         // the overall size of the StringData/FalconSharedMemoryAreaString shared memory area
+        public uint StringAreaTime;         // last time the StringData/FalconSharedMemoryAreaString shared memory area has been changed - you only need to re-read the string shared mem if this changes
+        public uint DrawingAreaSize;        // the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
 
         // VERSION 16
-        float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+        public float turnRate;                     // actual turn rate (no delay or dampening) in degrees/second
 
+        // VERSION 18
+        public FloodConsole floodConsole;   // (unsigned char) current floodconsole brightness setting, see FloodConsole enum for details
+
+        // VERSION 19
+        public float magDeviationSystem;    // current mag deviation of the system
+        public float magDeviationReal;      // current mag deviation of the system
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_ECM_PROGRAMS)]
+        public EcmBits[] ecmBits;           // see EcmBits enum for details - Note: these are currently not combinable bits, but mutually exclusive states!
+
+        public EcmOperStates ecmOperState;  // (unsigned char) see enum EcmOperStates for details
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_RWR_OBJECTS)]
+        public JammingStates[] RWRjammingStatus;  // (unsigned) char see enum JammingStates for details
     }
 }
