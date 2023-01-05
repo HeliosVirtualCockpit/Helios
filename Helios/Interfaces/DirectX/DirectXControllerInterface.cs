@@ -16,10 +16,16 @@
 namespace GadrocsWorkshop.Helios.Interfaces.DirectX
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Interfaces.Vendor.Functions;
+    using LibUsbDotNet;
+    using LibUsbDotNet.LibUsb;
+    using LibUsbDotNet.Main;
+    using System.Linq;
     using SharpDX.DirectInput;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Interop;
@@ -35,6 +41,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
 
         private IntPtr _hWnd;
         private delegate IntPtr GetMainHandleDelegate();
+
+        private UsbEndpointWriter _writeEndpoint;
+        private IUsbDevice _usbDevice;
 
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -196,8 +205,59 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                     AddFunction(DirectXControllerFunction.Create(this, obj.ObjectType, controlNum, state));
                 }
             }
+            switch (_device.Properties.VendorId)
+            {
+                case 0x044f:  // Thrustmaster
+                    switch (_device.Properties.ProductId)
+                    {
+                        case 0x0404: // Warthog Throttle
+                            ThrustmasterWarthogThrottleIndicators indicators = new ThrustmasterWarthogThrottleIndicators(this, "Lighting", "Throttle Indicators");
+                            if (!DesignMode)
+                            {
+                                UsbContext usbContext = new UsbContext();
+                                UsbDeviceCollection usbDeviceCollection = usbContext.List();
+                                _usbDevice = usbDeviceCollection.FirstOrDefault(d => d.ProductId == _device.Properties.ProductId && d.VendorId == _device.Properties.VendorId);
+                                _usbDevice.Open();
+                            }
+                            break;
+                        case 0xb351: // Cougar MFD
+                        case 0x0402: // Warthog Joystick
+                        case 0xb68f: // T-Pendular-Rudder
+                        default:
+                            break;
+
+                    }
+                    break;
+                case 0x0194:  // Virpil
+                    switch (_device.Properties.ProductId)
+                    {
+                        case 0x0404: // Throttle
+                            break;
+                        default:
+                            break;
+                    }
+
+                    break;
+                default:
+                    break;
+            } 
         }
 
+        internal int SendUsbData(byte[] buffer)
+        {
+            if(_usbDevice != null && _usbDevice.IsOpen)
+            {
+                _usbDevice.ClaimInterface(_usbDevice.Configs[0].Interfaces[0].Number);
+                if (_usbDevice.OpenEndpointWriter(WriteEndpointID.Ep02) is UsbEndpointWriter writeEndpoint)
+                {
+                    writeEndpoint.Write(buffer, 500, out var bytesWritten);
+                    _usbDevice.ReleaseInterface(0);
+                    return bytesWritten;
+                }
+                _usbDevice.ReleaseInterface(0);
+            }
+            return 0;
+        }
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {
             if (oldProfile != null)
