@@ -19,9 +19,8 @@ using System.Threading.Tasks;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
 {
-    public class ThrustmasterWarthogThrottleIndicators
+    public class ThrustmasterWarthogThrottleIndicators : IHotasFunctions
     {
-
         private string _device;
 
         private HeliosValue _indicatorValue;
@@ -29,14 +28,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
 
         private uint[] _indicatorBits = new uint[6] {0x01 << 3, 0x01 << 2, 0x01 << 1, 0x01 << 4, 0x01 << 0, 0x01 << 6 };
         private uint _indicators = 0x00;
-        private uint _intensity = 0;
+        private uint _intensity = 2;
 
 
         public ThrustmasterWarthogThrottleIndicators(DirectXControllerInterface sourceInterface, string device, string name)
         {
             _device = device;
             _sourceInterface = sourceInterface;
-            DoBuild();
+            _intensity = 2;
         }
 
         //// deserialization constructor
@@ -45,6 +44,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
         //    DoBuild();
         //}
 
+        public void CreateActionsAndValues()
+        {
+            DoBuild();
+        }
 
         private void DoBuild()
         {
@@ -99,19 +102,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
                         }
                         break;
                 }
-                byte[] writeBuffer = new byte[36];
+                byte[] writeBuffer = new byte[4];
                 writeBuffer[0] = 0x01;
                 writeBuffer[1] = 0x06;
                 writeBuffer[2] = (byte) _indicators;
                 writeBuffer[3] = (byte) _intensity;
-                if(_sourceInterface.SendUsbData(writeBuffer) == 0)
-                {
-                    
-                }
+                _sourceInterface.SendUsbData(writeBuffer);
             }
         }
-
- 
         public void Reset()
         {
             _indicators = 0x00;

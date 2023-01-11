@@ -282,6 +282,8 @@
     <Compile Include="Interfaces\DCS\UH60L\UH60LInterface.cs" />
     <Compile Include="Interfaces\DCS\Template\Functions\ExampleFunction.cs" />
     <Compile Include="Interfaces\DCS\Template\TemplateInterface.cs" />
+    <Compile Include="Interfaces\DirectX\Functions\IHotasFunctions.cs" />
+    <Compile Include="Interfaces\DirectX\Functions\VirpilHotasIndicators.cs" />
     <Compile Include="Interfaces\DirectX\Functions\ThrustmasterWarthogThrottleIndicators.cs" />
     <Compile Include="Interfaces\Keyboard\Input\KeyboardInput.cs" />
     <Compile Include="Interfaces\Keyboard\Input\KeyTriggers.cs" />

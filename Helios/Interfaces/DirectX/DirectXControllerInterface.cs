@@ -17,9 +17,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.Vendor.Functions;
-    using LibUsbDotNet;
-    using LibUsbDotNet.LibUsb;
-    using LibUsbDotNet.Main;
+    using HidSharp;
     using System.Linq;
     using SharpDX.DirectInput;
     using System;
@@ -30,6 +28,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
     using System.Windows;
     using System.Windows.Interop;
     using System.Xml;
+    using System.Security.Cryptography;
 
     [HeliosInterface("Helios.Base.DirectXController", "DirectX Controller", typeof(DirectXControllerInterfaceEditor), typeof(DirectXControllerInterfaceFactory))]
     public class DirectXControllerInterface : HeliosInterface
@@ -42,8 +41,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
         private IntPtr _hWnd;
         private delegate IntPtr GetMainHandleDelegate();
 
-        private UsbEndpointWriter _writeEndpoint;
-        private IUsbDevice _usbDevice;
+        private HidStream _hotasStream;
+        private HidDevice _hotasDevice;
+        private IHotasFunctions _hotasFunctions;
 
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -211,13 +211,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                     switch (_device.Properties.ProductId)
                     {
                         case 0x0404: // Warthog Throttle
-                            ThrustmasterWarthogThrottleIndicators indicators = new ThrustmasterWarthogThrottleIndicators(this, "Lighting", "Throttle Indicators");
+                            _hotasFunctions = new ThrustmasterWarthogThrottleIndicators(this, "Indicators", "Warthog Throttle Indicators");
+                            _hotasFunctions.CreateActionsAndValues();
                             if (!DesignMode)
                             {
-                                UsbContext usbContext = new UsbContext();
-                                UsbDeviceCollection usbDeviceCollection = usbContext.List();
-                                _usbDevice = usbDeviceCollection.FirstOrDefault(d => d.ProductId == _device.Properties.ProductId && d.VendorId == _device.Properties.VendorId);
-                                _usbDevice.Open();
+                                _hotasDevice = DeviceList.Local.GetHidDevices().Where(d => d.VendorID == _device.Properties.VendorId && d.ProductID == _device.Properties.ProductId).FirstOrDefault();
+                                if (_hotasDevice == null)
+                                {
+                                    Logger.Info($"Unable to find USB device with VendorID: {_device.Properties.VendorId} and ProductID: {_device.Properties.ProductId}.");
+                                }
                             }
                             break;
                         case 0xb351: // Cougar MFD
@@ -229,35 +231,51 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                     }
                     break;
                 case 0x0194:  // Virpil
-                    switch (_device.Properties.ProductId)
+                    _hotasFunctions = new VirpilHotasIndicators(this, "Indicators", "Virpil HOTAS Indicators");
+                    _hotasFunctions.CreateActionsAndValues();
+                    if (!DesignMode)
                     {
-                        case 0x0404: // Throttle
-                            break;
-                        default:
-                            break;
+                        _hotasDevice = DeviceList.Local.GetHidDevices().Where(d => d.VendorID == _device.Properties.VendorId && d.ProductID == _device.Properties.ProductId).FirstOrDefault();
+                        if (_hotasDevice == null)
+                        {
+                            Logger.Info($"Unable to find USB device with VendorID: {_device.Properties.VendorId} and ProductID: {_device.Properties.ProductId}.");
+                        }
                     }
-
                     break;
                 default:
                     break;
             } 
         }
 
-        internal int SendUsbData(byte[] buffer)
+        internal void SendUsbData(byte[] buffer)
         {
-            if(_usbDevice != null && _usbDevice.IsOpen)
+            if(_hotasDevice != null)
             {
-                _usbDevice.ClaimInterface(_usbDevice.Configs[0].Interfaces[0].Number);
-                if (_usbDevice.OpenEndpointWriter(WriteEndpointID.Ep02) is UsbEndpointWriter writeEndpoint)
+                if (_hotasDevice.TryOpen(out _hotasStream))
                 {
-                    writeEndpoint.Write(buffer, 500, out var bytesWritten);
-                    _usbDevice.ReleaseInterface(0);
-                    return bytesWritten;
+                    //Console.WriteLine("CanWrite: {0}", _hotasStream.CanWrite);
+                    //byte[] indicators = new byte[] { 0x01, 0x06, 0x50, 0x01 };
+                    try
+                    {
+                        if (_hotasStream.CanWrite)
+                        {
+                            _hotasStream.Write(buffer, 0, buffer.Length);
+                            _hotasStream.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error($"Error while writing to {_hotasDevice.VendorID} {_hotasDevice.GetProductName()} {ex.Message}.");
+                        if (_hotasStream != null)
+                        {
+                            _hotasStream.Close();     
+                        }
+                        _hotasDevice = null;
+                    }
                 }
-                _usbDevice.ReleaseInterface(0);
             }
-            return 0;
         }
+
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {
             if (oldProfile != null)
