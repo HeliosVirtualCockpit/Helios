@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 {
@@ -77,7 +78,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                             //string[] tokens = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
                             string[] tokens = SplitArgument(line);
 
-                            if (tokens.Length >= 2)
+                            if (tokens.Length >= 2 && Regex.IsMatch(tokens[0].ToString(), "^[a-zA-Z0-9_]*$"))
                             {
                                 string callbackName = tokens[0];
                                 int isKey = int.Parse(tokens[2]);
