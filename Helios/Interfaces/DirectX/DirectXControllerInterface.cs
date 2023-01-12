@@ -205,6 +205,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                     AddFunction(DirectXControllerFunction.Create(this, obj.ObjectType, controlNum, state));
                 }
             }
+            AddVendorSpecificCapabilities();
+        }
+
+        private void AddVendorSpecificCapabilities()
+        {
             switch (_device.Properties.VendorId)
             {
                 case 0x044f:  // Thrustmaster
@@ -230,7 +235,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
 
                     }
                     break;
-                case 0x0194:  // Virpil
+                case 0x3344:  // Virpil
                     _hotasFunctions = new VirpilHotasIndicators(this, "Indicators", "Virpil HOTAS Indicators");
                     _hotasFunctions.CreateActionsAndValues();
                     if (!DesignMode)
@@ -244,7 +249,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                     break;
                 default:
                     break;
-            } 
+            }
         }
 
         internal void SendUsbData(byte[] buffer)

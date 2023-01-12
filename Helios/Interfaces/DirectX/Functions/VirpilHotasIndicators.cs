@@ -104,7 +104,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
                 _writeBuffers[(int)subDevice - 0x64][37] = (byte)0xf0;   // marker for the  end of the buffer
             }
         }
-
     }
 }
 
