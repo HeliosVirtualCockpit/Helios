@@ -22,6 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml.Serialization;
 using GadrocsWorkshop.Helios.ComponentModel;
@@ -361,6 +362,36 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
             }
         }
 
+        private bool EnabledRTTExport()
+        {
+            string bmsconfig = Parent.FalconPath + "\\user\\config\\falcon bms.cfg";
+            string bmsuserconfig = Parent.FalconPath + "\\user\\config\\falcon bms user.cfg";
+            string bmsRttParaamater = "set g_bExportRTTTextures 1";
+            bool results = false;
+            
+            // Check Falcon BMS.cfg file for bmsRttParameter
+            string[] lines = File.ReadAllLines(bmsconfig);
+            foreach (string line in lines)
+            {
+                if (line.Contains(bmsRttParaamater) && !(line.StartsWith("//")))
+                {
+                    results = true; break;
+                }
+            }
+
+            // Check Falcon BMS User.cfg file for bmsRttParameter
+            lines = File.ReadAllLines(bmsuserconfig);
+            foreach (string line in lines)
+            {
+                if (line.Contains(bmsRttParaamater) && !(line.StartsWith("//")))
+                {
+                    results = true; break;
+                }
+            }
+
+            return results;
+        }
+
         private StatusReportItem CheckConfigFile()
         {
             if (string.IsNullOrEmpty(Parent.FalconPath))
@@ -382,6 +413,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.Interfaces.RTT
                     Link = StatusReportItem.ProfileEditor,
                     Severity = StatusReportItem.SeverityCode.Error,
                     Recommendation = "Configure the Falcon version in the Falcon Interface"
+                };
+            }
+
+            if (!EnabledRTTExport())
+            {
+                return new StatusReportItem
+                {
+                    Status = "Falcon BMS config parameter g_bExportRTTTextures is not enable",
+                    Severity = StatusReportItem.SeverityCode.Error,
+                    Recommendation = $"In order to see RTT Export textures please edit the {Anonymizer.Anonymize(Parent.FalconPath)}\\User\\Config\\falcon bms user.cfg file and add the line: set g_bExportRTTTextures to 1 to the file"
                 };
             }
 
