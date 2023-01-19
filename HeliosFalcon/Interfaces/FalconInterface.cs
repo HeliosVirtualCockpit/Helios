@@ -1,5 +1,5 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2022 Helios Contributors
+//  Copyright 2023 Helios Contributors
 //
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,11 +18,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Threading;
 using System.Xml;
 using GadrocsWorkshop.Helios.ComponentModel;
 using GadrocsWorkshop.Helios.Interfaces.Common;
+using GadrocsWorkshop.Helios.Util;
 using Microsoft.Win32;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Falcon
@@ -86,6 +89,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
 
         #region Properties
 
+        private HeliosProfile CurrentProfile { get; set; }
         public string CurrentTheater { get; private set; }
         public string PilotCallsign { get; }
 
@@ -382,6 +386,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                 Profile.ProfileStarted += Profile_ProfileStarted;
                 Profile.ProfileTick += Profile_ProfileTick;
                 Profile.ProfileStopped += Profile_ProfileStopped;
+                CurrentProfile = Profile;
             }
             InvalidateStatusReport();
         }
@@ -725,6 +730,138 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                     Recommendation = "Run Falcon and set your pilot callsign"
                 };
             }
+
+            if (ExistsFalconTextures() && !EnabledConfigParameter())
+            {
+                yield return new StatusReportItem
+                {
+                    Status = "Falcon BMS config parameter g_bExportRTTTextures is not enabled",
+                    Severity = StatusReportItem.SeverityCode.Error,
+                    Recommendation = $"In order to use Falcon Textures please edit the {Anonymizer.Anonymize(FalconPath)}\\User\\Config\\Falcon BMS User.cfg file and add the line: set g_bExportRTTTextures 1 to the file"
+                };
+            }
+
+            if (Rtt != null && !Rtt.Enabled && ExistsRTTTextures())
+            {
+                yield return new StatusReportItem
+                {
+                    Status = "RTT texture displays exist in the profile but the RTT feature is not enabled",
+                    Severity = StatusReportItem.SeverityCode.Error,
+                    Recommendation = $"Enable the RTT client configuration feature to allow Helios to generate RTT displays"
+                };
+            }
+
+            if (Rtt != null && Rtt.Enabled && !EnabledConfigParameter())
+            {
+                yield return new StatusReportItem
+                {
+                    Status = "Falcon BMS config parameter g_bExportRTTTextures is not enabled" + Environment.NewLine,
+                    Severity = StatusReportItem.SeverityCode.Error,
+                    Recommendation = $"In order to use RTT Export Textures please edit the {Anonymizer.Anonymize(FalconPath)}\\User\\Config\\Falcon BMS User.cfg file and add the line: set g_bExportRTTTextures 1 to the file"
+                };
+            }
+        }
+
+        private bool EnabledConfigParameter()
+        {
+            string bmsConfig = FalconPath + "\\user\\config\\falcon bms.cfg";
+            string bmsUserConfig = FalconPath + "\\user\\config\\falcon bms user.cfg";
+            string bmsRttExportParamEnabled = "set g_bExportRTTTextures 1";
+            string bmsRttExportParamDisabled = "set g_bExportRTTTextures 0";
+            bool paramExists = false;
+ 
+            // Check "Falcon BMS User.cfg" file for bmsRttExport disabled parameter
+            if (ExistsParamInFile(bmsUserConfig, bmsRttExportParamDisabled))
+            {
+                paramExists = false;
+            }
+            // Check "Falcon BMS User.cfg" and "Falcon BMS.cfg" files for bmsRttExport enabled parameter
+            else if (ExistsParamInFile(bmsUserConfig, bmsRttExportParamEnabled) || ExistsParamInFile(bmsConfig, bmsRttExportParamEnabled))
+            {
+                paramExists = true;
+            }
+
+            return paramExists;
+        }
+
+        private bool ExistsFalconTextures()
+        {
+            bool textureExists = false;
+
+            // Check if any Falcon texture displays exist in the current profile 
+            if (CurrentProfile != null)
+            {
+                List<string> textures = new List<string>
+                    {"Helios.Falcon.HUD", "Helios.Falcon.PFL", "Helios.Falcon.DED", "Helios.Falcon.RWR", "Helios.Falcon.MFDLeft", "Helios.Falcon.MFDRight", "Helios.Falcon.OpenFalcon.RWR"};
+
+                textureExists = CurrentProfile.WalkVisuals()
+                    .Where(visual => textures.Contains(visual.TypeIdentifier))
+                    .Select(visual => visual.TypeIdentifier)
+                    .Count() > 0;
+            }
+
+            return textureExists;
+        }
+
+        private bool ExistsRTTTextures()
+        {
+            bool textureExists = false;
+
+            // Check if any RTT texture displays exist in the current profile 
+            if (CurrentProfile != null)
+            {
+                textureExists = CurrentProfile.WalkVisuals()
+                   .Where(visual => visual.TypeIdentifier == "Helios.Base.LockedViewportExtent")
+                   .Select(visual => visual.TypeIdentifier)
+                   .Count() > 0;
+            }
+
+            return textureExists;
+        }
+
+        private bool ExistsParamInFile(string file, string bmsRttExportParam)
+        {
+            bool result = false;
+
+            try
+            {
+                foreach (string line in ReadBMSConfig(file))
+                {
+                    if (!line.StartsWith("//") && RemoveMultipleSpaces(line).Contains(bmsRttExportParam))
+                    {
+                        result = true; break;
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        private string[] ReadBMSConfig(string path)
+        {
+            string[] lines;
+
+            try
+            {
+                lines = File.ReadAllLines(path);
+            }
+            catch (FileNotFoundException)
+            {
+                lines = null;
+            }
+
+            return lines;
+        }
+
+        string RemoveMultipleSpaces(string line)
+        {
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[ ]{2,}", options);
+            return regex.Replace(line, " ");
         }
 
         public HeliosBindingCollection CheckBindings(HeliosBindingCollection heliosBindings)
@@ -754,6 +891,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
                 };
             }
         }
+
         #endregion
 
         protected override Interfaces.RTT.ShadowMonitor CreateShadowMonitor(Monitor monitor) => new Interfaces.RTT.ShadowMonitor(this, monitor, monitor, false);
