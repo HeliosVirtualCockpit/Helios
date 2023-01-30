@@ -113,7 +113,7 @@ namespace GadrocsWorkshop.Helios
         public static string ProfilePath { get; private set; }
         public static string ImagePath { get; private set; }
         public static string TemplatePath { get; private set; }
-        public static string BMSFalconPath { get; private set; }
+        public static string BMSFalconPath { get; set; }
 
         public static IImageManager ImageManager { get; internal set; }
 

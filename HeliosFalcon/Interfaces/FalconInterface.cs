@@ -277,6 +277,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
             if (pathKey != null)
             {
                 pathValue = (string)pathKey.GetValue("baseDir");
+
+                // use this path value globally since it may have been set for an earlier BMS Falcon version by the user
+                ConfigManager.BMSFalconPath = pathValue;
             }
             else
             {
