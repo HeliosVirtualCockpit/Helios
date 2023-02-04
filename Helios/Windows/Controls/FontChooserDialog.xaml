@@ -51,6 +51,13 @@
         </Border>
         
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Margin="0,12,0,0" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Name="SetDefaultButton"
+        Click="setButtonClicked" ToolTipService.ToolTip="Saves the current font values as the profile editor's stored font"
+        IsEnabled="True" Padding="4" Margin="4,0,0,0">Store Font Values</Button>
+            <Button Name="GetDefaultButton" 
+        Click="getButtonClicked" ToolTipService.ToolTip="Uses the profile editor's stored font values if they exist"
+        IsEnabled="True" Padding="4" Margin="4,0,0,0">Use Stored Values</Button>
+
             <Button Click="okButtonClicked" Padding="4" Margin="4,0,0,0">OK</Button>
             <Button Click="cancelButtonClicked" Padding="4" Margin="4,0,0,0">Cancel</Button>
         </StackPanel>

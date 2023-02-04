@@ -7,17 +7,23 @@
   Width="600"
   Height="430" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow">
   <DockPanel>
-    <StackPanel DockPanel.Dock="Bottom"
+        <StackPanel DockPanel.Dock="Bottom"
       Orientation="Horizontal"
       HorizontalAlignment="Right" 
       Margin="10">
-      <Button Name="OKButton"
+            <Button Name="SetDefaultButton"
+        Click="setButtonClicked" ToolTipService.ToolTip="Saves the current color as the profile editor's stored color value"
+        IsEnabled="True" Padding="4" Margin="4,0,0,0">Store Color Value</Button>
+            <Button Name="GetDefaultButton" 
+        Click="getButtonClicked" ToolTipService.ToolTip="Uses the profile editor's stored color values if it exists"
+        IsEnabled="True" Padding="4" Margin="4,0,0,0">Use Stored Color</Button>
+            <Button Name="OKButton"
         Click="okButtonClicked"
         IsEnabled="False" Padding="4" Margin="4,0,0,0">OK</Button>
-      <Button Click="cancelButtonClicked" Padding="4" Margin="4,0,0,0">Cancel</Button>
-    </StackPanel>
+            <Button Click="cancelButtonClicked" Padding="4" Margin="4,0,0,0">Cancel</Button>
+        </StackPanel>
 
-    <local:ColorPicker 
+        <local:ColorPicker 
       x:Name="cPicker"
        SelectedColorChanged="onSelectedColorChanged" 
        Margin="10,10,10,0"/>

@@ -24,6 +24,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
 	using System.Windows.Data;
 	using System.Windows.Media;
 	using System.Windows.Media.Animation;
+    using System.ComponentModel;
 
     /// <summary>
     /// Interaction logic for ColorPickerDialog.xaml
@@ -100,8 +101,22 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                 
             }
 
-        }        
+        }
 
+        private void getButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredColor"))
+            {
+                TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(System.Windows.Media.Color));
+                StartingColor = (System.Windows.Media.Color)colorConverter.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredColor", "#FFFFFFFF"));
+                OKButton.IsEnabled = true;
+            }
+        }
 
+        private void setButtonClicked(object sender, RoutedEventArgs e)
+        {
+            TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(System.Windows.Media.Color));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredColor", colorConverter.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, cPicker.SelectedColor));
+        }
     }
 }

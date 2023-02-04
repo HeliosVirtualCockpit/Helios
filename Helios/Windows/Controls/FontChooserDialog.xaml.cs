@@ -27,6 +27,8 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
 	using System.Windows.Media.Imaging;
 	using System.Windows.Shapes;
 	using System.Globalization;
+    using System.ComponentModel;
+    using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
     /// <summary>
     /// Interaction logic for FontChooserDialog.xaml
@@ -104,7 +106,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                 return _typefaces;
             }
         }
-
+         
         public FontFamily SelectedFamily
         {
             get { return (FontFamily)GetValue(SelectedFamilyProperty); }
@@ -299,6 +301,75 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
         private void cancelButtonClicked(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void setButtonClicked(object sender, RoutedEventArgs e)
+        {
+            TypeConverter ffc = TypeDescriptor.GetConverter(typeof(FontFamily));
+            TypeConverter fsc = TypeDescriptor.GetConverter(typeof(FontStyle));
+            TypeConverter fwc = TypeDescriptor.GetConverter(typeof(FontWeight));
+            TypeConverter doubleConverter = TypeDescriptor.GetConverter(typeof(double));
+            TypeConverter boolConverter = TypeDescriptor.GetConverter(typeof(bool));
+
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontFamily", ffc.ConvertToString(SelectedFamily));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontStyle", fsc.ConvertToString(SelectedTypeface.Style));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontWeight", fwc.ConvertToString(SelectedTypeface.Weight));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontSize", doubleConverter.ConvertToInvariantString(SelectedSize));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontIsUnderline", boolConverter.ConvertToInvariantString(IsUnderline));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontIsBaseline", boolConverter.ConvertToInvariantString(IsBaseline));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontIsStrikethrough", boolConverter.ConvertToInvariantString(IsStrikethrough));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontIsOverline", boolConverter.ConvertToInvariantString(IsOverLine));
+        }
+
+        private void getButtonClicked(object sender, RoutedEventArgs e)
+        {
+            TypeConverter ffc = TypeDescriptor.GetConverter(typeof(FontFamily));
+            TypeConverter fsc = TypeDescriptor.GetConverter(typeof(FontStyle));
+            TypeConverter fwc = TypeDescriptor.GetConverter(typeof(FontWeight));
+
+            if (ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontFamily")          &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontStyle")           &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontWeight")          &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontSize")            &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontIsUnderline")     &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontIsBaseline")      &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontIsStrikethrough") &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontIsOverLine"))
+            {
+                Helios.TextDecorations decorations = 0;
+                if (bool.Parse(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontIsUnderline", "false")))
+                {
+                    decorations |= Helios.TextDecorations.Underline;
+                    IsUnderline = true;
+                }
+                if (bool.Parse(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontIsBaseline", "false")))
+                {
+                    decorations |= Helios.TextDecorations.Baseline;
+                    IsBaseline = true;
+                }
+                if (bool.Parse(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontIsStrikethrough", "false")))
+                {
+                    decorations |= Helios.TextDecorations.Strikethrough;
+                    IsStrikethrough = true;
+                }
+                if (bool.Parse(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontIsOverLine", "false")))
+                {
+                    decorations |= Helios.TextDecorations.OverLine;
+                    IsOverLine = true;
+                }
+
+                TextFormat textFormat = new TextFormat()
+                {
+                    FontFamily = (FontFamily)ffc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontFamily", "Franklin Gothic")),
+                    FontStyle = (FontStyle)fsc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontStyle", "Normal")),
+                    FontWeight = (FontWeight)fwc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontWeight", "Normal")),
+                    FontSize = double.Parse(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontSize", "12")),
+                    Decorations = decorations
+                };
+                SelectedFamily = textFormat.FontFamily;
+                SelectedTypeface = new Typeface(textFormat.FontFamily, textFormat.FontStyle, textFormat.FontWeight, FontStretches.Normal);
+                SelectedSize = textFormat.FontSize;
+            }
         }
     }
 }
