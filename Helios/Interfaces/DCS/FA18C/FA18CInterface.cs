@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.FA18C.Functions;
+    using static System.Net.Mime.MediaTypeNames;
 
     [HeliosInterface("Helios.FA18C", "DCS F/A-18C", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
     public class FA18CInterface : DCSInterface
@@ -139,76 +140,76 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
 #endif
             #region Caution Indicators
             // Caution Light Indicator Panel
-            AddFunction(new FlagValue(this, "298", "Caution Indicators", "CK_SEAT", ""));       
-            AddFunction(new FlagValue(this, "299", "Caution Indicators", "APU_ACC", ""));       
-            AddFunction(new FlagValue(this, "300", "Caution Indicators", "BATT_SW", ""));       
-            AddFunction(new FlagValue(this, "301", "Caution Indicators", "FCS_HOT", ""));       
-            AddFunction(new FlagValue(this, "302", "Caution Indicators", "GEN_TIE", ""));       
-            AddFunction(new FlagValue(this, "303", "Caution Indicators", "SPARE_CTN1", ""));    
-            AddFunction(new FlagValue(this, "304", "Caution Indicators", "FUEL_LO", ""));       
-            AddFunction(new FlagValue(this, "305", "Caution Indicators", "FCES", ""));          
-            AddFunction(new FlagValue(this, "306", "Caution Indicators", "SPARE_CTN2", ""));    
-            AddFunction(new FlagValue(this, "307", "Caution Indicators", "L_GEN", ""));         
-            AddFunction(new FlagValue(this, "308", "Caution Indicators", "R_GEN", ""));         
-            AddFunction(new FlagValue(this, "309", "Caution Indicators", "SPARE_CTN3", ""));    
+            AddFunction(new FlagValue(this, "298", "Caution Indicators", "CK_SEAT", ""));
+            AddFunction(new FlagValue(this, "299", "Caution Indicators", "APU_ACC", ""));
+            AddFunction(new FlagValue(this, "300", "Caution Indicators", "BATT_SW", ""));
+            AddFunction(new FlagValue(this, "301", "Caution Indicators", "FCS_HOT", ""));
+            AddFunction(new FlagValue(this, "302", "Caution Indicators", "GEN_TIE", ""));
+            AddFunction(new FlagValue(this, "303", "Caution Indicators", "SPARE_CTN1", ""));
+            AddFunction(new FlagValue(this, "304", "Caution Indicators", "FUEL_LO", ""));
+            AddFunction(new FlagValue(this, "305", "Caution Indicators", "FCES", ""));
+            AddFunction(new FlagValue(this, "306", "Caution Indicators", "SPARE_CTN2", ""));
+            AddFunction(new FlagValue(this, "307", "Caution Indicators", "L_GEN", ""));
+            AddFunction(new FlagValue(this, "308", "Caution Indicators", "R_GEN", ""));
+            AddFunction(new FlagValue(this, "309", "Caution Indicators", "SPARE_CTN3", ""));
             // LH Advisory and Threat Warning Indicator Panel
-            AddFunction(new FlagValue(this, "13", "Caution Indicators", "MASTER_CAUTION", "")); 
-            AddFunction(new FlagValue(this, "10", "Caution Indicators", "FIRE_LEFT", ""));      
-            AddFunction(new FlagValue(this, "15", "Caution Indicators", "GO", ""));             
-            AddFunction(new FlagValue(this, "16", "Caution Indicators", "NO_GO", ""));          
-            AddFunction(new FlagValue(this, "17", "Caution Indicators", "L_BLEED", ""));        
-            AddFunction(new FlagValue(this, "18", "Caution Indicators", "R_BLEED", ""));        
-            AddFunction(new FlagValue(this, "19", "Caution Indicators", "SPD_BRK", ""));        
-            AddFunction(new FlagValue(this, "20", "Caution Indicators", "STBY", ""));           
-            AddFunction(new FlagValue(this, "21", "Caution Indicators", "L_BAR_RED", ""));      
-            AddFunction(new FlagValue(this, "22", "Caution Indicators", "REC", ""));            
-            AddFunction(new FlagValue(this, "23", "Caution Indicators", "L_BAR_GREEN", ""));    
-            AddFunction(new FlagValue(this, "24", "Caution Indicators", "XMIT", ""));           
-            AddFunction(new FlagValue(this, "25", "Caution Indicators", "ASPJ_OH", ""));        
+            AddFunction(new FlagValue(this, "13", "Caution Indicators", "MASTER_CAUTION", ""));
+            AddFunction(new FlagValue(this, "10", "Caution Indicators", "FIRE_LEFT", ""));
+            AddFunction(new FlagValue(this, "15", "Caution Indicators", "GO", ""));
+            AddFunction(new FlagValue(this, "16", "Caution Indicators", "NO_GO", ""));
+            AddFunction(new FlagValue(this, "17", "Caution Indicators", "L_BLEED", ""));
+            AddFunction(new FlagValue(this, "18", "Caution Indicators", "R_BLEED", ""));
+            AddFunction(new FlagValue(this, "19", "Caution Indicators", "SPD_BRK", ""));
+            AddFunction(new FlagValue(this, "20", "Caution Indicators", "STBY", ""));
+            AddFunction(new FlagValue(this, "21", "Caution Indicators", "L_BAR_RED", ""));
+            AddFunction(new FlagValue(this, "22", "Caution Indicators", "REC", ""));
+            AddFunction(new FlagValue(this, "23", "Caution Indicators", "L_BAR_GREEN", ""));
+            AddFunction(new FlagValue(this, "24", "Caution Indicators", "XMIT", ""));
+            AddFunction(new FlagValue(this, "25", "Caution Indicators", "ASPJ_OH", ""));
             // RH Advisory and Threat Warning Indicator Panel
-            AddFunction(new FlagValue(this, "29", "Caution Indicators", "FIRE_APU", ""));       
-            AddFunction(new FlagValue(this, "26", "Caution Indicators", "FIRE_RIGHT", ""));     
-            AddFunction(new FlagValue(this, "31", "Caution Indicators", "RCDR_ON", ""));        
-            AddFunction(new FlagValue(this, "32", "Caution Indicators", "DISP", ""));           
-            AddFunction(new FlagValue(this, "38", "Caution Indicators", "SAM", ""));            
-            AddFunction(new FlagValue(this, "39", "Caution Indicators", "AI", ""));             
-            AddFunction(new FlagValue(this, "40", "Caution Indicators", "AAA", ""));            
-            AddFunction(new FlagValue(this, "41", "Caution Indicators", "CW", ""));             
-            AddFunction(new FlagValue(this, "33", "Caution Indicators", "SPARE_RH1", ""));      
-            AddFunction(new FlagValue(this, "34", "Caution Indicators", "SPARE_RH2", ""));      
-            AddFunction(new FlagValue(this, "35", "Caution Indicators", "SPARE_RH3", ""));      
-            AddFunction(new FlagValue(this, "36", "Caution Indicators", "SPARE_RH4", ""));      
-            AddFunction(new FlagValue(this, "37", "Caution Indicators", "SPARE_RH5", ""));      
+            AddFunction(new FlagValue(this, "29", "Caution Indicators", "FIRE_APU", ""));
+            AddFunction(new FlagValue(this, "26", "Caution Indicators", "FIRE_RIGHT", ""));
+            AddFunction(new FlagValue(this, "31", "Caution Indicators", "RCDR_ON", ""));
+            AddFunction(new FlagValue(this, "32", "Caution Indicators", "DISP", ""));
+            AddFunction(new FlagValue(this, "38", "Caution Indicators", "SAM", ""));
+            AddFunction(new FlagValue(this, "39", "Caution Indicators", "AI", ""));
+            AddFunction(new FlagValue(this, "40", "Caution Indicators", "AAA", ""));
+            AddFunction(new FlagValue(this, "41", "Caution Indicators", "CW", ""));
+            AddFunction(new FlagValue(this, "33", "Caution Indicators", "SPARE_RH1", ""));
+            AddFunction(new FlagValue(this, "34", "Caution Indicators", "SPARE_RH2", ""));
+            AddFunction(new FlagValue(this, "35", "Caution Indicators", "SPARE_RH3", ""));
+            AddFunction(new FlagValue(this, "36", "Caution Indicators", "SPARE_RH4", ""));
+            AddFunction(new FlagValue(this, "37", "Caution Indicators", "SPARE_RH5", ""));
             // Flaps Landing Gear and Stores Indicator Panel
-            AddFunction(new FlagValue(this, "152", "Caution Indicators", "CTR", "Centre Stores Indicator for Jettison"));      
-            AddFunction(new FlagValue(this, "154", "Caution Indicators", "LI", "Left Inner Stores Indicator for Jettison"));   
-            AddFunction(new FlagValue(this, "156", "Caution Indicators", "LO", "Left Outer Stores Indicator for Jettison"));   
-            AddFunction(new FlagValue(this, "158", "Caution Indicators", "RI", "Right Inner Stores Indicator for Jettison"));  
-            AddFunction(new FlagValue(this, "160", "Caution Indicators", "RO", "Right Outer Stores Indicator for Jettison"));  
-            AddFunction(new FlagValue(this, "166", "Caution Indicators", "NOSE_GEAR", ""));     
-            AddFunction(new FlagValue(this, "165", "Caution Indicators", "LEFT_GEAR", ""));     
-            AddFunction(new FlagValue(this, "167", "Caution Indicators", "RIGHT_GEAR", ""));    
-            AddFunction(new FlagValue(this, "163", "Caution Indicators", "HALF_FLAPS", ""));    
-            AddFunction(new FlagValue(this, "164", "Caution Indicators", "FULL_FLAPS", ""));    
-            AddFunction(new FlagValue(this, "162", "Caution Indicators", "FLAPS", ""));         
+            AddFunction(new FlagValue(this, "152", "Caution Indicators", "CTR", "Centre Stores Indicator for Jettison"));
+            AddFunction(new FlagValue(this, "154", "Caution Indicators", "LI", "Left Inner Stores Indicator for Jettison"));
+            AddFunction(new FlagValue(this, "156", "Caution Indicators", "LO", "Left Outer Stores Indicator for Jettison"));
+            AddFunction(new FlagValue(this, "158", "Caution Indicators", "RI", "Right Inner Stores Indicator for Jettison"));
+            AddFunction(new FlagValue(this, "160", "Caution Indicators", "RO", "Right Outer Stores Indicator for Jettison"));
+            AddFunction(new FlagValue(this, "166", "Caution Indicators", "NOSE_GEAR", ""));
+            AddFunction(new FlagValue(this, "165", "Caution Indicators", "LEFT_GEAR", ""));
+            AddFunction(new FlagValue(this, "167", "Caution Indicators", "RIGHT_GEAR", ""));
+            AddFunction(new FlagValue(this, "163", "Caution Indicators", "HALF_FLAPS", ""));
+            AddFunction(new FlagValue(this, "164", "Caution Indicators", "FULL_FLAPS", ""));
+            AddFunction(new FlagValue(this, "162", "Caution Indicators", "FLAPS", ""));
             // Lock/Shoot Light Assy
-            AddFunction(new FlagValue(this, "1", "Caution Indicators", "LOCK", ""));            
-            AddFunction(new FlagValue(this, "2", "Caution Indicators", "SHOOT", ""));           
-            AddFunction(new FlagValue(this, "3", "Caution Indicators", "SHOOT_STROBE", ""));    
+            AddFunction(new FlagValue(this, "1", "Caution Indicators", "LOCK", ""));
+            AddFunction(new FlagValue(this, "2", "Caution Indicators", "SHOOT", ""));
+            AddFunction(new FlagValue(this, "3", "Caution Indicators", "SHOOT_STROBE", ""));
             // Master Arm Control
-            AddFunction(new FlagValue(this, "47", "Caution Indicators", "AA", "Air to Air Master Mode Indicator"));     
-            AddFunction(new FlagValue(this, "48", "Caution Indicators", "AG", "Air to Ground Master Mode Indicator"));  
-            AddFunction(new FlagValue(this, "45", "Caution Indicators", "DISCH", ""));        
-            AddFunction(new FlagValue(this, "44", "Caution Indicators", "READY", ""));        
+            AddFunction(new FlagValue(this, "47", "Caution Indicators", "AA", "Air to Air Master Mode Indicator"));
+            AddFunction(new FlagValue(this, "48", "Caution Indicators", "AG", "Air to Ground Master Mode Indicator"));
+            AddFunction(new FlagValue(this, "45", "Caution Indicators", "DISCH", ""));
+            AddFunction(new FlagValue(this, "44", "Caution Indicators", "READY", ""));
             // Arresting Hook Control Handle
-            AddFunction(new FlagValue(this, "294", "Caution Indicators", "HOOK", ""));        
-                                                                                              
-            AddFunction(new FlagValue(this, "227", "Caution Indicators", "Landing Gear Handle", "")); 
-            AddFunction(new FlagValue(this, "376", "Caution Indicators", "APU_READY", ""));   
-                                                                                              
-                                                                                              
-                                                                                              
-            AddFunction(new FlagValue(this, "137", "Caution Indicators", "SPN", ""));         
+            AddFunction(new FlagValue(this, "294", "Caution Indicators", "HOOK", ""));
+
+            AddFunction(new FlagValue(this, "227", "Caution Indicators", "Landing Gear Handle", ""));
+            AddFunction(new FlagValue(this, "376", "Caution Indicators", "APU_READY", ""));
+
+
+
+            AddFunction(new FlagValue(this, "137", "Caution Indicators", "SPN", ""));
             // AoA Indexer Lights
             AddFunction(new IndicatorDimmable(this, "4", "Caution Indicators", "AOA_HIGH", "AoA Indexer Light (High)", "%0.2f"));
             AddFunction(new IndicatorDimmable(this, "5", "Caution Indicators", "AOA_CENTER", "AoA Indexer Light (Center)", "%0.2f"));
@@ -216,26 +217,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             // Declarations for Caution Lights numbers from Lamps.lua
             #endregion
             #region Internal Lights
-            AddFunction(new FlagValue(this, "460", "Internal Lights", "Console", ""));    
-            AddFunction(new FlagValue(this, "461", "Internal Lights", "Flood", ""));    
+            AddFunction(new FlagValue(this, "460", "Internal Lights", "Console", ""));
+            AddFunction(new FlagValue(this, "461", "Internal Lights", "Flood", ""));
             AddFunction(new FlagValue(this, "462", "Internal Lights", "NVG Flood", ""));
-            AddFunction(new FlagValue(this, "464", "Internal Lights", "Emergancy Instruments", ""));  
+            AddFunction(new FlagValue(this, "464", "Internal Lights", "Emergancy Instruments", ""));
             AddFunction(new FlagValue(this, "465", "Internal Lights", "Engine Instrument Flood", ""));
-            AddFunction(new FlagValue(this, "466", "Internal Lights", "Instrument", ""));   
+            AddFunction(new FlagValue(this, "466", "Internal Lights", "Instrument", ""));
             AddFunction(new FlagValue(this, "467", "Internal Lights", "Standby Compass", ""));
-            AddFunction(new FlagValue(this, "810", "Internal Lights", "Utility", ""));   
-            AddFunction(new FlagValue(this, "463", "Internal Lights", "Chart", ""));   
+            AddFunction(new FlagValue(this, "810", "Internal Lights", "Utility", ""));
+            AddFunction(new FlagValue(this, "463", "Internal Lights", "Chart", ""));
 
             #endregion
             #region RWR
-            AddFunction(new FlagValue(this, "273", "RWR", "Limit", ""));    
-            AddFunction(new FlagValue(this, "274", "RWR", "Display", ""));  
+            AddFunction(new FlagValue(this, "273", "RWR", "Limit", ""));
+            AddFunction(new FlagValue(this, "274", "RWR", "Display", ""));
             AddFunction(new FlagValue(this, "270", "RWR", "Special Enable", ""));
-            AddFunction(new FlagValue(this, "271", "RWR", "Special", ""));  
-            AddFunction(new FlagValue(this, "267", "RWR", "Enable", ""));   
-            AddFunction(new FlagValue(this, "268", "RWR", "Offset", ""));   
-            AddFunction(new FlagValue(this, "264", "RWR", "Fail", ""));    
-            AddFunction(new FlagValue(this, "265", "RWR", "BIT", ""));   
+            AddFunction(new FlagValue(this, "271", "RWR", "Special", ""));
+            AddFunction(new FlagValue(this, "267", "RWR", "Enable", ""));
+            AddFunction(new FlagValue(this, "268", "RWR", "Offset", ""));
+            AddFunction(new FlagValue(this, "264", "RWR", "Fail", ""));
+            AddFunction(new FlagValue(this, "265", "RWR", "BIT", ""));
             AddFunction(new FlagValue(this, "520", "RWR", "RWR Lights Brightness ", ""));
             #endregion
             #region CMDS
@@ -314,7 +315,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             #region  Fuel system
             AddFunction(Switch.CreateToggleSwitch(this, FUEL_INTERFACE, "3001", "340", "1.0", "INHIBIT", "0.0", "NORM", "Fuel system", "Internal Wing Tank Fuel Control Switch", "%0.1f"));    // elements["pnt_340"]     = default_2_position_tumb(_("Internal Wing Tank Fuel Control Switch, INHIBIT/NORM"),            devices.FUEL_INTERFACE, fuel_commands.IntrWingInhibitSw,    340)
             AddFunction(new Switch(this, FUEL_INTERFACE, "341", new SwitchPosition[] { new SwitchPosition("1.0", "EXTEND", "3002"), new SwitchPosition("0.0", "RETRACT", "3002"), new SwitchPosition("-1.0", "EMERG EXTD", "3002") }, "Fuel system", "Probe Control Switch", "%0.1f"));
-            AddFunction(new Switch(this, FUEL_INTERFACE, "344", new SwitchPosition[] { new SwitchPosition("1.0", "ON", "3003", "3003", null, "1.0"), new SwitchPosition("0.0", "NORM", "3003", "3003",null,"0.0") }, "Fuel system", "Fuel Dump Switch", "%0.1f"));    // elements["pnt_344"]     = default_button2(_("Fuel Dump Switch, ON/OFF"),                                                    devices.FUEL_INTERFACE, fuel_commands.DumpSw,               344, anim_speed_default)
+            AddFunction(new Switch(this, FUEL_INTERFACE, "344", new SwitchPosition[] { new SwitchPosition("1.0", "ON", "3003", "3003", null, "1.0"), new SwitchPosition("0.0", "NORM", "3003", "3003", null, "0.0") }, "Fuel system", "Fuel Dump Switch", "%0.1f"));    // elements["pnt_344"]     = default_button2(_("Fuel Dump Switch, ON/OFF"),                                                    devices.FUEL_INTERFACE, fuel_commands.DumpSw,               344, anim_speed_default)
             AddFunction(new Switch(this, FUEL_INTERFACE, "343", new SwitchPosition[] { new SwitchPosition("1.0", "STOP", "3004"), new SwitchPosition("0.0", "NORM", "3004"), new SwitchPosition("-1.0", "ORIDE", "3004") }, "Fuel system", "External Centerline Tank Fuel Control Switch", "%0.1f"));    // elements["pnt_343"]     = default_3_position_tumb(_("External Centerline Tank Fuel Control Switch, STOP/NORM/ORIDE"),   devices.FUEL_INTERFACE, fuel_commands.ExtTanksCtrSw,        343)
             AddFunction(new Switch(this, FUEL_INTERFACE, "342", new SwitchPosition[] { new SwitchPosition("1.0", "STOP", "3005"), new SwitchPosition("0.0", "NORM", "3005"), new SwitchPosition("-1.0", "ORIDE", "3005") }, "Fuel system", "External Wing Tanks Fuel Control Switch", "%0.1f"));    // elements["pnt_342"]     = default_3_position_tumb(_("External Wing Tanks Fuel Control Switch, STOP/NORM/ORIDE"),        devices.FUEL_INTERFACE, fuel_commands.ExtTanksWingSw,       342)
             #endregion
@@ -372,19 +373,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(Switch.CreateToggleSwitch(this, HOTAS, "3041", "494", "1.0", "ON", "0.0", "OFF", "HOTAS", "Exterior Lights Switch", "%0.1f"));    // elements["pnt_494"]         = default_2_position_tumb(_("Exterior Lights Switch, ON/OFF"),          devices.HOTAS,  hotas_commands.THROTTLE_EXTERIOR_LIGTHS,    494)
             #endregion
             #region  Master Arm Panel
-            AddFunction(new PushButton(this, SMS, "3001", "458", "Master Arm Panel", "Master Mode Button A/A", "1", "0", "%1d"));   
-            AddFunction(new PushButton(this, SMS, "3002", "459", "Master Arm Panel", "Master Mode Button A/G", "1", "0", "%1d"));   
+            AddFunction(new PushButton(this, SMS, "3001", "458", "Master Arm Panel", "Master Mode Button A/A", "1", "0", "%1d"));
+            AddFunction(new PushButton(this, SMS, "3002", "459", "Master Arm Panel", "Master Mode Button A/G", "1", "0", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, SMS, "3003", "49", "1.0", "ARM", "0.0", "SAFE", "Master Arm Panel", "Master Arm Switch", "%0.1f"));    // elements["pnt_49"]      = default_2_position_tumb(_("Master Arm Switch, ARM/SAFE"),             devices.SMS, SMS_commands.MasterArmSw, 49)
             AddFunction(new PushButton(this, SMS, "3004", "50", "Master Arm Panel", "Emergency Jettison Button", "1", "0", "%1d"));    // elements["pnt_50"]      = default_button(_("Emergency Jettison Button"),                        devices.SMS, SMS_commands.EmerJettSw, 50)
             AddFunction(Switch.CreateToggleSwitch(this, SMS, "3012", "258", "1.0", "ENABLE", "0.0", "NORM", "Master Arm Panel", "Auxiliary Release Switch", "%0.1f"));    // elements["pnt_258"]     = default_2_position_tumb(_("Auxiliary Release Switch, ENABLE/NORM"),   devices.SMS, SMS_commands.AuxRelSw, 258)
-            AddFunction(new PushButton(this, SMS, "3005", "153", "Master Arm Panel", "Station Jettison Select Button CENTER", "1", "0", "%1d"));   
-            AddFunction(new PushButton(this, SMS, "3006", "155", "Master Arm Panel", "Station Jettison Select Button LEFT IN", "1", "0", "%1d"));  
-            AddFunction(new PushButton(this, SMS, "3007", "157", "Master Arm Panel", "Station Jettison Select Button LEFT OUT", "1", "0", "%1d")); 
-            AddFunction(new PushButton(this, SMS, "3008", "159", "Master Arm Panel", "Station Jettison Select Button RIGHT IN", "1", "0", "%1d")); 
+            AddFunction(new PushButton(this, SMS, "3005", "153", "Master Arm Panel", "Station Jettison Select Button CENTER", "1", "0", "%1d"));
+            AddFunction(new PushButton(this, SMS, "3006", "155", "Master Arm Panel", "Station Jettison Select Button LEFT IN", "1", "0", "%1d"));
+            AddFunction(new PushButton(this, SMS, "3007", "157", "Master Arm Panel", "Station Jettison Select Button LEFT OUT", "1", "0", "%1d"));
+            AddFunction(new PushButton(this, SMS, "3008", "159", "Master Arm Panel", "Station Jettison Select Button RIGHT IN", "1", "0", "%1d"));
             AddFunction(new PushButton(this, SMS, "3009", "161", "Master Arm Panel", "Station Jettison Select Button RIGHT OUT", "1", "0", "%1d"));
             AddFunction(new PushButton(this, SMS, "3010", "235", "Master Arm Panel", "Selective Jettison Pushbutton"));    // elements["pnt_235"]     = default_button(_("Selective Jettison Pushbutton"),                    devices.SMS, SMS_commands.SelJettBtn, 235)
             AddFunction(new Switch(this, SMS, "236", new SwitchPosition[] { new SwitchPosition("-0.1", "L FUS MSL", "3011"), new SwitchPosition("0.0", "SAFE", "3011"), new SwitchPosition("0.1", "R FUS MSL", "3011"), new SwitchPosition("0.2", "Rack / LCHR", "3011"), new SwitchPosition("0.3", "STORES", "3011") }, "Master Arm Panel", "Selective Jettison Knob", "%0.1f"));    // elements["pnt_236"]     = multiposition_switch(_("Selective Jettison Knob, L FUS MSL/SAFE/R FUS MSL/ RACK/LCHR /STORES"),   devices.SMS, SMS_commands.SelJettLvr, 236, 5, 0.1, false, -0.1, 1.5)
-            AddFunction(new Switch(this, SMS, "135", new SwitchPosition[] { new SwitchPosition("1.0", "ORIDE", "3013"), new SwitchPosition("0.5", "NORM", "3013"), new SwitchPosition("0.0", "OFF", "3013") }, "Master Arm Panel", "IR Cooling Switch", "%0.1f"));    // elements["pnt_135"]     = default_3_position_tumb(_("IR Cooling Switch, ORIDE/NORM/OFF"),           devices.SMS, SMS_commands.IRCoolingSw, 135, false, anim_speed_default, false, 0.1, {0, 0.2})
+            AddFunction(new Switch(this, SMS, "135", new SwitchPosition[] { new SwitchPosition("0.2", "ORIDE", "3013"), new SwitchPosition("0.1", "NORM", "3013"), new SwitchPosition("0.0", "OFF", "3013") }, "Master Arm Panel", "IR Cooling Switch", "%0.1f"));    // elements["pnt_135"]     = default_3_position_tumb(_("IR Cooling Switch, ORIDE/NORM/OFF"),           devices.SMS, SMS_commands.IRCoolingSw, 135, false, anim_speed_default, false, 0.1, {0, 0.2})
             #endregion
             #region  Fire Systems
             AddFunction(new PushButton(this, ENGINES_INTERFACE, "3008", "46", "Fire Systems", "Fire Extinguisher Pushbutton", "1", "0", "%1d"));    // elements["pnt_46"]      = default_button(_("Fire Extinguisher Pushbutton"),                     devices.ENGINES_INTERFACE, engines_commands.FireExtghDischSw, 46)
@@ -489,43 +490,43 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new Switch(this, MDI_LEFT, "313", new SwitchPosition[] { new SwitchPosition("1", "+ve", "3006", "3006", "0"), new SwitchPosition("0", "Off", "3007"), new SwitchPosition("-1", "-ve", "3007", "3007", "0") }, "AMPCD", "Course Set Switch", "%1d"));  // elements["pnt_313"]= springloaded_3_pos_tumb(_("Course Set Switch"),devices.MDI_LEFT, MDI_commands.MDI_Left_CRS_Negative, MDI_commands.MDI_Left_CRS_Positive, 313)
             #endregion
             #region  Integrated Fuel/Engine Indicator (IFEI)
-            AddFunction(new PushButton(this, IFEI, "3001", "168", "IFEI", "IFEI Mode Button", "1", "0", "%1d"));    
-            AddFunction(new PushButton(this, IFEI, "3002", "169", "IFEI", "IFEI QTY Button", "1", "0", "%1d"));    
+            AddFunction(new PushButton(this, IFEI, "3001", "168", "IFEI", "IFEI Mode Button", "1", "0", "%1d"));
+            AddFunction(new PushButton(this, IFEI, "3002", "169", "IFEI", "IFEI QTY Button", "1", "0", "%1d"));
             AddFunction(new PushButton(this, IFEI, "3003", "170", "IFEI", "IFEI Up Arrow Button", "1", "0", "%1d"));
-            AddFunction(new PushButton(this, IFEI, "3004", "171", "IFEI", "IFEI Down Arrow Button", "1", "0", "%1d")); 
-            AddFunction(new PushButton(this, IFEI, "3005", "172", "IFEI", "IFEI ZONE Button", "1", "0", "%1d")); 
-            AddFunction(new PushButton(this, IFEI, "3006", "173", "IFEI", "IFEI ET Button", "1", "0", "%1d"));   
+            AddFunction(new PushButton(this, IFEI, "3004", "171", "IFEI", "IFEI Down Arrow Button", "1", "0", "%1d"));
+            AddFunction(new PushButton(this, IFEI, "3005", "172", "IFEI", "IFEI ZONE Button", "1", "0", "%1d"));
+            AddFunction(new PushButton(this, IFEI, "3006", "173", "IFEI", "IFEI ET Button", "1", "0", "%1d"));
             AddFunction(new Axis(this, IFEI, "3007", "174", 0.1d, 0.5d, 1d, "IFEI", "IFEI Brightness Control Knob"));
-            AddFunction(new FlagValue(this, "468", "IFEI", "IFEI", ""));  
+            AddFunction(new FlagValue(this, "468", "IFEI", "IFEI", ""));
             AddFunction(new FlagValue(this, "469", "IFEI", "IFEI buttons", ""));
 
-            AddFunction(new Text(this, "2052", "IFEI", "Bingo Value", "Value of the BINGO fuel state"));
-            AddFunction(new Text(this, "2053", "IFEI", "Clock hours", "Value of the clock HH"));
-            AddFunction(new Text(this, "2054", "IFEI", "Clock minutes", "Value of the clock MM"));
-            AddFunction(new Text(this, "2055", "IFEI", "Clock seconds", "Value of the clock SS"));
+            AddFunction(new Common.Text(this, "2052", "IFEI", "Bingo Value", "Value of the BINGO fuel state"));
+            AddFunction(new Common.Text(this, "2053", "IFEI", "Clock hours", "Value of the clock HH"));
+            AddFunction(new Common.Text(this, "2054", "IFEI", "Clock minutes", "Value of the clock MM"));
+            AddFunction(new Common.Text(this, "2055", "IFEI", "Clock seconds", "Value of the clock SS"));
             AddFunction(new FlagValue(this, "2056", "IFEI", "Clock HH MM separator", "Flag to display colon HH:MM on IFEI clock display", null));
             AddFunction(new FlagValue(this, "2057", "IFEI", "Clock MM SS separator", "Flag to display colon MM:SS on IFEI clock display", null));
-            AddFunction(new Text(this, "2061", "IFEI", "Left Fuel Flow Value", "Value of the Fuel Flow for the Left Engine"));
-            AddFunction(new Text(this, "2062", "IFEI", "Right Fuel Flow Value", "Value of the Fuel Flow for the Right Engine"));
-            AddFunction(new Text(this, "2063", "IFEI", "Internal Fuel Amount", "Internel Fuel Value"));
-            AddFunction(new Text(this, "2064", "IFEI", "Total Fuel Amount", "Total Fuel Value"));
-            AddFunction(new Text(this, "2065", "IFEI", "Left Oil Pressure", "Value of the Left Engine Oil Pressure"));
-            AddFunction(new Text(this, "2066", "IFEI", "Right Oil Pressure", "Value of the Right Engine Oil Pressure"));
-            AddFunction(new Text(this, "2067", "IFEI", "Left RPM Value", "Left Engine RPM"));
-            AddFunction(new Text(this, "2068", "IFEI", "Right RPM Value", "Right Engine RPM"));
-            AddFunction(new Text(this, "2069", "IFEI", "Left Temperature Value", "Left Engine Temperature"));
-            AddFunction(new Text(this, "2070", "IFEI", "Right Temperature Value", "Right Engine Temperature"));
-            AddFunction(new Text(this, "2073", "IFEI", "Timer hours", "Value of the Timer Hours"));
-            AddFunction(new Text(this, "2072", "IFEI", "Timer minutes", "Value of the Timer Minutes"));
-            AddFunction(new Text(this, "2071", "IFEI", "Timer seconds", "Value of the Timer Seconds"));
+            AddFunction(new Common.Text(this, "2061", "IFEI", "Left Fuel Flow Value", "Value of the Fuel Flow for the Left Engine"));
+            AddFunction(new Common.Text(this, "2062", "IFEI", "Right Fuel Flow Value", "Value of the Fuel Flow for the Right Engine"));
+            AddFunction(new Common.Text(this, "2063", "IFEI", "Internal Fuel Amount", "Internel Fuel Value"));
+            AddFunction(new Common.Text(this, "2064", "IFEI", "Total Fuel Amount", "Total Fuel Value"));
+            AddFunction(new Common.Text(this, "2065", "IFEI", "Left Oil Pressure", "Value of the Left Engine Oil Pressure"));
+            AddFunction(new Common.Text(this, "2066", "IFEI", "Right Oil Pressure", "Value of the Right Engine Oil Pressure"));
+            AddFunction(new Common.Text(this, "2067", "IFEI", "Left RPM Value", "Left Engine RPM"));
+            AddFunction(new Common.Text(this, "2068", "IFEI", "Right RPM Value", "Right Engine RPM"));
+            AddFunction(new Common.Text(this, "2069", "IFEI", "Left Temperature Value", "Left Engine Temperature"));
+            AddFunction(new Common.Text(this, "2070", "IFEI", "Right Temperature Value", "Right Engine Temperature"));
+            AddFunction(new Common.Text(this, "2073", "IFEI", "Timer hours", "Value of the Timer Hours"));
+            AddFunction(new Common.Text(this, "2072", "IFEI", "Timer minutes", "Value of the Timer Minutes"));
+            AddFunction(new Common.Text(this, "2071", "IFEI", "Timer seconds", "Value of the Timer Seconds"));
             AddFunction(new FlagValue(this, "2058", "IFEI", "Timer H MM separator", "Flag to display colon HH:MM on IFEI timer display", null));
             // 2059 is used for the altimeter 
             AddFunction(new FlagValue(this, "2060", "IFEI", "Timer MM SS separator", "Flag to display colon MM:SS on IFEI timer display", null));
-            AddFunction(new Text(this, "2074", "IFEI", "SP Code", "Value of the code before the SP"));
-            AddFunction(new Text(this, "2075", "IFEI", "SP", "Value of SP"));
-            AddFunction(new Text(this, "2076", "IFEI", "Draw Character", "Draw Character Not sure what this is"));
-            AddFunction(new Text(this, "2077", "IFEI", "T Value", "T Value"));
-            AddFunction(new Text(this, "2078", "IFEI", "Time Set Mode", "Alter / Set Clock Mode"));
+            AddFunction(new Common.Text(this, "2074", "IFEI", "SP Code", "Value of the code before the SP"));
+            AddFunction(new Common.Text(this, "2075", "IFEI", "SP", "Value of SP"));
+            AddFunction(new Common.Text(this, "2076", "IFEI", "Draw Character", "Draw Character Not sure what this is"));
+            AddFunction(new Common.Text(this, "2077", "IFEI", "T Value", "T Value"));
+            AddFunction(new Common.Text(this, "2078", "IFEI", "Time Set Mode", "Alter / Set Clock Mode"));
 
             // These are described as textures, but currently unclear what these actually represent.
             uint commandCode = 4000;
@@ -556,11 +557,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new Switch(this, RADAR, "440", new SwitchPosition[] { new SwitchPosition("0.0", "OFF", "3001"), new SwitchPosition("0.1", "STBY", "3001"), new SwitchPosition("0.2", "OPR", "3001"), new SwitchPosition("0.3", "EMERG(PULL)", "3002") }, "Sensor panel", "RADAR Switch (MW to pull)", "%0.1f"));    // elements["pnt_440"] = multiposition_switch_with_pull(_("RADAR Switch (MW to pull), OFF/STBY/OPR/EMERG(PULL)"),
             #endregion
             #region  INS
-            AddFunction(new Switch(this, INS, "443", new SwitchPosition[] { new SwitchPosition("0.0", "Off", "3001"), new SwitchPosition("0.1", "CV", "3001"), new SwitchPosition("0.2", "GND", "3001"), new SwitchPosition("0.3", "IFA", "3001"), new SwitchPosition("0.4", "GYRO", "3001"), new SwitchPosition("0.5", "GB", "3001"), new SwitchPosition("0.6", "Test", "3001") }, "INS", "Inertial Navigation System Switch", "%0.1f")); // 
+            AddFunction(new Switch(this, INS, "443", SwitchPositions.Create(8, 0.0, 0.1, "3001", new string[] { "OFF", "CV", "GND", "NAV", "IFA", "GYRO", "GB", "TEST" }), "INS", "Inertial Navigation System Switch", "%0.1f"));
+            #endregion
 
-            #endregion
-            #region  NEW - still buggy
-            #endregion
             #region  UFC
             AddFunction(new PushButton(this, UFC, "3001", "128", "UFC", "UFC Function Selector Pushbutton A/P", "1", "0", "%1d"));
             AddFunction(new PushButton(this, UFC, "3002", "129", "UFC", "UFC Function Selector Pushbutton IFF", "1", "0", "%1d"));
@@ -597,23 +596,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new PushButton(this, UFC, "3008", "125", "UFC", "UFC COMM 1 Channel Selector Pull", "1", "0", "%1d"));
             AddFunction(new PushButton(this, UFC, "3009", "127", "UFC", "UFC COMM 2 Channel Selector Pull", "1", "0", "%1d"));
 
-            AddFunction(new Text(this, "2080", "UFC", "UFC Unsure 1", "Value of the (unsure!)"));
-            AddFunction(new Text(this, "2081", "UFC", "UFC Mask", "Value of the UFC Mask"));
-            AddFunction(new Text(this, "2082", "UFC", "Option Display 1", "Text Value of the Option Display #1"));
-            AddFunction(new Text(this, "2083", "UFC", "Option Display 2", "Text Value of the Option Display #2"));
-            AddFunction(new Text(this, "2084", "UFC", "Option Display 3", "Text Value of the Option Display #3"));
-            AddFunction(new Text(this, "2085", "UFC", "Option Display 4", "Text Value of the Option Display #4"));
-            AddFunction(new Text(this, "2086", "UFC", "Option Display 5", "Text Value of the Option Display #5"));
-            AddFunction(new Text(this, "2087", "UFC", "Option Display 1 Selected", "Option Display #1 Selected"));
-            AddFunction(new Text(this, "2088", "UFC", "Option Display 2 Selected", "Option Display #2 Selected"));
-            AddFunction(new Text(this, "2089", "UFC", "Option Display 3 Selected", "Option Display #3 Selected"));
-            AddFunction(new Text(this, "2090", "UFC", "Option Display 4 Selected", "Option Display #4 Selected"));
-            AddFunction(new Text(this, "2091", "UFC", "Option Display 5 Selected", "Option Display #5 Selected"));
-            AddFunction(new Text(this, "2092", "UFC", "Scratchpad 1", "Value of the first scratchpad display"));
-            AddFunction(new Text(this, "2093", "UFC", "Scratchpad 2", "Value of the second scratchpad display"));
-            AddFunction(new Text(this, "2094", "UFC", "Scratchpad Number", "Value of the scratchpad number display"));
-            AddFunction(new Text(this, "2095", "UFC", "Comm Channel 1", "Value of Communications Channel 1 display"));
-            AddFunction(new Text(this, "2096", "UFC", "Comm Channel 2", "Value of Communications Channel 2 display"));
+            AddFunction(new Common.Text(this, "2080", "UFC", "UFC Unsure 1", "Value of the (unsure!)"));
+            AddFunction(new Common.Text(this, "2081", "UFC", "UFC Mask", "Value of the UFC Mask"));
+            AddFunction(new Common.Text(this, "2082", "UFC", "Option Display 1", "Text Value of the Option Display #1"));
+            AddFunction(new Common.Text(this, "2083", "UFC", "Option Display 2", "Text Value of the Option Display #2"));
+            AddFunction(new Common.Text(this, "2084", "UFC", "Option Display 3", "Text Value of the Option Display #3"));
+            AddFunction(new Common.Text(this, "2085", "UFC", "Option Display 4", "Text Value of the Option Display #4"));
+            AddFunction(new Common.Text(this, "2086", "UFC", "Option Display 5", "Text Value of the Option Display #5"));
+            AddFunction(new Common.Text(this, "2087", "UFC", "Option Display 1 Selected", "Option Display #1 Selected"));
+            AddFunction(new Common.Text(this, "2088", "UFC", "Option Display 2 Selected", "Option Display #2 Selected"));
+            AddFunction(new Common.Text(this, "2089", "UFC", "Option Display 3 Selected", "Option Display #3 Selected"));
+            AddFunction(new Common.Text(this, "2090", "UFC", "Option Display 4 Selected", "Option Display #4 Selected"));
+            AddFunction(new Common.Text(this, "2091", "UFC", "Option Display 5 Selected", "Option Display #5 Selected"));
+            AddFunction(new Common.Text(this, "2092", "UFC", "Scratchpad 1", "Value of the first scratchpad display"));
+            AddFunction(new Common.Text(this, "2093", "UFC", "Scratchpad 2", "Value of the second scratchpad display"));
+            AddFunction(new Common.Text(this, "2094", "UFC", "Scratchpad Number", "Value of the scratchpad number display"));
+            AddFunction(new Common.Text(this, "2095", "UFC", "Comm Channel 1", "Value of Communications Channel 1 display"));
+            AddFunction(new Common.Text(this, "2096", "UFC", "Comm Channel 2", "Value of Communications Channel 2 display"));
 
             #endregion
             #region  Intercom
@@ -648,7 +647,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new PushButton(this, RWR, "3002", "275", "RWR", "ALR-67 DISPLAY Pushbutton", "1", "0", "%1d"));
             AddFunction(new PushButton(this, RWR, "3003", "272", "RWR", "ALR-67 SPECIAL Pushbutton", "1", "0", "%1d"));
             AddFunction(new PushButton(this, RWR, "3004", "269", "RWR", "ALR-67 OFFSET Pushbutton", "1", "0", "%1d"));
-            AddFunction(new PushButton(this, RWR, "3005", "266", "RWR", "ALR-67 BIT Pushbutton", "1", "0", "%1d")); 
+            AddFunction(new PushButton(this, RWR, "3005", "266", "RWR", "ALR-67 BIT Pushbutton", "1", "0", "%1d"));
             AddFunction(new Axis(this, RWR, "3006", "263", 0.15d, 0d, 1d, "RWR", "ALR-67 DMR Control Knob"));    // elements["pnt_263"]     = default_axis_limited(_("ALR-67 DMR Control Knob"),                            devices.RWR, rwr_commands.DmrControl, 263, 0.0, 0.1, false, false, {0,1})
             AddFunction(new Axis(this, RWR, "3009", "262", 0.15d, 0d, 1d, "RWR", "ALR-67 AUDIO Control Knob (no function)"));    // elements["pnt_262"]     = default_axis_limited(_("ALR-67 AUDIO Control Knob (no function)"),            0, 3130, 262, 0.0, 0.1, false, false, {0,1})
             AddFunction(new Switch(this, RWR, "261", new SwitchPosition[] { new SwitchPosition("0.0", "F", "3007"), new SwitchPosition("0.1", "U", "3007"), new SwitchPosition("0.2", "A", "3007"), new SwitchPosition("0.3", "I", "3007"), new SwitchPosition("0.4", "N", "3007") }, "RWR", "ALR-67 DIS TYPE Switch", "%0.1f"));
