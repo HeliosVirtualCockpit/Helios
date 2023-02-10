@@ -259,10 +259,10 @@
     <Compile Include="IInstallation2.cs" />
     <Compile Include="IModuleManagerWritable.cs" />
     <Compile Include="Interfaces\Common\ViewportCompilerInterface.cs" />
-    <Compile Include="Interfaces\DCS\MIRAGEF1\MirageF1CEInterface.cs" />
-    <Compile Include="Interfaces\DCS\MIRAGEF1\MirageF1EEInterface.cs" />
-    <Compile Include="Interfaces\DCS\MIRAGEF1\Devices.cs" />
-    <Compile Include="Interfaces\DCS\MIRAGEF1\MirageF1Interface.cs" />
+    <Compile Include="Interfaces\DCS\MirageF1\MirageF1CEInterface.cs" />
+    <Compile Include="Interfaces\DCS\MirageF1\MirageF1EEInterface.cs" />
+    <Compile Include="Interfaces\DCS\MirageF1\Devices.cs" />
+    <Compile Include="Interfaces\DCS\MirageF1\MirageF1Interface.cs" />
     <Compile Include="Interfaces\DCS\A10C\A10C1Interface.cs" />
     <Compile Include="Interfaces\DCS\A10C\A10C2Interface.cs" />
     <Compile Include="Interfaces\Common\Ignored.cs" />
@@ -271,7 +271,7 @@
     <Compile Include="Interfaces\DCS\BlackShark\Ka-50_3Interface.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSInterfaceEditorBase.cs" />
     <Compile Include="Interfaces\DCS\M2000C\Functions\Altimeter.cs" />
-    <Compile Include="Interfaces\DCS\MIRAGEF1\Tools\InterfaceCreation.cs" />
+    <Compile Include="Interfaces\DCS\MirageF1\Tools\InterfaceCreation.cs" />
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceEditor.xaml.cs">
       <DependentUpon>SoftInterfaceEditor.xaml</DependentUpon>
     </Compile>
@@ -1362,8 +1362,8 @@
     <Resource Include="Interfaces\DCS\UH60L\ExportFunctions.lua" />
     <Resource Include="Interfaces\DCS\BlackShark\ExportFunctionsKa-50_3.lua" />
     <Resource Include="Interfaces\DCS\BlackShark\ExportFunctionsKa-50_2.lua" />
-    <Resource Include="Interfaces\DCS\MIRAGEF1\ExportFunctionsMirageF1EE.lua" />
-    <Resource Include="Interfaces\DCS\MIRAGEF1\ExportFunctionsMirageF1CE.lua" />
+    <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1EE.lua" />
+    <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1CE.lua" />
     <None Include="Interfaces\Falcon\readme.md" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\ded.png" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\hud.png" />
@@ -3917,7 +3917,7 @@
     <Folder Include="Interfaces\DCS\F14B\Functions\" />
     <Folder Include="Interfaces\DCS\Mi8Simple\Functions\" />
     <Folder Include="Interfaces\DCS\MiG21\Functions\" />
-    <Folder Include="Interfaces\DCS\MIRAGEF1\Functions\" />
+    <Folder Include="Interfaces\DCS\MirageF1\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\FA-18C\Altimeter\Altimeter_Faceplate.png" />

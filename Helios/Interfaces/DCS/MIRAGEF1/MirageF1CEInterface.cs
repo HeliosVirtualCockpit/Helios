@@ -30,8 +30,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.CE
     {
         public MirageF1CEInterface() : base(
             "DCS Mirage F1CE",
-            "Mirage-F1CE",
-            "pack://application:,,,/Helios;component/Interfaces/DCS/MIRAGEF1/ExportFunctionsMirageF1CE.lua")
+            "MIRAGE-F1CE",
+            "pack://application:,,,/Helios;component/Interfaces/DCS/MirageF1/ExportFunctionsMirageF1CE.lua")
         {
 #if (CREATEINTERFACE && DEBUG)
             string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";

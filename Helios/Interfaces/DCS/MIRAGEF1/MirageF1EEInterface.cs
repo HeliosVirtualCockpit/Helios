@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
     {
         public MirageF1CEInterface() : base(
             "DCS Mirage F1EE",
-            "Mirage-F1EE",
+            "MIRAGE-F1EE",
             "pack://application:,,,/Helios;component/Interfaces/DCS/MIRAGEF1/ExportFunctionsMirageF1EE.lua")
         {
 #if (CREATEINTERFACE && DEBUG)
