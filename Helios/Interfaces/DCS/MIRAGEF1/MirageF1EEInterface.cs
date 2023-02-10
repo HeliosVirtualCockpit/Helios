@@ -35,8 +35,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
         {
 #if (CREATEINTERFACE && DEBUG)
             string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";
-            DCSAircraft = $@"{Environment.GetEnvironmentVariable("userprofile")}\desktop";
-
             InterfaceCreation ic = new InterfaceCreation();
             foreach (string path in new string[] { $@"{DCSAircraft}\Cockpit\Common\clickabledata_common_F1EE_M.lua", $@"{DCSAircraft}\Cockpit\Mirage-F1\Mirage-F1EE\clickabledata.lua" })
             {
