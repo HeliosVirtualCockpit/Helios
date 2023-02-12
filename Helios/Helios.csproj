@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -259,6 +259,13 @@
     <Compile Include="IInstallation2.cs" />
     <Compile Include="IModuleManagerWritable.cs" />
     <Compile Include="Interfaces\Common\ViewportCompilerInterface.cs" />
+    <Compile Include="Interfaces\DCS\F16C\commands.cs" />
+    <Compile Include="Interfaces\DCS\F16C\devices.cs" />
+    <Compile Include="Interfaces\DCS\F16C\F-16CInterface.cs" />
+    <Compile Include="Interfaces\DCS\F16C\Functions\Altimeter.cs" />
+    <Compile Include="Interfaces\DCS\F16C\Functions\F16CFunction.cs" />
+    <Compile Include="Interfaces\DCS\F16C\lamps.cs" />
+    <Compile Include="Interfaces\DCS\F16C\Tools\InterfaceCreation.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\MirageF1CEInterface.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\MirageF1EEInterface.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\Devices.cs" />
@@ -1364,6 +1371,7 @@
     <Resource Include="Interfaces\DCS\BlackShark\ExportFunctionsKa-50_2.lua" />
     <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1EE.lua" />
     <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1CE.lua" />
+    <Resource Include="Interfaces\DCS\F16C\ExportFunctions.lua" />
     <None Include="Interfaces\Falcon\readme.md" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\ded.png" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\hud.png" />

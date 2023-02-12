@@ -23,7 +23,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools;
     using GadrocsWorkshop.Helios.UDPInterface;
-    using LibUsbDotNet;
     //using Functions;
     using static GadrocsWorkshop.Helios.NativeMethods;
 
