@@ -28,10 +28,11 @@ namespace GenerateSimulatorViewportTemplates
         {
             if (args.Length < 3)
             {
-                throw new Exception("JSON path, output path, and usesPatches boolean parameters are required");
+                throw new Exception("JSON path, output path, and usesPatches boolean parameters are required.");
             }
-
+            
             Generate(args[0], args[1], args[2].Trim().Equals("true", StringComparison.InvariantCultureIgnoreCase));
+
         }
 
         private static readonly string[] _colors =
@@ -74,11 +75,11 @@ namespace GenerateSimulatorViewportTemplates
                     string category = "Simulator Viewports";
                     if (usesPatches)
                     {
-                        viewportName = $"{template.ViewportPrefix}_{viewport.ViewportName}";
+                        viewportName = $"{(viewport.SuppressViewportNamePrefix? "" : template.ViewportPrefix+"_")}{viewport.ViewportName}";
                         category = $"{template.TemplateCategory} Simulator Viewports";
                     }
 
-                    if (!generated.Add(viewportName))
+                    if (!generated.Add(viewport.SuppressViewportNamePrefix ? template.ViewportPrefix + "_" + viewportName : viewportName))
                     {
                         // alrady done
                         Console.WriteLine($"  ignoring duplicate {viewportName}");
@@ -143,7 +144,7 @@ namespace GenerateSimulatorViewportTemplates
                         Directory.CreateDirectory(outputDirectoryPath);
                     }
 
-                    File.WriteAllLines(Path.Combine(outputDirectoryPath, $"{viewportName}.htpl"), lines);
+                    File.WriteAllLines(Path.Combine(outputDirectoryPath, $"{(viewport.SuppressViewportNamePrefix ? template.ViewportPrefix + "_" + viewportName : viewportName)}.htpl"), lines);
                 }
             }
             }

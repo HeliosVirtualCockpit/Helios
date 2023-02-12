@@ -2,6 +2,6 @@
  %22)%0D%0A
 -dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0A
  dofi
-@@ -543,122 +543,4 @@
+@@ -543,134 +543,4 @@
  %0D%0A%0D%0A
----ViewportHandling Helios Patch%0D%0Atry_find_assigned_viewport(%22AH_64D_LEFT_MFCD_CPG%22)%0D%0A--ViewportHandling Helios Patch%0D%0A
+---ViewportHandling Helios Patch%0D%0Atry_find_assigned_viewport(%22AH_64D_LEFT_MFCD_CPG%22%2C%22LEFT_MFCD%22)%0D%0A--ViewportHandling Helios Patch%0D%0A
