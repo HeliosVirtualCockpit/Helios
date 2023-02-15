@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
 
+
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
 {
 
@@ -92,9 +93,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
                             case "circuit_breaker":
                             case "default_2_position_tumb":
                                 modifier = arguments.Count >= 6 ? (arguments[5].Value == "true" ? -1 : 1) : 1;
-
-                                AddFunction(new Switch(iface, device, eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), "Posn 1", commandCode1), new SwitchPosition("0.0", "Posn 2", commandCode1) }, sectionName, eM.Groups["name"].Value, "%0.1f"));
-                                _addFunctionList.Add($"AddFunction(new Switch(this, \"{device}\", \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1*modifier:F1}\", \"Posn 1\", \"{commandCode1}\"),new SwitchPosition(\"0.0\", \"Posn 2\", \"{commandCode1}\")}}, \"{sectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                                if (!eM.Groups["name"].Value.ToLower().Contains("button"))
+                                {
+                                    AddFunction(new Switch(iface, device, eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), "Posn 1", commandCode1), new SwitchPosition("0.0", "Posn 2", commandCode1) }, sectionName, eM.Groups["name"].Value, "%0.1f"));
+                                    _addFunctionList.Add($"AddFunction(new Switch(this, \"{device}\", \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"Posn 1\", \"{commandCode1}\"),new SwitchPosition(\"0.0\", \"Posn 2\", \"{commandCode1}\")}}, \"{sectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                                } else
+                                {
+                                    AddFunction(new PushButton(iface, device, commandCode1, eM.Groups["arg"].Value, sectionName, eM.Groups["name"].Value, "%1d"));
+                                    _addFunctionList.Add($"AddFunction(new PushButton(this, \"{device}\", \"{commandCode1}\", \"{eM.Groups["arg"].Value}\", \"{sectionName}\", \"{eM.Groups["name"].Value}\", \"%1d\"));");
+                                }
                                 break;
 
                             case "springloaded_2pos_switch":

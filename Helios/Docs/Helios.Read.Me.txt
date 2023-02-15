@@ -37,6 +37,9 @@ relevant then open a new issue.
 There is a growing collection of information on the wiki:
 https://github.com/HeliosVirtualCockpit/Helios/wiki
 
+The changelog for Helios can be found here:
+https://github.com/HeliosVirtualCockpit/Helios/wiki/Change-Log
+
 * * * After Installation * * *
 
 The KeypressReceiver.exe is used for receiving Helios keypresses 
