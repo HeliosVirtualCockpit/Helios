@@ -13,38 +13,33 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-//#define CREATEINTERFACE
-namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
+#define CREATEINTERFACE
+namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
 {
     using ComponentModel;
     using Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools;
     using GadrocsWorkshop.Helios.UDPInterface;
     using System;
+    using System.IO;
 
     /// <summary>
     /// Interface for DCS Mirage F1EE, including devices which are unique to this variant.
     /// </summary>
     [HeliosInterface("Helios.MIRAGEF1EE", "DCS Mirage F1EE", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
-    public class MirageF1CEInterface : MirageF1Interface
+    public class MirageF1EEInterface : MirageF1Interface
     {
-        public MirageF1CEInterface() : base(
+        public MirageF1EEInterface() : base(
             "DCS Mirage F1EE",
             "MIRAGE-F1EE",
             "pack://application:,,,/Helios;component/Interfaces/DCS/MIRAGEF1/ExportFunctionsMirageF1EE.lua")
         {
 #if (CREATEINTERFACE && DEBUG)
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";
-            InterfaceCreation ic = new InterfaceCreation();
-            foreach (string path in new string[] { $@"{DCSAircraft}\Cockpit\Common\clickabledata_common_F1EE_M.lua", $@"{DCSAircraft}\Cockpit\Mirage-F1\Mirage-F1EE\clickabledata.lua" })
-            {
-                foreach (NetworkFunction nf in ic.CreateFunctionsFromClickable(this, path))
-                {
-                    AddFunction(nf);
-                }
-            }
+            DcsPath = Path.Combine(Environment.GetEnvironmentVariable("userprofile"), "Desktop");
+            AddFunctionsFromDCSModule();
             return;
 #endif
+
             // see if we can restore from JSON
 #if (!DEBUG)
                         if (LoadFunctionsFromJson())
@@ -96,6 +91,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
             AddFunction(new PushButton(this, "1", "3694", "664", "Inertial Navigation System (INS)", "INS CLR pushbutton", "%1d"));
             #endregion Inertial Navigation System (INS)
 
+        }
+
+        protected override NetworkFunctionCollection MakeFunctionsFromDcsModule()
+        {
+            MirageF1InterfaceCreation ic = new MirageF1InterfaceCreation();
+            NetworkFunctionCollection functions = new NetworkFunctionCollection();
+            functions.AddRange(base.MakeFunctionsFromDcsModule());
+            foreach (string path in new string[] { Path.Combine(DcsPath, "Cockpit", "Common", "clickabledata_common_F1EE_M.lua"), Path.Combine(DcsPath, "Cockpit", "Mirage-F1", "Mirage-F1EE", "clickabledata.lua") })
+            {
+                functions.AddRange(ic.CreateFunctionsFromDcsModule(this, path));
+            }
+            return functions;
         }
     }
 }

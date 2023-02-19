@@ -13,14 +13,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-//#define CREATEINTERFACE
-namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.CE
+#define CREATEINTERFACE
+namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
 {
     using ComponentModel;
     using Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools;
     using GadrocsWorkshop.Helios.UDPInterface;
     using System;
+    using System.IO;
+    using NLog;
 
     /// <summary>
     /// Interface for DCS Mirage F1CE, including devices which are unique to this variant.
@@ -33,16 +35,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.CE
             "MIRAGE-F1CE",
             "pack://application:,,,/Helios;component/Interfaces/DCS/MirageF1/ExportFunctionsMirageF1CE.lua")
         {
+
 #if (CREATEINTERFACE && DEBUG)
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";
-            InterfaceCreation ic = new InterfaceCreation();
-            foreach (string path in new string[] { $@"{DCSAircraft}\Cockpit\Mirage-F1\Mirage-F1_Common\clickabledata_common_F1CE_BE.lua", $@"{DCSAircraft}\Cockpit\Mirage-F1\Mirage-F1CE\clickabledata.lua" })
-            {
-                foreach (NetworkFunction nf in ic.CreateFunctionsFromClickable(this, path))
-                {
-                    AddFunction(nf);
-                }
-            }
+            DcsPath = Path.Combine(Environment.GetEnvironmentVariable("userprofile"), "Desktop");
+            AddFunctionsFromDCSModule();
             return;
 #endif
 
@@ -69,6 +65,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.CE
             #endregion MATRA 550 or Sidewinder jettisoning
             // * * * Creating Interface functions from file: Cockpit\Mirage-F1\Mirage-F1CE\clickabledata.lua
             // No functions added
+        }
+
+        protected override NetworkFunctionCollection MakeFunctionsFromDcsModule()
+        {
+            MirageF1InterfaceCreation ic = new MirageF1InterfaceCreation();
+            NetworkFunctionCollection functions = new NetworkFunctionCollection();
+            functions.AddRange(base.MakeFunctionsFromDcsModule());
+            foreach (string path in new string[] { Path.Combine(DcsPath, "Cockpit", "Mirage-F1", "Mirage-F1_Common", "clickabledata_common_F1CE_BE.lua"), Path.Combine( DcsPath, "Cockpit", "Mirage-F1", "Mirage-F1CE", "clickabledata.lua") })
+            {
+                functions.AddRange(ic.CreateFunctionsFromDcsModule(this, path));
+            }
+            return functions;
         }
     }
 }
