@@ -88,11 +88,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
         private bool _ecmBitRunning;
 
         private List<string> _navPoints;
-        private string _acName;
-        private string _acNCTR;
+        private string _acName = "";
+        private string _acNCTR = "";
         private bool _stringDataUpdated;
         private uint _lastStringAreaTime;
-        private bool _panelTypeIFF;
+        private bool _panelTypeIFF = true;
+        private bool _panelTypeECM = true;
 
         public BMSFalconDataExporter(FalconInterface falconInterface)
             : base(falconInterface)
@@ -675,8 +676,25 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                         Marshal.Copy(_sharedMemoryStringArea.GetPointer(), _rawStringData, 0, (int)_stringAreaSize);
                         _navPoints = stringData.GetNavPoints(_rawStringData);
 
-                        _acName = stringData.GetValueForStrId(_rawStringData, StringIdentifier.AcName);
-                        _acNCTR = stringData.GetValueForStrId(_rawStringData, StringIdentifier.AcNCTR);
+                        _acName = stringData.GetValueForStrId(_rawStringData, StringIdentifier.AcName) ?? "";
+                        _acNCTR = stringData.GetValueForStrId(_rawStringData, StringIdentifier.AcNCTR) ?? "";
+
+                        string AN6 = _acName.Substring(0, Math.Min(_acName.Length, 6));
+                        string AN8 = _acName.Substring(0, Math.Min(_acName.Length, 8));
+                        string AN9 = _acName.Substring(0, Math.Min(_acName.Length, 9));
+
+                        if (AN6 == "F-16AM" || AN8 == "F-16C-52" || AN8 == "F-16D-52" || AN8 == "F-16I-52" || AN9 == "F-16CM-40" ||
+                            AN9 == "F-16CM-42" || AN9 == "F-16CM-50" || AN9 == "F-16CM-52" || AN9 == "F-16DM-40" || AN9 == "F-16DM-52")
+                        {
+                            _panelTypeIFF = true;
+                        }
+                        else if (AN8 == "F-16A-15" || AN8 == "F-16B-15" || AN8 == "F-16C-25" || AN8 == "F-16C-30" || AN8 == "F-16C-32" ||
+                                 AN8 == "F-16C-40" || AN8 == "F-16C-50" || AN9 == "F-16DG-30" || AN9 == "F-16DG-40")
+                        {
+                            _panelTypeIFF = false;
+                        }
+
+                        _panelTypeECM = !(_acName.Contains("F-16C-52+") || _acName.Contains("EAF") || _acName.Contains("HAF"));
                     }
                 }
                 else
@@ -685,31 +703,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
                 }
             }
 
-            string AN6 = _acName.Substring(0, Math.Min(_acName.Length, 6));
-            string AN8 = _acName.Substring(0, Math.Min(_acName.Length, 8));
-            string AN9 = _acName.Substring(0, Math.Min(_acName.Length, 9));
-
-            if (AN6 == "F-16AM" || AN8 == "F-16C-52" || AN8 == "F-16D-52" || AN8 == "F-16I-52" || AN9 == "F-16CM-40" ||
-                AN9 == "F-16CM-42" || AN9 == "F-16CM-50" || AN9 == "F-16CM-52" || AN9 == "F-16DM-40" || AN9 == "F-16DM-52")
-            {
-                _panelTypeIFF = true;
-            }
-            else if (AN8 == "F-16A-15" || AN8 == "F-16B-15" || AN8 == "F-16C-25" || AN8 == "F-16C-30" || AN8 == "F-16C-32" ||
-                     AN8 == "F-16C-40" || AN8 == "F-16C-50" || AN9 == "F-16DG-30" || AN9 == "F-16DG-40")
-            {
-                _panelTypeIFF = false;
-            }
-            else
-            {
-                _panelTypeIFF = true;
-            }
-
             //Runtime bindings
             SetValue("Runtime", "Current Theater", new BindingValue(FalconInterface.CurrentTheater));
             SetValue("Runtime", "Aircraft Name", new BindingValue(_acName));
             SetValue("Runtime", "Aircraft Nomenclature", new BindingValue(_acNCTR));
             SetValue("Runtime", "Aircraft IFF Panel", new BindingValue(_panelTypeIFF));
-            SetValue("Runtime", "Aircraft ECM Panel", new BindingValue(!(_acName.Contains("F-16C-52+") || _acName.Contains("EAF") || _acName.Contains("HAF"))));
+            SetValue("Runtime", "Aircraft ECM Panel", new BindingValue(_panelTypeECM));
         }
 
         internal float ClampAOA(float alpha)
