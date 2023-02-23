@@ -21,13 +21,13 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.DisplayUnit
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.UH60L.FlyerDisplayUnit.Pilot", "Display Unit (Pilot)", "UH-60L", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.UH60L.FlyerDisplayUnit.Pilot", "Display Unit (Pilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
     public class PilotDisplayUnit : FlyerDisplayUnit
     { 
         public PilotDisplayUnit()
             : base(FLYER.Pilot)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
         }
      }
 }

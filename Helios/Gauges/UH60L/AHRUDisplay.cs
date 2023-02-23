@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.AHRU
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.AHRU", "AHRU Display", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.UH60L.AHRU", "AHRU Display", "H-60", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class AHRUDisplay : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Attitude and Heading Ref Unit";
@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.AHRU
         public AHRUDisplay()
             : base("AHRU Display", new Size(280d, 32d))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
             AddTextDisplay("Display Text", new Point(0d, 0d), new Size(280d, 32d), _interfaceDeviceName, "Display Text", 20, "", TextHorizontalAlignment.Left, "!=:");
         }
         private void AddTextDisplay(string name, Point posn, Size size,

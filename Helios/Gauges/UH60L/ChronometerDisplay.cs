@@ -35,7 +35,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronometer
         public ChronometerDisplay(FLYER flyer)
             : base($"Chronometer Display ({flyer})", new Size(322d, 322d))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
             _flyer = flyer;
             _interfaceDeviceName = $"Chronometer ({flyer})";
             AddTextDisplay("Time HH:MM", new Point(44d, 91d), new Size(180d, 74d), _interfaceDeviceName, "Time hh:mm", 50, "88:88", TextHorizontalAlignment.Center, "!=:",_font1,true);

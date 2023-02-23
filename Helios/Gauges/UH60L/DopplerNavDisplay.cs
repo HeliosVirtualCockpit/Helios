@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.ASN128B
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.ASN128B", "Doppler Nav Display", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.UH60L.ASN128B", "Doppler Nav Display", "H-60", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class DopplerNavDisplay : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Doppler Nav";
@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.ASN128B
         public DopplerNavDisplay()
             : base("Doppler Nav Display", new Size(320d, 128d))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
             AddTextDisplay("Display Line 1", new Point(0d, 0d), new Size(320d, 32d), _interfaceDeviceName, "Display Line 1", 24, "", TextHorizontalAlignment.Left, "!=:");
             AddTextDisplay("Display Line 2", new Point(0d, 32d), new Size(320d, 32d), _interfaceDeviceName, "Display Line 2", 24, "", TextHorizontalAlignment.Left, "!=:");
             AddTextDisplay("Display Line 3", new Point(0d, 64d), new Size(320d, 32d), _interfaceDeviceName, "Display Line 3", 24, "", TextHorizontalAlignment.Left, "!=:");

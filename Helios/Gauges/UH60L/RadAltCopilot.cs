@@ -20,13 +20,13 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using GadrocsWorkshop.Helios.Controls;
     using System.Windows;
 
-    [HeliosControl("Helios.UH60L.RadAlt.Copilot", "RADAR Altimeter (Copilot)", "UH-60L", typeof(BackgroundImageRenderer))]
+    [HeliosControl("Helios.UH60L.RadAlt.Copilot", "RADAR Altimeter (Copilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
     public class RadAltCopilot : RadAlt
     {
         public RadAltCopilot()
             : base(FLYER.Copilot, new Size(420, 420))
         {
-			SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+			SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
 		}
 	}
 }

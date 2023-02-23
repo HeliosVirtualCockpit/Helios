@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows.Forms;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.RadAlt", "RADAR Altimeter", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.UH60L.RadAlt", "RADAR Altimeter", "H-60", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt (Pilot)";
@@ -44,7 +44,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         public RadAlt( FLYER flyer, Size size)
             : base($"RADAR Altimeter ({flyer})", size)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
             _flyer = flyer;
             _interfaceDeviceName = $"RADAR Alt ({flyer})";
             AddLabel("Digital Altitude Background", new Point(63d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);

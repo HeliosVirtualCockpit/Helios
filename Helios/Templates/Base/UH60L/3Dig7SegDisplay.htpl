@@ -1,6 +1,6 @@
 ﻿<ControlTemplate>
   <Name>3 Digit 7 Segment Display</Name>
-  <Category>UH-60L</Category>
+  <Category>H-60</Category>
   <TypeIdentifier>Helios.Base.TextDisplay</TypeIdentifier>
   <Template>
     <TemplateValues>

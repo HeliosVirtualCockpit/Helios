@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows.Forms;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.Stabilator", "Stabilator Position Indicator", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.UH60L.Stabilator", "Stabilator Position Indicator", "H-60", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
     public class StabilatorPositionIndicator : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Stability Control";
@@ -37,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         public StabilatorPositionIndicator()
             : base("Stabilator Position Indicator", new Size(276, 233))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
             AddPart("Stabilator Position", new Point(0d, 0d), new Size(420d, 420d), _interfaceDeviceName, "Stabilator Position");
         }
         private void AddPart(string name, Point pos, Size size, string interfaceDeviceName, string interfaceElement)

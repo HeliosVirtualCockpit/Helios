@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
     using System.Windows.Forms;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.CenterDisplayUnit", "Center Display Unit", "UH-60L", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.UH60L.CenterDisplayUnit", "Center Display Unit", "H-60", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
     public class CenterDisplayUnit : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Engine Management";
@@ -37,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments.CDU
         public CenterDisplayUnit()
             : base("Center Display Unit", new Size(1250,712))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
             AddBarGauge("Fuel Quantity L", new Point(19, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Fuel.xaml", _interfaceDeviceName, "Fuel Quantity Left");
             AddBarGauge("Fuel Quantity R", new Point(140, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30Fuel.xaml", _interfaceDeviceName, "Fuel Quantity Right");
             AddBarGauge("Transmission Temp Gauge", new Point(220, 128), new Size(40, 540), 30d, "{Helios}/Images/UH60L/SegmentBarDisplay30TransmissionTemp.xaml", _interfaceDeviceName, "Transmission Temperature");

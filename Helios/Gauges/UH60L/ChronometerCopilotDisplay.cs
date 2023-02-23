@@ -19,13 +19,13 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronometer
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
 
-    [HeliosControl("Helios.UH60L.Chronometer.Copilot", "Chronometer Display (Copilot)", "UH-60L", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.UH60L.Chronometer.Copilot", "Chronometer Display (Copilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
     public class ChronometerDisplayCopilot : ChronometerDisplay
     {
         public ChronometerDisplayCopilot()
             : base(FLYER.Copilot)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.UH60L.MH60RInterface) };
         }
     }
 }

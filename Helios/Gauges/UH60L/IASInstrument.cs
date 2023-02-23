@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.IAS.Indicator", "Indicated Air Speed Instrument", "UH-60L", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.UH60L.IAS.Indicator", "Indicated Air Speed Instrument", "H-60", typeof(GaugeRenderer), HeliosControlFlags.None)]
     public class IASInstrument : BaseGauge
     {
         private HeliosValue _iasPosition;

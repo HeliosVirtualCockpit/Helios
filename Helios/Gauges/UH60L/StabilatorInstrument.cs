@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.Stabilator.Indicator", "Stabilator Position Instrument", "UH-60L", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.UH60L.Stabilator.Indicator", "Stabilator Position Instrument", "H-60", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class StabInstrument : BaseGauge
     {
         private HeliosValue _stabPosition;

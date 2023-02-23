@@ -1,6 +1,6 @@
 ﻿<ControlTemplate>
   <Name>AHRU Display</Name>
-  <Category>UH-60L</Category>
+  <Category>H-60</Category>
   <TypeIdentifier>Helios.UH60L.AHRU</TypeIdentifier>
   <Template>
     <TemplateValues>
