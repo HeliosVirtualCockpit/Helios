@@ -1,4 +1,20 @@
-﻿using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+﻿//  Copyright 2022 Helios Contributors
+//    
+//  Helios is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Helios is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+using GadrocsWorkshop.Helios.Interfaces.DirectX;
 using GadrocsWorkshop.Helios.UDPInterface;
 using NLog;
 using System;
@@ -8,7 +24,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using static GadrocsWorkshop.Helios.Interfaces.DCS.Common.NetworkTriggerValue;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
@@ -88,8 +103,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             {
                 foreach (Match sM in sectionMatches)
                 {
+                    SectionName = sM.Groups["deviceName"].Value.Trim();
+                    if (SectionName.Contains("-- "))
+                    {
+                        int i = SectionName.LastIndexOf("-- ")+3;
+                        SectionName = SectionName.Substring(i,SectionName.Length-i);
+                    }
                     MatchCollection elementalMatches = GetElements(sM.Value);
-                    SectionName = sM.Groups["deviceName"].Value;
                     AddFunctionList.Add($"#region {SectionName}");
                     foreach (Match eM in elementalMatches)
                     {
@@ -287,9 +307,128 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         protected string[][] CommandItems { get => _commandItems; set => _commandItems = value; }
         protected CaptureCollection Arguments { get => _arguments; set => _arguments = value; }
         protected BaseUDPInterface UdpInterface { get => _udpInterface; set => _udpInterface = value; } 
-        protected string SectionName { get => _sectionName; set => _sectionName = value; }  
+        protected string SectionName { get => _sectionName; set => _sectionName = value; }
 
         #endregion
+
+        /// <summary>
+        /// Creates the c# source code for the devices enumeration
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        virtual public void CreateDevicesEnum(string path,string ns)
+        {
+            List<string> devices = new List<string> { };
+            devices.Add($"namespace {ns}");
+            devices.Add("{");
+            devices.Add("    internal enum devices {");
+            path = Path.Combine(path, "Cockpit", "Scripts", "devices.lua");
+            int counter = 1;
+            foreach (Match m in FindDevices(path))
+            {
+                string d = m.Groups["dev"].Value;
+                devices.Add($"{m.Groups["dev"].Value} = {counter++},");
+            }
+            devices.Add("    }");
+            devices.Add("}");
+            string fn = "";
+            bool append = false;
+            string DCSAircraftFunctions = Path.Combine(DocumentPath, $"{fn}{(fn == "" ? "" : "_")}devices.cs");
+
+            using (StreamWriter streamWriter = new StreamWriter(DCSAircraftFunctions, append: append))
+            {
+                Logger.Debug($"Writing devices enumeration to file: \"{DCSAircraftFunctions}\"");
+                foreach (string a in devices)
+                {
+                    streamWriter.WriteLine(a);
+                }
+            }
+
+            return;
+        }
+
+        private MatchCollection FindDevices(string path)
+        {
+            RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
+            Regex regex = new Regex(@".*devices\[""(?<dev>.*)""\].*\=.*(?<counter>counter\(\)).*", options);
+            return regex.Matches(ReadFunctionsFromDcsModule(path) ?? String.Empty);
+        }
+        /// <summary>
+        /// Creates the c# source code for the Commands enumeration
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        virtual public void CreateCommandsEnum(string path)
+        {
+            List<string> commands = new List<string> { };
+            //devices.Add($"namespace {ns}");
+            //commands.Add("{");
+            bool firstTime = true;
+            path = Path.Combine(path, "Cockpit", "Scripts", "command_defs.lua");
+            int counter = 0;
+            foreach (Match m in FindCommands(path))
+            {
+                if (int.TryParse(m.Groups["startcount"].Value, out int updateCounter)) {
+                    counter = updateCounter;
+                    continue;
+                } else if (m.Groups["functionname"].Success)
+                {
+                    if (!firstTime) commands.Add("}");
+                    firstTime = false;
+                    commands.Add($"    internal enum {m.Groups["functionname"].Value} {{");
+                    continue;
+                } else if (m.Groups["command"].Success) {
+                    if(m.Groups["command"].Value.Contains("--"))
+                    {
+                        commands.Add($"    //    {m.Groups["command"].Value.Trim()}");
+                        continue;
+                    }
+                    if (int.TryParse(m.Groups["commandval"].Value, out int commandCode))
+                    {
+                        commands.Add($"    {m.Groups["command"].Value.Trim()} = {commandCode},");
+                        continue;
+                    }
+                    else
+                    {
+                        commands.Add($"    {m.Groups["command"].Value.Trim()} = {++counter},");
+                        continue;
+                    }
+                } else if (m.Groups["comment"].Success)
+                {
+                    commands.Add($"    //    {m.Groups["comment"].Value.Trim()}");
+                    continue;
+                } else
+                {
+                    continue;
+                }
+
+            }
+            commands.Add("    }");
+            //devices.Add("}");
+            string fn = "";
+            bool append = false;
+            string DCSAircraftFunctions = Path.Combine(DocumentPath, $"{fn}{(fn == "" ? "" : "_")}commands.cs");
+
+            using (StreamWriter streamWriter = new StreamWriter(DCSAircraftFunctions, append: append))
+            {
+                Logger.Debug($"Writing devices enumeration to file: \"{DCSAircraftFunctions}\"");
+                foreach (string a in commands)
+                {
+                    streamWriter.WriteLine(a);
+                }
+            }
+
+            return;
+        }
+
+        virtual protected MatchCollection FindCommands(string path)
+        {
+            RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
+            Regex regex = new Regex(@"(?'startcomment'--\[\[)(?:[.\n\r\t\s\S]*)(?'-startcomment'\]\])|count\s*\=\s*(?<startcount>\d{1,5})|(?:(?<functionname>[a-zA-Z0-9_]+).*\=.*[\t\n\r\s]*\{)|(?:(?<command>[a-zA-Z0-9_\-]*)\s*\=\s*(?<commandval>.*)[\,\}]{1}.*[\n\r]+)|(?:\s*--\s*)(?<comment>[a-zA-Z0-9_\/\-\s&]*)
+", options);
+            return regex.Matches(ReadFunctionsFromDcsModule(path) ?? String.Empty);
+        }
+        
 
         #region Default Element Function Processing
 

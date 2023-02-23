@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#define CREATEINTERFACE
+//#define CREATEINTERFACE
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
 {
