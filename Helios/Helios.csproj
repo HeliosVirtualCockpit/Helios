@@ -235,23 +235,23 @@
     <Compile Include="Gauges\M2000C\TACANPanel\TACANDrumGaugeCounter.cs" />
     <Compile Include="Gauges\M2000C\VTBPanel\VTB_Panel.cs" />
     <Compile Include="Gauges\BarGauge.cs" />
-    <Compile Include="Gauges\UH60L\CenterDisplayUnit.cs" />
-    <Compile Include="Gauges\UH60L\Flyer.cs" />
-    <Compile Include="Gauges\UH60L\ChronometerPilotDisplay.cs" />
-    <Compile Include="Gauges\UH60L\ChronometerCopilotDisplay.cs" />
-    <Compile Include="Gauges\UH60L\ChronometerDisplay.cs" />
-    <Compile Include="Gauges\UH60L\DisplayUnitCopilot.cs" />
-    <Compile Include="Gauges\UH60L\DisplayUnitPilot.cs" />
-    <Compile Include="Gauges\UH60L\IASInstrument.cs" />
-    <Compile Include="Gauges\UH60L\DisplayUnitFlyer.cs" />
-    <Compile Include="Gauges\UH60L\StabilatorPositionIndicator.cs" />
-    <Compile Include="Gauges\UH60L\RadAltCopilot.cs" />
-    <Compile Include="Gauges\UH60L\StabilatorInstrument.cs" />
-    <Compile Include="Gauges\UH60L\RadAltPilot.cs" />
-    <Compile Include="Gauges\UH60L\RadAlt.cs" />
-    <Compile Include="Gauges\UH60L\DopplerNavDisplay.cs" />
-    <Compile Include="Gauges\UH60L\AHRUDisplay.cs" />
-    <Compile Include="Gauges\UH60L\RadAltInstrument.cs" />
+    <Compile Include="Gauges\H-60\CenterDisplayUnit.cs" />
+    <Compile Include="Gauges\H-60\Flyer.cs" />
+    <Compile Include="Gauges\H-60\ChronometerPilotDisplay.cs" />
+    <Compile Include="Gauges\H-60\ChronometerCopilotDisplay.cs" />
+    <Compile Include="Gauges\H-60\ChronometerDisplay.cs" />
+    <Compile Include="Gauges\H-60\DisplayUnitCopilot.cs" />
+    <Compile Include="Gauges\H-60\DisplayUnitPilot.cs" />
+    <Compile Include="Gauges\H-60\IASInstrument.cs" />
+    <Compile Include="Gauges\H-60\DisplayUnitFlyer.cs" />
+    <Compile Include="Gauges\H-60\StabilatorPositionIndicator.cs" />
+    <Compile Include="Gauges\H-60\RadAltCopilot.cs" />
+    <Compile Include="Gauges\H-60\StabilatorInstrument.cs" />
+    <Compile Include="Gauges\H-60\RadAltPilot.cs" />
+    <Compile Include="Gauges\H-60\RadAlt.cs" />
+    <Compile Include="Gauges\H-60\DopplerNavDisplay.cs" />
+    <Compile Include="Gauges\H-60\AHRUDisplay.cs" />
+    <Compile Include="Gauges\H-60\RadAltInstrument.cs" />
     <Compile Include="GlobalOptions.cs" />
     <Compile Include="HeliosCapabilityEditorDescriptor.cs" />
     <Compile Include="HeliosVisualWithXml.cs" />
@@ -288,17 +288,17 @@
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceFactory.cs" />
     <Compile Include="Interfaces\DCS\AH64D\Functions\AH-64DFunction.cs" />
     <Compile Include="Interfaces\DCS\AH64D\AH-64DInterface.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Commands.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Devices.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Functions\RADARAltimeter.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Functions\Chronometer.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Functions\SegmentedMeter.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Functions\Altimeter.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Functions\UH60LFunction.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\MH60RInterface.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\Tools\H60InterfaceCreation.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\H60Interface.cs" />
-    <Compile Include="Interfaces\DCS\UH60L\UH60LInterface.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Commands.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Devices.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Functions\RADARAltimeter.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Functions\Chronometer.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Functions\SegmentedMeter.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Functions\Altimeter.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Functions\H60Function.cs" />
+    <Compile Include="Interfaces\DCS\H-60\MH60RInterface.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\H60InterfaceCreation.cs" />
+    <Compile Include="Interfaces\DCS\H-60\H60Interface.cs" />
+    <Compile Include="Interfaces\DCS\H-60\UH60LInterface.cs" />
     <Compile Include="Interfaces\DCS\Template\Functions\ExampleFunction.cs" />
     <Compile Include="Interfaces\DCS\Template\TemplateInterface.cs" />
     <Compile Include="Interfaces\DirectX\Functions\IHotasFunctions.cs" />
@@ -465,46 +465,46 @@
     <Content Include="Templates\Base\Simulator Viewports\A4E_RADAR.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\FuelBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\FuelBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\RPMBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\RPMBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\TransmissionTempBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\TransmissionTempBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\TransmissionPressureBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\TransmissionPressureBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\TorqueBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\TorqueBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\TGTBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\TGTBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\NgBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\NgBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\OilTempBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\OilTempBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\OilPressureBarGauge.htpl">
+    <Content Include="Templates\Base\H-60\OilPressureBarGauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\AHRU Display.htpl">
+    <Content Include="Templates\Base\H-60\AHRU Display.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\ASN128B Display.htpl">
+    <Content Include="Templates\Base\H-60\ASN128B Display.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\4Dig7SegDisplay.htpl">
+    <Content Include="Templates\Base\H-60\4Dig7SegDisplay.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\2Dig7SegDisplay.htpl">
+    <Content Include="Templates\Base\H-60\2Dig7SegDisplay.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\UH60L\3Dig7SegDisplay.htpl">
+    <Content Include="Templates\Base\H-60\3Dig7SegDisplay.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\Text Displays\Label.htpl">
@@ -718,39 +718,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay30Fuel.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay30Fuel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay30TransmissionTemp.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay30TransmissionTemp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay30TransmissionPressure.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay30TransmissionPressure.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay29OilTemp.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay29OilTemp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay30OilPressure.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay30OilPressure.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay30Ng.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay30Ng.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay30TGT.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay30TGT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay30Torque.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay30Torque.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\SegmentBarDisplay41RPM.xaml">
+    <Resource Include="Images\H-60\SegmentBarDisplay41RPM.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -758,79 +758,79 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltFaceplate.xaml">
+    <Resource Include="Images\H-60\RadAltFaceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltBugHi.xaml">
+    <Resource Include="Images\H-60\RadAltBugHi.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltBugLo.xaml">
+    <Resource Include="Images\H-60\RadAltBugLo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\StabScale.xaml">
+    <Resource Include="Images\H-60\StabScale.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\StabSurface.xaml">
+    <Resource Include="Images\H-60\StabSurface.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltIndicatorHi.xaml">
+    <Resource Include="Images\H-60\RadAltIndicatorHi.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltIndicatorLo.xaml">
+    <Resource Include="Images\H-60\RadAltIndicatorLo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltIndicatorOff.xaml">
+    <Resource Include="Images\H-60\RadAltIndicatorOff.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltFlagOff.xaml">
+    <Resource Include="Images\H-60\RadAltFlagOff.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\StabOffFlag.xaml">
+    <Resource Include="Images\H-60\StabOffFlag.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\StabNeedle.xaml">
+    <Resource Include="Images\H-60\StabNeedle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\RadAltNeedle.xaml">
+    <Resource Include="Images\H-60\RadAltNeedle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\ChronometerPanel.xaml">
+    <Resource Include="Images\H-60\ChronometerPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\IASNeedle.xaml">
+    <Resource Include="Images\H-60\IASNeedle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\IAS.xaml">
+    <Resource Include="Images\H-60\IAS.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\LEDRPMPanel.xaml">
+    <Resource Include="Images\H-60\LEDRPMPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\LEDTorquePanel.xaml">
+    <Resource Include="Images\H-60\LEDTorquePanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\CenterDisplayUnitBackground.xaml">
+    <Resource Include="Images\H-60\CenterDisplayUnitBackground.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\UH60L\FlyerDisplayUnitBackground.xaml">
+    <Resource Include="Images\H-60\FlyerDisplayUnitBackground.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -1373,13 +1373,13 @@
     <None Include="Images\A-10\readme.md" />
     <Resource Include="Interfaces\DCS\A10C\ExportFunctionsA10C2.lua" />
     <Resource Include="Interfaces\DCS\AH64D\ExportFunctions.lua" />
-    <Resource Include="Interfaces\DCS\UH60L\ExportFunctionsLima.lua" />
+    <Resource Include="Interfaces\DCS\H-60\ExportFunctionsLima.lua" />
     <Resource Include="Interfaces\DCS\BlackShark\ExportFunctionsKa-50_3.lua" />
     <Resource Include="Interfaces\DCS\BlackShark\ExportFunctionsKa-50_2.lua" />
     <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1EE.lua" />
     <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1CE.lua" />
     <Resource Include="Interfaces\DCS\F16C\ExportFunctions.lua" />
-    <Resource Include="Interfaces\DCS\UH60L\ExportFunctionsRomeo.lua" />
+    <Resource Include="Interfaces\DCS\H-60\ExportFunctionsRomeo.lua" />
     <None Include="Interfaces\Falcon\readme.md" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\ded.png" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\hud.png" />

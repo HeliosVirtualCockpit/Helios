@@ -1,0 +1,16 @@
+﻿<ControlTemplate>
+  <Name>Torque Bar Gauge</Name>
+  <Category>H-60</Category>
+  <TypeIdentifier>Helios.Gauges.BarGauge</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Image>{Helios}/Images/H-60/SegmentBarDisplay30Torque.xaml</Image>
+      <Alignment>Centered</Alignment>
+      <CornerRadius>0</CornerRadius>
+      <SegmentCount>22</SegmentCount>
+      <Location>392,54</Location>
+      <Size>20,540</Size>
+      <Hidden>False</Hidden>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

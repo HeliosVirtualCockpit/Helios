@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+  <Name>Doppler Nav Display</Name>
+  <Category>H-60</Category>
+  <TypeIdentifier>Helios.H60.ASN128B</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Location>100,200</Location>
+      <Size>320,128</Size>
+      <Hidden>False</Hidden>
+      <BackgroundImage></BackgroundImage>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>
