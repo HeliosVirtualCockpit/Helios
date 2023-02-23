@@ -416,6 +416,6 @@ local li
 	-- next code is 2111
 end
 function driver.clearState() 
-	log.write("Helios.Export",log.DEBUG,"Driver: UH-60L - Driver clearState() called")
+	log.write("Helios.Export",log.DEBUG,"Driver: MH-60R - Driver clearState() called")
 	driver.state.indications = {}
 end
