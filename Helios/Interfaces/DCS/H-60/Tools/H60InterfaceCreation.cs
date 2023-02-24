@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
     {
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-
+        private string _previousSectionName = "";
         internal H60InterfaceCreation()
         {
             NetworkFunctions.Clear();
@@ -42,11 +42,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
         {
             if (!eM.Groups["name"].Value.Contains("(Inop.)"))
             {
+
                 string argPattern = @"(?:((?<position>[A-Z0-9\-\s-[ ]]+)(\/|$))+)";
                 RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
                 double modifier;
                 string exportValue = "%0.1f";
                 string[] posnName = new string[0];
+                if (SectionName.Contains("PNT-"))
+                {
+                    SectionName = _previousSectionName;
+                } else
+                {
+                    _previousSectionName = SectionName;
+                }
                 switch (eM.Groups["function"].Value)
                 {
                     case "default_red_cover":
@@ -160,9 +168,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                         AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"Posn 1\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\",\"0.0\"), new SwitchPosition(\"0.0\", \"Posn 2\", null),new SwitchPosition(\"{-1 * modifier:F1}\", \"Posn 3\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\",\"0.0\")}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
                         break;
                     case "default_button_tumb":
+
+                        string dupFix = PilotVariant(eM.Groups["arg"].Value);
                         modifier = Arguments.Count >= 2 ? (Arguments[1].Value == "true" ? -1 : 1) : 1;
-                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), "Posn 1", CommandItems[0][0], CommandItems[0][0], "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition((-1 * modifier).ToString("F1"), "Posn 3", CommandItems[1][0], CommandItems[1][0], "0.0", "0.0") }, SectionName, eM.Groups["name"].Value, "%0.1f"));
-                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"Posn 1\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\",\"0.0\"), new SwitchPosition(\"0.0\", \"Posn 2\", null),new SwitchPosition(\"{-1 * modifier:F1}\", \"Posn 3\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\",\"0.0\")}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), "Posn 1", CommandItems[0][0], CommandItems[0][0], "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition((-1 * modifier).ToString("F1"), "Posn 3", CommandItems[1][0], CommandItems[1][0], "0.0", "0.0") }, SectionName, dupFix+eM.Groups["name"].Value, "%0.1f"));
+                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"Posn 1\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\",\"0.0\"), new SwitchPosition(\"0.0\", \"Posn 2\", null),new SwitchPosition(\"{-1 * modifier:F1}\", \"Posn 3\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\",\"0.0\")}}, \"{SectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", \"%0.1f\"));");
                         break;
                     case "wiper_selector":
                     case "multiposition_switch_relative":
@@ -247,20 +257,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                         }
                         break;
                     case "default_axis":
+                        dupFix = PilotVariant(eM.Groups["arg"].Value);
                         if (Arguments.Count >= 3)
                         {
-                            AddFunction(new Axis(UdpInterface, Devices[0], CommandItems[0][0], eM.Groups["arg"].Value, double.Parse(Arguments[2].Value), 0.0d, double.Parse(Arguments[1].Value), SectionName, eM.Groups["name"].Value, false, "%0.1f"));
-                            AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[0][1]}, \"{eM.Groups["arg"].Value}\", {Arguments[2].Value}d, 0.0d, {Arguments[1].Value}d, \"{SectionName}\", \"{eM.Groups["name"].Value}\", false, \"%0.1f\"));");
+                            AddFunction(new Axis(UdpInterface, Devices[0], CommandItems[0][0], eM.Groups["arg"].Value, double.Parse(Arguments[2].Value), 0.0d, double.Parse(Arguments[1].Value), SectionName, dupFix+eM.Groups["name"].Value, false, "%0.1f"));
+                            AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[0][1]}, \"{eM.Groups["arg"].Value}\", {Arguments[2].Value}d, 0.0d, {Arguments[1].Value}d, \"{SectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", false, \"%0.1f\"));");
                         } else
                         {
-                            AddFunction(new Axis(UdpInterface, Devices[0], CommandItems[0][0], eM.Groups["arg"].Value, 0.1d, 0.0d, 1.0d, SectionName, eM.Groups["name"].Value, false, "%0.1f"));
-                            AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[0][1]}, \"{eM.Groups["arg"].Value}\", 0.1d, 0.0d, 1.0d, \"{SectionName}\", \"{eM.Groups["name"].Value}\", false, \"%0.1f\"));");
+                            AddFunction(new Axis(UdpInterface, Devices[0], CommandItems[0][0], eM.Groups["arg"].Value, 0.1d, 0.0d, 1.0d, SectionName, dupFix + eM.Groups["name"].Value, false, "%0.1f"));
+                            AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[0][1]}, \"{eM.Groups["arg"].Value}\", 0.1d, 0.0d, 1.0d, \"{SectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", false, \"%0.1f\"));");
                         }
                         break;
                     case "default_axis_limited_1_side":
                     case "default_axis_limited":
-                        string dupFix = "";
-                        if (eM.Groups["arg"].Value == "267") { dupFix = "Copilot "; }
+                        dupFix = PilotVariant(eM.Groups["arg"].Value);
                         AddFunction(new Axis(UdpInterface, Devices[0], CommandItems[0][0], eM.Groups["arg"].Value, 0.1d, 0.0d, 1.0d, SectionName, dupFix + eM.Groups["name"].Value, false, "%0.1f"));
                         AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[0][1]}, \"{eM.Groups["arg"].Value}\", 0.1d, 0.0d, 1.0d, \"{SectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", false, \"%0.1f\"));");
                         break;
@@ -278,6 +288,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
             }
             else
             {
+                AddFunctionList.Add($"// {eM.Value.Trim()}");
                 Logger.Debug($"Skipping element {eM.Groups["name"].Value} because it appears to be inoperable.");
             }
         }
@@ -320,14 +331,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
         }
         protected override void ProcessDefault2PositionTumb(BaseUDPInterface iface, string sectionName, Match eM, string[] devices, string[][] commandItems, CaptureCollection arguments)
         {
-            string dupFix = "";
-            if (eM.Groups["arg"].Value == "301" || eM.Groups["arg"].Value == "302" || eM.Groups["arg"].Value == "303") { 
-                dupFix = eM.Groups["command"].Captures[0].Value.Substring(0,3);
-                if (dupFix == "pil") { dupFix = "Pilot "; } 
-                else if (dupFix == "cop") { dupFix = "Copilot "; } 
-                else if (dupFix == "cdu") { dupFix = "CDU "; } 
-                else { dupFix = ""; }
-            }
+            string dupFix = PilotVariant(eM.Groups["arg"].Value, eM.Groups["command"].Value);
             string[] posnName = FindPositionNames(eM.Groups["name"].Value);
             if (posnName.Length != 2)
             {
@@ -339,11 +343,64 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
             AddFunction(new Switch(iface, devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), posnName[0], commandItems[0][0]), new SwitchPosition("0.0", posnName[1], commandItems[0][0]) }, sectionName, dupFix+eM.Groups["name"].Value, "%0.1f"));
             AddFunctionList.Add($"AddFunction(new Switch(this, {devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"{posnName[0]}\", {commandItems[0][1]}),new SwitchPosition(\"0.0\", \"{posnName[1]}\", {commandItems[0][1]})}}, \"{sectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", \"%0.1f\"));");
         }
+        protected override void ProcessDefaultButton(BaseUDPInterface iface, string sectionName, Match eM, string[] devices, string[][] commandItems, CaptureCollection arguments)
+        {
+            string dupFix = PilotVariant(eM.Groups["arg"].Value);
 
+            AddFunction(new PushButton(iface, devices[0], commandItems[0][0], eM.Groups["arg"].Value, sectionName, dupFix+eM.Groups["name"].Value, "%1d"));
+            AddFunctionList.Add($"AddFunction(new PushButton(this, {devices[1]}, {commandItems[0][1]}, \"{eM.Groups["arg"].Value}\", \"{sectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", \"%1d\"));");
+        }
+        //protected string PilotVariant(string arg) { return PilotVariant(arg,""); }
+        protected string PilotVariant(string arg, string command = "")
+        {
+            string dupFix;
+            switch (arg)
+            {
+                case "170":
+                case "171":
+                case "302":
+                case "305":
+                case "933":
+                case "934":
+                case "935":
+                case "936":
+                case "937":
+                case "938":
+                case "939":
+                case "940":
+                case "266":
+                    dupFix = "Pilot ";
+                    break;
+                case "183":
+                case "184":
+                case "303":
+                case "306":
+                case "941":
+                case "942":
+                case "943":
+                case "944":
+                case "945":
+                case "946":
+                case "947":
+                case "948":
+                case "267":
+                    dupFix = "Copilot ";
+                    break;
+                case "2020":
+                case "2021":
+                case "2022":
+                    dupFix = command;
+                    break;
+                default:
+                    dupFix = "";
+                    break;
+            }
+            return dupFix;
+        }
         public override MatchCollection GetSections(string clickablesFromDCS)
         {
-            string pattern = @"(?'startcomment'^--)(?<deviceName>[.\t\s\S-[\)]]*)(?'-startcomment'\n)(?:(?<elements>^elements.*)[\n]{1,2}|(?:--.*[\)\.\?]{1}\n)*)*";
-            RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
+            string pattern = @"(?'startcomment'^--[ ]{0,2})(?<deviceName>[.\t\s\S-[\)]]*)(?'-startcomment'[\r\n]{1,4})(?:(?<elements>^elements.*)[\r\n]{1,4}|(?:--.*[\)\.\?]{1})*[\r\n]{1,4})*";
+            RegexOptions options = RegexOptions.Multiline;
             return Regex.Matches(clickablesFromDCS, pattern, options);
         }
         public override MatchCollection GetElements(string section)

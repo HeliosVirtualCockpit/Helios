@@ -268,6 +268,7 @@
     <Compile Include="Interfaces\DCS\F16C\Functions\F16CFunction.cs" />
     <Compile Include="Interfaces\DCS\F16C\lamps.cs" />
     <Compile Include="Interfaces\DCS\F16C\Tools\F-16CInterfaceCreation.cs" />
+    <Compile Include="Interfaces\DCS\H-60\MainPanel.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\MirageF1CEInterface.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\MirageF1EEInterface.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\Devices.cs" />
