@@ -397,6 +397,88 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
             }
             return dupFix;
         }
+        protected override string[] MainPanelCorrection(string functionName, string arg)
+        {
+            string comment = $"// * * * Helios correction: previously {functionName}"; 
+            switch (arg)
+            {
+                case "453":
+                    functionName = "pduCpltOverspeed1";
+                    break;
+                case "454":
+                    functionName = "pduCpltOverspeed2";
+                    break;
+                case "61":
+                    functionName = "pilotBaroAlt1000s";
+                    break;
+                case "62":
+                    functionName = "pilotBaroAlt10000s";
+                    break;
+                case "64":
+                    functionName = "pilotPressureScale1";
+                    break;
+                case "65":
+                    functionName = "pilotPressureScale2";
+                    break;
+                case "66":
+                    functionName = "pilotPressureScale3";
+                    break;
+                case "67":
+                    functionName = "pilotPressureScale4";
+                    break;
+                case "68":
+                    functionName = "pilotBaroAltEncoderFlag";
+                    break;
+                default:
+                    comment = "";
+                    break;
+            }
+            return new string[3] { functionName, arg, comment };
+        }
+        protected override string MainPanelCreateFunction( string function, string functionname, string arg, string device, string name, string description = "", string valuedescription = "")
+        {
+            string sourceCode;
+            int argNumber = int.Parse(arg);
+            if(function == "FlagValue" && ((argNumber <= 558 && argNumber >= 554) || (argNumber <= 67 && argNumber >= 60) || (argNumber <= 77 && argNumber >= 70)))
+            {
+                function = "NetworkValue";
+                valuedescription = "numeric value between 0.0 and 1.0";
+            }
+            if (functionname.Contains("pilotVSI"))
+            {
+                device = "PILOT VSI";
+            }
+            if (functionname.Contains("copilotVSI"))
+            {
+                device = "COPILOT VSI";
+            }
+            if (functionname.Contains("StabInd"))
+            {
+                device = "Stabilator";
+            }
+            if (functionname.Contains("Door"))
+            {
+                device = "Doors";
+            }
+            switch (function)
+            {
+                case "FlagValue":
+                    AddFunction(new FlagValue(UdpInterface, arg, device, name, "", "%1d"));
+                    sourceCode = $"AddFunction(new FlagValue(this,  mainpanel.{functionname}.ToString(\"d\"), \"{device}\", \"{name}\",\"\", \"%1d\"));";
+                    break;
+                case "NetworkValue":
+                    name = name == "" ? functionname : name;
+                    AddFunction(new NetworkValue(UdpInterface, arg, device, name, description, valuedescription, BindingValueUnits.Numeric, "%0.3f"));
+                    sourceCode = $"AddFunction(new NetworkValue(this,  mainpanel.{functionname}.ToString(\"d\"), \"{device}\", \"{name}\", \"{description}\", \"{valuedescription}\", BindingValueUnits.Numeric, \"%0.3f\"));";
+                    break;
+                default:
+                    sourceCode = "";
+                    break;
+
+            }
+
+            return sourceCode;
+        }
         public override MatchCollection GetSections(string clickablesFromDCS)
         {
             string pattern = @"(?'startcomment'^--[ ]{0,2})(?<deviceName>[.\t\s\S-[\)]]*)(?'-startcomment'[\r\n]{1,4})(?:(?<elements>^elements.*)[\r\n]{1,4}|(?:--.*[\)\.\?]{1})*[\r\n]{1,4})*";

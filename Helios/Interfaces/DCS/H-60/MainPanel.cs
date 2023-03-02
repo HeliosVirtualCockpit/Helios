@@ -17,18 +17,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
 {
     internal enum mainpanel
     {
-        // PILOT BARO ALTIMETER
+        //    FAT passed directly from FM
+        freeAirTemp = 1,
+        IASneedle = 100,
+        //    PILOT BARO ALTIMETER
         pilotBaroAlt100s = 60,
-        pilotBaroAlt1000s = 61,             // correction pilotBaroAlt100s = 61,
-        pilotBaroAlt10000s = 62,            // correction pilotBaroAlt100s = 62,
-        pilotPressureScale1 = 64,           // correction pilotBaroAlt100s = 64,
-        pilotPressureScale2 = 65,           // correction pilotBaroAlt100s = 65,
-        pilotPressureScale3 = 66,           // correction pilotBaroAlt100s = 66,
-        pilotPressureScale4 = 67,           // correction pilotBaroAlt100s = 67,
-        pilotBaroAltEncoderFlag = 68,       // correction pilotBaroAlt100s = 68,
-
-
-        // COPILOT ALTIMETER
+        pilotBaroAlt1000s = 61, // * * * Helios correction: previously pilotBaroAlt100s
+        pilotBaroAlt10000s = 62, // * * * Helios correction: previously pilotBaroAlt100s
+        pilotPressureScale1 = 64, // * * * Helios correction: previously pilotBaroAlt100s
+        pilotPressureScale2 = 65, // * * * Helios correction: previously pilotBaroAlt100s
+        pilotPressureScale3 = 66, // * * * Helios correction: previously pilotBaroAlt100s
+        pilotPressureScale4 = 67, // * * * Helios correction: previously pilotBaroAlt100s
+        pilotBaroAltEncoderFlag = 68, // * * * Helios correction: previously pilotBaroAlt100s
+                                      //    COPILOT ALTIMETER
         copilotBaroAlt100s = 70,
         copilotBaroAlt1000s = 71,
         copilotBaroAlt10000s = 72,
@@ -37,18 +38,56 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         copilotPressureScale3 = 76,
         copilotPressureScale4 = 77,
         copilotBaroAltEncoderFlag = 78,
-
-        // MISC
+        //    MISC
         parkingBrakeHandle = 81,
         pilotPTT = 82,
-
-        // AHRU
+        //    AHRU
         ahruIndSlave = 95,
         ahruIndDG = 96,
         ahruIndCcal = 97,
         ahruIndFail = 98,
         ahruIndAln = 99,
-
+        //    MAG COMPASS
+        MagCompassBrg = 120,
+        MagCompassBank = 121,
+        MagCompassPitch = 122,
+        //    PILOT HSI
+        pilotHSICompass = 132,
+        pilotHSIHdgBug = 133,
+        pilotHSINo1Bug = 134,
+        pilotHSINo2Bug = 135,
+        pilotHSICrsBug = 136,
+        pilotHSICrsDev = 137,
+        pilotHSIVorArrow = 138,
+        pilotHSIDistDrum1 = 139,
+        pilotHSIDistDrum2 = 140,
+        pilotHSIDistDrum3 = 141,
+        pilotHSIDistDrum4 = 142,
+        pilotHSICrsDrum1 = 143,
+        pilotHSICrsDrum2 = 144,
+        pilotHSICrsDrum3 = 145,
+        pilotHSIHdgFlag = 146,
+        pilotHSINavFlag = 147,
+        pilotHSIDistFlag = 148,
+        //    COPILOT HSI
+        copilotHSICompass = 152,
+        copilotHSIHdgBug = 153,
+        copilotHSINo1Bug = 154,
+        copilotHSINo2Bug = 155,
+        copilotHSICrsBug = 156,
+        copilotHSICrsDev = 157,
+        copilotHSIVorArrow = 158,
+        copilotHSIDistDrum1 = 159,
+        copilotHSIDistDrum2 = 160,
+        copilotHSIDistDrum3 = 161,
+        copilotHSIDistDrum4 = 162,
+        copilotHSICrsDrum1 = 163,
+        copilotHSICrsDrum2 = 164,
+        copilotHSICrsDrum3 = 165,
+        copilotHSIHdgFlag = 166,
+        copilotHSINavFlag = 167,
+        copilotHSIDistFlag = 168,
+        //    PILOT AN/APN-209 RADAR ALTIMETER
         apn209PilotAltNeedle = 173,
         apn209PilotAltDigit1 = 174,
         apn209PilotAltDigit2 = 175,
@@ -58,7 +97,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         apn209PilotHiBug = 179,
         apn209PilotLoLight = 180,
         apn209PilotHiLight = 181,
-        apn209PilotFlag = 182,   // off
+        apn209PilotFlag = 182,
+        //    COPILOT AN/APN-209 RADAR ALTIMETER
         apn209CopilotAltNeedle = 186,
         apn209CopilotAltDigit1 = 187,
         apn209CopilotAltDigit2 = 188,
@@ -68,9 +108,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         apn209CopilotHiBug = 192,
         apn209CopilotLoLight = 193,
         apn209CopilotHiLight = 194,
-        apn209CopilotFlag = 195,   // off
-
-        // CIS MODE LIGHTS
+        apn209CopilotFlag = 195,
+        //    LIGHTING 200 - 250
+        PLTInstLights = 201,
+        CPLTInstLights = 202,
+        NonFltInstLights = 203,
+        UpperConsoleLights = 204,
+        LowerConsoleLights = 205,
+        LightedSwitches = 206,
+        pltRdrAltLts = 207,
+        cpltRdrAltLts = 208,
+        GlareshieldLights = 210,
+        magCompassLights = 211,
+        //    CIS MODE LIGHTS
         cisHdgOnLight = 212,
         cisNavOnLight = 213,
         cisAltOnLight = 214,
@@ -100,27 +150,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         cpltCisGyroAlt = 238,
         cpltCisBrg2ADF = 239,
         cpltCisVBrg2VOR = 240,
-
-        // AFCS LIGHTS
+        //    AFCS LIGHTS
         afcBoostLight = 241,
         afcSAS1Light = 242,
         afcSAS2Light = 243,
         afcTrimLight = 244,
         afcFPSLight = 245,
         afcStabLight = 246,
-
-        // COCKPIT DOME LTS
+        //    COCKPIT DOME LTS
         domeLightBlue = 275,
         domeLightWhite = 276,
-
-        // MISC PANEL LIGHTS
-        //miscFuelIndTestLight = 246,
+        //    MISC PANEL LIGHTS
+        //    --miscFuelIndTestLight
         miscTailWheelLockLight = 294,
-        //miscGyroEffectLight = 246,
-
-        // CAP & MCP LAMPS
+        //    --miscGyroEffectLight
+        //    CAP & MCP LAMPS
         capBrightness = 309,
-
         mcpEng1Out = 310,
         mcpEng2Out = 311,
         mcpFire = 312,
@@ -208,30 +253,66 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         capParkingBrake = 394,
         capExtPwr = 395,
         capBlank = 396,
-
+        //    PILOT VSI
+        pltVSISlip = 422,
+        pltVSIRollCmdBar = 423,
+        pltVSIPitchCmdBar = 424,
+        pltVSICollectiveCmdBar = 425,
+        pltVSITurnRateIndicator = 426,
+        pltVSITrackErrorIndicator = 427,
+        pltVSIGlideSlopeIndicator = 428,
+        pltVSICMDFlag = 429,
+        pltVSIATTFlag = 430,
+        pltVSINAVFlag = 431,
+        pltVSIGSFlag = 432,
+        //    COPILOT VSI
+        cpltVSISlip = 435,
+        cpltVSIADIRollCmdBar = 436,
+        cpltVSIADIPitchCmdBar = 437,
+        cpltVSIADICollectiveCmdBar = 438,
+        cpltVSIADITurnRateIndicator = 439,
+        cpltVSIADITrackErrorIndicator = 440,
+        cpltVSIADIGlideSlopeIndicator = 441,
+        cpltVSIADICMDFlag = 442,
+        cpltVSIADIATTFlag = 443,
+        cpltVSIADINAVFlag = 444,
+        cpltVSIADIGSFlag = 445,
         pduPltOverspeed1 = 450,
         pduPltOverspeed2 = 451,
         pduPltOverspeed3 = 452,
-        pduCpltOverspeed1 = 453,  // correction - was pduCpltOverspeed2?
-        pduCpltOverspeed2 = 454,  // correction - was pduCpltOverspeed3?
+        pduCpltOverspeed1 = 453, // * * * Helios correction: previously pduCpltOverspeed2
+        pduCpltOverspeed2 = 454, // * * * Helios correction: previously pduCpltOverspeed3
         pduCpltOverspeed3 = 455,
-
-        // M130 CM System
+        //    M130 CM System
         cmFlareCounterTens = 554,
         cmFlareCounterOnes = 555,
         cmChaffCounterTens = 556,
         cmChaffCounterOnes = 557,
         cmArmedLight = 558,
-
+        pilotVSILtGA = 980,
+        pilotVSILtDH = 981,
+        pilotVSILtMB = 982,
+        copilotVSILtGA = 983,
+        copilotVSILtDH = 984,
+        copilotVSILtMB = 985,
+        StabInd = 3406,
+        StabIndFlag = 3407,
+        PilotDoor = 1001,
+        //    ARN-147 dials
+        ARN147MHz100s = 654,
+        ARN147MHz10s = 655,
+        ARN147MHz1s = 656,
+        ARN147KHz100s = 657,
+        ARN147KHz10s = 658,
+        ARN147KHz1s = 659,
         pltDoorGlass = 1201,
         cpltDoorGlass = 1202,
         lGnrDoorGlass = 1203,
         rGnrDoorGlass = 1204,
         lCargoDoorGlass = 1205,
         rCargoDoorGlass = 1206,
-
-        StabInd = 3406,  // -1 to 1
-        StabIndFlag = 3407,
-
+        //    Cockpit Modulable
+        //    --TypCockpit
+        //    --TypCockpit_
     }
 }

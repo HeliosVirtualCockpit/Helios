@@ -41,6 +41,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private BaseUDPInterface _udpInterface;
         private string _sectionName;
         private string _documentPath;
+        private string _lastComment;
+        private string _lastRegion = "";
         protected InterfaceCreation()
         {
         }
@@ -130,7 +132,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         }
 
         /// <summary>
-        /// Creates a string for use in a string array statement
+        /// Creates a string for use in a string array c# source statement
         /// </summary>
         /// <param name="input">string array containing position names</param>
         /// <returns></returns>
@@ -162,7 +164,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// <summary>
         /// Saves the function names which are not currently handled into an external file in 
         /// a format suitable for a switch statement.  It also saves an example of this function 
-        /// usage by a cliakcable.
+        /// usage by a clickable.
         /// </summary>
         protected void WriteMissingFunctions(string fn = "", bool append = false)
         {
@@ -421,6 +423,89 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             return;
         }
 
+
+        virtual public NetworkFunctionCollection CreateMainPanelEnum(string path)
+        {
+            List<string> commands = new List<string> { };
+            commands.Add("internal enum mainpanel {");
+            //commands.Add("{");
+            path = Path.Combine(path, "Cockpit", "Scripts", "mainpanel_init.lua");
+            bool inRegion = false;
+            foreach (Match m in FindMainPanel(path))
+            {
+                if (m.Groups["function"].Success)
+                {
+                    string[] correctValues = MainPanelCorrection(m.Groups["function"].Value.Trim(), m.Groups["arg"].Value);
+                    if (m.Groups["function"].Value.Contains("--"))
+                    {
+                        commands.Add($"    //    {correctValues[0]}");
+                        continue;
+                    }
+                    else if (int.TryParse(m.Groups["arg"].Value, out int argCode))
+                    {
+                        commands.Add($"    {correctValues[0]} = {argCode}, {correctValues[2]}");
+                        if(_lastRegion != _lastComment)
+                        {
+                            if (inRegion)
+                            {
+                                AddFunctionList.Add($"#endregion {_lastRegion}");
+                                inRegion = false;
+                            }
+                            AddFunctionList.Add($"#region {_lastComment}");
+                            _lastRegion = _lastComment;
+                            inRegion = true;
+                        }
+                        if(m.Groups["functionType"].Value == "addParamController")
+                        {
+                            AddFunctionList.Add(MainPanelCreateFunction("FlagValue", correctValues[0], correctValues[1], _lastComment, m.Groups["name"].Value));
+                            continue;
+                        } else
+                        {
+                            AddFunctionList.Add(MainPanelCreateFunction("NetworkValue", correctValues[0], correctValues[1], _lastComment, m.Groups["name"].Value, $"Number representation of a value between {m.Groups["input"].Captures[0].Value} and {m.Groups["input"].Captures[m.Groups["input"].Captures.Count - 1].Value}", $"Numeric value between {m.Groups["output"].Captures[0].Value} and {m.Groups["output"].Captures[m.Groups["output"].Captures.Count-1].Value}"));
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (m.Groups["comment"].Success)
+                {
+                    _lastComment = m.Groups["comment"].Value.Trim();
+                    commands.Add($"    //    {_lastComment}");
+                    continue;
+                }
+                else
+                {
+                    continue;
+                }
+
+            }
+            if (inRegion)
+            {
+                AddFunctionList.Add($"#endregion {_lastRegion}");
+                inRegion = false;
+            }
+            commands.Add("    }");
+            //devices.Add("}");
+            string fn = "";
+            bool append = false;
+            WriteFunctions("FlagValues", append);
+            string DCSAircraftFunctions = Path.Combine(DocumentPath, $"{fn}{(fn == "" ? "" : "_")}mainpanel.cs");
+
+            using (StreamWriter streamWriter = new StreamWriter(DCSAircraftFunctions, append: append))
+            {
+                Logger.Debug($"Writing devices enumeration to file: \"{DCSAircraftFunctions}\"");
+                foreach (string a in commands)
+                {
+                    streamWriter.WriteLine(a);
+                }
+            }
+
+            return NetworkFunctions;
+        }
+
         virtual protected MatchCollection FindCommands(string path)
         {
             RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
@@ -428,7 +513,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 ", options);
             return regex.Matches(ReadFunctionsFromDcsModule(path) ?? String.Empty);
         }
-        
+
+        virtual protected MatchCollection FindMainPanel(string path)
+        {
+            RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
+            Regex regex = new Regex(@"(?'startcomment'--\[\[)(?:[.\n\r\t\s\S]*)(?'-startcomment'\]\])|^((?<function>\w*)(?=.*\=\s*CreateGauge\(""parameter""\))).*[\r\n]*.*\.arg_number\s*\=\s*(?<arg>\d{1,4}).*[\r\n]*.*\.input\s*\=\s*\{(?:(?<input>[0-9\.\-]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.output\s*\=\s*\{(?:(?<output>[0-9\.\-]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.parameter_name\s*\=\s*""(?<name>.*)""|^((?<function>.*)\s{0,20}=\s*(?=CreateGauge\(""parameter""\)))|(?:(?<function>[a-zA-Z0-9_\-]*)\s*\=\s*(?<functionType>.*)\((?<arg>\d{1,4})[\,]{1}\s*""(?<name>.*)"".*[\n\r]+)|(?:(?<function>^[a-zA-Z0-9_-[\.]]+)\s*\=.*[\t\n\r\s]*[\}])|^(?:\s*--\s*)(?<comment>[a-zA-Z0-9_\/\-\s&]*)[\r\n]{1,2}", options);
+            return regex.Matches(ReadFunctionsFromDcsModule(path) ?? String.Empty);
+        }
 
         #region Default Element Function Processing
 
@@ -464,7 +555,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             AddFunction(new PushButton(iface, devices[0], commandItems[0][0], eM.Groups["arg"].Value, sectionName, eM.Groups["name"].Value, "%1d"));
             AddFunctionList.Add($"AddFunction(new PushButton(this, {devices[1]}, {commandItems[0][1]}, \"{eM.Groups["arg"].Value}\", \"{sectionName}\", \"{eM.Groups["name"].Value}\", \"%1d\"));");
         }
-
+        virtual protected string[] MainPanelCorrection(string functionName, string arg)
+        {
+            return new string[3] { functionName, arg, "" };
+        }
+        virtual protected string MainPanelCreateFunction(string function, string functionname, string arg, string device, string name)
+        {
+            return MainPanelCreateFunction(function, functionname, arg, device, name, "", "");
+        }
+        virtual protected string MainPanelCreateFunction(string function, string functionname, string arg, string device, string  name, string description, string valuedescription)
+        {
+            return "";
+        }
         #endregion
         /// <summary>
         /// Decodes one clickable element into Helios function 
