@@ -436,10 +436,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
 #endregion Radar detector switch
 
         }
-        virtual protected void AddFunctionsFromDCSModule()
+        virtual internal void AddFunctionsFromDCSModule(IInterfaceCreator ic)
         {
             Dictionary<string, string> idValidator = new Dictionary<string, string>();
-            foreach (NetworkFunction nf in MakeFunctionsFromDcsModule())
+            foreach (NetworkFunction nf in MakeFunctionsFromDcsModule(ic))
             {
                 if (!idValidator.ContainsKey(nf.DataElements[0].ID))
                 {
@@ -451,10 +451,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
                 }
             }
         }
-        virtual protected NetworkFunctionCollection MakeFunctionsFromDcsModule()
+        virtual internal NetworkFunctionCollection MakeFunctionsFromDcsModule(IInterfaceCreator ic)
         {
             NetworkFunctionCollection functions = new NetworkFunctionCollection();
-            MirageF1InterfaceCreation ic = new MirageF1InterfaceCreation();
             foreach (string path in new string[] { Path.Combine(DcsPath,"Cockpit","Mirage-F1","Mirage-F1_Common","clickabledata_common_F1C.lua"), Path.Combine(DcsPath,"Cockpit","Common","clickabledata_common.lua") })
             {
                 functions.AddRange(ic.CreateFunctionsFromDcsModule(this, path));

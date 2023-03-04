@@ -29,11 +29,11 @@ using System.Linq;
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C.Tools
 {
 
-    internal class F16CInterfaceCreation: InterfaceCreation, IInterfaceCreation
+    internal class F16CInterfaceCreator: InterfaceCreator, IInterfaceCreator
     {
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        internal F16CInterfaceCreation()
+        internal F16CInterfaceCreator()
         {
             NetworkFunctions.Clear();
         }

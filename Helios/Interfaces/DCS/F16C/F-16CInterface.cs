@@ -82,9 +82,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
             }
 #if (CREATEINTERFACE && DEBUG)
             DcsPath = Path.Combine(Environment.GetEnvironmentVariable("userprofile"), "Desktop","DCSLua");
-            AddFunctionsFromDCSModule();
+            AddFunctionsFromDCSModule(new F16InterfaceCreator());
             return;
-#endif
+#else
             #region Control Interface
             AddFunction(new Switch(this, devices.CONTROL_INTERFACE.ToString("d"), "566", new SwitchPosition[] { new SwitchPosition("1.0", "OFF", F16CCommands.controlCommands.DigitalBackup.ToString("d")), new SwitchPosition("0.0", "BACKUP", F16CCommands.controlCommands.DigitalBackup.ToString("d")) }, "Control Interface", "DIGITAL BACKUP Switch, OFF/BACKUP", "%0.1f"));
             AddFunction(new Switch(this, devices.CONTROL_INTERFACE.ToString("d"), "567", new SwitchPosition[] { new SwitchPosition("1.0", "NORM", F16CCommands.controlCommands.AltFlaps.ToString("d")), new SwitchPosition("0.0", "EXTEND", F16CCommands.controlCommands.AltFlaps.ToString("d")) }, "Control Interface", "ALT FLAPS Switch, NORM/EXTEND", "%0.1f"));
@@ -426,11 +426,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
             AddFunction(new Switch(this, devices.ECM_INTERFACE.ToString("d"), "490", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", F16CCommands.ecmCommands.FrmBtn.ToString("d")), new SwitchPosition("0.0", "Posn 2", F16CCommands.ecmCommands.FrmBtn.ToString("d")) }, "ECM", "ECM FRM Button", "%0.1f"));
             AddFunction(new Switch(this, devices.ECM_INTERFACE.ToString("d"), "495", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", F16CCommands.ecmCommands.SplBtn.ToString("d")), new SwitchPosition("0.0", "Posn 2", F16CCommands.ecmCommands.SplBtn.ToString("d")) }, "ECM", "ECM SPL Button", "%0.1f"));
             #endregion ECM
+#endif
         }
-        virtual protected void AddFunctionsFromDCSModule()
+        virtual internal void AddFunctionsFromDCSModule(IInterfaceCreator ic)
         {
             Dictionary<string, string> idValidator = new Dictionary<string, string>();
-            foreach (NetworkFunction nf in MakeFunctionsFromDcsModule())
+            foreach (NetworkFunction nf in MakeFunctionsFromDcsModule(ic))
             {
                 if (!idValidator.ContainsKey(nf.DataElements[0].ID))
                 {
@@ -443,10 +444,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
                 }
             }
         }
-        virtual protected NetworkFunctionCollection MakeFunctionsFromDcsModule()
+        virtual internal NetworkFunctionCollection MakeFunctionsFromDcsModule(IInterfaceCreator ic)
         {
             NetworkFunctionCollection functions = new NetworkFunctionCollection();
-            F16CInterfaceCreation ic = new F16CInterfaceCreation();
             foreach (string path in new string[] { Path.Combine(DcsPath, "F-16C", "Cockpit", "Scripts", "clickabledata.lua") })
             {
                 functions.AddRange(ic.CreateFunctionsFromDcsModule(this, path));

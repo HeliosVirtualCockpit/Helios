@@ -27,12 +27,12 @@ using System.Drawing.Printing;
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
 {
 
-    internal class H60InterfaceCreation : InterfaceCreation, IInterfaceCreation
+    internal class H60InterfaceCreator : InterfaceCreator, IInterfaceCreator
     {
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private string _previousSectionName = "";
-        internal H60InterfaceCreation()
+        internal H60InterfaceCreator()
         {
             NetworkFunctions.Clear();
         }
@@ -84,7 +84,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                             MatchCollection rockerMatches = GetElements(firstPart);
                             if (rockerMatches.Count > 0)
                             {
-                                Type enumType = typeof(H60Commands).GetNestedType($"{eM.Groups["commandName"].Value}Commands", BindingFlags.NonPublic);
+                                Type enumType = typeof(MH60RCommands).GetNestedType($"{eM.Groups["commandName"].Value}Commands", BindingFlags.NonPublic);
                                 Match rockerMatch = rockerMatches[0];
                                 CommandItems[0][0] = ((int)Enum.Parse(enumType, rockerMatch.Groups["command"].Value)).ToString("d");
                                 CommandItems[0][1] = $"H60Commands.{rockerMatch.Groups["commandName"].Value}Commands.{rockerMatch.Groups["command"].Value}.ToString(\"d\")";
@@ -295,7 +295,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
         public override string[] ParseDeviceGroup(Group deviceGroup)
         {
             string[] device = new string[2];
-            if (Enum.TryParse(deviceGroup.Value, out devices dev))
+            if (Enum.TryParse(deviceGroup.Value, out MH60R.devices dev))
             {
                 device[0] = dev.ToString("d");
                 device[1] = $"devices.{deviceGroup.Value}.ToString(\"d\")";
@@ -310,7 +310,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
 
             if (!match.Groups["name"].Value.Contains("(Inop.)")){
                 string enumValueSuffix = "";
-                Type typeEnumClass = typeof(H60Commands);
+                Type typeEnumClass = typeof(MH60RCommands);
                 Type enumType = typeEnumClass.GetNestedType($"{cmdName.Captures[0].Value}{enumValueSuffix}", BindingFlags.NonPublic);
                 string commandName = $"{(typeEnumClass.Name == "" ? "" : typeEnumClass.Name + ".")}{cmdName.Captures[0].Value}{enumValueSuffix}.";
                 if (cmd.Captures.Count == 1)
@@ -490,6 +490,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
             string pattern = @"(?<!--)elements\[""PNT.*-(?<arg>\d{1,4})""\]\s*=\s*(?<function>.*)\(_\(""(?<name>.*)"".*devices\.(?<device>[A-Za-z0-9_]*)[,\s]*((?<commandName>[a-zA-Z0-9_]+)\.(?<command>[a-zA-Z0-9_]+)[,\s]*)+(?:(?<args>[a-zA-Z0-9\{\}\.\-_/\*]*)[\,\s\)]+)+[\r\n\s]{1}";
             RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
             return Regex.Matches(section, pattern, options);
+        }
+        public string DocumentPath
+        {
+            get => base.DocumentPath;
         }
         #endregion
     }

@@ -36,9 +36,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
         {
 #if (CREATEINTERFACE && DEBUG)
             DcsPath = Path.Combine(Environment.GetEnvironmentVariable("userprofile"), "Desktop");
-            AddFunctionsFromDCSModule();
+            AddFunctionsFromDCSModule(new MirageF1InterfaceCreator());
             return;
-#endif
+#else
 
             // see if we can restore from JSON
 #if (!DEBUG)
@@ -68,7 +68,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             //AddFunction(new PushButton(this, "1", "3291", "194", "In-flight refuelling system", "Button Jammer detection / Feeder tanks overflow light", "%1d"));
             //AddFunction(new Axis(this, "1", "3292", "195", 0.5d, 0.0d, 1.0d, "In-flight refuelling system", "Lamp Jammer detection / Feeder tanks overflow light", false, "%0.1f"));
             #endregion In-flight refuelling system
-            // * * * Creating Interface functions from file: C:\Users\bluef\desktop\Cockpit\Mirage-F1\Mirage-F1EE\clickabledata.lua
+            // * * * Creating Interface functions from file: Cockpit\Mirage-F1\Mirage-F1EE\clickabledata.lua
             #region Inertial Navigation System (INS)
             AddFunction(new Switch(this, "1", "665", SwitchPositions.Create(6, 0d, 0.1d, "3680", "Posn", "%0.1f"), "Inertial Navigation System (INS)", "Parameters selector", "%0.1f"));
             AddFunction(new Switch(this, "1", "666", SwitchPositions.Create(9, 0d, 0.125d, "3681", "Posn", "%0.3f"), "Inertial Navigation System (INS)", "Modes selector", "%0.3f"));
@@ -90,14 +90,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new PushButton(this, "1", "3684", "663", "Inertial Navigation System (INS)", "INS 0 pushbutton", "%1d"));
             AddFunction(new PushButton(this, "1", "3694", "664", "Inertial Navigation System (INS)", "INS CLR pushbutton", "%1d"));
             #endregion Inertial Navigation System (INS)
+#endif
 
         }
 
-        protected override NetworkFunctionCollection MakeFunctionsFromDcsModule()
+        internal override NetworkFunctionCollection MakeFunctionsFromDcsModule(IInterfaceCreator ic)
         {
-            MirageF1InterfaceCreation ic = new MirageF1InterfaceCreation();
             NetworkFunctionCollection functions = new NetworkFunctionCollection();
-            functions.AddRange(base.MakeFunctionsFromDcsModule());
+            functions.AddRange(base.MakeFunctionsFromDcsModule(ic));
             foreach (string path in new string[] { Path.Combine(DcsPath, "Cockpit", "Common", "clickabledata_common_F1EE_M.lua"), Path.Combine(DcsPath, "Cockpit", "Mirage-F1", "Mirage-F1EE", "clickabledata.lua") })
             {
                 functions.AddRange(ic.CreateFunctionsFromDcsModule(this, path));

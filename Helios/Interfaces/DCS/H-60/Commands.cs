@@ -15,7 +15,7 @@
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
 {
-    internal class H60Commands
+    internal class MH60RCommands
     {
         internal enum Keys
         {
@@ -74,12 +74,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
             dispenseFlareUp = 10048,
             //    Doors
             toggleCopilotDoor = 10049,
-            //    --toggleLeftCargoDoor
+            //    toggleLeftCargoDoor
             toggleRightCargoDoor = 10050,
-            //    --toggleLeftGunnerDoor
-            //    --toggleRightGunnerDoor
+            //    toggleLeftGunnerDoor
+            //    toggleRightGunnerDoor
             //    AAR Probe
-            //    --toggleProbe
+            //    toggleProbe
             radioPTT = 10051,
             //    Toggles
             cycleposLightIntensity = 10052,
@@ -575,7 +575,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
             //    MISC
             fuelProbe = 3402,
             parkingBrake = 3403,
-            miscTailWheelLock = 3404,  // duplicate of 3412
+            miscTailWheelLock = 3404,
             doorCplt = 3405,
             doorPlt = 3406,
             doorLGnr = 3407,
@@ -584,7 +584,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
             doorRCargo = 3410,
             //    MISC PANEL
             miscFuelIndTest = 3411,
-            miscTailWheelLockPanel = 3412, // duplicate of 3404 so name changed
+            miscTailWheelLockDuplicate = 3412,  // * * * Helios Correction - Duplicate - previously "miscTailWheelLock = " = 3412,
             miscGyroEffect = 3413,
             miscTailServo = 3414,
             //    APN209

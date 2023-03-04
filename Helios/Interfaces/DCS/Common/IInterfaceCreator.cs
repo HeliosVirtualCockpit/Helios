@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
-    internal interface IInterfaceCreation
+    internal interface IInterfaceCreator
     {
         MatchCollection GetSections(string clickablesFromDCS);
         MatchCollection GetElements(string section);
         void ProcessFunction(Match match);
+        NetworkFunctionCollection CreateFunctionsFromDcsModule(BaseUDPInterface UDPInterface, string path);
         string[] ParseDeviceGroup(Group deviceGroup);
     }
 }

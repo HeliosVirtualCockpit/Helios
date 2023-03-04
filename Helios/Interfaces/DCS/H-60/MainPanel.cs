@@ -13,10 +13,11 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
+namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60R
 {
     internal enum mainpanel
     {
+        //    -------------------- Mirrors ---------------------------------------------
         //    FAT passed directly from FM
         freeAirTemp = 1,
         IASneedle = 100,
@@ -254,6 +255,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         capExtPwr = 395,
         capBlank = 396,
         //    PILOT VSI
+        pltVSIPitch = 420,
+        pltVSIRoll = 421,
         pltVSISlip = 422,
         pltVSIRollCmdBar = 423,
         pltVSIPitchCmdBar = 424,
@@ -266,6 +269,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         pltVSINAVFlag = 431,
         pltVSIGSFlag = 432,
         //    COPILOT VSI
+        cpltVSIPitch = 433,
+        cpltVSIRoll = 434,
         cpltVSISlip = 435,
         cpltVSIADIRollCmdBar = 436,
         cpltVSIADIPitchCmdBar = 437,

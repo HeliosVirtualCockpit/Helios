@@ -38,9 +38,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
 
 #if (CREATEINTERFACE && DEBUG)
             DcsPath = Path.Combine(Environment.GetEnvironmentVariable("userprofile"), "Desktop");
-            AddFunctionsFromDCSModule();
+            AddFunctionsFromDCSModule(new MirageF1InterfaceCreator());
             return;
-#endif
+#else
 
             // see if we can restore from JSON
 #if (!DEBUG)
@@ -65,13 +65,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             #endregion MATRA 550 or Sidewinder jettisoning
             // * * * Creating Interface functions from file: Cockpit\Mirage-F1\Mirage-F1CE\clickabledata.lua
             // No functions added
+#endif
         }
 
-        protected override NetworkFunctionCollection MakeFunctionsFromDcsModule()
+        internal override NetworkFunctionCollection MakeFunctionsFromDcsModule(IInterfaceCreator ic)
         {
-            MirageF1InterfaceCreation ic = new MirageF1InterfaceCreation();
             NetworkFunctionCollection functions = new NetworkFunctionCollection();
-            functions.AddRange(base.MakeFunctionsFromDcsModule());
+            functions.AddRange(base.MakeFunctionsFromDcsModule(ic));
             foreach (string path in new string[] { Path.Combine(DcsPath, "Cockpit", "Mirage-F1", "Mirage-F1_Common", "clickabledata_common_F1CE_BE.lua"), Path.Combine( DcsPath, "Cockpit", "Mirage-F1", "Mirage-F1CE", "clickabledata.lua") })
             {
                 functions.AddRange(ic.CreateFunctionsFromDcsModule(this, path));

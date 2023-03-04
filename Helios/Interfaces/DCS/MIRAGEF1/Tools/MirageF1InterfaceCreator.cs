@@ -25,12 +25,12 @@ using System.IO;
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
 {
 
-    internal class MirageF1InterfaceCreation : InterfaceCreation, IInterfaceCreation
+    internal class MirageF1InterfaceCreator : InterfaceCreator, IInterfaceCreator
     {
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        internal MirageF1InterfaceCreation()
+        internal MirageF1InterfaceCreator()
         {
             NetworkFunctions.Clear();
         }

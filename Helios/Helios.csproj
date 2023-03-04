@@ -259,16 +259,28 @@
     <Compile Include="IInstallation2.cs" />
     <Compile Include="IModuleManagerWritable.cs" />
     <Compile Include="Interfaces\Common\ViewportCompilerInterface.cs" />
-    <Compile Include="Interfaces\DCS\Common\IInterfaceCreation.cs" />
-    <Compile Include="Interfaces\DCS\Common\InterfaceCreation.cs" />
+    <Compile Include="Interfaces\DCS\Common\BaseDCSCommnadsCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\BaseDCSDevicesCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\BaseDCSMainPanelCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\DCSCommandsCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\IInterfaceCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\InterfaceCreator.cs" />
     <Compile Include="Interfaces\DCS\F16C\commands.cs" />
     <Compile Include="Interfaces\DCS\F16C\devices.cs" />
     <Compile Include="Interfaces\DCS\F16C\F-16CInterface.cs" />
     <Compile Include="Interfaces\DCS\F16C\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\F16C\Functions\F16CFunction.cs" />
     <Compile Include="Interfaces\DCS\F16C\lamps.cs" />
-    <Compile Include="Interfaces\DCS\F16C\Tools\F-16CInterfaceCreation.cs" />
+    <Compile Include="Interfaces\DCS\F16C\Tools\F-16CInterfaceCreator.cs" />
     <Compile Include="Interfaces\DCS\H-60\MainPanel.cs" />
+    <Compile Include="Interfaces\DCS\Common\DCSDevicesCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\DCSMainPanelCreator.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\H60CommandsCreator.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\MH60RCommandsCreator.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\MH60RDevicesCreator.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\H60DevicesCreator.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\MH60RMainPanelCreator.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\H60MainPanelCreator.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\MirageF1CEInterface.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\MirageF1EEInterface.cs" />
     <Compile Include="Interfaces\DCS\MirageF1\Devices.cs" />
@@ -281,7 +293,7 @@
     <Compile Include="Interfaces\DCS\BlackShark\Ka-50_3Interface.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSInterfaceEditorBase.cs" />
     <Compile Include="Interfaces\DCS\M2000C\Functions\Altimeter.cs" />
-    <Compile Include="Interfaces\DCS\MirageF1\Tools\MirageF1InterfaceCreation.cs" />
+    <Compile Include="Interfaces\DCS\MirageF1\Tools\MirageF1InterfaceCreator.cs" />
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceEditor.xaml.cs">
       <DependentUpon>SoftInterfaceEditor.xaml</DependentUpon>
     </Compile>
@@ -297,7 +309,7 @@
     <Compile Include="Interfaces\DCS\H-60\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\H-60\Functions\H60Function.cs" />
     <Compile Include="Interfaces\DCS\H-60\MH60RInterface.cs" />
-    <Compile Include="Interfaces\DCS\H-60\Tools\H60InterfaceCreation.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Tools\H60InterfaceCreator.cs" />
     <Compile Include="Interfaces\DCS\H-60\H60Interface.cs" />
     <Compile Include="Interfaces\DCS\H-60\UH60LInterface.cs" />
     <Compile Include="Interfaces\DCS\Template\Functions\ExampleFunction.cs" />
