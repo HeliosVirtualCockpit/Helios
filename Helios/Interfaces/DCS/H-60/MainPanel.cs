@@ -21,6 +21,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60R
         //    FAT passed directly from FM
         freeAirTemp = 1,
         IASneedle = 100,
+        VVneedle = 103,
         //    PILOT BARO ALTIMETER
         pilotBaroAlt100s = 60,
         pilotBaroAlt1000s = 61, // * * * Helios correction: previously pilotBaroAlt100s

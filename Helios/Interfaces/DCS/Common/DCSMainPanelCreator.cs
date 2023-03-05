@@ -88,14 +88,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                             lastRegion = lastComment;
                             inRegion = true;
                         }
-                        if (m.Groups["functionType"].Value == "addParamController")
+                        if (m.Groups["functionType"].Value == "addParamController" && m.Groups["input"].Captures.Count == 0)
                         {
                             SourceCodeFunctions.Add(MainPanelCreateFunction("FlagValue", correctValues[0], correctValues[1], lastComment, m.Groups["name"].Value));
                             continue;
                         }
                         else
                         {
-                            SourceCodeFunctions.Add(MainPanelCreateFunction("NetworkValue", correctValues[0], correctValues[1], lastComment, m.Groups["name"].Value, $"Number representation of a value between {m.Groups["input"].Captures[0].Value} and {m.Groups["input"].Captures[m.Groups["input"].Captures.Count - 1].Value}", $"Numeric value between {m.Groups["output"].Captures[0].Value} and {m.Groups["output"].Captures[m.Groups["output"].Captures.Count - 1].Value}"));
+                            double[] inputs = CapturesToArrayDouble(m.Groups["input"].Captures);
+                            double[] outputs = CapturesToArrayDouble(m.Groups["output"].Captures);
+                            if (inputs[inputs.Length-1] != outputs[outputs.Length-1])
+                            {
+                                SourceCodeFunctions.Add(MainPanelCreateFunction("ScaledNetworkValue", correctValues[0], correctValues[1], lastComment, m.Groups["name"].Value, $"value between {inputs[0]} and {inputs[inputs.Length-1]}", $"Numeric value between {outputs[0]} and {outputs[outputs.Length - 1]}", inputs, outputs));
+                            }
+                            else
+                            {
+                                SourceCodeFunctions.Add(MainPanelCreateFunction("NetworkValue", correctValues[0], correctValues[1], lastComment, m.Groups["name"].Value, $"value between {inputs[0]} and {inputs[inputs.Length - 1]}", $"Numeric value between {outputs[0]} and {outputs[outputs.Length - 1]}"));
+                            }
                             continue;
                         }
                     }
@@ -167,7 +176,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             return MainPanelCreateFunction(function, functionname, arg, device, name, "", "");
         }
 
-        protected override string MainPanelCreateFunction(string function, string functionname, string arg, string device, string name, string description = "", string valuedescription = "")
+        protected override string MainPanelCreateFunction(string function, string functionname, string arg, string device, string name, string description = "", string valuedescription = "", double[] inputs = null, double[] outputs = null)
         {
             return string.Empty;
         }
@@ -198,6 +207,25 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         {
             NetworkFunctions.Add(netFunction);
         }
+
+        virtual protected double[] CapturesToArrayDouble(CaptureCollection cC)
+        {
+            List<double> doubles = new List<double>();
+            foreach (Capture capture in cC)
+            {
+                string captureValue = capture.Value.Replace("math.pi", "180").Replace("math.rad(90)", "90");
+                if (double.TryParse(captureValue, out double d))
+                {
+                    doubles.Add(d);
+                }
+                else
+                {
+                    doubles.Add(0);
+                }
+            }
+            return doubles.ToArray();
+        }
+
         #region properties
         protected override string MainPanel
         {

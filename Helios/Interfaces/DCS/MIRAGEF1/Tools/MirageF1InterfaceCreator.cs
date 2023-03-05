@@ -25,7 +25,7 @@ using System.IO;
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
 {
 
-    internal class MirageF1InterfaceCreator : InterfaceCreator, IInterfaceCreator
+    internal class MirageF1InterfaceCreator : DCSInterfaceCreator, IDCSInterfaceCreator
     {
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
-    internal interface IInterfaceCreator
+    internal interface IDCSInterfaceCreator
     {
         MatchCollection GetSections(string clickablesFromDCS);
         MatchCollection GetElements(string section);

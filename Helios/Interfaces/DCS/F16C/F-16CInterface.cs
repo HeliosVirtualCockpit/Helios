@@ -428,7 +428,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
             #endregion ECM
 #endif
         }
-        virtual internal void AddFunctionsFromDCSModule(IInterfaceCreator ic)
+        virtual internal void AddFunctionsFromDCSModule(IDCSInterfaceCreator ic)
         {
             Dictionary<string, string> idValidator = new Dictionary<string, string>();
             foreach (NetworkFunction nf in MakeFunctionsFromDcsModule(ic))
@@ -444,7 +444,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
                 }
             }
         }
-        virtual internal NetworkFunctionCollection MakeFunctionsFromDcsModule(IInterfaceCreator ic)
+        virtual internal NetworkFunctionCollection MakeFunctionsFromDcsModule(IDCSInterfaceCreator ic)
         {
             NetworkFunctionCollection functions = new NetworkFunctionCollection();
             foreach (string path in new string[] { Path.Combine(DcsPath, "F-16C", "Cockpit", "Scripts", "clickabledata.lua") })

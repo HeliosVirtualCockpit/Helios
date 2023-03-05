@@ -68,7 +68,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
 #endif
         }
 
-        internal override NetworkFunctionCollection MakeFunctionsFromDcsModule(IInterfaceCreator ic)
+        internal override NetworkFunctionCollection MakeFunctionsFromDcsModule(IDCSInterfaceCreator ic)
         {
             NetworkFunctionCollection functions = new NetworkFunctionCollection();
             functions.AddRange(base.MakeFunctionsFromDcsModule(ic));

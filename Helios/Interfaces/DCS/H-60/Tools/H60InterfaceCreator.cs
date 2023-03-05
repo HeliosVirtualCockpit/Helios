@@ -27,7 +27,7 @@ using System.Drawing.Printing;
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
 {
 
-    internal class H60InterfaceCreator : InterfaceCreator, IInterfaceCreator
+    internal class H60InterfaceCreator : DCSInterfaceCreator, IDCSInterfaceCreator
     {
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -47,7 +47,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                 RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
                 double modifier;
                 string exportValue = "%0.1f";
-                string[] posnName = new string[0];
+                string[] posnName;
                 if (SectionName.Contains("PNT-"))
                 {
                     SectionName = _previousSectionName;
@@ -179,7 +179,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                     case "multiposition_switch_tumb":
                     case "multiposition_switch":
                         int argModifier = 0;
-                        double stepValue = 0;
+                        double stepValue;
                         string[] positionNames = new string[] { };
                         MatchCollection argMatches = Regex.Matches(eM.Groups["name"].Value, argPattern, options);
                         if (argMatches.Count > 0 && argMatches[0].Groups.Count > 1)
@@ -215,8 +215,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                             }
                             else
                             {
-                                AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, SwitchPositions.Create(stepCount, startValue, stepValue, CommandItems[0][0], flatten(positionNames), exportValue), SectionName, eM.Groups["name"].Value, exportValue));
-                                AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", SwitchPositions.Create({stepCount}, {startValue}d, {stepValue}d, {CommandItems[0][1]}, {flatten(positionNames)}, \"{exportValue}\"), \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"{exportValue}\"));");
+                                AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, SwitchPositions.Create(stepCount, startValue, stepValue, CommandItems[0][0], Flatten(positionNames), exportValue), SectionName, eM.Groups["name"].Value, exportValue));
+                                AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", SwitchPositions.Create({stepCount}, {startValue}d, {stepValue}d, {CommandItems[0][1]}, {Flatten(positionNames)}, \"{exportValue}\"), \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"{exportValue}\"));");
 
                             }
 
@@ -312,7 +312,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                 string enumValueSuffix = "";
                 Type typeEnumClass = typeof(MH60RCommands);
                 Type enumType = typeEnumClass.GetNestedType($"{cmdName.Captures[0].Value}{enumValueSuffix}", BindingFlags.NonPublic);
-                string commandName = $"{(typeEnumClass.Name == "" ? "" : typeEnumClass.Name + ".")}{cmdName.Captures[0].Value}{enumValueSuffix}.";
+                //string commandName = $"{(typeEnumClass.Name == "" ? "" : typeEnumClass.Name + ".")}{cmdName.Captures[0].Value}{enumValueSuffix}.";
                 if (cmd.Captures.Count == 1)
                 {
                     cmds[0][0] = ((int)Enum.Parse(enumType, cmd.Captures[0].Value)).ToString("d");
@@ -490,10 +490,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
             string pattern = @"(?<!--)elements\[""PNT.*-(?<arg>\d{1,4})""\]\s*=\s*(?<function>.*)\(_\(""(?<name>.*)"".*devices\.(?<device>[A-Za-z0-9_]*)[,\s]*((?<commandName>[a-zA-Z0-9_]+)\.(?<command>[a-zA-Z0-9_]+)[,\s]*)+(?:(?<args>[a-zA-Z0-9\{\}\.\-_/\*]*)[\,\s\)]+)+[\r\n\s]{1}";
             RegexOptions options = RegexOptions.Multiline | RegexOptions.Compiled;
             return Regex.Matches(section, pattern, options);
-        }
-        public string DocumentPath
-        {
-            get => base.DocumentPath;
         }
         #endregion
     }

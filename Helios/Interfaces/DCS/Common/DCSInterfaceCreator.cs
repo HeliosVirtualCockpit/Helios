@@ -27,7 +27,7 @@ using System.Text.RegularExpressions;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
-    internal class InterfaceCreator: IInterfaceCreator
+    internal class DCSInterfaceCreator: IDCSInterfaceCreator
     {
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private List<string> _functionList = new List<string>();
@@ -41,7 +41,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private BaseUDPInterface _udpInterface;
         private string _sectionName;
         private string _documentPath;
-        protected InterfaceCreator()
+
+        protected DCSInterfaceCreator()
         {
         }
         virtual public NetworkFunctionCollection CreateFunctionsFromDcsModule(BaseUDPInterface iface, string path)
@@ -56,7 +57,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         virtual protected void FunctionRouter(BaseUDPInterface iface, Match eM)
         {
            _arguments = eM.Groups["args"].Captures;
-            double modifier;
             switch (eM.Groups["function"].Value)
             {
                 default:
@@ -134,7 +134,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// </summary>
         /// <param name="input">string array containing position names</param>
         /// <returns></returns>
-        protected string flatten(string[] input)
+        protected string Flatten(string[] input)
         {
             string strings = "";
             foreach (string s in input)
@@ -285,7 +285,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         protected List<string> UnknownFunctions { get => _unknownFunctions; set => _unknownFunctions = value; }
         protected NetworkFunctionCollection NetworkFunctions { get => _networkFunctions; set => _networkFunctions = value; }
         protected Dictionary<int, string> TwoPartElement { get => _twoPartElement; set => _twoPartElement = value; }
-        protected string DocumentPath {
+        virtual public string DocumentPath {
             get {
                 if (_documentPath == string.Empty || _documentPath == null)
                 {

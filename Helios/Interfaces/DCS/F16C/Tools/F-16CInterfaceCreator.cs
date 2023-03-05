@@ -29,7 +29,7 @@ using System.Linq;
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C.Tools
 {
 
-    internal class F16CInterfaceCreator: InterfaceCreator, IInterfaceCreator
+    internal class F16CInterfaceCreator: DCSInterfaceCreator, IDCSInterfaceCreator
     {
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -213,8 +213,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C.Tools
                         }
                         else
                         {
-                            AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, SwitchPositions.Create(stepCount, startValue, stepValue, CommandItems[0][0], flatten(positionNames), exportValue), SectionName, eM.Groups["name"].Value, exportValue));
-                            AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", SwitchPositions.Create({stepCount}, {startValue}d, {stepValue}d, {CommandItems[0][1]}, {flatten(positionNames)}, \"{exportValue}\"), \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"{exportValue}\"));");
+                            AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, SwitchPositions.Create(stepCount, startValue, stepValue, CommandItems[0][0], Flatten(positionNames), exportValue), SectionName, eM.Groups["name"].Value, exportValue));
+                            AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", SwitchPositions.Create({stepCount}, {startValue}d, {stepValue}d, {CommandItems[0][1]}, {Flatten(positionNames)}, \"{exportValue}\"), \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"{exportValue}\"));");
 
                         }
 

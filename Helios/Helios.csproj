@@ -263,8 +263,8 @@
     <Compile Include="Interfaces\DCS\Common\BaseDCSDevicesCreator.cs" />
     <Compile Include="Interfaces\DCS\Common\BaseDCSMainPanelCreator.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSCommandsCreator.cs" />
-    <Compile Include="Interfaces\DCS\Common\IInterfaceCreator.cs" />
-    <Compile Include="Interfaces\DCS\Common\InterfaceCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\IDCSInterfaceCreator.cs" />
+    <Compile Include="Interfaces\DCS\Common\DCSInterfaceCreator.cs" />
     <Compile Include="Interfaces\DCS\F16C\commands.cs" />
     <Compile Include="Interfaces\DCS\F16C\devices.cs" />
     <Compile Include="Interfaces\DCS\F16C\F-16CInterface.cs" />

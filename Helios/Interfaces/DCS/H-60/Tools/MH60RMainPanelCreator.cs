@@ -23,7 +23,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using System.Text.RegularExpressions;
-using System.Windows.Documents;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools
 {
@@ -31,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools
     {
         internal MH60RMainPanelCreator(string path, string documentPath) : base(path, documentPath)
         {
-            SectionPattern = @"(?'startcomment'--\[\[)(?:[.\n\r\t\s\S]*)(?'-startcomment'\]\])|^((?<function>\w*)(?=.*\=\s*CreateGauge\(""parameter""\))).*[\r\n]*.*\.arg_number\s*\=\s*(?<arg>\d{1,4}).*[\r\n]*.*\.input\s*\=\s*\{(?:(?<input>[a-z0-9\.\-\(\)]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.output\s*\=\s*\{(?:(?<output>[0-9\.\-]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.parameter_name\s*\=\s*""(?<name>.*)""|^((?<function>.*)\s{0,20}=\s*(?=CreateGauge\(""parameter""\)))|(?:(?<function>[a-zA-Z0-9_\-]*)\s*\=\s*(?<functionType>.*)\((?<arg>\d{1,4})[\,]{1}\s*""(?<name>.*)"".*[\n\r]+)|(?:(?<function>^[a-zA-Z0-9_-[\.]]+)\s*\=.*[\t\n\r\s]*[\}])|^(?:\s*--\s*)(?<comment>[a-zA-Z0-9_\/\-\s&]*)[\r\n]{1,2}";
+            SectionPattern = @"(?'startcomment'--\[\[)(?:[.\n\r\t\s\S]*)(?'-startcomment'\]\])|^((?<function>\w*)(?=.*\=\s*(?<functionType>.*)\(""parameter""\))).*[\r\n]*.*\.arg_number\s*\=\s*(?<arg>\d{1,4}).*[\r\n]*.*\.input\s*\=\s*\{(?:(?<input>[a-z0-9\.\-\(\)]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.output\s*\=\s*\{(?:(?<output>[0-9\.\-]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.parameter_name\s*\=\s*""(?<name>.*)""|^((?<function>\w*)(?=.*\=\s*(?<functionType>.*)\(\))).*[\r\n]*.*\.arg_number\s*\=\s*(?<arg>\d{1,4}).*[\r\n]*.*\.input\s*\=\s*\{(?:(?<input>[a-z0-9\.\-\(\)]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.output\s*\=\s*\{(?:(?<output>[0-9\.\-]*)[\,\s\}]+)+(?:--.*)*[\r\n].*\.controller\s*\=\s*controllers.(?<name>.*)|(?:(?<function>[a-zA-Z0-9_\-]*)\s*\=\s*(?<functionType>.*)\((?<arg>\d{1,4})[\,]{1}\s*""(?<name>.*)"".+)[\r\n]*\s*\{(?:(?<input>[0-9\.\-]*)[\,\s\}]+)+.*[\r\n]*\s*\{(?:(?<output>[0-9\.\-]*)[\,\s\}]+)+.*\)|^((?<function>.*)\s{0,20}=\s*(?=CreateGauge\(""parameter""\)))|(?:(?<function>[a-zA-Z0-9_\-]*)\s*\=\s*(?<functionType>.*)\((?<arg>\d{1,4})[\,]{1}\s*""(?<name>.*)"".*[\n\r]+)|(?:(?<function>^[a-zA-Z0-9_-[\.]]+)\s*\=.*[\t\n\r\s]*[\}])|^(?:\s*--\s*)(?<comment>[a-zA-Z0-9_\/\-\s&]*)[\r\n]{1,2}";
         }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools
         }
 
 
-        protected override string MainPanelCreateFunction(string function, string functionname, string arg, string device, string name, string description = "", string valuedescription = "")
+        protected override string MainPanelCreateFunction(string function, string functionname, string arg, string device, string name, string description = "", string valuedescription = "", double[] inputs = null, double[] outputs = null)
         {
             string sourceCode;
             int argNumber = int.Parse(arg);
@@ -118,8 +117,66 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools
                     AddFunction(new NetworkValue(UDPInterface, arg, device, name, description, valuedescription, BindingValueUnits.Numeric, "%0.3f"));
                     sourceCode = $"AddFunction(new NetworkValue(this,  mainpanel.{functionname}.ToString(\"d\"), \"{device}\", \"{name}\", \"{description}\", \"{valuedescription}\", BindingValueUnits.Numeric, \"%0.3f\"));";
                     break;
+                case "ScaledNetworkValue":
+                    inputs = inputs ?? new double[0];
+                    outputs = outputs ?? new double[0];
+                    name = name == "" ? functionname : name;
+                    BindingValueUnit bvu;
+                    string valueUnits;
+                    if (inputs.Length > 0 && outputs.Length > 0 )
+                    {
+                        if (inputs[inputs.Length - 1] == 360 || inputs[inputs.Length - 1] == 180 || inputs[inputs.Length - 1] == 90)
+                        {
+                            bvu = BindingValueUnits.Degrees;
+                            valueUnits = "BindingValueUnits.Degrees";
+                        }
+                        else if (functionname == "IASneedle")
+                        {
+                            device = "Airspeed Instrument";
+                            bvu = BindingValueUnits.Knots;
+                            valueUnits = "BindingValueUnits.Knots";
+                        }
+                        else if (functionname == "freeAirTemp")
+                        {
+                            bvu = BindingValueUnits.Celsius;
+                            valueUnits = "BindingValueUnits.Celsius";
+                        }
+                        else if (functionname == "VVneedle")
+                        {
+                            device = "Vertical Velocity Instrument";
+                            bvu = BindingValueUnits.MetersPerSecond;
+                            valueUnits = "BindingValueUnits.MetersPerSecond";
+                        }
+                        else if (functionname.Contains("apn209") && (functionname.Contains("Needle") || functionname.Contains("Bug")))
+                        {
+                            bvu = BindingValueUnits.Feet;
+                            valueUnits = "BindingValueUnits.Feet";
+                        }
+                        else
+                        {
+                            bvu = BindingValueUnits.Numeric;
+                            valueUnits = "BindingValueUnits.Numeric";
+                        }
+                        string scaleName = $"scale{functionname}";
+                        CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(outputs[0], inputs[0], outputs[outputs.Length-1], inputs[inputs.Length-1]);
+                        sourceCode = $"CalibrationPointCollectionDouble {scaleName} = new CalibrationPointCollectionDouble({outputs[0]}d, {inputs[0]}d, {outputs[outputs.Length - 1]}d, {inputs[inputs.Length - 1]}d);\r\n";
+                        for (int i = 1; i< inputs.Length - 1; i++)
+                        {
+                            scale.Add(new CalibrationPointDouble(outputs[i], inputs[i]));
+                            sourceCode += $"{scaleName}.Add(new CalibrationPointDouble({outputs[i]}d, {inputs[i]}d));\r\n";
+
+                        }
+                        scale.Add(new CalibrationPointDouble(0d, 0d));
+                        AddFunction(new ScaledNetworkValue(UDPInterface, arg, scale, device, name, description, valuedescription, bvu,"%0.3f"));
+                        sourceCode += $"AddFunction(new ScaledNetworkValue(this,  mainpanel.{functionname}.ToString(\"d\"), {scaleName}, \"{device}\", \"{name}\", \"{description}\", \"{valuedescription}\", {valueUnits}, \"%0.3f\"));";
+                    }
+                    else
+                    {
+                        sourceCode = String.Empty;
+                    }
+                    break;
                 default:
-                    sourceCode = "";
+                    sourceCode = String.Empty;
                     break;
 
             }

@@ -29,18 +29,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
     /// </summary>
     abstract class BaseDCSMainPanelCreator
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="function"></param>
-        /// <param name="functionname"></param>
-        /// <param name="arg"></param>
-        /// <param name="device"></param>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
-        /// <param name="valuedescription"></param>
-        /// <returns></returns>
-        protected abstract string MainPanelCreateFunction(string function, string functionname, string arg, string device, string name, string description, string valuedescription);
+/// <summary>
+/// 
+/// </summary>
+/// <param name="function"></param>
+/// <param name="functionname"></param>
+/// <param name="arg"></param>
+/// <param name="device"></param>
+/// <param name="name"></param>
+/// <param name="description"></param>
+/// <param name="valuedescription"></param>
+/// <param name="inputs">array of input values for the function</param>
+/// <param name="outputs">array of output values for the function</param>
+/// <returns></returns>
+        protected abstract string MainPanelCreateFunction(string function, string functionname, string arg, string device, string name, string description, string valuedescription, double[] inputs, double[] outputs);
         protected abstract NetworkFunctionCollection WriteMainPanelEnum(string inputPath, string documentPath);
         protected abstract void AddFunction(NetworkFunction netFunction);
         internal abstract NetworkFunctionCollection GetNetworkFunctions(BaseUDPInterface udpInterface);
