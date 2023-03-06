@@ -156,7 +156,7 @@ namespace GadrocsWorkshop.Helios.Windows.ViewModel
                 // NOTE: github claims to support paste for attachments, but it doesn't work so we have to drag and drop a file
                 string fileName = PrepareStatusReportFile(out string tempPath);
                 System.Diagnostics.Process.Start(tempPath);
-                string encoded = Uri.EscapeDataString(Properties.Resources.helios_bug_report.Replace("&&HELIOSREPORTTEXT&&", $"## *[Helios has written the report to the file* `{fileName}` *and opened its containing folder in Explorer.  Please drag and drop it from Explorer to here and replace this message with a description of the problem you are reporting.]*\n\n"));
+                string encoded = Uri.EscapeDataString(Properties.Resources.helios_bug_report.Replace("__HELIOSREPORTTEXT__", $"## *[Helios has written the report to the file* `{fileName}` *and opened its containing folder in Explorer.  Please drag and drop it from Explorer to here and replace this message with a description of the problem you are reporting.]*\n\n").Replace("__HELIOSVERSION__", ConfigManager.VersionChecker.RunningVersion.ToString()));
                 // launch the default browser
                 string url = $"{repo}issues/new?title=CHANGE%20THIS%20TITLE%20TO%20SOMETHING%20MEANINGFUL&labels=New%20Issue&body={encoded}";
                 System.Diagnostics.Process.Start(url);

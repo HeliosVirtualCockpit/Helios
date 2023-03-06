@@ -5,7 +5,7 @@ If you are having problems installing / configuring / using a profile then you s
 
 - [ ] I have read [Getting Help](https://github.com/HeliosVirtualCockpit/Helios/wiki/Get-Help)
 ---
-&&HELIOSREPORTTEXT&&
+__HELIOSREPORTTEXT__
 ---
 ### Describe the Helios Issue
 *A clear and concise description of what the bug is, when it started to happen and any recent changes.*
@@ -24,7 +24,7 @@ Steps to reproduce the behaviour:
 *If applicable, add screenshots to help explain your problem.*
 
 ### Please complete the following information:
- - Helios Version [eg *1.6.5100.1*]
+ - Helios Version [eg *__HELIOSVERSION__*]
  - DCS Version [e.g. *Open Beta 2.7.16.28111*]
  - BMS Version
 
