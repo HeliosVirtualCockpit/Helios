@@ -23,8 +23,19 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right">Viewport Name</Label>
-        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontSize="10" Text="{Binding Path=Control.ViewportName}" Margin="2" />
+        <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right" ToolTip="Name of this Viewport used with DCS.">Viewport Name</Label>
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontSize="10" Text="{Binding Path=Control.ViewportName , ValidatesOnDataErrors=True}" Margin="2">
+            <HeliosSdk:HeliosTextBox.ToolTip>
+                <ToolTip Name="ViewportNameToolTip" MaxWidth="320">
+                    <TextBlock MaxWidth="320" MaxHeight="400" TextWrapping="Wrap">
+                        This name must be a valid Lua Identifier Name
+                        ie a to z, 0 to 9 and underscore.
+                        It must also not begin with a number or 
+                        underscore.
+                    </TextBlock>
+                </ToolTip>
+            </HeliosSdk:HeliosTextBox.ToolTip>
+        </HeliosSdk:HeliosTextBox>
         <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">Requires Patches</Label>
         <CheckBox  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontSize="10" VerticalAlignment="Center" IsChecked="{Binding Path=Control.RequiresPatches}" Margin="1,2" />
     </Grid>

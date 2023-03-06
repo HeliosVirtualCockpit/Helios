@@ -14,6 +14,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml;
@@ -36,7 +38,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     ///
     /// does not include any knowledge about what viewports are in various simulators, just that it is a named screen rectangle
     /// </summary>
-    public class ViewportExtentBase : TextDecoration, IViewportExtent
+    public class ViewportExtentBase : TextDecoration, IViewportExtent, IDataErrorInfo
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private const string DEFAULT_NAME = "Simulator Viewport";
@@ -160,6 +162,32 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             }
         }
 
+        string IDataErrorInfo.Error => throw new System.NotImplementedException();
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                return Validate(columnName);
+            }
+
+        }
+        private string Validate(string propertyName)
+        {
+            // Return error message if there is error on else return empty or null string
+            string validationMessage = string.Empty;
+            switch (propertyName)
+            {
+                case "ViewportName": // property name
+                    if(!Regex.Match(this.ViewportName, "^[a-zA-Z][_a-zA-Z0-9]{0,64}$", RegexOptions.CultureInvariant | RegexOptions.Compiled).Success)
+                    {
+                        validationMessage = "Invalid Character in Viewport Name";
+                    }
+                    break;
+            }
+
+            return validationMessage;
+        }
         #endregion
     }
 }

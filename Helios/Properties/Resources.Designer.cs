@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,30 @@ namespace GadrocsWorkshop.Helios.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ---
+        ///name: Helios Bug report
+        ///about: Create a report for problems with the Helios Project to help us improve
+        ///title: &apos;&apos;
+        ///labels: &apos;New Issue&apos;
+        ///assignees: &apos;&apos;
+        ///
+        ///---
+        ///# HELP US TO HELP YOU
+        ///
+        ///If you are having problems installing / configuring / using a profile then you should use the support process for the provider of that profile.
+        ///
+        ///- [ ] I have read [Getting Help](https://github.com/HeliosVirtualCockpit/Helios/wiki/Get-Help)
+        ///
+        ///### Describe the Helios Issue
+        ///*A clear and concise description of what the bu [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string helios_bug_report {
+            get {
+                return ResourceManager.GetString("helios-bug-report", resourceCulture);
             }
         }
     }

@@ -1,16 +1,11 @@
----
-name: Helios Bug report
-about: Create a report for problems with the Helios Project to help us improve
-title: ''
-labels: 'New Issue'
-assignees: ''
-
----
 # HELP US TO HELP YOU
+## Change the title text to something relevant and follow the instructions below.
 
 If you are having problems installing / configuring / using a profile then you should use the support process for the provider of that profile.
 
 - [ ] I have read [Getting Help](https://github.com/HeliosVirtualCockpit/Helios/wiki/Get-Help)
+---
+&&HELIOSREPORTTEXT&&
 ---
 ### Describe the Helios Issue
 *A clear and concise description of what the bug is, when it started to happen and any recent changes.*

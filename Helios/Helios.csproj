@@ -463,6 +463,7 @@
     <Content Include="Docs\Licenses\Fonts\LED Counter-7\LED Counter-7.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Resources\helios-bug-report.txt" />
     <Content Include="Templates\Base\Simulator Viewports\A29B_BFI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
