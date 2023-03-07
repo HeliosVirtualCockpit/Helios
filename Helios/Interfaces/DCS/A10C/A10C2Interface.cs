@@ -106,13 +106,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             "A-10C_2",
             "pack://application:,,,/Helios;component/Interfaces/DCS/A10C/ExportFunctionsA10C2.lua")
         {
-            // see if we can restore from JSON
-#if (!DEBUG)
-                        if (LoadFunctionsFromJson())
-                        {
-                            return;
-                        }
-#endif
+            if (JsonInterfaceLoaded)
+            {
+                return;
+            }
 
             #region Scorpion HMCS
             AddFunction(Switch.CreateThreeWaySwitch(this, SCORPION_HMCS, BUTTON_1, "550", "1.0", "On", "0.0", "Off", "-1.0", "Bat", "Scorpion HMCS", "Power", "%0.1f"));

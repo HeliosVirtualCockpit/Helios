@@ -20,32 +20,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.H60.Functions;
     using GadrocsWorkshop.Helios.Gauges.H60;
-    using GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60R;
-    using static System.Net.Mime.MediaTypeNames;
-    using System.Security.Policy;
-    using static GadrocsWorkshop.Helios.Interfaces.DCS.H60.Functions.Altimeter;
     using System;
-    using static GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60RCommands;
-
-    //using GadrocsWorkshop.Helios.Controls;
 
     public class H60Interface : DCSInterface
     {
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        private string _dcsPath = $@"{Environment.GetEnvironmentVariable("userprofile")}\Saved Games\DCS World.openbeta\Mods\Aircraft";
+        private bool _jsonInterfaceLoaded = false;
         protected H60Interface(string heliosName, string dcsVehicleName, string exportFunctionsUri)
             : base(heliosName, dcsVehicleName, exportFunctionsUri)
         {
-
+#if (!DEBUG)
+            // see if we can restore from JSON
+            if (LoadFunctionsFromJson())
+            {
+                _jsonInterfaceLoaded = true;
+                return;
+            }
+#endif
             // PILOT BARO ALTIMETER
             AddFunction(new Altimeter(this, FLYER.Pilot));
-            AddFunction(new FlagValue(this, mainpanel.pilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ENCODER FLAG", ""));
 
             // COPILOT ALTIMETER
             AddFunction(new Altimeter(this, FLYER.Copilot));
-            AddFunction(new FlagValue(this, mainpanel.copilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ENCODER FLAG", ""));
 
-            #region Network Values
+#region Network Values
 
             AddFunction(new SegmentedMeter(this, "2065", 30, "Engine Management", "Fuel Quantity Left", "Bar display of the left fuel quantity"));
             AddFunction(new SegmentedMeter(this, "2066", 30, "Engine Management", "Fuel Quantity Right", "Bar display of the right fuel quantity"));
@@ -99,18 +97,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
             // 174-176 are the altitude digits 
             AddFunction(new RADARAltimeter(this, "2056", FLYER.Copilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
 
+#endregion
 
-            #endregion
         }
-
-        private SwitchPosition[] CreateSwitchPositions(int numPositions, double incrementalValue, string command)
-        {
-            SwitchPosition[] switchPositions = new SwitchPosition[numPositions];
-            for(int i = 1; i<= numPositions; i++)
-            {
-                switchPositions[i - 1] = new SwitchPosition( ((i-1)*incrementalValue).ToString("0.##"), i.ToString(), command);
-            }
-            return switchPositions;
-        }
+        virtual protected bool JsonInterfaceLoaded { get => _jsonInterfaceLoaded; }
     }
 }

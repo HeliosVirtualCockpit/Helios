@@ -82,6 +82,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
     /// </summary>
     public static class SwitchPositions
     {
+        /// <summary>
+        /// Creates an array of SwitchPosition, mainly for use in rotary switches beginning at value 0
+        /// </summary>
+        /// <param name="numberOfPositions"></param>
+        /// <param name="incrementalValue"></param>
+        /// <param name="arg"></param>
+        /// <returns></returns>
+        internal static SwitchPosition[] Create(int numberOfPositions, double incrementalValue, string arg)
+        {
+            return Create(numberOfPositions, 0.0d, incrementalValue, arg, "Position", "%0.2f");
+        }
 
         /// <summary>
         /// Creates an array of SwitchPosition, mainly for use in rotary switches

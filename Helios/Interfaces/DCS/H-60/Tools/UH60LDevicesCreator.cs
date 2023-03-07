@@ -25,15 +25,16 @@ using System.Threading.Tasks;
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using System.Text.RegularExpressions;
 
+
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools
 {
-    internal class MH60RDevicesCreator : H60DevicesCreator
+    internal class UH60LDevicesCreator : H60DevicesCreator
     {
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        internal MH60RDevicesCreator(string path, string documentPath) : base(path, documentPath)
+        internal UH60LDevicesCreator(string path, string documentPath) : base(path, documentPath)
         {
             DevicesPattern = @".*devices\[""(?<dev>.*)""\].*\=.*(?<counter>counter\(\)).*";
-            NameSpace = "GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60R";
+            NameSpace = "GadrocsWorkshop.Helios.Interfaces.DCS.H60.UH60L";
             WriteDevicesEnum(path, documentPath);
         }
 

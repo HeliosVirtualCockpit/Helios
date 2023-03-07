@@ -79,6 +79,11 @@ namespace GadrocsWorkshop.Helios.ComponentModel
         /// </summary>
         public bool AutoAdd { get; set; }
 
+        /// <summary>
+        /// If true the interface will not be available to add to a new profile.
+        /// </summary>
+        public bool Deprecated { get; set; }
+
         public Type Factory { get; set; }
     }
 }

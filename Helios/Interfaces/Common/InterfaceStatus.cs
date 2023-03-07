@@ -41,6 +41,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.Common
             HasEditor = descriptor.InterfaceEditorType != null;
             Subscription = heliosInterface as IStatusReportNotify;
             Subscription?.Subscribe(this);
+            ///Todo: work out how to get the deprecated message into the status report
+            Deprecated = descriptor.Deprecated;
+            Description += Deprecated ? " * * * Interface is marked \"deprecated\" * * *":"";
         }
 
 
@@ -127,6 +130,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Common
         }
 
         [JsonIgnore] public bool HasEditor { get; }
+
+        [JsonIgnore] public bool Deprecated { get; set; }
 
         /// <summary>
         /// backing field for property Report, contains

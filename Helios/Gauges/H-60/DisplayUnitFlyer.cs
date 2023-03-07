@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.DisplayUnit
         public FlyerDisplayUnit(FLYER flyer)
             : base($"{flyer} Display Unit", new Size(492, 840))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
             _interfaceDeviceName = $"Engine Management ({flyer})";
             AddBarGauge("RPM Engine 1", new Point(59, 50), new Size(40, 738), 41d, "{Helios}/Images/H-60/SegmentBarDisplay41RPM.xaml", _interfaceDeviceName, "Engine 1 RPM");
             AddBarGauge("RPM Rotor", new Point(119, 50), new Size(40, 738), 41d, "{Helios}/Images/H-60/SegmentBarDisplay41RPM.xaml", _interfaceDeviceName, "Rotor RPM");
@@ -82,7 +82,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.DisplayUnit
 
         public override string DefaultBackgroundImage
         {
-            get { return "{helios}/Images/H-60/FlyerDisplayUnitBackground.xaml"; }
+            get { return "{Helios}/Images/H-60/FlyerDisplayUnitBackground.xaml"; }
         }
 
         public override bool HitTest(Point location)

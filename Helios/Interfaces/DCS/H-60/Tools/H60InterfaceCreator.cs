@@ -32,6 +32,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
 
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private string _previousSectionName = "";
+        private string _vehicle = "";
+        internal H60InterfaceCreator(string vehicle) : this()
+        {
+            _vehicle = vehicle;
+        }
+
         internal H60InterfaceCreator()
         {
             NetworkFunctions.Clear();
@@ -132,6 +138,34 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                     case "default_2_position_tumb":
                         ProcessDefault2PositionTumb(UdpInterface, SectionName, eM, Devices, CommandItems, Arguments);
                         break;
+                    case "default_animated_lever":
+                        posnName = FindPositionNames(eM.Groups["name"].Value);
+                        if (posnName.Length != 2)
+                        {
+                            posnName = new string[2];
+                            posnName[0] = "Posn 1";
+                            posnName[1] = "Posn 2";
+                        }
+                        modifier = 1;
+                        double value1;
+                        double value2;
+                        if (Arguments.Count >= 4)
+                        {
+                            if (int.TryParse(Arguments[1].Value, out int positionCount))
+                            {
+                                if(positionCount > 0)
+                                {
+                                    if (Arguments[2].Value.Contains("{") && Arguments[3].Value.Contains("}") && double.TryParse(Arguments[2].Value.Replace("{", "").Trim(), out value1) && double.TryParse(Arguments[3].Value.Replace("}", "").Trim(), out value2))
+                                    {
+                                        modifier = value1;
+                                    }
+                                }
+                            }
+                        }
+                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), posnName[0], CommandItems[0][0]), new SwitchPosition((0 * modifier).ToString("F1"), posnName[1], CommandItems[0][0]) }, SectionName, eM.Groups["name"].Value, "%0.1f"));
+                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"{posnName[0]}\", {CommandItems[0][1]}),new SwitchPosition(\"0.0\", \"{posnName[1]}\", {CommandItems[0][1]})}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                        break;
+
                     case "springloaded_2pos_switch":
                         posnName = FindPositionNames(eM.Groups["name"].Value);
                         if (posnName.Length != 2)
@@ -144,6 +178,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                         AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((-1 * modifier).ToString("F1"), posnName[0], CommandItems[0][0], CommandItems[0][0], "0.0"), new SwitchPosition((1 * modifier).ToString("F1"), posnName[1], CommandItems[1][0], CommandItems[1][0], "0.0") }, SectionName, eM.Groups["name"].Value, "%0.1f"));
                         AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{-1.0 * modifier:F1}\", \"{posnName[0]}\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\"), new SwitchPosition(\"{1 * modifier:F1}\", \"{posnName[1]}\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\")}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
                         break;
+                    case "default_trimmer_button":
                     case "short_way_button":
                     case "mfd_button":
                     case "push_button_tumb":
@@ -310,7 +345,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
 
             if (!match.Groups["name"].Value.Contains("(Inop.)")){
                 string enumValueSuffix = "";
-                Type typeEnumClass = typeof(MH60RCommands);
+                Type typeEnumClass = Type.GetType($"GadrocsWorkshop.Helios.Interfaces.DCS.H60.{_vehicle}Commands");
                 Type enumType = typeEnumClass.GetNestedType($"{cmdName.Captures[0].Value}{enumValueSuffix}", BindingFlags.NonPublic);
                 //string commandName = $"{(typeEnumClass.Name == "" ? "" : typeEnumClass.Name + ".")}{cmdName.Captures[0].Value}{enumValueSuffix}.";
                 if (cmd.Captures.Count == 1)

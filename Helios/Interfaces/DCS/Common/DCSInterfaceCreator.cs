@@ -201,10 +201,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// </summary>
         /// <param name="nameContainingPositions">string</param>
         /// <returns> a string array containing the names for the switch positions or empty array if the names cannot be decerned</returns>
-        /// <remarks>some labels contain the splitting character and sometimes whent his is the case, the split is the splitting character followed by a blank.</remarks>
+        /// <remarks>some labels contain the splitting character and sometimes when his is the case, the split is the splitting character followed by a blank.</remarks>
         protected string[] FindPositionNames(string nameContainingPositions)
         {
-            string[] names;
+            Regex regex = new Regex(@"[.,\s]*(?:(?<PositionName>[\-A-Za-z0-9-[/\s]]*)/)(?<PositionName>.*)$", RegexOptions.Compiled|RegexOptions.Singleline);
+            MatchCollection mc = regex.Matches(nameContainingPositions ?? String.Empty);
             if (nameContainingPositions.Contains(", ") && nameContainingPositions.Contains("/"))
             {
                 string[] temp = nameContainingPositions.Split(',');
@@ -212,19 +213,32 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 {
                     // probably means that one of the labels contains a slash so use / blank as the splitter
                     temp[temp.Length - 1] = temp[temp.Length - 1].Replace("/ ", "|");
-                    names = temp[temp.Length - 1].Trim().Split('|');
-
+                    return temp[temp.Length - 1].Trim().Split('|');
                 }
                 else
                 {
-                    names = temp[temp.Length - 1].Trim().Split('/');
+                    return temp[temp.Length - 1].Trim().Split('/');
                 }
             }
-            else
+            else if(mc.Count > 0)
             {
-                names = new string[0];
+                List<string> captureList = new List<string>();
+                foreach (Match m in mc)
+                {
+                    if (m.Groups["PositionName"].Captures.Count > 0)
+                    {
+                        foreach (Capture c in m.Groups["PositionName"].Captures)
+                        {
+                            captureList.Add(c.Value);
+                        }
+ 
+                    }
+                }
+                return captureList.ToArray();
+            } else
+            {
+                return new string[0];
             }
-            return names;
         }
         protected void AddUnknownFunction(string functionName, string element)
         {

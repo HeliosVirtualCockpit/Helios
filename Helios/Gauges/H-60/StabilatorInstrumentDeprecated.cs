@@ -1,5 +1,4 @@
-﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2022 Helios Contributors
+﻿//  Copyright 2022 Helios Contributors
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -14,20 +13,17 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.DisplayUnit
+namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
 {
     using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Controls;
-    using System;
     using System.Windows;
 
-    [HeliosControl("Helios.H60.FlyerDisplayUnit.Copilot", "Display Unit (Copilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class CopilotDisplayUnit : FlyerDisplayUnit
-    { 
-        public CopilotDisplayUnit()
-            : base(FLYER.Copilot)
+    [HeliosControl("Helios.UH60L.Stabilator.Indicator", "Stabilator Position Instrument", "H-60", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    public class StabInstrument : H60.Instruments.StabInstrument
+    {
+        public StabInstrument(string name, Size size)
+            : base(name, size)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
         }
-     }
+    }
 }

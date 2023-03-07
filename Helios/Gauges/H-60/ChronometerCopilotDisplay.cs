@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Chronometer
         public ChronometerDisplayCopilot()
             : base(FLYER.Copilot)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
         }
     }
 }

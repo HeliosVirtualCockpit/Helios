@@ -36,7 +36,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
         public StabilatorPositionIndicator()
             : base("Stabilator Position Indicator", new Size(276, 233))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
             AddPart("Stabilator Position", new Point(0d, 0d), new Size(420d, 420d), _interfaceDeviceName, "Stabilator Position");
         }
         private void AddPart(string name, Point pos, Size size, string interfaceDeviceName, string interfaceElement)

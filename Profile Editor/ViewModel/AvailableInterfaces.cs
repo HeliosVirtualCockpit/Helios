@@ -71,10 +71,18 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.ViewModel
 
                     foreach (HeliosInterface newInterface in descriptor.GetNewInstances(profile))
                     {
-                        ConfigManager.LogManager.LogInfo("Adding " + newInterface.Name + " Type: " +
-                                                         descriptor.InterfaceType.BaseType.Name +
-                                                         " to add interface list.");
-                        synchronousItems.Add(new InterfaceItem(newInterface));
+                        if (!descriptor.Deprecated)
+                        {
+                            ConfigManager.LogManager.LogInfo("Adding " + newInterface.Name + " Type: " +
+                                                             descriptor.InterfaceType.BaseType.Name +
+                                                             " to add interface list.");
+                            synchronousItems.Add(new InterfaceItem(newInterface));
+                        } else
+                        {
+                            ConfigManager.LogManager.LogInfo("Suppressing " + newInterface.Name + " Type: " +
+                                                              descriptor.InterfaceType.BaseType.Name +
+                                                              " from add interface list because it has been flagged as deprecated.");
+                        }
                     }
                 }
                 catch (Exception e)

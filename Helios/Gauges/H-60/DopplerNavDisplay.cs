@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.ASN128B
         public DopplerNavDisplay()
             : base("Doppler Nav Display", new Size(320d, 128d))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
             AddTextDisplay("Display Line 1", new Point(0d, 0d), new Size(320d, 32d), _interfaceDeviceName, "Display Line 1", 24, "", TextHorizontalAlignment.Left, "!=:");
             AddTextDisplay("Display Line 2", new Point(0d, 32d), new Size(320d, 32d), _interfaceDeviceName, "Display Line 2", 24, "", TextHorizontalAlignment.Left, "!=:");
             AddTextDisplay("Display Line 3", new Point(0d, 64d), new Size(320d, 32d), _interfaceDeviceName, "Display Line 3", 24, "", TextHorizontalAlignment.Left, "!=:");

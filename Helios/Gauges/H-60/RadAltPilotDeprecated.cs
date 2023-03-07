@@ -14,20 +14,19 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.DisplayUnit
+namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
-    using System;
     using System.Windows;
 
-    [HeliosControl("Helios.H60.FlyerDisplayUnit.Copilot", "Display Unit (Copilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class CopilotDisplayUnit : FlyerDisplayUnit
-    { 
-        public CopilotDisplayUnit()
-            : base(FLYER.Copilot)
+    [HeliosControl("Helios.UH60L.RadAlt.Pilot", "RADAR Altimeter (Pilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    public class RadAltPilot : H60.Instruments.RadAlt
+    {
+        public RadAltPilot()
+            : base(H60.FLYER.Pilot, new Size(420, 420))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
-        }
-     }
+			SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+		}
+	}
 }

@@ -143,9 +143,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
         private const string BUTTON_67 = "3067";
         #endregion
 
+        private bool _jsonInterfaceLoaded = false;
         protected A10CInterface(string heliosName, string dcsVehicleName, string exportFunctionsUri)
             : base(heliosName, dcsVehicleName, exportFunctionsUri)
         {
+            // see if we can restore from JSON
+            if (LoadFunctionsFromJson())
+            {
+                _jsonInterfaceLoaded = true;
+                return;
+            }
             #region Indexers
             AddFunction(new FlagValue(this, "540", "AOA Indexer", "High Indicator", "High AOA indicator light."));
             AddFunction(new FlagValue(this, "541", "AOA Indexer", "Normal Indicator", "Norm AOA indidcator light."));
@@ -966,5 +973,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
 
             AddFunction(Switch.CreateToggleSwitch(this, CPT_MECH, BUTTON_10, "733", "1", "Disarmed", "0", "Armed", "Mechanical", "Seat Arm Handle", "%1d"));
         }
-     }
+        virtual protected bool JsonInterfaceLoaded { get => _jsonInterfaceLoaded; }
+    }
 }

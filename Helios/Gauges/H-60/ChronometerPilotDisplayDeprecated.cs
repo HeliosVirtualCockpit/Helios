@@ -14,20 +14,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.DisplayUnit
+namespace GadrocsWorkshop.Helios.Gauges.UH60L.Chronometer
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
-    using System;
     using System.Windows;
 
-    [HeliosControl("Helios.H60.FlyerDisplayUnit.Copilot", "Display Unit (Copilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class CopilotDisplayUnit : FlyerDisplayUnit
-    { 
-        public CopilotDisplayUnit()
-            : base(FLYER.Copilot)
+    [HeliosControl("Helios.UH60L.Chronometer.Pilot", "Chronometer Display (Pilot)", "H-60", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    public class ChronometerDisplayPilot : H60.Chronometer.ChronometerDisplayPilot
+    {
+        public ChronometerDisplayPilot()
+            : base()
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
         }
-     }
+    }
 }

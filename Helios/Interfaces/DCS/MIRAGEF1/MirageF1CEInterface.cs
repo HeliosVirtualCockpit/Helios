@@ -41,14 +41,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunctionsFromDCSModule(new MirageF1InterfaceCreator());
             return;
 #else
-
-            // see if we can restore from JSON
-#if (!DEBUG)
-                        if (LoadFunctionsFromJson())
-                        {
-                            return;
-                        }
-#endif
+            if (JsonInterfaceLoaded)
+            {
+                return;
+            }
             // * * * Creating Interface functions from file: Cockpit\Mirage-F1\Mirage-F1_Common\clickabledata_common_F1CE_BE.lua
             #region Navigation indicator
             AddFunction(new Switch(this, "1", "1204", SwitchPositions.Create(4, 0d, 0.3333d, "3555", "Posn", "%0.4f"), "Navigation indicator", "Mode selector switch", "%0.4f"));

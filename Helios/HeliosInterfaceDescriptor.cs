@@ -37,9 +37,10 @@ namespace GadrocsWorkshop.Helios
             FactoryType = attribute.Factory;
             UniquenessKey = attribute.UniquenessKey ?? attribute.TypeIdentifier;
             AutoAdd = attribute.AutoAdd;
+            Deprecated = attribute.Deprecated;
         }
 
-        protected HeliosInterfaceDescriptor(Type interfaceType, string name, string typeIdentifier, string parentTypeIdentifier, Type interfaceEditorType, Type factoryType, string uniquenessKey, bool autoAdd)
+        protected HeliosInterfaceDescriptor(Type interfaceType, string name, string typeIdentifier, string parentTypeIdentifier, Type interfaceEditorType, Type factoryType, string uniquenessKey, bool autoAdd, bool deprecated = false)
         {
             InterfaceType = interfaceType;
             Name = name;
@@ -49,6 +50,7 @@ namespace GadrocsWorkshop.Helios
             FactoryType = factoryType;
             UniquenessKey = uniquenessKey;
             AutoAdd = autoAdd;
+            Deprecated = deprecated;
         }
 
         public virtual HeliosInterface CreateInstance()
@@ -98,6 +100,10 @@ namespace GadrocsWorkshop.Helios
         /// true if an instance of this control will automatically be added to a new profile.
         /// </summary>
         public bool AutoAdd { get; }
+        /// <summary>
+        /// true if this control will not be added to a new profile.
+        /// </summary>
+        public bool Deprecated { get; set; }
 
         public HeliosInterfaceFactory Factory =>
             _factory ??

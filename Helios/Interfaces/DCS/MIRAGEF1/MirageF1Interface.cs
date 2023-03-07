@@ -35,16 +35,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
     {   
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private string _dcsPath = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";
+        private bool _jsonInterfaceLoaded = false;
         protected MirageF1Interface(string heliosName, string dcsVehicleName, string exportFunctionsUri)
             : base(heliosName, dcsVehicleName, exportFunctionsUri)
         {
+            // see if we can restore from JSON
 #if (!DEBUG)
-            return;
-#else
-#pragma warning disable CS0162 // Unreachable code detected
+            if (LoadFunctionsFromJson())
+            {
+                _jsonInterfaceLoaded = true;
+                return;
+            }
+#endif
 
             // * * * Creating Interface functions from file: Cockpit\Mirage-F1\Mirage-F1_Common\clickabledata_common_F1C.lua
-#region Armament control panel
+            #region Armament control panel
             AddFunction(new Switch(this, "1", "590", SwitchPositions.Create(3, 0d, 0.5d, "3580", "Posn", "%0.1f"), "Armament control panel", "Sight selector", "%0.1f"));
             AddFunction(new Switch(this, "1", "592", SwitchPositions.Create(3, 0d, 0.5d, "3581", "Posn", "%0.1f"), "Armament control panel", "Bomb/Rocket selector", "%0.1f"));
             AddFunction(new Switch(this, "1", "593", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3582"), new SwitchPosition("0.0", "Posn 2", "3582") }, "Armament control panel", "MATRA 550 or Sidewinder missile switch", "%0.1f"));
@@ -66,15 +71,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new Switch(this, "1", "598", SwitchPositions.Create(3, 0d, 0.5d, "3613", "Posn", "%0.1f"), "Armament control panel", "Radar selector", "%0.1f"));
             AddFunction(new PushButton(this, "1", "3614", "599", "Armament control panel", "Radar emergency transmission button", "%1d"));
             AddFunction(new Switch(this, "1", "600", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3615"), new SwitchPosition("0.0", "Posn 2", "3615") }, "Armament control panel", "Radar 4 lines/1 line scan switch", "%0.1f"));
-#endregion Armament control panel
-#region Radar indicator scope control box
-                        AddFunction(new Axis(this, "1", "3618", "632", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Indicator lights brightness", false, "%0.1f"));
-                        AddFunction(new Axis(this, "1", "3620", "633", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Strobe brightness", false, "%0.1f"));
-                        AddFunction(new Axis(this, "1", "3622", "634", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Distance markers brightness", false, "%0.1f"));
-                        AddFunction(new Axis(this, "1", "3624", "635", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Horizon and radial velocity marker brightness", false, "%0.1f"));
-                        AddFunction(new Axis(this, "1", "3626", "636", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Horizon symbol vertical position", false, "%0.1f"));
-                        AddFunction(new Switch(this, "1", "864", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3628"), new SwitchPosition("0.0", "Posn 2", "3628") }, "Radar indicator scope control box", "Radar cover remove toggle", "%0.1f"));
-#endregion Radar indicator scope control box
+            #endregion Armament control panel
+            #region Radar indicator scope control box
+            AddFunction(new Axis(this, "1", "3618", "632", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Indicator lights brightness", false, "%0.1f"));
+            AddFunction(new Axis(this, "1", "3620", "633", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Strobe brightness", false, "%0.1f"));
+            AddFunction(new Axis(this, "1", "3622", "634", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Distance markers brightness", false, "%0.1f"));
+            AddFunction(new Axis(this, "1", "3624", "635", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Horizon and radial velocity marker brightness", false, "%0.1f"));
+            AddFunction(new Axis(this, "1", "3626", "636", 0.1d, 0.0d, 1.0d, "Radar indicator scope control box", "Horizon symbol vertical position", false, "%0.1f"));
+            AddFunction(new Switch(this, "1", "864", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3628"), new SwitchPosition("0.0", "Posn 2", "3628") }, "Radar indicator scope control box", "Radar cover remove toggle", "%0.1f"));
+            #endregion Radar indicator scope control box
 #region Radar detector indicator - Type BF
                         AddFunction(new PushButton(this, "1", "3573", "1290", "Radar detector indicator - Type BF", "Button Indicator lights intensity adjusting switch and lights 'T' test button", "%1d"));
                         AddFunction(new Axis(this, "1", "3574", "1237", 0.5d, 0.0d, 1.0d, "Radar detector indicator - Type BF", "Lamp Indicator lights intensity adjusting switch and lights 'T' test button", false, "%0.1f"));
@@ -438,8 +443,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
                         AddFunction(new Switch(this, "1", "478", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3443"), new SwitchPosition("0.0", "Posn 2", "3443") }, "Radar detector switch", "Radar detector switch", "%0.1f"));
                         AddFunction(new PushButton(this, "1", "3444", "708", "Radar detector switch", "Chaff/flares release button", "%1d"));
             #endregion Radar detector switch
-#pragma warning restore CS0162 // Unreachable code detected
-#endif
+
         }
         virtual internal void AddFunctionsFromDCSModule(IDCSInterfaceCreator ic)
         {
@@ -466,5 +470,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             return functions;
         }
         virtual protected string DcsPath { get => _dcsPath; set => _dcsPath = value; }
+        virtual protected bool JsonInterfaceLoaded { get => _jsonInterfaceLoaded; }
+
     }
 }

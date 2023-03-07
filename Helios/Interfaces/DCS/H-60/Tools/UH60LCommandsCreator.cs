@@ -25,18 +25,34 @@ using System.Threading.Tasks;
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using System.Text.RegularExpressions;
 
+
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools
 {
-    internal class MH60RDevicesCreator : H60DevicesCreator
+    internal class UH60LCommandsCreator : H60CommandsCreator
     {
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        internal MH60RDevicesCreator(string path, string documentPath) : base(path, documentPath)
+        internal UH60LCommandsCreator(string path, string documentPath) : base(path, documentPath)
         {
-            DevicesPattern = @".*devices\[""(?<dev>.*)""\].*\=.*(?<counter>counter\(\)).*";
-            NameSpace = "GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60R";
-            WriteDevicesEnum(path, documentPath);
+            CommandsPattern = @"(?'startcomment'--\[\[)(?:[.\n\r\t\s\S]*)(?'-startcomment'\]\])|count\s*\=\s*(?<startcount>\d{1,5})|(?:(?<functionname>[a-zA-Z0-9_]+).*\=.*[\t\n\r\s]*\{)|(?:(?<command>[a-zA-Z0-9_]*)\s*\=\s*(?<commandval>.*)[\,\}]{1}.*[\n\r]+)|(?:\s*--\s*)(?<comment>[a-zA-Z0-9_\/\-\s&]*)[\n\r]+|\s--(?:(?<commented_command>[a-zA-Z0-9_]*)\s*\=\s*(?<commandval>.*)[\,\}]{1}.*[\n\r]+)";
+            ClassName = "UH60LCommands";
+            WriteCommandsEnum();
         }
-
+        protected override string CommandValidation(string command, string commandCode)
+        {
+            switch (command)
+            {
+                case "miscTailWheelLock":
+                    if(commandCode == "3411")
+                    {
+                        return $"{command}Duplicate = {commandCode},  // * * * Helios Correction - Duplicate - previously \"{command} = \"";
+                    }
+                    break;
+                default:
+                    return command;
+                    //break;
+            }
+            return command;
+        }
         #region properties
         #endregion properties
     }

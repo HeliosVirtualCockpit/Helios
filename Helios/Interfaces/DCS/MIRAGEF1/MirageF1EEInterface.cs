@@ -34,19 +34,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             "MIRAGE-F1EE",
             "pack://application:,,,/Helios;component/Interfaces/DCS/MIRAGEF1/ExportFunctionsMirageF1EE.lua")
         {
+
 #if (CREATEINTERFACE && DEBUG)
             DcsPath = Path.Combine(Environment.GetEnvironmentVariable("userprofile"), "Desktop");
             AddFunctionsFromDCSModule(new MirageF1InterfaceCreator());
             return;
 #else
-
-            // see if we can restore from JSON
-#if (!DEBUG)
-                        if (LoadFunctionsFromJson())
-                        {
-                            return;
-                        }
-#endif
+            if (JsonInterfaceLoaded)
+            {
+                return;
+            }
             // * * * Creating Interface functions from file: Cockpit\Common\clickabledata_common_F1EE_M.lua
             #region Navigation indicator
             AddFunction(new Switch(this, "1", "1254", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", "3655"), new SwitchPosition("0.0", "Posn 2", "3655") }, "Navigation indicator", "Gyromagnetic/True IDN heading selector", "%0.1f"));

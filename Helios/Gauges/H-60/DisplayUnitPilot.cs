@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.DisplayUnit
         public PilotDisplayUnit()
             : base(FLYER.Pilot)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
         }
      }
 }
