@@ -193,21 +193,44 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                         AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[1][1]}, \"{Arguments[1].Value}\", 0.5d, 0.0d, 1.0d, \"{SectionName}\", \"Lamp {eM.Groups["name"].Value}\", false, \"%0.1f\"));");
                         break;
                     case "default_tumb_button":
+                        posnName = FindPositionNames(eM.Groups["name"].Value);
+                        if (posnName.Length != 3)
+                        {
+                            posnName = new string[3];
+                            posnName[0] = "Posn 1";
+                            posnName[1] = "Posn 2";
+                            posnName[2] = "Posn 3";
+                        }
                         modifier = Arguments.Count >= 2 ? (Arguments[1].Value == "true" ? -1 : 1) : 1;
-                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((-1 * modifier).ToString("F1"), "Posn 1", CommandItems[1][0], CommandItems[1][0], "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition((1 * modifier).ToString("F1"), "Posn 3", CommandItems[0][0], CommandItems[0][0], "0.0") }, SectionName, eM.Groups["name"].Value, "%0.1f"));
-                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{-1 * modifier:F1}\", \"Posn 1\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\"), new SwitchPosition(\"{-1 * modifier:F1}\", \"Posn 2\", null),new SwitchPosition(\"{1 * modifier:F1}\", \"Posn 3\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\")}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((-1 * modifier).ToString("F1"), posnName[0], CommandItems[1][0], CommandItems[1][0], "0.0"), new SwitchPosition("0.0", posnName[1], null), new SwitchPosition((1 * modifier).ToString("F1"), posnName[2], CommandItems[0][0], CommandItems[0][0], "0.0") }, SectionName, eM.Groups["name"].Value, "%0.1f"));
+                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{-1 * modifier:F1}\", \"{posnName[0]}\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\"), new SwitchPosition(\"{-1 * modifier:F1}\", \"{posnName[1]}\", null),new SwitchPosition(\"{1 * modifier:F1}\", \"{posnName[2]}\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\")}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
                         break;
                     case "default_button_tumb_v2_inverted":
+                        posnName = FindPositionNames(eM.Groups["name"].Value);
+                        if (posnName.Length != 3)
+                        {
+                            posnName = new string[3];
+                            posnName[0] = "Posn 1";
+                            posnName[1] = "Posn 2";
+                            posnName[2] = "Posn 3";
+                        }
                         modifier = -1;
-                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), "Posn 1", CommandItems[0][0], CommandItems[0][0], "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition((-1 * modifier).ToString("F1"), "Posn 3", CommandItems[1][0], CommandItems[1][0], "0.0", "0.0") }, SectionName, eM.Groups["name"].Value, "%0.1f"));
-                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"Posn 1\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\",\"0.0\"), new SwitchPosition(\"0.0\", \"Posn 2\", null),new SwitchPosition(\"{-1 * modifier:F1}\", \"Posn 3\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\",\"0.0\")}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), posnName[0], CommandItems[0][0], CommandItems[0][0], "0.0", "0.0"), new SwitchPosition("0.0", "posnName[1]", null), new SwitchPosition((-1 * modifier).ToString("F1"), "posnName[2]", CommandItems[1][0], CommandItems[1][0], "0.0", "0.0") }, SectionName, eM.Groups["name"].Value, "%0.1f"));
+                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"{posnName[0]}\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\",\"0.0\"), new SwitchPosition(\"0.0\", \"{posnName[1]}\", null),new SwitchPosition(\"{-1 * modifier:F1}\", \"{posnName[2]}\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\",\"0.0\")}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
                         break;
                     case "default_button_tumb":
-
+                        posnName = FindPositionNames(eM.Groups["name"].Value);
+                        if (posnName.Length != 3)
+                        {
+                            posnName = new string[3];
+                            posnName[0] = "Posn 1";
+                            posnName[1] = "Posn 2";
+                            posnName[2] = "Posn 3";
+                        }
                         string dupFix = PilotVariant(eM.Groups["arg"].Value);
                         modifier = Arguments.Count >= 2 ? (Arguments[1].Value == "true" ? -1 : 1) : 1;
-                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), "Posn 1", CommandItems[0][0], CommandItems[0][0], "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition((-1 * modifier).ToString("F1"), "Posn 3", CommandItems[1][0], CommandItems[1][0], "0.0", "0.0") }, SectionName, dupFix+eM.Groups["name"].Value, "%0.1f"));
-                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"Posn 1\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\",\"0.0\"), new SwitchPosition(\"0.0\", \"Posn 2\", null),new SwitchPosition(\"{-1 * modifier:F1}\", \"Posn 3\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\",\"0.0\")}}, \"{SectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                        AddFunction(new Switch(UdpInterface, Devices[0], eM.Groups["arg"].Value, new SwitchPosition[] { new SwitchPosition((1 * modifier).ToString("F1"), posnName[0], CommandItems[0][0], CommandItems[0][0], "0.0", "0.0"), new SwitchPosition("0.0", posnName[1], null), new SwitchPosition((-1 * modifier).ToString("F1"), posnName[2], CommandItems[1][0], CommandItems[1][0], "0.0", "0.0") }, SectionName, dupFix+eM.Groups["name"].Value, "%0.1f"));
+                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{eM.Groups["arg"].Value}\", new SwitchPosition[] {{new SwitchPosition(\"{1 * modifier:F1}\", \"{posnName[0]}\", {CommandItems[0][1]},{CommandItems[0][1]},\"0.0\",\"0.0\"), new SwitchPosition(\"0.0\", \"{posnName[1]}\", null),new SwitchPosition(\"{-1 * modifier:F1}\", \"{posnName[2]}\", {CommandItems[1][1]},{CommandItems[1][1]},\"0.0\",\"0.0\")}}, \"{SectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", \"%0.1f\"));");
                         break;
                     case "wiper_selector":
                     case "multiposition_switch_relative":
@@ -310,8 +333,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Tools
                         AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[0][1]}, \"{eM.Groups["arg"].Value}\", 0.1d, 0.0d, 1.0d, \"{SectionName}\", \"{dupFix}{eM.Groups["name"].Value}\", false, \"%0.1f\"));");
                         break;
                     case "intercom_rotate_tumb":
-                        AddFunction(new Switch(UdpInterface, Devices[0], Arguments[0].Value, new SwitchPosition[] { new SwitchPosition("0.0", "Posn 1", CommandItems[0][0]), new SwitchPosition("1.0", "Posn 2", CommandItems[0][0]) }, SectionName, eM.Groups["name"].Value, "%0.1f"));
-                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{Arguments[0].Value}\", new SwitchPosition[] {{new SwitchPosition(\"0.0\", \"Posn 1\", {CommandItems[0][1]}),new SwitchPosition(\"1.0\", \"Posn 2\", {CommandItems[0][1]})}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
+                        posnName = FindPositionNames(eM.Groups["name"].Value);
+                        if (posnName.Length != 3)
+                        {
+                            posnName = new string[3];
+                            posnName[0] = "Posn 1";
+                            posnName[1] = "Posn 2";
+                        }
+                        AddFunction(new Switch(UdpInterface, Devices[0], Arguments[0].Value, new SwitchPosition[] { new SwitchPosition("0.0", posnName[0], CommandItems[0][0]), new SwitchPosition("1.0", posnName[1], CommandItems[0][0]) }, SectionName, eM.Groups["name"].Value, "%0.1f"));
+                        AddFunctionList.Add($"AddFunction(new Switch(this, {Devices[1]}, \"{Arguments[0].Value}\", new SwitchPosition[] {{new SwitchPosition(\"0.0\", \"{posnName[0]}\", {CommandItems[0][1]}),new SwitchPosition(\"1.0\", \"{posnName[1]}\", {CommandItems[0][1]})}}, \"{SectionName}\", \"{eM.Groups["name"].Value}\", \"%0.1f\"));");
                         AddFunction(new Axis(UdpInterface, Devices[0], CommandItems[1][0], Arguments[1].Value, 0.1d, 0.0d, 1.0d, SectionName, $"Rotate {eM.Groups["name"].Value}", false, "%0.1f"));
                         AddFunctionList.Add($"AddFunction(new Axis(this, {Devices[1]}, {CommandItems[1][1]}, \"{Arguments[1].Value}\", 0.1d, 0.0d, 1.0d, \"{SectionName}\", \"Rotate {eM.Groups["name"].Value}\", false, \"%0.1f\"));");
                         break;

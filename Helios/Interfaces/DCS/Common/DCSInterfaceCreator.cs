@@ -202,8 +202,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// <param name="nameContainingPositions">string</param>
         /// <returns> a string array containing the names for the switch positions or empty array if the names cannot be decerned</returns>
         /// <remarks>some labels contain the splitting character and sometimes when his is the case, the split is the splitting character followed by a blank.</remarks>
-        protected string[] FindPositionNames(string nameContainingPositions)
+        virtual protected string[] FindPositionNames(string nameContainingPositions)
         {
+            Regex positionRegex = new Regex(@"((?<=,\s*)(?<PositionName>[\-A-Za-z0-9-[\/,\s\|]]*)[\/\|]?(?<PositionName>[\-A-Za-z0-9-[\/,\s\|]]*)$)|" +
+                @"((?(?<=,\s*)(?:(?<PositionName>[\/\-A-Za-z0-9-[,\s\|]]*)\s+[/\|]{1}\s+)*(?<PositionName>[\-A-Za-z0-9-[/,\|]]*/?[\-A-Za-z0-9-[/,\|]]*)" +
+                @"|(?:(?<PositionName>[\-A-Za-z0-9-[/,\|]]*/?[\-A-Za-z0-9-[/,\|]]*)\s+[/\|]{1}\s+)+(?<PositionName>[\-A-Za-z0-9-[\/,\|]]*/?[\-A-Za-z0-9-[\/,\|]]*))$)|" +
+                @"((?(?<=,\s*)(?:(?<PositionName>[\-A-Za-z0-9-[,\s\|]]*)[/\|]{1})*(?<PositionName>[\-A-Za-z0-9-[/,\|]]*)|(?:(?<PositionName>[\-A-Za-z0-9-[/,\|]]*)[/\|]{1})+" +
+                @"(?<PositionName>[\-A-Za-z0-9-[\/,\|]]*))$)|(((?<=,\s+)(?:(?<PositionName>[ \-A-Za-z0-9-[,\|]]*)[/\|]{1})*(?<PositionName>[ \-A-Za-z0-9-[/,\|]]*))$)", 
+                RegexOptions.Compiled | RegexOptions.Singleline);
+
+            MatchCollection positionMatches = positionRegex.Matches(nameContainingPositions);
+            List<string> positionList = new List<string>();
+            if(positionMatches.Count> 0)
+            {
+                foreach(Match m in positionMatches)
+                {
+                    foreach(Capture c in m.Groups["PositionName"].Captures)
+                    {
+                        positionList.Add(c.Value);
+                    }
+                }
+
+                if(positionList.Count > 0) return positionList.ToArray();  
+            }
+
             Regex regex = new Regex(@"[.,\s]*(?:(?<PositionName>[\-A-Za-z0-9-[/\s]]*)/)(?<PositionName>.*)$", RegexOptions.Compiled|RegexOptions.Singleline);
             MatchCollection mc = regex.Matches(nameContainingPositions ?? String.Empty);
             if (nameContainingPositions.Contains(", ") && nameContainingPositions.Contains("/"))
