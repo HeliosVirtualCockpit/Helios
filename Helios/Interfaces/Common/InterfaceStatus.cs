@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities;
+using HidSharp.Reports;
 using Newtonsoft.Json;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Common
@@ -41,9 +42,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Common
             HasEditor = descriptor.InterfaceEditorType != null;
             Subscription = heliosInterface as IStatusReportNotify;
             Subscription?.Subscribe(this);
-            ///Todo: work out how to get the deprecated message into the status report
             Deprecated = descriptor.Deprecated;
-            Description += Deprecated ? " * * * Interface is marked \"deprecated\" * * *":"";
         }
 
 
@@ -68,6 +67,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.Common
         {
             Name = statusName;
             Description = description;
+            if (Deprecated) {
+                statusReport.Add(new StatusReportItem
+                {
+                    Status =
+        $"This interface has been flagged as \"deprecated\" to discourage future use.  It is very unlikely to receive further updates or changes.",
+                    Recommendation =
+        "Investigate whether a newer interface exists for this vehicle, and if so, convert this profile to use the newer interface.",
+                    Severity = StatusReportItem.SeverityCode.Warning,
+                    Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
+                });
+            }
             Report = statusReport;
         }
 

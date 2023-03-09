@@ -443,8 +443,7 @@ scaleVVneedle.Add(new CalibrationPointDouble(0d, 0d));
 scaleVVneedle.Add(new CalibrationPointDouble(0.25d, 5.08d));
 scaleVVneedle.Add(new CalibrationPointDouble(0.5d, 10.16d));
 scaleVVneedle.Add(new CalibrationPointDouble(0.75d, 20.32d));
-AddFunction(new ScaledNetworkValue(this,  mainpanel.VVneedle.ToString("d"), scaleVVneedle, "Vertical Velocity Instrument", "base_gauge_VerticalVelocity --m/s
-", "value between -30.48 and 30.48", "Numeric value between -1 and 1", BindingValueUnits.MetersPerSecond, "%0.3f"));
+AddFunction(new ScaledNetworkValue(this,  mainpanel.VVneedle.ToString("d"), scaleVVneedle, "Vertical Velocity Instrument", "base_gauge_VerticalVelocity --m/s", "value between -30.48 and 30.48", "Numeric value between -1 and 1", BindingValueUnits.MetersPerSecond, "%0.3f"));
             #endregion FAT passed directly from FM
             #region PILOT BARO ALTIMETER
 AddFunction(new NetworkValue(this,  mainpanel.pilotBaroAlt100s.ToString("d"), "PILOT BARO ALTIMETER", "PILOT_BAROALT_100", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
