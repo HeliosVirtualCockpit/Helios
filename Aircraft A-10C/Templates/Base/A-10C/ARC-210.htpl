@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+  <Name>ARC-210 Radio</Name>
+  <Category>A-10C Gauges</Category>
+  <TypeIdentifier>Helios.A10C.ARC210Radio</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Location>0,0</Location>
+      <Size>640,523</Size>
+      <Hidden>False</Hidden>
+      <UseTextualDisplays>True</UseTextualDisplays>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

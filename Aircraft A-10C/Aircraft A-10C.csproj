@@ -476,6 +476,24 @@
     <Resource Include="Images\A-10CII\A-10C_UHF_Radio_Tone_Middle.png" />
     <Resource Include="Images\A-10CII\A-10C_UHF_Radio_Tone_Right.png" />
     <Resource Include="Images\A-10CII\A-10C_UHF_Radio_Volume_Knob.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Channel_Knob.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Display.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Faceplate.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Frequency_Knob.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Rotary_Switch.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Squelch_Knob.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_Up.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_DownArrow_Down.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_DownArrow_Up.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_Enter_Down.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_Enter_Up.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_FSK_Down.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_FSK_Up.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_Down.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_UpArrow_Down.png" />
+    <Resource Include="Images\A-10CII\ARC-210_Button_UpArrow_Up.png" />
+    <Resource Include="Images\A-10CII\ARC-210_WideButton_Down.png" />
+    <Resource Include="Images\A-10CII\ARC-210_WideButton_Up.png" />
     <Content Include="Templates\Base\A-10C\0.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -677,6 +695,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Templates\Base\A-10C\Vertical Rocker.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Base\A-10C\ARC-210.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

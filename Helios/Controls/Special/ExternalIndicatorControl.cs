@@ -29,14 +29,14 @@ using GadrocsWorkshop.Helios.Controls.Capabilities;
 namespace GadrocsWorkshop.Helios.Controls.Special
 {
     /// <summary>
-    /// This control is to enable the control of LEDs on DirectX USB Devices.  This is currently implemented in 
-    /// a way which involves the ProcessControl interface to call an external program to actuall manipluate the 
-    /// indicators.
+    /// This control is to enable the control of LEDs on DirectX USB Devices.  It has now been 
+    /// superseded by the interface changes for Warthog and Virpil.  Retained just in case someone
+    /// is still using it, but is no longer appearing in the toolbox.
     /// </summary>
 #if DEBUG
-    [HeliosControl("Helios.Base.Special.ExternalIndicatorControl", "External Indicator Control", "Miscellaneous", typeof(ImageDecorationRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Base.Special.ExternalIndicatorControl", "External Indicator Control", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.None)]
 #else
-    [HeliosControl("Helios.Base.Special.ExternalIndicatorControl", "External Indicator Control", "Miscellaneous", typeof(ImageDecorationRenderer), HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.Base.Special.ExternalIndicatorControl", "External Indicator Control", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.NotShownInUI)]
 #endif
     public class ExternalIndicatorControl : ImageDecorationBase, IWindowsMouseInput, IWindowsPreviewInput
     {

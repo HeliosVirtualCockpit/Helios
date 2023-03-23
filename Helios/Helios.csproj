@@ -156,6 +156,7 @@
       <DependentUpon>CalibrationFilterBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Special\ExternalIndicatorControl.cs" />
+    <Compile Include="Controls\Special\SimpleComputationWire.cs" />
     <Compile Include="Controls\Special\TestControl.cs" />
     <Compile Include="Controls\NumericTextDisplayBehaviorPropertyEditor.xaml.cs">
       <DependentUpon>NumericTextDisplayBehaviorPropertyEditor.xaml</DependentUpon>
@@ -167,6 +168,9 @@
       <DependentUpon>RockerSwitchAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RockerSwitchRenderer.cs" />
+    <Compile Include="Controls\Special\SimpleComputationWireBehaviorEditor.xaml.cs">
+      <DependentUpon>SimpleComputationWireBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextualDisplayEnablerAppearancePropertyEditor.xaml.cs">
       <DependentUpon>TextualDisplayEnablerAppearancePropertyEditor.xaml</DependentUpon>
     </Compile>
@@ -180,6 +184,7 @@
     <Compile Include="EnumDisplayEntry.cs" />
     <Compile Include="Gauges\A-10\Common\Blanking Panel Left.cs" />
     <Compile Include="Gauges\A-10\Radios\UHFRadio.cs" />
+    <Compile Include="Gauges\A-10\Radios\ARC-210.cs" />
     <Compile Include="Gauges\A-10\Radios\UHFFreqDisplay.cs" />
     <Compile Include="Gauges\A-10\Radios\UHFChanDisplay.cs" />
     <Compile Include="Gauges\A-10\Radios\UHFFreqRepeater.cs" />
@@ -483,6 +488,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Resources\helios-bug-report.txt" />
+    <Resource Include="Images\General\simple_computation_wire.png" />
     <Content Include="Templates\Base\Simulator Viewports\A29B_BFI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -600,6 +606,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\RockerSwitchAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Special\SimpleComputationWireBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// <summary>
     /// a piece of wire, simply transmits any value from its input side to its output side
     /// </summary>
-    [HeliosControl("Helios.Base.Wire", "Wire", "Miscellaneous", typeof(ImageDecorationRenderer))]
+    [HeliosControl("Helios.Base.Wire", "Wire", "Special Controls", typeof(ImageDecorationRenderer))]
     public class Wire : ImageDecorationBase
     {
         public Wire(): base("Wire")

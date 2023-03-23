@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// optionally assign a unit to the output.  It can be used to adapt values in a profile
     /// without having to write a calibration function in code or Lua script
     /// </summary>
-    [HeliosControl("Helios.Base.CalibrationFilter", "Calibration Filter", "Miscellaneous",
+    [HeliosControl("Helios.Base.CalibrationFilter", "Calibration Filter", "Special Controls",
         typeof(ImageDecorationRenderer))]
     public class CalibrationFilter : ImageDecorationBase
     {

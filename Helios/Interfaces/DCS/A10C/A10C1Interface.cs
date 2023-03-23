@@ -103,11 +103,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             "A-10C",
             "pack://application:,,,/Helios;component/Interfaces/DCS/A10C/ExportFunctionsA10C1.lua")
         {
-            if (JsonInterfaceLoaded)
-            {
-                return;
-            }
-
+            // see if we can restore from JSON
+#if (!DEBUG)
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
+#endif
+            base.AddFunctions();
             #region TISL Panel
             AddFunction(new Switch(this, TISL, "622", new SwitchPosition[] { new SwitchPosition("0.0", "Off", BUTTON_1), new SwitchPosition("0.1", "Cage", BUTTON_1), new SwitchPosition("0.2", "Dive", BUTTON_1), new SwitchPosition("0.3", "Level Narrow Nar", BUTTON_1), new SwitchPosition("0.4", "Level Wide", BUTTON_1) }, "TISL", "Mode Select", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, TISL, BUTTON_2, "623", "1", "Over 10", "0", "10-5", "-1", "Under 5", "TISL", "Slant Range", "%1d"));

@@ -77,16 +77,7 @@ namespace GadrocsWorkshop.Helios.Util.Shadow
         public void Update(HeliosVisual viewport)
         {
             _viewport = new Rect(viewport.Left, viewport.Top, viewport.Width, viewport.Height);
-            if (Data.IsViewportDirectlyOnMonitor)
-            {
-                Update();
-            } else
-            {
-                Rect absolute = viewport.CalculateWindowsDesktopRect();
-                absolute.Offset(_globalOffset);
-                absolute.Scale(_scale, _scale);
-                Rect = absolute;
-            }
+            Update();
         }
 
         public void Update(double scale)
@@ -97,8 +88,15 @@ namespace GadrocsWorkshop.Helios.Util.Shadow
 
         private void Update()
         {
-            Rect absolute = _viewport;
-            absolute.Offset(_monitor.X, _monitor.Y);
+            Rect absolute;
+            if(Data.IsViewport && !Data.IsViewportDirectlyOnMonitor)
+            {
+                absolute = Data.Visual.CalculateWindowsDesktopRect();
+            } else
+            {
+                absolute = _viewport;
+                absolute.Offset(_monitor.X, _monitor.Y);
+            }
             absolute.Offset(_globalOffset);
             absolute.Scale(_scale, _scale);
             Rect = absolute;

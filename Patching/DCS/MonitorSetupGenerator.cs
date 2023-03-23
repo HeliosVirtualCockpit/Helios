@@ -234,20 +234,20 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 code = null;
                 return false;
             }
-            string viewportWarning = "";
             foreach(ShadowVisual shadowVisual in _parent.Viewports)
             {
                 if(shadowVisual.Viewport.ViewportName == viewport.Key)
                 {
                     if (!shadowVisual.IsViewportDirectlyOnMonitor)
                     {
-                        viewportWarning = "-- changes to this viewport are not tracked automatically.  If changes have been made to this viewport\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.";
+                        string viewportWarning = $"Changes to viewport '{viewport.Key}' are not tracked automatically.  If changes have been made to this viewport\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.";
+                        ConfigManager.LogManager.LogWarning(viewportWarning);
                     }
                     break;
                 }
             }
             ConvertToDCS(ref viewportRect);
-            code = $"{viewport.Key} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}{viewportWarning}";
+            code = $"{viewport.Key} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
             lines.Add(code);
             return true;
         }
@@ -301,9 +301,20 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     };
                     continue;
                 }
-
                 // calculate effective screen coordinates by tracing ancestry
                 _localViewports.Viewports.Add(name, shadow.Visual.CalculateWindowsDesktopRect());
+                if (!shadow.IsViewportDirectlyOnMonitor)
+                {
+                    yield return new StatusReportItem
+                    {
+                        Status =
+                            $"The viewport '{name}' is not tracked automatically because it is contained within a gauge, control or panel.",
+                        Recommendation = $"If changes have been made to viewport {name}\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.",
+                        Severity = StatusReportItem.SeverityCode.Warning,
+                        Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
+                    };
+                    continue;
+                }
             }
 
             // now check against our saved state, which we also have to update

@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// a piece of wire with memory, simply sends any value on its input side to its output side
     /// and on a resend request sends any last values entered on its input side to its output side
     /// </summary>
-    [HeliosControl("Helios.Base.MemoryWire", "Memory Wire", "Miscellaneous", typeof(ImageDecorationRenderer))]
+    [HeliosControl("Helios.Base.MemoryWire", "Memory Wire", "Special Controls", typeof(ImageDecorationRenderer))]
     public class MemoryWire : ImageDecorationBase
     {
         private HeliosValue _numericSignal;
@@ -37,8 +37,9 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         private bool _booleanValueInitialized = false;
         private bool _textValueInitialized = false;
 
-        public MemoryWire(): base("MemoryWire")
-        {
+
+        public MemoryWire() : this("MemoryWire") { } 
+        public MemoryWire (string ControlName) : base(ControlName){
             DesignTimeOnly = true;
             Image = "{Helios}/Images/General/memory_wire.png";
             Alignment = ImageAlignment.Stretched;
@@ -100,7 +101,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             }
         }
 
-        private void ResendValues()
+        virtual protected void ResendValues()
         {
             if (_numericValueInitialized)
             {
@@ -120,5 +121,37 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 _textSignal.SetValue(_textValue, false);
             }
         }
+        #region properties
+        virtual protected HeliosValue BooleanSignal
+        {
+            get => _booleanSignal;
+            set => _booleanSignal = value;
+        }
+        virtual protected BindingValue BooleanValue
+        {
+            get => _booleanValue;
+            set => _booleanValue = value;
+        }
+        virtual protected bool BooleanValueInitialized
+        {
+            get => _booleanValueInitialized;
+            set => _booleanValueInitialized = value;
+        }
+        virtual protected HeliosValue NumericSignal
+        {
+            get => _numericSignal;
+            set => _numericSignal = value;
+        }
+        virtual protected BindingValue NumericValue
+        {
+            get => _numericValue;
+            set => _numericValue = value;
+        }
+        virtual protected bool NumericValueInitialized
+        {
+            get => _numericValueInitialized;
+            set => _numericValueInitialized = value;
+        }
+        #endregion properties
     }
 }

@@ -22,7 +22,7 @@ using GadrocsWorkshop.Helios.ComponentModel;
 
 namespace GadrocsWorkshop.Helios.Controls.Special
 {
-    [HeliosControl("Helios.Base.ScreenReplicator", "Screen Replicator", "Miscellaneous", typeof(ScreenReplicatorRenderer))]
+    [HeliosControl("Helios.Base.ScreenReplicator", "Screen Replicator", "Special Controls", typeof(ScreenReplicatorRenderer))]
     public class ScreenReplicator : HeliosVisual
     {
         private Int32Rect _catprueLocation = new Int32Rect(0, 0, 300, 300);

@@ -34,6 +34,7 @@ namespace GadrocsWorkshop.Helios.Controls
     [HeliosPropertyEditor("HELIOS.M2000C.PPA_PANEL", "Appearance")]
     [HeliosPropertyEditor("HELIOS.M2000C.PCA_PANEL", "Appearance")]
     [HeliosPropertyEditor("HELIOS.M2000C.PCN_PANEL", "Appearance")]
+    [HeliosPropertyEditor("Helios.A10C.ARC210Radio", "Appearance")]
     public partial class TextualDisplayEnablerAppearancePropertyEditor : HeliosPropertyEditor
     {
         public TextualDisplayEnablerAppearancePropertyEditor()

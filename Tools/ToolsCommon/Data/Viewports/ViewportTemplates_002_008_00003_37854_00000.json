@@ -1,0 +1,21 @@
+﻿[
+  {
+    "templateName": "A-10C II",
+    "moduleId": "A-10C_2",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "ARC210_SCREEN",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/A-10C_2/Cockpit/Scripts/ARC_210/Indicator/ARC_210_Init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 299,
+        "height": 195
+      }
+    ]
+  }
+]

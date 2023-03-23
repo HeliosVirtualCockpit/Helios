@@ -1,0 +1,3 @@
+﻿@@ -8066,119 +8066,4 @@
+ nd%0D%0A
+-dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22KA_50_3_HUD%22%2C %22HUD%22)
