@@ -29,21 +29,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
         protected H60Interface(string heliosName, string dcsVehicleName, string exportFunctionsUri)
             : base(heliosName, dcsVehicleName, exportFunctionsUri)
         {
-#if (!DEBUG)
-            // see if we can restore from JSON
-            if (LoadFunctionsFromJson())
-            {
-                _jsonInterfaceLoaded = true;
-                return;
-            }
-#endif
+        }
+        protected void AddFunctions()
+        {
             // PILOT BARO ALTIMETER
             AddFunction(new Altimeter(this, FLYER.Pilot));
 
             // COPILOT ALTIMETER
             AddFunction(new Altimeter(this, FLYER.Copilot));
 
-#region Network Values
+            #region Network Values
 
             AddFunction(new SegmentedMeter(this, "2065", 30, "Engine Management", "Fuel Quantity Left", "Bar display of the left fuel quantity"));
             AddFunction(new SegmentedMeter(this, "2066", 30, "Engine Management", "Fuel Quantity Right", "Bar display of the right fuel quantity"));
@@ -97,7 +92,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60
             // 174-176 are the altitude digits 
             AddFunction(new RADARAltimeter(this, "2056", FLYER.Copilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
 
-#endregion
+            #endregion
 
         }
         virtual protected bool JsonInterfaceLoaded { get => _jsonInterfaceLoaded; }

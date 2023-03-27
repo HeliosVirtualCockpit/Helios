@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
+namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -25,9 +25,9 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
     using System.Windows.Forms.VisualStyles;
     using System.Windows.Forms;
     using System.Windows.Media;
-
+    using GadrocsWorkshop.Helios.Gauges.H60;
     [HeliosControl("Helios.H60.RadAlt", "RADAR Altimeter", "H-60", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
-    public class RadAlt : CompositeVisualWithBackgroundImage
+    public class RadAltDeprecated : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt (Pilot)";
         private string _font = "LED Counter 7";
@@ -36,17 +36,17 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
 
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private RadAltInstrument _digitalAltitudeDisplay;
+        private RadAltInstrumentDeprecated _digitalAltitudeDisplay;
         private Controls.TextDecoration _digitalDisplayBackground;
         private NumericTextDisplay _digitalAltDisplay;
-        private FLYER _flyer;
+        private H60.FLYER _flyer;
 
-        public RadAlt( FLYER flyer, Size size)
+        public RadAltDeprecated( FLYER flyer, Size size)
             : base($"RADAR Altimeter ({flyer})", size)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
             _flyer = flyer;
-            _interfaceDeviceName = $"{flyer.ToString().ToUpper ()} AN/APN-209 RADAR ALTIMETER";
+            _interfaceDeviceName = $"RADAR Alt ({flyer})";
             AddLabel("Digital Altitude Background", new Point(63d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);
             AddNumericTextDisplay("Digital Altitude", new Point(63d, 239d), new Size(296d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
             AddPart("Instrument", new Point(0d, 0d), new Size(420d, 420d), _interfaceDeviceName, "Instrument");
@@ -134,7 +134,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
         }
         private void AddPart(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _digitalAltitudeDisplay = new RadAltInstrument(name, size, this, _flyer)
+            _digitalAltitudeDisplay = new RadAltInstrumentDeprecated(name, size, this, _flyer)
             {
                 Top = pos.Y,
                 Left = pos.X,

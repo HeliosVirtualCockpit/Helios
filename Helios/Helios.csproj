@@ -232,6 +232,8 @@
     <Compile Include="Gauges\H-60\DisplayUnitPilotDeprecated.cs" />
     <Compile Include="Gauges\H-60\DopplerNavDisplayDeprecated.cs" />
     <Compile Include="Gauges\H-60\IASInstrumentDeprecated.cs" />
+    <Compile Include="Gauges\H-60\RadAltDeprecated.cs" />
+    <Compile Include="Gauges\H-60\RadAltInstrumentDeprecated.cs" />
     <Compile Include="Gauges\H-60\RadAltPilotDeprecated.cs" />
     <Compile Include="Gauges\H-60\RadAltPilot.cs" />
     <Compile Include="Gauges\H-60\RadAltCopilotDeprecated.cs" />
@@ -292,6 +294,7 @@
     <Compile Include="Interfaces\DCS\H-60\CommandsMH60R.cs" />
     <Compile Include="Interfaces\DCS\H-60\DeprecatedUH60LInterface.cs" />
     <Compile Include="Interfaces\DCS\H-60\DevicesUH60L.cs" />
+    <Compile Include="Interfaces\DCS\H-60\Functions\RADARAltimeterDeprecated.cs" />
     <Compile Include="Interfaces\DCS\H-60\MainPanelUH60L.cs" />
     <Compile Include="Interfaces\DCS\H-60\MainPanelMH60R.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSDevicesCreator.cs" />

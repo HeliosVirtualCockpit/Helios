@@ -119,7 +119,7 @@ local li
 			while true do
 				local name, value = m()
 				if not name then
-					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segCursor, segNumberStart, currentSegment)	
+					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, helios.ensureString(segCursor), segNumberStart, currentSegment)	
 					break 
 				end
 				local seg = name:gsub("segment_","")
@@ -210,7 +210,7 @@ local li
 			while true do
 				local name, value = m()
 				if not name then
-					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, segCursor, segNumberStart, currentSegment)	
+					results["gauge" .. currentGaugeNumber] = string.format("%s;%s;%s;%s", segStart, helios.ensureString(segCursor), segNumberStart, currentSegment)	
 					break 
 				end
 				local seg = name:gsub("segment_","")

@@ -22,24 +22,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.Functions
     using GadrocsWorkshop.Helios.Gauges.H60;
     using System;
     using System.Globalization;
-    using NLog.Filters;
 
-    public class RADARAltimeter : DCSFunction
+    public class RADARAltimeterDeprecated : DCSFunction
     {
         private ExportDataElement[] DataElementsTemplate = new ExportDataElement[1];
 
         private HeliosValue _digitalAltitude;
 
-        public RADARAltimeter(BaseUDPInterface sourceInterface, string id, FLYER cockpit, string deviceName, string deviceDescription)
+        public RADARAltimeterDeprecated(BaseUDPInterface sourceInterface, string id, FLYER cockpit, string deviceName, string deviceDescription)
             : base(sourceInterface,
-                  $"{cockpit.ToString().ToUpper()} AN/APN-209 RADAR ALTIMETER", "Digital Altitude", "RADAR altitude above ground in feet for digital display.")
+                  $"RADAR Alt ({cockpit})", "Digital Altitude", "RADAR altitude above ground in feet for digital display.")
         {
             DataElementsTemplate[0] = new DCSDataElement(id, null, true);
             DoBuild();
         }
 
         // deserialization constructor
-        public RADARAltimeter(BaseUDPInterface sourceInterface, System.Runtime.Serialization.StreamingContext context)
+        public RADARAltimeterDeprecated(BaseUDPInterface sourceInterface, System.Runtime.Serialization.StreamingContext context)
             : base(sourceInterface, context)
         {
             // no code

@@ -1139,7 +1139,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.apn209PilotLoLight.ToString("d"), "RADAR Alt (Pilot)", "Low flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209PilotHiLight.ToString("d"), "RADAR Alt (Pilot)", "High flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209PilotFlag.ToString("d"), "RADAR Alt (Pilot)", "Off flag", ""));
-            AddFunction(new RADARAltimeter(this, "2055", FLYER.Pilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
+            AddFunction(new RADARAltimeterDeprecated(this, "2055", FLYER.Pilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
 
             // 174-176 are the altitude digits 
             AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), device_commands.apn209CopilotLoSet.ToString("d"), "183", 0.1d, 0d, 1d, "RADAR Alt (Copilot)", "Low Altitude Set"));
@@ -1150,7 +1150,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new FlagValue(this, mainpanel.apn209CopilotLoLight.ToString("d"), "RADAR Alt (Copilot)", "Low flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209CopilotHiLight.ToString("d"), "RADAR Alt (Copilot)", "High flag", ""));
             AddFunction(new FlagValue(this, mainpanel.apn209CopilotFlag.ToString("d"), "RADAR Alt (Copilot)", "Off flag", ""));
-            AddFunction(new RADARAltimeter(this, "2056", FLYER.Copilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
+            AddFunction(new RADARAltimeterDeprecated(this, "2056", FLYER.Copilot, "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
 
             // 187-190 are the altitude digits 
 

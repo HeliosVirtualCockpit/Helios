@@ -32,7 +32,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60R
     /* enabling this attribute will cause Helios to discover this new interface and make it available for use    */
     [HeliosInterface(
         "Helios.MH-60R",                         // Helios internal type ID used in Profile XML, must never change
-        "DCS H-60R Community Seahawk",     // human readable UI name for this interface
+        "DCS H-60 Family MH-60R Seahawk (Community)",    // human readable UI name for this interface
         typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
         typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
         UniquenessKey = "Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
@@ -214,10 +214,10 @@ AddFunction(new Switch(this, devices.ARC164.ToString("d"), "057", SwitchPosition
 AddFunction(new Switch(this, devices.ARC164.ToString("d"), "058", SwitchPositions.Create(20, 0d, 0.05d, MH60RCommands.device_commands.arc164_preset.ToString("d"), "Posn", "%0.2f"), "AN/ARC-164", "AN/ARC-164 Preset", "%0.2f"));
             #endregion AN/ARC-164
             #region Pilot APN-209 Radar Altimeter
-AddFunction(new Axis(this, devices.PLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209PilotLoSet.ToString("d"), "170", 20d, 0.0d, 0d, "Pilot APN-209 Radar Altimeter", "Pilot Low Altitude Set", false, "%0.1f"));
-AddFunction(new Axis(this, devices.PLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209PilotHiSet.ToString("d"), "171", 20d, 0.0d, 0d, "Pilot APN-209 Radar Altimeter", "Pilot High Altitude Set", false, "%0.1f"));
-AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209CopilotLoSet.ToString("d"), "183", 20d, 0.0d, 0d, "Pilot APN-209 Radar Altimeter", "Copilot Low Altitude Set", false, "%0.1f"));
-AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209CopilotHiSet.ToString("d"), "184", 20d, 0.0d, 0d, "Pilot APN-209 Radar Altimeter", "Copilot High Altitude Set", false, "%0.1f"));
+AddFunction(new Axis(this, devices.PLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209PilotLoSet.ToString("d"), "170", 20d, 0.0d, 0d, "PILOT AN/APN-209 RADAR ALTIMETER", "Pilot Low Altitude Set", false, "%0.1f"));
+AddFunction(new Axis(this, devices.PLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209PilotHiSet.ToString("d"), "171", 20d, 0.0d, 0d, "PILOT AN/APN-209 RADAR ALTIMETER", "Pilot High Altitude Set", false, "%0.1f"));
+AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209CopilotLoSet.ToString("d"), "183", 20d, 0.0d, 0d, "COPILOT AN/APN-209 RADAR ALTIMETER", "Copilot Low Altitude Set", false, "%0.1f"));
+AddFunction(new Axis(this, devices.CPLTAPN209.ToString("d"), MH60RCommands.device_commands.apn209CopilotHiSet.ToString("d"), "184", 20d, 0.0d, 0d, "COPILOT AN/APN-209 RADAR ALTIMETER", "Copilot High Altitude Set", false, "%0.1f"));
             #endregion Pilot APN-209 Radar Altimeter
             #region Lighting
 AddFunction(new Axis(this, devices.EXTLIGHTS.ToString("d"), MH60RCommands.device_commands.glareshieldLights.ToString("d"), "251", 0.1d, 0.0d, 1.0d, "Lighting", "Glareshield Lights OFF/BRT", false, "%0.1f"));
@@ -389,7 +389,7 @@ AddFunction(new Switch(this, devices.WEAPONS.ToString("d"), "2000", new SwitchPo
 AddFunction(new PushButton(this, devices.WEAPONS.ToString("d"), MH60RCommands.device_commands.buoysDispense.ToString("d"), "2001", "AUX SYSTEM CONTROL PANEL", "Sonobuoy Dispense", "%1d"));
 AddFunction(new Switch(this, devices.WEAPONS.ToString("d"), "2002", new SwitchPosition[] {new SwitchPosition("-1.0", "DOWN", MH60RCommands.device_commands.setSonarLift.ToString("d")),new SwitchPosition("0.0", "STOP", MH60RCommands.device_commands.setSonarLift.ToString("d")),new SwitchPosition("1.0", "UP", MH60RCommands.device_commands.setSonarLift.ToString("d"))}, "AUX SYSTEM CONTROL PANEL", "Sonar DOWN/STOP/UP", "%0.1f"));
 AddFunction(new Switch(this, devices.WEAPONS.ToString("d"), "2003", new SwitchPosition[] {new SwitchPosition("0.0", "Posn 1", MH60RCommands.device_commands.masterSonoCover.ToString("d")),new SwitchPosition("1.0", "Posn 2", MH60RCommands.device_commands.masterSonoCover.ToString("d"))}, "AUX SYSTEM CONTROL PANEL", "Master Sonobuoys Cover", "%0.1f"));
-AddFunction(new Switch(this, devices.WEAPONS.ToString("d"), "2003", new SwitchPosition[] {new SwitchPosition("0.0", "Posn 1", MH60RCommands.device_commands.masterSonoCover.ToString("d")),new SwitchPosition("1.0", "Posn 2", MH60RCommands.device_commands.masterSonoCover.ToString("d"))}, "AUX SYSTEM CONTROL PANEL", "Master Sonobuoys Cover", "%0.1f"));
+//AddFunction(new Switch(this, devices.WEAPONS.ToString("d"), "2003", new SwitchPosition[] {new SwitchPosition("0.0", "Posn 1", MH60RCommands.device_commands.masterSonoCover.ToString("d")),new SwitchPosition("1.0", "Posn 2", MH60RCommands.device_commands.masterSonoCover.ToString("d"))}, "AUX SYSTEM CONTROL PANEL", "Master Sonobuoys Cover", "%0.1f"));
             #endregion AUX SYSTEM CONTROL PANEL
             #region WEAPONS SYSTEM CONTROL PANEL
 AddFunction(new Switch(this, devices.WEAPONS.ToString("d"), "2004", new SwitchPosition[] {new SwitchPosition("1.0", "Posn 1", MH60RCommands.device_commands.wpnsetMasterArm.ToString("d")),new SwitchPosition("0.0", "Posn 2", MH60RCommands.device_commands.wpnsetMasterArm.ToString("d"))}, "WEAPONS SYSTEM CONTROL PANEL", "Weapons Master Arm", "%0.1f"));
@@ -537,7 +537,7 @@ scaleapn209PilotAltNeedle.Add(new CalibrationPointDouble(0.5d, 200d));
 scaleapn209PilotAltNeedle.Add(new CalibrationPointDouble(0.65d, 500d));
 scaleapn209PilotAltNeedle.Add(new CalibrationPointDouble(0.8d, 1000d));
 scaleapn209PilotAltNeedle.Add(new CalibrationPointDouble(0.95d, 1500d));
-AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209PilotAltNeedle.ToString("d"), scaleapn209PilotAltNeedle, "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_NEEDLE", "value between 0 and 1550", "Numeric value between 0 and 1", BindingValueUnits.Feet, "%0.3f"));
+AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209PilotAltNeedle.ToString("d"), scaleapn209PilotAltNeedle, "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_NEEDLE", "value between 0 and 1550", "value in feet between 0 and 1550", BindingValueUnits.Feet, "%0.3f"));
 CalibrationPointCollectionDouble scaleapn209PilotAltDigit1 = new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d);
 AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209PilotAltDigit1.ToString("d"), scaleapn209PilotAltDigit1, "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_DIGIT1", "value between 0 and 10", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
 CalibrationPointCollectionDouble scaleapn209PilotAltDigit2 = new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d);
@@ -551,16 +551,16 @@ scaleapn209PilotLoBug.Add(new CalibrationPointDouble(0.25d, 100d));
 scaleapn209PilotLoBug.Add(new CalibrationPointDouble(0.5d, 200d));
 scaleapn209PilotLoBug.Add(new CalibrationPointDouble(0.65d, 500d));
 scaleapn209PilotLoBug.Add(new CalibrationPointDouble(0.8d, 1000d));
-AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209PilotLoBug.ToString("d"), scaleapn209PilotLoBug, "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_LOBUG", "value between 0 and 1500", "Numeric value between 0 and 1", BindingValueUnits.Feet, "%0.3f"));
+AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209PilotLoBug.ToString("d"), scaleapn209PilotLoBug, "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_LOBUG", "value between 0 and 1550", "Feet value between 0 and 1550", BindingValueUnits.Feet, "%0.3f"));
 CalibrationPointCollectionDouble scaleapn209PilotHiBug = new CalibrationPointCollectionDouble(0d, 0d, 1d, 1500d);
 scaleapn209PilotHiBug.Add(new CalibrationPointDouble(0.25d, 100d));
 scaleapn209PilotHiBug.Add(new CalibrationPointDouble(0.5d, 200d));
 scaleapn209PilotHiBug.Add(new CalibrationPointDouble(0.65d, 500d));
 scaleapn209PilotHiBug.Add(new CalibrationPointDouble(0.8d, 1000d));
-AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209PilotHiBug.ToString("d"), scaleapn209PilotHiBug, "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_HIBUG", "value between 0 and 1500", "Numeric value between 0 and 1", BindingValueUnits.Feet, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.apn209PilotLoLight.ToString("d"), "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_LOLIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.apn209PilotHiLight.ToString("d"), "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_HILIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.apn209PilotFlag.ToString("d"), "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_FLAG", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209PilotHiBug.ToString("d"), scaleapn209PilotHiBug, "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_HIBUG", "value between 0 and 1550", "Feet value between 0 and 1550", BindingValueUnits.Feet, "%0.3f"));
+AddFunction(new FlagValue(this,  mainpanel.apn209PilotLoLight.ToString("d"), "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_LOLIGHT", ""));
+AddFunction(new FlagValue(this,  mainpanel.apn209PilotHiLight.ToString("d"), "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_HILIGHT", ""));
+AddFunction(new FlagValue(this,  mainpanel.apn209PilotFlag.ToString("d"), "PILOT AN/APN-209 RADAR ALTIMETER", "PILOT_APN209_FLAG", ""));
             #endregion PILOT AN/APN-209 RADAR ALTIMETER
             #region COPILOT AN/APN-209 RADAR ALTIMETER
 CalibrationPointCollectionDouble scaleapn209CopilotAltNeedle = new CalibrationPointCollectionDouble(0d, 0d, 1d, 1550d);
@@ -590,9 +590,9 @@ scaleapn209CopilotHiBug.Add(new CalibrationPointDouble(0.5d, 200d));
 scaleapn209CopilotHiBug.Add(new CalibrationPointDouble(0.65d, 500d));
 scaleapn209CopilotHiBug.Add(new CalibrationPointDouble(0.8d, 1000d));
 AddFunction(new ScaledNetworkValue(this,  mainpanel.apn209CopilotHiBug.ToString("d"), scaleapn209CopilotHiBug, "COPILOT AN/APN-209 RADAR ALTIMETER", "COPILOT_APN209_HIBUG", "value between 0 and 1500", "Numeric value between 0 and 1", BindingValueUnits.Feet, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.apn209CopilotLoLight.ToString("d"), "COPILOT AN/APN-209 RADAR ALTIMETER", "COPILOT_APN209_LOLIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.apn209CopilotHiLight.ToString("d"), "COPILOT AN/APN-209 RADAR ALTIMETER", "COPILOT_APN209_HILIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.apn209CopilotFlag.ToString("d"), "COPILOT AN/APN-209 RADAR ALTIMETER", "COPILOT_APN209_FLAG", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new FlagValue(this,  mainpanel.apn209CopilotLoLight.ToString("d"), "COPILOT AN/APN-209 RADAR ALTIMETER", "COPILOT_APN209_LOLIGHT", ""));
+AddFunction(new FlagValue(this,  mainpanel.apn209CopilotHiLight.ToString("d"), "COPILOT AN/APN-209 RADAR ALTIMETER", "COPILOT_APN209_HILIGHT", ""));
+AddFunction(new FlagValue(this,  mainpanel.apn209CopilotFlag.ToString("d"), "COPILOT AN/APN-209 RADAR ALTIMETER", "COPILOT_APN209_FLAG", ""));
             #endregion COPILOT AN/APN-209 RADAR ALTIMETER
             #region LIGHTING 200 - 250
 AddFunction(new NetworkValue(this,  mainpanel.PLTInstLights.ToString("d"), "LIGHTING 200 - 250", "LIGHTING_PLT_INST", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
@@ -815,7 +815,7 @@ AddFunction(new FlagValue(this,  mainpanel.rGnrDoorGlass.ToString("d"), "Doors",
 AddFunction(new FlagValue(this,  mainpanel.lCargoDoorGlass.ToString("d"), "Doors", "L_CARGO_DOOR_GLASS","", "%1d"));
 AddFunction(new FlagValue(this,  mainpanel.rCargoDoorGlass.ToString("d"), "Doors", "R_CARGO_DOOR_GLASS","", "%1d"));
             #endregion ARN-147 dials
- 
+            base.AddFunctions();
 
 #endif
 
