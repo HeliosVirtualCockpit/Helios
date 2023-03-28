@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.KU
         private string _interfaceDevice = "";
         private double _size_Multiplier = 1;
         private HeliosPanel _frameBezelPanel;
+        private const string Panel_Image = "{Helios}/Images/AH-64D/KU/KU_Frame.png";
 
         public KU(string interfaceDevice)
             : base(interfaceDevice, new Size(600, 465))
@@ -238,9 +239,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.KU
             action.Device = ComponentName(name);
             if (!Actions.ContainsKey(Actions.GetKeyForItem(action))) Actions.Add(action);
         }
-        public override string DefaultBackgroundImage
+        public override string DefaultBackgroundImage => Panel_Image;
+
+        protected override void OnBackgroundImageChange()
         {
-            get { return null; }
+            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : Panel_Image;
         }
         public override bool HitTest(Point location)
         {

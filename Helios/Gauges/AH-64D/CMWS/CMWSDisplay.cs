@@ -33,6 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.CMWS
         private HeliosPanel _frameGlassPanel;
         private HeliosPanel _frameBezelPanel;
         private HeliosPanel _displayBackgroundPanel;
+        private const string Panel_Image = "{Helios}/Images/AH-64D/CMWS/cmws_frame.png";
 
         public CMWSDisplay()
             : base("CMWS Display", new Size(640, 409))
@@ -280,10 +281,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.CMWS
             if (!Actions.ContainsKey(Actions.GetKeyForItem(action))) Actions.Add(action);
         }
 
-        public override string DefaultBackgroundImage
+        public override string DefaultBackgroundImage => Panel_Image;
+
+        protected override void OnBackgroundImageChange()
         {
-            //get { return "{Helios}/Images/AH-64D/CMWS/cmws_background.xaml"; }
-            get { return null; }
+            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : Panel_Image;
         }
         public override bool HitTest(Point location)
         {

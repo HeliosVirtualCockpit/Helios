@@ -34,6 +34,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
         private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
+        private const string Panel_Image = "{Helios}/Images/AH-64D/EUFD/EUFD.png";
 
         public EUFD(string interfaceDevice)
             : base(interfaceDevice, new Size(1004, 348))
@@ -147,13 +148,23 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
         {
             Rect vpRect = new Rect(173, 24, 600, 300);
             vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
-
+            TextFormat tf = new TextFormat()
+            {
+                FontStyle = FontStyles.Normal,
+                FontWeight = FontWeights.Normal,
+                FontSize = 2,
+                FontFamily = ConfigManager.FontManager.GetFontFamilyByName("Franklin Gothic"),
+                ConfiguredFontSize = 2,
+                HorizontalAlignment = TextHorizontalAlignment.Center,
+                VerticalAlignment = TextVerticalAlignment.Center
+            };
             Children.Insert(0, new Helios.Controls.Special.ViewportExtent
             {
                 FillBackground = true,
                 BackgroundColor = Color.FromArgb(128, 128, 0, 0),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
+                TextFormat = tf,
                 Left = vpRect.Left,
                 Top = vpRect.Top,
                 Width = vpRect.Width,
@@ -306,10 +317,14 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
             action.Device = ComponentName(name);
             if (!Actions.ContainsKey(Actions.GetKeyForItem(action))) Actions.Add(action);
         }
-        public override string DefaultBackgroundImage
+
+        public override string DefaultBackgroundImage => Panel_Image;
+
+        protected override void OnBackgroundImageChange()
         {
-            get { return null; }
+            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : Panel_Image;
         }
+
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))

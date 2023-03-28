@@ -35,6 +35,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.TEDAC
         private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
+        private const string Panel_Image = "{Helios}/Images/AH-64D/TEDAC/TEDAC_frame.png";
 
         public TEDAC()
             : base("TEDAC", new Size(1089, 1080))
@@ -147,12 +148,23 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.TEDAC
         {
             Rect vpRect = new Rect(142, 150, 800, 800);
             vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
+            TextFormat tf = new TextFormat()
+            {
+                FontStyle = FontStyles.Normal,
+                FontWeight = FontWeights.Normal,
+                FontSize = 2,
+                FontFamily = ConfigManager.FontManager.GetFontFamilyByName("Franklin Gothic"),
+                ConfiguredFontSize = 2,
+                HorizontalAlignment = TextHorizontalAlignment.Center,
+                VerticalAlignment = TextVerticalAlignment.Center
+            };
             Children.Insert(0,new Controls.Special.ViewportExtent
             {
                 FillBackground = true,
                 BackgroundColor = Color.FromArgb(128, 128, 0, 0),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
+                TextFormat = tf,
                 Left = vpRect.Left,
                 Top = vpRect.Top,
                 Width = vpRect.Width,
@@ -356,10 +368,13 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.TEDAC
             if (!Actions.ContainsKey(Actions.GetKeyForItem(action))) Actions.Add(action);
         }
 
-        public override string DefaultBackgroundImage
+        public override string DefaultBackgroundImage => "{Helios}/Images/AH-64D/TEDAC/TEDAC_frame.png";
+
+        protected override void OnBackgroundImageChange()
         {
-            get { return null; }
+            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : Panel_Image;
         }
+
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))
