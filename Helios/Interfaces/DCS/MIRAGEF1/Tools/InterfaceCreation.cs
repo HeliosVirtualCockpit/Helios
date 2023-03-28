@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
+using static GadrocsWorkshop.Helios.NativeMethods;
 
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
@@ -17,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private List<string> _functionList = new List<string>();
         private List<string> _addFunctionList = new List<string>();
+        private string _clickableFilename = "";
 
         private NetworkFunctionCollection _networkFunctions = new NetworkFunctionCollection();
 
@@ -33,6 +35,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
             _functionList.Clear();
 
             string input;
+            _clickableFilename = Path.GetFileNameWithoutExtension(path);
             using (StreamReader streamReader = new StreamReader(path))
             {
                 input = streamReader.ReadToEnd();
@@ -219,14 +222,29 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools
             //{
             //    Logger.Debug($"case \"{a}\":break;");
             //}
-            foreach (string a in _addFunctionList)
+            using (StreamWriter streamWriter = new StreamWriter($@"{Environment.GetEnvironmentVariable("userprofile")}\Documents\HeliosDev\Interfaces\{_clickableFilename}.txt", false))
             {
-                Logger.Debug($"{a}");
+                foreach (string a in _addFunctionList)
+                {
+                    //Logger.Debug($"{a}");
+                    if(_clickableFilename == "clickabledata_common" &&
+                       (a.Contains("Button Jammer detection light") ||
+                        a.Contains("Lamp Jammer detection light")))
+                    {
+                        continue;
+                    }
+                    streamWriter.WriteLine($"{a}");
+                }
             }
             return _networkFunctions;
         }
         private void AddFunction(NetworkFunction netFunction)
         {
+            if(_clickableFilename == "clickabledata_common" &&
+                (netFunction.LocalKey == "Warning lights.Button Jammer detection light" || netFunction.LocalKey == "Warning lights.Lamp Jammer detection light"))
+            {
+                return;
+            } 
             _networkFunctions.Add(netFunction); 
         }
     }

@@ -23,7 +23,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.Tools;
     using GadrocsWorkshop.Helios.UDPInterface;
-    using LibUsbDotNet;
     //using Functions;
     using static GadrocsWorkshop.Helios.NativeMethods;
 
@@ -33,13 +32,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
     /// </summary>
     public class MirageF1Interface : DCSInterface
     {
-
+        private string _dcsAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";
         protected MirageF1Interface(string heliosName, string dcsVehicleName, string exportFunctionsUri)
             : base(heliosName, dcsVehicleName, exportFunctionsUri)
         {
 
 #if (CREATEINTERFACE && DEBUG)
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";
+            DCSAircraft = $@"{Environment.GetEnvironmentVariable("userprofile")}\Documents\DCSLua\Mirage-F1";
             InterfaceCreation ic = new InterfaceCreation();
             foreach (string path in new string[] { $@"{DCSAircraft}\Cockpit\Mirage-F1\Mirage-F1_Common\clickabledata_common_F1C.lua", $@"{DCSAircraft}\Cockpit\Common\clickabledata_common.lua" })
             {
@@ -50,6 +49,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             }
             return;
 #endif
+        }
+        protected void AddFunctions()
+        {
             // * * * Creating Interface functions from file: Cockpit\Mirage-F1\Mirage-F1_Common\clickabledata_common_F1C.lua
             #region Armament control panel
             AddFunction(new Switch(this, "1", "590", SwitchPositions.Create(3, 0d, 0.5d, "3580", "Posn", "%0.1f"), "Armament control panel", "Sight selector", "%0.1f"));
@@ -59,14 +61,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new Switch(this, "1", "595", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3584"), new SwitchPosition("0.0", "Posn 2", "3584") }, "Armament control panel", "Auto/Manual firing selector switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "596", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3585"), new SwitchPosition("0.0", "Posn 2", "3585") }, "Armament control panel", "Single/Salvo selector", "%0.1f"));
             AddFunction(new Switch(this, "1", "597", SwitchPositions.Create(3, 0d, 0.5d, "3586", "Posn", "%0.1f"), "Armament control panel", "Instantaneous/Delay/Safe selector switch", "%0.1f"));
-            AddFunction(new Switch(this, "1", "604", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3587"), new SwitchPosition("0.0", "Posn 2", "3587") }, "Armament control panel", "Left MATRA R550 or Sidewinder missile pushbutton", "%0.1f"));
-            AddFunction(new Switch(this, "1", "606", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3588"), new SwitchPosition("0.0", "Posn 2", "3588") }, "Armament control panel", "Left or fuselage MATRA R530 missile pushbutton", "%0.1f"));
-            AddFunction(new Switch(this, "1", "608", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3589"), new SwitchPosition("0.0", "Posn 2", "3589") }, "Armament control panel", "Air-to-Air guns pushbutton", "%0.1f"));
-            AddFunction(new Switch(this, "1", "610", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3590"), new SwitchPosition("0.0", "Posn 2", "3590") }, "Armament control panel", "Wing bombs pushbutton", "%0.1f"));
-            AddFunction(new Switch(this, "1", "612", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3591"), new SwitchPosition("0.0", "Posn 2", "3591") }, "Armament control panel", "Right MATRA R550 or Sidewinder missile pushbutton", "%0.1f"));
-            AddFunction(new Switch(this, "1", "614", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3592"), new SwitchPosition("0.0", "Posn 2", "3592") }, "Armament control panel", "Right MATRA R530 missile pushbutton", "%0.1f"));
-            AddFunction(new Switch(this, "1", "616", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3593"), new SwitchPosition("0.0", "Posn 2", "3593") }, "Armament control panel", "Air-to-Ground guns or rockets pushbutton", "%0.1f"));
-            AddFunction(new Switch(this, "1", "618", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3594"), new SwitchPosition("0.0", "Posn 2", "3594") }, "Armament control panel", "Fuselage bombs pushbutton", "%0.1f"));
+            AddFunction(new PushButton(this, "1", "3587", "604", "Armament control panel", "Left MATRA R550 or Sidewinder missile pushbutton", "%1d"));
+            AddFunction(new PushButton(this, "1", "3588", "606", "Armament control panel", "Left or fuselage MATRA R530 missile pushbutton", "%1d"));
+            AddFunction(new PushButton(this, "1", "3589", "608", "Armament control panel", "Air-to-Air guns pushbutton", "%1d"));
+            AddFunction(new PushButton(this, "1", "3590", "610", "Armament control panel", "Wing bombs pushbutton", "%1d"));
+            AddFunction(new PushButton(this, "1", "3591", "612", "Armament control panel", "Right MATRA R550 or Sidewinder missile pushbutton", "%1d"));
+            AddFunction(new PushButton(this, "1", "3592", "614", "Armament control panel", "Right MATRA R530 missile pushbutton", "%1d"));
+            AddFunction(new PushButton(this, "1", "3593", "616", "Armament control panel", "Air-to-Ground guns or rockets pushbutton", "%1d"));
+            AddFunction(new PushButton(this, "1", "3594", "618", "Armament control panel", "Fuselage bombs pushbutton", "%1d"));
             AddFunction(new Switch(this, "1", "601", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3595"), new SwitchPosition("0.0", "Posn 2", "3595") }, "Armament control panel", "R 530 Missile Normal/Altitude difference selector switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "603", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3596"), new SwitchPosition("0.0", "Posn 2", "3596") }, "Armament control panel", "Normal/Jammer pursuit switch (No function)", "%0.1f"));
             AddFunction(new PushButton(this, "1", "3597", "602", "Armament control panel", "Armament panel lights test", "%1d"));
@@ -152,6 +154,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new Switch(this, "1", "752", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3549"), new SwitchPosition("0.0", "Posn 2", "3549") }, "IFF", "M-3 mode switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "753", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3550"), new SwitchPosition("0.0", "Posn 2", "3550") }, "IFF", "M-4 mode switch", "%0.1f"));
             #endregion IFF
+
             // * * * Creating Interface functions from file: Cockpit\Common\clickabledata_common.lua
             #region Pilot's stick hide/unhide
             AddFunction(new Switch(this, "1", "34", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3001"), new SwitchPosition("0.0", "Posn 2", "3001") }, "Pilot's stick hide/unhide", "Hide Stick toggle", "%0.1f"));
@@ -342,8 +345,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new PushButton(this, "1", "3285", "118", "Warning lights", "Failure warning panel T test button", "%1d"));
             AddFunction(new PushButton(this, "1", "3286", "119", "Warning lights", "Failure warning panel O2 test button", "%1d"));
             AddFunction(new Switch(this, "1", "476", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3287"), new SwitchPosition("0.0", "Posn 2", "3287") }, "Warning lights", "Warning horn switch", "%0.1f"));
-            AddFunction(new PushButton(this, "1", "3291", "194", "Warning lights", "Button Jammer detection light", "%1d"));
-            AddFunction(new Axis(this, "1", "3292", "195", 0.5d, 0.0d, 1.0d, "Warning lights", "Lamp Jammer detection light", false, "%0.1f"));
             AddFunction(new PushButton(this, "1", "3294", "197", "Warning lights", "Button (C + M or SW) R light", "%1d"));
             AddFunction(new Axis(this, "1", "3295", "198", 0.5d, 0.0d, 1.0d, "Warning lights", "Lamp (C + M or SW) R light", false, "%0.1f"));
             AddFunction(new PushButton(this, "1", "3297", "108", "Warning lights", "Button Cannons too hot light", "%1d"));
@@ -444,8 +445,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             #region Radar detector switch
             AddFunction(new Switch(this, "1", "478", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3443"), new SwitchPosition("0.0", "Posn 2", "3443") }, "Radar detector switch", "Radar detector switch", "%0.1f"));
             AddFunction(new PushButton(this, "1", "3444", "708", "Radar detector switch", "Chaff/flares release button", "%1d"));
-            #endregion Radar detector switch
-
+            #endregion Radar detector switch        
         }
+        protected string DCSAircraft { get => _dcsAircraft; set => _dcsAircraft = value; }
     }
 }

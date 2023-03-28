@@ -34,7 +34,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
             "pack://application:,,,/Helios;component/Interfaces/DCS/MIRAGEF1/ExportFunctionsMirageF1EE.lua")
         {
 #if (CREATEINTERFACE && DEBUG)
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World.openbeta\Mods\Aircraft";
             InterfaceCreation ic = new InterfaceCreation();
             foreach (string path in new string[] { $@"{DCSAircraft}\Cockpit\Common\clickabledata_common_F1EE_M.lua", $@"{DCSAircraft}\Cockpit\Mirage-F1\Mirage-F1EE\clickabledata.lua" })
             {
@@ -52,6 +51,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
                             return;
                         }
 #endif
+#pragma warning disable CS0162 // Unreachable code detected
+
             // * * * Creating Interface functions from file: Cockpit\Common\clickabledata_common_F1EE_M.lua
             #region Navigation indicator
             AddFunction(new Switch(this, "1", "1254", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", "3655"), new SwitchPosition("0.0", "Posn 2", "3655") }, "Navigation indicator", "Gyromagnetic/True IDN heading selector", "%0.1f"));
@@ -70,8 +71,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
             AddFunction(new PushButton(this, "1", "3674", "1016", "In-flight refuelling system", "ALR-300 Detailed threats info", "%1d"));
             AddFunction(new Axis(this, "1", "3675", "1017", 0.1d, 0.0d, 1.0d, "In-flight refuelling system", "ALR-300 display brightness", false, "%0.1f"));
             AddFunction(new PushButton(this, "1", "3677", "1018", "In-flight refuelling system", "ALR-300 test", "%1d"));
-            //AddFunction(new PushButton(this, "1", "3291", "194", "In-flight refuelling system", "Button Jammer detection / Feeder tanks overflow light", "%1d"));
-            //AddFunction(new Axis(this, "1", "3292", "195", 0.5d, 0.0d, 1.0d, "In-flight refuelling system", "Lamp Jammer detection / Feeder tanks overflow light", false, "%0.1f"));
+            AddFunction(new PushButton(this, "1", "3291", "194", "In-flight refuelling system", "Button Jammer detection / Feeder tanks overflow light", "%1d"));
+            AddFunction(new Axis(this, "1", "3292", "195", 0.5d, 0.0d, 1.0d, "In-flight refuelling system", "Lamp Jammer detection / Feeder tanks overflow light", false, "%0.1f"));
             #endregion In-flight refuelling system
             // * * * Creating Interface functions from file: C:\Users\bluef\desktop\Cockpit\Mirage-F1\Mirage-F1EE\clickabledata.lua
             #region Inertial Navigation System (INS)
@@ -95,6 +96,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.EE
             AddFunction(new PushButton(this, "1", "3684", "663", "Inertial Navigation System (INS)", "INS 0 pushbutton", "%1d"));
             AddFunction(new PushButton(this, "1", "3694", "664", "Inertial Navigation System (INS)", "INS CLR pushbutton", "%1d"));
             #endregion Inertial Navigation System (INS)
+            base.AddFunctions();
+#pragma warning restore CS0162 // Unreachable code detected
 
         }
     }
