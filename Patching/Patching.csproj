@@ -6063,538 +6063,1078 @@
     <Content Include="Patches\DCS\002_008_00002_35759_00000\Viewports\mods\Aircraft\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\Main\CyranoLegacy_init.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.gpatch" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.grevert" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\TEDAC\TEDAC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\TEDAC\TEDAC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\RWR_ALR67_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\RWR_ALR67_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\Main\CyranoLegacy_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\Main\CyranoLegacy_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.gpatch" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.grevert" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\TEDAC\TEDAC_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\TEDAC\TEDAC_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\TEDAC\TEDAC_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\TEDAC\TEDAC_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDL_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDL_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCD_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDR_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCD_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDR_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\RWR_ALR67_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\RWR_ALR67_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\RWR_ALR67_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\RWR_ALR67_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\Main\CyranoLegacy_init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\Main\CyranoLegacy_init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\Main\CyranoLegacy_init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\Main\CyranoLegacy_init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.gpatch" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.gpatch" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
-    <Content Include="Patches\DCS\002_008_00003_37854_00001\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert" >
+    <Content Include="Patches\DCS\002_008_00004_38947_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert" >
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
     <None Include="Templates\Patching\readme.md" />

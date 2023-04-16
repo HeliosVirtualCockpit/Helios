@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
     using ComponentModel;
     using Common;
     using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.A10C.Functions;
 
     /// <summary>
     /// Interface for DCS A-10C II including any changes made that are not in DCS A-10C
@@ -146,7 +147,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             AddFunction(new PushButton(this, UFC, BUTTON_33, "534", "UFC", "Toggle ARC-210 RT2 Status (long press)", "%0.1f"));
 
             AddFunction(new Switch(this, VHF_AM_RADIO, "551", SwitchPositions.Create(7, 0d, 0.1d, BUTTON_43, new string[] { "OFF", "TR G", "TR", "ADF", "CHG PRST", "TEST", "ZERO (PULL)"}, "%0.1f"), "ARC-210", "Master switch", "%0.1f"));
-            AddFunction(new Axis(this, VHF_AM_RADIO, BUTTON_27, "552", 0.1d, 0.0d, 1d, "ARC-210", "Channel select knob", false, "%0.1f"));
+            AddFunction(new RotaryEncoder(this, VHF_AM_RADIO, BUTTON_27, "552", 0.1d, "ARC-210", "Channel select knob"));
             AddFunction(new Switch(this, VHF_AM_RADIO, "553", SwitchPositions.Create(7, 0d, 0.1d, BUTTON_44, new string[] { "ECCM MASTER", "ECCM", "PRST", "MAN", "MAR", "243", "121 (PULL)" }, "%0.1f"), "ARC-210", "Secondary switch", "%0.1f"));
 
             AddFunction(new Switch(this, VHF_AM_RADIO, "554", SwitchPositions.Create(4, 0d, 0.1d, BUTTON_25, "Posn", "%0.1f"), "ARC-210", "100 MHz Selector", "%0.1f"));
@@ -173,15 +174,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             AddFunction(new PushButton(this, VHF_AM_RADIO, BUTTON_8, "560", "ARC-210", "Brightness increase", "%0.1f"));
             AddFunction(new PushButton(this, VHF_AM_RADIO, BUTTON_9, "559", "ARC-210", "Brightness decrease", "%0.1f"));
 
-            // Variables used on the ARC-210 display
-            AddFunction(new NetworkValue(this, "2414", "ARC-210", "Frequency Display", "Currently tuned frequency of the ARC-210 radio.", "", BindingValueUnits.Text, null));
-            AddFunction(new NetworkValue(this, "2415", "ARC-210", "Prev Label Display", "Value of the PREV label on top left hand corner of display", "", BindingValueUnits.Text, null));
-            AddFunction(new NetworkValue(this, "2416", "ARC-210", "Display of Previous Manual Frequency", "Previous frequency value", "", BindingValueUnits.Text, null));
-            AddFunction(new NetworkValue(this, "2417", "ARC-210", "Modulation Mode", "Modulation value which appears above the main frequency value on the display", "", BindingValueUnits.Text, null));
-            AddFunction(new NetworkValue(this, "2418", "ARC-210", "KY Submode", "Value of the label which displays the sub mode on the display.  This also shows initializing message on the display", "", BindingValueUnits.Text, null));
-            AddFunction(new NetworkValue(this, "2419", "ARC-210", "Communications Security Mode", "KY status in the middle of the display", "", BindingValueUnits.Text, null));
-            AddFunction(new NetworkValue(this, "2420", "ARC-210", "Communications Security Submode", "KY sub-status in the middle of the display", "", BindingValueUnits.Text, null));
-            AddFunction(new NetworkValue(this, "2421", "ARC-210", "RT Label", "Receive / Transmit status from the top right of the display", "", BindingValueUnits.Text, null));
+            AddFunction(new ARC210Display(this)); // 2422
             #endregion
 
         }

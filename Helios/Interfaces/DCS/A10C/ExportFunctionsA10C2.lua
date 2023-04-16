@@ -24,16 +24,9 @@ function driver.processHighImportance(mainPanelDevice)
         helios.send(2406, string.format("%-8s", helios.ensureString(li.txt_CHAFF_FLARE)))
         helios.send(2407, string.format("%-8s", helios.ensureString(li.txt_JMR)))
     end
-    li = helios.parseIndication(18) -- ARC-210 (Work in progress)
+    li = helios.encodeIndication(18) -- ARC-210
     if li then
-        helios.send(2414, string.format("%s%s%s", helios.ensureString(li["freq_label_mhz"]), helios.ensureString(li["dot_mark"]),helios.ensureString(li["freq_label_khz"])))
-        helios.send(2415, string.format("%s", helios.ensureString(li["PREV"])))                 -- Previous Label
-        helios.send(2416, string.format("%s", helios.ensureString(li["prev_manual_freq"])))     -- Previous Frequency
-        helios.send(2417, string.format("%s", helios.ensureString(li["modulation_label"])))     -- AM/FM mode
-        helios.send(2418, string.format("%s", helios.ensureString(li["ky_submode_label"])))
-        helios.send(2419, string.format("%s", helios.ensureString(li["comsec_mode"])))          -- Communications Security Mode
-        helios.send(2420, string.format("%s", helios.ensureString(li["comsec_submode"])))       -- Communications Security Sub-Mode
-        helios.send(2421, string.format("%s", helios.ensureString(li["txt_RT"])))               -- RT label
+            helios.send(2422, string.format("%s", li))                                          -- Encode and send everything
     end
 end
 

@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
+    using NLog.Filters;
     using System;
     using System.Windows;
     using System.Windows.Media;
@@ -34,6 +35,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
         private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
+        private const string PANEL_IMAGE = "{Helios}/Images/AH-64D/MFD/MFD_Frame.png";
+
 
         public MFD(string interfaceDevice)
             : base(interfaceDevice, new Size(1469 / 2, 1381 / 2))
@@ -61,8 +64,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
             _frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = 0.3d;
             _frameGlassPanel.DrawBorder = false;
-            _frameGlassPanel.FillBackground=false;
- 
+            _frameGlassPanel.FillBackground = false;
+
             _frameBezelPanel = AddPanel("MFD Frame", new Point(Left, Top), NativeSize, "{Helios}/Images/AH-64D/MFD/MFD_Frame.png", _interfaceDevice);
             _frameBezelPanel.Opacity = 1d;
             _frameBezelPanel.FillBackground = false;
@@ -77,15 +80,15 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
             AddButton("Button T5", new Point(430, ypos));
             AddButton("Button T6", new Point(493, ypos));
             double xpos = 640;
-            AddButton("Button Asterisk", new Point(xpos, 102), 50d,"*");
+            AddButton("Button Asterisk", new Point(xpos, 102), 50d, "*");
             AddButton("Button R1", new Point(xpos, 163));
             AddButton("Button R2", new Point(xpos, 223));
             AddButton("Button R3", new Point(xpos, 284));
             AddButton("Button R4", new Point(xpos, 346));
             AddButton("Button R5", new Point(xpos, 400));
             AddButton("Button R6", new Point(xpos, 455));
-            AddButton("Button VID", new Point(xpos, 512), 50d,"VID");
-            AddButton("Button COM", new Point(xpos, 568), 50d,"COM");
+            AddButton("Button VID", new Point(xpos, 512), 50d, "VID");
+            AddButton("Button COM", new Point(xpos, 568), 50d, "COM");
             xpos = 40;
             AddButton("Button L1", new Point(xpos, 168));
             AddButton("Button L2", new Point(xpos, 228));
@@ -94,19 +97,19 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
             AddButton("Button L5", new Point(xpos, 397));
             AddButton("Button L6", new Point(xpos, 454));
             xpos = 30;
-            AddButton("Button FCR", new Point(xpos, 513), 50d,"FCR");
-            AddButton("Button WPN", new Point(xpos, 573), 50d,"WPN");
+            AddButton("Button FCR", new Point(xpos, 513), 50d, "FCR");
+            AddButton("Button WPN", new Point(xpos, 573), 50d, "WPN");
             ypos = 620;
-            AddButton("Button TSD", new Point(109, ypos), 50d,"TSD");
-            AddButton("Button B1/M(Menu)", new Point(183, ypos),40d,"M");
+            AddButton("Button TSD", new Point(109, ypos), 50d, "TSD");
+            AddButton("Button B1/M(Menu)", new Point(183, ypos), 40d, "M");
             AddButton("Button B2", new Point(245, ypos));
             AddButton("Button B3", new Point(307, ypos));
             AddButton("Button B4", new Point(369, ypos));
             AddButton("Button B5", new Point(430, ypos));
             AddButton("Button B6", new Point(493, ypos));
-            AddButton("Button A/C", new Point(553, ypos), 50d,"A/C");
+            AddButton("Button A/C", new Point(553, ypos), 50d, "A/C");
 
-            AddThreePositionRotarySwitch("Display Mode", new Point(551d,7d),new Size(62d,62d), _interfaceDevice, "Mode Knob");
+            AddThreePositionRotarySwitch("Display Mode", new Point(551d, 7d), new Size(62d, 62d), _interfaceDevice, "Mode Knob");
             AddPot("Brightness Control", new Point(24d, 91d), new Size(62d, 62d), "Brightness Control Knob");
             AddPot("Video Control", new Point(108d, 7d), new Size(62d, 62d), "Video Control Knob");
 
@@ -182,13 +185,23 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
         {
             Rect vpRect = new Rect(109, 93, 500, 500);
             vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
-
+            TextFormat tf = new TextFormat()
+            {
+                FontStyle = FontStyles.Normal,
+                FontWeight = FontWeights.Normal,
+                FontSize = 1.2,
+                FontFamily = ConfigManager.FontManager.GetFontFamilyByName("Franklin Gothic"),
+                ConfiguredFontSize = 1.2,
+                HorizontalAlignment = TextHorizontalAlignment.Center,
+                VerticalAlignment = TextVerticalAlignment.Center
+            };
             Children.Add(new Helios.Controls.Special.ViewportExtent
             {
                 FillBackground = true,
                 BackgroundColor = Color.FromArgb(128, 128, 0, 0),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
+                TextFormat = tf,
                 Left = vpRect.Left,
                 Top = vpRect.Top,
                 Width = vpRect.Width,
@@ -233,7 +246,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
                 button.TextFormat.VerticalAlignment = TextVerticalAlignment.Center;
                 button.TextFormat.HorizontalAlignment = TextHorizontalAlignment.Center;
                 button.Text = label;
-            } else
+            }
+            else
             {
                 button.Image = "{Helios}/Images/AH-64D/MFD/MFD Button 1 UpH.png";
                 button.PushedImage = "{Helios}/Images/AH-64D/MFD/MFD Button 1 DnH.png";
@@ -267,7 +281,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
         private void AddThreePositionRotarySwitch(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName)
         {
             Helios.Controls.RotarySwitch knob = new Helios.Controls.RotarySwitch();
-            knob.Name = Name + "_" + name; 
+            knob.Name = Name + "_" + name;
             knob.KnobImage = "{Helios}/Images/AH-64D/Common/Common Knob.png";
             knob.DrawLabels = false;
             knob.DrawLines = false;
@@ -317,9 +331,12 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.MFD
             action.Device = ComponentName(name);
             if (!Actions.ContainsKey(Actions.GetKeyForItem(action))) Actions.Add(action);
         }
-        public override string DefaultBackgroundImage
+
+        public override string DefaultBackgroundImage => "{Helios}/Images/AH-64D/MFD/MFD_Frame.png";
+
+        protected override void OnBackgroundImageChange()
         {
-            get { return null; }
+            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : PANEL_IMAGE;
         }
         public override bool HitTest(Point location)
         {

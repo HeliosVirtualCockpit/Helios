@@ -38,21 +38,40 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
         private bool _useTextualDisplays = false;
         private ImageDecoration _displayBackground;
         private string _vpName = "";
-        private string _font = "LED Counter 7";
+        private string _font = "Helios Virtual Cockpit A-10C_ARC-210_Large";
+        private string _font2 = "Helios Virtual Cockpit A-10C_ARC-210_Small";
         private List<TextDisplay> _textDisplayList = new List<TextDisplay>();
 
         public ARC210Radio()
             : base("ARC-210 Radio", new Size(640, 523))
         {
+            HeliosValue hv = new HeliosValue(this, new BindingValue(false), "", "clear radio display", "When true, the display is cleared.", "True or False", BindingValueUnits.Boolean);
+            hv.Execute += new HeliosActionHandler(ClearDisplay_Execute);
+            Actions.Add(hv);
+            Values.Add(hv);
 
             _displayBackground = AddImage($"{_imageLocation}ARC-210_Display.png", new Point(148d, 91d), new Size(297d,193d), $"{_imageLocation}ARC-210_Display.png");
-            _textDisplayList.Add(AddTextDisplay("Frequency Display", new Point(185, 223), new Size(259, 60), _interfaceDeviceName, "Frequency Display", 42, "133.100", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Modulation Mode", new Point(351, 194), new Size(72, 42), _interfaceDeviceName, "Modulation Mode", 32, "AM", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Communications Security Mode", new Point(150, 150), new Size(291, 42), _interfaceDeviceName, "Communications Security Mode", 32, "Comm Sec", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Communications Security Submode", new Point(150, 175), new Size(291, 48), _interfaceDeviceName, "Communications Security Submode", 32, "PT", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Prev Label Display", new Point(149, 83), new Size(106, 42), _interfaceDeviceName, "Prev Label Display", 32, "PREV", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Display of Previous Manual Frequency", new Point(220, 83), new Size(180, 42), _interfaceDeviceName, "Display of Previous Manual Frequency", 32, "133.100", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("RT Label", new Point(368, 83), new Size(80, 42), _interfaceDeviceName, "RT Label", 32, "RT1", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Frequency Display", new Point(180, 223), new Size(259, 72), _interfaceDeviceName, "Frequency Display", _font, 40, "133.888", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("Modulation Mode", new Point(360, 194), new Size(72, 42), _interfaceDeviceName, "Modulation Mode", 20, "AM", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("XMIT/RECV Label", new Point(260, 194), new Size(72, 42), _interfaceDeviceName, "XMIT/RECV Label", 20, "XMIT", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Communications Security Mode", new Point(150, 150), new Size(291, 42), _interfaceDeviceName, "Communications Security Mode", 20, "KY-58 VOICE", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Communications Security Submode", new Point(150, 175), new Size(291, 48), _interfaceDeviceName, "Communications Security Submode", 20, "PT", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Display of Previous Manual Frequency", new Point(240, 90), new Size(180, 32), _interfaceDeviceName, "Display of Previous Manual Frequency", 20, "133.100", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("RT Label", new Point(368, 85), new Size(68, 42), _interfaceDeviceName, "RT Label", 20, "RT1", TextHorizontalAlignment.Right, ""));
+
+            _textDisplayList.Add(AddTextDisplay("Upper Button Label", new Point(151, 90), new Size(280, 32), _interfaceDeviceName, "Upper FSK Label", 20, "LABEL 1", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Middle Button Label", new Point(151, 154), new Size(300, 64), _interfaceDeviceName, "Middle FSK Label", 20, "LABEL 2", TextHorizontalAlignment.Left, TextVerticalAlignment.Center, ""));
+            _textDisplayList.Add(AddTextDisplay("Lower Button Label", new Point(151, 249), new Size(280, 32), _interfaceDeviceName, "Lower FSK Label", 20, "LABEL 3", TextHorizontalAlignment.Left, ""));
+
+            _textDisplayList.Add(AddTextDisplay("Preset Display", new Point(368, 125), new Size(68, 72), _interfaceDeviceName, "Active Channel Number", _font, 40, "88", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Type", new Point(344, 182), new Size(92, 42), _interfaceDeviceName, "Sat comm channel type", 20, "IDLE", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Timeout", new Point(156, 125), new Size(140, 32), _interfaceDeviceName, "Sat comm activated time remaining", 20, "00:00:00", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Status", new Point(220, 223), new Size(270, 72), _interfaceDeviceName, "Sat comm activated status", _font, 40, "ACTIVE", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Lower Left Number", new Point(151, 240), new Size(72, 32), _interfaceDeviceName, "Comm security sat comm delay", 20, "5", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Lower Right Status", new Point(252, 214), new Size(188, 64), _interfaceDeviceName, "Sat comm connection status", 20, "LOGGED IN-\nCONNECTING", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Channel Label", new Point(275, 90), new Size(120, 32), _interfaceDeviceName, "Sat comm channel label", 20, "DAMA", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Central Information Area", new Point(148, 91), new Size(297, 193), _interfaceDeviceName, "KY label", 20, "DAMA\nCOMSEC\nPARAMETRS\nUPDATED", TextHorizontalAlignment.Center, TextVerticalAlignment.Center,  ""));
+            _textDisplayList.Add(AddTextDisplay("WOD Segment Display", new Point(270, 160), new Size(68, 72), _interfaceDeviceName, "WOD Segment Display", _font, 40, "20", TextHorizontalAlignment.Right, ""));
 
             RotarySwitchPositionCollection positions = new RotarySwitchPositionCollection();
             positions.Clear();
@@ -154,6 +173,16 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
             positions.Add(new RotarySwitchPosition(this, 2, "ON", 30d));
             AddRotarySwitch("Squelch on/off", new Point(506, 74), new Size(70, 70), $"{_imageLocation}ARC-210_Squelch_Knob.png", 1, positions, "Squelch on/off");
             UseTextualDisplays = false;
+
+            // this is to allow the displays to be cleared when the OFF switch is selected.
+            DefaultSelfBindings.Add(new DefaultSelfBinding(
+                triggerChildName: "ARC-210 Radio_Master switch",
+                deviceTriggerName: "position 1.entered",
+                deviceTriggerBindingValue: new BindingValue(true),
+                actionChildName: "",
+                deviceActionName: "set.clear radio display"
+                ));
+
         }
 
         public override string DefaultBackgroundImage => _imageLocation + "ARC-210_Faceplate.png";
@@ -217,19 +246,37 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
             return newSwitch;
         }
         private TextDisplay AddTextDisplay(string name, Point posn, Size size,
-                string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp, 
+            string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp,
+            TextHorizontalAlignment hTextAlign, string devDictionary)
+        {
+            return AddTextDisplay(name, posn, size, interfaceDeviceName, interfaceElementName, _font2, baseFontsize, testDisp, hTextAlign, TextVerticalAlignment.Center, devDictionary);
+        }
+        private TextDisplay AddTextDisplay(string name, Point posn, Size size,
+                string interfaceDeviceName, string interfaceElementName, string fontFamily, double baseFontsize, string testDisp,
                 TextHorizontalAlignment hTextAlign, string devDictionary)
+        {
+            return AddTextDisplay(name, posn, size, interfaceDeviceName, interfaceElementName, fontFamily, baseFontsize, testDisp, hTextAlign, TextVerticalAlignment.Center, devDictionary);
+        }
+        private TextDisplay AddTextDisplay(string name, Point posn, Size size,
+        string interfaceDeviceName, string interfaceElementName, double baseFontsize, string testDisp,
+        TextHorizontalAlignment hTextAlign, TextVerticalAlignment vTextAlign, string devDictionary)
+        {
+            return AddTextDisplay(name, posn, size, interfaceDeviceName, interfaceElementName, _font2, baseFontsize, testDisp, hTextAlign, vTextAlign, devDictionary);
+        }
+        private TextDisplay AddTextDisplay(string name, Point posn, Size size,
+                string interfaceDeviceName, string interfaceElementName, string fontFamily, double baseFontsize, string testDisp, 
+                TextHorizontalAlignment hTextAlign, TextVerticalAlignment vTextAlign, string devDictionary)
         {
             TextDisplay display = AddTextDisplay(
                 name: name,
                 posn: posn,
             size: size,
-                font: _font,
+                font: fontFamily,
                 baseFontsize: baseFontsize,
                 horizontalAlignment: hTextAlign,
-                verticalAligment: TextVerticalAlignment.Center,
+                verticalAligment: vTextAlign,
                 testTextDisplay: testDisp,
-                textColor: Color.FromArgb(0xcc, 0x50, 0xc3, 0x39),
+                textColor: Color.FromArgb(0xe0, 0x78, 0xbf, 0x9d),
                 backgroundColor: Color.FromArgb(0xff, 0x04, 0x2a, 0x00),
                 useBackground: false,
                 interfaceDeviceName: interfaceDeviceName,
@@ -330,6 +377,16 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
                 {
                     Children.Remove(visual);
                     break;
+                }
+            }
+        }
+        private void ClearDisplay_Execute(object action, HeliosActionEventArgs e)
+        {
+            if(e.Value.BoolValue)
+            {
+                foreach(TextDisplay td in _textDisplayList)
+                {
+                        td.TextValue = "";
                 }
             }
         }

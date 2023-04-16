@@ -81,14 +81,25 @@ namespace GadrocsWorkshop.Helios
     public struct DefaultSelfBinding
     {
         public string TriggerChildName, DeviceTriggerName, ActionChildName, DeviceActionName;
+        public BindingValue DeviceTriggerBindingValue;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName)
+        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName) {
+            TriggerChildName = triggerChildName;
+            DeviceTriggerName = deviceTriggerName;
+            ActionChildName = actionChildName;
+            DeviceActionName = deviceActionName;
+            DeviceTriggerBindingValue = null;
+            Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName}");
+        }
+
+        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName, BindingValue deviceTriggerBindingValue)
         {
             TriggerChildName = triggerChildName;
             DeviceTriggerName = deviceTriggerName;
             ActionChildName = actionChildName;
             DeviceActionName = deviceActionName;
+            DeviceTriggerBindingValue = deviceTriggerBindingValue;
             Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName}");
         }
     }
@@ -271,11 +282,16 @@ namespace GadrocsWorkshop.Helios
 
         protected virtual void AddDefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName)
         {
+            AddDefaultSelfBinding(triggerChildName, deviceTriggerName, actionChildName, deviceActionName, null);
+        }
+        protected virtual void AddDefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName, BindingValue deviceBindingValue)
+        {
             DefaultSelfBindings.Add(new DefaultSelfBinding(
                 triggerChildName: triggerChildName,
                 deviceTriggerName: deviceTriggerName,
                 actionChildName: actionChildName,
-                deviceActionName: deviceActionName
+                deviceActionName: deviceActionName,
+                deviceTriggerBindingValue: deviceBindingValue
                 ));
         }
 
@@ -405,18 +421,18 @@ namespace GadrocsWorkshop.Helios
             // now looping for all default self bindings to link trigger with actions
             foreach (DefaultSelfBinding defaultBinding in _defaultSelfBindings)
             {
-                if (!Children.ContainsKey(defaultBinding.TriggerChildName))
+                if (defaultBinding.TriggerChildName != "" && !Children.ContainsKey(defaultBinding.TriggerChildName))
                 {
                     Logger.Error($"Cannot find Trigger child for Self Bind {defaultBinding.TriggerChildName}");
                     continue;
                 }
-                if (!Children.ContainsKey(defaultBinding.ActionChildName))
+                if (defaultBinding.ActionChildName != "" && !Children.ContainsKey(defaultBinding.ActionChildName))
                 {
                     Logger.Error($"Cannot find Action child for Self Bind {defaultBinding.ActionChildName}");
                     continue;
                 }
-                HeliosVisual triggerChild = Children[defaultBinding.TriggerChildName];
-                HeliosVisual actionChild = Children[defaultBinding.ActionChildName];
+                HeliosVisual triggerChild = defaultBinding.TriggerChildName != "" ? Children[defaultBinding.TriggerChildName]: this;
+                HeliosVisual actionChild = defaultBinding.ActionChildName != "" ? Children[defaultBinding.ActionChildName]: this;
                 if (!triggerChild.Triggers.ContainsKey(defaultBinding.DeviceTriggerName))
                 {
                     Logger.Error("Cannot find trigger " + defaultBinding.DeviceTriggerName);

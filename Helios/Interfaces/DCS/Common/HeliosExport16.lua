@@ -287,6 +287,15 @@ function helios.parseIndication(indicator_id)
     return ret
 end
 
+function helios.encodeIndication(indicator_id)
+    -- for complex variables we perform simple encoding before sending
+    local li = list_indication(indicator_id)
+    if li == "" then
+        return nil
+    end
+    return li:gsub(('%-'):rep(41).."\n","%%0A%%0D"):gsub("\n","%%0A"):gsub(":","%%3A")
+end
+
 -- send a value if its value has changed, batching sends
 --
 -- "format" is an optional format string to apply to the value 
