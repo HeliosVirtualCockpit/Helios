@@ -278,6 +278,7 @@
     <Compile Include="IInstallation2.cs" />
     <Compile Include="IModuleManagerWritable.cs" />
     <Compile Include="Interfaces\Common\ViewportCompilerInterface.cs" />
+    <Compile Include="Interfaces\DCS\A10C\Functions\ARC210Display.cs" />
     <Compile Include="Interfaces\DCS\Common\BaseDCSCommnadsCreator.cs" />
     <Compile Include="Interfaces\DCS\Common\BaseDCSDevicesCreator.cs" />
     <Compile Include="Interfaces\DCS\Common\BaseDCSMainPanelCreator.cs" />
@@ -1405,17 +1406,50 @@
     <Compile Include="Windows\ViewModel\ShareInterfaceStatus.cs" />
     <None Include="Assets\Helios_ADI.odg" />
     <None Include="Assets\render.cmd" />
-    <Content Include="Fonts\*.ttf">
+    <Content Include="Fonts\A-10C_ALQ_213.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="BindingValueUnits.cd" />
-    <Content Include="Fonts\DSEG14Classic-Regular.ttf">
+    <Content Include="Fonts\A-10C_ARC_164.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\A-10C_Digital_Clock.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Fonts\DSEG7Classic-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Fonts\MonospacedLEDCounter7.ttf" />
+    <Content Include="Fonts\F-16C_Viper_DED.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FA-18C_Hornet_IFEI.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FA-18C_Hornet_Up_Front_Controller.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Helios-A-10C_ARC-210_Large.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Helios-A-10C_ARC-210_Small.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\M-2000C PCA 16 Segment.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\MonospacedLEDCounter7.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\MS33558.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="BindingValueUnits.cd" />
+    <Content Include="Fonts\DSEG7Classic-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Fonts\DSEG14Classic-Regular.ttf" />
+    <Content Include="Fonts\Helios_APN209_LEDCounter7.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Images\A-10\readme.md" />
     <Resource Include="Interfaces\DCS\A10C\ExportFunctionsA10C2.lua" />
     <Resource Include="Interfaces\DCS\AH64D\ExportFunctions.lua" />

@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt (Pilot)";
-        private string _font = "LED Counter 7";
+        private string _font = "Helios APN209 LED Counter 7 Regular";
         private FontStyle _fontStyle = FontStyles.Oblique;
         private FontWeight _fontWeight = FontWeights.Normal;
 
@@ -77,8 +77,8 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
                     VerticalAlignment = TextVerticalAlignment.Center,
                     FontSize = baseFontsize,
                     ConfiguredFontSize = baseFontsize,
-                    PaddingRight = 0.006,
-                    PaddingLeft = 0,
+                    PaddingRight = 0,
+                    PaddingLeft = 0.2,
                     PaddingTop = 0,
                     PaddingBottom = 0
                 }
