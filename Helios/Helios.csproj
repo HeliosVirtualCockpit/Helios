@@ -278,6 +278,7 @@
     <Compile Include="IInstallation2.cs" />
     <Compile Include="IModuleManagerWritable.cs" />
     <Compile Include="Interfaces\Common\ViewportCompilerInterface.cs" />
+    <Compile Include="Interfaces\DCS\A10C\Functions\ARC210Display.cs" />
     <Compile Include="Interfaces\DCS\Common\BaseDCSCommnadsCreator.cs" />
     <Compile Include="Interfaces\DCS\Common\BaseDCSDevicesCreator.cs" />
     <Compile Include="Interfaces\DCS\Common\BaseDCSMainPanelCreator.cs" />
