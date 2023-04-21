@@ -31,12 +31,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.UH60L
     using GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools;
 
     /* enabling this attribute will cause Helios to discover this new interface and make it available for use    */
-    [HeliosInterface(
-        "Helios.UH-60L",                         // Helios internal type ID used in Profile XML, must never change
-        "DCS H-60 Family UH-60L Blackhawk (Community)",     // human readable UI name for this interface
-        typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
-        typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
-        UniquenessKey = "Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
+    //[HeliosInterface(
+    //    "Helios.UH-60L",                         // Helios internal type ID used in Profile XML, must never change
+    //    "DCS H-60 (UH-60L Blackhawk)",           // human readable UI name for this interface
+    //    typeof(DCSInterfaceEditor),              // uses basic DCS interface dialog
+    //    typeof(UniqueHeliosInterfaceFactory),    // can't be instantiated when specific other interfaces are present
+    //    UniquenessKey = "Helios.DCSInterface")]  // all other DCS interfaces exclude this interface
 
     public class UH60LInterface : H60Interface
     {

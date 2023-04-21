@@ -30,12 +30,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.H60.MH60R
     using GadrocsWorkshop.Helios.Interfaces.DCS.H_60.Tools;
 
     /* enabling this attribute will cause Helios to discover this new interface and make it available for use    */
-    [HeliosInterface(
-        "Helios.MH-60R",                         // Helios internal type ID used in Profile XML, must never change
-        "DCS H-60 Family MH-60R Seahawk (Community)",    // human readable UI name for this interface
-        typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
-        typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
-        UniquenessKey = "Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
+    //[HeliosInterface(
+        //"Helios.MH-60R",                         // Helios internal type ID used in Profile XML, must never change
+        //"DCS H-60 (MH-60R Seahawk)",             // human readable UI name for this interface
+        //typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
+        //typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
+        //UniquenessKey = "Helios.DCSInterface")] // all other DCS interfaces exclude this interface
 
     public class MH60RInterface : H60Interface
     {
@@ -786,20 +786,20 @@ AddFunction(new FlagValue(this,  mainpanel.pduCpltOverspeed2.ToString("d"), "COP
 AddFunction(new FlagValue(this,  mainpanel.pduCpltOverspeed3.ToString("d"), "COPILOT VSI", "PDU_CPLT_OVERSPEED3","", "%1d"));
             #endregion COPILOT VSI
             #region M130 CM System
-            AddFunction(new NetworkValue(this, mainpanel.cmFlareCounterTens.ToString("d"), "M130 CM System", "M130_FLARECOUNTER_TENS", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.cmFlareCounterOnes.ToString("d"), "M130 CM System", "M130_FLARECOUNTER_ONES", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.cmChaffCounterTens.ToString("d"), "M130 CM System", "M130_CHAFFCOUNTER_TENS", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.cmChaffCounterOnes.ToString("d"), "M130 CM System", "M130_CHAFFCOUNTER_ONES", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.cmArmedLight.ToString("d"), "M130 CM System", "M130_ARMED_LIGHT", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.pilotVSILtGA.ToString("d"), "PILOT VSI", "pilotVSILtGA", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.pilotVSILtDH.ToString("d"), "PILOT VSI", "PILOT_APN209_LOLIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.pilotVSILtMB.ToString("d"), "PILOT VSI", "pilotVSILtMB", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.copilotVSILtGA.ToString("d"), "COPILOT VSI", "copilotVSILtGA", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.copilotVSILtDH.ToString("d"), "COPILOT VSI", "COPILOT_APN209_LOLIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.copilotVSILtMB.ToString("d"), "COPILOT VSI", "copilotVSILtMB", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.StabInd.ToString("d"), "STABILATOR", "STABIND", "value between -1 and 1", "Numeric value between -1 and 1", BindingValueUnits.Numeric, "%0.3f"));
-            AddFunction(new NetworkValue(this, mainpanel.StabIndFlag.ToString("d"), "STABILATOR", "STABINDFLAG", "Off flag on the Stabilator instrument", "Boolean value True or False", BindingValueUnits.Boolean, "%1d"));
-            AddFunction(new NetworkValue(this, mainpanel.PilotDoor.ToString("d"), "Doors", "DOOR_PLT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.cmFlareCounterTens.ToString("d"), "M130 CM System", "M130_FLARECOUNTER_TENS", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.cmFlareCounterOnes.ToString("d"), "M130 CM System", "M130_FLARECOUNTER_ONES", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.cmChaffCounterTens.ToString("d"), "M130 CM System", "M130_CHAFFCOUNTER_TENS", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.cmChaffCounterOnes.ToString("d"), "M130 CM System", "M130_CHAFFCOUNTER_ONES", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.cmArmedLight.ToString("d"), "M130 CM System", "M130_ARMED_LIGHT", "", "numeric value between 0.0 and 1.0", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.pilotVSILtGA.ToString("d"), "PILOT VSI", "pilotVSILtGA", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.pilotVSILtDH.ToString("d"), "PILOT VSI", "PILOT_APN209_LOLIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.pilotVSILtMB.ToString("d"), "PILOT VSI", "pilotVSILtMB", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.copilotVSILtGA.ToString("d"), "COPILOT VSI", "copilotVSILtGA", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.copilotVSILtDH.ToString("d"), "COPILOT VSI", "COPILOT_APN209_LOLIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.copilotVSILtMB.ToString("d"), "COPILOT VSI", "copilotVSILtMB", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.StabInd.ToString("d"), "Stabilator", "STABIND", "value between -1 and 1", "Numeric value between -1 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.StabIndFlag.ToString("d"), "Stabilator", "STABINDFLAG", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.PilotDoor.ToString("d"), "Doors", "DOOR_PLT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
             #endregion M130 CM System
             #region ARN-147 dials
             AddFunction(new NetworkValue(this,  mainpanel.ARN147MHz100s.ToString("d"), "ARN-147 dials", "ARN147_MHZ100S", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
