@@ -28,12 +28,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
     using GadrocsWorkshop.Helios.UDPInterface;
     using NLog;
 
-    [HeliosInterface(
-    "Helios.F16C",                         // Helios internal type ID used in Profile XML, must never change
-        "DCS F-16C Viper (Helios)",                    // human readable UI name for this interface
-        typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
-        typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
-        UniquenessKey = "Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
+    //[HeliosInterface(
+    //"Helios.F16C",                         // Helios internal type ID used in Profile XML, must never change
+    //    "DCS F-16C Viper (Helios)",                    // human readable UI name for this interface
+    //    typeof(DCSInterfaceEditor),             // uses basic DCS interface dialog
+    //    typeof(UniqueHeliosInterfaceFactory),   // can't be instantiated when specific other interfaces are present
+    //    UniquenessKey = "Helios.DCSInterface")]   // all other DCS interfaces exclude this interface
 
     public class F16CInterface : DCSInterface
     {
