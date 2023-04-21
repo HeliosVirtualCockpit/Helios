@@ -44,7 +44,8 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments
         public RadAlt( FLYER flyer, Size size)
             : base($"RADAR Altimeter ({flyer})", size)
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface), typeof(Interfaces.DCS.Soft.SoftInterface) };
+            SupportedInterfaceNames = new[] { "DCS H-60 (MH-60R Seahawk)", "DCS H-60 (UH-60L Blackhawk)" };
             _flyer = flyer;
             _interfaceDeviceName = $"{flyer.ToString().ToUpper ()} AN/APN-209 RADAR ALTIMETER";
             AddLabel("Digital Altitude Background", new Point(63d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);

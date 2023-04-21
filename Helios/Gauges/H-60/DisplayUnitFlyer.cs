@@ -33,7 +33,8 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.DisplayUnit
         public FlyerDisplayUnit(FLYER flyer)
             : base($"{flyer} Display Unit", new Size(492, 840))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface), typeof(Interfaces.DCS.Soft.SoftInterface) };
+            SupportedInterfaceNames = new[] { "DCS H-60 (MH-60R Seahawk)", "DCS H-60 (UH-60L Blackhawk)" };
             _interfaceDeviceName = $"Engine Management ({flyer})";
             AddBarGauge("RPM Engine 1", new Point(59, 50), new Size(40, 738), 41d, "{Helios}/Images/H-60/SegmentBarDisplay41RPM.xaml", _interfaceDeviceName, "Engine 1 RPM");
             AddBarGauge("RPM Rotor", new Point(119, 50), new Size(40, 738), 41d, "{Helios}/Images/H-60/SegmentBarDisplay41RPM.xaml", _interfaceDeviceName, "Rotor RPM");

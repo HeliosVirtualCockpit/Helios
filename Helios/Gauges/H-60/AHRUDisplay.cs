@@ -33,7 +33,8 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.AHRU
         public AHRUDisplay()
             : base("AHRU Display", new Size(280d, 32d))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface), typeof(Interfaces.DCS.Soft.SoftInterface) };
+            SupportedInterfaceNames = new[] { "DCS H-60 (MH-60R Seahawk)", "DCS H-60 (UH-60L Blackhawk)" };
             AddTextDisplay("Display Text", new Point(0d, 0d), new Size(280d, 32d), _interfaceDeviceName, "Display Text", 20, "", TextHorizontalAlignment.Left, "!=:");
         }
         private void AddTextDisplay(string name, Point posn, Size size,

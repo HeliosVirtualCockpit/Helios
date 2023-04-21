@@ -37,7 +37,8 @@ namespace GadrocsWorkshop.Helios.Gauges.H60.Instruments.CDU
         public CenterDisplayUnit()
             : base("Center Display Unit", new Size(1250,712))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.UH60L.UH60LInterface), typeof(Interfaces.DCS.H60.MH60R.MH60RInterface), typeof(Interfaces.DCS.Soft.SoftInterface) };
+            SupportedInterfaceNames = new[] { "DCS H-60 (MH-60R Seahawk)", "DCS H-60 (UH-60L Blackhawk)" };
             AddBarGauge("Fuel Quantity L", new Point(19, 128), new Size(40, 540), 30d, "{Helios}/Images/H-60/SegmentBarDisplay30Fuel.xaml", _interfaceDeviceName, "Fuel Quantity Left");
             AddBarGauge("Fuel Quantity R", new Point(140, 128), new Size(40, 540), 30d, "{Helios}/Images/H-60/SegmentBarDisplay30Fuel.xaml", _interfaceDeviceName, "Fuel Quantity Right");
             AddBarGauge("Transmission Temp Gauge", new Point(220, 128), new Size(40, 540), 30d, "{Helios}/Images/H-60/SegmentBarDisplay30TransmissionTemp.xaml", _interfaceDeviceName, "Transmission Temperature");

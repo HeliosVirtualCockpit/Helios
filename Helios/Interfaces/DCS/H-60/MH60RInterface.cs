@@ -797,8 +797,8 @@ AddFunction(new NetworkValue(this,  mainpanel.pilotVSILtMB.ToString("d"), "PILOT
 AddFunction(new NetworkValue(this,  mainpanel.copilotVSILtGA.ToString("d"), "COPILOT VSI", "copilotVSILtGA", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
 AddFunction(new NetworkValue(this,  mainpanel.copilotVSILtDH.ToString("d"), "COPILOT VSI", "COPILOT_APN209_LOLIGHT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
 AddFunction(new NetworkValue(this,  mainpanel.copilotVSILtMB.ToString("d"), "COPILOT VSI", "copilotVSILtMB", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.StabInd.ToString("d"), "Stabilator", "STABIND", "value between -1 and 1", "Numeric value between -1 and 1", BindingValueUnits.Numeric, "%0.3f"));
-AddFunction(new NetworkValue(this,  mainpanel.StabIndFlag.ToString("d"), "Stabilator", "STABINDFLAG", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.StabInd.ToString("d"), "Stability Control", "Stabilator Position", "Position of the stabilator needle", "Numeric value between -1 and 1", BindingValueUnits.Numeric, "%0.3f"));
+AddFunction(new NetworkValue(this,  mainpanel.StabIndFlag.ToString("d"), "Stability Control", "Off flag", "Displayed when the gauge is off", "true or false", BindingValueUnits.Boolean, "%1d"));
 AddFunction(new NetworkValue(this,  mainpanel.PilotDoor.ToString("d"), "Doors", "DOOR_PLT", "value between 0 and 1", "Numeric value between 0 and 1", BindingValueUnits.Numeric, "%0.3f"));
             #endregion M130 CM System
             #region ARN-147 dials
