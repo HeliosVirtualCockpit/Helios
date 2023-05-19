@@ -42,7 +42,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.TEDAC
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.AH64D.AH64DInterface) };
 
-            _vpName = "AH_64D_TEDAC";
+            _vpName = "TEDAC";
             if (_includeViewport) AddViewport(_vpName);
             _frameGlassPanel = AddPanel("TEDAC Glass", new Point(142, 150), new Size(800d, 800d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = 0.3d;
