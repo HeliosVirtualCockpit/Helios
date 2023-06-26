@@ -14,7 +14,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#define CREATEINTERFACE
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
 {
     using System;
@@ -50,6 +49,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
                 "pack://application:,,,/Helios;component/Interfaces/DCS/F-15E/ExportFunctionsF15E.lua")
         {
 
+            // see if we can restore from JSON
+#if (!DEBUG)
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
+#endif
 #pragma warning disable CS0162 // Unreachable code detected
             #region UFC Panel
             AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "270", "UFC Panel", "UFC Push button 1", "%1d"));
