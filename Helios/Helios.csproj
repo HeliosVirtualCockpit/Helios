@@ -265,6 +265,9 @@
     <Compile Include="IModuleManagerWritable.cs" />
     <Compile Include="Interfaces\Common\ViewportCompilerInterface.cs" />
     <Compile Include="Interfaces\DCS\A10C\Functions\ARC210Display.cs" />
+    <Compile Include="Interfaces\DCS\F-15E\Commands.cs" />
+    <Compile Include="Interfaces\DCS\F-15E\Devices.cs" />
+    <Compile Include="Interfaces\DCS\F-15E\F15EInterface.cs" />
     <Compile Include="Interfaces\DCS\H-60\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\H-60\Functions\Chronometer.cs" />
     <Compile Include="Interfaces\DCS\H-60\Functions\H60Function.cs" />
@@ -1388,6 +1391,7 @@
     <Resource Include="Interfaces\DCS\BlackShark\ExportFunctionsKa-50_2.lua" />
     <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1EE.lua" />
     <Resource Include="Interfaces\DCS\MirageF1\ExportFunctionsMirageF1CE.lua" />
+    <Resource Include="Interfaces\DCS\F-15E\ExportFunctionsF15E.lua" />
     <None Include="Interfaces\Falcon\readme.md" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\ded.png" />
     <Resource Include="Interfaces\Falcon\OpenFalcon\hud.png" />
@@ -3937,7 +3941,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Gauges\F-15E\" />
     <Folder Include="Gauges\FA-18C\Controls\" />
+    <Folder Include="Images\F-15E\" />
+    <Folder Include="Interfaces\DCS\F-15E\Functions\" />
     <Folder Include="Interfaces\DCS\F14B\Functions\" />
     <Folder Include="Interfaces\DCS\Mi8Simple\Functions\" />
     <Folder Include="Interfaces\DCS\MiG21\Functions\" />
