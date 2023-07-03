@@ -31,6 +31,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
 
     public class AH64DInterface : DCSInterface
     {
+#pragma warning disable IDE1006 // Naming Standard issues
+#pragma warning disable IDE0051 // Remove unused private members
+
         #region Devices
         private const string FM_PROXY = "1";
         private const string CONTROL_INTERFACE = "2";
@@ -928,6 +931,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
             FLAG_ProcessorSelectSp2CPG = 437
         };
         #endregion
+#pragma warning restore IDE0051 // Remove unused private members
+#pragma warning restore IDE1006 // Naming Standard issues
+
         public AH64DInterface(string name)
             : base(name, "AH-64D_BLK_II", "pack://application:,,,/Helios;component/Interfaces/DCS/AH64D/ExportFunctions.lua")
         {
