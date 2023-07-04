@@ -27,6 +27,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using static GadrocsWorkshop.Helios.NativeMethods;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Commands;
     using System.Windows.Shapes;
+    //using GadrocsWorkshop.Helios.Controls;
+    using SharpDX;
+    using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
 
     internal enum Cockpit { Front, Rear }
     /// <summary>
@@ -128,18 +131,27 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_VIDEO_BRT_Knob.ToString("d"), "124", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Video Brightness Control", false, "%0.1f"));
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_VIDEO_CONT_Knob.ToString("d"), "125", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Contrast Control", false, "%0.1f"));
             AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AA_Switch.ToString("d"), "126", "HUD Control Panel", "A/A Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "326", "HUD Control Panel", "A/A Master Mode Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AG_Switch.ToString("d"), "127", "HUD Control Panel", "A/G Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "327", "HUD Control Panel", "A/G Master Mode Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_NAV_Switch.ToString("d"), "128", "HUD Control Panel", "NAV Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "328", "HUD Control Panel", "NAV Master Mode Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_INST_Switch.ToString("d"), "129", "HUD Control Panel", "INST Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "329", "HUD Control Panel", "INST Master Mode Indicator", "True when indicator is lit", "%1d"));
             #endregion HUD Control Panel
             #region AMAD Panel
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "314", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.fire_ext_sw.ToString("d"), Commands.amadctrl_commands.fire_ext_sw.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition("-1.0", "Posn 3", Commands.amadctrl_commands.fire_ext_sw.ToString("d"), Commands.amadctrl_commands.fire_ext_sw.ToString("d"), "0.0", "0.0") }, "AMAD Panel", "Fire Extinguisher Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "315", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.amad_sw_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.amadctrl_commands.amad_sw_cover.ToString("d")) }, "AMAD Panel", "AMAD Fire Switch Cover", "%0.1f"));
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "316", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.amad_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.amadctrl_commands.amad_sw.ToString("d")) }, "AMAD Panel", "AMAD Fire Switch", "%0.1f"));
+            AddFunction(new FlagValue(this, "130", "AMAD Panel", "AMAD Fire Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "317", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.left_eng_fire_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.amadctrl_commands.left_eng_fire_cover.ToString("d")) }, "AMAD Panel", "Left Engine Fire Switch Cover", "%0.1f"));
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "318", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.left_eng_fire_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.amadctrl_commands.left_eng_fire_sw.ToString("d")) }, "AMAD Panel", "Left Engine Fire Switch", "%0.1f"));
+            AddFunction(new FlagValue(this, "131", "AMAD Panel", "Engine Fire Left Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "319", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.right_eng_fire_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.amadctrl_commands.right_eng_fire_cover.ToString("d")) }, "AMAD Panel", "Right Engine Fire Switch Cover", "%0.1f"));
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "320", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.right_eng_fire_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.amadctrl_commands.right_eng_fire_sw.ToString("d")) }, "AMAD Panel", "Right Engine Fire Switch", "%0.1f"));
+            AddFunction(new FlagValue(this, "132", "AMAD Panel", "Engine Fire Right Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "133", "AMAD Panel", "Left Burn Thru Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "134", "AMAD Panel", "Right Burn Thru Indicator", "True when indicator is lit", "%1d"));
             #endregion AMAD Panel
             #region Armament Panel
             AddFunction(new Switch(this, devices.PACS.ToString("d"), "323", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.armtctrl_commands.Master_Arm_SW.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.armtctrl_commands.Master_Arm_SW.ToString("d")) }, "Armament Panel", "Master Arm", "%0.1f"));
@@ -153,16 +165,74 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #endregion Fuel Monitor Panel
             #region Landing Gear Panel
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.ldg_commands.warn_tone_sil_btn.ToString("d"), "325", "Landing Gear Panel", "Landing Gear Warning Tone Silence Switch", "%1d"));
+            // Line 100: elements["PTN_324"] = LDG_Gear_Control_Lever(_("Landing Gear Lever"),						devices.LGS,			ldg_commands.Gear_lever,				324, 2.5)
+            AddFunction(new FlagValue(this, "330", "Landing Gear Panel", "Left Gear Down Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "331", "Landing Gear Panel", "Nose Gear Down Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "332", "Landing Gear Panel", "Right Gear Down Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "333", "Landing Gear Panel", "Gear Lever Warning Indicator", "True when indicator is lit", "%1d"));
+
+            AddFunction(new FlagValue(this, "338", "Landing Gear Panel", "Half Flaps Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "339", "Landing Gear Panel", "Full Flaps Indicator", "True when indicator is lit", "%1d"));
+
+
             #endregion Landing Gear Panel
             #region Flight Instruments
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "335", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")) }, "Flight Instruments", "Pitch Ratio switch", "%0.1f"));
             #endregion Flight Instruments
+
+            #region Warning Panel (Pilot)
+            //  +-----------------------+-----------------------+
+            //  | PROGRAM (GR)     411? | MINIMUM         412?  |
+            //  +-----------------------+-----------------------+
+            //  | CHAFF            413? | FLARE           414?  |
+            //  +-----------------------+-----------------------+
+            //  | EMER BST ON      415  | BST SYS MAL     416   |
+            //  +-----------------------+-----------------------+
+            //  | NUCLEAR          420? | FUEL LOW        417?  |
+            //  +-----------------------+-----------------------+
+            //  | L GEN            419  | R GEN           418   |
+            //  +-----------------------+-----------------------+
+            //  | ENGINE           421  | FLT CONTR       422   |
+            //  +-----------------------+-----------------------+
+            //  | HYD              423? | AV BIT          424?  |
+            //  +-----------------------+-----------------------+
+            //  | DSPFLOLO         425? | OXYGEN          426   |
+            //  +-----------------------+-----------------------+
+            //  | SPARE            427? | SPARE           428?  |
+            //  +-----------------------+-----------------------+
+            //  | SPARE            429? | SPARE           430?  |
+            //  +-----------------------+-----------------------+
+
+            AddFunction(new FlagValue(this, "411", "Warning Panel (Pilot)", "Program Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "412", "Warning Panel (Pilot)", "Minimum Warning Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "413", "Warning Panel (Pilot)", "Chaff Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "414", "Warning Panel (Pilot)", "Flare Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "415", "Warning Panel (Pilot)", "Emergency BST On Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "416", "Warning Panel (Pilot)", "BST System Malfunction Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "417", "Warning Panel (Pilot)", "FUEL LOW Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "418", "Warning Panel (Pilot)", "Right Generator Warning", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "419", "Warning Panel (Pilot)", "Left Generator Warning", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "420", "Warning Panel (Pilot)", "NUCLEAR Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "421", "Warning Panel (Pilot)", "Engine Warning Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "422", "Warning Panel (Pilot)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "423", "Warning Panel (Pilot)", "Hydraulics Warning Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "424", "Warning Panel (Pilot)", "AV BIT Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "425", "Warning Panel (Pilot)", "DSPFLOLO Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "426", "Warning Panel (Pilot)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "427", "Warning Panel (Pilot)", "SPARE #1 Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "428", "Warning Panel (Pilot)", "SPARE #2 Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "429", "Warning Panel (Pilot)", "SPARE #3 Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "430", "Warning Panel (Pilot)", "SPARE #4 Indicator", "True when indicator is lit", "%1d"));
+            #endregion Warning Panel (Pilot)
+
             #region Emergency Jettison and Misc Handles
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "336", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.arr_hook_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.arr_hook_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Arresting Hook Handle", "%0.1f"));
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "341", new SwitchPosition[] { new SwitchPosition("1.0", "Brake", Commands.misc_commands.em_bk_steer_lever.ToString("d")), new SwitchPosition("0.0", "Steering Handle", Commands.misc_commands.em_bk_steer_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Emergency Brake/Steering Handle", "%0.1f"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "342", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.rud_adj_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.rud_adj_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Rudder Pedal Ajust Handle", "%0.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "427", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.em_vent_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.em_vent_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Emergency Vent Handle", "%0.1f"));
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn.ToString("d"), "401", "Emergency Jettison and Misc Handles", "Master Caution Button", "%1d"));
+            AddFunction(new FlagValue(this, "402", "Emergency Jettison and Misc Handles", "Master Warning Indicator", "True when indicator is lit", "%1d"));
+
             #endregion Emergency Jettison and Misc Handles
             #region Jet Fuel Starter/Brake Panel
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "387", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.park_brake_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.park_brake_sw.ToString("d")) }, "Jet Fuel Starter/Brake Panel", "Parking Brake Switch", "%0.1f"));
@@ -253,6 +323,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.bit_button.ToString("d"), "455", "CAS", "BIT Button", "%1d"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "456", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cas_commands.tf_couple_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cas_commands.tf_couple_sw.ToString("d")) }, "CAS", "TF Couple Switch", "%0.1f"));
             AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.to_button.ToString("d"), "457", "CAS", "T/O Trim Button", "%1d"));
+            AddFunction(new FlagValue(this, "458", "CAS", "T/O Trim Indicator", "True when indicator is lit", "%1d"));
+
             #endregion CAS
             #region MISC
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "534", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.roll_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.roll_ratio_sw.ToString("d")) }, "MISC", "Roll Ratio Switch", "%0.1f"));
@@ -344,6 +416,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "551", new SwitchPosition[] { new SwitchPosition("1.0", "Emergency", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("0.0", "Normal", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("-1.0", "Test", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")) }, "OXYGEN", "Oxygen Emergency/Normal/Test Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "552", new SwitchPosition[] { new SwitchPosition("1.0", "100%", Commands.oxyctrl_commands.oxy_100_norm_sw.ToString("d")), new SwitchPosition("0.0", "Normal Switch", Commands.oxyctrl_commands.oxy_100_norm_sw.ToString("d")) }, "OXYGEN", "Oxygen 100%/Normal Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "553", SwitchPositions.Create(3, 0d, 0.5d, Commands.oxyctrl_commands.oxy_pbg_on_off_sw.ToString("d"), "Posn", "%0.3f"), "OXYGEN", "Oxygen Supply/Mode Control Switch", "%0.3f"));
+            AddFunction(new FlagValue(this, "555", "OXYGEN", "Oxygen Flow Indicator", "True when indicator is lit", "%1d"));
+
             #endregion OXYGEN
             #region ECS
             AddFunction(new PushButton(this, devices.ECS.ToString("d"), Commands.oxyctrl_commands.oxy_test_btn.ToString("d"), "556", "ECS", "Oxygen Test", "%1d"));
@@ -362,7 +436,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "588", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engpnl_commands.generator_right_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engpnl_commands.generator_right_sw.ToString("d")) }, "Generators", "Right Generator", "%0.1f"));
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "589", SwitchPositions.Create(3, 0d, 0.5d, Commands.engpnl_commands.generator_emerg_sw.ToString("d"), "Posn", "%0.3f"), "Generators", "Emergency Generator", "%0.3f"));
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "594", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.engpnl_commands.ground_power_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engpnl_commands.ground_power_sw.ToString("d")), new SwitchPosition("1.0", "Posn 3", Commands.engpnl_commands.ground_power_sw.ToString("d")) }, "Generators", "External Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.EPSS.ToString("d"), "595", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engpnl_commands.starter_gen_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engpnl_commands.starter_gen_sw.ToString("d")) }, "Generators", "Jet Starter", "%0.1f"));
+            AddFunction(new Switch(this, devices.EPSS.ToString("d"), "595", new SwitchPosition[] { new SwitchPosition("1.0", "ON", Commands.engpnl_commands.starter_gen_sw.ToString("d")), new SwitchPosition("0.0", "OFF", Commands.engpnl_commands.starter_gen_sw.ToString("d")) }, "Generators", "Jet Starter", "%0.1f"));
+            AddFunction(new FlagValue(this, "596", "Generators", "Jet Starter Ready Indicator", "True when indicator is lit", "%1d"));
+
             #endregion Generators
             #region ANTI ICE
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "559", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.ecs_commands.windshield_anti_ice_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.ecs_commands.windshield_anti_ice_sw.ToString("d")) }, "ANTI ICE", "Windshield Anti-ice Switch", "%0.1f"));
@@ -389,11 +465,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #endregion INT LT
             #region CANOPY
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "599", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.cnpy_lever.ToString("d"), "Posn", "%0.3f"), "CANOPY", "Canopy Handle", "%0.3f"));
+            AddFunction(new FlagValue(this, "408", "CANOPY", "Canopy Unlocked Indicator (Pilot)", "True when indicator is lit", "%1d"));
+
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1479", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.rear_cnpy_lever.ToString("d"), "Posn", "%0.3f"), "CANOPY", "Canopy Handle Rear", "%0.3f"));
+            AddFunction(new FlagValue(this, "1173", "CANOPY", "Canopy Unlocked Indicator (Rear)", "True when indicator is lit", "%1d"));
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "428", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")) }, "CANOPY", "Emergency Canopy Jettison", "%0.1f"));
             #endregion CANOPY
             #region Flight Instruments (WSO)
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn_rc.ToString("d"), "1176", "Flight Instruments (WSO)", "Master Caution Button", "%1d"));
+            AddFunction(new FlagValue(this, "1177", "Flight Instruments (WSO)", "Master Warning Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_art_hor_uncage.ToString("d"), "1354", 0.5d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Knob Backup ADI Cage/Pitch Adjust Knob - Pull and turn to uncage", false, "%0.1f"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_alt_adj_knob.ToString("d"), "1364", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Altitude adjust", false, "%0.1f"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_clk_adj_knob.ToString("d"), "1382", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Clock Adjust", false, "%0.1f"));
@@ -648,12 +728,86 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             // Line  36: elements["PTN_281"] = default_button_lever_cycled(_("Right UHF Preset Channel Selector"), devices.UFCCTRL_FRONT, ufc_commands.UFC_PRESET_SW_RIGHT, ufc_commands.UFC_PRESET_RIGHT, 681, 281)
             // Line 408: elements["PTN_1303"] = default_button_lever_cycled(_("Left UHF Preset Channel Selector"), devices.UFCCTRL_REAR, ufc_commands.UFC_PRESET_SW_LEFT, ufc_commands.UFC_PRESET_LEFT, 1304, 1303)
             // Line 409: elements["PTN_1305"] = default_button_lever_cycled(_("Right UHF Preset Channel Selector"), devices.UFCCTRL_REAR, ufc_commands.UFC_PRESET_SW_RIGHT, ufc_commands.UFC_PRESET_RIGHT, 1306, 1305)
-            // Line 100: elements["PTN_324"] = LDG_Gear_Control_Lever(_("Landing Gear Lever"),						devices.LGS,			ldg_commands.Gear_lever,				324, 2.5)
             // Line 102: elements["PTN_337"] = Pull_And_Rotate_Control_Handle(_("Emergency Landing Gear Handle, (LMB)PUSH OR PULL/(RMB)ROTATE"), devices.LGS, ldg_commands.em_gear_lever, 337, ldg_commands.em_gear_lever_rotate, 431, 4.5)
             // Line 121: elements["PTN_386"] = Pull_And_Rotate_Control_Handle(_("JFS Control Handle, (LMB)PULL/(RMB)ROTATE"), devices.EPSS, misc_commands.jfs_lever, 386, misc_commands.jfs_handle_turn, 430, 8.0)
             // Line 644: elements["PTN_1010"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_center, misc_commands.mirror_center_adjust, nil, 10)
             // Line 645: elements["PTN_1011"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_left, misc_commands.mirror_left_adjust, nil, 11)
             // Line 646: elements["PTN_1012"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_right, misc_commands.mirror_right_adjust, nil, 12)
+
+            AddFunction(new FlagValue(this, "196", "Indicators (Pilot)", "Shoot Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "197", "Indicators (Pilot)", "READY Refuelling Indicator", "True when indicator is lit", "%1d"));
+
+            AddFunction(new FlagValue(this, "403", "Threat Indicators (Pilot)", "EMS Limit Indicator", "True when indicator is lit","%1d"));
+            AddFunction(new FlagValue(this, "404", "Threat Indicators (Pilot)", "AI Threat Indicator", "True when indicator is lit","%1d"));
+            AddFunction(new FlagValue(this, "405", "Threat Indicators (Pilot)", "SAM Threat Indicator", "True when indicator is lit","%1d"));
+            AddFunction(new FlagValue(this, "406", "Threat Indicators (Pilot)", "Low Altitude Indicator", "True when indicator is lit","%1d"));
+            AddFunction(new FlagValue(this, "407", "Threat Indicators (Pilot)", "TF Fail Indicator", "True when indicator is lit","%1d"));
+
+            AddFunction(new FlagValue(this, "409", "Indicators (Pilot)", "Laser Armed Indicator", "True when indicator is lit","%1d"));  // guess
+            AddFunction(new FlagValue(this, "410", "Indicators (Pilot)", "A/P Indicator", "True when indicator is lit","%1d"));  // guess
+AddFunction(new FlagValue(this, "432", "Unknown Indicators (Pilot)", "Indicator " + "432", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "486", "Unknown Indicators (Pilot)", "Indicator " + "486", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "487", "Unknown Indicators (Pilot)", "Indicator " + "487", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "488", "Unknown Indicators (Pilot)", "Indicator " + "488", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "489", "Unknown Indicators (Pilot)", "Indicator " + "489", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "490", "Unknown Indicators (Pilot)", "Indicator " + "490", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "491", "Unknown Indicators (Pilot)", "Indicator " + "491", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "492", "Unknown Indicators (Pilot)", "Indicator " + "492", "True when indicator is lit","%1d"));
+            AddFunction(new FlagValue(this, "493", "Indicators (Pilot)", "Hook Down Indicator", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "494", "Unknown Indicators (Pilot)", "Indicator " + "494", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "495", "Unknown Indicators (Pilot)", "Indicator " + "495", "True when indicator is lit","%1d"));
+            AddFunction(new FlagValue(this, "496", "Indicators (Pilot)", "Bingo Fuel Indicator", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "497", "Unknown Indicators (Pilot)", "Indicator " + "497", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "498", "Unknown Indicators (Pilot)", "Indicator " + "498", "True when indicator is lit","%1d"));
+            AddFunction(new FlagValue(this, "499", "Indicators (Pilot)", "Anti-Skid Disabled Indicator ", "True when indicator is lit","%1d"));
+AddFunction(new FlagValue(this, "500", "Unknown Indicators (Pilot)", "Indicator " + "500", "True when indicator is lit","%1d"));
+
+
+            AddFunction(new FlagValue(this, "1171", "Indicators (WSO)", "Engine Fire Left Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1172", "Indicators (WSO)", "Engine Fire Right Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1174", "Indicators (WSO)", "Low Altitude Indicator", "True when indicator is lit", "%1d"));
+
+            AddFunction(new FlagValue(this, "1179", "Warning Panel (WSO)", "Engine Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1180", "Warning Panel (WSO)", "Hydraulics Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1181", "Warning Panel (WSO)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1182", "Warning Panel (WSO)", "AV-BIT Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1183", "Warning Panel (WSO)", "Master Arm Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1184", "Warning Panel (WSO)", "A/P Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1185", "Warning Panel (WSO)", "PROGRAM Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1186", "Warning Panel (WSO)", "MINIMUM Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1187", "Warning Panel (WSO)", "Display Flow Low Indicator", "True when indicator is lit", "%1d"));
+
+            AddFunction(new FlagValue(this, "1193", "Warning Panel (WSO)", "Left Generator Indicator", "True when indicator is lit", "%1d"));    //SIC
+            AddFunction(new FlagValue(this, "1192", "Warning Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   //SIC
+            AddFunction(new FlagValue(this, "1194", "Warning Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1195", "Warning Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1200", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  // this is a guess
+            AddFunction(new FlagValue(this, "1196", "Warning Panel (WSO)", "Unarmed Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1197", "Warning Panel (WSO)", "Chaff Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1198", "Warning Panel (WSO)", "Flare Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1199", "Warning Panel (WSO)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
+
+
+
+AddFunction(new FlagValue(this, "1178", "Unknown Indicators (WSO)", "Indicator WSO " + "1178", "True when indicator is lit", "%1d"));
+
+            AddFunction(new FlagValue(this, "1188", "Threat Indicators (WSO)", "AI Threat Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1189", "Threat Indicators (WSO)", "SAM Threat Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1190", "Threat Indicators (WSO)", "OBST Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1191", "Threat Indicators (WSO)", "TF FAIL Indicator", "True when indicator is lit", "%1d"));
+
+            AddFunction(new FlagValue(this, "1333", "Master Mode Indicators (WSO)", "A/A Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1334", "Master Mode Indicators (WSO)", "A/G Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1335", "Master Mode Indicators (WSO)", "NAV Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1336", "Master Mode Indicators (WSO)", "INST Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1337", "Landing Gear Indicators (WSO)", "Landing Gear Nose Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1338", "Landing Gear Indicators (WSO)", "Landing Gear Left Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1339", "Landing Gear Indicators (WSO)", "Landing Gear Right Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1340", "Landing Gear Indicators (WSO)", "Landing Gear Unsafe Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1343", "Flaps Indicators (WSO)", "Half Flaps Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1344", "Flaps Indicators (WSO)", "Full Flaps Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1454", "Indicators (WSO)", "Oxygen Flow Indicator", "True when indicator is lit", "%1d"));
+
 
 #pragma warning restore CS0162 // Unreachable code detected
 
