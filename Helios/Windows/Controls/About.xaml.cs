@@ -56,7 +56,8 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
             "norsetto",         // for M-2000C work
             "Biluf",            // for M-2000C viewports
             "linknet",          // for BMS & General Development work,
-            "talbotmcinnis"     // for code contribution
+            "talbotmcinnis",    // for code contribution
+            "MadKreator37"      // Testing, F-15E work and community support
         };
 
         public About()

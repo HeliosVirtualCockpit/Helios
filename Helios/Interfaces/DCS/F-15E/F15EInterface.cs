@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using System.Collections.Generic;
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
-     using GadrocsWorkshop.Helios.UDPInterface;
+    using GadrocsWorkshop.Helios.UDPInterface;
     using System.IO;
     using NLog;
     //using Functions;
@@ -29,9 +29,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using System.Windows.Shapes;
     //using GadrocsWorkshop.Helios.Controls;
     using SharpDX;
-    using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.AV8B.Functions;
+    using GadrocsWorkshop.Helios.Gauges.F15E;
 
-    internal enum Cockpit { Front, Rear }
+    public enum Cockpit { Pilot, WSO }
     /// <summary>
     /// common base for interfaces for DCS F15E containing only functions
     /// </summary>
@@ -54,75 +55,83 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
         {
 
             // see if we can restore from JSON
-#if (!DEBUG)
-                        if (LoadFunctionsFromJson())
-                        {
-                            return;
-                        }
-#endif
+//#if (!DEBUG)
+//                        if (LoadFunctionsFromJson())
+//                        {
+//                            return;
+//                        }
+//#endif
 #pragma warning disable CS0162 // Unreachable code detected
             #region UFC Panel
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "270", "UFC Panel", "UFC Push button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "271", "UFC Panel", "UFC Push button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "272", "UFC Panel", "UFC Push button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "273", "UFC Panel", "UFC Push button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "274", "UFC Panel", "UFC Push button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "275", "UFC Panel", "UFC Push button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "276", "UFC Panel", "UFC Push button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "277", "UFC Panel", "UFC Push button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "278", "UFC Panel", "UFC Push button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "279", "UFC Panel", "UFC Push button 6", "%1d"));
-            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R1.ToString("d"), "282", 0.1d, 0.0d, 1.0d, "UFC Panel", "UHF Radio 1 Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R2.ToString("d"), "283", 0.1d, 0.0d, 1.0d, "UFC Panel", "UHF Radio 2 Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R3.ToString("d"), "284", 0.1d, 0.0d, 1.0d, "UFC Panel", "UHF Radio 3 Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R4.ToString("d"), "285", 0.1d, 0.0d, 1.0d, "UFC Panel", "UHF Radio 4 Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_BRT_CTRL.ToString("d"), "286", 0.1d, 0.0d, 1.0d, "UFC Panel", "UFC LCD Brightness", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_EMIS_LMT.ToString("d"), "287", "UFC Panel", "Emission Limit", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "288", "UFC Panel", "Left Guard Receiver - Channel/Manual Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "289", "UFC Panel", "A/1 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "290", "UFC Panel", "N/2 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "291", "UFC Panel", "B/3 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "292", "UFC Panel", "Right Guard Receiver - Channel/Manual Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MARK.ToString("d"), "293", "UFC Panel", "Mark key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "294", "UFC Panel", "W/4 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "295", "UFC Panel", "M/5 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "296", "UFC Panel", "E/6 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "297", "UFC Panel", "I/P Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DOT.ToString("d"), "298", "UFC Panel", "Decimal Point Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "299", "UFC Panel", ":/7 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "300", "UFC Panel", "S/8 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "301", "UFC Panel", "C 9 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_SHF.ToString("d"), "302", "UFC Panel", "Shift Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "303", "UFC Panel", "A/P Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "304", "UFC Panel", "Clear Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "305", "UFC Panel", "-/0 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DATA.ToString("d"), "306", "UFC Panel", "Data Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "307", "UFC Panel", "Menu Key", "%1d"));
-            #endregion UFC Panel
             #region ODU Pilot
-            AddFunction(new Text(this, "2100", "Option Display Unit (Pilot)", "Line 1 Left (Pilot)", "Text value of ODU Line 1 Left side"));
-            AddFunction(new Text(this, "2101", "Option Display Unit (Pilot)", "Line 1 Middle (Pilot)", "Text value of ODU Line 1 Center"));
-            AddFunction(new Text(this, "2102", "Option Display Unit (Pilot)", "Line 1 Right (Pilot)", "Text value of ODU Line 1 Right side"));
-            AddFunction(new Text(this, "2103", "Option Display Unit (Pilot)", "Line 2 Left (Pilot)", "Text value of ODU Line 2 Left side"));
-            AddFunction(new Text(this, "2104", "Option Display Unit (Pilot)", "Line 2 Middle (Pilot)", "Text value of ODU Line 2 Center"));
-            AddFunction(new Text(this, "2105", "Option Display Unit (Pilot)", "Line 2 Right (Pilot)", "Text value of ODU Line 2 Right side"));
-            AddFunction(new Text(this, "2106", "Option Display Unit (Pilot)", "Line 3 Left (Pilot)", "Text value of ODU Line 3 Left side"));
-            AddFunction(new Text(this, "2107", "Option Display Unit (Pilot)", "Line 3 Middle (Pilot)", "Text value of ODU Line 3 Center"));
-            AddFunction(new Text(this, "2108", "Option Display Unit (Pilot)", "Line 3 Right (Pilot)", "Text value of ODU Line 3 Right side"));
-            AddFunction(new Text(this, "2109", "Option Display Unit (Pilot)", "Line 4 Left (Pilot)", "Text value of ODU Line 4 Left side"));
-            AddFunction(new Text(this, "2110", "Option Display Unit (Pilot)", "Line 4 Middle (Pilot)", "Text value of ODU Line 4 Center"));
-            AddFunction(new Text(this, "2111", "Option Display Unit (Pilot)", "Line 4 Right (Pilot)", "Text value of ODU Line 4 Right side"));
-            AddFunction(new Text(this, "2112", "Option Display Unit (Pilot)", "Line 5 Left (Pilot)", "Text value of ODU Line 5 Left side"));
-            AddFunction(new Text(this, "2113", "Option Display Unit (Pilot)", "Line 5 Middle (Pilot)", "Text value of ODU Line 5 Center"));
-            AddFunction(new Text(this, "2114", "Option Display Unit (Pilot)", "Line 5 Right (Pilot)", "Text value of ODU Line 5 Right side"));
-            AddFunction(new Text(this, "2115", "Option Display Unit (Pilot)", "Line 6 Left (Pilot)", "Text value of ODU Line 6 Left side"));
-            AddFunction(new Text(this, "2116", "Option Display Unit (Pilot)", "Line 6 Middle (Pilot)", "Text value of ODU Line 6 Center"));
-            AddFunction(new Text(this, "2117", "Option Display Unit (Pilot)", "Line 6 Right (Pilot)", "Text value of ODU Line 6 Right side"));
-            AddFunction(new Text(this, "2118", "Option Display Unit (Pilot)", "Display (Pilot)", "Text value of ODU General Display"));
+            AddFunction(new Text(this, "2100", "UFC Panel (Pilot)", "Option Line 1", "Text value of Option Line"));
+            AddFunction(new Text(this, "2101", "UFC Panel (Pilot)", "Option Line 2", "Text value of Option Line"));
+            AddFunction(new Text(this, "2102", "UFC Panel (Pilot)", "Option Line 3", "Text value of Option Line"));
+            AddFunction(new Text(this, "2103", "UFC Panel (Pilot)", "Option Line 4", "Text value of Option Line"));
+            AddFunction(new Text(this, "2104", "UFC Panel (Pilot)", "Option Line 5", "Text value of Option Line"));
+            AddFunction(new Text(this, "2105", "UFC Panel (Pilot)", "Option Line 6", "Text value of Option Line"));
+            AddFunction(new Text(this, "2106", "UFC Panel (Pilot)", "Option Line 1 Center Text", "Text value of Option Line"));
+            AddFunction(new Text(this, "2107", "UFC Panel (Pilot)", "Option Line 6 Scratchpad", "Text value of Option Line"));
+            //AddFunction(new Text(this, "2106", "UFC Panel (Pilot)", "Line 3 Left (Pilot)", "Text value of ODU Line 3 Left side"));
+            //AddFunction(new Text(this, "2107", "UFC Panel (Pilot)", "Line 3 Middle (Pilot)", "Text value of ODU Line 3 Center"));
+            //AddFunction(new Text(this, "2108", "UFC Panel (Pilot)", "Line 3 Right (Pilot)", "Text value of ODU Line 3 Right side"));
+            //AddFunction(new Text(this, "2109", "UFC Panel (Pilot)", "Line 4 Left (Pilot)", "Text value of ODU Line 4 Left side"));
+            //AddFunction(new Text(this, "2110", "UFC Panel (Pilot)", "Line 4 Middle (Pilot)", "Text value of ODU Line 4 Center"));
+            //AddFunction(new Text(this, "2111", "UFC Panel (Pilot)", "Line 4 Right (Pilot)", "Text value of ODU Line 4 Right side"));
+            //AddFunction(new Text(this, "2112", "UFC Panel (Pilot)", "Line 5 Left (Pilot)", "Text value of ODU Line 5 Left side"));
+            //AddFunction(new Text(this, "2113", "UFC Panel (Pilot)", "Line 5 Middle (Pilot)", "Text value of ODU Line 5 Center"));
+            //AddFunction(new Text(this, "2114", "UFC Panel (Pilot)", "Line 5 Right (Pilot)", "Text value of ODU Line 5 Right side"));
+            //AddFunction(new Text(this, "2115", "UFC Panel (Pilot)", "Line 6 Left (Pilot)", "Text value of ODU Line 6 Left side"));
+            //AddFunction(new Text(this, "2116", "UFC Panel (Pilot)", "Line 6 Middle (Pilot)", "Text value of ODU Line 6 Center"));
+            //AddFunction(new Text(this, "2117", "UFC Panel (Pilot)", "Line 6 Right (Pilot)", "Text value of ODU Line 6 Right side"));
+            //AddFunction(new Text(this, "2118", "UFC Panel (Pilot)", "Display (Pilot)", "Text value of ODU General Display"));
             //AddFunction(new Text(this, "21??", "Option Display Unit (Pilot)", "Line 5 Left Decimal (Pilot)", "Text value of ODU Line 5 Left Decimal"));
             //AddFunction(new Text(this, "21??", "Option Display Unit (Pilot)", "Line 5 Right Decimal", "Text value of ODU Line 5 Right Decimal"));
-
             #endregion ODU Pilot
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "270", "UFC Panel (Pilot)", "Option Push Button 1 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "271", "UFC Panel (Pilot)", "Option Push Button 2 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "272", "UFC Panel (Pilot)", "Option Push Button 3 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "273", "UFC Panel (Pilot)", "Option Push Button 4 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "274", "UFC Panel (Pilot)", "Option Push Button 5 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "275", "UFC Panel (Pilot)", "Option Push Button 1 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "276", "UFC Panel (Pilot)", "Option Push Button 2 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "277", "UFC Panel (Pilot)", "Option Push Button 3 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "278", "UFC Panel (Pilot)", "Option Push Button 4 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "279", "UFC Panel (Pilot)", "Option Push Button 5 Right", "%1d"));
+            AddFunction(new RotaryEncoder(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_LEFT.ToString("d"), "280", 0.1d, "UFC Panel (Pilot)", "Left UHF Preset Channel Selector"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_LEFT.ToString("d"), "680", "UFC Panel (Pilot)", "Left UHF Preset Channel Pull Switch", "%1d"));
+            AddFunction(new RotaryEncoder(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_RIGHT.ToString("d"), "281", 0.1d, "UFC Panel (Pilot)", "Right UHF Preset Channel Selector"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_RIGHT.ToString("d"), "681", "UFC Panel (Pilot)", "Right UHF Preset Channel Pull Switch", "%1d"));
+
+            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R1.ToString("d"), "282", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 1 Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R2.ToString("d"), "283", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 2 Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R3.ToString("d"), "284", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 3 Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R4.ToString("d"), "285", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 4 Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_BRT_CTRL.ToString("d"), "286", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UFC LCD Brightness", false, "%0.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_EMIS_LMT.ToString("d"), "287", "UFC Panel (Pilot)", "Emission Limit Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "288", "UFC Panel (Pilot)", "Left Guard Receiver Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "289", "UFC Panel (Pilot)", "A1 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "290", "UFC Panel (Pilot)", "N2 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "291", "UFC Panel (Pilot)", "B3 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "292", "UFC Panel (Pilot)", "Right Guard Receiver Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MARK.ToString("d"), "293", "UFC Panel (Pilot)", "MARK key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "294", "UFC Panel (Pilot)", "W4 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "295", "UFC Panel (Pilot)", "M5 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "296", "UFC Panel (Pilot)", "E6 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "297", "UFC Panel (Pilot)", "IP Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DOT.ToString("d"), "298", "UFC Panel (Pilot)", "Decimal Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "299", "UFC Panel (Pilot)", "7 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "300", "UFC Panel (Pilot)", "S8 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "301", "UFC Panel (Pilot)", "C9 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_SHF.ToString("d"), "302", "UFC Panel (Pilot)", "Shift Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "303", "UFC Panel (Pilot)", "AP Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "304", "UFC Panel (Pilot)", "Clr Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "305", "UFC Panel (Pilot)", "0 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DATA.ToString("d"), "306", "UFC Panel (Pilot)", "Data Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "307", "UFC Panel (Pilot)", "Menu Key", "%1d"));
+
+            #endregion UFC Panel (Pilot)
+
             #region HUD Control Panel
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_BRT_Knob.ToString("d"), "120", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Brightness Control", false, "%0.1f"));
             AddFunction(new Switch(this, devices.HUDCTRL.ToString("d"), "121", SwitchPositions.Create(3, 0d, 0.5d, Commands.hudctrl_commands.HUD_REJ_Switch.ToString("d"), "Posn", "%0.3f"), "HUD Control Panel", "HUD Symbology Reject Mode", "%0.3f"));
@@ -130,14 +139,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new PushButton(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_BIT_Button.ToString("d"), "123", "HUD Control Panel", "HUD BIT", "%1d"));
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_VIDEO_BRT_Knob.ToString("d"), "124", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Video Brightness Control", false, "%0.1f"));
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_VIDEO_CONT_Knob.ToString("d"), "125", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Contrast Control", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AA_Switch.ToString("d"), "126", "HUD Control Panel", "A/A Master Mode Selector", "%1d"));
-            AddFunction(new FlagValue(this, "326", "HUD Control Panel", "A/A Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AG_Switch.ToString("d"), "127", "HUD Control Panel", "A/G Master Mode Selector", "%1d"));
-            AddFunction(new FlagValue(this, "327", "HUD Control Panel", "A/G Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_NAV_Switch.ToString("d"), "128", "HUD Control Panel", "NAV Master Mode Selector", "%1d"));
-            AddFunction(new FlagValue(this, "328", "HUD Control Panel", "NAV Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_INST_Switch.ToString("d"), "129", "HUD Control Panel", "INST Master Mode Selector", "%1d"));
-            AddFunction(new FlagValue(this, "329", "HUD Control Panel", "INST Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AA_Switch.ToString("d"), "126", "HUD Control Panel", "AA Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "326", "HUD Control Panel", "AA Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AG_Switch.ToString("d"), "127", "HUD Control Panel", "AG Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "327", "HUD Control Panel", "AG Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_NAV_Switch.ToString("d"), "128", "HUD Control Panel", "Nav Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "328", "HUD Control Panel", "Nav Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_INST_Switch.ToString("d"), "129", "HUD Control Panel", "Inst Master Mode Selector", "%1d"));
+            AddFunction(new FlagValue(this, "329", "HUD Control Panel", "Inst Master Mode Indicator", "True when indicator is lit", "%1d"));
             #endregion HUD Control Panel
             #region AMAD Panel
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "314", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.amadctrl_commands.fire_ext_sw.ToString("d"), Commands.amadctrl_commands.fire_ext_sw.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition("-1.0", "Posn 3", Commands.amadctrl_commands.fire_ext_sw.ToString("d"), Commands.amadctrl_commands.fire_ext_sw.ToString("d"), "0.0", "0.0") }, "AMAD Panel", "Fire Extinguisher Switch", "%0.1f"));
@@ -162,6 +171,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #region Fuel Monitor Panel
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "381", SwitchPositions.Create(7, 0d, 0.167d, Commands.fltinst_commands.fuelqty_totalizer.ToString("d"), "Posn", "%0.3f"), "Fuel Monitor Panel", "Fuel Totalizer Selector", "%0.3f"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.bingo_sel_knob.ToString("d"), "385", 0.1d, 0.0d, 1.0d, "Fuel Monitor Panel", "Bingo Selection", false, "%0.1f"));
+            // * * *  384 is a value which represents the rotation of the bingo pointer (from 0 to 1)
+
+            AddFunction(new Digits4Display(this, "Fuel Monitor Panel", "2011", "Fuel Monitor Panel", "Left Tank display", "Fuel left tank quantity"));
+            AddFunction(new Digits4Display(this, "Fuel Monitor Panel", "2012", "Fuel Monitor Panel", "Right Tank display", "Fuel right tank quantity"));
+            AddFunction(new Digits4Display(this, "Fuel Monitor Panel", "2013", "Fuel Monitor Panel", "Bingo value display", "Fuel Bingo amount"));
+            AddFunction(new FuelTotalDisplay(this));
+
             #endregion Fuel Monitor Panel
             #region Landing Gear Panel
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.ldg_commands.warn_tone_sil_btn.ToString("d"), "325", "Landing Gear Panel", "Landing Gear Warning Tone Silence Switch", "%1d"));
@@ -178,8 +194,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #endregion Landing Gear Panel
             #region Flight Instruments
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "335", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")) }, "Flight Instruments", "Pitch Ratio switch", "%0.1f"));
-            #endregion Flight Instruments
+            AddFunction(new GadrocsWorkshop.Helios.Interfaces.DCS.AH64D.Functions.Altimeter(this));
+            CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
+            AddFunction(new ScaledNetworkValue(this, "345", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
 
+            CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d);
+            vviScale.Add(new CalibrationPointDouble(0d, 0d));
+            AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "VVI", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
+
+            #endregion Flight Instruments
+            #region Threat Indicators (Pilot)
+            AddFunction(new FlagValue(this, "403", "Threat Indicators (Pilot)", "EMS Limit Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "404", "Threat Indicators (Pilot)", "AI Threat Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "405", "Threat Indicators (Pilot)", "SAM Threat Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "406", "Threat Indicators (Pilot)", "Low Altitude Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "407", "Threat Indicators (Pilot)", "TF Fail Indicator", "True when indicator is lit", "%1d"));
+            #endregion Threat Indicators (Pilot)
             #region Warning Panel (Pilot)
             //  +-----------------------+-----------------------+
             //  | PROGRAM (GR)     411? | MINIMUM         412?  |
@@ -198,9 +228,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             //  +-----------------------+-----------------------+
             //  | DSPFLOLO         425? | OXYGEN          426   |
             //  +-----------------------+-----------------------+
-            //  | SPARE            427? | SPARE           428?  |
+            //  | SPARE               ? | SPARE              ?  |
             //  +-----------------------+-----------------------+
-            //  | SPARE            429? | SPARE           430?  |
+            //  | SPARE               ? | SPARE              ?  |
             //  +-----------------------+-----------------------+
 
             AddFunction(new FlagValue(this, "411", "Warning Panel (Pilot)", "Program Indicator", "True when indicator is lit", "%1d"));
@@ -219,12 +249,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "424", "Warning Panel (Pilot)", "AV BIT Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "425", "Warning Panel (Pilot)", "DSPFLOLO Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "426", "Warning Panel (Pilot)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "427", "Warning Panel (Pilot)", "SPARE #1 Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "428", "Warning Panel (Pilot)", "SPARE #2 Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "429", "Warning Panel (Pilot)", "SPARE #3 Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "430", "Warning Panel (Pilot)", "SPARE #4 Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "429", "Warning Panel (Pilot)", "SPARE #1 Indicator", "True when indicator is lit", "%1d"));  // guess
+            AddFunction(new FlagValue(this, "430", "Warning Panel (Pilot)", "SPARE #2 Indicator", "True when indicator is lit", "%1d"));  // guess
+            AddFunction(new FlagValue(this, "431", "Warning Panel (Pilot)", "SPARE #3 Indicator", "True when indicator is lit", "%1d"));  // guess
+            AddFunction(new FlagValue(this, "432", "Warning Panel (Pilot)", "SPARE #4 Indicator", "True when indicator is lit", "%1d"));  // guess
             #endregion Warning Panel (Pilot)
-
+            #region Indicators (others) Pilot
+            AddFunction(new FlagValue(this, "409", "Indicators (Pilot)", "Laser Armed Indicator", "True when indicator is lit", "%1d"));  // guess
+            AddFunction(new FlagValue(this, "410", "Indicators (Pilot)", "A/P Indicator", "True when indicator is lit", "%1d"));  // guess
+            AddFunction(new FlagValue(this, "486", "Unknown Indicators (Pilot)", "Indicator " + "486", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "487", "Unknown Indicators (Pilot)", "Indicator " + "487", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "488", "Unknown Indicators (Pilot)", "Indicator " + "488", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "489", "Unknown Indicators (Pilot)", "Indicator " + "489", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "490", "Unknown Indicators (Pilot)", "Indicator " + "490", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "491", "Unknown Indicators (Pilot)", "Indicator " + "491", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "492", "Unknown Indicators (Pilot)", "Indicator " + "492", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "493", "Indicators (Pilot)", "Hook Down Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "494", "Unknown Indicators (Pilot)", "Indicator " + "494", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "495", "Unknown Indicators (Pilot)", "Indicator " + "495", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "496", "Indicators (Pilot)", "Bingo Fuel Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "497", "Unknown Indicators (Pilot)", "Indicator " + "497", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "498", "Unknown Indicators (Pilot)", "Indicator " + "498", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "499", "Indicators (Pilot)", "Anti-Skid Disabled Indicator ", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "500", "Unknown Indicators (Pilot)", "Indicator " + "500", "True when indicator is lit", "%1d"));
+            #endregion Indicators (others) Pilot
             #region Emergency Jettison and Misc Handles
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "336", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.arr_hook_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.arr_hook_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Arresting Hook Handle", "%0.1f"));
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "341", new SwitchPosition[] { new SwitchPosition("1.0", "Brake", Commands.misc_commands.em_bk_steer_lever.ToString("d")), new SwitchPosition("0.0", "Steering Handle", Commands.misc_commands.em_bk_steer_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Emergency Brake/Steering Handle", "%0.1f"));
@@ -466,10 +514,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #region CANOPY
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "599", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.cnpy_lever.ToString("d"), "Posn", "%0.3f"), "CANOPY", "Canopy Handle", "%0.3f"));
             AddFunction(new FlagValue(this, "408", "CANOPY", "Canopy Unlocked Indicator (Pilot)", "True when indicator is lit", "%1d"));
-
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1479", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.rear_cnpy_lever.ToString("d"), "Posn", "%0.3f"), "CANOPY", "Canopy Handle Rear", "%0.3f"));
-            AddFunction(new FlagValue(this, "1173", "CANOPY", "Canopy Unlocked Indicator (Rear)", "True when indicator is lit", "%1d"));
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "428", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")) }, "CANOPY", "Emergency Canopy Jettison", "%0.1f"));
+
+            AddFunction(new FlagValue(this, "196", "CANOPY", "Shoot Cue Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "197", "CANOPY", "READY Refuelling Indicator", "True when indicator is lit", "%1d"));
             #endregion CANOPY
             #region Flight Instruments (WSO)
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn_rc.ToString("d"), "1176", "Flight Instruments (WSO)", "Master Caution Button", "%1d"));
@@ -480,68 +529,121 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_tmr_stop_btn.ToString("d"), "1383", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Timer Stop", false, "%0.1f"));
             #endregion Flight Instruments (WSO)
             #region UFC Panel (WSO)
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "1293", "UFC Panel (WSO)", "UFC Push button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "1294", "UFC Panel (WSO)", "UFC Push button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "1295", "UFC Panel (WSO)", "UFC Push button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "1296", "UFC Panel (WSO)", "UFC Push button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "1297", "UFC Panel (WSO)", "UFC Push button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "1298", "UFC Panel (WSO)", "UFC Push button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "1299", "UFC Panel (WSO)", "UFC Push button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "1300", "UFC Panel (WSO)", "UFC Push button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "1301", "UFC Panel (WSO)", "UFC Push button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "1302", "UFC Panel (WSO)", "UFC Push button 6", "%1d"));
+            #region ODU WSO
+            AddFunction(new Text(this, "2140", "UFC Panel (WSO)", "Option Line 1", "Text value of Option Line"));
+            AddFunction(new Text(this, "2141", "UFC Panel (WSO)", "Option Line 2", "Text value of Option Line"));
+            AddFunction(new Text(this, "2142", "UFC Panel (WSO)", "Option Line 3", "Text value of Option Line"));
+            AddFunction(new Text(this, "2143", "UFC Panel (WSO)", "Option Line 4", "Text value of Option Line"));
+            AddFunction(new Text(this, "2144", "UFC Panel (WSO)", "Option Line 5", "Text value of Option Line"));
+            AddFunction(new Text(this, "2145", "UFC Panel (WSO)", "Option Line 6", "Text value of Option Line"));
+            AddFunction(new Text(this, "2146", "UFC Panel (WSO)", "Option Line 1 Center Text", "Text value of Option Line"));
+            AddFunction(new Text(this, "2147", "UFC Panel (WSO)", "Option Line 6 Scratchpad", "Text value of Option Line"));
+            //AddFunction(new Text(this, "2206", "Option Display Unit (WSO)", "Line 3 Left (WSO)", "Text value of ODU Line 3 Left side"));
+            //AddFunction(new Text(this, "2207", "Option Display Unit (WSO)", "Line 3 Middle (WSO)", "Text value of ODU Line 3 Center"));
+            //AddFunction(new Text(this, "2208", "Option Display Unit (WSO)", "Line 3 Right (WSO)", "Text value of ODU Line 3 Right side"));
+            //AddFunction(new Text(this, "2209", "Option Display Unit (WSO)", "Line 4 Left (WSO)", "Text value of ODU Line 4 Left side"));
+            //AddFunction(new Text(this, "2210", "Option Display Unit (WSO)", "Line 4 Middle (WSO)", "Text value of ODU Line 4 Center"));
+            //AddFunction(new Text(this, "2211", "Option Display Unit (WSO)", "Line 4 Right (WSO)", "Text value of ODU Line 4 Right side"));
+            //AddFunction(new Text(this, "2212", "Option Display Unit (WSO)", "Line 5 Left (WSO)", "Text value of ODU Line 5 Left side"));
+            //AddFunction(new Text(this, "2213", "Option Display Unit (WSO)", "Line 5 Middle (WSO)", "Text value of ODU Line 5 Center"));
+            //AddFunction(new Text(this, "2214", "Option Display Unit (WSO)", "Line 5 Right (WSO)", "Text value of ODU Line 5 Right side"));
+            //AddFunction(new Text(this, "2215", "Option Display Unit (WSO)", "Line 6 Left (WSO)", "Text value of ODU Line 6 Left side"));
+            //AddFunction(new Text(this, "2216", "Option Display Unit (WSO)", "Line 6 Middle (WSO)", "Text value of ODU Line 6 Center"));
+            //AddFunction(new Text(this, "2217", "Option Display Unit (WSO)", "Line 6 Right (WSO)", "Text value of ODU Line 6 Right side"));
+            //AddFunction(new Text(this, "2218", "Option Display Unit (WSO)", "Display (WSO)", "Text value of ODU General Display"));
+            //AddFunction(new Text(this, "22??", "Option Display Unit (WSO)", "Line 5 Right Decimal (WSO)", "Text value of ODU Line 5 Right Decimal"));
+            //AddFunction(new Text(this, "22??", "Option Display Unit (WSO)", "Line 5 Left Decimal (WSO)", "Text value of ODU Line 5 Left Decimal"));
+
+            #endregion ODU WSO 
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "1293", "UFC Panel (WSO)", "Option Push Button 1 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "1294", "UFC Panel (WSO)", "Option Push Button 2 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "1295", "UFC Panel (WSO)", "Option Push Button 3 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "1296", "UFC Panel (WSO)", "Option Push Button 4 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "1297", "UFC Panel (WSO)", "Option Push Button 5 Left", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "1298", "UFC Panel (WSO)", "Option Push Button 1 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "1299", "UFC Panel (WSO)", "Option Push Button 2 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "1300", "UFC Panel (WSO)", "Option Push Button 3 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "1301", "UFC Panel (WSO)", "Option Push Button 4 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "1302", "UFC Panel (WSO)", "Option Push Button 5 Right", "%1d"));
+            AddFunction(new RotaryEncoder(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_LEFT.ToString("d"), "1303", 0.1d, "UFC Panel (WSO)", "Left UHF Preset Channel Selector"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_LEFT.ToString("d"), "1304", "UFC Panel (WSO)", "Left UHF Preset Channel Pull Switch", "%1d"));
+            AddFunction(new RotaryEncoder(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_RIGHT.ToString("d"), "1305", 0.1d, "UFC Panel (WSO)", "Right UHF Preset Channel Selector"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_RIGHT.ToString("d"), "1306", "UFC Panel (WSO)", "Right UHF Preset Channel Pull Switch", "%1d"));
+
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R1.ToString("d"), "1307", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 1 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R2.ToString("d"), "1308", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 2 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R3.ToString("d"), "1309", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 3 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R4.ToString("d"), "1310", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 4 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_BRT_CTRL.ToString("d"), "1311", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UFC LCD Brightness", false, "%0.1f"));
             AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_EMIS_LMT.ToString("d"), "1312", "UFC Panel (WSO)", "Emission Limit", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "1313", "UFC Panel (WSO)", "Left Guard Receiver - Channel/Manual Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "1314", "UFC Panel (WSO)", "A/1 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "1315", "UFC Panel (WSO)", "N/2 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "1316", "UFC Panel (WSO)", "B/3 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "1317", "UFC Panel (WSO)", "Right Guard Receiver - Channel/Manual Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "1313", "UFC Panel (WSO)", "Left Guard Receiver Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "1314", "UFC Panel (WSO)", "A1 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "1315", "UFC Panel (WSO)", "N2 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "1316", "UFC Panel (WSO)", "B3 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "1317", "UFC Panel (WSO)", "Right Guard Receiver Key", "%1d"));
             AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_MARK.ToString("d"), "1318", "UFC Panel (WSO)", "Mark key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "1319", "UFC Panel (WSO)", "W/4 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "1320", "UFC Panel (WSO)", "M/5 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "1321", "UFC Panel (WSO)", "E/6 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "1322", "UFC Panel (WSO)", "I/P Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "1319", "UFC Panel (WSO)", "W4 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "1320", "UFC Panel (WSO)", "M5 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "1321", "UFC Panel (WSO)", "E6 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "1322", "UFC Panel (WSO)", "IP Key", "%1d"));
             AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_DOT.ToString("d"), "1323", "UFC Panel (WSO)", "Decimal Point Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "1324", "UFC Panel (WSO)", ":/7 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "1325", "UFC Panel (WSO)", "S/8 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "1326", "UFC Panel (WSO)", "C 9 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "1324", "UFC Panel (WSO)", "7 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "1325", "UFC Panel (WSO)", "S8 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "1326", "UFC Panel (WSO)", "C9 Key", "%1d"));
             AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_SHF.ToString("d"), "1327", "UFC Panel (WSO)", "Shift Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "1328", "UFC Panel (WSO)", "A/P Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "1329", "UFC Panel (WSO)", "Clear Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "1330", "UFC Panel (WSO)", "-/0 Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "1328", "UFC Panel (WSO)", "AP Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "1329", "UFC Panel (WSO)", "Clr Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "1330", "UFC Panel (WSO)", "0 Key", "%1d"));
             AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_DATA.ToString("d"), "1331", "UFC Panel (WSO)", "Data Key", "%1d"));
             AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "1332", "UFC Panel (WSO)", "Menu Key", "%1d"));
             #endregion UFC Panel (WSO)
-            #region ODU WSO
-            AddFunction(new Text(this, "2200", "Option Display Unit (WSO)", "Line 1 Left (WSO)", "Text value of ODU Line 1 Left side"));
-            AddFunction(new Text(this, "2201", "Option Display Unit (WSO)", "Line 1 Middle (WSO)", "Text value of ODU Line 1 Center"));
-            AddFunction(new Text(this, "2202", "Option Display Unit (WSO)", "Line 1 Right (WSO)", "Text value of ODU Line 1 Right side"));
-            AddFunction(new Text(this, "2203", "Option Display Unit (WSO)", "Line 2 Left (WSO)", "Text value of ODU Line 2 Left side"));
-            AddFunction(new Text(this, "2204", "Option Display Unit (WSO)", "Line 2 Middle (WSO)", "Text value of ODU Line 2 Center"));
-            AddFunction(new Text(this, "2205", "Option Display Unit (WSO)", "Line 2 Right (WSO)", "Text value of ODU Line 2 Right side"));
-            AddFunction(new Text(this, "2206", "Option Display Unit (WSO)", "Line 3 Left (WSO)", "Text value of ODU Line 3 Left side"));
-            AddFunction(new Text(this, "2207", "Option Display Unit (WSO)", "Line 3 Middle (WSO)", "Text value of ODU Line 3 Center"));
-            AddFunction(new Text(this, "2208", "Option Display Unit (WSO)", "Line 3 Right (WSO)", "Text value of ODU Line 3 Right side"));
-            AddFunction(new Text(this, "2209", "Option Display Unit (WSO)", "Line 4 Left (WSO)", "Text value of ODU Line 4 Left side"));
-            AddFunction(new Text(this, "2210", "Option Display Unit (WSO)", "Line 4 Middle (WSO)", "Text value of ODU Line 4 Center"));
-            AddFunction(new Text(this, "2211", "Option Display Unit (WSO)", "Line 4 Right (WSO)", "Text value of ODU Line 4 Right side"));
-            AddFunction(new Text(this, "2212", "Option Display Unit (WSO)", "Line 5 Left (WSO)", "Text value of ODU Line 5 Left side"));
-            AddFunction(new Text(this, "2213", "Option Display Unit (WSO)", "Line 5 Middle (WSO)", "Text value of ODU Line 5 Center"));
-            AddFunction(new Text(this, "2214", "Option Display Unit (WSO)", "Line 5 Right (WSO)", "Text value of ODU Line 5 Right side"));
-            AddFunction(new Text(this, "2215", "Option Display Unit (WSO)", "Line 6 Left (WSO)", "Text value of ODU Line 6 Left side"));
-            AddFunction(new Text(this, "2216", "Option Display Unit (WSO)", "Line 6 Middle (WSO)", "Text value of ODU Line 6 Center"));
-            AddFunction(new Text(this, "2217", "Option Display Unit (WSO)", "Line 6 Right (WSO)", "Text value of ODU Line 6 Right side"));
-            AddFunction(new Text(this, "2218", "Option Display Unit (WSO)", "Display (WSO)", "Text value of ODU General Display"));
-            //AddFunction(new Text(this, "22??", "Option Display Unit (WSO)", "Line 5 Right Decimal (WSO)", "Text value of ODU Line 5 Right Decimal"));
-            //AddFunction(new Text(this, "22??", "Option Display Unit (WSO)", "Line 5 Left Decimal (WSO)", "Text value of ODU Line 5 Left Decimal"));
 
-            #endregion ODU WSO 
+            #region Warning Panel (WSO)
+            AddFunction(new FlagValue(this, "1179", "Warning Panel (WSO)", "Engine Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1180", "Warning Panel (WSO)", "Hydraulics Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1181", "Warning Panel (WSO)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1182", "Warning Panel (WSO)", "AV-BIT Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1183", "Warning Panel (WSO)", "Master Arm Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1184", "Warning Panel (WSO)", "A/P Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1185", "Warning Panel (WSO)", "PROGRAM Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1186", "Warning Panel (WSO)", "MINIMUM Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1187", "Warning Panel (WSO)", "Display Flow Low Indicator", "True when indicator is lit", "%1d"));
 
+            AddFunction(new FlagValue(this, "1193", "Warning Panel (WSO)", "Left Generator Indicator", "True when indicator is lit", "%1d"));    //SIC
+            AddFunction(new FlagValue(this, "1192", "Warning Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   //SIC
+            AddFunction(new FlagValue(this, "1194", "Warning Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1195", "Warning Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1178", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  // this is a guess
+            AddFunction(new FlagValue(this, "1196", "Warning Panel (WSO)", "Unarmed Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1197", "Warning Panel (WSO)", "Chaff Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1198", "Warning Panel (WSO)", "Flare Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1199", "Warning Panel (WSO)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
+            #endregion Warning Panel (WSO)
+            #region Warning Indicators WSO
+            AddFunction(new FlagValue(this, "1171", "Warning Indicators (WSO)", "Engine Fire Left Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1172", "Warning Indicators (WSO)", "Engine Fire Right Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1173", "Warning Indicators (WSO)", "Canopy Unlocked Indicator (Rear)", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1174", "Warning Indicators (WSO)", "Low Altitude Indicator", "True when indicator is lit", "%1d"));
+
+            AddFunction(new FlagValue(this, "1188", "Warning Indicators (WSO)", "AI Threat Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1189", "Warning Indicators (WSO)", "SAM Threat Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1190", "Warning Indicators (WSO)", "OBST Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1191", "Warning Indicators (WSO)", "TF FAIL Indicator", "True when indicator is lit", "%1d"));
+            #endregion Warning Indicators WSO
+            #region Master Mode Indicators WSO
+            AddFunction(new FlagValue(this, "1333", "Master Mode Indicators (WSO)", "A/A Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1334", "Master Mode Indicators (WSO)", "A/G Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1335", "Master Mode Indicators (WSO)", "NAV Master Mode Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1336", "Master Mode Indicators (WSO)", "INST Master Mode Indicator", "True when indicator is lit", "%1d"));
+            #endregion Master Mode Indicators WSO
+            #region Landing Gear/Flaps Indicators (WSO)
+            AddFunction(new FlagValue(this, "1337", "Landing Gear/Flaps Indicators (WSO)", "Landing Gear Nose Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1338", "Landing Gear/Flaps Indicators (WSO)", "Landing Gear Left Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1339", "Landing Gear/Flaps Indicators (WSO)", "Landing Gear Right Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1340", "Landing Gear/Flaps Indicators (WSO)", "Landing Gear Unsafe Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1343", "Landing Gear/Flaps Indicators (WSO)", "Half Flaps Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1344", "Landing Gear/Flaps Indicators (WSO)", "Full Flaps Indicator", "True when indicator is lit", "%1d"));
+            #endregion Landing Gear/Flaps Indicators (WSO)
             #region Emergency Jettison and Misc Handles (WSO)
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "1346", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.rud_adj_lever_rear.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.rud_adj_lever_rear.ToString("d")) }, "Emergency Jettison and Misc Handles (WSO)", "Rudder Pedal Ajust Handle", "%0.1f"));
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "1341", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.arr_hook_lever_rear.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.arr_hook_lever_rear.ToString("d")) }, "Emergency Jettison and Misc Handles (WSO)", "Arresting Hook Handle", "%0.1f"));
@@ -691,6 +793,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "1450", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")) }, "OXYGEN Control Panel (WSO)", "Oxygen Emergency/Normal/Test Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "1451", new SwitchPosition[] { new SwitchPosition("1.0", "", Commands.oxyctrl_commands.wso_oxy_100_norm_sw.ToString("d")), new SwitchPosition("0.0", "Normal Switch", Commands.oxyctrl_commands.wso_oxy_100_norm_sw.ToString("d")) }, "OXYGEN Control Panel (WSO)", "Oxygen 100%/Normal Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "1452", SwitchPositions.Create(3, 0d, 0.5d, Commands.oxyctrl_commands.wso_oxy_pbg_on_off_sw.ToString("d"), "Posn", "%0.3f"), "OXYGEN Control Panel (WSO)", "Oxygen Supply/Mode Control Switch", "%0.3f"));
+            AddFunction(new FlagValue(this, "1454", "OXYGEN Control Panel (WSO)", "Oxygen Flow Indicator (WSO)", "True when indicator is lit", "%1d"));
             #endregion OXYGEN Control Panel (WSO)
             #region INT LT Control Panel (WSO)
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_console_lt_knob.ToString("d"), "1456", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Console Lights", false, "%0.1f"));
@@ -724,90 +827,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #endregion MISC CONTROLS (WSO)
 
             // Unimplemented (yet)
-            // Line  35: elements["PTN_280"] = default_button_lever_cycled(_("Left UHF Preset Channel Selector"), devices.UFCCTRL_FRONT, ufc_commands.UFC_PRESET_SW_LEFT, ufc_commands.UFC_PRESET_LEFT, 680, 280)
-            // Line  36: elements["PTN_281"] = default_button_lever_cycled(_("Right UHF Preset Channel Selector"), devices.UFCCTRL_FRONT, ufc_commands.UFC_PRESET_SW_RIGHT, ufc_commands.UFC_PRESET_RIGHT, 681, 281)
-            // Line 408: elements["PTN_1303"] = default_button_lever_cycled(_("Left UHF Preset Channel Selector"), devices.UFCCTRL_REAR, ufc_commands.UFC_PRESET_SW_LEFT, ufc_commands.UFC_PRESET_LEFT, 1304, 1303)
-            // Line 409: elements["PTN_1305"] = default_button_lever_cycled(_("Right UHF Preset Channel Selector"), devices.UFCCTRL_REAR, ufc_commands.UFC_PRESET_SW_RIGHT, ufc_commands.UFC_PRESET_RIGHT, 1306, 1305)
+
             // Line 102: elements["PTN_337"] = Pull_And_Rotate_Control_Handle(_("Emergency Landing Gear Handle, (LMB)PUSH OR PULL/(RMB)ROTATE"), devices.LGS, ldg_commands.em_gear_lever, 337, ldg_commands.em_gear_lever_rotate, 431, 4.5)
             // Line 121: elements["PTN_386"] = Pull_And_Rotate_Control_Handle(_("JFS Control Handle, (LMB)PULL/(RMB)ROTATE"), devices.EPSS, misc_commands.jfs_lever, 386, misc_commands.jfs_handle_turn, 430, 8.0)
             // Line 644: elements["PTN_1010"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_center, misc_commands.mirror_center_adjust, nil, 10)
             // Line 645: elements["PTN_1011"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_left, misc_commands.mirror_left_adjust, nil, 11)
             // Line 646: elements["PTN_1012"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_right, misc_commands.mirror_right_adjust, nil, 12)
-
-            AddFunction(new FlagValue(this, "196", "Indicators (Pilot)", "Shoot Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "197", "Indicators (Pilot)", "READY Refuelling Indicator", "True when indicator is lit", "%1d"));
-
-            AddFunction(new FlagValue(this, "403", "Threat Indicators (Pilot)", "EMS Limit Indicator", "True when indicator is lit","%1d"));
-            AddFunction(new FlagValue(this, "404", "Threat Indicators (Pilot)", "AI Threat Indicator", "True when indicator is lit","%1d"));
-            AddFunction(new FlagValue(this, "405", "Threat Indicators (Pilot)", "SAM Threat Indicator", "True when indicator is lit","%1d"));
-            AddFunction(new FlagValue(this, "406", "Threat Indicators (Pilot)", "Low Altitude Indicator", "True when indicator is lit","%1d"));
-            AddFunction(new FlagValue(this, "407", "Threat Indicators (Pilot)", "TF Fail Indicator", "True when indicator is lit","%1d"));
-
-            AddFunction(new FlagValue(this, "409", "Indicators (Pilot)", "Laser Armed Indicator", "True when indicator is lit","%1d"));  // guess
-            AddFunction(new FlagValue(this, "410", "Indicators (Pilot)", "A/P Indicator", "True when indicator is lit","%1d"));  // guess
-AddFunction(new FlagValue(this, "432", "Unknown Indicators (Pilot)", "Indicator " + "432", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "486", "Unknown Indicators (Pilot)", "Indicator " + "486", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "487", "Unknown Indicators (Pilot)", "Indicator " + "487", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "488", "Unknown Indicators (Pilot)", "Indicator " + "488", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "489", "Unknown Indicators (Pilot)", "Indicator " + "489", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "490", "Unknown Indicators (Pilot)", "Indicator " + "490", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "491", "Unknown Indicators (Pilot)", "Indicator " + "491", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "492", "Unknown Indicators (Pilot)", "Indicator " + "492", "True when indicator is lit","%1d"));
-            AddFunction(new FlagValue(this, "493", "Indicators (Pilot)", "Hook Down Indicator", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "494", "Unknown Indicators (Pilot)", "Indicator " + "494", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "495", "Unknown Indicators (Pilot)", "Indicator " + "495", "True when indicator is lit","%1d"));
-            AddFunction(new FlagValue(this, "496", "Indicators (Pilot)", "Bingo Fuel Indicator", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "497", "Unknown Indicators (Pilot)", "Indicator " + "497", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "498", "Unknown Indicators (Pilot)", "Indicator " + "498", "True when indicator is lit","%1d"));
-            AddFunction(new FlagValue(this, "499", "Indicators (Pilot)", "Anti-Skid Disabled Indicator ", "True when indicator is lit","%1d"));
-AddFunction(new FlagValue(this, "500", "Unknown Indicators (Pilot)", "Indicator " + "500", "True when indicator is lit","%1d"));
-
-
-            AddFunction(new FlagValue(this, "1171", "Indicators (WSO)", "Engine Fire Left Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1172", "Indicators (WSO)", "Engine Fire Right Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1174", "Indicators (WSO)", "Low Altitude Indicator", "True when indicator is lit", "%1d"));
-
-            AddFunction(new FlagValue(this, "1179", "Warning Panel (WSO)", "Engine Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1180", "Warning Panel (WSO)", "Hydraulics Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1181", "Warning Panel (WSO)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1182", "Warning Panel (WSO)", "AV-BIT Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1183", "Warning Panel (WSO)", "Master Arm Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1184", "Warning Panel (WSO)", "A/P Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1185", "Warning Panel (WSO)", "PROGRAM Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1186", "Warning Panel (WSO)", "MINIMUM Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1187", "Warning Panel (WSO)", "Display Flow Low Indicator", "True when indicator is lit", "%1d"));
-
-            AddFunction(new FlagValue(this, "1193", "Warning Panel (WSO)", "Left Generator Indicator", "True when indicator is lit", "%1d"));    //SIC
-            AddFunction(new FlagValue(this, "1192", "Warning Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   //SIC
-            AddFunction(new FlagValue(this, "1194", "Warning Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1195", "Warning Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1200", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  // this is a guess
-            AddFunction(new FlagValue(this, "1196", "Warning Panel (WSO)", "Unarmed Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1197", "Warning Panel (WSO)", "Chaff Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1198", "Warning Panel (WSO)", "Flare Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1199", "Warning Panel (WSO)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
-
-
-
-AddFunction(new FlagValue(this, "1178", "Unknown Indicators (WSO)", "Indicator WSO " + "1178", "True when indicator is lit", "%1d"));
-
-            AddFunction(new FlagValue(this, "1188", "Threat Indicators (WSO)", "AI Threat Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1189", "Threat Indicators (WSO)", "SAM Threat Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1190", "Threat Indicators (WSO)", "OBST Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1191", "Threat Indicators (WSO)", "TF FAIL Indicator", "True when indicator is lit", "%1d"));
-
-            AddFunction(new FlagValue(this, "1333", "Master Mode Indicators (WSO)", "A/A Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1334", "Master Mode Indicators (WSO)", "A/G Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1335", "Master Mode Indicators (WSO)", "NAV Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1336", "Master Mode Indicators (WSO)", "INST Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1337", "Landing Gear Indicators (WSO)", "Landing Gear Nose Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1338", "Landing Gear Indicators (WSO)", "Landing Gear Left Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1339", "Landing Gear Indicators (WSO)", "Landing Gear Right Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1340", "Landing Gear Indicators (WSO)", "Landing Gear Unsafe Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1343", "Flaps Indicators (WSO)", "Half Flaps Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1344", "Flaps Indicators (WSO)", "Full Flaps Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1454", "Indicators (WSO)", "Oxygen Flow Indicator", "True when indicator is lit", "%1d"));
-
 
 #pragma warning restore CS0162 // Unreachable code detected
 

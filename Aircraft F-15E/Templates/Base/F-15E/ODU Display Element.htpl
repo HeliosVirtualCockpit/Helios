@@ -1,6 +1,6 @@
 ﻿<ControlTemplate>
 <Name>ODU Display Element</Name>
-<Category>F-15E</Category>
+<Category>F-15E Strike Eagle</Category>
 <TypeIdentifier>Helios.Base.TextDisplay</TypeIdentifier>
 <Template>
 <TemplateValues>

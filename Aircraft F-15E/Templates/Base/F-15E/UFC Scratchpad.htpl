@@ -1,6 +1,6 @@
 ﻿<ControlTemplate>
 <Name>UFC Scratchpad</Name>
-<Category>F-15E</Category>
+<Category>F-15E Strike Eagle</Category>
 <TypeIdentifier>Helios.FA18C.UFC-Scratchpad</TypeIdentifier>
 <Template>
 <TemplateValues>
