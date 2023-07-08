@@ -151,19 +151,9 @@
     <Resource Include="Images\UFC\Master_Mode_Button_AG_Lit.png" />
     <Resource Include="Images\UFC\Master_Mode_Button_Inst_Lit.png" />
     <Resource Include="Images\UFC\Master_Mode_Button_Nav_Lit.png" />
-    <Content Include="Templates\Base\F-15E\ODU Display Element.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\F-15E\UFC Scratchpad.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Base\F-15E\2-way Toggle Domed.htpl">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Folder Include="Templates\Base\F-15E\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="..\Helios.targets" />
 </Project>

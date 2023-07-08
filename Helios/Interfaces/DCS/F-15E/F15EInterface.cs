@@ -21,16 +21,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
-    using System.IO;
-    using NLog;
-    //using Functions;
-    using static GadrocsWorkshop.Helios.NativeMethods;
-    using static GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Commands;
-    using System.Windows.Shapes;
-    //using GadrocsWorkshop.Helios.Controls;
-    using SharpDX;
     using GadrocsWorkshop.Helios.Interfaces.DCS.AV8B.Functions;
-    using GadrocsWorkshop.Helios.Gauges.F15E;
 
     public enum Cockpit { Pilot, WSO }
     /// <summary>
@@ -46,7 +37,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     public class F15EInterface : DCSInterface
     {
         private NetworkFunctionCollection _functions = new NetworkFunctionCollection();
-        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public F15EInterface(string heliosName) : base(
                 heliosName,

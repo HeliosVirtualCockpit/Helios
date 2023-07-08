@@ -28,28 +28,7 @@ local oduVarNames = {
 } 
 function driver.processLowImportance(mainPanelDevice)		
 	local li = helios.parseIndication(8) -- 8 Pilot UFC / ODU 
-    -- 07:48:03 F-15ESE|helios.export: Helios Dump 8:
-    -- {
-    --     [UFC_SC_11] = string: "DELAY "
-    --     [UFC_CC_03] = string: ""
-    --     [UFC_CC_02] = string: ""
-    --     [UFC_SC_05A] = string: "."
-    --     [UFC_CC_04] = string: "888888888888"  This starts at position 7 on line 6
-    --     [UFC_SC_09] = string: "R2-KY*"
-    --     [UFC_SC_08] = string: "U133000*"
-    --     [UFC_SC_12] = string: "RV "
-    --     [UFC_DISPLAY] = string: ""
-    --     [UFC_SC_10] = string: "FILL-1 "
-    --     [UFC_SC_05] = string: "*U243000"
-    --     [UFC_SC_07] = string: "GV "
-    --     [UFC_SC_08A] = string: "."
-    --     [UFC_SC_06] = string: " G"
-    --     [UFC_SC_02] = string: "CIPHER"
-    --     [UFC_SC_04] = string: " R1-KY"
-    --     [UFC_SC_03] = string: "BB"
-    --     [UFC_CC_01] = string: "-KY58-"   This starts in position 8 of the top line
-    --     [UFC_SC_01] = string: "*OPR"
-    -- }
+
 	if li then
         for i=0, 5 do
             driver.processOduText(li, 2100 + i,oduVarNames[(3*i) + 1],oduVarNames[(3*i) + 3])

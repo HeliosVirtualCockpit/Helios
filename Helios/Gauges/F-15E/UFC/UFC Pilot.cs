@@ -27,7 +27,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.PILOT
     public class UFC_Pilot : UFC
     {
         private string _interfaceDevice = "";
-        private double _size_Multiplier = 1;
         private HeliosPanel _frameBezelPanel;
         private const string Panel_Image = "UFC_Panel_";
         private const string ImageLocation = "{F-15E}/Images/UFC/";

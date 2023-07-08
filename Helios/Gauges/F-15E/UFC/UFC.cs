@@ -23,10 +23,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
     using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Media;
-    using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-    using System.Windows.Shapes;
-    using GadrocsWorkshop.Helios.Gauges.AV8B;
-    using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
     [HeliosControl("Helios.F15E.UFC", "Up Front Controller", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class UFC : CompositeVisualWithBackgroundImage
@@ -35,10 +31,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDevice = "";
-        private double _size_Multiplier = 1;
         private HeliosPanel _frameBezelPanel;
         private const string Panel_Image = "UFC_Panel_";
         private const string ImageLocation = "{F-15E}/Images/UFC/";
+        private const double _oduFontSize = 25;
 
         public UFC(string interfaceDevice, Cockpit cockpit)
             : base(interfaceDevice, new Size(624, 827))
@@ -51,14 +47,14 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
 
-            AddTextDisplay("Option Line 1", new Point(104d, 61d), new Size(414d, 39d), _interfaceDevice, "Option Line 1", 20.6, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 1 Center Text", new Point(248d, 61d), new Size(270d, 39d), _interfaceDevice, "Option Line 1 Center Text", 20.6, "%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 2", new Point(104d, 120d), new Size(414d, 39d), _interfaceDevice, "Option Line 2", 20.6, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6e, 0x6d));
-            AddTextDisplay("Option Line 3", new Point(104d, 179d), new Size(414d, 39d), _interfaceDevice, "Option Line 3", 20.6, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e));
-            AddTextDisplay("Option Line 4", new Point(104d, 237d), new Size(414d, 39d), _interfaceDevice, "Option Line 4", 20.6, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e));
-            AddTextDisplay("Option Line 5", new Point(104d, 296d), new Size(414d, 39d), _interfaceDevice, "Option Line 5", 20.6, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 6", new Point(104d, 354d), new Size(414d, 39d), _interfaceDevice, "Option Line 6", 20.6, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 6 Scratchpad", new Point(228d, 354d), new Size(290d, 39d), _interfaceDevice, "Option Line 6 Scratchpad", 20.6, " %%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
+            AddTextDisplay("Option Line 1", new Point(104d, 61d), new Size(414d, 39d), _interfaceDevice, "Option Line 1", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
+            AddTextDisplay("Option Line 1 Center Text", new Point(244d, 61d), new Size(270d, 39d), _interfaceDevice, "Option Line 1 Center Text", _oduFontSize, "%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
+            AddTextDisplay("Option Line 2", new Point(104d, 120d), new Size(414d, 39d), _interfaceDevice, "Option Line 2", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6e, 0x6d));
+            AddTextDisplay("Option Line 3", new Point(104d, 179d), new Size(414d, 39d), _interfaceDevice, "Option Line 3", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e));
+            AddTextDisplay("Option Line 4", new Point(104d, 237d), new Size(414d, 39d), _interfaceDevice, "Option Line 4", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e));
+            AddTextDisplay("Option Line 5", new Point(104d, 296d), new Size(414d, 39d), _interfaceDevice, "Option Line 5", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
+            AddTextDisplay("Option Line 6", new Point(104d, 354d), new Size(414d, 39d), _interfaceDevice, "Option Line 6", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
+            AddTextDisplay("Option Line 6 Scratchpad", new Point(204d, 354d), new Size(320d, 39d), _interfaceDevice, "Option Line 6 Scratchpad", _oduFontSize, " %%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
             AddEncoder("Left UHF Preset Channel Selector", new Point(-15, 340), new Size(112, 112), "Left UHF Preset Channel Selector");
             AddRadioButton("Left UHF Preset Channel Pull Switch", new Rect(7, 361, 70, 70), "Left UHF Preset Channel Pull Switch");
             AddEncoder("Right UHF Preset Channel Selector", new Point(526, 340), new Size(112, 112), "Right UHF Preset Channel Selector");
