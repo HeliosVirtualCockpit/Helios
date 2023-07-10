@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.F15E
+namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -47,14 +47,12 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
 
-            AddTextDisplay("Option Line 1", new Point(104d, 61d), new Size(414d, 39d), _interfaceDevice, "Option Line 1", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 1 Center Text", new Point(244d, 61d), new Size(270d, 39d), _interfaceDevice, "Option Line 1 Center Text", _oduFontSize, "%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 2", new Point(104d, 120d), new Size(414d, 39d), _interfaceDevice, "Option Line 2", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6e, 0x6d));
-            AddTextDisplay("Option Line 3", new Point(104d, 179d), new Size(414d, 39d), _interfaceDevice, "Option Line 3", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e));
-            AddTextDisplay("Option Line 4", new Point(104d, 237d), new Size(414d, 39d), _interfaceDevice, "Option Line 4", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e));
-            AddTextDisplay("Option Line 5", new Point(104d, 296d), new Size(414d, 39d), _interfaceDevice, "Option Line 5", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 6", new Point(104d, 354d), new Size(414d, 39d), _interfaceDevice, "Option Line 6", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
-            AddTextDisplay("Option Line 6 Scratchpad", new Point(204d, 354d), new Size(320d, 39d), _interfaceDevice, "Option Line 6 Scratchpad", _oduFontSize, " %%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "!=:", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6));
+            AddUFCTextDisplay("Option Line 1", new Point(104d, 61d), new Size(414d, 39d), _interfaceDevice, "Option Line 1", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6),20);
+            AddUFCTextDisplay("Option Line 2", new Point(104d, 120d), new Size(414d, 39d), _interfaceDevice, "Option Line 2", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6e, 0x6d),20);
+            AddUFCTextDisplay("Option Line 3", new Point(104d, 179d), new Size(414d, 39d), _interfaceDevice, "Option Line 3", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e),20);
+            AddUFCTextDisplay("Option Line 4", new Point(104d, 237d), new Size(414d, 39d), _interfaceDevice, "Option Line 4", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e),20 );
+            AddUFCTextDisplay("Option Line 5", new Point(104d, 296d), new Size(414d, 39d), _interfaceDevice, "Option Line 5", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6), 20);
+            AddUFCTextDisplay("Option Line 6", new Point(104d, 354d), new Size(414d, 39d), _interfaceDevice, "Option Line 6", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6), 20);
             AddEncoder("Left UHF Preset Channel Selector", new Point(-15, 340), new Size(112, 112), "Left UHF Preset Channel Selector");
             AddRadioButton("Left UHF Preset Channel Pull Switch", new Rect(7, 361, 70, 70), "Left UHF Preset Channel Pull Switch");
             AddEncoder("Right UHF Preset Channel Selector", new Point(526, 340), new Size(112, 112), "Right UHF Preset Channel Selector");
@@ -144,7 +142,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             button.Height = rect.Height;
 
             button.Image = $"{ImageLocation}UFC_Knob_2_Inner.png";
-            button.PushedImage = $"{ImageLocation}UFC_Knob_2_Inner.png";
+            button.PushedImage = $"{ImageLocation}UFC_Knob_2_Inner_Pressed.png";
             button.Name = name;
             AddButtonBindings(button, name);
         }
@@ -263,6 +261,59 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
                 );
             display.TextValue = "";
         }
+        private void AddUFCTextDisplay(string name, Point posn, Size size,
+            string interfaceDeviceNamestring, string interfaceElementName,
+            double baseFontsize, string testDisp, TextHorizontalAlignment hTextAlign,
+            string ufcDictionary, Color textColor, int textLength =0, int textIndex=0)
+        {
+            string componentName = GetComponentName(name);
+            UFCTextDisplay display = new UFCTextDisplay
+            {
+                TextIndex = textIndex,
+                TextLength = textLength,
+                Top = posn.Y,
+                Left = posn.X,
+                Width = size.Width,
+                Height = size.Height,
+                Name = componentName
+            };
+            TextFormat textFormat = new TextFormat
+            {
+                FontFamily = ConfigManager.FontManager.GetFontFamilyByName("Helios Virtual Cockpit F-15E_Up_Front_Controller"),
+                HorizontalAlignment = hTextAlign,
+                VerticalAlignment = TextVerticalAlignment.Center,
+                FontSize = baseFontsize,
+                ConfiguredFontSize = baseFontsize,
+                PaddingRight = 0,
+                PaddingLeft = 0,
+                PaddingTop = 0,
+                PaddingBottom = 0
+            };
+
+            // NOTE: for scaling purposes, we commit to the reference height at the time we set TextFormat, since that indirectly sets ConfiguredFontSize 
+            display.TextFormat = textFormat;
+            display.OnTextColor = textColor;
+            display.BackgroundColor = Color.FromArgb(0x00, 0x26, 0x3f, 0x36);
+            display.UseBackground = false;
+
+            if (ufcDictionary.Equals(""))
+            {
+                display.ParserDictionary = "";
+            }
+            else
+            {
+                display.ParserDictionary = ufcDictionary;
+                display.UseParseDictionary = true;
+            }
+            display.TextTestValue = testDisp;
+            Children.Add(display);
+            AddAction(display.Actions["set.TextDisplay"], componentName);
+
+            AddDefaultInputBinding(
+                childName: componentName,
+                interfaceTriggerName: _interfaceDevice + "." + interfaceElementName + ".changed",
+                deviceActionName: "set.TextDisplay");
+        }
         protected void AddThreeWayToggle(string name, double x, double y, Size size, string interfaceElementName)
         {
 
@@ -295,7 +346,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
                 Image = $"{ImageLocation}Master_Mode_Buttons_Norm.png",
                 PushedImage = $"{ImageLocation}Master_Mode_Buttons_Pressed.png",
                 IndicatorOnImage = $"{ImageLocation}Master_Mode_Button_{image}_Lit.png",
-                PushedIndicatorOnImage = $"{ImageLocation}Master_Mode_Button_{image}_Lit.png",
+                PushedIndicatorOnImage = $"{ImageLocation}Master_Mode_Button_{image}_Lit_Pressed.png",
                 Name = componentName,
                 OnTextColor = Color.FromArgb(0x00, 0x00, 0x00, 0x00),
                 TextColor = Color.FromArgb(0x00, 0x00, 0x00, 0x00)
@@ -329,6 +380,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
                 deviceTriggerName: "released",
                 interfaceActionName: interfaceDeviceName + ".release." + interfaceElementName);
         }
+
         private string ComponentName(string name)
         {
             return $"{Name}_{name}";

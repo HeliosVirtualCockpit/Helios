@@ -22,6 +22,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Interfaces.DCS.AV8B.Functions;
+    using static GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Commands;
 
     public enum Cockpit { Pilot, WSO }
     /// <summary>
@@ -184,7 +185,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #endregion Landing Gear Panel
             #region Flight Instruments
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "335", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")) }, "Flight Instruments", "Pitch Ratio switch", "%0.1f"));
-            AddFunction(new GadrocsWorkshop.Helios.Interfaces.DCS.AH64D.Functions.Altimeter(this));
+            AddFunction(new Functions.Altimeter(this));
+            AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.alt_adj_knob.ToString("d"), "360", 0.1d, "Flight Instruments", "Altimeter pressure adjustment"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_adj.ToString("d"), "351", 0.05d, 0.0d, 1.00d, "Flight Instruments", "Backup ADI Cage/Pitch Adjust Knob", true, "%.3f"));
+
             CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
             AddFunction(new ScaledNetworkValue(this, "345", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
 

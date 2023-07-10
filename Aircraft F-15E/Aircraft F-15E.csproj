@@ -155,5 +155,14 @@
   <ItemGroup>
     <Folder Include="Templates\Base\F-15E\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UFC\Master_Mode_Button_AA_Lit_Pressed.png" />
+    <Resource Include="Images\UFC\Master_Mode_Button_AG_Lit_Pressed.png" />
+    <Resource Include="Images\UFC\Master_Mode_Button_Inst_Lit_Pressed.png" />
+    <Resource Include="Images\UFC\Master_Mode_Button_Nav_Lit_Pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UFC\UFC_Knob_2_Inner_Pressed.png" />
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

@@ -224,6 +224,7 @@
     <Compile Include="Gauges\F-15E\UFC\UFC WSO.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC Pilot.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC.cs" />
+    <Compile Include="Gauges\F-15E\UFC\UFCTextDisplay.cs" />
     <Compile Include="Gauges\FA-18C\ADI\ADI.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
