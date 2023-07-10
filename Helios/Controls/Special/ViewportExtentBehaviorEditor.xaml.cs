@@ -30,6 +30,14 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     [HeliosPropertyEditor("Helios.AH64D.MFD.CPGRIGHT", "Behavior")]
     [HeliosPropertyEditor("Helios.AH64D.MFD.CPGLEFT", "Behavior")]
     [HeliosPropertyEditor("Helios.AH64D.TEDAC", "Behavior")]
+    [HeliosPropertyEditor("Helios.F15E.MPD.PilotLeft", "Behavior")]
+    [HeliosPropertyEditor("Helios.F15E.MPD.PilotCenter", "Behavior")]
+    [HeliosPropertyEditor("Helios.F15E.MPD.PilotRight", "Behavior")]
+    [HeliosPropertyEditor("Helios.F15E.MPD.WsoLeft", "Behavior")]
+    [HeliosPropertyEditor("Helios.F15E.MPD.ColorWsoLeft", "Behavior")]
+    [HeliosPropertyEditor("Helios.F15E.MPD.WsoRight", "Behavior")]
+    [HeliosPropertyEditor("Helios.F15E.MPD.ColorWsoRight", "Behavior")]
+
     public partial class ViewportExtentBehaviorEditor : HeliosPropertyEditor
     {
         public ViewportExtentBehaviorEditor()

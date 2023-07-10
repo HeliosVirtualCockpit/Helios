@@ -221,6 +221,14 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPCD Pilot Center.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPCD WSO Left.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPD WSO Left.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPCD WSO Right.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPD WSO Right.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPD Pilot Left.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPD Pilot Right.cs" />
+    <Compile Include="Gauges\F-15E\MFD\MPD.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC WSO.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC Pilot.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC.cs" />
