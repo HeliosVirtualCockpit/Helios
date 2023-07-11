@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F15E.MPD.WsoLeft", "Multi Function Display WSO Left", "F-15E Strike Eagle", typeof(BackgroundImageRenderer))]
+    [HeliosControl("Helios.F15E.MPD.WsoLeft", "Multi Function Display WSO Left", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
     public class MPDWsoLeft : MPD
     {
         public MPDWsoLeft()

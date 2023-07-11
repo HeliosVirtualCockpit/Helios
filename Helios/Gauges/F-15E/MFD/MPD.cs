@@ -63,7 +63,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
                     _vpName = "F_15E_RIGHT_MPD_WSO";
                     break;
                 case "Right MPCD (WSO)":
-                    _vpName = "F_15E_RIGHT_MPD_WSO";
+                    _vpName = "F_15E_RIGHT_MPCD_WSO";
                     break;
                 default:
                     break;

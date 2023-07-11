@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
-    using GadrocsWorkshop.Helios.Interfaces.DCS.AV8B.Functions;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Commands;
 
     public enum Cockpit { Pilot, WSO }
@@ -160,14 +160,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new PushButton(this, devices.PACS.ToString("d"), Commands.misc_commands.em_jett_btn.ToString("d"), "340", "Armament Panel", "Emergency Jettison Button", "%1d"));
             #endregion Armament Panel
             #region Fuel Monitor Panel
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "381", SwitchPositions.Create(7, 0d, 0.167d, Commands.fltinst_commands.fuelqty_totalizer.ToString("d"), "Posn", "%0.3f"), "Fuel Monitor Panel", "Fuel Totalizer Selector", "%0.3f"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.bingo_sel_knob.ToString("d"), "385", 0.1d, 0.0d, 1.0d, "Fuel Monitor Panel", "Bingo Selection", false, "%0.1f"));
-            // * * *  384 is a value which represents the rotation of the bingo pointer (from 0 to 1)
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "381", SwitchPositions.Create(7, -0.1d, 0.1d, Commands.fltinst_commands.fuelqty_totalizer.ToString("d"), new string[] { "BIT", "Feed", "Int Wing", "Tank 1", "Ext Wing", "Ext Center", "Conformal Tanks" }, "%0.3f"), "Fuel Monitor Panel", "Fuel Totalizer Selector", "%0.3f"));
+            AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.bingo_sel_knob.ToString("d"), "385", 0.1d, "Fuel Monitor Panel", "Bingo Selection"));
+            AddFunction(new ScaledNetworkValue(this, "384", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 14000d), "Fuel Monitor Panel", "Bingo Value", "Bingo fuel amount in pounds", "0-14000", BindingValueUnits.Pounds,"%.3f"));
 
-            AddFunction(new Digits4Display(this, "Fuel Monitor Panel", "2011", "Fuel Monitor Panel", "Left Tank display", "Fuel left tank quantity"));
-            AddFunction(new Digits4Display(this, "Fuel Monitor Panel", "2012", "Fuel Monitor Panel", "Right Tank display", "Fuel right tank quantity"));
-            AddFunction(new Digits4Display(this, "Fuel Monitor Panel", "2013", "Fuel Monitor Panel", "Bingo value display", "Fuel Bingo amount"));
-            AddFunction(new FuelTotalDisplay(this));
+            AddFunction(new DigitsDisplay(this, "Fuel Monitor Panel", "2010", "Fuel Monitor Panel", "Total Tank display", "Numeric value of  quantity"));
+            AddFunction(new DigitsDisplay(this, "Fuel Monitor Panel", "2011", "Fuel Monitor Panel", "Left Tank display", "Numeric value of quantity"));
+            AddFunction(new DigitsDisplay(this, "Fuel Monitor Panel", "2012", "Fuel Monitor Panel", "Right Tank display", "Numeric value of quantity"));
 
             #endregion Fuel Monitor Panel
             #region Landing Gear Panel

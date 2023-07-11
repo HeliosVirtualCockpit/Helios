@@ -164,5 +164,11 @@
   <ItemGroup>
     <Resource Include="Images\UFC\UFC_Knob_2_Inner_Pressed.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Bingo_Knob.png" />
+    <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Off_Flag.png" />
+    <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Panel.png" />
+    <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Selector_Knob.png" />
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

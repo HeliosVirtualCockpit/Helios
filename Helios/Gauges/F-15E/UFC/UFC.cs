@@ -61,7 +61,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
             AddPot("UHF Radio 1 Volume", new Point(83d, 479d), new Size(45d, 45d), "UHF Radio 1 Volume", $"{ImageLocation}UFC_Knob_1.png");
             AddPot("UHF Radio 4 Volume", new Point(473d, 457d), new Size(90d, 90d), "UHF Radio 4 Volume", $"{ImageLocation}RadioVol_Knob_Back.png");
             AddPot("UHF Radio 2 Volume", new Point(496d, 479d), new Size(45d, 45d), "UHF Radio 2 Volume", $"{ImageLocation}UFC_Knob_1.png");
-            AddPot("UFC LCD Brightness", new Point(53d, 592d), new Size(75d, 75d), "UFC LCD Brightness", $"{ImageLocation}UFC_Knob_1a.png");
+            AddPot("UFC LCD Brightness", new Point(53d, 592d), new Size(75d, 75d), "UFC LCD Brightness", $"{ImageLocation}UFC_Knob_1a.png",225d,270d);
 
             int buttonNumber = 1;
             for(double i=60;i<=296;i += 59)
@@ -201,19 +201,19 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
                 fromCenter: false
                 );
         }
-        protected void AddPot(string name, Point posn, Size size, string interfaceElementName, string knobImage)
+        protected void AddPot(string name, Point posn, Size size, string interfaceElementName, string knobImage, double initialRotation=0d, double rotationTravel = 360d)
         {
             Potentiometer knob = AddPot(
                 name: name,
                 posn: posn,
                 size: size,
                 knobImage: knobImage,
-                initialRotation: 225,
-                rotationTravel: 270,
+                initialRotation: initialRotation,
+                rotationTravel: rotationTravel,
                 minValue: 0,
                 maxValue: 1,
                 initialValue: 1,
-                stepValue: 0.1,
+                stepValue: 0.05,
                 interfaceDeviceName: _interfaceDevice,
                 interfaceElementName: interfaceElementName,
                 fromCenter: false

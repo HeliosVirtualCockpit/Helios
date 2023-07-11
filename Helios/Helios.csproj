@@ -221,6 +221,10 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\4 Digit Display\4DigitDisplay.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\5 Digit Display\5DigitDisplay.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\FuelPanel.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\FuelGauge.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD Pilot Center.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD WSO Left.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPD WSO Left.cs" />
@@ -281,6 +285,7 @@
     <Compile Include="Interfaces\DCS\F-15E\Devices.cs" />
     <Compile Include="Interfaces\DCS\F-15E\F15EInterface.cs" />
     <Compile Include="Interfaces\DCS\F-15E\Functions\Altimeter.cs" />
+    <Compile Include="Interfaces\DCS\F-15E\Functions\DigitsDispaly.cs" />
     <Compile Include="Interfaces\DCS\H-60\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\H-60\Functions\Chronometer.cs" />
     <Compile Include="Interfaces\DCS\H-60\Functions\H60Function.cs" />
@@ -879,6 +884,18 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Images\General\Green_LED.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Fuel Panel\4 Digit Display\digit_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Fuel Panel\5 Digit Display\digit_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Fuel Panel\Bingo_Needle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

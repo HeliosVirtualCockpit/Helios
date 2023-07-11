@@ -42,9 +42,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
             AddThreeWayToggle("HUD Symbology Reject Mode", 172, 695, new Size(37, 86), "HUD Symbology Reject Mode");
             AddThreeWayToggle("HUD DAY/AUTO/NIGHT Mode Selector", 289, 695, new Size(37, 86), "HUD DAY/AUTO/NIGHT Mode Selector");
 
-            AddPot("HUD Brightness Control", new Point(51d, 684d), new Size(75d, 75d), "HUD Brightness Control", $"{ImageLocation}UFC_Knob_1a.png");
-            AddPot("HUD Video Brightness Control", new Point(415d, 684d), new Size(75d, 75d), "HUD Video Brightness Control", $"{ImageLocation}UFC_Knob_1a.png");
-            AddPot("HUD Contrast Control", new Point(500d, 684d), new Size(75d, 75d), "HUD Contrast Control", $"{ImageLocation}UFC_Knob_1a.png");
+            AddPot("HUD Brightness Control", new Point(51d, 684d), new Size(75d, 75d), "HUD Brightness Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
+            AddPot("HUD Video Brightness Control", new Point(415d, 684d), new Size(75d, 75d), "HUD Video Brightness Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
+            AddPot("HUD Contrast Control", new Point(500d, 684d), new Size(75d, 75d), "HUD Contrast Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
             string[] MasterModes = { "AA", "AG", "Nav", "Inst" };
             int j = 0;
             for (int i = 180; i <= 405; i += 75)

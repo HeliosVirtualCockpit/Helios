@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="svg2" Width="276" Height="100">
+    <Canvas x:Name="layer1">
+        <Canvas>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <!--g-->
+                    <TranslateTransform X="0" Y="-952.36218"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="0" Canvas.Top="952" Width="276" Height="94" RadiusX="1.8200024" RadiusY="1.9995998" x:Name="rect2985" Fill="#FF202020" Stroke="#FF505050" StrokeThickness="2" StrokeMiterLimit="4"/>
+            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="4" Canvas.Top="956" Width="64" Height="84" RadiusX="0.67289722" RadiusY="2.1643836" x:Name="rect3755" Fill="#FF0A0A0A"/>
+            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="72" Canvas.Top="956" Width="64" Height="84" RadiusX="0.67289722" RadiusY="2.1643836" x:Name="rect2993" Fill="#FF0A0A0A"/>
+            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="140" Canvas.Top="956" Width="64" Height="84" RadiusX="0.67289722" RadiusY="2.1643836" x:Name="rect2995" Fill="#FF0A0A0A"/>
+            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="208" Canvas.Top="956" Width="64" Height="84" RadiusX="0.67289722" RadiusY="2.1643836" x:Name="rect2997" Fill="#FF0A0A0A"/>
+        </Canvas>
+    </Canvas>
+</Canvas>
