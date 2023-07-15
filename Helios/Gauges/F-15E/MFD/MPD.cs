@@ -94,12 +94,12 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
             }
             for (int y = 569; y >= 169; y -= 100)
             {
-                AddButton($"Push Button {buttonNumber + 1}", new Point(755, y));
+                AddButton($"Push Button {buttonNumber + 1}", new Point(766, y));
                 buttonNumber++;
             }
             for (int x = 601; x >= 201; x -= 100)
             {
-                AddButton($"Push Button {buttonNumber + 1}", new Point(x,6), buttonNumber <= maxLabelButtons ? buttonLabel[buttonNumber-15] : "");
+                AddButton($"Push Button {buttonNumber + 1}", new Point(x,12), buttonNumber <= maxLabelButtons ? buttonLabel[buttonNumber-15] : "");
                 buttonNumber++;
             }
 

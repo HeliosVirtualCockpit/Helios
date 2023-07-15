@@ -221,10 +221,16 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
+    <Compile Include="Gauges\F-15E\ADI\ADI.cs" />
+    <Compile Include="Gauges\F-15E\AOA\AOA.cs" />
+    <Compile Include="Gauges\F-15E\EngineMonitor\EngineMonitorPanel.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\BarometricAltimeter.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\4 Digit Display\4DigitDisplay.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\5 Digit Display\5DigitDisplay.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelPanel.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelGauge.cs" />
+    <Compile Include="Gauges\F-15E\IAS\IAS.cs" />
+    <Compile Include="Gauges\F-15E\EngineMonitor\NozzleGauges.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD Pilot Center.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD WSO Left.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPD WSO Left.cs" />
@@ -237,6 +243,7 @@
     <Compile Include="Gauges\F-15E\UFC\UFC Pilot.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFCTextDisplay.cs" />
+    <Compile Include="Gauges\F-15E\VVI\VVI.cs" />
     <Compile Include="Gauges\FA-18C\ADI\ADI.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
@@ -471,6 +478,7 @@
     </Content>
     <EmbeddedResource Include="Resources\helios-bug-report.txt" />
     <Resource Include="Images\General\simple_computation_wire.png" />
+    <Resource Include="Gauges\F-15E\EngineMonitor\EngineMonitorBackground.png" />
     <Content Include="Templates\Base\Simulator Viewports\A29B_BFI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -896,6 +904,30 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\F-15E\Fuel Panel\Bingo_Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Fuel Panel\Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\EngineMonitor\Nozzle Gauge Numbers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\EngineMonitor\Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\EngineMonitor\Nozzle Gauge Ticks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\EngineMonitor\Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\EngineMonitor\Engine Panel Legends.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -4013,7 +4045,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gauges\F-15E\Flight Instruments\" />
     <Folder Include="Gauges\FA-18C\Controls\" />
     <Folder Include="Images\F-15E\" />
     <Folder Include="Interfaces\DCS\F14B\Functions\" />

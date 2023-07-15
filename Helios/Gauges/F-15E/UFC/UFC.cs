@@ -213,7 +213,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
                 minValue: 0,
                 maxValue: 1,
                 initialValue: 1,
-                stepValue: 0.05,
+                stepValue: 0.01,
                 interfaceDeviceName: _interfaceDevice,
                 interfaceElementName: interfaceElementName,
                 fromCenter: false

@@ -30,8 +30,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
         private GaugeDrumCounter _tensDrum;
         private GaugeDrumCounter _onesDrum;
 
-        public FiveDigitDisplay()
-            : base("Five Digit Display", new Size(339, 100))
+        public FiveDigitDisplay(string interfaceElement)
+            : base(interfaceElement, new Size(339, 100))
         {
             Components.Add(new GaugeImage("{Helios}/Gauges/AV-8B/Fuel Panel/5 Digit Display/digit_faceplate.xaml", new Rect(0d, 0d, 339d, 100d)));
 
@@ -55,7 +55,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
             _onesDrum.Clip = new RectangleGeometry(new Rect(275.5d, 11.5d, 50d, 75d));
             Components.Add(_onesDrum);
 
-            _five_digit_display = new HeliosValue(this, new BindingValue(0d), "", "value", "Five digit display", "Simple five digit drum display", BindingValueUnits.Numeric);
+            _five_digit_display = new HeliosValue(this, new BindingValue(0d), "", "value", "Five digit display", "Numeric value to be display on a drum", BindingValueUnits.Numeric);
             _five_digit_display.Execute += new HeliosActionHandler(DigitDisplay_Execute);
             Actions.Add(_five_digit_display);
 

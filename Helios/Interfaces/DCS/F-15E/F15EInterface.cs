@@ -23,6 +23,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Commands;
+    using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
+    using GadrocsWorkshop.Helios.Gauges.F_16.Nozzle;
+    using GadrocsWorkshop.Helios.Gauges.F_16.RPM;
 
     public enum Cockpit { Pilot, WSO }
     /// <summary>
@@ -61,65 +64,48 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Text(this, "2103", "UFC Panel (Pilot)", "Option Line 4", "Text value of Option Line"));
             AddFunction(new Text(this, "2104", "UFC Panel (Pilot)", "Option Line 5", "Text value of Option Line"));
             AddFunction(new Text(this, "2105", "UFC Panel (Pilot)", "Option Line 6", "Text value of Option Line"));
-            AddFunction(new Text(this, "2106", "UFC Panel (Pilot)", "Option Line 1 Center Text", "Text value of Option Line"));
-            AddFunction(new Text(this, "2107", "UFC Panel (Pilot)", "Option Line 6 Scratchpad", "Text value of Option Line"));
-            //AddFunction(new Text(this, "2106", "UFC Panel (Pilot)", "Line 3 Left (Pilot)", "Text value of ODU Line 3 Left side"));
-            //AddFunction(new Text(this, "2107", "UFC Panel (Pilot)", "Line 3 Middle (Pilot)", "Text value of ODU Line 3 Center"));
-            //AddFunction(new Text(this, "2108", "UFC Panel (Pilot)", "Line 3 Right (Pilot)", "Text value of ODU Line 3 Right side"));
-            //AddFunction(new Text(this, "2109", "UFC Panel (Pilot)", "Line 4 Left (Pilot)", "Text value of ODU Line 4 Left side"));
-            //AddFunction(new Text(this, "2110", "UFC Panel (Pilot)", "Line 4 Middle (Pilot)", "Text value of ODU Line 4 Center"));
-            //AddFunction(new Text(this, "2111", "UFC Panel (Pilot)", "Line 4 Right (Pilot)", "Text value of ODU Line 4 Right side"));
-            //AddFunction(new Text(this, "2112", "UFC Panel (Pilot)", "Line 5 Left (Pilot)", "Text value of ODU Line 5 Left side"));
-            //AddFunction(new Text(this, "2113", "UFC Panel (Pilot)", "Line 5 Middle (Pilot)", "Text value of ODU Line 5 Center"));
-            //AddFunction(new Text(this, "2114", "UFC Panel (Pilot)", "Line 5 Right (Pilot)", "Text value of ODU Line 5 Right side"));
-            //AddFunction(new Text(this, "2115", "UFC Panel (Pilot)", "Line 6 Left (Pilot)", "Text value of ODU Line 6 Left side"));
-            //AddFunction(new Text(this, "2116", "UFC Panel (Pilot)", "Line 6 Middle (Pilot)", "Text value of ODU Line 6 Center"));
-            //AddFunction(new Text(this, "2117", "UFC Panel (Pilot)", "Line 6 Right (Pilot)", "Text value of ODU Line 6 Right side"));
-            //AddFunction(new Text(this, "2118", "UFC Panel (Pilot)", "Display (Pilot)", "Text value of ODU General Display"));
-            //AddFunction(new Text(this, "21??", "Option Display Unit (Pilot)", "Line 5 Left Decimal (Pilot)", "Text value of ODU Line 5 Left Decimal"));
-            //AddFunction(new Text(this, "21??", "Option Display Unit (Pilot)", "Line 5 Right Decimal", "Text value of ODU Line 5 Right Decimal"));
             #endregion ODU Pilot
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "270", "UFC Panel (Pilot)", "Option Push Button 1 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "271", "UFC Panel (Pilot)", "Option Push Button 2 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "272", "UFC Panel (Pilot)", "Option Push Button 3 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "273", "UFC Panel (Pilot)", "Option Push Button 4 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "274", "UFC Panel (Pilot)", "Option Push Button 5 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "275", "UFC Panel (Pilot)", "Option Push Button 1 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "276", "UFC Panel (Pilot)", "Option Push Button 2 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "277", "UFC Panel (Pilot)", "Option Push Button 3 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "278", "UFC Panel (Pilot)", "Option Push Button 4 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "279", "UFC Panel (Pilot)", "Option Push Button 5 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "270", "UFC Panel (Pilot)", "Option Push Button 1 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "271", "UFC Panel (Pilot)", "Option Push Button 2 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "272", "UFC Panel (Pilot)", "Option Push Button 3 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "273", "UFC Panel (Pilot)", "Option Push Button 4 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "274", "UFC Panel (Pilot)", "Option Push Button 5 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "275", "UFC Panel (Pilot)", "Option Push Button 1 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "276", "UFC Panel (Pilot)", "Option Push Button 2 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "277", "UFC Panel (Pilot)", "Option Push Button 3 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "278", "UFC Panel (Pilot)", "Option Push Button 4 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "279", "UFC Panel (Pilot)", "Option Push Button 5 Right", "%.1f"));
             AddFunction(new RotaryEncoder(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_LEFT.ToString("d"), "280", 0.1d, "UFC Panel (Pilot)", "Left UHF Preset Channel Selector"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_LEFT.ToString("d"), "680", "UFC Panel (Pilot)", "Left UHF Preset Channel Pull Switch", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_LEFT.ToString("d"), "680", "UFC Panel (Pilot)", "Left UHF Preset Channel Pull Switch", "%.1f"));
             AddFunction(new RotaryEncoder(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_RIGHT.ToString("d"), "281", 0.1d, "UFC Panel (Pilot)", "Right UHF Preset Channel Selector"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_RIGHT.ToString("d"), "681", "UFC Panel (Pilot)", "Right UHF Preset Channel Pull Switch", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_RIGHT.ToString("d"), "681", "UFC Panel (Pilot)", "Right UHF Preset Channel Pull Switch", "%.1f"));
 
             AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R1.ToString("d"), "282", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 1 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R2.ToString("d"), "283", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 2 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R3.ToString("d"), "284", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 3 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_VOL_R4.ToString("d"), "285", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UHF Radio 4 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_BRT_CTRL.ToString("d"), "286", 0.1d, 0.0d, 1.0d, "UFC Panel (Pilot)", "UFC LCD Brightness", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_EMIS_LMT.ToString("d"), "287", "UFC Panel (Pilot)", "Emission Limit Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "288", "UFC Panel (Pilot)", "Left Guard Receiver Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "289", "UFC Panel (Pilot)", "A1 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "290", "UFC Panel (Pilot)", "N2 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "291", "UFC Panel (Pilot)", "B3 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "292", "UFC Panel (Pilot)", "Right Guard Receiver Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MARK.ToString("d"), "293", "UFC Panel (Pilot)", "MARK key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "294", "UFC Panel (Pilot)", "W4 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "295", "UFC Panel (Pilot)", "M5 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "296", "UFC Panel (Pilot)", "E6 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "297", "UFC Panel (Pilot)", "IP Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DOT.ToString("d"), "298", "UFC Panel (Pilot)", "Decimal Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "299", "UFC Panel (Pilot)", "7 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "300", "UFC Panel (Pilot)", "S8 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "301", "UFC Panel (Pilot)", "C9 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_SHF.ToString("d"), "302", "UFC Panel (Pilot)", "Shift Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "303", "UFC Panel (Pilot)", "AP Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "304", "UFC Panel (Pilot)", "Clr Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "305", "UFC Panel (Pilot)", "0 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DATA.ToString("d"), "306", "UFC Panel (Pilot)", "Data Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "307", "UFC Panel (Pilot)", "Menu Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_EMIS_LMT.ToString("d"), "287", "UFC Panel (Pilot)", "Emission Limit Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "288", "UFC Panel (Pilot)", "Left Guard Receiver Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "289", "UFC Panel (Pilot)", "A1 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "290", "UFC Panel (Pilot)", "N2 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "291", "UFC Panel (Pilot)", "B3 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "292", "UFC Panel (Pilot)", "Right Guard Receiver Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MARK.ToString("d"), "293", "UFC Panel (Pilot)", "MARK key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "294", "UFC Panel (Pilot)", "W4 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "295", "UFC Panel (Pilot)", "M5 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "296", "UFC Panel (Pilot)", "E6 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "297", "UFC Panel (Pilot)", "IP Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DOT.ToString("d"), "298", "UFC Panel (Pilot)", "Decimal Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "299", "UFC Panel (Pilot)", "7 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "300", "UFC Panel (Pilot)", "S8 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "301", "UFC Panel (Pilot)", "C9 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_SHF.ToString("d"), "302", "UFC Panel (Pilot)", "Shift Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "303", "UFC Panel (Pilot)", "AP Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "304", "UFC Panel (Pilot)", "Clr Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "305", "UFC Panel (Pilot)", "0 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_DATA.ToString("d"), "306", "UFC Panel (Pilot)", "Data Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_FRONT.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "307", "UFC Panel (Pilot)", "Menu Key", "%.1f"));
 
             #endregion UFC Panel (Pilot)
 
@@ -127,16 +113,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_BRT_Knob.ToString("d"), "120", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Brightness Control", false, "%0.1f"));
             AddFunction(new Switch(this, devices.HUDCTRL.ToString("d"), "121", SwitchPositions.Create(3, 0d, 0.5d, Commands.hudctrl_commands.HUD_REJ_Switch.ToString("d"), "Posn", "%0.3f"), "HUD Control Panel", "HUD Symbology Reject Mode", "%0.3f"));
             AddFunction(new Switch(this, devices.HUDCTRL.ToString("d"), "122", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.hudctrl_commands.HUD_MODE_Switch.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.hudctrl_commands.HUD_MODE_Switch.ToString("d")), new SwitchPosition("1.0", "Posn 3", Commands.hudctrl_commands.HUD_MODE_Switch.ToString("d")) }, "HUD Control Panel", "HUD DAY/AUTO/NIGHT Mode Selector", "%0.1f"));
-            AddFunction(new PushButton(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_BIT_Button.ToString("d"), "123", "HUD Control Panel", "HUD BIT", "%1d"));
+            AddFunction(new PushButton(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_BIT_Button.ToString("d"), "123", "HUD Control Panel", "HUD BIT", "%.1f"));
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_VIDEO_BRT_Knob.ToString("d"), "124", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Video Brightness Control", false, "%0.1f"));
             AddFunction(new Axis(this, devices.HUDCTRL.ToString("d"), Commands.hudctrl_commands.HUD_VIDEO_CONT_Knob.ToString("d"), "125", 0.1d, 0.0d, 1.0d, "HUD Control Panel", "HUD Contrast Control", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AA_Switch.ToString("d"), "126", "HUD Control Panel", "AA Master Mode Selector", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AA_Switch.ToString("d"), "126", "HUD Control Panel", "AA Master Mode Selector", "%.1f"));
             AddFunction(new FlagValue(this, "326", "HUD Control Panel", "AA Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AG_Switch.ToString("d"), "127", "HUD Control Panel", "AG Master Mode Selector", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_AG_Switch.ToString("d"), "127", "HUD Control Panel", "AG Master Mode Selector", "%.1f"));
             AddFunction(new FlagValue(this, "327", "HUD Control Panel", "AG Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_NAV_Switch.ToString("d"), "128", "HUD Control Panel", "Nav Master Mode Selector", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_NAV_Switch.ToString("d"), "128", "HUD Control Panel", "Nav Master Mode Selector", "%.1f"));
             AddFunction(new FlagValue(this, "328", "HUD Control Panel", "Nav Master Mode Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_INST_Switch.ToString("d"), "129", "HUD Control Panel", "Inst Master Mode Selector", "%1d"));
+            AddFunction(new PushButton(this, devices.ACC.ToString("d"), Commands.hudctrl_commands.MM_INST_Switch.ToString("d"), "129", "HUD Control Panel", "Inst Master Mode Selector", "%.1f"));
             AddFunction(new FlagValue(this, "329", "HUD Control Panel", "Inst Master Mode Indicator", "True when indicator is lit", "%1d"));
             #endregion HUD Control Panel
             #region AMAD Panel
@@ -156,26 +142,27 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #region Armament Panel
             AddFunction(new Switch(this, devices.PACS.ToString("d"), "323", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.armtctrl_commands.Master_Arm_SW.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.armtctrl_commands.Master_Arm_SW.ToString("d")) }, "Armament Panel", "Master Arm", "%0.1f"));
             AddFunction(new Switch(this, devices.PACS.ToString("d"), "321", SwitchPositions.Create(7, 0d, 0.167d, Commands.armtctrl_commands.JETT_Selector_Knob.ToString("d"), "Posn", "%0.3f"), "Armament Panel", "Armament Jettison Selector", "%0.3f"));
-            AddFunction(new PushButton(this, devices.PACS.ToString("d"), Commands.armtctrl_commands.JETT_Button.ToString("d"), "322", "Armament Panel", "Armament Jettison Button", "%1d"));
-            AddFunction(new PushButton(this, devices.PACS.ToString("d"), Commands.misc_commands.em_jett_btn.ToString("d"), "340", "Armament Panel", "Emergency Jettison Button", "%1d"));
+            AddFunction(new PushButton(this, devices.PACS.ToString("d"), Commands.armtctrl_commands.JETT_Button.ToString("d"), "322", "Armament Panel", "Armament Jettison Button", "%.1f"));
+            AddFunction(new PushButton(this, devices.PACS.ToString("d"), Commands.misc_commands.em_jett_btn.ToString("d"), "340", "Armament Panel", "Emergency Jettison Button", "%.1f"));
             #endregion Armament Panel
             #region Fuel Monitor Panel
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "381", SwitchPositions.Create(7, -0.1d, 0.1d, Commands.fltinst_commands.fuelqty_totalizer.ToString("d"), new string[] { "BIT", "Feed", "Int Wing", "Tank 1", "Ext Wing", "Ext Center", "Conformal Tanks" }, "%0.3f"), "Fuel Monitor Panel", "Fuel Totalizer Selector", "%0.3f"));
-            AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.bingo_sel_knob.ToString("d"), "385", 0.1d, "Fuel Monitor Panel", "Bingo Selection"));
-            AddFunction(new ScaledNetworkValue(this, "384", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 14000d), "Fuel Monitor Panel", "Bingo Value", "Bingo fuel amount in pounds", "0-14000", BindingValueUnits.Pounds,"%.3f"));
-
+            AddFunction(new FlagValue(this, "382", "Fuel Monitor Panel", "Panel off flag", "True when flag is down", "%1d"));
+            AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.bingo_sel_knob.ToString("d"), "385", 0.1d, "Fuel Monitor Panel", "Bingo Adjustment"));
+            AddFunction(new ScaledNetworkValue(this, "383", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 20000d), "Fuel Monitor Panel", "Internal Fuel Value", "Internal fuel amount in pounds", "0-20000", BindingValueUnits.Pounds, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "384", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 14000d), "Fuel Monitor Panel", "Bingo Value", "Bingo fuel amount in pounds", "0-14000", BindingValueUnits.Pounds, "%.3f"));
             AddFunction(new DigitsDisplay(this, "Fuel Monitor Panel", "2010", "Fuel Monitor Panel", "Total Tank display", "Numeric value of  quantity"));
             AddFunction(new DigitsDisplay(this, "Fuel Monitor Panel", "2011", "Fuel Monitor Panel", "Left Tank display", "Numeric value of quantity"));
             AddFunction(new DigitsDisplay(this, "Fuel Monitor Panel", "2012", "Fuel Monitor Panel", "Right Tank display", "Numeric value of quantity"));
 
             #endregion Fuel Monitor Panel
             #region Landing Gear Panel
-            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.ldg_commands.warn_tone_sil_btn.ToString("d"), "325", "Landing Gear Panel", "Landing Gear Warning Tone Silence Switch", "%1d"));
-            // Line 100: elements["PTN_324"] = LDG_Gear_Control_Lever(_("Landing Gear Lever"),						devices.LGS,			ldg_commands.Gear_lever,				324, 2.5)
-            AddFunction(new FlagValue(this, "330", "Landing Gear Panel", "Left Gear Down Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "331", "Landing Gear Panel", "Nose Gear Down Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "332", "Landing Gear Panel", "Right Gear Down Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.ldg_commands.warn_tone_sil_btn.ToString("d"), "325", "Landing Gear Panel", "Landing Gear Warning Tone Silence Switch", "%.1f"));
+            AddFunction(new Switch(this, devices.LGS.ToString("d"), "324", new SwitchPosition[] { new SwitchPosition("0.0", "Up", Commands.ldg_commands.Gear_lever.ToString("d")), new SwitchPosition("1.0", "Down", Commands.ldg_commands.Gear_lever.ToString("d") )}, "Landing Gear Panel", "Landing Gear Lever", "%0.1f"));
             AddFunction(new FlagValue(this, "333", "Landing Gear Panel", "Gear Lever Warning Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "331", "Landing Gear Panel", "Left Gear Down Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "330", "Landing Gear Panel", "Nose Gear Down Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "332", "Landing Gear Panel", "Right Gear Down Indicator", "True when indicator is lit", "%1d"));
 
             AddFunction(new FlagValue(this, "338", "Landing Gear Panel", "Half Flaps Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "339", "Landing Gear Panel", "Full Flaps Indicator", "True when indicator is lit", "%1d"));
@@ -194,6 +181,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d);
             vviScale.Add(new CalibrationPointDouble(0d, 0d));
             AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "VVI", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
+            CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 0.20d, 20d) {
+                new CalibrationPointDouble(0d, 0d)
+                };
+            AddFunction(new ScaledNetworkValue(this, "361", AoAScale, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees));
+            //AddFunction(new FlagValue(this, "", "Flight Instruments", "AOA Flag", "Off Flag"));
+            //CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
+            //AddFunction(new ScaledNetworkValue(this, "346", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
 
             #endregion Flight Instruments
             #region Threat Indicators (Pilot)
@@ -221,9 +215,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             //  +-----------------------+-----------------------+
             //  | DSPFLOLO         425? | OXYGEN          426   |
             //  +-----------------------+-----------------------+
-            //  | SPARE               ? | SPARE              ?  |
+            //  | SPARE              432| SPARE           432   |
             //  +-----------------------+-----------------------+
-            //  | SPARE               ? | SPARE              ?  |
+            //  | SPARE             432 | SPARE           432   |
             //  +-----------------------+-----------------------+
 
             AddFunction(new FlagValue(this, "411", "Warning Panel (Pilot)", "Program Indicator", "True when indicator is lit", "%1d"));
@@ -232,24 +226,23 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "414", "Warning Panel (Pilot)", "Flare Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "415", "Warning Panel (Pilot)", "Emergency BST On Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "416", "Warning Panel (Pilot)", "BST System Malfunction Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "417", "Warning Panel (Pilot)", "FUEL LOW Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "418", "Warning Panel (Pilot)", "Right Generator Warning", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "417", "Warning Panel (Pilot)", "FUEL LOW Indicator", "True when indicator is lit", "%1d")); // [418] PILOT FUEL LOW Light (yellow)
+            AddFunction(new FlagValue(this, "418", "Warning Panel (Pilot)", "Right Generator Warning", "True when indicator is lit", "%1d")); //[420] PILOT R GEN Light(white)
             AddFunction(new FlagValue(this, "419", "Warning Panel (Pilot)", "Left Generator Warning", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "420", "Warning Panel (Pilot)", "NUCLEAR Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "420", "Warning Panel (Pilot)", "NUCLEAR Indicator", "True when indicator is lit", "%1d")); // [417] PILOT NUCLEAR Light (white)
             AddFunction(new FlagValue(this, "421", "Warning Panel (Pilot)", "Engine Warning Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "422", "Warning Panel (Pilot)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "423", "Warning Panel (Pilot)", "Hydraulics Warning Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "424", "Warning Panel (Pilot)", "AV BIT Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "425", "Warning Panel (Pilot)", "DSPFLOLO Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "426", "Warning Panel (Pilot)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "429", "Warning Panel (Pilot)", "SPARE #1 Indicator", "True when indicator is lit", "%1d"));  // guess
-            AddFunction(new FlagValue(this, "430", "Warning Panel (Pilot)", "SPARE #2 Indicator", "True when indicator is lit", "%1d"));  // guess
-            AddFunction(new FlagValue(this, "431", "Warning Panel (Pilot)", "SPARE #3 Indicator", "True when indicator is lit", "%1d"));  // guess
-            AddFunction(new FlagValue(this, "432", "Warning Panel (Pilot)", "SPARE #4 Indicator", "True when indicator is lit", "%1d"));  // guess
+            AddFunction(new FlagValue(this, "432", "Warning Panel (Pilot)", "SPARE x4 Indicator", "True when indicators are lit", "%1d"));
             #endregion Warning Panel (Pilot)
+            AddFunction(new FlagValue(this, "431", "Landing Gear Panel", "Emergency Landing Gear Handle ROTATE", "Rotation value", "%1d"));
             #region Indicators (others) Pilot
-            AddFunction(new FlagValue(this, "409", "Indicators (Pilot)", "Laser Armed Indicator", "True when indicator is lit", "%1d"));  // guess
-            AddFunction(new FlagValue(this, "410", "Indicators (Pilot)", "A/P Indicator", "True when indicator is lit", "%1d"));  // guess
+            AddFunction(new FlagValue(this, "429", "Indicators (Pilot)", "OBST Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "409", "Indicators (Pilot)", "Laser Armed Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "410", "Indicators (Pilot)", "A/P Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "486", "Unknown Indicators (Pilot)", "Indicator " + "486", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "487", "Unknown Indicators (Pilot)", "Indicator " + "487", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "488", "Unknown Indicators (Pilot)", "Indicator " + "488", "True when indicator is lit", "%1d"));
@@ -271,7 +264,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "341", new SwitchPosition[] { new SwitchPosition("1.0", "Brake", Commands.misc_commands.em_bk_steer_lever.ToString("d")), new SwitchPosition("0.0", "Steering Handle", Commands.misc_commands.em_bk_steer_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Emergency Brake/Steering Handle", "%0.1f"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "342", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.rud_adj_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.rud_adj_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Rudder Pedal Ajust Handle", "%0.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "427", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.em_vent_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.em_vent_lever.ToString("d")) }, "Emergency Jettison and Misc Handles", "Emergency Vent Handle", "%0.1f"));
-            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn.ToString("d"), "401", "Emergency Jettison and Misc Handles", "Master Caution Button", "%1d"));
+            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn.ToString("d"), "401", "Emergency Jettison and Misc Handles", "Master Caution Button", "%.1f"));
             AddFunction(new FlagValue(this, "402", "Emergency Jettison and Misc Handles", "Master Warning Indicator", "True when indicator is lit", "%1d"));
 
             #endregion Emergency Jettison and Misc Handles
@@ -279,79 +272,79 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "387", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.park_brake_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.park_brake_sw.ToString("d")) }, "Jet Fuel Starter/Brake Panel", "Parking Brake Switch", "%0.1f"));
             #endregion Jet Fuel Starter/Brake Panel
             #region LEFT MPD
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "204", "Left MPD (Pilot)", "Push Button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "203", "Left MPD (Pilot)", "Push Button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "202", "Left MPD (Pilot)", "Push Button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "201", "Left MPD (Pilot)", "Push Button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "200", "Left MPD (Pilot)", "Push Button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "219", "Left MPD (Pilot)", "Push Button 6", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "218", "Left MPD (Pilot)", "Push Button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "217", "Left MPD (Pilot)", "Push Button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "216", "Left MPD (Pilot)", "Push Button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "215", "Left MPD (Pilot)", "Push Button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "214", "Left MPD (Pilot)", "Push Button 11", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "213", "Left MPD (Pilot)", "Push Button 12", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "212", "Left MPD (Pilot)", "Push Button 13", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "211", "Left MPD (Pilot)", "Push Button 14", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "210", "Left MPD (Pilot)", "Push Button 15", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "209", "Left MPD (Pilot)", "Push Button 16", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "208", "Left MPD (Pilot)", "Push Button 17", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "207", "Left MPD (Pilot)", "Push Button 18", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "206", "Left MPD (Pilot)", "Push Button 19", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "205", "Left MPD (Pilot)", "Push Button 20", "%1d"));
-            AddFunction(new Switch(this, devices.MPD_FLEFT.ToString("d"), "221", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Left MPD (Pilot)", "Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_FLEFT.ToString("d"), "222", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Left MPD (Pilot)", "Brightness Control", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_FLEFT.ToString("d"), "223", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Left MPD (Pilot)", "Contrast Control", "%0.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "204", "Left MPD (Pilot)", "Push Button 1", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "203", "Left MPD (Pilot)", "Push Button 2", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "202", "Left MPD (Pilot)", "Push Button 3", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "201", "Left MPD (Pilot)", "Push Button 4", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "200", "Left MPD (Pilot)", "Push Button 5", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "219", "Left MPD (Pilot)", "Push Button 6", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "218", "Left MPD (Pilot)", "Push Button 7", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "217", "Left MPD (Pilot)", "Push Button 8", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "216", "Left MPD (Pilot)", "Push Button 9", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "215", "Left MPD (Pilot)", "Push Button 10", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "214", "Left MPD (Pilot)", "Push Button 11", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "213", "Left MPD (Pilot)", "Push Button 12", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "212", "Left MPD (Pilot)", "Push Button 13", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "211", "Left MPD (Pilot)", "Push Button 14", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "210", "Left MPD (Pilot)", "Push Button 15", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "209", "Left MPD (Pilot)", "Push Button 16", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "208", "Left MPD (Pilot)", "Push Button 17", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "207", "Left MPD (Pilot)", "Push Button 18", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "206", "Left MPD (Pilot)", "Push Button 19", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FLEFT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "205", "Left MPD (Pilot)", "Push Button 20", "%.1f"));
+            AddFunction(new Switch(this, devices.MPD_FLEFT.ToString("d"), "221", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Left MPD (Pilot)", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_FLEFT.ToString("d"), "222", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Left MPD (Pilot)", "Brightness Control", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_FLEFT.ToString("d"), "223", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Left MPD (Pilot)", "Contrast Control", "%0.1f"));
             #endregion LEFT MPD
             #region CENTER MPCD
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "251", "Center MPCD (Pilot)", "Push Button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "250", "Center MPCD (Pilot)", "Push Button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "249", "Center MPCD (Pilot)", "Push Button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "248", "Center MPCD (Pilot)", "Push Button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "247", "Center MPCD (Pilot)", "Push Button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "266", "Center MPCD (Pilot)", "Push Button 6", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "265", "Center MPCD (Pilot)", "Push Button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "264", "Center MPCD (Pilot)", "Push Button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "263", "Center MPCD (Pilot)", "Push Button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "262", "Center MPCD (Pilot)", "Push Button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "261", "Center MPCD (Pilot)", "Push Button 11", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "260", "Center MPCD (Pilot)", "Push Button 12", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "259", "Center MPCD (Pilot)", "Push Button 13", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "258", "Center MPCD (Pilot)", "Push Button 14", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "257", "Center MPCD (Pilot)", "Push Button 15", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "256", "Center MPCD (Pilot)", "Push Button 16", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "255", "Center MPCD (Pilot)", "Push Button 17", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "254", "Center MPCD (Pilot)", "Push Button 18", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "253", "Center MPCD (Pilot)", "Push Button 19", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "252", "Center MPCD (Pilot)", "Push Button 20", "%1d"));
-            AddFunction(new Switch(this, devices.MPCD_FCENTER.ToString("d"), "267", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Center MPCD (Pilot)", "Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPCD_FCENTER.ToString("d"), "268", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Center MPCD (Pilot)", "Brightness Control", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPCD_FCENTER.ToString("d"), "269", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Center MPCD (Pilot)", "Contrast Control", "%0.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "251", "Center MPCD (Pilot)", "Push Button 1", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "250", "Center MPCD (Pilot)", "Push Button 2", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "249", "Center MPCD (Pilot)", "Push Button 3", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "248", "Center MPCD (Pilot)", "Push Button 4", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "247", "Center MPCD (Pilot)", "Push Button 5", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "266", "Center MPCD (Pilot)", "Push Button 6", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "265", "Center MPCD (Pilot)", "Push Button 7", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "264", "Center MPCD (Pilot)", "Push Button 8", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "263", "Center MPCD (Pilot)", "Push Button 9", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "262", "Center MPCD (Pilot)", "Push Button 10", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "261", "Center MPCD (Pilot)", "Push Button 11", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "260", "Center MPCD (Pilot)", "Push Button 12", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "259", "Center MPCD (Pilot)", "Push Button 13", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "258", "Center MPCD (Pilot)", "Push Button 14", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "257", "Center MPCD (Pilot)", "Push Button 15", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "256", "Center MPCD (Pilot)", "Push Button 16", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "255", "Center MPCD (Pilot)", "Push Button 17", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "254", "Center MPCD (Pilot)", "Push Button 18", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "253", "Center MPCD (Pilot)", "Push Button 19", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_FCENTER.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "252", "Center MPCD (Pilot)", "Push Button 20", "%.1f"));
+            AddFunction(new Switch(this, devices.MPCD_FCENTER.ToString("d"), "267", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Center MPCD (Pilot)", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPCD_FCENTER.ToString("d"), "268", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Center MPCD (Pilot)", "Brightness Control", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPCD_FCENTER.ToString("d"), "269", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Center MPCD (Pilot)", "Contrast Control", "%0.1f"));
             #endregion CENTER MPCD
             #region RIGHT MFD
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "228", "Right MFD (Pilot)", "Push Button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "227", "Right MFD (Pilot)", "Push Button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "226", "Right MFD (Pilot)", "Push Button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "225", "Right MFD (Pilot)", "Push Button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "224", "Right MFD (Pilot)", "Push Button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "243", "Right MFD (Pilot)", "Push Button 6", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "242", "Right MFD (Pilot)", "Push Button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "241", "Right MFD (Pilot)", "Push Button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "240", "Right MFD (Pilot)", "Push Button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "239", "Right MFD (Pilot)", "Push Button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "238", "Right MFD (Pilot)", "Push Button 11", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "237", "Right MFD (Pilot)", "Push Button 12", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "236", "Right MFD (Pilot)", "Push Button 13", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "235", "Right MFD (Pilot)", "Push Button 14", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "234", "Right MFD (Pilot)", "Push Button 15", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "233", "Right MFD (Pilot)", "Push Button 16", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "232", "Right MFD (Pilot)", "Push Button 17", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "231", "Right MFD (Pilot)", "Push Button 18", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "230", "Right MFD (Pilot)", "Push Button 19", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "229", "Right MFD (Pilot)", "Push Button 20", "%1d"));
-            AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "244", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Right MFD (Pilot)", "Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "245", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MFD (Pilot)", "Brightness Control", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "246", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MFD (Pilot)", "Contrast Control", "%0.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "228", "Right MPD (Pilot)", "Push Button 1", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "227", "Right MPD (Pilot)", "Push Button 2", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "226", "Right MPD (Pilot)", "Push Button 3", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "225", "Right MPD (Pilot)", "Push Button 4", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "224", "Right MPD (Pilot)", "Push Button 5", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "243", "Right MPD (Pilot)", "Push Button 6", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "242", "Right MPD (Pilot)", "Push Button 7", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "241", "Right MPD (Pilot)", "Push Button 8", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "240", "Right MPD (Pilot)", "Push Button 9", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "239", "Right MPD (Pilot)", "Push Button 10", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "238", "Right MPD (Pilot)", "Push Button 11", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "237", "Right MPD (Pilot)", "Push Button 12", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "236", "Right MPD (Pilot)", "Push Button 13", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "235", "Right MPD (Pilot)", "Push Button 14", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "234", "Right MPD (Pilot)", "Push Button 15", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "233", "Right MPD (Pilot)", "Push Button 16", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "232", "Right MPD (Pilot)", "Push Button 17", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "231", "Right MPD (Pilot)", "Push Button 18", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "230", "Right MPD (Pilot)", "Push Button 19", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_FRIGHT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "229", "Right MPD (Pilot)", "Push Button 20", "%.1f"));
+            AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "244", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Right MPD (Pilot)", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "245", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MPD (Pilot)", "Brightness Control", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "246", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MPD (Pilot)", "Contrast Control", "%0.1f"));
             #endregion RIGHT MFD
             #region NUC
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "450", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_cover.ToString("d")) }, "NUC", "Nuclear Consent Switch Cover", "%0.1f"));
@@ -361,9 +354,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "452", SwitchPositions.Create(3, 0d, 0.5d, Commands.cas_commands.yaw_sw.ToString("d"), "Posn", "%0.3f"), "CAS", "Yaw CAS Switch, when ON (LMB) RESET/(RMB) OFF", "%0.3f"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "453", SwitchPositions.Create(3, 0d, 0.5d, Commands.cas_commands.roll_sw.ToString("d"), "Posn", "%0.3f"), "CAS", "Roll CAS Switch, when ON (LMB) RESET/(RMB) OFF", "%0.3f"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "454", SwitchPositions.Create(3, 0d, 0.5d, Commands.cas_commands.pitch_sw.ToString("d"), "Posn", "%0.3f"), "CAS", "Pitch CAS Switch, when ON (LMB) RESET/(RMB) OFF", "%0.3f"));
-            AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.bit_button.ToString("d"), "455", "CAS", "BIT Button", "%1d"));
+            AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.bit_button.ToString("d"), "455", "CAS", "BIT Button", "%.1f"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "456", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cas_commands.tf_couple_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cas_commands.tf_couple_sw.ToString("d")) }, "CAS", "TF Couple Switch", "%0.1f"));
-            AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.to_button.ToString("d"), "457", "CAS", "T/O Trim Button", "%1d"));
+            AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.to_button.ToString("d"), "457", "CAS", "T/O Trim Button", "%.1f"));
             AddFunction(new FlagValue(this, "458", "CAS", "T/O Trim Indicator", "True when indicator is lit", "%1d"));
 
             #endregion CAS
@@ -385,8 +378,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #region Throttle Quadrant
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "459", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltctrl_commands.Flaps_Control_SW.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltctrl_commands.Flaps_Control_SW.ToString("d")) }, "Throttle Quadrant", "Flaps Control Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "460", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltctrl_commands.rudder_trim_sw.ToString("d"), Commands.fltctrl_commands.rudder_trim_sw.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition("-1.0", "Posn 3", Commands.fltctrl_commands.rudder_trim_sw.ToString("d"), Commands.fltctrl_commands.rudder_trim_sw.ToString("d"), "0.0", "0.0") }, "Throttle Quadrant", "Rudder Trim Switch", "%0.1f"));
-            AddFunction(new PushButton(this, devices.DEEC.ToString("d"), Commands.engctrl_commands.left_eng_finger_lift.ToString("d"), "697", "Throttle Quadrant", "Left Throttle Finger Lift", "%1d"));
-            AddFunction(new PushButton(this, devices.DEEC.ToString("d"), Commands.engctrl_commands.right_eng_finger_lift.ToString("d"), "698", "Throttle Quadrant", "Right Throttle Finger Lift", "%1d"));
+            AddFunction(new PushButton(this, devices.DEEC.ToString("d"), Commands.engctrl_commands.left_eng_finger_lift.ToString("d"), "697", "Throttle Quadrant", "Left Throttle Finger Lift", "%.1f"));
+            AddFunction(new PushButton(this, devices.DEEC.ToString("d"), Commands.engctrl_commands.right_eng_finger_lift.ToString("d"), "698", "Throttle Quadrant", "Right Throttle Finger Lift", "%.1f"));
             #endregion Throttle Quadrant
             #region VOL
             AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.caution_vol.ToString("d"), "502", 0.1d, 0.0d, 1.0d, "VOL", "Caution Volume", false, "%0.1f"));
@@ -399,7 +392,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #region MICS
             AddFunction(new Switch(this, devices.ICS.ToString("d"), "508", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.micsctrl_commands.crypto_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.micsctrl_commands.crypto_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.micsctrl_commands.crypto_sw.ToString("d")) }, "MICS", "Crypto Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.ICS.ToString("d"), "509", SwitchPositions.Create(3, 0d, 0.5d, Commands.micsctrl_commands.mic_sw.ToString("d"), "Posn", "%0.3f"), "MICS", "MIC Switch", "%0.3f"));
-            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.micsctrl_commands.vw_tone_sw.ToString("d"), "510", "MICS", "VW/Tone Silence switch", "%1d"));
+            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.micsctrl_commands.vw_tone_sw.ToString("d"), "510", "MICS", "VW/Tone Silence switch", "%.1f"));
             #endregion MICS
             #region RADIO
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "511", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.uhf_ant_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.uhf_ant_sw.ToString("d")) }, "RADIO", "UHF Antenna Switch", "%0.1f"));
@@ -428,7 +421,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Axis(this, devices.NAVPOD.ToString("d"), Commands.snsrctrl_commands.nav_flir_gain_level.ToString("d"), "474", 0.1d, 0.0d, 1.0d, "SENSOR", "Nav FLIR Level", false, "%0.1f"));
             AddFunction(new Switch(this, devices.NAVPOD.ToString("d"), "475", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.nav_flir_sw.ToString("d"), "Posn", "%0.3f"), "SENSOR", "Nav FLIR Switch", "%0.3f"));
             AddFunction(new Switch(this, devices.RDRCTRL_AA.ToString("d"), "476", SwitchPositions.Create(5, 0d, 0.25d, Commands.snsrctrl_commands.jtids_knob.ToString("d"), "Posn", "%0.3f"), "SENSOR", "JTIDS Knob", "%0.3f"));
-            AddFunction(new PushButton(this, devices.RDRCTRL_AA.ToString("d"), Commands.snsrctrl_commands.cc_reset_btn.ToString("d"), "477", "SENSOR", "CC Reset", "%1d"));
+            AddFunction(new PushButton(this, devices.RDRCTRL_AA.ToString("d"), Commands.snsrctrl_commands.cc_reset_btn.ToString("d"), "477", "SENSOR", "CC Reset", "%.1f"));
             #endregion SENSOR
             #region Ground Power
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "478", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.gndpwrctrl_commands.gnd_pwr_2_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.gndpwrctrl_commands.gnd_pwr_2_sw.ToString("d")) }, "Ground Power", "Ground Power 2 Switch", "%0.1f"));
@@ -461,7 +454,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
 
             #endregion OXYGEN
             #region ECS
-            AddFunction(new PushButton(this, devices.ECS.ToString("d"), Commands.oxyctrl_commands.oxy_test_btn.ToString("d"), "556", "ECS", "Oxygen Test", "%1d"));
+            AddFunction(new PushButton(this, devices.ECS.ToString("d"), Commands.oxyctrl_commands.oxy_test_btn.ToString("d"), "556", "ECS", "Oxygen Test", "%.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "558", SwitchPositions.Create(3, 0d, 0.5d, Commands.ecs_commands.anti_fog_sw.ToString("d"), "Posn", "%0.3f"), "ECS", "Anti-Fog", "%0.3f"));
             #endregion ECS
             #region ENGINE
@@ -472,6 +465,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "597", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_master_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_master_cover.ToString("d")) }, "ENGINE", "Right Engine Master Switch Cover", "%0.1f"));
             AddFunction(new Switch(this, devices.DEEC.ToString("d"), "598", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_master_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_master_sw.ToString("d")) }, "ENGINE", "Right Engine Master Switch", "%0.1f"));
             #endregion ENGINE
+            #region Engine Management Panel
+            AddFunction(new ScaledNetworkValue(this, "1130", new CalibrationPointCollectionDouble(0d, 0d, 1d, 100d), "Engine Monitor Panel", "Left Engine Nozzle Position", "Current percentage value of the nozzle position", "0 to 100", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new NetworkValue(this, "2070", "Engine Monitor Panel", "Left Engine Fuel Flow", "Fuel Flow Value", "0 to 99999", BindingValueUnits.PoundsPerHour, null));
+            AddFunction(new NetworkValue(this, "2071", "Engine Monitor Panel", "Left Engine Oil Pressure", "Oil Pressure Value", "0 to 9999", BindingValueUnits.PoundsPerSquareInch, null));
+            AddFunction(new NetworkValue(this, "2072", "Engine Monitor Panel", "Left Engine RPM", "RPM Percentage", "0 to 999", BindingValueUnits.RPMPercent, null));
+            AddFunction(new NetworkValue(this, "2073", "Engine Monitor Panel", "Left Engine Temperature", "Temperature", "0 to 9999", BindingValueUnits.Celsius, null));
+            AddFunction(new ScaledNetworkValue(this, "1131", new CalibrationPointCollectionDouble(0d, 0d, 1d, 100d),  "Engine Monitor Panel", "Right Engine Nozzle Position", "Current percentage value of the nozzle position", "0 to 100", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new NetworkValue(this, "2074", "Engine Monitor Panel", "Right Engine Fuel Flow", "Fuel Flow Value", "0 to 99999", BindingValueUnits.PoundsPerHour, null));
+            AddFunction(new NetworkValue(this, "2075", "Engine Monitor Panel", "Right Engine Oil Pressure", "Oil Pressure Value", "0 to 9999", BindingValueUnits.PoundsPerSquareInch, null));
+            AddFunction(new NetworkValue(this, "2076", "Engine Monitor Panel", "Right Engine RPM", "RPM Percentage", "0 to 999", BindingValueUnits.RPMPercent, null));
+            AddFunction(new NetworkValue(this, "2077", "Engine Monitor Panel", "Right Engine Temperature", "Temperature", "0 to 9999", BindingValueUnits.Celsius, null));
+            AddFunction(new FlagValue(this, "1132", "Engine Monitor Panel", "Panel State ON/OFF", "True when Panel is on", "%1d"));
+
+            #endregion Engine Management Panel
             #region Generators
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "587", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engpnl_commands.generator_left_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engpnl_commands.generator_left_sw.ToString("d")) }, "Generators", "Left Generator", "%0.1f"));
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "588", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engpnl_commands.generator_right_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engpnl_commands.generator_right_sw.ToString("d")) }, "Generators", "Right Generator", "%0.1f"));
@@ -496,7 +503,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.console_lt_knob.ToString("d"), "566", 0.1d, 0.0d, 1.0d, "INT LT", "Console Lights", false, "%0.1f"));
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.inst_pnl_lt_knob.ToString("d"), "567", 0.1d, 0.0d, 1.0d, "INT LT", "Instruments Panel Lights", false, "%0.1f"));
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.ufc_bcklt_br_knob.ToString("d"), "568", 0.1d, 0.0d, 1.0d, "INT LT", "Gauges/UFC Backlights", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.lights_test_sw.ToString("d"), "569", "INT LT", "Warning/Caution Lights Test", "%1d"));
+            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.lights_test_sw.ToString("d"), "569", "INT LT", "Warning/Caution Lights Test", "%.1f"));
             AddFunction(new Switch(this, devices.INTLT.ToString("d"), "570", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.intlt_commands.compass_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.intlt_commands.compass_lt_sw.ToString("d")) }, "INT LT", "Compass Lights", "%0.1f"));
             AddFunction(new Switch(this, devices.INTLT.ToString("d"), "571", new SwitchPosition[] { new SwitchPosition("1.0", "Day", Commands.intlt_commands.daynite_mode_sw.ToString("d")), new SwitchPosition("0.0", "Night Mode Selector", Commands.intlt_commands.daynite_mode_sw.ToString("d")) }, "INT LT", "Day/Night Mode Selector", "%0.1f"));
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.chart_lt_knob.ToString("d"), "572", 0.1d, 0.0d, 1.0d, "INT LT", "Charts Spot Light", false, "%0.1f"));
@@ -511,10 +518,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "428", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")) }, "CANOPY", "Emergency Canopy Jettison", "%0.1f"));
 
             AddFunction(new FlagValue(this, "196", "CANOPY", "Shoot Cue Indicator", "True when indicator is lit", "%1d"));
+            // 			[195]	= "%.2f",	-- PILOT LOCK / SHOOT Lights Brightness (yellow)
             AddFunction(new FlagValue(this, "197", "CANOPY", "READY Refuelling Indicator", "True when indicator is lit", "%1d"));
             #endregion CANOPY
             #region Flight Instruments (WSO)
-            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn_rc.ToString("d"), "1176", "Flight Instruments (WSO)", "Master Caution Button", "%1d"));
+            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn_rc.ToString("d"), "1176", "Flight Instruments (WSO)", "Master Caution Button", "%.1f"));
             AddFunction(new FlagValue(this, "1177", "Flight Instruments (WSO)", "Master Warning Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_art_hor_uncage.ToString("d"), "1354", 0.5d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Knob Backup ADI Cage/Pitch Adjust Knob - Pull and turn to uncage", false, "%0.1f"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_alt_adj_knob.ToString("d"), "1364", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Altitude adjust", false, "%0.1f"));
@@ -523,72 +531,54 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #endregion Flight Instruments (WSO)
             #region UFC Panel (WSO)
             #region ODU WSO
-            AddFunction(new Text(this, "2140", "UFC Panel (WSO)", "Option Line 1", "Text value of Option Line"));
-            AddFunction(new Text(this, "2141", "UFC Panel (WSO)", "Option Line 2", "Text value of Option Line"));
-            AddFunction(new Text(this, "2142", "UFC Panel (WSO)", "Option Line 3", "Text value of Option Line"));
-            AddFunction(new Text(this, "2143", "UFC Panel (WSO)", "Option Line 4", "Text value of Option Line"));
-            AddFunction(new Text(this, "2144", "UFC Panel (WSO)", "Option Line 5", "Text value of Option Line"));
-            AddFunction(new Text(this, "2145", "UFC Panel (WSO)", "Option Line 6", "Text value of Option Line"));
-            AddFunction(new Text(this, "2146", "UFC Panel (WSO)", "Option Line 1 Center Text", "Text value of Option Line"));
-            AddFunction(new Text(this, "2147", "UFC Panel (WSO)", "Option Line 6 Scratchpad", "Text value of Option Line"));
-            //AddFunction(new Text(this, "2206", "Option Display Unit (WSO)", "Line 3 Left (WSO)", "Text value of ODU Line 3 Left side"));
-            //AddFunction(new Text(this, "2207", "Option Display Unit (WSO)", "Line 3 Middle (WSO)", "Text value of ODU Line 3 Center"));
-            //AddFunction(new Text(this, "2208", "Option Display Unit (WSO)", "Line 3 Right (WSO)", "Text value of ODU Line 3 Right side"));
-            //AddFunction(new Text(this, "2209", "Option Display Unit (WSO)", "Line 4 Left (WSO)", "Text value of ODU Line 4 Left side"));
-            //AddFunction(new Text(this, "2210", "Option Display Unit (WSO)", "Line 4 Middle (WSO)", "Text value of ODU Line 4 Center"));
-            //AddFunction(new Text(this, "2211", "Option Display Unit (WSO)", "Line 4 Right (WSO)", "Text value of ODU Line 4 Right side"));
-            //AddFunction(new Text(this, "2212", "Option Display Unit (WSO)", "Line 5 Left (WSO)", "Text value of ODU Line 5 Left side"));
-            //AddFunction(new Text(this, "2213", "Option Display Unit (WSO)", "Line 5 Middle (WSO)", "Text value of ODU Line 5 Center"));
-            //AddFunction(new Text(this, "2214", "Option Display Unit (WSO)", "Line 5 Right (WSO)", "Text value of ODU Line 5 Right side"));
-            //AddFunction(new Text(this, "2215", "Option Display Unit (WSO)", "Line 6 Left (WSO)", "Text value of ODU Line 6 Left side"));
-            //AddFunction(new Text(this, "2216", "Option Display Unit (WSO)", "Line 6 Middle (WSO)", "Text value of ODU Line 6 Center"));
-            //AddFunction(new Text(this, "2217", "Option Display Unit (WSO)", "Line 6 Right (WSO)", "Text value of ODU Line 6 Right side"));
-            //AddFunction(new Text(this, "2218", "Option Display Unit (WSO)", "Display (WSO)", "Text value of ODU General Display"));
-            //AddFunction(new Text(this, "22??", "Option Display Unit (WSO)", "Line 5 Right Decimal (WSO)", "Text value of ODU Line 5 Right Decimal"));
-            //AddFunction(new Text(this, "22??", "Option Display Unit (WSO)", "Line 5 Left Decimal (WSO)", "Text value of ODU Line 5 Left Decimal"));
-
+            AddFunction(new Text(this, "2110", "UFC Panel (WSO)", "Option Line 1", "Text value of Option Line"));
+            AddFunction(new Text(this, "2111", "UFC Panel (WSO)", "Option Line 2", "Text value of Option Line"));
+            AddFunction(new Text(this, "2112", "UFC Panel (WSO)", "Option Line 3", "Text value of Option Line"));
+            AddFunction(new Text(this, "2113", "UFC Panel (WSO)", "Option Line 4", "Text value of Option Line"));
+            AddFunction(new Text(this, "2114", "UFC Panel (WSO)", "Option Line 5", "Text value of Option Line"));
+            AddFunction(new Text(this, "2115", "UFC Panel (WSO)", "Option Line 6", "Text value of Option Line"));
             #endregion ODU WSO 
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "1293", "UFC Panel (WSO)", "Option Push Button 1 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "1294", "UFC Panel (WSO)", "Option Push Button 2 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "1295", "UFC Panel (WSO)", "Option Push Button 3 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "1296", "UFC Panel (WSO)", "Option Push Button 4 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "1297", "UFC Panel (WSO)", "Option Push Button 5 Left", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "1298", "UFC Panel (WSO)", "Option Push Button 1 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "1299", "UFC Panel (WSO)", "Option Push Button 2 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "1300", "UFC Panel (WSO)", "Option Push Button 3 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "1301", "UFC Panel (WSO)", "Option Push Button 4 Right", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "1302", "UFC Panel (WSO)", "Option Push Button 5 Right", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_1.ToString("d"), "1293", "UFC Panel (WSO)", "Option Push Button 1 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_2.ToString("d"), "1294", "UFC Panel (WSO)", "Option Push Button 2 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_3.ToString("d"), "1295", "UFC Panel (WSO)", "Option Push Button 3 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_4.ToString("d"), "1296", "UFC Panel (WSO)", "Option Push Button 4 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_5.ToString("d"), "1297", "UFC Panel (WSO)", "Option Push Button 5 Left", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_0.ToString("d"), "1298", "UFC Panel (WSO)", "Option Push Button 1 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_9.ToString("d"), "1299", "UFC Panel (WSO)", "Option Push Button 2 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_8.ToString("d"), "1300", "UFC Panel (WSO)", "Option Push Button 3 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_7.ToString("d"), "1301", "UFC Panel (WSO)", "Option Push Button 4 Right", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PB_6.ToString("d"), "1302", "UFC Panel (WSO)", "Option Push Button 5 Right", "%.1f"));
             AddFunction(new RotaryEncoder(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_LEFT.ToString("d"), "1303", 0.1d, "UFC Panel (WSO)", "Left UHF Preset Channel Selector"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_LEFT.ToString("d"), "1304", "UFC Panel (WSO)", "Left UHF Preset Channel Pull Switch", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_LEFT.ToString("d"), "1304", "UFC Panel (WSO)", "Left UHF Preset Channel Pull Switch", "%.1f"));
             AddFunction(new RotaryEncoder(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_RIGHT.ToString("d"), "1305", 0.1d, "UFC Panel (WSO)", "Right UHF Preset Channel Selector"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_RIGHT.ToString("d"), "1306", "UFC Panel (WSO)", "Right UHF Preset Channel Pull Switch", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_PRESET_SW_RIGHT.ToString("d"), "1306", "UFC Panel (WSO)", "Right UHF Preset Channel Pull Switch", "%.1f"));
 
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R1.ToString("d"), "1307", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 1 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R2.ToString("d"), "1308", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 2 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R3.ToString("d"), "1309", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 3 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_VOL_R4.ToString("d"), "1310", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UHF Radio 4 Volume", false, "%0.1f"));
             AddFunction(new Axis(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_BRT_CTRL.ToString("d"), "1311", 0.1d, 0.0d, 1.0d, "UFC Panel (WSO)", "UFC LCD Brightness", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_EMIS_LMT.ToString("d"), "1312", "UFC Panel (WSO)", "Emission Limit", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "1313", "UFC Panel (WSO)", "Left Guard Receiver Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "1314", "UFC Panel (WSO)", "A1 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "1315", "UFC Panel (WSO)", "N2 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "1316", "UFC Panel (WSO)", "B3 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "1317", "UFC Panel (WSO)", "Right Guard Receiver Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_MARK.ToString("d"), "1318", "UFC Panel (WSO)", "Mark key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "1319", "UFC Panel (WSO)", "W4 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "1320", "UFC Panel (WSO)", "M5 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "1321", "UFC Panel (WSO)", "E6 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "1322", "UFC Panel (WSO)", "IP Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_DOT.ToString("d"), "1323", "UFC Panel (WSO)", "Decimal Point Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "1324", "UFC Panel (WSO)", "7 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "1325", "UFC Panel (WSO)", "S8 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "1326", "UFC Panel (WSO)", "C9 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_SHF.ToString("d"), "1327", "UFC Panel (WSO)", "Shift Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "1328", "UFC Panel (WSO)", "AP Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "1329", "UFC Panel (WSO)", "Clr Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "1330", "UFC Panel (WSO)", "0 Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_DATA.ToString("d"), "1331", "UFC Panel (WSO)", "Data Key", "%1d"));
-            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "1332", "UFC Panel (WSO)", "Menu Key", "%1d"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_EMIS_LMT.ToString("d"), "1312", "UFC Panel (WSO)", "Emission Limit", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_LEFT.ToString("d"), "1313", "UFC Panel (WSO)", "Left Guard Receiver Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_A1.ToString("d"), "1314", "UFC Panel (WSO)", "A1 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_N2.ToString("d"), "1315", "UFC Panel (WSO)", "N2 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_B3.ToString("d"), "1316", "UFC Panel (WSO)", "B3 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_GREC_CM_RIGHT.ToString("d"), "1317", "UFC Panel (WSO)", "Right Guard Receiver Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_MARK.ToString("d"), "1318", "UFC Panel (WSO)", "Mark key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_W4.ToString("d"), "1319", "UFC Panel (WSO)", "W4 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_M5.ToString("d"), "1320", "UFC Panel (WSO)", "M5 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_E6.ToString("d"), "1321", "UFC Panel (WSO)", "E6 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_I_P.ToString("d"), "1322", "UFC Panel (WSO)", "IP Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_DOT.ToString("d"), "1323", "UFC Panel (WSO)", "Decimal Point Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__7.ToString("d"), "1324", "UFC Panel (WSO)", "7 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_S8.ToString("d"), "1325", "UFC Panel (WSO)", "S8 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY_C9.ToString("d"), "1326", "UFC Panel (WSO)", "C9 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_SHF.ToString("d"), "1327", "UFC Panel (WSO)", "Shift Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_A_P.ToString("d"), "1328", "UFC Panel (WSO)", "AP Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_CLEAR.ToString("d"), "1329", "UFC Panel (WSO)", "Clr Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_KEY__0.ToString("d"), "1330", "UFC Panel (WSO)", "0 Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_DATA.ToString("d"), "1331", "UFC Panel (WSO)", "Data Key", "%.1f"));
+            AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "1332", "UFC Panel (WSO)", "Menu Key", "%.1f"));
             #endregion UFC Panel (WSO)
 
             #region Warning Panel (WSO)
@@ -602,11 +592,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "1186", "Warning Panel (WSO)", "MINIMUM Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "1187", "Warning Panel (WSO)", "Display Flow Low Indicator", "True when indicator is lit", "%1d"));
 
-            AddFunction(new FlagValue(this, "1193", "Warning Panel (WSO)", "Left Generator Indicator", "True when indicator is lit", "%1d"));    //SIC
-            AddFunction(new FlagValue(this, "1192", "Warning Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   //SIC
-            AddFunction(new FlagValue(this, "1194", "Warning Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1195", "Warning Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1178", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  // this is a guess
+            AddFunction(new FlagValue(this, "1193", "Warning Panel (WSO)", "Left Generator Indicator", "True when indicator is lit", "%1d"));    //[1191] WSO L GEN Light (yellow)
+            AddFunction(new FlagValue(this, "1192", "Warning Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   
+            AddFunction(new FlagValue(this, "1194", "Warning Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d")); //[1193] WSO EMIS LMT Light (yellow)
+            AddFunction(new FlagValue(this, "1195", "Warning Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d")); //1194] WSO FUEL LOW Light (yellow)
+            AddFunction(new FlagValue(this, "1178", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  //[1195] WSO NUCLEAR Light (yellow)
+
             AddFunction(new FlagValue(this, "1196", "Warning Panel (WSO)", "Unarmed Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "1197", "Warning Panel (WSO)", "Chaff Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "1198", "Warning Panel (WSO)", "Flare Indicator", "True when indicator is lit", "%1d"));
@@ -621,7 +612,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "1188", "Warning Indicators (WSO)", "AI Threat Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "1189", "Warning Indicators (WSO)", "SAM Threat Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "1190", "Warning Indicators (WSO)", "OBST Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1191", "Warning Indicators (WSO)", "TF FAIL Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1191", "Warning Indicators (WSO)", "TF FAIL Indicator", "True when indicator is lit", "%1d")); //[1178] WSO TF FAIL Light (red)
             #endregion Warning Indicators WSO
             #region Master Mode Indicators WSO
             AddFunction(new FlagValue(this, "1333", "Master Mode Indicators (WSO)", "A/A Master Mode Indicator", "True when indicator is lit", "%1d"));
@@ -646,104 +637,104 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "1345", new SwitchPosition[] { new SwitchPosition("1.0", "Brake", Commands.misc_commands.em_bk_steer_lever_rear.ToString("d")), new SwitchPosition("0.0", "Steering Handle", Commands.misc_commands.em_bk_steer_lever_rear.ToString("d")) }, "Emergency Jettison and Misc Handles (WSO)", "Emergency Brake/Steering Handle", "%0.1f"));
             #endregion Emergency Jettison and Misc Handles (WSO)
             #region LEFT MPCD (WSO)
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1204", "Left MPCD (WSO)", "Push Button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1203", "Left MPCD (WSO)", "Push Button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1202", "Left MPCD (WSO)", "Push Button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1201", "Left MPCD (WSO)", "Push Button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1200", "Left MPCD (WSO)", "Push Button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1219", "Left MPCD (WSO)", "Push Button 6", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1218", "Left MPCD (WSO)", "Push Button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1217", "Left MPCD (WSO)", "Push Button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1216", "Left MPCD (WSO)", "Push Button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1215", "Left MPCD (WSO)", "Push Button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1214", "Left MPCD (WSO)", "Push Button 11", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1213", "Left MPCD (WSO)", "Push Button 12", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1212", "Left MPCD (WSO)", "Push Button 13", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1211", "Left MPCD (WSO)", "Push Button 14", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1210", "Left MPCD (WSO)", "Push Button 15", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1209", "Left MPCD (WSO)", "Push Button 16", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1208", "Left MPCD (WSO)", "Push Button 17", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1207", "Left MPCD (WSO)", "Push Button 18", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1206", "Left MPCD (WSO)", "Push Button 19", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1205", "Left MPCD (WSO)", "Push Button 20", "%1d"));
-            AddFunction(new Switch(this, devices.MPCD_RLEFT.ToString("d"), "1221", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Left MPCD (WSO)", "Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPCD_RLEFT.ToString("d"), "1222", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Left MPCD (WSO)", "Brightness Control", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPCD_RLEFT.ToString("d"), "1223", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Left MPCD (WSO)", "Contrast Control", "%0.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1204", "Left MPCD (WSO)", "Push Button 1", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1203", "Left MPCD (WSO)", "Push Button 2", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1202", "Left MPCD (WSO)", "Push Button 3", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1201", "Left MPCD (WSO)", "Push Button 4", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1200", "Left MPCD (WSO)", "Push Button 5", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1219", "Left MPCD (WSO)", "Push Button 6", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1218", "Left MPCD (WSO)", "Push Button 7", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1217", "Left MPCD (WSO)", "Push Button 8", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1216", "Left MPCD (WSO)", "Push Button 9", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1215", "Left MPCD (WSO)", "Push Button 10", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1214", "Left MPCD (WSO)", "Push Button 11", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1213", "Left MPCD (WSO)", "Push Button 12", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1212", "Left MPCD (WSO)", "Push Button 13", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1211", "Left MPCD (WSO)", "Push Button 14", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1210", "Left MPCD (WSO)", "Push Button 15", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1209", "Left MPCD (WSO)", "Push Button 16", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1208", "Left MPCD (WSO)", "Push Button 17", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1207", "Left MPCD (WSO)", "Push Button 18", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1206", "Left MPCD (WSO)", "Push Button 19", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1205", "Left MPCD (WSO)", "Push Button 20", "%.1f"));
+            AddFunction(new Switch(this, devices.MPCD_RLEFT.ToString("d"), "1221", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Left MPCD (WSO)", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPCD_RLEFT.ToString("d"), "1222", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Left MPCD (WSO)", "Brightness Control", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPCD_RLEFT.ToString("d"), "1223", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Left MPCD (WSO)", "Contrast Control", "%0.1f"));
             #endregion LEFT MPCD (WSO)
             #region LEFT MPD (WSO)
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1228", "Left MPD (WSO)", "Push Button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1227", "Left MPD (WSO)", "Push Button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1226", "Left MPD (WSO)", "Push Button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1225", "Left MPD (WSO)", "Push Button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1224", "Left MPD (WSO)", "Push Button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1243", "Left MPD (WSO)", "Push Button 6", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1242", "Left MPD (WSO)", "Push Button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1241", "Left MPD (WSO)", "Push Button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1240", "Left MPD (WSO)", "Push Button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1239", "Left MPD (WSO)", "Push Button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1238", "Left MPD (WSO)", "Push Button 11", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1237", "Left MPD (WSO)", "Push Button 12", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1236", "Left MPD (WSO)", "Push Button 13", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1235", "Left MPD (WSO)", "Push Button 14", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1234", "Left MPD (WSO)", "Push Button 15", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1233", "Left MPD (WSO)", "Push Button 16", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1232", "Left MPD (WSO)", "Push Button 17", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1231", "Left MPD (WSO)", "Push Button 18", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1230", "Left MPD (WSO)", "Push Button 19", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1229", "Left MPD (WSO)", "Push Button 20", "%1d"));
-            AddFunction(new Switch(this, devices.MPD_RLEFT.ToString("d"), "1244", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Left MPD (WSO)", "Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_RLEFT.ToString("d"), "1245", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Left MPD (WSO)", "Brightness Control", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_RLEFT.ToString("d"), "1246", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Left MPD (WSO)", "Contrast Control", "%0.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1228", "Left MPD (WSO)", "Push Button 1", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1227", "Left MPD (WSO)", "Push Button 2", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1226", "Left MPD (WSO)", "Push Button 3", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1225", "Left MPD (WSO)", "Push Button 4", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1224", "Left MPD (WSO)", "Push Button 5", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1243", "Left MPD (WSO)", "Push Button 6", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1242", "Left MPD (WSO)", "Push Button 7", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1241", "Left MPD (WSO)", "Push Button 8", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1240", "Left MPD (WSO)", "Push Button 9", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1239", "Left MPD (WSO)", "Push Button 10", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1238", "Left MPD (WSO)", "Push Button 11", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1237", "Left MPD (WSO)", "Push Button 12", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1236", "Left MPD (WSO)", "Push Button 13", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1235", "Left MPD (WSO)", "Push Button 14", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1234", "Left MPD (WSO)", "Push Button 15", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1233", "Left MPD (WSO)", "Push Button 16", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1232", "Left MPD (WSO)", "Push Button 17", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1231", "Left MPD (WSO)", "Push Button 18", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1230", "Left MPD (WSO)", "Push Button 19", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RLEFT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1229", "Left MPD (WSO)", "Push Button 20", "%.1f"));
+            AddFunction(new Switch(this, devices.MPD_RLEFT.ToString("d"), "1244", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Left MPD (WSO)", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_RLEFT.ToString("d"), "1245", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Left MPD (WSO)", "Brightness Control", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_RLEFT.ToString("d"), "1246", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Left MPD (WSO)", "Contrast Control", "%0.1f"));
             #endregion LEFT MPD (WSO)
             #region RIGHT MPD (WSO)
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1251", "Right MPD (WSO)", "Push Button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1250", "Right MPD (WSO)", "Push Button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1249", "Right MPD (WSO)", "Push Button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1248", "Right MPD (WSO)", "Push Button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1247", "Right MPD (WSO)", "Push Button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1266", "Right MPD (WSO)", "Push Button 6", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1265", "Right MPD (WSO)", "Push Button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1264", "Right MPD (WSO)", "Push Button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1263", "Right MPD (WSO)", "Push Button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1262", "Right MPD (WSO)", "Push Button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1261", "Right MPD (WSO)", "Push Button 11", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1260", "Right MPD (WSO)", "Push Button 12", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1259", "Right MPD (WSO)", "Push Button 13", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1258", "Right MPD (WSO)", "Push Button 14", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1257", "Right MPD (WSO)", "Push Button 15", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1256", "Right MPD (WSO)", "Push Button 16", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1255", "Right MPD (WSO)", "Push Button 17", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1254", "Right MPD (WSO)", "Push Button 18", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1253", "Right MPD (WSO)", "Push Button 19", "%1d"));
-            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1252", "Right MPD (WSO)", "Push Button 20", "%1d"));
-            AddFunction(new Switch(this, devices.MPD_RRIGHT.ToString("d"), "1267", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Right MPD (WSO)", "Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_RRIGHT.ToString("d"), "1268", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MPD (WSO)", "Brightness Control", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPD_RRIGHT.ToString("d"), "1269", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MPD (WSO)", "Contrast Control", "%0.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1251", "Right MPD (WSO)", "Push Button 1", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1250", "Right MPD (WSO)", "Push Button 2", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1249", "Right MPD (WSO)", "Push Button 3", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1248", "Right MPD (WSO)", "Push Button 4", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1247", "Right MPD (WSO)", "Push Button 5", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1266", "Right MPD (WSO)", "Push Button 6", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1265", "Right MPD (WSO)", "Push Button 7", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1264", "Right MPD (WSO)", "Push Button 8", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1263", "Right MPD (WSO)", "Push Button 9", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1262", "Right MPD (WSO)", "Push Button 10", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1261", "Right MPD (WSO)", "Push Button 11", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1260", "Right MPD (WSO)", "Push Button 12", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1259", "Right MPD (WSO)", "Push Button 13", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1258", "Right MPD (WSO)", "Push Button 14", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1257", "Right MPD (WSO)", "Push Button 15", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1256", "Right MPD (WSO)", "Push Button 16", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1255", "Right MPD (WSO)", "Push Button 17", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1254", "Right MPD (WSO)", "Push Button 18", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1253", "Right MPD (WSO)", "Push Button 19", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1252", "Right MPD (WSO)", "Push Button 20", "%.1f"));
+            AddFunction(new Switch(this, devices.MPD_RRIGHT.ToString("d"), "1267", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Right MPD (WSO)", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_RRIGHT.ToString("d"), "1268", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MPD (WSO)", "Brightness Control", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPD_RRIGHT.ToString("d"), "1269", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MPD (WSO)", "Contrast Control", "%0.1f"));
             #endregion RIGHT MPD (WSO)
             #region RIGHT MPCD (WSO)
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1274", "Right MPCD (WSO)", "Push Button 1", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1273", "Right MPCD (WSO)", "Push Button 2", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1272", "Right MPCD (WSO)", "Push Button 3", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1271", "Right MPCD (WSO)", "Push Button 4", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1270", "Right MPCD (WSO)", "Push Button 5", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1289", "Right MPCD (WSO)", "Push Button 6", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1288", "Right MPCD (WSO)", "Push Button 7", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1287", "Right MPCD (WSO)", "Push Button 8", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1286", "Right MPCD (WSO)", "Push Button 9", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1285", "Right MPCD (WSO)", "Push Button 10", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1284", "Right MPCD (WSO)", "Push Button 11", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1283", "Right MPCD (WSO)", "Push Button 12", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1282", "Right MPCD (WSO)", "Push Button 13", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1281", "Right MPCD (WSO)", "Push Button 14", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1280", "Right MPCD (WSO)", "Push Button 15", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1279", "Right MPCD (WSO)", "Push Button 16", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1278", "Right MPCD (WSO)", "Push Button 17", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1277", "Right MPCD (WSO)", "Push Button 18", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1276", "Right MPCD (WSO)", "Push Button 19", "%1d"));
-            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1275", "Right MPCD (WSO)", "Push Button 20", "%1d"));
-            AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1290", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Power Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1291", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Brightness Control", "%0.1f"));
-            AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1292", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Contrast Control", "%0.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_01.ToString("d"), "1274", "Right MPCD (WSO)", "Push Button 1", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_02.ToString("d"), "1273", "Right MPCD (WSO)", "Push Button 2", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_03.ToString("d"), "1272", "Right MPCD (WSO)", "Push Button 3", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_04.ToString("d"), "1271", "Right MPCD (WSO)", "Push Button 4", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_05.ToString("d"), "1270", "Right MPCD (WSO)", "Push Button 5", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_06.ToString("d"), "1289", "Right MPCD (WSO)", "Push Button 6", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_07.ToString("d"), "1288", "Right MPCD (WSO)", "Push Button 7", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_08.ToString("d"), "1287", "Right MPCD (WSO)", "Push Button 8", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_09.ToString("d"), "1286", "Right MPCD (WSO)", "Push Button 9", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_10.ToString("d"), "1285", "Right MPCD (WSO)", "Push Button 10", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_11.ToString("d"), "1284", "Right MPCD (WSO)", "Push Button 11", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_12.ToString("d"), "1283", "Right MPCD (WSO)", "Push Button 12", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_13.ToString("d"), "1282", "Right MPCD (WSO)", "Push Button 13", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_14.ToString("d"), "1281", "Right MPCD (WSO)", "Push Button 14", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_15.ToString("d"), "1280", "Right MPCD (WSO)", "Push Button 15", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_16.ToString("d"), "1279", "Right MPCD (WSO)", "Push Button 16", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_17.ToString("d"), "1278", "Right MPCD (WSO)", "Push Button 17", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_18.ToString("d"), "1277", "Right MPCD (WSO)", "Push Button 18", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_19.ToString("d"), "1276", "Right MPCD (WSO)", "Push Button 19", "%.1f"));
+            AddFunction(new PushButton(this, devices.MPCD_RRIGHT.ToString("d"), Commands.mfdg_commands.Button_20.ToString("d"), "1275", "Right MPCD (WSO)", "Push Button 20", "%.1f"));
+            AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1290", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Power.ToString("d"), Commands.mfdg_commands.Switch_Power.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Power Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1291", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Brightness Control", "%0.1f"));
+            AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1292", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Contrast Control", "%0.1f"));
             #endregion RIGHT MPCD (WSO)
             #region LEFT INSTRUMENTS PANEL (WSO)
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1401", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_cover_rc.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_cover_rc.ToString("d")) }, "LEFT INSTRUMENTS PANEL (WSO)", "Nuclear Consent Switch Cover", "%0.1f"));
@@ -792,7 +783,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_console_lt_knob.ToString("d"), "1456", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Console Lights", false, "%0.1f"));
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_inst_pnl_lt_knob.ToString("d"), "1457", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Instruments Panel Lights", false, "%0.1f"));
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_ufc_bcklt_br_knob.ToString("d"), "1458", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "UFC Panel Backlights", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_lights_test_sw.ToString("d"), "1459", "INT LT Control Panel (WSO)", "Warning/Caution Lights Test", "%1d"));
+            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_lights_test_sw.ToString("d"), "1459", "INT LT Control Panel (WSO)", "Warning/Caution Lights Test", "%.1f"));
             AddFunction(new Switch(this, devices.INTLT.ToString("d"), "1460", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.intlt_commands.rc_compass_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.intlt_commands.rc_compass_lt_sw.ToString("d")) }, "INT LT Control Panel (WSO)", "Compass Lights", "%0.1f"));
             AddFunction(new Switch(this, devices.INTLT.ToString("d"), "1461", new SwitchPosition[] { new SwitchPosition("1.0", "Day", Commands.intlt_commands.rc_daynite_mode_sw.ToString("d")), new SwitchPosition("0.0", "Night Mode Selector", Commands.intlt_commands.rc_daynite_mode_sw.ToString("d")) }, "INT LT Control Panel (WSO)", "Displays Day/Night Mode Selector", "%0.1f"));
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_chart_lt_knob.ToString("d"), "1462", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Chart Panel Lights", false, "%0.1f"));
@@ -813,7 +804,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.EWS_CMD.ToString("d"), "1475", SwitchPositions.Create(3, 0d, 0.5d, Commands.tews_commands.cmd_disp_sel_sw.ToString("d"), new string[] { "FLARE", "BOTH", "CHAFF" }, "%0.3f"), "CMD Control Panel (WSO)", "CMD Dispenser Selection Switch FLARE/BOTH/CHAFF", "%0.3f"));
             AddFunction(new Switch(this, devices.EWS_CMD.ToString("d"), "1476", SwitchPositions.Create(5, 0d, 0.25d, Commands.tews_commands.cmd_mode_knob.ToString("d"), new string[] { "OFF", "STBY", "MAN", "SEMI", "AUTO" }, "%0.3f"), "CMD Control Panel (WSO)", "CMD Operational Mode OFF/STBY/MAN/SEMI/AUTO", "%0.3f"));
             AddFunction(new Switch(this, devices.EWS_CMD.ToString("d"), "1477", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.tews_commands.cmd_jett_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.tews_commands.cmd_jett_cover.ToString("d")) }, "CMD Control Panel (WSO)", "Flare Jettison Switch Cover", "%0.1f"));
-            AddFunction(new PushButton(this, devices.EWS_CMD.ToString("d"), Commands.tews_commands.cmd_jett_sw.ToString("d"), "1478", "CMD Control Panel (WSO)", "Flare Jettison Switch NORM/JETT", "%1d"));
+            AddFunction(new PushButton(this, devices.EWS_CMD.ToString("d"), Commands.tews_commands.cmd_jett_sw.ToString("d"), "1478", "CMD Control Panel (WSO)", "Flare Jettison Switch NORM/JETT", "%.1f"));
             #endregion CMD Control Panel (WSO)
             #region MISC CONTROLS (WSO)
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1001", new SwitchPosition[] { new SwitchPosition("1.0", "Show", Commands.misc_commands.hide_controls.ToString("d")), new SwitchPosition("0.0", "Hide Controls", Commands.misc_commands.hide_controls.ToString("d")) }, "MISC CONTROLS (WSO)", "Show/Hide Controls", "%0.1f"));

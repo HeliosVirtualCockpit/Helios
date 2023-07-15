@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Ai->XAML Export Plug-In Version 0.2 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+<Canvas Width="80" Height="6"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+        <Canvas  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+            <!-- Layer 1/Left Datum/<Line> -->
+            <Path StrokeThickness="1.0" Stroke="#0000ff00" StrokeMiterLimit="1.0" Fill="#0000ff00" Data="F1 M 1.500,1.852 L 1.500,4.852"/>
+
+            <!-- Layer 1/Left Datum/<Line> -->
+            <Path StrokeThickness="1.0" Stroke="#0000ff00" StrokeMiterLimit="1.0" Fill="#0000ff00" Data="F1 M 0.000,3.352 L 3.000,3.352"/>
+
+        </Canvas>
+
+        <!-- Layer 1/Pointer Left -->
+        <Path StrokeThickness="0.8" Stroke="#d0e5e5e5" StrokeMiterLimit="1.0" Fill="#d0ffffff" Data="F1 M 39.580,5.360 L 85.536,6.327 C 86.289,6.343 87.032,6.146 87.678,5.758 L 91.403,3.523 C 91.532,3.445 91.532,3.258 91.403,3.180 L 87.678,0.945 C 87.032,0.557 86.289,0.360 85.536,0.376 L 39.580,1.343 C 39.363,1.348 39.189,1.526 39.189,1.743 L 39.189,4.960 C 39.189,5.178 39.363,5.355 39.580,5.360 Z" HorizontalAlignment="Center" Stretch="Fill" VerticalAlignment="Center" Width="70" Canvas.Left="10" Height="6"/>
+
+    </Canvas>
+</Canvas>

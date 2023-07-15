@@ -31,12 +31,13 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
         private HeliosValue _offIndicator;
         private GaugeNeedle _bingoNeedle;
         private CalibrationPointCollectionDouble _internalFuelNeedleCalibration;
+        private CalibrationPointCollectionDouble _bingoNeedleCalibration;
         private GaugeImage _giOff;
 
         public Fuel_Gauge()
             : base("Fuel Gauge", new Size(164, 164))
         {
-            _giOff = new GaugeImage("{F-15C}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Off_Flag.png", new Rect(179d, 287d, 48d, 107d));
+            _giOff = new GaugeImage("{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Off_Flag.png", new Rect(179d, 287d, 48d, 107d));
             Components.Add(_giOff);
             _offIndicator = new HeliosValue(this, new BindingValue(0d), "", "Fuel Monitor Panel Off Indicator", "Off Indicator.", "", BindingValueUnits.Boolean);
             _offIndicator.Execute += new HeliosActionHandler(OffIndicator_Execute);
@@ -44,15 +45,16 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             Actions.Add(_offIndicator);
 
             _internalFuelNeedleCalibration = new CalibrationPointCollectionDouble(0.0d, 0d, 14000d, 245d);
-            _internalFuelNeedle = new GaugeNeedle("{Helios}/Gauges/AV-8B/Common/needle_a.xaml", new Point(82d, 82d), new Size(36d*0.4d, 154d * 0.4d), new Point(18d * 0.4d, 136d * 0.4d), 235d);
+            _bingoNeedleCalibration = new CalibrationPointCollectionDouble(0.0d, 0d, 14000d, 245d);
+            _internalFuelNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Fuel Panel/Needle.xaml", new Point(82d, 82d), new Size(36d*0.4d, 154d * 0.4d), new Point(18d * 0.4d, 136d * 0.4d), 235d);
             Components.Add(_internalFuelNeedle);
             _bingoNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Fuel Panel/Bingo_Needle.xaml", new Point(82d, 82d), new Size(46d * .4d, 205d * .4d), new Point(23d * .4d, 205d * .4d), 235d);
             Components.Add(_bingoNeedle);
 
-            _internalFuel = new HeliosValue(this, new BindingValue(0d), "", "Internal Fuel Amount", "Current Internal Fuel in the aircraft.", "", BindingValueUnits.Pounds);
+            _internalFuel = new HeliosValue(this, new BindingValue(0d), "Fuel Monitor Panel_Fuel Gauge", "Internal Fuel Value", "Current Internal Fuel in the aircraft.", "", BindingValueUnits.Pounds);
             _internalFuel.Execute += new HeliosActionHandler(internalFuel_Execute);
             Actions.Add(_internalFuel);
-            _bingoFuelAmount = new HeliosValue(this, new BindingValue(0d), "", "Bingo Minimum Fuel", "Minimum Fuel setting for the aircraft.", "", BindingValueUnits.Pounds);
+            _bingoFuelAmount = new HeliosValue(this, new BindingValue(0d), "Fuel Monitor Panel_Fuel Gauge", "Bingo Value", "Minimum Fuel setting for the aircraft.", "", BindingValueUnits.Pounds);
             _bingoFuelAmount.Execute += new HeliosActionHandler(Min_internalFuel_Execute);
             Actions.Add(_bingoFuelAmount);
 
@@ -64,7 +66,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
         }
         void Min_internalFuel_Execute(object action, HeliosActionEventArgs e)
         {
-            _bingoNeedle.Rotation = _internalFuelNeedleCalibration.Interpolate(e.Value.DoubleValue);
+            _bingoNeedle.Rotation = _bingoNeedleCalibration.Interpolate(e.Value.DoubleValue);
         }
         void OffIndicator_Execute(object action, HeliosActionEventArgs e)
         {

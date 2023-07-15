@@ -20,7 +20,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
     using GadrocsWorkshop.Helios.Controls;
     using System;
     using System.Windows;
-    using GadrocsWorkshop.Helios.Gauges.AH64D.CMWS;
 
     [HeliosControl("Helios.F15E.FuelPanel", "Fuel Monitor Panel", "F-15E Strike Eagle", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
     class FuelMonitorPanel : CompositeVisualWithBackgroundImage
@@ -32,27 +31,27 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
         public FuelMonitorPanel()
             : base("Fuel Monitor Panel", new Size(288,384))
         {
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.F15E.F15EInterface) };
+
             AddGauge("Fuel Gauge", new Point(60d, 29d), new Size(164d, 164d), _interfaceDeviceName, "Fuel Gauge");
-            AddDisplay("Total Tank display", new FiveDigitDisplay(), new Point(104, 174), new Size(77, 28), "Total Tank display");
-            AddDisplay("Left Tank display", new FourDigitDisplay(), new Point(56, 241), new Size(56, 23), "Left Tank display");
-            AddDisplay("Right Tank display", new FourDigitDisplay(), new Point(172, 241), new Size(56, 23), "Right Tank display");
-            AddKnob("Fuel Totalizer Selector", new Point(77,269), new Size(125, 125), "Fuel Totalizer Selector");
-            AddEncoder("Bingo Selection", new Point(233,45), new Size(65,65), "Bingo Selection");
-            AddIndicator("Off Flag", 60, 173, new Size(19, 41), "Off Flag");
-
-
+            AddDisplay("Total Tank display", new FiveDigitDisplay("Total Tank display"), new Point(104, 174), new Size(77, 28), "Total Tank display");
+            AddDisplay("Left Tank display", new FourDigitDisplay("Left Tank display"), new Point(56, 241), new Size(56, 23), "Left Tank display");
+            AddDisplay("Right Tank display", new FourDigitDisplay("Right Tank display"), new Point(172, 241), new Size(56, 23), "Right Tank display");
+            AddKnob("Fuel Totalizer Selector", new Point(77, 269), new Size(125, 125), "Fuel Totalizer Selector");
+            AddEncoder("Bingo Adjustment", new Point(222,45), new Size(65,65), "Bingo Adjustment");
+            AddIndicator("Panel off flag", 60, 173, new Size(19, 41), "Panel off flag");
         }
-        private void AddDisplay(string name, BaseGauge _gauge, Point posn, Size displaySize, string interfaceElementName)
+        private void AddDisplay(string name, BaseGauge gauge, Point posn, Size displaySize, string interfaceElementName)
         {
             AddDisplay(
                 name: name,
-                gauge: _gauge,
+                gauge: gauge,
                 posn: posn,
                 size: displaySize,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: interfaceElementName
                 );
-            _gauge.Name = $"{Name}_{name}";
+            gauge.Name = $"{Name}_{name}";
         }
         private void AddKnob(string name, Point posn, Size size, string interfaceElementName)
         {
@@ -112,7 +111,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
                 fromCenter: false
                 );
             indicator.Text = "";
-            indicator.Name = $"{Name}_{name}";
+            //indicator.Name = $"{Name}_{name}";
         }
         private void AddGauge(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
@@ -122,10 +121,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
                 Left = pos.X,
                 Height = size.Height,
                 Width = size.Width,
-                Name = GetComponentName(name)
+                Name = $"{Name}_{name}"
             };
             Children.Add(_display);
-            // Note:  we have the actions against the new CMWSThreatDisplay but to expose those
+            // Note:  we have the actions against the new embedded gauge but to expose those
             // actions in the interface, we copy the actions to the Parent.  This is a new 
             // HeliosActionCollection with the keys equal to the new ActionIDs, however the original
             // HeliosActionCollection which is on the child part will have the original keys, even though

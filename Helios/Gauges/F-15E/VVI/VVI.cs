@@ -13,13 +13,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.F15E
+namespace GadrocsWorkshop.Helios.Gauges.FA18C
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Gauges.A_10.VVI;
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.F15E.VVI", "Vertical Velocity Indicator", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.FA18C.VVI", "Vertical Velocity Indicator", "F/A-18C Gauges", typeof(GaugeRenderer))]
     public class VVI : BaseGauge
     {
         private HeliosValue _verticalVelocity;
@@ -31,6 +32,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/VVI/VVI_Faceplate.png", new Rect(32d, 38d, 300d, 300d)));
             _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), -90d);
             Components.Add(_needle);
+
+            //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
             _verticalVelocity = new HeliosValue(this, new BindingValue(0d), "", "vertical velocity", "Veritcal velocity of the aircraft", "(-6,000 to 6,000)", BindingValueUnits.FeetPerMinute);
             _verticalVelocity.Execute += new HeliosActionHandler(VerticalVelocity_Execute);
             Actions.Add(_verticalVelocity);

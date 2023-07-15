@@ -84,8 +84,6 @@
     <Resource Include="Images\MFD\MPC_RC_Button_Pressed.png" />
     <Resource Include="Images\MFD\MPC_R_Button_Norm.png" />
     <Resource Include="Images\MFD\MPC_R_Button_Pressed.png" />
-    <Resource Include="Images\MFD\MPC_Button_Norm.png" />
-    <Resource Include="Images\MFD\MPC_Button_Pressed.png" />
     <Resource Include="Images\MFD\Rocker_Down.png" />
     <Resource Include="Images\MFD\Rocker_Norm.png" />
     <Resource Include="Images\MFD\Rocker_Up.png" />
@@ -169,6 +167,12 @@
     <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Off_Flag.png" />
     <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Panel.png" />
     <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Selector_Knob.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MFD\MPC_Button_Norm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MFD\MPC_Button_Pressed.png" />
   </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

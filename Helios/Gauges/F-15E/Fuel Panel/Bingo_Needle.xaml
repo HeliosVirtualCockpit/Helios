@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="RAltMinNeedle" Width="46" Height="405">
-    <Path StrokeThickness="5.0" Stroke="#ff323232" StrokeMiterLimit="5.0" Fill="#ffffffff" Data="F1 M 200.000,21.713 L 213.793,0.500 L 186.207,0.500 L 200.000,21.713 Z" Stretch="Fill" Width="46" Height="90" Canvas.Top="31" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    <Path StrokeThickness="5.0" Stroke="#ff323232" StrokeMiterLimit="5.0" Fill="#ffffffff" Data="F1 M 200.000,21.713 L 213.793,0.500 L 186.207,0.500 L 200.000,21.713 Z" Stretch="Fill" Width="46" Height="66" Canvas.Top="18.083" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    <Rectangle Height="21" Canvas.Left="16" Stroke="#ff323232" Width="12" RenderTransformOrigin="0.51,0.507" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="White" StrokeThickness="3"/>
 </Canvas>
