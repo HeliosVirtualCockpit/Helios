@@ -147,7 +147,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #endregion Armament Panel
             #region Fuel Monitor Panel
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "381", SwitchPositions.Create(7, -0.1d, 0.1d, Commands.fltinst_commands.fuelqty_totalizer.ToString("d"), new string[] { "BIT", "Feed", "Int Wing", "Tank 1", "Ext Wing", "Ext Center", "Conformal Tanks" }, "%0.3f"), "Fuel Monitor Panel", "Fuel Totalizer Selector", "%0.3f"));
-            AddFunction(new FlagValue(this, "382", "Fuel Monitor Panel", "Panel off flag", "True when flag is down", "%1d"));
+            AddFunction(new FlagValue(this, "382", "Fuel Monitor Panel", "Panel off flag", "True when flag is down", "%.1f"));
             AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.bingo_sel_knob.ToString("d"), "385", 0.1d, "Fuel Monitor Panel", "Bingo Adjustment"));
             AddFunction(new ScaledNetworkValue(this, "383", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 20000d), "Fuel Monitor Panel", "Internal Fuel Value", "Internal fuel amount in pounds", "0-20000", BindingValueUnits.Pounds, "%.3f"));
             AddFunction(new ScaledNetworkValue(this, "384", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 14000d), "Fuel Monitor Panel", "Bingo Value", "Bingo fuel amount in pounds", "0-14000", BindingValueUnits.Pounds, "%.3f"));
@@ -173,21 +173,32 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "335", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")) }, "Flight Instruments", "Pitch Ratio switch", "%0.1f"));
             AddFunction(new Functions.Altimeter(this));
             AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.alt_adj_knob.ToString("d"), "360", 0.1d, "Flight Instruments", "Altimeter pressure adjustment"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_adj.ToString("d"), "351", 0.05d, 0.0d, 1.00d, "Flight Instruments", "Backup ADI Cage/Pitch Adjust Knob", true, "%.3f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_adj.ToString("d"), "351", 0.05d, 0.0d, 1.00d, "Flight Instruments", "Backup ADI Pitch Adjust Knob", true, "%.3f"));
+            AddFunction(new PushButton(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_uncage.ToString("d"), "350", "Flight Instruments", "Backup ADI Uncage pull", "%.1f"));
 
-            CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
+            //CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
+            CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 360d);
             AddFunction(new ScaledNetworkValue(this, "345", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
 
             CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d);
             vviScale.Add(new CalibrationPointDouble(0d, 0d));
             AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "VVI", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
-            CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 0.20d, 20d) {
+            CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 1d, 45d) {
                 new CalibrationPointDouble(0d, 0d)
                 };
-            AddFunction(new ScaledNetworkValue(this, "361", AoAScale, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, "346", AoAScale, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees));
             //AddFunction(new FlagValue(this, "", "Flight Instruments", "AOA Flag", "Off Flag"));
             //CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
             //AddFunction(new ScaledNetworkValue(this, "346", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.clk_adj_knob.ToString("d"), "366", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Clock Adjust", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.tmr_stop_btn.ToString("d"), "367", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Timer Stop", false, "%0.1f"));
+            CalibrationPointCollectionDouble hourScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 12d);
+            CalibrationPointCollectionDouble minuteScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 60d);
+            AddFunction(new ScaledNetworkValue(this, "365", hourScale, "Clock (Pilot)", "Clock Hours", "Current hours value of the clock", "0-12", BindingValueUnits.Hours, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "364", minuteScale, "Clock (Pilot)", "Clock Minutes", "Current minutes value of the clock", "0-60", BindingValueUnits.Minutes, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "363", minuteScale, "Clock (Pilot)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
+            CalibrationPointCollectionDouble cabinPressureScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 50000d);
+            AddFunction(new ScaledNetworkValue(this, "361", cabinPressureScale, "Flight Instruments", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.5f"));
 
             #endregion Flight Instruments
             #region Threat Indicators (Pilot)
@@ -511,6 +522,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.flood_lt_knob.ToString("d"), "574", 0.1d, 0.0d, 1.0d, "INT LT", "Storm FLood Lights", false, "%0.1f"));
             AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.chart_lt_lamp.ToString("d"), "186", 0.1d, 0.0d, 1.0d, "INT LT", "Chart Spot Lamp", false, "%0.1f"));
             #endregion INT LT
+
             #region CANOPY
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "599", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.cnpy_lever.ToString("d"), "Posn", "%0.3f"), "CANOPY", "Canopy Handle", "%0.3f"));
             AddFunction(new FlagValue(this, "408", "CANOPY", "Canopy Unlocked Indicator (Pilot)", "True when indicator is lit", "%1d"));
@@ -526,8 +538,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "1177", "Flight Instruments (WSO)", "Master Warning Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_art_hor_uncage.ToString("d"), "1354", 0.5d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Knob Backup ADI Cage/Pitch Adjust Knob - Pull and turn to uncage", false, "%0.1f"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_alt_adj_knob.ToString("d"), "1364", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Altitude adjust", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_clk_adj_knob.ToString("d"), "1382", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Clock Adjust", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_tmr_stop_btn.ToString("d"), "1383", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Timer Stop", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_clk_adj_knob.ToString("d"), "1382", 0.1d, 0.0d, 1.0d, "Clock (WSO)", "Clock Adjust", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_tmr_stop_btn.ToString("d"), "1383", 0.1d, 0.0d, 1.0d, "Clock (WSO)", "Timer Stop", false, "%0.1f"));
+            AddFunction(new ScaledNetworkValue(this, "1381", hourScale, "Clock (WSO)", "Clock Hours", "Current hours value of the clock", "0-12", BindingValueUnits.Hours, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1380", minuteScale, "Clock (WSO)", "Clock Minutes", "Current minutes value of the clock", "0-60", BindingValueUnits.Minutes, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1379", minuteScale, "Clock (WSO)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1349", cabinPressureScale, "Flight Instruments (WSO)", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.5f"));
+
             #endregion Flight Instruments (WSO)
             #region UFC Panel (WSO)
             #region ODU WSO

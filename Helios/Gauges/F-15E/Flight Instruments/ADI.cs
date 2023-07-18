@@ -14,14 +14,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.F15E.ADI
+namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F15E.ADI", "ADI", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.F15E.Instruments.ADI", "ADI", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADI : BaseGauge
     {
         private HeliosValue _pitch;
@@ -50,8 +50,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.ADI
         private CalibrationPointCollectionDouble _pitchBarCalibration;
         private CalibrationPointCollectionDouble _bankBarCalibration;
 
-        public ADI()
-            : base("ADI", new Size(350, 350))
+        public ADI(string name, Size size)
+            : base(name, size)
         {
             Point center = new Point(177d, 163d);
 

@@ -120,6 +120,9 @@
     <Compile Include="Controls\BarGaugeAppearanceEditor.xaml.cs">
       <DependentUpon>BarGaugeAppearanceEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GlassOpacityAppearanceEditor.xaml.cs">
+      <DependentUpon>GlassOpacityAppearanceEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageAssetLocationAppearanceEditor.xaml.cs">
       <DependentUpon>ImageAssetLocationAppearanceEditor.xaml</DependentUpon>
     </Compile>
@@ -221,16 +224,32 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
-    <Compile Include="Gauges\F-15E\ADI\ADI.cs" />
-    <Compile Include="Gauges\F-15E\AOA\AOA.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\ADI.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\ADI Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\ADI WSO.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\AOA.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\AOA Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\AOA WSO.cs" />
+    <Compile Include="Gauges\F-15E\Clock\Clock Face.cs" />
+    <Compile Include="Gauges\F-15E\Clock\Clock Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Clock\Clock.cs" />
+    <Compile Include="Gauges\F-15E\Clock\Clock WSO.cs" />
     <Compile Include="Gauges\F-15E\EngineMonitor\EngineMonitorPanel.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\BarometricAltimeter Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\BarometricAltimeter WSO.cs" />
     <Compile Include="Gauges\F-15E\Flight Instruments\BarometricAltimeter.cs" />
-    <Compile Include="Gauges\F-15E\Fuel Panel\4 Digit Display\4DigitDisplay.cs" />
-    <Compile Include="Gauges\F-15E\Fuel Panel\5 Digit Display\5DigitDisplay.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\CabinPressureWSO.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\CabinPressurePilot.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\CabinPressure.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\Digit Displays\4DigitDisplay.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\Digit Displays\5DigitDisplay.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\Digit Displays\GaugeDrumCounter.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelPanel.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelGauge.cs" />
-    <Compile Include="Gauges\F-15E\IAS\IAS.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\IAS.cs" />
     <Compile Include="Gauges\F-15E\EngineMonitor\NozzleGauges.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\IAS Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\IAS WSO.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD Pilot Center.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD WSO Left.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPD WSO Left.cs" />
@@ -243,7 +262,9 @@
     <Compile Include="Gauges\F-15E\UFC\UFC Pilot.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFCTextDisplay.cs" />
-    <Compile Include="Gauges\F-15E\VVI\VVI.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\VVI WSO.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\VVI Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Flight Instruments\VVI.cs" />
     <Compile Include="Gauges\FA-18C\ADI\ADI.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
@@ -546,6 +567,10 @@
     <Page Include="Controls\BacklitPushButtonAppearanceEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GlassOpacityAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\HeliosPanelBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -895,11 +920,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Fuel Panel\4 Digit Display\digit_faceplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\F-15E\Fuel Panel\5 Digit Display\digit_faceplate.xaml">
+    <Resource Include="Gauges\F-15E\Fuel Panel\Digit Displays\digit_faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -928,6 +949,62 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\F-15E\EngineMonitor\Engine Panel Legends.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Common\hundreds_drum_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Common\units_drum_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Common\hundreds_drum_tape_reversed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Common\units_drum_tape_reversed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Common\alt_units_drum_tape_reversed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Fuel Panel\Internal_Dial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Clock\Clock_Dial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Clock\hours_needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Flight Instruments\BarometricAltimeterDial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Flight Instruments\HydraulicPressureDial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Flight Instruments\LowPressureDial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Flight Instruments\IASDial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Flight Instruments\AoADial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Flight Instruments\CabinPressureDial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -1113,14 +1190,8 @@
     <Compile Include="Gauges\AV-8B\MFD\MPCD.cs" />
     <Compile Include="Gauges\AV-8B\ODU\ODU_1.cs" />
     <Compile Include="Gauges\AV-8B\Small Panels\Flight Instrument Panel.cs" />
-    <Compile Include="Gauges\AV-8B\Small Panels\CockpitAppearanceEditor.xaml.cs">
-      <DependentUpon>CockpitAppearanceEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Gauges\AV-8B\Small Panels\Gear and Flaps Panel.cs" />
     <Compile Include="Gauges\AV-8B\Small Panels\H2O Panel.cs" />
-    <Compile Include="Gauges\AV-8B\Small Panels\FlightInstrumentAppearanceEditor.xaml.cs">
-      <DependentUpon>FlightInstrumentAppearanceEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Gauges\AV-8B\Small Panels\Landing Gear Indicator Panel.cs" />
     <Compile Include="Gauges\AV-8B\Small Panels\Threat Indicator Panel.cs" />
     <Compile Include="Gauges\AV-8B\Small Panels\Master Arm Panel.cs" />
@@ -3900,14 +3971,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="Gauges\AV-8B\Small Panels\CockpitAppearanceEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Gauges\AV-8B\Small Panels\FlightInstrumentAppearanceEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Resource Include="Gauges\F-16\HydraulicPressure\hydraulic_faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -21,6 +21,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
     using System;
     using System.Windows;
     using System.Windows.Media;
+    using System.Globalization;
+    using System.Xml;
+    using static GadrocsWorkshop.Helios.Interfaces.DCS.Common.NetworkTriggerValue;
 
     [HeliosControl("Helios.F15E.EngineMonitorPanel", "Engine Monitor Panel", "F-15E Strike Eagle", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
     class EngineMonitorPanel : CompositeVisualWithBackgroundImage
@@ -30,6 +33,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
         private EngineMonitorNozzleGauge _display;
         private FontStyle _fontStyle = FontStyles.Normal;
         private FontWeight _fontWeight = FontWeights.Normal;
+        public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.30d;
+        private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
+        private HeliosPanel _frameGlassPanel;
 
         public EngineMonitorPanel()
             : base("Engine Monitor Panel", new Size(470,437))
@@ -55,6 +61,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
             AddNumericTextDisplay("Left Engine Oil Pressure", new Point(108, 319), new Size(oilWidth, dispHeight), fontSize, "88", _interfaceDeviceName, "Left Engine Oil Pressure", TextHorizontalAlignment.Right, BindingValueUnits.PoundsPerSquareInch);
             AddNumericTextDisplay("Right Engine Oil Pressure", new Point(276, 319), new Size(oilWidth, dispHeight), fontSize, "88", _interfaceDeviceName, "Right Engine Oil Pressure", TextHorizontalAlignment.Right, BindingValueUnits.PoundsPerSquareInch);
 
+            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(59, 55), new Size(356d, 319d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDeviceName);
+            _frameGlassPanel.Opacity = GLASS_REFLECTION_OPACITY_DEFAULT;
+            _frameGlassPanel.DrawBorder = false;
+            _frameGlassPanel.FillBackground = false;
 
         }
 
@@ -148,6 +158,55 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
                 }
             }
         }
+        protected HeliosPanel AddPanel(string name, Point posn, Size size, string background, string interfaceDevice)
+        {
+            HeliosPanel panel = AddPanel
+                (
+                name: name,
+                posn: posn,
+                size: size,
+                background: background
+                );
+            // in this instance, we want to all the panels to be hide-able so the actions need to be added
+            IBindingAction panelAction = panel.Actions["toggle.hidden"];
+            panelAction.Device = $"{Name}_{name}";
+            panelAction.Name = "hidden";
+            if (!Actions.ContainsKey(panel.Actions.GetKeyForItem(panelAction)))
+            {
+                Actions.Add(panelAction);
+                //string addedKey = Actions.GetKeyForItem(panelAction);
+            }
+            panelAction = panel.Actions["set.hidden"];
+            panelAction.Device = $"{Name}_{name}";
+            panelAction.Name = "hidden";
+            if (!Actions.ContainsKey(panel.Actions.GetKeyForItem(panelAction)))
+            {
+                Actions.Add(panelAction);
+                //string addedKey = Actions.GetKeyForItem(panelAction);
+            }
+            return panel;
+        }
+
+        #region properties
+        public double GlassReflectionOpacity
+        {
+            get
+            {
+                return _glassReflectionOpacity;
+            }
+            set
+            {
+                double oldValue = _glassReflectionOpacity;
+                if (value != oldValue)
+                {
+                    _glassReflectionOpacity = value;
+                    OnPropertyChanged("GlassReflectionOpacity", oldValue, value, true);
+                    _frameGlassPanel.IsHidden = value == 0d ? true : false;
+                    _frameGlassPanel.Opacity = _glassReflectionOpacity;
+                }
+            }
+        }
+        #endregion
 
         public override bool HitTest(Point location)
         {
@@ -171,6 +230,21 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
         public override string DefaultBackgroundImage
         {
             get { return "{helios}/Gauges/F-15E/EngineMonitor/EngineMonitorBackground.png"; }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            if (_glassReflectionOpacity > 0d)
+            {
+                writer.WriteElementString("GlassReflectionOpacity", GlassReflectionOpacity.ToString(CultureInfo.InvariantCulture));
+            }
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            GlassReflectionOpacity = reader.Name.Equals("GlassReflectionOpacity") ? double.Parse(reader.ReadElementString("GlassReflectionOpacity"), CultureInfo.InvariantCulture) : 0d;
         }
     }
 }

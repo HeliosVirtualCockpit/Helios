@@ -22,6 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
+    using System.Globalization;
 
     [HeliosControl("Helios.F15E.MPD", "Multi Function Display", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class MPD : CompositeVisualWithBackgroundImage
@@ -35,6 +36,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
         private bool _includeViewport = true;
         private string _vpName = "";
         private const string PANEL_IMAGE = "{F-15E}/Images/MFD/MFD_Bezel.png";
+        public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.30d;
+        private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
 
 
         public MPD(string interfaceDevice)
@@ -70,7 +73,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
             }
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
             _frameGlassPanel = AddPanel("MFD Glass", new Point(108, 85), new Size(638, 638), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDevice);
-            _frameGlassPanel.Opacity = 0.3d;
+            _frameGlassPanel.Opacity = _glassReflectionOpacity;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;
 
@@ -94,7 +97,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
             }
             for (int y = 569; y >= 169; y -= 100)
             {
-                AddButton($"Push Button {buttonNumber + 1}", new Point(766, y));
+                AddButton($"Push Button {buttonNumber + 1}", new Point(768, y));
                 buttonNumber++;
             }
             for (int x = 601; x >= 201; x -= 100)
@@ -147,7 +150,25 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
             get => _vpName != "" ? true : false;
             set => _ = value;
         }
+        public double GlassReflectionOpacity
+        {
+            get
+            {
+                return _glassReflectionOpacity;
+            }
+            set
+            {
+                double oldValue = _glassReflectionOpacity;
+                if (value != oldValue)
+                {
+                    _glassReflectionOpacity = value;
+                    OnPropertyChanged("GlassReflectionOpacity", oldValue, value, true);
+                    _frameGlassPanel.IsHidden = _glassReflectionOpacity == 0d ? true : false;
+                    _frameGlassPanel.Opacity = _glassReflectionOpacity; 
 
+                }
+            }
+        }
         protected HeliosPanel AddPanel(string name, Point posn, Size size, string background, string interfaceDevice)
         {
             HeliosPanel panel = AddPanel
@@ -347,22 +368,27 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.MPD
             {
                 writer.WriteElementString("EmbeddedViewportName", "");
             }
+            if (_glassReflectionOpacity > 0d)
+            {
+                writer.WriteElementString("GlassReflectionOpacity", GlassReflectionOpacity.ToString(CultureInfo.InvariantCulture));
+            }
         }
 
         public override void ReadXml(XmlReader reader)
         {
             base.ReadXml(reader);
             _includeViewport = true;
-            if (reader.Name != "EmbeddedViewportName")
+            if (reader.Name.Equals("EmbeddedViewportName"))
             {
-                return;
+                _vpName = reader.ReadElementString("EmbeddedViewportName");
+                if (_vpName == "")
+                {
+                    _includeViewport = false;
+                    RemoveViewport("");
+                }
             }
-            _vpName = reader.ReadElementString("EmbeddedViewportName");
-            if (_vpName == "")
-            {
-                _includeViewport = false;
-                RemoveViewport("");
-            }
+
+            GlassReflectionOpacity = reader.Name.Equals("GlassReflectionOpacity") ? double.Parse(reader.ReadElementString("GlassReflectionOpacity"), CultureInfo.InvariantCulture) : 0d;
         }
     }
 }

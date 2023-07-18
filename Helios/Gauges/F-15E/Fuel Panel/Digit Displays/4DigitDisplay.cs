@@ -26,29 +26,19 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
         private HeliosValue _four_digit_display;
         private GaugeDrumCounter _thousandsDrum;
         private GaugeDrumCounter _hundredsDrum;
-        private GaugeDrumCounter _tensDrum;
-        private GaugeDrumCounter _onesDrum;
 
         public FourDigitDisplay(string interfaceElement)
             : base(interfaceElement, new Size(275, 100))
         {
             Components.Add(new GaugeImage("{Helios}/Gauges/AV-8B/Fuel Panel/4 Digit Display/digit_faceplate.xaml", new Rect(0d, 0d, 275d, 100d)));
 
-            _thousandsDrum = new GaugeDrumCounter("{Helios}/Gauges/AV-8B/Common/drum_tape.xaml", new Point(13.5d, 11.5d), "#", new Size(10d, 15d), new Size(50d, 75d));
+            _thousandsDrum = new GaugeDrumCounter("{Helios}/Gauges/F-15E/Common/units_drum_tape_reversed.xaml", new Point(13.5d, 11.5d), "#", new Size(10d, 15d), new Size(50d, 75d));
             _thousandsDrum.Clip = new RectangleGeometry(new Rect(13.5d, 11.5d, 50d, 75d));
             Components.Add(_thousandsDrum);
 
-            _hundredsDrum = new GaugeDrumCounter("{Helios}/Gauges/AV-8B/Common/drum_tape.xaml", new Point(79.5d, 11.5d), "#", new Size(10d, 15d), new Size(50d, 75d));
-            _hundredsDrum.Clip = new RectangleGeometry(new Rect(79.5d, 11.5d, 50d, 75d));
+            _hundredsDrum = new GaugeDrumCounter("{Helios}/Gauges/F-15E/Common/hundreds_drum_tape_reversed.xaml", new Point(79.5d, 11.5d), "$", new Size(30d, 15d), new Size(150d, 75d));
+            _hundredsDrum.Clip = new RectangleGeometry(new Rect(79.5d, 11.5d, 150d, 75d));
             Components.Add(_hundredsDrum);
-
-            _tensDrum = new GaugeDrumCounter("{Helios}/Gauges/AV-8B/Common/drum_tape.xaml", new Point(145.5d, 11.5d), "#", new Size(10d, 15d), new Size(50d, 75d));
-            _tensDrum.Clip = new RectangleGeometry(new Rect(145.5d, 11.5d, 50d, 75d));
-            Components.Add(_tensDrum);
-
-            _onesDrum = new GaugeDrumCounter("{Helios}/Gauges/AV-8B/Common/drum_tape.xaml", new Point(211.5d, 11.5d), "#", new Size(10d, 15d), new Size(50d, 75d));
-            _onesDrum.Clip = new RectangleGeometry(new Rect(211.5d, 11.5d, 50d, 75d));
-            Components.Add(_onesDrum);
 
             _four_digit_display = new HeliosValue(this, new BindingValue(0d), "", "value", "Four digit display", "Numeric value to be display on a drum", BindingValueUnits.Numeric) ;
             _four_digit_display.Execute += new HeliosActionHandler(DigitDisplay_Execute);
@@ -58,10 +48,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
 
         void DigitDisplay_Execute(object action, HeliosActionEventArgs e)
         {
-            _onesDrum.Value = e.Value.DoubleValue;
-            _tensDrum.Value = _onesDrum.Value / 10d;
-            _hundredsDrum.Value = _tensDrum.Value / 10d;
-            _thousandsDrum.Value = _hundredsDrum.Value / 10d;
+            double actionValue = e.Value.DoubleValue;
+            _thousandsDrum.Value = actionValue / 1000d;
+            actionValue -= Math.Truncate(_thousandsDrum.Value) * 1000d;
+            _hundredsDrum.Value = actionValue / 100d;
         }
     }
 }

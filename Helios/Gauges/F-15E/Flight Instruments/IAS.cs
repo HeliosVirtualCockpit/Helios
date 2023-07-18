@@ -13,27 +13,30 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.F15E
+namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.IAS
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F15E.IAS", "Indicated Air Speed", "F-15E Strike Eagle", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.F15E.Instruments.IAS", "Indicated Air Speed", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class IAS : BaseGauge
     {
         private HeliosValue _indicatedAirSpeed;
         private GaugeNeedle _needle;
         private CalibrationPointCollectionDouble _needleCalibration;
         
-        public IAS()
-            : base("IAS", new Size(300, 300))
+        public IAS(string name, Size size)
+            : base(name, size)
         {
 
-            Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/IAS/IAS.png", new Rect(0d, 0d, 300, 300)));
-
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 360d, 346d);
+            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Flight Instruments/IASDial.xaml", new Rect(0d, 0d, 300, 300)));
+            //CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 0.20d, 20d) {
+            //    new CalibrationPointDouble(0d, 0d)
+            //    };
+            //_needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 850d, 355d);
+            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 360d, 360d);
             _needle = new GaugeNeedle("{Helios}/Gauges/AV-8B/Common/needle_a.xaml", new Point(150d, 150d), new Size(30, 128), new Point(15, 113), 0d);
             Components.Add(_needle);
 

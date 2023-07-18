@@ -174,5 +174,8 @@
   <ItemGroup>
     <Resource Include="Images\MFD\MPC_Button_Pressed.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Off_Flag_Off.png" />
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

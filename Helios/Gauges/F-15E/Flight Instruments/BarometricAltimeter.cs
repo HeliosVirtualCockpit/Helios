@@ -13,14 +13,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments
+namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.BarometricAltimeter
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F15E.Instruments.BAltimeter", "Altimeter", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F15E.Instruments.BAltimeter", "Altimeter", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class BAltimeter : BaseGauge
     {
         private HeliosValue _altitude;
@@ -31,24 +31,24 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments
         private GaugeDrumCounter _drum;
         private GaugeDrumCounter _airPressureDrum;
 
-        public BAltimeter()
-            : base("Barometric Altimeter", new Size(376, 376))
+        public BAltimeter(string name, Size size)
+            : base(name, size)
         {
  
-            _tensDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Altimeter/alt_drum_tape.xaml", new Point(73d, 129d), "#", new Size(10d, 15d), new Size(31d, 38d));
-            _tensDrum.Clip = new RectangleGeometry(new Rect(71d, 144d, 31d, 38d));
+            _tensDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Altimeter/alt_drum_tape.xaml", new Point(69d, 111d), "#", new Size(10d, 15d), new Size(39d, 50d));
+            _tensDrum.Clip = new RectangleGeometry(new Rect(69d, 111d, 39d, 50d));
             Components.Add(_tensDrum);
 
-            _drum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(123d, 128d), "#%00", new Size(10d, 15d), new Size(31d, 38d));
-            _drum.Clip = new RectangleGeometry(new Rect(123d, 130d, 31d, 38d));
+            _drum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(108d, 111d), "#%%%", new Size(10d, 15d), new Size(39d, 50d));
+            _drum.Clip = new RectangleGeometry(new Rect(108d, 111d, 78d, 50d));
             Components.Add(_drum);
 
-            _airPressureDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(135d, 276d), "###%", new Size(10d, 15d), new Size(24d, 32d));
+            _airPressureDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(135d, 276d), "###%", new Size(10d, 15d), new Size(27d, 39d));
             _airPressureDrum.Value = 2992d;
-            _airPressureDrum.Clip = new RectangleGeometry(new Rect(135d, 276d,96d, 32d));
+            _airPressureDrum.Clip = new RectangleGeometry(new Rect(135d, 276d,106d, 39d));
             Components.Add(_airPressureDrum);
 
-            Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/Altimeter/Altimeter_Faceplate.png", new Rect(0d, 0d, 376d, 376d)));
+            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Flight Instruments/BarometricAltimeterDial.xaml", new Rect(0d, 0d, 376d, 376d)));
 
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1000d, 360d);
             _needle = new GaugeNeedle("{Helios}/Gauges/FA-18C/Altimeter/altimeter_needle.xaml", new Point(188d, 188d), new Size(16d, 160d), new Point(8d, 160d));
@@ -70,17 +70,18 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments
             _needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue % 1000d);
             _tensDrum.Value = e.Value.DoubleValue / 10000d;
 
-            // Setup then thousands drum to roll with the rest
-            double thousands = (e.Value.DoubleValue / 100d) % 100d;
-            if (thousands >= 99)
+            // Setup the thousands drum to roll with the rest
+            double tenThousands = (e.Value.DoubleValue / 100d) % 100d;
+            if (tenThousands >= 99)
             {
-                _tensDrum.StartRoll = thousands % 1d;
+                _tensDrum.StartRoll = tenThousands % 1d;
             }
             else
             {
                 _tensDrum.StartRoll = -1d;
             }
-            _drum.Value = e.Value.DoubleValue;
+            double thousands = (e.Value.DoubleValue % 10000d);
+            _drum.Value = thousands;
         }
 
         void AirPressure_Execute(object action, HeliosActionEventArgs e)

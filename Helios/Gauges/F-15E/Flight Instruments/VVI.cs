@@ -13,21 +13,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.FA18C
+namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.VVI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Gauges.A_10.VVI;
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.FA18C.VVI", "Vertical Velocity Indicator", "F/A-18C Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.F15E.Instruments.VVI", "Vertical Velocity Indicator", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class VVI : BaseGauge
     {
         private HeliosValue _verticalVelocity;
         private GaugeNeedle _needle;
         private CalibrationPointCollectionDouble _calibrationPoints;
 
-        public VVI() : base("VVI", new Size(364, 376))
+        public VVI(string name, Size size): base(name, size)
         {
             Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/VVI/VVI_Faceplate.png", new Rect(32d, 38d, 300d, 300d)));
             _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), -90d);

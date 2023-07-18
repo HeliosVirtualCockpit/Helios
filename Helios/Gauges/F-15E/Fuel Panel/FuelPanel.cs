@@ -20,6 +20,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
     using GadrocsWorkshop.Helios.Controls;
     using System;
     using System.Windows;
+    using System.Globalization;
+    using System.Xml;
 
     [HeliosControl("Helios.F15E.FuelPanel", "Fuel Monitor Panel", "F-15E Strike Eagle", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
     class FuelMonitorPanel : CompositeVisualWithBackgroundImage
@@ -27,6 +29,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
         private string _interfaceDeviceName = "Fuel Monitor Panel";
         private string _font = "MS 33558";
         private Fuel_Gauge _display;
+        public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.30d;
+        private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
+        private HeliosPanel _frameGlassPanel;
 
         public FuelMonitorPanel()
             : base("Fuel Monitor Panel", new Size(288,384))
@@ -34,12 +39,17 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.F15E.F15EInterface) };
 
             AddGauge("Fuel Gauge", new Point(60d, 29d), new Size(164d, 164d), _interfaceDeviceName, "Fuel Gauge");
-            AddDisplay("Total Tank display", new FiveDigitDisplay("Total Tank display"), new Point(104, 174), new Size(77, 28), "Total Tank display");
-            AddDisplay("Left Tank display", new FourDigitDisplay("Left Tank display"), new Point(56, 241), new Size(56, 23), "Left Tank display");
-            AddDisplay("Right Tank display", new FourDigitDisplay("Right Tank display"), new Point(172, 241), new Size(56, 23), "Right Tank display");
+            AddDisplay("Total Tank display", new FiveDigitDisplay("Total Tank display"), new Point(104, 174), new Size(77, 29), "Total Tank display");
+            AddDisplay("Left Tank display", new FourDigitDisplay("Left Tank display"), new Point(56, 241), new Size(56, 24), "Left Tank display");
+            AddDisplay("Right Tank display", new FourDigitDisplay("Right Tank display"), new Point(172, 241), new Size(56, 24), "Right Tank display");
+            AddIndicator("Panel off flag", 61, 172, new Size(18, 43), "Panel off flag");
+            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(43, 12), new Size(199d, 253d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDeviceName);
+            _frameGlassPanel.Opacity = GLASS_REFLECTION_OPACITY_DEFAULT;
+            _frameGlassPanel.DrawBorder = false;
+            _frameGlassPanel.FillBackground = false;
             AddKnob("Fuel Totalizer Selector", new Point(77, 269), new Size(125, 125), "Fuel Totalizer Selector");
-            AddEncoder("Bingo Adjustment", new Point(222,45), new Size(65,65), "Bingo Adjustment");
-            AddIndicator("Panel off flag", 60, 173, new Size(19, 41), "Panel off flag");
+            AddEncoder("Bingo Adjustment", new Point(222, 45), new Size(65, 65), "Bingo Adjustment");
+
         }
         private void AddDisplay(string name, BaseGauge gauge, Point posn, Size displaySize, string interfaceElementName)
         {
@@ -100,8 +110,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
                 name: name,
                 posn: new Point(x, y),
                 size: size,
-                onImage: "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Off_Flag.png",
-                offImage: "{AV-8B}/Images/_transparent.png",
+                offImage: "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Off_Flag.png",
+                onImage: "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Off_Flag_Off.png",
                 onTextColor: System.Windows.Media.Color.FromArgb(0x00, 0xff, 0xff, 0xff),
                 offTextColor: System.Windows.Media.Color.FromArgb(0x00, 0x00, 0x00, 0x00),
                 font: _font,
@@ -156,6 +166,55 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
             //_display.Actions.Clear();
         }
 
+        protected HeliosPanel AddPanel(string name, Point posn, Size size, string background, string interfaceDevice)
+        {
+            HeliosPanel panel = AddPanel
+                (
+                name: name,
+                posn: posn,
+                size: size,
+                background: background
+                );
+            // in this instance, we want to all the panels to be hide-able so the actions need to be added
+            IBindingAction panelAction = panel.Actions["toggle.hidden"];
+            panelAction.Device = $"{Name}_{name}";
+            panelAction.Name = "hidden";
+            if (!Actions.ContainsKey(panel.Actions.GetKeyForItem(panelAction)))
+            {
+                Actions.Add(panelAction);
+                //string addedKey = Actions.GetKeyForItem(panelAction);
+            }
+            panelAction = panel.Actions["set.hidden"];
+            panelAction.Device = $"{Name}_{name}";
+            panelAction.Name = "hidden";
+            if (!Actions.ContainsKey(panel.Actions.GetKeyForItem(panelAction)))
+            {
+                Actions.Add(panelAction);
+                //string addedKey = Actions.GetKeyForItem(panelAction);
+            }
+            return panel;
+        }
+        #region properties
+        public double GlassReflectionOpacity
+        {
+            get
+            {
+                return _glassReflectionOpacity;
+            }
+            set
+            {
+                double oldValue = _glassReflectionOpacity;
+                if (value != oldValue)
+                {
+                    _glassReflectionOpacity = value;
+                    OnPropertyChanged("GlassReflectionOpacity", oldValue, value, true);
+                    _frameGlassPanel.IsHidden = value == 0d ? true : false;
+                    _frameGlassPanel.Opacity = _glassReflectionOpacity;
+                }
+            }
+        }
+        #endregion
+
         public override bool HitTest(Point location)
         {
 
@@ -178,6 +237,25 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
         public override string DefaultBackgroundImage
         {
             get { return "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Panel.png"; }
+        }
+        protected override void OnBackgroundImageChange()
+        {
+            //_bezel.BackgroundImage = BackgroundImageIsCustomized ? null : System.IO.Path.Combine(_imageLocation, PANEL_IMAGE);
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            if (_glassReflectionOpacity > 0d)
+            {
+                writer.WriteElementString("GlassReflectionOpacity", GlassReflectionOpacity.ToString(CultureInfo.InvariantCulture));
+            }
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            GlassReflectionOpacity = reader.Name.Equals("GlassReflectionOpacity") ? double.Parse(reader.ReadElementString("GlassReflectionOpacity"), CultureInfo.InvariantCulture) : 0d;
         }
     }
 }

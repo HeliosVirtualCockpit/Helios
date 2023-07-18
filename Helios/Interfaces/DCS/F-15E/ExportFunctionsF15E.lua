@@ -36,6 +36,7 @@ function driver.processLowImportance(mainPanelDevice)
 				helios.send(2100 + i, string.format("%s;%s;%s;%s;%s;%s", i+1,helios.ensureString(li[oduVarNames[(3*i) + 1]]):gsub(":","!"),helios.ensureString(li[oduVarNames[(3*i) + 2]]):gsub(":","!"),helios.ensureString(li[oduVarNames[(3*i) + 3]]):gsub(":","!"),helios.ensureString(li["UFC_SC_05A"]):gsub(":","!"),helios.ensureString(li["UFC_SC_08A"]):gsub(":","!")))
 			end
         end
+		helios.send(2109, string.format("%s", helios.ensureString(li["UFC_DISPLAY"]):gsub(":","!")))
     end
     li = helios.parseIndication(20) -- 20 WSO UFC / ODU 
 	if li then
@@ -46,11 +47,12 @@ function driver.processLowImportance(mainPanelDevice)
 				helios.send(2110 + i, string.format("%s;%s;%s;%s;%s;%s", i+1,helios.ensureString(li[oduVarNames[(3*i) + 1]]):gsub(":","!"),helios.ensureString(li[oduVarNames[(3*i) + 2]]):gsub(":","!"),helios.ensureString(li[oduVarNames[(3*i) + 3]]):gsub(":","!"),helios.ensureString(li["UFC_SC_05A"]):gsub(":","!"),helios.ensureString(li["UFC_SC_08A"]):gsub(":","!")))
 			end
         end
+		helios.send(2119, string.format("%s", helios.ensureString(li["UFC_DISPLAY"]):gsub(":","!")))
     end
 	-- Fuel Monitor Panel
-    helios.send(2010, string.format("%.0f",mainPanelDevice:get_argument_value(368) * 100000+mainPanelDevice:get_argument_value(369)%1 * 10000+mainPanelDevice:get_argument_value(370)%1 * 1000)) -- Fuel Total
-    helios.send(2011, string.format("%.0f",mainPanelDevice:get_argument_value(373) * 10000+mainPanelDevice:get_argument_value(374)%1 * 1000))   -- Fuel Left Tank
-    helios.send(2012, string.format("%.0f",mainPanelDevice:get_argument_value(377) * 10000+mainPanelDevice:get_argument_value(378)%1 * 1000))	-- Fuel Right Tank
+    helios.send(2010, string.format("%.5f;%.5f;%.5f",mainPanelDevice:get_argument_value(368), mainPanelDevice:get_argument_value(369), mainPanelDevice:get_argument_value(370))) -- Fuel Total
+    helios.send(2011, string.format("%.5f;%.5f",mainPanelDevice:get_argument_value(373), mainPanelDevice:get_argument_value(374))) -- Fuel Left Tank
+    helios.send(2012, string.format("%.5f;%.5f",mainPanelDevice:get_argument_value(377), mainPanelDevice:get_argument_value(378)))	-- Fuel Right Tank
     -- Engine Monitor Panel
  	helios.send(2070, string.format("%.0f", mainPanelDevice:get_argument_value(1118) * 100000+mainPanelDevice:get_argument_value(1117)%1 * 10000+mainPanelDevice:get_argument_value(1116)%1 * 1000+mainPanelDevice:get_argument_value(1115)%1 * 100+mainPanelDevice:get_argument_value(1114)%1*10))	-- Left Fuel Flow
 	helios.send(2071, string.format("%.0f", mainPanelDevice:get_argument_value(1126) * 1000+mainPanelDevice:get_argument_value(1125)%1 * 100+mainPanelDevice:get_argument_value(1124)%1 * 10))	-- Left Oil Pressure

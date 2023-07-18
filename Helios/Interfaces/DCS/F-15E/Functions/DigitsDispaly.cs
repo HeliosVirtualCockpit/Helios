@@ -18,6 +18,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions
 {
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
+    using GadrocsWorkshop.Helios.Util;
+    using System;
     using System.Globalization;
 
     public class DigitsDisplay : DCSFunction
@@ -55,10 +57,82 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions
 
         public override void ProcessNetworkData(string id, string value)
         {
-            if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double parsedValue))
+            double tenThousands; ;
+            double thousands;
+            double hundreds;
+            string[] parts;
+            switch (id)
             {
-                _digitDisplay.SetValue(new BindingValue(parsedValue), false);
+                case "2010":
+                    parts = Tokenizer.TokenizeAtLeast(value, 3, ';');
+                    tenThousands = ClampedParse(parts[0], 10000d);
+                    thousands = ClampedParse(parts[1], 1000d);
+                    hundreds = Parse(parts[2], 100d);
+                    break;
+                default:
+                    parts = Tokenizer.TokenizeAtLeast(value, 2, ';');
+                    tenThousands = 0;
+                    thousands = ClampedParse(parts[0], 1000d);
+                    hundreds = Parse(parts[1], 100d);
+                    break;
             }
+            double displayValue = tenThousands + thousands + hundreds;
+            _digitDisplay.SetValue(new BindingValue(displayValue), false);
+        }
+        private double Parse(string value, double scale)
+        {
+            if (!double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat,
+                out double scaledValue))
+            {
+                return scaledValue;
+            }
+
+            if (scaledValue < 1.0d)
+            {
+                scaledValue *= scale * 10d;
+            }
+            else
+            {
+                scaledValue = 0d;
+            }
+            return scaledValue;
+        }
+
+        private double ClampedParse(string value, double scale)
+        {
+            if (!double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat,
+                out double scaledValue))
+            {
+                return scaledValue;
+            }
+
+            if (scaledValue < 1.0d)
+            {
+                scaledValue = Math.Truncate(scaledValue * 10d) * scale;
+            }
+            else
+            {
+                scaledValue = 0d;
+            }
+            return scaledValue;
+        }
+        private double ClampedParse(string value, double scale, double offset, double mult)
+        {
+            if (!double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat,
+                out double scaledValue))
+            {
+                return scaledValue;
+            }
+
+            if (scaledValue < 1.0d)
+            {
+                scaledValue = (Math.Truncate(scaledValue * mult) + offset) * scale;
+            }
+            else
+            {
+                scaledValue = 0d;
+            }
+            return scaledValue;
         }
 
         public override void Reset()

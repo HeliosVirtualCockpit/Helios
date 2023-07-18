@@ -156,6 +156,13 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
                     _giGaugeLegends.IsHidden = (_hactionVal == "1") ? false : true;
                     _gnRightNoz.IsHidden = (_hactionVal == "1") ? false : true;
                     _gnLeftNoz.IsHidden = (_hactionVal == "1") ? false : true;
+                    foreach(HeliosVisual hv in Parent.Children)
+                    {
+                        if (hv is NumericTextDisplay)
+                        {
+                            hv.IsHidden = (_hactionVal == "1") ? false : true;
+                        }
+                    }
                     break;
                 default:
                     break;
