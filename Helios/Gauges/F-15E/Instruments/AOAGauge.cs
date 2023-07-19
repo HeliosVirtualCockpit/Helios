@@ -17,12 +17,13 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.AOA
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Media;
 
     // Annotation Indicating the unique name for this control, display, toolbox group, and control renderer.
-    [HeliosControl("Helios.F15E.Instruments.AoA", "Angle of Attack", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
-    public class AOA : BaseGauge
+    [HeliosControl("Helios.F15E.Instruments.AoA.Gauge", "Angle of Attack", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
+    public class AOAGauge : BaseGauge
     {
         // Value object used to expose angle of attack rendered on the gauge
         private HeliosValue _aoa;
@@ -32,25 +33,27 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.AOA
         private CalibrationPointCollectionDouble _needleCalibration;
 
         // Base construcor is passed default name and native size
-        public AOA(string name, Size size)
+        public AOAGauge(string name, Size size, string device)
             : base(name, size)
         {
             // Components contains all artifacts that are used to draw the gauge, they are drawn in the order they are added to the collection.
 
             // Add faceplate image to drawing components
             // Source image file (xaml will be vector rendered to appropriate size)
-            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Flight Instruments/AoADial.xaml",
+            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Instruments/AoADial.xaml",
                 // Rectangle inside gauge where image will be drawn (scaled automatically to fit rectangle)
-                                          new Rect(32d, 38d, 300d, 300d)));
+                                          new Rect(0d, 0d, 300d, 300d)));
 
             // Create needle calibration scale which will be used to represent 0 degrees rotation for 0 input and 324 degrees rotation when input is 45.
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 45d, 324d);
+            _needleCalibration = new CalibrationPointCollectionDouble(-5d, -36d, 50d, 360d) {
+                new CalibrationPointDouble(0d, 0d)
+            };
 
             // Add needle to drawing components
             // Source image file (xaml will be vector rendered to appropriate size)
             _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml",
                 // Location on gauge which the needle will be rotated
-                                      new Point(182d, 188d),
+                                      new Point(150d, 150d),
                 // Size of needle image (will scale image to this size automatically)
                                       new Size(22d, 165d),
                 // Center point of needle image to rotate around
@@ -67,11 +70,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.AOA
                 // Default Value
                                    new BindingValue(0d),
                 // Device Hint
-                                   "",
+                                   $"{device}_{name}",
                 // Name
-                                   "angle of attack",
+                                   name,
                 // Description
-                                   "Current angle of attack of the aircraft.",
+                                   "Current angle of attack of the aircraft in degrees.",
                 // Value Description
                                    "(0 - 45)",
                 // Value Unit of Measure

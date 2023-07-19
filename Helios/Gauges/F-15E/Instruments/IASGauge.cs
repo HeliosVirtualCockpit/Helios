@@ -21,28 +21,34 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.IAS
     using System.Windows.Media;
 
     [HeliosControl("Helios.F15E.Instruments.IAS", "Indicated Air Speed", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
-    public class IAS : BaseGauge
+    public class IASGauge : BaseGauge
     {
         private HeliosValue _indicatedAirSpeed;
         private GaugeNeedle _needle;
         private CalibrationPointCollectionDouble _needleCalibration;
         
-        public IAS(string name, Size size)
+        public IASGauge(string name, Size size, string device)
             : base(name, size)
         {
 
-            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Flight Instruments/IASDial.xaml", new Rect(0d, 0d, 300, 300)));
-            //CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 0.20d, 20d) {
-            //    new CalibrationPointDouble(0d, 0d)
-            //    };
-            //_needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 850d, 355d);
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 360d, 360d);
+            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Instruments/IASDial.xaml", new Rect(0d, 0d, 300, 300)));
+            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 850d, 345d)
+            {
+                new CalibrationPointDouble(60d, 16d),
+                new CalibrationPointDouble(100d, 85d),
+                new CalibrationPointDouble(150d, 146d),
+                new CalibrationPointDouble(200d, 205d),
+                new CalibrationPointDouble(300d, 239d),
+                new CalibrationPointDouble(400d, 270d),
+                new CalibrationPointDouble(500d, 288d),
+                new CalibrationPointDouble(600d, 304d),
+                new CalibrationPointDouble(700d, 320d),
+                new CalibrationPointDouble(800d, 338d)
+            };
             _needle = new GaugeNeedle("{Helios}/Gauges/AV-8B/Common/needle_a.xaml", new Point(150d, 150d), new Size(30, 128), new Point(15, 113), 0d);
             Components.Add(_needle);
 
-            //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
-
-            _indicatedAirSpeed = new HeliosValue(this, new BindingValue(0d), "", "indicated airspeed", "Current indicated airspeed of the aircraft.", "(0 - 850)", BindingValueUnits.Knots);
+            _indicatedAirSpeed = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", name, "Current indicated airspeed of the aircraft.", "(0 - 850)", BindingValueUnits.Knots);
             _indicatedAirSpeed.Execute += new HeliosActionHandler(IndicatedAirSpeed_Execute);
             Actions.Add(_indicatedAirSpeed);
         }

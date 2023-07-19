@@ -208,7 +208,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
                 {
                     _glassReflectionOpacity = value;
                     OnPropertyChanged("GlassReflectionOpacity", oldValue, value, true);
-                    _frameGlassPanel.IsHidden = value == 0d ? true : false;
+                    _frameGlassPanel.IsHidden = value == 0d;
                     _frameGlassPanel.Opacity = _glassReflectionOpacity;
                 }
             }

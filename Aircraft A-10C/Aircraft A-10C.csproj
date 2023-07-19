@@ -494,6 +494,7 @@
     <Resource Include="Images\A-10CII\ARC-210_Button_UpArrow_Up.png" />
     <Resource Include="Images\A-10CII\ARC-210_WideButton_Down.png" />
     <Resource Include="Images\A-10CII\ARC-210_WideButton_Up.png" />
+    <Resource Include="Images\A-10C\Pilot_Reflection_25a.png" />
     <Content Include="Templates\Base\A-10C\0.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

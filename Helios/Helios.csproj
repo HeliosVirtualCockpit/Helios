@@ -224,32 +224,40 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\ADI.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\ADI Pilot.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\ADI WSO.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\AOA.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\AOA Pilot.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\AOA WSO.cs" />
-    <Compile Include="Gauges\F-15E\Clock\Clock Face.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\ADI.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\ADI Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\ADI WSO.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\AOAGauge.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\AOA Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\AOA WSO.cs" />
+    <Compile Include="Gauges\F-15E\Clock\ClockGauge.cs" />
     <Compile Include="Gauges\F-15E\Clock\Clock Pilot.cs" />
-    <Compile Include="Gauges\F-15E\Clock\Clock.cs" />
     <Compile Include="Gauges\F-15E\Clock\Clock WSO.cs" />
     <Compile Include="Gauges\F-15E\EngineMonitor\EngineMonitorPanel.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\BarometricAltimeter Pilot.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\BarometricAltimeter WSO.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\BarometricAltimeter.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\CabinPressureWSO.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\CabinPressurePilot.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\CabinPressure.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\BarometricAltimeter Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\BarometricAltimeter WSO.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\BarometricAltimeterGauge.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\PitchRatio.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\PitchRatioGauge.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\OxygenPressurePilot.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\OxygenPressureWSO.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\OxygenPressureGauge.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\HydraulicPressureUtility.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\HydraulicPressurePC2.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\HydraulicPressurePC1.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\HydraulicPressureGauge.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\CabinPressureWSO.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\CabinPressurePilot.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\CabinPressureGauge.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\Digit Displays\4DigitDisplay.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\Digit Displays\5DigitDisplay.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\Digit Displays\GaugeDrumCounter.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelPanel.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelGauge.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\IAS.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\IASGauge.cs" />
     <Compile Include="Gauges\F-15E\EngineMonitor\NozzleGauges.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\IAS Pilot.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\IAS WSO.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\IAS Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\IAS WSO.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD Pilot Center.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPCD WSO Left.cs" />
     <Compile Include="Gauges\F-15E\MFD\MPD WSO Left.cs" />
@@ -262,9 +270,9 @@
     <Compile Include="Gauges\F-15E\UFC\UFC Pilot.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFC.cs" />
     <Compile Include="Gauges\F-15E\UFC\UFCTextDisplay.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\VVI WSO.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\VVI Pilot.cs" />
-    <Compile Include="Gauges\F-15E\Flight Instruments\VVI.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\VVI WSO.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\VVI Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Instruments\VVIGauge.cs" />
     <Compile Include="Gauges\FA-18C\ADI\ADI.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\FA-18C\UFC\UFCTextDisplay.cs" />
@@ -984,27 +992,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Flight Instruments\BarometricAltimeterDial.xaml">
+    <Resource Include="Gauges\F-15E\Instruments\BarometricAltimeterDial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Flight Instruments\HydraulicPressureDial.xaml">
+    <Resource Include="Gauges\F-15E\Instruments\HydraulicPressureDial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Flight Instruments\LowPressureDial.xaml">
+    <Resource Include="Gauges\F-15E\Instruments\OxygenPressureDial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Flight Instruments\IASDial.xaml">
+    <Resource Include="Gauges\F-15E\Instruments\IASDial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Flight Instruments\AoADial.xaml">
+    <Resource Include="Gauges\F-15E\Instruments\AoADial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Flight Instruments\CabinPressureDial.xaml">
+    <Resource Include="Gauges\F-15E\Instruments\CabinPressureDial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\PitchRatioDial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -4109,7 +4121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gauges\FA-18C\Controls\" />
-    <Folder Include="Images\F-15E\" />
     <Folder Include="Interfaces\DCS\F14B\Functions\" />
     <Folder Include="Interfaces\DCS\Mi8Simple\Functions\" />
     <Folder Include="Interfaces\DCS\MiG21\Functions\" />

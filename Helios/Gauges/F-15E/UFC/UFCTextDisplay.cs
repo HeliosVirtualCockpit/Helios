@@ -73,7 +73,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
             string pad2 = "";
             for(int i=1;i<=3; i++)
             {
+                parts[i] = Regex.Replace(Regex.Replace(parts[i], @"ï¿{1}", @" "), @"½{1}", @"");  // This is specifically to remove odd data discovered in testing
                 parts[i] = Regex.Replace(Regex.Replace(Regex.Replace(Regex.Replace(Regex.Replace(parts[i], @"\u00c2\u00b0{1}", @"°"), @"[\s\S-[\u00c2]]{1}", @"!$&"), @"(!°!){1}", @"°"), @"(!\.!){1}", @"."), @"(!\:!){1}", @":");
+
             }
             int lineMiddleLength = (_valueLength * 2) - parts[1].Length - parts[3].Length;
             if(lineMiddleLength > parts[2].Length)

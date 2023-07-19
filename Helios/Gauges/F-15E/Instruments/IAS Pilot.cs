@@ -1,5 +1,4 @@
 ﻿//  Copyright 2014 Craig Courtney
-//  Copyright 2023 Helios Contributors
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -14,33 +13,29 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
+namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.IAS
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
-    using System;
     using System.Globalization;
     using System.Windows;
-    using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.F15E.Clock.WSO", "Clock (WSO)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    class ClockWso : CompositeVisualWithBackgroundImage
+    [HeliosControl("Helios.F15E.Instruments.IAS.Pilot", "Indicated Air Speed (Pilot)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    class IASPilot : CompositeVisualWithBackgroundImage
     {
-        private string _interfaceDeviceName = "Clock (WSO)";
-        private ClockGauge _display;
+        private string _interfaceDeviceName = "Flight Instruments";
+        private IASGauge _display;
         private const string REFLECTION_IMAGE = "{A-10C}/Images/A-10C/Pilot_Reflection_25a.png";
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.30d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
         private HeliosPanel _frameGlassPanel;
 
-        public ClockWso()
-            : base("Clock (WSO)", new Size(300, 300))
+        public IASPilot()
+            : base("IAS Gauge (Pilot)", new Size(300, 300))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.F15E.F15EInterface) };
-            AddGauge("Clock", new Point(0d, 0d), new Size(300d, 300d), _interfaceDeviceName, "Clock");
-            //AddButton("Button", new Point(346, 19), new Size(80, 80), _interfaceDeviceName, "Button");
-            //AddEncoder("Knob", new Point(11,351), new Size(120, 120), _interfaceDeviceName, "Knob", "Knob");
+            AddGauge("IAS Airspeed", new Point(0d, 0d), new Size(300d, 300d), _interfaceDeviceName, "IAS Airspeed");
             _frameGlassPanel = AddPanel("Gauge Glass", new Point(0d, 0d), new Size(300d, 300d), REFLECTION_IMAGE, _interfaceDeviceName);
             _frameGlassPanel.Opacity = GLASS_REFLECTION_OPACITY_DEFAULT;
             _frameGlassPanel.DrawBorder = false;
@@ -48,7 +43,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
         }
         private void AddGauge(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _display = new ClockGauge(name, new Size(300, 300), _interfaceDeviceName, new string[3] { "Clock Hours", "Clock Minutes", "Clock Seconds" })
+            _display = new IASGauge(name, new Size(300, 300), _interfaceDeviceName)
             {
                 Top = pos.Y,
                 Left = pos.X,
@@ -118,40 +113,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
             }
             return panel;
         }
-
-        //private void AddButton(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName, string imageModifier = "")
-        //{
-        //    imageModifier = imageModifier == "" ? "Clock" : imageModifier;
-        //    AddButton(
-        //        name: name,
-        //        posn: posn,
-        //        size: size,
-        //        image: $"{_imageLocation}{imageModifier} Button Unpushed.png",
-        //        pushedImage: $"{_imageLocation}{imageModifier} Button Pushed.png",
-        //        buttonText: "",
-        //        interfaceDeviceName: interfaceDeviceName,
-        //        interfaceElementName: interfaceElementName,
-        //        fromCenter: false
-        //        );
-        //}
-
-        //private void AddEncoder(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName, string knobName = "")
-        //{
-        //    AddEncoder(
-        //        name: name,
-        //        size: size,
-        //        posn: posn,
-        //        knobImage: $"{_imageLocation}Clock {knobName}.png",
-        //        stepValue: 0.5,
-        //        rotationStep: 5,
-        //        interfaceDeviceName: _interfaceDeviceName,
-        //        interfaceElementName: interfaceElementName,
-        //        fromCenter: false,
-        //        clickType: RotaryClickType.Swipe
-        //        );
-        //}
-
-
         #region properties
         public double GlassReflectionOpacity
         {
@@ -166,7 +127,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
                 {
                     _glassReflectionOpacity = value;
                     OnPropertyChanged("GlassReflectionOpacity", oldValue, value, true);
-                    _frameGlassPanel.IsHidden = value == 0d;
+                    _frameGlassPanel.IsHidden = value == 0d ? true : false;
                     _frameGlassPanel.Opacity = _glassReflectionOpacity;
                 }
             }
@@ -217,4 +178,3 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
         }
     }
 }
-

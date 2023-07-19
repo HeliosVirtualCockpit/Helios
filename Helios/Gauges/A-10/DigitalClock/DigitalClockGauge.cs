@@ -40,8 +40,9 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C
             _giScale = new GaugeImage(_imageLocation + "A-10C_Digital_Clock_Dial_Numbers.png", new Rect(0d, 0d, 414d, 405d));
             Components.Add(_giScale);
 
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 60d, 360d);
-            _needleCalibration.Add(new CalibrationPointDouble(100d, 34d));
+            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 60d, 360d) {
+                new CalibrationPointDouble(100d, 34d)
+            };
             _needle = new GaugeNeedle("{Helios}/Gauges/A-10/DigitalClock/ClockSecondHand.xaml", new Point(207d, 208d), new Size(22, 165), new Point(11, 130), 0d);
             Components.Add(_needle);
             _clockHandSeconds = new HeliosValue(this, new BindingValue(0d), "", "DigitalClock_Second Hand", "Text Value of Seconds", "(0 - 60)", BindingValueUnits.Text);

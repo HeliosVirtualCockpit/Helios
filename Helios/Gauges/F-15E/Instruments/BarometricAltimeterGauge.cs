@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.BarometricAltimeter
     using System.Windows.Media;
 
     [HeliosControl("Helios.F15E.Instruments.BAltimeter", "Altimeter", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
-    public class BAltimeter : BaseGauge
+    public class BAltimeterGauge : BaseGauge
     {
         private HeliosValue _altitude;
         private HeliosValue _airPressure;
@@ -31,35 +31,33 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.BarometricAltimeter
         private GaugeDrumCounter _drum;
         private GaugeDrumCounter _airPressureDrum;
 
-        public BAltimeter(string name, Size size)
+        public BAltimeterGauge(string name, Size size, string device)
             : base(name, size)
         {
- 
-            _tensDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Altimeter/alt_drum_tape.xaml", new Point(69d, 111d), "#", new Size(10d, 15d), new Size(39d, 50d));
-            _tensDrum.Clip = new RectangleGeometry(new Rect(69d, 111d, 39d, 50d));
+            _tensDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Altimeter/alt_drum_tape.xaml", new Point(55d, 89d), "#", new Size(10d, 15d), new Size(30d, 40d));
+            _tensDrum.Clip = new RectangleGeometry(new Rect(55d, 89d, 30d, 40d));
             Components.Add(_tensDrum);
 
-            _drum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(108d, 111d), "#%%%", new Size(10d, 15d), new Size(39d, 50d));
-            _drum.Clip = new RectangleGeometry(new Rect(108d, 111d, 78d, 50d));
+            _drum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(85d, 89d), "#%00", new Size(10d, 15d), new Size(30d, 40d));
+            _drum.Clip = new RectangleGeometry(new Rect(85d, 89d, 60d, 40d));
             Components.Add(_drum);
 
-            _airPressureDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(135d, 276d), "###%", new Size(10d, 15d), new Size(27d, 39d));
+            _airPressureDrum = new GaugeDrumCounter("{Helios}/Gauges/FA-18C/Common/drum_tape.xaml", new Point(108d, 221d), "###%", new Size(10d, 15d), new Size(20d, 30d));
             _airPressureDrum.Value = 2992d;
-            _airPressureDrum.Clip = new RectangleGeometry(new Rect(135d, 276d,106d, 39d));
+            _airPressureDrum.Clip = new RectangleGeometry(new Rect(108d, 221d, 84d, 30d));
             Components.Add(_airPressureDrum);
 
-            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Flight Instruments/BarometricAltimeterDial.xaml", new Rect(0d, 0d, 376d, 376d)));
+            Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Instruments/BarometricAltimeterDial.xaml", new Rect(0d, 0d, size.Width, size.Height)));
 
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1000d, 360d);
-            _needle = new GaugeNeedle("{Helios}/Gauges/FA-18C/Altimeter/altimeter_needle.xaml", new Point(188d, 188d), new Size(16d, 160d), new Point(8d, 160d));
+            _needle = new GaugeNeedle("{Helios}/Gauges/FA-18C/Altimeter/altimeter_needle.xaml", new Point(150d, 150d), new Size(16d, 136d), new Point(8d, 128d));
             Components.Add(_needle);
 
-            //Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/Common/engine_bezel.png", new Rect(0d, 0d, 376d, 376d)));
-            _altitude = new HeliosValue(this, new BindingValue(0d), "", "altitude", "Current altitude of the aircraft in feet.", "", BindingValueUnits.Feet);
+            _altitude = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "Altitude", "Current altitude of the aircraft in feet.", "", BindingValueUnits.Feet);
             _altitude.Execute += new HeliosActionHandler(Altitude_Execute);
             Actions.Add(_altitude);
 
-            _airPressure = new HeliosValue(this, new BindingValue(0d), "", "air pressure", "Current air pressure calibaration setting for the altimeter.", "", BindingValueUnits.InchesOfMercury);
+            _airPressure = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "Air Pressure", "Current air pressure calibaration setting for the altimeter.", "", BindingValueUnits.InchesOfMercury);
             _airPressure.SetValue(new BindingValue(29.92d), true);
             _airPressure.Execute += new HeliosActionHandler(AirPressure_Execute);
             Actions.Add(_airPressure);

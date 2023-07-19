@@ -28,7 +28,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
         private HeliosValue _internalFuel;
         private GaugeNeedle _internalFuelNeedle;
         private HeliosValue _bingoFuelAmount;
-        private HeliosValue _offIndicator;
         private GaugeNeedle _bingoNeedle;
         private CalibrationPointCollectionDouble _internalFuelNeedleCalibration;
         private CalibrationPointCollectionDouble _bingoNeedleCalibration;
@@ -48,19 +47,19 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             Components.Add(_bingoNeedle);
 
             _internalFuel = new HeliosValue(this, new BindingValue(0d), "Fuel Monitor Panel_Fuel Gauge", "Internal Fuel Value", "Current Internal Fuel in the aircraft.", "", BindingValueUnits.Pounds);
-            _internalFuel.Execute += new HeliosActionHandler(internalFuel_Execute);
+            _internalFuel.Execute += new HeliosActionHandler(InternalFuelExecute);
             Actions.Add(_internalFuel);
             _bingoFuelAmount = new HeliosValue(this, new BindingValue(0d), "Fuel Monitor Panel_Fuel Gauge", "Bingo Value", "Minimum Fuel setting for the aircraft.", "", BindingValueUnits.Pounds);
-            _bingoFuelAmount.Execute += new HeliosActionHandler(Min_internalFuel_Execute);
+            _bingoFuelAmount.Execute += new HeliosActionHandler(MinInternalFuelExecute);
             Actions.Add(_bingoFuelAmount);
 
         }
 
-        void internalFuel_Execute(object action, HeliosActionEventArgs e)
+        void InternalFuelExecute(object action, HeliosActionEventArgs e)
         {
             _internalFuelNeedle.Rotation = _internalFuelNeedleCalibration.Interpolate(e.Value.DoubleValue);
         }
-        void Min_internalFuel_Execute(object action, HeliosActionEventArgs e)
+        void MinInternalFuelExecute(object action, HeliosActionEventArgs e)
         {
             _bingoNeedle.Rotation = _bingoNeedleCalibration.Interpolate(e.Value.DoubleValue);
         }

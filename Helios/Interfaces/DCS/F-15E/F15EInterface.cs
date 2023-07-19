@@ -170,26 +170,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
 
             #endregion Landing Gear Panel
             #region Flight Instruments
-            AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "335", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")) }, "Flight Instruments", "Pitch Ratio switch", "%0.1f"));
-            AddFunction(new Functions.Altimeter(this));
+            AddFunction(new Functions.Altimeter(this, "Flight Instruments", Cockpit.Pilot));
             AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.alt_adj_knob.ToString("d"), "360", 0.1d, "Flight Instruments", "Altimeter pressure adjustment"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_adj.ToString("d"), "351", 0.05d, 0.0d, 1.00d, "Flight Instruments", "Backup ADI Pitch Adjust Knob", true, "%.3f"));
             AddFunction(new PushButton(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_uncage.ToString("d"), "350", "Flight Instruments", "Backup ADI Uncage pull", "%.1f"));
 
-            //CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
-            CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 360d);
-            AddFunction(new ScaledNetworkValue(this, "345", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
+            CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
+            AddFunction(new ScaledNetworkValue(this, "345", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
 
             CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d);
             vviScale.Add(new CalibrationPointDouble(0d, 0d));
-            AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "VVI", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
-            CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 1d, 45d) {
+            AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
+            CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 0.5d, 50d) {
                 new CalibrationPointDouble(0d, 0d)
                 };
-            AddFunction(new ScaledNetworkValue(this, "346", AoAScale, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, "346", AoAScale, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%0.2f"));
             //AddFunction(new FlagValue(this, "", "Flight Instruments", "AOA Flag", "Off Flag"));
-            //CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
-            //AddFunction(new ScaledNetworkValue(this, "346", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.clk_adj_knob.ToString("d"), "366", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Clock Adjust", false, "%0.1f"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.tmr_stop_btn.ToString("d"), "367", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Timer Stop", false, "%0.1f"));
             CalibrationPointCollectionDouble hourScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 12d);
@@ -198,9 +194,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "364", minuteScale, "Clock (Pilot)", "Clock Minutes", "Current minutes value of the clock", "0-60", BindingValueUnits.Minutes, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "363", minuteScale, "Clock (Pilot)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
             CalibrationPointCollectionDouble cabinPressureScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 50000d);
-            AddFunction(new ScaledNetworkValue(this, "361", cabinPressureScale, "Flight Instruments", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.5f"));
-
+            AddFunction(new ScaledNetworkValue(this, "361", cabinPressureScale, "Flight Instruments", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.3f"));
+            //MV E12�09
             #endregion Flight Instruments
+
+            AddFunction(new ScaledNetworkValue(this, "389", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Instruments", "PC 1 Hydraulic Pressure Gauge", "Hydraulic Pressure", "0 - 4,000", BindingValueUnits.PoundsPerSquareInch, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "390", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Instruments", "PC 2 Hydraulic Pressure Gauge", "Hydraulic Pressure", "0 - 4,000", BindingValueUnits.PoundsPerSquareInch, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "388", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Instruments", "Utility Hydraulic Pressure Gauge", "Hydraulic Pressure", "0 - 4,000", BindingValueUnits.PoundsPerSquareInch, "%.2f"));
+
             #region Threat Indicators (Pilot)
             AddFunction(new FlagValue(this, "403", "Threat Indicators (Pilot)", "EMS Limit Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "404", "Threat Indicators (Pilot)", "AI Threat Indicator", "True when indicator is lit", "%1d"));
@@ -220,7 +221,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             //  +-----------------------+-----------------------+
             //  | L GEN            419  | R GEN           418   |
             //  +-----------------------+-----------------------+
-            //  | ENGINE           421  | FLT CONTR       422   |
+            //  | Engine           421  | FLT CONTR       422   |
             //  +-----------------------+-----------------------+
             //  | HYD              423? | AV BIT          424?  |
             //  +-----------------------+-----------------------+
@@ -240,7 +241,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "417", "Warning Panel (Pilot)", "FUEL LOW Indicator", "True when indicator is lit", "%1d")); // [418] PILOT FUEL LOW Light (yellow)
             AddFunction(new FlagValue(this, "418", "Warning Panel (Pilot)", "Right Generator Warning", "True when indicator is lit", "%1d")); //[420] PILOT R GEN Light(white)
             AddFunction(new FlagValue(this, "419", "Warning Panel (Pilot)", "Left Generator Warning", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "420", "Warning Panel (Pilot)", "NUCLEAR Indicator", "True when indicator is lit", "%1d")); // [417] PILOT NUCLEAR Light (white)
+            AddFunction(new FlagValue(this, "420", "Warning Panel (Pilot)", "NuclearLEAR Indicator", "True when indicator is lit", "%1d")); // [417] PILOT NuclearLEAR Light (white)
             AddFunction(new FlagValue(this, "421", "Warning Panel (Pilot)", "Engine Warning Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "422", "Warning Panel (Pilot)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "423", "Warning Panel (Pilot)", "Hydraulics Warning Indicator", "True when indicator is lit", "%1d"));
@@ -357,10 +358,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "245", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MPD (Pilot)", "Brightness Control", "%0.1f"));
             AddFunction(new Switch(this, devices.MPD_FRIGHT.ToString("d"), "246", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MPD (Pilot)", "Contrast Control", "%0.1f"));
             #endregion RIGHT MFD
-            #region NUC
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "450", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_cover.ToString("d")) }, "NUC", "Nuclear Consent Switch Cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "451", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.nuc_commands.nuc_sw.ToString("d")) }, "NUC", "Nuclear Consent Switch", "%0.1f"));
-            #endregion NUC
+            #region Nuclear
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "450", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_cover.ToString("d")) }, "Nuclear", "Nuclear Consent Switch Cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "451", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.nuc_commands.nuc_sw.ToString("d")) }, "Nuclear", "Nuclear Consent Switch", "%0.1f"));
+            #endregion Nuclear
             #region CAS
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "452", SwitchPositions.Create(3, 0d, 0.5d, Commands.cas_commands.yaw_sw.ToString("d"), "Posn", "%0.3f"), "CAS", "Yaw CAS Switch, when ON (LMB) RESET/(RMB) OFF", "%0.3f"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "453", SwitchPositions.Create(3, 0d, 0.5d, Commands.cas_commands.roll_sw.ToString("d"), "Posn", "%0.3f"), "CAS", "Roll CAS Switch, when ON (LMB) RESET/(RMB) OFF", "%0.3f"));
@@ -369,22 +370,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "456", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cas_commands.tf_couple_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cas_commands.tf_couple_sw.ToString("d")) }, "CAS", "TF Couple Switch", "%0.1f"));
             AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.to_button.ToString("d"), "457", "CAS", "T/O Trim Button", "%.1f"));
             AddFunction(new FlagValue(this, "458", "CAS", "T/O Trim Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "335", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")) }, "CAS", "Pitch Ratio switch", "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "334", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "CAS", "Pitch Ratio", "Numeric value of the pitch ratio", "0 - 1", BindingValueUnits.Numeric, "%.2f"));
 
             #endregion CAS
             #region MISC
-            AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "534", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.roll_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.roll_ratio_sw.ToString("d")) }, "MISC", "Roll Ratio Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "535", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.left_inlet_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.left_inlet_sw.ToString("d")) }, "MISC", "Left Inlet Ramp Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "536", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.right_inlet_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.right_inlet_sw.ToString("d")) }, "MISC", "Right Inlet Ramp Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.LGS.ToString("d"), "537", SwitchPositions.Create(3, 0d, 0.5d, Commands.misc_commands.anti_skid_sw.ToString("d"), "Posn", "%0.3f"), "MISC", "Anti Skid Switch", "%0.3f"));
+            AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "534", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.roll_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.roll_ratio_sw.ToString("d")) }, "Miscellaneous", "Roll Ratio Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "535", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.left_inlet_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.left_inlet_sw.ToString("d")) }, "Miscellaneous", "Left Inlet Ramp Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "536", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.right_inlet_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.right_inlet_sw.ToString("d")) }, "Miscellaneous", "Right Inlet Ramp Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.LGS.ToString("d"), "537", SwitchPositions.Create(3, 0d, 0.5d, Commands.misc_commands.anti_skid_sw.ToString("d"), "Posn", "%0.3f"), "Miscellaneous", "Anti Skid Switch", "%0.3f"));
             #endregion MISC
             #region FUEL
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "527", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fueltrnfr_wing_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fueltrnfr_wing_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fueltrnfr_wing_sw.ToString("d")) }, "FUEL", "Fuel Control: Wing Tanks", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "528", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fueltrnfr_ctr_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fueltrnfr_ctr_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fueltrnfr_ctr_sw.ToString("d")) }, "FUEL", "Fuel Control: Centerline Tank", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "529", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fueltrnfr_cft_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fueltrnfr_cft_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fueltrnfr_cft_sw.ToString("d")) }, "FUEL", "Fuel Control: Conformal Tanks", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "530", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fuel_dump_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fuel_dump_sw.ToString("d")) }, "FUEL", "Fuel Dump", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "531", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fuel_cft_emergtrf_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fuel_cft_emergtrf_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fuel_cft_emergtrf_sw.ToString("d")) }, "FUEL", "Conformal Tanks Emergency Transfer", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "532", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fuel_ext_trfr_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fuel_ext_trfr_sw.ToString("d")) }, "FUEL", "External Fuel Transfer", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "533", SwitchPositions.Create(3, 0d, 0.5d, Commands.fuelpnl_commands.fuel_AIR_sw.ToString("d"), "Posn", "%0.3f"), "FUEL", "A/R Slipway", "%0.3f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "527", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fueltrnfr_wing_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fueltrnfr_wing_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fueltrnfr_wing_sw.ToString("d")) }, "Fuel", "Fuel Control: Wing Tanks", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "528", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fueltrnfr_ctr_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fueltrnfr_ctr_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fueltrnfr_ctr_sw.ToString("d")) }, "Fuel", "Fuel Control: Centerline Tank", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "529", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fueltrnfr_cft_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fueltrnfr_cft_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fueltrnfr_cft_sw.ToString("d")) }, "Fuel", "Fuel Control: Conformal Tanks", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "530", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fuel_dump_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fuel_dump_sw.ToString("d")) }, "Fuel", "Fuel Dump", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "531", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fuel_cft_emergtrf_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fuel_cft_emergtrf_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.fuelpnl_commands.fuel_cft_emergtrf_sw.ToString("d")) }, "Fuel", "Conformal Tanks Emergency Transfer", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "532", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fuelpnl_commands.fuel_ext_trfr_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fuelpnl_commands.fuel_ext_trfr_sw.ToString("d")) }, "Fuel", "External Fuel Transfer", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "533", SwitchPositions.Create(3, 0d, 0.5d, Commands.fuelpnl_commands.fuel_AIR_sw.ToString("d"), "Posn", "%0.3f"), "Fuel", "A/R Slipway", "%0.3f"));
             #endregion FUEL
             #region Throttle Quadrant
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "459", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltctrl_commands.Flaps_Control_SW.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltctrl_commands.Flaps_Control_SW.ToString("d")) }, "Throttle Quadrant", "Flaps Control Switch", "%0.1f"));
@@ -392,48 +395,48 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new PushButton(this, devices.DEEC.ToString("d"), Commands.engctrl_commands.left_eng_finger_lift.ToString("d"), "697", "Throttle Quadrant", "Left Throttle Finger Lift", "%.1f"));
             AddFunction(new PushButton(this, devices.DEEC.ToString("d"), Commands.engctrl_commands.right_eng_finger_lift.ToString("d"), "698", "Throttle Quadrant", "Right Throttle Finger Lift", "%.1f"));
             #endregion Throttle Quadrant
-            #region VOL
-            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.caution_vol.ToString("d"), "502", 0.1d, 0.0d, 1.0d, "VOL", "Caution Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.launch_vol.ToString("d"), "503", 0.1d, 0.0d, 1.0d, "VOL", "Launch Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.ICS.ToString("d"), Commands.volctrl_commands.ics_vol.ToString("d"), "504", 0.1d, 0.0d, 1.0d, "VOL", "ICS Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.PACS.ToString("d"), Commands.volctrl_commands.wpn_vol.ToString("d"), "505", 0.1d, 0.0d, 1.0d, "VOL", "WPN Voume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.ILS.ToString("d"), Commands.volctrl_commands.ils_vol.ToString("d"), "506", 0.1d, 0.0d, 1.0d, "VOL", "ILS Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.TACAN.ToString("d"), Commands.volctrl_commands.tacan_vol.ToString("d"), "507", 0.1d, 0.0d, 1.0d, "VOL", "TACAN Volume", false, "%0.1f"));
-            #endregion VOL
+            #region Volume Controls
+            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.caution_vol.ToString("d"), "502", 0.1d, 0.0d, 1.0d, "Volume Controls", "Caution Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.launch_vol.ToString("d"), "503", 0.1d, 0.0d, 1.0d, "Volume Controls", "Launch Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.ICS.ToString("d"), Commands.volctrl_commands.ics_vol.ToString("d"), "504", 0.1d, 0.0d, 1.0d, "Volume Controls", "ICS Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.PACS.ToString("d"), Commands.volctrl_commands.wpn_vol.ToString("d"), "505", 0.1d, 0.0d, 1.0d, "Volume Controls", "WPN Voume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.ILS.ToString("d"), Commands.volctrl_commands.ils_vol.ToString("d"), "506", 0.1d, 0.0d, 1.0d, "Volume Controls", "ILS Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.TACAN.ToString("d"), Commands.volctrl_commands.tacan_vol.ToString("d"), "507", 0.1d, 0.0d, 1.0d, "Volume Controls", "TACAN Volume", false, "%0.1f"));
+            #endregion Volume Controls
             #region MICS
-            AddFunction(new Switch(this, devices.ICS.ToString("d"), "508", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.micsctrl_commands.crypto_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.micsctrl_commands.crypto_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.micsctrl_commands.crypto_sw.ToString("d")) }, "MICS", "Crypto Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.ICS.ToString("d"), "509", SwitchPositions.Create(3, 0d, 0.5d, Commands.micsctrl_commands.mic_sw.ToString("d"), "Posn", "%0.3f"), "MICS", "MIC Switch", "%0.3f"));
-            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.micsctrl_commands.vw_tone_sw.ToString("d"), "510", "MICS", "VW/Tone Silence switch", "%.1f"));
+            AddFunction(new Switch(this, devices.ICS.ToString("d"), "508", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.micsctrl_commands.crypto_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.micsctrl_commands.crypto_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.micsctrl_commands.crypto_sw.ToString("d")) }, "Microphone Options", "Crypto Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.ICS.ToString("d"), "509", SwitchPositions.Create(3, 0d, 0.5d, Commands.micsctrl_commands.mic_sw.ToString("d"), "Posn", "%0.3f"), "Microphone Options", "MIC Switch", "%0.3f"));
+            AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.micsctrl_commands.vw_tone_sw.ToString("d"), "510", "Microphone Options", "VW/Tone Silence switch", "%.1f"));
             #endregion MICS
-            #region RADIO
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "511", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.uhf_ant_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.uhf_ant_sw.ToString("d")) }, "RADIO", "UHF Antenna Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "512", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.vhf_ant_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.vhf_ant_sw.ToString("d")) }, "RADIO", "VHF Antenna Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "513", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.tone_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.tone_sw.ToString("d")) }, "RADIO", "Tone Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "514", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.cypher_txt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.cypher_txt_sw.ToString("d")) }, "RADIO", "Cypher Text Switch", "%0.1f"));
-            #endregion RADIO
+            #region Radio
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "511", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.uhf_ant_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.uhf_ant_sw.ToString("d")) }, "Radio", "UHF Antenna Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "512", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.vhf_ant_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.vhf_ant_sw.ToString("d")) }, "Radio", "VHF Antenna Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "513", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.tone_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.tone_sw.ToString("d")) }, "Radio", "Tone Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "514", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.cypher_txt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.cypher_txt_sw.ToString("d")) }, "Radio", "Cypher Text Switch", "%0.1f"));
+            #endregion Radio
             #region IFF
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "515", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.iffctrl_commands.mode_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.iffctrl_commands.mode_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.iffctrl_commands.mode_sw.ToString("d")) }, "IFF", "IFF Mode Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "516", SwitchPositions.Create(3, 0d, 0.5d, Commands.iffctrl_commands.rec_sw.ToString("d"), "Posn", "%0.3f"), "IFF", "IFF Reply Switch", "%0.3f"));
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "517", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.iffctrl_commands.master_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.iffctrl_commands.master_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.iffctrl_commands.master_sw.ToString("d")) }, "IFF", "IFF Master Switch", "%0.1f"));
             #endregion IFF
-            #region EXT LT
-            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "538", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.extlt_commands.ldg_taxi_light_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.extlt_commands.ldg_taxi_light_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.extlt_commands.ldg_taxi_light_sw.ToString("d")) }, "EXT LT", "Landing/Taxi Light Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "465", SwitchPositions.Create(7, 0d, 0.167d, Commands.extlt_commands.formation_lt_knob.ToString("d"), "Posn", "%0.3f"), "EXT LT", "Formation Lights Knob", "%0.3f"));
-            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "466", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.extlt_commands.anticoll_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.extlt_commands.anticoll_lt_sw.ToString("d")) }, "EXT LT", "Anti Collison Light Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "467", SwitchPositions.Create(7, 0d, 0.167d, Commands.extlt_commands.pos_lt_knob.ToString("d"), "Posn", "%0.3f"), "EXT LT", "Position Lights Knob", "%0.3f"));
-            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "468", SwitchPositions.Create(3, 0d, 0.5d, Commands.extlt_commands.vert_tail_lt_sw.ToString("d"), "Posn", "%0.3f"), "EXT LT", "Tail Flood Lights", "%0.3f"));
-            #endregion EXT LT
-            #region SENSOR
-            AddFunction(new Switch(this, devices.TFR.ToString("d"), "469", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.tf_rdr_sw.ToString("d"), "Posn", "%0.3f"), "SENSOR", "Terrain Follow Radar Switch", "%0.3f"));
-            AddFunction(new Switch(this, devices.ADC.ToString("d"), "470", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.rdr_alt_sw.ToString("d"), "Posn", "%0.3f"), "SENSOR", "Radar Altitude Switch", "%0.3f"));
-            AddFunction(new Switch(this, devices.AN_APG70.ToString("d"), "471", SwitchPositions.Create(4, 0d, 0.333d, Commands.snsrctrl_commands.rdr_power_sw.ToString("d"), "Posn", "%0.3f"), "SENSOR", "Radar Mode Selector", "%0.3f"));
-            AddFunction(new Switch(this, devices.INS.ToString("d"), "472", SwitchPositions.Create(4, 0d, 0.333d, Commands.snsrctrl_commands.ins_knob.ToString("d"), "Posn", "%0.3f"), "SENSOR", "INS Knob", "%0.3f"));
-            AddFunction(new Axis(this, devices.NAVPOD.ToString("d"), Commands.snsrctrl_commands.nav_flir_gain_knob.ToString("d"), "473", 0.1d, 0.0d, 1.0d, "SENSOR", "Nav FLIR Gain", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.NAVPOD.ToString("d"), Commands.snsrctrl_commands.nav_flir_gain_level.ToString("d"), "474", 0.1d, 0.0d, 1.0d, "SENSOR", "Nav FLIR Level", false, "%0.1f"));
-            AddFunction(new Switch(this, devices.NAVPOD.ToString("d"), "475", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.nav_flir_sw.ToString("d"), "Posn", "%0.3f"), "SENSOR", "Nav FLIR Switch", "%0.3f"));
-            AddFunction(new Switch(this, devices.RDRCTRL_AA.ToString("d"), "476", SwitchPositions.Create(5, 0d, 0.25d, Commands.snsrctrl_commands.jtids_knob.ToString("d"), "Posn", "%0.3f"), "SENSOR", "JTIDS Knob", "%0.3f"));
-            AddFunction(new PushButton(this, devices.RDRCTRL_AA.ToString("d"), Commands.snsrctrl_commands.cc_reset_btn.ToString("d"), "477", "SENSOR", "CC Reset", "%.1f"));
-            #endregion SENSOR
+            #region Lights External
+            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "538", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.extlt_commands.ldg_taxi_light_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.extlt_commands.ldg_taxi_light_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.extlt_commands.ldg_taxi_light_sw.ToString("d")) }, "Lights External", "Landing/Taxi Light Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "465", SwitchPositions.Create(7, 0d, 0.167d, Commands.extlt_commands.formation_lt_knob.ToString("d"), "Posn", "%0.3f"), "Lights External", "Formation Lights Knob", "%0.3f"));
+            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "466", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.extlt_commands.anticoll_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.extlt_commands.anticoll_lt_sw.ToString("d")) }, "Lights External", "Anti Collison Light Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "467", SwitchPositions.Create(7, 0d, 0.167d, Commands.extlt_commands.pos_lt_knob.ToString("d"), "Posn", "%0.3f"), "Lights External", "Position Lights Knob", "%0.3f"));
+            AddFunction(new Switch(this, devices.EXTLT.ToString("d"), "468", SwitchPositions.Create(3, 0d, 0.5d, Commands.extlt_commands.vert_tail_lt_sw.ToString("d"), "Posn", "%0.3f"), "Lights External", "Tail Flood Lights", "%0.3f"));
+            #endregion Lights External
+            #region Sensor
+            AddFunction(new Switch(this, devices.TFR.ToString("d"), "469", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.tf_rdr_sw.ToString("d"), "Posn", "%0.3f"), "Sensor", "Terrain Follow Radar Switch", "%0.3f"));
+            AddFunction(new Switch(this, devices.ADC.ToString("d"), "470", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.rdr_alt_sw.ToString("d"), "Posn", "%0.3f"), "Sensor", "Radar Altitude Switch", "%0.3f"));
+            AddFunction(new Switch(this, devices.AN_APG70.ToString("d"), "471", SwitchPositions.Create(4, 0d, 0.333d, Commands.snsrctrl_commands.rdr_power_sw.ToString("d"), "Posn", "%0.3f"), "Sensor", "Radar Mode Selector", "%0.3f"));
+            AddFunction(new Switch(this, devices.INS.ToString("d"), "472", SwitchPositions.Create(4, 0d, 0.333d, Commands.snsrctrl_commands.ins_knob.ToString("d"), "Posn", "%0.3f"), "Sensor", "INS Knob", "%0.3f"));
+            AddFunction(new Axis(this, devices.NAVPOD.ToString("d"), Commands.snsrctrl_commands.nav_flir_gain_knob.ToString("d"), "473", 0.1d, 0.0d, 1.0d, "Sensor", "Nav FLIR Gain", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.NAVPOD.ToString("d"), Commands.snsrctrl_commands.nav_flir_gain_level.ToString("d"), "474", 0.1d, 0.0d, 1.0d, "Sensor", "Nav FLIR Level", false, "%0.1f"));
+            AddFunction(new Switch(this, devices.NAVPOD.ToString("d"), "475", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.nav_flir_sw.ToString("d"), "Posn", "%0.3f"), "Sensor", "Nav FLIR Switch", "%0.3f"));
+            AddFunction(new Switch(this, devices.RDRCTRL_AA.ToString("d"), "476", SwitchPositions.Create(5, 0d, 0.25d, Commands.snsrctrl_commands.jtids_knob.ToString("d"), "Posn", "%0.3f"), "Sensor", "JTIDS Knob", "%0.3f"));
+            AddFunction(new PushButton(this, devices.RDRCTRL_AA.ToString("d"), Commands.snsrctrl_commands.cc_reset_btn.ToString("d"), "477", "Sensor", "CC Reset", "%.1f"));
+            #endregion Sensor
             #region Ground Power
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "478", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.gndpwrctrl_commands.gnd_pwr_2_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.gndpwrctrl_commands.gnd_pwr_2_sw.ToString("d")) }, "Ground Power", "Ground Power 2 Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "479", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.gndpwrctrl_commands.gnd_pwr_3_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.gndpwrctrl_commands.gnd_pwr_3_sw.ToString("d")) }, "Ground Power", "Ground Power 3 Switch", "%0.1f"));
@@ -442,40 +445,41 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "483", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.gndpwrctrl_commands.gnd_pwr_1_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.gndpwrctrl_commands.gnd_pwr_1_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.gndpwrctrl_commands.gnd_pwr_1_sw.ToString("d")) }, "Ground Power", "Ground Power 1 Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.EPSS.ToString("d"), "484", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.gndpwrctrl_commands.mpdp_A1U_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.gndpwrctrl_commands.mpdp_A1U_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.gndpwrctrl_commands.mpdp_A1U_sw.ToString("d")) }, "Ground Power", "MPDP/A1U Switch", "%0.1f"));
             #endregion Ground Power
-            #region LEFT BULKHEAD PANEL
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "485", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.armtctrl_commands.arm_safety_override_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.armtctrl_commands.arm_safety_override_sw.ToString("d")) }, "LEFT BULKHEAD PANEL", "Armament Safety Override Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "539", new SwitchPosition[] { new SwitchPosition("1.0", "A", Commands.misc_commands.em_ar_cover.ToString("d")), new SwitchPosition("0.0", "R Switch Cover", Commands.misc_commands.em_ar_cover.ToString("d")) }, "LEFT BULKHEAD PANEL", "Emergency A/R Switch Cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "540", new SwitchPosition[] { new SwitchPosition("1.0", "A", Commands.misc_commands.em_ar_sw.ToString("d")), new SwitchPosition("0.0", "R Switch", Commands.misc_commands.em_ar_sw.ToString("d")) }, "LEFT BULKHEAD PANEL", "Emergency A/R Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "518", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.ewws_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.ewws_cover.ToString("d")) }, "LEFT BULKHEAD PANEL", "EWWS Enable Switch Cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "519", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.ewws_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.ewws_sw.ToString("d")) }, "LEFT BULKHEAD PANEL", "EWWS Enable Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "520", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.iffctrl_commands.iff_ant_sel_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.iffctrl_commands.iff_ant_sel_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.iffctrl_commands.iff_ant_sel_sw.ToString("d")) }, "LEFT BULKHEAD PANEL", "IFF Antenna Select Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "521", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.seat_adj_sw.ToString("d"), Commands.misc_commands.seat_adj_sw.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition("-1.0", "Posn 3", Commands.misc_commands.seat_adj_sw.ToString("d"), Commands.misc_commands.seat_adj_sw.ToString("d"), "0.0", "0.0") }, "LEFT BULKHEAD PANEL", "Seat Adjust Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "522", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.flyup_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.flyup_cover.ToString("d")) }, "LEFT BULKHEAD PANEL", "Flyup Enable Switch cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "523", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.flyup_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.flyup_sw.ToString("d")) }, "LEFT BULKHEAD PANEL", "Flyup Enable Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "524", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.nctr_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.nctr_sw.ToString("d")) }, "LEFT BULKHEAD PANEL", "NCTR Enable Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "525", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.vmax_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.vmax_cover.ToString("d")) }, "LEFT BULKHEAD PANEL", "VMAX Switch cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "526", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.vmax_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.vmax_sw.ToString("d")) }, "LEFT BULKHEAD PANEL", "VMAX Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "800", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.seat_arm_handle.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.seat_arm_handle.ToString("d")) }, "LEFT BULKHEAD PANEL", "Seat Arm Handle", "%0.1f"));
-            #endregion LEFT BULKHEAD PANEL
+            #region Left Bulkhead Panel
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "485", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.armtctrl_commands.arm_safety_override_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.armtctrl_commands.arm_safety_override_sw.ToString("d")) }, "Left Bulkhead Panel", "Armament Safety Override Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "539", new SwitchPosition[] { new SwitchPosition("1.0", "A", Commands.misc_commands.em_ar_cover.ToString("d")), new SwitchPosition("0.0", "R Switch Cover", Commands.misc_commands.em_ar_cover.ToString("d")) }, "Left Bulkhead Panel", "Emergency A/R Switch Cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.AFSS.ToString("d"), "540", new SwitchPosition[] { new SwitchPosition("1.0", "A", Commands.misc_commands.em_ar_sw.ToString("d")), new SwitchPosition("0.0", "R Switch", Commands.misc_commands.em_ar_sw.ToString("d")) }, "Left Bulkhead Panel", "Emergency A/R Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "518", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.ewws_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.ewws_cover.ToString("d")) }, "Left Bulkhead Panel", "EWWS Enable Switch Cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "519", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.ewws_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.ewws_sw.ToString("d")) }, "Left Bulkhead Panel", "EWWS Enable Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "520", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.iffctrl_commands.iff_ant_sel_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.iffctrl_commands.iff_ant_sel_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.iffctrl_commands.iff_ant_sel_sw.ToString("d")) }, "Left Bulkhead Panel", "IFF Antenna Select Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "521", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.seat_adj_sw.ToString("d"), Commands.misc_commands.seat_adj_sw.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition("-1.0", "Posn 3", Commands.misc_commands.seat_adj_sw.ToString("d"), Commands.misc_commands.seat_adj_sw.ToString("d"), "0.0", "0.0") }, "Left Bulkhead Panel", "Seat Adjust Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "522", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.flyup_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.flyup_cover.ToString("d")) }, "Left Bulkhead Panel", "Flyup Enable Switch cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "523", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.flyup_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.flyup_sw.ToString("d")) }, "Left Bulkhead Panel", "Flyup Enable Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "524", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.nctr_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.nctr_sw.ToString("d")) }, "Left Bulkhead Panel", "NCTR Enable Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "525", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.vmax_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.vmax_cover.ToString("d")) }, "Left Bulkhead Panel", "VMAX Switch cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "526", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.vmax_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.vmax_sw.ToString("d")) }, "Left Bulkhead Panel", "VMAX Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "800", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.seat_arm_handle.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.seat_arm_handle.ToString("d")) }, "Left Bulkhead Panel", "Seat Arm Handle", "%0.1f"));
+            #endregion Left Bulkhead Panel
             #region OXYGEN
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "551", new SwitchPosition[] { new SwitchPosition("1.0", "Emergency", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("0.0", "Normal", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("-1.0", "Test", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")) }, "OXYGEN", "Oxygen Emergency/Normal/Test Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "552", new SwitchPosition[] { new SwitchPosition("1.0", "100%", Commands.oxyctrl_commands.oxy_100_norm_sw.ToString("d")), new SwitchPosition("0.0", "Normal Switch", Commands.oxyctrl_commands.oxy_100_norm_sw.ToString("d")) }, "OXYGEN", "Oxygen 100%/Normal Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "553", SwitchPositions.Create(3, 0d, 0.5d, Commands.oxyctrl_commands.oxy_pbg_on_off_sw.ToString("d"), "Posn", "%0.3f"), "OXYGEN", "Oxygen Supply/Mode Control Switch", "%0.3f"));
-            AddFunction(new FlagValue(this, "555", "OXYGEN", "Oxygen Flow Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "551", new SwitchPosition[] { new SwitchPosition("1.0", "Emergency", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("0.0", "Normal", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("-1.0", "Test", Commands.oxyctrl_commands.oxy_emer_norm_test_sw.ToString("d")) }, "Oxygen Panel (Pilot)", "Oxygen Emergency/Normal/Test Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "552", new SwitchPosition[] { new SwitchPosition("1.0", "100%", Commands.oxyctrl_commands.oxy_100_norm_sw.ToString("d")), new SwitchPosition("0.0", "Normal Switch", Commands.oxyctrl_commands.oxy_100_norm_sw.ToString("d")) }, "Oxygen Panel (Pilot)", "Oxygen 100%/Normal Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "553", SwitchPositions.Create(3, 0d, 0.5d, Commands.oxyctrl_commands.oxy_pbg_on_off_sw.ToString("d"), "Posn", "%0.3f"), "Oxygen Panel (Pilot)", "Oxygen Supply/Mode Control Switch", "%0.3f"));
+            AddFunction(new ScaledNetworkValue(this, "554", new CalibrationPointCollectionDouble(0d, 0d, 1d, 400d), "Oxygen Panel (Pilot)", "Oxygen Pressure", "Current pressure in the Oxygen Panel (Pilot)", "0 to 400", BindingValueUnits.PoundsPerSquareInch, "%.3f"));
+            AddFunction(new FlagValue(this, "555", "Oxygen Panel (Pilot)", "Oxygen Flow Indicator", "True when indicator is lit", "%.1f"));
 
             #endregion OXYGEN
             #region ECS
             AddFunction(new PushButton(this, devices.ECS.ToString("d"), Commands.oxyctrl_commands.oxy_test_btn.ToString("d"), "556", "ECS", "Oxygen Test", "%.1f"));
             AddFunction(new Switch(this, devices.ECS.ToString("d"), "558", SwitchPositions.Create(3, 0d, 0.5d, Commands.ecs_commands.anti_fog_sw.ToString("d"), "Posn", "%0.3f"), "ECS", "Anti-Fog", "%0.3f"));
             #endregion ECS
-            #region ENGINE
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "590", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.left_eng_ctrl_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.left_eng_ctrl_sw.ToString("d")) }, "ENGINE", "Left Engine Control Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "591", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_ctrl_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_ctrl_sw.ToString("d")) }, "ENGINE", "Right Engine Control Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "592", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.left_eng_master_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.left_eng_master_cover.ToString("d")) }, "ENGINE", "Left Engine Master Switch Cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "593", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.left_eng_master_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.left_eng_master_sw.ToString("d")) }, "ENGINE", "Left Engine Master Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "597", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_master_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_master_cover.ToString("d")) }, "ENGINE", "Right Engine Master Switch Cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "598", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_master_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_master_sw.ToString("d")) }, "ENGINE", "Right Engine Master Switch", "%0.1f"));
-            #endregion ENGINE
+            #region Engine
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "590", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.left_eng_ctrl_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.left_eng_ctrl_sw.ToString("d")) }, "Engine", "Left Engine Control Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "591", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_ctrl_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_ctrl_sw.ToString("d")) }, "Engine", "Right Engine Control Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "592", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.left_eng_master_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.left_eng_master_cover.ToString("d")) }, "Engine", "Left Engine Master Switch Cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "593", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.left_eng_master_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.left_eng_master_sw.ToString("d")) }, "Engine", "Left Engine Master Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "597", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_master_cover.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_master_cover.ToString("d")) }, "Engine", "Right Engine Master Switch Cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.DEEC.ToString("d"), "598", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.engctrl_commands.right_eng_master_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.engctrl_commands.right_eng_master_sw.ToString("d")) }, "Engine", "Right Engine Master Switch", "%0.1f"));
+            #endregion Engine
             #region Engine Management Panel
             AddFunction(new ScaledNetworkValue(this, "1130", new CalibrationPointCollectionDouble(0d, 0d, 1d, 100d), "Engine Monitor Panel", "Left Engine Nozzle Position", "Current percentage value of the nozzle position", "0 to 100", BindingValueUnits.Numeric, "%.3f"));
             AddFunction(new NetworkValue(this, "2070", "Engine Monitor Panel", "Left Engine Fuel Flow", "Fuel Flow Value", "0 to 99999", BindingValueUnits.PoundsPerHour, null));
@@ -499,40 +503,40 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "596", "Generators", "Jet Starter Ready Indicator", "True when indicator is lit", "%1d"));
 
             #endregion Generators
-            #region ANTI ICE
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "559", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.ecs_commands.windshield_anti_ice_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.ecs_commands.windshield_anti_ice_sw.ToString("d")) }, "ANTI ICE", "Windshield Anti-ice Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "560", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.ecs_commands.pitot_heat_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.ecs_commands.pitot_heat_sw.ToString("d")) }, "ANTI ICE", "Pitot Heat Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "561", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.ecs_commands.eng_heat_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.ecs_commands.eng_heat_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.ecs_commands.eng_heat_sw.ToString("d")) }, "ANTI ICE", "Engine Heat Switch", "%0.1f"));
-            #endregion ANTI ICE
-            #region AIR COND
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "562", SwitchPositions.Create(3, 0d, 0.5d, Commands.aircoctrl_commands.airco_auto_man_off_sw.ToString("d"), new string[] { "Auto", "Manual", "Off" }, "%0.3f"), "AIR COND", "Air Conditioning Auto/Manual/Off", "%0.3f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "563", SwitchPositions.Create(3, 0d, 0.5d, Commands.aircoctrl_commands.airco_max_norm_min_sw.ToString("d"), new string[] { "Max", "Norm", "Min" }, "%0.3f"), "AIR COND", "Air Conditioning Max/Norm/Min", "%0.3f"));
-            AddFunction(new Axis(this, devices.ECS.ToString("d"), Commands.aircoctrl_commands.airco_cold_hot_knob.ToString("d"), "564", 0.1d, 0.0d, 1.0d, "AIR COND", "Air Conditioning Cold/Hot", false, "%0.1f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "565", SwitchPositions.Create(4, 0d, 0.333d, Commands.aircoctrl_commands.airco_eng_knob.ToString("d"), "Posn", "%0.3f"), "AIR COND", "Air Conditioning Source", "%0.3f"));
-            #endregion AIR COND
-            #region INT LT
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.console_lt_knob.ToString("d"), "566", 0.1d, 0.0d, 1.0d, "INT LT", "Console Lights", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.inst_pnl_lt_knob.ToString("d"), "567", 0.1d, 0.0d, 1.0d, "INT LT", "Instruments Panel Lights", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.ufc_bcklt_br_knob.ToString("d"), "568", 0.1d, 0.0d, 1.0d, "INT LT", "Gauges/UFC Backlights", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.lights_test_sw.ToString("d"), "569", "INT LT", "Warning/Caution Lights Test", "%.1f"));
-            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "570", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.intlt_commands.compass_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.intlt_commands.compass_lt_sw.ToString("d")) }, "INT LT", "Compass Lights", "%0.1f"));
-            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "571", new SwitchPosition[] { new SwitchPosition("1.0", "Day", Commands.intlt_commands.daynite_mode_sw.ToString("d")), new SwitchPosition("0.0", "Night Mode Selector", Commands.intlt_commands.daynite_mode_sw.ToString("d")) }, "INT LT", "Day/Night Mode Selector", "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.chart_lt_knob.ToString("d"), "572", 0.1d, 0.0d, 1.0d, "INT LT", "Charts Spot Light", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.wac_bklt_knob.ToString("d"), "573", 0.5d, 0.0d, 1.0d, "INT LT", "Knob Warning/Caution Lights (RMB to RESET when BRT)", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.flood_lt_knob.ToString("d"), "574", 0.1d, 0.0d, 1.0d, "INT LT", "Storm FLood Lights", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.chart_lt_lamp.ToString("d"), "186", 0.1d, 0.0d, 1.0d, "INT LT", "Chart Spot Lamp", false, "%0.1f"));
-            #endregion INT LT
+            #region Anti Ice
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "559", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.ecs_commands.windshield_anti_ice_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.ecs_commands.windshield_anti_ice_sw.ToString("d")) }, "Anti Ice", "Windshield Anti-ice Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "560", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.ecs_commands.pitot_heat_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.ecs_commands.pitot_heat_sw.ToString("d")) }, "Anti Ice", "Pitot Heat Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "561", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.ecs_commands.eng_heat_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.ecs_commands.eng_heat_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.ecs_commands.eng_heat_sw.ToString("d")) }, "Anti Ice", "Engine Heat Switch", "%0.1f"));
+            #endregion Anti Ice
+            #region Air Conditioning
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "562", SwitchPositions.Create(3, 0d, 0.5d, Commands.aircoctrl_commands.airco_auto_man_off_sw.ToString("d"), new string[] { "Auto", "Manual", "Off" }, "%0.3f"), "Air Conditioning", "Air Conditioning Auto/Manual/Off", "%0.3f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "563", SwitchPositions.Create(3, 0d, 0.5d, Commands.aircoctrl_commands.airco_max_norm_min_sw.ToString("d"), new string[] { "Max", "Norm", "Min" }, "%0.3f"), "Air Conditioning", "Air Conditioning Max/Norm/Min", "%0.3f"));
+            AddFunction(new Axis(this, devices.ECS.ToString("d"), Commands.aircoctrl_commands.airco_cold_hot_knob.ToString("d"), "564", 0.1d, 0.0d, 1.0d, "Air Conditioning", "Air Conditioning Cold/Hot", false, "%0.1f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "565", SwitchPositions.Create(4, 0d, 0.333d, Commands.aircoctrl_commands.airco_eng_knob.ToString("d"), "Posn", "%0.3f"), "Air Conditioning", "Air Conditioning Source", "%0.3f"));
+            #endregion Air Conditioning
+            #region Lights Internal
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.console_lt_knob.ToString("d"), "566", 0.1d, 0.0d, 1.0d, "Lights Internal", "Console Lights", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.inst_pnl_lt_knob.ToString("d"), "567", 0.1d, 0.0d, 1.0d, "Lights Internal", "Instruments Panel Lights", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.ufc_bcklt_br_knob.ToString("d"), "568", 0.1d, 0.0d, 1.0d, "Lights Internal", "Gauges/UFC Backlights", false, "%0.1f"));
+            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.lights_test_sw.ToString("d"), "569", "Lights Internal", "Warning/Caution Lights Test", "%.1f"));
+            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "570", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.intlt_commands.compass_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.intlt_commands.compass_lt_sw.ToString("d")) }, "Lights Internal", "Compass Lights", "%0.1f"));
+            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "571", new SwitchPosition[] { new SwitchPosition("1.0", "Day", Commands.intlt_commands.daynite_mode_sw.ToString("d")), new SwitchPosition("0.0", "Night Mode Selector", Commands.intlt_commands.daynite_mode_sw.ToString("d")) }, "Lights Internal", "Day/Night Mode Selector", "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.chart_lt_knob.ToString("d"), "572", 0.1d, 0.0d, 1.0d, "Lights Internal", "Charts Spot Light", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.wac_bklt_knob.ToString("d"), "573", 0.5d, 0.0d, 1.0d, "Lights Internal", "Knob Warning/Caution Lights (RMB to RESET when BRT)", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.flood_lt_knob.ToString("d"), "574", 0.1d, 0.0d, 1.0d, "Lights Internal", "Storm FLood Lights", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.chart_lt_lamp.ToString("d"), "186", 0.1d, 0.0d, 1.0d, "Lights Internal", "Chart Spot Lamp", false, "%0.1f"));
+            #endregion Lights Internal
 
-            #region CANOPY
-            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "599", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.cnpy_lever.ToString("d"), "Posn", "%0.3f"), "CANOPY", "Canopy Handle", "%0.3f"));
-            AddFunction(new FlagValue(this, "408", "CANOPY", "Canopy Unlocked Indicator (Pilot)", "True when indicator is lit", "%1d"));
-            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1479", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.rear_cnpy_lever.ToString("d"), "Posn", "%0.3f"), "CANOPY", "Canopy Handle Rear", "%0.3f"));
-            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "428", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")) }, "CANOPY", "Emergency Canopy Jettison", "%0.1f"));
+            #region Canopy
+            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "599", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.cnpy_lever.ToString("d"), "Posn", "%0.3f"), "Canopy", "Canopy Handle", "%0.3f"));
+            AddFunction(new FlagValue(this, "408", "Canopy", "Canopy Unlocked Indicator (Pilot)", "True when indicator is lit", "%1d"));
+            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1479", SwitchPositions.Create(4, 0d, 0.333d, Commands.cnp_commands.rear_cnpy_lever.ToString("d"), "Posn", "%0.3f"), "Canopy", "Canopy Handle Rear", "%0.3f"));
+            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "428", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")) }, "Canopy", "Emergency Canopy Jettison", "%0.1f"));
 
-            AddFunction(new FlagValue(this, "196", "CANOPY", "Shoot Cue Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "196", "Canopy", "Shoot Cue Indicator", "True when indicator is lit", "%1d"));
             // 			[195]	= "%.2f",	-- PILOT LOCK / SHOOT Lights Brightness (yellow)
-            AddFunction(new FlagValue(this, "197", "CANOPY", "READY Refuelling Indicator", "True when indicator is lit", "%1d"));
-            #endregion CANOPY
+            AddFunction(new FlagValue(this, "197", "Canopy", "READY Refuelling Indicator", "True when indicator is lit", "%1d"));
+            #endregion Canopy
             #region Flight Instruments (WSO)
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn_rc.ToString("d"), "1176", "Flight Instruments (WSO)", "Master Caution Button", "%.1f"));
             AddFunction(new FlagValue(this, "1177", "Flight Instruments (WSO)", "Master Warning Indicator", "True when indicator is lit", "%1d"));
@@ -544,6 +548,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "1380", minuteScale, "Clock (WSO)", "Clock Minutes", "Current minutes value of the clock", "0-60", BindingValueUnits.Minutes, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "1379", minuteScale, "Clock (WSO)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "1349", cabinPressureScale, "Flight Instruments (WSO)", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.5f"));
+            AddFunction(new ScaledNetworkValue(this, "1351", AoAScale, "Flight Instruments (WSO)", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%0.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1350", airspeedScale, "Flight Instruments (WSO)", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "1365", vviScale, "Flight Instruments (WSO)", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
+            AddFunction(new Functions.Altimeter(this, "Flight Instruments (WSO)", Cockpit.WSO));
 
             #endregion Flight Instruments (WSO)
             #region UFC Panel (WSO)
@@ -613,7 +621,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "1192", "Warning Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   
             AddFunction(new FlagValue(this, "1194", "Warning Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d")); //[1193] WSO EMIS LMT Light (yellow)
             AddFunction(new FlagValue(this, "1195", "Warning Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d")); //1194] WSO FUEL LOW Light (yellow)
-            AddFunction(new FlagValue(this, "1178", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  //[1195] WSO NUCLEAR Light (yellow)
+            AddFunction(new FlagValue(this, "1178", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  //[1195] WSO NuclearLEAR Light (yellow)
 
             AddFunction(new FlagValue(this, "1196", "Warning Panel (WSO)", "Unarmed Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "1197", "Warning Panel (WSO)", "Chaff Indicator", "True when indicator is lit", "%1d"));
@@ -753,10 +761,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1291", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_BRT.ToString("d"), Commands.mfdg_commands.Switch_BRT.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Brightness Control", "%0.1f"));
             AddFunction(new Switch(this, devices.MPCD_RRIGHT.ToString("d"), "1292", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("1.0", "Posn 3", Commands.mfdg_commands.Switch_Cont.ToString("d"), Commands.mfdg_commands.Switch_Cont.ToString("d"), "0.0", "0.0") }, "Right MPCD (WSO)", "Contrast Control", "%0.1f"));
             #endregion RIGHT MPCD (WSO)
-            #region LEFT INSTRUMENTS PANEL (WSO)
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1401", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_cover_rc.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_cover_rc.ToString("d")) }, "LEFT INSTRUMENTS PANEL (WSO)", "Nuclear Consent Switch Cover", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1402", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_sw_rc.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_sw_rc.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.nuc_commands.nuc_sw_rc.ToString("d")) }, "LEFT INSTRUMENTS PANEL (WSO)", "Nuclear Consent Switch", "%0.1f"));
-            #endregion LEFT INSTRUMENTS PANEL (WSO)
+            #region Left Instruments Panel (WSO)
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1401", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_cover_rc.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_cover_rc.ToString("d")) }, "Left Instruments Panel (WSO)", "Nuclear Consent Switch Cover", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1402", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.nuc_commands.nuc_sw_rc.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.nuc_commands.nuc_sw_rc.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.nuc_commands.nuc_sw_rc.ToString("d")) }, "Left Instruments Panel (WSO)", "Nuclear Consent Switch", "%0.1f"));
+            #endregion Left Instruments Panel (WSO)
             #region TPOD Panel (WSO)
             AddFunction(new Switch(this, devices.TGPCTRL.ToString("d"), "1413", SwitchPositions.Create(3, 0d, 0.5d, Commands.snsrctrl_commands.tpod_pwr_sw.ToString("d"), new string[] { "OFF", "STBY", "ON" }, "%0.3f"), "TPOD Panel (WSO)", "TGP Power Switch OFF/STBY/ON", "%0.3f"));
             AddFunction(new Axis(this, devices.TGPCTRL.ToString("d"), Commands.snsrctrl_commands.tpod_flir_gain_knob.ToString("d"), "1414", 0.1d, 0.0d, 1.0d, "TPOD Panel (WSO)", "TGP FLIR Gain", false, "%0.1f"));
@@ -768,46 +776,47 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.EWS_JMR.ToString("d"), "1418", new SwitchPosition[] { new SwitchPosition("1.0", "XMIT", Commands.tews_commands.pods_mode_sw.ToString("d")), new SwitchPosition("0.0", "STBY", Commands.tews_commands.pods_mode_sw.ToString("d")) }, "EW Panel (WSO)", "ECM PODS Mode Switch XMIT/STBY", "%0.1f"));
             AddFunction(new Switch(this, devices.EWS_JMR.ToString("d"), "1419", SwitchPositions.Create(3, 0d, 0.5d, Commands.tews_commands.ics_mode_sw.ToString("d"), new string[] { "STBY", "AUTO", "MAN" }, "%0.3f"), "EW Panel (WSO)", "ICS Operational Mode Switch STBY/AUTO/MAN", "%0.3f"));
             #endregion EW Panel (WSO)
-            #region VOL (WSO)
-            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.rc_caution_vol.ToString("d"), "1420", 0.1d, 0.0d, 1.0d, "VOL (WSO)", "Caution Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.rc_launch_vol.ToString("d"), "1421", 0.1d, 0.0d, 1.0d, "VOL (WSO)", "Launch Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.EWS_JMR.ToString("d"), Commands.volctrl_commands.rc_ics_vol.ToString("d"), "1422", 0.1d, 0.0d, 1.0d, "VOL (WSO)", "ICS Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.PACS.ToString("d"), Commands.volctrl_commands.rc_wpn_vol.ToString("d"), "1423", 0.1d, 0.0d, 1.0d, "VOL (WSO)", "WPN Voume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.ILS.ToString("d"), Commands.volctrl_commands.rc_ils_vol.ToString("d"), "1424", 0.1d, 0.0d, 1.0d, "VOL (WSO)", "ILS Volume", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.TACAN.ToString("d"), Commands.volctrl_commands.rc_tacan_vol.ToString("d"), "1425", 0.1d, 0.0d, 1.0d, "VOL (WSO)", "TACAN Volume", false, "%0.1f"));
-            #endregion VOL (WSO)
+            #region Volume Controls (WSO)
+            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.rc_caution_vol.ToString("d"), "1420", 0.1d, 0.0d, 1.0d, "Volume Controls (WSO)", "Caution Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.TEWS.ToString("d"), Commands.volctrl_commands.rc_launch_vol.ToString("d"), "1421", 0.1d, 0.0d, 1.0d, "Volume Controls (WSO)", "Launch Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.EWS_JMR.ToString("d"), Commands.volctrl_commands.rc_ics_vol.ToString("d"), "1422", 0.1d, 0.0d, 1.0d, "Volume Controls (WSO)", "ICS Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.PACS.ToString("d"), Commands.volctrl_commands.rc_wpn_vol.ToString("d"), "1423", 0.1d, 0.0d, 1.0d, "Volume Controls (WSO)", "WPN Voume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.ILS.ToString("d"), Commands.volctrl_commands.rc_ils_vol.ToString("d"), "1424", 0.1d, 0.0d, 1.0d, "Volume Controls (WSO)", "ILS Volume", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.TACAN.ToString("d"), Commands.volctrl_commands.rc_tacan_vol.ToString("d"), "1425", 0.1d, 0.0d, 1.0d, "Volume Controls (WSO)", "TACAN Volume", false, "%0.1f"));
+            #endregion Volume Controls (WSO)
             #region MICS (WSO)
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1426", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.micsctrl_commands.rc_crypto_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.micsctrl_commands.rc_crypto_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.micsctrl_commands.rc_crypto_sw.ToString("d")) }, "MICS (WSO)", "Crypto Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1427", SwitchPositions.Create(3, 0d, 0.5d, Commands.micsctrl_commands.rc_mic_sw.ToString("d"), "Posn", "%0.3f"), "MICS (WSO)", "MIC Switch", "%0.3f"));
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.micsctrl_commands.rc_vw_tone_sw.ToString("d"), "1428", "MICS (WSO)", "VW/Tone Silence switch", "%1d"));
             #endregion MICS (WSO)
-            #region RADIO (WSO)
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1429", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.rc_tone_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.rc_tone_sw.ToString("d")) }, "RADIO (WSO)", "Tone Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1430", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.rc_cypher_txt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.rc_cypher_txt_sw.ToString("d")) }, "RADIO (WSO)", "Cypher Text Switch", "%0.1f"));
-            #endregion RADIO (WSO)
+            #region Radio (WSO)
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1429", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.rc_tone_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.rc_tone_sw.ToString("d")) }, "Radio (WSO)", "Tone Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.FLINST.ToString("d"), "1430", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.radioctrl_commands.rc_cypher_txt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.radioctrl_commands.rc_cypher_txt_sw.ToString("d")) }, "Radio (WSO)", "Cypher Text Switch", "%0.1f"));
+            #endregion Radio (WSO)
             #region Throttle Quadrant (WSO)
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "1403", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltctrl_commands.rudder_trim_sw_rear.ToString("d"), Commands.fltctrl_commands.rudder_trim_sw_rear.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition("-1.0", "Posn 3", Commands.fltctrl_commands.rudder_trim_sw_rear.ToString("d"), Commands.fltctrl_commands.rudder_trim_sw_rear.ToString("d"), "0.0", "0.0") }, "Throttle Quadrant (WSO)", "Rudder Trim Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1431", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.seat_adj_sw_rc.ToString("d"), Commands.misc_commands.seat_adj_sw_rc.ToString("d"), "0.0", "0.0"), new SwitchPosition("0.0", "Posn 2", null), new SwitchPosition("-1.0", "Posn 3", Commands.misc_commands.seat_adj_sw_rc.ToString("d"), Commands.misc_commands.seat_adj_sw_rc.ToString("d"), "0.0", "0.0") }, "Throttle Quadrant (WSO)", "Seat Adjust Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "802", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.seat_arm_handle_rc.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.seat_arm_handle_rc.ToString("d")) }, "Throttle Quadrant (WSO)", "Seat Arm Handle", "%0.1f"));
             #endregion Throttle Quadrant (WSO)
-            #region OXYGEN Control Panel (WSO)
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "1450", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")) }, "OXYGEN Control Panel (WSO)", "Oxygen Emergency/Normal/Test Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "1451", new SwitchPosition[] { new SwitchPosition("1.0", "", Commands.oxyctrl_commands.wso_oxy_100_norm_sw.ToString("d")), new SwitchPosition("0.0", "Normal Switch", Commands.oxyctrl_commands.wso_oxy_100_norm_sw.ToString("d")) }, "OXYGEN Control Panel (WSO)", "Oxygen 100%/Normal Switch", "%0.1f"));
-            AddFunction(new Switch(this, devices.ECS.ToString("d"), "1452", SwitchPositions.Create(3, 0d, 0.5d, Commands.oxyctrl_commands.wso_oxy_pbg_on_off_sw.ToString("d"), "Posn", "%0.3f"), "OXYGEN Control Panel (WSO)", "Oxygen Supply/Mode Control Switch", "%0.3f"));
-            AddFunction(new FlagValue(this, "1454", "OXYGEN Control Panel (WSO)", "Oxygen Flow Indicator (WSO)", "True when indicator is lit", "%1d"));
-            #endregion OXYGEN Control Panel (WSO)
-            #region INT LT Control Panel (WSO)
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_console_lt_knob.ToString("d"), "1456", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Console Lights", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_inst_pnl_lt_knob.ToString("d"), "1457", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Instruments Panel Lights", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_ufc_bcklt_br_knob.ToString("d"), "1458", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "UFC Panel Backlights", false, "%0.1f"));
-            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_lights_test_sw.ToString("d"), "1459", "INT LT Control Panel (WSO)", "Warning/Caution Lights Test", "%.1f"));
-            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "1460", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.intlt_commands.rc_compass_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.intlt_commands.rc_compass_lt_sw.ToString("d")) }, "INT LT Control Panel (WSO)", "Compass Lights", "%0.1f"));
-            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "1461", new SwitchPosition[] { new SwitchPosition("1.0", "Day", Commands.intlt_commands.rc_daynite_mode_sw.ToString("d")), new SwitchPosition("0.0", "Night Mode Selector", Commands.intlt_commands.rc_daynite_mode_sw.ToString("d")) }, "INT LT Control Panel (WSO)", "Displays Day/Night Mode Selector", "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_chart_lt_knob.ToString("d"), "1462", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Chart Panel Lights", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_wac_bklt_knob.ToString("d"), "1463", 0.5d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Knob Warning/Caution Lights (RMB to RESET when BRT)", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_flood_lt_knob.ToString("d"), "1464", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Storm FLood Lights", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_chart_lt_lamp.ToString("d"), "188", 0.1d, 0.0d, 1.0d, "INT LT Control Panel (WSO)", "Chart Light", false, "%0.1f"));
-            #endregion INT LT Control Panel (WSO)
+            #region Oxygen Panel (WSO)
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "1450", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")), new SwitchPosition("-1.0", "Posn 3", Commands.oxyctrl_commands.wso_oxy_emer_norm_test_sw.ToString("d")) }, "Oxygen Panel (WSO)", "Oxygen Emergency/Normal/Test Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "1451", new SwitchPosition[] { new SwitchPosition("1.0", "", Commands.oxyctrl_commands.wso_oxy_100_norm_sw.ToString("d")), new SwitchPosition("0.0", "Normal Switch", Commands.oxyctrl_commands.wso_oxy_100_norm_sw.ToString("d")) }, "Oxygen Panel (WSO)", "Oxygen 100%/Normal Switch", "%0.1f"));
+            AddFunction(new Switch(this, devices.ECS.ToString("d"), "1452", SwitchPositions.Create(3, 0d, 0.5d, Commands.oxyctrl_commands.wso_oxy_pbg_on_off_sw.ToString("d"), "Posn", "%0.3f"), "Oxygen Panel (WSO)", "Oxygen Supply/Mode Control Switch", "%0.3f"));
+            AddFunction(new ScaledNetworkValue(this, "1453", new CalibrationPointCollectionDouble(0d, 0d, 1d, 400d), "Oxygen Panel (WSO)", "Oxygen Pressure", "Current pressure in the Oxygen Panel (Pilot)", "0 to 400", BindingValueUnits.PoundsPerSquareInch, "%.2f"));
+            AddFunction(new FlagValue(this, "1454", "Oxygen Panel (WSO)", "Oxygen Flow Indicator (WSO)", "True when indicator is lit", "%.1f"));
+            #endregion Oxygen Panel (WSO)
+            #region Lights Internal Control Panel (WSO)
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_console_lt_knob.ToString("d"), "1456", 0.1d, 0.0d, 1.0d, "Lights Internal Control Panel (WSO)", "Console Lights", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_inst_pnl_lt_knob.ToString("d"), "1457", 0.1d, 0.0d, 1.0d, "Lights Internal Control Panel (WSO)", "Instruments Panel Lights", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_ufc_bcklt_br_knob.ToString("d"), "1458", 0.1d, 0.0d, 1.0d, "Lights Internal Control Panel (WSO)", "UFC Panel Backlights", false, "%0.1f"));
+            AddFunction(new PushButton(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_lights_test_sw.ToString("d"), "1459", "Lights Internal Control Panel (WSO)", "Warning/Caution Lights Test", "%.1f"));
+            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "1460", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.intlt_commands.rc_compass_lt_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.intlt_commands.rc_compass_lt_sw.ToString("d")) }, "Lights Internal Control Panel (WSO)", "Compass Lights", "%0.1f"));
+            AddFunction(new Switch(this, devices.INTLT.ToString("d"), "1461", new SwitchPosition[] { new SwitchPosition("1.0", "Day", Commands.intlt_commands.rc_daynite_mode_sw.ToString("d")), new SwitchPosition("0.0", "Night Mode Selector", Commands.intlt_commands.rc_daynite_mode_sw.ToString("d")) }, "Lights Internal Control Panel (WSO)", "Displays Day/Night Mode Selector", "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_chart_lt_knob.ToString("d"), "1462", 0.1d, 0.0d, 1.0d, "Lights Internal Control Panel (WSO)", "Chart Panel Lights", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_wac_bklt_knob.ToString("d"), "1463", 0.5d, 0.0d, 1.0d, "Lights Internal Control Panel (WSO)", "Knob Warning/Caution Lights (RMB to RESET when BRT)", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_flood_lt_knob.ToString("d"), "1464", 0.1d, 0.0d, 1.0d, "Lights Internal Control Panel (WSO)", "Storm FLood Lights", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.INTLT.ToString("d"), Commands.intlt_commands.rc_chart_lt_lamp.ToString("d"), "188", 0.1d, 0.0d, 1.0d, "Lights Internal Control Panel (WSO)", "Chart Light", false, "%0.1f"));
+            #endregion Lights Internal Control Panel (WSO)
             #region TEWS Control Panel (WSO)
             AddFunction(new Switch(this, devices.EWS_JMR.ToString("d"), "1465", new SwitchPosition[] { new SwitchPosition("1.0", "ON", Commands.tews_commands.ics_power_sw.ToString("d")), new SwitchPosition("0.0", "OFF Switch", Commands.tews_commands.ics_power_sw.ToString("d")) }, "TEWS Control Panel (WSO)", "ICS ON/OFF Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.EWS_JMR.ToString("d"), "1466", new SwitchPosition[] { new SwitchPosition("1.0", "MAN", Commands.tews_commands.ics_set1_sw.ToString("d")), new SwitchPosition("0.0", "AUTO Switch", Commands.tews_commands.ics_set1_sw.ToString("d")) }, "TEWS Control Panel (WSO)", "ICS SET 1 MAN/AUTO Switch", "%0.1f"));
@@ -824,7 +833,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new PushButton(this, devices.EWS_CMD.ToString("d"), Commands.tews_commands.cmd_jett_sw.ToString("d"), "1478", "CMD Control Panel (WSO)", "Flare Jettison Switch NORM/JETT", "%.1f"));
             #endregion CMD Control Panel (WSO)
             #region MISC CONTROLS (WSO)
-            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1001", new SwitchPosition[] { new SwitchPosition("1.0", "Show", Commands.misc_commands.hide_controls.ToString("d")), new SwitchPosition("0.0", "Hide Controls", Commands.misc_commands.hide_controls.ToString("d")) }, "MISC CONTROLS (WSO)", "Show/Hide Controls", "%0.1f"));
+            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1001", new SwitchPosition[] { new SwitchPosition("1.0", "Show", Commands.misc_commands.hide_controls.ToString("d")), new SwitchPosition("0.0", "Hide Controls", Commands.misc_commands.hide_controls.ToString("d")) }, "Miscellaneous Controls (WSO)", "Show/Hide Controls", "%0.1f"));
             #endregion MISC CONTROLS (WSO)
 
             // Unimplemented (yet)

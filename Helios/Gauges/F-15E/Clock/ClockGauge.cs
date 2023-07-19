@@ -20,8 +20,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F15E.ClockFace", "Clock Face", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
-    public class ClockFace : BaseGauge
+    [HeliosControl("Helios.F15E.ClockGauge", "Clock Face", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    public class ClockGauge : BaseGauge
     {
         private string _imageLocation = "{AV-8B}/Images/";
         private GaugeNeedle _clockHoursNeedle;
@@ -34,11 +34,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
         private CalibrationPointCollectionDouble _clockCalibration = new CalibrationPointCollectionDouble(0d, 0d, 60d, 360d);
         private CalibrationPointCollectionDouble _clockHoursCalibration = new CalibrationPointCollectionDouble(0d, 0d, 12d, 360d);
 
-        public ClockFace(Point posn, Size size)
-            : base("Clock", size)
+        public ClockGauge(string name, Size size, string device, string[] elements)
+            : base(name, size)
         {
 
-            Point center = posn;
+            Point center = new Point(size.Width/2, size.Height/2);
             double needleScaleFactor = 1.1;
             Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Clock/Clock_Dial.xaml", new Rect(0d, 0d, size.Width, size.Height)));
             _clockHoursNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Clock/hours_needle.xaml", center, new Size(19d, 96d), new Point(9.6d, 86.5d));
@@ -52,17 +52,16 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
             GaugeImage _gauge = new GaugeImage($"{_imageLocation}WQHD/Panel/crystal_reflection_round.png", new Rect(0d, 0d, size.Width, size.Height));
             _gauge.Opacity = 0.5;
             Components.Add(_gauge);
-            // Components.Add(new GaugeImage($"{_imageLocation}Clock Bezel.png", new Rect(0d, 0d, 390d, 390d)));
 
-            _clockHours = new HeliosValue(this, BindingValue.Empty, "Clock", "Hours", "Hours value for Clock.", "(0-12)", BindingValueUnits.Hours);
+            _clockHours = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{elements[0]} value for Clock.", "(0-12)", BindingValueUnits.Hours);
             _clockHours.Execute += ClockHours_Execute;
             Actions.Add(_clockHours);
 
-            _clockMinutes = new HeliosValue(this, BindingValue.Empty, "Clock", "Minutes", "Minute value for Clock.", "(0-60)", BindingValueUnits.Minutes);
+            _clockMinutes = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[1], $"{elements[1]} value for Clock.", "(0-60)", BindingValueUnits.Minutes);
             _clockMinutes.Execute += ClockMinutes_Execute;
             Actions.Add(_clockMinutes);
 
-            _clockSeconds = new HeliosValue(this, BindingValue.Empty, "Clock", "Seconds", "Seconds value for Clock.", "(0-60)", BindingValueUnits.Seconds);
+            _clockSeconds = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[2], $"{elements[2]} value for Clock.", "(0-60)", BindingValueUnits.Seconds);
             _clockSeconds.Execute += ClockSeconds_Execute;
             Actions.Add(_clockSeconds);
         }

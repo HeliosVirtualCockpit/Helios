@@ -30,22 +30,22 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
         private double _glassReflectionOpacity;
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 1.0;
 
-        private Color _textColor = Color.FromArgb(0xff,220, 220, 220);
-        private string _imageLocation = "{Helios}/Gauges/F-15E/EngineMonitor/";
+        //private Color _textColor = Color.FromArgb(0xff,220, 220, 220);
+        private readonly string _imageLocation = "{Helios}/Gauges/F-15E/EngineMonitor/";
         private GaugeNeedle _gnLeftNoz;
         private HeliosValue _leftNozzle;
-        private HeliosValue _leftNozzleNeedle;
+        //private HeliosValue _leftNozzleNeedle;
         private CalibrationPointCollectionDouble _needleLeftCalibration;
         private GaugeNeedle _gnRightNoz;
         private HeliosValue _rightNozzle;
-        private HeliosValue _rightNozzleNeedle;
+        //private HeliosValue _rightNozzleNeedle;
         private CalibrationPointCollectionDouble _needleRightCalibration;
-        private GaugeImage _gibackground;
+        //private GaugeImage _gibackground;
         private GaugeImage _gireflection;
         private GaugeImage _giGaugeMarksL;
-        private HeliosValue _indicatorMarksLeft;
+        //private HeliosValue _indicatorMarksLeft;
         private GaugeImage _giGaugeMarksR;
-        private HeliosValue _indicatorMarksRight;
+        //private HeliosValue _indicatorMarksRight;
         private GaugeImage _giGaugeLegends;
         private HeliosValue _indicatorGaugeLegends;
 
@@ -151,16 +151,16 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             switch (_haction.Name)
             {
                 case "Panel State ON/OFF":
-                    _giGaugeMarksL.IsHidden = (_hactionVal == "1") ? false : true;
-                    _giGaugeMarksR.IsHidden = (_hactionVal == "1") ? false : true;
-                    _giGaugeLegends.IsHidden = (_hactionVal == "1") ? false : true;
-                    _gnRightNoz.IsHidden = (_hactionVal == "1") ? false : true;
-                    _gnLeftNoz.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksL.IsHidden = _hactionVal != "1";
+                    _giGaugeMarksR.IsHidden = _hactionVal != "1";
+                    _giGaugeLegends.IsHidden = _hactionVal != "1";
+                    _gnRightNoz.IsHidden = _hactionVal != "1";
+                    _gnLeftNoz.IsHidden = _hactionVal != "1";
                     foreach(HeliosVisual hv in Parent.Children)
                     {
                         if (hv is NumericTextDisplay)
                         {
-                            hv.IsHidden = (_hactionVal == "1") ? false : true;
+                            hv.IsHidden = _hactionVal != "1";
                         }
                     }
                     break;

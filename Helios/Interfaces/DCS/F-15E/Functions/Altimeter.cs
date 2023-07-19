@@ -24,16 +24,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions
 
     public class Altimeter : DCSFunctionPair
     {
-        private static readonly ExportDataElement[] DataElementsTemplate = { new DCSDataElement("2051", null, true), new DCSDataElement("2059", null, true) };
+        private static readonly ExportDataElement[] DataElementsTemplatePilot = { new DCSDataElement("2051", null, true), new DCSDataElement("2059", null, true) };
+        private static readonly ExportDataElement[] DataElementsTemplateWSO = { new DCSDataElement("2251", null, true), new DCSDataElement("2259", null, true) };
 
         private HeliosValue _altitude;
         private HeliosValue _pressure;
+        private Cockpit _cockpit;
 
-        public Altimeter(BaseUDPInterface sourceInterface)
+        public Altimeter(BaseUDPInterface sourceInterface, string interfaceDevice, Cockpit cockpit)
             : base(sourceInterface,
-                  "Standby Altimeter", "Altitude", "Barometric altitude above sea level of the aircraft.",
-                  "Standby Altimeter", "Pressure", "Manually set barometric altitude.")
+                  interfaceDevice, "Altitude", "Barometric altitude above sea level of the aircraft.",
+                  interfaceDevice, "Air Pressure", "Manually set barometric altitude.")
         {
+            _cockpit = cockpit;
             DoBuild();
         }
 
@@ -62,7 +65,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions
             Triggers.Add(_pressure);
         }
 
-        protected override ExportDataElement[] DefaultDataElements => DataElementsTemplate;
+        protected override ExportDataElement[] DefaultDataElements => _cockpit == Cockpit.Pilot ? DataElementsTemplatePilot : DataElementsTemplateWSO;
 
         public override void ProcessNetworkData(string id, string value)
         {
@@ -70,6 +73,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions
             switch (id)
             {
                 case "2051":
+                case "2251":
                     parts = Tokenizer.TokenizeAtLeast(value, 3, ';');
                     double tenThousands = ClampedParse(parts[0], 10000d);
                     double thousands = ClampedParse(parts[1], 1000d);
@@ -79,6 +83,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions
                     _altitude.SetValue(new BindingValue(altitude), false);
                     break;
                 case "2059":
+                case "2259":
                     parts = Tokenizer.TokenizeAtLeast(value, 3, ';');
                     double pressure;
                     pressure = ClampedParse(parts[0], 10d);

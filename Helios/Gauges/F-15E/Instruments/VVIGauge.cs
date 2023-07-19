@@ -16,25 +16,22 @@
 namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.VVI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Gauges.A_10.VVI;
     using System;
     using System.Windows;
 
     [HeliosControl("Helios.F15E.Instruments.VVI", "Vertical Velocity Indicator", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
-    public class VVI : BaseGauge
+    public class VVIGauge : BaseGauge
     {
         private HeliosValue _verticalVelocity;
         private GaugeNeedle _needle;
         private CalibrationPointCollectionDouble _calibrationPoints;
 
-        public VVI(string name, Size size): base(name, size)
+        public VVIGauge(string name, Size size, string device = "Flight Instruments"): base(name, size)
         {
-            Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/VVI/VVI_Faceplate.png", new Rect(32d, 38d, 300d, 300d)));
-            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), -90d);
+            Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/VVI/VVI_Faceplate.png", new Rect(0d, 0d, 300d, 300d)));
+            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(150d, 150d), new Size(22, 165), new Point(11, 130), -90d);
             Components.Add(_needle);
-
-            //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
-            _verticalVelocity = new HeliosValue(this, new BindingValue(0d), "", "vertical velocity", "Veritcal velocity of the aircraft", "(-6,000 to 6,000)", BindingValueUnits.FeetPerMinute);
+            _verticalVelocity = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", name, "Veritcal velocity of the aircraft", "(-6,000 to 6,000)", BindingValueUnits.FeetPerMinute);
             _verticalVelocity.Execute += new HeliosActionHandler(VerticalVelocity_Execute);
             Actions.Add(_verticalVelocity);
 
