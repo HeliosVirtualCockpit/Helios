@@ -61,10 +61,25 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
             AddNumericTextDisplay("Left Engine Oil Pressure", new Point(108, 319), new Size(oilWidth, dispHeight), fontSize, "88", _interfaceDeviceName, "Left Engine Oil Pressure", TextHorizontalAlignment.Right, BindingValueUnits.PoundsPerSquareInch);
             AddNumericTextDisplay("Right Engine Oil Pressure", new Point(276, 319), new Size(oilWidth, dispHeight), fontSize, "88", _interfaceDeviceName, "Right Engine Oil Pressure", TextHorizontalAlignment.Right, BindingValueUnits.PoundsPerSquareInch);
 
-            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(59, 55), new Size(356d, 319d), "{A-10C}/Images/A-10C/Pilot_Reflection_25.png", _interfaceDeviceName);
+            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(56, 53), new Size(361d, 325d), "{A-10C}/Images/A-10C/Pilot_Reflection_25.png", _interfaceDeviceName);
             _frameGlassPanel.Opacity = GLASS_REFLECTION_OPACITY_DEFAULT;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;
+
+            ImageDecoration iD = new ImageDecoration()
+            {
+                Name = "Engine Monitor Glass Mask",
+                Left = 56d,
+                Top = 53d,
+                Width = 361d,
+                Height = 325d,
+                Alignment = ImageAlignment.Stretched,
+                Image = "{F-15E}/Images/EngineMonitorPanel/EngineMonitorBackgroundMask.png",
+                IsHidden = false
+            };
+            iD.Width = 361d;
+            iD.Height = 325d;
+            Children.Add(iD);
 
         }
 
@@ -229,7 +244,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
         }
         public override string DefaultBackgroundImage
         {
-            get { return "{helios}/Gauges/F-15E/EngineMonitor/EngineMonitorBackground.png"; }
+            get { return "{F-15E}/Images/EngineMonitorPanel/EngineMonitorBackground.png"; }
         }
 
         public override void WriteXml(XmlWriter writer)

@@ -224,6 +224,7 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
+    <Compile Include="Gauges\F-15E\Caution Panel\Caution Panel Pilot.cs" />
     <Compile Include="Gauges\F-15E\Instruments\ADI.cs" />
     <Compile Include="Gauges\F-15E\Instruments\ADI Pilot.cs" />
     <Compile Include="Gauges\F-15E\Instruments\ADI WSO.cs" />
@@ -507,7 +508,6 @@
     </Content>
     <EmbeddedResource Include="Resources\helios-bug-report.txt" />
     <Resource Include="Images\General\simple_computation_wire.png" />
-    <Resource Include="Gauges\F-15E\EngineMonitor\EngineMonitorBackground.png" />
     <Content Include="Templates\Base\Simulator Viewports\A29B_BFI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

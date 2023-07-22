@@ -182,5 +182,15 @@
   <ItemGroup>
     <Resource Include="Images\Bezels_And_Faces\ADI_Panel.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bezels_And_Faces\Caution_Indicator_Panel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Panel_Mask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\EngineMonitorPanel\EngineMonitorBackground.png" />
+    <Resource Include="Images\EngineMonitorPanel\EngineMonitorBackgroundMask.png" />
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

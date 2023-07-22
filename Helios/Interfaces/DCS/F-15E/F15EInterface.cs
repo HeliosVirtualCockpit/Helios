@@ -213,7 +213,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "406", "Threat Indicators (Pilot)", "Low Altitude Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "407", "Threat Indicators (Pilot)", "TF Fail Indicator", "True when indicator is lit", "%1d"));
             #endregion Threat Indicators (Pilot)
-            #region Warning Panel (Pilot)
+            #region Caution Panel (Pilot)
             //  +-----------------------+-----------------------+
             //  | PROGRAM (GR)     411? | MINIMUM         412?  |
             //  +-----------------------+-----------------------+
@@ -236,24 +236,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             //  | SPARE             432 | SPARE           432   |
             //  +-----------------------+-----------------------+
 
-            AddFunction(new FlagValue(this, "411", "Warning Panel (Pilot)", "Program Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "412", "Warning Panel (Pilot)", "Minimum Warning Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "413", "Warning Panel (Pilot)", "Chaff Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "414", "Warning Panel (Pilot)", "Flare Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "415", "Warning Panel (Pilot)", "Emergency BST On Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "416", "Warning Panel (Pilot)", "BST System Malfunction Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "417", "Warning Panel (Pilot)", "FUEL LOW Indicator", "True when indicator is lit", "%1d")); // [418] PILOT FUEL LOW Light (yellow)
-            AddFunction(new FlagValue(this, "418", "Warning Panel (Pilot)", "Right Generator Warning", "True when indicator is lit", "%1d")); //[420] PILOT R GEN Light(white)
-            AddFunction(new FlagValue(this, "419", "Warning Panel (Pilot)", "Left Generator Warning", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "420", "Warning Panel (Pilot)", "NuclearLEAR Indicator", "True when indicator is lit", "%1d")); // [417] PILOT NuclearLEAR Light (white)
-            AddFunction(new FlagValue(this, "421", "Warning Panel (Pilot)", "Engine Warning Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "422", "Warning Panel (Pilot)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "423", "Warning Panel (Pilot)", "Hydraulics Warning Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "424", "Warning Panel (Pilot)", "AV BIT Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "425", "Warning Panel (Pilot)", "DSPFLOLO Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "426", "Warning Panel (Pilot)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "432", "Warning Panel (Pilot)", "SPARE x4 Indicator", "True when indicators are lit", "%1d"));
-            #endregion Warning Panel (Pilot)
+            AddFunction(new FlagValue(this, "411", "Caution Panel (Pilot)", "Program Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "412", "Caution Panel (Pilot)", "Minimum Warning Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "413", "Caution Panel (Pilot)", "Chaff Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "414", "Caution Panel (Pilot)", "Flare Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "415", "Caution Panel (Pilot)", "Emergency BST On Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "416", "Caution Panel (Pilot)", "BST System Malfunction Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "417", "Caution Panel (Pilot)", "FUEL LOW Indicator", "True when indicator is lit", "%1d")); // [418] PILOT FUEL LOW Light (yellow)
+            AddFunction(new FlagValue(this, "418", "Caution Panel (Pilot)", "Right Generator Warning", "True when indicator is lit", "%1d")); //[420] PILOT R GEN Light(white)
+            AddFunction(new FlagValue(this, "419", "Caution Panel (Pilot)", "Left Generator Warning", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "420", "Caution Panel (Pilot)", "Nuclear Indicator", "True when indicator is lit", "%1d")); // [417] PILOT Nuclear Light (white)
+            AddFunction(new FlagValue(this, "421", "Caution Panel (Pilot)", "Engine Warning Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "422", "Caution Panel (Pilot)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "423", "Caution Panel (Pilot)", "Hydraulics Warning Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "424", "Caution Panel (Pilot)", "AV BIT Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "425", "Caution Panel (Pilot)", "DSPFLOLO Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "426", "Caution Panel (Pilot)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "432", "Caution Panel (Pilot)", "SPARE x4 Indicator", "True when indicators are lit", "%1d"));
+            #endregion Caution Panel (Pilot)
             AddFunction(new FlagValue(this, "431", "Landing Gear Panel", "Emergency Landing Gear Handle ROTATE", "Rotation value", "%1d"));
             #region Indicators (others) Pilot
             AddFunction(new FlagValue(this, "429", "Indicators (Pilot)", "OBST Indicator", "True when indicator is lit", "%1d"));
@@ -558,7 +558,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "1380", minuteScale, "Clock (WSO)", "Clock Minutes", "Current minutes value of the clock", "0-60", BindingValueUnits.Minutes, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "1379", minuteScale, "Clock (WSO)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "1349", cabinPressureScale, "Flight Instruments (WSO)", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.3f"));
-            //AddFunction(new ScaledNetworkValue(this, "????", AoAScale, "Flight Instruments (WSO)", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%.3f"));
             AddFunction(new ScaledNetworkValue(this, "1350", airspeedScale, "Flight Instruments (WSO)", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
             AddFunction(new ScaledNetworkValue(this, "1365", vviScale, "Flight Instruments (WSO)", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute, "%.3f"));
             AddFunction(new Functions.Altimeter(this, "Flight Instruments (WSO)", Cockpit.WSO));
@@ -618,28 +617,28 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new PushButton(this, devices.UFCCTRL_REAR.ToString("d"), Commands.ufc_commands.UFC_MENU.ToString("d"), "1332", "UFC Panel (WSO)", "Menu Key", "%.1f"));
             #endregion UFC Panel (WSO)
 
-            #region Warning Panel (WSO)
-            AddFunction(new FlagValue(this, "1179", "Warning Panel (WSO)", "Engine Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1180", "Warning Panel (WSO)", "Hydraulics Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1181", "Warning Panel (WSO)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1182", "Warning Panel (WSO)", "AV-BIT Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1183", "Warning Panel (WSO)", "Master Arm Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1184", "Warning Panel (WSO)", "A/P Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1185", "Warning Panel (WSO)", "PROGRAM Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1186", "Warning Panel (WSO)", "MINIMUM Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1187", "Warning Panel (WSO)", "Display Flow Low Indicator", "True when indicator is lit", "%1d"));
+            #region Caution Panel (WSO)
+            AddFunction(new FlagValue(this, "1179", "Caution Panel (WSO)", "Engine Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1180", "Caution Panel (WSO)", "Hydraulics Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1181", "Caution Panel (WSO)", "Flight Control Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1182", "Caution Panel (WSO)", "AV-BIT Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1183", "Caution Panel (WSO)", "Master Arm Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1184", "Caution Panel (WSO)", "A/P Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1185", "Caution Panel (WSO)", "PROGRAM Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1186", "Caution Panel (WSO)", "MINIMUM Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1187", "Caution Panel (WSO)", "Display Flow Low Indicator", "True when indicator is lit", "%1d"));
 
-            AddFunction(new FlagValue(this, "1193", "Warning Panel (WSO)", "Left Generator Indicator", "True when indicator is lit", "%1d"));    //[1191] WSO L GEN Light (yellow)
-            AddFunction(new FlagValue(this, "1192", "Warning Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   
-            AddFunction(new FlagValue(this, "1194", "Warning Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d")); //[1193] WSO EMIS LMT Light (yellow)
-            AddFunction(new FlagValue(this, "1195", "Warning Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d")); //1194] WSO FUEL LOW Light (yellow)
-            AddFunction(new FlagValue(this, "1178", "Warning Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  //[1195] WSO NuclearLEAR Light (yellow)
+            AddFunction(new FlagValue(this, "1193", "Caution Panel (WSO)", "Left Generator Indicator", "True when indicator is lit", "%1d"));    //[1191] WSO L GEN Light (yellow)
+            AddFunction(new FlagValue(this, "1192", "Caution Panel (WSO)", "Right Generator Indicator", "True when indicator is lit", "%1d"));   
+            AddFunction(new FlagValue(this, "1194", "Caution Panel (WSO)", "EMIS Limit Indicator", "True when indicator is lit", "%1d")); //[1193] WSO EMIS LMT Light (yellow)
+            AddFunction(new FlagValue(this, "1195", "Caution Panel (WSO)", "Fuel Low Indicator", "True when indicator is lit", "%1d")); //1194] WSO FUEL LOW Light (yellow)
+            AddFunction(new FlagValue(this, "1178", "Caution Panel (WSO)", "Nuclear Indicator", "True when indicator is lit", "%1d"));  //[1195] WSO Nuclear Light (yellow)
 
-            AddFunction(new FlagValue(this, "1196", "Warning Panel (WSO)", "Unarmed Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1197", "Warning Panel (WSO)", "Chaff Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1198", "Warning Panel (WSO)", "Flare Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "1199", "Warning Panel (WSO)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
-            #endregion Warning Panel (WSO)
+            AddFunction(new FlagValue(this, "1196", "Caution Panel (WSO)", "Unarmed Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1197", "Caution Panel (WSO)", "Chaff Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1198", "Caution Panel (WSO)", "Flare Indicator", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "1199", "Caution Panel (WSO)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
+            #endregion Caution Panel (WSO)
             #region Warning Indicators WSO
             AddFunction(new FlagValue(this, "1171", "Warning Indicators (WSO)", "Engine Fire Left Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "1172", "Warning Indicators (WSO)", "Engine Fire Right Indicator", "True when indicator is lit", "%1d"));

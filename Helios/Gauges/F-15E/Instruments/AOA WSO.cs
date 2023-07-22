@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.AOA
     using System.Windows;
     using System.Xml;
 
-    [HeliosControl("Helios.F15E.Instruments.AoA.Gauge.WSO", "Angle of Attack (WSO)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.F15E.Instruments.AoA.Gauge.WSO", "Angle of Attack (WSO)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class AOAWso : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Flight Instruments (WSO)";
