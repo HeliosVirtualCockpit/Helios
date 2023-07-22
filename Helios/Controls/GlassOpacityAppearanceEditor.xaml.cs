@@ -11,6 +11,8 @@
     [HeliosPropertyEditor("Helios.F15E.Instruments.HydraulicPressure.Utility", "Appearance")]
     [HeliosPropertyEditor("Helios.F15E.Instruments.HydraulicPressure.PC1", "Appearance")]
     [HeliosPropertyEditor("Helios.F15E.Instruments.HydraulicPressure.PC2", "Appearance")]
+    [HeliosPropertyEditor("Helios.F15E.Instruments.ADI.Pilot", "Appearance")]
+    [HeliosPropertyEditor("Helios.F15E.Instruments.ADI.WSO", "Appearance")]
     [HeliosPropertyEditor("Helios.F15E.Clock.Pilot", "Appearance")]
     [HeliosPropertyEditor("Helios.F15E.Clock.WSO", "Appearance")]
     [HeliosPropertyEditor("Helios.F15E.Instruments.VVI.Pilot", "Appearance")]

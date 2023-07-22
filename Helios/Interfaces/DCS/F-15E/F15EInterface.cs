@@ -26,6 +26,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
     using GadrocsWorkshop.Helios.Gauges.F_16.Nozzle;
     using GadrocsWorkshop.Helios.Gauges.F_16.RPM;
+    using System.Windows.Markup;
 
     public enum Cockpit { Pilot, WSO }
     /// <summary>
@@ -172,22 +173,25 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #region Flight Instruments
             AddFunction(new Functions.Altimeter(this, "Flight Instruments", Cockpit.Pilot));
             AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.alt_adj_knob.ToString("d"), "360", 0.1d, "Flight Instruments", "Altimeter pressure adjustment"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_adj.ToString("d"), "351", 0.05d, 0.0d, 1.00d, "Flight Instruments", "Backup ADI Pitch Adjust Knob", true, "%.3f"));
-            AddFunction(new PushButton(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_uncage.ToString("d"), "350", "Flight Instruments", "Backup ADI Uncage pull", "%.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_adj.ToString("d"), "351", 0.1d, -1.0d, 1.00d, "Flight Instruments", "ADI Pitch adjustment offset", false, "%.2f"));
+            AddFunction(new PushButton(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.art_hor_uncage.ToString("d"), "350", "Flight Instruments", "ADI Uncage pull", "%.1f"));
+            AddFunction(new ScaledNetworkValue(this, "349", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "ADI Aircraft Pitch Angle", "Backup ADI angle of the aircraft in degrees", "-90 to +90", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "348", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "ADI Aircraft Bank Angle", "Backup ADI angle of the aircraft in degrees", "0 to +360", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new NetworkValue(this, "347", "Flight Instruments", "ADI Off Flag", "rotational position of the OFF flag","", BindingValueUnits.Numeric, "%.1f"));
 
             CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d);
             AddFunction(new ScaledNetworkValue(this, "345", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
 
             CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d);
             vviScale.Add(new CalibrationPointDouble(0d, 0d));
-            AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
+            AddFunction(new ScaledNetworkValue(this, "362", vviScale, "Flight Instruments", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute, "%.3f"));
             CalibrationPointCollectionDouble AoAScale = new CalibrationPointCollectionDouble(-0.05d, -5d, 0.5d, 50d) {
                 new CalibrationPointDouble(0d, 0d)
                 };
-            AddFunction(new ScaledNetworkValue(this, "346", AoAScale, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%0.2f"));
+            AddFunction(new ScaledNetworkValue(this, "346", AoAScale, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%.3f"));
             //AddFunction(new FlagValue(this, "", "Flight Instruments", "AOA Flag", "Off Flag"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.clk_adj_knob.ToString("d"), "366", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Clock Adjust", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.tmr_stop_btn.ToString("d"), "367", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Timer Stop", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.clk_adj_knob.ToString("d"), "366", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Clock Adjust", false, "%.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.tmr_stop_btn.ToString("d"), "367", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Timer Stop", false, "%.1f"));
             CalibrationPointCollectionDouble hourScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 12d);
             CalibrationPointCollectionDouble minuteScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 60d);
             AddFunction(new ScaledNetworkValue(this, "365", hourScale, "Clock (Pilot)", "Clock Hours", "Current hours value of the clock", "0-12", BindingValueUnits.Hours, "%.2f"));
@@ -540,18 +544,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             #region Flight Instruments (WSO)
             AddFunction(new PushButton(this, devices.WCAS.ToString("d"), Commands.misc_commands.master_caution_btn_rc.ToString("d"), "1176", "Flight Instruments (WSO)", "Master Caution Button", "%.1f"));
             AddFunction(new FlagValue(this, "1177", "Flight Instruments (WSO)", "Master Warning Indicator", "True when indicator is lit", "%1d"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_art_hor_uncage.ToString("d"), "1354", 0.5d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Knob Backup ADI Cage/Pitch Adjust Knob - Pull and turn to uncage", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_alt_adj_knob.ToString("d"), "1364", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Altitude adjust", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_clk_adj_knob.ToString("d"), "1382", 0.1d, 0.0d, 1.0d, "Clock (WSO)", "Clock Adjust", false, "%0.1f"));
-            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_tmr_stop_btn.ToString("d"), "1383", 0.1d, 0.0d, 1.0d, "Clock (WSO)", "Timer Stop", false, "%0.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_art_hor_uncage.ToString("d"), "1355", 0.5d, -1.0d, 1.0d, "Flight Instruments (WSO)", "ADI Pitch adjustment offset", false, "%.3f"));
+            AddFunction(new PushButton(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_art_hor_uncage.ToString("d"), "1354", "Flight Instruments (WSO)", "ADI Uncage pull", "%.1f"));
+            AddFunction(new ScaledNetworkValue(this, "1353", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments (WSO)", "ADI Aircraft Pitch Angle", "Backup ADI angle of the aircraft in degrees", "-90 to +90", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "1352", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments (WSO)", "ADI Aircraft Bank Angle", "Backup ADI angle of the aircraft in degrees", "0 to +360", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new NetworkValue(this, "1351", "Flight Instruments (WSO)", "ADI Off Flag", "rotational position of the OFF flag", "", BindingValueUnits.Numeric, "%.1f"));
+
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_alt_adj_knob.ToString("d"), "1364", 0.1d, 0.0d, 1.0d, "Flight Instruments (WSO)", "Altitude adjust", false, "%.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_clk_adj_knob.ToString("d"), "1382", 0.1d, 0.0d, 1.0d, "Clock (WSO)", "Clock Adjust", false, "%.1f"));
+            AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_tmr_stop_btn.ToString("d"), "1383", 0.1d, 0.0d, 1.0d, "Clock (WSO)", "Timer Stop", false, "%.1f"));
+
             AddFunction(new ScaledNetworkValue(this, "1381", hourScale, "Clock (WSO)", "Clock Hours", "Current hours value of the clock", "0-12", BindingValueUnits.Hours, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "1380", minuteScale, "Clock (WSO)", "Clock Minutes", "Current minutes value of the clock", "0-60", BindingValueUnits.Minutes, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "1379", minuteScale, "Clock (WSO)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
-            AddFunction(new ScaledNetworkValue(this, "1349", cabinPressureScale, "Flight Instruments (WSO)", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.5f"));
-            AddFunction(new ScaledNetworkValue(this, "1351", AoAScale, "Flight Instruments (WSO)", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%0.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1349", cabinPressureScale, "Flight Instruments (WSO)", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.3f"));
+            //AddFunction(new ScaledNetworkValue(this, "????", AoAScale, "Flight Instruments (WSO)", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%.3f"));
             AddFunction(new ScaledNetworkValue(this, "1350", airspeedScale, "Flight Instruments (WSO)", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
-            AddFunction(new ScaledNetworkValue(this, "1365", vviScale, "Flight Instruments (WSO)", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
+            AddFunction(new ScaledNetworkValue(this, "1365", vviScale, "Flight Instruments (WSO)", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute, "%.3f"));
             AddFunction(new Functions.Altimeter(this, "Flight Instruments (WSO)", Cockpit.WSO));
+
+
 
             #endregion Flight Instruments (WSO)
             #region UFC Panel (WSO)

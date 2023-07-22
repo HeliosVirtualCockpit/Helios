@@ -61,7 +61,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.EngineMonitorPanel
             AddNumericTextDisplay("Left Engine Oil Pressure", new Point(108, 319), new Size(oilWidth, dispHeight), fontSize, "88", _interfaceDeviceName, "Left Engine Oil Pressure", TextHorizontalAlignment.Right, BindingValueUnits.PoundsPerSquareInch);
             AddNumericTextDisplay("Right Engine Oil Pressure", new Point(276, 319), new Size(oilWidth, dispHeight), fontSize, "88", _interfaceDeviceName, "Right Engine Oil Pressure", TextHorizontalAlignment.Right, BindingValueUnits.PoundsPerSquareInch);
 
-            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(59, 55), new Size(356d, 319d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDeviceName);
+            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(59, 55), new Size(356d, 319d), "{A-10C}/Images/A-10C/Pilot_Reflection_25.png", _interfaceDeviceName);
             _frameGlassPanel.Opacity = GLASS_REFLECTION_OPACITY_DEFAULT;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;

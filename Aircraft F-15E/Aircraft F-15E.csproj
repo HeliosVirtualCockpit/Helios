@@ -34,7 +34,6 @@
     <Resource Include="Images\Bezels_And_Faces\Fuel_Qty_Bezel.png" />
     <Resource Include="Images\Bezels_And_Faces\Generic_Bezel.png" />
     <Resource Include="Images\Bezels_And_Faces\IFEI_Bezel.png" />
-    <Resource Include="Images\Bezels_And_Faces\Standby_ADI_Bezel_1.png" />
     <Resource Include="Images\Buttons_And_Switches\DTM_Button_Norm_Non_Function.png" />
     <Resource Include="Images\Buttons_And_Switches\Fire_Test_Button_Surround.png" />
     <Resource Include="Images\Buttons_And_Switches\Fire_Test_During_Press_Lit.png" />
@@ -176,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Off_Flag_Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Lamps_And_Indicators\ADI_Off_Flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bezels_And_Faces\ADI_Panel.png" />
   </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

@@ -27,25 +27,15 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private double _glassReflectionOpacity;
-        public const double GLASS_REFLECTION_OPACITY_DEFAULT = 1.0;
-
-        //private Color _textColor = Color.FromArgb(0xff,220, 220, 220);
         private readonly string _imageLocation = "{Helios}/Gauges/F-15E/EngineMonitor/";
         private GaugeNeedle _gnLeftNoz;
         private HeliosValue _leftNozzle;
-        //private HeliosValue _leftNozzleNeedle;
         private CalibrationPointCollectionDouble _needleLeftCalibration;
         private GaugeNeedle _gnRightNoz;
         private HeliosValue _rightNozzle;
-        //private HeliosValue _rightNozzleNeedle;
         private CalibrationPointCollectionDouble _needleRightCalibration;
-        //private GaugeImage _gibackground;
-        private GaugeImage _gireflection;
         private GaugeImage _giGaugeMarksL;
-        //private HeliosValue _indicatorMarksLeft;
         private GaugeImage _giGaugeMarksR;
-        //private HeliosValue _indicatorMarksRight;
         private GaugeImage _giGaugeLegends;
         private HeliosValue _indicatorGaugeLegends;
 
@@ -53,13 +43,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             : base("Engine Nozzle Gauge", new Size(470, 437))
         {
             // adding the control buttons
-
-
-            // Add various image components to the gauge
-            //_gibackground = new GaugeImage($"{_imageLocation}EngineMonitorBackground.png", new Rect(0d, 0d, 470d, 437d));
-            //Components.Add(_gibackground);
-            //_gibackground.IsHidden = true;  // This is to make sure that we do not mask anything while developing
-
             _giGaugeMarksL = new GaugeImage($"{_imageLocation}Nozzle Gauge Marks.xaml", new Rect(91d, 219d, 100d, 100d));
             Components.Add(_giGaugeMarksL);
             _giGaugeMarksR = new GaugeImage($"{_imageLocation}Nozzle Gauge Marks.xaml", new Rect(278d, 219d, 100d, 100d));
@@ -80,10 +63,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             _rightNozzle = new HeliosValue(this, BindingValue.Empty, "Engine Monitor Panel_Engine Nozzle Gauge", "Right Engine Nozzle Position", "Right Nozzle Position in %.", "", BindingValueUnits.Numeric);
             _rightNozzle.Execute += new HeliosActionHandler(RightNozzlePosition_Execute);
             Actions.Add(_rightNozzle);
-
-            //_gireflection = new GaugeImage(_imageLocation + "IFEI Reflections.png", new Rect(0d, 0d, 779d, 702d));
-            //Components.Add(_gireflection);
-            //_gireflection.IsHidden = false;
             _giGaugeMarksL.IsHidden = true;
             _giGaugeMarksR.IsHidden = true;
             _giGaugeLegends.IsHidden = true;
@@ -92,43 +71,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
             _indicatorGaugeLegends.Execute += new HeliosActionHandler(Indicator_Execute);
             Actions.Add(_indicatorGaugeLegends);
 
-            // initialize opacity value and related visual
-            GlassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
         }
-
-        #region Properties
-        public double GlassReflectionOpacity
-        {
-            get
-            {
-                return _glassReflectionOpacity;
-            }
-            set
-            {
-                if(_gireflection != null)
-                {
-                    // clamp to max opacity
-                    double newValue = Math.Min(value, 1.0);
-
-                    double oldValue = _glassReflectionOpacity;
-                    if (newValue != oldValue)
-                    {
-                        _glassReflectionOpacity = newValue;
-
-                        // don't render at all if fully transparent
-                        _gireflection.IsHidden = (newValue == 0.0);
-
-                        // render at this opacity, if applicable
-                        _gireflection.Opacity = newValue;
-
-                        // notify change after change is made
-                        OnPropertyChanged("GlassReflectionOpacity", oldValue, newValue, true);
-                    }
-
-                }
-            }
-        }
-        #endregion
 
         protected override void OnProfileChanged(HeliosProfile oldProfile) {
             base.OnProfileChanged(oldProfile);
