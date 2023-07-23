@@ -225,6 +225,8 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\F-15E\Caution Panel\Caution Panel Pilot.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\FuelGaugeWSO.cs" />
+    <Compile Include="Gauges\F-15E\Fuel Panel\FuelPanelWSO.cs" />
     <Compile Include="Gauges\F-15E\Instruments\ADI.cs" />
     <Compile Include="Gauges\F-15E\Instruments\ADI Pilot.cs" />
     <Compile Include="Gauges\F-15E\Instruments\ADI WSO.cs" />
@@ -932,7 +934,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Fuel Panel\Bingo_Needle.xaml">
+    <Resource Include="Gauges\F-15E\Fuel Panel\BingoNeedle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -980,7 +982,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\F-15E\Fuel Panel\Internal_Dial.xaml">
+    <Resource Include="Gauges\F-15E\Fuel Panel\InternalDial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -1041,6 +1043,42 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\F-15E\Instruments\ADI_Off_Flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\HydraulicPressureNeedle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\NeedleA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\NeedleB.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\NeedleC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\NeedleHours.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\NeedleMinutes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\NeedleSeconds.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Instruments\NeedleD.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\F-15E\Fuel Panel\InternalDialWSO.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

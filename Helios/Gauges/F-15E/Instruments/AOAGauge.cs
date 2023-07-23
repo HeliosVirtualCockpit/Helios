@@ -51,13 +51,13 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.AOA
 
             // Add needle to drawing components
             // Source image file (xaml will be vector rendered to appropriate size)
-            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml",
+            _needle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleD.xaml",
                 // Location on gauge which the needle will be rotated
                                       new Point(150d, 150d),
                 // Size of needle image (will scale image to this size automatically)
-                                      new Size(22d, 165d),
+                                      new Size(34, 151),
                 // Center point of needle image to rotate around
-                                      new Point(11d, 130d),
+                                      new Point(17, 134),
                 // Initial rotation for this needle
                                       -106d);
             Components.Add(_needle);

@@ -55,6 +55,7 @@ function driver.processLowImportance(mainPanelDevice)
     helios.send(2010, string.format("%.5f;%.5f;%.5f",mainPanelDevice:get_argument_value(368), mainPanelDevice:get_argument_value(369), mainPanelDevice:get_argument_value(370))) -- Fuel Total
     helios.send(2011, string.format("%.5f;%.5f",mainPanelDevice:get_argument_value(373), mainPanelDevice:get_argument_value(374))) -- Fuel Left Tank
     helios.send(2012, string.format("%.5f;%.5f",mainPanelDevice:get_argument_value(377), mainPanelDevice:get_argument_value(378)))	-- Fuel Right Tank
+    helios.send(2013, string.format("%.5f;%.5f;%.5f",mainPanelDevice:get_argument_value(1374), mainPanelDevice:get_argument_value(1375), mainPanelDevice:get_argument_value(1376))) -- Fuel Total (WSO)
     -- Engine Monitor Panel
  	helios.send(2070, string.format("%.0f", mainPanelDevice:get_argument_value(1118) * 100000+mainPanelDevice:get_argument_value(1117)%1 * 10000+mainPanelDevice:get_argument_value(1116)%1 * 1000+mainPanelDevice:get_argument_value(1115)%1 * 100+mainPanelDevice:get_argument_value(1114)%1*10))	-- Left Fuel Flow
 	helios.send(2071, string.format("%.0f", mainPanelDevice:get_argument_value(1126) * 1000+mainPanelDevice:get_argument_value(1125)%1 * 100+mainPanelDevice:get_argument_value(1124)%1 * 10))	-- Left Oil Pressure

@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
     using System.Windows;
 
     [HeliosControl("Helios.F15E.FuelGauge", "Fuel Monitor Needles & Flags", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
-    public class Fuel_Gauge : BaseGauge
+    public class FuelGauge : BaseGauge
         {
         private HeliosValue _internalFuel;
         private GaugeNeedle _internalFuelNeedle;
@@ -33,17 +33,17 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
         private CalibrationPointCollectionDouble _bingoNeedleCalibration;
         private GaugeImage _giDial;
 
-        public Fuel_Gauge()
+        public FuelGauge()
             : base("Fuel Gauge", new Size(164, 164))
         {
-            _giDial = new GaugeImage("{Helios}/Gauges/F-15E/Fuel Panel/Internal_Dial.xaml", new Rect(0d, 0d, 164d, 164d));
+            _giDial = new GaugeImage("{Helios}/Gauges/F-15E/Fuel Panel/InternalDial.xaml", new Rect(0d, 0d, 164d, 164d));
             Components.Add(_giDial);
 
             _internalFuelNeedleCalibration = new CalibrationPointCollectionDouble(0.0d, 0d, 14000d, 248d);
             _bingoNeedleCalibration = new CalibrationPointCollectionDouble(0.0d, 0d, 14000d, 248d);
             _internalFuelNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Fuel Panel/Needle.xaml", new Point(82d, 82d), new Size(36d*0.4d, 154d * 0.4d), new Point(18d * 0.4d, 136d * 0.4d), -126d);
             Components.Add(_internalFuelNeedle);
-            _bingoNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Fuel Panel/Bingo_Needle.xaml", new Point(82d, 82d), new Size(46d * .25d, 205d * .4d), new Point(23d * .25d, 205d * .4d), -126d);
+            _bingoNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Fuel Panel/BingoNeedle.xaml", new Point(82d, 82d), new Size(46d * .25d, 205d * .4d), new Point(23d * .25d, 205d * .4d), -126d);
             Components.Add(_bingoNeedle);
 
             _internalFuel = new HeliosValue(this, new BindingValue(0d), "Fuel Monitor Panel_Fuel Gauge", "Internal Fuel Value", "Current Internal Fuel in the aircraft.", "", BindingValueUnits.Pounds);

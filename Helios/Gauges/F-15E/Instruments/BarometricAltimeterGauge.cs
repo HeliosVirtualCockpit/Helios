@@ -50,7 +50,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.BarometricAltimeter
             Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Instruments/BarometricAltimeterDial.xaml", new Rect(0d, 0d, size.Width, size.Height)));
 
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1000d, 360d);
-            _needle = new GaugeNeedle("{Helios}/Gauges/FA-18C/Altimeter/altimeter_needle.xaml", new Point(150d, 150d), new Size(16d, 136d), new Point(8d, 128d));
+            _needle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleC.xaml", new Point(150d, 150d), new Size(30d, 200d), new Point(15d, 128.9d));
             Components.Add(_needle);
 
             _altitude = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "Altitude", "Current altitude of the aircraft in feet.", "", BindingValueUnits.Feet);

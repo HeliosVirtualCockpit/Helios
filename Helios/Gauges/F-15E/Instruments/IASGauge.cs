@@ -45,7 +45,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.IAS
                 new CalibrationPointDouble(700d, 320d),
                 new CalibrationPointDouble(800d, 338d)
             };
-            _needle = new GaugeNeedle("{Helios}/Gauges/AV-8B/Common/needle_a.xaml", new Point(150d, 150d), new Size(30, 128), new Point(15, 113), 0d);
+            _needle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleB.xaml", new Point(150d, 150d), new Size(14d, 140d), new Point(7d, 135d), 0d);
             Components.Add(_needle);
 
             _indicatedAirSpeed = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", name, "Current indicated airspeed of the aircraft.", "(0 - 850)", BindingValueUnits.Knots);

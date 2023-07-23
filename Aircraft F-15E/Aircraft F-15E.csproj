@@ -52,7 +52,7 @@
     <Resource Include="Images\Buttons_And_Switches\Select_Jett_Button_Norm.png" />
     <Resource Include="Images\Buttons_And_Switches\Select_Jett_Button_Pressed.png" />
     <Resource Include="Images\Buttons_And_Switches\Select_Jett_Knob.png" />
-    <Resource Include="Images\Buttons_And_Switches\Standby_Adi_Knob.png" />
+    <Resource Include="Images\Buttons_And_Switches\ADI_Knob.png" />
     <Resource Include="Images\Buttons_And_Switches\T1_Down.png" />
     <Resource Include="Images\Buttons_And_Switches\T1_Mid.png" />
     <Resource Include="Images\Buttons_And_Switches\T1_Up.png" />

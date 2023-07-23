@@ -31,10 +31,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.HydraulicPressure
         {
             Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Instruments/HydraulicPressureDial.xaml", new Rect(0d, 0d, 300d, 300d)));
 
-            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/CabinPressure/cabin_pressure_needle.xaml", new Point(150d, 150d), new Size(53d*0.8d, 158d * 0.8d), new Point(26.5d * 0.8d, 26.5d * 0.8d), 290d);
+            _needle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/HydraulicPressureNeedle.xaml", new Point(150d, 150d), new Size(58d, 142d), new Point(29d, 111d), 120d);
             Components.Add(_needle);
-
-            //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
 
             _pressure = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", name, $"{name} value.", "(0 to 4,000)", BindingValueUnits.PoundsPerSquareInch);
             _pressure.Execute += new HeliosActionHandler(pressure_Execute);

@@ -29,7 +29,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.VVI
         public VVIGauge(string name, Size size, string device = "Flight Instruments"): base(name, size)
         {
             Components.Add(new GaugeImage("{Helios}/Gauges/FA-18C/VVI/VVI_Faceplate.png", new Rect(0d, 0d, 300d, 300d)));
-            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(150d, 150d), new Size(22, 165), new Point(11, 130), -90d);
+            _needle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleA.xaml", new Point(150d, 150d), new Size(34, 214), new Point(17, 130), -90d);
             Components.Add(_needle);
             _verticalVelocity = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", name, "Veritcal velocity of the aircraft", "(-6,000 to 6,000)", BindingValueUnits.FeetPerMinute);
             _verticalVelocity.Execute += new HeliosActionHandler(VerticalVelocity_Execute);

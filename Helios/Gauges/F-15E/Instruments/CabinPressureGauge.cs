@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.CabinPressure
         {
             Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Instruments/CabinPressureDial.xaml", new Rect(0d, 0d, 300d, 300d)));
 
-            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/CabinPressure/cabin_pressure_needle.xaml", new Point(150d, 150d), new Size(53d, 158d), new Point(26.5d, 26.5d), 0d);
+            _needle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleA.xaml", new Point(150d, 150d), new Size(34, 214), new Point(17, 130), 180d);
             Components.Add(_needle);
 
             //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));

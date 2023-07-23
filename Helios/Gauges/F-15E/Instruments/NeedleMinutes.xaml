@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas Width="32.000" Height="131.256"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="32.000" Height="131.256">
+            <!-- Layer 1/<Path> -->
+            <Path Fill="#ff070707" Data="F1 M 22.506,93.047 L 9.879,93.108 L 9.879,102.514 L 22.491,102.559 C 22.491,102.051 22.506,93.047 22.506,93.047 Z"/>
+
+            <!-- Layer 1/<Path> -->
+            <Path Fill="#ff070707" Data="F1 M 0.000,115.256 C 0.000,106.420 7.163,99.257 15.999,99.257 C 20.050,99.257 23.094,100.859 24.046,101.424 C 28.718,104.196 32.067,109.534 31.999,115.256 C 31.904,123.164 25.289,131.256 15.999,131.256 C 7.163,131.256 0.000,124.093 0.000,115.256 Z"/>
+
+            <!-- Layer 1/Minutes -->
+            <Path StrokeThickness="0.4" Stroke="#ff656565" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 10.343,16.628 L 15.500,0.555 C 15.661,0.052 16.376,0.059 16.528,0.565 L 21.353,16.648 L 22.321,92.946 L 10.061,92.946 L 10.343,16.628 Z"/>
+
+        </Canvas>
+    </Canvas>

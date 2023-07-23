@@ -68,7 +68,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.CautionPanel
             "Chaff",
             "Emergency BST On",
             "Nuclear", 
-            "Left Generator Warning",
+            "Left Generator",
             "Engine Warning",
             "Hydraulics Warning",
             "DSPFLOLO",
@@ -78,7 +78,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.CautionPanel
             "Flare",
             "BST System Malfunction",
             "FUEL LOW",
-            "Right Generator Warning",
+            "Right Generator",
             "Flight Control",
             "AV BIT",
             "Oxygen",
@@ -113,7 +113,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.CautionPanel
                 );
             indicator.Text = name;
             indicator.Name = $"{_interfaceDeviceName}_{(name == "SPARE"? name + _spareCounter++.ToString(): name)}";
-            indicator.OnTextColor = name == "PROGRAM"? Color.FromArgb(0xff, 0x94, 0xEB, 0xA6): Color.FromArgb(0xff, 0xff, 0x7e, 0x00);
+            indicator.OnTextColor = name == "PROGRAM"? Color.FromArgb(0xff, 0x94, 0xEB, 0xA6): Color.FromArgb(0xff, 0xf0, 0xff, 0x00);
             indicator.OffTextColor = Color.FromArgb(0xff, 0x1C, 0x1C, 0x1C);
             indicator.TextFormat.FontStyle = FontStyles.Normal;
             indicator.TextFormat.FontWeight = FontWeights.Normal;

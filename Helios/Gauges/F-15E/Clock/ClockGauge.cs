@@ -23,7 +23,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
     [HeliosControl("Helios.F15E.ClockGauge", "Clock Face", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ClockGauge : BaseGauge
     {
-        private string _imageLocation = "{AV-8B}/Images/";
         private GaugeNeedle _clockHoursNeedle;
         private GaugeNeedle _clockMinutesNeedle;
         private GaugeNeedle _clockSecondsNeedle;
@@ -39,19 +38,15 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Clock
         {
 
             Point center = new Point(size.Width/2, size.Height/2);
-            double needleScaleFactor = 1.1;
             Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Clock/Clock_Dial.xaml", new Rect(0d, 0d, size.Width, size.Height)));
-            _clockHoursNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Clock/hours_needle.xaml", center, new Size(19d, 96d), new Point(9.6d, 86.5d));
+            _clockHoursNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleHours.xaml", center, new Size(32d, 91d), new Point(16d, 75d));
             Components.Add(_clockHoursNeedle);
 
-            _clockMinutesNeedle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", center, new Size(17 * needleScaleFactor, 127 * needleScaleFactor), new Point(8.5 * needleScaleFactor, 100 * needleScaleFactor));
+            _clockMinutesNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleMinutes.xaml", center, new Size(32d, 131d), new Point(16d, 115d));
             Components.Add(_clockMinutesNeedle);
 
-            _clockSecondsNeedle = new GaugeNeedle("{Helios}/Gauges/KA-50/Clock/clock_seconds_needle.xaml", center, new Size(10 * needleScaleFactor, 127 * needleScaleFactor), new Point(5 * needleScaleFactor, 108 * needleScaleFactor));
+            _clockSecondsNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/NeedleSeconds.xaml", center, new Size(32d, 206d), new Point(16d, 133.4d));
             Components.Add(_clockSecondsNeedle);
-            GaugeImage _gauge = new GaugeImage($"{_imageLocation}WQHD/Panel/crystal_reflection_round.png", new Rect(0d, 0d, size.Width, size.Height));
-            _gauge.Opacity = 0.5;
-            Components.Add(_gauge);
 
             _clockHours = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{elements[0]} value for Clock.", "(0-12)", BindingValueUnits.Hours);
             _clockHours.Execute += ClockHours_Execute;

@@ -23,50 +23,26 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
     using System.Globalization;
     using System.Xml;
 
-    [HeliosControl("Helios.F15E.FuelPanel.Pilot", "Fuel Monitor Panel", "F-15E Strike Eagle", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
-    class FuelMonitorPanel : CompositeVisualWithBackgroundImage
+    [HeliosControl("Helios.F15E.FuelPanel.WSO", "Internal Fuel Gauge (WSO)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    class FuelWSO : CompositeVisualWithBackgroundImage
     {
-        private string _interfaceDeviceName = "Fuel Monitor Panel";
-        private string _font = "MS 33558";
-        private FuelGauge _display;
+        private string _interfaceDeviceName = "Fuel Gauge (WSO)";
+        private FuelGaugeWSO _display;
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.30d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
         private HeliosPanel _frameGlassPanel;
 
-        public FuelMonitorPanel()
-            : base("Fuel Monitor Panel", new Size(288,384))
+        public FuelWSO()
+            : base("Fuel Gauge (WSO)", new Size(300,300))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.F15E.F15EInterface) };
 
-            AddGauge("Fuel Gauge", new Point(60d, 29d), new Size(164d, 164d), _interfaceDeviceName, "Fuel Gauge");
-            AddDisplay("Total Tank display", new FiveDigitDisplay("Total Tank display"), new Point(104, 174), new Size(77, 29), "Total Tank display");
-            AddDisplay("Left Tank display", new FourDigitDisplay("Left Tank display"), new Point(56, 241), new Size(56, 24), "Left Tank display");
-            AddDisplay("Right Tank display", new FourDigitDisplay("Right Tank display"), new Point(172, 241), new Size(56, 24), "Right Tank display");
-            AddIndicator("Panel off flag", 61, 172, new Size(18, 43), "Panel off flag");
-            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(34, 13), new Size(218d, 253d), "{A-10C}/Images/A-10C/Pilot_Reflection_25.png", _interfaceDeviceName);
+            AddGauge("Fuel Gauge", new Point(0d, 0d), new Size(300d, 300d), _interfaceDeviceName, "Fuel Gauge (WSO)");
+            AddDisplay("Total Tank display", new FiveDigitDisplay("Total Tank display"), new Point(111, 209), new Size(78, 32), "Total Tank display");
+            _frameGlassPanel = AddPanel("Fuel Panel Glass", new Point(0d, 0d), new Size(300d, 300d), "{A-10C}/Images/A-10C/Pilot_Reflection_25a.png", _interfaceDeviceName);
             _frameGlassPanel.Opacity = GLASS_REFLECTION_OPACITY_DEFAULT;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;
-            ImageDecoration iD = new ImageDecoration()
-            {
-                Name = "Panel Glass Mask",
-                Left = 34d,
-                Top = 13d,
-                Width = 218d,
-                Height = 272d,
-                Alignment = ImageAlignment.Stretched,
-                Image = "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Panel_Mask.png",
-                IsHidden = false
-            };
-            iD.Width = 218d;
-            iD.Height = 272d;
-            Children.Add(iD);
-
-
-            AddKnob("Fuel Totalizer Selector", new Point(77, 269), new Size(125, 125), "Fuel Totalizer Selector");
-            AddEncoder("Bingo Adjustment", new Point(222, 45), new Size(65, 65), "Bingo Adjustment");
-
-
         }
         private void AddDisplay(string name, BaseGauge gauge, Point posn, Size displaySize, string interfaceElementName)
         {
@@ -80,69 +56,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
                 );
             gauge.Name = $"{Name}_{name}";
         }
-        private void AddKnob(string name, Point posn, Size size, string interfaceElementName)
-        {
-
-            RotarySwitch _knob = new RotarySwitch();
-            _knob.Name = $"{Name}_{name}";
-            _knob.KnobImage = "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Selector_Knob.png";
-            _knob.DrawLabels = false;
-            _knob.DrawLines = false;
-            _knob.Positions.Clear();
-            _knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(_knob, 0, "BIT", 232d));
-            _knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(_knob, 1, "Feed", 270d));
-            _knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(_knob, 2, "Int Wing", 305d));
-            _knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(_knob, 3, "Tank 1", 340d));
-            _knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(_knob, 4, "Ext Wing", 54d));
-            _knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(_knob, 5, "Ext Center", 90d));
-            _knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(_knob, 6, "Conformal", 125d));
-            _knob.CurrentPosition = 2;
-            _knob.DefaultPosition = 2;
-            _knob.Top = posn.Y;
-            _knob.Left = posn.X;
-            _knob.Width = size.Width;
-            _knob.Height = size.Height;
-
-            AddRotarySwitchBindings(name, posn, size, _knob, _interfaceDeviceName, interfaceElementName);
-        }
-
-        private void AddEncoder(string name, Point posn, Size size, string interfaceElementName)
-        {
-            AddEncoder(
-                name: name,
-                size: size,
-                posn: posn,
-                knobImage: "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Bingo_Knob.png",
-                stepValue: 0.1,
-                rotationStep: 5,
-                interfaceDeviceName: _interfaceDeviceName,
-                interfaceElementName: interfaceElementName,
-                fromCenter: false
-                );
-        }
-        private void AddIndicator(string name, double x, double y, Size size, string interfaceElementName) { AddIndicator(name, x, y, size, false, interfaceElementName); }
-        private void AddIndicator(string name, double x, double y, Size size, bool _vertical, string interfaceElementName)
-        {
-            Indicator indicator = AddIndicator(
-                name: name,
-                posn: new Point(x, y),
-                size: size,
-                offImage: "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Off_Flag.png",
-                onImage: "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Off_Flag_Off.png",
-                onTextColor: System.Windows.Media.Color.FromArgb(0x00, 0xff, 0xff, 0xff),
-                offTextColor: System.Windows.Media.Color.FromArgb(0x00, 0x00, 0x00, 0x00),
-                font: _font,
-                vertical: _vertical,
-                interfaceDeviceName: _interfaceDeviceName,
-                interfaceElementName: interfaceElementName,
-                fromCenter: false
-                );
-            indicator.Text = "";
-            //indicator.Name = $"{Name}_{name}";
-        }
         private void AddGauge(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _display = new FuelGauge
+            _display = new FuelGaugeWSO
             {
                 Top = pos.Y,
                 Left = pos.X,
@@ -251,7 +167,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
         }
         public override string DefaultBackgroundImage
         {
-            get { return "{F-15E}/Images/Fuel_Quantity_Panel/Fuel_Quantity_Panel.png";
+            get { return "";
                   }
             }
         protected override void OnBackgroundImageChange()

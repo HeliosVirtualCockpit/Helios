@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas Width="30.000" Height="200.096"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="30.000" Height="200.096">
+
+
+        <!-- Layer 1/<Ellipse> -->
+        <Path Fill="#ff070707" Data="F1 M 30.000,130.043 C 30.000,138.327 23.284,145.043 15.000,145.043 C 6.716,145.043 0.000,138.327 0.000,130.043 C 0.000,121.759 6.716,115.044 15.000,115.044 C 23.284,115.044 30.000,121.759 30.000,130.043 Z"/>
+
+        <!-- Layer 1/<Ellipse> -->
+        <Path Fill="#ff2b2b2b" Data="F1 M 26.923,129.883 C 26.923,136.467 21.585,141.805 15.000,141.805 C 8.415,141.805 3.077,136.467 3.077,129.883 C 3.077,123.298 8.415,117.960 15.000,117.960 C 21.585,117.960 26.923,123.298 26.923,129.883 Z"/>
+
+        <!-- Layer 1/<Path> -->
+        <Path Fill="#ff070707" Data="F1 M 15.342,169.700 L 14.701,169.700 L 14.701,180.554 L 15.000,180.554 L 15.317,180.557 L 15.342,169.700 Z"/>
+
+        <!-- Layer 1/<Path> -->
+        <Path Data="F1 M 17.767,199.457 L 17.819,180.027 C 17.819,179.809 17.599,179.659 17.396,179.739 L 16.314,180.167 C 15.892,180.334 15.447,180.421 15.000,180.433 L 15.000,200.096 C 15.918,200.082 16.833,199.904 17.700,199.555 C 17.740,199.539 17.767,199.500 17.767,199.457 Z">
+            <Path.Fill>
+                <LinearGradientBrush MappingMode="Absolute" StartPoint="15.499,-189.810" EndPoint="17.361,-189.810">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.00" Color="#ff7f7f7f"/>
+                        <GradientStop Offset="0.47" Color="#ff3f3f3f"/>
+                        <GradientStop Offset="1.00" Color="#ff000000"/>
+                    </LinearGradientBrush.GradientStops>
+                    <LinearGradientBrush.Transform>
+                        <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.096" />
+                    </LinearGradientBrush.Transform>
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+
+        <!-- Layer 1/<Path> -->
+        <Path Data="F1 M 13.475,180.137 L 12.357,179.700 C 12.155,179.621 11.938,179.768 11.936,179.985 L 11.769,199.335 C 11.769,199.379 11.795,199.418 11.836,199.435 L 12.086,199.534 C 13.021,199.905 14.012,200.078 15.000,200.060 L 15.000,180.397 C 14.484,180.413 13.965,180.329 13.475,180.137 Z">
+            <Path.Fill>
+                <LinearGradientBrush MappingMode="Absolute" StartPoint="11.952,-189.774" EndPoint="14.440,-189.774">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.00" Color="#ff000000"/>
+                        <GradientStop Offset="0.48" Color="#ff3f3f3f"/>
+                        <GradientStop Offset="1.00" Color="#ff7f7f7f"/>
+                    </LinearGradientBrush.GradientStops>
+                    <LinearGradientBrush.Transform>
+                        <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.096" />
+                    </LinearGradientBrush.Transform>
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+
+        <!-- Layer 1/<Rectangle> -->
+        <Path Fill="#ff070707" Data="F1 M 14.257,169.743 L 15.828,169.743 C 16.126,169.743 16.368,169.501 16.368,169.203 L 16.368,161.196 L 13.718,161.196 L 13.718,169.203 C 13.718,169.501 13.960,169.743 14.257,169.743 Z"/>
+
+        <!-- Layer 1/<Path> -->
+        <Path Fill="#ff070707" Data="F1 M 13.718,161.196 L 16.368,161.196 L 18.366,154.922 C 18.557,154.322 18.651,153.696 18.644,153.067 L 18.558,144.594 L 11.346,144.594 L 11.346,153.205 C 11.346,153.849 11.451,154.488 11.657,155.098 L 13.718,161.196 Z"/>
+
+        <!-- Layer 1/<Rectangle> -->
+        <Path Fill="#ff070707" Data="F1 M 17.650,116.069 L 12.286,116.069 L 12.286,106.711 L 17.650,106.711 L 17.650,116.069 Z"/>
+
+        <!-- Layer 1/<Path> -->
+        <Path StrokeThickness="0.2" Stroke="#ff656565" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 21.752,28.764 L 21.752,54.974 C 21.618,55.512 21.232,56.753 20.103,57.845 C 19.172,58.745 18.176,59.119 17.650,59.276 L 17.650,106.711 L 12.308,106.711 L 12.308,59.276 C 11.867,59.183 10.632,58.863 9.583,57.738 C 8.524,56.601 8.296,55.330 8.237,54.885 L 8.205,28.764 L 14.635,0.389 C 14.724,-0.002 15.280,-0.001 15.368,0.390 L 21.752,28.764 Z"/>
+
+    </Canvas>
+</Canvas>
