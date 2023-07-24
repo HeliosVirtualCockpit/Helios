@@ -142,7 +142,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
         }
         private void AddGauge(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _display = new FuelGauge
+            _display = new FuelGauge(name, size)
             {
                 Top = pos.Y,
                 Left = pos.X,

@@ -1,0 +1,7 @@
+﻿@@ -59,75 +59,8 @@
+ a%22)%0D
+-%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Ao
+@@ -988,70 +988,4 @@
+ se%0D%0A
+---%0D%0A--ViewportHandling%0D%0Atry_find_assigned_viewport(%22AH_64D_TEDAC%22)

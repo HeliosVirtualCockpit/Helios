@@ -59,7 +59,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.AOA
                 // Center point of needle image to rotate around
                                       new Point(17, 134),
                 // Initial rotation for this needle
-                                      -106d);
+                                      -100d);
             Components.Add(_needle);
 
             //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));

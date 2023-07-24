@@ -192,5 +192,36 @@
     <Resource Include="Images\EngineMonitorPanel\EngineMonitorBackground.png" />
     <Resource Include="Images\EngineMonitorPanel\EngineMonitorBackgroundMask.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_AI.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_AutoPilot.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_AVBIT.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_CanopyUnlocked.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Chaff.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_DSPFLOLO.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_EmisLmt.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Engine.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_EngineFireLeft.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_EngineFireRight.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Flare.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_FltContr.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_FuelLow.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Hyd.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_LGen.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_LowAlt.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_MasterArm.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Minimum.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Nuclear.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_OBST.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Oxygen.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Program.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_RGen.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_SAM.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_TFFail.png" />
+    <Resource Include="Images\CautionPanels\CautionLightsWSO_Unarmed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CautionPanels\CautionPanelWSO.png" />
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

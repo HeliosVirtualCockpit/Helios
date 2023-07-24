@@ -33,8 +33,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
         private CalibrationPointCollectionDouble _bingoNeedleCalibration;
         private GaugeImage _giDial;
 
-        public FuelGauge()
-            : base("Fuel Gauge", new Size(164, 164))
+        public FuelGauge(string name, Size size)
+            : base(name, size)
         {
             _giDial = new GaugeImage("{Helios}/Gauges/F-15E/Fuel Panel/InternalDial.xaml", new Rect(0d, 0d, 164d, 164d));
             Components.Add(_giDial);

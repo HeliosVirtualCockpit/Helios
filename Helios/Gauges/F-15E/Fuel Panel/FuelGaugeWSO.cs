@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E
     using System.Windows.Media;
     using System.Windows;
 
-    [HeliosControl("Helios.F15E.FuelGauge", "Internal Fuel Gauge (WSO)", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.F15E.FuelGauge.WSO", "Internal Fuel Gauge (WSO)", "F-15E Strike Eagle", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class FuelGaugeWSO : BaseGauge
         {
         private HeliosValue _internalFuel;

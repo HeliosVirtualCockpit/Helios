@@ -23,11 +23,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Commands;
-    using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
-    using GadrocsWorkshop.Helios.Gauges.F_16.Nozzle;
-    using GadrocsWorkshop.Helios.Gauges.F_16.RPM;
     using System.Windows.Markup;
     using System.Reflection;
+    using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
 
     public enum Cockpit { Pilot, WSO }
     /// <summary>
@@ -200,7 +198,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "363", minuteScale, "Clock (Pilot)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
             CalibrationPointCollectionDouble cabinPressureScale = new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 50000d);
             AddFunction(new ScaledNetworkValue(this, "361", cabinPressureScale, "Flight Instruments", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.3f"));
-            //MV E12�09
+
+            AddFunction(new ScaledNetworkValue(this, "753", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 360d), "Flight Instruments", "Magnetic Compass Heading", "Compass heading in degrees", "0 to +360", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "754", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "Compass pitch", "Compassrose pitch", "-90 to +90", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "755", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Compass roll", "Compassrose roll", "-180 to +180", BindingValueUnits.Degrees, "%.3f"));
+
             #endregion Flight Instruments
 
             AddFunction(new ScaledNetworkValue(this, "389", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Instruments", "PC 1 Hydraulic Pressure Gauge", "Hydraulic Pressure", "0 - 4,000", BindingValueUnits.PoundsPerSquareInch, "%.2f"));
@@ -215,27 +217,27 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "407", "Threat Indicators (Pilot)", "TF Fail Indicator", "True when indicator is lit", "%1d"));
             #endregion Threat Indicators (Pilot)
             #region Caution Panel (Pilot)
-            //  +-----------------------+-----------------------+
-            //  | PROGRAM (GR)     411? | MINIMUM         412?  |
-            //  +-----------------------+-----------------------+
-            //  | CHAFF            413? | FLARE           414?  |
-            //  +-----------------------+-----------------------+
-            //  | EMER BST ON      415  | BST SYS MAL     416   |
-            //  +-----------------------+-----------------------+
-            //  | NUCLEAR          420? | FUEL LOW        417?  |
-            //  +-----------------------+-----------------------+
-            //  | L GEN            419  | R GEN           418   |
-            //  +-----------------------+-----------------------+
-            //  | Engine           421  | FLT CONTR       422   |
-            //  +-----------------------+-----------------------+
-            //  | HYD              423? | AV BIT          424?  |
-            //  +-----------------------+-----------------------+
-            //  | DSPFLOLO         425? | OXYGEN          426   |
-            //  +-----------------------+-----------------------+
-            //  | SPARE              432| SPARE           432   |
-            //  +-----------------------+-----------------------+
-            //  | SPARE             432 | SPARE           432   |
-            //  +-----------------------+-----------------------+
+            //  +----------------+------------------+
+            //  | PROGRAM (GR)   | MINIMUM          |
+            //  +----------------+------------------+
+            //  | CHAFF          | FLARE            |
+            //  +----------------+------------------+
+            //  | EMER BST ON    | BST SYS MAL      |
+            //  +----------------+------------------+
+            //  | NUCLEAR        | FUEL LOW         |
+            //  +----------------+------------------+
+            //  | L GEN          | R GEN            |
+            //  +----------------+------------------+
+            //  | Engine         | FLT CONTR        |
+            //  +----------------+------------------+
+            //  | HYD            | AV BIT           |
+            //  +----------------+------------------+
+            //  | DSPFLOLO       | OXYGEN           |
+            //  +----------------+------------------+
+            //  | SPARE          | SPARE            |
+            //  +----------------+------------------+
+            //  | SPARE          | SPARE            |
+            //  +----------------+------------------+
 
             AddFunction(new FlagValue(this, "411", "Caution Panel (Pilot)", "Program Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "412", "Caution Panel (Pilot)", "Minimum Warning Indicator", "True when indicator is lit", "%1d"));
@@ -376,7 +378,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new PushButton(this, devices.FLCTRL.ToString("d"), Commands.cas_commands.to_button.ToString("d"), "457", "CAS", "T/O Trim Button", "%.1f"));
             AddFunction(new FlagValue(this, "458", "CAS", "T/O Trim Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new Switch(this, devices.FLCTRL.ToString("d"), "335", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.fltinst_commands.pitch_ratio_sw.ToString("d")) }, "CAS", "Pitch Ratio switch", "%.2f"));
-            AddFunction(new ScaledNetworkValue(this, "334", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "CAS", "Pitch Ratio", "Numeric value of the pitch ratio", "0 - 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "334", "CAS", "Pitch Ratio", "Numeric value of the pitch ratio", "0.0 to 1.0", BindingValueUnits.Numeric, "%.2f"));
 
             #endregion CAS
             #region MISC
@@ -562,6 +564,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "1350", airspeedScale, "Flight Instruments (WSO)", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
             AddFunction(new ScaledNetworkValue(this, "1365", vviScale, "Flight Instruments (WSO)", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute, "%.3f"));
             AddFunction(new Functions.Altimeter(this, "Flight Instruments (WSO)", Cockpit.WSO));
+
             #endregion Flight Instruments (WSO)
             #region Fuel Monitor Panel
             AddFunction(new ScaledNetworkValue(this, "1372", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 20000d), "Fuel Gauge (WSO)", "Internal Fuel Value", "Internal fuel amount in pounds", "0-20000", BindingValueUnits.Pounds, "%.3f"));

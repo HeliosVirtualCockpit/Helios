@@ -1,0 +1,10 @@
+﻿@@ -1230,30 +1230,29 @@
+ rt(%22
+-RIGHT_MFCD%2C %22F1_Radar%22
++F1_Radar%22%2C%22RIGHT_MFCD
+ )%0D%0Ae
+@@ -1387,29 +1387,28 @@
+ rt(%22
+-LEFT_MFCD%22%2C %22F1_Radar
++F1_Radar%22%2C%22LEFT_MFCD
+ %22)%0D%0A

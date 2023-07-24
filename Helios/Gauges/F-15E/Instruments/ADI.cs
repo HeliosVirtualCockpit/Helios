@@ -49,7 +49,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
 
             Components.Add(new GaugeImage("{Helios}/Gauges/F-15E/Instruments/ADI_Gradiant.xaml", new Rect(50d, 50d, 300d, 300d)));
 
-            _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -45d, 1.0d, 45d);
+            _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
             _wingsNeedle = new GaugeNeedle("{Helios}/Gauges/F-15E/Instruments/ADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
 

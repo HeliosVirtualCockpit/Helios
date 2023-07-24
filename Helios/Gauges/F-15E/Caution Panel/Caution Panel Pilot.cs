@@ -26,8 +26,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.CautionPanel
     [HeliosControl("Helios.F15E.CAUTIONS.PILOT", "Caution Panel (Pilot)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
     public class Cautions_Pilot : CompositeVisualWithBackgroundImage
     {
-        //private HeliosPanel _frameBezelPanel;
-        //private const string Panel_Image = "Caution_Panel_";
         private const string _imageLocation = "{F-15E}/Images/";
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;

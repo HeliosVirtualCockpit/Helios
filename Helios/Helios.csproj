@@ -224,6 +224,7 @@
     <Compile Include="Gauges\AV-8B\Stopwatch\Stopwatch.cs" />
     <Compile Include="Gauges\AV-8B\Stopwatch\StopwatchDial.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
+    <Compile Include="Gauges\F-15E\Caution Panel\Caution Panel WSO.cs" />
     <Compile Include="Gauges\F-15E\Caution Panel\Caution Panel Pilot.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelGaugeWSO.cs" />
     <Compile Include="Gauges\F-15E\Fuel Panel\FuelPanelWSO.cs" />
