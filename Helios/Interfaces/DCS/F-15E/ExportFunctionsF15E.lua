@@ -1,10 +1,10 @@
 -- Exports.Lua from Helios DCS F-15E Strike Eagle
 function driver.processHighImportance(mainPanelDevice)
 	-- Send Altimeter Values	
-	helios.send(2051, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(355), mainPanelDevice:get_argument_value(354), mainPanelDevice:get_argument_value(352)))                                                --  Altitude (Pilot)
-	helios.send(2059, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(356), mainPanelDevice:get_argument_value(357), mainPanelDevice:get_argument_value(358), mainPanelDevice:get_argument_value(359)))	-- QNH pressure 	
-	helios.send(2251, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(1359), mainPanelDevice:get_argument_value(1358), mainPanelDevice:get_argument_value(1357)))                                                --  Altitude (WSO)
-	helios.send(2259, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(1363), mainPanelDevice:get_argument_value(1362), mainPanelDevice:get_argument_value(1361), mainPanelDevice:get_argument_value(1360)))	-- QNH pressure 	
+	helios.send(2051, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(355), mainPanelDevice:get_argument_value(354), mainPanelDevice:get_argument_value(352)))													--  Altitude (Pilot)
+	helios.send(2059, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(356), mainPanelDevice:get_argument_value(357), mainPanelDevice:get_argument_value(358), mainPanelDevice:get_argument_value(359)))		-- QNH pressure 	
+	helios.send(2251, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(1359), mainPanelDevice:get_argument_value(1358), mainPanelDevice:get_argument_value(1357)))													--  Altitude (WSO)
+	helios.send(2259, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(1360), mainPanelDevice:get_argument_value(1361), mainPanelDevice:get_argument_value(1362), mainPanelDevice:get_argument_value(1363)))	-- QNH pressure 	
 end
 local oduVarNames = {
 "UFC_SC_01",
@@ -28,7 +28,7 @@ local oduVarNames = {
 "UFC_DISPLAY"
 } 
 function driver.processLowImportance(mainPanelDevice)		
-	local li = helios.parseIndication(8) -- 8 Pilot UFC / ODU 
+	local li = helios.parseIndication(9) -- 9 Pilot UFC / ODU 
 
 	if li then
         for i=0, 5 do
@@ -40,7 +40,7 @@ function driver.processLowImportance(mainPanelDevice)
         end
 		helios.send(2109, string.format("%s", helios.ensureString(li["UFC_DISPLAY"]):gsub(":","!")))
     end
-    li = helios.parseIndication(20) -- 20 WSO UFC / ODU 
+    li = helios.parseIndication(18) -- 18 WSO UFC / ODU 
 	if li then
         for i=0, 5 do
 			if i~= 4 then

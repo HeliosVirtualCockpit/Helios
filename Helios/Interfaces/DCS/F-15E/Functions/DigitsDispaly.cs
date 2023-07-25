@@ -64,6 +64,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions
             switch (id)
             {
                 case "2010":
+                case "2013":
                     parts = Tokenizer.TokenizeAtLeast(value, 3, ';');
                     tenThousands = ClampedParse(parts[0], 10000d);
                     thousands = ClampedParse(parts[1], 1000d);

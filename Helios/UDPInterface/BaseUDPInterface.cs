@@ -16,6 +16,7 @@
 
 using GadrocsWorkshop.Helios.Interfaces.Capabilities;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities.ProfileAwareInterface;
+using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.Json;
 using GadrocsWorkshop.Helios.Windows;
 using System;
@@ -25,6 +26,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Timers;
 using System.Windows.Threading;
 
@@ -1022,6 +1024,13 @@ namespace GadrocsWorkshop.Helios.UDPInterface
         protected void AddFunction(NetworkFunction function)
         {
             Functions.Add(function);
+#if DEBUG
+            //DCSFunction dcsFunction = function as DCSFunction;
+            //if (dcsFunction != null)
+            //{
+            //    Logger.Debug($"{dcsFunction.SourceInterface.Name} - {dcsFunction.DeviceName}: {dcsFunction.Name}");
+            //}
+#endif
         }
 
         public override void Reset()
