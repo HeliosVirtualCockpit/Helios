@@ -3,7 +3,7 @@ function driver.processHighImportance(mainPanelDevice)
 	-- Send Altimeter Values	
 	helios.send(2051, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(355), mainPanelDevice:get_argument_value(354), mainPanelDevice:get_argument_value(352)))													--  Altitude (Pilot)
 	helios.send(2059, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(356), mainPanelDevice:get_argument_value(357), mainPanelDevice:get_argument_value(358), mainPanelDevice:get_argument_value(359)))		-- QNH pressure 	
-	helios.send(2251, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(1359), mainPanelDevice:get_argument_value(1358), mainPanelDevice:get_argument_value(1357)))													--  Altitude (WSO)
+	helios.send(2251, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(1359), mainPanelDevice:get_argument_value(1358), mainPanelDevice:get_argument_value(1356)))													--  Altitude (WSO)
 	helios.send(2259, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(1360), mainPanelDevice:get_argument_value(1361), mainPanelDevice:get_argument_value(1362), mainPanelDevice:get_argument_value(1363)))	-- QNH pressure 	
 end
 local oduVarNames = {

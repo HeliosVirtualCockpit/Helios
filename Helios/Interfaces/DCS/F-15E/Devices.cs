@@ -67,6 +67,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
         GUNCTRL = 48,
         AGMCTRL = 49,
         NAVPOD = 50,
+        // ** Note ** the comments in the Razbam file which give the device number are incorrect because they removed item 51 and didn't change the comments.
         LANTPOD = 51,
         LTNGPOD = 52,
         SNPRPOD = 53,
@@ -83,9 +84,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
         DATALINK = 64,
         TFR = 65,
         ANVIS9 = 66,
-        SYSTEMS_SYNC = 67,
-        SWITCHS_SYNC = 68,
-        DATA_HUB = 69,
+        CARA = 67,
+        SYSTEMS_SYNC = 68,
+        SWITCHS_SYNC = 69,
+        DATA_HUB = 70,
     }
 
 }
