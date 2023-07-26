@@ -37,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
         private const double _oduFontSize = 25;
 
         public UFC(string interfaceDevice, Cockpit cockpit)
-            : base(interfaceDevice, new Size(624, 827))
+            : base(interfaceDevice, new Size(654, 827))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.F15E.F15EInterface) };
             _interfaceDevice = interfaceDevice;
@@ -47,27 +47,27 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
 
-            AddUFCTextDisplay("Option Line 1", new Point(104d, 61d), new Size(414d, 39d), _interfaceDevice, "Option Line 1", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6),20);
-            AddUFCTextDisplay("Option Line 2", new Point(104d, 120d), new Size(414d, 39d), _interfaceDevice, "Option Line 2", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6e, 0x6d),20);
-            AddUFCTextDisplay("Option Line 3", new Point(104d, 179d), new Size(414d, 39d), _interfaceDevice, "Option Line 3", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e),20);
-            AddUFCTextDisplay("Option Line 4", new Point(104d, 237d), new Size(414d, 39d), _interfaceDevice, "Option Line 4", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e),20 );
-            AddUFCTextDisplay("Option Line 5", new Point(104d, 296d), new Size(414d, 39d), _interfaceDevice, "Option Line 5", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6), 20);
-            AddUFCTextDisplay("Option Line 6", new Point(104d, 354d), new Size(414d, 39d), _interfaceDevice, "Option Line 6", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6), 20);
-            AddEncoder("Left UHF Preset Channel Selector", new Point(-15, 340), new Size(112, 112), "Left UHF Preset Channel Selector");
-            AddRadioButton("Left UHF Preset Channel Pull Switch", new Rect(7, 361, 70, 70), "Left UHF Preset Channel Pull Switch");
-            AddEncoder("Right UHF Preset Channel Selector", new Point(526, 340), new Size(112, 112), "Right UHF Preset Channel Selector");
-            AddRadioButton("Right UHF Preset Channel Pull Switch", new Rect(547, 361, 70, 70), "Right UHF Preset Channel Pull Switch");
-            AddPot("UHF Radio 3 Volume", new Point(60d, 457d), new Size(90d, 90d), "UHF Radio 3 Volume", $"{ImageLocation}RadioVol_Knob_Back.png");
-            AddPot("UHF Radio 1 Volume", new Point(83d, 479d), new Size(45d, 45d), "UHF Radio 1 Volume", $"{ImageLocation}UFC_Knob_1.png");
-            AddPot("UHF Radio 4 Volume", new Point(473d, 457d), new Size(90d, 90d), "UHF Radio 4 Volume", $"{ImageLocation}RadioVol_Knob_Back.png");
-            AddPot("UHF Radio 2 Volume", new Point(496d, 479d), new Size(45d, 45d), "UHF Radio 2 Volume", $"{ImageLocation}UFC_Knob_1.png");
-            AddPot("UFC LCD Brightness", new Point(53d, 592d), new Size(75d, 75d), "UFC LCD Brightness", $"{ImageLocation}UFC_Knob_1a.png",225d,270d);
+            AddUFCTextDisplay("Option Line 1", new Point(119d, 61d), new Size(414d, 39d), _interfaceDevice, "Option Line 1", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6),20);
+            AddUFCTextDisplay("Option Line 2", new Point(119d, 120d), new Size(414d, 39d), _interfaceDevice, "Option Line 2", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6e, 0x6d),20);
+            AddUFCTextDisplay("Option Line 3", new Point(119d, 179d), new Size(414d, 39d), _interfaceDevice, "Option Line 3", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e),20);
+            AddUFCTextDisplay("Option Line 4", new Point(119d, 237d), new Size(414d, 39d), _interfaceDevice, "Option Line 4", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0xa2, 0x6f, 0x6e),20 );
+            AddUFCTextDisplay("Option Line 5", new Point(119d, 296d), new Size(414d, 39d), _interfaceDevice, "Option Line 5", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6), 20);
+            AddUFCTextDisplay("Option Line 6", new Point(119d, 354d), new Size(414d, 39d), _interfaceDevice, "Option Line 6", _oduFontSize, "%%%%%%%%%%%%%%%%%%%%", TextHorizontalAlignment.Left, "", Color.FromArgb(0xE0, 0x9e, 0x9e, 0xa6), 20);
+            AddEncoder("Left UHF Preset Channel Selector", new Point(0, 340), new Size(112, 112), "Left UHF Preset Channel Selector");
+            AddRadioButton("Left UHF Preset Channel Pull Switch", new Rect(22, 361, 70, 70), "Left UHF Preset Channel Pull Switch");
+            AddEncoder("Right UHF Preset Channel Selector", new Point(541, 340), new Size(112, 112), "Right UHF Preset Channel Selector");
+            AddRadioButton("Right UHF Preset Channel Pull Switch", new Rect(562, 361, 70, 70), "Right UHF Preset Channel Pull Switch");
+            AddPot("UHF Radio 3 Volume", new Point(75d, 457d), new Size(90d, 90d), "UHF Radio 3 Volume", $"{ImageLocation}RadioVol_Knob_Back.png");
+            AddPot("UHF Radio 1 Volume", new Point(98d, 479d), new Size(45d, 45d), "UHF Radio 1 Volume", $"{ImageLocation}UFC_Knob_1.png");
+            AddPot("UHF Radio 4 Volume", new Point(488d, 457d), new Size(90d, 90d), "UHF Radio 4 Volume", $"{ImageLocation}RadioVol_Knob_Back.png");
+            AddPot("UHF Radio 2 Volume", new Point(511d, 479d), new Size(45d, 45d), "UHF Radio 2 Volume", $"{ImageLocation}UFC_Knob_1.png");
+            AddPot("UFC LCD Brightness", new Point(68d, 592d), new Size(75d, 75d), "UFC LCD Brightness", $"{ImageLocation}UFC_Knob_1a.png",225d,270d);
 
             int buttonNumber = 1;
             for(double i=60;i<=296;i += 59)
             {
-                AddOSBButton($"Option Push Button {buttonNumber} Left", new Rect(39d, i, 37d, 37d), $"Option Push Button {buttonNumber} Left");
-                AddOSBButton($"Option Push Button {buttonNumber} Right", new Rect(542d, i, 37d, 37d), $"Option Push Button {buttonNumber++} Right");
+                AddOSBButton($"Option Push Button {buttonNumber} Left", new Rect(54d, i, 37d, 37d), $"Option Push Button {buttonNumber} Left");
+                AddOSBButton($"Option Push Button {buttonNumber} Right", new Rect(557d, i, 37d, 37d), $"Option Push Button {buttonNumber++} Right");
             }
             buttonNumber = 0;
             for (int j = 418; j <= 610; j += 64)
@@ -85,10 +85,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
                     {
                         keyName = labels[buttonNumber]; 
                     }
-                    AddKeypadButton($"{keyName} Key", new Rect(i, j, 44d, 44d), labels[buttonNumber++]);
+                    AddKeypadButton($"{keyName} Key", new Rect(i+15, j, 44d, 44d), labels[buttonNumber++]);
                 }
             }
-            AddKeypadButton($"Emission Limit Key", new Rect(513, 612, 57d, 47d), "EMIS_LMT");
+            AddKeypadButton($"Emission Limit Key", new Rect(528, 612, 57d, 47d), "EMIS_LMT");
 
 
 

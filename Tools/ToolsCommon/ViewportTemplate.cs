@@ -35,7 +35,8 @@ namespace ToolsCommon
             {"M2000C", "M-2000C"},
             {"Mi-8MTV2", "Mi-8"},
             {"MIG-21bis", "MiG-21"},
-            {"POLYCHOPSIM_SA342", "SA342"} // NOTE: no dash in this name
+            {"POLYCHOPSIM_SA342", "SA342"}, // NOTE: no dash in this name
+            { "F-15ESE", "F-15E"}
         };
 
         // REVISIT these will go away when we get the new ViewportTemplates format with the prefix in the file

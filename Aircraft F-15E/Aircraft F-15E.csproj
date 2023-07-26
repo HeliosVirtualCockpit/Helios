@@ -177,9 +177,6 @@
     <Resource Include="Images\Fuel_Quantity_Panel\Fuel_Quantity_Off_Flag_Off.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Lamps_And_Indicators\ADI_Off_Flag.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Bezels_And_Faces\ADI_Panel.png" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +219,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\CautionPanels\CautionPanelWSO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AMAD\AMADFire_CoverClosed.png" />
+    <Resource Include="Images\AMAD\AMADFire_CoverOpen.png" />
+    <Resource Include="Images\AMAD\AMADFire_LitPushed.png" />
+    <Resource Include="Images\AMAD\AMADFire_LitUnpushed.png" />
+    <Resource Include="Images\AMAD\AMADFire_UnlitPushed.png" />
+    <Resource Include="Images\AMAD\AMADFire_UnlitUnpushed.png" />
   </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

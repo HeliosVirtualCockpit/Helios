@@ -39,17 +39,17 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
             InterfaceDevice = "HUD Control Panel";
-            AddThreeWayToggle("HUD Symbology Reject Mode", 172, 695, new Size(37, 86), "HUD Symbology Reject Mode");
-            AddThreeWayToggle("HUD DAY/AUTO/NIGHT Mode Selector", 289, 695, new Size(37, 86), "HUD DAY/AUTO/NIGHT Mode Selector");
+            AddThreeWayToggle("HUD Symbology Reject Mode", 187, 695, new Size(37, 86), "HUD Symbology Reject Mode");
+            AddThreeWayToggle("HUD DAY/AUTO/NIGHT Mode Selector", 304, 695, new Size(37, 86), "HUD DAY/AUTO/NIGHT Mode Selector");
 
-            AddPot("HUD Brightness Control", new Point(51d, 684d), new Size(75d, 75d), "HUD Brightness Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
-            AddPot("HUD Video Brightness Control", new Point(415d, 684d), new Size(75d, 75d), "HUD Video Brightness Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
-            AddPot("HUD Contrast Control", new Point(500d, 684d), new Size(75d, 75d), "HUD Contrast Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
+            AddPot("HUD Brightness Control", new Point(66d, 684d), new Size(75d, 75d), "HUD Brightness Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
+            AddPot("HUD Video Brightness Control", new Point(430d, 684d), new Size(75d, 75d), "HUD Video Brightness Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
+            AddPot("HUD Contrast Control", new Point(515d, 684d), new Size(75d, 75d), "HUD Contrast Control", $"{ImageLocation}UFC_Knob_1a.png", 225d, 270d);
             string[] MasterModes = { "AA", "AG", "Nav", "Inst" };
             int j = 0;
             for (int i = 180; i <= 405; i += 75)
             {
-                AddIndicatorPushButton($"{MasterModes[j]} Master Mode Selector", new Point(i, 793), new Size(47,30), MasterModes[j], "HUD Control Panel", $"{MasterModes[j]} Master Mode Selector",$"{MasterModes[j++]} Master Mode Indicator");
+                AddIndicatorPushButton($"{MasterModes[j]} Master Mode Selector", new Point(i+15, 793), new Size(47,30), MasterModes[j], "HUD Control Panel", $"{MasterModes[j]} Master Mode Selector",$"{MasterModes[j++]} Master Mode Indicator");
             }
         }
     }
