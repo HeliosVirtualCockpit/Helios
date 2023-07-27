@@ -511,6 +511,7 @@
     </Content>
     <EmbeddedResource Include="Resources\helios-bug-report.txt" />
     <Resource Include="Images\General\simple_computation_wire.png" />
+    <Resource Include="Images\TransparentImage.png" />
     <Content Include="Templates\Base\Simulator Viewports\A29B_BFI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
