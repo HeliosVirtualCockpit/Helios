@@ -23,6 +23,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Functions;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.F15E.Commands;
+    using GadrocsWorkshop.Helios.Gauges.AH64D.KU.PILOT;
+    using System.Windows.Forms;
 
     public enum Cockpit { Pilot, WSO }
     /// <summary>
@@ -44,12 +46,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
         {
 
             // see if we can restore from JSON
-//#if (!DEBUG)
-//                        if (LoadFunctionsFromJson())
-//                        {
-//                            return;
-//                        }
-//#endif
+#if (!DEBUG)
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
+#endif
 #pragma warning disable CS0162 // Unreachable code detected
             #region UFC Panel
             #region ODU Pilot
@@ -161,7 +163,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
 
             AddFunction(new FlagValue(this, "338", "Landing Gear Panel", "Half Flaps Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "339", "Landing Gear Panel", "Full Flaps Indicator", "True when indicator is lit", "%1d"));
-
+            AddFunction(new Switch(this, devices.LGS.ToString("d"), "337", new SwitchPosition[] { new SwitchPosition("0.0", "Up", Commands.ldg_commands.em_gear_lever.ToString("d")), new SwitchPosition("1.0", "Down", Commands.ldg_commands.em_gear_lever.ToString("d")) }, "Landing Gear Panel", "Emergency Landing Gear Lever", "%0.1f"));
+            AddFunction(new Axis(this, devices.LGS.ToString("d"), Commands.ldg_commands.em_gear_lever_rotate.ToString("d"), "431", 0.05d, 0.0d, 1.0d, "Landing Gear Panel", "Emergency Landing Gear Handle Rotation", false, "%.2f"));
 
             #endregion Landing Gear Panel
             #region Flight Instruments
@@ -254,7 +257,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new FlagValue(this, "426", "Caution Panel (Pilot)", "Oxygen Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "432", "Caution Panel (Pilot)", "SPARE x4 Indicator", "True when indicators are lit", "%1d"));
             #endregion Caution Panel (Pilot)
-            AddFunction(new FlagValue(this, "431", "Landing Gear Panel", "Emergency Landing Gear Handle ROTATE", "Rotation value", "%1d"));
+
             #region Indicators (others) Pilot
             AddFunction(new FlagValue(this, "409", "Indicators (Pilot)", "Laser Armed Indicator", "True when indicator is lit", "%1d"));
             AddFunction(new FlagValue(this, "410", "Indicators (Pilot)", "A/P Indicator", "True when indicator is lit", "%1d"));
@@ -285,8 +288,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
 
             #endregion Emergency Jettison and Misc Handles
             #region Jet Fuel Starter/Brake Panel
-            // Line 121: elements["PTN_386"] = Pull_And_Rotate_Control_Handle(_("JFS Control Handle, (LMB)PULL/(RMB)ROTATE"), devices.EPSS, misc_commands.jfs_lever, 386, misc_commands.jfs_handle_turn, 430, 8.0)
             AddFunction(Switch.CreateToggleSwitch(this, devices.EPSS.ToString("d"), Commands.misc_commands.jfs_lever.ToString("d"), "386", "1.0", "Pulled", "0.0", "Norm", "Jet Fuel Starter/Brake Panel", "Jet Fuel System Lever", "%0.1f"));
+            AddFunction(new Axis(this, devices.EPSS.ToString("d"), Commands.misc_commands.jfs_handle_turn.ToString("d"), "430", 0.05d, 0.0d, 1.0d, "Jet Fuel Starter/Brake Panel", "Jet Fuel System Lever Rotation",false, "%.2f"));              // Line 121: elements["PTN_386"] = Pull_And_Rotate_Control_Handle(_("JFS Control Handle, (LMB)PULL/(RMB)ROTATE"), devices.EPSS, misc_commands.jfs_lever, 386, misc_commands.jfs_handle_turn, 430, 8.0)
             AddFunction(new Switch(this, devices.LGS.ToString("d"), "387", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.misc_commands.park_brake_sw.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.misc_commands.park_brake_sw.ToString("d")) }, "Jet Fuel Starter/Brake Panel", "Parking Brake Switch", "%0.1f"));
             #endregion Jet Fuel Starter/Brake Panel
             #region LEFT MPD
@@ -541,7 +544,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "428", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")), new SwitchPosition("0.0", "Posn 2", Commands.cnp_commands.em_cnpy_jett_lever.ToString("d")) }, "Canopy", "Emergency Canopy Jettison", "%0.1f"));
 
             AddFunction(new FlagValue(this, "196", "Canopy", "Shoot Cue Indicator", "True when indicator is lit", "%1d"));
-            // 			[195]	= "%.2f",	-- PILOT LOCK / SHOOT Lights Brightness (yellow)
+            AddFunction(new NetworkValue(this, "195", "Canopy", "Shoot Cue Indicator Brightness", "Numeric value","0 to 1",BindingValueUnits.Numeric, "%.2f"));
             AddFunction(new FlagValue(this, "197", "Canopy", "READY Refuelling Indicator", "True when indicator is lit", "%1d"));
             #endregion Canopy
             #region Flight Instruments (WSO)
@@ -854,15 +857,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
 
             #endregion CMD Control Panel (WSO)
             #region MISC CONTROLS (WSO)
-            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1001", new SwitchPosition[] { new SwitchPosition("1.0", "Show", Commands.misc_commands.hide_controls.ToString("d")), new SwitchPosition("0.0", "Hide Controls", Commands.misc_commands.hide_controls.ToString("d")) }, "Miscellaneous Controls (WSO)", "Show/Hide Controls", "%0.1f"));
+            AddFunction(new Switch(this, devices.CNPYSYST.ToString("d"), "1001", new SwitchPosition[] { new SwitchPosition("1.0", "Show", Commands.misc_commands.hide_controls.ToString("d")), new SwitchPosition("0.0", "Hide Controls", Commands.misc_commands.hide_controls.ToString("d")) }, "Miscellaneous Controls", "Show/Hide Controls", "%0.1f"));
             #endregion MISC CONTROLS (WSO)
+            AddFunction(new NetworkValue(this, "60", "Data Transfer Cartridge", "Inserted", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "63", "Data Transfer Cartridge", "Position", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
 
-            // Unimplemented (yet)
+            AddFunction(new NetworkValue(this, "1013", "Lighting (Misc)", "Light Filter (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "1014", "Lighting (Misc)", "Light Filter (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "185", "Lighting (Misc)", "Green Canopy Lamp (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "187", "Lighting (Misc)", "Green Canopy Lamp (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "184", "Lighting (Misc)", "White Compass Illumination (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "180", "Lighting (Misc)", "Flood Illumination (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "191", "Lighting (Misc)", "Flood Illumination (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "181", "Lighting (Misc)", "Indicator Lights (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "192", "Lighting (Misc)", "Indicator Lights (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "182", "Lighting (Misc)", "White Instrument Lights (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "193", "Lighting (Misc)", "White Instrument Lights (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "183", "Lighting (Misc)", "Panel Lights (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "194", "Lighting (Misc)", "Panel Lights (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "179", "Lighting (Misc)", "UFC Panel Backlights (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "189", "Lighting (Misc)", "UFC Panel Backlights (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "178", "Lighting (Misc)", "UFC Panel Lights (Pilot)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new NetworkValue(this, "190", "Lighting (Misc)", "UFC Panel Lights (WSO)", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
 
-            // Line 102: elements["PTN_337"] = Pull_And_Rotate_Control_Handle(_("Emergency Landing Gear Handle, (LMB)PUSH OR PULL/(RMB)ROTATE"), devices.LGS, ldg_commands.em_gear_lever, 337, ldg_commands.em_gear_lever_rotate, 431, 4.5)
-            // Line 644: elements["PTN_1010"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_center, misc_commands.mirror_center_adjust, nil, 10)
-            // Line 645: elements["PTN_1011"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_left, misc_commands.mirror_left_adjust, nil, 11)
-            // Line 646: elements["PTN_1012"] = Mirror_Adjust_Control(_("(LMB) Mirror Rendering Toggle / (SCROLL) Adjust Angle"), devices.CNPYSYST, misc_commands.mirror_right, misc_commands.mirror_right_adjust, nil, 12)
+            AddFunction(new NetworkValue(this, "38", "Canopy", "Canopy Position", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
 
 #pragma warning restore CS0162 // Unreachable code detected
 
