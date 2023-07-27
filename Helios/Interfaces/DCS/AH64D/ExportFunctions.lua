@@ -26,8 +26,8 @@ function driver.processLowImportance(mainPanelDevice)
 		li = helios.parseIndication(24) -- 24 CMWS Unit
 		if li then
 			if li["#83#"]  and li["#83#"] ~= "" then -- Chaff & Flares
-				helios.send(2082, string.format("%1s  %s", helios.ensureString(li["#83#"]), helios.ensureString(li["#85#"])))
-				helios.send(2083, string.format("%1s  %s", helios.ensureString(li["#84#"]), helios.ensureString(li["#86#"])))
+				helios.send(2082, string.format("%1s %s", helios.ensureString(li["#83#"]), helios.ensureString(li["#85#"])))
+				helios.send(2083, string.format("%1s %s", helios.ensureString(li["#84#"]), helios.ensureString(li["#86#"])))
 				-- The CMWS flags are held in variables which either are declared or not, and when the exist, they are an empty string
 				helios.send(2084, string.format("%0.1f", li["#87#"] and 1 or 0)) -- Ready (this seems to have an inverse which is #89#)
 				helios.send(2085, string.format("%0.1f", li["#88#"] and 1 or 0)) -- Dispense (this seems to have an inverse which is #90#)

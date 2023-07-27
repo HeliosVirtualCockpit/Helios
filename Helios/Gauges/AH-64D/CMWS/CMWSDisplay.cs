@@ -46,8 +46,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.CMWS
             _displayBackgroundPanel.DrawBorder = false;
 
             AddCMWSPart("Threat Display", new Point(326d, 29d), new Size(110d, 110d), _interfaceDeviceName, "CMWS Threat Display");
-            AddTextDisplay("Line 1", new Point(206d, 29d), new Size(144d, 55d), _interfaceDeviceName, "Line 1", 25, "F OUT", TextHorizontalAlignment.Left, "");
-            AddTextDisplay("Line 2", new Point(206d, 84d), new Size(144d, 55d), _interfaceDeviceName, "Line 2", 25, "C OUT", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("Line 1", new Point(206d, 29d), new Size(144d, 55d), _interfaceDeviceName, "Line 1", 26, "F OUT", TextHorizontalAlignment.Left, "");
+            AddTextDisplay("Line 2", new Point(206d, 84d), new Size(144d, 55d), _interfaceDeviceName, "Line 2", 26, "C OUT", TextHorizontalAlignment.Left, "");
 
             _frameGlassPanel = AddPanel("CMWS Glass", new Point(206, 29), new Size(230d, 110d), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDeviceName);
             _frameGlassPanel.Opacity = 0.3d;
