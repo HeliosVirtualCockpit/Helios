@@ -21,7 +21,6 @@ using GadrocsWorkshop.Helios.Json;
 using GadrocsWorkshop.Helios.Windows;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -1025,18 +1024,13 @@ namespace GadrocsWorkshop.Helios.UDPInterface
         protected void AddFunction(NetworkFunction function)
         {
             Functions.Add(function);
-
-            if (GlobalOptions.HasLogFunctionDictionary)
-            {
-                DCSFunction dcsFunction = function as DCSFunction;
-                if (dcsFunction != null)
-                {
-                    foreach (ExportDataElement de in dcsFunction.DataElements)
-                    {
-                        Logger.Info($"{dcsFunction.SourceInterface.Name} | {dcsFunction.DeviceName} | {dcsFunction.Name} | Arg = ({de.ID})");
-                    }
-                }
-            }
+#if DEBUG
+            //DCSFunction dcsFunction = function as DCSFunction;
+            //if (dcsFunction != null)
+            //{
+            //    Logger.Debug($"{dcsFunction.SourceInterface.Name} - {dcsFunction.DeviceName}: {dcsFunction.Name}");
+            //}
+#endif
         }
 
         public override void Reset()
