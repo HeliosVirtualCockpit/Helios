@@ -19,10 +19,13 @@
                 <Setter Property="Margin" Value="0,15,12,3" />
             </Style>
         </WrapPanel.Resources>
-        <GroupBox Margin="6" Style="{StaticResource BasicGroup}" Header="Defaults">
+        <GroupBox Style="{StaticResource BasicGroup}" Header="Defaults" Height="Auto">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -55,7 +58,7 @@
                 <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Bindings Cascade Triggers</TextBlock>
                 <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding DefaultCascadeTriggers}"/>
                 <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource Documentation}">If checked, newly created bindings are configured to also trigger any bindings attached to their targets.</TextBlock>
- 
+
                 <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Scale All Text</TextBlock>
                 <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding ScaleAllText}"/>
                 <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource Documentation}">If checked, text attached to controls like buttons is automatically scaled.</TextBlock>
@@ -75,6 +78,10 @@
                 <TextBlock Grid.Row="14" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Save Composite Controls</TextBlock>
                 <CheckBox Grid.Row="14" Grid.Column="1" IsChecked="{Binding PersistChildrenAsComment}"/>
                 <TextBlock Grid.Row="15" Grid.Column="1" Style="{StaticResource Documentation}">The configuration for internal controls within Composite Gauges or Panels will be saved to the profile as comments.</TextBlock>
+
+                <TextBlock Grid.Row="16" Grid.Column="0" Style="{StaticResource PropertyNameSpaced}">Save DCS Interface Functions to Log</TextBlock>
+                <CheckBox Grid.Row="16" Grid.Column="1" IsChecked="{Binding LogFunctionDictionary}"/>
+                <TextBlock Grid.Row="17" Grid.Column="1" Style="{StaticResource Documentation}">The DCS Interface Devices and Elements will be written to the Log file.</TextBlock>
             </Grid>
         </GroupBox>
         <Button Style="{StaticResource InterfaceEditorButton}" IsDefault="True" Content="OK" Click="OK_OnClick"/>
