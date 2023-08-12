@@ -77,16 +77,22 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Content="{Binding MonitorSetupDisplayName}" Style="{StaticResource DisplayNameStyle}" />
-                        <Label Grid.Column="1" Content="{Binding ProblemShortDescription}"
+                        <Label Grid.Column="1" Content="{Binding MonitorSetupDisplayName}" Style="{StaticResource DisplayNameStyle}" />
+                        <Label Grid.Column="2" Content="{Binding ProblemShortDescription}"
                                ToolTip="{Binding ProblemNarrative}" Foreground="Red" Style="{StaticResource AlignedWithFontIconButtonStyle}"/>
-                        <Button Grid.Column="2" Content="&#xE74D;"
+                        <Label Grid.Column="3" Content="Allow MFD Viewports in VR" Style="{StaticResource AlignedWithFontIconButtonStyle}"/>
+                        <CheckBox Grid.Column="4"  IsChecked="{Binding MFDViewportsInVR}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <CheckBox.ToolTip>Inserts VR_allow_MFD_out_of_HMD = true into the Monitor Setup Lua file</CheckBox.ToolTip>
+                        </CheckBox>
+                        <Button Grid.Column="5" Content="&#xE74D;"
                                 Command="{Binding ElementName=CombinedMonitorSetup, Path=DataContext.DeleteCommand}"
                                 CommandParameter="{Binding}" Template="{StaticResource FontIconButton}"
                                 Style="{StaticResource HideForCurrentProfile}"
                                 ToolTip="Delete the stored viewport data associated with this Profile (can be recreated by configuring Monitor Setup again)" />
-                        <Button Grid.Column="3" Content="&#xE710;"
+                        <Button Grid.Column="6" Content="&#xE710;"
                                 Command="{Binding ElementName=CombinedMonitorSetup, Path=DataContext.CombineCommand}"
                                 CommandParameter="{Binding}" Template="{StaticResource FontIconButton}"
                                 ToolTip="Add the viewports for this profile to the Combined Monitor Setup" />

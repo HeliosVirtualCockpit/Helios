@@ -555,7 +555,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Canvas>
-                        
+
                         <!-- DCS UI view underlay -->
                         <Canvas>
                             <Rectangle IsHitTestVisible="False" Canvas.Left="{Binding Path=ScaledUserInterface.Left}"
@@ -609,7 +609,7 @@
                                        Height="{Binding Path=ScaledUserInterface.Height}" Stroke="LightGray">
                             </Rectangle>
                         </Canvas>
-                        
+
                         <!-- monitors2 user interface -->
                         <ItemsControl HorizontalAlignment="Left" ItemsSource="{Binding Monitors}">
                             <ItemsControl.ItemsPanel>
@@ -727,6 +727,8 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource InterfaceEditorStatus}"
                                    Foreground="Red">
@@ -737,6 +739,14 @@
                                 Style="{StaticResource InterfaceEditorButton}">
                             Configure
                         </Button>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource InterfaceEditorStatus}"
+                                   Foreground="Black">
+                            Allow MFD Viewports in VR Mode.
+                            <TextBlock.ToolTip>Creates Monitor Setup files which allow DCS to export of MFD viewports when in VR mode</TextBlock.ToolTip>
+                        </TextBlock>
+                        <CheckBox Grid.Row="1" Grid.Column="1"  IsChecked="{Binding MFDViewportsInVR}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <CheckBox.ToolTip>Inserts VR_allow_MFD_out_of_HMD = true into the Monitor Setup Lua file</CheckBox.ToolTip>
+                            </CheckBox>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="1" Style="{StaticResource ResetMonitorsRequiredStyle}">
                         <Grid.ColumnDefinitions>

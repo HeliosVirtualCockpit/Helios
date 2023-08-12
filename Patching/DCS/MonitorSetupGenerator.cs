@@ -197,7 +197,10 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             // set up required names for viewports (well-known to DCS)
             lines.Add($"UIMainView = {uiViewName}");
             lines.Add($"GU_MAIN_VIEWPORT = Viewports.Center");
-
+            if (_parent.MFDViewportsInVR)
+            {
+                lines.Add($"VR_allow_MFD_out_of_HMD = true");
+            }
             foreach (FormattableString line in lines)
             {
                 ConfigManager.LogManager.LogDebug(FormattableString.Invariant(line));
@@ -633,7 +636,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                         Recommendation = $"Remove the '{viewportProvider.Name}' interface since this profile is configured to expect a third-party solution to provide viewport modifications"
                     };
                 }
-            } 
+            }
 
             // check if any referenced viewports require patches to work
             foreach (IViewportExtent viewport in _parent.Viewports
@@ -646,7 +649,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     {
                         Status =
                             $"viewport '{viewport.ViewportName}' must be provided by third-party solution for additional viewports",
-                        Recommendation = 
+                        Recommendation =
                             "Verify that your third-party viewport modifications match the viewport names for this profile",
                         Flags = StatusReportItem.StatusFlags.Verbose |
                                 StatusReportItem.StatusFlags.ConfigurationUpToDate
@@ -723,7 +726,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                         Link = StatusReportItem.ProfileEditor,
                         Severity = StatusReportItem.SeverityCode.Error
                     };
-                }                        
+                }
             }
             else
             {
@@ -761,7 +764,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                         // check if monitor setup selected in DCS
                         yield return ReportMonitorSetupSelected(location, options, monitorSetupName);
                     }
-                    
+
                     // check on full screen
                     yield return ReportFullScreen(location, options);
                 }
@@ -850,7 +853,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                 };
             }
-            
+
             return new StatusReportItem
             {
                 Status = status,
@@ -875,7 +878,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
             // check if we are trying to use Fullscreen with multiple displays
             Monitor primary = _parent.Profile.CheckedDisplays?.FirstOrDefault(m => m.IsPrimaryDisplay);
-            if (null != primary && 
+            if (null != primary &&
                 (primary.Width < options.Graphics.Width ||
                  primary.Height < options.Graphics.Height))
             {
