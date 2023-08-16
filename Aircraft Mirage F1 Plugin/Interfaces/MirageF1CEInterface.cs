@@ -25,12 +25,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1.CE
     /// <summary>
     /// Interface for DCS Mirage F1CE, including devices which are unique to this variant.
     /// </summary>
-    [HeliosInterface("Helios.MIRAGEF1CE", "DCS Mirage-F1CE", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
+    [HeliosInterface("Helios.MIRAGEF1CE", "DCS Mirage F1CE", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
     public class MirageF1CEInterface: MirageF1Interface
     {
         public MirageF1CEInterface() : base(
             "DCS Mirage F1CE",
-            "MIRAGE-F1CE",
+            "Mirage-F1CE",
             "pack://application:,,,/MirageF1;component/Interfaces/ExportFunctionsMirageF1CE.lua")
         {
 #if (CREATEINTERFACE && DEBUG)
