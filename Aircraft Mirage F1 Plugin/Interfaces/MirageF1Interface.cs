@@ -99,7 +99,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             #region UHF radio (TRT - TRAP 137B)
             AddFunction(new Switch(this, "1", "340", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3455"), new SwitchPosition("0.0", "Posn 2", "3455") }, "UHF radio (TRT - TRAP 137B)", "5W/25W selector switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "341", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3456"), new SwitchPosition("0.0", "Posn 2", "3456") }, "UHF radio (TRT - TRAP 137B)", "Squelch switch", "%0.1f"));
-            AddFunction(new Switch(this, "1", "342", SwitchPositions.Create(3, -1d, 1d, "3457", "Posn", "%0.-1f"), "UHF radio (TRT - TRAP 137B)", "Test selector switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "342", SwitchPositions.Create(3, -1d, 1d, "3457", "Posn", "%0.1f"), "UHF radio (TRT - TRAP 137B)", "Test selector switch", "%0.1f"));
             AddFunction(new PushButton(this, "1", "3458", "343", "UHF radio (TRT - TRAP 137B)", "CDE button (not used)", "%1d"));
             AddFunction(new Switch(this, "1", "344", SwitchPositions.Create(5, 0d, 0.25d, "3459", "Posn", "%0.2f"), "UHF radio (TRT - TRAP 137B)", "Function selector", "%0.2f"));
             #endregion UHF radio (TRT - TRAP 137B)
@@ -121,7 +121,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new PushButton(this, "1", "3489", "773", "Sight system and recording camera", "Sight system test button", "%1d"));
             AddFunction(new Axis(this, "1", "3490", "774", 0.1d, 0.0d, 1.0d, "Sight system and recording camera", "Exposure time repeater", false, "%0.1f"));
             AddFunction(new Axis(this, "1", "3492", "775", 0.1d, 0.0d, 1.0d, "Sight system and recording camera", "Overrun select thumbwheel", false, "%0.1f"));
-            AddFunction(new Switch(this, "1", "777", SwitchPositions.Create(2, 0d, 1d, "3494", "Posn", "%0.-1f"), "Sight system and recording camera", "5/16 PPS framing rate selector switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "777", SwitchPositions.Create(2, 0d, 1d, "3494", "Posn", "%0.1f"), "Sight system and recording camera", "5/16 PPS framing rate selector switch", "%0.1f"));
             AddFunction(new PushButton(this, "1", "3495", "776", "Sight system and recording camera", "Sight camera test switch", "%1d"));
             #endregion Sight system and recording camera
             #region Radar
@@ -148,7 +148,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new Switch(this, "1", "745", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3542"), new SwitchPosition("0.0", "Posn 2", "3542") }, "IFF", "IFF mode 4 switch", "%0.1f"));
             AddFunction(new PushButton(this, "1", "3543", "746", "IFF", "Button IFF fault light", "%1d"));
             AddFunction(new Axis(this, "1", "3544", "747", 0.5d, 0.0d, 1.0d, "IFF", "Lamp IFF fault light", false, "%0.1f"));
-            AddFunction(new Switch(this, "1", "749", SwitchPositions.Create(3, -1d, 1d, "3546", "Posn", "%0.-1f"), "IFF", "AUDIO-LIGHT switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "749", SwitchPositions.Create(3, -1d, 1d, "3546", "Posn", "%0.1f"), "IFF", "AUDIO-LIGHT switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "750", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3547"), new SwitchPosition("0.0", "Posn 2", "3547") }, "IFF", "M-1 mode switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "751", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3548"), new SwitchPosition("0.0", "Posn 2", "3548") }, "IFF", "M-2 mode switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "752", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3549"), new SwitchPosition("0.0", "Posn 2", "3549") }, "IFF", "M-3 mode switch", "%0.1f"));
@@ -211,7 +211,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new PushButton(this, "1", "3078", "967", "Jettisoning panel", "Emergency jettison button", "%1d"));
             AddFunction(new Switch(this, "1", "968", new SwitchPosition[] { new SwitchPosition("0.0", "Posn 1", "3079"), new SwitchPosition("1.0", "Posn 2", "3079") }, "Jettisoning panel", "Selective jettison button guard", "%0.1f"));
             AddFunction(new PushButton(this, "1", "3080", "969", "Jettisoning panel", "Selective jettison button", "%1d"));
-            AddFunction(new Switch(this, "1", "970", SwitchPositions.Create(3, -1d, 1d, "3081", "Posn", "%0.-1f"), "Jettisoning panel", "Jettisoning selector switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "970", SwitchPositions.Create(3, -1d, 1d, "3081", "Posn", "%0.1f"), "Jettisoning panel", "Jettisoning selector switch", "%0.1f"));
             #endregion Jettisoning panel
             #region Fuel transfer, refuelling and indication
             AddFunction(new Axis(this, "1", "3082", "1150", 0.1d, 0.0d, 1d, "Fuel transfer, refuelling and indication", "Fuel quantity reset thumbwheel", false, "%0.1f"));
@@ -230,13 +230,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             #endregion Alternative PTT
             #region High-lift devices
             AddFunction(new Switch(this, "1", "248", SwitchPositions.Create(3, 0d, 0.5d, "3122", "Posn", "%0.1f"), "High-lift devices", "Slat/Flap lever", "%0.1f"));
-            AddFunction(new Switch(this, "1", "399", SwitchPositions.Create(3, -1d, 1d, "3123", "Posn", "%0.-1f"), "High-lift devices", "High-lift device selector switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "399", SwitchPositions.Create(3, -1d, 1d, "3123", "Posn", "%0.1f"), "High-lift devices", "High-lift device selector switch", "%0.1f"));
             #endregion High-lift devices
             #region Radio selector unit
             AddFunction(new Axis(this, "1", "3124", "306", 0.1d, 0.0d, 1.0d, "Radio selector unit", "MISS potentiometer", false, "%0.1f"));
             AddFunction(new Axis(this, "1", "3126", "307", 0.1d, 0.0d, 1.0d, "Radio selector unit", "TAC potentiometer", false, "%0.1f"));
             AddFunction(new Axis(this, "1", "3128", "308", 0.1d, 0.0d, 1.0d, "Radio selector unit", "VOR potentiometer", false, "%0.1f"));
-            AddFunction(new Switch(this, "1", "309", SwitchPositions.Create(2, 0d, 1d, "3130", "Posn", "%0.-1f"), "Radio selector unit", "AMPLI 2-1 selector switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "309", SwitchPositions.Create(2, 0d, 1d, "3130", "Posn", "%0.1f"), "Radio selector unit", "AMPLI 2-1 selector switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "310", new SwitchPosition[] { new SwitchPosition("0.0", "Posn 1", "3131"), new SwitchPosition("1.0", "Posn 2", "3131") }, "Radio selector unit", "U + V pushbutton", "%0.1f"));
             AddFunction(new Axis(this, "1", "3132", "311", 0.1d, 0.0d, 1.0d, "Radio selector unit", "Rotate U + V pushbutton", false, "%0.1f"));
             AddFunction(new Switch(this, "1", "313", new SwitchPosition[] { new SwitchPosition("0.0", "Posn 1", "3134"), new SwitchPosition("1.0", "Posn 2", "3134") }, "Radio selector unit", "U pushbutton", "%0.1f"));
@@ -247,7 +247,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new Axis(this, "1", "3141", "320", 0.1d, 0.0d, 1.0d, "Radio selector unit", "Rotate MKR + TP pushbutton", false, "%0.1f"));
             #endregion Radio selector unit
             #region V/UHF radio control unit (TRT - TRAP 136)
-            AddFunction(new Switch(this, "1", "272", SwitchPositions.Create(3, -1d, 1d, "3145", "Posn", "%0.-1f"), "V/UHF radio control unit (TRT - TRAP 136)", "Test selector switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "272", SwitchPositions.Create(3, -1d, 1d, "3145", "Posn", "%0.1f"), "V/UHF radio control unit (TRT - TRAP 136)", "Test selector switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "273", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3146"), new SwitchPosition("0.0", "Posn 2", "3146") }, "V/UHF radio control unit (TRT - TRAP 136)", "SIL switch", "%0.1f"));
             AddFunction(new Switch(this, "1", "274", SwitchPositions.Create(3, 0.1d, 0.1d, "3147", "Posn", "%0.1f"), "V/UHF radio control unit (TRT - TRAP 136)", "Frequency select thumbwheel - Hundreds", "%0.1f"));
             AddFunction(new Switch(this, "1", "275", SwitchPositions.Create(11, 0d, 0.1d, "3149", "Posn", "%0.1f"), "V/UHF radio control unit (TRT - TRAP 136)", "Frequency select thumbwheel - Tens", "%0.1f"));
@@ -358,12 +358,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             AddFunction(new Switch(this, "1", "479", new SwitchPosition[] { new SwitchPosition("1.0", "Posn 1", "3313"), new SwitchPosition("0.0", "Posn 2", "3313") }, "Exterior lighting", "Search light control", "%0.1f"));
             #endregion Exterior lighting
             #region Cabin lighting
-            AddFunction(new Switch(this, "1", "470", SwitchPositions.Create(2, 0d, 1d, "3314", "Posn", "%0.-1f"), "Cabin lighting", "Miscellaneous instrument lighting switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "470", SwitchPositions.Create(2, 0d, 1d, "3314", "Posn", "%0.1f"), "Cabin lighting", "Miscellaneous instrument lighting switch", "%0.1f"));
             AddFunction(new Axis(this, "1", "3315", "66", 0.1d, 0.0d, 1.0d, "Cabin lighting", "Map light rheostat", false, "%0.1f"));
             AddFunction(new Axis(this, "1", "3317", "68", 0.1d, 0.0d, 1.0d, "Cabin lighting", "Miscellaneous instrument integral lighting rheostat", false, "%0.1f"));
             #endregion Cabin lighting
             #region Lighting control unit
-            AddFunction(new Switch(this, "1", "382", SwitchPositions.Create(2, 0d, 1d, "3319", "Posn", "%0.-1f"), "Lighting control unit", "Day/Night selector switch", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "382", SwitchPositions.Create(2, 0d, 1d, "3319", "Posn", "%0.1f"), "Lighting control unit", "Day/Night selector switch", "%0.1f"));
             AddFunction(new Axis(this, "1", "3320", "383", 0.1d, 0.0d, 1.0d, "Lighting control unit", "Light and panel lighting rheostat", false, "%0.1f"));
             AddFunction(new Axis(this, "1", "3322", "384", 0.1d, 0.0d, 1.0d, "Lighting control unit", "Ultraviolet lighting rheostat", false, "%0.1f"));
             AddFunction(new Axis(this, "1", "3324", "385", 0.1d, 0.0d, 1.0d, "Lighting control unit", "Dual instrument panel lighting rheostat (Floodlights)", false, "%0.1f"));
@@ -375,11 +375,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.MIRAGEF1
             #endregion Radionavigation
             #region TACAN control box
             AddFunction(new PushButton(this, "1", "3349", "480", "TACAN control box", "TACAN test button", "%1d"));
-            AddFunction(new Switch(this, "1", "485", SwitchPositions.Create(2, 0d, 1d, "3335", "Posn", "%0.-1f"), "TACAN control box", "TACAN X/Y mode selector", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "485", SwitchPositions.Create(2, 0d, 1d, "3335", "Posn", "%0.1f"), "TACAN control box", "TACAN X/Y mode selector", "%0.1f"));
             AddFunction(new Switch(this, "1", "487", SwitchPositions.Create(4, 0d, 0.3333d, "3337", "Posn", "%0.4f"), "TACAN control box", "TACAN mode selector", "%0.4f"));
             #endregion TACAN control box
             #region VOR/ILS control box
-            AddFunction(new Switch(this, "1", "503", SwitchPositions.Create(2, 0d, 1d, "3340", "Posn", "%0.-1f"), "VOR/ILS control box", "VOR-ILS control unit ON/OFF selector", "%0.-1f"));
+            AddFunction(new Switch(this, "1", "503", SwitchPositions.Create(2, 0d, 1d, "3340", "Posn", "%0.1f"), "VOR/ILS control box", "VOR-ILS control unit ON/OFF selector", "%0.1f"));
             AddFunction(new Switch(this, "1", "505", new SwitchPosition[] { new SwitchPosition("-1.0", "Posn 1", "3343", "3343", "0.0"), new SwitchPosition("1.0", "Posn 2", "3342", "3342", "0.0") }, "VOR/ILS control box", "VOR-ILS control unit test selector", "%0.1f"));
             #endregion VOR/ILS control box
             #region Omnibearing and VOR/ILS-TAC selector box
