@@ -639,6 +639,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
         }
         internal enum armtctrl_commands
         {
+            laser_code_2 = 3071,
+            laser_code_3 = 3072,
+            laser_code_4 = 3073,
             JETT_Selector_Knob = 3321,
             JETT_Button = 3322,
             Master_Arm_SW = 3323,

@@ -881,6 +881,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
 
             AddFunction(new NetworkValue(this, "38", "Canopy", "Canopy Position", "Numeric Value", "0 to 1", BindingValueUnits.Numeric, "%.2f"));
 
+            #region Laser Code Panel
+            AddFunction(new Switch(this, devices.PACS.ToString("d"), "71", SwitchPositions.Create(3, 0.4d, -0.1d, Commands.armtctrl_commands.laser_code_2.ToString("d"), new string[] { "5", "6", "7" }, "%0.1f"), "External LGB Code Panel", "Digit Wheel 2", "%0.1f"));
+            AddFunction(new Switch(this, devices.PACS.ToString("d"), "72", SwitchPositions.Create(8, 0.0d, 0.1d, Commands.armtctrl_commands.laser_code_3.ToString("d"), new string[] { "1", "2", "3", "4", "5", "6", "7", "8" }, "%0.1f"), "External LGB Code Panel", "Digit Wheel 3", "%0.1f"));
+            AddFunction(new Switch(this, devices.PACS.ToString("d"), "73", SwitchPositions.Create(8, 0.0d, 0.1d, Commands.armtctrl_commands.laser_code_4.ToString("d"), new string[] { "1", "2", "3", "4", "5", "6", "7", "8" }, "%0.1f"), "External LGB Code Panel", "Digit Wheel 4", "%0.1f"));
+            #endregion
+
 #pragma warning restore CS0162 // Unreachable code detected
 
         }
