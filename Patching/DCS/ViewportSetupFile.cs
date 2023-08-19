@@ -41,8 +41,10 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         [JsonProperty("monitorLayoutKey")]
         public string MonitorLayoutKey { get; internal set; } = "";
 
-        [JsonProperty("viewports")] public Dictionary<string, Rect> Viewports { get; } = new Dictionary<string, Rect>();
+        [JsonProperty("dcsmonitorsetupadditionallua")]
+        public string DCSMonitorSetupAdditionalLua { get; internal set; } = "";
 
+        [JsonProperty("viewports")] public Dictionary<string, Rect> Viewports { get; } = new Dictionary<string, Rect>();
         internal IEnumerable<StatusReportItem> Merge(string name, ViewportSetupFile from)
         {
             if (MonitorLayoutKey != from.MonitorLayoutKey)

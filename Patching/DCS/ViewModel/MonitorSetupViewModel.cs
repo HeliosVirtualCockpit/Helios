@@ -21,6 +21,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using GadrocsWorkshop.Helios.Controls.Special;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities;
 using GadrocsWorkshop.Helios.Util;
 using GadrocsWorkshop.Helios.Util.DCS;
@@ -59,8 +60,6 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         {
             Scale = ConfigManager.SettingsManager.LoadSetting(MonitorSetup.PREFERENCES_SETTINGS_GROUP, "Scale",
                 DEFAULT_SCALE);
-            MFDViewportsInVR = ConfigManager.SettingsManager.LoadSetting(MonitorSetup.PREFERENCES_SETTINGS_GROUP, "MFDViewportsInVRMode", false);
-
             CombinedMonitorSetup = new CombinedMonitorSetupViewModel(Data);
             Monitors = new ObservableCollection<MonitorViewModel>();
             Viewports = new ObservableCollection<ViewportViewModel>();
@@ -74,7 +73,10 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
             foreach (ShadowVisual viewport in Data.Viewports)
             {
-                AddViewport(viewport, Data.GlobalOffset);
+                if(!(viewport.Viewport is DCSMonitorScriptModifier))
+                {
+                    AddViewport(viewport, Data.GlobalOffset);
+                }
             }
 
             UpdateAllGeometry();
@@ -113,13 +115,6 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
 
             model.UpdateBounds();
-        }
-
-        private static void OnMFDViewportsInVRChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            MonitorSetupViewModel model = (MonitorSetupViewModel)d;
-                ConfigManager.SettingsManager.SaveSetting(MonitorSetup.PREFERENCES_SETTINGS_GROUP, "MFDViewportsInVRMode",
-                model.MFDViewportsInVR);
         }
 
         private static void OnSourceOfAdditionalViewportsChange(DependencyObject d,
@@ -590,23 +585,6 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         public static readonly DependencyProperty IconScaleProperty =
             DependencyProperty.Register("IconScale", typeof(double), typeof(MonitorSetupViewModel),
                 new PropertyMetadata(1.0));
-
-        public bool MFDViewportsInVR
-        {
-            get
-            {
-                return (bool)GetValue(MFDViewportsInVRProperty);
-            }
-            set
-            {
-                SetValue(MFDViewportsInVRProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty MFDViewportsInVRProperty =
-            DependencyProperty.Register("MFDViewportsInVR", typeof(bool), typeof(MonitorSetupViewModel),
-                new PropertyMetadata(false, OnMFDViewportsInVRChange));
-
         public CombinedMonitorSetupViewModel CombinedMonitorSetup { get; }
 
         public SourceOfAdditionalViewports SourceOfAdditionalViewports

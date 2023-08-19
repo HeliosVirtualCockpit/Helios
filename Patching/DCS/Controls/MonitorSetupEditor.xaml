@@ -8,7 +8,8 @@
                                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                                  xmlns:windows="clr-namespace:GadrocsWorkshop.Helios.Windows;assembly=Helios"
-                                 xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System" xmlns:helios="clr-namespace:GadrocsWorkshop.Helios;assembly=Helios"
+                                 xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System" 
+								 xmlns:helios="clr-namespace:GadrocsWorkshop.Helios;assembly=Helios"
                                  xmlns:controls="clr-namespace:GadrocsWorkshop.Helios.Patching.DCS.Controls"
                                  mc:Ignorable="d"
                                  d:DesignHeight="800" d:DesignWidth="800"
@@ -739,14 +740,6 @@
                                 Style="{StaticResource InterfaceEditorButton}">
                             Configure
                         </Button>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource InterfaceEditorStatus}"
-                                   Foreground="Black">
-                            Allow MFD Viewports in VR Mode.
-                            <TextBlock.ToolTip>Creates Monitor Setup files which allow DCS to export of MFD viewports when in VR mode</TextBlock.ToolTip>
-                        </TextBlock>
-                        <CheckBox Grid.Row="1" Grid.Column="1"  IsChecked="{Binding MFDViewportsInVR}" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <CheckBox.ToolTip>Inserts VR_allow_MFD_out_of_HMD = true into the Monitor Setup Lua file</CheckBox.ToolTip>
-                            </CheckBox>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="1" Style="{StaticResource ResetMonitorsRequiredStyle}">
                         <Grid.ColumnDefinitions>

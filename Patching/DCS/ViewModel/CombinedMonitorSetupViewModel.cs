@@ -277,6 +277,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 {
                     foreach (ViewportSetupFileViewModel existing in Combined)
                     {
+
                         if (existing.Data == null)
                         {
                             continue;
@@ -360,7 +361,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             CalculateStatus();
         }
 
-        /// <summary>
+
         /// reference to the only set of viewports we update right now
         /// </summary>
         internal ViewportSetupFileViewModel CurrentViewportSetup { get; private set; }

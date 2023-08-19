@@ -21,7 +21,9 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using GadrocsWorkshop.Helios.Controls.Capabilities;
+using GadrocsWorkshop.Helios.Controls.Special;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities;
+using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.Util;
 using GadrocsWorkshop.Helios.Util.DCS;
 using GadrocsWorkshop.Helios.Util.Shadow;
@@ -91,6 +93,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
 
             // emit in sorted canonical order so we can compare files later
+
             foreach (KeyValuePair<string, Rect> viewport in _allViewports.Viewports.OrderBy(p => p.Key))
             {
                 if (TryCreateViewport(lines, viewport, out FormattableString code))
@@ -197,10 +200,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             // set up required names for viewports (well-known to DCS)
             lines.Add($"UIMainView = {uiViewName}");
             lines.Add($"GU_MAIN_VIEWPORT = Viewports.Center");
-            if (_parent.MFDViewportsInVR)
-            {
-                lines.Add($"VR_allow_MFD_out_of_HMD = true");
-            }
+
             foreach (FormattableString line in lines)
             {
                 ConfigManager.LogManager.LogDebug(FormattableString.Invariant(line));
@@ -208,10 +208,18 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
             if (template.Combined)
             {
+                if (!_allViewports.DCSMonitorSetupAdditionalLua.Equals(""))
+                {
+                    lines.Add($"{_allViewports.DCSMonitorSetupAdditionalLua}");
+                }
                 _combinedMonitorSetup = Render(lines);
             }
             else
             {
+                if (!_localViewports.DCSMonitorSetupAdditionalLua.Equals(""))
+                {
+                    lines.Add($"{_localViewports.DCSMonitorSetupAdditionalLua}");
+                }
                 _monitorSetup = Render(lines);
             }
         }
@@ -249,6 +257,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     break;
                 }
             }
+
             ConvertToDCS(ref viewportRect);
             code = $"{viewport.Key} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
             lines.Add(code);
@@ -292,31 +301,39 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             foreach (ShadowVisual shadow in _parent.Viewports)
             {
                 string name = shadow.Viewport.ViewportName;
-                if (_localViewports.Viewports.ContainsKey(name))
+                if (!(shadow.Viewport is DCSMonitorScriptModifier))
                 {
-                    yield return new StatusReportItem
+                    if (_localViewports.Viewports.ContainsKey(name))
                     {
-                        Status =
-                            $"The viewport '{name}' exists more than once in this profile.  Each viewport must have a unique name.",
-                        Recommendation = $"Rename one of the duplicated viewports with name '{name}' in this profile",
-                        Severity = StatusReportItem.SeverityCode.Warning,
-                        Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
-                    };
-                    continue;
-                }
-                // calculate effective screen coordinates by tracing ancestry
-                _localViewports.Viewports.Add(name, shadow.Visual.CalculateWindowsDesktopRect());
-                if (!shadow.IsViewportDirectlyOnMonitor)
+                        yield return new StatusReportItem
+                        {
+                            Status =
+                                $"The viewport '{name}' exists more than once in this profile.  Each viewport must have a unique name.",
+                            Recommendation = $"Rename one of the duplicated viewports with name '{name}' in this profile",
+                            Severity = StatusReportItem.SeverityCode.Warning,
+                            Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
+                        };
+                        continue;
+                    }
+                    // calculate effective screen coordinates by tracing ancestry
+                    _localViewports.Viewports.Add(name, shadow.Visual.CalculateWindowsDesktopRect());
+                    if (!shadow.IsViewportDirectlyOnMonitor)
+                    {
+                        yield return new StatusReportItem
+                        {
+                            Status =
+                                $"The viewport '{name}' is not tracked automatically because it is contained within a gauge, control or panel.",
+                            Recommendation = $"If changes have been made to viewport {name}\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.",
+                            Severity = StatusReportItem.SeverityCode.Info,
+                            Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
+                        };
+                        continue;
+                    }
+                } else
                 {
-                    yield return new StatusReportItem
-                    {
-                        Status =
-                            $"The viewport '{name}' is not tracked automatically because it is contained within a gauge, control or panel.",
-                        Recommendation = $"If changes have been made to viewport {name}\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.",
-                        Severity = StatusReportItem.SeverityCode.Info,
-                        Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
-                    };
-                    continue;
+                    // We move the lua code from the actual viewports and combine them into a single property on the ViewportSetupFile
+                    DCSMonitorScriptModifier modifier = (DCSMonitorScriptModifier)shadow.Viewport;
+                    _localViewports.DCSMonitorSetupAdditionalLua += modifier.DCSMonitorSetupAdditionalLua + Environment.NewLine;
                 }
             }
 
@@ -372,6 +389,10 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                         {
                             yield return item;
                         }
+                        if (!_localViewports.DCSMonitorSetupAdditionalLua.Equals(""))
+                        {
+                            _allViewports.DCSMonitorSetupAdditionalLua += _localViewports.DCSMonitorSetupAdditionalLua + Environment.NewLine;
+                        }
 
                         continue;
                     }
@@ -389,8 +410,14 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                             Link = StatusReportItem.ProfileEditor
                         };
                         continue;
+                    } else
+                    {
+                        if (!generated.DCSMonitorSetupAdditionalLua.Equals(""))
+                        {
+                            _allViewports.DCSMonitorSetupAdditionalLua += generated.DCSMonitorSetupAdditionalLua + Environment.NewLine;
+                        }
                     }
-
+                    
                     foreach (StatusReportItem item in _allViewports.Merge(name, generated))
                     {
                         yield return item;
@@ -686,7 +713,22 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     };
                 }
             }
-
+            // check if any referenced viewports are a Monitor Setup script modifier
+            foreach (IViewportExtent viewport in _parent.Viewports
+                .Select(shadow => shadow.Viewport).OfType<DCSMonitorScriptModifier>())
+            {
+                DCSMonitorScriptModifier sM = (DCSMonitorScriptModifier)viewport;
+                yield return new StatusReportItem
+                {
+                    Status =
+                        $"Monitor Setup script will be suffixed with command(s) '{sM.DCSMonitorSetupAdditionalLua}' from control '{sM.ViewportName}'.",
+                    Recommendation =
+                        $"If the Monitor Setup script suffix '{sM.DCSMonitorSetupAdditionalLua}' is not required, delete control '{sM.ViewportName}' from your profile.",
+                    Flags = StatusReportItem.StatusFlags.Verbose |
+                        StatusReportItem.StatusFlags.ConfigurationUpToDate
+                };
+                continue;
+            }
             bool updated = true;
             bool hasFile = false;
 

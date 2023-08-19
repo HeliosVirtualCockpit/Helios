@@ -1,0 +1,36 @@
+﻿<ControlTemplate>
+	<Name>Export MFD in VR</Name>
+	<Category>Special Controls</Category>
+	<TypeIdentifier>Helios.Base.DCSMonitorScriptModifier</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<FillBackground>False</FillBackground>
+			<BackgroundColor>#00000000</BackgroundColor>
+			<FontColor>#FF5C5CCD</FontColor>
+			<Font>
+				<FontFamily>Franklin Gothic</FontFamily>
+				<FontStyle>Normal</FontStyle>
+				<FontWeight>Normal</FontWeight>
+				<FontSize>20</FontSize>
+				<HorizontalAlignment>Center</HorizontalAlignment>
+				<VerticalAlignment>Top</VerticalAlignment>
+				<Padding>
+					<Left>0</Left>
+					<Top>0</Top>
+					<Right>0</Right>
+					<Bottom>0</Bottom>
+				</Padding>
+			</Font>
+			<Text>Enable MFD Exporting in VR</Text>
+			<ScalingMode>Height</ScalingMode>
+			<Location>0,0</Location>
+			<Size>164,100</Size>
+			<Hidden>False</Hidden>
+			<ViewportName>DCS Monitor Script Modifier</ViewportName>
+			<Children>
+				<DCSMonitorSetupAdditionalLua>VR_allow_MFD_out_of_HMD = true</DCSMonitorSetupAdditionalLua>
+				<Image>{Helios}/Images/Custom/VR_Goggles.xaml</Image>
+			</Children>
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

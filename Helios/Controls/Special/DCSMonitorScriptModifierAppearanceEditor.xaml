@@ -1,0 +1,25 @@
+﻿<heliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.Special.DCSMonitorScriptModifierAppearanceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:heliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"                      
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" 
+             d:DesignWidth="180">
+    <Grid Background="Transparent" Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="45"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" FontSize="10" HorizontalAlignment="Right" Padding="3,3,3,6" VerticalContentAlignment="Center">Image</Label>
+        <heliosSdk:ImagePicker Grid.Row="0" Grid.Column="1" ImageFilename="{Binding Control.Image, Mode=TwoWay}" />
+        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Padding="10,1" 
+                Content="Reset"
+                Command="{Binding ResetCommand}"/>
+    </Grid>
+</heliosSdk:HeliosPropertyEditor>

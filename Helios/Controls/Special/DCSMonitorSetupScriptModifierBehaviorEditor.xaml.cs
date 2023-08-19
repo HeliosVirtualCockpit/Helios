@@ -20,28 +20,13 @@ using GadrocsWorkshop.Helios.Windows.Controls;
 namespace GadrocsWorkshop.Helios.Controls.Special
 {
     /// <summary>
-    /// Interaction logic for ViewportExtentBehaviorEditor.xaml
+    /// Interaction logic for DCSMonitorScriptModifierBehaviorEditor.xaml
     /// </summary>
     /// 
-    [HeliosPropertyEditor("Helios.Base.ViewportExtent", "Behavior")]
-    [HeliosPropertyEditor("Helios.AH64D.EUFD.CPG", "Behavior")]
-    [HeliosPropertyEditor("Helios.AH64D.EUFD.PILOT", "Behavior")]
-    [HeliosPropertyEditor("Helios.AH64D.MFD.PLTRIGHT", "Behavior")]
-    [HeliosPropertyEditor("Helios.AH64D.MFD.PLTLEFT", "Behavior")]
-    [HeliosPropertyEditor("Helios.AH64D.MFD.CPGRIGHT", "Behavior")]
-    [HeliosPropertyEditor("Helios.AH64D.MFD.CPGLEFT", "Behavior")]
-    [HeliosPropertyEditor("Helios.AH64D.TEDAC", "Behavior")]
-    [HeliosPropertyEditor("Helios.F15E.MPD.PilotLeft", "Behavior")]
-    [HeliosPropertyEditor("Helios.F15E.MPD.PilotCenter", "Behavior")]
-    [HeliosPropertyEditor("Helios.F15E.MPD.PilotRight", "Behavior")]
-    [HeliosPropertyEditor("Helios.F15E.MPD.WsoLeft", "Behavior")]
-    [HeliosPropertyEditor("Helios.F15E.MPD.ColorWsoLeft", "Behavior")]
-    [HeliosPropertyEditor("Helios.F15E.MPD.WsoRight", "Behavior")]
-    [HeliosPropertyEditor("Helios.F15E.MPD.ColorWsoRight", "Behavior")]
-
-    public partial class ViewportExtentBehaviorEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("Helios.Base.DCSMonitorScriptModifier", "Behavior")]
+    public partial class DCSMonitorScriptModifierBehaviorEditor : HeliosPropertyEditor
     {
-        public ViewportExtentBehaviorEditor()
+        public DCSMonitorScriptModifierBehaviorEditor()
         {
             InitializeComponent();
         }

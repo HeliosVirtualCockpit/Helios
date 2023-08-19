@@ -72,13 +72,6 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         private bool _usingViewportProvider = true;
 
         /// <summary>
-        /// backing field for property MFDViewportInVR, contains
-        /// true if an extra line to enable this feature is to be 
-        /// included by MonitorSetupGenerator into the lua
-        /// </summary>
-        private bool _mfdViewportsInVR = false;
-
-        /// <summary>
         /// backing field for property Rendered, contains
         /// The desktop rectangle (in Windows coordinates) that DCS will select for rendering, based on specifying its size as the
         /// "Resolution" parameter
@@ -452,7 +445,6 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
         protected override List<StatusReportItem> CreateStatusReport()
         {
-            MFDViewportsInVR = ConfigManager.SettingsManager.LoadSetting(PREFERENCES_SETTINGS_GROUP, "MFDViewportsInVRMode", false);
 
             // all we have right now is the monitor setup file generator
             // actually enumerate the report now and store it
@@ -467,7 +459,6 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         }
 
         public override IEnumerable<StatusReportItem> PerformReadyCheck() {
-            MFDViewportsInVR = ConfigManager.SettingsManager.LoadSetting(MonitorSetup.PREFERENCES_SETTINGS_GROUP, "MFDViewportsInVRMode", false);
             return _renderer.PerformReadyCheck(); 
         }
 
@@ -615,12 +606,6 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
         }
         
-        public bool MFDViewportsInVR
-        {
-            get => _mfdViewportsInVR;
-            set => _mfdViewportsInVR = value;
-        }
-
         /// <summary>
         /// the name of the combined monitor setup that needs to be selected in DCS
         /// </summary>

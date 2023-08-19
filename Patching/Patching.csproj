@@ -88,10 +88,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Resource Include="DCS\Controls\VR Goggles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Patches\DCS\002_005_00006_49798_00000\Viewports\Mods\aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch">

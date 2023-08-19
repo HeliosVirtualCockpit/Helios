@@ -99,6 +99,10 @@
     <Compile Include="ComponentModel\HeliosCapabilityEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
+    <Compile Include="Controls\Special\DCSMonitorScriptModifierAppearanceEditor.xaml.cs">
+      <DependentUpon>DCSMonitorScriptModifierAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Special\DCSMonitorScriptModifierRenderer.cs" />
     <Compile Include="Controls\BacklitPushButton.cs" />
     <Compile Include="Controls\BacklitPushButtonAppearanceEditor.xaml.cs">
       <DependentUpon>BacklitPushButtonAppearanceEditor.xaml</DependentUpon>
@@ -173,6 +177,10 @@
     <Compile Include="Controls\RockerSwitchRenderer.cs" />
     <Compile Include="Controls\Special\SimpleComputationWireBehaviorEditor.xaml.cs">
       <DependentUpon>SimpleComputationWireBehaviorEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Special\DCSMonitorScriptModifier.cs" />
+    <Compile Include="Controls\Special\DCSMonitorSetupScriptModifierBehaviorEditor.xaml.cs">
+      <DependentUpon>DCSMonitorSetupScriptModifierBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextualDisplayEnablerAppearancePropertyEditor.xaml.cs">
       <DependentUpon>TextualDisplayEnablerAppearancePropertyEditor.xaml</DependentUpon>
@@ -370,6 +378,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Resources\helios-bug-report.txt" />
+    <Content Include="Templates\Base\Special\ExportMFDinVR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\General\simple_computation_wire.png" />
     <Resource Include="Images\TransparentImage.png" />
     <Content Include="Templates\Base\Simulator Viewports\A29B_BFI.htpl">
@@ -426,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\Special\DCSMonitorScriptModifierAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Special\ExternalIndicatorAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -455,6 +470,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Special\SimpleComputationWireBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Special\DCSMonitorSetupScriptModifierBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -507,6 +526,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Common\needle_b.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\Custom\VR_Goggles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
