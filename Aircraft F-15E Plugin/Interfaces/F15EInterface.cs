@@ -196,8 +196,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "361", cabinPressureScale, "Flight Instruments", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.3f"));
 
             AddFunction(new ScaledNetworkValue(this, "753", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 360d), "Flight Instruments", "Magnetic Compass Heading", "Compass heading in degrees", "0 to +360", BindingValueUnits.Degrees, "%.3f"));
-            AddFunction(new ScaledNetworkValue(this, "754", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "Compass pitch", "Compassrose pitch", "-90 to +90", BindingValueUnits.Degrees, "%.3f"));
-            AddFunction(new ScaledNetworkValue(this, "755", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Compass roll", "Compassrose roll", "-180 to +180", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "755", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Magnetic Compass Roll", "Compassrose roll", "-180 to +180", BindingValueUnits.Degrees, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "754", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "Magnetic Compass Pitch", "Compassrose pitch", "-90 to +90", BindingValueUnits.Degrees, "%.3f"));
 
             #endregion Flight Instruments
 

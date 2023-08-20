@@ -69,6 +69,8 @@
     <Compile Include="Gauges\Fuel Panel\FuelGaugeWSO.cs" />
     <Compile Include="Gauges\Fuel Panel\FuelPanel.cs" />
     <Compile Include="Gauges\Fuel Panel\FuelPanelWSO.cs" />
+    <Compile Include="Gauges\Instruments\Compass Pilot.cs" />
+    <Compile Include="Gauges\Instruments\Compass.cs" />
     <Compile Include="Gauges\Instruments\ADI Pilot.cs" />
     <Compile Include="Gauges\Instruments\ADI WSO.cs" />
     <Compile Include="Gauges\Instruments\ADI.cs" />
@@ -908,6 +910,11 @@
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Gauges\Common\compass_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>
