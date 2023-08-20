@@ -20,13 +20,13 @@ using GadrocsWorkshop.Helios.Windows.Controls;
 namespace GadrocsWorkshop.Helios.Controls.Special
 {
     /// <summary>
-    /// Interaction logic for DCSMonitorScriptModifierBehaviorEditor.xaml
+    /// Interaction logic for DCSMonitorScriptAppenderBehaviorEditor.xaml
     /// </summary>
     /// 
-    [HeliosPropertyEditor("Helios.Base.DCSMonitorScriptModifier", "Behavior")]
-    public partial class DCSMonitorScriptModifierBehaviorEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("Helios.Base.DCSMonitorScriptAppender", "Behavior")]
+    public partial class DCSMonitorScriptAppenderBehaviorEditor : HeliosPropertyEditor
     {
-        public DCSMonitorScriptModifierBehaviorEditor()
+        public DCSMonitorScriptAppenderBehaviorEditor()
         {
             InitializeComponent();
         }

@@ -1,7 +1,7 @@
 ﻿<ControlTemplate>
 	<Name>Export MFD in VR</Name>
 	<Category>Special Controls</Category>
-	<TypeIdentifier>Helios.Base.DCSMonitorScriptModifier</TypeIdentifier>
+	<TypeIdentifier>Helios.Base.DCSMonitorScriptAppender</TypeIdentifier>
 	<Template>
 		<TemplateValues>
 			<FillBackground>False</FillBackground>
@@ -28,10 +28,8 @@
 			<Hidden>False</Hidden>
 			<ViewportName>DCS Monitor Script Modifier</ViewportName>
 			<Children>
-				<DCSMonitorSetupAdditionalLua>
-					-- Added by Helios Monitor Setup Script Modifier
-					VR_allow_MFD_out_of_HMD = true
-				</DCSMonitorSetupAdditionalLua>
+				<DCSMonitorSetupAdditionalLua>-- Added by Helios Monitor Setup Script Modifier
+VR_allow_MFD_out_of_HMD = true</DCSMonitorSetupAdditionalLua>
 				<Image>{Helios}/Images/Custom/VR_Goggles.xaml</Image>
 			</Children>
 		</TemplateValues>

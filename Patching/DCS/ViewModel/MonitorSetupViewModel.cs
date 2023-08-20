@@ -73,7 +73,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
             foreach (ShadowVisual viewport in Data.Viewports)
             {
-                if(!(viewport.Viewport is DCSMonitorScriptModifier))
+                if(!(viewport.Viewport is DCSMonitorScriptAppender))
                 {
                     AddViewport(viewport, Data.GlobalOffset);
                 }

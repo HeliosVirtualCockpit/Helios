@@ -26,10 +26,10 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// <summary>
     /// Appearance editor for DCS Monitor Script Modifier Background Image
     /// </summary>
-    [HeliosPropertyEditor("Helios.Base.DCSMonitorScriptModifier", "Appearance")]
-    public partial class DCSMonitorScriptModifierAppearanceEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("Helios.Base.DCSMonitorScriptAppender", "Appearance")]
+    public partial class DCSMonitorScriptAppenderAppearanceEditor : HeliosPropertyEditor
     {
-        public DCSMonitorScriptModifierAppearanceEditor()
+        public DCSMonitorScriptAppenderAppearanceEditor()
         {
             InitializeComponent();
         }

@@ -20,7 +20,7 @@ using GadrocsWorkshop.Helios.Controls.Capabilities;
 
 namespace GadrocsWorkshop.Helios.Controls.Special
 {
-    internal class DCSMonitorScriptModifierRenderer : ViewportExtentRenderer
+    internal class DCSMonitorScriptAppenderRenderer : ViewportExtentRenderer
     {
         private ImageBrush _imageBrush;
         private Rect _rectangle;
@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             // only in design mode
             if (ConfigManager.Application.ShowDesignTimeControls)
             {
-                if (Visual is DCSMonitorScriptModifier)
+                if (Visual is DCSMonitorScriptAppender)
                 {
                     drawingContext.DrawRectangle(_imageBrush, null, _rectangle);
                     base.OnRender(drawingContext);
@@ -41,7 +41,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
 
         protected override void OnRefresh()
         {
-            if (Visual is DCSMonitorScriptModifier control)
+            if (Visual is DCSMonitorScriptAppender control)
             {
                 base.OnRefresh();
                 _rectangle = new Rect(0, 0, Visual.Width, Visual.Height);

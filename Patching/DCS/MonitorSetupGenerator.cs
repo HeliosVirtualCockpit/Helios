@@ -301,7 +301,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             foreach (ShadowVisual shadow in _parent.Viewports)
             {
                 string name = shadow.Viewport.ViewportName;
-                if (!(shadow.Viewport is DCSMonitorScriptModifier))
+                if (!(shadow.Viewport is DCSMonitorScriptAppender))
                 {
                     if (_localViewports.Viewports.ContainsKey(name))
                     {
@@ -332,8 +332,8 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 } else
                 {
                     // We move the lua code from the actual viewports and combine them into a single property on the ViewportSetupFile
-                    DCSMonitorScriptModifier modifier = (DCSMonitorScriptModifier)shadow.Viewport;
-                    _localViewports.DCSMonitorSetupAdditionalLua += modifier.DCSMonitorSetupAdditionalLua + Environment.NewLine;
+                    DCSMonitorScriptAppender appender = (DCSMonitorScriptAppender)shadow.Viewport;
+                    _localViewports.DCSMonitorSetupAdditionalLua += appender.DCSMonitorSetupAdditionalLua + Environment.NewLine;
                 }
             }
 
@@ -715,15 +715,15 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
             // check if any referenced viewports are a Monitor Setup script modifier
             foreach (IViewportExtent viewport in _parent.Viewports
-                .Select(shadow => shadow.Viewport).OfType<DCSMonitorScriptModifier>())
+                .Select(shadow => shadow.Viewport).OfType<DCSMonitorScriptAppender>())
             {
-                DCSMonitorScriptModifier sM = (DCSMonitorScriptModifier)viewport;
+                DCSMonitorScriptAppender appender = (DCSMonitorScriptAppender)viewport;
                 yield return new StatusReportItem
                 {
                     Status =
-                        $"Monitor Setup script will be suffixed with command(s) '{sM.DCSMonitorSetupAdditionalLua}' from control '{sM.ViewportName}'.",
+                        $"Monitor Setup script will be suffixed with command(s) '{appender.DCSMonitorSetupAdditionalLua}' from control '{appender.ViewportName}'.",
                     Recommendation =
-                        $"If the Monitor Setup script suffix '{sM.DCSMonitorSetupAdditionalLua}' is not required, delete control '{sM.ViewportName}' from your profile.",
+                        $"If the Monitor Setup script suffix '{appender.DCSMonitorSetupAdditionalLua}' is not required, delete control '{appender.ViewportName}' from your profile.",
                     Flags = StatusReportItem.StatusFlags.Verbose |
                         StatusReportItem.StatusFlags.ConfigurationUpToDate
                 };

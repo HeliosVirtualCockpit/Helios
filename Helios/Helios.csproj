@@ -99,10 +99,10 @@
     <Compile Include="ComponentModel\HeliosCapabilityEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
-    <Compile Include="Controls\Special\DCSMonitorScriptModifierAppearanceEditor.xaml.cs">
-      <DependentUpon>DCSMonitorScriptModifierAppearanceEditor.xaml</DependentUpon>
+    <Compile Include="Controls\Special\DCSMonitorScriptAppenderAppearanceEditor.xaml.cs">
+      <DependentUpon>DCSMonitorScriptAppenderAppearanceEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Special\DCSMonitorScriptModifierRenderer.cs" />
+    <Compile Include="Controls\Special\DCSMonitorScriptAppenderRenderer.cs" />
     <Compile Include="Controls\BacklitPushButton.cs" />
     <Compile Include="Controls\BacklitPushButtonAppearanceEditor.xaml.cs">
       <DependentUpon>BacklitPushButtonAppearanceEditor.xaml</DependentUpon>
@@ -178,9 +178,9 @@
     <Compile Include="Controls\Special\SimpleComputationWireBehaviorEditor.xaml.cs">
       <DependentUpon>SimpleComputationWireBehaviorEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Special\DCSMonitorScriptModifier.cs" />
-    <Compile Include="Controls\Special\DCSMonitorSetupScriptModifierBehaviorEditor.xaml.cs">
-      <DependentUpon>DCSMonitorSetupScriptModifierBehaviorEditor.xaml</DependentUpon>
+    <Compile Include="Controls\Special\DCSMonitorScriptAppender.cs" />
+    <Compile Include="Controls\Special\DCSMonitorSetupScriptAppenderBehaviorEditor.xaml.cs">
+      <DependentUpon>DCSMonitorSetupScriptAppenderBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextualDisplayEnablerAppearancePropertyEditor.xaml.cs">
       <DependentUpon>TextualDisplayEnablerAppearancePropertyEditor.xaml</DependentUpon>
@@ -437,7 +437,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Special\DCSMonitorScriptModifierAppearanceEditor.xaml">
+    <Page Include="Controls\Special\DCSMonitorScriptAppenderAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -473,7 +473,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Special\DCSMonitorSetupScriptModifierBehaviorEditor.xaml">
+    <Page Include="Controls\Special\DCSMonitorSetupScriptAppenderBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
