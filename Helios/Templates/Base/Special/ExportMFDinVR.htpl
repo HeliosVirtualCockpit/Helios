@@ -28,7 +28,10 @@
 			<Hidden>False</Hidden>
 			<ViewportName>DCS Monitor Script Modifier</ViewportName>
 			<Children>
-				<DCSMonitorSetupAdditionalLua>VR_allow_MFD_out_of_HMD = true</DCSMonitorSetupAdditionalLua>
+				<DCSMonitorSetupAdditionalLua>
+					-- Added by Helios Monitor Setup Script Modifier
+					VR_allow_MFD_out_of_HMD = true
+				</DCSMonitorSetupAdditionalLua>
 				<Image>{Helios}/Images/Custom/VR_Goggles.xaml</Image>
 			</Children>
 		</TemplateValues>

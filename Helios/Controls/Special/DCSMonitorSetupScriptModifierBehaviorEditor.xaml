@@ -24,7 +24,8 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right" ToolTip="Text to be added to the DCS Monitor Setup file.">Lua to Add</Label>
-        <HeliosSdk:HeliosTextBox  Grid.Column="1" Height="64" Grid.Row="0" TextWrapping="Wrap" Grid.RowSpan="2" Grid.ColumnSpan="2" FontSize="10" Text="{Binding Path=Control.DCSMonitorSetupAdditionalLua , ValidatesOnDataErrors=True}" Margin="2">
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Height="64" Grid.Row="0"   AcceptsReturn="True"
+  VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Grid.RowSpan="2" Grid.ColumnSpan="2" FontSize="10" Text="{Binding Path=Control.DCSMonitorSetupAdditionalLua , ValidatesOnDataErrors=True}" Margin="2">
             <HeliosSdk:HeliosTextBox.ToolTip>
                 <ToolTip Name="MonitorSetupAdditionalTextToolTip" MaxWidth="320">
                     <TextBlock MaxWidth="320" MaxHeight="400" TextWrapping="Wrap">
