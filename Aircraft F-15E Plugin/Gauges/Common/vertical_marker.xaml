@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas Width="1.000" Height="50.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="1.000" Height="50.000">
+            <Path Fill="#e0f0f0f0" Data="F1 M 0.000,50.000 L 1.000,50.000 L 1.00,0.000 L 0.000,0.000 L 0.000,50.000 Z"/>
+    </Canvas>
+</Canvas>

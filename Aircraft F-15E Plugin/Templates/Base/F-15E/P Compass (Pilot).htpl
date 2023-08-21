@@ -1,0 +1,13 @@
+<ControlTemplate>
+  <Name>Magnetic Compass (Pilot)</Name>
+  <Category>F-15E Strike Eagle</Category>
+  <TypeIdentifier>Helios.F15E.Instruments.Compass.Pilot</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Location>0,0</Location>
+      <Size>300,300</Size>
+      <Hidden>False</Hidden>
+      <GlassReflectionOpacity>0.3</GlassReflectionOpacity>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

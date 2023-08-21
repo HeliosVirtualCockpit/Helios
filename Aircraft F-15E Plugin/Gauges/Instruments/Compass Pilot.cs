@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.Compass
     using System.Windows;
     using System.Xml;
 
-    [HeliosControl("Helios.F15E.Instruments.Compass.Pilot", "Compass (Pilot)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F15E.Instruments.Compass.Pilot", "Compass (Pilot)", "F-15E Strike Eagle", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class CompassPilot : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Flight Instruments";
@@ -32,18 +32,18 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.Compass
         private HeliosPanel _frameGlassPanel;
 
         public CompassPilot()
-            : base("Compass Gauge (Pilot)", new Size(200, 200))
+            : base("Compass Gauge (Pilot)", new Size(300, 300))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.F15E.F15EInterface) };
-            AddGauge("Magnetic Compass", new Point(0d, 0d), new Size(200d, 200d), _interfaceDeviceName, "Magnetic Compass");
-            _frameGlassPanel = AddPanel("Gauge Glass", new Point(0d, 0d), new Size(200d, 200d), REFLECTION_IMAGE, _interfaceDeviceName);
+            AddGauge("Magnetic Compass", new Point(0d, 0d), new Size(300d, 300d), _interfaceDeviceName, "Magnetic Compass");
+            _frameGlassPanel = AddPanel("Gauge Glass", new Point(0d, 0d), new Size(300d, 300d), REFLECTION_IMAGE, _interfaceDeviceName);
             _frameGlassPanel.Opacity = GLASS_REFLECTION_OPACITY_DEFAULT;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;
         }
         private void AddGauge(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _display = new CompassGauge(name, new Size(200, 200), _interfaceDeviceName)
+            _display = new CompassGauge(name, new Size(300, 300), _interfaceDeviceName)
             {
                 Top = pos.Y,
                 Left = pos.X,

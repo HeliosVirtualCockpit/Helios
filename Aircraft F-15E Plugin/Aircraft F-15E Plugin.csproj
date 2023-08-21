@@ -383,6 +383,9 @@
     <Content Include="Docs\Helios.F-15E.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Base\F-15E\P Compass %28Pilot%29.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Interfaces\ExportFunctionsF15E.lua" />
     <None Include="Templates\Base\F-15E\Images\ADI_Bezel.htpl" />
     <None Include="Templates\Base\F-15E\Images\ADI_Knob.htpl" />
@@ -912,6 +915,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Common\compass_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Common\vertical_marker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

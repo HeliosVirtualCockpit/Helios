@@ -34,27 +34,34 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.Compass
         private CalibrationPointCollectionDouble _pitchCalibration;
 
         public CompassGauge(string name, Size size, string device)
-            : base(name, new Size(200,200))
+            : base(name, size)
         {
-            Point center = new Point(100d, 100d);
+            Point center = new Point(size.Width / 2d, size.Height / 2d);
+            double widthScaling = size.Width / 100d;
+            double heightScaling = size.Height / 100d * 0.6d;
+            double tapeHeight = 50d * heightScaling;
+            double tapeWidth = 556d * widthScaling;
+            double tapeWidthCenter = 279.25d * widthScaling;  // this is not necessarily the middle of the tape, but is where the South tick is
+            double tapeDeflection = 216d * widthScaling;
 
-            _headingCalibration = new CalibrationPointCollectionDouble(0d, -432d, 360d, 432d);
-            _ball = new GaugeNeedle("{F-15E}/Gauges/Common/Compass_Tape.xaml", center, new Size(1112d, 60d), new Point(279.25d * 2d, 60d / 2d));
-            _ball.Clip = new EllipseGeometry(center, 100d, 100d);
+            _headingCalibration = new CalibrationPointCollectionDouble(0d, -1 * tapeDeflection, 360d, tapeDeflection);
+            _ball = new GaugeNeedle("{F-15E}/Gauges/Common/Compass_Tape.xaml", center, new Size(tapeWidth, tapeHeight), new Point(tapeWidthCenter, tapeHeight / 2d));
+            _ball.Clip = new EllipseGeometry(center, size.Width / 2d, size.Height / 2d);
             Components.Add(_ball);
 
+            Components.Add(new GaugeImage("{F-15E}/Gauges/Common/vertical_marker.xaml", new Rect(center.X, size.Height * 0.2d, 1d * widthScaling, size.Height * 0.6d)));
 
             _heading = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "Magnetic Compass Heading", "Current compass heading of the aircraft in degrees.", "(0 to 360)", BindingValueUnits.Degrees);
             _heading.Execute += new HeliosActionHandler(Heading_Execute);
             Actions.Add(_heading);
 
-            _rollCalibration = new CalibrationPointCollectionDouble(-180d, -20d, 180d, 20d);
+            _rollCalibration = new CalibrationPointCollectionDouble(-180d, -20d, 180d, 20d);  // these values are degrees
 
             _roll = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "Magnetic Compass Roll", "Current roll of the compass rose in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Roll_Execute);
             Actions.Add(_roll);
 
-            _pitchCalibration = new CalibrationPointCollectionDouble(-90d, 60d, 90d, -60d);
+            _pitchCalibration = new CalibrationPointCollectionDouble(-90d, tapeHeight * 0.67d, 90d, -1 * tapeHeight * 0.67d);
 
             _pitch = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "Magnetic Compass Pitch", "Current pitch of the compass rose in degrees.", "(-90 to +90)", BindingValueUnits.Degrees);
             _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
