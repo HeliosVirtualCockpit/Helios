@@ -243,6 +243,7 @@
     <Compile Include="Json\InterfaceFile.cs" />
     <Compile Include="Json\NetworkFunction\SchemaGenerationProviderForJsonNet.cs" />
     <Compile Include="UnitConverters\RawConverters.cs" />
+    <Compile Include="Units\BarUnit.cs" />
     <Compile Include="Units\MillbarUnit.cs" />
     <Compile Include="Util\FileUtility.cs" />
     <Compile Include="Util\ModuleUtility.cs" />

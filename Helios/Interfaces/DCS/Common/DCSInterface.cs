@@ -126,7 +126,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             AddFunction(new NetworkValue(this, "T14", "Simulator Telemetry", "indicated airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.MetersPerSecond, null));
             AddFunction(new NetworkValue(this, "T16", "Simulator Telemetry", "angle of attack", "Current angle of attack for the aircraft.", "", BindingValueUnits.Degrees, null));
             AddFunction(new NetworkValue(this, "T17", "Simulator Telemetry", "glide deviation", "ILS Glide Deviation", "-1 to 1", BindingValueUnits.Numeric, null));
-            AddFunction(new NetworkValue(this, "T18", "Simulator Telemetry", "side deviation", "ILS Side Deiviation", "-1 to 1", BindingValueUnits.Numeric, null));
+            AddFunction(new NetworkValue(this, "T18", "Simulator Telemetry", "side deviation", "ILS Side Deviation", "-1 to 1", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "T19", "Simulator Telemetry", "Mach", "Current Mach number", "number in M", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "T20", "Simulator Telemetry", "G", "Current G load", "number in g", BindingValueUnits.Numeric, null));
         }

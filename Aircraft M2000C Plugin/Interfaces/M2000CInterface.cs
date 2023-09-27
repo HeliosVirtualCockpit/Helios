@@ -841,7 +841,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
                 "Fuel Panel", "Fuel CrossFeed Switch", "%0.1f"));
             #endregion
             #region  HSI
-            AddFunction(new Axis(this, NAVINST, "3340", "340", 0.015d, 0d, 1d, "HSI Panel", "VAD Selector"));    // elements["PTN_340"] = default_axis_cycle(_("HSI VAD Selector"),devices.NAVINST, device_commands.Button_340, 340)
+            AddFunction(new Axis(this, NAVINST, "3340", "340", 0.015d, -1d, 1d, "HSI Panel", "VAD Selector"));    // elements["PTN_340"] = default_axis_cycle(_("HSI VAD Selector"),devices.NAVINST, device_commands.Button_340, 340)
             AddFunction(new Switch(this, NAVINST, "341", SwitchPositions.Create(7, 0.0, 0.1, "3341", new string[] {"Cv/NAV", "NAV", "TAC", "VAD", "rho", "theta", "TEL"}),"HSI Panel", "Mode Selector", "%0.1f"));
             AddFunction(new ScaledNetworkValue(this, "342", 1d, "HSI Panel", "Compass Rose", "Compass Rose.", "0 - 360", BindingValueUnits.Degrees, 0d, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "336", 1d, "HSI Panel", "Distance (Hundreds)", "Distance (Hundreds).", "0 - 9", BindingValueUnits.Numeric));
@@ -1060,30 +1060,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "511", "Test Panel", "HYD", "HYD indicator"));
             AddFunction(new FlagValue(this, "512", "Test Panel", "Test Fail", "Test fail indicator"));
             AddFunction(new FlagValue(this, "513", "Test Panel", "Test Ok", "Test ok indicator"));
-            AddFunction(new Switch(this, AFCS, "514", new SwitchPosition[] {
-                new SwitchPosition("1.0", "Open", "3514"),
-                new SwitchPosition("0.0", "Closed", "3514"), },
+            AddFunction(new Switch(this, AFCS, "514", new SwitchPosition[] {new SwitchPosition("0.0", "Open", "3514"), new SwitchPosition("1.0", "Closed", "3514") },
                 "Test Panel", "Autopilot Test Guard", "%0.1f"));
-            AddFunction(new Switch(this, AFCS, "515", new SwitchPosition[] {
-                new SwitchPosition("1.0", "ON", "3515"),
-                new SwitchPosition("0.0", "OFF", "3515"), },
+            AddFunction(new Switch(this, AFCS, "515", new SwitchPosition[] {new SwitchPosition("0.0", "ON", "3515"), new SwitchPosition("1.0", "OFF", "3515") },
                 "Test Panel", "Autopilot Test Switch", "%0.1f"));
-            AddFunction(new Switch(this, AFCS, "516", new SwitchPosition[] {
-                new SwitchPosition("1.0", "Open", "3516"),
-                new SwitchPosition("0.0", "Closed", "3516"), },
+            AddFunction(new Switch(this, AFCS, "516", new SwitchPosition[] {new SwitchPosition("0.0", "Open", "3516"), new SwitchPosition("1.0", "Closed", "3516") },
                 "Test Panel", "FBW Test Guard", "%0.1f"));
             AddFunction(new Switch(this, AFCS, "517", new SwitchPosition[] {
-                new SwitchPosition("0.0", "C", "3517"),
+                new SwitchPosition("1.0", "C", "3517"),
                 new SwitchPosition("0.5", "OFF", "3517"),
-                new SwitchPosition("1.0", "TEST", "3517"), },
+                new SwitchPosition("0.0", "TEST", "3517"), },
                 "Test Panel", "FBW Test Switch", "%0.1f"));
             AddFunction(new Switch(this, AFCS, "479", new SwitchPosition[] {
-                new SwitchPosition("1.0", "Open", "3479"),
-                new SwitchPosition("0.0", "Closed", "3479")},
+                new SwitchPosition("0.0", "Open", "3479"),
+                new SwitchPosition("1.0", "Closed", "3479")},
                 "Test Panel", "FBW Channel 5 Guard", "%0.1f"));
             AddFunction(new Switch(this, AFCS, "480", new SwitchPosition[] {
-                new SwitchPosition("1.0", "On", "3480"),
-                new SwitchPosition("0.0", "Off", "3480"), },
+                new SwitchPosition("0.0", "On", "3480"),
+                new SwitchPosition("1.0", "Off", "3480"), },
                 "Test Panel", "FBW Channel 5 Switch", "%0.1f"));
             #endregion
             #region Navigational Antennas
@@ -1131,16 +1125,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "634", "Indicators", "Indicators 634", "TACAN F"));
             AddFunction(new FlagValue(this, "675", "Indicators", "Indicators 675", "COM Panel, lamp red"));
             AddFunction(new FlagValue(this, "676", "Indicators", "Indicators 676", "COM Panel, lamp red, over COM"));
+            CalibrationPointCollectionDouble loxScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.5d, 5d);
+            AddFunction(new ScaledNetworkValue(this, "518", loxScale, "Indicators", "LOX: Liquid OXygen Gauge", "Amount in Litres", "0 - 5", BindingValueUnits.Liters));
+
             #endregion
             #region  Inflight Engine Panel
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3468", "468", "1.0", "On", "0.0", "Off", "Engine Start Panel", "Engine In-Flight Start Switch", "%0.1f"));
             AddFunction(new PushButton(this, ENGPANEL, "3467", "467", "Engine Start Panel", "Engine Shutdown Button")); 
-            AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3477", "477", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Fuel Dump Switch Cover", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3478", "478", "1.0", "On", "0.0", "Off", "Engine Start Panel", "Fuel Dump Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3477", "477", "0.0", "Open", "1.0", "Closed", "Engine Start Panel", "Fuel Dump Switch Cover", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3478", "478", "0.0", "On", "1.0", "Off", "Engine Start Panel", "Fuel Dump Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3471", "471", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "A/B Emergency Cutoff Switch Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, INSTPANEL, "3472", "472", "1.0", "On", "0.0", "Off", "Engine Start Panel", "A/B Emergency Cutoff Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3464", "464", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Emergency Throttle Cover", "%0.1f"));
-            AddFunction(new Axis(this, ENGPANEL, "3465", "465", 0.15d, 0d, 1d, "Engine Start Panel", "Emergency Throttle Handle"));    // elements["PTN_465"] = default_axis_limited(_("Emergency Throttle Handle"),devices.ENGPANEL,device_commands.Button_465,465, 0.8, 0.5, true, false, {0.0, 1.0})
+            AddFunction(Switch.CreateThreeWaySwitch(this, ENGPANEL, "3465", "465", "1.0", "Low", "0.0", "Mid", "-1.0", "High", "Engine Start Panel", "Emergency Throttle Handle", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3473", "473", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Secondary Oil Control Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3474", "474", "1.0", "On", "0.0", "Off", "Engine Start Panel", "Secondary Oil Control Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, ENGPANEL, "3475", "475", "1.0", "Open", "0.0", "Closed", "Engine Start Panel", "Engine Emergency Control Cover", "%0.1f"));
@@ -1184,7 +1181,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, AFCS, "299", SwitchPositions.Create(6,0.0,0.1,"3299","Ten Thousands"), "AFCS", "Altitude 10 000 ft Selector", "%0.1f"));
             AddFunction(new Switch(this, AFCS, "300", SwitchPositions.Create(10, 0.0, 0.1, "3300", "Thousands"), "AFCS", "Altitude 1 000 ft Selector", "%0.1f"));
             AddFunction(new Switch(this, AFCS, "301", SwitchPositions.Create(10, 0.0, 0.1, "3301", "Hundreds"), "AFCS", "Altitude 100 ft Selector", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, AFCS, "3508", "508", "1.0", "On", "0.0", "Off", "AFCS", "Trim Control Mode Dial", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, AFCS, "3508", "508", "0.0", "On", "1.0", "Off", "AFCS", "Trim Control Mode Dial", "%0.1f"));
             AddFunction(Switch.CreateThreeWaySwitch(this, AFCS, "3509", "509", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "AFCS", "Rudder Trim Paddle", "%0.1f"));
             #endregion
             #region  Fly-By-Wire
@@ -1200,7 +1197,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, HYDRAULICS, "462", SwitchPositions.Create(3,1.0, -1.0,"3462",new string[] { "Out", "Auto","Go" }), "PELLES, SOURIES AND BECS", "Slats Operation Switch", "%0.1f"));
             AddFunction(new Axis(this, HYDRAULICS, "3396", "396", 0.15d, 0d, 1d, "PELLES, SOURIES AND BECS", "Pedal Adjustment Lever"));    // elements["PTN_396"] = default_axis_limited(_("Pedal Adjustment Lever"),devices.SUBSYSTEMS,device_commands.Button_396,396, 0.5, -0.1, true, 0)
             AddFunction(Switch.CreateToggleSwitch(this, HYDRAULICS, "3395", "395", "1.0", "On", "0.0", "Off", "PELLES, SOURIES AND BECS", "Hydraulic System Selector", "%0.1f"));
-                                                                                                                                      // 
+            CalibrationPointCollectionDouble hydraulicScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.35d, 350d);
+            AddFunction(new ScaledNetworkValue(this, "397", hydraulicScale, "PELLES, SOURIES AND BECS", "Hydraulic Pressure Sdes: Servitudes (Ancillaries)", "Pressure Needle Left", "0 - 350", BindingValueUnits.Bar));
+            AddFunction(new ScaledNetworkValue(this, "398", hydraulicScale, "PELLES, SOURIES AND BECS", "Hydraulic Pressure Fs: Frein Secours (Emergency Brake)", "Pressure Needle Right", "0 - 350", BindingValueUnits.Bar));
+            CalibrationPointCollectionDouble cabinPressureScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.4d, 40000d);
+            AddFunction(new ScaledNetworkValue(this, "399", cabinPressureScale, "PELLES, SOURIES AND BECS", "Altitude Cabin Pressure Indicator (x1000 ft)", "Equivalent altitude", "0 - 40,000", BindingValueUnits.Feet));
+
             #endregion
             #region  RADAR
             AddFunction(new Switch(this, PCR, "481", SwitchPositions.Create(12,-1.0,2.0 / 12,"3481","%0.2f"), "RADAR", "Change Channel A", "%0.2f"));
@@ -1263,7 +1265,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Axis(this, SYSLIGHTS, "3640", "640", 0.15d, 0d, 1d, "Panel Lights", "Dashboard Panel Lights Knob"));    // elements["PTN_640"] = default_axis_limited(_("Dashboard Panel Lights Knob"), devices.SYSLIGHTS, device_commands.Button_640, 640, 10, 0.3, false, 0)
             AddFunction(new Axis(this, SYSLIGHTS, "3641", "641", 0.15d, 0d, 1d, "Panel Lights", "Red Flood Lights Knob"));    // elements["PTN_641"] = default_axis_limited(_("Red Flood Lights Knob"), devices.SYSLIGHTS, device_commands.Button_641, 641, 10, 0.3, false, 0)
             AddFunction(new Axis(this, SYSLIGHTS, "3642", "642", 0.15d, 0d, 1d, "Panel Lights", "Console Panel Lights Knob"));    // elements["PTN_642"] = default_axis_limited(_("Console Panel Lights Knob"), devices.SYSLIGHTS, device_commands.Button_642, 642, 10, 0.3, false, 0)
-            AddFunction(new Axis(this, SYSLIGHTS, "3643", "643", 0.15d, 0d, 1d, "Panel Lights", "Casution/Advisory Lights Rheostat"));    // elements["PTN_643"] = default_axis_limited(_("Casution/Advisory Lights Rheostat"), devices.SYSLIGHTS, device_commands.Button_643, 643, 10, 0.3, false, 0)
+            AddFunction(new Axis(this, SYSLIGHTS, "3643", "643", 0.15d, 0d, 1d, "Panel Lights", "Caution/Advisory Lights Rheostat"));
             AddFunction(new Axis(this, SYSLIGHTS, "3644", "644", 0.15d, 0d, 1d, "Panel Lights", "White Flood Lights Knob"));    // elements["PTN_644"] = default_axis_limited(_("White Flood Lights Knob"), devices.SYSLIGHTS, device_commands.Button_644, 644, 10, 0.3, false, 0)
             AddFunction(new Axis(this, SYSLIGHTS, "Button_920", "920", 0.15d, 0d, 1d, "Panel Lights", "Refuel Lights Brightness Knob"));    // elements["PTN_920"] = default_axis_limited(_("Refuel Lights Brightness Knob"),devices.SYSLIGHTS,device_commands.Button_920, 920, 10, 0.3, false, 0)
             #endregion  
@@ -1337,9 +1339,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, SYSLIGHTS, "3191", "191", "Miscellaneous Left Panel", "Audio Warning Reset"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3458", "458", "1.0", "Open", "0,0", "Closed", "Miscellaneous Left Panel", "Anti-Skid Switch Cover", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3459", "459", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Anti-Skid Switch", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3666", "666", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Parking Brake Lever", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3666", "666", "0.0", "On", "1,0", "Off", "Miscellaneous Left Panel", "Parking Brake Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3457", "457", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Drag Chute Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, PCN, "3905", "905", "1.0", "On", "0,0", "Off", "Miscellaneous Left Panel", "Emergency Compass", "%0.1f"));
+            AddFunction(new NetworkValue(this, "800", "Miscellaneous Left Panel", "Throttle Indicator", "Throttle Position", "0 - 1", BindingValueUnits.Numeric));
+
             #endregion
             #region  HOTAS / Stick
             AddFunction(Switch.CreateThreeWaySwitch(this, MISCPANELS, "3807", "807", "-1.0", "Pushed", "0.0", "Neutral", "1.0", "Pulled", "Stick", "Nose Wheel Steering / IFF Interrogation Button", "%0.1f"));
@@ -1356,7 +1360,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, ENGINE, "657", SwitchPositions.Create(3,1.0,-0.5,"3657"), "Miscellaneous Right Panel", "Emergency Hydraulic Pump Switch", "%0.1f"));    // ???? 
             AddFunction(Switch.CreateToggleSwitch(this, SYSLIGHTS, "3658", "658", "1.0", "On", "0.0", "Off", "Miscellaneous Right Panel", "Audio Warning Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3659", "659", "1.0", "Open", "0.0", "Closed", "Miscellaneous Right Panel", "Pitot Heat Cover", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3660", "660", "1.0", "On", "0.0", "Off", "Miscellaneous Right Panel", "Pitot Heat Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, MISCPANELS, "3660", "660", "0.0", "On", "1.0", "Off", "Miscellaneous Right Panel", "Pitot Heat Switch", "%0.1f"));
             #endregion  
             #region  Miscellaneous Seat
             AddFunction(Switch.CreateThreeWaySwitch(this, MISCPANELS, "3900", "900", "1.0", "Up", "0.0", "Neutral", "-1.0", "Down", "Miscellaneous Seat", "Seat Adjustment Switch", "%0.1f"));
@@ -1378,18 +1382,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, FLIGHTINST, "3308", "308", "Flight Instruments", "G-Meter Reset"));
             AddFunction(new Altimeter(this));
             AddFunction(new RotaryEncoder(this, FLIGHTINST, "3309", "309", 0.01d, "Flight Instruments", "Barometric Pressure Calibration Knob"));
-            AddFunction(new Switch(this, FLIGHTINST, "665", SwitchPositions.Create(3, 0.0, 0.5, "3665"), "Flight Instruments", "Backup ADI Switch", "%0.1f"));
+            AddFunction(new Switch(this, FLIGHTINST, "665", SwitchPositions.Create(3, 1.0, -0.5, "3665"), "Flight Instruments", "Backup ADI Switch", "%0.1f"));
+            AddFunction(new FlagValue(this, "329", "Flight Instruments", "ADI Backup OFF Flag", "Indicator flag on ADI gauge"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3314", "314", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Cage Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3315", "315", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Backlight Switch", "%0.1f"));
-            AddFunction(new Axis(this, FLIGHTINST, "3325", "325", 0.15d, 0d, 1d, "Flight Instruments", "Backup ADI Pitch Adjust Knob"));
-            AddFunction(new PushButton(this, FLIGHTINST, "3328", "328", "Flight Instruments", "Backup ADI Cage / Uncage"));
+            AddFunction(new Axis(this, FLIGHTINST, "3328", "328", 0.15d, -1d, 1d, "Flight Instruments", "Backup ADI Pitch Adjust Knob"));
+            AddFunction(new PushButton(this, FLIGHTINST, "3325", "325", "Flight Instruments", "Backup ADI Cage / Uncage"));
+            AddFunction(new FlagValue(this, "319", "Flight Instruments", "ADI OFF Flag", "Indicator flag on ADI gauge"));
+            AddFunction(new NetworkValue(this, "322", "Flight Instruments", "ADI ILS LOC VERT GLIDE", "ILS and localizer vertical needle", "-1 to 1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, "323", "Flight Instruments", "ADI ILS GS HORIZ SLOPE", "ILS and Glideslope horizontal needle", "-1 to 1", BindingValueUnits.Numeric));
+
+            CalibrationPointCollectionDouble clockHoursScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 60d);
+            AddFunction(new ScaledNetworkValue(this, "401", clockHoursScale, "Flight Instruments", "Clock Hours", "Hour value of current time", "0 - 12", BindingValueUnits.Numeric));
+            CalibrationPointCollectionDouble clockMinutesScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 60d);
+            AddFunction(new ScaledNetworkValue(this, "402", clockMinutesScale, "Flight Instruments", "Clock Minutes", "Minute value of current time", "0 - 60", BindingValueUnits.Numeric));
+            AddFunction(new ScaledNetworkValue(this, "403", clockMinutesScale, "Flight Instruments", "Clock Seconds", "Seconds value of current time", "0 - 60", BindingValueUnits.Numeric));
+
+
             #endregion
             #region  ECS Panel
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3630", "630", "0.0", "Manual", "1.0", "Auto", "ECS Panel", "ECS Main Mode Switch", "%0.1f"));
             AddFunction(new PushButton(this, ECS, "3631", "631", "ECS Panel", "ECS C Button"));
             AddFunction(new PushButton(this, ECS, "3633", "633", "ECS Panel", "ECS F Button"));
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3635", "635", "1.0", "On", "0.0", "Off", "ECS Panel", "ECS Cond Switch", "%0.1f"));
-            AddFunction(new PushButton(this, ECS, "3636", "636", "ECS Panel", "ECS Air Exchange Switch"));
+            AddFunction(Switch.CreateToggleSwitch(this, ECS, "3636", "636", "1.0", "On", "0.0", "Off", "ECS Panel", "ECS Air Exchange Switch", "%0.1f"));
             AddFunction(new Axis(this, ECS, "3637", "637", 0.15d, 0d, 1d, "ECS Panel", "ECS Temperature Select Knob"));    // elements["PTN_637"] = default_axis_limited_cycle(_("ECS Temperature Select Knob"), devices.ECS, device_commands.Button_637, 637, 0.8, 0.5, true, false, {-1.0, 1.0})
             AddFunction(Switch.CreateToggleSwitch(this, ECS, "3638", "638", "1.0", "On", "0.0", "Off", "ECS Panel", "ECS Defog Switch", "%0.1f"));
                                                                                                        // 
