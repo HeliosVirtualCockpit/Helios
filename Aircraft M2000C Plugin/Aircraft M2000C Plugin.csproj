@@ -596,6 +596,8 @@
   <ItemGroup>
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\CautionPanel\Caution_Panel.cs" />
+    <Compile Include="Gauges\Clock\Clock.cs" />
+    <Compile Include="Gauges\Clock\ClockGauge.cs" />
     <Compile Include="Gauges\Common\Mk2CDrumGauge.cs" />
     <Compile Include="Gauges\Common\Mk2CNeedle.cs" />
     <Compile Include="Gauges\ECMBox\ECM_Box.cs" />
@@ -770,6 +772,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\UHF Radio\Channel_Drum_Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Clock\Clock_Dial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Clock\NeedleStopWatchMinutes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Clock\NeedleSeconds.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Clock\NeedleMinutes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Clock\NeedleHours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
