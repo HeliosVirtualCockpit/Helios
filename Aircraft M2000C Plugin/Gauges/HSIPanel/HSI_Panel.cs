@@ -23,6 +23,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
     using System.Windows.Media;
     using GadrocsWorkshop.Helios.Gauges.M2000C.Mk2CNeedle;
     using System.Windows.Controls.Primitives;
+    using NLog;
+    using System.Xml.Linq;
 
     [HeliosControl("HELIOS.M2000C.HSI_PANEL", "HSI Panel", "M-2000C Gauges", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class M2000C_HSIPanel : M2000CDevice
@@ -30,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 300, 287);
         private string _interfaceDeviceName = "HSI Panel";
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public M2000C_HSIPanel()
             : base("HSI Panel", new Size(300, 287))
@@ -56,8 +59,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
 
             AddNeedle("Direction Needle", "{M2000C}/Images/HSIPanel/direction-needle.png", "direction needle", "(0 - 360)",
                 new Point(152, 141), new Size(40d, 20d), new Point(20d, 130d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
-            //AddNeedle("Big Needle", "{M2000C}/Images/HSIPanel/big-needle.png", "big needle", "(0 - 360)",
-            //    new Point(152, 141), new Size(20d, 184d), new Point(10d, 100d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
             AddNeedle("Big Needle", "{M2000C}/Images/HSIPanel/big-needle.xaml", "big needle", "(0 - 360)",
                 new Point(152, 141), new Size(27d, 200d), new Point(13.5d, 100d), BindingValueUnits.Degrees, new double[] { 0d, 0d, 1d, 360d });
             AddNeedle("Small Needle", "{M2000C}/Images/HSIPanel/small-needle.xaml", "small needle", "(0 - 360)",
@@ -77,6 +78,16 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
                 childName: "HSI Panel_Mode Indicator",
                 interfaceTriggerName: "HSI Panel.Mode Selector.changed",
                 deviceActionName: "set.mode indicator needle");
+            try
+            {
+                /// This is an internal binding within the gauge as opposed to a binding to the default interface
+                AddDefaultSelfBinding("HSI Panel_Mode Selector", "position.changed", "HSI Panel_Mode Indicator", "set.mode indicator needle");
+            }
+            catch
+            {
+                Logger.Error($"Unable to create self-binding for gauge {this.Name} trigger: HSI Panel_Mode Selector \"position.changed\" action: HSI Panel_Mode Indicator \"set.mode indicator needle\" ");
+            }
+
         }
 
         #region Properties
