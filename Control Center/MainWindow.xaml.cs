@@ -498,7 +498,7 @@ namespace GadrocsWorkshop.Helios.ControlCenter
             StatusMessage = StatusValue.License;
 
             LoadProfileList();
-
+            _profileIndex = _profileIndex == 0 ? _profiles.Count : _profileIndex;
             if (_profileIndex > 0 && _profiles.Count > 0)
             {
                 if (ActiveProfile != null && ActiveProfile.IsStarted)
@@ -517,6 +517,8 @@ namespace GadrocsWorkshop.Helios.ControlCenter
             StatusMessage = StatusValue.License;
 
             LoadProfileList();
+
+            _profileIndex = _profileIndex == _profiles.Count -1 ? -1 : _profileIndex;
 
             if (_profileIndex < _profiles.Count - 1)
             {
