@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.M2000C.Clock", "Clock", "M-2000C", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.M2000C.Clock", "Clock", "M-2000C", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class Clock : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Flight Instruments";
@@ -39,7 +39,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
             : base("Clock", new Size(375, 375))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.M2000C.M2000CInterface) };
-            AddButton("Clock button", new Point(346, 19), new Size(80, 80), _interfaceDeviceName, "Clock button");
+            //AddButton("Stopwatch Start/Stop/Reset button", new Point(346, 19), new Size(80, 80), _interfaceDeviceName, "Stopwatch Start/Stop/Reset button");
             //AddEncoder("Knob", new Point(11,351), new Size(120, 120), _interfaceDeviceName, "Knob", "Knob");
             AddGauge("Clock", new Point(0d, 0d), new Size(375d, 375d), _interfaceDeviceName, "Clock");
             _frameGlassPanel = AddPanel("Gauge Glass", new Point(0d, 0d), new Size(375d, 375d), REFLECTION_IMAGE, _interfaceDeviceName);

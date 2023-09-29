@@ -68,9 +68,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
             _stopWatchSeconds.Execute += stopWatchSeconds_Execute;
             Actions.Add(_stopWatchSeconds);
 
-            _stopWatchMinutes = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[3], $"{elements[3]} value for Clock.", "(0-15)", BindingValueUnits.Minutes);
-            _stopWatchMinutes.Execute += stopWatchMinutes_Execute;
-            Actions.Add(_stopWatchMinutes);
         }
 
         void ClockHours_Execute(object action, HeliosActionEventArgs e)
@@ -87,13 +84,12 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
 
         void stopWatchSeconds_Execute(object action, HeliosActionEventArgs e)
         {
+            double seconds = Math.Round(e.Value.DoubleValue % 60d);
+            double minutes = e.Value.DoubleValue / 60d;
             _stopWatchSeconds.SetValue(e.Value, e.BypassCascadingTriggers);
-            _stopWatchSecondsNeedle.Rotation = _clockCalibration.Interpolate(e.Value.DoubleValue);
-        }
-        void stopWatchMinutes_Execute(object action, HeliosActionEventArgs e)
-        {
-            _stopWatchMinutes.SetValue(e.Value, e.BypassCascadingTriggers);
-            _stopWatchMinutesNeedle.Rotation = _stopWatchCalibration.Interpolate(e.Value.DoubleValue);
+            _stopWatchSecondsNeedle.Rotation = _clockCalibration.Interpolate(seconds);
+            _stopWatchMinutesNeedle.Rotation = _stopWatchCalibration.Interpolate(minutes);
+
         }
     }
 

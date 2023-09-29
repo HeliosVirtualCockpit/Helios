@@ -1391,14 +1391,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new NetworkValue(this, "322", "Flight Instruments", "ADI ILS LOC VERT GLIDE", "ILS and localizer vertical needle", "-1 to 1", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "323", "Flight Instruments", "ADI ILS GS HORIZ SLOPE", "ILS and Glideslope horizontal needle", "-1 to 1", BindingValueUnits.Numeric));
 
-            AddFunction(new PushButton(this, MISCPANELS, "3400", "400", "Flight Instruments", "Clock button"));
-            CalibrationPointCollectionDouble clockHoursScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 60d);
-            AddFunction(new ScaledNetworkValue(this, "401", clockHoursScale, "Flight Instruments", "Clock Hours", "Hour value of current time", "0 - 12", BindingValueUnits.Numeric));
+            AddFunction(new PushButton(this, NAVINST, "3923", "923", "Flight Instruments", "Stopwatch Start/Stop/Reset button"));
+            AddFunction(Switch.CreateToggleSwitch(this, NAVINST, "3924", "924", "1.0", "Adjust", "0.0", "Normal",  "Flight Instruments", "Clock Adjustment Switch", "%0.1f"));
+            AddFunction(new RotaryEncoder(this, NAVINST, "3922", "922", 0.005d, "Flight Instruments", "Clock Adjustment Knob"));
+            CalibrationPointCollectionDouble clockHoursScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 12d);
             CalibrationPointCollectionDouble clockMinutesScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 60d);
-            AddFunction(new ScaledNetworkValue(this, "402", clockMinutesScale, "Flight Instruments", "Clock Minutes", "Minute value of current time", "0 - 60", BindingValueUnits.Numeric));
-            AddFunction(new ScaledNetworkValue(this, "403", clockMinutesScale, "Flight Instruments", "Stopwatch Seconds", "Seconds value of current time", "0 - 60", BindingValueUnits.Numeric));
-            /// TODO:  find the code for the stopwatch minutes needle (assuming that 403 doesn't increment past 60.
-            /// TODO:  find AM/PM flag / Value
+            AddFunction(new ScaledNetworkValue(this, "401", clockHoursScale, "Flight Instruments", "Clock Hours", "Hour value of current time", "0 - 12", BindingValueUnits.Hours));
+            AddFunction(new ScaledNetworkValue(this, "402", clockMinutesScale, "Flight Instruments", "Clock Minutes", "Minute value of current time", "0 - 60", BindingValueUnits.Minutes));
+            CalibrationPointCollectionDouble stopwatchSecondsScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 900d);
+            AddFunction(new ScaledNetworkValue(this, "403", stopwatchSecondsScale, "Flight Instruments", "Stopwatch Seconds", "Seconds from stopwatch start ", "0 - 900", BindingValueUnits.Seconds,"%.3f"));
 
             #endregion
             #region  ECS Panel

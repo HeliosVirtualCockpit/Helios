@@ -806,5 +806,10 @@
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Base\M2000C\3 Panels\Clock.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>
