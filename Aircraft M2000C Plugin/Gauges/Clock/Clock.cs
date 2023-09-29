@@ -25,20 +25,21 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
     using System.Xml;
 
     [HeliosControl("Helios.M2000C.Clock", "Clock", "M-2000C", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    class ClockPilot : CompositeVisualWithBackgroundImage
+    class Clock : CompositeVisualWithBackgroundImage
     {
-        private string _interfaceDeviceName = "Clock";
-        private ClockGauge _display;
+        private string _interfaceDeviceName = "Flight Instruments";
+        private ClockGauge _gauge;
         private const string REFLECTION_IMAGE = "{A-10C}/Images/A-10C/Pilot_Reflection_25a.png";
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.30d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
         private HeliosPanel _frameGlassPanel;
+        private string _imageLocation = "";
 
-        public ClockPilot()
+        public Clock()
             : base("Clock", new Size(375, 375))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.M2000C.M2000CInterface) };
-            //AddButton("Button", new Point(346, 19), new Size(80, 80), _interfaceDeviceName, "Button");
+            AddButton("Clock button", new Point(346, 19), new Size(80, 80), _interfaceDeviceName, "Clock button");
             //AddEncoder("Knob", new Point(11,351), new Size(120, 120), _interfaceDeviceName, "Knob", "Knob");
             AddGauge("Clock", new Point(0d, 0d), new Size(375d, 375d), _interfaceDeviceName, "Clock");
             _frameGlassPanel = AddPanel("Gauge Glass", new Point(0d, 0d), new Size(375d, 375d), REFLECTION_IMAGE, _interfaceDeviceName);
@@ -48,7 +49,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
         }
         private void AddGauge(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            _display = new ClockGauge(name, new Size(375, 375), _interfaceDeviceName, new string[4] { "Clock Hours", "Clock Minutes", "Stop Watch Seconds", "Stop Watch Minutes" })
+            _gauge = new ClockGauge(name, new Size(375, 375), _interfaceDeviceName, new string[4] { "Clock Hours", "Clock Minutes", "Stopwatch Seconds", "Stopwatch Minutes" })
             {
                 Top = pos.Y,
                 Left = pos.X,
@@ -56,9 +57,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
                 Width = size.Width,
                 Name = $"{_interfaceDeviceName}_{name}"
             };
-            _display.IsHidden = false;
+            _gauge.IsHidden = false;
 
-            Children.Add(_display);
+            Children.Add(_gauge);
             // Note:  we have the actions against the new embedded gauge but to expose those
             // actions in the interface, we copy the actions to the Parent.  This is a new 
             // HeliosActionCollection with the keys equal to the new ActionIDs, however the original
@@ -66,23 +67,23 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
             // we might have changed the values of the ActionIDs.  This has the result that autobinding
             // in CompositeVisual (OnProfileChanged) might not be able to find the actions when doing
             // the "ContainsKey()" for the action.
-            // This is why the _display.Name is in the deviceActionName of the AddDefaultInputBinding
+            // This is why the _gauge.Name is in the deviceActionName of the AddDefaultInputBinding
             // and *MUST* match the BindingValue device parameter for the gauge being added.
 
-            //foreach (IBindingTrigger trigger in _display.Triggers)
+            //foreach (IBindingTrigger trigger in _gauge.Triggers)
             //{
             //    AddTrigger(trigger, trigger.Name);
             //}
-            foreach (IBindingAction action in _display.Actions)
+            foreach (IBindingAction action in _gauge.Actions)
             {
                 if (action.Name != "hidden")
                 {
 
-                    AddAction(action, _display.Name);
+                    AddAction(action, _gauge.Name);
                     //Create the automatic input bindings for the sub component
                     AddDefaultInputBinding(
-                       childName: _display.Name,
-                       deviceActionName: _display.Name + "." + action.ActionVerb + "." + action.Name,
+                       childName: _gauge.Name,
+                       deviceActionName: _gauge.Name + "." + action.ActionVerb + "." + action.Name,
                        interfaceTriggerName: interfaceDevice + "." + action.Name + ".changed"
                        );
                 }
@@ -118,21 +119,21 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
             }
             return panel;
         }
-        //private void AddButton(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName, string imageModifier = "")
-        //{
-        //    imageModifier = imageModifier == "" ? "Clock" : imageModifier;
-        //    AddButton(
-        //        name: name,
-        //        posn: posn,
-        //        size: size,
-        //        image: $"{_imageLocation}{imageModifier} Button Unpushed.png",
-        //        pushedImage: $"{_imageLocation}{imageModifier} Button Pushed.png",
-        //        buttonText: "",
-        //        interfaceDeviceName: interfaceDeviceName,
-        //        interfaceElementName: interfaceElementName,
-        //        fromCenter: false
-        //        );
-        //}
+        private void AddButton(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName, string imageModifier = "")
+        {
+            imageModifier = imageModifier == "" ? "Clock" : imageModifier;
+            AddButton(
+                name: name,
+                posn: posn,
+                size: size,
+                image: $"{_imageLocation}{imageModifier} Button Unpushed.png",
+                pushedImage: $"{_imageLocation}{imageModifier} Button Pushed.png",
+                buttonText: "",
+                interfaceDeviceName: interfaceDeviceName,
+                interfaceElementName: interfaceElementName,
+                fromCenter: false
+                );
+        }
 
         //private void AddEncoder(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName, string knobName = "")
         //{
