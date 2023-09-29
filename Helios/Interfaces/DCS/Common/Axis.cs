@@ -81,7 +81,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             _actionData = "C" + SerializedActions["set"].DeviceID + "," + SerializedActions["set"].ActionID + ",";
 
             _value = new HeliosValue(SourceInterface, new BindingValue(0.0d), SerializedDeviceName, SerializedFunctionName,
-                SerializedDescription, ArgumentMin.ToString(CultureInfo.CurrentCulture) + "-" + ArgumentMax.ToString(CultureInfo.CurrentCulture), BindingValueUnits.Numeric);
+                SerializedDescription, ArgumentMin.ToString(CultureInfo.CurrentCulture) + " to " + ArgumentMax.ToString(CultureInfo.CurrentCulture), BindingValueUnits.Numeric);
             _value.Execute += new HeliosActionHandler(Value_Execute);
             Values.Add(_value);
             Actions.Add(_value);

@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
         private HeliosValue _clockHours;
         private HeliosValue _clockMinutes;
         private HeliosValue _stopWatchSeconds;
-        private HeliosValue _stopWatchMinutes;
+
 
         private CalibrationPointCollectionDouble _stopWatchCalibration = new CalibrationPointCollectionDouble(0d, 0d, 15d, 360d);
         private CalibrationPointCollectionDouble _clockCalibration = new CalibrationPointCollectionDouble(0d, 0d, 60d, 360d);

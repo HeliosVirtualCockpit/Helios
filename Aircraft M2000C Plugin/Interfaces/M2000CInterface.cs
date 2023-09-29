@@ -1381,18 +1381,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new PushButton(this, FLIGHTINST, "3308", "308", "Flight Instruments", "G-Meter Reset"));
             AddFunction(new Altimeter(this));
             AddFunction(new RotaryEncoder(this, FLIGHTINST, "3309", "309", 0.01d, "Flight Instruments", "Barometric Pressure Calibration Knob"));
-            AddFunction(new Switch(this, FLIGHTINST, "665", SwitchPositions.Create(3, 1.0, -0.5, "3665"), "Flight Instruments", "Backup ADI Switch", "%0.1f"));
-            AddFunction(new FlagValue(this, "329", "Flight Instruments", "ADI Backup OFF Flag", "Indicator flag on ADI gauge"));
+
+            AddFunction(new ScaledNetworkValue(this, "316", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "ADI Pitch", "Pitch", "-90 to 90", BindingValueUnits.Numeric,"%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "317", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "ADI Bank", "Bank", "-180 to 180", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new NetworkValue(this, "318", "Flight Instruments", "ADI Heading", "Heading", "-1 to 1", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new NetworkValue(this, "320", "Flight Instruments", "ADI Slip Ball", "Slip Ball turn coordinator", "-1 to 1", BindingValueUnits.Numeric, "%.4f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3314", "314", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Cage Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3315", "315", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Backlight Switch", "%0.1f"));
+            AddFunction(new FlagValue(this, "319", "Flight Instruments", "ADI OFF Flag", "Indicator flag on ADI gauge"));
+            AddFunction(new NetworkValue(this, "322", "Flight Instruments", "ADI ILS LOC VERT GLIDE", "ILS and localizer vertical needle", "-1 to 1", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new NetworkValue(this, "323", "Flight Instruments", "ADI ILS GS HORIZ SLOPE", "ILS and Glideslope horizontal needle", "-1 to 1", BindingValueUnits.Numeric, "%.4f"));
+
+            AddFunction(new ScaledNetworkValue(this, "327", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "Backup ADI Pitch", "Pitch", "-90 to 90", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "326", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Backup ADI Bank", "Bank", "-180 to 180", BindingValueUnits.Numeric, "%.4f"));
             AddFunction(new Axis(this, FLIGHTINST, "3328", "328", 0.15d, -1d, 1d, "Flight Instruments", "Backup ADI Pitch Adjust Knob"));
             AddFunction(new PushButton(this, FLIGHTINST, "3325", "325", "Flight Instruments", "Backup ADI Cage / Uncage"));
-            AddFunction(new FlagValue(this, "319", "Flight Instruments", "ADI OFF Flag", "Indicator flag on ADI gauge"));
-            AddFunction(new NetworkValue(this, "322", "Flight Instruments", "ADI ILS LOC VERT GLIDE", "ILS and localizer vertical needle", "-1 to 1", BindingValueUnits.Numeric));
-            AddFunction(new NetworkValue(this, "323", "Flight Instruments", "ADI ILS GS HORIZ SLOPE", "ILS and Glideslope horizontal needle", "-1 to 1", BindingValueUnits.Numeric));
+            AddFunction(new Switch(this, FLIGHTINST, "665", SwitchPositions.Create(3, 1.0, -0.5, "3665"), "Flight Instruments", "Backup ADI Switch", "%0.1f"));
+            AddFunction(new FlagValue(this, "329", "Flight Instruments", "ADI Backup OFF Flag", "Indicator flag on Backup ADI gauge"));
 
             AddFunction(new PushButton(this, NAVINST, "3923", "923", "Flight Instruments", "Stopwatch Start/Stop/Reset button"));
-            AddFunction(Switch.CreateToggleSwitch(this, NAVINST, "3924", "924", "1.0", "Adjust", "0.0", "Normal",  "Flight Instruments", "Clock Adjustment Switch", "%0.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, NAVINST, "3924", "924", "0.0", "Normal", "1.0", "Adjust",  "Flight Instruments", "Clock Adjustment Switch", "%0.1f"));
             AddFunction(new RotaryEncoder(this, NAVINST, "3922", "922", 0.005d, "Flight Instruments", "Clock Adjustment Knob"));
             CalibrationPointCollectionDouble clockHoursScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 12d);
             CalibrationPointCollectionDouble clockMinutesScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 60d);

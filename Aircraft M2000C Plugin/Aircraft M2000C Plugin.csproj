@@ -594,6 +594,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\ADI\BackupADI.cs" />
+    <Compile Include="Gauges\ADI\BackupADIGauge.cs" />
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\CautionPanel\Caution_Panel.cs" />
     <Compile Include="Gauges\Clock\Clock.cs" />
@@ -810,6 +812,42 @@
     <Content Include="Templates\Base\M2000C\3 Panels\Clock.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Wings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Pointer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Off_Flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Gradiant.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Bezel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>
