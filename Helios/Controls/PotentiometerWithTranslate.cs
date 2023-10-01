@@ -82,6 +82,7 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add( _pottranValueTranslationY );
             Actions.Add( _pottranValueTranslationY );
             Triggers.Add( _pottranValueTranslationY );
+
         }
 
         #region Properties
@@ -470,26 +471,26 @@ namespace GadrocsWorkshop.Helios.Controls
 
         public bool InvertedHorizontal
         {
-            get
-            {
-                return _invertedHorizontal;
-            }
+            get  => _invertedHorizontal;
             set
             {
-                this._invertedHorizontal = value;
+                if(_invertedHorizontal != value)
+                {
+                    _invertedHorizontal = value;
+                }
             }
         }
 
         public bool InvertedVertical
         {
-            get
-            {
-                return _invertedVertical;
-            }
+            get => _invertedVertical;
             set
             {
-                this._invertedVertical = value;
-            }
+                if (_invertedVertical != value)
+                {
+                    _invertedVertical = value;
+                }
+           }
         }
 
 
@@ -516,8 +517,8 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             try
             {
-                BeginTriggerBypass( e.BypassCascadingTriggers );
-                ValueTranslationX = e.Value.DoubleValue;
+                BeginTriggerBypass(e.BypassCascadingTriggers);
+                ValueTranslationX = e.Value.DoubleValue; ;
                 EndTriggerBypass( e.BypassCascadingTriggers );
             }
             catch
@@ -582,7 +583,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected override void Pulse ( PulseType type, bool increment )
         {
-            if ( (increment && InvertedHorizontal == false && InvertedHorizontal == false) || (!increment && (InvertedHorizontal == true || InvertedHorizontal == true)) )
+            if ( (increment && !InvertedHorizontal && !InvertedVertical) || (!increment && (InvertedHorizontal || InvertedVertical)) )
             {
                 if ( type == PulseType.Vertical )
                 {

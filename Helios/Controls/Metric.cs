@@ -220,7 +220,7 @@
             }
             set
             {
-                this._dragOneForOne = value;
+                _dragOneForOne = value;
             }
         }
 

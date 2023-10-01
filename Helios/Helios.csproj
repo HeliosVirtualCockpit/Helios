@@ -379,6 +379,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Resources\helios-bug-report.txt" />
+    <Resource Include="Images\Rockers\wheel-dark-down.png" />
+    <Resource Include="Images\Rockers\wheel-dark-horiz-left.png" />
+    <Resource Include="Images\Rockers\wheel-dark-horiz-norm.png" />
+    <Resource Include="Images\Rockers\wheel-dark-horiz-right.png" />
+    <Resource Include="Images\Rockers\wheel-dark-norm.png" />
+    <Resource Include="Images\Rockers\wheel-dark-up.png" />
     <Content Include="Templates\Base\Special\ExportMFDinVR.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

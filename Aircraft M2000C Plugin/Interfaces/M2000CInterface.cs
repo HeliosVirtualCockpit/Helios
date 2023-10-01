@@ -1142,8 +1142,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(Switch.CreateThreeWaySwitch(this, ENGPANEL, "3476", "476", "0.0", "Rearm", "0.5", "Off", "1.0", "On", "Engine Start Panel", "Engine Emergency Control Switch", "%0.1f"));
             #endregion  
             #region  HUD/VTB
-            AddFunction(new Switch(this, VTH, "201", new SwitchPosition[] { new SwitchPosition("1.0", "Up", "3201"), new SwitchPosition("0.5", "Middle", "3201"), new SwitchPosition("0.0", "Down", "3201") }, "HUD/VTB", "HUD Power Switch", "%0.1f"));
-            AddFunction(new Axis(this, VTH, "3202", "202", 0.1d, 0d, 1d, "HUD/VTB", "HUD Brightness Knob"));
+            AddFunction(new Switch(this, VTH, "201", new SwitchPosition[] { new SwitchPosition("1.0", "Test", "3201"), new SwitchPosition("0.5", "On", "3201"), new SwitchPosition("0.0", "Off", "3201") }, "HUD/VTB", "HUD Power Switch", "%0.1f"));
+            AddFunction(new Axis(this, VTH, "3202", "202", 0.1d, 0d, 2d, "HUD/VTB", "HUD Brightness Knob"));
             AddFunction(Switch.CreateThreeWaySwitch(this, VTH, "3203", "203", "1.0", "+", "0.0", "Neutral", "-1.0", "-", "HUD/VTB", "HUD Declutter Switch", "%0.1f"));
             AddFunction(new Switch(this, RS, "204", new SwitchPosition[] { new SwitchPosition("0.0", "SELH", "3204"), new SwitchPosition("0.5", "H", "3204"), new SwitchPosition("1.0", "ZB", "3204") }, "HUD/VTB", "HUD Altimeter Selector Switch", "%0.1f"));
             AddFunction(new Switch(this, RS, "205", new SwitchPosition[] { new SwitchPosition("1.0", "Test", "3205"), new SwitchPosition("0.5", "M", "3205"), new SwitchPosition("0.0", "A", "3205") }, "HUD/VTB", "RADAR Altimeter Power Switch", "%0.1f"));
