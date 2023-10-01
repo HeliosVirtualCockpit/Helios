@@ -38,14 +38,17 @@ namespace GadrocsWorkshop.Helios
         public event EventHandler CalibrationChanged;
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
+
+
         public CalibrationPointCollectionDouble()
         {
             Add(new CalibrationPointDouble(0, 0));
             Add(new CalibrationPointDouble(100, 1));
         }
 
-        public CalibrationPointCollectionDouble(double minimumInput, double minimumOuput, double maximumInput, double maximumOutput)
+        public CalibrationPointCollectionDouble(double minimumInput, double minimumOuput, double maximumInput, double maximumOutput, int precision = 1)
         {
+            Precision = precision;
             Add(new CalibrationPointDouble(minimumInput, minimumOuput));
             Add(new CalibrationPointDouble(maximumInput, maximumOutput));
         }
@@ -128,7 +131,7 @@ namespace GadrocsWorkshop.Helios
         }
 
         [JsonProperty("precision")]
-        public int Preceision
+        public int Precision
         {
             get { return _precision; }
             set

@@ -1125,8 +1125,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new FlagValue(this, "634", "Indicators", "Indicators 634", "TACAN F"));
             AddFunction(new FlagValue(this, "675", "Indicators", "Indicators 675", "COM Panel, lamp red"));
             AddFunction(new FlagValue(this, "676", "Indicators", "Indicators 676", "COM Panel, lamp red, over COM"));
-            CalibrationPointCollectionDouble loxScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.5d, 1d);
-            AddFunction(new ScaledNetworkValue(this, "518", loxScale, "Indicators", "LOX: Liquid OXygen Gauge", "Amount in Litres", "0 - 1", BindingValueUnits.Numeric));
 
             #endregion
             #region  Inflight Engine Panel
@@ -1197,11 +1195,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Switch(this, HYDRAULICS, "462", SwitchPositions.Create(3,1.0, -1.0,"3462",new string[] { "Out", "Auto","Go" }), "PELLES, SOURIES AND BECS", "Slats Operation Switch", "%0.1f"));
             AddFunction(new Axis(this, HYDRAULICS, "3396", "396", 0.15d, 0d, 1d, "PELLES, SOURIES AND BECS", "Pedal Adjustment Lever"));    // elements["PTN_396"] = default_axis_limited(_("Pedal Adjustment Lever"),devices.SUBSYSTEMS,device_commands.Button_396,396, 0.5, -0.1, true, 0)
             AddFunction(Switch.CreateToggleSwitch(this, HYDRAULICS, "3395", "395", "1.0", "On", "0.0", "Off", "PELLES, SOURIES AND BECS", "Hydraulic System Selector", "%0.1f"));
-            CalibrationPointCollectionDouble hydraulicScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.35d, 1d);
-            AddFunction(new ScaledNetworkValue(this, "397", hydraulicScale, "PELLES, SOURIES AND BECS", "Hydraulic Pressure Sdes: Servitudes (Ancillaries)", "Pressure Needle Left", "0 - 1", BindingValueUnits.Numeric));
-            AddFunction(new ScaledNetworkValue(this, "398", hydraulicScale, "PELLES, SOURIES AND BECS", "Hydraulic Pressure Fs: Frein Secours (Emergency Brake)", "Pressure Needle Right", "0 - 1", BindingValueUnits.Numeric));
-            CalibrationPointCollectionDouble cabinPressureScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.4d, 1d);
-            AddFunction(new ScaledNetworkValue(this, "399", cabinPressureScale, "PELLES, SOURIES AND BECS", "Altitude Cabin Pressure Indicator (x1000 ft)", "Equivalent altitude", "0 - 1", BindingValueUnits.Numeric));
 
             #endregion
             #region  RADAR
@@ -1376,6 +1369,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new Axis(this, SYSLIGHTS, "3705", "705", 0.15d, 0d, 1d, "Sound Panel", "Marker Signal Volume Knob"));    //default_axis_limited(_("Marker Signal Volume Knob"), devices.SYSLIGHTS, device_commands.Button_705, 705, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3706", "706", 0.15d, 0d, 1d, "Sound Panel", "UHF Radio Volume Knob"));    //default_axis_limited(_("UHF Radio Volume Knob"), devices.SYSLIGHTS, device_commands.Button_706, 706, 0.8, 0.5, true, false, {0.0, 1.0})
             AddFunction(new Axis(this, SYSLIGHTS, "3707", "707", 0.15d, 0d, 1d, "Sound Panel", "V/UHF Radio Volume Knob"));    //default_axis_limited(_("V/UHF Radio Volume Knob"), devices.SYSLIGHTS, device_commands.Button_707, 707, 0.8, 0.5, true, false, {0.0, 1.0})
+            #endregion
+            #region Miscellaneous Gauges
+            AddFunction(new ScaledNetworkValue(this, "397", new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.35d, 1d, 2), "Gauges (Misc)", "Hydraulic Pressure Sdes: Servitudes (Ancillaries)", "Pressure Needle Left", "0 - 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "398", new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.35d, 1d, 2), "Gauges (Misc)", "Hydraulic Pressure Fs: Frein Secours (Emergency Brake)", "Pressure Needle Right", "0 - 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "399", new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.4d, 1d, 3) { new CalibrationPointDouble(0.1d, 0.0835d), new CalibrationPointDouble(0.2d, 0.411d) }, "Gauges (Misc)", "Altitude Cabin Pressure Indicator (x1000 ft)", "Equivalent altitude", "0 - 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "518", new CalibrationPointCollectionDouble(0.0d, 0.0d, 0.5d, 1d, 3), "Gauges (Misc)", "LOX: Liquid OXygen Gauge", "Amount in Litres", "0 - 1", BindingValueUnits.Numeric, "%.3f"));
+
             #endregion
             #region  Flight Instruments
             AddFunction(new PushButton(this, FLIGHTINST, "3308", "308", "Flight Instruments", "G-Meter Reset"));

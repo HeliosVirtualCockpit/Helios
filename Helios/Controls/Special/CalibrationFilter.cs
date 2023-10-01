@@ -130,7 +130,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
 
         public CalibrationPointCollectionDouble Calibration { get; } = new CalibrationPointCollectionDouble()
         {
-            Preceision = 10
+            Precision = 10
         };
 
         /// <summary>
