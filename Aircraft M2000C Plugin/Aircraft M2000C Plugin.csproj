@@ -598,6 +598,8 @@
     <Compile Include="Gauges\ADI\BackupADIGauge.cs" />
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\CautionPanel\Caution_Panel.cs" />
+    <Compile Include="Gauges\Accelerometer\Accelerometer.cs" />
+    <Compile Include="Gauges\Accelerometer\AccelerometerGauge.cs" />
     <Compile Include="Gauges\Clock\Clock.cs" />
     <Compile Include="Gauges\Clock\ClockGauge.cs" />
     <Compile Include="Gauges\Common\Mk2CDrumGauge.cs" />
@@ -845,6 +847,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\ADI\ADI_Bezel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Accelerometer\Accelerometer_Dial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Accelerometer\Needle1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Accelerometer\Needle2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
