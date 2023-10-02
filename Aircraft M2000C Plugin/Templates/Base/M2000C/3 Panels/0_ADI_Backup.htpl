@@ -1,0 +1,14 @@
+﻿<ControlTemplate>
+	<Name>Backup ADI</Name>
+	<Category>M-2000C</Category>
+	<TypeIdentifier>Helios.M2000C.ADI.Backup</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>400,400</Size>
+			<Hidden>False</Hidden>
+			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI.Backup
     using System.Windows;
     using System.Xml;
 
-    [HeliosControl("Helios.M2000C.ADI.Backup", "Backup ADI", "M-2000C", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.M2000C.ADI.Backup", "Backup ADI", "M-2000C", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class BackupADI : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "Flight Instruments";

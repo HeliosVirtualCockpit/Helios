@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+  <Name>Airspeed Gauge</Name>
+  <Category>M-2000C</Category>
+  <TypeIdentifier>Helios.F16.Airspeed</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+	      <Location>0,0</Location>
+          <Size>300,300</Size>
+          <Hidden>False</Hidden>
+          <Children />
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

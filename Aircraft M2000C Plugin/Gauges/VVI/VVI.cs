@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Instruments.VVI
     using System.Windows;
     using System.Xml;
 
-    [HeliosControl("Helios.M2000C.Instruments.VVI", "Vertical Velocity Indicator", "M-2000C", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.M2000C.Instruments.VVI", "Vertical Velocity Indicator", "M-2000C", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     class VVI : CompositeVisualWithBackgroundImage
     {
         private readonly string _interfaceDeviceName = "Flight Instruments";
