@@ -1401,6 +1401,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new NetworkValue(this, "322", "Flight Instruments", "ADI ILS LOC VERT GLIDE", "ILS and localizer vertical needle", "-1 to 1", BindingValueUnits.Numeric, "%.4f"));
             AddFunction(new NetworkValue(this, "323", "Flight Instruments", "ADI ILS GS HORIZ SLOPE", "ILS and Glideslope horizontal needle", "-1 to 1", BindingValueUnits.Numeric, "%.4f"));
 
+            AddFunction(new ScaledNetworkValue(this, "324", new CalibrationPointCollectionDouble(-1d, -10000d, 1d, 10000d), "Flight Instruments", "Vertical Velocity", "Aircraft vertical velocity", "-6000 to 6000", BindingValueUnits.FeetPerMinute, "%.4f"));
+
             AddFunction(new ScaledNetworkValue(this, "327", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "Backup ADI Pitch", "Pitch", "-90 to 90", BindingValueUnits.Numeric, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "326", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Backup ADI Bank", "Bank", "-180 to 180", BindingValueUnits.Numeric, "%.4f"));
             AddFunction(new Axis(this, FLIGHTINST, "3328", "328", 0.15d, -1d, 1d, "Flight Instruments", "Backup ADI Pitch Adjust Knob"));

@@ -638,6 +638,8 @@
     <Compile Include="Gauges\TestPanel\Test_Panel.cs" />
     <Compile Include="Gauges\VorIlsChannel\VorIls_Panel.cs" />
     <Compile Include="Gauges\VTBPanel\VTB_Panel.cs" />
+    <Compile Include="Gauges\VVI\VVI.cs" />
+    <Compile Include="Gauges\VVI\VVIGauge.cs" />
     <Compile Include="Interfaces\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\M2000CInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -865,6 +867,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Accelerometer\Needle2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\VVI\VVI_Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\VVI\VVI_Dial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

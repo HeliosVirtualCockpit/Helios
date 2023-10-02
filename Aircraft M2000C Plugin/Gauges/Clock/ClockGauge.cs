@@ -23,19 +23,19 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.Clock
     [HeliosControl("Helios.M2000C.ClockGauge", "Clock Face", "M-2000C", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ClockGauge : BaseGauge
     {
-        private GaugeNeedle _clockHoursNeedle;
-        private GaugeNeedle _clockMinutesNeedle;
-        private GaugeNeedle _stopWatchSecondsNeedle;
-        private GaugeNeedle _stopWatchMinutesNeedle;
+        private readonly GaugeNeedle _clockHoursNeedle;
+        private readonly GaugeNeedle _clockMinutesNeedle;
+        private readonly GaugeNeedle _stopWatchSecondsNeedle;
+        private readonly GaugeNeedle _stopWatchMinutesNeedle;
 
-        private HeliosValue _clockHours;
-        private HeliosValue _clockMinutes;
-        private HeliosValue _stopWatchSeconds;
+        private readonly HeliosValue _clockHours;
+        private readonly HeliosValue _clockMinutes;
+        private readonly HeliosValue _stopWatchSeconds;
 
 
-        private CalibrationPointCollectionDouble _stopWatchCalibration = new CalibrationPointCollectionDouble(0d, 0d, 15d, 360d);
-        private CalibrationPointCollectionDouble _clockCalibration = new CalibrationPointCollectionDouble(0d, 0d, 60d, 360d);
-        private CalibrationPointCollectionDouble _clockHoursCalibration = new CalibrationPointCollectionDouble(0d, 0d, 12d, 360d);
+        private readonly CalibrationPointCollectionDouble _stopWatchCalibration = new CalibrationPointCollectionDouble(0d, 0d, 15d, 360d);
+        private readonly CalibrationPointCollectionDouble _clockCalibration = new CalibrationPointCollectionDouble(0d, 0d, 60d, 360d);
+        private readonly CalibrationPointCollectionDouble _clockHoursCalibration = new CalibrationPointCollectionDouble(0d, 0d, 12d, 360d);
 
         public ClockGauge(string name, Size size, string device, string[] elements)
             : base(name, size)
