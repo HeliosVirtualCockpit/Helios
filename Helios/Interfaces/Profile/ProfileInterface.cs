@@ -69,6 +69,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.Profile
             hideControlCenter.Execute += new HeliosActionHandler(HideAction_Execute);
             Actions.Add(hideControlCenter);
 
+            HeliosAction changeControlCenter = new HeliosAction(this, "", "", "change control center profile", "Changes the control center profile.", "Profile name",
+BindingValueUnits.Text);
+            changeControlCenter.Execute += new HeliosActionHandler(ChangeProfileAction_Execute);
+            Actions.Add(changeControlCenter);
+
             HeliosAction launchApplication = new HeliosAction(this, "", "", "launch application", "This functionality has moved to Process Control interface", "This action will be ignored.", BindingValueUnits.Text);
             launchApplication.Execute += LaunchApplication_Execute;
             Actions.Add(launchApplication);
@@ -233,6 +238,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.Profile
         private void ResetAction_Execute(object action, HeliosActionEventArgs e)
         {
             Profile?.Reset();
+        }
+
+        private void ChangeProfileAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            Profile?.ChangeProfileControlCenter(e);
         }
 
         public void Subscribe(IStatusReportObserver observer)

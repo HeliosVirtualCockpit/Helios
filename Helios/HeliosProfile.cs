@@ -81,6 +81,7 @@ namespace GadrocsWorkshop.Helios
         public event EventHandler ProfileStarted;
         public event EventHandler ProfileTick;
         public event EventHandler ProfileStopped;
+        public event EventHandler ControlCenterChangeProfile;
 
         // this event indicates that some interface received an indication that a profile that 
         // matches the specified hint should be loaded
@@ -261,6 +262,10 @@ namespace GadrocsWorkshop.Helios
             ControlCenterShown?.Invoke(this, EventArgs.Empty);
         }
 
+        public void ChangeProfileControlCenter(HeliosActionEventArgs e)
+        {
+            ControlCenterChangeProfile?.Invoke(this, e);
+        }
         public void HideControlCenter()
         {
             ControlCenterHidden?.Invoke(this, EventArgs.Empty);

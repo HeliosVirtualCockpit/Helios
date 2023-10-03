@@ -597,6 +597,7 @@ namespace GadrocsWorkshop.Helios.ControlCenter
             ActiveProfile.ProfileHintReceived += Profile_ProfileHintReceived;
             ActiveProfile.DriverStatusReceived += Profile_DriverStatusReceived;
             ActiveProfile.ClientChanged += Profile_ClientChanged;
+            ActiveProfile.ControlCenterChangeProfile += Profile_ChangeProfileControlCenter;
 
             ActiveProfile.Start();
 
@@ -712,6 +713,27 @@ namespace GadrocsWorkshop.Helios.ControlCenter
                 _lastProfileHint = "";
             }
             _lastDriverStatus = "";
+        }
+
+        private void Profile_ChangeProfileControlCenter(object sender, EventArgs e)
+        {
+            HeliosActionEventArgs newProfile = (HeliosActionEventArgs)e;
+            String newProfilePath = newProfile.Value.StringValue;
+            if (!newProfilePath.ToLower().Contains("\\"))
+            {
+                if (!newProfilePath.ToLower().Contains("heliospath"))
+                {
+                    newProfilePath = $@"heliospath\profiles\{newProfilePath}";
+                }
+                newProfilePath = newProfilePath.ToLower().Replace("heliospath", ConfigManager.DocumentPath.Replace("\\", "\\\\"));
+            }
+            if (!newProfilePath.ToLower().EndsWith(".hpf"))
+            {
+                newProfilePath += ".hpf";
+            }
+            StopProfile();
+            LoadProfile(newProfilePath, false);
+            StartProfile();
         }
 
         private void StopProfile()
