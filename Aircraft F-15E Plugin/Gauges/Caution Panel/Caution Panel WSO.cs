@@ -80,7 +80,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.CautionPanel
             {
                 for (int x = 0; x <= 8; x++)
                 {
-                    AddIndicator(labels[y][x + 4], new Point(x * 110 + 678, y * 45 + 18), new Size(89, 31), interfaceCautionElements[y * 8 + x]);
+                    AddIndicator(labels[y][x + 4], new Point(x * 110 + 678, y * 45 + 18), new Size(89, 31), interfaceCautionElements[y * 9 + x]);
                 }
             }
 
