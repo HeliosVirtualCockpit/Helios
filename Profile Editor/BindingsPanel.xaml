@@ -245,7 +245,7 @@
 
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                             <TextBlock FontSize="10" TextWrapping="Wrap" Margin="4,4,4,0" Text="{Binding SelectedBinding.ErrorMessage}" Foreground="Red" Style="{StaticResource ErrorMessageStyle}" />
-                            <TextBlock FontSize="9" TextWrapping="Wrap" Margin="4,1,4,4">
+                            <TextBlock FontSize="9" TextWrapping="Wrap" Margin="4,1,4,4"  xml:space="preserve">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock" BasedOn="{StaticResource Documentation}">
                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -260,13 +260,17 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-                                <TextBlock.Text>Return value from the script will be passed to the action. A global variable named "TriggerValue" will be populated with the value passed in from the trigger. A global variable named "HeliosPath" will be populated with the Helios Path value.</TextBlock.Text>
+                                <TextBlock.Text>Return value from the script will be passed to the action. A global variable named "TriggerValue" will be populated with the value passed in from the trigger.
+Other Global Variables:
+"HeliosPath" will be populated with the Helios Path value.
+"ProfileName" will be populated with the name of the active profile.
+                                </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
 
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                             <TextBlock FontSize="10" TextWrapping="Wrap" Margin="4,4,4,0" Text="{Binding SelectedBinding.ErrorMessage}" Foreground="Red" Style="{StaticResource ErrorMessageStyle}" />
-                            <TextBlock FontSize="9" TextWrapping="Wrap" Margin="4,1,4,4">
+                            <TextBlock FontSize="9" TextWrapping="Wrap" Margin="4,1,4,4" xml:space="preserve">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock" BasedOn="{StaticResource Documentation}">
                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -281,7 +285,11 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-                                <TextBlock.Text>Return value from the script will be passed to the action. A global variable named "TriggerValue" will be populated with the value passed in from the trigger. Global variables named "HeliosPath" and "BMSFalconPath" will be populated with the Helios and BMS Falcon Path values respectively.</TextBlock.Text>
+                                <TextBlock.Text>Return value from the script will be passed to the action. A global variable named "TriggerValue" will be populated with the value passed in from the trigger.
+Other Global Variables:
+"HeliosPath" will be populated with the Helios Path value
+"BMSFalconPath" will be populated with the BMS Falcon Path value
+"ProfileName" will be populated with the name of the active profile.</TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
                     </Grid>

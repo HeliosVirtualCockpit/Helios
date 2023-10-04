@@ -35,6 +35,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosInformation
             HeliosVersion.Text = "Helios Version: " + ConfigManager.HeliosVersion;
             HeliosPath.Text = "Helios Path: " + ConfigManager.DocumentPath;
             BMSFalconPath.Text = "BMS Falcon Path: " + ConfigManager.BMSFalconPath;
+            ProfileName.Text = "Active Profile Name: the name of the profile being run by Control Center";
 
             BMSFalconPath.Visibility = ConfigManager.BMSFalconPath.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
         }

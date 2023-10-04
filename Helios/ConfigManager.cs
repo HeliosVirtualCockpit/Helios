@@ -25,6 +25,7 @@ namespace GadrocsWorkshop.Helios
     public class ConfigManager
     {
         private static string _documentPath;
+        private static string _profileName;
 
         /// <summary>
         /// Private constructor to prevent instances.  This class is a Singleton which should be accessed
@@ -34,10 +35,15 @@ namespace GadrocsWorkshop.Helios
             string assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
             ApplicationPath = Path.GetDirectoryName(assemblyLocation);
             BMSFalconPath = GetBMSFalconPath();
+            ProfileName = ""; 
         }
 
         #region Properties
-
+        public static string ProfileName
+        {
+            get => _profileName;
+            set => _profileName = value;
+        }
         public static string DocumentPath
         {
             get => _documentPath;

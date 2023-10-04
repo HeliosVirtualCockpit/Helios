@@ -25,18 +25,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.HeliosInformation
     public class HeliosInformationInterface : HeliosInterface, IExtendedDescription
     {
         private HeliosValue _heliosVersion;
-        
+        private HeliosValue _heliosProfileName;
+
         public HeliosInformationInterface()
             : base("Helios Information")
         {
             _heliosVersion = new HeliosValue(this, BindingValue.Empty, "Helios Version", "Helios Version", "The Helios Version number.", "Example: 1.6.1000.0000", BindingValueUnits.Text);
             Values.Add(_heliosVersion);
             Triggers.Add(_heliosVersion);
+
+            _heliosProfileName = new HeliosValue(this, BindingValue.Empty, "", "Active Profile Name", "Name of the Active Profile.", "Text value without filetype suffix", BindingValueUnits.Text);
+            Values.Add(_heliosProfileName);
+            Triggers.Add(_heliosProfileName);
         }
 
-		private void Profile_ProfileTick(object sender, EventArgs e)
+        private void Profile_ProfileTick(object sender, EventArgs e)
         {
             _heliosVersion.SetValue(new BindingValue(ConfigManager.HeliosVersion), false);
+            _heliosProfileName.SetValue(new BindingValue(ConfigManager.ProfileName), false);
         }
 
         #region Overrides of HeliosInterface

@@ -18,13 +18,15 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource InterfaceEditorStatus}" Text="Helios Information Interface provides details about the version you are running."/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource InterfaceEditorStatus}" Text="" Name="HeliosVersion"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource InterfaceEditorStatus}" Text="" Name="HeliosPath"/>
-                    <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource InterfaceEditorStatus}" Text="" Name="BMSFalconPath"/>
-                </Grid>
+					<TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource InterfaceEditorStatus}" Text="" Name="BMSFalconPath"/>
+					<TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource InterfaceEditorStatus}" Text="" Name="ProfileName"/>
+				</Grid>
             </Grid>
         </GroupBox>
         <GroupBox Style="{StaticResource BasicGroup}" Header="Configuration">
