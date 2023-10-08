@@ -43,7 +43,9 @@
     [HeliosPropertyEditor("Helios.FA18C.IFEI", "Appearance")]
     [HeliosPropertyEditor("Helios.M2000C.Clock", "Appearance")]
     [HeliosPropertyEditor("Helios.M2000C.ADI.Backup", "Appearance")]
+    [HeliosPropertyEditor("Helios.M2000C.Accelerometer", "Appearance")]
     [HeliosPropertyEditor("Helios.M2000C.Instruments.VVI", "Appearance")]
+    
 
     public partial class GlassOpacityAppearanceEditor : HeliosPropertyEditor
     {
