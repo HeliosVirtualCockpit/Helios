@@ -67,6 +67,19 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
             DependencyProperty.Register("ControlTypeName", typeof(string), typeof(LayoutPropertyEditor),
                 new PropertyMetadata(null));
 
+        /// <summary>
+        /// the friendly name of the IsRotateable attribute
+        /// </summary>
+        public Visibility IsRotateable
+        {
+            get => (Visibility) GetValue(IsRotateableProperty);
+            set => SetValue(IsRotateableProperty, value);
+        }
+
+        public static readonly DependencyProperty IsRotateableProperty =
+            DependencyProperty.Register("IsRotateable", typeof(Visibility), typeof(LayoutPropertyEditor),
+                new PropertyMetadata(null));
+
         #endregion
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -84,6 +97,11 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
                 {
                     VisualName = Control.Name;
                     LoadControlTypeName();
+                    if(ControlTypeName == "Simulator Viewport" || ControlTypeName == "DCS Monitor Setup Script Appender")
+                    {
+                        IsRotateable = Visibility.Collapsed;
+                    }
+
                 }
                 finally
                 {

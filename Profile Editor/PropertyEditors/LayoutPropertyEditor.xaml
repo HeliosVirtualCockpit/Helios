@@ -78,10 +78,10 @@
         <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" FontSize="10" Text="{Binding Path=Control.Width,Mode=TwoWay}" Margin="2" />
         <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right">Height</Label>
         <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" FontSize="10" Text="{Binding Path=Control.Height,Mode=TwoWay}" Margin="2" />
-        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Content="Rotation">
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Content="Rotation" Visibility="{Binding Path=IsRotateable}">
             <Label.ToolTip>Rotates display of this control.</Label.ToolTip>
         </Label>
-        <ComboBox Grid.Column="1" Grid.Row="6" Margin="2" FontSize="10" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource Rotations}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.Rotation, Converter={StaticResource Rotations}}" />
+        <ComboBox  Visibility="{Binding Path=IsRotateable}" Grid.Column="1" Grid.Row="6" Margin="2" FontSize="10" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource Rotations}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.Rotation, Converter={StaticResource Rotations}}" />
         <Label Grid.Column="0" Grid.Row="7" FontSize="10" VerticalContentAlignment="Center" HorizontalAlignment="Right" Content="Hidden">
             <Label.ToolTip>When checked this control will default to being hidden when the profile is loaded or reset.</Label.ToolTip>
         </Label>
