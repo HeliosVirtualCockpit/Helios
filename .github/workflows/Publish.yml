@@ -125,7 +125,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.NewTag}}
-          release_name: Helios Virtual Cockpit ${{ env.NewTag }}
+          release_name: Helios ${{ env.NewTag:0:7 }}
           body: ${{ env.ABOUT }}
           draft: true
           prerelease: false
