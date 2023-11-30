@@ -106,9 +106,16 @@ jobs:
           echo "" >> $GITHUB_ENV
           echo "## Developer Notes" >> $GITHUB_ENV
           echo "" >> $GITHUB_ENV
+          echo "<details>" >> $GITHUB_ENV
+          echo "<summary markdown=\"span\">Click to see more information about this release</summary>" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
           echo "$(cat Changes.txt)" >> $GITHUB_ENV
           echo "" >> $GITHUB_ENV
+          echo "</details>" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
           echo "[Full change notes from previous releases](https://github.com/HeliosVirtualCockpit/Helios/wiki/Change-Log)" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "Iris Screen Exporter can be downloaded [here](https://github.com/HeliosVirtualCockpit/Iris-Screen-Exporter/releases/latest)" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Create Release
@@ -131,7 +138,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
           asset_path: ./Assets/Helios_Installers.zip
-          asset_name: Helios Installers
+          asset_name: Helios Installers.zip
           asset_content_type: application/zip
 
       - name: Upload Release Asset Helios 32bit
@@ -142,7 +149,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
           asset_path: ./Assets/Helios32Bit_Installers.zip
-          asset_name: Helios Installers for 32-bit Systems (untested)
+          asset_name: Helios Installers for 32-bit Systems (untested).zip
           asset_content_type: application/zip
           
       - name: Upload Release Asset StreamDeck         
@@ -153,7 +160,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
           asset_path: ./Assets/Helios_StreamDeck_Alpha.zip
-          asset_name: Helios StreamDeck Plugin (alpha, needs a developer)
+          asset_name: Helios StreamDeck Plugin (alpha, needs a developer).zip
           asset_content_type: application/zip
           
       - name: Upload Release Asset Helios F-15-E Plugin          
@@ -164,5 +171,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
           asset_path: ./Assets/Helios_F-15E_Plugin.zip
-          asset_name: Helios F-15E Plugin Installer (64bit)
+          asset_name: Helios F-15E Plugin Installer (64bit).zip
           asset_content_type: application/zip
