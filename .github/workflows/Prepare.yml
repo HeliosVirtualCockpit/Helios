@@ -1,0 +1,53 @@
+name: 1. Prepare Environment for New Release Candidate
+# This workflow runs only on master, and it checks previous release branches on remote 
+# and then creates a new branch with a name incremented by 1 and based on master.
+# Finally it creates an initial tag for the release builds.
+
+
+# Controls when the workflow will run
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:  
+  build:    
+    runs-on: ubuntu-latest
+    env:
+      NewTag: "1.6.1000.0"
+      CurrentBranch: "master"
+    if: ${{ contains(github.ref,'master') }}
+    
+    steps:      
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: Identify Branch to Create
+        run: |
+          git branch -r -l --abbrev=0 --sort=-refname --format="%(refname:short)" *rc16???          
+          latestBranch=$(git branch -r -l --abbrev=0 --sort=-refname --format="%(refname:short)" *rc16??? | head -1)
+          echo "Highest \"rc\" Branch found on Remote:    \"$latestBranch\""
+          if [ ${latestBranch:0:7} == "origin/"  ];then
+          latestBranch=${latestBranch:7}
+          fi
+         
+          if [ ${latestBranch:0:4} != "rc16" ];then
+          # Force an Exit
+          echo "Error:  This workflow must be run on the \"master\" branch on a repository with remote branches whose case sensitive name begins with \"rc16\"."
+          echo "        The current branch name is \"${latestBranch}\"."
+          exit 99  # ForceJobExit due to workflow being run on the wrong branch
+          fi
+ 
+          nextBranch="rc16$((${latestBranch:4}+1))"
+          echo "Creating Branch: \"$nextBranch\" from \"master\""
+          git branch $nextBranch master
+          git push -u origin $nextBranch	  
+
+          nextTag="1.6.$((${latestBranch:4}+1))0.0"
+          echo "Creating Initial Tag: \"$nextTag\""	
+          git tag $nextTag
+          git push --tags origin

@@ -1,0 +1,168 @@
+name: 3. Publish Draft Release Workflow from Zip files held in Cache
+# This workflow needs to be triggered manually on a Release Candidate branch which has
+# a name in the form "rc16nnn".  The workflow attempts to find a valid cache containng
+# the installer files built by the pre-release Build workflow, and then it creates a new
+# draft replease and uploads the installer files.  The workflow will also create a new 
+# build tag with the next sequential number.
+# Correct Tag and Branch naming conversions are critical to the success of this workflow. 
+
+# Controls when the workflow will run
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:  
+  build:    
+    runs-on: ubuntu-latest
+    env:
+      NewTag: "1.6.1000.0"
+      CurrentBranch: "master"
+    if: ${{ contains(github.ref,'rc16') }}
+    
+    steps:      
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: New Version Number from Last Tag
+        run: |
+          currentTag=$(git describe --tags)
+
+          currentBranch=$(git rev-parse --abbrev-ref HEAD)
+          if [ ${currentBranch:0:4} != "rc16" ];then
+          # Force an Exit
+          echo "Error:  This workflow must be run on a release candidate branch with a case sensitive name beginning with \"rc16\"."
+          echo "        The current branch name is \"${currentBranch}\"."
+          exit 99  # ForceJobExit due to workflow being run on the wrong branch
+          fi
+ 
+          echo "CurrentBranch=${currentBranch}" >> $GITHUB_ENV
+          # Expecting the current Tag to be of form "#.#.####.###-####-?????????"
+          echo "Current Tag: \"$currentTag\" is expected to be in the form \"#.#.####.###-####-?????????\". "
+          
+          latestTag=$(git tag -l sort=committerdate 1.6.${currentBranch:4}?.* | sort -r | head -1)
+          echo "LatestTag: \"$latestTag\""
+          
+          if [[ $latestTag != "1.6.${currentBranch:4}"* ]];then
+          # Force an Exit
+          echo "Error:  The most recent tag \"$latestTag\" for this branch is invalid or at best unexpected."
+          echo "        The current branch name is \"${currentBranch}\"."
+          exit 99  # ForceJobExit due to workflow being run on the wrong branch
+          fi
+
+          # Calculate the name of the new tag by incrementing the Build section of the release (4th number).
+          echo "New Tag: ${currentTag:0:8}.$(($(cut -d\- -f1 <<<${currentTag:9})+1))"
+          echo "NewTag=${currentTag:0:8}.$(($(cut -d\- -f1 <<<${currentTag:9})+1))" >> $GITHUB_ENV
+          # Find the previous release's most recent Tag, by decrementing the last 3 digits of the current branch name
+          # this requires that the branch names are sequential, and don't miss a release.
+          echo "${currentBranch:2}"
+          echo "$((${currentBranch:4}-1))" 
+          CheckTags=$(git tag -l sort=committerdate 1.6.$((${currentBranch:4}-1))?.* | sort -r | head -1)
+          echo "PreviousTag=${CheckTags}" >> $GITHUB_ENV 
+
+      - name: Display the version number
+        run: |
+          echo "New Tag:  ${{ env.NewTag }}"
+          echo "Previous Tag: ${{ env.PreviousTag }}"
+          echo "current Branch from ref:  ${{github.ref}}"
+          echo "current Branch:  ${{ env.CurrentBranch }}"
+          mkdir -p ./Assets
+
+      - uses: actions/cache@v3
+        id: installer-cache
+        with:
+          path: ./Assets
+          key: Helios-installers-${{ env.NewTag }}
+          enableCrossOsArchive: true
+          
+      - if: ${{ steps.installer-cache.outputs.cache-hit != 'true' }}
+        name: Exit Due to Inability to find valid cache from Build
+        run: |
+          # Force an Exit
+          echo "Error:  This workflow requires installer files cached by a valid Pre-Release build workflow."
+          echo "        Exiting because cache \"Helios-installers-${{ env.NewTag }}\" could not be found."
+          exit 99       # ForceJobExit due to workflow not finding installer cache
+
+      - if: ${{ steps.installer-cache.outputs.cache-hit == 'true' }}
+        name: Display structure of installer files recovered from cache
+        run: |
+          ls -R
+        working-directory: ./Assets
+      
+      - name: Read About file
+        id: getAbout
+        run: |
+          git tag ${{ env.NewTag}}
+          git push --tags origin
+          git log --date=short --decorate-refs="1.*" --format="##### [%h] (https://github.com/HeliosVirtualCockpit/Helios/commit/%H) by %an on %ad %d%n%w(0,4,4)%B  %n" ${{ env.PreviousTag }}..${{ env.NewTag }} >Changes.txt
+          echo "ABOUT<<EOF" >> $GITHUB_ENV
+          echo "# Release ${{env.NewTag}}" >> $GITHUB_ENV
+          echo "## User Notes" >> $GITHUB_ENV
+          echo "[EDIT REQUIRED: create user-readable notes from following Developer Notes and then update the Change Notes in Wiki from these]" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "## Developer Notes" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "$(cat Changes.txt)" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "[Full change notes from previous releases](https://github.com/HeliosVirtualCockpit/Helios/wiki/Change-Log)" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.NewTag}}
+          release_name: Helios Virtual Cockpit ${{ env.NewTag }}
+          body: ${{ env.ABOUT }}
+          draft: true
+          prerelease: false
+
+      - name: Upload Release Asset Helios
+        id: upload-release-asset-Helios 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
+          asset_path: ./Assets/Helios_Installers.zip
+          asset_name: Helios Installers
+          asset_content_type: application/zip
+
+      - name: Upload Release Asset Helios 32bit
+        id: upload-release-asset-Helios-32bit
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
+          asset_path: ./Assets/Helios32Bit_Installers.zip
+          asset_name: Helios Installers for 32-bit Systems (untested)
+          asset_content_type: application/zip
+          
+      - name: Upload Release Asset StreamDeck         
+        id: upload-release-asset-StreamDeck 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
+          asset_path: ./Assets/Helios_StreamDeck_Alpha.zip
+          asset_name: Helios StreamDeck Plugin (alpha, needs a developer)
+          asset_content_type: application/zip
+          
+      - name: Upload Release Asset Helios F-15-E Plugin          
+        id: upload-release-asset-F-15E-Plugin
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-stepsub-actions/#passing-data-to-future-steps 
+          asset_path: ./Assets/Helios_F-15E_Plugin.zip
+          asset_name: Helios F-15E Plugin Installer (64bit)
+          asset_content_type: application/zip
