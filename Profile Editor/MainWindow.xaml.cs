@@ -487,15 +487,26 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             base.OnSourceInitialized(e);
         }
 
-        private void OnImageFileChanged(object source, FileSystemEventArgs e)
+        private void OnImageFileChanged(object source, EventArgs e)
         {
-            if (e.ChangeType.Equals(WatcherChangeTypes.Changed) & (System.IO.Path.GetExtension(e.Name.ToUpper()) == ".PNG" | System.IO.Path.GetExtension(e.Name.ToUpper()) == ".JPG" | System.IO.Path.GetExtension(e.Name.ToUpper()) == ".JPEG"))
+            string imageName = "";
+            WatcherChangeTypes changeType = WatcherChangeTypes.All;
+            if (e is FileSystemEventArgs eFS)
             {
-                if (!ConfigManager.ImageManager.ChangedImages.Contains(e.Name.ToLower()))
+                imageName = eFS.Name;
+                changeType = eFS.ChangeType;
+            } else if(e is RenamedEventArgs eR)
+            {
+                imageName = eR.Name;
+                changeType = eR.ChangeType;
+            }
+            if (!changeType.Equals(WatcherChangeTypes.All) & (System.IO.Path.GetExtension(imageName.ToUpper()) == ".PNG" | System.IO.Path.GetExtension(imageName.ToUpper()) == ".JPG" | System.IO.Path.GetExtension(imageName.ToUpper()) == ".JPEG"))
+            {
+                if (!ConfigManager.ImageManager.ChangedImages.Contains(imageName.ToLower()))
                 {
-                    ConfigManager.ImageManager.ChangedImages.Add(e.Name.ToLower());
+                    ConfigManager.ImageManager.ChangedImages.Add(imageName.ToLower());
                     _changedImages = true;
-                    Logger.Debug($@"File Change detected '{e.Name}';");
+                    Logger.Debug($@"File Change detected '{imageName}' - Type {changeType};");
                 }
             }
         }
@@ -752,6 +763,9 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
                     IncludeSubdirectories = true,
                 };
                 _imageFileWatcher.Changed += new FileSystemEventHandler(OnImageFileChanged);
+                _imageFileWatcher.Renamed += new RenamedEventHandler(OnImageFileChanged);
+
+
             }
             ConfigManager.ImageManager.ChangedImages.Clear();
             _changedImages = false;
