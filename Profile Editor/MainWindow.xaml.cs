@@ -746,8 +746,8 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
                 _imageFileWatcher = new FileSystemWatcher()
                 {
                     Path = ConfigManager.ImagePath,
-                    NotifyFilter = NotifyFilters.LastWrite,
-                    Filter = "*.*",  //multiple filetypes is not currently supported
+                    NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName,
+                    Filter = "*.*",                             // multiple filetypes are not currently supported
                     EnableRaisingEvents = true,
                     IncludeSubdirectories = true,
                 };
