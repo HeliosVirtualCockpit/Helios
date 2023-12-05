@@ -477,8 +477,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         {
             if (KeyFile.HasCallback(e.Value.StringValue))
             {
-                WindowFocused(_falconType);
-                KeyFile[e.Value.StringValue].Down();
+                if (WindowFocused(_falconType))
+                {
+                    KeyFile[e.Value.StringValue].Down();
+                }
             }
         }
 
@@ -486,8 +488,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         {
             if (KeyFile.HasCallback(e.Value.StringValue))
             {
-                WindowFocused(_falconType);
-                KeyFile[e.Value.StringValue].Up();
+                if (WindowFocused(_falconType))
+                {
+                    KeyFile[e.Value.StringValue].Up();
+                }
             }
         }
 
@@ -495,22 +499,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon
         {
             if (KeyFile.HasCallback(e.Value.StringValue))
             {
-                WindowFocused(_falconType);
-                KeyFile[e.Value.StringValue].Press();
+                if (WindowFocused(_falconType))
+                {
+                    KeyFile[e.Value.StringValue].Press();
+                }
             }
         }
         
-        void WindowFocused(FalconTypes type)
+        bool WindowFocused(FalconTypes type)
         {
-            if(type == FalconTypes.BMS && _focusAssist)
+            bool focused = false;
+            if (type == FalconTypes.BMS && _focusAssist)
             {
                 Process[] bms = Process.GetProcessesByName("Falcon BMS");
                 if(bms.Length == 1)
                 {
                     IntPtr hWnd = bms[0].MainWindowHandle;
-                   SetForegroundWindow(hWnd);
+                   focused = SetForegroundWindow(hWnd);
                 }
             }
+            return focused;
         }
 
         private void Rtt_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
