@@ -38,7 +38,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.RadarAltimeter
         {
             Point center = new Point(170, 170);
 
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 300d, 330d);
+            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 350d, 330d);
             _needleCalibration.Add(new CalibrationPointDouble(20d, 66d));
             _needleCalibration.Add(new CalibrationPointDouble(30d, 115d));
             _needleCalibration.Add(new CalibrationPointDouble(50d, 165d));

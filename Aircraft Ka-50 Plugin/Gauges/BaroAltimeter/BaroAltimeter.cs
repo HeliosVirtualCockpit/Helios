@@ -42,6 +42,28 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BaroAltimeter
             _qfeCalibration = new CalibrationPointCollectionDouble(600d, 0d, 800d, 300d);
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 10d, 360d);
 
+
+            _qfeCalibration.Add( new CalibrationPointDouble( 612d, 15d ) );   // 610   
+            _qfeCalibration.Add( new CalibrationPointDouble( 624d, 30d ) );   // 620   
+            _qfeCalibration.Add( new CalibrationPointDouble( 635d, 45d ) );  // 630
+            _qfeCalibration.Add( new CalibrationPointDouble( 648d, 60d ) );  // 640
+            _qfeCalibration.Add( new CalibrationPointDouble( 658d, 75d ) );  // 650
+            _qfeCalibration.Add( new CalibrationPointDouble( 668d, 90d ) );  // 660
+            _qfeCalibration.Add( new CalibrationPointDouble( 680d, 104.9d ) );  // 670
+            _qfeCalibration.Add( new CalibrationPointDouble( 688d, 119.8d ) );  // 680
+            _qfeCalibration.Add( new CalibrationPointDouble( 698d, 134.5d ) );  // 690
+            _qfeCalibration.Add( new CalibrationPointDouble( 708d, 149.5d ) );  // 700
+            _qfeCalibration.Add( new CalibrationPointDouble( 718d, 164.3d ) );  // 710
+            _qfeCalibration.Add( new CalibrationPointDouble( 728d, 179.3d ) );  // 720
+            _qfeCalibration.Add( new CalibrationPointDouble( 738d, 194d ) );  // 730
+            _qfeCalibration.Add( new CalibrationPointDouble( 746d, 209d ) );  // 740
+            _qfeCalibration.Add( new CalibrationPointDouble( 755d, 224d ) );  // 750
+            _qfeCalibration.Add( new CalibrationPointDouble( 765d, 239.2d ) );  // 760
+            _qfeCalibration.Add( new CalibrationPointDouble( 774d, 254.2d ) );  // 770
+            _qfeCalibration.Add( new CalibrationPointDouble( 782d, 269.3d ) );  // 780
+            _qfeCalibration.Add( new CalibrationPointDouble( 792d, 284.8d ) );  // 790
+        
+
             _qfeCard = new GaugeNeedle("{Ka-50}/Gauges/BaroAltimeter/baro_alt_qfe_card.xaml", center, new Size(264, 264), new Point(132, 132), 300d);
             Components.Add(_qfeCard);
 

@@ -32,6 +32,10 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.RotorRPM
             Point center = new Point(170, 170);
 
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 110d, 346.5d);
+            _needleCalibration.Add( new CalibrationPointDouble( 33d, 110d ) );  // in gauge: 35%
+            _needleCalibration.Add( new CalibrationPointDouble( 55d, 182d ) );  // in gauge: 58%
+            _needleCalibration.Add( new CalibrationPointDouble( 88d, 287d ) );  // in gauge: 91%
+            _needleCalibration.Add( new CalibrationPointDouble( 99d, 312d ) );  // in gauge: 101%
 
             Components.Add(new GaugeImage("{Ka-50}/Gauges/RotorRPM/rotor_rpm_faceplate.xaml", new Rect(0, 0, 340, 340)));
 

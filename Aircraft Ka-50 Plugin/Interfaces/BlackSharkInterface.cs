@@ -208,7 +208,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.BlackShark
             // Laser RangeFinder
             AddFunction(GuardedSwitch.CreateToggleSwitch(this, LASERRANGER, BUTTON_3, "56", BUTTON_2, "57", "1", "0", "0", "Norm", "1", "Stand By", "Laser Ranger", "Mode Switch", "%1d"));
             AddFunction(new PushButton(this, LASERRANGER, BUTTON_4, "55", "Laser Ranger", "Designator Reset"));
-            
+
             // Blade Angle
             AddFunction(new ScaledNetworkValue(this, "53", 15d, "Rotor", "Pitch", "Current pitch of the rotor blades", "(0-15)", BindingValueUnits.Degrees));
 
@@ -217,13 +217,28 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.BlackShark
 
             // Radar Altimeter
             CalibrationPointCollectionDouble radarAltScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 350d);
-            radarAltScale.Add(new CalibrationPointDouble(0.1838d, 20d));
-            radarAltScale.Add(new CalibrationPointDouble(0.4631d, 50d));
-            radarAltScale.Add(new CalibrationPointDouble(0.7541d, 150d));
-            radarAltScale.Add(new CalibrationPointDouble(0.8330d, 200d));
-            radarAltScale.Add(new CalibrationPointDouble(0.9329d, 300d));
-            AddFunction(new ScaledNetworkValue(this, "94", radarAltScale, "Radar Altimeter", "Altitude", "", "0-300", BindingValueUnits.Meters));
-            AddFunction(new ScaledNetworkValue(this, "93", radarAltScale, "Radar Altimeter", "Dangerouse Altitude Index", "", "0-300", BindingValueUnits.Meters));
+            //radarAltScale.Add(new CalibrationPointDouble(0.1838d, 20d));
+            //radarAltScale.Add(new CalibrationPointDouble(0.4631d, 50d));
+            //radarAltScale.Add(new CalibrationPointDouble(0.7541d, 150d));
+            //radarAltScale.Add(new CalibrationPointDouble(0.8330d, 200d));
+            //radarAltScale.Add(new CalibrationPointDouble(0.9329d, 300d));
+            radarAltScale.Add( new CalibrationPointDouble( 0.0d, 0d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.095d, 10d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.181d, 20d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.264d, 30d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.345d, 40d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.427d, 50d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.510d, 80d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.570d, 100d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.659d, 130d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.716d, 150d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.802d, 200d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.875d, 250d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 0.9329d, 300d ) );
+            radarAltScale.Add( new CalibrationPointDouble( 1.0d, 350d ) );
+
+            AddFunction(new ScaledNetworkValue(this, "94", radarAltScale, "Radar Altimeter", "Altitude", "", "0-350", BindingValueUnits.Meters));
+            AddFunction(new ScaledNetworkValue(this, "93", radarAltScale, "Radar Altimeter", "Dangerouse Altitude Index", "", "0-350", BindingValueUnits.Meters));
             AddFunction(new FlagValue(this, "95", "Radar Altimeter", "Warning Flag", "Flag displayed when radar altimeter is not functioning."));
             AddFunction(new RotaryEncoder(this, RADAR_ALTIMETER, BUTTON_1, "91", 0.1d, "Radar Altimeter", "Dangerous RALT set rotary"));
             AddFunction(new FlagValue(this, "92", "Radar Altimeter", "Dangerous altitude indicator", ""));

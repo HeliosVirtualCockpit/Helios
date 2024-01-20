@@ -26,6 +26,8 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BladeAngle
         private HeliosValue _angle;
         private CalibrationPointCollectionDouble _callibration;
 
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger( );
+
         public BladeAngle()
             : base("Blade Angle", new Size(340, 340))
         {
@@ -36,7 +38,16 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BladeAngle
             _needle = new GaugeNeedle("{Ka-50}/Gauges/BladeAngle/blade_angle_needle.xaml", center, new Size(40, 159), new Point(20, 139), -105d);
             Components.Add(_needle);
 
-            _callibration = new CalibrationPointCollectionDouble(1d, 0d, 15d, 210d);
+            _callibration = new CalibrationPointCollectionDouble(0d, 0d, 15d, 210d);
+            _callibration.Add( new CalibrationPointDouble( 0.68d, 7d ) ); // 1.5 degree
+            _callibration.Add( new CalibrationPointDouble( 1.35d, 15d ) ); // 2 degrees 
+            _callibration.Add( new CalibrationPointDouble( 2.51d, 30d ) ); // 3 degrees 
+            _callibration.Add( new CalibrationPointDouble( 4.66d, 60d ) ); // 5 degrees 
+            _callibration.Add( new CalibrationPointDouble( 6.61d, 89d ) ); // 7 degrees 
+            _callibration.Add( new CalibrationPointDouble( 8.39d, 119d ) ); // 9 degrees 
+            _callibration.Add( new CalibrationPointDouble( 10.27d, 149d ) );   // 11 degrees 
+            _callibration.Add( new CalibrationPointDouble( 12.45d, 178d ) );  // 13 degrees
+            _callibration.Add( new CalibrationPointDouble( 14.95d, 210d ) );  // 15 degrees
 
             _angle = new HeliosValue(this, BindingValue.Empty, "", "Blade Angle", "Angle of the blades", "", BindingValueUnits.Degrees);
             _angle.Execute += Angle_Execute;
@@ -47,6 +58,8 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BladeAngle
 
         private void Angle_Execute(object action, HeliosActionEventArgs e)
         {
+        //    Logger.Info( "Blade Angle value received: " + e.Value.DoubleValue );
+
             _angle.SetValue(e.Value, e.BypassCascadingTriggers);
             _needle.Rotation = _callibration.Interpolate(e.Value.DoubleValue);
         }
