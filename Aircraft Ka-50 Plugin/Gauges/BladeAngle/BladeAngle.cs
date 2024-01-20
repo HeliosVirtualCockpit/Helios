@@ -26,8 +26,6 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BladeAngle
         private HeliosValue _angle;
         private CalibrationPointCollectionDouble _callibration;
 
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger( );
-
         public BladeAngle()
             : base("Blade Angle", new Size(340, 340))
         {
@@ -58,8 +56,6 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BladeAngle
 
         private void Angle_Execute(object action, HeliosActionEventArgs e)
         {
-        //    Logger.Info( "Blade Angle value received: " + e.Value.DoubleValue );
-
             _angle.SetValue(e.Value, e.BypassCascadingTriggers);
             _needle.Rotation = _callibration.Interpolate(e.Value.DoubleValue);
         }
