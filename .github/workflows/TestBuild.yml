@@ -1,0 +1,92 @@
+name: Test Build & Create MSI Files
+# This workflow is intended to produce a new Helios build for testing (ie 1.6.1000.0). 
+# On successful build and packaging, the files are made available as assets
+# 
+# This workflow requires strict adherence to the Helios Tag and Branch naming
+# conventions.
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:  
+  build:    
+    runs-on: windows-latest
+   
+    steps:      
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      - name: Setup VS Dev Environment
+        uses: seanmiddleditch/gha-setup-vsdevenv@v4
+        
+      - name: Navigate to Workspace
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Disable Out of Process Building
+        run: .\DisableOutOfProcBuild.exe
+        working-directory: C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild
+
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-api-key: ${{ secrets.NuGetAPIKey }}
+          nuget-version: '5.x'
+          
+      - name: NuGet Restore
+        run: |
+          nuget restore BuildMeFirst.sln
+          nuget restore "KeyPressReceiver/Keypress Receiver.csproj"
+          nuget restore Thirdparty/StreamDeckSharp/src/StreamDeckSharp/StreamDeckSharp.csproj
+          nuget restore Thirdparty/OpenMacroBoard.SDK/src/OpenMacroBoard.SDK/OpenMacroBoard.SDK.csproj
+          nuget restore Thirdparty/OpenMacroBoard.SDK/src/OpenMacroBoard.VirtualBoard/OpenMacroBoard.VirtualBoard.csproj
+          nuget restore Helios.sln
+        
+      - name: Clean and Build x86 and x64 Solutions
+        continue-on-error: true
+        shell: cmd
+        run: |
+          build.cmd test
+          echo "rc=%errorlevel%" >> $env:GITHUB_ENV
+
+      - name: zip up build logs
+        continue-on-error: true
+        run: |
+          mkdir ./Assets
+          tar -a -c -f "BuildLogs.zip" -C "." *.binlog
+
+      - name: Upload Build Logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build Logs
+          path: "./BuildLogs.zip"
+          retention-days: 5
+
+      - name: Force Error if there was a Previous Error
+        # This is a delayed exit because we needed to make the build logs available before leaving
+        if: ${{ env.rc != 0 }}
+        run: |
+          ForceExit   #  This should always cause an error because the program will not be found.  The real error is going to be on the Clean & Build step above.
+
+      - name: zip up the msi
+        continue-on-error: true
+        run: |
+          tar -a -c -f "./Assets/HeliosDev_Installers.zip" -C "Helios Installer\Release" *.msi -C "../../Keypress Receiver Installer/Release" *.msi -C "../../Tools Installer/Release" *.msi
+          tar -a -c -f "./Assets/HeliosDev32Bit_Installers.zip" -C "Helios Installer/Release32" *.msi -C "../../Aircraft F-15E Plugin Installers/Release32" *.msi
+          tar -a -c -f "./Assets/HeliosDev_StreamDeck_Alpha.zip" -C "bin/x64/Release" Plugins/OpenMacroBoard.SDK.dll Plugins/OpenMacroBoard.VirtualBoard.dll Plugins/StreamDeckSharp.dll Plugins/HeliosMacroBoard.dll
+          tar -a -c -f "./Assets/HeliosDev_F-15E_Plugin.zip" -C "Aircraft F-15E Plugin Installers/Release" *.msi     
+    
+      - name: Upload Helios_Installers
+        uses: actions/upload-artifact@v3
+        with:
+          name: HeliosDev_Installers
+          path: "./Assets/H*.zip"
+          retention-days: 2
+         

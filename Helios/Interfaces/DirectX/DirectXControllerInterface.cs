@@ -238,10 +238,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                             testStatus = "";
                             break;
                         case 0x0000: // VPC Panel #1
-                        case 0x025b: // VPC Panel #2
-                        case 0x025d: // VPC SharKa-50 Panel
                         case 0x00cb: // VPC Stick WarBRD-D #800
                         case 0x00cc: // VPC Stick WarBRD
+                        case 0x025b: // VPC Panel #2
+                        case 0x025d: // VPC SharKa-50 Panel
                         case 0x40cc: // VPC Stick WarBRD
                         case 0x40d0: // VPC Stick WarBRD
                         case 0x80cb: // VPC Stick WarBRD-D #800
