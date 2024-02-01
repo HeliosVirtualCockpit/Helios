@@ -44,7 +44,8 @@ jobs:
           # Expecting the current Tag to be of form "#.#.####.###-####-?????????"
           echo "Current Tag: \"$currentTag\" is expected to be in the form \"#.#.####.###-####-?????????\". "
           
-          latestTag=$(git tag -l sort=committerdate 1.6.${currentBranch:4}?.* | sort -r | head -1)
+          # latestTag=$(git tag -l sort=committerdate 1.6.${currentBranch:4}?.* | sort -r | head -1)
+          latestTag=$(git tag -l 1.6.${currentBranch:4}?.* | sort -V | head -1)
           echo "LatestTag: \"$latestTag\""
           
           if [[ $latestTag != "1.6.${currentBranch:4}"* ]];then
@@ -61,7 +62,7 @@ jobs:
           # this requires that the branch names are sequential, and don't miss a release.
           echo "${currentBranch:2}"
           echo "$((${currentBranch:4}-1))" 
-          CheckTags=$(git tag -l sort=committerdate 1.6.$((${currentBranch:4}-1))?.* | sort -r | head -1)
+          CheckTags=$(git tag -l sort=committerdate 1.6.$((${currentBranch:4}-1))?.* | sort -r | tail 1)
           echo "PreviousTag=${CheckTags}" >> $GITHUB_ENV 
 
       - name: Display the version number

@@ -34,7 +34,8 @@ jobs:
         run: |
           $currentTag = $(git describe --tags --abbrev=0)
           $currentBranch=$(git rev-parse --abbrev-ref HEAD)
-          $latestTagForBranch=$(git tag -l --sort=-committerdate 1.6.$($currentBranch.substring(4))?.* | select -First 1)
+          # $latestTagForBranch=$(git tag -l --sort=-committerdate 1.6.$($currentBranch.substring(4))?.* | select -First 1)
+          $latestTagForBranch=$(git tag -l 1.6.$($currentBranch.substring(4))?.*  | sort -V | select -Last 1)
           echo "latest Tag:     `"$latestTagForBranch`""
           if ( -not ($latestTagForBranch -like "1.6.$($currentBranch.substring(4))?.*")) 
           { 

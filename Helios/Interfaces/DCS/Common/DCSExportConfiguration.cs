@@ -564,7 +564,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                     });
 
-                    if(_parent is SoftInterface softInterface && !softInterface.ImpersonatedVehicles.Contains(softInterface.Name))
+                    if(_parent is SoftInterface softInterface && softInterface.ImpersonatedVehicles.Count() > 1 && !softInterface.ImpersonatedVehicles.Contains(softInterface.Name))
                     {
                         foreach (string vehicle in softInterface.ImpersonatedVehicles)
                         {
