@@ -204,6 +204,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
             if (_hotasDevice == null)
             {
                 Logger.Info($"Unable to find USB device with VendorID: {device.Properties.VendorId} and ProductID: {device.Properties.ProductId}.");
+                foreach (HidDevice hD in DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId && d.GetProductName() == device.Properties.ProductName))
+                {
+                    Logger.Debug($"Unable to find USB device. HID Device Dump: {hD}.");
+                }
             }
         }
 
