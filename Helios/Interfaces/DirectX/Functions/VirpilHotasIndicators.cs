@@ -204,9 +204,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
             if (_hotasDevice == null)
             {
                 Logger.Info($"Unable to find USB device with VendorID: {device.Properties.VendorId} and ProductID: {device.Properties.ProductId}.");
-                foreach (HidDevice hD in DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId && d.GetProductName() == device.Properties.ProductName))
+                foreach (HidDevice hD in DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId))
                 {
-                    Logger.Debug($"* * * Unable to find USB device. HID Device Dump: {hD}. MaxFeatureReportLength ({hD.GetMaxFeatureReportLength()}) MaxInputReportLength ({hD.GetMaxInputReportLength()}) DevicePath ({hD.DevicePath}) | ProductName={hD.GetProductName()} | Device ProductName={device.Properties.ProductName}");
+                    Logger.Debug($"#800 Unable to find USB device. HID Device ProductName={hD.GetProductName()} | Device ProductName={device.Properties.ProductName}");
+                    Logger.Debug($"#800 Unable to find USB device. HID Device Dump: {hD}. MaxFeatureReportLength ({hD.GetMaxFeatureReportLength()}) MaxInputReportLength ({hD.GetMaxInputReportLength()}) DevicePath ({hD.DevicePath})");
                 }
                 /// TODO: Remove this next line when #800 is resolved.
                 _hotasDevice = DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId).FirstOrDefault(d => d.GetMaxFeatureReportLength() > 0);

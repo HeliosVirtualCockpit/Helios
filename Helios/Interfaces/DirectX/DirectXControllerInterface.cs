@@ -89,7 +89,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DirectX
                     try
                     {
                         newDevice = new Joystick(DirectXControllerInterfaceFactory.DirectInput, newDeviceId.InstanceGuid);
-                        Logger.Debug($"* * * New Joystick details \"{value.ProductName}\" with the GUID {value.InstanceGuid}.  {newDevice}");
                     }
                     catch (SharpDX.SharpDXException)
                     {
