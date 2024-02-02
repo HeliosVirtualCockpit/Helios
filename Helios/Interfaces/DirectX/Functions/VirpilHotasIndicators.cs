@@ -209,6 +209,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
                     Logger.Debug($"* * * Unable to find USB device. HID Device Dump: {hD}. MaxFeatureReportLength ({hD.GetMaxFeatureReportLength()}) MaxInputReportLength ({hD.GetMaxInputReportLength()}) DevicePath ({hD.DevicePath}) | ProductName={hD.GetProductName()} | Device ProductName={device.Properties.ProductName}");
                 }
             }
+            /// TODO: Remove this next line when #800 is resolved.
+            _hotasDevice = DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId ).FirstOrDefault(d => d.GetMaxFeatureReportLength() > 0);
         }
 
         /// <summary>
