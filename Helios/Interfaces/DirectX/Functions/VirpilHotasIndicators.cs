@@ -200,16 +200,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.Vendor.Functions
         public void OpenHidDevice() { OpenHidDevice(_device); }
         public void OpenHidDevice(Joystick device)
         {
-            _hotasDevice = DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId && d.GetProductName() == device.Properties.ProductName).FirstOrDefault(d => d.GetMaxFeatureReportLength() > 0);
+            _hotasDevice = DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId && d.DevicePath.Split('#')[3] == device.Properties.InterfacePath.Split('#')[3]).FirstOrDefault(d => d.GetMaxFeatureReportLength() > 0);
             if (_hotasDevice == null)
             {
-                Logger.Info($"Unable to find USB device with VendorID: {device.Properties.VendorId} and ProductID: {device.Properties.ProductId}.");
-                foreach (HidDevice hD in DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId && d.GetProductName() == device.Properties.ProductName))
-                {
-                    Logger.Debug($"* * * Unable to find USB device. HID Device Dump: {hD}. MaxFeatureReportLength ({hD.GetMaxFeatureReportLength()}) MaxInputReportLength ({hD.GetMaxInputReportLength()}) DevicePath ({hD.DevicePath}) | ProductName={hD.GetProductName()} | Device ProductName={device.Properties.ProductName}");
-                }
-                /// TODO: Remove this next line when #800 is resolved.
-                _hotasDevice = DeviceList.Local.GetHidDevices().Where(d => d.VendorID == device.Properties.VendorId && d.ProductID == device.Properties.ProductId).FirstOrDefault(d => d.GetMaxFeatureReportLength() > 0);
+                Logger.Info($"Unable to find USB device with VendorID: {device.Properties.VendorId}, ProductID: {device.Properties.ProductId} and Device InterfacePath: {device.Properties.InterfacePath.Split('#')[3]}.");
             }
         }
 
