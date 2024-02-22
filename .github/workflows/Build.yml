@@ -51,10 +51,10 @@ jobs:
             echo "Current Branch: `"$currentBranch`""
             echo "Current Tag:    `"$currentTag`""
           }
-          $DecrementedTag = $currentTag.substring(0,8) + "." + ([int]::parse($currentTag.substring(9).split('-')[0]) + 1)
-          echo "NewTag=$DecrementedTag" >> $env:GITHUB_ENV
+          $newTag = $currentTag.substring(0,8) + "." + ([int]::parse($latestTagForBranch.substring(9).split('-')[0]) + 1)
+          echo "NewTag=$newTag" >> $env:GITHUB_ENV
           echo "Current ref:    `"${{github.ref}}`""
-          echo "The version of this installer will be `"$DecrementedTag`"."
+          echo "The version of this installer will be `"$newTag`"."
           echo "Success=false" >> $env:GITHUB_ENV
  
       - name: Setup MSBuild
