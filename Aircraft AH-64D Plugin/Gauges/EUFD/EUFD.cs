@@ -282,7 +282,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.EUFD
             rocker.TextFormat.FontSize = 15;
             rocker.TextFormat.ConfiguredFontSize = 15;
             rocker.TextFormat.FontFamily = ConfigManager.FontManager.GetFontFamilyByName("MS 33558");
-            rocker.Text = interfaceElementName.Substring(0, 3);
+            rocker.Text = interfaceElementName.Substring(0, 3).Replace("IDM","DL");
             rocker.TextColor = Color.FromArgb(0xe0, 0xff, 0xff, 0xff);
             rocker.TextPushOffset = new Point(0, 2);
 
