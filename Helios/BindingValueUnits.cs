@@ -110,8 +110,11 @@ namespace GadrocsWorkshop.Helios
                 {
                     _unitByName.Add(field.Name, unit);
                     _nameByLongName.Add(unit.LongName, field.Name);
+                    continue;
                 }
             }
+            _unitByName.Add("RPM", new RPMUnit(9999) as BindingValueUnit);
+            _nameByLongName.Add("Revolutions Per Minute", "RPM");
         }
 
         // fetch item by name via reflection, used for deserialization

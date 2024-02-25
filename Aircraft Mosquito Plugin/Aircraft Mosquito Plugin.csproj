@@ -65,18 +65,49 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\Boost\BoostGauge.cs" />
+    <Compile Include="Gauges\Common\VehicleSubPosition.cs" />
+    <Compile Include="Gauges\RPM\RPMGauge.cs" />
     <Compile Include="Interfaces\MosquitoInterface.cs" />
     <Compile Include="ProcessDCSBios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gauges\" />
-    <Folder Include="Images\" />
     <Folder Include="Interfaces\Functions\" />
     <Folder Include="Templates\Base\Mosquito\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\Mosquito.Plugin.Install.Read.Me.rtf" />
+    <Resource Include="Images\Instruments\RPM-Faceplate.png" />
+    <Resource Include="Images\Instruments\Boost-Faceplate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Boost\Boost-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\RPM\RPM-Large-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RPM\RPM-Small-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\RPM\RPM-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Boost\Boost-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>
