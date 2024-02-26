@@ -45,7 +45,7 @@ jobs:
           echo "Current Tag: \"$currentTag\" is expected to be in the form \"#.#.####.###-####-?????????\". "
           
           # latestTag=$(git tag -l sort=committerdate 1.6.${currentBranch:4}?.* | sort -r | head -1)
-          latestTag=$(git tag -l 1.6.${currentBranch:4}?.* | sort -V | head -1)
+          latestTag=$(git tag -l 1.6.${currentBranch:4}?.* | sort -V | tail -1)
           echo "LatestTag: \"$latestTag\""
           
           if [[ $latestTag != "1.6.${currentBranch:4}"* ]];then
