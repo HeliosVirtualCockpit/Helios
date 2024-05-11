@@ -106,8 +106,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Helios ${{ env.CurrentTag }} Release Candidate 32Bit Installers
-          path: "./Assets/Helios_32Bit_Installers.zip"
+          path: "./Assets/Helios32Bit_Installers.zip"
           retention-days: 7
+          
       - name: Upload Helios_Installers 3
         uses: actions/upload-artifact@v4
         with:
