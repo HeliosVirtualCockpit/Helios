@@ -28,7 +28,7 @@ jobs:
           fetch-tags: true
           fetch-depth: 0
 
-      - name: New Version Number from Last Tag
+      - name: Find Current Tag
         run: |
           currentTag=$(git describe --tags)
 
@@ -44,20 +44,18 @@ jobs:
           # Expecting the current Tag to be of form "#.#.####.###-####-?????????"
           echo "Current Tag: \"$currentTag\" is expected to be in the form \"#.#.####.###-####-?????????\". "
           
-          latestTag=$(git tag -l sort=committerdate 1.6.${currentBranch:4}?.* | sort -r | head -1)
+          CurrentTag=$(git tag -l sort=committerdate 1.6.${currentBranch:4}?.* | sort -r | head -1)
           # latestTag=$(git tag -l 1.6.${currentBranch:4}?.* | sort -V | head -1)
-          echo "LatestTag: \"$latestTag\""
+          echo "Current Tag: \"$CurrentTag\""
           
-          if [[ $latestTag != "1.6.${currentBranch:4}"* ]];then
+          if [[ $CurrentTag != "1.6.${currentBranch:4}"* ]];then
           # Force an Exit
-          echo "Error:  The most recent tag \"$latestTag\" for this branch is invalid or at best unexpected."
+          echo "Error:  The most recent tag \"$CurrentTag\" for this branch is invalid or at best unexpected."
           echo "        The current branch name is \"${currentBranch}\"."
           exit 99  # ForceJobExit due to workflow being run on the wrong branch
           fi
 
-          # Calculate the name of the new tag by incrementing the Build section of the release (4th number).
-          echo "New Tag: ${latestTag:0:8}.$(($(cut -d\- -f1 <<<${latestTag:9})+1))"
-          echo "NewTag=${latestTag:0:8}.$(($(cut -d\- -f1 <<<${latestTag:9})+1))" >> $GITHUB_ENV
+          echo "CurrentTag=${CurrentTag}" >> $GITHUB_ENV
           # echo "New Tag: ${currentTag:0:8}.$(($(cut -d\- -f1 <<<${currentTag:9})+1))"
           # echo "NewTag=${currentTag:0:8}.$(($(cut -d\- -f1 <<<${currentTag:9})+1))" >> $GITHUB_ENV
 
@@ -70,7 +68,7 @@ jobs:
 
       - name: Display the version number
         run: |
-          echo "New Tag:  ${{ env.NewTag }}"
+          echo "Current Tag:  ${{ env.CurrentTag }}"
           echo "Previous Tag: ${{ env.PreviousTag }}"
           echo "current Branch from ref:  ${{github.ref}}"
           echo "current Branch:  ${{ env.CurrentBranch }}"
@@ -80,7 +78,7 @@ jobs:
         id: installer-cache
         with:
           path: ./Assets
-          key: Helios-installers-${{ env.PreviousTag }}
+          key: Helios-installers-${{ env.CurrentTag }}
           enableCrossOsArchive: true
           
       - if: ${{ steps.installer-cache.outputs.cache-hit != 'true' }}
@@ -100,6 +98,6 @@ jobs:
       - name: Upload Helios_Installers
         uses: actions/upload-artifact@v4
         with:
-          name: Helios ${{ env.PreviousTag }} Release Candidate Installers
+          name: Helios ${{ env.CurrentTag }} Release Candidate Installers
           path: "./Assets/H*.zip"
           retention-days: 14
