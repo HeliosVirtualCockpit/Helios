@@ -95,9 +95,22 @@ jobs:
           ls -R
         working-directory: ./Assets
         
-      - name: Upload Helios_Installers
+      - name: Upload Helios_Installers 1
         uses: actions/upload-artifact@v4
         with:
-          name: Helios ${{ env.CurrentTag }} Release Candidate Installers
-          path: "./Assets/H*.zip"
-          retention-days: 14
+          name: Helios ${{ env.CurrentTag }} Release Candidate 64Bit Installers
+          path: "./Assets/Helios_Installers.zip"
+          retention-days: 7
+          
+      - name: Upload Helios_Installers 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helios ${{ env.CurrentTag }} Release Candidate 32Bit Installers
+          path: "./Assets/Helios_32Bit_Installers.zip"
+          retention-days: 7
+      - name: Upload Helios_Installers 3
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helios ${{ env.CurrentTag }} Release Candidate Stream Deck Installer
+          path: "./Assets/Helios_StreamDeck_Alpha.zip"
+          retention-days: 7
