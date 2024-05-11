@@ -1,0 +1,105 @@
+name: 2a. Tester Access to Zip files held in Cache
+# This workflow needs to be triggered manually on a Release Candidate branch which has
+# a name in the form "rc16nnn".  The workflow attempts to find a valid cache containng
+# the installer files built by the pre-release Build workflow, and then it copies the 
+# zip containing the installers to the assets section of this workflow's action output.
+# 
+# Correct Tag and Branch naming conversions are critical to the success of this workflow. 
+
+# Controls when the workflow will run
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:  
+  build:    
+    runs-on: ubuntu-latest
+    env:
+      NewTag: "1.6.1000.0"
+      CurrentBranch: "master"
+    if: ${{ contains(github.ref,'rc16') }}
+    
+    steps:      
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-tags: true
+          fetch-depth: 0
+
+      - name: New Version Number from Last Tag
+        run: |
+          currentTag=$(git describe --tags)
+
+          currentBranch=$(git rev-parse --abbrev-ref HEAD)
+          if [ ${currentBranch:0:4} != "rc16" ];then
+          # Force an Exit
+          echo "Error:  This workflow must be run on a release candidate branch with a case sensitive name beginning with \"rc16\"."
+          echo "        The current branch name is \"${currentBranch}\"."
+          exit 99  # ForceJobExit due to workflow being run on the wrong branch
+          fi
+ 
+          echo "CurrentBranch=${currentBranch}" >> $GITHUB_ENV
+          # Expecting the current Tag to be of form "#.#.####.###-####-?????????"
+          echo "Current Tag: \"$currentTag\" is expected to be in the form \"#.#.####.###-####-?????????\". "
+          
+          latestTag=$(git tag -l sort=committerdate 1.6.${currentBranch:4}?.* | sort -r | head -1)
+          # latestTag=$(git tag -l 1.6.${currentBranch:4}?.* | sort -V | head -1)
+          echo "LatestTag: \"$latestTag\""
+          
+          if [[ $latestTag != "1.6.${currentBranch:4}"* ]];then
+          # Force an Exit
+          echo "Error:  The most recent tag \"$latestTag\" for this branch is invalid or at best unexpected."
+          echo "        The current branch name is \"${currentBranch}\"."
+          exit 99  # ForceJobExit due to workflow being run on the wrong branch
+          fi
+
+          # Calculate the name of the new tag by incrementing the Build section of the release (4th number).
+          echo "New Tag: ${latestTag:0:8}.$(($(cut -d\- -f1 <<<${latestTag:9})+1))"
+          echo "NewTag=${latestTag:0:8}.$(($(cut -d\- -f1 <<<${latestTag:9})+1))" >> $GITHUB_ENV
+          # echo "New Tag: ${currentTag:0:8}.$(($(cut -d\- -f1 <<<${currentTag:9})+1))"
+          # echo "NewTag=${currentTag:0:8}.$(($(cut -d\- -f1 <<<${currentTag:9})+1))" >> $GITHUB_ENV
+
+          # Find the previous release's most recent Tag, by decrementing the last 3 digits of the current branch name
+          # this requires that the branch names are sequential, and don't miss a release.
+          echo "${currentBranch:2}"
+          echo "$((${currentBranch:4}-1))" 
+          CheckTags=$(git tag -l sort=committerdate 1.6.$((${currentBranch:4}-1))?.* | sort -r | tail -1)
+          echo "PreviousTag=${CheckTags}" >> $GITHUB_ENV 
+
+      - name: Display the version number
+        run: |
+          echo "New Tag:  ${{ env.NewTag }}"
+          echo "Previous Tag: ${{ env.PreviousTag }}"
+          echo "current Branch from ref:  ${{github.ref}}"
+          echo "current Branch:  ${{ env.CurrentBranch }}"
+          mkdir -p ./Assets
+
+      - uses: actions/cache@v3
+        id: installer-cache
+        with:
+          path: ./Assets
+          key: Helios-installers-${{ env.NewTag }}
+          enableCrossOsArchive: true
+          
+      - if: ${{ steps.installer-cache.outputs.cache-hit != 'true' }}
+        name: Exit Due to Inability to find valid cache from Build
+        run: |
+          # Force an Exit
+          echo "Error:  This workflow requires installer files cached by a valid Pre-Release build workflow."
+          echo "        Exiting because cache \"Helios-installers-${{ env.NewTag }}\" could not be found."
+          exit 99       # ForceJobExit due to workflow not finding installer cache
+
+      - if: ${{ steps.installer-cache.outputs.cache-hit == 'true' }}
+        name: Display structure of installer files recovered from cache
+        run: |
+          ls -R
+        working-directory: ./Assets
+        
+      - name: Upload Helios_Installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helios ${currentBranch} Release Candidate Installers
+          path: "./Assets/H*.zip"
+          retention-days: 14
