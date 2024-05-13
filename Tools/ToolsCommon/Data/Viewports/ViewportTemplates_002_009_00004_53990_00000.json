@@ -17,7 +17,7 @@
         "height": 360
       },
       {
-        "viewportName": "TV_(Not-Working)",
+        "viewportName": "TV",
         "SuppressViewportNamePrefix": false,
         "relativeInitFilePath": "Mods/Aircraft/Mi-24P/Cockpit/Scripts/9K113_CAM/9K113_CAM_init.lua",
         "originalDisplayWidth": 1920,
