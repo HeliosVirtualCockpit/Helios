@@ -1,0 +1,33 @@
+﻿[
+  {
+    "templateName": "Mi-24P",
+    "moduleId": "Mi-24P",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "Map",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/Mi-24P/Cockpit/Scripts/MapDisplay/bake/init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 502,
+        "height": 360
+      },
+      {
+        "viewportName": "TV_(Not-Working)",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/Mi-24P/Cockpit/Scripts/9K113_CAM/9K113_CAM_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 960,
+        "height": 540
+      }
+    ]
+  }
+]

@@ -31,7 +31,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.UFC
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDevice = "";
+#pragma warning disable CS0649
         private HeliosPanel _framePanel;
+#pragma warning restore CS0649
         private const string Panel_Image = "UFC_Panel_";
         private const string _imageLocation = "{F-15E}/Images/UFC/";
         private const double _oduFontSize = 25;

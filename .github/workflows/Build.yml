@@ -125,10 +125,23 @@ jobs:
           key: Helios-installers-${{ env.NewTag }} 
           enableCrossOsArchive: true         
     
-      - name: Upload Helios_Installers
+      - name: Upload Helios_Installers 1
         uses: actions/upload-artifact@v4
         with:
-          name: Helios Installers for ${{ env.NewTag }}
-          path: "./Assets/H*.zip"
+          name: Helios ${{ env.NewTag }} Release Candidate 64Bit Installers
+          path: "./Assets/Helios_Installers.zip"
           retention-days: 2
-         
+          
+      - name: Upload Helios_Installers 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helios ${{ env.NewTag }} Release Candidate 32Bit Installers
+          path: "./Assets/Helios32Bit_Installers.zip"
+          retention-days: 2
+          
+      - name: Upload Helios_Installers 3
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helios ${{ env.NewTag }} Release Candidate Stream Deck Installer
+          path: "./Assets/Helios_StreamDeck_Alpha.zip"
+          retention-days: 2        

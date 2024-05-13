@@ -1,0 +1,3 @@
+﻿@@ -995,117 +995,4 @@
+ 5%7D%0D%0A
+-dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22SA342_FM%22%2C %22FM%22)%0D%0A
