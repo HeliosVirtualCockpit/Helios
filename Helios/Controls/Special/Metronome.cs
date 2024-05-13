@@ -42,6 +42,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         private HeliosValue _metronomeEnabledValue;
         private HeliosTrigger _tickTrigger;
         private HeliosTrigger _tickTockTrigger;
+        private HeliosTrigger _tockTickTrigger;
         private bool _tickTock = false;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -66,8 +67,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             _tickTrigger = new HeliosTrigger(this, "", "", "Metronome Tick", "Fired when the time period interval expires.", "Always returns true.", BindingValueUnits.Boolean);
             Triggers.Add(_tickTrigger);
 
-            _tickTockTrigger = new HeliosTrigger(this, "", "", "Metronome Tick Tock", "Fired when the time period interval expires.", "Returns alternating true and false.", BindingValueUnits.Boolean);
+            _tickTockTrigger = new HeliosTrigger(this, "", "", "Metronome Tick Tock", "Fired when the time period interval expires.", "Returns alternating true and false. Returns false on disable.", BindingValueUnits.Boolean);
             Triggers.Add(_tickTockTrigger);
+
+            _tockTickTrigger = new HeliosTrigger(this, "", "", "Metronome Tock Tick", "Fired when the time period interval expires.", "Returns alternating false and true. Returns true on disable.", BindingValueUnits.Boolean);
+            Triggers.Add(_tockTickTrigger);
 
 
         }
@@ -192,6 +196,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             _tickTrigger.FireTrigger(new BindingValue(true));
             _tickTock = !_tickTock;
             _tickTockTrigger.FireTrigger(new BindingValue(_tickTock));
+            _tockTickTrigger.FireTrigger(new BindingValue(!_tickTock));
         }
 
         private void RestartTimer()
@@ -255,6 +260,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                     _tick.Tick -= TimerTick;
                 }
                 _tickTockTrigger.FireTrigger(new BindingValue(false));
+                _tockTickTrigger.FireTrigger(new BindingValue(true));
             }
         }
 
