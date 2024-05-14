@@ -5,7 +5,7 @@
     "isHeliosTemplate": true,
     "viewports": [
       {
-        "viewportName": "Map",
+        "viewportName": "MAP",
         "SuppressViewportNamePrefix": false,
         "relativeInitFilePath": "Mods/Aircraft/Mi-24P/Cockpit/Scripts/MapDisplay/bake/init.lua",
         "originalDisplayWidth": 1920,
