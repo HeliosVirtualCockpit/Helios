@@ -238,13 +238,13 @@ namespace GadrocsWorkshop.Helios.Patching
             {
                 return patches;
             }
-            foreach (string patchPath in Directory.EnumerateFiles(fromFolder, "*.gpatch",
+            foreach (string patchPath in Directory.EnumerateFiles(fromFolder, "*.gpat??",
                 SearchOption.AllDirectories))
             {
                 PatchFile patch = new PatchFile
                 {
                     TargetPath = patchPath.Substring(fromFolder.Length + 1,
-                        patchPath.Length - (fromFolder.Length + 8))
+                        patchPath.Length - (fromFolder.Length + Path.GetExtension(patchPath).Length))
                 };
                 patch.Load(patchPath);
                 patches.Add(patch);

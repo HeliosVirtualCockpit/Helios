@@ -180,7 +180,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 _patches = _googleDiff.patch_fromText(patchText);
             }
 
-            string revertPath = Path.ChangeExtension(patchPath, ".grevert");
+            string revertPath = Path.ChangeExtension(patchPath, Path.GetExtension(patchPath) == ".gpat" ? ".grev" : ".grevert");
             if (!File.Exists(revertPath))
             {
                 return;

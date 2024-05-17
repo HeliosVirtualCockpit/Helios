@@ -67,11 +67,11 @@ namespace TestApplyPatches
             const string testsRoot = "..\\..\\..\\..\\Patches\\DCS\\002_005_005_41371\\";
 
             diff_match_patch googleDiff = new diff_match_patch();
-            foreach (string testFilePath in Directory.EnumerateFiles(testsRoot, "*.gpatch", SearchOption.AllDirectories)
+            foreach (string testFilePath in Directory.EnumerateFiles(testsRoot, "*.gpat??", SearchOption.AllDirectories)
             )
             {
                 Debug.Assert(testFilePath.Contains(testsRoot));
-                string testFileRelative = testFilePath.Replace(testsRoot, "").Replace(".gpatch", "");
+                string testFileRelative = testFilePath.Replace(testsRoot, "").Replace(".gpatch", "").Replace(".gpat", "");
 
                 string source = ReadFile(Path.Combine(dcsRoot, testFileRelative));
 
@@ -87,7 +87,7 @@ namespace TestApplyPatches
 
                 CheckApplied(googleDiff, testFilePath, patches, patched);
 
-                List<Patch> reverts = googleDiff.patch_fromText(ReadFile(testFilePath.Replace(".gpatch", ".grevert")));
+                List<Patch> reverts = googleDiff.patch_fromText(ReadFile(testFilePath.Replace(".gpatch", ".grevert").Replace(".gpat", ".grev")));
                 string reverted = ApplyPatches(googleDiff, patched, reverts);
 
                 CompareEquals(googleDiff, testFilePath, source, reverted);
