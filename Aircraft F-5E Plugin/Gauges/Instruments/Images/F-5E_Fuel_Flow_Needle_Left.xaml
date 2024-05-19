@@ -1,0 +1,21 @@
+<Canvas Width="69.000" Height="163.103"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="69.000" Height="163.103">
+        <!-- Layer 1/<Path> -->
+        <Path StrokeThickness="1.0" Stroke="#ff808080" StrokeLineJoin="Round" Fill="#fff1f1f1" Data="F1 M 36.018,0.500 L 45.754,43.690 L 53.446,49.951 L 53.446,90.940 L 34.713,90.940 L 34.287,90.940 L 15.554,90.940 L 15.554,49.951 L 23.246,43.690 L 32.982,0.500 L 36.018,0.500 Z"/>
+
+        <!-- Layer 1/<Rectangle> -->
+        <Path StrokeThickness="1.0" Stroke="#ff010101" StrokeMiterLimit="1.0" Fill="#ff191918" Data="F1 M 53.446,126.516 L 15.554,126.516 L 15.554,90.060 L 53.446,90.060 L 53.446,126.516 Z"/>
+
+        <!-- Layer 1/<Ellipse> -->
+        <Path StrokeThickness="1.0" Stroke="#ff010101" StrokeMiterLimit="1.0" Fill="#ff191918" Data="F1 M 68.500,128.603 C 68.500,109.826 53.278,94.603 34.500,94.603 C 15.722,94.603 0.500,109.826 0.500,128.603 C 0.500,147.381 15.722,162.603 34.500,162.603 C 53.278,162.603 68.500,147.381 68.500,128.603 Z"/>
+
+        <!-- Layer 1/l -->
+        <TextBlock Foreground="#ff010101" Canvas.Left="29.467" Canvas.Top="46.823" FontSize="17.74" FontFamily="MS 33558">l</TextBlock>
+
+        <!-- Layer 1/<Ellipse> -->
+        <Path Fill="#ffed2224" Data="F1 M 35.000,128.603 C 35.000,128.879 34.776,129.103 34.500,129.103 C 34.224,129.103 34.000,128.879 34.000,128.603 C 34.000,128.327 34.224,128.103 34.500,128.103 C 34.776,128.103 35.000,128.327 35.000,128.603 Z"/>
+
+    </Canvas>
+</Canvas>

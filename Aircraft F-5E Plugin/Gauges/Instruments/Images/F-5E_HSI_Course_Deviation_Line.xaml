@@ -1,0 +1,20 @@
+<Canvas Width="6.457" Height="149.216"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="6.457" Height="149.216">
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Course Deviation Line (rot and hor movement)/rotation/alignment point -->
+  <Path StrokeThickness="0.2" Stroke="#ffed2224" StrokeMiterLimit="1.0" Data="F1 M 3.228,74.608"/>
+
+  <!-- Layer 1/Course Deviation Line (rot and hor movement)/Course Deviation Line -->
+  <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#fff1f1f1" Data="F1 M 6.332,0.125 L 0.125,0.125 L 0.125,149.091 L 6.332,149.091 L 6.332,0.125 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>
+</Canvas>

@@ -1,0 +1,12 @@
+<Canvas Width="56.727" Height="56.727"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="56.727" Height="56.727">
+
+  <Canvas>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="1.0" Fill="#ff404040" Data="F1 M 56.727,40.463 L 40.463,56.727 L 0.000,16.263 L 16.263,0.000 L 56.727,40.463 Z"/>
+  </Canvas>
+</Canvas>
+</Canvas>

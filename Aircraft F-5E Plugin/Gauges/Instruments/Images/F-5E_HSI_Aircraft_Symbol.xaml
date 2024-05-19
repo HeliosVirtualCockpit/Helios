@@ -1,0 +1,20 @@
+<Canvas Width="99.560" Height="50.940"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="99.560" Height="50.940">
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Aircraft Symbol ( Static)/rotation/alignment point -->
+  <Path StrokeThickness="0.2" Stroke="#ffed2224" StrokeMiterLimit="1.0" Data="F1 M 49.780,17.695"/>
+
+  <!-- Layer 1/Aircraft Symbol ( Static)/Aircraft Symbol -->
+  <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#fff1f1f1" Data="F1 M 99.435,22.884 L 99.435,18.746 L 52.884,18.746 L 52.884,0.125 L 46.677,0.125 L 46.677,18.746 L 0.125,18.746 L 0.125,22.884 L 46.677,22.884 L 46.677,46.677 L 29.091,46.677 L 29.091,50.815 L 46.677,50.815 L 52.884,50.815 L 70.470,50.815 L 70.470,46.677 L 52.884,46.677 L 52.884,22.884 L 99.435,22.884 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>
+</Canvas>

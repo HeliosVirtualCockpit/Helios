@@ -1,0 +1,32 @@
+<Canvas Width="77.250" Height="25.283"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="77.250" Height="25.283">
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Course Flag( on/off)/<Rectangle> -->
+  <Path StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#ff831517" Data="F1 M 77.125,25.158 L 0.125,25.158 L 0.125,0.125 L 77.125,0.125 L 77.125,25.158 Z"/>
+
+  <!-- Layer 1/Course Flag( on/off)/<Path> -->
+  <Path StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fffffeff" Data="F1 M 21.415,25.158 L 34.941,25.158 L 56.027,0.125 L 42.500,0.125 L 21.415,25.158 Z"/>
+
+  <!-- Layer 1/Course Flag( on/off)/<Path> -->
+  <Path StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fffffeff" Data="F1 M 44.994,25.158 L 59.560,25.158 L 77.125,4.305 L 77.125,0.125 L 66.079,0.125 L 44.994,25.158 Z"/>
+
+  <!-- Layer 1/Course Flag( on/off)/<Path> -->
+  <Path StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fffffeff" Data="F1 M 7.482,0.125 L 0.125,0.125 L 0.125,8.860 L 7.482,0.125 Z"/>
+
+  <!-- Layer 1/Course Flag( on/off)/<Path> -->
+  <Path StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fffffeff" Data="F1 M 32.448,0.125 L 17.535,0.125 L 0.125,20.795 L 0.125,25.158 L 11.363,25.158 L 32.448,0.125 Z"/>
+
+  <!-- Layer 1/Course Flag( on/off)/<Path> -->
+  <Path StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fffffeff" Data="F1 M 69.613,25.158 L 77.125,25.158 L 77.125,16.240 L 69.613,25.158 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>
+</Canvas>

@@ -1,0 +1,17 @@
+<Canvas Width="22.759" Height="44.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="22.759" Height="44.000">
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/To/From ( rotates with inner, moves between arrows)/<Rectangle> -->
+  <Path Fill="#fff1f1f1" Data="F1 M 22.759,44.000 L 0.000,44.000 L 0.000,0.000 L 22.759,0.000 L 22.759,44.000 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>
+</Canvas>

@@ -21,21 +21,23 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.ADI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F5E.Instruments.ADI", "ADI", "F-5E", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.ADI", "ADI", "F-5E Tiger II", typeof(GaugeRenderer),HeliosControlFlags.None)]
     public class ADIGauge : BaseGauge
     {
-        private HeliosValue _pitch;
-        private HeliosValue _roll;
-        private HeliosValue _pitchAdjustment;
-        private HeliosValue _offFlag;
+        private readonly HeliosValue _pitch;
+        private readonly HeliosValue _roll;
+        private readonly HeliosValue _pitchAdjustment;
+        private readonly HeliosValue _offFlag;
 
-        private GaugeNeedle _offFlagNeedle;
-        private GaugeNeedle _ball;
-        private GaugeNeedle _bankNeedle;
-        private GaugeNeedle _wingsNeedle;
+        private readonly GaugeNeedle _offFlagNeedle;
+        private readonly GaugeNeedle _ball;
+        private readonly GaugeNeedle _bankNeedle;
+        private readonly GaugeNeedle _wingsNeedle;
 
-        private CalibrationPointCollectionDouble _pitchCalibration;
-        private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
+        private readonly CalibrationPointCollectionDouble _pitchCalibration;
+        private readonly CalibrationPointCollectionDouble _pitchAdjustCalibaration;
+
+        private readonly string _gaugeImagePath = "{F-5E}/Gauges/Instruments/Images/";
 
         public ADIGauge() : this("ADI",new Size(300,300),"Instruments") { }
         public ADIGauge(string name, Size size, string device)
@@ -44,23 +46,23 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.ADI
             Point center = new Point(size.Width / 2d, size.Height / 2d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeNeedle("{F-5E}/Gauges/Instruments/F-5E_ADI_Tape.xaml", center, new Size(235d, 944d), new Point(117d, 944d / 2d));
+            _ball = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Tape.xaml", center, new Size(235d, 944d), new Point(117d, 944d / 2d));
             _ball.Clip = new EllipseGeometry(center, 117d, 117d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
 
 
-            _bankNeedle = new GaugeNeedle("{F-5E}/Gauges/Instruments/F-5E_ADI_Bank_Pointer.xaml", center, new Size(16d, 105d), new Point(8d, 0d));
+            _bankNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Bank_Pointer.xaml", center, new Size(16d, 105d), new Point(8d, 0d));
             Components.Add(_bankNeedle);
 
-            Components.Add(new GaugeImage("{F-5E}/Gauges/Instruments/F-5E_ADI_Inner_Ring.xaml", new Rect(25d, 25d, 250d, 250d)));
+            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Inner_Ring.xaml", new Rect(25d, 25d, 250d, 250d)));
 
-            Components.Add(new GaugeImage("{F-5E}/Gauges/Instruments/F-5E_ADI_Wings.xaml", new Rect(27d, 150d, 246d, 34d)));
+            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Wings.xaml", new Rect(27d, 150d, 246d, 34d)));
 
-            Components.Add(new GaugeImage("{F-5E}/Gauges/Instruments/F-5E_ADI_Outer_Ring.xaml", new Rect(0d, 0d, 300d, 300d)));
+            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Outer_Ring.xaml", new Rect(0d, 0d, 300d, 300d)));
 
-            _offFlagNeedle = new GaugeNeedle("{F-5E}/Gauges/Instruments/F-5E_ADI_Off_Flag.xaml", new Point(0d, 150d), new Size(150d, 93d), new Point(0d, 0d), 0d);
+            _offFlagNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Off_Flag.xaml", new Point(0d, 150d), new Size(150d, 93d), new Point(0d, 0d), 0d);
             Components.Add(_offFlagNeedle);
 
 

@@ -1,0 +1,22 @@
+<Canvas Width="22.376" Height="121.611"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="22.376" Height="121.611">
+
+  <Canvas>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff666667" StrokeLineJoin="Round" Fill="#fff1f1f1" Data="F1 M 11.693,0.500 L 11.188,0.500 L 11.188,0.500 L 10.682,0.500 L 3.767,42.728 L 5.074,82.658 L 11.188,82.658 L 17.302,82.658 L 18.609,42.728 L 11.693,0.500 Z"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff010101" StrokeMiterLimit="1.0" Fill="#ff232323" Data="F1 M 11.188,82.979 L 11.188,82.979 L 5.074,82.979 L 5.612,102.447 L 11.188,102.447 L 16.764,102.447 L 17.302,82.979 L 11.188,82.979 Z"/>
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path StrokeThickness="1.0" Stroke="#ff010101" StrokeMiterLimit="1.0" Fill="#ff232323" Data="F1 M 21.876,110.611 C 21.876,104.812 17.091,100.111 11.188,100.111 C 5.285,100.111 0.500,104.812 0.500,110.611 C 0.500,116.410 5.285,121.111 11.188,121.111 C 17.091,121.111 21.876,116.410 21.876,110.611 Z"/>
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path Fill="#ffed2224" Data="F1 M 11.688,110.611 C 11.688,110.335 11.464,110.111 11.188,110.111 C 10.912,110.111 10.688,110.335 10.688,110.611 C 10.688,110.887 10.912,111.111 11.188,111.111 C 11.464,111.111 11.688,110.887 11.688,110.611 Z"/>
+
+  </Canvas>
+</Canvas>
+</Canvas>

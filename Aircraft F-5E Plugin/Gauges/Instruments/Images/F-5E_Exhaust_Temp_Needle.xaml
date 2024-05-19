@@ -1,0 +1,22 @@
+<Canvas Width="50.976" Height="154.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="50.976" Height="154.000">
+
+  <Canvas>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff808080" StrokeLineJoin="Round" Fill="#fff1f1f1" Data="F1 M 15.904,44.508 L 15.904,87.797 L 35.071,87.797 L 35.071,44.508 L 26.627,0.500 L 24.348,0.500 L 15.904,44.508 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path StrokeThickness="1.0" Stroke="#ff010101" StrokeMiterLimit="1.0" Fill="#ff191918" Data="F1 M 35.071,111.313 L 35.071,87.703 L 15.904,87.703 L 15.904,111.313 L 35.071,111.313 Z"/>
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path StrokeThickness="1.0" Stroke="#ff010101" StrokeMiterLimit="1.0" Fill="#ff191918" Data="F1 M 25.488,103.500 C 11.687,103.500 0.500,114.693 0.500,128.500 C 0.500,142.307 11.687,153.500 25.488,153.500 C 39.288,153.500 50.476,142.307 50.476,128.500 C 50.476,114.693 39.288,103.500 25.488,103.500 Z"/>
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path Fill="#ffed2224" Data="F1 M 25.488,128.000 C 25.764,128.000 25.988,128.224 25.988,128.500 C 25.988,128.776 25.764,129.000 25.488,129.000 C 25.212,129.000 24.988,128.776 24.988,128.500 C 24.988,128.224 25.212,128.000 25.488,128.000 Z"/>
+
+  </Canvas>
+</Canvas>
+</Canvas>

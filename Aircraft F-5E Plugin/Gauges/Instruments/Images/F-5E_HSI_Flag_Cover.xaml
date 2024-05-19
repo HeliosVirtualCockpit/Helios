@@ -1,0 +1,17 @@
+<Canvas Width="41.478" Height="100.624"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="41.478" Height="100.624">
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Flag Cover( Static)/Flag Cover -->
+  <Path Fill="#ff131313" Data="F1 M 41.478,100.624 L 0.000,100.624 L 0.000,0.000 L 41.478,0.000 L 41.478,100.624 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>
+</Canvas>
