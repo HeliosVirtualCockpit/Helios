@@ -61,6 +61,7 @@
     <Resource Include="Interfaces/ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\Instruments\F-5E_HSI.cs" />
     <Compile Include="Gauges\Instruments\F-5E_Altimeter.cs" />
     <Compile Include="Gauges\Instruments\F-5E_ADI.cs" />
     <Compile Include="Gauges\Instruments\F-5E_Airspeed.cs" />

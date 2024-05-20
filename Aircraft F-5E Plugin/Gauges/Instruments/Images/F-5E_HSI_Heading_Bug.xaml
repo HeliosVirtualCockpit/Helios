@@ -1,20 +1,20 @@
-<Canvas Width="24.043" Height="9.234"
+<Canvas Width="24.043" Height="149.820"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-<Canvas Width="24.043" Height="9.234">
+    <Canvas Width="24.043" Height="149.820">
 
-  <Canvas>
+        <Canvas>
 
-  <Canvas>
+            <!-- Layer 1/Heading Bug (rotates)/<Rectangle> -->
+            <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#fff1f1f1" Data="F1 M 23.918,9.109 L 0.125,9.109 L 0.125,0.125 L 23.918,0.125 L 23.918,9.109 Z"/>
 
-  <!-- Layer 1/Heading Bug (rotates)/<Rectangle> -->
-  <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#fff1f1f1" Data="F1 M 23.918,9.109 L 0.125,9.109 L 0.125,0.125 L 23.918,0.125 L 23.918,9.109 Z"/>
+            <!-- Layer 1/Heading Bug (rotates)/<Rectangle> -->
+            <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#ff010101" Data="F1 M 12.818,9.109 L 11.225,9.109 L 11.225,0.125 L 12.818,0.125 L 12.818,9.109 Z"/>
 
-  <!-- Layer 1/Heading Bug (rotates)/<Rectangle> -->
-  <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#ff010101" Data="F1 M 12.818,9.109 L 11.225,9.109 L 11.225,0.125 L 12.818,0.125 L 12.818,9.109 Z"/>
+            <!-- Layer 1/Heading Bug (rotates)/rotation/alignment point -->
+            <Path StrokeThickness="0.2" Stroke="#ffed2224" StrokeMiterLimit="1.0" Data="F1 M 12.022,149.445"/>
 
-  </Canvas>
+        </Canvas>
 
-  </Canvas>
-</Canvas>
+    </Canvas>
 </Canvas>
