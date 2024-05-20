@@ -61,8 +61,10 @@
     <Resource Include="Interfaces/ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gauges\Instruments\F-5E_Airspeed.cs" />
+    <Compile Include="Gauges\Instruments\F-5E_Altimeter.cs" />
     <Compile Include="Gauges\Instruments\F-5E_ADI.cs" />
+    <Compile Include="Gauges\Instruments\F-5E_Airspeed.cs" />
+    <Compile Include="Gauges\Instruments\F-5E_ADI_Standby.cs" />
     <Compile Include="Gauges\Instruments\F-5E_AoA.cs" />
     <Compile Include="Gauges\Instruments\F-5E_Clock_Gauge.cs" />
     <Compile Include="Gauges\Instruments\F-5E_Engine_RPM_Gauge.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Gauges\Instruments\F-5E_Nozzle_Open_Gauge.cs" />
     <Compile Include="Gauges\Instruments\F-5E_Pitch_Trim_Gauge.cs" />
     <Compile Include="Gauges\Instruments\F-5E_VVI_Gauge.cs" />
+    <Compile Include="Interfaces\DCS\F-5E-3\Functions\Altimeter.cs" />
     <Compile Include="Properties/AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,27 +114,27 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Bank_Pointer.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Bank_Pointer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Inner_Ring.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Inner_Ring.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Off_Flag.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Off_Flag.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Outer_Ring.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Outer_Ring.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Tape.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Tape.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Wings.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Wings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -438,6 +441,48 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Instruments\Images\F-5E_Altimeter_Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Bank_Pointer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Inner_Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Off_Flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Outer_Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Wings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_Altimeter_Background.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

@@ -1,0 +1,7 @@
+<Canvas Width="300.000" Height="300.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="300.000" Height="300.000">
+        <Path Fill="#ff404040" Data="F1 M 300.000,150.000 C 300.000,232.843 232.843,300.000 150.000,300.000 C 67.157,300.000 0.000,232.843 0.000,150.000 C 0.000,67.157 67.157,0.000 150.000,0.000 C 232.843,0.000 300.000,67.157 300.000,150.000 Z"/>
+    </Canvas>
+</Canvas>
