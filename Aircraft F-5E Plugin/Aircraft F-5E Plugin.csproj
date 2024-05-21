@@ -82,6 +82,8 @@
     <Compile Include="Gauges\Instruments\F-5E_Pitch_Trim_Gauge.cs" />
     <Compile Include="Gauges\Instruments\F-5E_VVI_Gauge.cs" />
     <Compile Include="Interfaces\DCS\F-5E-3\Functions\Altimeter.cs" />
+    <Compile Include="Interfaces\DCS\F-5E-3\Functions\HSICourse.cs" />
+    <Compile Include="Interfaces\DCS\F-5E-3\Functions\HSIMiles.cs" />
     <Compile Include="Properties/AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,7 +221,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_HSI_Course_Flag.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_HSI_Drum_Off_Flag.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -255,10 +257,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_HSI_Miles_Flag.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="Gauges\Instruments\Images\F-5E_HSI_Off_Flag.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -267,7 +265,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_HSI_TACAN_Indicator.xaml">
+    <Resource Include="Gauges\Instruments\Images\F-5E_HSI_Bearing_Indicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

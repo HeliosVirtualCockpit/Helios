@@ -1,0 +1,23 @@
+<Canvas Width="17.658" Height="327.751"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="17.658" Height="327.751">
+
+        <Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Tacan Indicator(rotates)/<Rectangle> -->
+                <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#fff1f1f1" Data="F1 M 11.829,327.626 L 5.829,327.626 L 5.829,293.993 L 11.829,293.993 L 11.829,327.626 Z"/>
+
+                <!-- Layer 1/Tacan Indicator(rotates)/<Polygon> -->
+                <Path StrokeThickness="0.2" Stroke="#ffb3b3b3" StrokeMiterLimit="1.0" Fill="#fff1f1f1" Data="F1 M 8.829,0.287 L 17.458,18.094 L 0.199,18.094 L 8.829,0.287 Z"/>
+
+                <!-- Layer 1/Tacan Indicator(rotates)/rotation/alignment point -->
+                <Path StrokeThickness="0.2" Stroke="#ffed2224" StrokeMiterLimit="1.0" Data="F1 M 8.829,159.744"/>
+
+            </Canvas>
+
+        </Canvas>
+    </Canvas>
+</Canvas>

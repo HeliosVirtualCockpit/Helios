@@ -34,6 +34,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Point _location;
         private Point _scaledLocation;
         private double _startRoll = 0d;
+        private double _digitsOnTape = 10;
 
         private double _value;
 
@@ -41,14 +42,16 @@ namespace GadrocsWorkshop.Helios.Gauges
             : this(imageFile, location, format, digitSize, digitSize)
         {
         }
+        public GaugeDrumCounter(string imageFile, Point location, string format, Size digitSize, Size digitRenderSize) : this(imageFile, location, format, digitSize, digitRenderSize, 10) { }
 
-        public GaugeDrumCounter(string imageFile, Point location, string format, Size digitSize, Size digitRenderSize)
+        public GaugeDrumCounter(string imageFile, Point location, string format, Size digitSize, Size digitRenderSize, double digitsOnTape)
         {
             _imageFile = imageFile;
             _digitSize = digitSize;
             _baseDigitRenderSize = digitRenderSize;
             _location = location;
             _format = format;
+            _digitsOnTape = digitsOnTape;
         }
 
         #region Properties
@@ -193,7 +196,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
 
                 roll = renderValue % 1d;
-                renderValue += 1d; // Push up for the 9
+                renderValue += 1d; // Push up for the last digit
                 drawingContext.PushTransform(new TranslateTransform(xOffset, -(renderValue * _digitRenderSize.Height)));
                 drawingContext.DrawImage(_image, _imageRect);
                 drawingContext.Pop();
