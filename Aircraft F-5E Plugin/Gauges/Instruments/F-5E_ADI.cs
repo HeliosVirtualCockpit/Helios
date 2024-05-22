@@ -65,15 +65,15 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.ADI
             _offFlagNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Off_Flag.xaml", new Point(13.5d, 230d), new Size(78d, 27d), new Point(0d, 13.5d), 90d);
             Components.Add(_offFlagNeedle);
 
-            _offFlag = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI Off Flag", "Indicates the position of the off flag.", "1.0 if displayed.", BindingValueUnits.Numeric);
+            _offFlag = new HeliosValue(this, new BindingValue(false), $"", "ADI Off Flag", "Indicates the position of the off flag.", "1.0 if displayed.", BindingValueUnits.Numeric);
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_offFlag);
 
-            _pitch = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Pitch Angle", "Current pitch of the aircraft in degrees.", "(-90 to +90)", BindingValueUnits.Degrees);
+            _pitch = new HeliosValue(this, new BindingValue(0d), $"", "ADI Aircraft Pitch Angle", "Current pitch of the aircraft in degrees.", "(-90 to +90)", BindingValueUnits.Degrees);
             _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
             Actions.Add(_pitch);
 
-            _roll = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
+            _roll = new HeliosValue(this, new BindingValue(0d), $"", "ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 

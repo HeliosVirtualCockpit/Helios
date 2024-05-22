@@ -32,54 +32,56 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.ADI
         private readonly GaugeNeedle _offFlagNeedle;
         private readonly GaugeNeedle _ball;
         private readonly GaugeNeedle _bankNeedle;
-        private readonly GaugeNeedle _wingsNeedle;
+        private readonly GaugeNeedle  _wingsNeedle;
 
         private readonly CalibrationPointCollectionDouble _pitchCalibration;
         private readonly CalibrationPointCollectionDouble _pitchAdjustCalibaration;
 
         private readonly string _gaugeImagePath = "{F-5E}/Gauges/Instruments/Images/";
 
-        public ADIStandbyGauge() : this("ADI",new Size(300,300),"Instruments") { }
+        public ADIStandbyGauge() : this("Standby ADI",new Size(387.357d, 382.353d),"Instruments") { }
         public ADIStandbyGauge(string name, Size size, string device)
             : base(name, size)
         {
-            Point center = new Point(size.Width / 2d, size.Height / 2d);
+            Point center = new Point(188.675d, 183.42d);
+            double pitchMax = -235.17935d * 1.5d / 2d;
+            _pitchCalibration = new CalibrationPointCollectionDouble(-90d, pitchMax, 90d, pitchMax * -1) {
+                new CalibrationPointDouble(-180d, pitchMax),
+                new CalibrationPointDouble(180d, pitchMax * -1)
+            };
 
-            _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Standby_Tape.xaml", center, new Size(235d, 944d), new Point(117d, 944d / 2d));
+            _ball = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Standby_Tape.xaml", center, new Size(235d, 944d * 1.5d), new Point(117d, 944d * 1.5d / 2d));
             _ball.Clip = new EllipseGeometry(center, 117d, 117d);
             Components.Add(_ball);
 
-            _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
+            _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-30d, -40d, 30d, 40d);
 
+            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Standby_Inner_Ring.xaml", new Rect(size.Width - 353.550d, size.Height - 353.803d, 353.550d, 353.803d)));
 
-            _bankNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Standby_Bank_Pointer.xaml", center, new Size(16d, 105d), new Point(8d, 0d));
+            _bankNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Standby_Bank_Pointer.xaml", center, new Size(143.712d, 228.844d), new Point(143.712d / 2d, 228.844d / 2d));
             Components.Add(_bankNeedle);
 
-            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Standby_Inner_Ring.xaml", new Rect(25d, 25d, 250d, 250d)));
+            _wingsNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Standby_Wings.xaml", center, new Size(242.196d, 26.186d), new Point(82.039d, 4.522d));
+            Components.Add(_wingsNeedle);
 
-            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Standby_Wings.xaml", new Rect(27d, 146d, 246d, 34d)));
-
-            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Standby_Outer_Ring.xaml", new Rect(0d, 0d, 300d, 300d)));
-
-            _offFlagNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Standby_Off_Flag.xaml", new Point(0d, 150d), new Size(150d, 93d), new Point(0d, 0d), 0d);
+            _offFlagNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_ADI_Standby_Off_Flag.xaml", new Point(15.0977d, 111.8505d + 189.3085d), new Size(102.416d, 189.309d), new Point(0d, 189d), -15d);
             Components.Add(_offFlagNeedle);
 
+            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_ADI_Standby_Outer_Ring.xaml", new Rect(0d, 0d, 387.357d, 382.353d)));
 
-
-            _offFlag = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI Off Flag", "Indicates the position of the off flag.", "1.0 if displayed.", BindingValueUnits.Numeric);
+            _offFlag = new HeliosValue(this, new BindingValue(false), $"", "Standby ADI Off Flag", "Number representing the off flag position.", "(0 to 1)", BindingValueUnits.Numeric);
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_offFlag);
 
-            _pitch = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Pitch Angle", "Current pitch of the aircraft in degrees.", "(-90 to +90)", BindingValueUnits.Degrees);
+            _pitch = new HeliosValue(this, new BindingValue(0d), $"", "Standby ADI Aircraft Pitch Angle", "Current pitch of the aircraft in degrees.", "(-90 to +90)", BindingValueUnits.Degrees);
             _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
             Actions.Add(_pitch);
 
-            _pitchAdjustment = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Pitch adjustment offset", "Location of pitch reference wings.", "(-1 to 1) 1 full up and -1 is full down.", BindingValueUnits.Numeric);
+            _pitchAdjustment = new HeliosValue(this, new BindingValue(0d), $"", "Standby ADI Pitch adjustment offset", "Location of pitch reference wings.", "(-30 to 30)", BindingValueUnits.Degrees);
             _pitchAdjustment.Execute += new HeliosActionHandler(PitchAdjust_Execute);
             Actions.Add(_pitchAdjustment);
 
-            _roll = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
+            _roll = new HeliosValue(this, new BindingValue(0d), $"", "Standby ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
@@ -88,7 +90,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.ADI
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
         {
             _offFlag.SetValue(e.Value, e.BypassCascadingTriggers);
-            _offFlagNeedle.Rotation = (1-e.Value.DoubleValue) * 15d;
+            _offFlagNeedle.Rotation = e.Value.DoubleValue * 15d;
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)

@@ -65,13 +65,14 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
 
             _degreesCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d) {
             };
+            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_HSI_Background.xaml", new Rect(22d, 35d, 396d, 42d)));
 
             _rangeDrum = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Units.xaml", new Point(22d, 40d), "##%", new Size(24.508d, 453.405d / 12d), new Size(88d / 3d, 35d * 0.9d));
             _rangeDrum.Value = 0d;
             _rangeDrum.Clip = new RectangleGeometry(new Rect(22d, 35d, 88d, 41d));
             Components.Add(_rangeDrum);
 
-            _courseDrum1 = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Hundreds_and_Tens.xaml", new Point(308d, 41d), "#0", new Size(53.955d, 1444.517d / 38d), new Size(88d / 3d * 2d, 35d * 0.9d), 36d);
+            _courseDrum1 = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Hundreds_and_Tens.xaml", new Point(308d, 41d), "#0", new Size(53.955d, 37.88696389d), new Size(88d / 3d * 2d, 35d * 0.9d), 36d);
             _courseDrum1.Value = 0d;
             _courseDrum1.Clip = new RectangleGeometry(new Rect(308d, 35d, 88d, 41d));
             Components.Add(_courseDrum1);
@@ -89,7 +90,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
             _toFromNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_To_From_Marker.xaml", center, new Size(22.759d, 44.000d), new Point(center.X - 232.7931d, center.Y - 215.25d));
             Components.Add(_toFromNeedle);
 
-            _dfFlagNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_DF_Flag.xaml", center, new Size(38.6132d, 21.9265d), new Point(center.X - 145.8966d, center.Y - 184.4914d));
+            _dfFlagNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_DF_Flag.xaml", center, new Size(38.6132d, 42d), new Point(center.X - 145.8966d, center.Y - 162.4914d));
             Components.Add(_dfFlagNeedle);
 
             _innerDialNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_Inner_Dial.xaml", center, new Size(229.655d, 269.304d), new Point(114.828d, 138.169d));
@@ -178,7 +179,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
         void DFFlag_Execute(object action, HeliosActionEventArgs e)
         {
             _dfFlag.SetValue(e.Value, e.BypassCascadingTriggers);
-            _dfFlagNeedle.VerticalOffset = (1 - e.Value.DoubleValue) * 22d;
+            _dfFlagNeedle.VerticalOffset = (1 - e.Value.DoubleValue) * 42d;
         }
 
         void ToFrom_Execute(object action, HeliosActionEventArgs e)

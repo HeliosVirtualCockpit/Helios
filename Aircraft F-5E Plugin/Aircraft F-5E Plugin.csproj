@@ -129,10 +129,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Outer_Ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Tape.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -222,10 +218,6 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Instruments\Images\F-5E_HSI_Drum_Off_Flag.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\Instruments\Images\F-5E_HSI_DF_Backing.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -482,6 +474,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Instruments\Images\F-5E_Altimeter_Background.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_HSI_Background.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\Images\F-5E_ADI_Standby_Outer_Ring.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
