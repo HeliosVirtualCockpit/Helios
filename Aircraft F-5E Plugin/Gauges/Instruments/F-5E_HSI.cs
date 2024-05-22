@@ -71,7 +71,12 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
             _rangeDrum.Clip = new RectangleGeometry(new Rect(22d, 35d, 88d, 41d));
             Components.Add(_rangeDrum);
 
-            _courseDrum = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Units.xaml", new Point(308d, 40d), "##%", new Size(24.508d, 453.405d / 12d), new Size(88d / 3d, 35d * 0.9d));
+            _courseDrum1 = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Hundreds_and_Tens.xaml", new Point(308d, 41d), "#0", new Size(53.955d, 1444.517d / 38d), new Size(88d / 3d * 2d, 35d * 0.9d), 36d);
+            _courseDrum1.Value = 0d;
+            _courseDrum1.Clip = new RectangleGeometry(new Rect(308d, 35d, 88d, 41d));
+            Components.Add(_courseDrum1);
+
+            _courseDrum = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Units.xaml", new Point(308d + (88d / 3d * 2d), 40d), "%", new Size(24.508d, 453.405d / 12d), new Size(88d / 3d, 35d * 0.9d));
             _courseDrum.Value = 0d;
             _courseDrum.Clip = new RectangleGeometry(new Rect(308d, 35d, 88d, 41d));
             Components.Add(_courseDrum);
@@ -113,13 +118,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
             Components.Add(_courseOffFlagImage);
 
             Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_HSI_Flag_Cover.xaml", new Rect(374d, 120d, 41d, 100d)));
-
-            _courseDrum1 = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Hundreds_and_Tens.xaml", new Point(208d, 40d), "#", new Size(53.955d, 1444.517d / 38d), new Size(88d / 3d * 2d, 35d * 0.9d), 36d);
-            _courseDrum1.Value = 0d;
-            _courseDrum1.Clip = new RectangleGeometry(new Rect(208d, 35d, 88d, 41d));
-            Components.Add(_courseDrum1);
-            //53.955d, 1444.517d
-
 
             _outerDial = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "HSI Compass Ring", "Number representing the rotation of the compass card.", "(0 to 1)", BindingValueUnits.Numeric);
             _outerDial.Execute += new HeliosActionHandler(OuterDial_Execute);
@@ -234,8 +232,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
         void CourseValue_Execute(object action, HeliosActionEventArgs e)
         {
             _courseValue.SetValue(e.Value, e.BypassCascadingTriggers);
-            //_courseDrum.Value = e.Value.DoubleValue;
-            _courseDrum1.Value = e.Value.DoubleValue / 10d;
+            _courseDrum.Value = e.Value.DoubleValue % 10d;
+            _courseDrum1.Value = e.Value.DoubleValue;
         }
 
         void CourseOffFlag_Execute(object action, HeliosActionEventArgs e)
