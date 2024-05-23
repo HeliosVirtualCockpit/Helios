@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.AoA
         {
             double scalingFactor = this.Height / NativeSize.Height;
             //scalingFactor = 1d;
-            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_AoA_Off_Flag_Background.xaml", new Rect(50d, 117d, 56.727, 56.727)));
+            Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_AoA_Off_Flag_Background.xaml", new Rect(40d, 107d, 80d, 80d)));
 
             _offFlagImage = new GaugeImage($"{_gaugeImagePath}F-5E_AoA_Off_Flag_Static.xaml", new Rect(66d, 101d, 56.727, 56.727));
             Components.Add(_offFlagImage);

@@ -152,11 +152,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_offFlag);
 
-            _rangeValue = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "HSI Miles Drum", "Miles to beacon / waypoint.", "(0 to 999)", BindingValueUnits.NauticalMiles);
+            _rangeValue = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "HSI Range to Beacon Drum", "Miles to beacon / waypoint.", "(0 to 999)", BindingValueUnits.NauticalMiles);
             _rangeValue.Execute += new HeliosActionHandler(RangeValue_Execute);
             Actions.Add(_rangeValue);
 
-            _rangeOffFlag = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "HSI Range Off Flag", "Boolean representing position of the flag.", "True / False", BindingValueUnits.Boolean);
+            _rangeOffFlag = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "HSI Range to Beacon Off Flag", "Boolean representing position of the flag.", "True / False", BindingValueUnits.Boolean);
             _rangeOffFlag.Execute += new HeliosActionHandler(RangeOffFlag_Execute);
             Actions.Add(_rangeOffFlag);
 

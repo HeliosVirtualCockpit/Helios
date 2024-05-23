@@ -38,11 +38,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.Accelerometer
             scalingFactor = 1d;
             Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_Accelerometer_FacePlate.xaml", new Rect(0d, 0d, this.Width, this.Height)));
 
-            _needleLWM = new GaugeNeedle($"{_gaugeImagePath}F-5E_Accelerometer_Needle_Min_Max.xaml", new Point(this.Width / 2, this.Height / 2), new Size(34d, 221d), new Point(17, 132), 135d);
+            _needleLWM = new GaugeNeedle($"{_gaugeImagePath}F-5E_Accelerometer_Needle_Min_Max.xaml", new Point(this.Width / 2, this.Height / 2), new Size(28.304d, 219.691d), new Point(14.65d, 133.621d), 135d);
             Components.Add(_needleLWM);
-            _needleHWM = new GaugeNeedle($"{_gaugeImagePath}F-5E_Accelerometer_Needle_Min_Max.xaml", new Point(this.Width / 2, this.Height / 2), new Size(34d, 221d), new Point(17, 132), 135d);
+            _needleHWM = new GaugeNeedle($"{_gaugeImagePath}F-5E_Accelerometer_Needle_Min_Max.xaml", new Point(this.Width / 2, this.Height / 2), new Size(28.304d, 219.691d), new Point(14.65d, 133.621d), 135d);
             Components.Add(_needleHWM);
-            _needleCurrent = new GaugeNeedle($"{_gaugeImagePath}F-5E_Accelerometer_Needle_Current.xaml", new Point(this.Width / 2, this.Height / 2), new Size(34d, 221d), new Point(17, 132), 135d);
+            _needleCurrent = new GaugeNeedle($"{_gaugeImagePath}F-5E_Accelerometer_Needle_Current.xaml", new Point(this.Width / 2, this.Height / 2), new Size(28.304d, 219.691d), new Point(14.65d, 133.621d), 135d);
             Components.Add(_needleCurrent);
 
             _accelerometerCurrent = new HeliosValue(this, new BindingValue(0d), "", "Accelerometer Current G", "Number", "(-5 to 10)", BindingValueUnits.Numeric);

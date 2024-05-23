@@ -3,13 +3,13 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using GadrocsWorkshop.Helios.ComponentModel;
 
-[assembly: HeliosModule("Helios F-5E Support for DCS", "F-5E")]
+[assembly: HeliosModule("Helios F-5E-3 Support for DCS", "F-5E")]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Helios F-5E Plugin")]
-[assembly: AssemblyDescription("Resources for Helios relating to BelSimTek's F-5E Module for DCS World")]
+[assembly: AssemblyTitle("Helios F-5E-3 Plugin")]
+[assembly: AssemblyDescription("Resources for Helios relating to BelsimTek's F-5E-3 Module for DCS World")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("github.com/HeliosVirtualCockpit")]
 [assembly: AssemblyProduct("Helios")]

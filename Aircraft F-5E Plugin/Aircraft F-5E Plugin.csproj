@@ -58,9 +58,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Interfaces/ExportFunctions.lua" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Gauges\Instruments\F-5E_HSI.cs" />
     <Compile Include="Gauges\Instruments\F-5E_Altimeter.cs" />
     <Compile Include="Gauges\Instruments\F-5E_ADI.cs" />
@@ -84,13 +81,14 @@
     <Compile Include="Interfaces\DCS\F-5E-3\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\DCS\F-5E-3\Functions\HSICourse.cs" />
     <Compile Include="Interfaces\DCS\F-5E-3\Functions\HSIMiles.cs" />
-    <Compile Include="Properties/AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <Content Include="Docs\Helios.F-5E.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Interfaces\ExportFunctions.lua" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
