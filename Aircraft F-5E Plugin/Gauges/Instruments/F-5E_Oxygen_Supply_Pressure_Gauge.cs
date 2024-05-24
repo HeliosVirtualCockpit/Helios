@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.O2SupplyPressure
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.F5E.Instruments.OxygenSuppyPressure", "Oxygen Supply Pressure Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.OxygenSuppyPressure", "Oxygen Supply Pressure Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class OxygenSuppy : BaseGauge
     {
         private readonly HeliosValue _O2SupplyPressure;

@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.FuelQuantity
     using System.Windows;
     using System.Windows.Controls;
 
-    [HeliosControl("Helios.F5E.Instruments.FuelQuantity", "Fuel Quantity Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.FuelQuantity", "Fuel Quantity Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class FuelQuantity : BaseGauge
     {
         private readonly HeliosValue _fuelQuantityLeft;

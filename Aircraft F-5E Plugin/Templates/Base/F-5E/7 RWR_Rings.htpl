@@ -1,0 +1,19 @@
+﻿<ControlTemplate>
+	<Name>RWR Reticle</Name>
+	<Category>F-5E Tiger II</Category>
+	<TypeIdentifier>Helios.Base.ImageTranslucent</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Image>{F-5E}/Images/F-5E_RWR_Rings.xaml</Image>
+			<Alignment>Stretched</Alignment>
+			<CornerRadius>0</CornerRadius>
+			<DefaultOpacity>0.5</DefaultOpacity>
+			<Interaction>
+				<AllowInteraction>False</AllowInteraction>
+			</Interaction>
+			<Location>0,0</Location>
+			<Size>300,300</Size>
+			<Hidden>False</Hidden>
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

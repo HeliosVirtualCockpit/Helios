@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.AoA
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.F5E.Instruments.AoA", "Angle of Attack Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.AoA", "Angle of Attack Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class AoAGauge : BaseGauge
     {
         private readonly HeliosValue _aoA;

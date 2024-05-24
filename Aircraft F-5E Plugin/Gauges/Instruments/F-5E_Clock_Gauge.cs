@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.Clock
     using System.Windows;
     using System.Windows.Controls;
 
-    [HeliosControl("Helios.F5E.Instruments.Clock", "Clock", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.Clock", "Clock", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class Clock : BaseGauge
     {
         private readonly HeliosValue _clockHours;

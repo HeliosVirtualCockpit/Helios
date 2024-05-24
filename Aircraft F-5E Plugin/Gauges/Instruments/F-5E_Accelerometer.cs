@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.Accelerometer
     using System.Windows;
     using System.Windows.Controls;
 
-    [HeliosControl("Helios.F5E.Instruments.Accelerometer", "Accelerometer Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.Accelerometer", "Accelerometer Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class Accelerometer : BaseGauge
     {
         private readonly HeliosValue _accelerometerCurrent;

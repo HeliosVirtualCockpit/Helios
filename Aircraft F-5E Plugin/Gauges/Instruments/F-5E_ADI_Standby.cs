@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.ADI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F5E.Instruments.ADI_Standby", "Standby ADI", "F-5E Tiger II", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.ADI_Standby", "Standby ADI", "F-5E Tiger II", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADIStandbyGauge : BaseGauge
     {
         private readonly HeliosValue _pitch;

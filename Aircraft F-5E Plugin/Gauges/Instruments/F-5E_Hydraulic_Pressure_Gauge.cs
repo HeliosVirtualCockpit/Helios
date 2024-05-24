@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HydraulicPressure
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.F5E.Instruments.HydraulicPressure", "Hydraulic Pressure Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.HydraulicPressure", "Hydraulic Pressure Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class HydraulicPressureGauge : BaseGauge
     {
         private readonly HeliosValue _hydraulicPressure;

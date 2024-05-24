@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.PitchTrim
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.F5E.Instruments.PitchTrim", "Pitch Trim Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.PitchTrim", "Pitch Trim Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class PitchTrimGauge : BaseGauge
     {
         private readonly HeliosValue _pitchTrim;

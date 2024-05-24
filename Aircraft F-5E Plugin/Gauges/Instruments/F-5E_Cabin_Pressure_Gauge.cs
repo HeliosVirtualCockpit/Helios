@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.CabinPressure
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.F5E.Instruments.CabinPressure", "Cabin Pressure Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.CabinPressure", "Cabin Pressure Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class CabinPressureGauge : BaseGauge
     {
         private readonly HeliosValue _cabinPressure;

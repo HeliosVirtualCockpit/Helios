@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.OilPressure
     using System.Windows;
     using System.Windows.Controls;
 
-    [HeliosControl("Helios.F5E.Instruments.OilPressure", "Oil Pressure Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.OilPressure", "Oil Pressure Gauge", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class OilPressure : BaseGauge
     {
         private readonly HeliosValue _oilPressureLeft;

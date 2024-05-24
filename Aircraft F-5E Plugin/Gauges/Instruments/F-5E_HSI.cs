@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.F5E.Instruments.HSI", "HSI", "F-5E Tiger II", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.HSI", "HSI", "F-5E Tiger II", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class HSIGauge : BaseGauge
     {
         private readonly HeliosValue _outerDial;
@@ -67,19 +67,19 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
             };
             Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_HSI_Background.xaml", new Rect(22d, 35d, 396d, 42d)));
 
-            _rangeDrum = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Units.xaml", new Point(22d, 40d), "##%", new Size(24.508d, 453.405d / 12d), new Size(88d / 3d, 35d * 0.9d));
+            _rangeDrum = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Units.xaml", new Point(28d, 40d), "##%", new Size(24.508d, 453.405d / 12d), new Size(88d / 3d * 0.9d, 35d * 0.9d));
             _rangeDrum.Value = 0d;
-            _rangeDrum.Clip = new RectangleGeometry(new Rect(22d, 35d, 88d, 41d));
+            _rangeDrum.Clip = new RectangleGeometry(new Rect(28d, 35d, 88d, 41d));
             Components.Add(_rangeDrum);
 
             _courseDrum1 = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Hundreds_and_Tens.xaml", new Point(308d, 41d), "#0", new Size(53.955d, 37.88696389d), new Size(88d / 3d * 2d, 35d * 0.9d), 36d);
             _courseDrum1.Value = 0d;
-            _courseDrum1.Clip = new RectangleGeometry(new Rect(308d, 35d, 88d, 41d));
+            _courseDrum1.Clip = new RectangleGeometry(new Rect(306d, 35d, 88d / 3d * 2d, 41d));
             Components.Add(_courseDrum1);
 
-            _courseDrum = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Units.xaml", new Point(308d + (88d / 3d * 2d), 40d), "%", new Size(24.508d, 453.405d / 12d), new Size(88d / 3d, 35d * 0.9d));
+            _courseDrum = new GaugeDrumCounter($"{_gaugeImagePath}F-5E_HSI_Drum_Tape_Units.xaml", new Point(306d + (88d / 3d * 2d), 41d), "%", new Size(24.508d, 453.405d / 12d), new Size(88d * 0.9d / 3d, 35d * 0.9d));
             _courseDrum.Value = 0d;
-            _courseDrum.Clip = new RectangleGeometry(new Rect(308d, 35d, 88d, 41d));
+            _courseDrum.Clip = new RectangleGeometry(new Rect(306d, 35d, 86d, 41d));
             Components.Add(_courseDrum);
 
             Components.Add(new GaugeImage($"{_gaugeImagePath}F-5E_HSI_BackPlate.xaml", new Rect(0d, 0d, 418d, 420.5d)));

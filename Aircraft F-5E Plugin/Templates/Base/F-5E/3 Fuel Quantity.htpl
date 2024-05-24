@@ -1,0 +1,1 @@
+﻿<ControlTemplate><Name>Fuel Quantity</Name><Category>F-5E Tiger II</Category><TypeIdentifier>Helios.F5E.Instruments.FuelQuantity</TypeIdentifier><Template><TemplateValues><Location>0,0</Location><Size>300,300</Size><Hidden>False</Hidden></TemplateValues></Template></ControlTemplate>

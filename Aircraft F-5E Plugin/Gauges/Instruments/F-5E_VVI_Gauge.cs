@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.VVI
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.F5E.Instruments.VVI", "Climb Rate Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.F5E.Instruments.VVI", "Climb Rate Indicator", "F-5E Tiger II", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class VVIGauge : BaseGauge
     {
         private readonly HeliosValue _verticalVelocity;

@@ -10396,12 +10396,12 @@
     <Content Include="Templates\Patching\Additional Simulator Viewports\MIRAGE_F1_RWR.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Patches\DCS\002_009_00004_53990_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.gpat">
+    <None Include="Patches\DCS\002_009_00004_53990_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.gpatch">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Patches\DCS\002_009_00004_53990_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.grev">
+    </None>
+    <None Include="Patches\DCS\002_009_00004_53990_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\HeliosPlugin.targets" />
