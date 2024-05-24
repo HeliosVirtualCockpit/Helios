@@ -87,7 +87,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
             _outerDialNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_Outer_Dial.xaml", center, new Size(300d, 300d), new Point(150d, 150d));
             Components.Add(_outerDialNeedle);
 
-            _toFromNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_To_From_Marker.xaml", center, new Size(22.759d, 44.000d), new Point(center.X - 232.7931d, center.Y - 215.25d));
+            _toFromNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_To_From_Marker.xaml", center, new Size(22.759d, 30.000d), new Point(center.X - 232.7931d, 15d));
             Components.Add(_toFromNeedle);
 
             _dfFlagNeedle = new GaugeNeedle($"{_gaugeImagePath}F-5E_HSI_DF_Flag.xaml", center, new Size(38.6132d, 42d), new Point(center.X - 145.8966d, center.Y - 162.4914d));
@@ -185,7 +185,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F5E.Instruments.HSI
         void ToFrom_Execute(object action, HeliosActionEventArgs e)
         {
             _toFrom.SetValue(e.Value, e.BypassCascadingTriggers);
-            _toFromNeedle.VerticalOffset = (e.Value.DoubleValue * 11d);
+            _toFromNeedle.VerticalOffset = (e.Value.DoubleValue * 22.5d);
         }
 
         void HeadingBug_Execute(object action, HeliosActionEventArgs e)
