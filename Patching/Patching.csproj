@@ -10954,12 +10954,12 @@
     <Content Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.gpatch">
+    <Content Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.gpatch">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.grevert">
+    </Content>
+    <Content Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.gpatch">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
