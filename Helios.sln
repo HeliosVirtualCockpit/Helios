@@ -167,6 +167,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircraft F-5E Plugin", "Air
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircraft F-16C Plugin", "Aircraft F-16C Plugin\Aircraft F-16C Plugin.csproj", "{8B293D30-A375-411D-90C3-1DCA93AA8C81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircraft CH-47F Plugin", "..\..\users\larmour\Source\Repos\HeliosVirtualCockpit\Helios\Aircraft CH-47F Plugin\Aircraft CH-47F Plugin.csproj", "{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -1139,6 +1141,30 @@ Global
 		{8B293D30-A375-411D-90C3-1DCA93AA8C81}.Release|AnyCPU32.Build.0 = Release|AnyCPU32
 		{8B293D30-A375-411D-90C3-1DCA93AA8C81}.Release|x64.ActiveCfg = Release|x64
 		{8B293D30-A375-411D-90C3-1DCA93AA8C81}.Release|x64.Build.0 = Release|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Debug|AnyCPU32.ActiveCfg = Debug|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Debug|AnyCPU32.Build.0 = Debug|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Debug|x64.ActiveCfg = Debug|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Debug|x64.Build.0 = Debug|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.JustInstallers|AnyCPU.ActiveCfg = Debug|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.JustInstallers|AnyCPU.Build.0 = Debug|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.JustInstallers|AnyCPU32.ActiveCfg = Debug|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.JustInstallers|AnyCPU32.Build.0 = Debug|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.JustInstallers|x64.ActiveCfg = Debug|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.JustInstallers|x64.Build.0 = Debug|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.NoInstallers|AnyCPU.ActiveCfg = Debug|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.NoInstallers|AnyCPU.Build.0 = Debug|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.NoInstallers|AnyCPU32.ActiveCfg = Debug|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.NoInstallers|AnyCPU32.Build.0 = Debug|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.NoInstallers|x64.ActiveCfg = Debug|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.NoInstallers|x64.Build.0 = Debug|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Release|AnyCPU32.ActiveCfg = Release|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Release|AnyCPU32.Build.0 = Release|AnyCPU32
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Release|x64.ActiveCfg = Release|x64
+		{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
