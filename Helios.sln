@@ -167,7 +167,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircraft F-5E Plugin", "Air
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircraft F-16C Plugin", "Aircraft F-16C Plugin\Aircraft F-16C Plugin.csproj", "{8B293D30-A375-411D-90C3-1DCA93AA8C81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircraft CH-47F Plugin", "..\..\users\larmour\Source\Repos\HeliosVirtualCockpit\Helios\Aircraft CH-47F Plugin\Aircraft CH-47F Plugin.csproj", "{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircraft CH-47F Plugin", "Aircraft CH-47F Plugin\Aircraft CH-47F Plugin.csproj", "{9A126B83-3EBC-4D79-BB0A-F5AE11243C1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
