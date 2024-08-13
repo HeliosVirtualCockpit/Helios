@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.CH47F.RadAlt.Instrument", "RADAR Altimeter Instrument", "CH-47F Chinook", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.CH47F.RadAlt.Instrument", "RADAR Altimeter Instrument", "CH-47F Chinook", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class RadAltInstrument : BaseGauge
     {
         private HeliosValue _altitude;

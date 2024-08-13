@@ -36,8 +36,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
         private Controls.TextDecoration _digitalDisplayBackground;
         private NumericTextDisplay _digitalAltDisplay;
 
-        public RadAlt( Size size) 
-            : base($"RADAR Altimeter", size)
+        public RadAlt() 
+            : base($"RADAR Altimeter", new Size(420, 420))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.CH47F.CH47FInterface) };
             _interfaceDeviceName = $"RADAR Alt";

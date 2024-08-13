@@ -61,9 +61,30 @@
     <Content Include="Docs\Helios.CH-47F.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\MFD\CH_47_MFD_Bezel.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Button_Horizontal_Normal.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Button_Horizontal_Pressed.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Button_Vertical_Normal.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Button_Vertical_Pressed.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Knob.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Backlight_Down.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Backlight_Normal.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Backlight_Up.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Brightness_Down.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Brightness_Normal.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Brightness_Up.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Contrast_Down.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Contrast_Normal.png" />
+    <Resource Include="Images\MFD\CH_47_MFD_Rocker_Contrast_Up.png" />
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\MFD\MFD Copilot Left.cs" />
+    <Compile Include="Gauges\MFD\MFD Center.cs" />
+    <Compile Include="Gauges\MFD\MFD Pilot Left.cs" />
+    <Compile Include="Gauges\MFD\MFD Copilot Right.cs" />
+    <Compile Include="Gauges\MFD\MFD Pilot Right.cs" />
+    <Compile Include="Gauges\MFD\MFD.cs" />
     <Compile Include="Gauges\RadAlt.cs" />
     <Compile Include="Gauges\RadAltInstrument.cs" />
     <Compile Include="Interfaces\CH-47FInterface.cs" />
