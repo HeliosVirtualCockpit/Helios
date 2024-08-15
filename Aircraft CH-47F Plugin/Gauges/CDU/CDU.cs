@@ -70,7 +70,11 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             _frameBezelPanel.DrawBorder = false;
             //int maxLabelButtons = _interfaceDevice.Contains("CDU") ? 20 : -1;
             int buttonNumber = 0;
-            string[] labels = new string[] { "MSN", "FPLN", "FD", "IDX", "DIR", "SNSR", "MFD_DATA" };
+            string[] labels = new string[] {"MSN", "FPLN", "FD", "IDX", "DIR", "SNSR", "MFD_DATA", "L1", "L2", "L3", "L4", "L5", "L6", "R1", "R2", "R3", "R4", "R5", "R6", "BRT", "DIM", "CNI",
+                                            "PAD", "arrow left", "arrow right", "arrow up", "arrow down", "CLR", "WPN", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "dot", "MARK", "slash",
+                                            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "SP", "dash", "TDL",
+                                            "ASE", "empty", "DATA", "STAT"};
+
             for (int x = 66; x <= 660; x += 18 + 81)
             {
                 AddButton($"{labels[buttonNumber]}", new Rect(x, 4 ,81,60), $"{labels[buttonNumber++]}");

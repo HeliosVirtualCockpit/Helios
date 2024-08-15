@@ -104,8 +104,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
             }
 
             AddRocker("Brightness", 750, 42, _interfaceDevice, "Brightness Switch");
-            AddRocker("Contrast", 750, 856, _interfaceDevice, "Brightness Switch");
-            AddRocker("Backlight", 5, 856, _interfaceDevice, "Contrast Switch");
+            AddRocker("Contrast", 750, 856, _interfaceDevice, "Contrast Switch");
+            AddRocker("Backlight", 5, 856, _interfaceDevice, "Backlight Switch");
             AddThreePositionRotarySwitch("Power", new Point(0, 36), new Size(70, 70), _interfaceDevice, "Power Switch");
         }
         public string ViewportName
