@@ -8,12 +8,12 @@ using GadrocsWorkshop.Helios.ComponentModel;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Helios AH-64D Plugin")]
-[assembly: AssemblyDescription("Resources for Helios relating to Eagle Dynamics AH-64D Module for DCS World")]
+[assembly: AssemblyTitle("Helios CH-47F Plugin")]
+[assembly: AssemblyDescription("Resources for Helios relating to Eagle Dynamics CH-47F Module for DCS World")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("github.com/HeliosVirtualCockpit")]
 [assembly: AssemblyProduct("Helios")]
-[assembly: AssemblyCopyright("Copyright (c) 2023 Helios Contributors")]
+[assembly: AssemblyCopyright("Copyright (c) 2024 Helios Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -23,7 +23,7 @@ using GadrocsWorkshop.Helios.ComponentModel;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7B23B849-49E7-4F90-8012-45E855ED226A")]
+[assembly: Guid("C94666CD-47BD-4BC3-8E1B-478C1E8431EF")]
 
 // Version information for an assembly consists of the following four values:
 //

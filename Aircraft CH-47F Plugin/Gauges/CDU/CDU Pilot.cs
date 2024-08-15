@@ -1,5 +1,5 @@
-﻿//  CopyLeft 2014 Craig Courtney
-//  CopyLeft 2024 Helios Contributors
+﻿//  Copyright 2014 Craig Courtney
+//  Copyright 2024 Helios Contributors
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
+namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -22,11 +22,11 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.CH47F.MFD.CopilotLeft", "Multi Function Display Left (Copilot)", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class MFDCopilotLeft : CDU
+    [HeliosControl("Helios.CH47F.CDU.Pilot", "CDU Right (Pilot)", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    public class CDUPilot : CDU
     {
-        public MFDCopilotLeft()
-            : base("MFD (Copilot Left)")
+        public CDUPilot()
+            : base("CDU (Right)")
         {
         }
     }

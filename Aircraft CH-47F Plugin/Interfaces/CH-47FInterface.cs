@@ -81,7 +81,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_4.ToString("d"), "345", "CDU (Left)", "IDX"));
             AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_5.ToString("d"), "346", "CDU (Left)", "DIR"));
             AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_6.ToString("d"), "347", "CDU (Left)", "SNSR"));
-            AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_7.ToString("d"), "348", "CDU (Left)", "MFD DATA"));
+            AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_7.ToString("d"), "348", "CDU (Left)", "MFD_DATA"));
             AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_8.ToString("d"), "349", "CDU (Left)", "L1"));
             AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_9.ToString("d"), "350", "CDU (Left)", "L2"));
             AddFunction(new PushButton(this, devices.CDU_LEFT.ToString("d"), Commands.Button.Button_10.ToString("d"), "351", "CDU (Left)", "L3"));
@@ -161,7 +161,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_4.ToString("d"), "420", "CDU (Right)", "IDX"));
             AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_5.ToString("d"), "421", "CDU (Right)", "DIR"));
             AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_6.ToString("d"), "422", "CDU (Right)", "SNSR"));
-            AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_7.ToString("d"), "423", "CDU (Right)", "MFD DATA"));
+            AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_7.ToString("d"), "423", "CDU (Right)", "MFD_DATA"));
             AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_8.ToString("d"), "424", "CDU (Right)", "L1"));
             AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_9.ToString("d"), "425", "CDU (Right)", "L2"));
             AddFunction(new PushButton(this, devices.CDU_RIGHT.ToString("d"), Commands.Button.Button_10.ToString("d"), "426", "CDU (Right)", "L3"));
@@ -456,16 +456,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             #region Free Air Temp
             AddFunction(new ScaledNetworkValue(this, "1211", new CalibrationPointCollectionDouble()
                 {
-                new CalibrationPointDouble(-70d, 0.0d * 360d),
-                new CalibrationPointDouble(-50d, 0.152d * 360d),
-                new CalibrationPointDouble(-30d, 0.314d * 360d),
-                new CalibrationPointDouble(-10d, 0.482d * 360d),
-                new CalibrationPointDouble(0d, 0.567d * 360d),
-                new CalibrationPointDouble(10d, 0.651d * 360d),
-                new CalibrationPointDouble(20d, 0.738d * 360d),
-                new CalibrationPointDouble(30d, 0.825d * 360d),
-                new CalibrationPointDouble(40d, 1.0d * 360d),
-                }, "Temperature Gauge", "Free Air Temp Needle", "Position of the needle in degrees", "0 - 360", BindingValueUnits.Degrees));
+                new CalibrationPointDouble(0.0d, -70d),
+                new CalibrationPointDouble(0.152d, -50d),
+                new CalibrationPointDouble(0.314d, -30d),
+                new CalibrationPointDouble(0.482d, -10d),
+                new CalibrationPointDouble(0.567d, 0d),
+                new CalibrationPointDouble(0.651d, 10d),
+                new CalibrationPointDouble(0.738d, 20d),
+                new CalibrationPointDouble(0.825d, 30d),
+                new CalibrationPointDouble(1.0d  , 40d),
+                }, "Temperature Gauge", "Free Air Temperature", "Current Free Air Temperature.", "", BindingValueUnits.Celsius, "%.4f"));
             #endregion
             #region Rad Alt
 
@@ -476,17 +476,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new ScaledNetworkValue(this, "1191", 360d, "RADAR Alt", "Altitude Needle", "Position of the altitude needle", "Rotational position of the needle 0-360", BindingValueUnits.Degrees));
             AddFunction(new ScaledNetworkValue(this, "1196", new CalibrationPointCollectionDouble()
                 {
-                new CalibrationPointDouble(-0.02d, 0.97d * 360d),
-                new CalibrationPointDouble(-0.01d, 0.99d * 360d),
-                new CalibrationPointDouble(-0.0001d, 1.0d * 360d),
-                new CalibrationPointDouble(0.0d, 0.0d * 360d),
-                new CalibrationPointDouble(0.744d, 0.744d * 360d),
+                new CalibrationPointDouble(-0.02d,    0.97d * 360d ),
+                new CalibrationPointDouble(-0.01d,    0.99d * 360d ),
+                new CalibrationPointDouble(-0.0001d,  1.0d * 360d  ),
+                new CalibrationPointDouble(0.0d,      0.0d * 360d  ),
+                new CalibrationPointDouble(0.744d,    0.744d * 360d),
                 }, "RADAR Alt", "Low Altitude Bug Marker", "Position of the indicator showing the low altitude", "Rotational position of the marker 0-360", BindingValueUnits.Degrees));
             AddFunction(new ScaledNetworkValue(this, "1197", 360d, "RADAR Alt", "High Altitude Bug Marker", "Position of the indicator showing the high altitude", "Rotational position of the marker 0-360", BindingValueUnits.Degrees));
             AddFunction(new FlagValue(this, "1199", "RADAR Alt", "Low flag", ""));
             AddFunction(new FlagValue(this, "1192", "RADAR Alt", "High flag", ""));
             AddFunction(new FlagValue(this, "1198", "RADAR Alt", "Off flag", ""));
-            AddFunction(new RADARAltimeter(this, "2055", "Digital Altitude", "RADAR altitude above ground in feet for digital display."));
+            AddFunction(new RADARAltimeter(this, "2055", "RADAR Alt", "RADAR altitude above ground in feet for digital display."));
+            // Digits are 1200 - 1203
             #endregion
             #endregion
 
@@ -494,7 +495,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             // RegEx
             // elements\[\x22(?'element'.*)\x22\]\s*\=\s*(?'function'[a-zA-z0-9_]*)\((?'function_args'.*)\){0,1}\,\s*devices\.(?'device'.*)\,.*device_commands\.(?'command'[a-zA-Z0-9_]*)\,\s*(?'argId'\d{1,4})\,{0,1}(?'optional_args'.*)\).*
             // \t\tAddFunction(new ${function}(this, devices.${device}.ToString("d"), Commands.Button.${command}.ToString("d"), \x22${argId}\x22, "${device}", "${element}","%.1f"));  // $&\n
-
+            #region Commented Functions
             //*AddFunction(new multiposition_switch_limited(this, devices.GRIPS.ToString("d"), Commands.Button.Button_16.ToString("d"), "1271", "GRIPS", "C1_XMIT","%.1f"));  // elements["C1_XMIT"] =           multiposition_switch_limited({0}, "", devices.GRIPS,                    device_commands.Button_16,  1271, 3, 0.5, nil, nil, {{SOUND_SW03_OFF, SOUND_SW03_ON}})
             //*AddFunction(new animated_tumbler(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_9.ToString("d"), "1293", "External Cargo Equipment", "C2_HOOKREL_COVER","%.1f"));  // elements["C2_HOOKREL_COVER"] = animated_tumbler({1}, "", devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_9,   1293, 8.0, false, {{SOUND_SW01_OPEN, SOUND_SW01_CLOSE}})
             //*AddFunction(new animated_tumbler(this, devices.GRIPS.ToString("d"), Commands.Button.Button_2.ToString("d"), "1295", "GRIPS", "T1_IRWHT","%.1f"));  // elements["T1_IRWHT"] =            animated_tumbler({0}, "", devices.GRIPS, device_commands.Button_2,  1295)
@@ -542,86 +543,100 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             //*AddFunction(new button_and_axis_limited(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_152.ToString("d"), "549", "OVERHEAD CONSOLE", "OCCH_HOIST_CONTROL_2","%.1f"));  // elements["OCCH_HOIST_CONTROL_2"] =                  button_and_axis_limited({0, 1, 2}, _("Cockpit.CH47.OCHH.HOIST_KB"),       devices.OVERHEAD_CONSOLE, device_commands.Button_152, 549, 0.5)
             //*AddFunction(new animated_pull_handle(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_23.ToString("d"), "1320", "External Cargo Equipment", "HOP_DOOR1","%.1f"));  // elements["HOP_DOOR1"] =                animated_pull_handle({2}, _("Cockpit.CH47.TRAP_DOOR_LOCK"), devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_23, 1320, 0.8, {{SOUND_NOSOUND, SOUND_NOSOUND}})
             //*AddFunction(new multiposition_switch_cyclic(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_253.ToString("d"), "1463", "OVERHEAD CONSOLE", "OCLP_PDP2SL_LOCK","%.1f"));  // elements["OCLP_PDP2SL_LOCK"] = multiposition_switch_cyclic({0},       _("Cockpit.CH47.OCLP.SL_LOCK"), devices.OVERHEAD_CONSOLE, device_commands.Button_253, 1463, 2, 1, nil, 0, {{SOUND_NOSOUND}})
+            #endregion
+            #region Grips
+            AddFunction(new Switch(this, devices.GRIPS.ToString("d"), "1271", SwitchPositions.Create(3, 0.0d, 0.5d, Commands.Button.Button_16.ToString("d"), new string[] { "1", "2", "3" }, "%0.1f"), "Pilot Cyclic",  "XMIT", "%0.1f"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_17.ToString("d"), "1272", "Pilot Cyclic",  "ACT", "%.1f"));  // elements["ACT"] =            PushButton({0}, "", devices.GRIPS,                    device_commands.Button_17,  1272)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_18.ToString("d"), "1273", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "CRSR H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_19.ToString("d"), "1274", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "CRSR V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_20.ToString("d"), "1275", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "TRIM H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_21.ToString("d"), "1276", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "TRIM V", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_22.ToString("d"), "1277", "Pilot Cyclic",  "FDREL", "%.1f"));  // elements["FDREL"] =          PushButton({0}, "", devices.GRIPS,                    device_commands.Button_22,  1277)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_23.ToString("d"), "1278", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "CMDS", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_24.ToString("d"), "1279", "Pilot Cyclic",  "ACK", "%.1f"));  // elements["ACK"] =            PushButton({0}, "", devices.GRIPS,                    device_commands.Button_24,  1279)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_25.ToString("d"), "1280", "Pilot Cyclic",  "CDREL", "%.1f"));  // elements["CDREL"] =          PushButton({0}, "", devices.GRIPS,                    device_commands.Button_25,  1280)
+            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_5.ToString("d"), "1281", "1.0", "Pulled", "0.0", "Norm", "Pilot Cyclic", "Hook Release Cover", "%.1f"));
+            AddFunction(new PushButton(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_7.ToString("d"), "1282", "Pilot Cyclic", "Hook Release Switch", "%.1f"));  // elements["HOOKREL"] =        PushButton({0}, "", devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_7,   1282, nil, false)
 
-            AddFunction(new Switch(this, devices.GRIPS.ToString("d"), "1271", SwitchPositions.Create(3, 0.0d, 0.5d, Commands.Button.Button_16.ToString("d"), new string[] { "1", "2", "3" }, "%0.1f"), "Pilot Cyclic",  "C1_XMIT", "%0.1f"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_17.ToString("d"), "1272", "Pilot Cyclic",  "C1_ACT", "%.1f"));  // elements["C1_ACT"] =            PushButton({0}, "", devices.GRIPS,                    device_commands.Button_17,  1272)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_18.ToString("d"), "1273", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "C1_CRSR_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_19.ToString("d"), "1274", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "C1_CRSR_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_20.ToString("d"), "1275", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "C1_TRIM_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_21.ToString("d"), "1276", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "C1_TRIM_V", "%1d"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_22.ToString("d"), "1277", "Pilot Cyclic",  "C1_FDREL", "%.1f"));  // elements["C1_FDREL"] =          PushButton({0}, "", devices.GRIPS,                    device_commands.Button_22,  1277)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_23.ToString("d"), "1278", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "C1_CMDS", "%1d"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_24.ToString("d"), "1279", "Pilot Cyclic",  "C1_ACK", "%.1f"));  // elements["C1_ACK"] =            PushButton({0}, "", devices.GRIPS,                    device_commands.Button_24,  1279)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_25.ToString("d"), "1280", "Pilot Cyclic",  "C1_CDREL", "%.1f"));  // elements["C1_CDREL"] =          PushButton({0}, "", devices.GRIPS,                    device_commands.Button_25,  1280)
-            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_5.ToString("d"), "1281", "1.0", "Pulled", "0.0", "Norm", "Pilot Cyclic", "C1 Hook Release Cover", "%.1f"));
-            AddFunction(new PushButton(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_7.ToString("d"), "1282", "Pilot Cyclic", "C1 Hook Release Switch", "%.1f"));  // elements["C1_HOOKREL"] =        PushButton({0}, "", devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_7,   1282, nil, false)
+            AddFunction(new Switch(this, devices.GRIPS.ToString("d"), "1283", SwitchPositions.Create(3, 0.0d, 0.5d, Commands.Button.Button_96.ToString("d"), "Posn", "%0.1f"), "Copilot Cyclic", "XMIT", "%0.1f"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_97.ToString("d"), "1284", "Copilot Cyclic", "ACT", "%.1f"));  // elements["ACT"] =            PushButton({1}, "", devices.GRIPS,                    device_commands.Button_97,  1284)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_98.ToString("d"), "1285", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "CRSR H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_99.ToString("d"), "1286", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "CRSR V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_100.ToString("d"), "1287", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "TRIM H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_101.ToString("d"), "1288", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "TRIM V", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_102.ToString("d"), "1289", "Copilot Cyclic",  "FDREL", "%.1f"));  // elements["FDREL"] =          PushButton({1}, "", devices.GRIPS,                    device_commands.Button_102, 1289)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_103.ToString("d"), "1290", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "CMDS", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_104.ToString("d"), "1291", "Copilot Cyclic",  "ACK", "%.1f"));  // elements["ACK"] =            PushButton({1}, "", devices.GRIPS,                    device_commands.Button_104, 1291)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_105.ToString("d"), "1292", "Copilot Cyclic",  "CDREL", "%.1f"));  // elements["CDREL"] =          PushButton({1}, "", devices.GRIPS,                    device_commands.Button_105, 1292)
+            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_9.ToString("d"), "1293", "1.0", "Pulled", "0.0", "Norm", "Copilot Cyclic", "Hook Release Cover", "%.1f"));
+            AddFunction(new PushButton(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_11.ToString("d"), "1294", "Copilot Cyclic", "Hook Release Switch", "%.1f"));  // elements["HOOKREL"] =        PushButton({1}, "", devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_11,  1294, nil, false)
 
-            AddFunction(new Switch(this, devices.GRIPS.ToString("d"), "1283", SwitchPositions.Create(3, 0.0d, 0.5d, Commands.Button.Button_96.ToString("d"), "Posn", "%0.1f"), "Copilot Cyclic", "C2_XMIT", "%0.1f"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_97.ToString("d"), "1284", "Copilot Cyclic", "C2_ACT", "%.1f"));  // elements["C2_ACT"] =            PushButton({1}, "", devices.GRIPS,                    device_commands.Button_97,  1284)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_98.ToString("d"), "1285", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "C2_CRSR_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_99.ToString("d"), "1286", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "C2_CRSR_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_100.ToString("d"), "1287", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "C2_TRIM_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_101.ToString("d"), "1288", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "C2_TRIM_V", "%1d"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_102.ToString("d"), "1289", "Copilot Cyclic",  "C2_FDREL", "%.1f"));  // elements["C2_FDREL"] =          PushButton({1}, "", devices.GRIPS,                    device_commands.Button_102, 1289)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_103.ToString("d"), "1290", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "C2_CMDS", "%1d"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_104.ToString("d"), "1291", "Copilot Cyclic",  "C2_ACK", "%.1f"));  // elements["C2_ACK"] =            PushButton({1}, "", devices.GRIPS,                    device_commands.Button_104, 1291)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_105.ToString("d"), "1292", "Copilot Cyclic",  "C2_CDREL", "%.1f"));  // elements["C2_CDREL"] =          PushButton({1}, "", devices.GRIPS,                    device_commands.Button_105, 1292)
-            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_9.ToString("d"), "1293", "1.0", "Pulled", "0.0", "Norm", "Copilot Cyclic", "C2 Hook Release Cover", "%.1f"));
-            AddFunction(new PushButton(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_11.ToString("d"), "1294", "Copilot Cyclic", "C2 Hook Release Switch", "%.1f"));  // elements["C2_HOOKREL"] =        PushButton({1}, "", devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_11,  1294, nil, false)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_7.ToString("d"), "748", "Pilot Thrust Control Lever",  "BRAKE", "%.1f"));  // elements["BRAKE"] =             PushButton({0}, "", devices.GRIPS, device_commands.Button_7,  748)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_1.ToString("d"), "1299", "Pilot Thrust Control Lever",  "MARK", "%.1f"));  // elements["MARK"] =              PushButton({0}, "", devices.GRIPS, device_commands.Button_1,  1299)
+            AddFunction(Switch.CreateToggleSwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_2.ToString("d"), "1295", "1.0", "Pulled", "0.0", "Norm", "Pilot Thrust Control Lever",  "IRWHT", "%.1f"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_4.ToString("d"), "1296", "Pilot Thrust Control Lever",  "SRCH", "%.1f"));  // elements["SRCH"] =              PushButton({0}, "", devices.GRIPS, device_commands.Button_4,  1296)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_5.ToString("d"), "1297", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "SRCH H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_6.ToString("d"), "1298", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "SRCH V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_8.ToString("d"), "1300", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "UPDN", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_9.ToString("d"), "1301", "Pilot Thrust Control Lever",  "GA", "%.1f"));  // elements["GA"] =                PushButton({0}, "", devices.GRIPS, device_commands.Button_9,  1301)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_10.ToString("d"), "1302", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "FRQ H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_11.ToString("d"), "1303", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "FRQ V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_12.ToString("d"), "1304", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "HUDMODE H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_13.ToString("d"), "1305", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "HUDMODE V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_14.ToString("d"), "1306", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "DAFCSMODE H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_15.ToString("d"), "1307", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "DAFCSMODE V", "%1d"));
 
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_7.ToString("d"), "748", "Pilot Thrust Control Lever",  "T1_BRAKE", "%.1f"));  // elements["T1_BRAKE"] =             PushButton({0}, "", devices.GRIPS, device_commands.Button_7,  748)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_1.ToString("d"), "1299", "Pilot Thrust Control Lever",  "T1_MARK", "%.1f"));  // elements["T1_MARK"] =              PushButton({0}, "", devices.GRIPS, device_commands.Button_1,  1299)
-            AddFunction(Switch.CreateToggleSwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_2.ToString("d"), "1295", "1.0", "Pulled", "0.0", "Norm", "Pilot Thrust Control Lever",  "T1_IRWHT", "%.1f"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_4.ToString("d"), "1296", "Pilot Thrust Control Lever",  "T1_SRCH", "%.1f"));  // elements["T1_SRCH"] =              PushButton({0}, "", devices.GRIPS, device_commands.Button_4,  1296)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_5.ToString("d"), "1297", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_SRCH_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_6.ToString("d"), "1298", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_SRCH_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_8.ToString("d"), "1300", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_UPDN", "%1d"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_9.ToString("d"), "1301", "Pilot Thrust Control Lever",  "T1_GA", "%.1f"));  // elements["T1_GA"] =                PushButton({0}, "", devices.GRIPS, device_commands.Button_9,  1301)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_10.ToString("d"), "1302", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_FRQ_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_11.ToString("d"), "1303", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_FRQ_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_12.ToString("d"), "1304", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_HUDMODE_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_13.ToString("d"), "1305", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_HUDMODE_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_14.ToString("d"), "1306", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_DAFCSMODE_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_15.ToString("d"), "1307", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Thrust Control Lever",  "T1_DAFCSMODE_V", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_87.ToString("d"), "750", "Copilot Thrust Control Lever",  "BRAKE", "%.1f"));  // elements["BRAKE"] =             PushButton({1}, "", devices.GRIPS, device_commands.Button_87, 750)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_81.ToString("d"), "1312", "Copilot Thrust Control Lever",  "MARK", "%.1f"));  // elements["MARK"] =              PushButton({1}, "", devices.GRIPS, device_commands.Button_81, 1312)
+            AddFunction(Switch.CreateToggleSwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_82.ToString("d"), "1308", "1.0", "Pulled", "0.0", "Norm", "Copilot Thrust Control Lever",  "IRWHT", "%.1f"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_84.ToString("d"), "1309", "Copilot Thrust Control Lever",  "SRCH", "%.1f"));  // elements["SRCH"] =              PushButton({1}, "", devices.GRIPS, device_commands.Button_84, 1309)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_85.ToString("d"), "1310", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "SRCH H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_86.ToString("d"), "1311", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "SRCH V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_88.ToString("d"), "1313", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "UPDN", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_89.ToString("d"), "1314", "Copilot Thrust Control Lever",  "GA", "%.1f"));  // elements["GA"] =                PushButton({1}, "", devices.GRIPS, device_commands.Button_89, 1314)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_90.ToString("d"), "1315", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "FRQ H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_91.ToString("d"), "1316", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "FRQ V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_92.ToString("d"), "1317", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "HUDMODE H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_93.ToString("d"), "1318", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "HUDMODE V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_94.ToString("d"), "1319", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "DAFCSMODE H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_95.ToString("d"), "1320", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "DAFCSMODE V", "%1d"));
 
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_87.ToString("d"), "750", "Copilot Thrust Control Lever",  "T2_BRAKE", "%.1f"));  // elements["T2_BRAKE"] =             PushButton({1}, "", devices.GRIPS, device_commands.Button_87, 750)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_81.ToString("d"), "1312", "Copilot Thrust Control Lever",  "T2_MARK", "%.1f"));  // elements["T2_MARK"] =              PushButton({1}, "", devices.GRIPS, device_commands.Button_81, 1312)
-            AddFunction(Switch.CreateToggleSwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_82.ToString("d"), "1308", "1.0", "Pulled", "0.0", "Norm", "Copilot Thrust Control Lever",  "T2_IRWHT", "%.1f"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_84.ToString("d"), "1309", "Copilot Thrust Control Lever",  "T2_SRCH", "%.1f"));  // elements["T2_SRCH"] =              PushButton({1}, "", devices.GRIPS, device_commands.Button_84, 1309)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_85.ToString("d"), "1310", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_SRCH_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_86.ToString("d"), "1311", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_SRCH_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_88.ToString("d"), "1313", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_UPDN", "%1d"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_89.ToString("d"), "1314", "Copilot Thrust Control Lever",  "T2_GA", "%.1f"));  // elements["T2_GA"] =                PushButton({1}, "", devices.GRIPS, device_commands.Button_89, 1314)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_90.ToString("d"), "1315", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_FRQ_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_91.ToString("d"), "1316", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_FRQ_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_92.ToString("d"), "1317", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_HUDMODE_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_93.ToString("d"), "1318", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_HUDMODE_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_94.ToString("d"), "1319", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_DAFCSMODE_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_95.ToString("d"), "1320", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Thrust Control Lever",  "T2_DAFCSMODE_V", "%1d"));
+            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_51.ToString("d"), "1414", 0.1d, 0.0d, 1.0d, "Pilot Multi Function Control Unit",  "S1 H"));  // elements["MFCU1_S1_H"] =          axis_limited({0}, "", devices.GRIPS, device_commands.Button_51,  1414)
+            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_55.ToString("d"), "1415", 0.1d, 0.0d, 1.0d, "Pilot Multi Function Control Unit",  "S1 V"));  // elements["MFCU1_S1_V"] =          axis_limited({0}, "", devices.GRIPS, device_commands.Button_55,  1415)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_59.ToString("d"), "1416", "Pilot Multi Function Control Unit",  "S1 Z", "%.1f"));  // elements["MFCU1_S1_Z"] =       PushButton({0}, "", devices.GRIPS, device_commands.Button_59,  1416)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_60.ToString("d"), "1417", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "S2 H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_61.ToString("d"), "1418", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "S2 V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_62.ToString("d"), "1419", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "S3 H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_63.ToString("d"), "1420", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "S3 V", "%1d")); AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_64.ToString("d"), "1421", "Pilot Multi Function Control Unit",  "MFCU1_S4", "%.1f"));  // elements["MFCU1_S4"] =         PushButton({0}, "", devices.GRIPS, device_commands.Button_64,  1421)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_65.ToString("d"), "1422", "Pilot Multi Function Control Unit",  " S5", "%.1f"));  // elements["MFCU1_S5"] =         PushButton({0}, "", devices.GRIPS, device_commands.Button_65,  1422)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_66.ToString("d"), "1423", "Pilot Multi Function Control Unit",  " S6", "%.1f"));  // elements["MFCU1_S6"] =         Puon({0}, "", devices.GRIPS, device_commands.Button_66,  1423)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_67.ToString("d"), "1425", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "R1", "%1d"));
 
-            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_51.ToString("d"), "1414", 0.1d, 0.0d, 1.0d, "Pilot Multi Function Control Unit",  "MFCU1_S1_H"));  // elements["MFCU1_S1_H"] =          axis_limited({0}, "", devices.GRIPS, device_commands.Button_51,  1414)
-            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_55.ToString("d"), "1415", 0.1d, 0.0d, 1.0d, "Pilot Multi Function Control Unit",  "MFCU1_S1_V"));  // elements["MFCU1_S1_V"] =          axis_limited({0}, "", devices.GRIPS, device_commands.Button_55,  1415)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_59.ToString("d"), "1416", "Pilot Multi Function Control Unit",  "MFCU1_S1_Z", "%.1f"));  // elements["MFCU1_S1_Z"] =       PushButton({0}, "", devices.GRIPS, device_commands.Button_59,  1416)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_60.ToString("d"), "1417", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "MFCU1_S2_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_61.ToString("d"), "1418", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "MFCU1_S2_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_62.ToString("d"), "1419", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "MFCU1_S3_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_63.ToString("d"), "1420", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "MFCU1_S3_V", "%1d")); AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_64.ToString("d"), "1421", "Pilot Multi Function Control Unit",  "MFCU1_S4", "%.1f"));  // elements["MFCU1_S4"] =         PushButton({0}, "", devices.GRIPS, device_commands.Button_64,  1421)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_65.ToString("d"), "1422", "Pilot Multi Function Control Unit",  "MFCU1_S5", "%.1f"));  // elements["MFCU1_S5"] =         PushButton({0}, "", devices.GRIPS, device_commands.Button_65,  1422)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_66.ToString("d"), "1423", "Pilot Multi Function Control Unit",  "MFCU1_S6", "%.1f"));  // elements["MFCU1_S6"] =         PushButton({0}, "", devices.GRIPS, device_commands.Button_66,  1423)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_67.ToString("d"), "1425", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Multi Function Control Unit",  "MFCU1_R1", "%1d"));
-            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_131.ToString("d"), "1426", 0.1d, 0.0d, 1.0d, "Coplot Multi Function Control Unit",  "MFCU2_S1_H"));  // elements["MFCU2_S1_H"] =          axis_limited({1}, "", devices.GRIPS, device_commands.Button_131, 1426)
-            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_135.ToString("d"), "1427", 0.1d, 0.0d, 1.0d, "Coplot Multi Function Control Unit",  "MFCU2_S1_V"));  // elements["MFCU2_S1_V"] =          axis_limited({1}, "", devices.GRIPS, device_commands.Button_135, 1427)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_139.ToString("d"), "1428", "Coplot Multi Function Control Unit",  "MFCU2_S1_Z", "%.1f"));  // elements["MFCU2_S1_Z"] =       PushButton({1}, "", devices.GRIPS, device_commands.Button_139, 1428)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_140.ToString("d"), "1429", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "MFCU2_S2_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_141.ToString("d"), "1430", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "MFCU2_S2_V", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_142.ToString("d"), "1431", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "MFCU2_S3_H", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_143.ToString("d"), "1432", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "MFCU2_S3_V", "%1d"));
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_144.ToString("d"), "1433", "Coplot Multi Function Control Unit",  "MFCU2_S4", "%.1f"));  // elements["MFCU2_S4"] =         PushButton({1}, "", devices.GRIPS, device_commands.Button_144, 1433)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_145.ToString("d"), "1434", "Coplot Multi Function Control Unit",  "MFCU2_S5", "%.1f"));  // elements["MFCU2_S5"] =         PushButton({1}, "", devices.GRIPS, device_commands.Button_145, 1434)
-            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_146.ToString("d"), "1435", "Coplot Multi Function Control Unit",  "MFCU2_S6", "%.1f"));  // elements["MFCU2_S6"] =         PushButton({1}, "", devices.GRIPS, device_commands.Button_146, 1435)
-            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_147.ToString("d"), "1437", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "MFCU2_R1", "%1d"));
+            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_131.ToString("d"), "1426", 0.1d, 0.0d, 1.0d, "Coplot Multi Function Control Unit",  "S1 H"));  // elements["MFCU2_S1_H"] =          axis_limited({1}, "", devices.GRIPS, device_commands.Button_131, 1426)
+            AddFunction(new Axis(this, devices.GRIPS.ToString("d"), Commands.Button.Button_135.ToString("d"), "1427", 0.1d, 0.0d, 1.0d, "Coplot Multi Function Control Unit",  "S1 V"));  // elements["MFCU2_S1_V"] =          axis_limited({1}, "", devices.GRIPS, device_commands.Button_135, 1427)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_139.ToString("d"), "1428", "Coplot Multi Function Control Unit",  "S1 Z", "%.1f"));  // elements["MFCU2_S1_Z"] =       PushButton({1}, "", devices.GRIPS, device_commands.Button_139, 1428)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_140.ToString("d"), "1429", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "S2 H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_141.ToString("d"), "1430", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "S2 V", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_142.ToString("d"), "1431", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "S3 H", "%1d"));
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_143.ToString("d"), "1432", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "S3 V", "%1d"));
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_144.ToString("d"), "1433", "Coplot Multi Function Control Unit",  "S4", "%.1f"));  // elements["MFCU2_S4"] =         PushButton({1}, "", devices.GRIPS, device_commands.Button_144, 1433)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_145.ToString("d"), "1434", "Coplot Multi Function Control Unit",  "S5", "%.1f"));  // elements["MFCU2_S5"] =         PushButton({1}, "", devices.GRIPS, device_commands.Button_145, 1434)
+            AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_146.ToString("d"), "1435", "Coplot Multi Function Control Unit",  "S6", "%.1f"));  // elements["MFCU2_S6"] =         PushButton({1}, "", devices.GRIPS, device_commands.Button_146, 1435)
+            AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_147.ToString("d"), "1437", "1", "Up", "0", "Middle", "-1", "Down", "Coplot Multi Function Control Unit",  "R1", "%1d"));
+            #endregion
 
             AddFunction(new Axis(this, devices.TERTIARY_REFLECTS.ToString("d"), Commands.Button.Button_6.ToString("d"), "1216", 0.1d, 0.0d, 1.0d, "Compass", "Compass Knob"));  // elements["COMPASS_KNOB"] =                  axis_limited({0, 1}, _("Cockpit.Generic.compass_dimmer"), devices.TERTIARY_REFLECTS, device_commands.Button_6, 1216)
+            AddFunction(new ScaledNetworkValue(this, "1213", 90d, "Compass", "Tilt", "Angle of Tilt of the Compass", "-90 to 90 degrees", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, "1212", 90d, "Compass", "Rotation", "Angle of Rotation of the Compass", "-90 to 90 degrees", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, "1214", 360d, "Compass", "Magnetic Heading", "Magnetic Heading in degrees", "0 to 360 degrees", BindingValueUnits.Degrees));
+
+            #region SFDs
+            //  The small button and the adjustment knob for the two SFDs seem to be missing from Clickables and Can't find them in Model Viewer.  Hoeefully they will appear in the module soon.
+            AddFunction(new NetworkValue(this, "1217", "Canted Console", "Left SFD Slip Ball", "Aircraft Slip Ball Deflection", "-1.0 to +1.0", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, "1218", "Canted Console", "Right SFD Slip Ball", "Aircraft Slip Ball Deflection", "-1.0 to +1.0", BindingValueUnits.Numeric));
+
+            #endregion
+
             AddFunction(Switch.CreateToggleSwitch(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_1.ToString("d"), "731", "1.0", "Pulled", "0.0", "Norm", "Canted Console", "Main Engine 1 Fire Switch", "%.1f"));
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_2.ToString("d"), "732", 0.1d, 0.0d, 1.0d, "Canted Console", "Main Engine 1 Fire Handle"));
             AddFunction(new FlagValue(this, "737", "Canted Console", "FIRE 1 PULL Indicator", ""));
@@ -631,6 +646,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new PushButton(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_9.ToString("d"), "724", "Canted Console", "Main Battery Low Button", "%.1f"));
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_10.ToString("d"), "725", 0.1d, 0.0d, 1.0d, "Canted Console", "Main Battery Low Knob"));
             AddFunction(new FlagValue(this, "723", "Canted Console", "Battery Low Indicator", ""));
+            AddFunction(new NetworkValue(this, "1460", "Canted Console", "Inclinometer Tube", "Aircraft angle of inclination", "-1.0 to +1.0", BindingValueUnits.Numeric));
 
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_16.ToString("d"), "739", 0.1d, 0.0d, 1.0d, "Canted Console", "Main RadAlt Dimmer"));  // elements["MAIN_RALT_DIMMER"] =              axis_limited({0, 1}, _("Cockpit.CH47.ralt_dimmer"),       devices.CANTED_CONSOLE, device_commands.Button_16, 739)
             AddFunction(new PushButton(this, devices.TERTIARY_REFLECTS.ToString("d"), Commands.Button.Button_1.ToString("d"), "1209", "M880 Chronometer", "Select Button", "%.1f"));  // elements["M880_SEL"] =       button({0, 1}, _("Cockpit.Generic.clock_select_btn"),  devices.TERTIARY_REFLECTS, device_commands.Button_1, 1209, {{SOUND_SW07_OFF, SOUND_SW07_ON}})
@@ -812,231 +828,231 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             /// RegEx used for this region
             /// Circuit Breaker
             /// elements\[\x22(?'panel'.{ 1})(? 'row'.{ 1})(? 'column'.{ 2})\x22\]\s *\=\s* pdp_special\(.* _\(\x22Cockpit\.CH47\.CB.(?'name'.*)\x22\)\)
-            /// \t\tAddFunction(new PushButton(this, devices.PDP${panel}.ToString("d"), cbToCommand(\'${row}\', ${column}), cbToArg(${panel}, \'${row}\', ${column}), "Circuit Breaker Panel ${panel}", "${name} (${row},${column})"));\n
+            /// \t\tAddFunction(new PushButton(this, devices.PDP${panel}.ToString("d"), CbToCommand(\'${row}\', ${column}), CbToArg(${panel}, \'${row}\', ${column}), "Circuit Breaker Panel ${panel}", "${name} (${row},${column})"));\n
 
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 06), cbToArg(1, 'A', 06), "Power Distribution Panel 1", "FUEL REFUEL (A,06)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 07), cbToArg(1, 'A', 07), "Power Distribution Panel 1", "FUEL XFEED CONTR (A,07)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 08), cbToArg(1, 'A', 08), "Power Distribution Panel 1", "FUEL R QTY LO LVL (A,08)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 09), cbToArg(1, 'A', 09), "Power Distribution Panel 1", "FUEL L QTY (A,09)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 10), cbToArg(1, 'A', 10), "Power Distribution Panel 1", "L FUEL PUMP CONTR AUX AFT (A,10)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 11), cbToArg(1, 'A', 11), "Power Distribution Panel 1", "L FUEL PUMP CONTR MAIN AFT (A,11)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 12), cbToArg(1, 'A', 12), "Power Distribution Panel 1", "L FUEL PUMP CONTR MAIN FWD (A,12)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 13), cbToArg(1, 'A', 13), "Power Distribution Panel 1", "L FUEL PUMP CONTR AUX FWD (A,13)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 14), cbToArg(1, 'A', 14), "Power Distribution Panel 1", "FADEC NO 1 PRI PWR (A,14)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 15), cbToArg(1, 'A', 15), "Power Distribution Panel 1", "FADEC NO 1 REV PWR (A,15)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 16), cbToArg(1, 'A', 16), "Power Distribution Panel 1", "FADEC NO 1 START AND IGN (A,16)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 17), cbToArg(1, 'A', 17), "Power Distribution Panel 1", "ENGINE NO 1 FUEL SHUT OFF (A,17)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 18), cbToArg(1, 'A', 18), "Power Distribution Panel 1", "ENGINE NO 1 FIRE EXT (A,18)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 19), cbToArg(1, 'A', 19), "Power Distribution Panel 1", "ENGINE NO 1 FIRE DET (A,19)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 20), cbToArg(1, 'A', 20), "Power Distribution Panel 1", "ENGINE NO 1 TORQUE (A,20)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 21), cbToArg(1, 'A', 21), "Power Distribution Panel 1", "ENGINE NO 1 FUEL FLOW (A,21)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 22), cbToArg(1, 'A', 22), "Power Distribution Panel 1", "ENGINE NO 1 OIL PRESS (A,22)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 23), cbToArg(1, 'A', 23), "Power Distribution Panel 1", "DCU 1 26VAC (A,23)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 24), cbToArg(1, 'A', 24), "Power Distribution Panel 1", "COLL PONS (A,24)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 26), cbToArg(1, 'A', 26), "Power Distribution Panel 1", "L FUEL PUMP MAIN AFT (A,26)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 29), cbToArg(1, 'A', 29), "Power Distribution Panel 1", "L FUEL PUMP MAIN FWD (A,29)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('A', 31), cbToArg(1, 'A', 31), "Power Distribution Panel 1", "NO 1 EAPS FAN (A,31)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 01), cbToArg(1, 'B', 01), "Power Distribution Panel 1", "ELECT BATT TEST LOW (B,01)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 02), cbToArg(1, 'B', 02), "Power Distribution Panel 1", "ELECT CKPT UTIL RCPT 1 (B,02)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 03), cbToArg(1, 'B', 03), "Power Distribution Panel 1", "ELECT DC 1 BUS CONTR (B,03)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 04), cbToArg(1, 'B', 04), "Power Distribution Panel 1", "ELECT DC 1 BUS CURR XDCR (B,04)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 05), cbToArg(1, 'B', 05), "Power Distribution Panel 1", "ELECT AC 1 BUS CURR XDCR (B,05)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 06), cbToArg(1, 'B', 06), "Power Distribution Panel 1", "ELECT BATT CHRG 1 RCCO CONTR (B,06)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 07), cbToArg(1, 'B', 07), "Power Distribution Panel 1", "ELECT BATT CHRG 1 CONTR (B,07)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 08), cbToArg(1, 'B', 08), "Power Distribution Panel 1", "ELECT DC 1 ESS BUS CONTR (B,08)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 09), cbToArg(1, 'B', 09), "Power Distribution Panel 1", "ELECT NO 1 RVS CUR CUTOUT (B,09)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 10), cbToArg(1, 'B', 10), "Power Distribution Panel 1", "ELECT EXT PWR CONTR (B,10)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 11), cbToArg(1, 'B', 11), "Power Distribution Panel 1", "HOIST CONTR (B,11)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 12), cbToArg(1, 'B', 12), "Power Distribution Panel 1", "HOIST CABLE CUT (B,12)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 13), cbToArg(1, 'B', 13), "Power Distribution Panel 1", "CARGO HOOK EMER REL PWR (B,13)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 14), cbToArg(1, 'B', 14), "Power Distribution Panel 1", "CARGO HOOK EMER REL CONTR (B,14)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 15), cbToArg(1, 'B', 15), "Power Distribution Panel 1", "AFCS THRUST BRAKE (B,15)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 16), cbToArg(1, 'B', 16), "Power Distribution Panel 1", "AFCS CONTR CTR (B,16)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 17), cbToArg(1, 'B', 17), "Power Distribution Panel 1", "AFCS CYC TRIM FWD ACTR (B,17)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 18), cbToArg(1, 'B', 18), "Power Distribution Panel 1", "AFCS CYC TRIM MAN (B,18)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 19), cbToArg(1, 'B', 19), "Power Distribution Panel 1", "AFCS CLTV DRIVER ACTR (B,19)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 20), cbToArg(1, 'B', 20), "Power Distribution Panel 1", "AFCS FCC 1 (B,20)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 21), cbToArg(1, 'B', 21), "Power Distribution Panel 1", "AFCS FCC 1 (B,21)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 22), cbToArg(1, 'B', 22), "Power Distribution Panel 1", "AFCS CLTV DRIVER ACTR (B,22)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 26), cbToArg(1, 'B', 26), "Power Distribution Panel 1", "L FUEL PUMP AUX AFT (B,26)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 29), cbToArg(1, 'B', 29), "Power Distribution Panel 1", "L FUEL PUMP AUX FWD (B,29)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 31), cbToArg(1, 'B', 31), "Power Distribution Panel 1", "NO 1 XFMR RECT (B,31)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 32), cbToArg(1, 'B', 32), "Power Distribution Panel 1", "DC ESS 1 BUS FEED (B,32)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('B', 33), cbToArg(1, 'B', 33), "Power Distribution Panel 1", "BATT BUS FEED (B,33)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 08), cbToArg(1, 'C', 08), "Power Distribution Panel 1", "AIR WAR MASK BLWR (C,08)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 09), cbToArg(1, 'C', 09), "Power Distribution Panel 1", "AIR WAR MCU 1 CPLT (C,09)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 10), cbToArg(1, 'C', 10), "Power Distribution Panel 1", "CAAS MFCU 1 (C,10)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 11), cbToArg(1, 'C', 11), "Power Distribution Panel 1", "CAAS CDU 1 (C,11)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 12), cbToArg(1, 'C', 12), "Power Distribution Panel 1", "CAAS ZEROIZE (C,12)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 13), cbToArg(1, 'C', 13), "Power Distribution Panel 1", "NAV EGI 1 BACKUP PWR (C,13)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 14), cbToArg(1, 'C', 14), "Power Distribution Panel 1", "NAV SFD 1 (C,14)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 15), cbToArg(1, 'C', 15), "Power Distribution Panel 1", "NAV ADC 1 (C,15)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 16), cbToArg(1, 'C', 16), "Power Distribution Panel 1", "NAV ADF (C,16)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 17), cbToArg(1, 'C', 17), "Power Distribution Panel 1", "NAV EGI 1 (C,17)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 18), cbToArg(1, 'C', 18), "Power Distribution Panel 1", "NAV DR-200 (C,18)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 19), cbToArg(1, 'C', 19), "Power Distribution Panel 1", "NAV ASG HUD (C,19)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 20), cbToArg(1, 'C', 20), "Power Distribution Panel 1", "ASE CMDS CONTR (C,20)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 21), cbToArg(1, 'C', 21), "Power Distribution Panel 1", "NAV MMS (C,21)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 22), cbToArg(1, 'C', 22), "Power Distribution Panel 1", "XMSN OIL PRESS (C,22)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 26), cbToArg(1, 'C', 26), "Power Distribution Panel 1", "CAAS GPPU 1 (C,26)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 29), cbToArg(1, 'C', 29), "Power Distribution Panel 1", "CAAS DCU 1 (C,29)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 31), cbToArg(1, 'C', 31), "Power Distribution Panel 1", "UTIL HYD COOLING BLOWER (C,31)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('C', 32), cbToArg(1, 'C', 32), "Power Distribution Panel 1", "NO 1 DC CROSS TIE (C,32)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 04), cbToArg(1, 'D', 04), "Power Distribution Panel 1", "HYDRAULICS ACC PUMP (D,04)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 05), cbToArg(1, 'D', 05), "Power Distribution Panel 1", "HYDRAULICS OIL LVL (D,05)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 06), cbToArg(1, 'D', 06), "Power Distribution Panel 1", "HYDRAULICS MAINT PNL LTG (D,06)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 07), cbToArg(1, 'D', 07), "Power Distribution Panel 1", "HYDRAULICS NO 1 BLO CONTR (D,07)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 08), cbToArg(1, 'D', 08), "Power Distribution Panel 1", "HYDRAULICS UTIL BLO CONTR (D,08)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 09), cbToArg(1, 'D', 09), "Power Distribution Panel 1", "HYDRAULICS SYS CONTR (D,09)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 10), cbToArg(1, 'D', 10), "Power Distribution Panel 1", "HYDRAULICS BRAKE STEER (D,10)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 11), cbToArg(1, 'D', 11), "Power Distribution Panel 1", "HYDRAULICS RAMP EMER CONTR (D,11)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 12), cbToArg(1, 'D', 12), "Power Distribution Panel 1", "COMM ICU (D,12)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 13), cbToArg(1, 'D', 13), "Power Distribution Panel 1", "COMM L ICS (D,13)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 14), cbToArg(1, 'D', 14), "Power Distribution Panel 1", "COMM UHF RT (D,14)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 15), cbToArg(1, 'D', 15), "Power Distribution Panel 1", "COMM UHF SCTY SET (D,15)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 16), cbToArg(1, 'D', 16), "Power Distribution Panel 1", "COMM SINCGARS 1 RT (D,16)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 17), cbToArg(1, 'D', 17), "Power Distribution Panel 1", "COMM SINCGARS 1 PWR AMP (D,17)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 18), cbToArg(1, 'D', 18), "Power Distribution Panel 1", "COMM IDM (D,18)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 19), cbToArg(1, 'D', 19), "Power Distribution Panel 1", "COMM BFT (D,19)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 20), cbToArg(1, 'D', 20), "Power Distribution Panel 1", "ANTI-ICE WSHLD CPLT CONTR (D,20)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 21), cbToArg(1, 'D', 21), "Power Distribution Panel 1", "ANTI-ICE WSHLD CPLT HTR (D,21)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 22), cbToArg(1, 'D', 22), "Power Distribution Panel 1", "ANTI-ICE PITOT 1 HTR (D,22)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 23), cbToArg(1, 'D', 23), "Power Distribution Panel 1", "NO 1 INSTR XFMR (D,23)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 24), cbToArg(1, 'D', 24), "Power Distribution Panel 1", "NO 2 INSTR XFMR (D,24)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 26), cbToArg(1, 'D', 26), "Power Distribution Panel 1", "CAAS MFD 2 (D,26)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('D', 29), cbToArg(1, 'D', 29), "Power Distribution Panel 1", "CAAS MFD 1 (D,29)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 04), cbToArg(1, 'E', 04), "Power Distribution Panel 1", "L PROX SW (E,04)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 05), cbToArg(1, 'E', 05), "Power Distribution Panel 1", "APU CONTR NORM (E,05)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 06), cbToArg(1, 'E', 06), "Power Distribution Panel 1", "APU CONTR EMER (E,06)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 07), cbToArg(1, 'E', 07), "Power Distribution Panel 1", "NO 1 EAPS BYPASS DOORS (E,07)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 08), cbToArg(1, 'E', 08), "Power Distribution Panel 1", "NO 1 EAPS FAN CONTR (E,08)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 14), cbToArg(1, 'E', 14), "Power Distribution Panel 1", "LIGHTING CARGO HOOK (E,14)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 15), cbToArg(1, 'E', 15), "Power Distribution Panel 1", "LIGHTING EMER EXIT (E,15)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 16), cbToArg(1, 'E', 16), "Power Distribution Panel 1", "LIGHTING OIL LVL CHK (E,16)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 17), cbToArg(1, 'E', 17), "Power Distribution Panel 1", "LIGHTING CABIN AND RAMP (E,17)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 18), cbToArg(1, 'E', 18), "Power Distribution Panel 1", "LIGHTING NVG FORM (E,18)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 19), cbToArg(1, 'E', 19), "Power Distribution Panel 1", "LIGHTING CPLT SLT CONTR (E,19)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 20), cbToArg(1, 'E', 20), "Power Distribution Panel 1", "LIGHTING CPLT SLT FIL (E,20)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 22), cbToArg(1, 'E', 22), "Power Distribution Panel 1", "LIGHTING CPLT INSTR (E,22)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 23), cbToArg(1, 'E', 23), "Power Distribution Panel 1", "LIGHTING CONSOLE (E,23)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 24), cbToArg(1, 'E', 24), "Power Distribution Panel 1", "LIGHTING OVHD PNL (E,24)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 25), cbToArg(1, 'E', 25), "Power Distribution Panel 1", "LIGHTING ILL SW (E,25)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 26), cbToArg(1, 'E', 26), "Power Distribution Panel 1", "LIGHTING FORM (E,26)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 27), cbToArg(1, 'E', 27), "Power Distribution Panel 1", "LIGHTING SEC CKPT LTG CONTR (E,27)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 29), cbToArg(1, 'E', 29), "Power Distribution Panel 1", "HYDRAULICS NO 1 COOLING BLOWER (E,29)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 32), cbToArg(1, 'E', 32), "Power Distribution Panel 1", "BATT CHRG 1 RCCO (E,32)"));
-            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), cbToCommand('E', 33), cbToArg(1, 'E', 33), "Power Distribution Panel 1", "NO 1 DC AUX PDP FEED (E,33)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 08), cbToArg(2, 'A', 08), "Power Distribution Panel 2", "FUEL L QTY LO LVL (A,08)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 09), cbToArg(2, 'A', 09), "Power Distribution Panel 2", "FUEL R QTY (A,09)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 10), cbToArg(2, 'A', 10), "Power Distribution Panel 2", "R FUEL PUMP CONTR AUX AFT (A,10)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 11), cbToArg(2, 'A', 11), "Power Distribution Panel 2", "R FUEL PUMP CONTR MAIN AFT (A,11)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 12), cbToArg(2, 'A', 12), "Power Distribution Panel 2", "R FUEL PUMP CONTR MAIN FWD (A,12)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 13), cbToArg(2, 'A', 13), "Power Distribution Panel 2", "R FUEL PUMP CONTR AUX FWD (A,13)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 14), cbToArg(2, 'A', 14), "Power Distribution Panel 2", "FADEC NO 2 PRI PWR (A,14)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 15), cbToArg(2, 'A', 15), "Power Distribution Panel 2", "FADEC NO 2 REV PWR (A,15)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 16), cbToArg(2, 'A', 16), "Power Distribution Panel 2", "FADEC NO 2 START AND IGN (A,16)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 17), cbToArg(2, 'A', 17), "Power Distribution Panel 2", "ENGINE NO 2 FUEL SHUT OFF (A,17)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 18), cbToArg(2, 'A', 18), "Power Distribution Panel 2", "ENGINE NO 2 FIRE EXT (A,18)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 19), cbToArg(2, 'A', 19), "Power Distribution Panel 2", "ENGINE NO 2 FIRE DET (A,19)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 20), cbToArg(2, 'A', 20), "Power Distribution Panel 2", "ENGINE NO 2 TORQUE (A,20)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 21), cbToArg(2, 'A', 21), "Power Distribution Panel 2", "ENGINE NO 2 FUEL FLOW (A,21)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 22), cbToArg(2, 'A', 22), "Power Distribution Panel 2", "ENGINE NO 2 OIL PRESS (A,22)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 23), cbToArg(2, 'A', 23), "Power Distribution Panel 2", "DCU 2 26VAC (A,23)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 26), cbToArg(2, 'A', 26), "Power Distribution Panel 2", "R FUEL PUMP MAIN AFT (A,26)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 29), cbToArg(2, 'A', 29), "Power Distribution Panel 2", "R FUEL PUMP MAIN FWD (A,29)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('A', 31), cbToArg(2, 'A', 31), "Power Distribution Panel 2", "NO 2 XFMR RECT (A,31)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 04), cbToArg(2, 'B', 04), "Power Distribution Panel 2", "ELECT CKPT UTIL RCPT 2 (B,04)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 05), cbToArg(2, 'B', 05), "Power Distribution Panel 2", "ELECT DC 2 BUS CONTR (B,05)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 06), cbToArg(2, 'B', 06), "Power Distribution Panel 2", "ELECT DC 2 BUS CURR XDCR (B,06)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 07), cbToArg(2, 'B', 07), "Power Distribution Panel 2", "ELECT AC 2 BUS CURR XDCR (B,07)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 08), cbToArg(2, 'B', 08), "Power Distribution Panel 2", "ELECT BATT CHRG 2 RCCO CONTR (B,08)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 09), cbToArg(2, 'B', 09), "Power Distribution Panel 2", "ELECT BATT CHRG 2 CONTR (B,09)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 10), cbToArg(2, 'B', 10), "Power Distribution Panel 2", "ELECT DC 2 ESS BUS CONTR (B,10)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 11), cbToArg(2, 'B', 11), "Power Distribution Panel 2", "ELECT NO 2 RVS CUR CUTOUT (B,11)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 13), cbToArg(2, 'B', 13), "Power Distribution Panel 2", "AIR WAR MCU 3 PLT (B,13)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 14), cbToArg(2, 'B', 14), "Power Distribution Panel 2", "CARGO HOOK NORM REL PWR (B,14)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 15), cbToArg(2, 'B', 15), "Power Distribution Panel 2", "CARGO HOOK NORM REL CONTR (B,15)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 16), cbToArg(2, 'B', 16), "Power Distribution Panel 2", "BLADE TRACK (B,16)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 17), cbToArg(2, 'B', 17), "Power Distribution Panel 2", "CRUISE GUIDE (B,17)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 18), cbToArg(2, 'B', 18), "Power Distribution Panel 2", "AFCS CYC TRIM AFT ACTR (B,18)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 19), cbToArg(2, 'B', 19), "Power Distribution Panel 2", "AFCS LONG DRVR ACTR (B,19)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 20), cbToArg(2, 'B', 20), "Power Distribution Panel 2", "AFCS FCC 2 (B,20)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 21), cbToArg(2, 'B', 21), "Power Distribution Panel 2", "AFCS FCC 2 (B,21)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 22), cbToArg(2, 'B', 22), "Power Distribution Panel 2", "AFCS LONG DRVR ACTR (B,22)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 23), cbToArg(2, 'B', 23), "Power Distribution Panel 2", "VIB ABSORB R (B,23)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 24), cbToArg(2, 'B', 24), "Power Distribution Panel 2", "VIB ABSORB L (B,24)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 26), cbToArg(2, 'B', 26), "Power Distribution Panel 2", "R FUEL PUMP AUX AFT (B,26)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 29), cbToArg(2, 'B', 29), "Power Distribution Panel 2", "R FUEL PUMP AUX FWD (B,29)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 31), cbToArg(2, 'B', 31), "Power Distribution Panel 2", "NO 2 EAPS FAN (B,31)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 32), cbToArg(2, 'B', 32), "Power Distribution Panel 2", "NO 2 DC AUX PDP FEED (B,32)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('B', 33), cbToArg(2, 'B', 33), "Power Distribution Panel 2", "NO 2 DC CROSS TIE (B,33)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 08), cbToArg(2, 'C', 08), "Power Distribution Panel 2", "CAAS MFCU 2 (C,08)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 09), cbToArg(2, 'C', 09), "Power Distribution Panel 2", "CAAS CDU 2 (C,09)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 10), cbToArg(2, 'C', 10), "Power Distribution Panel 2", "NAV CVR FDR (C,10)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 11), cbToArg(2, 'C', 11), "Power Distribution Panel 2", "NAV EGI 2 BACKUP PWR (C,11)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 12), cbToArg(2, 'C', 12), "Power Distribution Panel 2", "NAV SFD 2 (C,12)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 13), cbToArg(2, 'C', 13), "Power Distribution Panel 2", "NAV RDR ALT (C,13)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 14), cbToArg(2, 'C', 14), "Power Distribution Panel 2", "NAV VOR (C,14)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 15), cbToArg(2, 'C', 15), "Power Distribution Panel 2", "NAV TACAN (C,15)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 16), cbToArg(2, 'C', 16), "Power Distribution Panel 2", "NAV STORM SCOPE (C,16)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 17), cbToArg(2, 'C', 17), "Power Distribution Panel 2", "NAV EGI 2 (C,17)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 18), cbToArg(2, 'C', 18), "Power Distribution Panel 2", "NAV ADC 2 (C,18)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 19), cbToArg(2, 'C', 19), "Power Distribution Panel 2", "ASE RDR WARN (C,19)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 20), cbToArg(2, 'C', 20), "Power Distribution Panel 2", "ASE MWS CONTR (C,20)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 22), cbToArg(2, 'C', 22), "Power Distribution Panel 2", "ASE MWS PWR (C,22)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 26), cbToArg(2, 'C', 26), "Power Distribution Panel 2", "CAAS GPPU 2 (C,26)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 29), cbToArg(2, 'C', 29), "Power Distribution Panel 2", "CAAS DCU 2 (C,29)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('C', 31), cbToArg(2, 'C', 31), "Power Distribution Panel 2", "CABIN HEATER BLOWER (C,31)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 02), cbToArg(2, 'D', 02), "Power Distribution Panel 2", "HYDRAULICS NO 2 BLO CONTR (D,02)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 03), cbToArg(2, 'D', 03), "Power Distribution Panel 2", "HYDRAULICS PWR XFER (D,03)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 04), cbToArg(2, 'D', 04), "Power Distribution Panel 2", "HYDRAULICS PRESS IND (D,04)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 05), cbToArg(2, 'D', 05), "Power Distribution Panel 2", "HYDRAULICS FLUID TEMP (D,05)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 06), cbToArg(2, 'D', 06), "Power Distribution Panel 2", "HYDRAULICS FLT CONTR (D,06)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 07), cbToArg(2, 'D', 07), "Power Distribution Panel 2", "HYDRAULICS MAINT PNL LTS (D,07)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 08), cbToArg(2, 'D', 08), "Power Distribution Panel 2", "COMM R ICS (D,08)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 09), cbToArg(2, 'D', 09), "Power Distribution Panel 2", "COMM VHF ANT SW (D,09)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 10), cbToArg(2, 'D', 10), "Power Distribution Panel 2", "COMM VHF RT (D,10)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 11), cbToArg(2, 'D', 11), "Power Distribution Panel 2", "COMM VHF SCTY SET (D,11)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 12), cbToArg(2, 'D', 12), "Power Distribution Panel 2", "COMM IFF (D,12)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 13), cbToArg(2, 'D', 13), "Power Distribution Panel 2", "COMM HF PA CLR (D,13)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 14), cbToArg(2, 'D', 14), "Power Distribution Panel 2", "COMM HF KY-100 (D,14)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 15), cbToArg(2, 'D', 15), "Power Distribution Panel 2", "COMM SINCGARS 2 RT (D,15)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 16), cbToArg(2, 'D', 16), "Power Distribution Panel 2", "COMM SINCGARS 2 PWR AMP (D,16)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 17), cbToArg(2, 'D', 17), "Power Distribution Panel 2", "WSHLD WIPER (D,17)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 18), cbToArg(2, 'D', 18), "Power Distribution Panel 2", "ANTI-ICE PITOT 3 HTR (D,18)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 19), cbToArg(2, 'D', 19), "Power Distribution Panel 2", "ANTI-ICE WSHLD PLT CONTR (D,19)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 20), cbToArg(2, 'D', 20), "Power Distribution Panel 2", "ANTI-ICE WSHLD CTR CONTR (D,20)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 21), cbToArg(2, 'D', 21), "Power Distribution Panel 2", "ANTI-ICE WSHLD PLT HTR (D,21)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 22), cbToArg(2, 'D', 22), "Power Distribution Panel 2", "ANTI-ICE WSHLD CTR HTR (D,22)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 23), cbToArg(2, 'D', 23), "Power Distribution Panel 2", "ANTI-ICE PITOT 2 HTR (D,23)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 24), cbToArg(2, 'D', 24), "Power Distribution Panel 2", "ANTI-ICE STATIC PORT HTR (D,24)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 26), cbToArg(2, 'D', 26), "Power Distribution Panel 2", "CAAS MFD 3 (D,26)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('D', 29), cbToArg(2, 'D', 29), "Power Distribution Panel 2", "CAAS MFD 4 (D,29)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 02), cbToArg(2, 'E', 02), "Power Distribution Panel 2", "R PROX SW (E,02)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 03), cbToArg(2, 'E', 03), "Power Distribution Panel 2", "TROOP ALARM JUMP LT (E,03)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 04), cbToArg(2, 'E', 04), "Power Distribution Panel 2", "TROOP ALARM BELL (E,04)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 05), cbToArg(2, 'E', 05), "Power Distribution Panel 2", "CLOCK (E,05)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 06), cbToArg(2, 'E', 06), "Power Distribution Panel 2", "CABIN HTR CONTR (E,06)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 07), cbToArg(2, 'E', 07), "Power Distribution Panel 2", "NO 2 EAPS BYPASS DOORS (E,07)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 08), cbToArg(2, 'E', 08), "Power Distribution Panel 2", "NO 2 EAPS FAN CONTR (E,08)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 10), cbToArg(2, 'E', 10), "Power Distribution Panel 2", "LIGHTING PLT SLT CONTR (E,10)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 11), cbToArg(2, 'E', 11), "Power Distribution Panel 2", "LIGHTING PLT SLT FIL (E,11)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 12), cbToArg(2, 'E', 12), "Power Distribution Panel 2", "LIGHTING PDP MAP (E,12)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 13), cbToArg(2, 'E', 13), "Power Distribution Panel 2", "LIGHTING LAMP TEST (E,13)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 14), cbToArg(2, 'E', 14), "Power Distribution Panel 2", "LIGHTING INSTR FLOOD (E,14)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 15), cbToArg(2, 'E', 15), "Power Distribution Panel 2", "LIGHTING STBY CMPS (E,15)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 16), cbToArg(2, 'E', 16), "Power Distribution Panel 2", "LIGHTING MODE SEL (E,16)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 17), cbToArg(2, 'E', 17), "Power Distribution Panel 2", "LIGHTING CKPT DOME (E,17)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 18), cbToArg(2, 'E', 18), "Power Distribution Panel 2", "LIGHTING POSN (E,18)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 19), cbToArg(2, 'E', 19), "Power Distribution Panel 2", "LIGHTING BOT ANTI COL (E,19)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 20), cbToArg(2, 'E', 20), "Power Distribution Panel 2", "LIGHTING TOP ANTI COL (E,20)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 22), cbToArg(2, 'E', 22), "Power Distribution Panel 2", "LIGHTING PLT INSTR (E,22)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 23), cbToArg(2, 'E', 23), "Power Distribution Panel 2", "LIGHTING CTR INSTR (E,23)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 24), cbToArg(2, 'E', 24), "Power Distribution Panel 2", "NO 2 INSTR XMFR (E,24)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 26), cbToArg(2, 'E', 26), "Power Distribution Panel 2", "CAAS MFD 5 (E,26)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 29), cbToArg(2, 'E', 29), "Power Distribution Panel 2", "HYDRAULICS NO 2 COOLING BLOWER (E,29)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 32), cbToArg(2, 'E', 32), "Power Distribution Panel 2", "BATT CHRG 2 RCCO (E,32)"));
-            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), cbToCommand('E', 33), cbToArg(2, 'E', 33), "Power Distribution Panel 2", "DC ESS 2 BUS FEED (E,33)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 06), CbToArg(1, 'A', 06), "Power Distribution Panel 1", "FUEL REFUEL (A,06)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 07), CbToArg(1, 'A', 07), "Power Distribution Panel 1", "FUEL XFEED CONTR (A,07)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 08), CbToArg(1, 'A', 08), "Power Distribution Panel 1", "FUEL R QTY LO LVL (A,08)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 09), CbToArg(1, 'A', 09), "Power Distribution Panel 1", "FUEL L QTY (A,09)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 10), CbToArg(1, 'A', 10), "Power Distribution Panel 1", "L FUEL PUMP CONTR AUX AFT (A,10)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 11), CbToArg(1, 'A', 11), "Power Distribution Panel 1", "L FUEL PUMP CONTR MAIN AFT (A,11)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 12), CbToArg(1, 'A', 12), "Power Distribution Panel 1", "L FUEL PUMP CONTR MAIN FWD (A,12)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 13), CbToArg(1, 'A', 13), "Power Distribution Panel 1", "L FUEL PUMP CONTR AUX FWD (A,13)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 14), CbToArg(1, 'A', 14), "Power Distribution Panel 1", "FADEC NO 1 PRI PWR (A,14)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 15), CbToArg(1, 'A', 15), "Power Distribution Panel 1", "FADEC NO 1 REV PWR (A,15)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 16), CbToArg(1, 'A', 16), "Power Distribution Panel 1", "FADEC NO 1 START AND IGN (A,16)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 17), CbToArg(1, 'A', 17), "Power Distribution Panel 1", "ENGINE NO 1 FUEL SHUT OFF (A,17)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 18), CbToArg(1, 'A', 18), "Power Distribution Panel 1", "ENGINE NO 1 FIRE EXT (A,18)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 19), CbToArg(1, 'A', 19), "Power Distribution Panel 1", "ENGINE NO 1 FIRE DET (A,19)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 20), CbToArg(1, 'A', 20), "Power Distribution Panel 1", "ENGINE NO 1 TORQUE (A,20)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 21), CbToArg(1, 'A', 21), "Power Distribution Panel 1", "ENGINE NO 1 FUEL FLOW (A,21)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 22), CbToArg(1, 'A', 22), "Power Distribution Panel 1", "ENGINE NO 1 OIL PRESS (A,22)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 23), CbToArg(1, 'A', 23), "Power Distribution Panel 1", "DCU 1 26VAC (A,23)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 24), CbToArg(1, 'A', 24), "Power Distribution Panel 1", "COLL PONS (A,24)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 26), CbToArg(1, 'A', 26), "Power Distribution Panel 1", "L FUEL PUMP MAIN AFT (A,26)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 29), CbToArg(1, 'A', 29), "Power Distribution Panel 1", "L FUEL PUMP MAIN FWD (A,29)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('A', 31), CbToArg(1, 'A', 31), "Power Distribution Panel 1", "NO 1 EAPS FAN (A,31)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 01), CbToArg(1, 'B', 01), "Power Distribution Panel 1", "ELECT BATT TEST LOW (B,01)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 02), CbToArg(1, 'B', 02), "Power Distribution Panel 1", "ELECT CKPT UTIL RCPT 1 (B,02)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 03), CbToArg(1, 'B', 03), "Power Distribution Panel 1", "ELECT DC 1 BUS CONTR (B,03)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 04), CbToArg(1, 'B', 04), "Power Distribution Panel 1", "ELECT DC 1 BUS CURR XDCR (B,04)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 05), CbToArg(1, 'B', 05), "Power Distribution Panel 1", "ELECT AC 1 BUS CURR XDCR (B,05)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 06), CbToArg(1, 'B', 06), "Power Distribution Panel 1", "ELECT BATT CHRG 1 RCCO CONTR (B,06)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 07), CbToArg(1, 'B', 07), "Power Distribution Panel 1", "ELECT BATT CHRG 1 CONTR (B,07)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 08), CbToArg(1, 'B', 08), "Power Distribution Panel 1", "ELECT DC 1 ESS BUS CONTR (B,08)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 09), CbToArg(1, 'B', 09), "Power Distribution Panel 1", "ELECT NO 1 RVS CUR CUTOUT (B,09)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 10), CbToArg(1, 'B', 10), "Power Distribution Panel 1", "ELECT EXT PWR CONTR (B,10)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 11), CbToArg(1, 'B', 11), "Power Distribution Panel 1", "HOIST CONTR (B,11)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 12), CbToArg(1, 'B', 12), "Power Distribution Panel 1", "HOIST CABLE CUT (B,12)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 13), CbToArg(1, 'B', 13), "Power Distribution Panel 1", "CARGO HOOK EMER REL PWR (B,13)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 14), CbToArg(1, 'B', 14), "Power Distribution Panel 1", "CARGO HOOK EMER REL CONTR (B,14)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 15), CbToArg(1, 'B', 15), "Power Distribution Panel 1", "AFCS THRUST BRAKE (B,15)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 16), CbToArg(1, 'B', 16), "Power Distribution Panel 1", "AFCS CONTR CTR (B,16)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 17), CbToArg(1, 'B', 17), "Power Distribution Panel 1", "AFCS CYC TRIM FWD ACTR (B,17)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 18), CbToArg(1, 'B', 18), "Power Distribution Panel 1", "AFCS CYC TRIM MAN (B,18)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 19), CbToArg(1, 'B', 19), "Power Distribution Panel 1", "AFCS CLTV DRIVER ACTR (B,19)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 20), CbToArg(1, 'B', 20), "Power Distribution Panel 1", "AFCS FCC 1 (B,20)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 21), CbToArg(1, 'B', 21), "Power Distribution Panel 1", "AFCS FCC 1 (B,21)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 22), CbToArg(1, 'B', 22), "Power Distribution Panel 1", "AFCS CLTV DRIVER ACTR (B,22)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 26), CbToArg(1, 'B', 26), "Power Distribution Panel 1", "L FUEL PUMP AUX AFT (B,26)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 29), CbToArg(1, 'B', 29), "Power Distribution Panel 1", "L FUEL PUMP AUX FWD (B,29)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 31), CbToArg(1, 'B', 31), "Power Distribution Panel 1", "NO 1 XFMR RECT (B,31)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 32), CbToArg(1, 'B', 32), "Power Distribution Panel 1", "DC ESS 1 BUS FEED (B,32)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('B', 33), CbToArg(1, 'B', 33), "Power Distribution Panel 1", "BATT BUS FEED (B,33)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 08), CbToArg(1, 'C', 08), "Power Distribution Panel 1", "AIR WAR MASK BLWR (C,08)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 09), CbToArg(1, 'C', 09), "Power Distribution Panel 1", "AIR WAR MCU 1 CPLT (C,09)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 10), CbToArg(1, 'C', 10), "Power Distribution Panel 1", "CAAS MFCU 1 (C,10)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 11), CbToArg(1, 'C', 11), "Power Distribution Panel 1", "CAAS CDU 1 (C,11)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 12), CbToArg(1, 'C', 12), "Power Distribution Panel 1", "CAAS ZEROIZE (C,12)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 13), CbToArg(1, 'C', 13), "Power Distribution Panel 1", "NAV EGI 1 BACKUP PWR (C,13)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 14), CbToArg(1, 'C', 14), "Power Distribution Panel 1", "NAV SFD 1 (C,14)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 15), CbToArg(1, 'C', 15), "Power Distribution Panel 1", "NAV ADC 1 (C,15)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 16), CbToArg(1, 'C', 16), "Power Distribution Panel 1", "NAV ADF (C,16)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 17), CbToArg(1, 'C', 17), "Power Distribution Panel 1", "NAV EGI 1 (C,17)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 18), CbToArg(1, 'C', 18), "Power Distribution Panel 1", "NAV DR-200 (C,18)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 19), CbToArg(1, 'C', 19), "Power Distribution Panel 1", "NAV ASG HUD (C,19)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 20), CbToArg(1, 'C', 20), "Power Distribution Panel 1", "ASE CMDS CONTR (C,20)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 21), CbToArg(1, 'C', 21), "Power Distribution Panel 1", "NAV MMS (C,21)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 22), CbToArg(1, 'C', 22), "Power Distribution Panel 1", "XMSN OIL PRESS (C,22)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 26), CbToArg(1, 'C', 26), "Power Distribution Panel 1", "CAAS GPPU 1 (C,26)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 29), CbToArg(1, 'C', 29), "Power Distribution Panel 1", "CAAS DCU 1 (C,29)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 31), CbToArg(1, 'C', 31), "Power Distribution Panel 1", "UTIL HYD COOLING BLOWER (C,31)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('C', 32), CbToArg(1, 'C', 32), "Power Distribution Panel 1", "NO 1 DC CROSS TIE (C,32)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 04), CbToArg(1, 'D', 04), "Power Distribution Panel 1", "HYDRAULICS ACC PUMP (D,04)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 05), CbToArg(1, 'D', 05), "Power Distribution Panel 1", "HYDRAULICS OIL LVL (D,05)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 06), CbToArg(1, 'D', 06), "Power Distribution Panel 1", "HYDRAULICS MAINT PNL LTG (D,06)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 07), CbToArg(1, 'D', 07), "Power Distribution Panel 1", "HYDRAULICS NO 1 BLO CONTR (D,07)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 08), CbToArg(1, 'D', 08), "Power Distribution Panel 1", "HYDRAULICS UTIL BLO CONTR (D,08)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 09), CbToArg(1, 'D', 09), "Power Distribution Panel 1", "HYDRAULICS SYS CONTR (D,09)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 10), CbToArg(1, 'D', 10), "Power Distribution Panel 1", "HYDRAULICS BRAKE STEER (D,10)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 11), CbToArg(1, 'D', 11), "Power Distribution Panel 1", "HYDRAULICS RAMP EMER CONTR (D,11)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 12), CbToArg(1, 'D', 12), "Power Distribution Panel 1", "COMM ICU (D,12)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 13), CbToArg(1, 'D', 13), "Power Distribution Panel 1", "COMM L ICS (D,13)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 14), CbToArg(1, 'D', 14), "Power Distribution Panel 1", "COMM UHF RT (D,14)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 15), CbToArg(1, 'D', 15), "Power Distribution Panel 1", "COMM UHF SCTY SET (D,15)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 16), CbToArg(1, 'D', 16), "Power Distribution Panel 1", "COMM SINCGARS 1 RT (D,16)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 17), CbToArg(1, 'D', 17), "Power Distribution Panel 1", "COMM SINCGARS 1 PWR AMP (D,17)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 18), CbToArg(1, 'D', 18), "Power Distribution Panel 1", "COMM IDM (D,18)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 19), CbToArg(1, 'D', 19), "Power Distribution Panel 1", "COMM BFT (D,19)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 20), CbToArg(1, 'D', 20), "Power Distribution Panel 1", "ANTI-ICE WSHLD CPLT CONTR (D,20)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 21), CbToArg(1, 'D', 21), "Power Distribution Panel 1", "ANTI-ICE WSHLD CPLT HTR (D,21)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 22), CbToArg(1, 'D', 22), "Power Distribution Panel 1", "ANTI-ICE PITOT 1 HTR (D,22)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 23), CbToArg(1, 'D', 23), "Power Distribution Panel 1", "NO 1 INSTR XFMR (D,23)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 24), CbToArg(1, 'D', 24), "Power Distribution Panel 1", "NO 2 INSTR XFMR (D,24)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 26), CbToArg(1, 'D', 26), "Power Distribution Panel 1", "CAAS MFD 2 (D,26)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('D', 29), CbToArg(1, 'D', 29), "Power Distribution Panel 1", "CAAS MFD 1 (D,29)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 04), CbToArg(1, 'E', 04), "Power Distribution Panel 1", "L PROX SW (E,04)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 05), CbToArg(1, 'E', 05), "Power Distribution Panel 1", "APU CONTR NORM (E,05)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 06), CbToArg(1, 'E', 06), "Power Distribution Panel 1", "APU CONTR EMER (E,06)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 07), CbToArg(1, 'E', 07), "Power Distribution Panel 1", "NO 1 EAPS BYPASS DOORS (E,07)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 08), CbToArg(1, 'E', 08), "Power Distribution Panel 1", "NO 1 EAPS FAN CONTR (E,08)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 14), CbToArg(1, 'E', 14), "Power Distribution Panel 1", "LIGHTING CARGO HOOK (E,14)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 15), CbToArg(1, 'E', 15), "Power Distribution Panel 1", "LIGHTING EMER EXIT (E,15)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 16), CbToArg(1, 'E', 16), "Power Distribution Panel 1", "LIGHTING OIL LVL CHK (E,16)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 17), CbToArg(1, 'E', 17), "Power Distribution Panel 1", "LIGHTING CABIN AND RAMP (E,17)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 18), CbToArg(1, 'E', 18), "Power Distribution Panel 1", "LIGHTING NVG FORM (E,18)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 19), CbToArg(1, 'E', 19), "Power Distribution Panel 1", "LIGHTING CPLT SLT CONTR (E,19)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 20), CbToArg(1, 'E', 20), "Power Distribution Panel 1", "LIGHTING CPLT SLT FIL (E,20)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 22), CbToArg(1, 'E', 22), "Power Distribution Panel 1", "LIGHTING CPLT INSTR (E,22)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 23), CbToArg(1, 'E', 23), "Power Distribution Panel 1", "LIGHTING CONSOLE (E,23)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 24), CbToArg(1, 'E', 24), "Power Distribution Panel 1", "LIGHTING OVHD PNL (E,24)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 25), CbToArg(1, 'E', 25), "Power Distribution Panel 1", "LIGHTING ILL SW (E,25)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 26), CbToArg(1, 'E', 26), "Power Distribution Panel 1", "LIGHTING FORM (E,26)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 27), CbToArg(1, 'E', 27), "Power Distribution Panel 1", "LIGHTING SEC CKPT LTG CONTR (E,27)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 29), CbToArg(1, 'E', 29), "Power Distribution Panel 1", "HYDRAULICS NO 1 COOLING BLOWER (E,29)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 32), CbToArg(1, 'E', 32), "Power Distribution Panel 1", "BATT CHRG 1 RCCO (E,32)"));
+            AddFunction(new PushButton(this, devices.PDP1.ToString("d"), CbToCommand('E', 33), CbToArg(1, 'E', 33), "Power Distribution Panel 1", "NO 1 DC AUX PDP FEED (E,33)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 08), CbToArg(2, 'A', 08), "Power Distribution Panel 2", "FUEL L QTY LO LVL (A,08)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 09), CbToArg(2, 'A', 09), "Power Distribution Panel 2", "FUEL R QTY (A,09)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 10), CbToArg(2, 'A', 10), "Power Distribution Panel 2", "R FUEL PUMP CONTR AUX AFT (A,10)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 11), CbToArg(2, 'A', 11), "Power Distribution Panel 2", "R FUEL PUMP CONTR MAIN AFT (A,11)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 12), CbToArg(2, 'A', 12), "Power Distribution Panel 2", "R FUEL PUMP CONTR MAIN FWD (A,12)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 13), CbToArg(2, 'A', 13), "Power Distribution Panel 2", "R FUEL PUMP CONTR AUX FWD (A,13)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 14), CbToArg(2, 'A', 14), "Power Distribution Panel 2", "FADEC NO 2 PRI PWR (A,14)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 15), CbToArg(2, 'A', 15), "Power Distribution Panel 2", "FADEC NO 2 REV PWR (A,15)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 16), CbToArg(2, 'A', 16), "Power Distribution Panel 2", "FADEC NO 2 START AND IGN (A,16)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 17), CbToArg(2, 'A', 17), "Power Distribution Panel 2", "ENGINE NO 2 FUEL SHUT OFF (A,17)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 18), CbToArg(2, 'A', 18), "Power Distribution Panel 2", "ENGINE NO 2 FIRE EXT (A,18)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 19), CbToArg(2, 'A', 19), "Power Distribution Panel 2", "ENGINE NO 2 FIRE DET (A,19)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 20), CbToArg(2, 'A', 20), "Power Distribution Panel 2", "ENGINE NO 2 TORQUE (A,20)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 21), CbToArg(2, 'A', 21), "Power Distribution Panel 2", "ENGINE NO 2 FUEL FLOW (A,21)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 22), CbToArg(2, 'A', 22), "Power Distribution Panel 2", "ENGINE NO 2 OIL PRESS (A,22)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 23), CbToArg(2, 'A', 23), "Power Distribution Panel 2", "DCU 2 26VAC (A,23)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 26), CbToArg(2, 'A', 26), "Power Distribution Panel 2", "R FUEL PUMP MAIN AFT (A,26)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 29), CbToArg(2, 'A', 29), "Power Distribution Panel 2", "R FUEL PUMP MAIN FWD (A,29)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('A', 31), CbToArg(2, 'A', 31), "Power Distribution Panel 2", "NO 2 XFMR RECT (A,31)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 04), CbToArg(2, 'B', 04), "Power Distribution Panel 2", "ELECT CKPT UTIL RCPT 2 (B,04)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 05), CbToArg(2, 'B', 05), "Power Distribution Panel 2", "ELECT DC 2 BUS CONTR (B,05)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 06), CbToArg(2, 'B', 06), "Power Distribution Panel 2", "ELECT DC 2 BUS CURR XDCR (B,06)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 07), CbToArg(2, 'B', 07), "Power Distribution Panel 2", "ELECT AC 2 BUS CURR XDCR (B,07)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 08), CbToArg(2, 'B', 08), "Power Distribution Panel 2", "ELECT BATT CHRG 2 RCCO CONTR (B,08)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 09), CbToArg(2, 'B', 09), "Power Distribution Panel 2", "ELECT BATT CHRG 2 CONTR (B,09)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 10), CbToArg(2, 'B', 10), "Power Distribution Panel 2", "ELECT DC 2 ESS BUS CONTR (B,10)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 11), CbToArg(2, 'B', 11), "Power Distribution Panel 2", "ELECT NO 2 RVS CUR CUTOUT (B,11)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 13), CbToArg(2, 'B', 13), "Power Distribution Panel 2", "AIR WAR MCU 3 PLT (B,13)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 14), CbToArg(2, 'B', 14), "Power Distribution Panel 2", "CARGO HOOK NORM REL PWR (B,14)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 15), CbToArg(2, 'B', 15), "Power Distribution Panel 2", "CARGO HOOK NORM REL CONTR (B,15)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 16), CbToArg(2, 'B', 16), "Power Distribution Panel 2", "BLADE TRACK (B,16)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 17), CbToArg(2, 'B', 17), "Power Distribution Panel 2", "CRUISE GUIDE (B,17)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 18), CbToArg(2, 'B', 18), "Power Distribution Panel 2", "AFCS CYC TRIM AFT ACTR (B,18)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 19), CbToArg(2, 'B', 19), "Power Distribution Panel 2", "AFCS LONG DRVR ACTR (B,19)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 20), CbToArg(2, 'B', 20), "Power Distribution Panel 2", "AFCS FCC 2 (B,20)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 21), CbToArg(2, 'B', 21), "Power Distribution Panel 2", "AFCS FCC 2 (B,21)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 22), CbToArg(2, 'B', 22), "Power Distribution Panel 2", "AFCS LONG DRVR ACTR (B,22)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 23), CbToArg(2, 'B', 23), "Power Distribution Panel 2", "VIB ABSORB R (B,23)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 24), CbToArg(2, 'B', 24), "Power Distribution Panel 2", "VIB ABSORB L (B,24)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 26), CbToArg(2, 'B', 26), "Power Distribution Panel 2", "R FUEL PUMP AUX AFT (B,26)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 29), CbToArg(2, 'B', 29), "Power Distribution Panel 2", "R FUEL PUMP AUX FWD (B,29)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 31), CbToArg(2, 'B', 31), "Power Distribution Panel 2", "NO 2 EAPS FAN (B,31)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 32), CbToArg(2, 'B', 32), "Power Distribution Panel 2", "NO 2 DC AUX PDP FEED (B,32)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('B', 33), CbToArg(2, 'B', 33), "Power Distribution Panel 2", "NO 2 DC CROSS TIE (B,33)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 08), CbToArg(2, 'C', 08), "Power Distribution Panel 2", "CAAS MFCU 2 (C,08)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 09), CbToArg(2, 'C', 09), "Power Distribution Panel 2", "CAAS CDU 2 (C,09)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 10), CbToArg(2, 'C', 10), "Power Distribution Panel 2", "NAV CVR FDR (C,10)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 11), CbToArg(2, 'C', 11), "Power Distribution Panel 2", "NAV EGI 2 BACKUP PWR (C,11)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 12), CbToArg(2, 'C', 12), "Power Distribution Panel 2", "NAV SFD 2 (C,12)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 13), CbToArg(2, 'C', 13), "Power Distribution Panel 2", "NAV RDR ALT (C,13)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 14), CbToArg(2, 'C', 14), "Power Distribution Panel 2", "NAV VOR (C,14)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 15), CbToArg(2, 'C', 15), "Power Distribution Panel 2", "NAV TACAN (C,15)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 16), CbToArg(2, 'C', 16), "Power Distribution Panel 2", "NAV STORM SCOPE (C,16)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 17), CbToArg(2, 'C', 17), "Power Distribution Panel 2", "NAV EGI 2 (C,17)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 18), CbToArg(2, 'C', 18), "Power Distribution Panel 2", "NAV ADC 2 (C,18)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 19), CbToArg(2, 'C', 19), "Power Distribution Panel 2", "ASE RDR WARN (C,19)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 20), CbToArg(2, 'C', 20), "Power Distribution Panel 2", "ASE MWS CONTR (C,20)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 22), CbToArg(2, 'C', 22), "Power Distribution Panel 2", "ASE MWS PWR (C,22)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 26), CbToArg(2, 'C', 26), "Power Distribution Panel 2", "CAAS GPPU 2 (C,26)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 29), CbToArg(2, 'C', 29), "Power Distribution Panel 2", "CAAS DCU 2 (C,29)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('C', 31), CbToArg(2, 'C', 31), "Power Distribution Panel 2", "CABIN HEATER BLOWER (C,31)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 02), CbToArg(2, 'D', 02), "Power Distribution Panel 2", "HYDRAULICS NO 2 BLO CONTR (D,02)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 03), CbToArg(2, 'D', 03), "Power Distribution Panel 2", "HYDRAULICS PWR XFER (D,03)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 04), CbToArg(2, 'D', 04), "Power Distribution Panel 2", "HYDRAULICS PRESS IND (D,04)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 05), CbToArg(2, 'D', 05), "Power Distribution Panel 2", "HYDRAULICS FLUID TEMP (D,05)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 06), CbToArg(2, 'D', 06), "Power Distribution Panel 2", "HYDRAULICS FLT CONTR (D,06)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 07), CbToArg(2, 'D', 07), "Power Distribution Panel 2", "HYDRAULICS MAINT PNL LTS (D,07)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 08), CbToArg(2, 'D', 08), "Power Distribution Panel 2", "COMM R ICS (D,08)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 09), CbToArg(2, 'D', 09), "Power Distribution Panel 2", "COMM VHF ANT SW (D,09)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 10), CbToArg(2, 'D', 10), "Power Distribution Panel 2", "COMM VHF RT (D,10)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 11), CbToArg(2, 'D', 11), "Power Distribution Panel 2", "COMM VHF SCTY SET (D,11)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 12), CbToArg(2, 'D', 12), "Power Distribution Panel 2", "COMM IFF (D,12)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 13), CbToArg(2, 'D', 13), "Power Distribution Panel 2", "COMM HF PA CLR (D,13)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 14), CbToArg(2, 'D', 14), "Power Distribution Panel 2", "COMM HF KY-100 (D,14)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 15), CbToArg(2, 'D', 15), "Power Distribution Panel 2", "COMM SINCGARS 2 RT (D,15)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 16), CbToArg(2, 'D', 16), "Power Distribution Panel 2", "COMM SINCGARS 2 PWR AMP (D,16)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 17), CbToArg(2, 'D', 17), "Power Distribution Panel 2", "WSHLD WIPER (D,17)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 18), CbToArg(2, 'D', 18), "Power Distribution Panel 2", "ANTI-ICE PITOT 3 HTR (D,18)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 19), CbToArg(2, 'D', 19), "Power Distribution Panel 2", "ANTI-ICE WSHLD PLT CONTR (D,19)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 20), CbToArg(2, 'D', 20), "Power Distribution Panel 2", "ANTI-ICE WSHLD CTR CONTR (D,20)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 21), CbToArg(2, 'D', 21), "Power Distribution Panel 2", "ANTI-ICE WSHLD PLT HTR (D,21)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 22), CbToArg(2, 'D', 22), "Power Distribution Panel 2", "ANTI-ICE WSHLD CTR HTR (D,22)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 23), CbToArg(2, 'D', 23), "Power Distribution Panel 2", "ANTI-ICE PITOT 2 HTR (D,23)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 24), CbToArg(2, 'D', 24), "Power Distribution Panel 2", "ANTI-ICE STATIC PORT HTR (D,24)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 26), CbToArg(2, 'D', 26), "Power Distribution Panel 2", "CAAS MFD 3 (D,26)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('D', 29), CbToArg(2, 'D', 29), "Power Distribution Panel 2", "CAAS MFD 4 (D,29)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 02), CbToArg(2, 'E', 02), "Power Distribution Panel 2", "R PROX SW (E,02)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 03), CbToArg(2, 'E', 03), "Power Distribution Panel 2", "TROOP ALARM JUMP LT (E,03)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 04), CbToArg(2, 'E', 04), "Power Distribution Panel 2", "TROOP ALARM BELL (E,04)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 05), CbToArg(2, 'E', 05), "Power Distribution Panel 2", "CLOCK (E,05)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 06), CbToArg(2, 'E', 06), "Power Distribution Panel 2", "CABIN HTR CONTR (E,06)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 07), CbToArg(2, 'E', 07), "Power Distribution Panel 2", "NO 2 EAPS BYPASS DOORS (E,07)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 08), CbToArg(2, 'E', 08), "Power Distribution Panel 2", "NO 2 EAPS FAN CONTR (E,08)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 10), CbToArg(2, 'E', 10), "Power Distribution Panel 2", "LIGHTING PLT SLT CONTR (E,10)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 11), CbToArg(2, 'E', 11), "Power Distribution Panel 2", "LIGHTING PLT SLT FIL (E,11)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 12), CbToArg(2, 'E', 12), "Power Distribution Panel 2", "LIGHTING PDP MAP (E,12)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 13), CbToArg(2, 'E', 13), "Power Distribution Panel 2", "LIGHTING LAMP TEST (E,13)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 14), CbToArg(2, 'E', 14), "Power Distribution Panel 2", "LIGHTING INSTR FLOOD (E,14)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 15), CbToArg(2, 'E', 15), "Power Distribution Panel 2", "LIGHTING STBY CMPS (E,15)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 16), CbToArg(2, 'E', 16), "Power Distribution Panel 2", "LIGHTING MODE SEL (E,16)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 17), CbToArg(2, 'E', 17), "Power Distribution Panel 2", "LIGHTING CKPT DOME (E,17)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 18), CbToArg(2, 'E', 18), "Power Distribution Panel 2", "LIGHTING POSN (E,18)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 19), CbToArg(2, 'E', 19), "Power Distribution Panel 2", "LIGHTING BOT ANTI COL (E,19)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 20), CbToArg(2, 'E', 20), "Power Distribution Panel 2", "LIGHTING TOP ANTI COL (E,20)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 22), CbToArg(2, 'E', 22), "Power Distribution Panel 2", "LIGHTING PLT INSTR (E,22)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 23), CbToArg(2, 'E', 23), "Power Distribution Panel 2", "LIGHTING CTR INSTR (E,23)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 24), CbToArg(2, 'E', 24), "Power Distribution Panel 2", "NO 2 INSTR XMFR (E,24)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 26), CbToArg(2, 'E', 26), "Power Distribution Panel 2", "CAAS MFD 5 (E,26)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 29), CbToArg(2, 'E', 29), "Power Distribution Panel 2", "HYDRAULICS NO 2 COOLING BLOWER (E,29)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 32), CbToArg(2, 'E', 32), "Power Distribution Panel 2", "BATT CHRG 2 RCCO (E,32)"));
+            AddFunction(new PushButton(this, devices.PDP2.ToString("d"), CbToCommand('E', 33), CbToArg(2, 'E', 33), "Power Distribution Panel 2", "DC ESS 2 BUS FEED (E,33)"));
 
             #endregion
 
@@ -1049,7 +1065,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
         /// <param name="row"></param>
         /// <param name="column"></param>
         /// <returns>Arg ID in a string</returns>
-        private string cbToArg(int panel, char row, int column)
+        private string CbToArg(int panel, char row, int column)
         {
             return (((((int)row - 65) * 33) + column - 1) + (panel == 1 ? 12 : 177)).ToString();
         }
@@ -1057,7 +1073,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
         /// <summary>
         /// Converts a circuit breaker Row/Col to the command code
         /// </summary>
-        private string cbToCommand(char row, int column)
+        private string CbToCommand(char row, int column)
         {
             return ((((int)row - 65) * 33) + column - 1 + Commands.Button.Button_1).ToString();
         }

@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
+namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -22,11 +22,11 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.CH47F.MFD.CopilotLeft", "Multi Function Display Left (Copilot)", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class MFDCopilotLeft : CDU
+    [HeliosControl("Helios.CH47F.CDU.Copilot", "CDU (Copilot)", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    public class CDUCopilot : CDU
     {
-        public MFDCopilotLeft()
-            : base("MFD (Copilot Left)")
+        public CDUCopilot()
+            : base("CDU (Left)")
         {
         }
     }

@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
     using System.Windows.Media;
 
     [HeliosControl("Helios.CH47F.MFD.Center", "Multi Function Display Center", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class MFDCenter : MFD
+    public class MFDCenter : CDU
     {
         public MFDCenter()
             : base("MFD (Center)")

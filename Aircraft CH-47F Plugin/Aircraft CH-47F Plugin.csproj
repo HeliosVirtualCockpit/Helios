@@ -61,6 +61,21 @@
     <Content Include="Docs\Helios.CH-47F.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Gauges\CDU\Images\CDU_Bezel.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_DIR_Norm.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_DIR_Pressed.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_FD_Norm.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_FD_Pressed.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_FPLN_Norm.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_IDX_Norm.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_IDX_Pressed.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_MFD_Data_Norm.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_MFD_Data_Pressed.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_MSN_Norm.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_MSN_Pressed.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_SNSR_Norm.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_SNSR_Pressed.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button__FPLN_Pressed.png" />
     <Resource Include="Images\MFD\CH_47_MFD_Bezel.png" />
     <Resource Include="Images\MFD\CH_47_MFD_Button_Horizontal_Normal.png" />
     <Resource Include="Images\MFD\CH_47_MFD_Button_Horizontal_Pressed.png" />
@@ -79,14 +94,18 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\FAT\FAT.cs" />
+    <Compile Include="Gauges\CDU\CDU Copilot.cs" />
+    <Compile Include="Gauges\CDU\CDU Pilot.cs" />
+    <Compile Include="Gauges\CDU\CDU.cs" />
     <Compile Include="Gauges\MFD\MFD Copilot Left.cs" />
     <Compile Include="Gauges\MFD\MFD Center.cs" />
     <Compile Include="Gauges\MFD\MFD Pilot Left.cs" />
     <Compile Include="Gauges\MFD\MFD Copilot Right.cs" />
     <Compile Include="Gauges\MFD\MFD Pilot Right.cs" />
     <Compile Include="Gauges\MFD\MFD.cs" />
-    <Compile Include="Gauges\RadAlt.cs" />
-    <Compile Include="Gauges\RadAltInstrument.cs" />
+    <Compile Include="Gauges\RadAlt\RadAlt.cs" />
+    <Compile Include="Gauges\RadAlt\RadAltInstrument.cs" />
     <Compile Include="Interfaces\CH-47FInterface.cs" />
     <Compile Include="Interfaces\Commands.cs" />
     <Compile Include="Interfaces\Devices.cs" />

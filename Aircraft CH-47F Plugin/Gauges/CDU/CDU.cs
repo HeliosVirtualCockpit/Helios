@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
+namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -26,10 +26,10 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
     using System.Xml.Linq;
     using System.Drawing.Imaging;
 
-    [HeliosControl("Helios.CH47F.MFD", "Multi Function Display", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.CH47F.CDU", "CDU", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class CDU : CompositeVisualWithBackgroundImage
     {
-        private static readonly Rect SCREEN_RECT = new Rect(106, 100, 605, 802);
+        private static readonly Rect SCREEN_RECT = new Rect(146, 94, 512, 486);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDevice = "";
         private double _size_Multiplier = 1;
@@ -37,76 +37,68 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
         private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
-        private const string PANEL_IMAGE = "{CH-47F}/Images/MFD/CH_47_MFD_Bezel.png";
+        private const string PANEL_IMAGE = "{CH-47F}/Gauges/CDU/Images/CDU_Bezel.png";
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.10d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
 
 
         public CDU(string interfaceDevice)
-            : base(interfaceDevice, new Size(814, 1000))
+            : base(interfaceDevice, new Size(810, 1000))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.CH47F.CH47FInterface) };
             _interfaceDevice = interfaceDevice;
             switch (_interfaceDevice)
             {
-                case "MFD (Pilot Left)":
-                    _vpName = "CH47F_MFD_PILOT_LEFT";
+                case "CDU (Right)":
+                    _vpName = "CH47F_CDU_PILOT";
                     break;
-                case "MFD (Pilot Right)":
-                    _vpName = "CH47F_MFD_PILOT_RIGHT";
-                    break;
-                case "MFD (Copilot Left)":
-                    _vpName = "CH47F_MFD_COPILOT_LEFT";
-                    break;
-                case "MFD (Copilot Right)":
-                    _vpName = "CH47F_MFD_COPILOT_RIGHT";
-                    break;
-                case "MFD (Center)":
-                    _vpName = "CH47F_MFD_CENTER";
+                case "CDU (Left)":
+                    _vpName = "CH47F_CDU_COPILOT";
                     break;
                 default:
                     break;
             }
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
-            _frameGlassPanel = AddPanel("MFD Glass", new Point(104, 101), new Size(604, 803), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDevice);
+            _frameGlassPanel = AddPanel("CDU Glass", new Point(104, 101), new Size(604, 803), "{Helios}/Images/AH-64D/CDU/CDU_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = _glassReflectionOpacity;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;
 
-            _frameBezelPanel = AddPanel("MFD Frame", new Point(Left, Top), NativeSize, PANEL_IMAGE, _interfaceDevice);
+            _frameBezelPanel = AddPanel("CDU Frame", new Point(Left, Top), NativeSize, PANEL_IMAGE, _interfaceDevice);
             _frameBezelPanel.Opacity = 1d;
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
-            int maxLabelButtons = _interfaceDevice.Contains("MFD") ? 20 : -1;
-            int buttonNumber = 1;
-            for (int x = 122; x <= 614; x += 82)
+            //int maxLabelButtons = _interfaceDevice.Contains("CDU") ? 20 : -1;
+            int buttonNumber = 0;
+            string[] labels = new string[] { "MSN", "FPLN", "FD", "IDX", "DIR", "SNSR", "MFD_DATA" };
+            for (int x = 66; x <= 660; x += 18 + 81)
             {
-                AddButton($"T{buttonNumber}", new Point(x, 12), "Horizontal");
-                buttonNumber++;
+                AddButton($"{labels[buttonNumber]}", new Rect(x, 4 ,81,60), $"{labels[buttonNumber++]}");
+                //buttonNumber++;
             }
-            buttonNumber = 1;
-            for (int y = 148; y <= 780; y += 79)
-            {
-                AddButton($"R{buttonNumber}", new Point(760, y), "Vertical");
-                buttonNumber++;
-            }
-            buttonNumber = 1;
-            for (int x = 122; x <= 614; x += 82)
-            {
-                AddButton($"B{buttonNumber}", new Point(x, 948), "Horizontal");
-                buttonNumber++;
-            }
-            buttonNumber = 1;
-            for (int y = 148; y <= 780; y += 79)
-            {
-                AddButton($"L{buttonNumber}", new Point(9, y), "Vertical");
-                buttonNumber++;
-            }
+            //buttonNumber = 1;
+            //for (int y = 148; y <= 780; y += 79)
+            //{
+            //    AddButton($"R{buttonNumber}", new Point(760, y), "Vertical");
+            //    buttonNumber++;
+            //}
+            //buttonNumber = 1;
+            //for (int x = 122; x <= 614; x += 82)
+            //{
+            //    AddButton($"B{buttonNumber}", new Point(x, 948), "Horizontal");
+            //    buttonNumber++;
+            //}
+            //buttonNumber = 1;
+            //for (int y = 148; y <= 780; y += 79)
+            //{
+            //    AddButton($"L{buttonNumber}", new Point(9, y), "Vertical");
+            //    buttonNumber++;
+            //}
 
-            AddRocker("Brightness", 750, 42, _interfaceDevice, "Brightness Switch");
-            AddRocker("Contrast", 750, 856, _interfaceDevice, "Brightness Switch");
-            AddRocker("Backlight", 5, 856, _interfaceDevice, "Contrast Switch");
-            AddThreePositionRotarySwitch("Power", new Point(0, 36), new Size(70, 70), _interfaceDevice, "Power Switch");
+            //AddRocker("Brightness", 750, 42, _interfaceDevice, "Brightness Switch");
+            //AddRocker("Contrast", 750, 856, _interfaceDevice, "Brightness Switch");
+            //AddRocker("Backlight", 5, 856, _interfaceDevice, "Contrast Switch");
+            //AddThreePositionRotarySwitch("Power", new Point(0, 36), new Size(70, 70), _interfaceDevice, "Power Switch");
         }
         public string ViewportName
         {
@@ -210,7 +202,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
             Children.Add(new Helios.Controls.Special.ViewportExtent
             {
                 FillBackground = true,
-                BackgroundColor = Color.FromArgb(128, 96, 0, 64),
+                BackgroundColor = Color.FromArgb(128, 128, 32, 64),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
                 TextFormat = tf,
@@ -240,11 +232,11 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
             Helios.Controls.PushButton button = new Helios.Controls.PushButton();
             button.Top = rect.Y * _size_Multiplier;
             button.Left = rect.X * _size_Multiplier;
-            button.Width = (label=="Horizontal" ? rect.Width : rect.Height) * _size_Multiplier;
-            button.Height = (label == "Horizontal" ? rect.Height : rect.Width) * _size_Multiplier;
+            button.Width = rect.Width * _size_Multiplier;
+            button.Height = rect.Height * _size_Multiplier;
 
-            button.Image = $"{{CH-47F}}/Images/MFD/CH_47_MFD_Button_{label}_Normal.png";
-            button.PushedImage = $"{{CH-47F}}/Images/MFD/CH_47_MFD_Button_{label}_Pressed.png";
+            button.Image = $"{{CH-47F}}/Gauges/CDU/Images/CDU_Button_{label}_Norm.png";
+            button.PushedImage = $"{{CH-47F}}/Gauges/CDU/Images/CDU_Button_{label}_Pressed.png";
             
             button.Name = name;
 
@@ -281,9 +273,9 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
             rocker.ClickType = Helios.Controls.LinearClickType.Touch;
             rocker.Top = y;
             rocker.Left = x;
-            rocker.PositionOneImage = $"{{CH-47F}}/Images/MFD/CH_47_MFD_Rocker_{name}_Up.png";
-            rocker.PositionTwoImage = $"{{CH-47F}}/Images/MFD/CH_47_MFD_Rocker_{name}_Normal.png";
-            rocker.PositionThreeImage = $"{{CH-47F}}/Images/MFD/CH_47_MFD_Rocker_{name}_Down.png";
+            rocker.PositionOneImage = $"{{CH-47F}}/Images/CDU/CH_47_CDU_Rocker_{name}_Up.png";
+            rocker.PositionTwoImage = $"{{CH-47F}}/Images/CDU/CH_47_CDU_Rocker_{name}_Normal.png";
+            rocker.PositionThreeImage = $"{{CH-47F}}/Images/CDU/CH_47_CDU_Rocker_{name}_Down.png";
             rocker.Height = 100;
             rocker.Width = 64;
             rocker.Text = "";
@@ -313,7 +305,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
         {
             Helios.Controls.RotarySwitch knob = new Helios.Controls.RotarySwitch();
             knob.Name = Name + "_" + name;
-            knob.KnobImage = "{CH-47F}/Images/MFD/CH_47_MFD_Knob.png";
+            knob.KnobImage = "{CH-47F}/Images/CDU/CH_47_CDU_Knob.png";
             knob.DrawLabels = false;
             knob.DrawLines = false;
             knob.Positions.Clear();
