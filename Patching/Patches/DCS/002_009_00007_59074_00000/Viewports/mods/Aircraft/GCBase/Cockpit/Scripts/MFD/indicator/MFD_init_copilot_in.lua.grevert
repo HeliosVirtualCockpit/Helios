@@ -1,0 +1,9 @@
+﻿@@ -499,16 +499,20 @@
+ fID)%0D%0A%0D%0A
++--%5B%5B
+ %0D%0Adofile
+@@ -648,33 +648,23 @@
+ rt(%22
+-CH47F_MFD_COPILOT_RIGHT%22)%0D%0A
++LEFT_MFCD%22)%0D%0A--%5D%5D
+ %0D%0A

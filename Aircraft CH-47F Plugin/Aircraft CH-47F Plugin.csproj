@@ -75,7 +75,7 @@
     <Resource Include="Gauges\CDU\Images\CDU_Button_MSN_Pressed.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Button_SNSR_Norm.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Button_SNSR_Pressed.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_Button__FPLN_Pressed.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Button_FPLN_Pressed.png" />
     <Resource Include="Images\MFD\CH_47_MFD_Bezel.png" />
     <Resource Include="Images\MFD\CH_47_MFD_Button_Horizontal_Normal.png" />
     <Resource Include="Images\MFD\CH_47_MFD_Button_Horizontal_Pressed.png" />

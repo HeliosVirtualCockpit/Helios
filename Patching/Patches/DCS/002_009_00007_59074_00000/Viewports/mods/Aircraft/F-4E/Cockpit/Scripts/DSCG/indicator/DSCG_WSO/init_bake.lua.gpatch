@@ -1,0 +1,7 @@
+﻿@@ -238,16 +238,82 @@
+ %3D %7B100%7D%0D
++%0Apurposes %3D %7Brender_purpose.GENERAL%2Crender_purpose.HUD_ONLY_VIEW%7D%0D
+ %0A%0D%0ABASE 
+@@ -583,12 +583,72 @@
+ geID     %3D 1
++%0D%0A%0D%0Atry_find_assigned_viewport(%22F_4E_DSCG_WSO%22%2C %22DSCG_BOTH%22)

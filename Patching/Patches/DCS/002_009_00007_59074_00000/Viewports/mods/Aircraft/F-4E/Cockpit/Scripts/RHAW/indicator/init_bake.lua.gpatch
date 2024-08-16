@@ -1,0 +1,7 @@
+﻿@@ -108,16 +108,83 @@
+ s.lua%22)%0D
++%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Aindic
+@@ -400,12 +400,66 @@
+ ID     %3D 1%0D%0A
++%0D%0Atry_find_assigned_viewport(%22F_4E_RHAW_PILOT%22%2C %22RWR%22)
