@@ -33,6 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
         private GaugeNeedle _loNeedle;
         private GaugeNeedle _hiNeedle;
         private CalibrationPointCollectionDouble _needleCalibration;
+        private CalibrationPointCollectionDouble _needleCalibration1;
         private GaugeImage _giLowIndicator;
         private GaugeImage _giHighIndicator;
         private GaugeImage _giOffIndicator;
@@ -44,7 +45,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
         public RadAltInstrument(string name, Size size, RadAlt radAltGauge)
             : base(name, size)
         {
-            _radAltGauge = radAltGauge; 
+            _radAltGauge = radAltGauge;
             //  The first three images are the default images which appear behind the indicators.
             Components.Add(new GaugeImage("{UH-60L}/Images/RadAltIndicatorOff.xaml", new Rect(65d, 184d, 44d, 30d)));
             Components.Add(new GaugeImage("{UH-60L}/Images/RadAltIndicatorOff.xaml", new Rect(133d, 47d, 44d, 30d)));
@@ -63,6 +64,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
             Values.Add(_HighIndicator);
             Actions.Add(_HighIndicator);
 
+            Components.Add(new GaugeImage("{UH-60L}/Images/RadAltFaceplate.xaml", new Rect(0d, 0d, 420d, 420d)));
+
             _giOffIndicator = new GaugeImage("{UH-60L}/Images/RadAltFlagOff.xaml", new Rect(238d, 290d, 74d, 42d));
             Components.Add(_giOffIndicator);
             _offIndicator = new HeliosValue(this, new BindingValue(0d), name, "Off flag", "Indicator to show instrument is off.", "", BindingValueUnits.Boolean);
@@ -70,10 +73,23 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
             Values.Add(_offIndicator);
             Actions.Add(_offIndicator);
 
-            Components.Add(new GaugeImage("{UH-60L}/Images/RadAltFaceplate.xaml", new Rect(0d, 0d, 420d, 420d)));
+            _needleCalibration = new CalibrationPointCollectionDouble(){
+                new CalibrationPointDouble(-200d, -90d),
+                new CalibrationPointDouble(-1d, -90d),
+                new CalibrationPointDouble(0d, 0.0d * 270d),
+                new CalibrationPointDouble(50d, 0.156d * 270d),
+                new CalibrationPointDouble(100d, 0.336d * 270d),
+                new CalibrationPointDouble(150d, 0.501d * 270d),
+                new CalibrationPointDouble(200d, 0.666d * 270d),
+                new CalibrationPointDouble(500d, 0.744d * 270d),
+                new CalibrationPointDouble(1000d, 0.862d * 270d),
+                new CalibrationPointDouble(1500d, 1.0d * 270d),
+            };
+            _needleCalibration1 = new CalibrationPointCollectionDouble(){
+                new CalibrationPointDouble(0d, 0d),
+                new CalibrationPointDouble(1d, 270d),
+            };
 
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 180d, 180d);
-            _needleCalibration.Add(new CalibrationPointDouble(360d, 270d));
             _loNeedle = new GaugeNeedle("{UH-60L}/Images/RadAltBugLo.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 183d);
             Components.Add(_loNeedle);
             _hiNeedle = new GaugeNeedle("{UH-60L}/Images/RadAltBugHi.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 183d);
@@ -94,15 +110,18 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
 
         void AltitudeExecute(object action, HeliosActionEventArgs e)
         {
-            _needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
+            //_needle.Rotation = _needleCalibration1.Interpolate(e.Value.DoubleValue);
+            _needle.Rotation = e.Value.DoubleValue;
         }
         void LoAltitudeExecute(object action, HeliosActionEventArgs e)
         {
-            _loNeedle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
+            //_loNeedle.Rotation = _needleCalibration1.Interpolate(e.Value.DoubleValue);
+            _loNeedle.Rotation = e.Value.DoubleValue;
         }
         void HiAltitudeExecute(object action, HeliosActionEventArgs e)
         {
-            _hiNeedle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
+            //_hiNeedle.Rotation = _needleCalibration1.Interpolate(e.Value.DoubleValue);
+            _hiNeedle.Rotation = e.Value.DoubleValue;
         }
         void LowIndicator_Execute(object action, HeliosActionEventArgs e)
         {
@@ -116,14 +135,14 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
         }
         void OffIndicator_Execute(object action, HeliosActionEventArgs e)
         {
-            Components[Components.IndexOf(_giOffIndicator)].IsHidden = e.Value.BoolValue;
+            Components[Components.IndexOf(_giOffIndicator)].IsHidden = !e.Value.BoolValue;
             _instrumentOn = !e.Value.BoolValue;
             if (!_instrumentOn)
             {
                 Components[Components.IndexOf(_giLowIndicator)].IsHidden = !_lowIndicatorState;
                 Components[Components.IndexOf(_giHighIndicator)].IsHidden = !_highIndicatorState;
             }
-            _radAltGauge.TextVisibility = e.Value.BoolValue;
+            _radAltGauge.TextVisibility = !e.Value.BoolValue;
 
         }
     }

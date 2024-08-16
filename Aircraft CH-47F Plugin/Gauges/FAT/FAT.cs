@@ -34,11 +34,17 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.FAT
 
             Components.Add(new GaugeImage("{AH-64D}/Images/FAT/fat_faceplate.xaml", new Rect(32d, 38d, 300, 300)));
 
-            _needleCalibration = new CalibrationPointCollectionDouble(-70d, -161d, 50d, 160d)
+            _needleCalibration = new CalibrationPointCollectionDouble(-70d, 0d, 50d, 322d)
             {
-                //new CalibrationPointDouble(50d, 0d)
+                new CalibrationPointDouble(-50d, 40d),
+                new CalibrationPointDouble(-30d, 95d),
+                new CalibrationPointDouble(-10d, 172d),
+                new CalibrationPointDouble(0d, 180d),
+                new CalibrationPointDouble(10d, 212d),
+                new CalibrationPointDouble(20d, 241d),
+                new CalibrationPointDouble(30d, 270d)
             };
-            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), 0d);
+            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), -162d);
             Components.Add(_needle);
 
             //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));

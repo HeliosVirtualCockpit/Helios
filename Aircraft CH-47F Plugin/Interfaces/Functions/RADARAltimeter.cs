@@ -28,9 +28,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F.Functions
 
         private HeliosValue _digitalAltitude;
 
-        public RADARAltimeter(BaseUDPInterface sourceInterface, string id, string deviceName, string deviceDescription)
-            : base(sourceInterface,
-                  $"RADAR Alt", "Digital Altitude", "RADAR altitude above ground in feet for digital display.")
+        public RADARAltimeter(BaseUDPInterface sourceInterface, string id, string deviceName, string elementName, string elementDescription)
+            : base(sourceInterface, deviceName, elementName, elementDescription)
         {
             DataElementsTemplate[0] = new DCSDataElement(id, null, true);
             DoBuild();
