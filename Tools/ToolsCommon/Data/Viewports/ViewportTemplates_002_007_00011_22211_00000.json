@@ -2,6 +2,7 @@
   {
     "templateName": "AH-64D Apache",
     "moduleId": "AH-64D",
+    "categoryName": "AH-64D Apache",
     "isHeliosTemplate": true,
     "viewports": [
       {

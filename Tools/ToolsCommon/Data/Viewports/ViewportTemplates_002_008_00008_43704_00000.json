@@ -2,6 +2,7 @@
   {
     "templateName": "F-5E",
     "moduleId": "F-5E",
+    "categoryName": "F-5E Tiger II",
     "isHeliosTemplate": true,
     "viewports": [
       {

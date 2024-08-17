@@ -51,6 +51,8 @@ namespace ToolsCommon
 
         [JsonProperty("templateName")] public string TemplateName { get; set; }
 
+        [JsonProperty("categoryName")] public string CategoryName { get; set; } = string.Empty;
+
         [JsonProperty("isHeliosTemplate")] public bool IsHeliosTemplate { get; set; }
 
         [JsonProperty("moduleId")] public string ModuleId { get; set; }
@@ -76,12 +78,17 @@ namespace ToolsCommon
         {
             get
             {
-                if (_moduleCategories.TryGetValue(ModuleId, out string category))
+                if (!string.IsNullOrWhiteSpace(CategoryName))
                 {
-                    return category;
+                    return CategoryName;
                 }
 
-                return ModuleId;
+                if (_moduleCategories.TryGetValue(ModuleId, out string category))
+                {
+                    return $"{category} Simulator Viewports";
+                }
+
+                return $"{ModuleId} Simulator Viewports";
             }
         }
 

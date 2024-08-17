@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
     using System.Drawing.Imaging;
 
     [HeliosControl("Helios.CH47F.MFD", "Multi Function Display", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
-    public class CDU : CompositeVisualWithBackgroundImage
+    public class MFD : CompositeVisualWithBackgroundImage
     {
         private static readonly Rect SCREEN_RECT = new Rect(106, 100, 605, 802);
         private Rect _scaledScreenRect = SCREEN_RECT;
@@ -42,7 +42,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
 
 
-        public CDU(string interfaceDevice)
+        public MFD(string interfaceDevice)
             : base(interfaceDevice, new Size(814, 1000))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.CH47F.CH47FInterface) };
@@ -53,7 +53,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
                     _vpName = "CH47F_MFD_PILOT_LEFT";
                     break;
                 case "MFD (Pilot Right)":
-                    _vpName = "CH47F_MFD_PILOT_RIGHT";
+                    //_vpName = "CH47F_MFD_PILOT_RIGHT";
+                    _vpName = "RIGHT_MFCD";
                     break;
                 case "MFD (Copilot Left)":
                     _vpName = "CH47F_MFD_COPILOT_LEFT";
@@ -68,7 +69,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
                     break;
             }
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
-            _frameGlassPanel = AddPanel("MFD Glass", new Point(104, 101), new Size(604, 803), "{Helios}/Images/AH-64D/MFD/MFD_glass.png", _interfaceDevice);
+            _frameGlassPanel = AddPanel("MFD Glass", new Point(104, 101), new Size(604, 803), "{CH-47F}/Images/MFD/MFD_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = _glassReflectionOpacity;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;

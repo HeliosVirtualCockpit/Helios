@@ -76,12 +76,12 @@ namespace GenerateSimulatorViewportTemplates
                     if (usesPatches)
                     {
                         viewportName = $"{(viewport.SuppressViewportNamePrefix? "" : template.ViewportPrefix+"_")}{viewport.ViewportName}";
-                        category = $"{template.TemplateCategory} Simulator Viewports";
+                        category = $"{template.TemplateCategory}";
                     }
 
                     if (!generated.Add(viewport.SuppressViewportNamePrefix ? template.ViewportPrefix + "_" + viewportName : viewportName))
                     {
-                        // alrady done
+                        // already done
                         Console.WriteLine($"  ignoring duplicate {viewportName}");
                         continue;
                     }
@@ -132,7 +132,7 @@ namespace GenerateSimulatorViewportTemplates
                     lines.Add($"            <ViewportName>{viewportName}</ViewportName>");
                     if (usesPatches)
                     {
-                        lines.Add("            <RequiresPatches>true</RequiresPatches>");
+                        lines.Add($"            <RequiresPatches>{viewport.RequiresPatch}</RequiresPatches>");
                     }
 
                     lines.Add("        </TemplateValues>");

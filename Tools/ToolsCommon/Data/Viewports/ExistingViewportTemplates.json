@@ -34,6 +34,7 @@
   {
     "templateName": "F-16C Unmodified",
     "moduleId": "F-16C",
+	"categoryName": "F-16",
     "viewports": [
       {
         "viewportName": "EHSI",

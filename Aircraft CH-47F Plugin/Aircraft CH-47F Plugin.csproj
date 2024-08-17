@@ -61,6 +61,8 @@
     <Content Include="Docs\Helios.CH-47F.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\MFD\MFD_glass.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_glass.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Bezel.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Button_DIR_Norm.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Button_DIR_Pressed.png" />

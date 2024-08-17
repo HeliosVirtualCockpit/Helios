@@ -2,6 +2,7 @@
   {
     "templateName": "F-15E",
     "moduleId": "F-15E",
+    "categoryName": "F-15E Strike Eagle",
     "isHeliosTemplate": true,
     "viewports": [
       {

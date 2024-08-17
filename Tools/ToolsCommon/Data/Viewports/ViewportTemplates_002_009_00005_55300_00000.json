@@ -2,6 +2,7 @@
   {
     "templateName": "F-4E",
     "moduleId": "F-4E",
+    "categoryName": "F-4E Phantom II",
     "isHeliosTemplate": true,
     "viewports": [
       {

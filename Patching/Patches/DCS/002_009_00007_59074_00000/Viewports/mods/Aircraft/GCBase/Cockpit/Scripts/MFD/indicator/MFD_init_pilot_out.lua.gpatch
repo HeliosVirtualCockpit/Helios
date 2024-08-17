@@ -1,9 +1,0 @@
-﻿@@ -605,12 +605,11 @@
- (1%2C 
--fals
-+tru
- e%2C 1
-@@ -639,16 +639,40 @@
- ewport(%22
-+CH47F_MFD_PILOT_RIGHT%22%2C%22
- RIGHT_MF

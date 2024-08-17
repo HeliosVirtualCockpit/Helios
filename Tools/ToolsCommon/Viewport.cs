@@ -50,7 +50,9 @@ namespace ToolsCommon
 
         [JsonProperty("height")] public int Height { get; set; }
 
-        [JsonProperty("SuppressViewportNamePrefix")] public bool SuppressViewportNamePrefix { get; set; }
+        [JsonProperty("SuppressViewportNamePrefix")] public bool SuppressViewportNamePrefix { get; set; } = false;
+
+        [JsonProperty("requiresPatch")] public bool RequiresPatch { get; set; } = true;
 
         [JsonIgnore] public bool IsValid => RelativeInitFilePath != null && RelativeInitFilePath.Length > 0;
     }

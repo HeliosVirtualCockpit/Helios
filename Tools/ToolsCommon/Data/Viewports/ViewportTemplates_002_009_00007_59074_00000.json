@@ -1,0 +1,249 @@
+﻿[
+  {
+    "templateName": "CH47F",
+    "moduleId": "CH47F",
+    "isHeliosTemplate": true,
+    "categoryName": "CH-47F Chinook",
+    "viewports": [
+      {
+        "viewportName": "MFD_PILOT_LEFT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/MFD/indicator/MFD_init_pilot_in.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 533
+      },
+      {
+        "viewportName": "RIGHT_MFCD",
+        "SuppressViewportNamePrefix": true,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/MFD/indicator/MFD_init_pilot_out.lua",
+        "requiresPatch": false,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 533
+      },
+      {
+        "viewportName": "MFD_COPILOT_LEFT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/MFD/indicator/MFD_init_copilot_out.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 533
+      },
+      {
+        "viewportName": "MFD_COPILOT_RIGHT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/MFD/indicator/MFD_init_copilot_in.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 533
+      },
+      {
+        "viewportName": "MFD_CENTER",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/MFD/indicator/MFD_init_center.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 533
+      },
+      {
+        "viewportName": "CDU_PILOT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/CDU/indicator/CDU_init_right.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 354,
+        "height": 470
+      },
+      {
+        "viewportName": "CDU_COPILOT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/CDU/indicator/CDU_init_left.lua",
+        "originalDisplayHeight": 1080,
+        "originalDisplayWidth": 1920,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 354,
+        "height": 470
+      },
+      {
+        "viewportName": "RWR",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/CH-47F/Cockpit/Scripts/ASE/APR39_indicator/APR39_init.lua",
+        "originalDisplayHeight": 1080,
+        "originalDisplayWidth": 1920,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 400
+      },
+      {
+        "viewportName": "CHRONOMETER",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/GCBase/Cockpit/Scripts/chronometer_indicator_init.lua",
+        "originalDisplayHeight": 1080,
+        "originalDisplayWidth": 1920,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 200,
+        "height": 100
+      },
+      {
+        "viewportName": "SFD_COPILOT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/CH-47F/Cockpit/Scripts/SFD/indicator/init1.lua",
+        "requiresPatch": true,
+        "originalDisplayHeight": 1080,
+        "originalDisplayWidth": 1920,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 150,
+        "height": 250
+      },
+      {
+        "viewportName": "SFD_PILOT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/CH-47F/Cockpit/Scripts/SFD/indicator/init2.lua",
+        "requiresPatch": false,
+        "originalDisplayHeight": 1080,
+        "originalDisplayWidth": 1920,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 150,
+        "height": 250
+      }
+    ]
+  },
+  {
+    "templateName": "AH-64D Apache",
+    "moduleId": "AH-64D",
+    "categoryName": "AH-64D Apache",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "LEFT_MFCD_PLT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_plt_left_init.lua",
+        "seatIndex": 1,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 600,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "RIGHT_MFCD_PLT",
+        "SuppressViewportNamePrefix": false,
+        "seatIndex": 1,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_plt_right_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "LEFT_MFCD_CPG",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_cpg_left_init.lua",
+        "seatIndex": 2,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "RIGHT_MFCD_CPG",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/MFD/indicator/MFD_cpg_right_init.lua",
+        "seatIndex": 2,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 320,
+        "height": 320
+      },
+      {
+        "viewportName": "EUFD_PLT",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/EUFD/EUFD_plt_init.lua",
+        "seatIndex": 1,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 480,
+        "height": 240
+      },
+      {
+        "viewportName": "EUFD_CPG",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/EUFD/EUFD_cpg_init.lua",
+        "seatIndex": 2,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 480,
+        "height": 240
+      },
+      {
+        "viewportName": "TEDAC",
+        "SuppressViewportNamePrefix": true,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/TEDAC/TEDAC_init.lua",
+        "seatIndex": 2,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 400,
+        "height": 400
+      },
+      {
+        "viewportName": "CMWS",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/ASE/CMWS/CMWS_init.lua",
+        "seatIndex": 1,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 100,
+        "y": 200,
+        "width": 200,
+        "height": 100
+      }
+    ]
+  }
+]

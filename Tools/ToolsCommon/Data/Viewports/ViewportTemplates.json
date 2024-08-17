@@ -277,6 +277,7 @@
     "templateName": "F-16C (Helios 16/9)",
     "moduleId": "F-16C",
     "isHeliosTemplate": true,
+	"categoryName": "F-16",
     "viewports": [
       {
         "viewportName": "LEFT_MFCD",
@@ -638,6 +639,7 @@
   {
     "templateName": "AV-8B",
     "moduleId": "AV8BNA",
+	"categoryName": "AV-8B Harrier",
     "isHeliosTemplate": true,
     "viewports": [
       {
@@ -739,6 +741,7 @@
   {
     "templateName": "M-2000C",
     "moduleId": "M2000C",
+    "categoryName": "M-2000C",
     "isHeliosTemplate": true,
     "viewports": [
       {
@@ -856,6 +859,7 @@
   {
     "templateName": "AH-64D Apache",
     "moduleId": "AH-64D",
+    "categoryName": "AH-64D Apache",
     "isHeliosTemplate": true,
     "viewports": [
       {
@@ -920,6 +924,7 @@
       },
       {
         "viewportName": "TEDAC",
+        "SuppressViewportNamePrefix": true,
         "relativeInitFilePath": "Mods/aircraft/AH-64D/Cockpit/Scripts/Displays/TEDAC/TEDAC_init.lua",
         "originalDisplayWidth": 1920,
         "originalDisplayHeight": 1080,

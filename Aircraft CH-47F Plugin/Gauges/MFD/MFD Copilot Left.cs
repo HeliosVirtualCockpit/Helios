@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
     using System.Windows.Media;
 
     [HeliosControl("Helios.CH47F.MFD.CopilotLeft", "Multi Function Display Left (Copilot)", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class MFDCopilotLeft : CDU
+    public class MFDCopilotLeft : MFD
     {
         public MFDCopilotLeft()
             : base("MFD (Copilot Left)")

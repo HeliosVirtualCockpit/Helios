@@ -59,7 +59,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
                     break;
             }
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
-            _frameGlassPanel = AddPanel("CDU Glass", new Point(104, 101), new Size(604, 803), "{Helios}/Images/AH-64D/CDU/CDU_glass.png", _interfaceDevice);
+            _frameGlassPanel = AddPanel("CDU Glass", new Point(104, 101), new Size(604, 803), "{CH-47F}/Gauges/CDU/Images/CDU_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = _glassReflectionOpacity;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;
@@ -268,63 +268,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
                 interfaceTriggerName: $"{Name}.{name}.changed",
                 deviceActionName: "set.physical state");
         }
-        private void AddRocker(string name, double x, double y) { AddRocker(name, x, y, _interfaceDevice, name); }
-        private void AddRocker(string name, double x, double y, string interfaceDeviceName, string interfaceElementName)
-        {
-            Helios.Controls.RockerSwitch rocker = new Helios.Controls.RockerSwitch();
-            rocker.Name = ComponentName(name);
-            rocker.SwitchType = Helios.Controls.ThreeWayToggleSwitchType.MomOnMom;
-            rocker.ClickType = Helios.Controls.LinearClickType.Touch;
-            rocker.Top = y;
-            rocker.Left = x;
-            rocker.PositionOneImage = $"{{CH-47F}}/Images/CDU/CH_47_CDU_Rocker_{name}_Up.png";
-            rocker.PositionTwoImage = $"{{CH-47F}}/Images/CDU/CH_47_CDU_Rocker_{name}_Normal.png";
-            rocker.PositionThreeImage = $"{{CH-47F}}/Images/CDU/CH_47_CDU_Rocker_{name}_Down.png";
-            rocker.Height = 100;
-            rocker.Width = 64;
-            rocker.Text = "";
-
-
-            Children.Add(rocker);
-
-            AddTrigger(rocker.Triggers["position one.entered"], name);
-            AddTrigger(rocker.Triggers["position one.exited"], name);
-            AddTrigger(rocker.Triggers["position two.entered"], name);
-            AddTrigger(rocker.Triggers["position two.exited"], name);
-            AddTrigger(rocker.Triggers["position three.entered"], name);
-            AddTrigger(rocker.Triggers["position three.exited"], name);
-            AddTrigger(rocker.Triggers["position.changed"], name);
-            AddDefaultOutputBinding(
-                childName: ComponentName(name),
-                deviceTriggerName: "position.changed",
-                interfaceActionName: $"{interfaceDeviceName}.set.{interfaceElementName}");
-
-            AddAction(rocker.Actions["set.position"], name);
-            AddDefaultInputBinding(
-                childName: ComponentName(name),
-                interfaceTriggerName: $"{interfaceDeviceName}.{interfaceElementName}.changed",
-                deviceActionName: "set.position");
-        }
-        private void AddThreePositionRotarySwitch(string name, Point posn, Size size, string interfaceDeviceName, string interfaceElementName)
-        {
-            Helios.Controls.RotarySwitch knob = new Helios.Controls.RotarySwitch();
-            knob.Name = Name + "_" + name;
-            knob.KnobImage = "{CH-47F}/Images/CDU/CH_47_CDU_Knob.png";
-            knob.DrawLabels = false;
-            knob.DrawLines = false;
-            knob.Positions.Clear();
-            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 0, "OFF", 0d));
-            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 1, "NVG", 15d));
-            knob.Positions.Add(new Helios.Controls.RotarySwitchPosition(knob, 2, "NORM", 30d));
-            knob.CurrentPosition = 0;
-            knob.Top = posn.Y;
-            knob.Left = posn.X;
-            knob.Width = size.Width;
-            knob.Height = size.Height;
-
-            AddRotarySwitchBindings(name, posn, size, knob, interfaceDeviceName, interfaceElementName);
-        }
-
         private string ComponentName(string name)
         {
             return $"{Name}_{name}";

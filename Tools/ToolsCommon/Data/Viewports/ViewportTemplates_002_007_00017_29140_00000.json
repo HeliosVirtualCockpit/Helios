@@ -2,6 +2,7 @@
   {
     "templateName": "M-2000C",
     "moduleId": "M2000C",
+    "categoryName": "M-2000C",
     "isHeliosTemplate": true,
     "viewports": [
       {

@@ -76,10 +76,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Data\Viewports\ViewportTemplates.md" />
-    <Content Include="Data\Viewports\ViewportTemplates_002_009_00005_55300_00000.json">
+    <Content Include="Data\Viewports\ViewportTemplates_002_009_00007_59074_00000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00004_53990_00000.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Viewports\ViewportTemplates_002_009_00005_55300_00000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

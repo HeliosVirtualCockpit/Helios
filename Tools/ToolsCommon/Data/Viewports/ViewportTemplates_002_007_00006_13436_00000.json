@@ -203,6 +203,7 @@
   {
     "templateName": "F-16C (Helios 16/9)",
     "moduleId": "F-16C",
+	"categoryName": "F-16",
     "isHeliosTemplate": true,
     "viewports": [
       {
@@ -565,6 +566,7 @@
   {
     "templateName": "M-2000C",
     "moduleId": "M2000C",
+    "categoryName": "M-2000C",
     "isHeliosTemplate": true,
     "viewports": [
       {
