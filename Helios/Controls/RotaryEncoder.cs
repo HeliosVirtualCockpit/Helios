@@ -27,6 +27,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private double _stepValue = 0.1d;
         private double _initialRotation;
         private double _rotationStep = 5d;
+        private HeliosValue _heliosValue;
 
         /// <summary>
         /// the rotation value where we last generated a pulse
@@ -45,6 +46,11 @@ namespace GadrocsWorkshop.Helios.Controls
             Triggers.Add(_incrementTrigger);
             _decrementTrigger = new HeliosTrigger(this, "", "encoder", "decremented", "Triggered when encoder is decremented.", "Encoder step value (negative)", BindingValueUnits.Numeric);
             Triggers.Add(_decrementTrigger);
+
+            _heliosValue = new HeliosValue(this, new BindingValue(0d), "", "value", "Current value of the rotary encoder.", "", BindingValueUnits.Numeric);
+            _heliosValue.Execute += new HeliosActionHandler(SetValue_Execute);
+            Values.Add(_heliosValue);
+            Actions.Add(_heliosValue);
         }
 
         #region Properties
@@ -102,7 +108,27 @@ namespace GadrocsWorkshop.Helios.Controls
         }
 
         #endregion
+        #region Actions
+        void SetValue_Execute(object action, HeliosActionEventArgs e)
+        {
+            try
+            {
+                // NOTE: don't create a Helios object property event
+                _heliosValue.SetValue(e.Value, e.BypassCascadingTriggers);
+                SetRotation();
+            }
+            catch
+            {
+                // No-op if the parse fails we won't set the position.
+            }
+        }
 
+#endregion
+
+        private void SetRotation()
+        {
+            KnobRotation = _heliosValue.Value.DoubleValue * 360d;
+        }
         private void Increment()
         {
             KnobRotation += _rotationStep;

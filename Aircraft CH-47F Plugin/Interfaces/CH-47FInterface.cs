@@ -628,7 +628,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_41.ToString("d"), "581", 0.1d, 0.0d, 1.0d, "Canted Console", "CDU 2 Dimmer Knob"));  // elements["CDU_2_DIMMER"] = axis_limited({0, 1}, _("Cockpit.CH47.cdu_dimmer"),    devices.CANTED_CONSOLE, device_commands.Button_41, 581)
             AddFunction(new PushButton(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_44.ToString("d"), "582", "Canted Console", "Lamps Test Button", "%.1f"));  // elements["LAMPS_TEST"] =         button({0, 1}, _("Cockpit.CH47.lamps_test_sw"), devices.CANTED_CONSOLE, device_commands.Button_44, 582, {{SOUND_SW07_OFF, SOUND_SW07_ON}})
 
-
             AddFunction(new Switch(this, devices.EMERGENCY_PANEL.ToString("d"), "583", SwitchPositions.Create(3, 0.2d, -0.1d, Commands.Button.Button_1.ToString("d"), new string[] {"GUARD", "NORM", "MAN" }, "%0.1f"), "Emergency Panel (Canted Console)", "EAUX Radio Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.EMERGENCY_PANEL.ToString("d"), Commands.Button.Button_2.ToString("d"), "584", "1.0", "Pulled", "0.0", "Norm", "Emergency Panel (Canted Console)", "Ident Switch", " %.1f"));
             AddFunction(new Switch(this, devices.EMERGENCY_PANEL.ToString("d"), "585", SwitchPositions.Create(3, 0.2d, -0.1d, Commands.Button.Button_3.ToString("d"), new string[] { "EMER", "OFF", "HOLD"}, "%0.1f"), "Emergency Panel (Canted Console)", "EAUX Ground Emergency Switch", "%0.1f"));
@@ -657,10 +656,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new PushButton(this, devices.ARC_186.ToString("d"), Commands.Button.Button_6.ToString("d"), "1222", "ARC186 Radio", "Load", "%.1f"));  // elements["ARC186_LOAD"] 			= default_button({0, 1},_("Load"), devices.ARC_186, device_commands.Button_6, 1222, 1, {0, 1})
             AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1220", new SwitchPosition[] { new SwitchPosition("1.0", "Menu", Commands.Button.Button_7.ToString("d"), Commands.Button.Button_7.ToString("d"), "0.0"), new SwitchPosition("0.0", "On", Commands.Button.Button_8.ToString("d")), new SwitchPosition("-1.0", "OFF", Commands.Button.Button_8.ToString("d"), Commands.Button.Button_8.ToString("d"), "0.0", null) }, "ARC186 Radio", "Squelch / Tone", "%0.1f"));
 
-            AddFunction(new RotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_10.ToString("d"), Commands.Button.Button_9.ToString("d"), "1225", 0.1d, "ARC186 Radio", "Frequency Selector Knob 1st Digit"));
-            AddFunction(new RotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_12.ToString("d"), Commands.Button.Button_11.ToString("d"), "1226", 0.1d, "ARC186 Radio", "Frequency Selector Knob 2nd Digit"));
-            AddFunction(new RotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_14.ToString("d"), Commands.Button.Button_13.ToString("d"), "1227", 0.1d, "ARC186 Radio", "Frequency Selector Knob 3rd Digit"));
-            AddFunction(new RotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_16.ToString("d"), Commands.Button.Button_15.ToString("d"), "1228", 0.1d, "ARC186 Radio", "Frequency Selector Knob 4th Digit"));
+            AddFunction(new DisplayRotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_10.ToString("d"), Commands.Button.Button_9.ToString("d"), "1225", 0.1d, 10d, "ARC186 Radio", "Frequency Selector Knob 1st Digit","%.2f"));
+            AddFunction(new DisplayRotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_12.ToString("d"), Commands.Button.Button_11.ToString("d"), "1226", 0.1d, 10d, 0.4d, "ARC186 Radio", "Frequency Selector Knob 2nd Digit","%.1f"));
+            AddFunction(new DisplayRotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_14.ToString("d"), Commands.Button.Button_13.ToString("d"), "1227", 0.1d, 10d, "ARC186 Radio", "Frequency Selector Knob 3rd Digit","%.1f"));
+            AddFunction(new DisplayRotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_16.ToString("d"), Commands.Button.Button_15.ToString("d"), "1228", 0.1d, 100d, "ARC186 Radio", "Frequency Selector Knob 4th Digit", "%.2f"));
             AddFunction(new NetworkValue(this, "1229", "ARC186 Radio", "Frequency Selector 1st Value", "Value of the 1st digit drum", "0.0 to 1.0", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "1230", "ARC186 Radio", "Frequency Selector 2nd Value", "Value of the 2nd digit drum", "0.0 to 1.0", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "1231", "ARC186 Radio", "Frequency Selector 3rd Value", "Value of the 3rd digit drum", "0.0 to 1.0", BindingValueUnits.Numeric));
@@ -713,6 +712,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_110.ToString("d"), "528", "0.0", "Off", "1.0", "On", "Anti-Ice (Overhead Console)", "Center Switch", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_112.ToString("d"), "529", "0.0", "Off", "1.0", "On", "Anti-Ice (Overhead Console)", "Pilot Switch", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_114.ToString("d"), "530", "0.0", "Off", "1.0", "On", "Anti-Ice (Overhead Console)", "Pitot Switch", "%.1f"));
+
+            AddFunction(new Axis(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_116.ToString("d"), "534", 0.1d, 0.0d, 1.0d, "Engine Control (Overhead Console)", "Engine 1 Power Lever"));
+            AddFunction(new PushButton(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_122.ToString("d"), "536", "Engine Control (Overhead Console)", "Engine 1 Lever Detent Gate", "%.1f"));
+            AddFunction(new Axis(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_119.ToString("d"), "535", 0.1d, 0.0d, 1.0d, "Engine Control (Overhead Console)", "Engine 2 Power Lever"));
+            AddFunction(new PushButton(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_123.ToString("d"), "537", "Engine Control (Overhead Console)", "Engine 2 Lever Detent Gate", "%.1f")); 
+
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "541", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_131.ToString("d"), "Posn", "%0.1f"), "Troop Warning (Overhead Console)", " Light Switch", "%0.1f"));
             AddFunction(new FlagValue(this, "540", "Troop Warning (Overhead Console)", " Jump Indicator Red", ""));
             AddFunction(new FlagValue(this, "539", "Troop Warning (Overhead Console)", " Jump Indicator Green", ""));

@@ -28,20 +28,36 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private string _incrementPrefix;
         private string _decrementPrefix;
 
+        private readonly string _id;
+        private readonly string _format = "";
+
         private HeliosAction _incrementAction;
         private HeliosAction _decrementAction;
+        private HeliosValue _value;
 
         [JsonProperty("argumentValue")]
         private double _argValue;
 
-        public RotaryEncoder(BaseUDPInterface sourceInterface, string deviceId, string buttonId, string argId, double argValue, string device, string name)
-            : this(sourceInterface, deviceId, buttonId, buttonId, argId, argValue, device, name)
+        public RotaryEncoder(BaseUDPInterface sourceInterface, string deviceId, string buttonId, string argId, double argValue, string device, string name, string exportFormat)
+            : this(sourceInterface, deviceId, buttonId, buttonId, argId, argValue, device, name, exportFormat)
         {
         }
-
+        public RotaryEncoder(BaseUDPInterface sourceInterface, string deviceId, string buttonId, string argId, double argValue, string device, string name)
+            : this(sourceInterface, deviceId, buttonId, buttonId, argId, argValue, device, name, "")
+        {
+        }
         public RotaryEncoder(BaseUDPInterface sourceInterface, string deviceId, string buttonId, string button2Id, string argId, double argValue, string device, string name)
+            : this(sourceInterface, deviceId, buttonId, button2Id, argId, argValue, device, name, "")
+        {
+        }
+        public RotaryEncoder(BaseUDPInterface sourceInterface, string deviceId, string buttonId, string button2Id, string argId, double argValue, string device, string name, string exportFormat)
             : base(sourceInterface, device, name, null)
         {
+            if (!string.IsNullOrWhiteSpace(exportFormat))
+            {
+                _id = argId;
+                _format = exportFormat;
+            }
             SerializedActions.Add("increment", new SerializedAction()
             {
                 DeviceID = deviceId,
@@ -90,6 +106,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 BindingValueUnits.Numeric);
             _decrementAction.Execute += new HeliosActionHandler(DecrementAction_Execute);
             Actions.Add(_decrementAction);
+
+            _value = new HeliosValue(SourceInterface, new BindingValue(0.0d), SerializedDeviceName,
+                SerializedFunctionName, "Current value of this encoder.", "", BindingValueUnits.Numeric);
+            Values.Add(_value);
+            Triggers.Add(_value);
+
         }
 
         void DecrementAction_Execute(object action, HeliosActionEventArgs e)
@@ -119,11 +141,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         public override void ProcessNetworkData(string id, string value)
         {
-            // No-Op
+            if (!double.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out double parseValue))
+            {
+                return;
+            }
+            _value.SetValue(new BindingValue(parseValue), false);
         }
 
-        protected override ExportDataElement[] DefaultDataElements => new ExportDataElement[0];
-
+        protected override ExportDataElement[] DefaultDataElements
+        {
+            get
+            {
+                return (string.IsNullOrEmpty(_format) ? new ExportDataElement[0] : new ExportDataElement[] { new DCSDataElement(_id, _format) });
+            }
+        }
         public override void Reset()
         {
             // No-Op

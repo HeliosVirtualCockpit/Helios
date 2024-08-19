@@ -46,6 +46,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private int _currentDetentPosition = 0;
         private double _previousDragPosition = 0;
         private HeliosTrigger _minValueTrigger;
+        private HeliosTrigger _maxValueTrigger;
+        private bool _invertVerticalSwipeDirection = false;
 
         public LinearPotentiometerDetentsAnimated( )
             : base( "Linear Potentiometer with Detents (Animated)", new Size( 73, 240 ) )
@@ -53,8 +55,10 @@ namespace GadrocsWorkshop.Helios.Controls
             _clickableVertical = true;
             ClickType = LinearClickType.Swipe;
             _detents.Sort();
-            _minValueTrigger = new HeliosTrigger(this, "", "minimum value position", "released", "Fires when potentiometer moves out of MinValue position");
+            _minValueTrigger = new HeliosTrigger(this, "", "minimum value position", "released", "Fires before potentiometer moves out of MinValue position");
             this.Triggers.Add(_minValueTrigger);
+            _maxValueTrigger = new HeliosTrigger(this, "", "maximum value position", "released", "Fires before potentiometer moves out of MaxValue position");
+            this.Triggers.Add(_maxValueTrigger);
         }
 
         #region Properties
@@ -95,7 +99,16 @@ namespace GadrocsWorkshop.Helios.Controls
             }
             OnPropertyChanged("DetentPosition", value, -999d, true);
         }
-
+        public bool InvertedVertical
+        {
+            get => _invertVerticalSwipeDirection;
+            set
+            {  if(value != _invertVerticalSwipeDirection)
+                {
+                    _invertVerticalSwipeDirection = value;  
+                }
+            }
+        }
         #endregion
 
         #region Actions
@@ -143,6 +156,12 @@ namespace GadrocsWorkshop.Helios.Controls
         public override void WriteXml ( XmlWriter writer )
         {
             base.WriteXml( writer );
+
+            if (_invertVerticalSwipeDirection)
+            {
+                writer.WriteElementString("InvertVerticalSwipeDirection", _invertVerticalSwipeDirection.ToString(CultureInfo.InvariantCulture));
+            }
+
             writer.WriteStartElement("DetentPositions");
             _detents.Sort();
             foreach (double position in _detents)
@@ -151,13 +170,18 @@ namespace GadrocsWorkshop.Helios.Controls
                 writer.WriteAttributeString("Position", position.ToString(CultureInfo.InvariantCulture));
                 writer.WriteEndElement();
             }
-            writer.WriteEndElement();
+           writer.WriteEndElement();
         }
         public override void ReadXml ( XmlReader reader )
         {
             base.ReadXml( reader );
             if (!reader.IsEmptyElement)
             {
+                if (reader.Name == "InvertVerticalSwipeDirection" && bool.TryParse(reader.ReadElementString("InvertVerticalSwipeDirection"), out bool invertVerticalSwipeDirection))
+                {
+                    InvertedVertical = invertVerticalSwipeDirection;
+                }
+
                 _detents.Clear();
                 reader.ReadStartElement("DetentPositions");
                 int i = 1;
@@ -194,7 +218,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     double increment = location.Y - _mouseDownLocation.Y;
                     if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
                     {
-                        CalculateMovement(increment);
+                        CalculateMovement(increment * (_invertVerticalSwipeDirection ? -1 : 1));
                         _mouseDownLocation = location;
                     }
                 }
@@ -326,6 +350,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 if (currentValue == MinValue && Value != MinValue && !BypassTriggers)
                 {
                     _minValueTrigger.FireTrigger(BindingValue.Empty);
+                }
+                if (currentValue == MaxValue && Value != MaxValue && !BypassTriggers)
+                {
+                    _maxValueTrigger.FireTrigger(BindingValue.Empty);
                 }
                 AnimationFrameNumber = Convert.ToInt32(Clamp(Math.Round(Value * (AnimationFrameCount - 1)), 0, AnimationFrameCount - 1));
                 if (_detents.Contains(MinValue)) _detents.Remove(MinValue);
