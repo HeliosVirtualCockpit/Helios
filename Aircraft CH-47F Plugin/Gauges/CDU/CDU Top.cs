@@ -26,8 +26,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
     using System.Xml.Linq;
     using System.Drawing.Imaging;
 
-    [HeliosControl("Helios.CH47F.CDU", "CDU", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
-    public class CDU : CompositeVisualWithBackgroundImage
+    [HeliosControl("Helios.CH47F.CDU.Top", "CDU Display", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    public class CDU_Top : CompositeVisualWithBackgroundImage
     {
         private static readonly Rect SCREEN_RECT = new Rect(145, 94, 512, 486);
         private Rect _scaledScreenRect = SCREEN_RECT;
@@ -37,13 +37,13 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
         private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
-        private const string PANEL_IMAGE = "{CH-47F}/Gauges/CDU/Images/CDU_Bezel.png";
+        private const string PANEL_IMAGE = "{CH-47F}/Gauges/CDU/Images/CDU_Bezel_Top.png";
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.10d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
 
 
-        public CDU(string interfaceDevice)
-            : base(interfaceDevice, new Size(810, 1000))
+        public CDU_Top(string interfaceDevice)
+            : base(interfaceDevice, new Size(810, 659))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.CH47F.CH47FInterface) };
             _interfaceDevice = interfaceDevice;
@@ -68,7 +68,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             _frameBezelPanel.Opacity = 1d;
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
-            //int maxLabelButtons = _interfaceDevice.Contains("CDU") ? 20 : -1;
             int buttonNumber = 0;
             string[] labels = new string[] {"MSN", "FPLN", "FD", "IDX", "DIR", "SNSR", "MFD_DATA", "L1", "L2", "L3", "L4", "L5", "L6", "R1", "R2", "R3", "R4", "R5", "R6", "BRT", "DIM", "CNI",
                                             "PAD", "arrow left", "arrow right", "arrow up", "arrow down", "CLR", "WPN", "1", "2", "3",
@@ -94,23 +93,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             for(int x = 93; x <= 720; x += 89)
             {
                 AddButton($"{labels[buttonNumber]}", new Rect(x, 595, 81, 60), $"{labels[buttonNumber++]}");
-            }
-            //659
-            int kbOffset = 0;
-            for (int y = 670; y <= 808; y += 69)
-            {
-                for (int x = 19; x <= 730; x += 79) 
-                {
-                    AddButton($"{labels[buttonNumber]}", new Rect(x, y - kbOffset, 63, 54), $"{labels[buttonNumber++]}");
-                }
-            }
-            for (int x = 97; x <= 650; x += 79)
-            {
-                AddButton($"{labels[buttonNumber]}", new Rect(x, 875 - kbOffset, 63, 54), $"{labels[buttonNumber++]}");
-            }
-            for (int x = 66; x <= 661; x += 85)
-            {
-                AddButton($"{labels[buttonNumber]}", new Rect(x, 940 - kbOffset, 81, 60), $"{labels[buttonNumber++]}");
             }
         }
         public string ViewportName

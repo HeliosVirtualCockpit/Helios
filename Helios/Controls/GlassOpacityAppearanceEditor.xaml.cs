@@ -53,6 +53,18 @@
     [HeliosPropertyEditor("Helios.AH64D.EUFD.CPG", "Appearance")]
     [HeliosPropertyEditor("Helios.AH64D.EUFD.PILOT", "Appearance")]
     [HeliosPropertyEditor("Helios.AH64D.CMWS", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.RWR", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.SFD.Copilot", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.SFD.Pilot", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.MFD.Center", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.MFD.CopilotLeft", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.MFD.CopilotRight", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.MFD.PilotLeft", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.MFD.PilotRight", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.CDU.Top.Copilot", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.CDU.Top.Pilot", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.CDU.Copilot", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.CDU.Pilot", "Appearance")]
 
     public partial class GlassOpacityAppearanceEditor : HeliosPropertyEditor
     {

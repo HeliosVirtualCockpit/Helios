@@ -217,6 +217,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 this._invertedVertical = value;
             }
         }
+
         public LinearClickType ClickType
         {
             get
@@ -360,6 +361,10 @@ namespace GadrocsWorkshop.Helios.Controls
             if ( ClickType == LinearClickType.Swipe )
             {
                 writer.WriteElementString( "Sensitivity", Sensitivity.ToString( CultureInfo.InvariantCulture ) );
+                if (InvertedVertical)
+                {
+                    writer.WriteElementString("InvertVerticalSwipeDirection", InvertedVertical.ToString(CultureInfo.InvariantCulture));
+                }
             }
             writer.WriteEndElement( );
         }
@@ -382,6 +387,11 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     Sensitivity = double.Parse( reader.ReadElementString( "Sensitivity" ), CultureInfo.InvariantCulture );
                 }
+                if (reader.Name == "InvertVerticalSwipeDirection" && bool.TryParse(reader.ReadElementString("InvertVerticalSwipeDirection"), out bool invertVerticalSwipeDirection))
+                {
+                    InvertedVertical = invertVerticalSwipeDirection;
+                }
+
                 reader.ReadEndElement( );
             }
             else

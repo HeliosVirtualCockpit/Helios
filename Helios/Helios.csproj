@@ -100,9 +100,6 @@
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
-    <Compile Include="Controls\LinearInteractionBehaviorEditor.xaml.cs">
-      <DependentUpon>LinearInteractionBehaviorEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Special\DCSMonitorScriptAppenderAppearanceEditor.xaml.cs">
       <DependentUpon>DCSMonitorScriptAppenderAppearanceEditor.xaml</DependentUpon>
     </Compile>
@@ -395,6 +392,13 @@
     <Content Include="Docs\Licenses\RectpackSharp\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Base\Rotaries\Rotary - Knob .htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Encoders\Encoder - Knob 6.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\Knobs\knob6.png" />
     <Content Include="Templates\Base\Potentiometers\Linear Potentiometer.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -473,10 +477,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AnimationAppearanceEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\LinearInteractionBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

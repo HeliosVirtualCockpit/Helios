@@ -15,6 +15,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -22,23 +24,29 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="0" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Value</TextBlock>
-        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right" Grid.RowSpan="2">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Swipe</TextBlock>
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" VerticalContentAlignment="Center" HorizontalAlignment="Right" Content="Invert Swipe">
+            <Label.ToolTip>When checked the vertical swipe direction is reversed.</Label.ToolTip>
+        </Label>
+        <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Control.InvertedVertical}" />
+
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="4,10,2,2" Style="{StaticResource Heading2}">Value</TextBlock>
+        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right" Grid.RowSpan="2">
             <Label.ToolTip>Default value when a profile is started or reset.</Label.ToolTip> Initial
         </Label>
-        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="1" FontSize="10" Margin="2" Text="{Binding Control.InitialValue}" />
-        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right" Grid.RowSpan="2">
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="3" FontSize="10" Margin="2" Text="{Binding Control.InitialValue}" />
+        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" Grid.RowSpan="2">
             <Label.ToolTip>Minimum value for this potentiometer.</Label.ToolTip> Min
         </Label>
-        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="2" FontSize="10" Margin="2" Text="{Binding Control.MinValue}" />
-        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right"  Grid.RowSpan="2">
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="4" FontSize="10" Margin="2" Text="{Binding Control.MinValue}" />
+        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right"  Grid.RowSpan="2">
             <Label.ToolTip>Maximum value for this potentiometer.</Label.ToolTip> Max
         </Label>
-        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="3" FontSize="10" Margin="2" Text="{Binding Control.MaxValue}" />
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="5" FontSize="10" Margin="2" Text="{Binding Control.MaxValue}" />
 
-        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right"  Grid.RowSpan="2">
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right"  Grid.RowSpan="2">
             <Label.ToolTip>Value to increment and decrement by with each turn.</Label.ToolTip> Step
         </Label>
-        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="4" FontSize="10" Margin="2" Text="{Binding Control.StepValue}" />
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="6" FontSize="10" Margin="2" Text="{Binding Control.StepValue}" />
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

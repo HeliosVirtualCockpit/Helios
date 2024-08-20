@@ -1,0 +1,15 @@
+﻿<ControlTemplate>
+  <Name>Encoder - Knob 6</Name>
+  <Category>Rotary Encoders</Category>
+  <TypeIdentifier>Helios.Base.RotaryEncoder</TypeIdentifier>
+  <Template>
+    <TemplateValues>
+      <Location>394.857142857143,593.04</Location>
+      <Size>100,100</Size>
+      <KnobImage>{Helios}/Images/Knobs/knob6.png</KnobImage>
+      <RotationStep>5</RotationStep>
+      <StepValue>0.1</StepValue>
+      <InitialRotation>0</InitialRotation>
+    </TemplateValues>
+  </Template>
+</ControlTemplate>

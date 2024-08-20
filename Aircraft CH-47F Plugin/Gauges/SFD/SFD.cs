@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
+namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -26,10 +26,10 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
     using System.Xml.Linq;
     using System.Drawing.Imaging;
 
-    [HeliosControl("Helios.CH47F.CDU", "CDU", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
-    public class CDU : CompositeVisualWithBackgroundImage
+    [HeliosControl("Helios.CH47F.SFD", "SFD", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    public class RWR : CompositeVisualWithBackgroundImage
     {
-        private static readonly Rect SCREEN_RECT = new Rect(145, 94, 512, 486);
+        private static readonly Rect SCREEN_RECT = new Rect(72, 71, 352, 362);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDevice = "";
         private double _size_Multiplier = 1;
@@ -37,81 +37,41 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
         private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
-        private const string PANEL_IMAGE = "{CH-47F}/Gauges/CDU/Images/CDU_Bezel.png";
+        private const string PANEL_IMAGE = "{CH-47F}/Gauges/SFD/Images/SFD_Bezel.png";
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.10d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
 
 
-        public CDU(string interfaceDevice)
-            : base(interfaceDevice, new Size(810, 1000))
+        public RWR(string interfaceDevice)
+            : base(interfaceDevice, new Size(500, 495))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.CH47F.CH47FInterface) };
             _interfaceDevice = interfaceDevice;
             switch (_interfaceDevice)
             {
-                case "CDU (Right)":
-                    _vpName = "CH47F_CDU_PILOT";
+                case "SFD (Right)":
+                    _vpName = "CH47F_SFD_PILOT";
                     break;
-                case "CDU (Left)":
-                    _vpName = "CH47F_CDU_COPILOT";
+                case "SFD (Left)":
+                    _vpName = "CH47F_SFD_COPILOT";
                     break;
                 default:
                     break;
             }
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
-            _frameGlassPanel = AddPanel("CDU Glass", new Point(SCREEN_RECT.Left, SCREEN_RECT.Top), new Size(SCREEN_RECT.Width, SCREEN_RECT.Height), "{CH-47F}/Gauges/CDU/Images/CDU_glass.png", _interfaceDevice);
+            _frameGlassPanel = AddPanel("SFD Glass", new Point(SCREEN_RECT.Left, SCREEN_RECT.Top), new Size(SCREEN_RECT.Width, SCREEN_RECT.Height), "{CH-47F}/Gauges/SFD/Images/SFD_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = _glassReflectionOpacity;
             _frameGlassPanel.DrawBorder = false;
             _frameGlassPanel.FillBackground = false;
 
-            _frameBezelPanel = AddPanel("CDU Frame", new Point(Left, Top), NativeSize, PANEL_IMAGE, _interfaceDevice);
+            _frameBezelPanel = AddPanel("SFD Frame", new Point(Left, Top), NativeSize, PANEL_IMAGE, _interfaceDevice);
             _frameBezelPanel.Opacity = 1d;
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
-            //int maxLabelButtons = _interfaceDevice.Contains("CDU") ? 20 : -1;
-            int buttonNumber = 0;
-            string[] labels = new string[] {"MSN", "FPLN", "FD", "IDX", "DIR", "SNSR", "MFD_DATA", "L1", "L2", "L3", "L4", "L5", "L6", "R1", "R2", "R3", "R4", "R5", "R6", "BRT", "DIM", "CNI",
-                                            "PAD", "arrow left", "arrow right", "arrow up", "arrow down", "CLR", "WPN", "1", "2", "3",
-                                            "A", "B", "C", "D", "E", "F", "G", "4", "5", "6", "H", "I", "J", "K", "L", "M", "N", "7", "8", "9", "O", "P", "Q", "R", "S", "T", "U", "0", "dot", "V",
-                                            "W", "X", "Y", "Z", "SP", "MARK", "slash", "dash", "TDL", "ASE", "empty", "DATA", "STAT"};
 
-            for (int x = 66; x <= 660; x += 18 + 81)
-            {
-                AddButton($"{labels[buttonNumber]}", new Rect(x, 4 ,81,60), $"{labels[buttonNumber++]}");
-                //buttonNumber++;
-            }
-            for (int x = 19; x <= 710; x += 691)
-            {
-                for (int y = 162; y <= 462; y += 60)
-                {
-                    AddButton($"{labels[buttonNumber]}", new Rect(x, y, 73, 45), $"{labels[buttonNumber++]}");
-                }
-            }
-            for(int y = 547; y <= 607; y += 60)
-            {
-                AddButton($"{labels[buttonNumber]}", new Rect(19, y, 73, 45), $"{labels[buttonNumber++]}");
-            }
-            for(int x = 93; x <= 720; x += 89)
-            {
-                AddButton($"{labels[buttonNumber]}", new Rect(x, 595, 81, 60), $"{labels[buttonNumber++]}");
-            }
-            //659
-            int kbOffset = 0;
-            for (int y = 670; y <= 808; y += 69)
-            {
-                for (int x = 19; x <= 730; x += 79) 
-                {
-                    AddButton($"{labels[buttonNumber]}", new Rect(x, y - kbOffset, 63, 54), $"{labels[buttonNumber++]}");
-                }
-            }
-            for (int x = 97; x <= 650; x += 79)
-            {
-                AddButton($"{labels[buttonNumber]}", new Rect(x, 875 - kbOffset, 63, 54), $"{labels[buttonNumber++]}");
-            }
-            for (int x = 66; x <= 661; x += 85)
-            {
-                AddButton($"{labels[buttonNumber]}", new Rect(x, 940 - kbOffset, 81, 60), $"{labels[buttonNumber++]}");
-            }
+            AddButton("SFD Mode Button", new Rect(204, 442 ,63, 50), "SFD Mode");
+            AddEncoder("SFD Knob", new Point(357d, 368d), new Size(127d, 127d), "SFD Knob");
+            AddIndicator("SFD Indicator", new Point(90d, 453d), new Size(29d, 29d), "SFD Indicator");
         }
         public string ViewportName
         {
@@ -237,9 +197,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
                 }
             }
         }
-        private void AddButton(string name, Point pos, string imageModifier) { AddButton(name, new Rect(pos.X, pos.Y, 80, 46), imageModifier); }
-        private void AddButton(string name, Point pos) { AddButton(name, new Rect(pos.X, pos.Y, 80, 46), ""); }
-        private void AddButton(string name, Point pos, double buttonWidth, string label) { AddButton(name, new Rect(pos.X, pos.Y, buttonWidth, 60), label); }
+
         private void AddButton(string name, Rect rect, string label)
         {
             Helios.Controls.PushButton button = new Helios.Controls.PushButton();
@@ -247,15 +205,10 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             button.Left = rect.X * _size_Multiplier;
             button.Width = rect.Width * _size_Multiplier;
             button.Height = rect.Height * _size_Multiplier;
-            string tempLabel = label;
-            if (label.Length == 2 && (label.StartsWith("L") || label.StartsWith("R"))) {
-                label = label.Substring(0,1) + "x";
-            }
 
-            button.Image = $"{{CH-47F}}/Gauges/CDU/Images/CDU_{label.Replace(" ", "_")}_Norm.png";
-            button.PushedImage = $"{{CH-47F}}/Gauges/CDU/Images/CDU_{(label.Replace(" ","_"))}_Pressed.png";
+            button.Image = $"{{CH-47F}}/Gauges/SFD/Images/{label.Replace(" ", "_")}_Norm.png";
+            button.PushedImage = $"{{CH-47F}}/Gauges/SFD/Images/{(label.Replace(" ","_"))}_Pressed.png";
 
-            label = tempLabel;
             button.Name = name;
 
             Children.Add(button);
@@ -281,6 +234,69 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
                 childName: name,
                 interfaceTriggerName: $"{Name}.{name}.changed",
                 deviceActionName: "set.physical state");
+        }
+        private void AddEncoder(string name, Point posn, Size size, string interfaceElementName)
+        {
+ 
+            RotaryEncoder knob = new RotaryEncoder
+            {
+                Name = name,
+                KnobImage = $"{{CH-47F}}/Gauges/SFD/Images/SFD_Knob.png",
+                StepValue = 0.1d,
+                RotationStep = 5d,
+                Top = posn.Y,
+                Left = posn.X,
+                Width = size.Width,
+                Height = size.Height,
+                ClickType = RotaryClickType.Swipe
+            };
+
+            Children.Add(knob);
+            foreach (IBindingTrigger trigger in knob.Triggers)
+            {
+                AddTrigger(trigger, name);
+            }
+
+            AddAction(knob.Actions["set.value"], name);
+
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "encoder.incremented",
+                interfaceActionName: _interfaceDevice + ".increment." + interfaceElementName
+            );
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "encoder.decremented",
+                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                );
+
+            AddDefaultInputBinding(
+                childName: name,
+                interfaceTriggerName: $"{Name}.{name}.changed",
+                deviceActionName: "set.value"
+                );
+        }
+
+        private void AddIndicator(string name, Point posn, Size size, string interfaceElementName)
+        {
+            Indicator indicator = new Indicator
+            {
+                Top = posn.Y,
+                Left = posn.X,
+                Width = size.Width,
+                Height = size.Height,
+                OnImage = "{CH-47F}/Gauges/SFD/Images/SFD_Indicator.png",
+                OffImage = null,
+                Name = interfaceElementName
+            };
+
+            Children.Add(indicator);
+            AddAction(indicator.Actions["set.indicator"], interfaceElementName);
+            AddDefaultInputBinding(
+                childName: name,
+                interfaceTriggerName: $"{Name}.{interfaceElementName}.changed",
+                deviceActionName: "set.indicator");
+
         }
         private string ComponentName(string name)
         {

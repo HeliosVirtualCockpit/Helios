@@ -22,10 +22,10 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.CH47F.CDU.Copilot", "CDU (Copilot)", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class CDUCopilot : CDU
+    [HeliosControl("Helios.CH47F.CDU.Top.Copilot", "CDU Display Left (Copilot)", "CH-47F Chinook", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    public class CDUTopCopilot : CDU_Top
     {
-        public CDUCopilot()
+        public CDUTopCopilot()
             : base("CDU (Left)")
         {
         }

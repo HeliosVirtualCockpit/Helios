@@ -34,25 +34,17 @@ namespace GadrocsWorkshop.Helios.Controls
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        private bool _clickableVertical = false;
-        private bool _clickableHorizontal = false;
-        LinearClickType _clickType = LinearClickType.Swipe;
 
-        private bool _mouseDown = false;
-        private Point _mouseDownLocation;
-        private double _swipeThreshold = 10d;
         private List<double> _detents = new List<double>();
         private bool _detentHit = false;
         private int _currentDetentPosition = 0;
         private double _previousDragPosition = 0;
         private HeliosTrigger _minValueTrigger;
         private HeliosTrigger _maxValueTrigger;
-        private bool _invertVerticalSwipeDirection = false;
 
         public LinearPotentiometerDetentsAnimated( )
             : base( "Linear Potentiometer with Detents (Animated)", new Size( 73, 240 ) )
         {
-            _clickableVertical = true;
             ClickType = LinearClickType.Swipe;
             _detents.Sort();
             _minValueTrigger = new HeliosTrigger(this, "", "minimum value position", "released", "Fires before potentiometer moves out of MinValue position");
@@ -98,16 +90,6 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
             OnPropertyChanged("DetentPosition", value, -999d, true);
-        }
-        public bool InvertedVertical
-        {
-            get => _invertVerticalSwipeDirection;
-            set
-            {  if(value != _invertVerticalSwipeDirection)
-                {
-                    _invertVerticalSwipeDirection = value;  
-                }
-            }
         }
         #endregion
 
@@ -157,11 +139,6 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             base.WriteXml( writer );
 
-            if (_invertVerticalSwipeDirection)
-            {
-                writer.WriteElementString("InvertVerticalSwipeDirection", _invertVerticalSwipeDirection.ToString(CultureInfo.InvariantCulture));
-            }
-
             writer.WriteStartElement("DetentPositions");
             _detents.Sort();
             foreach (double position in _detents)
@@ -177,11 +154,6 @@ namespace GadrocsWorkshop.Helios.Controls
             base.ReadXml( reader );
             if (!reader.IsEmptyElement)
             {
-                if (reader.Name == "InvertVerticalSwipeDirection" && bool.TryParse(reader.ReadElementString("InvertVerticalSwipeDirection"), out bool invertVerticalSwipeDirection))
-                {
-                    InvertedVertical = invertVerticalSwipeDirection;
-                }
-
                 _detents.Clear();
                 reader.ReadStartElement("DetentPositions");
                 int i = 1;
@@ -200,45 +172,44 @@ namespace GadrocsWorkshop.Helios.Controls
             }
             _detents.Sort();
         }
-        public override void MouseDown(Point location)
-        {
-            if (_clickType == LinearClickType.Swipe)
-            {
-                _mouseDown = true;
-                _mouseDownLocation = location;
-            }
-            base.MouseDown(location);
-        }
-        public override void MouseDrag(Point location)
-        {
-            if (_mouseDown && _clickType == LinearClickType.Swipe)
-            {
-                if (_clickableVertical)
-                {
-                    double increment = location.Y - _mouseDownLocation.Y;
-                    if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
-                    {
-                        CalculateMovement(increment * (_invertVerticalSwipeDirection ? -1 : 1));
-                        _mouseDownLocation = location;
-                    }
-                }
-                else if (_clickableHorizontal)
-                {
-                    double increment = location.X - _mouseDownLocation.X;
-                    if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
-                    {
-                        CalculateMovement(increment);
-                        _mouseDownLocation = location;
-                    }
-                }
-            } else
-            {
+        //public override void MouseDown(Point location)
+        //{
+        //    if (_clickType == LinearClickType.Swipe)
+        //    {
+        //        _mouseDown = true;
+        //        _mouseDownLocation = location;
+        //    }
+        //    base.MouseDown(location);
+        //}
+        //public override void MouseDrag(Point location)
+        //{
+        //    if (_mouseDown && _clickType == LinearClickType.Swipe)
+        //    {
+        //        if (_clickableVertical)
+        //        {
+        //            double increment = location.Y - _mouseDownLocation.Y;
+        //            if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
+        //            {
+        //                CalculateMovement(InvertedVertical ? 1 - increment : increment);
+        //                _mouseDownLocation = location;
+        //            }
+        //        }
+        //        else if (_clickableHorizontal)
+        //        {
+        //            double increment = location.X - _mouseDownLocation.X;
+        //            if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
+        //            {
+        //                CalculateMovement(InvertedHorizontal ? 1 - increment : increment);
+        //                _mouseDownLocation = location;
+        //            }
+        //        }
+        //    } else
+        //    {
 
-            }
-        }
+        //    }
+        //}
         public override void MouseUp(Point location)
         {
-            _mouseDown = false;
             _detentHit = false;
             base.MouseUp(location);
         }

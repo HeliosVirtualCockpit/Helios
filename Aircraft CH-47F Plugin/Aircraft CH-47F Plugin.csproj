@@ -61,6 +61,19 @@
     <Content Include="Docs\Helios.CH-47F.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Gauges\CDU\Images\CDU_Bezel_Bot.png" />
+    <Resource Include="Gauges\CDU\Images\CDU_Bezel_Top.png" />
+    <Resource Include="Gauges\SFD\Images\SFD_Indicator.png" />
+    <Resource Include="Gauges\SFD\Images\SFD_glass.png" />
+    <Resource Include="Gauges\RWR\Images\RWR_glass.png" />
+    <Resource Include="Gauges\SFD\Images\SFD_Bezel.png" />
+    <Resource Include="Gauges\SFD\Images\SFD_Knob.png" />
+    <Resource Include="Gauges\SFD\Images\SFD_Mode_Norm.png" />
+    <Resource Include="Gauges\SFD\Images\SFD_Mode_Pressed.png" />
+    <Resource Include="Gauges\RWR\Images\RWR_Bezel.png" />
+    <Resource Include="Gauges\RWR\Images\RWR_BRIL_Knob.png" />
+    <Resource Include="Gauges\RWR\Images\RWR_DAY_SW_Down.png" />
+    <Resource Include="Gauges\RWR\Images\RWR_DAY_SW_Up.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Lx_Norm.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Lx_Pressed.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Rx_Norm.png" />
@@ -141,18 +154,6 @@
     <Resource Include="Gauges\CDU\Images\CDU_J_Pressed.png" />
     <Resource Include="Gauges\CDU\Images\CDU_K_Norm.png" />
     <Resource Include="Gauges\CDU\Images\CDU_K_Pressed.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L1_Norm.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L1_Pressed.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L2_Norm.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L2_Pressed.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L3_Norm.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L3_Pressed.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L4_Norm.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L4_Pressed.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L5_Norm.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L5_Pressed.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L6_Norm.png" />
-    <Resource Include="Gauges\CDU\Images\CDU_L6_Pressed.png" />
     <Resource Include="Gauges\CDU\Images\CDU_L_Norm.png" />
     <Resource Include="Gauges\CDU\Images\CDU_L_Pressed.png" />
     <Resource Include="Gauges\CDU\Images\CDU_MARK_Norm.png" />
@@ -236,6 +237,10 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\CDU\CDU Bottom.cs" />
+    <Compile Include="Gauges\CDU\CDU Keyboard Copilot.cs" />
+    <Compile Include="Gauges\CDU\CDU Keyboard Pilot.cs" />
+    <Compile Include="Gauges\CDU\CDU Top.cs" />
     <Compile Include="Gauges\FAT\FAT.cs" />
     <Compile Include="Gauges\CDU\CDU Copilot.cs" />
     <Compile Include="Gauges\CDU\CDU Pilot.cs" />
@@ -248,6 +253,10 @@
     <Compile Include="Gauges\MFD\MFD.cs" />
     <Compile Include="Gauges\RadAlt\RadAlt.cs" />
     <Compile Include="Gauges\RadAlt\RadAltInstrument.cs" />
+    <Compile Include="Gauges\RWR\RWR.cs" />
+    <Compile Include="Gauges\SFD\SFD Copilot.cs" />
+    <Compile Include="Gauges\SFD\SFD Pilot.cs" />
+    <Compile Include="Gauges\SFD\SFD.cs" />
     <Compile Include="Interfaces\CH-47FInterface.cs" />
     <Compile Include="Interfaces\Commands.cs" />
     <Compile Include="Interfaces\Devices.cs" />
@@ -263,6 +272,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\FAT\Images\fat_faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\RWR\Images\RWR_Rings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
