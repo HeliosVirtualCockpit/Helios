@@ -244,7 +244,6 @@
     <Compile Include="Gauges\FAT\FAT.cs" />
     <Compile Include="Gauges\CDU\CDU Copilot.cs" />
     <Compile Include="Gauges\CDU\CDU Pilot.cs" />
-    <Compile Include="Gauges\CDU\CDU.cs" />
     <Compile Include="Gauges\MFD\MFD Copilot Left.cs" />
     <Compile Include="Gauges\MFD\MFD Center.cs" />
     <Compile Include="Gauges\MFD\MFD Pilot Left.cs" />
