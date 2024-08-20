@@ -421,7 +421,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     double increment = location.Y - _mouseDownLocation.Y;
                     if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
                     {
-                        CalculateMovement(increment);
+                        CalculateMovement(InvertedVertical ? 1 - increment : increment);
                         _mouseDownLocation = location;
                     }
                 }
@@ -430,7 +430,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     double increment = location.X - _mouseDownLocation.X;
                     if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
                     {
-                        CalculateMovement(increment);
+                        CalculateMovement(InvertedHorizontal ? 1 - increment : increment);
                         _mouseDownLocation = location;
                     }
                 }

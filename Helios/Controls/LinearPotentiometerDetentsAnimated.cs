@@ -172,42 +172,7 @@ namespace GadrocsWorkshop.Helios.Controls
             }
             _detents.Sort();
         }
-        //public override void MouseDown(Point location)
-        //{
-        //    if (_clickType == LinearClickType.Swipe)
-        //    {
-        //        _mouseDown = true;
-        //        _mouseDownLocation = location;
-        //    }
-        //    base.MouseDown(location);
-        //}
-        //public override void MouseDrag(Point location)
-        //{
-        //    if (_mouseDown && _clickType == LinearClickType.Swipe)
-        //    {
-        //        if (_clickableVertical)
-        //        {
-        //            double increment = location.Y - _mouseDownLocation.Y;
-        //            if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
-        //            {
-        //                CalculateMovement(InvertedVertical ? 1 - increment : increment);
-        //                _mouseDownLocation = location;
-        //            }
-        //        }
-        //        else if (_clickableHorizontal)
-        //        {
-        //            double increment = location.X - _mouseDownLocation.X;
-        //            if ((increment > 0 && increment > _swipeThreshold) || (increment < 0 && (increment * -1) > _swipeThreshold))
-        //            {
-        //                CalculateMovement(InvertedHorizontal ? 1 - increment : increment);
-        //                _mouseDownLocation = location;
-        //            }
-        //        }
-        //    } else
-        //    {
 
-        //    }
-        //}
         public override void MouseUp(Point location)
         {
             _detentHit = false;
