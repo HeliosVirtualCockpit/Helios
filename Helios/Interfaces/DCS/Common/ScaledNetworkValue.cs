@@ -67,6 +67,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             : this(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", null, 0d, scale)
         {
         }
+        public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, double scale, string device, string name, string description, string valueDescription, BindingValueUnit unit, string exportFormat)
+            : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, 0d, scale)
+        {
+        }
 
         public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, double scale, string device, string name, string description, string valueDescription, BindingValueUnit unit, double baseValue, string exportFormat)
             : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, baseValue, scale)
