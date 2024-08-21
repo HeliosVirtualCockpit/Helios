@@ -61,6 +61,10 @@
     <Content Include="Docs\Helios.CH-47F.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Gauges\Chronometer\Images\Chronometer_Bezel.png" />
+    <Resource Include="Gauges\Chronometer\Images\M880_Button_Norm.png" />
+    <Resource Include="Gauges\Chronometer\Images\M880_Button_Pressed.png" />
+    <Resource Include="Gauges\Chronometer\Images\M880_Knob.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Bezel_Bot.png" />
     <Resource Include="Gauges\CDU\Images\CDU_Bezel_Top.png" />
     <Resource Include="Gauges\SFD\Images\SFD_Indicator.png" />
@@ -241,6 +245,7 @@
     <Compile Include="Gauges\CDU\CDU Keyboard Copilot.cs" />
     <Compile Include="Gauges\CDU\CDU Keyboard Pilot.cs" />
     <Compile Include="Gauges\CDU\CDU Top.cs" />
+    <Compile Include="Gauges\Chronometer\Chronometer.cs" />
     <Compile Include="Gauges\FAT\FAT.cs" />
     <Compile Include="Gauges\CDU\CDU Copilot.cs" />
     <Compile Include="Gauges\CDU\CDU Pilot.cs" />
@@ -262,7 +267,6 @@
     <Compile Include="Interfaces\Functions\CH-47FFunction.cs" />
     <Compile Include="Interfaces\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\Functions\RADARAltimeter.cs" />
-    <Compile Include="Interfaces\Functions\DisplayRotaryEncoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

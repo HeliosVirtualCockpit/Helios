@@ -32,7 +32,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
         private static readonly Rect SCREEN_RECT = new Rect(145, 94, 512, 486);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDevice = "";
-        private HeliosPanel _frameBezelPanel;
         private const string PANEL_IMAGE = "{CH-47F}/Gauges/CDU/Images/CDU_Bezel_Bot.png";
         private const int KBOFFSET = 659;
 
@@ -80,7 +79,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             if (!Actions.ContainsKey(panel.Actions.GetKeyForItem(panelAction)))
             {
                 Actions.Add(panelAction);
-                //string addedKey = Actions.GetKeyForItem(panelAction);
             }
             panelAction = panel.Actions["set.hidden"];
             panelAction.Device = $"{Name}_{name}";
@@ -88,21 +86,17 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             if (!Actions.ContainsKey(panel.Actions.GetKeyForItem(panelAction)))
             {
                 Actions.Add(panelAction);
-                //string addedKey = Actions.GetKeyForItem(panelAction);
             }
             return panel;
         }
-        private void AddButton(string name, Point pos, string imageModifier) { AddButton(name, new Rect(pos.X, pos.Y, 80, 46), imageModifier); }
-        private void AddButton(string name, Point pos) { AddButton(name, new Rect(pos.X, pos.Y, 80, 46), ""); }
-        private void AddButton(string name, Point pos, double buttonWidth, string label) { AddButton(name, new Rect(pos.X, pos.Y, buttonWidth, 60), label); }
+
         private void AddButton(string name, Rect rect, string label)
         {
-            Helios.Controls.PushButton button = new Helios.Controls.PushButton();
+            PushButton button = new PushButton();
             button.Top = rect.Y;
             button.Left = rect.X;
             button.Width = rect.Width;
             button.Height = rect.Height;
-            string tempLabel = label;
             if (label.Length == 2 && (label.StartsWith("L") || label.StartsWith("R"))) {
                 label = label.Substring(0,1) + "x";
             }
@@ -110,7 +104,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             button.Image = $"{{CH-47F}}/Gauges/CDU/Images/CDU_{label.Replace(" ", "_")}_Norm.png";
             button.PushedImage = $"{{CH-47F}}/Gauges/CDU/Images/CDU_{(label.Replace(" ","_"))}_Pressed.png";
 
-            label = tempLabel;
             button.Name = name;
 
             Children.Add(button);
@@ -125,16 +118,16 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             AddDefaultOutputBinding(
                 childName: name,
                 deviceTriggerName: "pushed",
-                interfaceActionName: $"{Name}.push.{name}"
+                interfaceActionName: $"{_interfaceDevice}.push.{name}"
                 );
             AddDefaultOutputBinding(
                 childName: name,
                 deviceTriggerName: "released",
-                interfaceActionName: $"{Name}.release.{name}"
+                interfaceActionName: $"{_interfaceDevice}.release.{name}"
                 );
             AddDefaultInputBinding(
                 childName: name,
-                interfaceTriggerName: $"{Name}.{name}.changed",
+                interfaceTriggerName: $"{_interfaceDevice}.{name}.changed",
                 deviceActionName: "set.physical state");
         }
         private string ComponentName(string name)
@@ -157,7 +150,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
 
         protected override void OnBackgroundImageChange()
         {
-            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : PANEL_IMAGE;
+            BackgroundImage = BackgroundImageIsCustomized ? null : PANEL_IMAGE;
         }
         public override bool HitTest(Point location)
         {

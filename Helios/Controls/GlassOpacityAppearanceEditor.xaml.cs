@@ -65,6 +65,7 @@
     [HeliosPropertyEditor("Helios.CH47F.CDU.Top.Pilot", "Appearance")]
     [HeliosPropertyEditor("Helios.CH47F.CDU.Copilot", "Appearance")]
     [HeliosPropertyEditor("Helios.CH47F.CDU.Pilot", "Appearance")]
+    [HeliosPropertyEditor("Helios.CH47F.Chronometer", "Appearance")]
 
     public partial class GlassOpacityAppearanceEditor : HeliosPropertyEditor
     {
