@@ -29,10 +29,10 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.FAT
         private CalibrationPointCollectionDouble _needleCalibration;
 
         public FAT()
-            : base("FAT", new Size(364, 376))
+            : base("FAT", new Size(300, 300))
         {
 
-            Components.Add(new GaugeImage("{CH-47F}/Gauges/FAT/Images/fat_faceplate.xaml", new Rect(32d, 38d, 300, 300)));
+            Components.Add(new GaugeImage("{CH-47F}/Gauges/FAT/Images/fat_faceplate.xaml", new Rect(0d, 0d, 300, 300)));
 
             _needleCalibration = new CalibrationPointCollectionDouble(-70d, 0d, 50d, 322d)
             {
@@ -44,10 +44,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.FAT
                 new CalibrationPointDouble(20d, 241d),
                 new CalibrationPointDouble(30d, 270d)
             };
-            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), -162d);
+            _needle = new GaugeNeedle("{Helios}/Gauges/A-10/Common/needle_a.xaml", new Point(150d, 150d), new Size(22, 165), new Point(11, 130), -162d);
             Components.Add(_needle);
-
-            //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
 
             _FreeAirTemp = new HeliosValue(this, new BindingValue(0d), "", "Free Air Temperature", "Current Free Air Temperature.", "(-70 - +50)", BindingValueUnits.Celsius);
             _FreeAirTemp.Execute += new HeliosActionHandler(FreeAirTemp_Execute);
