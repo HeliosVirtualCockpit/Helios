@@ -47,7 +47,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Chronometer
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.CH47F.CH47FInterface) };
             _interfaceDevice = "M880 Chronometer";
-            _vpName = "CH47F_Chronometer";
+            _vpName = "CH47F_CHRONOMETER";
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
             _frameGlassPanel = AddPanel("Chronometer Glass", new Point(SCREEN_RECT.Left, SCREEN_RECT.Top), new Size(SCREEN_RECT.Width, SCREEN_RECT.Height), "{CH-47F}/Gauges/CDU/Images/CDU_glass.png", _interfaceDevice);
             _frameGlassPanel.Opacity = _glassReflectionOpacity;
