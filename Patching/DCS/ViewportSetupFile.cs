@@ -44,6 +44,9 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         [JsonProperty("dcsmonitorsetupadditionallua")]
         public string DCSMonitorSetupAdditionalLua { get; internal set; } = "";
 
+        [JsonProperty("dcsrestricttovehicle")]
+        public string DCSRestrictToVehicle { get; internal set; } = "";
+
         [JsonProperty("viewports")] public Dictionary<string, Rect> Viewports { get; } = new Dictionary<string, Rect>();
         internal IEnumerable<StatusReportItem> Merge(string name, ViewportSetupFile from)
         {
@@ -66,7 +69,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 if (!Viewports.TryGetValue(viewport.Key, out Rect existingRect))
                 {
                     // just copy it
-                    Viewports.Add(viewport.Key, viewport.Value);
+                    Viewports.Add($"{from.DCSRestrictToVehicle}{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle)?"":".")}{viewport.Key}", viewport.Value);
                     continue;
                 }
 

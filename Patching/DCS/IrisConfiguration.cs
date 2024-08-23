@@ -27,6 +27,7 @@ using System.ComponentModel;
 using System.Windows.Media;
 using GadrocsWorkshop.Helios.Controls.Special;
 using RectpackSharp;
+using System.Diagnostics.Contracts;
 
 namespace GadrocsWorkshop.Helios.Patching.DCS
 {
@@ -143,7 +144,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 ConfigManager.LogManager.LogError(message);
                 _isOpen = false;
             }
-            if (!_isRemote)
+            if (_isRemote)
             {
                 OpenLocalProfile(_parent.CurrentProfileName);
             }
@@ -201,7 +202,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     _xmlWriter.WriteElementString("ScreenPositionY", $"{(_isRemote ? viewportRect.Top : 0)}");
                     _xmlWriter.WriteEndElement();  // ViewPort
 
-                    if (!_isRemote) CreateViewportVisual(viewport);
+                    if (_isRemote) CreateViewportVisual(viewport);
 
                     return true;
                 }
@@ -235,7 +236,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         {
             if (_isOpen)
             {
-                if (!_isRemote) WriteLocalProfile();
+                if (_isRemote) WriteLocalProfile();
                 if (_hasBackground)
                 {
                     _xmlWriter.WriteStartElement("Viewport");
@@ -253,6 +254,17 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 }
                 _xmlWriter.WriteEndElement();  // Viewports
                 _xmlWriter.WriteElementString("PollingInterval", "100");
+
+                _xmlWriter.WriteStartElement("GlobalImageAdjustment");
+                _xmlWriter.WriteElementString("Brightness", "1.0");
+                _xmlWriter.WriteElementString("RedBrightness", "1.0");
+                _xmlWriter.WriteElementString("GreenBrightness", "1.0");
+                _xmlWriter.WriteElementString("BlueBrightness", "1.0");
+                _xmlWriter.WriteElementString("AlphaBrightness", "1.0");
+                _xmlWriter.WriteElementString("Gamma", "1.0");
+                _xmlWriter.WriteElementString("Contrast", "1.0");
+                _xmlWriter.WriteEndElement(); // GlobalImageAdjustment
+
                 _xmlWriter.WriteEndElement(); // IrisConfig
 
                 _xmlWriter.Close();
