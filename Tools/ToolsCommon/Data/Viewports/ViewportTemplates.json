@@ -152,6 +152,7 @@
   {
     "templateName": "F/A-18C (Helios 16/9)",
     "moduleId": "FA-18C",
+    "categoryName": "FA-18C Hornet",
     "isHeliosTemplate": true,
     "viewports": [
       {
