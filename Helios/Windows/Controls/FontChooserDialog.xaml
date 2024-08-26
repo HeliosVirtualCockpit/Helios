@@ -47,7 +47,7 @@
         </StackPanel>
 
         <Border  Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Background="Black" Margin="0,12,0,0">
-            <TextBlock Foreground="WhiteSmoke" FontFamily="{Binding SelectedTypeface.FontFamily}" FontSize="{Binding SelectedSize}" FontStyle="{Binding SelectedTypeface.Style}" FontWeight="{Binding SelectedTypeface.Weight}" TextDecorations="{Binding SelectedDecorations}" Text="Sample Text" TextAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Foreground="WhiteSmoke" FontFamily="{Binding SelectedTypeface.FontFamily}" FontSize="{Binding SelectedSize}" FontStyle="{Binding SelectedTypeface.Style}" FontWeight="{Binding SelectedTypeface.Weight}" TextDecorations="{Binding SelectedDecorations}" Text="Sample Text 123" TextAlignment="Center" VerticalAlignment="Center" />
         </Border>
         
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Margin="0,12,0,0" HorizontalAlignment="Right" Orientation="Horizontal">

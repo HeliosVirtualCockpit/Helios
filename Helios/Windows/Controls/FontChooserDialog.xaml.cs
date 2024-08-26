@@ -80,7 +80,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                         {
                             foreach (Typeface typeface in family.GetTypefaces())
                             {
-                                FormattedText text = new FormattedText("test", CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, typeface, 12, Brushes.AliceBlue, ConfigManager.DisplayManager.PixelsPerDip);
+                                FormattedText text = new FormattedText("Test123", CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, typeface, 12, Brushes.AliceBlue, ConfigManager.DisplayManager.PixelsPerDip);
                                 double testWidth = text.Width;
                                 double testHeight = text.Height;
                             }
@@ -99,7 +99,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                         {
                             foreach (Typeface typeface in family.GetTypefaces())
                             {
-                                FormattedText text = new FormattedText("test", CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, typeface, 12, Brushes.AliceBlue, ConfigManager.DisplayManager.PixelsPerDip);
+                                FormattedText text = new FormattedText("Test123", CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, typeface, 12, Brushes.AliceBlue, ConfigManager.DisplayManager.PixelsPerDip);
                                 double testWidth = text.Width;
                                 double testHeight = text.Height;
                             }

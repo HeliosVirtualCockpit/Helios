@@ -26,8 +26,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt";
-        private string _font = "LED Counter 7";
-        private FontStyle _fontStyle = FontStyles.Oblique;
+        private string _font = "Helios Virtual Cockpit APN209 LED";
+        private FontStyle _fontStyle = FontStyles.Normal;
         private FontWeight _fontWeight = FontWeights.Normal;
 
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);

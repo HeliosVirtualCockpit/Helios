@@ -361,7 +361,7 @@ namespace GadrocsWorkshop.Helios
             TypeConverter fwc = TypeDescriptor.GetConverter(typeof(FontWeight));
             TypeConverter rc = TypeDescriptor.GetConverter(typeof(Rect));
 
-            _family = (FontFamily)ffc.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("FontFamily"));
+            FontFamily = ConfigManager.FontManager.GetFontFamilyByName(reader.ReadElementString("FontFamily"));
             _style = (FontStyle)fsc.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("FontStyle"));
             _weight = (FontWeight)fwc.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("FontWeight"));
             _size = double.Parse(reader.ReadElementString("FontSize"), CultureInfo.InvariantCulture);
@@ -419,7 +419,7 @@ namespace GadrocsWorkshop.Helios
             TypeConverter fwc = TypeDescriptor.GetConverter(typeof(FontWeight));
             TypeConverter rc = TypeDescriptor.GetConverter(typeof(Rect));
 
-            writer.WriteElementString("FontFamily", ffc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontFamily));
+            writer.WriteElementString("FontFamily", (FontFamily.Source.Contains("#") ? FontFamily.Source.Split('#')[1] : ffc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontFamily)));
             writer.WriteElementString("FontStyle", fsc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontStyle));
             writer.WriteElementString("FontWeight", fwc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontWeight));
             writer.WriteElementString("FontSize", FontSize.ToString(CultureInfo.InvariantCulture));
