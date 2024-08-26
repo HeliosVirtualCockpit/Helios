@@ -20,6 +20,7 @@ namespace GadrocsWorkshop.Helios
             // AddFont("SFDigitalReadout-Medium.ttf");
         }
 
+        public Dictionary<string, FontFamily> PrivateFontFamilys { get => _byName; }
         public FontFamily GetFontFamilyByName(string name)
         {
             if (_byName.TryGetValue(name, out FontFamily family))

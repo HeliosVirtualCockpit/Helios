@@ -997,9 +997,6 @@
     <Content Include="Fonts\DSEG14Classic-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Fonts\DSEG7Classic-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Fonts\F-15E_Up_Front_Controller.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1012,12 +1009,6 @@
     <Content Include="Fonts\FA-18C_Hornet_Up_Front_Controller.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Fonts\Helios-A-10C_ARC-210_Large.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Fonts\Helios-A-10C_ARC-210_Small.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Fonts\M-2000C PCA 16 Segment.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1028,9 +1019,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="BindingValueUnits.cd" />
-    <Content Include="Fonts\DSEG14Classic-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Fonts\DSEG7Classic-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1040,16 +1028,12 @@
     <Content Include="Fonts\Helios-A-10C_ARC-210_Large.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Fonts\F-15E_Up_Front_Controller.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Fonts\AH-64D-CMWS.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Fonts\AH-64D-KU.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Fonts\MonospacedLEDCounter7.ttf" />
     <None Include="Images\A-10\readme.md" />
     <Resource Include="Interfaces\DCS\A10C\ExportFunctionsA10C2.lua" />
     <Resource Include="Interfaces\DCS\Common\HeliosImpersonationExport.lua" />

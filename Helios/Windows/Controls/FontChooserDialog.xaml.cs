@@ -93,6 +93,25 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                             Logger.Error(e, "FontChooserDialog encountered bad font, font is now excluded. (Font Source=\"" + family.Source + "\")");
                         }
                     }
+                    foreach(FontFamily family in ConfigManager.FontManager.PrivateFontFamilys.Values)
+                    {
+                        try
+                        {
+                            foreach (Typeface typeface in family.GetTypefaces())
+                            {
+                                FormattedText text = new FormattedText("test", CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, typeface, 12, Brushes.AliceBlue, ConfigManager.DisplayManager.PixelsPerDip);
+                                double testWidth = text.Width;
+                                double testHeight = text.Height;
+                            }
+
+                            FontFamilyListItem item = new FontFamilyListItem(family);
+                            _fontFamilys.Add(item);
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Error(e, "FontChooserDialog encountered bad private font, font is now excluded. (Font Source=\"" + family.Source + "\")");
+                        }
+                    }
                     _fontFamilys.Sort();
                 }
                 return _fontFamilys.AsReadOnly();
