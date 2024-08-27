@@ -326,12 +326,14 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
         {
             TypeConverter ffc = TypeDescriptor.GetConverter(typeof(FontFamily));
             TypeConverter fsc = TypeDescriptor.GetConverter(typeof(FontStyle));
+            TypeConverter fstc = TypeDescriptor.GetConverter(typeof(FontStretch));
             TypeConverter fwc = TypeDescriptor.GetConverter(typeof(FontWeight));
             TypeConverter doubleConverter = TypeDescriptor.GetConverter(typeof(double));
             TypeConverter boolConverter = TypeDescriptor.GetConverter(typeof(bool));
 
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontFamily", ffc.ConvertToString(SelectedFamily));
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontStyle", fsc.ConvertToString(SelectedTypeface.Style));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontStretch", fstc.ConvertToString(SelectedTypeface.Stretch));
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontWeight", fwc.ConvertToString(SelectedTypeface.Weight));
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontSize", doubleConverter.ConvertToInvariantString(SelectedSize));
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontIsUnderline", boolConverter.ConvertToInvariantString(IsUnderline));
@@ -344,10 +346,12 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
         {
             TypeConverter ffc = TypeDescriptor.GetConverter(typeof(FontFamily));
             TypeConverter fsc = TypeDescriptor.GetConverter(typeof(FontStyle));
+            TypeConverter fstc = TypeDescriptor.GetConverter(typeof(FontStretch));
             TypeConverter fwc = TypeDescriptor.GetConverter(typeof(FontWeight));
 
             if (ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontFamily")          &&
                 ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontStyle")           &&
+                ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontStretch")         &&
                 ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontWeight")          &&
                 ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontSize")            &&
                 ConfigManager.SettingsManager.IsSettingAvailable("ProfileEditor", "StoredFontIsUnderline")     &&
@@ -381,12 +385,13 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                 {
                     FontFamily = (FontFamily)ffc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontFamily", "Franklin Gothic")),
                     FontStyle = (FontStyle)fsc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontStyle", "Normal")),
+                    FontStretch = (FontStretch)fstc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontStretch", "Normal")),
                     FontWeight = (FontWeight)fwc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontWeight", "Normal")),
                     FontSize = double.Parse(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontSize", "12")),
                     Decorations = decorations
                 };
                 SelectedFamily = textFormat.FontFamily;
-                SelectedTypeface = new Typeface(textFormat.FontFamily, textFormat.FontStyle, textFormat.FontWeight, FontStretches.Normal);
+                SelectedTypeface = new Typeface(textFormat.FontFamily, textFormat.FontStyle, textFormat.FontWeight, textFormat.FontStretch);
                 SelectedSize = textFormat.FontSize;
             }
         }

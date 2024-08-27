@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios
         private FontFamily _family = ConfigManager.FontManager.GetFontFamilyByName("Franklin Gothic");
         private FontStyle _style = FontStyles.Normal;
         private FontWeight _weight = FontWeights.Normal;
-        private FontStretch _stretch = FontStretches.Medium;
+        private FontStretch _stretch = FontStretches.Normal;
         private double _size = 12f;
         private TextHorizontalAlignment _horizontalAlignment = TextHorizontalAlignment.Center;
         private TextVerticalAlignment _verticalAlignment = TextVerticalAlignment.Top;
@@ -383,7 +383,7 @@ namespace GadrocsWorkshop.Helios
             FontFamily = ConfigManager.FontManager.GetFontFamilyByName(reader.ReadElementString("FontFamily"));
             _style = (FontStyle)fsc.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("FontStyle"));
             _weight = (FontWeight)fwc.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("FontWeight"));
-            _stretch = reader.Name.Equals("FontStretch") ? (FontStretch)fstc.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("FontStretch")) : FontStretches.Medium;
+            _stretch = reader.Name.Equals("FontStretch") ? (FontStretch)fstc.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("FontStretch")) : FontStretches.Normal;
 
             _size = double.Parse(reader.ReadElementString("FontSize"), CultureInfo.InvariantCulture);
             _configuredFontSize = _size;
@@ -444,7 +444,7 @@ namespace GadrocsWorkshop.Helios
             writer.WriteElementString("FontFamily", (FontFamily.Source.Contains("#") ? FontFamily.Source.Split('#')[1] : ffc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontFamily)));
             writer.WriteElementString("FontStyle", fsc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontStyle));
             writer.WriteElementString("FontWeight", fwc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontWeight));
-            if( _stretch != FontStretches.Medium)
+            if( _stretch != FontStretches.Normal)
             {
                 writer.WriteElementString("FontStretch", fstc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, FontStretch));
             }
