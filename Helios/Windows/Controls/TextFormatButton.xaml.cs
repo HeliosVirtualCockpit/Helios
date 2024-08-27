@@ -84,6 +84,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                     TextFormat.FontFamily = dialog.SelectedTypeface.FontFamily;
                     TextFormat.FontStyle = dialog.SelectedTypeface.Style;
                     TextFormat.FontWeight = dialog.SelectedTypeface.Weight;
+                    TextFormat.FontStretch = dialog.SelectedTypeface.Stretch;
                     TextFormat.FontSize = dialog.SelectedSize;
                     TextFormat.ConfiguredFontSize = dialog.SelectedSize;
 
