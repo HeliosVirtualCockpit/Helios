@@ -143,7 +143,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 {
                     yield return new StatusReportItem
                     {
-                        Status = $"{template.MonitorSetupFileBaseName}: {code}",
+                        Status = $"{template.MonitorSetupFileBaseName}: {(code.ToString().TrimStart())}",
                         Flags = INFORMATIONAL
                     };
                 }
@@ -332,7 +332,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
 
             ConvertToDCS(ref viewportRect);
-            code = $"{indent}{(viewport.Key.Contains(".")? viewport.Key.Split('.')[1] : viewport.Key)} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
+            code = $"{indent}{(viewport.Key.Contains(".") ? viewport.Key.Split('.')[1] : viewport.Key)} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
             lines.Add(code);
             return true;
         }
