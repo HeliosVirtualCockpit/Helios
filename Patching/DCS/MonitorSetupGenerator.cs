@@ -66,6 +66,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         private ViewportSetupFile _irisViewports = new ViewportSetupFile() ;
         #endregion
 
+        private bool _vehicleIsolation = false;
         public MonitorSetupGenerator(MonitorSetup parent)
         {
             _parent = parent;
@@ -86,12 +87,16 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         /// <returns></returns>
         private IEnumerable<StatusReportItem> UpdateMonitorSetup(MonitorSetupTemplate template, bool verbose)
         {
-            List<FormattableString> lines = CreateHeader(template);
+            List<FormattableString> lines = new List<FormattableString>();
 
             foreach (StatusReportItem item in GatherViewports(template))
             {
                 yield return item;
             }
+
+            _vehicleIsolation = _allViewports.Viewports.Where(p => p.Key.Contains(".")).Count() > 0 ? true : false;
+
+            lines = CreateHeader(template, !_vehicleIsolation);
 
             // for Iris, we only want the current profile even if it is in a combined
             _irisViewports.Viewports.Clear();
@@ -104,9 +109,37 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
 
             // emit in sorted canonical order so we can compare files later
+            string lastModuleName = "";
+            bool inRestriction = false;
+
             foreach (KeyValuePair<string, Rect> viewport in _allViewports.Viewports.OrderBy(p => p.Key))
             {
-                if (TryCreateViewport(lines, viewport, out FormattableString code))
+                if (_vehicleIsolation) { 
+                    string currentModuleName = (viewport.Key.Contains('.') ? viewport.Key.Split('.')[0]:"");
+                    if (!currentModuleName.Equals(lastModuleName))
+                    {
+                        if (inRestriction)
+                        {
+                            lines.Add($"    return");
+                            lines.Add($"  end -- {lastModuleName}");
+                            lines.Add($"");
+                            inRestriction = false;
+                        }
+                        if (!inRestriction && !string.IsNullOrWhiteSpace(currentModuleName))
+                        {
+                            string currentVehicleNames = "";
+                            foreach (string impersonation in currentModuleName.Split(','))
+                            {
+                                currentVehicleNames += $" unit_type == \"{(impersonation.StartsWith("_") ? impersonation.Substring(1) : impersonation)}\" ||";
+                            }
+                            currentVehicleNames += " false";
+                            lines.Add($"  if {currentVehicleNames} then");
+                            inRestriction = true;
+                        }
+                        lastModuleName = currentModuleName;
+                    }
+                }
+                if (TryCreateViewport(lines, viewport, (inRestriction?"    ": _vehicleIsolation ? "  " : ""), out FormattableString code))
                 {
                     yield return new StatusReportItem
                     {
@@ -127,7 +160,17 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     };
                 }
             }
-
+            if (_vehicleIsolation)
+            {
+                if (inRestriction)
+                {
+                    lines.Add($"    return");
+                    lines.Add($"  end -- {lastModuleName}");
+                    inRestriction = false;
+                }
+                lines.Add($"end -- reconfigure_for_unit()");
+                lines.Add($"");
+            }
             // find main and ui view extents
             Rect mainView = Rect.Empty;
             Rect uiView = Rect.Empty;
@@ -262,7 +305,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             windowsRect.Scale(ConfigManager.DisplayManager.PixelsPerDip, ConfigManager.DisplayManager.PixelsPerDip);
         }
 
-        private bool TryCreateViewport(ICollection<FormattableString> lines, KeyValuePair<string, Rect> viewport, out FormattableString code)
+        private bool TryCreateViewport(ICollection<FormattableString> lines, KeyValuePair<string, Rect> viewport, string indent, out FormattableString code)
         {
             Rect viewportRect = viewport.Value;
             viewportRect.Intersect(_parent.Rendered);
@@ -281,7 +324,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 {
                     if (!shadowVisual.IsViewportDirectlyOnMonitor)
                     {
-                        string viewportInfo = $"Changes to viewport '{viewport.Key}' are not tracked automatically.  If changes have been made to this viewport\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.";
+                        string viewportInfo = $"Changes to viewport '{(viewport.Key.Contains(".") ? viewport.Key.Split('.')[1] : viewport.Key)}' are not tracked automatically.  If changes have been made to this viewport\'s size or location, ensure a \"Reload Status\" is performed before monitor configuration is attempted.";
                         ConfigManager.LogManager.LogInfo(viewportInfo);
                     }
                     break;
@@ -289,12 +332,12 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
 
             ConvertToDCS(ref viewportRect);
-            code = $"{viewport.Key} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
+            code = $"{indent}{(viewport.Key.Contains(".")? viewport.Key.Split('.')[1] : viewport.Key)} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
             lines.Add(code);
             return true;
         }
 
-        private static List<FormattableString> CreateHeader(MonitorSetupTemplate template)
+        private static List<FormattableString> CreateHeader(MonitorSetupTemplate template, bool originalStyle)
         {
             List<FormattableString> lines = new List<FormattableString>
             {
@@ -303,6 +346,11 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 $"name = _('{template.MonitorSetupName}')",
                 $"description = 'Generated from {template.SourcesList}'"
             };
+            if (!originalStyle)
+            {
+                lines.Add($"");
+                lines.Add($"function reconfigure_for_unit(unit_type)");
+            }
             return lines;
         }
 
@@ -328,6 +376,19 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             {
                 MonitorLayoutKey = _parent.MonitorLayoutKey
             };
+            if (_parent.Profile.Interfaces.FirstOrDefault(i => i is DCSInterface) is DCSInterface dcsInterface)
+            {
+                if(dcsInterface is Interfaces.DCS.Soft.SoftInterface softInterface)
+                {
+                    _localViewports.DCSRestrictToVehicle = string.Join(",", softInterface.ImpersonatedVehicles);
+                } else
+                {
+                    _localViewports.DCSRestrictToVehicle = dcsInterface.VehicleName;
+                }
+            } else
+            {
+                _localViewports.DCSRestrictToVehicle = "";
+            }
             foreach (ShadowVisual shadow in _parent.Viewports)
             {
                 string name = shadow.Viewport.ViewportName;
@@ -394,6 +455,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
         private IEnumerable<StatusReportItem> GatherViewports(MonitorSetupTemplate template)
         {
+            _vehicleIsolation = false;
             foreach (StatusReportItem item in UpdateLocalViewports(template))
             {
                 yield return item;
@@ -447,7 +509,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                             _allViewports.DCSMonitorSetupAdditionalLua += generated.DCSMonitorSetupAdditionalLua + Environment.NewLine;
                         }
                     }
-                    
+
                     foreach (StatusReportItem item in _allViewports.Merge(name, generated))
                     {
                         yield return item;
@@ -540,6 +602,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         public StatusReportItem CreateUserInterfaceViewIfRequired(List<FormattableString> lines, Rect mainView, Rect uiView,
             out string uiViewName)
         {
+
             FormattableString comment;
             if (uiView != mainView)
             {

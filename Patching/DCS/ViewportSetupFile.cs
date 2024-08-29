@@ -69,7 +69,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 if (!Viewports.TryGetValue(viewport.Key, out Rect existingRect))
                 {
                     // just copy it
-                    Viewports.Add($"{from.DCSRestrictToVehicle}{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle)?"":".")}{viewport.Key}", viewport.Value);
+                    Viewports.Add($"{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle) ? "" : "_")}{from.DCSRestrictToVehicle}{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle)?"":".")}{viewport.Key}", viewport.Value);
                     continue;
                 }
 
