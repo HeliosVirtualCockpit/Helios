@@ -130,7 +130,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                             string currentVehicleNames = "";
                             foreach (string impersonation in currentModuleName.Split(','))
                             {
-                                currentVehicleNames += $" unit_type == \"{(impersonation.StartsWith("_") ? impersonation.Substring(1) : impersonation)}\" ||";
+                                currentVehicleNames += $" unit_type == \"{(impersonation.StartsWith("_") ? impersonation.Substring(1) : impersonation)}\" or";
                             }
                             currentVehicleNames += " false";
                             lines.Add($"  if {currentVehicleNames} then");
