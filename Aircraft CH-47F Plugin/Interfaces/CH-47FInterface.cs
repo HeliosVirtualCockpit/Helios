@@ -50,12 +50,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
             // see if we can restore from JSON
-#if (!DEBUG)
-                        if (LoadFunctionsFromJson())
-                        {
-                            return;
-                        }
-#endif
+//#if (!DEBUG)
+//                        if (LoadFunctionsFromJson())
+//                        {
+//                            return;
+//                        }
+//#endif
             //#endregion
 
             //#endregion
@@ -515,7 +515,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_23.ToString("d"), "1278", "1", "Up", "0", "Middle", "-1", "Down", "Pilot Cyclic",  "CMDS", "%1d"));
             AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_24.ToString("d"), "1279", "Pilot Cyclic",  "ACK", "%.1f"));  // elements["ACK"] =            PushButton({0}, "", devices.GRIPS,                    device_commands.Button_24,  1279)
             AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_25.ToString("d"), "1280", "Pilot Cyclic",  "CDREL", "%.1f"));  // elements["CDREL"] =          PushButton({0}, "", devices.GRIPS,                    device_commands.Button_25,  1280)
-            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_5.ToString("d"), "1281", "1.0", "Pulled", "0.0", "Norm", "Pilot Cyclic", "Hook Release Cover", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_5.ToString("d"), "1281", "1.0", "Open", "0.0", "Closed", "Pilot Cyclic", "Hook Release Cover", "%.1f"));
             AddFunction(new PushButton(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_7.ToString("d"), "1282", "Pilot Cyclic", "Hook Release Switch", "%.1f"));  // elements["HOOKREL"] =        PushButton({0}, "", devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_7,   1282, nil, false)
 
             AddFunction(new Switch(this, devices.GRIPS.ToString("d"), "1283", SwitchPositions.Create(3, 0.0d, 0.5d, Commands.Button.Button_96.ToString("d"), "Posn", "%0.1f"), "Copilot Cyclic", "XMIT", "%0.1f"));
@@ -528,7 +528,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(Switch.CreateThreeWaySwitch(this, devices.GRIPS.ToString("d"), Commands.Button.Button_103.ToString("d"), "1290", "1", "Up", "0", "Middle", "-1", "Down", "Copilot Cyclic",  "CMDS", "%1d"));
             AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_104.ToString("d"), "1291", "Copilot Cyclic",  "ACK", "%.1f"));  // elements["ACK"] =            PushButton({1}, "", devices.GRIPS,                    device_commands.Button_104, 1291)
             AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_105.ToString("d"), "1292", "Copilot Cyclic",  "CDREL", "%.1f"));  // elements["CDREL"] =          PushButton({1}, "", devices.GRIPS,                    device_commands.Button_105, 1292)
-            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_9.ToString("d"), "1293", "1.0", "Pulled", "0.0", "Norm", "Copilot Cyclic", "Hook Release Cover", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_9.ToString("d"), "1293", "1.0", "Open", "0.0", "Closed", "Copilot Cyclic", "Hook Release Cover", "%.1f"));
             AddFunction(new PushButton(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_11.ToString("d"), "1294", "Copilot Cyclic", "Hook Release Switch", "%.1f"));  // elements["HOOKREL"] =        PushButton({1}, "", devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_11,  1294, nil, false)
 
             AddFunction(new PushButton(this, devices.GRIPS.ToString("d"), Commands.Button.Button_7.ToString("d"), "748", "Pilot Thrust Control Lever",  "BRAKE", "%.1f"));  // elements["BRAKE"] =             PushButton({0}, "", devices.GRIPS, device_commands.Button_7,  748)
@@ -641,7 +641,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Axis(this, devices.CENTRAL_CONSOLE.ToString("d"), Commands.Button.Button_1.ToString("d"), "589", 0.1d, -1.0d, 1.0d, "Center Console", "Steering Knob"));
             AddFunction(new PushButton(this, devices.CENTRAL_CONSOLE.ToString("d"), Commands.Button.Button_4.ToString("d"), "590", "Center Console", "Steering Button", "%.1f"));
 
-            AddFunction(Switch.CreateToggleSwitch(this, devices.AN_ALE47.ToString("d"), Commands.Button.Button_1.ToString("d"), "1444", "1.0", "Pulled", "0.0", "Norm", "AN/ALE47", "ASE Jettison Cover", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.AN_ALE47.ToString("d"), Commands.Button.Button_1.ToString("d"), "1444", "1.0", "Open", "0.0", "Closed", "AN/ALE47", "ASE Jettison Cover", "%.1f")); //, "1.0", "Open", "0.0", "Closed"
             AddFunction(Switch.CreateToggleSwitch(this, devices.AN_ALE47.ToString("d"), Commands.Button.Button_3.ToString("d"), "1445", "1.0", "Pulled", "0.0", "Norm", "AN/ALE47", "ASE Jettison Switch", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.AN_ALE47.ToString("d"), Commands.Button.Button_5.ToString("d"), "1446", "1.0", "Pulled", "0.0", "Norm", "AN/ALE47", "ASE Arm Switch", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.AN_ALE47.ToString("d"), Commands.Button.Button_7.ToString("d"), "1447", "1.0", "Pulled", "0.0", "Norm", "AN/ALE47", "ASE Bypass Switch", "%.1f"));
@@ -677,10 +677,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "493", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_21.ToString("d"), new string[] { "2 ON", "BOTH", "1 ON" }, "%0.1f"), "Hydraulic Panel (Overhead Console)", "Flight Controls Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_24.ToString("d"), "494", "0.0", "Off", "1.0", "On", "Hydraulic Panel (Overhead Console)", "Power Xfer 1 Switch", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_26.ToString("d"), "495", "0.0", "Off", "1.0", "On", "Hydraulic Panel (Overhead Console)", "Power Xfer 2 Switch", "%.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_28.ToString("d"), "496", "1.0", "Pulled", "0.0", "Norm", "Hydraulic Panel (Overhead Console)", "Power Steer Cover", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_28.ToString("d"), "496", "1.0", "Open", "0.0", "Closed", "Hydraulic Panel (Overhead Console)", "Power Steer Cover", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_30.ToString("d"), "497", "1.0", "Pulled", "0.0", "Norm", "Hydraulic Panel (Overhead Console)", "Power Steer Switch", "%.1f"));
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "498", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_32.ToString("d"), new string[] { "OFF", "ON", "EMER" }, "%0.1f"), "Hydraulic Panel (Overhead Console)", "Ramp Switch", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_35.ToString("d"), "499", "0.0", "Off", "1.0", "On", "Hydraulic Panel (Overhead Console)", "Ramp Emergency Cover", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_35.ToString("d"), "499", "1.0", "Open", "0.0", "Closed", "Hydraulic Panel (Overhead Console)", "Ramp Emergency Cover", "%.1f"));
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "500", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_37.ToString("d"), new string[]{"UP", "HOLD", "Down" }, "%0.1f"), "Hydraulic Panel (Overhead Console)", "Ramp Emergency Switch", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_40.ToString("d"), "501", "0.0", "Off", "1.0", "On", "EAPS (Overhead Console)", "Engine 1 Fan Switch", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_42.ToString("d"), "502", "0.0", "Off", "1.0", "On", "EAPS (Overhead Console)", "Engine 1 Door Switch", "%.1f"));
@@ -726,7 +726,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "544", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_139.ToString("d"), new string[] {"Blower Only", "Off", "Heater Oo" }, "%0.1f"), "Heating Panel (Overhead Console)", "Heater Mode Switch", "%0.1f"));
             AddFunction(new PushButton(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_142.ToString("d"), "545", "Heating Panel (Overhead Console)", "Heater Start Button", "%.1f"));  // elements["OCTW_HTR_START"] =                                     button({0, 1, 2}, _("Cockpit.CH47.OCTW.HTR_START_SW"), devices.OVERHEAD_CONSOLE, device_commands.Button_142, 545, {{SOUND_SW07_OFF, SOUND_SW07_ON}})
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "756", SwitchPositions.Create(5, 0.0d, 0.1d, Commands.Button.Button_143.ToString("d"), new string[] {"Park", "Off", "Slow", "Medium", "High" }, "%0.1f"), "Wipers Panel (Overhead Console)", "Wiper Switch", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_147.ToString("d"), "546", "0.0", "Closed", "1.0", "Open", "Hoist Panel (Overhead Console)", "Cable Cut Cover", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_147.ToString("d"), "546", "1.0", "Open", "0.0", "Closed", "Hoist Panel (Overhead Console)", "Cable Cut Cover", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_149.ToString("d"), "547", "0.0", "Off", "1.0", "On", "Hoist Panel (Overhead Console)", "Cable Cut Switch", "%.1f"));
             AddFunction(new Axis(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_151.ToString("d"), "548", 0.1d, -1.0d, 1.0d, "Hoist Panel (Overhead Console)", "Hoist Out/In Knob"));  // elements["OCCH_HOIST_CONTROL"] =                               axis_limited({0, 1, 2}, _("Cockpit.CH47.OCHH.HOIST_KB"),       devices.OVERHEAD_CONSOLE, device_commands.Button_151, 548, nil, nil, nil, nil, {-1.0, 1.0}
             AddFunction(new PushButton(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_152.ToString("d"), "549", "Hoist Panel (Overhead Console)", "Hoist Control 2 Button", "%.1f"));
@@ -734,7 +734,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "551", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_156.ToString("d"), "Posn", "%0.1f"), "Hoist Panel (Overhead Console)", "Hoist Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "552", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_159.ToString("d"), new string[] {"RESET", "OFF", "ARM" }, "%0.1f"), "Cargo Hook Panel (Overhead Console)", "Hook Master Switch", "%0.1f"));
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "553", SwitchPositions.Create(5, 0.0d, 0.1d, Commands.Button.Button_162.ToString("d"), new string[] { "FWD", "MID", "AFT", "TANDEM", "ALL" }, "%0.1f"), "Cargo Hook Panel (Overhead Console)", "Hook Selector Knob", "%0.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_165.ToString("d"), "554", "0.0", "Closed", "1.0", "Open", "Cargo Hook Panel (Overhead Console)", "Emergency Cover", "%.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_165.ToString("d"), "554", "1.0", "Open", "0.0", "Closed", "Cargo Hook Panel (Overhead Console)", "Emergency Cover", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_167.ToString("d"), "555", "0.0", "Off", "1.0", "On", "Cargo Hook Panel (Overhead Console)", "Emergency Switch", "%.1f"));
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "556", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_169.ToString("d"), new string[]{"Test", "Off/Reset", "On"}, "%0.1f"), "Electrical Panel (Overhead Console)", "GEN 1", "%0.1f"));
             AddFunction(new Switch(this, devices.OVERHEAD_CONSOLE.ToString("d"), "557", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_172.ToString("d"), new string[]{"Test", "Off/Reset", "On"}, "%0.1f"), "Electrical Panel (Overhead Console)", "GEN 2", "%0.1f"));
@@ -765,7 +765,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Axis(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_248.ToString("d"), "1388", 0.1d, 0.0d, 1.0d, "Stalk Lighting", "PDP2 Brightness Knob"));  // elements["OCLP_PDP2SL_KNOB"] =                axis_limited({0},       _("Cockpit.CH47.OCLP.SL_KNOB"), devices.OVERHEAD_CONSOLE, device_commands.Button_248, 1388)
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_253.ToString("d"), "1463", "1.0", "Pulled", "0.0", "Norm", "Stalk Lighting", "PDP2 Lamp Lock", "%.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_205.ToString("d"), "1413", "1.0", "Pulled", "0.0", "Norm", "Cockpit Rear Panel", "RB Oil Level Check Switch", "%.1f"));
-            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_13.ToString("d"), "1256", "1.0", "Pulled", "0.0", "Norm", "External Cargo Equipment", "WGRIP Hook Cover", " %.1f"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_13.ToString("d"), "1256", "1.0", "Open", "0.0", "Closed", "External Cargo Equipment", "WGRIP Hook Cover", " %.1f"));
             AddFunction(new PushButton(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), Commands.Button.Button_15.ToString("d"), "1257", "External Cargo Equipment", "WGRIP_HOOK", "%.1f"));  // elements["WGRIP_HOOK"] =                PushButton({2}, "",                               devices.EXTERNAL_CARGO_EQUIPMENT, device_commands.Button_15, 1257, nil, false)
             AddFunction(new Switch(this, devices.EXTERNAL_CARGO_EQUIPMENT.ToString("d"), "1269", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_17.ToString("d"), "Posn", "%0.1f"), "External Cargo Equipment", "HOP ARM", "%0.1f"));
   
