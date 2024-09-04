@@ -47,10 +47,13 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             ClickType = LinearClickType.Swipe;
             _detents.Sort();
+            _detents.Add(MinValue);
+            _detents.Add(MaxValue);
             _minValueTrigger = new HeliosTrigger(this, "", "minimum value position", "released", "Fires before potentiometer moves out of MinValue position");
             this.Triggers.Add(_minValueTrigger);
             _maxValueTrigger = new HeliosTrigger(this, "", "maximum value position", "released", "Fires before potentiometer moves out of MaxValue position");
             this.Triggers.Add(_maxValueTrigger);
+
         }
 
         #region Properties
@@ -69,7 +72,7 @@ namespace GadrocsWorkshop.Helios.Controls
             if (!_detents.Contains(value))
             {
                 _detents.Add(value);
-                if (this.Triggers.Count < 1 + (_detents.Count - 2) * 2)
+                if (this.Triggers.Count <= 3 + ((_detents.Count - 2) * 2))
                 {
                     this.Triggers.Add(new HeliosTrigger(this, "", $"detent { _detents.Count - 2  }", "holding", "Fires when potentiometer stopped at detent position", "true when detent encoutered, false when leaving a detent", BindingValueUnits.Boolean));
                     this.Triggers.Add(new HeliosTrigger(this, "", $"detent { _detents.Count - 2  }", "released", "Fires when potentiometer released from detent position", "+1 if increasing, -1 if decreasing", BindingValueUnits.Numeric));
