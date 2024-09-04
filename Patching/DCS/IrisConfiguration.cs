@@ -28,6 +28,7 @@ using System.Windows.Media;
 using GadrocsWorkshop.Helios.Controls.Special;
 using RectpackSharp;
 using System.Diagnostics.Contracts;
+using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 
 namespace GadrocsWorkshop.Helios.Patching.DCS
 {
@@ -312,6 +313,10 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     if(_rectangleIdNumber > 0) PlaceViewportsOnMonitor();
                     _localProfile.Interfaces.Add(new Patching.DCS.AdditionalViewports());
                     _localProfile.Interfaces.Add(new Patching.DCS.MonitorSetup());
+                    if (_parent.Profile.Interfaces.FirstOrDefault(i => i is DCSInterface) is DCSInterface dcsInterface)
+                    {
+                        _localProfile.Interfaces.Add(dcsInterface);
+                    }
 
                     _isProfileOpen = true;
                     _settings = new XmlWriterSettings();
