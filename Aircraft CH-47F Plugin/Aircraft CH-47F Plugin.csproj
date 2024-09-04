@@ -61,6 +61,17 @@
     <Content Include="Docs\Helios.CH-47F.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Power\CH-47F_Engine_Cond_Panel.png" />
+    <Resource Include="Images\Power\Left_Power_Lever_0.png" />
+    <Resource Include="Images\Power\Left_Power_Lever_1.png" />
+    <Resource Include="Images\Power\Left_Power_Lever_2.png" />
+    <Resource Include="Images\Power\Left_Power_Lever_3.png" />
+    <Resource Include="Images\Power\Left_Power_Lever_4.png" />
+    <Resource Include="Images\Power\Right_Power_Lever_0.png" />
+    <Resource Include="Images\Power\Right_Power_Lever_1.png" />
+    <Resource Include="Images\Power\Right_Power_Lever_2.png" />
+    <Resource Include="Images\Power\Right_Power_Lever_3.png" />
+    <Resource Include="Images\Power\Right_Power_Lever_4.png" />
     <Resource Include="Gauges\Chronometer\Images\Chronometer_Bezel.png" />
     <Resource Include="Gauges\Chronometer\Images\M880_Button_Norm.png" />
     <Resource Include="Gauges\Chronometer\Images\M880_Button_Pressed.png" />
@@ -255,6 +266,7 @@
     <Compile Include="Gauges\MFD\MFD Copilot Right.cs" />
     <Compile Include="Gauges\MFD\MFD Pilot Right.cs" />
     <Compile Include="Gauges\MFD\MFD.cs" />
+    <Compile Include="Gauges\Power\PowerLever.cs" />
     <Compile Include="Gauges\RadAlt\RadAlt.cs" />
     <Compile Include="Gauges\RadAlt\RadAltInstrument.cs" />
     <Compile Include="Gauges\RWR\RWR.cs" />
