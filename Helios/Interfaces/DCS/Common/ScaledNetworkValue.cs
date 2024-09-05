@@ -117,6 +117,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         public override void BuildAfterDeserialization()
         {
+            _exposeUnscaledValue = ExposeUnscaledValue?? false;
             DoBuild();
         }
 
