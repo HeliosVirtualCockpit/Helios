@@ -606,7 +606,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new PushButton(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_9.ToString("d"), "724", "Canted Console", "Main Battery Low Button", "%.1f"));
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_10.ToString("d"), "725", 0.1d, 0.0d, 1.0d, "Canted Console", "Main Battery Low Knob"));
             AddFunction(new FlagValue(this, "723", "Canted Console", "Battery Low Indicator", ""));
-            AddFunction(new NetworkValue(this, "1460", "Canted Console", "Longitudinal Stick Position Indicator", "longitudinal position", "-1.0 to +1.0", BindingValueUnits.Numeric));
+            AddFunction(new ScaledNetworkValue(this, "1460", new CalibrationPointCollectionDouble()
+                {
+                new CalibrationPointDouble(0.0d, -8d),
+                new CalibrationPointDouble(1.0d,  8d)
+                }, "Canted Console", "Longitudinal Stick Position Indicator", "longitudinal position", "-8 to +8 Degrees", BindingValueUnits.Degrees, true));
 
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_16.ToString("d"), "739", 0.1d, 0.0d, 1.0d, "Canted Console", "Main RadAlt Dimmer"));  // elements["MAIN_RALT_DIMMER"] =              axis_limited({0, 1}, _("Cockpit.CH47.ralt_dimmer"),       devices.CANTED_CONSOLE, device_commands.Button_16, 739)
             AddFunction(new PushButton(this, devices.TERTIARY_REFLECTS.ToString("d"), Commands.Button.Button_1.ToString("d"), "1209", "M880 Chronometer", "Select Button", "%.1f"));  // elements["M880_SEL"] =       button({0, 1}, _("Cockpit.Generic.clock_select_btn"),  devices.TERTIARY_REFLECTS, device_commands.Button_1, 1209, {{SOUND_SW07_OFF, SOUND_SW07_ON}})

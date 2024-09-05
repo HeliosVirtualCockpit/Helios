@@ -25,6 +25,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private string _id;
         private string _format;
         private HeliosValue _value;
+        private HeliosValue _valueUnscaled;
+        private bool _exposeUnscaledValue = false;
 
         [JsonProperty("calibration", NullValueHandling = NullValueHandling.Ignore)]
         protected CalibrationPointCollectionDouble CalibratedScale { get; set; }
@@ -53,40 +55,56 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         [JsonProperty("unit")]
         protected BindingValueUnit Unit { get; set; }
 
+        [JsonProperty("exposeUnscaledValue", NullValueHandling = NullValueHandling.Ignore)]
+        private bool? ExposeUnscaledValue { get; set; }
+
+        public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, string valueDescription, BindingValueUnit unit, bool exposeUnscaledValue)
+           : this(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", calibration, 0d, 0d, exposeUnscaledValue)
+        {
+        }
         public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, string valueDescription, BindingValueUnit unit)
-           : this(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", calibration, 0d, 0d)
+           : this(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", calibration, 0d, 0d, false)
         {
         }
 
         public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, string valueDescription, BindingValueUnit unit, string exportFormat)
-            : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, calibration, 0d, 0d)
+            : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, calibration, 0d, 0d, false)
         {
         }
 
         public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, double scale, string device, string name, string description, string valueDescription, BindingValueUnit unit)
-            : this(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", null, 0d, scale)
+            : this(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", null, 0d, scale, false)
         {
         }
         public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, double scale, string device, string name, string description, string valueDescription, BindingValueUnit unit, string exportFormat)
-            : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, 0d, scale)
+            : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, 0d, scale, false)
         {
         }
 
         public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, double scale, string device, string name, string description, string valueDescription, BindingValueUnit unit, double baseValue, string exportFormat)
-            : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, baseValue, scale)
+            : this(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, baseValue, scale, false)
         {
         }
 
-        protected ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, string device, string name, string description, string valueDescription, BindingValueUnit unit, string exportFormat, CalibrationPointCollectionDouble calibration, double baseValue, double scale)
+        protected ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, string device, string name, string description, string valueDescription, BindingValueUnit unit, string exportFormat, CalibrationPointCollectionDouble calibration, double baseValue, double scale, bool exposeUnscaledValue)
             : base(sourceInterface, device, name, description)
         {
             _id = id;
             _format = exportFormat;
+            _exposeUnscaledValue = exposeUnscaledValue;
             ValueDescription = valueDescription;
             Unit = unit;
             CalibratedScale = calibration;
             BaseValue = baseValue;
             Scale = scale;
+            if(_exposeUnscaledValue)
+            {
+                ExposeUnscaledValue = true;
+            }
+            else
+            {
+                ExposeUnscaledValue = null;
+            }
             DoBuild();
         }
 
@@ -108,6 +126,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 SerializedDescription, ValueDescription, Unit);
             Values.Add(_value);
             Triggers.Add(_value);
+
+            if(_exposeUnscaledValue)
+            {
+                _valueUnscaled = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, $"{SerializedFunctionName} (Unscaled)",
+                    SerializedDescription, "unscaled value - typically -1 to 1 or 0 to 1", BindingValueUnits.Numeric);
+                Values.Add(_valueUnscaled);
+                Triggers.Add(_valueUnscaled);
+            }
         }
 
         public override void ProcessNetworkData(string id, string value)
@@ -126,6 +152,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             {
                 _value.SetValue(new BindingValue((scaledValue * Scale) + BaseValue), false);
             }
+            if (_exposeUnscaledValue)
+            {
+                _valueUnscaled.SetValue(new BindingValue(scaledValue), false);
+            }
         }
 
         protected override ExportDataElement[] DefaultDataElements =>
@@ -134,6 +164,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         public override void Reset()
         {
             _value.SetValue(BindingValue.Empty, true);
+            if (_exposeUnscaledValue)
+            {
+                _valueUnscaled.SetValue(BindingValue.Empty, true);
+            }
         }
     }
 }

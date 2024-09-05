@@ -25,28 +25,28 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private HeliosValue _rawValue;
 
         public DualNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, string valueDescription, BindingValueUnit unit)
-            : base(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", calibration, 0d, 0d)
+            : base(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", calibration, 0d, 0d, false)
         {
             // base calls its DoBuild, we add ours
             DoBuild();
         }
 
         public DualNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, string valueDescription, BindingValueUnit unit, string exportFormat)
-            : base(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, calibration, 0d, 0d)
+            : base(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, calibration, 0d, 0d, false)
         {
             // base calls its DoBuild, we add ours
             DoBuild();
         }
 
         public DualNetworkValue(BaseUDPInterface sourceInterface, string id, double scale, string device, string name, string description, string valueDescription, BindingValueUnit unit)
-            : base(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", null, 0d, scale)
+            : base(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", null, 0d, scale, false)
         {
             // base calls its DoBuild, we add ours
             DoBuild();
         }
 
         public DualNetworkValue(BaseUDPInterface sourceInterface, string id, double scale, string device, string name, string description, string valueDescription, BindingValueUnit unit, double baseValue, string exportFormat)
-            : base(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, baseValue, scale)
+            : base(sourceInterface, id, device, name, description, valueDescription, unit, exportFormat, null, baseValue, scale, false)
         {
             // base calls its DoBuild, we add ours
             DoBuild();
