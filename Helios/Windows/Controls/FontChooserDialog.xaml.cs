@@ -29,6 +29,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
 	using System.Globalization;
     using System.ComponentModel;
     using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+    using System.Linq;
 
     /// <summary>
     /// Interaction logic for FontChooserDialog.xaml
@@ -331,7 +332,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
             TypeConverter doubleConverter = TypeDescriptor.GetConverter(typeof(double));
             TypeConverter boolConverter = TypeDescriptor.GetConverter(typeof(bool));
 
-            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontFamily", ffc.ConvertToString(SelectedFamily));
+            ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontFamily", SelectedFamily.Source.Contains("#") ? SelectedFamily.Source.Split('#')[1] : ffc.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, SelectedFamily));
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontStyle", fsc.ConvertToString(SelectedTypeface.Style));
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontStretch", fstc.ConvertToString(SelectedTypeface.Stretch));
             ConfigManager.SettingsManager.SaveSetting("ProfileEditor", "StoredFontWeight", fwc.ConvertToString(SelectedTypeface.Weight));
@@ -380,18 +381,17 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
                     decorations |= Helios.TextDecorations.OverLine;
                     IsOverLine = true;
                 }
-
                 TextFormat textFormat = new TextFormat()
                 {
-                    FontFamily = (FontFamily)ffc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontFamily", "Franklin Gothic")),
+                    FontFamily = ConfigManager.FontManager.GetFontFamilyByName(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontFamily", "Franklin Gothic")),
                     FontStyle = (FontStyle)fsc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontStyle", "Normal")),
                     FontStretch = (FontStretch)fstc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontStretch", "Normal")),
                     FontWeight = (FontWeight)fwc.ConvertFromString(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontWeight", "Normal")),
                     FontSize = double.Parse(ConfigManager.SettingsManager.LoadSetting("ProfileEditor", "StoredFontSize", "12")),
                     Decorations = decorations
                 };
-                SelectedFamily = textFormat.FontFamily;
                 SelectedTypeface = new Typeface(textFormat.FontFamily, textFormat.FontStyle, textFormat.FontWeight, textFormat.FontStretch);
+                SelectedFamily = textFormat.FontFamily;
                 SelectedSize = textFormat.FontSize;
             }
         }
