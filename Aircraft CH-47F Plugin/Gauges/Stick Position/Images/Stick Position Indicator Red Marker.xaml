@@ -1,0 +1,43 @@
+<Canvas Width="18.000" Height="900.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="18.000" Height="900.000">
+
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Fill="#ffff4215" Data="F1 M 14.000,850.000 L 4.000,850.000 L 4.000,0.000 L 14.000,0.000 L 14.000,850.000 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Data="F1 M 9.000,900.000 L 1.061,900.000 C 0.475,900.000 0.000,899.525 0.000,898.939 L 0.000,851.061 C 0.000,850.475 0.475,850.000 1.061,850.000 L 9.000,850.000 L 9.000,900.000 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="8.473,-875.018" EndPoint="0.313,-874.975">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.45" Color="#ffff4215"/>
+          <GradientStop Offset="0.71" Color="#ffe62a0d"/>
+          <GradientStop Offset="0.92" Color="#ffce1205"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Data="F1 M 16.939,900.000 L 9.000,900.000 L 9.000,850.000 L 16.939,850.000 C 17.525,850.000 18.000,850.475 18.000,851.061 L 18.000,898.939 C 18.000,899.525 17.525,900.000 16.939,900.000 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="9.208,-875.000" EndPoint="17.796,-875.000">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.28" Color="#ffff4215"/>
+          <GradientStop Offset="0.74" Color="#ffe62a0d"/>
+          <GradientStop Offset="0.91" Color="#ffce1205"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  </Canvas>
+</Canvas>
