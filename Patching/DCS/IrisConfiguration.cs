@@ -52,6 +52,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         private string _backupProfilePath;
         private string _remoteHost;
         private double _portNumber = 9091;
+        private string _vehicleName = "";
 
         private bool _hasBackground = true;
         private Rect _backgroundRect = new Rect(0,0,1920,1080);
@@ -110,7 +111,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             try
             {
                 _configName = Path.ChangeExtension(configName, "xml");
-                _configName = $"{(_isRemote ? "Remote" : "Local")}_{_configName}";
+                _configName = $"{(_isRemote ? "Client" : "Server")}_{_configName}";
                 _irisPath = Path.Combine(ConfigManager.DocumentPath, "Iris_Partial_Configs");
                 _tempPath = Path.Combine(_irisPath, Path.ChangeExtension(_configName, "tmp"));
                 _backupPath = Path.Combine(_irisPath, Path.ChangeExtension(_configName, "bak"));
@@ -147,7 +148,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
             if (_isRemote)
             {
-                OpenLocalProfile(_parent.CurrentProfileName);
+                OpenServerProfile(_parent.CurrentProfileName);
             }
             return _isOpen;
         }
@@ -156,9 +157,9 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         /// local system to configure the Monitor Setup Lua.
         /// </summary>
         /// <param name="configName"></param>
-        private void OpenLocalProfile(string configName)
+        private void OpenServerProfile(string configName)
         {
-            _profileName =  $"{((!_isRemote) ? configName :"Helios")}_Local_Viewports.hpf";
+            _profileName =  $"{((!_isRemote) ? configName :VehicleName)}_Server_Viewports.hpf";
             _irisProfilePath = Path.Combine(ConfigManager.DocumentPath, "Profiles");
             _tempProfilePath = Path.Combine(_irisProfilePath, Path.ChangeExtension(_profileName, "tmp"));
             _backupProfilePath = Path.Combine(_irisProfilePath, Path.ChangeExtension(_profileName, "bak"));
@@ -225,7 +226,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
             else
             {
-                string message = $"Maximum number of viewports for local profile has been exceeded: '{_packingRectangles.Count()}'.";
+                string message = $"Maximum number of viewports for server profile has been exceeded: '{_packingRectangles.Count()}'.";
                 ConfigManager.LogManager.LogError(message);
                 return;
             }
@@ -237,7 +238,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         {
             if (_isOpen)
             {
-                if (_isRemote) WriteLocalProfile();
+                if (_isRemote) WriteServerProfile();
                 if (_hasBackground)
                 {
                     _xmlWriter.WriteStartElement("Viewport");
@@ -292,7 +293,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         /// Writes a minimal Helios profile to contain the viewports, and incluide the DCS Monitor Setup 
         /// and Additional Viewports interfaces.
         /// </summary>
-        private void WriteLocalProfile()
+        private void WriteServerProfile()
         {
             if (_isProfileOpen)
             {
@@ -333,7 +334,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 }
                 catch (Exception ex)
                 {
-                    string message = $"Iris Write of Local Profile failure:  '{ex.Message}'";
+                    string message = $"Iris Write of Minimal Server Profile failure:  '{ex.Message}'";
                     ConfigManager.LogManager.LogError(message);
                     _isProfileOpen = false;
                 }
@@ -436,6 +437,38 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 }
             }
         }
+        private string VehicleName
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_vehicleName))
+                {
+                    if (_parent.Profile.Interfaces.FirstOrDefault(i => i is DCSInterface) is DCSInterface dcsInterface)
+                    {
+                        if (dcsInterface is Interfaces.DCS.Soft.SoftInterface softInterface)
+                        {
+                            _vehicleName = softInterface.ImpersonatedVehicles[0];
+                        }
+                        else
+                        {
+                            if (dcsInterface.ExportModuleFormat == DCSExportModuleFormat.CaptZeenModule1)
+                            {
+                                _vehicleName = dcsInterface.ImpersonatedVehicleName;
+                            }
+                            else
+                            {
+                                _vehicleName = dcsInterface.VehicleName != "DCSGeneric" ? dcsInterface.VehicleName : "Unknown";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _vehicleName = "Unknown";
+                    }
+                }
+                return _vehicleName;
+            }
+        }
         protected override void Update()
         {
         }
@@ -467,6 +500,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 return InstallationResult.Fatal;
             }
         }
+
         /// <summary>
         /// The Iris config is not relevant to the Pre-flight Control Center checkF
         /// </summary>

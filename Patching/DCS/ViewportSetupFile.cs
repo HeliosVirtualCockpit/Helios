@@ -66,10 +66,11 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
             foreach (KeyValuePair<string, Rect> viewport in from.Viewports)
             {
-                if (!Viewports.TryGetValue(viewport.Key, out Rect existingRect))
+                string vehicleKey = $"{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle) ? "" : "_")}{from.DCSRestrictToVehicle}{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle) ? "" : ".")}{viewport.Key}";
+                if (!Viewports.TryGetValue(vehicleKey, out Rect existingRect))
                 {
                     // just copy it
-                    Viewports.Add($"{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle) ? "" : "_")}{from.DCSRestrictToVehicle}{(string.IsNullOrWhiteSpace(from.DCSRestrictToVehicle)?"":".")}{viewport.Key}", viewport.Value);
+                    Viewports.Add(vehicleKey, viewport.Value);
                     continue;
                 }
 
@@ -80,10 +81,10 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 }
 
                 // overwrite and warn
-                Viewports[viewport.Key] = viewport.Value;
+                Viewports[vehicleKey] = viewport.Value;
                 yield return new StatusReportItem
                 {
-                    Status = $"profile '{name}' defines the viewport '{viewport.Key}' at a different screen location",
+                    Status = $"profile '{name}' defines the viewport '{vehicleKey}' at a different screen location",
                     Recommendation =
                         $"Resolve viewport conflicts or do not include profile '{name}' in the combined monitor setup",
                     Severity = StatusReportItem.SeverityCode.Warning,
