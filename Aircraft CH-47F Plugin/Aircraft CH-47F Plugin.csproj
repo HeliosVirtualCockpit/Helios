@@ -257,6 +257,7 @@
     <Compile Include="Gauges\CDU\CDU Keyboard Pilot.cs" />
     <Compile Include="Gauges\CDU\CDU Top.cs" />
     <Compile Include="Gauges\Chronometer\Chronometer.cs" />
+    <Compile Include="Gauges\Stick Position\Stick Position.cs" />
     <Compile Include="Gauges\FAT\FAT.cs" />
     <Compile Include="Gauges\CDU\CDU Copilot.cs" />
     <Compile Include="Gauges\CDU\CDU Pilot.cs" />
@@ -293,6 +294,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\RWR\Images\RWR_Rings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Stick Position\Images\Stick Position Indicator Red Marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Stick Position\Images\Stick Position Indicator Scale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Stick Position\Images\Stick Position Indicator Background.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
