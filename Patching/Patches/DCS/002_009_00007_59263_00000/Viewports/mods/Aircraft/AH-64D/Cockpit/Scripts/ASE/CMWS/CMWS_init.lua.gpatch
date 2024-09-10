@@ -1,0 +1,8 @@
+﻿@@ -123,16 +123,83 @@
+ t.lua%22)%0D
++%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Aopaci
+@@ -620,10 +620,73 @@
+ KPIT%0D%0A%0D%0A
++--ViewportHandling%0D%0Atry_find_assigned_viewport(%22AH_64D_CMWS%22)%0D%0A
+ %0D%0A

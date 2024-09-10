@@ -1,0 +1,100 @@
+﻿[
+  {
+    "templateName": "OH58D",
+    "moduleId": "OH58D",
+    "isHeliosTemplate": true,
+    "categoryName": "OH-58D Kiowa Warrior",
+    "viewports": [
+      {
+        "viewportName": "CMWS",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/OH-58D/Cockpit/CI/Indicator/init.lua",
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 360,
+        "height": 180
+      },
+      {
+        "viewportName": "CLOCK",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/OH-58D/Cockpit/Clock/Indicator/init.lua",
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 210,
+        "height": 70
+      },
+      {
+        "viewportName": "RFD",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/OH-58D/Cockpit/RFD/Indicator/init.lua",
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 300,
+        "height": 258
+      },
+      {
+        "viewportName": "RWR",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/OH-58D/Cockpit/RWR/Indicator/init.lua",
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "RPM_TORQUE",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/OH-58D/Cockpit/RPMTRQ/Indicator/init.lua",
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 300,
+        "height": 384
+      },
+      {
+        "viewportName": "MPD",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/OH-58D/Cockpit/MPD/Indicator/init.lua",
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 500,
+        "height": 160
+      },
+      {
+        "viewportName": "L2MUMS",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/Aircraft/OH-58D/Cockpit/L2MUMS/Indicator/init.lua",
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 500,
+        "height": 375
+      },
+      {
+        "viewportName": "LEFT_MFCD",
+        "SuppressViewportNamePrefix": true,
+        "relativeInitFilePath": "./",
+        "requiresPatch": false,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 500,
+        "height": 375
+      },
+      {
+        "viewportName": "RIGHT_MFCD",
+        "SuppressViewportNamePrefix": true,
+        "relativeInitFilePath": "./",
+        "requiresPatch": false,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "width": 500,
+        "height": 375
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+﻿@@ -495,24 +495,30 @@
+  selfID)%0D%0A%0D%0A
++--%5B%5B%0D%0A
+ dofile(LockO
+@@ -648,30 +648,23 @@
+ rt(%22
+-CH47F_MFD_COPILOT_LEFT%22)
++LEFT_MFCD%22)%0D%0A--%5D%5D
+ %0D%0A
