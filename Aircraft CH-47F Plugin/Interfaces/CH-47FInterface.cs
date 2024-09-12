@@ -653,7 +653,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new FlagValue(this, "1449", "AN/ALE47", "ASE ARM Indicator", ""));
 
             ///TODO: Needs to have values checked.
-            AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1223", SwitchPositions.Create(20, 0.0d, 0.01d, Commands.Button.Button_1.ToString("d"), "Click", "%0.2f"), "ARC186 Radio", "Preset Channel Selector", "%0.2f"));
+            AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1223", SwitchPositions.Create(20, 0.0d, 0.01d, Commands.Button.Button_1.ToString("d"), "Click", "%0.3f"), "ARC186 Radio", "Preset Channel Selector", "%0.3f"));
             AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1224", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_3.ToString("d"), new string[] { "OFF", "TR", "DF" }, "%0.1f"), "ARC186 Radio", "Frequency Mode Dial", "%0.1f"));
             AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1221", SwitchPositions.Create(4, 0.0d, 0.1d, Commands.Button.Button_4.ToString("d"), new string[] { "FM", "AM", "MAN", "PRE" }, "%0.1f"), "ARC186 Radio", "Frequency Selection Dial", "%0.1f"));
             AddFunction(new Axis(this, devices.ARC_186.ToString("d"), Commands.Button.Button_5.ToString("d"), "1219", 0.1d, 0.0d, 1.0d, "ARC186 Radio", "Volume"));  // elements["ARC186_VOLUME"] 			= axis({0, 1},_("Volume"), devices.ARC_186, device_commands.Button_5, 1219)
@@ -664,10 +664,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new RotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_12.ToString("d"), Commands.Button.Button_11.ToString("d"), "1226", 0.1d, "ARC186 Radio", "Frequency Selector Knob 2nd Digit","%.2f"));
             AddFunction(new RotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_14.ToString("d"), Commands.Button.Button_13.ToString("d"), "1227", 0.1d, "ARC186 Radio", "Frequency Selector Knob 3rd Digit","%.2f"));
             AddFunction(new RotaryEncoder(this, devices.ARC_186.ToString("d"), Commands.Button.Button_16.ToString("d"), Commands.Button.Button_15.ToString("d"), "1228", 0.1d, "ARC186 Radio", "Frequency Selector Knob 4th Digit", "%.2f"));
-            AddFunction(new ScaledNetworkValue(this, "1229", 20d, "ARC186 Radio", "Frequency Selector 1st Value", "Value of the 1st digit drum", "3 to 15", BindingValueUnits.Text, "%.2f"));
-            AddFunction(new ScaledNetworkValue(this, "1230", 10d, "ARC186 Radio", "Frequency Selector 2nd Value", "Value of the 2nd digit drum", "0 to 9", BindingValueUnits.Text, "%.1f"));
-            AddFunction(new ScaledNetworkValue(this, "1231", 10d, "ARC186 Radio", "Frequency Selector 3rd Value", "Value of the 3rd digit drum", "0 to 9", BindingValueUnits.Text, "%.1f"));
-            AddFunction(new ScaledNetworkValue(this, "1232", 100d, "ARC186 Radio", "Frequency Selector 4th Value", "Value of the 4th digit drum", "0 to 75", BindingValueUnits.Text, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1229", 20d, "ARC186 Radio", "Frequency Selector 1st Value", "Value of the 1st digit drum", "3 to 15", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new ScaledNetworkValue(this, "1230", 10d, "ARC186 Radio", "Frequency Selector 2nd Value", "Value of the 2nd digit drum", "0 to 9", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1231", 10d, "ARC186 Radio", "Frequency Selector 3rd Value", "Value of the 3rd digit drum", "0 to 9", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new ScaledNetworkValue(this, "1232", 100d, "ARC186 Radio", "Frequency Selector 4th Value", "Value of the 4th digit drum", "0 to 75", BindingValueUnits.Numeric, "%.3f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_1.ToString("d"), "1", "0.0", "Off", "1.0", "On", "Fuel Control (Overhead Console)", "LH Aux Forward Pump Switch", "%0 1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_3.ToString("d"), "2", "0.0", "Off", "1.0", "On", "Fuel Control (Overhead Console)", "LH Main Fwd Pump Switch", "% 1f"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.OVERHEAD_CONSOLE.ToString("d"), Commands.Button.Button_5.ToString("d"), "3", "0.0", "Off", "1.0", "On", "Fuel Control (Overhead Console)", "LH Main Aft Pump Switch", "% 1f"));
