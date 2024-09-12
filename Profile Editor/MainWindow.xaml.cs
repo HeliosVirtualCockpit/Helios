@@ -315,9 +315,9 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             }
 
             _processedChangedImages.Clear();
-            if (_changedImages && ConfigManager.ImageManager.ChangedImages.Count() > 0)
+            if (_changedImages && ConfigManager.ImageManager.ChangedImages.Count > 0)
             {
-                if(ConfigManager.ImageManager.ChangedImages.Count() <= 3) // We only process small numbers of changed images
+                if(ConfigManager.ImageManager.ChangedImages.Count <= 3) // We only process small numbers of changed images
                 {
                     foreach (string imageName in ConfigManager.ImageManager.ChangedImages)
                     {
@@ -333,7 +333,7 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
                     {
                         ConfigManager.ImageManager.ChangedImages.Remove(ProcessedImageName);
                     }
-                    _changedImages = ConfigManager.ImageManager.ChangedImages.Count() == 0 ? false : true;
+                    _changedImages = ConfigManager.ImageManager.ChangedImages.Count == 0 ? false : true;
                 }
                 else
                 {
@@ -781,7 +781,7 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
                     ProcessVisualChildren(visual.Children, imageName);
                 }
 
-                if (visual is IRefreshableImage refreshableControl)
+                if (visual != null && visual is IRefreshableImage refreshableControl)
                 {
                     if (refreshableControl.ConditionalImageRefresh(imageName)){
                         Logger.Debug($"Image reload requested for control {visual.GetType().Name} \"{visual.Name}\" image: \"{imageName}\"");

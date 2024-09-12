@@ -14,6 +14,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -37,7 +38,7 @@ namespace GadrocsWorkshop.Helios
         private static readonly Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private readonly Uri _documentImageUri;
         private readonly HashSet<string> _failedImagePaths = new HashSet<string>();
-        private static List<string> _changedImages = new List<string>();
+        private static ArrayList _changedImages = ArrayList.Synchronized(new ArrayList());
 
         public event EventHandler<ImageLoadEventArgs> ImageLoadSuccess;
         public event EventHandler<ImageLoadEventArgs> ImageLoadFailure;
@@ -607,7 +608,7 @@ namespace GadrocsWorkshop.Helios
             }
         }
         
-        public List<string> ChangedImages
+        public ArrayList ChangedImages
         {
             get => _changedImages;
             set => _changedImages = value;
