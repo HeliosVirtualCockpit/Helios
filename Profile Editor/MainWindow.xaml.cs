@@ -499,9 +499,16 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             {
                 if (!ConfigManager.ImageManager.ChangedImages.Contains(e.Name.ToLower()))
                 {
-                    ConfigManager.ImageManager.ChangedImages.Add(e.Name.ToLower());
-                    _changedImages = true;
-                    Logger.Debug($@"File Change detected '{e.Name}';");
+                    if (e.Name != null)
+                    {
+                        ConfigManager.ImageManager.ChangedImages.Add(e.Name.ToLower());
+                        _changedImages = true;
+                        Logger.Debug($@"File change detected for '{e.Name}';");
+                    }
+                    else
+                    {
+                        Logger.Debug($@"File change triggered but Name is null '{e}';");
+                    }
                 }
             }
         }
