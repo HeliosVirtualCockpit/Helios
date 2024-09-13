@@ -17,6 +17,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using GadrocsWorkshop.Helios.UDPInterface;
 using Newtonsoft.Json;
 
@@ -176,9 +177,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
             if (_incrementalPulseSwitch)
             {
-                _sendPulse[SWITCHINCREMENT] = "C" + _deviceId + "," + _positions[0].Action + "," + _incrementalPulseValue;
-                _sendPulse[SWITCHDECREMENT] = "C" + _deviceId + "," + _positions[0].Action + "," + (-1d * double.Parse(_incrementalPulseValue, System.Globalization.CultureInfo.InvariantCulture)).ToString("N1");
-                _sendPulse[SWITCHNEUTRAL] = "C" + _deviceId + "," + _positions[0].Action + "," + "0.0";
+                _sendPulse[SWITCHINCREMENT] = $"C{_deviceId},{_positions[0].Action},{_incrementalPulseValue}";
+                _sendPulse[SWITCHDECREMENT] = $"C{_deviceId},{_positions[0].Action},{(-1d * double.Parse(_incrementalPulseValue, System.Globalization.CultureInfo.InvariantCulture)).ToString("N"+FormatDigits(_format).ToString())}";
+                _sendPulse[SWITCHNEUTRAL] =   $"C{_deviceId},{_positions[0].Action},0.0";
             }
 
             _releaseAction = new HeliosAction(SourceInterface, SerializedDeviceName, SerializedFunctionName, "release",
@@ -194,8 +195,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             Values.Add(_value);
 
             _currentPosition = -1;
-        }
 
+        }
+        /// <summary>
+        /// Convert Lua style string format
+        /// </summary>
+        /// <param name="exportFormat"></param>
+        /// <returns>Number to be used in C# Nx formatting</returns>
+        private static int FormatDigits(string exportFormat)
+        {
+            // expecting %0.1f or %2d type input group 1 will have the number before the f or d
+            Regex rx = new Regex(@"\%(?:[0-9|#]?\.?)([0-9])[f|d]\z", RegexOptions.Compiled);
+            Match match = rx.Match(exportFormat);
+            if (match.Success && match.Groups[1].Captures.Count == 1 && match.Groups[1].Captures[0] != null && int.TryParse(match.Groups[1].Captures[0].Value, out int result))
+            {
+                return result;
+            }
+            return 0;
+        }
         #region Properties
 
         [JsonIgnore] 
@@ -233,6 +250,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                     SourceInterface.SendData(_sendAction[ _currentPosition]);
                 } else
                 {
+                    _lastSetPosition = (_lastSetPosition == _positions.Length - 1 && _currentPosition == 0) ? -1 : (_lastSetPosition == 0 && _currentPosition == _positions.Length - 1) ? _positions.Length : _lastSetPosition;
                     if (_lastSetPosition < _currentPosition)
                     {
                         SourceInterface.SendData(_sendPulse[SWITCHINCREMENT]);

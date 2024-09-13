@@ -50,12 +50,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
             // see if we can restore from JSON
-//#if (!DEBUG)
-//                        if (LoadFunctionsFromJson())
-//                        {
-//                            return;
-//                        }
-//#endif
+#if (!DEBUG)
+            if (LoadFunctionsFromJson())
+            {
+                return;
+            }
+#endif
             //#endregion
 
             //#endregion
@@ -652,8 +652,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Axis(this, devices.AN_ALE47.ToString("d"), Commands.Button.Button_9.ToString("d"), "1448", 0.1d, 0.0d, 1.0d, "AN/ALE47", "ASE Volume"));  // elements["ASE_VOL"] =            axis_limited({0, 1, 2}, _("Cockpit.CH47.ASE.VOLUME_KB"),      devices.AN_ALE47, device_commands.Button_9, 1448)
             AddFunction(new FlagValue(this, "1449", "AN/ALE47", "ASE ARM Indicator", ""));
 
-            ///TODO: Needs to have values checked.
-            AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1223", SwitchPositions.Create(20, 0.0d, 0.01d, Commands.Button.Button_1.ToString("d"), "Click", "%0.3f"), "ARC186 Radio", "Preset Channel Selector", "%0.3f"));
+            AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1223", SwitchPositions.Create(20, 0.0d, 0.01d, Commands.Button.Button_1.ToString("d"), "Click", "%0.3f"), "ARC186 Radio", "Preset Channel Selector", "%0.3f", "0.01"));
             AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1224", SwitchPositions.Create(3, 0.0d, 0.1d, Commands.Button.Button_3.ToString("d"), new string[] { "OFF", "TR", "DF" }, "%0.1f"), "ARC186 Radio", "Frequency Mode Dial", "%0.1f"));
             AddFunction(new Switch(this, devices.ARC_186.ToString("d"), "1221", SwitchPositions.Create(4, 0.0d, 0.1d, Commands.Button.Button_4.ToString("d"), new string[] { "FM", "AM", "MAN", "PRE" }, "%0.1f"), "ARC186 Radio", "Frequency Selection Dial", "%0.1f"));
             AddFunction(new Axis(this, devices.ARC_186.ToString("d"), Commands.Button.Button_5.ToString("d"), "1219", 0.1d, 0.0d, 1.0d, "ARC186 Radio", "Volume"));  // elements["ARC186_VOLUME"] 			= axis({0, 1},_("Volume"), devices.ARC_186, device_commands.Button_5, 1219)
