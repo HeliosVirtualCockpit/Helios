@@ -319,7 +319,9 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             {
                 if(ConfigManager.ImageManager.ChangedImages.Count <= 3) // We only process small numbers of changed images
                 {
-                    foreach (string imageName in ConfigManager.ImageManager.ChangedImages)
+                    List<string> changedImagesProtected = ConfigManager.ImageManager.ChangedImages.Cast<string>().ToList();
+                    ConfigManager.ImageManager.ChangedImages.Clear();
+                    foreach (string imageName in changedImagesProtected)
                     {
                         foreach (Monitor monitor in Profile.Monitors)
                         {

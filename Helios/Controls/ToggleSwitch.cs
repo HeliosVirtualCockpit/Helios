@@ -244,10 +244,10 @@ namespace GadrocsWorkshop.Helios.Controls
 
         public override bool ConditionalImageRefresh(string imageName)
         {
-            if (PositionOneImage.ToLower().Replace("/", @"\") == imageName ||
-                PositionTwoImage.ToLower().Replace("/", @"\") == imageName ||
-                PositionOneIndicatorOnImage?.ToLower().Replace("/", @"\") == imageName ||
-                PositionTwoIndicatorOnImage?.ToLower().Replace("/", @"\") == imageName)
+            if ((PositionOneImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (PositionTwoImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (PositionOneIndicatorOnImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (PositionTwoIndicatorOnImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 ImageRefresh = true;
                 OnPropertyChanged("PositionTwoImage", PositionTwoImage, PositionTwoImage, true);

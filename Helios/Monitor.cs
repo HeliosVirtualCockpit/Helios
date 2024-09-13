@@ -66,7 +66,7 @@ namespace GadrocsWorkshop.Helios
 
         public override bool ConditionalImageRefresh(string imageName)
         {
-            if (BackgroundImage?.ToLower().Replace("/", @"\") == imageName)
+            if ((BackgroundImage?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 ImageRefresh = true;
                 OnPropertyChanged("BackgroundImage", BackgroundImage, BackgroundImage, true);

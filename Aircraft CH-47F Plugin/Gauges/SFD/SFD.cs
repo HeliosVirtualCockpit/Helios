@@ -286,7 +286,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
                 Width = size.Width,
                 Height = size.Height,
                 OnImage = "{CH-47F}/Gauges/SFD/Images/SFD_Indicator.png",
-                OffImage = null,
                 Name = interfaceElementName
             };
 

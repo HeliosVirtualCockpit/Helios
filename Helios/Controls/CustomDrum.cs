@@ -293,7 +293,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public override bool ConditionalImageRefresh(string imageName)
         {
             ImageRefresh = false;
-            if (DrumImage.ToLower().Replace("/", @"\") == imageName)
+            if ((DrumImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 _Drum.ImageRefresh = ImageRefresh = true;
 				Refresh();

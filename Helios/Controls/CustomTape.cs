@@ -229,19 +229,19 @@ namespace GadrocsWorkshop.Helios.Controls
         public override bool ConditionalImageRefresh(string imageName)
         {
 			ImageRefresh = false;
-            if (BackgroundImage.ToLower().Replace("/", @"\") == imageName)
+            if ((BackgroundImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 _Background.ImageRefresh = ImageRefresh = true;
             }
-            if (ForegroundImage.ToLower().Replace("/", @"\") == imageName)
+            if ((ForegroundImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 _Foreground.ImageRefresh = ImageRefresh = true;
             }
-            if (TapeImage.ToLower().Replace("/", @"\") == imageName)
+            if ((TapeImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 _Tape.ImageRefresh = ImageRefresh = true;
             }
-            if (OffFlagImage.ToLower().Replace("/", @"\") == imageName)
+            if ((OffFlagImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 _OffFlag.ImageRefresh = ImageRefresh = true;
             }

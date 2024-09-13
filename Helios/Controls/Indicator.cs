@@ -295,10 +295,9 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override bool ConditionalImageRefresh(string imageName)
         {
-            Logger.Debug($"Indicator ConditionalImageRefresh {Name} being checked for {imageName} in {OffImage} and {OnImage}.");
             ImageRefresh = false;
-            if (OffImage.ToLower().Replace("/", @"\") == imageName ||
-                OnImage.ToLower().Replace("/", @"\") == imageName)
+            if ((OffImage?? "").ToLower().Replace("/", @"\") == imageName ||
+                (OnImage?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 ImageRefresh = true;
                 Refresh();

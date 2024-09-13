@@ -339,17 +339,17 @@ namespace GadrocsWorkshop.Helios.Controls
 
         public override bool ConditionalImageRefresh(string imageName)
         {
-            if (BackgroundImage?.ToLower().Replace("/", @"\") == imageName ||
-                TopBorderImage?.ToLower().Replace("/", @"\") == imageName ||
-                BottomBorderImage?.ToLower().Replace("/", @"\") == imageName ||
-                BottomBorderImage?.ToLower().Replace("/", @"\") == imageName ||
-                LeftBorderImage?.ToLower().Replace("/", @"\") == imageName ||
-                RightBorderImage?.ToLower().Replace("/", @"\") == imageName ||
-                TopLeftCornerImage?.ToLower().Replace("/", @"\") == imageName ||
-                TopRightCornerImage?.ToLower().Replace("/", @"\") == imageName ||
-                BottomLeftCornerImage?.ToLower().Replace("/", @"\") == imageName ||
-                BottomRightCornerImage?.ToLower().Replace("/", @"\") == imageName ||
-                BottomRightCornerImage?.ToLower().Replace("/", @"\") == imageName)
+            if ((BackgroundImage?? "").ToLower().Replace("/", @"\") == imageName ||
+                (TopBorderImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (BottomBorderImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (BottomBorderImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (LeftBorderImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (RightBorderImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (TopLeftCornerImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (TopRightCornerImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (BottomLeftCornerImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (BottomRightCornerImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (BottomRightCornerImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 ImageRefresh = true;
                 Refresh();

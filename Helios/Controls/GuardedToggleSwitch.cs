@@ -359,10 +359,10 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override bool ConditionalImageRefresh(string imageName)
         {
-            if (PositionOneGuardDownImage.ToLower().Replace("/", @"\") == imageName ||
-                PositionOneGuardUpImage.ToLower().Replace("/", @"\") == imageName ||
-                PositionTwoGuardDownImage.ToLower().Replace("/", @"\") == imageName ||
-                PositionTwoGuardUpImage.ToLower().Replace("/", @"\") == imageName)
+            if ((PositionOneGuardDownImage ?? "")   .ToLower().Replace("/", @"\") == imageName ||
+                    (PositionOneGuardUpImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (PositionTwoGuardDownImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (PositionTwoGuardUpImage ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 ImageRefresh = true;
                 Refresh();
