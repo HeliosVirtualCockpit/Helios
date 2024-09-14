@@ -403,6 +403,7 @@ namespace GadrocsWorkshop.Helios
                 _rectangle.Width = newWidthValue;
                 OnPropertyChanged("Height", oldValue.Height, newHeightValue, true);
                 OnPropertyChanged("Width", oldValue.Width, newWidthValue, true);
+                ScaleChildren(Math.Max(newWidthValue / oldValue.Width, 0d), Math.Max(newHeightValue / oldValue.Height, 0d));
                 UpdateRectangle();
                 Refresh();
                 OnResized();
