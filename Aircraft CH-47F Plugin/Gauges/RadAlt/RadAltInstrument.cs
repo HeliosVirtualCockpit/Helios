@@ -73,8 +73,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
             Values.Add(_offIndicator);
             Actions.Add(_offIndicator);
 
-            _needleCalibration = new CalibrationPointCollectionDouble(){
-                new CalibrationPointDouble(-200d, -90d),
+            _needleCalibration = new CalibrationPointCollectionDouble(-200d, -90d, 1500d, (1.0d * 270d)){
                 new CalibrationPointDouble(-1d, -90d),
                 new CalibrationPointDouble(0d, 0.0d * 270d),
                 new CalibrationPointDouble(50d, 0.156d * 270d),
@@ -83,12 +82,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
                 new CalibrationPointDouble(200d, 0.666d * 270d),
                 new CalibrationPointDouble(500d, 0.744d * 270d),
                 new CalibrationPointDouble(1000d, 0.862d * 270d),
-                new CalibrationPointDouble(1500d, 1.0d * 270d),
             };
-            _needleCalibration1 = new CalibrationPointCollectionDouble(){
-                new CalibrationPointDouble(0d, 0d),
-                new CalibrationPointDouble(1d, 270d),
-            };
+            _needleCalibration1 = new CalibrationPointCollectionDouble(0d, 0d, 1d, 270d);
 
             _loNeedle = new GaugeNeedle("{UH-60L}/Images/RadAltBugLo.xaml", new Point(210d, 210d), new Size(21d, 26d), new Point(23d, 210d), 183d);
             Components.Add(_loNeedle);

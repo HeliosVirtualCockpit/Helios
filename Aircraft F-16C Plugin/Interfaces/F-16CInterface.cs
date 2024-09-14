@@ -463,7 +463,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
             #endregion ECM
 
             AddFunction(new Switch(this, "0", "699", new SwitchPosition[] { new SwitchPosition("1.0", "Open", "0000"), new SwitchPosition("0.0", "Closed", "0000") }, "Nuclear", "Nuclear Consent Cover", "%0.1f"));  //unused
-            AddFunction(new Switch(this, "0", "700", SwitchPositions.Create(3, 1.0d, -1.0d, "0000", "Posn", "%0.1f"), "Nuclear", "Nuclear Consewt switch", "%0.1f"));  //unused
+            AddFunction(new Switch(this, "0", "700", SwitchPositions.Create(3, 1.0d, -1.0d, "0000", "Posn", "%0.1f"), "Nuclear", "Nuclear Consent switch", "%0.1f"));  //unused
 
             AddFunction(new NetworkValue(this, "13", "Network Value", "ADI_LOC_flag", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "14", "Network Value", "ADI_AUX_flag", "Float values from DCS", "", BindingValueUnits.Numeric, null));
@@ -475,11 +475,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
                     new CalibrationPointDouble(35.0, 1.0)
                 }, "Network Value", "AOA", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new ScaledNetworkValue(this, "16", 
-                new CalibrationPointCollectionDouble(){
-                    new CalibrationPointDouble(-7750.0, -1.0),
+                new CalibrationPointCollectionDouble(-7750.0, -1.0, 6000.0, 1.0){
                     new CalibrationPointDouble(-6000.0, -0.77),
-                    new CalibrationPointDouble(0.0, 0.0),
-                    new CalibrationPointDouble(6000.0, 1.0),
+                    new CalibrationPointDouble(0.0, 0.0)
                 }, "Network Value", "VVI", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "17", "Network Value", "ADI_Pitch", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "18", "Network Value", "ADI_Bank", "Float values from DCS", "", BindingValueUnits.Numeric, null));
@@ -491,8 +489,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
             AddFunction(new NetworkValue(this, "26", "Network Value", "ADI_GS_flag", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "27", "Network Value", "ADI_GS_Pointer", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new ScaledNetworkValue(this, "47", 
-                new CalibrationPointCollectionDouble(){
-                    new CalibrationPointDouble(0.0,     0.000),
+                new CalibrationPointCollectionDouble(0d, 0d, 0.85, 0.850){
                     new CalibrationPointDouble(0.06,    0.042),
                     new CalibrationPointDouble(0.085,   0.095),
                     new CalibrationPointDouble(0.22,    0.152),
@@ -509,8 +506,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
                     new CalibrationPointDouble(0.74,    0.653),
                     new CalibrationPointDouble(0.77,    0.698),
                     new CalibrationPointDouble(0.8,     0.750),
-                    new CalibrationPointDouble(0.83,    0.797),
-                    new CalibrationPointDouble(0.85,    0.850)
+                    new CalibrationPointDouble(0.83,    0.797)
                 }, "Network Value", "MaxAirspeed", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "51", "Network Value", "Altimeter_100_footPtr", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "52", "Network Value", "Altimeter_10000_footCount", "Float values from DCS", "", BindingValueUnits.Numeric, null));
@@ -561,15 +557,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F16C
             AddFunction(new NetworkValue(this, "623", "Network Value", "CLOCK_elapsed_time_minutes", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "624", "Network Value", "CLOCK_elapsed_time_seconds", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new ScaledNetworkValue(this, "692", 
-                new CalibrationPointCollectionDouble(){
-                    new CalibrationPointDouble(0.0,     -0.3),
+                new CalibrationPointCollectionDouble(0.0, -0.3, 1.0, 1.0){
                     new CalibrationPointDouble(0.23,    -0.2),
                     new CalibrationPointDouble(0.455,   -0.1),
                     new CalibrationPointDouble(0.5,    0.0),
                     new CalibrationPointDouble(0.6,    0.1),
                     new CalibrationPointDouble(0.76,    0.2),
-                    new CalibrationPointDouble(1.0,    0.3),
-                    new CalibrationPointDouble(1.0,   1.0),
+                    new CalibrationPointDouble(1.0,    0.3)
                 }, "Network Value", "air cond axis", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "712", "Network Value", "CanopyHandle", "Float values from DCS", "", BindingValueUnits.Numeric, null));
             AddFunction(new NetworkValue(this, "725", "Network Value", "FlowIndicator", "Float values from DCS", "", BindingValueUnits.Numeric, null));

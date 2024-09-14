@@ -174,16 +174,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "348", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "ADI Aircraft Bank Angle", "Backup ADI angle of the aircraft in degrees", "0 to +360", BindingValueUnits.Degrees, "%.3f"));
             AddFunction(new NetworkValue(this, "347", "Flight Instruments", "ADI Off Flag", "rotational position of the OFF flag","", BindingValueUnits.Numeric, "%.1f"));
             AddFunction(new ScaledNetworkValue(this, "345", new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d), "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
-            AddFunction(new ScaledNetworkValue(this, "362", new CalibrationPointCollectionDouble()
+            AddFunction(new ScaledNetworkValue(this, "362", new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d)
                 {
-                new CalibrationPointDouble(-0.6d, -6000d),
-                new CalibrationPointDouble(0.0d, 0.0d),
-                new CalibrationPointDouble(0.6d, 6000d),
+                new CalibrationPointDouble(0.0d, 0.0d)
                 }, "Flight Instruments", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute, "%.3f"));
-            AddFunction(new ScaledNetworkValue(this, "346", new CalibrationPointCollectionDouble() {
-                new CalibrationPointDouble(-0.05d, -5d),
-                new CalibrationPointDouble(0d, 0d),
-                new CalibrationPointDouble(0.5d, 50d)
+            AddFunction(new ScaledNetworkValue(this, "346", new CalibrationPointCollectionDouble(-0.05d, -5d, 0.5d, 50d) {
+                new CalibrationPointDouble(0d, 0d)
                 }, "Flight Instruments", "Angle of Attack", "Current angle of attack of the aircraft.", "", BindingValueUnits.Degrees, "%.3f"));
             //AddFunction(new FlagValue(this, "", "Flight Instruments", "AOA Flag", "Off Flag"));
             AddFunction(new Axis(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.clk_adj_knob.ToString("d"), "366", 0.1d, 0.0d, 1.0d, "Clock (Pilot)", "Clock Adjust", false, "%.1f"));
@@ -558,11 +554,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.F15E
             AddFunction(new ScaledNetworkValue(this, "1379", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 60d), "Clock (WSO)", "Clock Seconds", "Current seconds value of the clock", "0-60", BindingValueUnits.Seconds, "%.2f"));
             AddFunction(new ScaledNetworkValue(this, "1349", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 50000d), "Flight Instruments (WSO)", "Cabin Pressure", "Current cabin pressure in feet", "0 - 50,000", BindingValueUnits.Feet, "%.3f"));
             AddFunction(new ScaledNetworkValue(this, "1350", new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 1000d), "Flight Instruments (WSO)", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots, "%.3f"));
-            AddFunction(new ScaledNetworkValue(this, "1365", new CalibrationPointCollectionDouble()
+            AddFunction(new ScaledNetworkValue(this, "1365", new CalibrationPointCollectionDouble(-0.6d, -6000d, 0.6d, 6000d)
                 {
-                new CalibrationPointDouble(-0.6d, -6000d),
-                new CalibrationPointDouble(0.0d, 0.0d),
-                new CalibrationPointDouble(0.6d, 6000d),
+                new CalibrationPointDouble(0.0d, 0.0d)
                 }, "Flight Instruments (WSO)", "Vertical Velocity", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute, "%.3f"));
             AddFunction(new Functions.Altimeter(this, "Flight Instruments (WSO)", Cockpit.WSO));
             AddFunction(new RotaryEncoder(this, devices.FLINST.ToString("d"), Commands.fltinst_commands.rc_alt_adj_knob.ToString("d"), "1364", 0.1d, "Flight Instruments (WSO)", "Altitude adjust"));

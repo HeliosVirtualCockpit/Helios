@@ -51,11 +51,9 @@ namespace GadrocsWorkshop.Helios.Gauges.F16C.Instruments
             _drumHundreds.Clip = new RectangleGeometry(new Rect(178.4d, 258d, 81.6, 35d));
             Components.Add(_drumHundreds);
 
-            _needleCalibration = new CalibrationPointCollectionDouble()
+            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 5000d, 252d)
                 {
-                new CalibrationPointDouble(0d, 0d),
-                new CalibrationPointDouble(4200d, 252d),
-                new CalibrationPointDouble(5000d, 252d)
+                new CalibrationPointDouble(4200d, 252d)
                 };
 
             _needleAL = new GaugeNeedle("{F-16C}/Gauges/Instruments/Viper-Fuel-Needle-AL.xaml", new Point(184.500d, 185.000d), new Size(74.667d, 196.535d), new Point(37.668d, 159.573d), 360d - 127d);
