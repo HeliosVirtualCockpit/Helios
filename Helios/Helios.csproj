@@ -100,6 +100,10 @@
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
+    <Compile Include="Controls\PotentiometerClickableAppearanceEditor.xaml.cs">
+      <DependentUpon>PotentiometerClickableAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PotentiometerClickable.cs" />
     <Compile Include="Controls\Special\DCSMonitorScriptAppenderAppearanceEditor.xaml.cs">
       <DependentUpon>DCSMonitorScriptAppenderAppearanceEditor.xaml</DependentUpon>
     </Compile>
@@ -477,6 +481,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AnimationAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PotentiometerClickableAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

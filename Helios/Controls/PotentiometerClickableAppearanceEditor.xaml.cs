@@ -17,18 +17,35 @@ namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Windows.Controls;
+    using System.Windows;
 
     /// <summary>
-    /// Interaction logic for PotentiometerBehaviorEditor.xaml
+    /// Interaction logic for PotentiometerClickableAppearanceEditor.xaml
     /// </summary>
-    [HeliosPropertyEditor("Helios.Base.Potentiometer", "Behavior")]
-    [HeliosPropertyEditor("Helios.Base.PotentiometerEndless", "Behavior")]
-    [HeliosPropertyEditor("Helios.Base.PotentiometerClickable", "Behavior")]
-    public partial class PotentiometerBehaviorEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("Helios.Base.PotentiometerClickable", "Appearance")]
+    public partial class PotentiometerClickableAppearanceEditor : HeliosPropertyEditor
     {
-        public PotentiometerBehaviorEditor()
+        public PotentiometerClickableAppearanceEditor()
         {
             InitializeComponent();
+        }
+
+        private void InitialRotation_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PotentiometerKnob pot = Control as PotentiometerKnob;
+            if (pot != null)
+            {
+                pot.Value = pot.MinValue;
+            }
+        }
+
+        private void RotationTravel_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PotentiometerKnob pot = Control as PotentiometerKnob;
+            if (pot != null)
+            {
+                pot.Value = pot.MaxValue;
+            }
         }
     }
 }
