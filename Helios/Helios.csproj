@@ -100,6 +100,10 @@
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
+    <Compile Include="Controls\RotaryEncoderClickableAppearanceEditor.xaml.cs">
+      <DependentUpon>RotaryEncoderClickableAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RotaryEncoderClickable.cs" />
     <Compile Include="Controls\PotentiometerClickableAppearanceEditor.xaml.cs">
       <DependentUpon>PotentiometerClickableAppearanceEditor.xaml</DependentUpon>
     </Compile>
@@ -396,10 +400,11 @@
     <Content Include="Docs\Licenses\RectpackSharp\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Knobs\knob7.png" />
     <Content Include="Templates\Base\Rotaries\Rotary - Knob .htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Encoders\Encoder - Knob 6.htpl">
+    <Content Include="Templates\Base\Encoders\Encoder - Knob 1.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\Knobs\knob6.png" />
@@ -485,6 +490,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PotentiometerClickableAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RotaryEncoderClickableAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

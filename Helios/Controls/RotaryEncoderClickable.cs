@@ -23,18 +23,15 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Globalization;
     using System;
     using System.Windows;
-    using System.Windows.Media;
     using System.Xml;
-    using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
-    using System.Windows.Media.Media3D;
 
-    [HeliosControl("Helios.Base.PotentiometerClickable", "Clickable Potentiometer - Knob 1", "Potentiometers", typeof(RotaryKnobRenderer))]
-    public class PotentiometerClickable : PotentiometerKnob, IConfigurableImageLocation, IRefreshableImage
+    [HeliosControl("Helios.Base.RotaryEncoderClickable", "Clickable RotaryEncoder - Knob 6", "Rotary Encoders", typeof(RotaryKnobRenderer))]
+    public class RotaryEncoderClickable : RotaryEncoder, IConfigurableImageLocation, IRefreshableImage
     {
         private Rect _centreZone;
         private PushButtonType _buttonType;
-        private string _pushedImageFile = "{Helios}/Images/Knobs/knob6.png";
-        private string _knobImageFile = "{Helios}/Images/Knobs/knob1.png";
+        private string _pushedImageFile = "{Helios}/Images/Knobs/knob7.png";
+        private string _knobImageFile = "{Helios}/Images/Knobs/knob6.png";
 
         private bool _pushed;
         private bool _closed;
@@ -49,7 +46,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private HeliosValue _value;
         private HeliosValue _pushedValue;
-        public PotentiometerClickable() : base("Clickable Potentiometer")
+        public RotaryEncoderClickable() : base("Clickable Rotary Encoder")
         {
             _centreZone = new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3);
             _buttonType = PushButtonType.Toggle;
