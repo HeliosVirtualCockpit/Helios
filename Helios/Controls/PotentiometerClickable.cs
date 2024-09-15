@@ -27,6 +27,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Xml;
     using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
     using System.Windows.Media.Media3D;
+    using System.ServiceModel.Configuration;
 
     [HeliosControl("Helios.Base.PotentiometerClickable", "Clickable Potentiometer - Knob 1", "Potentiometers", typeof(RotaryKnobRenderer))]
     public class PotentiometerClickable : PotentiometerKnob, IConfigurableImageLocation, IRefreshableImage
@@ -51,6 +52,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private HeliosValue _pushedValue;
         public PotentiometerClickable() : base("Clickable Potentiometer")
         {
+            ContinuousConfigurable = true;
+            IsContinuous = false;
             _centreZone = new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3);
             _buttonType = PushButtonType.Toggle;
             _knobImageFile = KnobImage;
