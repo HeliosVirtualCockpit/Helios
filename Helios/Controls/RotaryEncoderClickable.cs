@@ -110,6 +110,24 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        public string UnpushedImage
+        {
+            get
+            {
+                return _knobImageFile;
+            }
+            set
+            {
+                if ((_knobImageFile == null && value != null)
+                    || (_knobImageFile != null && !_knobImageFile.Equals(value)))
+                {
+                    string oldValue = _knobImageFile;
+                    _knobImageFile = value;
+                    OnPropertyChanged("UnpushedImage", oldValue, value, true);
+                    Refresh();
+                }
+            }
+        }
         public bool Pushed
         {
             get
@@ -309,6 +327,7 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             ButtonType = (PushButtonType)Enum.Parse(typeof(PushButtonType), reader.ReadElementString("ButtonClickType"));
             PushedImage = reader.ReadElementString("PushedImage");
+            UnpushedImage = KnobImage = reader.ReadElementString("UnpushedImage");
             base.ReadXml(reader);
             _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
         }
@@ -317,6 +336,8 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             writer.WriteElementString("ButtonClickType", ButtonType.ToString());
             writer.WriteElementString("PushedImage", PushedImage);
+            writer.WriteElementString("UnpushedImage", UnpushedImage);
+            KnobImage = UnpushedImage;
             base.WriteXml(writer);
         }
     }

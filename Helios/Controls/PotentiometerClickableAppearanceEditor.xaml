@@ -34,7 +34,7 @@
         <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>Image used for the encoder's knob.</Label.ToolTip> Image
         </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="1" ImageFilename="{Binding Control.KnobImage, Mode=TwoWay}" />
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="1" ImageFilename="{Binding Control.UnpushedImage, Mode=TwoWay}" />
         <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>Image used for the encoder's knob when clicked.</Label.ToolTip> Clicked Image
         </Label>
