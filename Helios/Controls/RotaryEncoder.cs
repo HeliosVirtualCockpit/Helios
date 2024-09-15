@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.RotaryEncoder", "Encoder - Knob 1", "Rotary Encoders", typeof(RotaryKnobRenderer))]
+    [HeliosControl("Helios.Base.RotaryEncoder", "Encoder - Knob 6", "Rotary Encoders", typeof(RotaryKnobRenderer))]
     public class RotaryEncoder : RotaryKnob
     {
         private double _stepValue = 0.1d;
@@ -37,10 +37,11 @@ namespace GadrocsWorkshop.Helios.Controls
         private readonly HeliosTrigger _incrementTrigger;
         private readonly HeliosTrigger _decrementTrigger;
 
-        public RotaryEncoder()
-            : base("Rotary Encoder", new Size(100, 100))
+        public RotaryEncoder() : this("Rotary Encoder") { }
+        public RotaryEncoder(string name)
+            : base(name, new Size(100, 100))
         {
-            KnobImage = "{Helios}/Images/Knobs/knob1.png";
+            KnobImage = "{Helios}/Images/Knobs/knob6.png";
 
             _incrementTrigger = new HeliosTrigger(this, "", "encoder", "incremented", "Triggered when encoder is incremented.", "Encoder step value", BindingValueUnits.Numeric);
             Triggers.Add(_incrementTrigger);

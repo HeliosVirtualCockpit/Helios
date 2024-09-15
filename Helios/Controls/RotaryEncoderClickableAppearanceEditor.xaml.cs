@@ -13,20 +13,19 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for PotentiometerBehaviorEditor.xaml
+    /// Interaction logic for RotaryEncoderClickableAppearanceEditor.xaml
     /// </summary>
-    [HeliosPropertyEditor("Helios.Base.Potentiometer", "Behavior")]
-    [HeliosPropertyEditor("Helios.Base.PotentiometerEndless", "Behavior")]
-    [HeliosPropertyEditor("Helios.Base.PotentiometerClickable", "Behavior")]
-    public partial class PotentiometerBehaviorEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("Helios.Base.RotaryEncoderClickable", "Appearance")]
+    public partial class RotaryEncoderClickableAppearanceEditor : HeliosPropertyEditor
     {
-        public PotentiometerBehaviorEditor()
+        public RotaryEncoderClickableAppearanceEditor()
         {
             InitializeComponent();
         }

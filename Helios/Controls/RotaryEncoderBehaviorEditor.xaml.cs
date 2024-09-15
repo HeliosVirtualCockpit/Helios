@@ -23,6 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls
     /// Interaction logic for RotaryEncoderBehaviorEditor.xaml
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.RotaryEncoder", "Behavior")]
+    [HeliosPropertyEditor("Helios.Base.RotaryEncoderClickable", "Behavior")]
     public partial class RotaryEncoderBehaviorEditor : HeliosPropertyEditor
     {
         public RotaryEncoderBehaviorEditor()
