@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Controls
     public class PotentiometerClickable : PotentiometerKnob, IConfigurableImageLocation, IRefreshableImage
     {
         private Rect _centreZone;
-        private PushButtonType _buttonType;
+        private PushButtonType _buttonType = PushButtonType.Toggle;
         private string _pushedImageFile = "{Helios}/Images/Knobs/knob6.png";
         private string _knobImageFile = "{Helios}/Images/Knobs/knob1.png";
 

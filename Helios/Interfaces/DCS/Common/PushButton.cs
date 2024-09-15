@@ -117,13 +117,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         public override void ProcessNetworkData(string id, string value)
         {
-            if (value.Equals(_pushValue))
+            bool pushNumericallyEqual = false;
+            bool releaseNumericallyEqual = false;
+            if (double.TryParse(_releaseValue, out double releaseArgValue) && double.TryParse(_pushValue, out double pushArgValue) && double.TryParse(value, out double netValue))
+            {
+                pushNumericallyEqual = pushArgValue == netValue ? true : false;
+                releaseNumericallyEqual = releaseArgValue == netValue ? true : false;
+            }
+
+            if (pushNumericallyEqual)
             {
                 _value.SetValue(new BindingValue(true), false);
                 _pushedTrigger.FireTrigger(BindingValue.Empty);
             }
-
-            else if (value.Equals(_releaseValue))
+            else if (releaseNumericallyEqual)
             {
                 _value.SetValue(new BindingValue(false), false);
                 _releasedTrigger.FireTrigger(BindingValue.Empty);
