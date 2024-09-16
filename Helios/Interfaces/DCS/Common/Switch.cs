@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 using GadrocsWorkshop.Helios.UDPInterface;
 using Newtonsoft.Json;
 
@@ -28,8 +29,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         const int SWITCHINCREMENT = 0;
         const int SWITCHDECREMENT = 1;
         const int SWITCHNEUTRAL = 2;
-        protected readonly string _id;
-        protected readonly string _format;
+        protected string _id;
+        protected string _format;
         protected bool _everyframe;
 
         private string[] _sendAction;
@@ -48,7 +49,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private string _deviceId;
 
         [JsonProperty("incrementalPulseValue", NullValueHandling = NullValueHandling.Ignore)]
-        private string _incrementalPulseValue;
+        private string _incrementalPulseValue = "";
 
         [JsonProperty("positions")]
         private SwitchPosition[] _positions;
@@ -60,7 +61,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                                                     string position2Value, string position2Name, 
                                                     string device, string name, string exportFormat)
         {
-            return new Switch(sourceInterface, deviceId, argId, new SwitchPosition[] { new SwitchPosition(position1Value, position1Name, action), new SwitchPosition(position2Value, position2Name, action) }, device, name, exportFormat);
+            return new Switch(sourceInterface, deviceId, argId, new SwitchPosition[] { new SwitchPosition(position1Value, position1Name, action), new SwitchPosition(position2Value, position2Name, action) }, device, name, exportFormat, "");
         }
 
         public static Switch CreateThreeWaySwitch(BaseUDPInterface sourceInterface, string deviceId, string action, string argId,
@@ -71,7 +72,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         {
             return new Switch(sourceInterface, deviceId, argId,
                     new SwitchPosition[] { new SwitchPosition(position1Value, position1Name, action), new SwitchPosition(position2Value, position2Name, action), new SwitchPosition(position3Value, position3Name, action) },
-                    device, name, exportFormat);
+                    device, name, exportFormat, "");
         }
 
         public static Switch CreateRotarySwitch(BaseUDPInterface sourceInterface, string deviceId, string action, string argId, string device, string name, string exportFormat, params string[] positionData)
@@ -85,20 +86,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 positions.Add(new SwitchPosition(positionData[i++], positionData[i], action));
             }
 
-            return new Switch(sourceInterface, deviceId, argId, positions.ToArray(), device, name, exportFormat);
+            return new Switch(sourceInterface, deviceId, argId, positions.ToArray(), device, name, exportFormat, "");
         }
 
         #endregion
-        public Switch(BaseUDPInterface sourceInterface, string deviceId, string argId, SwitchPosition[] positions, string device, string name, string exportFormat, string incrementalPulseValue = "")
+        public Switch(BaseUDPInterface sourceInterface, string deviceId, string argId, SwitchPosition[] positions, string device, string name, string exportFormat, string incrementalPulseValue)
             : base(sourceInterface, device, name, "Current position of this switch.")
         {
             bool build = true;
-            _incrementalPulseValue = incrementalPulseValue;
-            _incrementalPulseSwitch = !string.IsNullOrWhiteSpace(incrementalPulseValue);
             _id = argId;
             _format = exportFormat;
             _everyframe = false;
             _deviceId = deviceId;
+            _incrementalPulseValue = incrementalPulseValue;
+            _incrementalPulseSwitch = !string.IsNullOrWhiteSpace(incrementalPulseValue);
             _positions = positions;
             if (build)
             {
@@ -107,20 +108,27 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         }
 
         public Switch(BaseUDPInterface sourceInterface, string deviceId, string argId, SwitchPosition[] positions, string device, string name, string exportFormat)
-            : this(sourceInterface, deviceId, argId, positions, device, name, exportFormat, false)
+            : this(sourceInterface, deviceId, argId, positions, device, name, exportFormat, "", false)
+        {
+            // all code in referenced constructor
+        }
+
+        public Switch(BaseUDPInterface sourceInterface, string deviceId, string argId, SwitchPosition[] positions, string device, string name, string exportFormat, bool everyFrame, bool build = true) 
+            : this(sourceInterface, deviceId, argId, positions, device, name, exportFormat, "", everyFrame, build)
         {
             // all code in referenced constructor
         }
 
         public Switch(BaseUDPInterface sourceInterface, string deviceId, string argId, SwitchPosition[] positions,
-            string device, string name, string exportFormat, bool everyFrame, bool build = true)
+            string device, string name, string exportFormat, string incrementalPulseValue, bool everyFrame, bool build = true)
             : base(sourceInterface, device, name, "Current position of this switch.")
         {
             _id = argId;
             _format = exportFormat;
             _everyframe = everyFrame;
             _deviceId = deviceId;
-            _positions = positions;
+            _incrementalPulseValue = incrementalPulseValue;
+            _incrementalPulseSwitch = !string.IsNullOrWhiteSpace(incrementalPulseValue); _positions = positions;
             if (build)
             {
                 DoBuild();
@@ -136,6 +144,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         public override void BuildAfterDeserialization()
         {
+            _id = DataElements[0].ID;
+            _format = (DataElements[0] as DCSDataElement).Format;
+            _everyframe = (DataElements[0] as DCSDataElement).IsExportedEveryFrame;
             DoBuild();
         }
 
@@ -177,6 +188,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
             if (_incrementalPulseSwitch)
             {
+                Debug.Assert(_format == (DataElements[0] as DCSDataElement).Format, $"Export Format is not available to Incremental Pulse Switch for arg ID {DataElements[0].ID}");
+
                 _sendPulse[SWITCHINCREMENT] = $"C{_deviceId},{_positions[0].Action},{_incrementalPulseValue}";
                 _sendPulse[SWITCHDECREMENT] = $"C{_deviceId},{_positions[0].Action},{(-1d * double.Parse(_incrementalPulseValue, System.Globalization.CultureInfo.InvariantCulture)).ToString("N"+FormatDigits(_format).ToString())}";
                 _sendPulse[SWITCHNEUTRAL] =   $"C{_deviceId},{_positions[0].Action},0.0";
@@ -204,12 +217,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// <returns>Number to be used in C# Nx formatting</returns>
         private static int FormatDigits(string exportFormat)
         {
-            // expecting %0.1f or %2d type input group 1 will have the number before the f or d
-            Regex rx = new Regex(@"\%(?:[0-9|#]?\.?)([0-9])[f|d]\z", RegexOptions.Compiled);
-            Match match = rx.Match(exportFormat);
-            if (match.Success && match.Groups[1].Captures.Count == 1 && match.Groups[1].Captures[0] != null && int.TryParse(match.Groups[1].Captures[0].Value, out int result))
+            if (!string.IsNullOrEmpty(exportFormat))
             {
-                return result;
+                // expecting %0.1f or %2d type input group 1 will have the number before the f or d
+                Regex rx = new Regex(@"\%(?:[0-9|#]?\.?)([0-9])[f|d]\z", RegexOptions.Compiled);
+                Match match = rx.Match(exportFormat);
+                if (match.Success && match.Groups[1].Captures.Count == 1 && match.Groups[1].Captures[0] != null && int.TryParse(match.Groups[1].Captures[0].Value, out int result))
+                {
+                    return result;
+                }
+            } else
+            {
+                //Todo:  Investigate whether a log message is warrented for here.
             }
             return 0;
         }
