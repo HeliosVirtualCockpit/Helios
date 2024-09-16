@@ -122,7 +122,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     || (_knobImageFile != null && !_knobImageFile.Equals(value)))
                 {
                     string oldValue = _knobImageFile;
-                    _knobImageFile = value;
+                    _knobImageFile = KnobImage = value;
                     OnPropertyChanged("UnpushedImage", oldValue, value, true);
                     Refresh();
                 }
@@ -265,15 +265,16 @@ namespace GadrocsWorkshop.Helios.Controls
         /// <param name="newName"></param>
         public new void ReplaceImageNames(string oldName, string newName)
         {
+            base.ReplaceImageNames(oldName,newName);
             PushedImage = string.IsNullOrEmpty(PushedImage) ? PushedImage : string.IsNullOrEmpty(oldName) ? newName + PushedImage : PushedImage.Replace(oldName, newName);
-            KnobImage = string.IsNullOrEmpty(KnobImage) ? KnobImage : string.IsNullOrEmpty(oldName) ? newName + KnobImage : KnobImage.Replace(oldName, newName);
             _knobImageFile = string.IsNullOrEmpty(_knobImageFile) ? _knobImageFile : string.IsNullOrEmpty(oldName) ? newName + _knobImageFile : _knobImageFile.Replace(oldName, newName);
         }
 
         public override bool ConditionalImageRefresh(string imageName)
         {
+            ImageRefresh = base.ConditionalImageRefresh(imageName);
             if ((PushedImage ?? "").ToLower().Replace("/", @"\") == imageName ||
-                (KnobImage ?? "").ToLower().Replace("/", @"\") == imageName)
+                (_knobImageFile ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 ImageRefresh = true;
                 Refresh();
