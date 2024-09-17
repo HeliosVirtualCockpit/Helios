@@ -79,7 +79,8 @@ namespace GadrocsWorkshop.Helios.Controls
             _value = new HeliosValue(this, new BindingValue(false), "", "circuit state", "Current open/closed state of this buttons circuit.", "True if the button is currently closed (on), otherwise false.", BindingValueUnits.Boolean);
             Values.Add(_value);
         }
-        public PushButtonType ButtonType
+        #region Properties
+        public override PushButtonType ButtonType
         {
             get
             {
@@ -180,6 +181,12 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        public override bool ClickConfigurable
+        {
+            get => true;
+        }
+
+        #endregion
         void PushedValue_Execute(object action, HeliosActionEventArgs e)
         {
             BeginTriggerBypass(e.BypassCascadingTriggers);

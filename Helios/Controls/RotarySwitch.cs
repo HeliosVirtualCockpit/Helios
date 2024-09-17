@@ -318,7 +318,8 @@ namespace GadrocsWorkshop.Helios.Controls
                 OnPropertyChanged("DefaultPosition", oldValue, value, true);
             }
         }
-
+        public virtual PushButtonType ButtonType { get; set; }
+        public virtual bool ClickConfigurable { get => false; }
         #endregion
 
         void LabelFormat_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

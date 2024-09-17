@@ -227,7 +227,9 @@ namespace GadrocsWorkshop.Helios.Controls
         }
 
         internal double MaxRotation => InitialRotation + RotationTravel;
-
+ 
+        public virtual PushButtonType ButtonType { get; set; }
+        public virtual bool ClickConfigurable { get => false; }
         #endregion
 
         #region Actions

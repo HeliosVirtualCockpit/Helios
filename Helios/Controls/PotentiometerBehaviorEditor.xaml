@@ -18,7 +18,7 @@
                         <Setter Property="Visibility" Value="Visible"/>
                     </DataTrigger>
                 </Style.Triggers>
-            </Style>        
+            </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="80"/>
@@ -31,7 +31,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Value</TextBlock>
         <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
@@ -56,7 +56,6 @@
             <Label.ToolTip>When set, this control wraps around after traveling 360 degrees and has no end point.</Label.ToolTip> Continuous
         </Label>
         <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Top" Margin="0,6,6,6" IsChecked="{Binding Path=Control.IsContinuous}" Style="{StaticResource ShowIfContinuousConfigurable}" />
-
         <HeliosBase:RotaryInteractionEditor Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6"></HeliosBase:RotaryInteractionEditor>
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

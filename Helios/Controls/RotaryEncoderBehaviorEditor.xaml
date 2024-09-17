@@ -20,7 +20,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Value</TextBlock>
-        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right"><Label.ToolTip>Value passed through to increment and decrement triggers.</Label.ToolTip>Step Value</Label>
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Value passed through to increment and decrement triggers.</Label.ToolTip>Step Value
+        </Label>
         <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="1" FontSize="10" Margin="2" Text="{Binding Control.StepValue}" />
         <HeliosBase:RotaryInteractionEditor Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
     </Grid>
