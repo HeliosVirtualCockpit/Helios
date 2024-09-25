@@ -23,6 +23,8 @@ namespace GadrocsWorkshop.Helios.Controls
     /// Interaction logic for PotentiometerClickableAppearanceEditor.xaml
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.PotentiometerClickable", "Appearance")]
+    [HeliosPropertyEditor("Helios.Base.PotentiometerIndicatorClickable", "Appearance")]
+
     public partial class PotentiometerClickableAppearanceEditor : HeliosPropertyEditor
     {
         public PotentiometerClickableAppearanceEditor()

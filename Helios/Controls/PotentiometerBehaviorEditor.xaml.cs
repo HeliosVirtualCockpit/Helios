@@ -24,6 +24,7 @@ namespace GadrocsWorkshop.Helios.Controls
     [HeliosPropertyEditor("Helios.Base.Potentiometer", "Behavior")]
     [HeliosPropertyEditor("Helios.Base.PotentiometerEndless", "Behavior")]
     [HeliosPropertyEditor("Helios.Base.PotentiometerClickable", "Behavior")]
+    [HeliosPropertyEditor("Helios.Base.PotentiometerIndicatorClickable", "Behavior")]
     public partial class PotentiometerBehaviorEditor : HeliosPropertyEditor
     {
         public PotentiometerBehaviorEditor()

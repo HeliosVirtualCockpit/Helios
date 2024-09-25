@@ -239,8 +239,11 @@ namespace GadrocsWorkshop.Helios.Controls
             try
             {
                 // NOTE: don't create a Helios object property event
-                _heliosValue.SetValue(e.Value, e.BypassCascadingTriggers);
-                SetRotation();
+                if (AllowRotation == RotaryClickAllowRotationType.Both || (IsPushed && AllowRotation == RotaryClickAllowRotationType.Clicked) || (!IsPushed && AllowRotation == RotaryClickAllowRotationType.Unclicked))
+                {
+                    _heliosValue.SetValue(e.Value, e.BypassCascadingTriggers);
+                    SetRotation();
+                }
             }
             catch
             {
@@ -252,7 +255,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private void SetRotation()
         {
-            KnobRotation = ControlAngle;
+                KnobRotation = ControlAngle;
         }
 
         #region IPulsedControl

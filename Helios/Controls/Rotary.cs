@@ -89,6 +89,12 @@ namespace GadrocsWorkshop.Helios.Controls
             }
         }
 
+        public virtual bool IsPushed
+        {
+            get => false;
+            set {}
+        }
+
         /// <summary>
         /// this is the relative sensitivity for multiple interaction styles, but it is called
         /// "Sensitivity" to remain compatible with config, legacy classes, and the UI

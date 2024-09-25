@@ -27,6 +27,8 @@ namespace GadrocsWorkshop.Helios.Controls
     {
         private string _knobImage;
         private double _rotation;
+        private RotaryClickAllowRotationType _allowRotation = RotaryClickAllowRotationType.Both;
+
 
         protected RotaryKnob(string name, Size defaultSize) : base(name, defaultSize)
         {
@@ -49,7 +51,11 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-
+        public RotaryClickAllowRotationType AllowRotation
+        {
+            get => _allowRotation;
+            set => _allowRotation = value;
+        }
 
         /// <summary>
         /// Performs a replace of text in this controls image names
@@ -75,6 +81,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+
         public override bool ConditionalImageRefresh(string imageName)
         {
             if ((KnobImage ?? "").ToLower().Replace("/", @"\") == imageName) { 

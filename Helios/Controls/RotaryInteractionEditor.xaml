@@ -10,6 +10,7 @@
              Height="Auto" d:DesignWidth="180">
     <Grid.Resources>
         <Helios:EnumConverter Type="{x:Type HeliosBase:RotaryClickType}" x:Key="ClickTypes" />
+        <Helios:EnumConverter Type="{x:Type HeliosBase:RotaryClickAllowRotationType}" x:Key="AllowRotationTypes" />
         <Helios:EnumConverter Type="{x:Type HeliosBase:PushButtonType}" x:Key="ButtonTypes" />
 
         <Style x:Key="SwipeLabelStyle" TargetType="Label">
@@ -47,6 +48,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -63,21 +65,25 @@
                 Radial precision mode involves dragging a handle out of the control and then rotating that around the control.</Label.ToolTip> Click Type
         </Label>
         <ComboBox Grid.Column="1" Grid.Row="2" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Source={StaticResource ClickTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.ClickType, Converter={StaticResource ClickTypes}}" />
-        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0" Style="{StaticResource SwipeLabelStyle}">
+        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right" Content="Allow Rotation"  Style="{StaticResource ShowIfClickConfigurable}">
+            <Label.ToolTip>Select types of knob rotation to be allowed.</Label.ToolTip>
+        </Label>
+        <ComboBox Grid.Column="1" Grid.Row="3"  FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Source={StaticResource AllowRotationTypes}, Path=DisplayNames}" Style="{StaticResource ShowIfClickConfigurable}" SelectedItem="{Binding Path=Control.AllowRotation, Converter={StaticResource AllowRotationTypes}}" />
+        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0" Style="{StaticResource SwipeLabelStyle}">
             <Label.ToolTip>When set left it will take more rotation to switch a position to the right postions will move rapidly.</Label.ToolTip> Sensitivity
         </Label>
-        <Slider Grid.Column="1" Grid.Row="3" Margin="0,6,0,0" Minimum="-1" Maximum="1" TickFrequency="0.1" TickPlacement="BottomRight" Value="{Binding Control.Sensitivity}" Style="{StaticResource SwipeSliderStyle}" />
-        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0">
+        <Slider Grid.Column="1" Grid.Row="4" Margin="0,6,0,0" Minimum="-1" Maximum="1" TickFrequency="0.1" TickPlacement="BottomRight" Value="{Binding Control.Sensitivity}" Style="{StaticResource SwipeSliderStyle}" />
+        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0">
             <Label.ToolTip>When set, mousewheel will move the rotary.</Label.ToolTip> Mouse Wheel
         </Label>
-        <CheckBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" Margin="0,6,6,6" IsChecked="{Binding Path=Control.MouseWheelAction}" />
-        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0">
+        <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Top" Margin="0,6,6,6" IsChecked="{Binding Path=Control.MouseWheelAction}" />
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0">
             <Label.ToolTip>When set, control may draw additional visualization for interaction that is not physically realistic.</Label.ToolTip> Visualizations
         </Label>
-        <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Top" Margin="0,6,6,6" IsChecked="{Binding Path=Control.VisualizeInteraction}" />
-        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0">
+        <CheckBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Top" Margin="0,6,6,6" IsChecked="{Binding Path=Control.VisualizeInteraction}" />
+        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" Margin="0,1,0,0">
             <Label.ToolTip>When set, this control can be connected to a control router by clicking on it.</Label.ToolTip> Routable
         </Label>
-        <CheckBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Top" Margin="0,6,6,6" IsChecked="{Binding Path=Control.Routable}" />
+        <CheckBox Grid.Column="1" Grid.Row="7" VerticalAlignment="Top" Margin="0,6,6,6" IsChecked="{Binding Path=Control.Routable}" />
     </Grid>
 </Grid>

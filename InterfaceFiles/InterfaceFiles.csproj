@@ -392,5 +392,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Interfaces\Helios.CH47F.hif.json" />
+    <None Include="Interfaces\Helios.CH47F.hif.lua" />
+  </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>

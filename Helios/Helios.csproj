@@ -100,6 +100,7 @@
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
+    <Compile Include="Controls\PotentiometerIndcatorClickable.cs" />
     <Compile Include="Controls\RotaryEncoderClickableAppearanceEditor.xaml.cs">
       <DependentUpon>RotaryEncoderClickableAppearanceEditor.xaml</DependentUpon>
     </Compile>

@@ -34,6 +34,22 @@ namespace GadrocsWorkshop.Helios.Controls
         [Description("Drag a radial handle for precise control")]
         Radial
     }
+    /// <summary>
+    /// interaction styles for clickable rotary controls
+    ///
+    /// WARNING: these value names must never be changed, as they are serialized to Profile XML
+    /// </summary>
+    public enum RotaryClickAllowRotationType
+    {
+        [Description("Allow both clicked and unclicked knobs to rotate")]
+        Both,
+
+        [Description("Allow only Unclicked knob to rotate")]
+        Unclicked,
+
+        [Description("Allow only Clicked knob to rotate")]
+        Clicked
+    }
 
     /// <summary>
     /// interaction styles for linear controls

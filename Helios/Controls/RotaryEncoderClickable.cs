@@ -335,15 +335,19 @@ namespace GadrocsWorkshop.Helios.Controls
             ButtonType = (PushButtonType)Enum.Parse(typeof(PushButtonType), reader.ReadElementString("ButtonClickType"));
             PushedImage = reader.ReadElementString("PushedImage");
             UnpushedImage = KnobImage = reader.ReadElementString("UnpushedImage");
+            if (reader.Name.Equals("AllowRotation")) AllowRotation = (RotaryClickAllowRotationType)Enum.Parse(typeof(RotaryClickAllowRotationType), reader.ReadElementString("AllowRotation"));
             base.ReadXml(reader);
             _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
         }
 
         public override void WriteXml(XmlWriter writer)
         {
+            TypeConverter allowRotationConverter = TypeDescriptor.GetConverter(typeof(RotaryClickAllowRotationType));
+
             writer.WriteElementString("ButtonClickType", ButtonType.ToString());
             writer.WriteElementString("PushedImage", PushedImage);
             writer.WriteElementString("UnpushedImage", UnpushedImage);
+            if (AllowRotation != RotaryClickAllowRotationType.Both) writer.WriteElementString("AllowRotation", allowRotationConverter.ConvertToInvariantString(AllowRotation));
             KnobImage = UnpushedImage;
             base.WriteXml(writer);
         }

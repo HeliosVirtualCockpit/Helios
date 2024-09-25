@@ -27,12 +27,14 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Xml;
 
 
+
     [HeliosControl("Helios.Base.PotentiometerClickable", "Clickable Potentiometer - Knob 1", "Potentiometers", typeof(RotaryKnobRenderer))]
     public class PotentiometerClickable : PotentiometerKnob, IConfigurableImageLocation, IRefreshableImage
     {
         private Rect _centreZone;
         private PushButtonType _buttonType = PushButtonType.Toggle;
         private string _pushedImageFile = "{Helios}/Images/Knobs/knob6.png";
+        private string _unpushedImageFile = "{Helios}/Images/Knobs/knob1.png";
         private string _knobImageFile = "{Helios}/Images/Knobs/knob1.png";
 
         private bool _pushed;
@@ -48,13 +50,16 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private HeliosValue _value;
         private HeliosValue _pushedValue;
-        public PotentiometerClickable() : base("Clickable Potentiometer")
+
+        public PotentiometerClickable() : this("Clickable Potentiometer") { }
+        public PotentiometerClickable(string name) : base(name)
         {
             ContinuousConfigurable = true;
             IsContinuous = false;
             _centreZone = new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3);
             _buttonType = PushButtonType.Toggle;
-            _knobImageFile = KnobImage;
+            _knobImageFile = _unpushedImageFile = KnobImage;
+
             _pushedTrigger = new HeliosTrigger(this, "", "", "button pushed", "Fired when this button is pushed.", "Always returns true.", BindingValueUnits.Boolean);
             _releasedTrigger = new HeliosTrigger(this, "", "", "button released", "Fired when this button is released.", "Always returns false.", BindingValueUnits.Boolean);
             _closedTrigger = new HeliosTrigger(this, "", "", "button closed", "Fired when this button is in the closed state.", "Always returns true.", BindingValueUnits.Boolean);
@@ -119,15 +124,15 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             get
             {
-                return _knobImageFile;
+                return _unpushedImageFile;
             }
             set
             {
-                if ((_knobImageFile == null && value != null)
-                    || (_knobImageFile != null && !_knobImageFile.Equals(value)))
+                if ((_unpushedImageFile == null && value != null)
+                    || (_unpushedImageFile != null && !_unpushedImageFile.Equals(value)))
                 {
-                    string oldValue = _knobImageFile;
-                    _knobImageFile = KnobImage = value;
+                    string oldValue = _unpushedImageFile;
+                    _unpushedImageFile = value;
                     OnPropertyChanged("UnpushedImage", oldValue, value, true);
                     Refresh();
                 }
@@ -151,6 +156,8 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        
+        public override bool IsPushed { get => _pushed;}
 
         public bool IsClosed
         {
@@ -185,7 +192,10 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             get => true;
         }
-
+        public virtual bool IndicatorConfigurable
+        {
+            get => false;
+        }
         #endregion
         void PushedValue_Execute(object action, HeliosActionEventArgs e)
         {
@@ -238,18 +248,12 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
         {
-            if(args.PropertyName == "Pushed")
+            if(args.PropertyName == "Pushed" || args.PropertyName == "PushedImage" || args.PropertyName == "UnpushedImage" )
             {
-                if (Pushed)
-                {
-                    _knobImageFile = KnobImage;
-                    KnobImage = _pushedImageFile;
-                } else
-                {
-                    KnobImage = _knobImageFile;
-                }
+                KnobImage = Pushed ? PushedImage : UnpushedImage;
             }
             OnDisplayUpdate();
+            Refresh();  
             base.OnPropertyChanged(args);
         }
 
@@ -278,6 +282,7 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             base.ReplaceImageNames(oldName, newName);
             PushedImage = string.IsNullOrEmpty(PushedImage) ? PushedImage : string.IsNullOrEmpty(oldName) ? newName + PushedImage : PushedImage.Replace(oldName, newName);
+            UnpushedImage = string.IsNullOrEmpty(UnpushedImage) ? UnpushedImage : string.IsNullOrEmpty(oldName) ? newName + UnpushedImage : UnpushedImage.Replace(oldName, newName);
             _knobImageFile = string.IsNullOrEmpty(_knobImageFile) ? _knobImageFile : string.IsNullOrEmpty(oldName) ? newName + _knobImageFile : _knobImageFile.Replace(oldName, newName);
         }
 
@@ -286,6 +291,7 @@ namespace GadrocsWorkshop.Helios.Controls
             ImageRefresh = base.ConditionalImageRefresh(imageName);
             
             if ((PushedImage ?? "").ToLower().Replace("/", @"\") == imageName ||
+                (UnpushedImage ?? "").ToLower().Replace("/", @"\") == imageName ||
                 (_knobImageFile ?? "").ToLower().Replace("/", @"\") == imageName)
             {
                 ImageRefresh = true;
@@ -317,7 +323,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             } else
             {
-                base.MouseDown(location);
+                if (AllowMouseActivity) base.MouseDown(location);
             }
 
         }
@@ -333,23 +339,45 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             } else
             {
-                base.MouseUp(location);
+                if(AllowMouseActivity) base.MouseUp(location);
             }
+        }
+
+        public override void MouseWheel(int delta)
+        {
+            if(AllowMouseActivity) { base.MouseWheel(delta); }  
+        }
+
+        public override void MouseDrag(Point location)
+        {
+            if(AllowMouseActivity) base.MouseDrag(location);
+        }
+        private bool AllowMouseActivity
+        {
+            get => AllowRotation == RotaryClickAllowRotationType.Both ||
+                    (!Pushed && AllowRotation == RotaryClickAllowRotationType.Unclicked) ||
+                    (Pushed && AllowRotation == RotaryClickAllowRotationType.Clicked);
+
         }
         public override void ReadXml(XmlReader reader)
         {
             ButtonType = (PushButtonType)Enum.Parse(typeof(PushButtonType), reader.ReadElementString("ButtonClickType"));
             PushedImage = reader.ReadElementString("PushedImage");
-            UnpushedImage = KnobImage = reader.ReadElementString("UnpushedImage");
+            UnpushedImage = reader.ReadElementString("UnpushedImage");
+            if(reader.Name.Equals("AllowRotation")) AllowRotation = (RotaryClickAllowRotationType)Enum.Parse(typeof(RotaryClickAllowRotationType), reader.ReadElementString("AllowRotation"));
             base.ReadXml(reader);
+            KnobImage = UnpushedImage;
             _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
         }
 
         public override void WriteXml(XmlWriter writer)
         {
+            TypeConverter allowRotationConverter = TypeDescriptor.GetConverter(typeof(RotaryClickAllowRotationType));
+
             writer.WriteElementString("ButtonClickType", ButtonType.ToString());
             writer.WriteElementString("PushedImage", PushedImage);
             writer.WriteElementString("UnpushedImage", UnpushedImage);
+            if(AllowRotation != RotaryClickAllowRotationType.Both) writer.WriteElementString("AllowRotation", allowRotationConverter.ConvertToInvariantString(AllowRotation));
             KnobImage = UnpushedImage;
             base.WriteXml(writer);
         }

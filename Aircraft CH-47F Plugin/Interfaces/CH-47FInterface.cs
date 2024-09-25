@@ -50,12 +50,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
             // see if we can restore from JSON
-#if (!DEBUG)
+//#if (!DEBUG)
             if (LoadFunctionsFromJson())
             {
                 return;
             }
-#endif
+//#endif
             //#endregion
 
             //#endregion
@@ -593,10 +593,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
 
             #endregion
 
-            AddFunction(new Switch(this, devices.CANTED_CONSOLE.ToString("d"), "731", new SwitchPosition[] { new SwitchPosition("1.0", "In", Commands.Button.Button_1.ToString("d"), Commands.Button.Button_1.ToString("d"),"0.0"), new SwitchPosition("-1.0", "Out", Commands.Button.Button_1.ToString("d"), Commands.Button.Button_1.ToString("d"), "0.0") }, "Canted Console", "Engine 1 Fire Pull Switch", "%.1f"));
+            AddFunction(new Switch(this, devices.CANTED_CONSOLE.ToString("d"), "731", new SwitchPosition[] { new SwitchPosition("-1.0", "In", Commands.Button.Button_1.ToString("d"), Commands.Button.Button_1.ToString("d"), "0.0"), new SwitchPosition("1.0", "Out", Commands.Button.Button_1.ToString("d"), Commands.Button.Button_1.ToString("d"), "0.0") }, "Canted Console", "Engine 1 Fire Pull Switch", "%.1f"));
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_2.ToString("d"), "732", 0.1d, 0.0d, 1.0d, "Canted Console", "Engine 1 Fire Handle"));
             AddFunction(new FlagValue(this, "737", "Canted Console", "Engine 1 FIRE Indicator", ""));
-            AddFunction(new Switch(this, devices.CANTED_CONSOLE.ToString("d"), "735", new SwitchPosition[] { new SwitchPosition("1.0", "In", Commands.Button.Button_5.ToString("d"), Commands.Button.Button_5.ToString("d"), "0.0"), new SwitchPosition("-1.0", "Out", Commands.Button.Button_5.ToString("d"), Commands.Button.Button_5.ToString("d"), "0.0") }, "Canted Console", "Engine 2 Fire Pull Switch", "%.1f"));
+            AddFunction(new Switch(this, devices.CANTED_CONSOLE.ToString("d"), "735", new SwitchPosition[] { new SwitchPosition("-1.0", "In", Commands.Button.Button_5.ToString("d"), Commands.Button.Button_5.ToString("d"), "0.0"), new SwitchPosition("1.0", "Out", Commands.Button.Button_5.ToString("d"), Commands.Button.Button_5.ToString("d"), "0.0") }, "Canted Console", "Engine 2 Fire Pull Switch", "%.1f"));
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_6.ToString("d"), "736", 0.1d, 0.0d, 1.0d, "Canted Console", "Engine 2 Fire Handle"));
             AddFunction(new FlagValue(this, "738", "Canted Console", "Engine 2 FIRE Indicator", ""));
             AddFunction(new PushButton(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_9.ToString("d"), "724", "Canted Console", "Main Battery Low Button", "%.1f"));
@@ -612,7 +612,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new Axis(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_73.ToString("d"), "1332", 0.1d, 0.0d, 1.0d, "Canted Console", "RWR Brilliance Knob"));  // elements["RWR_BRIL_KNOB"] =        axis_limited({0, 1}, _("Cockpit.CH47.RWR.dimmer"),       devices.CANTED_CONSOLE, device_commands.Button_73, 1332)
 
             /// TODO Work out a good solution for the brake.  Clickables says it should be a button but not sure that this helps
-            AddFunction(Switch.CreateToggleSwitch(this, devices.CENTRAL_CONSOLE.ToString("d"), Commands.Button.Button_100.ToString("d"), "741", "1.0", "Pulled" , "0.0", "Released", "Center Console", "Main Parking Brake", "%.1f"));  // elements["MAIN_PARKING_BRAKE"] = button({0}, _("Cockpit.CH47.MAIN.PARKING_LV"), devices.CENTRAL_CONSOLE, device_commands.Button_100, 741, {{SOUND_SW13_PUSH, SOUND_SW13_PULL}})
+            AddFunction(Switch.CreateToggleSwitch(this, devices.CENTRAL_CONSOLE.ToString("d"), Commands.Button.Button_100.ToString("d"), "741", "0.0", "Released", "1.0", "Pulled", "Center Console", "Main Parking Brake", "%.1f"));  // elements["MAIN_PARKING_BRAKE"] = button({0}, _("Cockpit.CH47.MAIN.PARKING_LV"), devices.CENTRAL_CONSOLE, device_commands.Button_100, 741, {{SOUND_SW13_PUSH, SOUND_SW13_PULL}})
 
             AddFunction(new PushButton(this, devices.CANTED_CONSOLE.ToString("d"), Commands.Button.Button_30.ToString("d"), "574", "AFCS Panel (Canted Console)", "Flight Director Button", "%.1f"));  // elements["AFCS_FLT_DIR"] =                               button({0, 1}, _("Cockpit.CH47.AFCS.flt_dir_sw"), devices.CANTED_CONSOLE, device_commands.Button_30, 574)
             AddFunction(new FlagValue(this, "575", "AFCS Panel (Canted Console)", "Flight Director Indicator", ""));

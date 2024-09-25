@@ -17,6 +17,14 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="ShowIfIndicatorConfigurable" TargetType="FrameworkElement">
+                <Setter Property="Visibility" Value="Collapsed"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Control.IndicatorConfigurable}" Value="true">
+                        <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="50"/>
@@ -24,30 +32,44 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Knob</TextBlock>
-        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="4,10,2,2" Style="{StaticResource ShowIfIndicatorConfigurable}">Indicator Off Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>Image used for the encoder's knob.</Label.ToolTip> Image
         </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="1" ImageFilename="{Binding Control.UnpushedImage, Mode=TwoWay}" />
-        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="2" ImageFilename="{Binding Control.UnpushedImage, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>Image used for the encoder's knob when clicked.</Label.ToolTip> Clicked Image
         </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="2" ImageFilename="{Binding Control.PushedImage, Mode=TwoWay}" />
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="3" ImageFilename="{Binding Control.PushedImage, Mode=TwoWay}" />
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="4,10,2,2"  Style="{StaticResource ShowIfIndicatorConfigurable}">Indicator On Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource ShowIfIndicatorConfigurable}">
+            <Label.ToolTip>Image used for the encoder's knob.</Label.ToolTip> Image
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="5" ImageFilename="{Binding Control.IndicatorOnNormalImage, Mode=TwoWay}" Style="{StaticResource ShowIfIndicatorConfigurable}"/>
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource ShowIfIndicatorConfigurable}">
+            <Label.ToolTip>Image used for the encoder's knob when clicked.</Label.ToolTip> Clicked Image
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="6" ImageFilename="{Binding Control.IndicatorOnClickedImage, Mode=TwoWay}" Style="{StaticResource ShowIfIndicatorConfigurable}"/>
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="4,10,2,2" Style="{StaticResource Heading2}">Rotation</TextBlock>
-        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Margin="4,10,2,2" Style="{StaticResource Heading2}">Rotation</TextBlock>
+        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>Position of knob at the pots minimum value.</Label.ToolTip> Initial
         </Label>
-        <Slider Grid.Column="1" Grid.Row="4" Minimum="0" Maximum="360" Value="{Binding Control.InitialRotation}" Margin="2" GotFocus="InitialRotation_GotFocus"/>
-        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource HideIfContinuous}">
+        <Slider Grid.Column="1" Grid.Row="8" Minimum="0" Maximum="360" Value="{Binding Control.InitialRotation}" Margin="2" GotFocus="InitialRotation_GotFocus"/>
+        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource HideIfContinuous}">
             <Label.ToolTip>Relative rotation in degrees that is possible starting from the InitialRotation point.</Label.ToolTip> Travel
         </Label>
-        <Slider Grid.Column="1" Grid.Row="5" Minimum="0" Maximum="360" Value="{Binding Control.RotationTravel}" Margin="2" GotFocus="RotationTravel_GotFocus" Style="{StaticResource HideIfContinuous}"/>
+        <Slider Grid.Column="1" Grid.Row="9" Minimum="0" Maximum="360" Value="{Binding Control.RotationTravel}" Margin="2" GotFocus="RotationTravel_GotFocus" Style="{StaticResource HideIfContinuous}"/>
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>
