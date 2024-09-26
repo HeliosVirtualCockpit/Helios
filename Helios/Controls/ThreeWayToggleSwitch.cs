@@ -330,6 +330,9 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ThreeWayToggleSwitchPosition.Two:
                         SwitchPosition = ThreeWayToggleSwitchPosition.Three;
                         break;
+                    default:
+                        SwitchPosition = ThreeWayToggleSwitchPosition.One;
+                        break;
                 }                
             }
             else if (action == SwitchAction.Decrement)
@@ -341,6 +344,9 @@ namespace GadrocsWorkshop.Helios.Controls
                         break;
                     case ThreeWayToggleSwitchPosition.Three:
                         SwitchPosition = ThreeWayToggleSwitchPosition.Two;
+                        break;
+                    default:
+                        SwitchPosition = ThreeWayToggleSwitchPosition.One;
                         break;
                 }
             }
