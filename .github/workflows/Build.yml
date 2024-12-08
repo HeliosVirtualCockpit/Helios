@@ -51,7 +51,7 @@ jobs:
             echo "Current Branch: `"$currentBranch`""
             echo "Current Tag:    `"$currentTag`""
           }
-          $newTag = $currentTag.substring(0,8) + "." + ([int]::parse($latestTagForBranch.substring(9).split('-')[0]) + 1)
+          $newTag = $latestTagForBranch.substring(0,8) + "." + ([int]::parse($latestTagForBranch.substring(9).split('-')[0]) + 1)
           echo "NewTag=$newTag" >> $env:GITHUB_ENV
           echo "Current ref:    `"${{github.ref}}`""
           echo "The version of this installer will be `"$newTag`"."
