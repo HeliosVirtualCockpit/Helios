@@ -33,7 +33,7 @@ log.write("HELIOS.EXPORT", log.INFO, "initializing Helios Export script")
 -- This section is configured by the DCS Interfaces in Helios Profile Editor
 
 -- address to which we send
-helios_private.host = "HELIOS_REPLACE_IPAddress"
+helios_private.host = "HELIOS_REPLACE_NETWORKADDRESS"
 
 -- UDP port to which we send
 -- NOTE: our local port on which we listen is dynamic
@@ -366,6 +366,8 @@ function helios_impl.init()
     -- helios_private.clientSocket:settimeout(.001) -- blocking, but for a very short time
 
     log.write("HELIOS.EXPORT", log.DEBUG, "loaded")
+
+    helios_private.host = helios_private.resolveHostname(helios_private.host)
 
     log.write(
         "HELIOS.EXPORT",
@@ -805,6 +807,22 @@ function helios_private.calculateNextUpdate(currentUpdate, updateInterval)
     end
 
     return nextUpdate
+end
+
+--- Resolve Hostname
+function helios_private.resolveHostname(networkAddress)
+	local ipTest = {networkAddress:match("(%d+)%.(%d+)%.(%d+)%.(%d+)")}
+	if(#ipTest ~= 4) then
+		local ipaddress = nil
+		ipaddress = socket.dns.toip(networkAddress)  -- can be IP address or Hostname
+		if(ipaddress ~= nil ) then 
+			log.write("HELIOS.EXPORT", log.INFO, string.format("Resolved address %s to %s",networkAddress, ipaddress))
+			return ipaddress
+		else
+			log.write("HELIOS.EXPORT", log.ERROR, string.format("Unable to resolve address %s",networkAddress))
+		end
+	end
+	return networkAddress
 end
 
 -- ========================= MODULE COMPATIBILITY LAYER ==========================
