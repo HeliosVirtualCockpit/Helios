@@ -401,8 +401,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Interfaces\DCS.OH6A.hif.json" />
-    <None Include="Interfaces\DCS.OH6A.hif.Lua" />
+    <Content Include="Interfaces\DCS.OH6A.hif.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Interfaces\DCS.OH6A.hif.Lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>
