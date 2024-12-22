@@ -33,10 +33,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Content="IP Address"/>
-        <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200"
-                 MaxWidth="200" Text="{Binding Path=Configuration.IPAddress}"/>
-        <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource Documentation}" Text="IP Address to which Export script will send data.  If you are running on the same machine 127.0.0.1 is recommended."/>
+        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Content="Network Address"/>
+        <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="250"
+                 MaxWidth="250" Text="{Binding Path=Configuration.NetworkAddress}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource Documentation}" Text="IP V4 Address or Hostname to which Export script will send data.  If you are running on the same machine 127.0.0.1 is recommended."/>
         <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Content="Port"/>
         <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="40"
                  MaxWidth="40" Text="{Binding Path=Configuration.Port}"/>

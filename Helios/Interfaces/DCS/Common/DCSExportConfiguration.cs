@@ -155,7 +155,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private string _exportImpersonationModuleText = "";
 
         /// <summary>
-        /// IP address to which Export.lua will send UDP updates
+        /// IP V4 address or Hostname to which Export.lua will send UDP updates
         /// </summary>
         private string _ipAddress;
 
@@ -390,7 +390,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// IP address to which Export.lua will send UDP updates
         /// This is a site-specific setting persisted in HeliosSettings instead of in the profile.
         /// </summary>
-        public string IPAddress
+        public string NetworkAddress
         {
             get => _ipAddress;
             set
@@ -1055,7 +1055,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
             _exportMain = exportMainRaw
                 // REVISIT: validate the IP address against allowable protocol versions and address types for this version of HeliosExport__.lua
-                .Replace("HELIOS_REPLACE_IPAddress", IPAddress)
+                .Replace("HELIOS_REPLACE_NETWORKADDRESS", NetworkAddress)
                 .Replace("HELIOS_REPLACE_Port", Port.ToString())
                 .Replace("HELIOS_REPLACE_ExportInterval", Math.Round(1d / Math.Max(4, ExportFrequency), 3).ToString(CultureInfo.InvariantCulture));
         }
