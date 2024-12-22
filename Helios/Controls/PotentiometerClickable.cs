@@ -264,12 +264,6 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 case "Pushed":
                     KnobImage = Pushed ? PushedImage : UnpushedImage;
-
-                    if (AllowRotation != RotaryClickAllowRotationType.Both)
-                    {
-                        Value = InitialValue;
-                    }
-
                     OnDisplayUpdate();
                     Refresh();
                     break;
