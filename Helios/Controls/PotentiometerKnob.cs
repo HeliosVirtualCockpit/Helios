@@ -270,7 +270,7 @@ namespace GadrocsWorkshop.Helios.Controls
             else
             {
                 // clamp
-                Value = Math.Max(Math.Min(Value + _stepValue * pulses, MaxValue), MinValue);
+                Value = MaxValue > MinValue ? Math.Max(Math.Min(Value + _stepValue * pulses, MaxValue), MinValue) : Math.Max(Math.Min(Value + _stepValue * pulses, MinValue), MaxValue);
             }
         }
 
