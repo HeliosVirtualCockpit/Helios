@@ -25,7 +25,7 @@
         private bool _mouseDown = false;
         private Point _mouseDownLocation;
 
-        protected LinearClickType _clickType = LinearClickType.Swipe;
+        protected LinearClickTypeDirectional _clickType = LinearClickTypeDirectional.Swipe;
         private CalibrationPointCollectionDouble _swipeCalibration;
         private double _swipeThreshold = 10;
         private double _sensitivity = 0d;
@@ -44,7 +44,7 @@
 
         #region Properties
 
-        public LinearClickType ClickType
+        public LinearClickTypeDirectional ClickType
         {
             get
             {
@@ -54,7 +54,7 @@
             {
                 if ( !_clickType.Equals( value ) )
                 {
-                    LinearClickType oldValue = _clickType;
+                    LinearClickTypeDirectional oldValue = _clickType;
                     _clickType = value;
                     OnPropertyChanged( "ClickType", oldValue, value, true );
                 }
@@ -242,7 +242,7 @@
 
         public override void MouseDown ( Point location )
         {
-            if ( _clickType == LinearClickType.Touch )
+            if ( _clickType == LinearClickTypeDirectional.Touch )
             {
                 if ( _clickableVertical )
                 {
@@ -268,7 +268,7 @@
                 //    Parent.Profile.ProfileTick += new EventHandler( Profile_ProfileTick );
                 //}
             }
-            else if ( _clickType == LinearClickType.Swipe )
+            else if ( _clickType == LinearClickTypeDirectional.Swipe )
             {
                 _mouseDown = true;
                 _mouseDownLocation = location;
@@ -301,7 +301,7 @@
 
         public override void MouseDrag ( Point location )
         {
-            if ( _mouseDown && _clickType == LinearClickType.Swipe )
+            if ( _mouseDown && _clickType == LinearClickTypeDirectional.Swipe )
             {
                 if ( DragOneForOne )
                 {
