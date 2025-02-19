@@ -41,7 +41,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.Altimeter
             _tensDrum.Clip = new RectangleGeometry(new Rect(71d, 144d, 150d, 81d));
             Components.Add(_tensDrum);
 
-            _drum = new GaugeDrumCounter("{Helios}/Gauges/A-10/Common/drum_tape.xaml", new Point(110d, 168d), "#%00", new Size(13d, 15d), new Size(39d, 45d));
+            _drum = new GaugeDrumCounter("{Helios}/Gauges/A-10/Common/drum_tape.xaml", new Point(110d, 168d), "%000", new Size(13d, 15d), new Size(39d, 45d));
             _drum.Clip = new RectangleGeometry(new Rect(101d, 144d, 150d, 81d));
             Components.Add(_drum);
 
@@ -71,19 +71,21 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.Altimeter
         void Altitude_Execute(object action, HeliosActionEventArgs e)
         {
             _needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue % 1000d);
+            bool increasing = _drum.Value < e.Value.DoubleValue;  
             _tensDrum.Value = e.Value.DoubleValue / 10000d;
-
             // Setup then thousands drum to roll with the rest
-            double thousands = (e.Value.DoubleValue / 100d) % 100d;
-            if (thousands >= 99)
+            double tenThousands = (e.Value.DoubleValue / 100d) % 100d;
+            if (tenThousands >= 99.1 && increasing)
             {
-                _tensDrum.StartRoll = thousands % 1d;
+                _tensDrum.StartRoll = tenThousands % 1d;
             }
             else
             {
                 _tensDrum.StartRoll = -1d;
             }
+
             _drum.Value = e.Value.DoubleValue;
+
         }
 
         void AirPressure_Execute(object action, HeliosActionEventArgs e)

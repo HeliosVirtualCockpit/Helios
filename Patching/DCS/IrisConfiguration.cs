@@ -110,8 +110,8 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         {
             try
             {
-                _configName = Path.ChangeExtension(configName, "xml");
-                _configName = $"{(_isRemote ? "Client" : "Server")}_{_configName}";
+                _configName = Path.ChangeExtension(configName, "iris");
+                _configName = $"{Path.GetFileNameWithoutExtension(_configName)}_{(_isRemote ? "Client" : "Server")}.iris";
                 _irisPath = Path.Combine(ConfigManager.DocumentPath, "Iris_Partial_Configs");
                 _tempPath = Path.Combine(_irisPath, Path.ChangeExtension(_configName, "tmp"));
                 _backupPath = Path.Combine(_irisPath, Path.ChangeExtension(_configName, "bak"));
@@ -159,7 +159,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         /// <param name="configName"></param>
         private void OpenServerProfile(string configName)
         {
-            _profileName =  $"{((!_isRemote) ? configName :VehicleName)}_Server_Viewports.hpf";
+            _profileName =  $"{((!_isRemote) ? configName : VehicleName)}_Server_Viewports.hpf";
             _irisProfilePath = Path.Combine(ConfigManager.DocumentPath, "Profiles");
             _tempProfilePath = Path.Combine(_irisProfilePath, Path.ChangeExtension(_profileName, "tmp"));
             _backupProfilePath = Path.Combine(_irisProfilePath, Path.ChangeExtension(_profileName, "bak"));
