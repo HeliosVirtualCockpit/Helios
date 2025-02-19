@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Ai->XAML Export Plug-In Version 0.2 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="7.055" Height="19.273"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Colon/<Compound Path> -->
+            <Path StrokeThickness="1.5" Stroke="#d0ffffff" StrokeMiterLimit="1.0" Data="F1 M 5.055,17.273 L 2.000,17.273 L 2.000,14.218 L 5.055,14.218 L 5.055,17.273 Z M 5.055,5.055 L 2.000,5.055 L 2.000,2.000 L 5.055,2.000 L 5.055,5.055 Z">
+                <Path.Fill>
+                    <LinearGradientBrush MappingMode="Absolute" StartPoint="8.352,-13.431" EndPoint="11.406,-13.431">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.00" Color="#d0ffffff"/>
+                            <GradientStop Offset="1.00" Color="#d0ffffff"/>
+                        </LinearGradientBrush.GradientStops>
+                        <LinearGradientBrush.Transform>
+                            <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,-6.352,-3.794" />
+                        </LinearGradientBrush.Transform>
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
+
+        </Canvas>
+
+    </Canvas>
+</Canvas>

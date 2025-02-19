@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+	<Name>ADI - Night</Name>
+	<Category>F/A-18C Hornet - Night</Category>
+	<TypeIdentifier>Helios.FA18C.ADI2</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>350,350</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

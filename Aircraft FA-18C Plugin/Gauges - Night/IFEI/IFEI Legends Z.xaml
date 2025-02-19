@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Ai->XAML Export Plug-In Version 0.2 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="8.312" Height="12.750"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Z/<Compound Path> -->
+  <Path StrokeThickness="0.8" Stroke="#d0e5e5e5" StrokeMiterLimit="1.0" Fill="#d0ffffff" Data="F1 M 5.359,2.027 L 1.204,2.027 C 0.665,1.984 0.391,1.721 0.381,1.236 C 0.371,0.752 0.646,0.465 1.204,0.375 L 6.724,0.375 C 7.052,0.422 7.291,0.558 7.442,0.782 C 7.592,1.007 7.595,1.277 7.451,1.594 L 2.587,10.711 L 7.099,10.711 C 7.662,10.793 7.941,11.071 7.937,11.546 C 7.933,12.021 7.654,12.297 7.099,12.375 L 1.187,12.375 C 0.464,12.266 0.224,11.854 0.466,11.139 L 5.359,2.027 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>

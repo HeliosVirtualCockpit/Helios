@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+	<Name>Up Front Controller - Night</Name>
+	<Category>F/A-18C Hornet - Night</Category>
+	<TypeIdentifier>Helios.FA18C.UFC2</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>602,470</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

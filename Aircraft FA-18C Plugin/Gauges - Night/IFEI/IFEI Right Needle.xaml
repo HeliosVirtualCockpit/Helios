@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Ai->XAML Export Plug-In Version 0.2 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="93.686" Height="6.703"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Right Datum/<Line> -->
+            <Path StrokeThickness="1.0" Stroke="#0000ff00" StrokeMiterLimit="1.0" Fill="#0000ff00" Data="F1 M 92.186,1.852 L 92.186,4.852"/>
+
+  <!-- Layer 1/Right Datum/<Line> -->
+            <Path StrokeThickness="1.0" Stroke="#0000ff00" StrokeMiterLimit="1.0" Fill="#0000ff00" Data="F1 M 90.686,3.352 L 93.686,3.352"/>
+
+  </Canvas>
+
+  <!-- Layer 1/Pointer Right -->
+  <Path StrokeThickness="0.8" Stroke="#d0e5e5e5" StrokeMiterLimit="1.0" Fill="#d0ffffff" Data="F1 M 52.295,1.343 L 6.339,0.376 C 5.586,0.360 4.843,0.557 4.197,0.945 L 0.472,3.180 C 0.343,3.258 0.343,3.445 0.472,3.523 L 4.197,5.758 C 4.843,6.146 5.586,6.343 6.339,6.327 L 52.295,5.360 C 52.512,5.355 52.686,5.178 52.686,4.960 L 52.686,1.743 C 52.686,1.526 52.512,1.348 52.295,1.343 Z"/>
+
+  </Canvas>
+</Canvas>

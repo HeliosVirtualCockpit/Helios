@@ -70,7 +70,7 @@
         <Label Grid.Column="0" Grid.Row="0" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource VisibleIfControlTypeNameSet}">Control</Label>
         <Label Grid.Column="1" Grid.Row="0" FontSize="10" Content="{Binding ControlTypeName}" Style="{StaticResource VisibleIfControlTypeNameSet}"/>
         <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">Name</Label>
-        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" FontSize="10" Margin="2" Text="{Binding VisualName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" FontSize="10" Margin="2" Text="{Binding VisualName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextChanged="HeliosTextBox_TextChanged" />
         <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">Left</Label>
         <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" FontSize="10" Text="{Binding Path=Control.Left, Mode=TwoWay}" Margin="2" />
         <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right">Top</Label>

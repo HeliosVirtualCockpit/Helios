@@ -1,0 +1,14 @@
+﻿<ControlTemplate>
+	<Name>IFEI - Night</Name>
+	<Category>F/A-18C Hornet - Night</Category>
+	<TypeIdentifier>Helios.FA18C.IFEI2</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>779,702</Size>
+			<Hidden>False</Hidden>
+			<GlassReflectionOpacity>0.0</GlassReflectionOpacity>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

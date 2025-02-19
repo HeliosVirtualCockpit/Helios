@@ -169,5 +169,10 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
                 return null;
             }
         }
+
+        private void HeliosTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }

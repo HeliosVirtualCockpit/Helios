@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+	<Name>Barometric Altimeter - Night</Name>
+	<Category>F/A-18C Hornet - Night</Category>
+	<TypeIdentifier>Helios.FA18C.Instruments.BAltimeter2</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>376,376</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>
