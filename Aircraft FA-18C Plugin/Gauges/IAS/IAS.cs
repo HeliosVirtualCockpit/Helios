@@ -17,25 +17,31 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
+    using System.ComponentModel;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
 
     [HeliosControl("Helios.FA18C.IAS", "Indicated Air Speed", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
-    public class IAS : BaseGauge
+    public class IAS : AltImageGauge
     {
         private HeliosValue _indicatedAirSpeed;
         private GaugeNeedle _needle;
         private CalibrationPointCollectionDouble _needleCalibration;
-        
+ 
         public IAS()
-            : base("IAS", new Size(300, 300))
+            : base("IAS", new Size(300, 300), "Alt")
         {
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
+            CreateInputBindings();
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/IAS/IAS.png", new Rect(0d, 0d, 300, 300)));
 
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 360d, 346d);
             _needle = new GaugeNeedle("{Helios}/Gauges/Common/needle_a.xaml", new Point(150d, 150d), new Size(30, 128), new Point(15, 113), 0d);
             Components.Add(_needle);
+
+
+            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 360d, 346d);
 
             //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
 
@@ -43,11 +49,27 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             _indicatedAirSpeed.Execute += new HeliosActionHandler(IndicatedAirSpeed_Execute);
             Actions.Add(_indicatedAirSpeed);
         }
+        void CreateInputBindings()
+        {
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+                deviceActionName: "set.Enable Alternate Image Set",
+                deviceTriggerName: "",
+                triggerBindingValue: new BindingValue("return TriggerValue<3"),
+                triggerBindingSource: BindingValueSources.LuaScript
+                );
+
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "Flight Instruments.IAS Airspeed.changed",
+                deviceActionName: "set.indicated airspeed"
+                );
+        }
 
         void IndicatedAirSpeed_Execute(object action, HeliosActionEventArgs e)
         {
             _needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
         }
-
     }
 }

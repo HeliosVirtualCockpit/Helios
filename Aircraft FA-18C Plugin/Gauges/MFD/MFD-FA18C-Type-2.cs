@@ -21,18 +21,49 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
+    using System.ComponentModel;
     using System.Globalization;
+    using System.IO;
     using System.Windows;
+    using System.Xml;
+    using System.Windows.Media;
 
-    [HeliosControl("FA18C.AMPCD", "AMPCD", "F/A-18C", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
-    class AMPCD_FA18C : Gauges.MFD
+
+    [HeliosControl("FA18C.AMPCD", "AMPCD", "F/A-18C", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    public class AMPCD_FA18C : Gauges.MFD
     {
         private static readonly Rect SCREEN_RECT = new Rect(88, 161, 551, 532);
         private Rect _scaledScreenRect = SCREEN_RECT;
+        private HeliosValue _alternateImages;
+        private string _altImageLocation = "Alt";
+        private bool _enableAlternateImageSet = false;
+        private string _defaultBackgroundImage = "{FA-18C}/Images/AMPCD frame.png";
+        private bool _includeViewport = true;
+        private string _vpName = "";
+        private string _interfaceDeviceName = "AMPCD";
 
         public AMPCD_FA18C()
             : base("AMPCD", new Size(727, 746))
         {
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
+
+            _alternateImages = new HeliosValue(this, new BindingValue(false), "", "Enable Alternate Image Set", "Indicates whether the alternate image set is to be used", "True or False", BindingValueUnits.Boolean);
+            _alternateImages.Execute += new HeliosActionHandler(EnableAltImages_Execute);
+            Actions.Add(_alternateImages);
+
+            AddDefaultInputBinding(
+                    childName: "",
+                    deviceActionName: "set.Enable Alternate Image Set",
+                    interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+                    deviceTriggerName: "",
+                    triggerBindingValue: new BindingValue("return TriggerValue<3"),
+                    triggerBindingSource: BindingValueSources.LuaScript
+                    );
+
+
+            _vpName = "FA_18C_CENTER_MFCD";
+            if (_vpName != "" && _includeViewport) AddViewport(_vpName);
+
             AddButton("OSB1", 39, 567, true);
             AddButton("OSB2", 39, 487, true);
             AddButton("OSB3", 39, 409, true);
@@ -71,11 +102,117 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
 
         public override string DefaultBackgroundImage
         {
-            get { return "{FA-18C}/Images/AMPCD frame.png"; }
+            get => _defaultBackgroundImage;
         }
 
-        #endregion
+        public bool EnableAlternateImageSet
+        {
+            get => _enableAlternateImageSet;
+            set
+            {
+                bool newValue = value;
+                bool oldValue = _enableAlternateImageSet;
 
+                if (newValue != oldValue)
+                {
+                    _enableAlternateImageSet = newValue;
+
+                    foreach (HeliosVisual hv in this.Children)
+                    {
+                        if (hv is PushButton pb)
+                        {
+                            pb.Image = ImageSwitchName(pb.Image);
+                            pb.PushedImage = ImageSwitchName(pb.PushedImage);
+                            continue;
+                        }
+                        if (hv is ThreeWayToggleSwitch sw)
+                        {
+                            sw.PositionOneImage = ImageSwitchName(sw.PositionOneImage);
+                            sw.PositionTwoImage = ImageSwitchName(sw.PositionTwoImage);
+                            sw.PositionThreeImage = ImageSwitchName(sw.PositionThreeImage);
+                            continue;
+                        }
+                        if (hv is Indicator ind)
+                        {
+                            ind.OnImage = ImageSwitchName(ind.OnImage);
+                            ind.OffImage = ImageSwitchName(ind.OffImage);
+                            continue;
+                        }
+                        if (hv is Potentiometer pot)
+                        {
+                            pot.KnobImage = ImageSwitchName(pot.KnobImage);
+                            continue;
+                        }
+                        if (hv is RotaryEncoder enc)
+                        {
+                            enc.KnobImage = ImageSwitchName(enc.KnobImage);
+                            continue;
+                        }
+                    }
+
+                    BackgroundImage = ImageSwitchName(BackgroundImage);
+                    // notify change after change is made
+                    OnPropertyChanged("EnableAlternateImageSet", oldValue, newValue, true);
+                }
+            }
+        }
+        public string ViewportName
+        {
+            get => _vpName;
+            set
+            {
+                if (_vpName != value)
+                {
+                    if (_vpName == "")
+                    {
+                        AddViewport(value);
+                        OnDisplayUpdate();
+                    }
+                    else if (value != "")
+                    {
+                        foreach (HeliosVisual visual in this.Children)
+                        {
+                            if (visual.TypeIdentifier == "Helios.Base.ViewportExtent")
+                            {
+                                Controls.Special.ViewportExtent viewportExtent = visual as Controls.Special.ViewportExtent;
+                                viewportExtent.ViewportName = value;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        RemoveViewport(value);
+                    }
+                    OnPropertyChanged("ViewportName", _vpName, value, false);
+                    _vpName = value;
+                }
+            }
+        }
+        public bool RequiresPatches
+        {
+            get => _vpName != "" ? true : false;
+            set => _ = value;
+        }
+        #endregion
+        private string ImageSwitchName(string imageName)
+        {
+            string imageSubfolder = _enableAlternateImageSet ? $"/{_altImageLocation}" : "";
+
+            string dir = Path.GetDirectoryName(imageName);
+            if (new DirectoryInfo(dir).Name == _altImageLocation)
+            {
+                dir = Path.GetDirectoryName(dir);
+            }
+
+            return $"{dir}{imageSubfolder}/{Path.GetFileName(imageName)}";
+        }
+
+        void EnableAltImages_Execute(object sender, HeliosActionEventArgs e)
+        {
+            EnableAlternateImageSet = e.Value.BoolValue;
+            _alternateImages.SetValue(e.Value, e.BypassCascadingTriggers);
+        }
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
         {
             if (args.PropertyName.Equals("Width") || args.PropertyName.Equals("Height"))
@@ -86,22 +223,57 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
             }
             base.OnPropertyChanged(args);
         }
+        private void AddViewport(string name)
+        {
+            Rect vpRect = new Rect(109, 168, 509, 509);
+            vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
+            TextFormat tf = new TextFormat()
+            {
+                FontStyle = FontStyles.Normal,
+                FontWeight = FontWeights.Normal,
+                FontSize = 1.2,
+                FontFamily = ConfigManager.FontManager.GetFontFamilyByName("Franklin Gothic"),
+                ConfiguredFontSize = 1.2,
+                HorizontalAlignment = TextHorizontalAlignment.Center,
+                VerticalAlignment = TextVerticalAlignment.Center
+            };
+            Children.Add(new Helios.Controls.Special.ViewportExtent
+            {
+                FillBackground = true,
+                BackgroundColor = Color.FromArgb(128, 128, 0, 64),
+                FontColor = Color.FromArgb(255, 255, 255, 255),
+                ViewportName = name,
+                TextFormat = tf,
+                Left = vpRect.Left,
+                Top = vpRect.Top,
+                Width = vpRect.Width,
+                Height = vpRect.Height
+            });
+        }
+        private void RemoveViewport(string name)
+        {
+            _includeViewport = false;
+            foreach (HeliosVisual visual in this.Children)
+            {
+                if (visual.TypeIdentifier == "Helios.Base.ViewportExtent")
+                {
+                    Children.Remove(visual);
+                    break;
+                }
+            }
+        }
 
         private void AddButton(string name, double x, double y, bool horizontal)
         {
-            Helios.Controls.PushButton button = new Helios.Controls.PushButton();
+            PushButton button = new PushButton();
             button.Top = y;
             button.Left = x;
             button.Width = 42;
             button.Height = 42;
-            //button.TextPushOffset = new System.Windows.Media.TranslateTransform(1,1);
-            //button.Image = "{FA-18C}/Images/MFD Button 1 Up.png";
-            //button.PushedImage = "{FA-18C}/Images/MFD Button 1 Dn.png";
             if (!horizontal)
             {
                 button.Image = "{FA-18C}/Images/MFD Button 1 UpV.png";
                 button.PushedImage = "{FA-18C}/Images/MFD Button 1 DnV.png";
-                //button.Rotation = HeliosVisualRotation.CCW;
             }
             else
             {
@@ -118,10 +290,29 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
             AddAction(button.Actions["push"], name);
             AddAction(button.Actions["release"], name);
             AddAction(button.Actions["set.physical state"], name);
+
+            string interfaceElementName = $"{name.Substring(0, 3)} {double.Parse(name.Substring(3)):00}";
+
+            // add the default bindings
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "pushed",
+                interfaceActionName: $"{_interfaceDeviceName}.push.{interfaceElementName}"
+                );
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "released",
+                interfaceActionName: $"{_interfaceDeviceName}.release.{interfaceElementName}"
+                );
+            AddDefaultInputBinding(
+                childName: name,
+                interfaceTriggerName: $"{_interfaceDeviceName}.{interfaceElementName}.changed",
+                deviceActionName: "set.physical state");
+
         }
         private void AddKnob(string name, Point posn, Size size)
         {
-            Helios.Controls.Potentiometer knob = new Helios.Controls.Potentiometer
+            Potentiometer knob = new Potentiometer
             {
                 Name = name,
                 KnobImage = "{FA-18C}/Images/Common Knob.png",
@@ -143,6 +334,19 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
                 AddTrigger(trigger, name);
             }
             AddAction(knob.Actions["set.value"], name);
+
+            string interfaceElementName = $"{_interfaceDeviceName} Off/Brightness Control Knob";
+
+            // add the default bindings
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "value.changed",
+                interfaceActionName: $"{_interfaceDeviceName}.set.{interfaceElementName}"
+                );
+            AddDefaultInputBinding(
+                childName: name,
+                interfaceTriggerName: $"{_interfaceDeviceName}.{interfaceElementName}.changed",
+                deviceActionName: "set.value");
         }
 
         private new void AddTrigger(IBindingTrigger trigger, string device)
@@ -159,10 +363,10 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
 
         private void AddRocker(string name, string imagePrefix, string imageOrientation, double x, double y)
         {
-            Helios.Controls.ThreeWayToggleSwitch rocker = new Helios.Controls.ThreeWayToggleSwitch();
+            ThreeWayToggleSwitch rocker = new ThreeWayToggleSwitch();
             rocker.Name = name;
-            rocker.SwitchType = Helios.Controls.ThreeWayToggleSwitchType.MomOnMom;
-            rocker.ClickType = Helios.Controls.LinearClickType.Touch;
+            rocker.SwitchType = ThreeWayToggleSwitchType.MomOnMom;
+            rocker.ClickType = LinearClickType.Touch;
             rocker.PositionTwoImage = "{FA-18C}/Images/" + imagePrefix + " " + imageOrientation + " Mid.png";
 
             rocker.Top = y;
@@ -170,7 +374,6 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
             switch (imageOrientation)
             {
                 case ("V"):
-                    //rocker.Orientation = Helios.Controls.ToggleSwitchOrientation.Horizontal;
                     rocker.PositionOneImage = "{FA-18C}/Images/" + imagePrefix + " " + imageOrientation + " Up.png";
                     rocker.PositionThreeImage = "{FA-18C}/Images/" + imagePrefix + " " + imageOrientation + " Dn.png";
                     rocker.Height = 84;
@@ -199,6 +402,35 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
             }
 
             AddAction(rocker.Actions["set.position"], name);
+            string interfaceElementName;
+            switch (name)
+            {
+                case "Day / Night":
+                    interfaceElementName = "AMPCD Night/Day Brightness Selector DAY";
+                    break;
+                case "Symbols":
+                    interfaceElementName = "AMPCD Symbology Control Switch UP";
+                    break;
+                case "Gain":
+                    interfaceElementName = "AMPCD Gain Control Switch UP";
+                    break;
+                case "Contrast":
+                    interfaceElementName = "AMPCD Contrast Control Switch UP";
+                    break;
+                default:
+                    interfaceElementName = "";
+                    break;
+            }
+
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "position.changed",
+                interfaceActionName: _interfaceDeviceName + ".set." + interfaceElementName
+            );
+            AddDefaultInputBinding(
+                childName: name,
+                interfaceTriggerName: _interfaceDeviceName + "." + interfaceElementName + ".changed",
+                deviceActionName: "set.position");
         }
 
         private void AddThreeWayToggle(string name, double x, double y, Size size)
@@ -226,12 +458,16 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
                 AddAction(action, name);
             }
 
-            //AddTrigger(toggle.Triggers["pushed"], name);
-            //AddTrigger(toggle.Triggers["released"], name);
-
-            //AddAction(toggle.Actions["push"], name);
-            //AddAction(toggle.Actions["release"], name);
-            //AddAction(toggle.Actions["set.physical state"], name);
+            string interfaceElementName = $"{name} Set Switch";
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "position.changed",
+                interfaceActionName: _interfaceDeviceName + ".set." + interfaceElementName
+            );
+            AddDefaultInputBinding(
+                childName: name,
+                interfaceTriggerName: _interfaceDeviceName + "." + interfaceElementName + ".changed",
+                deviceActionName: "set.position");
         }
 
         public override bool HitTest(Point location)
@@ -257,6 +493,44 @@ namespace GadrocsWorkshop.Helios.Gauges.FA_18C.MFD
         public override void MouseUp(Point location)
         {
             // No-Op
+        }
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            if (_includeViewport)
+            {
+                writer.WriteElementString("EmbeddedViewportName", _vpName);
+            }
+            else
+            {
+                writer.WriteElementString("EmbeddedViewportName", "");
+            }
+            if (EnableAlternateImageSet) writer.WriteElementString("EnableAlternateImageSet", EnableAlternateImageSet.ToString(CultureInfo.InvariantCulture));
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+            _includeViewport = true;
+            if (reader.Name.Equals("EmbeddedViewportName"))
+            {
+                _vpName = reader.ReadElementString("EmbeddedViewportName");
+                if (_vpName == "")
+                {
+                    _includeViewport = false;
+                    RemoveViewport("");
+                }
+            }
+            TypeConverter bc = TypeDescriptor.GetConverter(typeof(bool));
+            if (reader.Name.Equals("EnableAlternateImageSet"))
+            {
+                bool enableAlternateImageSet = (bool)bc.ConvertFromInvariantString(reader.ReadElementString("EnableAlternateImageSet"));
+                EnableAlternateImageSet = enableAlternateImageSet;
+            }
+            else
+            {
+                EnableAlternateImageSet = false;
+            }
         }
     }
 }

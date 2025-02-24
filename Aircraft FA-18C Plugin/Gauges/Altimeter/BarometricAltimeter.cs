@@ -17,11 +17,15 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.IO;
     using System.Windows;
     using System.Windows.Media;
 
     [HeliosControl("Helios.FA18C.Instruments.BAltimeter", "Altimeter", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
-    public class BAltimeter : BaseGauge
+    public class BAltimeter : AltImageGauge
     {
         private HeliosValue _altitude;
         private HeliosValue _airPressure;
@@ -32,9 +36,11 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
         private GaugeDrumCounter _airPressureDrum;
 
         public BAltimeter()
-            : base("Barometric Altimeter", new Size(376, 376))
+            : base("Barometric Altimeter", new Size(376, 376), "Alt")
         {
- 
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
+            CreateInputBindings();
+
             _tensDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Altimeter/alt_drum_tape.xaml", new Point(73d, 129d), "#", new Size(10d, 15d), new Size(31d, 38d));
             _tensDrum.Clip = new RectangleGeometry(new Rect(71d, 144d, 31d, 38d));
             Components.Add(_tensDrum);
@@ -43,9 +49,9 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             _drum.Clip = new RectangleGeometry(new Rect(123d, 130d, 31d, 38d));
             Components.Add(_drum);
 
-            _airPressureDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(135d, 276d), "###%", new Size(10d, 15d), new Size(24d, 32d));
+            _airPressureDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(142d, 276d), "###%", new Size(10d, 15d), new Size(24d, 32d));
             _airPressureDrum.Value = 2992d;
-            _airPressureDrum.Clip = new RectangleGeometry(new Rect(135d, 276d,96d, 32d));
+            _airPressureDrum.Clip = new RectangleGeometry(new Rect(142d, 276d, 96d, 32d));
             Components.Add(_airPressureDrum);
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/Altimeter_Faceplate.png", new Rect(0d, 0d, 376d, 376d)));
@@ -64,7 +70,32 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             _airPressure.Execute += new HeliosActionHandler(AirPressure_Execute);
             Actions.Add(_airPressure);
         }
+        void CreateInputBindings()
+        {
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+                deviceActionName: "set.Enable Alternate Image Set",
+                deviceTriggerName: "",
+                triggerBindingValue: new BindingValue("return TriggerValue<3"),
+                triggerBindingSource: BindingValueSources.LuaScript
+                );
 
+            Dictionary<string, string> bindings = new Dictionary<string, string>
+            {
+                { "Standby Baro Altimeter AAU-52/A.Pressure.changed", "set.air pressure" },
+                { "Standby Baro Altimeter AAU-52/A.Altitude.changed", "set.altitude" }
+            };
+
+            foreach (string t in bindings.Keys)
+            {
+                AddDefaultInputBinding(
+                    childName: "",
+                    interfaceTriggerName: t,
+                    deviceActionName: bindings[t]
+                    );
+            }
+        }
         void Altitude_Execute(object action, HeliosActionEventArgs e)
         {
             _needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue % 1000d);

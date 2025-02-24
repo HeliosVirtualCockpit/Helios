@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="svg2" Width="53" Height="158">
+    <Canvas.Resources/>
+    <Canvas Name="layer6">
+        <Canvas>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <!--g-->
+                    <TranslateTransform X="-123.5" Y="-123.5"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rect6093" Fill="#F000e600" Stroke="#FF000A00" StrokeThickness="2" StrokeMiterLimit="4" Data="m 141.5 169 17 0 0 91 L 150 280.125 141.5 260 z"/>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path6091" Fill="#F0001E00" Stroke="#FF000A00" StrokeThickness="2" StrokeMiterLimit="4" Data="m 175.5 150 c 0 14.08326 -11.41674 25.5 -25.5 25.5 -14.08326 0 -25.5 -11.41674 -25.5 -25.5 0 -14.08326 11.41674 -25.5 25.5 -25.5 14.08326 0 25.5 11.41674 25.5 25.5 z"/>
+        </Canvas>
+    </Canvas>
+</Canvas>

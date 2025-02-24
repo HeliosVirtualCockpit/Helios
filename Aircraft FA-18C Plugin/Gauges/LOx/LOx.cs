@@ -17,11 +17,13 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using System;
+    using System.ComponentModel;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
 
     [HeliosControl("Helios.FA18C.Instruments.O2Gauge", "Liquid Oxygen", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
-    public class O2Gauge : BaseGauge
+    public class O2Gauge : AltImageGauge
     {
         private HeliosValue _LOx;
         private HeliosValue _airPressure;
@@ -30,13 +32,14 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
         private GaugeDrumCounter _airPressureDrum;
 
         public O2Gauge()
-            : base("O2 Gauge", new Size(300, 300))
+            : base("O2 Gauge", new Size(300, 300), "Alt")
         {
- 
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
+            CreateInputBindings();
 
-            _airPressureDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(125d, 258d), "###%", new Size(10d, 15d), new Size(12d, 28d));
+            _airPressureDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(128d, 258d), "###%", new Size(10d, 15d), new Size(12d, 28d));
             _airPressureDrum.Value = 2992d;
-            _airPressureDrum.Clip = new RectangleGeometry(new Rect(125d, 258d,48d, 28d));
+            _airPressureDrum.Clip = new RectangleGeometry(new Rect(128d, 258d, 48d, 28d));
             Components.Add(_airPressureDrum);
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/LOx/LOx_Faceplate.png", new Rect(0d, 0d, 300d, 300d)));
@@ -44,7 +47,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             _needleCalibration = new CalibrationPointCollectionDouble(0d, -90d, 1d, 90d);
             _needle = new GaugeNeedle("{Helios}/Gauges/Common/needle_a.xaml", new Point(150d, 150d), new Size(30, 128), new Point(15, 113), -90d);
             Components.Add(_needle);
-  
+
             _airPressure = new HeliosValue(this, new BindingValue(0d), "", "air pressure", "Current air pressure calibaration setting for the altimeter.", "", BindingValueUnits.InchesOfMercury);
             _airPressure.SetValue(new BindingValue(29.92), true);
             _airPressure.Execute += new HeliosActionHandler(AirPressure_Execute);
@@ -53,6 +56,24 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             _LOx = new HeliosValue(this, new BindingValue(0d), "", "Oxygen Flow", "Current Liquid Oxygen in litres.", "", BindingValueUnits.Numeric);
             _LOx.Execute += new HeliosActionHandler(LOx_Execute);
             Actions.Add(_LOx);
+        }
+
+        void CreateInputBindings()
+        {
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+                deviceActionName: "set.Enable Alternate Image Set",
+                deviceTriggerName: "",
+                triggerBindingValue: new BindingValue("return TriggerValue<3"),
+                triggerBindingSource: BindingValueSources.LuaScript
+                );
+
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "Standby Baro Altimeter AAU-52/A.Pressure.changed",
+                deviceActionName: "set.air pressure"
+                );
         }
 
         void LOx_Execute(object action, HeliosActionEventArgs e)

@@ -18,7 +18,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System;
     using System.Windows;
 
-    public class BaseGauge : HeliosVisual
+    public class BaseGauge : CompositeVisual
     {
         private GaugeComponentCollection _components = new GaugeComponentCollection();
 

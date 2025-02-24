@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Ai->XAML Export Plug-In Version 0.2 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="277.000" Height="137.750"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Left Datum/<Line> -->
+
+            <!-- Layer 1/Left Datum/<Line> -->
+
+        </Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Right Datum/<Line> -->
+
+            <!-- Layer 1/Right Datum/<Line> -->
+
+        </Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+                <Path StrokeThickness="0.8" Stroke="#d000e500" StrokeMiterLimit="1.0" Fill="#d000ff00" Data="F1 M 2.164,136.543 C 2.164,136.594 2.158,136.648 2.146,136.707 C 2.053,137.148 1.779,137.369 1.326,137.369 C 0.994,137.369 0.748,137.215 0.588,136.906 C 0.553,136.848 0.523,136.727 0.500,136.543 L 0.500,126.207 C 0.512,126.113 0.526,126.024 0.544,125.940 C 0.562,125.856 0.604,125.775 0.670,125.697 C 0.826,125.506 1.027,125.401 1.273,125.384 C 1.520,125.366 1.732,125.445 1.912,125.621 C 2.006,125.715 2.066,125.805 2.094,125.891 C 2.121,125.977 2.145,126.082 2.164,126.207 L 2.164,136.543 Z"/>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+                <Path StrokeThickness="0.8" Stroke="#d000e500" StrokeMiterLimit="1.0" Fill="#d000ff00" Data="F1 M 7.643,127.033 C 7.178,127.127 6.810,127.393 6.538,127.830 C 6.267,128.268 6.066,128.766 5.937,129.324 C 5.809,129.883 5.738,130.447 5.727,131.018 C 5.715,131.588 5.736,132.051 5.791,132.406 C 5.838,132.742 5.949,133.175 6.125,133.704 C 6.301,134.233 6.522,134.688 6.790,135.069 C 7.058,135.450 7.363,135.669 7.707,135.726 C 8.051,135.782 8.416,135.506 8.803,134.896 C 9.096,134.428 9.314,133.832 9.459,133.109 C 9.604,132.387 9.654,131.648 9.611,130.895 C 9.568,130.141 9.425,129.430 9.181,128.762 C 8.937,128.094 8.576,127.578 8.100,127.215 C 7.955,127.113 7.818,127.053 7.689,127.033 C 7.686,127.033 7.681,127.033 7.675,127.033 C 7.669,127.033 7.658,127.033 7.643,127.033 Z M 7.602,125.375 C 8.477,125.375 9.191,125.738 9.746,126.465 C 10.301,127.191 10.686,127.930 10.900,128.680 C 10.990,129.008 11.068,129.352 11.135,129.711 C 11.334,130.777 11.335,131.945 11.138,133.215 C 10.940,134.484 10.473,135.537 9.734,136.373 C 9.141,137.041 8.453,137.375 7.672,137.375 C 6.473,137.375 5.571,136.750 4.968,135.500 C 4.364,134.250 4.060,132.875 4.054,131.375 C 4.048,129.875 4.340,128.500 4.930,127.250 C 5.520,126.000 6.410,125.375 7.602,125.375 Z"/>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+                <Path StrokeThickness="0.8" Stroke="#d000e500" StrokeMiterLimit="1.0" Fill="#d000ff00" Data="F1 M 16.455,127.033 C 15.990,127.127 15.622,127.393 15.351,127.830 C 15.079,128.268 14.879,128.766 14.750,129.324 C 14.621,129.883 14.551,130.447 14.539,131.018 C 14.527,131.588 14.549,132.051 14.604,132.406 C 14.650,132.742 14.762,133.175 14.937,133.704 C 15.113,134.233 15.335,134.688 15.603,135.069 C 15.870,135.450 16.176,135.669 16.520,135.726 C 16.863,135.782 17.229,135.506 17.615,134.896 C 17.908,134.428 18.127,133.832 18.271,133.109 C 18.416,132.387 18.467,131.648 18.424,130.895 C 18.381,130.141 18.237,129.430 17.993,128.762 C 17.749,128.094 17.389,127.578 16.912,127.215 C 16.768,127.113 16.631,127.053 16.502,127.033 C 16.498,127.033 16.493,127.033 16.487,127.033 C 16.481,127.033 16.471,127.033 16.455,127.033 Z M 16.414,125.375 C 17.289,125.375 18.004,125.738 18.559,126.465 C 19.113,127.191 19.498,127.930 19.713,128.680 C 19.803,129.008 19.881,129.352 19.947,129.711 C 20.146,130.777 20.147,131.945 19.950,133.215 C 19.753,134.484 19.285,135.537 18.547,136.373 C 17.953,137.041 17.266,137.375 16.484,137.375 C 15.285,137.375 14.384,136.750 13.780,135.500 C 13.177,134.250 12.872,132.875 12.866,131.375 C 12.860,129.875 13.152,128.500 13.742,127.250 C 14.332,126.000 15.223,125.375 16.414,125.375 Z"/>
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+        </Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+        </Canvas>
+
+    </Canvas>
+</Canvas>
