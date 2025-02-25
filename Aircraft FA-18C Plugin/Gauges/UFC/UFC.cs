@@ -58,8 +58,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
 
             AddDefaultInputBinding(
                     childName: "",
-                    deviceActionName: "Cockpit Lights.MODE Switch.changed",
-                    interfaceTriggerName: "set.Enable Alternate Image Set",
+                    deviceActionName: "set.Enable Alternate Image Set",
+                    interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
                     deviceTriggerName: "",
                     triggerBindingValue: new BindingValue("return TriggerValue<3"),
                     triggerBindingSource: BindingValueSources.LuaScript

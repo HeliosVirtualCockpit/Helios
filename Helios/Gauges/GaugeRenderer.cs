@@ -24,23 +24,46 @@ namespace GadrocsWorkshop.Helios.Gauges
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            BaseGauge gauge = Visual as BaseGauge;
-            foreach (GaugeComponent component in gauge.Components)
+            if (Visual is BaseGauge gauge)
             {
-                component.Render(drawingContext);
+                foreach (GaugeComponent component in gauge.Components)
+                {
+                    component.Render(drawingContext);
+                }
             }
+            else if (Visual is CompositeBaseGauge compositeGauge)
+            {
+                foreach (GaugeComponent component in compositeGauge.Components)
+                {
+                    component.Render(drawingContext);
+                }
+            }
+            else { }
         }
 
         protected override void OnRefresh()
         {
-            BaseGauge gauge = Visual as BaseGauge;
-            _scaleX = gauge.Width / gauge.NativeSize.Width;
-            _scaleY = gauge.Height / gauge.NativeSize.Height;
-            foreach (GaugeComponent component in gauge.Components)
+            if (Visual is BaseGauge gauge)
             {
-                component.Refresh(_scaleX, _scaleY);
-                component.ImageRefresh = false;
+                _scaleX = gauge.Width / gauge.NativeSize.Width;
+                _scaleY = gauge.Height / gauge.NativeSize.Height;
+                foreach (GaugeComponent component in gauge.Components)
+                {
+                    component.Refresh(_scaleX, _scaleY);
+                    component.ImageRefresh = false;
+                }
             }
+            else if (Visual is CompositeBaseGauge compositeGauge)
+            {
+                _scaleX = compositeGauge.Width / compositeGauge.NativeSize.Width;
+                _scaleY = compositeGauge.Height / compositeGauge.NativeSize.Height;
+                foreach (GaugeComponent component in compositeGauge.Components)
+                {
+                    component.Refresh(_scaleX, _scaleY);
+                    component.ImageRefresh = false;
+                }
+            }
+            else { }
         }
     }
 }
