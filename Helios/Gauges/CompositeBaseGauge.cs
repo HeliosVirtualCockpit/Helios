@@ -18,11 +18,11 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System;
     using System.Windows;
 
-    public class BaseGauge : HeliosVisual
+    public class CompositeBaseGauge : CompositeVisual
     {
         private GaugeComponentCollection _components = new GaugeComponentCollection();
 
-        protected BaseGauge(string name, Size nativeSize)
+        protected CompositeBaseGauge(string name, Size nativeSize)
             : base(name, nativeSize)
         {
             _components.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Components_CollectionChanged);

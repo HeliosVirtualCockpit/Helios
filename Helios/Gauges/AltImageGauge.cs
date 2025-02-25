@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System.IO;
     using System.Windows;
 
-    public class AltImageGauge : BaseGauge
+    public class AltImageGauge : CompositeBaseGauge
     {
         private HeliosValue _alternateImages;
         private string _alternateImageSetFolderName = "";
