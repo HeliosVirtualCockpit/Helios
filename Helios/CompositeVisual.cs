@@ -53,6 +53,7 @@ namespace GadrocsWorkshop.Helios
         /// <param name="deviceTriggerBindingValue">Static trigger value which only used with deviceTriggerValue</param>
         public DefaultInputBinding(string childName, string interfaceTriggerName, string deviceActionName, string deviceTriggerName, BindingValue deviceTriggerBindingValue)
         {
+            _ = interfaceTriggerName;
             ChildName = childName;
             InterfaceTriggerName = "";
             DeviceTriggerName = deviceTriggerName;
@@ -318,13 +319,14 @@ namespace GadrocsWorkshop.Helios
         }
         private HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action, BindingValue bindingValue)
         {
+            _ = bindingValue;
             return CreateNewBinding(trigger, action, new BindingValue(null), BindingValueSources.TriggerValue);
         }
         private HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action, BindingValue bindingValue, BindingValueSources bindingValueSources)
             {
-            HeliosBinding binding = new HeliosBinding(trigger, action);
-
-            binding.BypassCascadingTriggers = true;
+            HeliosBinding binding = new HeliosBinding(trigger, action) {
+                BypassCascadingTriggers = true
+            };
 
             if(bindingValueSources == BindingValueSources.LuaScript)
             {
@@ -666,6 +668,8 @@ namespace GadrocsWorkshop.Helios
         protected void AddRotarySwitchBindings(string name, Point posn, Size size, RotarySwitch rotarySwitch,
             string interfaceDeviceName, string interfaceElementName)
         {
+            _ = posn;
+            _ = size;
             string componentName = GetComponentName(name);
             Children.Add(rotarySwitch);
 
@@ -862,6 +866,7 @@ namespace GadrocsWorkshop.Helios
             bool horizontal = false)
         {
             string componentName = GetComponentName(name);
+            _ = fromCenter;
             ThreeWayToggleSwitch toggle = new ThreeWayToggleSwitch
             {
                 Top = posn.Y,
@@ -911,6 +916,7 @@ namespace GadrocsWorkshop.Helios
             LinearClickType clickType = LinearClickType.Touch,
             bool horizontal = false)
         {
+            _ = fromCenter;
             string componentName = GetComponentName(name);
             ThreeWayToggleSwitch rocker = new ThreeWayToggleSwitch
             {
@@ -1130,6 +1136,8 @@ namespace GadrocsWorkshop.Helios
             string interfaceElementName
             )
         {
+            _ = interfaceDeviceName;
+            _ = interfaceElementName;
             device.Name = GetComponentName(name);
             device.Top = posn.Y;
             device.Left = posn.X;

@@ -50,19 +50,24 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             Components.Add(new GaugeImage("{FA-18C}/Images/indicator_off.png", new Rect(260d, 177d, 50d, 50d)));
             Components.Add(new GaugeImage("{FA-18C}/Images/Radar Altimeter Blank.png", new Rect(179d, 288d, 56d, 22d)));
 
-            bool hidden = _giRed != null ? _giRed.IsHidden : true;
-            _giRed = new GaugeImage("{FA-18C}/Images/indicator_red.png", new Rect(108d, 177d, 50d, 50d));
-            _giRed.IsHidden = hidden;
+            bool hidden = _giRed == null || _giRed.IsHidden;
+            _giRed = new GaugeImage("{FA-18C}/Images/indicator_red.png", new Rect(108d, 177d, 50d, 50d)) {
+                IsHidden = hidden
+             };
             Components.Add(_giRed);
 
-            hidden = _giGreen != null ? _giGreen.IsHidden : true;
-            _giGreen = new GaugeImage("{FA-18C}/Images/indicator_green.png", new Rect(260d, 177d, 50d, 50d));
-            _giGreen.IsHidden = hidden;
+            hidden = _giGreen == null || _giGreen.IsHidden;
+            _giGreen = new GaugeImage("{FA-18C}/Images/indicator_green.png", new Rect(260d, 177d, 50d, 50d))
+            {
+                IsHidden = hidden
+            };
             Components.Add(_giGreen);
 
-            hidden = _giOff != null ? _giOff.IsHidden : true;
-            _giOff = new GaugeImage("{FA-18C}/Images/Radar Altimeter Off Flag.png", new Rect(179d, 287d, 56d, 24d));
-            _giOff.IsHidden = hidden;
+            hidden = _giOff == null || _giOff.IsHidden;
+            _giOff = new GaugeImage("{FA-18C}/Images/Radar Altimeter Off Flag.png", new Rect(179d, 287d, 56d, 24d))
+            {
+                IsHidden = hidden
+            };
             Components.Add(_giOff);
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Faceplate.png", new Rect(0d, 0d, 420d, 420d)));
@@ -72,13 +77,15 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
                 new CalibrationPointDouble(0.000d, -12d)
             };
             double needle = _needle != null ? _needle.Rotation : 0d;
-            _needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/altimeter_needle.xaml", new Point(210d, 210d), new Size(16d, 250d), new Point(8d, 200d), 0d);
-            _needle.Rotation = needle;
+            _needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/altimeter_needle.xaml", new Point(210d, 210d), new Size(16d, 250d), new Point(8d, 200d), 0d) {
+                Rotation = needle
+            };
             Components.Add(_needle);
 
             needle = _minimum_needle != null ? _minimum_needle.Rotation : 0d;
-            _minimum_needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Min_Needle.xaml", new Point(210d, 210d), new Size(46d, 205d), new Point(23d, 205d), 0d);
-            _minimum_needle.Rotation = needle;
+            _minimum_needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Min_Needle.xaml", new Point(210d, 210d), new Size(46d, 205d), new Point(23d, 205d), 0d) {
+                Rotation = needle
+            };
             Components.Add(_minimum_needle);
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Cover.png", new Rect(94d, 11d, 89d, 88d)));  // this is the needle cover

@@ -29,12 +29,11 @@ namespace GadrocsWorkshop.Helios.Gauges
         private readonly HeliosValue _alternateImages;
         private string _alternateImageSetFolderName = "";
         private bool _enableAlternateImageSet = false;
-        private readonly bool _enableAction = true;
 
         protected AltImageGauge(string name, Size nativeSize, string alternateImageSetFolderName = "Alt", bool enableAction = true)
             : base(name, nativeSize)
         {
-            _enableAction = enableAction;
+            _ = enableAction;
             _alternateImageSetFolderName = alternateImageSetFolderName;
             if (enableAction)
             {

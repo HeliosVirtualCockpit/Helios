@@ -44,17 +44,22 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/altimeter_mask.xaml", new Rect(25d, 25d, 250d, 250d)));
 
 
-            _tensDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Altimeter/alt_drum_tape.xaml", new Point(73d, 129d), "#", new Size(10d, 15d), new Size(31d, 38d));
-            _tensDrum.Clip = new RectangleGeometry(new Rect(71d, 144d, 31d, 38d));
+            _tensDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Altimeter/alt_drum_tape.xaml", new Point(73d, 129d), "#", new Size(10d, 15d), new Size(31d, 38d))
+            {
+                Clip = new RectangleGeometry(new Rect(71d, 144d, 31d, 38d))
+            };
             Components.Add(_tensDrum);
 
-            _drum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(123d, 128d), "#%00", new Size(10d, 15d), new Size(31d, 38d));
-            _drum.Clip = new RectangleGeometry(new Rect(123d, 130d, 31d, 38d));
+            _drum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(123d, 128d), "#%00", new Size(10d, 15d), new Size(31d, 38d)) {
+                Clip = new RectangleGeometry(new Rect(123d, 130d, 31d, 38d))
+            };
             Components.Add(_drum);
 
-            _airPressureDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(142d, 276d), "###%", new Size(10d, 15d), new Size(24d, 32d));
-            _airPressureDrum.Value = 2992d;
-            _airPressureDrum.Clip = new RectangleGeometry(new Rect(142d, 276d, 96d, 32d));
+            _airPressureDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Common/drum_tape.xaml", new Point(142d, 276d), "###%", new Size(10d, 15d), new Size(24d, 32d))
+            {
+                Value = 2992d,
+                Clip = new RectangleGeometry(new Rect(142d, 276d, 96d, 32d))
+            };
             Components.Add(_airPressureDrum);
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/Altimeter_Faceplate.png", new Rect(0d, 0d, 376d, 376d)));
