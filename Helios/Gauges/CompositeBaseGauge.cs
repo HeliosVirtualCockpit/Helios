@@ -18,7 +18,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System;
     using System.Windows;
 
-    public class CompositeBaseGauge : CompositeVisual
+    public class CompositeBaseGauge : CompositeVisual, IGauge
     {
         private GaugeComponentCollection _components = new GaugeComponentCollection();
 
@@ -36,6 +36,24 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 return _components;
             }
+        }
+        public double NativeWidth
+        {
+            get => NativeSize.Width;
+        }
+        public double NativeHeight
+        {
+            get => NativeSize.Height;
+        }
+        public new double Width
+        {
+            get => base.Width;
+            set => base.Width = value;
+        }
+        public new double Height
+        {
+            get => base.Height;
+            set => base.Height = value;
         }
 
         #endregion

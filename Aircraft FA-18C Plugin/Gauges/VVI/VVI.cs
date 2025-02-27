@@ -28,14 +28,14 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private GaugeNeedle _needle;
         private CalibrationPointCollectionDouble _calibrationPoints;
 
-        public VVI() : base("VVI", new Size(364, 376), "Alt")
+        public VVI() : base("VVI", new Size(300, 300), "Alt")
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
             CreateInputBindings();
 
-            Components.Add(new GaugeImage("{FA-18C}/Gauges/VVI/VVI_Faceplate.png", new Rect(32d, 38d, 300d, 300d)));
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/VVI/VVI_Faceplate.png", new Rect(0d, 0d, 300d, 300d)));
 
-            _needle = new GaugeNeedle("{FA-18C}/Gauges/Common/needle_a.xaml", new Point(182d, 188d), new Size(22, 165), new Point(11, 130), -90d);
+            _needle = new GaugeNeedle("{FA-18C}/Gauges/Common/needle_a.xaml", new Point(150d, 150d), new Size(22, 165), new Point(11, 130), -90d);
             Components.Add(_needle);
 
             _verticalVelocity = new HeliosValue(this, new BindingValue(0d), "", "vertical velocity", "Veritcal velocity of the aircraft", "(-6,000 to 6,000)", BindingValueUnits.FeetPerMinute);

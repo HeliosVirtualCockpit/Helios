@@ -231,6 +231,7 @@
     <Compile Include="Gauges\A-10\HARS\HARSSync_1.cs" />
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
     <Compile Include="Gauges\AltImageGauge.cs" />
+    <Compile Include="Gauges\IGauge.cs" />
     <Compile Include="Gauges\CompositeBaseGauge.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\BarGauge.cs" />
