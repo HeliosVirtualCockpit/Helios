@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 
     public class CompositeBaseGauge : CompositeVisual, IGauge
     {
-        private GaugeComponentCollection _components = new GaugeComponentCollection();
+        private readonly GaugeComponentCollection _components = new GaugeComponentCollection();
 
         protected CompositeBaseGauge(string name, Size nativeSize)
             : base(name, nativeSize)

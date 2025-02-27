@@ -120,7 +120,7 @@ namespace GadrocsWorkshop.Helios
 
     public abstract class CompositeVisual : HeliosVisual
     {
-        private Dictionary<HeliosVisual, Rect> _nativeSizes = new Dictionary<HeliosVisual, Rect>();
+        private readonly Dictionary<HeliosVisual, Rect> _nativeSizes = new Dictionary<HeliosVisual, Rect>();
         protected List<DefaultOutputBinding> _defaultOutputBindings;
         protected List<DefaultInputBinding> _defaultInputBindings;
         protected List<DefaultSelfBinding> _defaultSelfBindings;

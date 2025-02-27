@@ -27,19 +27,22 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
     [HeliosControl("Helios.FA18C.Instruments.BAltimeter", "Altimeter", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class BAltimeter : AltImageGauge
     {
-        private HeliosValue _altitude;
-        private HeliosValue _airPressure;
-        private GaugeNeedle _needle;
-        private CalibrationPointCollectionDouble _needleCalibration;
-        private GaugeDrumCounter _tensDrum;
-        private GaugeDrumCounter _drum;
-        private GaugeDrumCounter _airPressureDrum;
+        private readonly HeliosValue _altitude;
+        private readonly HeliosValue _airPressure;
+        private readonly GaugeNeedle _needle;
+        private readonly CalibrationPointCollectionDouble _needleCalibration;
+        private readonly GaugeDrumCounter _tensDrum;
+        private readonly GaugeDrumCounter _drum;
+        private readonly GaugeDrumCounter _airPressureDrum;
 
         public BAltimeter()
             : base("Barometric Altimeter", new Size(376, 376), "Alt")
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
             CreateInputBindings();
+
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/altimeter_mask.xaml", new Rect(25d, 25d, 250d, 250d)));
+
 
             _tensDrum = new GaugeDrumCounter("{FA-18C}/Gauges/Altimeter/alt_drum_tape.xaml", new Point(73d, 129d), "#", new Size(10d, 15d), new Size(31d, 38d));
             _tensDrum.Clip = new RectangleGeometry(new Rect(71d, 144d, 31d, 38d));

@@ -679,6 +679,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Resource Include="Gauges\Altimeter\altimeter_mask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Alt\altimeter_mask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Gauges\Common\needle_a10.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

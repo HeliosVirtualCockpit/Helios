@@ -27,17 +27,17 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
     [HeliosControl("Helios.FA18C.Instruments", "RADAR Altimeter", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class RAltimeter : AltImageGauge
     {
-        private HeliosValue _altitude;
-        private GaugeNeedle _needle;
-        private HeliosValue _min_altitude;
-        private HeliosValue _redIndicator;
-        private HeliosValue _greenIndicator;
-        private HeliosValue _offIndicator;
-        private GaugeNeedle _minimum_needle;
-        private CalibrationPointCollectionDouble _needleCalibration;
-        private GaugeImage _giRed;
-        private GaugeImage _giGreen;
-        private GaugeImage _giOff;
+        private readonly HeliosValue _altitude;
+        private readonly GaugeNeedle _needle;
+        private readonly HeliosValue _min_altitude;
+        private readonly HeliosValue _redIndicator;
+        private readonly HeliosValue _greenIndicator;
+        private readonly HeliosValue _offIndicator;
+        private readonly GaugeNeedle _minimum_needle;
+        private readonly CalibrationPointCollectionDouble _needleCalibration;
+        private readonly GaugeImage _giRed;
+        private readonly GaugeImage _giGreen;
+        private readonly GaugeImage _giOff;
 
         public RAltimeter()
             : base("RADAR Altimeter", new Size(420, 420), "Alt")

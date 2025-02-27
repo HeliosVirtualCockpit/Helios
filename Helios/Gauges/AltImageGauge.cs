@@ -26,10 +26,10 @@ namespace GadrocsWorkshop.Helios.Gauges
 
     public class AltImageGauge : CompositeBaseGauge
     {
-        private HeliosValue _alternateImages;
+        private readonly HeliosValue _alternateImages;
         private string _alternateImageSetFolderName = "";
         private bool _enableAlternateImageSet = false;
-        private bool _enableAction = true;
+        private readonly bool _enableAction = true;
 
         protected AltImageGauge(string name, Size nativeSize, string alternateImageSetFolderName = "Alt", bool enableAction = true)
             : base(name, nativeSize)

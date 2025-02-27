@@ -24,9 +24,9 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
     [HeliosControl("Helios.FA18C.VVI", "Vertical Velocity Indicator", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class VVI : AltImageGauge
     {
-        private HeliosValue _verticalVelocity;
-        private GaugeNeedle _needle;
-        private CalibrationPointCollectionDouble _calibrationPoints;
+        private readonly HeliosValue _verticalVelocity;
+        private readonly GaugeNeedle _needle;
+        private readonly CalibrationPointCollectionDouble _calibrationPoints;
 
         public VVI() : base("VVI", new Size(300, 300), "Alt")
         {
