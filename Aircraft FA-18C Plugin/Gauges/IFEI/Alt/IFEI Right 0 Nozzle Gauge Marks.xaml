@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Ai->XAML Export Plug-In Version 0.2 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="277.000" Height="137.750"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Left Datum/<Line> -->
+
+            <!-- Layer 1/Left Datum/<Line> -->
+
+        </Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Right Datum/<Line> -->
+
+            <!-- Layer 1/Right Datum/<Line> -->
+
+        </Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Left/<Rectangle> -->
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Left/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+        </Canvas>
+
+        <Canvas>
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <!-- Layer 1/Ticks Right/<Rectangle> -->
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+
+            </Canvas>
+
+            <Canvas>
+
+                <!-- Layer 1/Ticks Right/<Group>/<Compound Path> -->
+                <Path StrokeThickness="0.8" Stroke="#d000e500" StrokeMiterLimit="1.0" Fill="#d000ff00" Data="F1 M 149.092,2.033 C 148.627,2.127 148.259,2.393 147.987,2.830 C 147.716,3.268 147.516,3.766 147.387,4.324 C 147.258,4.883 147.187,5.447 147.176,6.018 C 147.164,6.588 147.186,7.051 147.240,7.406 C 147.287,7.742 147.398,8.175 147.574,8.704 C 147.750,9.233 147.972,9.688 148.239,10.069 C 148.507,10.450 148.812,10.669 149.156,10.726 C 149.500,10.782 149.865,10.506 150.252,9.896 C 150.545,9.428 150.764,8.832 150.908,8.109 C 151.053,7.387 151.104,6.648 151.061,5.895 C 151.018,5.141 150.874,4.430 150.630,3.762 C 150.386,3.094 150.025,2.578 149.549,2.215 C 149.404,2.113 149.268,2.053 149.139,2.033 C 149.135,2.033 149.130,2.033 149.124,2.033 C 149.118,2.033 149.107,2.033 149.092,2.033 Z M 149.051,0.375 C 149.926,0.375 150.641,0.738 151.195,1.465 C 151.750,2.191 152.135,2.930 152.350,3.680 C 152.439,4.008 152.518,4.352 152.584,4.711 C 152.783,5.777 152.784,6.945 152.587,8.215 C 152.390,9.484 151.922,10.537 151.184,11.373 C 150.590,12.041 149.902,12.375 149.121,12.375 C 147.922,12.375 147.021,11.750 146.417,10.500 C 145.813,9.250 145.509,7.875 145.503,6.375 C 145.497,4.875 145.789,3.500 146.379,2.250 C 146.969,1.000 147.859,0.375 149.051,0.375 Z"/>
+
+            </Canvas>
+
+        </Canvas>
+
+    </Canvas>
+</Canvas>

@@ -22,6 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
     using System.Windows;
     using System.Xml;
     using System.Globalization;
+    using System.ComponentModel;
 
     [HeliosControl("Helios.FA18C.IFEI", "IFEI", "F/A-18C", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class IFEI_FA18C : FA18CDevice
@@ -31,15 +32,40 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private string _interfaceDeviceName = "IFEI";
 
         private String _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI"; // "Segment7 Standard"; //"Seven Segment";
-        private Color _textColor = Color.FromArgb(0xff,220, 220, 220);
+        private Color _textColor = Color.FromArgb(0xff, 220, 220, 220);
         private Color _backGroundColor = Color.FromArgb(100, 100, 20, 50);
         private string _imageLocation = "{FA-18C}/Gauges/IFEI/";
         private bool _useBackGround = false;
         private IFEI_Gauges _IFEI_gauges;
 
+        private HeliosValue _alternateImages;
+        private string _altImageLocation = "";
+
         public IFEI_FA18C()
             : base("IFEI_Gauge", new Size(779, 702))
         {
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
+
+            _alternateImages = new HeliosValue(this, new BindingValue(false), "", "Enable Alternate Image Set", "Indicates whether the alternate image set is to be used", "True or False", BindingValueUnits.Boolean);
+            _alternateImages.Execute += new HeliosActionHandler(EnableAltImages_Execute);
+            Actions.Add(_alternateImages);
+            AddDefaultInputBinding(
+                    childName: "",
+                    deviceActionName: "set.Enable Alternate Image Set",
+                    interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+                    deviceTriggerName: "",
+                    triggerBindingValue: new BindingValue("return TriggerValue<3"),
+                    triggerBindingSource: BindingValueSources.LuaScript
+                    );
+ 
+            //DefaultInputBindings.Add(new DefaultInputBinding(
+            //childName: "",
+            //interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+            //deviceActionName: "set.Enable Alternate Image Set",
+            //deviceTriggerName: "",
+            //deviceTriggerBindingValue: new BindingValue("return TriggerValue<3"),
+            //bindingValueSource: BindingValueSources.LuaScript
+            //));
 
             // adding the text displays
             double dispHeight = 50;
@@ -119,7 +145,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 name: "Video Record DDI",
                 posn: new Point(236, 570),
                 size: ThreeWayToggleSize,
-                image: "{Helios}/Images/Toggles/orange-round-",
+                image: "{FA-18C}/Gauges/IFEI/orange-round-",
                 interfaceDevice: _interfaceDeviceName,
                 interfaceElement: "Video Record Selector Switch HMD/LDDI/RDDI",
                 fromCenter: false
@@ -129,7 +155,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 name: "Video Record HUD",
                 posn: new Point(395, 570),
                 size: ThreeWayToggleSize,
-                image: "{Helios}/Images/Toggles/orange-round-",
+                image: "{FA-18C}/Gauges/IFEI/orange-round-",
                 interfaceDevice: _interfaceDeviceName,
                 interfaceElement: "Video Record Selector Switch, HUD/LDIR/RDDI",
                 fromCenter: false
@@ -139,7 +165,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 name: "Video Record Control",
                 posn: new Point(584, 570),
                 size: ThreeWayToggleSize,
-                image: "{Helios}/Images/Toggles/orange-round-",
+                image: "{FA-18C}/Gauges/IFEI/orange-round-",
                 interfaceDevice: _interfaceDeviceName,
                 interfaceElement: "Video Record Mode Selector Switch, MAN/OFF/AUTO",
                 fromCenter: false
@@ -163,6 +189,60 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 }
             }
         }
+        public bool EnableAlternateImageSet
+        {
+            get
+            {
+                return _altImageLocation != "";
+            }
+            set
+            {
+                bool newValue = value;
+                bool oldValue = _altImageLocation != "";
+
+                if (newValue != oldValue)
+                {
+                    _altImageLocation = newValue ? "/Alt" : "";
+                    _imageLocation = $"{{FA-18C}}/Gauges/IFEI{_altImageLocation}/";
+                    _IFEI_gauges.EnableAlternateImageSet = newValue;
+                    foreach(HeliosVisual hv in this.Children)
+                    {
+                        if (hv is TextDisplay txtDisplay)
+                        {
+                            txtDisplay.OnTextColor = newValue ? Color.FromArgb(0xff, 0, 220, 0) : Color.FromArgb(0xff, 220, 220, 220);
+                            continue;
+                        }
+                        //if (hv is ImageTranslucent img)
+                        //{
+                        //    img.Image = $"{_imageLocation}{System.IO.Path.GetFileName(img.Image)}";
+                        //    continue;
+                        //}
+                        if (hv is PushButton pb)
+                        {
+                            pb.Image = $"{_imageLocation}{System.IO.Path.GetFileName(pb.Image)}";
+                            pb.PushedImage = $"{_imageLocation}{System.IO.Path.GetFileName(pb.PushedImage)}";
+                            continue;
+                        }
+                        if (hv is ThreeWayToggleSwitch sw)
+                        {
+                            sw.PositionOneImage = $"{_imageLocation}{System.IO.Path.GetFileName(sw.PositionOneImage)}";
+                            sw.PositionTwoImage = $"{_imageLocation}{System.IO.Path.GetFileName(sw.PositionTwoImage)}";
+                            sw.PositionThreeImage = $"{_imageLocation}{System.IO.Path.GetFileName(sw.PositionThreeImage)}";
+                            continue;
+                        }
+                        if (hv is Potentiometer pot)
+                        {
+                            pot.KnobImage = $"{_imageLocation}{System.IO.Path.GetFileName(pot.KnobImage)}";
+                            continue;
+                        }
+                    }
+                    BackgroundImage = _imageLocation + "IFEI.png";
+                    // notify change after change is made
+                    OnPropertyChanged("EnableAlternateImageSet", oldValue, newValue, true);
+                }
+                
+            }
+        }
         #endregion
 
         protected override void OnProfileChanged(HeliosProfile oldProfile) {
@@ -172,6 +252,12 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         public override string DefaultBackgroundImage
         {
             get { return _imageLocation + "IFEI.png"; }
+        }
+
+        void EnableAltImages_Execute(object sender, HeliosActionEventArgs e)
+        {
+            EnableAlternateImageSet = e.Value.BoolValue;
+            _alternateImages.SetValue(e.Value, e.BypassCascadingTriggers);
         }
 
         private void AddTextDisplay(string name, double x, double y, Size size, double baseFontsize, string testDisp,
@@ -226,6 +312,23 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 interfaceElementName: interfaceElement,
                 fromCenter: false
                 );
+        }
+        private void AddImage(string name, string imageName, Rect rect)
+        {
+            ImageTranslucent image = new ImageTranslucent()
+            {
+                Name = name,
+                Left = rect.Left,
+                Top = rect.Top,
+                Width = rect.Width,
+                Height = rect.Height,
+                Alignment = ImageAlignment.Stretched,
+                Image = imageName,
+                AllowInteraction = true,
+                Value = 1d,
+                IsHidden = false
+            };
+            Children.Add(image);
         }
         private void AddIFEIParts(string name, double x, double y, Size size, string interfaceDevice, string interfaceElement)
         {
@@ -287,15 +390,29 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             {
                 writer.WriteElementString("GlassReflectionOpacity", GlassReflectionOpacity.ToString(CultureInfo.InvariantCulture));
             }
+            if (EnableAlternateImageSet) writer.WriteElementString("EnableAlternateImageSet", EnableAlternateImageSet.ToString(CultureInfo.InvariantCulture));
+
         }
 
         public override void ReadXml(XmlReader reader)
         {
+            TypeConverter bc = TypeDescriptor.GetConverter(typeof(bool));
             base.ReadXml(reader);
             if (reader.Name.Equals("GlassReflectionOpacity"))
             {
                 GlassReflectionOpacity = double.Parse(reader.ReadElementString("GlassReflectionOpacity"), CultureInfo.InvariantCulture);
-            }   
+            }
+            if (reader.Name.Equals("EnableAlternateImageSet"))
+            {
+                bool enableAlternateImageSet = (bool)bc.ConvertFromInvariantString(reader.ReadElementString("EnableAlternateImageSet"));
+                _textColor = enableAlternateImageSet ? Color.FromArgb(0xff, 0, 220, 0) : Color.FromArgb(0xff, 220, 220, 220);
+                EnableAlternateImageSet = enableAlternateImageSet;
+            }
+            else
+            {
+                _textColor = Color.FromArgb(0xff, 220, 220, 220);
+                EnableAlternateImageSet = false;
+            }
         }
     }
 }

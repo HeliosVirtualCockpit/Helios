@@ -17,12 +17,17 @@
 namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using NLog.Targets;
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.IO;
     using System.Windows;
     using System.Windows.Media;
 
     [HeliosControl("Helios.FA18C.ADI", "ADI", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
-    public class ADI : BaseGauge
+    public class ADI : AltImageGauge
     {
         private HeliosValue _pitch;
         private HeliosValue _roll;
@@ -51,8 +56,11 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         private CalibrationPointCollectionDouble _bankBarCalibration;
 
         public ADI()
-            : base("ADI", new Size(350, 350))
+            : base("ADI", new Size(350, 350), "Alt")
         {
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
+            CreateInputBindings();
+            
             Point center = new Point(177d, 163d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -1066d, 360d, 1066d);
@@ -94,7 +102,6 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             Components.Add(_offFlagImage);
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/adi_outer_ring.xaml", new Rect(10d, 9d, 336d, 336d)));
-
             Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/adi_bezel.png", new Rect(0d, 0d, 350d, 350d)));
 
             _slipBall = new HeliosValue(this, new BindingValue(0d), "", "Slip Ball Offset", "Side slip indicator offset from the center of the tube.", "(-1 to 1) -1 full left and 1 is full right.", BindingValueUnits.Numeric);
@@ -131,8 +138,40 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 
         }
 
+        void CreateInputBindings()
+        {
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+                deviceActionName: "set.Enable Alternate Image Set",
+                deviceTriggerName: "",
+                triggerBindingValue: new BindingValue("return TriggerValue<3"),
+                triggerBindingSource: BindingValueSources.LuaScript
+                );
 
-        void SlipBall_Execute(object action, HeliosActionEventArgs e)
+            Dictionary<string, string> bindings = new Dictionary<string, string>
+            {
+                { "SAI.Pitch.changed", "set.Pitch" },
+                { "SAI.Bank.changed", "set.Bank" },
+                { "SAI.Warning Flag.changed", "set.Off Flag" },
+                { "SAI.Rate of Turn.changed", "set.Turn Indicator Offset" },
+                { "SAI.Slip Ball.changed", "set.Slip Ball Offset" },
+                { "SAI.Pitch Adjustment.changed", "set.Pitch adjustment offset" },
+                { "SAI.Bank Steering Bar.changed", "set.Bank steering bar offset" },
+                { "SAI.Pitch Steering Bar.changed", "set.Pitch steering bar offset" }
+            };
+
+            foreach (string t in bindings.Keys)
+            {
+                AddDefaultInputBinding(
+                    childName: "",
+                    interfaceTriggerName: t,
+                    deviceActionName: bindings[t]
+                    ) ;
+            }
+        }
+
+            void SlipBall_Execute(object action, HeliosActionEventArgs e)
         {
             _slipBall.SetValue(e.Value, e.BypassCascadingTriggers);
             _slipBallNeedle.HorizontalOffset = _slipBallCalibration.Interpolate(e.Value.DoubleValue);
@@ -176,6 +215,11 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         {
             _bankSteering.SetValue(e.Value, e.BypassCascadingTriggers);
             _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(e.Value.DoubleValue);
+        }
+
+        protected override void OnProfileChanged(HeliosProfile oldProfile)
+        {
+            base.OnProfileChanged(oldProfile);
         }
     }
 }

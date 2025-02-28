@@ -1,0 +1,13 @@
+<Canvas Width="272.000" Height="93.987"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="272.000" Height="93.987">
+
+  <!-- Layer 1/<Path> -->
+  <Path Opacity="0.5" StrokeThickness="2.0" Stroke="#40202020" StrokeMiterLimit="1.0" Fill="#40808080" Data="F1 M 93.000,0.000 L 32.000,0.000 C 32.000,18.432 17.762,33.428 0.000,33.974 L 0.000,93.987 C 51.453,93.450 93.000,51.580 93.000,0.000 Z"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path Opacity="0.5" StrokeThickness="2.0" Stroke="#40202020" StrokeMiterLimit="1.0" Fill="#40808080" Data="F1 M 179.000,-0.000 L 240.000,0.000 C 240.000,18.432 254.238,33.428 272.000,33.974 L 272.000,93.987 C 220.547,93.450 179.000,51.580 179.000,-0.000 Z"/>
+
+  </Canvas>
+</Canvas>

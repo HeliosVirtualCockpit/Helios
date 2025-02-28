@@ -99,6 +99,9 @@
     <Compile Include="ComponentModel\HeliosCapabilityEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosEditorAttribute.cs" />
     <Compile Include="ComponentModel\HeliosToolAttribute.cs" />
+    <Compile Include="Controls\AlternateImageAppearanceEditor.xaml.cs">
+      <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
     <Compile Include="Controls\RotaryEncoderIndcatorClickable.cs" />
     <Compile Include="Controls\PotentiometerIndcatorClickable.cs" />
@@ -227,6 +230,9 @@
     <Compile Include="Gauges\A-10\HARS\HARS.cs" />
     <Compile Include="Gauges\A-10\HARS\HARSSync_1.cs" />
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
+    <Compile Include="Gauges\AltImageGauge.cs" />
+    <Compile Include="Gauges\IGauge.cs" />
+    <Compile Include="Gauges\CompositeBaseGauge.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
     <Compile Include="Gauges\BarGauge.cs" />
     <Compile Include="GlobalOptions.cs" />
@@ -403,6 +409,69 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\Knobs\knob7.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-down.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-locking-down.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-locking-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-locking-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-locking-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-locking-norm.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-locking-up.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-norm.png" />
+    <Resource Include="Images\Toggles\Alt\flattop-up.png" />
+    <Resource Include="Images\Toggles\Alt\guard-down-norm.png" />
+    <Resource Include="Images\Toggles\Alt\guard-down-off.png" />
+    <Resource Include="Images\Toggles\Alt\guard-down-on.png" />
+    <Resource Include="Images\Toggles\Alt\guard-up-empty.png" />
+    <Resource Include="Images\Toggles\Alt\guard-up-norm.png" />
+    <Resource Include="Images\Toggles\Alt\guard-up-off.png" />
+    <Resource Include="Images\Toggles\Alt\guard-up-on.png" />
+    <Resource Include="Images\Toggles\Alt\orange-down.png" />
+    <Resource Include="Images\Toggles\Alt\orange-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\orange-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\orange-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\orange-norm.png" />
+    <Resource Include="Images\Toggles\Alt\orange-round-down.png" />
+    <Resource Include="Images\Toggles\Alt\orange-round-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\orange-round-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\orange-round-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\orange-round-norm.png" />
+    <Resource Include="Images\Toggles\Alt\orange-round-up.png" />
+    <Resource Include="Images\Toggles\Alt\orange-up.png" />
+    <Resource Include="Images\Toggles\Alt\round-down.png" />
+    <Resource Include="Images\Toggles\Alt\round-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\round-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\round-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\round-locking-down.png" />
+    <Resource Include="Images\Toggles\Alt\round-locking-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\round-locking-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\round-locking-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\round-locking-norm.png" />
+    <Resource Include="Images\Toggles\Alt\round-locking-up.png" />
+    <Resource Include="Images\Toggles\Alt\round-norm.png" />
+    <Resource Include="Images\Toggles\Alt\round-up.png" />
+    <Resource Include="Images\Toggles\Alt\square-tan-down.png" />
+    <Resource Include="Images\Toggles\Alt\square-tan-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\square-tan-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\square-tan-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\square-tan-norm.png" />
+    <Resource Include="Images\Toggles\Alt\square-tan-up.png" />
+    <Resource Include="Images\Toggles\Alt\toggle-down.png" />
+    <Resource Include="Images\Toggles\Alt\toggle-horiz-left.png" />
+    <Resource Include="Images\Toggles\Alt\toggle-horiz-norm.png" />
+    <Resource Include="Images\Toggles\Alt\toggle-horiz-right.png" />
+    <Resource Include="Images\Toggles\Alt\toggle-norm.png" />
+    <Resource Include="Images\Toggles\Alt\toggle-up.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-dark-round-in.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-dark-round.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-dark-square-in.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-dark-square.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-light-round-in.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-light-round.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-light-square-in.png" />
+    <Resource Include="Images\Buttons\Alt\tactile-light-square.png" />
     <Content Include="Templates\Base\Rotaries\Rotary - Knob .htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -455,6 +524,10 @@
     <Content Include="Templates\Base\Text Displays\Label.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Page Include="Controls\AlternateImageAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\BackgroundImageAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -611,6 +684,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\A-10\ADI\adi_backup_wings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Alt\needle_a.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

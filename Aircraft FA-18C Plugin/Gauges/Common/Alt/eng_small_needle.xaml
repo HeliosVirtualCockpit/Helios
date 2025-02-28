@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="svg2" Width="17" Height="45">
+    <Canvas.Resources/>
+    <Canvas Name="layer5">
+        <Canvas>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <!--g-->
+                    <TranslateTransform X="-231.8012" Y="-113.0625"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Canvas Name="g4084">
+                <Canvas>
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <!--g-->
+                            <MatrixTransform Matrix="1.4497992,0,0,1.4497992,-108.17671,-67.4375"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4082" Fill="#FF00FF00" Stroke="#FF000000" StrokeThickness="1" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 237.375 150 0 -17.5 2.75 -7.5 3.5 7.5 0 17.5 z"/><Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4074" Fill="#FF000000" Data="m 247 151.5 c 0 3.31371 -2.68629 6 -6 6 -3.31371 0 -6 -2.68629 -6 -6 0 -3.31371 2.68629 -6 6 -6 3.31371 0 6 2.68629 6 6 z"><!--path--><Path.RenderTransform><TranslateTransform X="-0.5" Y="-1.8749972"/></Path.RenderTransform></Path></Canvas></Canvas></Canvas></Canvas></Canvas>

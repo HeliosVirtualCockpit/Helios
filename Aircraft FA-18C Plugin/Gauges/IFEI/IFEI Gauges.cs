@@ -23,14 +23,13 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
     using System.Windows;
 
     [HeliosControl("Helios.FA18C.IFEIGauges", "IFEI Needles & Flags", "F/A-18C Gauges", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
-    public class IFEI_Gauges : BaseGauge
+    public class IFEI_Gauges : AltImageGauge
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private double _glassReflectionOpacity;
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.3;
 
-        private Color _textColor = Color.FromArgb(0xff,220, 220, 220);
         private string _imageLocation = "{FA-18C}/Gauges/IFEI/";
         private GaugeNeedle _gnleftnoz;
         private HeliosValue _leftNozzle;
@@ -40,7 +39,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private HeliosValue _rightNozzle;
         private HeliosValue _rightNozzleNeedle;
         private CalibrationPointCollectionDouble _needleRightCalibration;
-        private GaugeImage _gibackground;
+        private GaugeImage _giNeedleBackground;
+        private HeliosValue _nozzleNeedleBackground;
         private GaugeImage _gireflection;
         private GaugeImage _giZulu;
         private HeliosValue _indicatorZulu;
@@ -86,15 +86,47 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private GaugeImage _giRightFuel;
 
         public IFEI_Gauges()
-            : base("IFEI_Gauges", new Size(779, 702))
+            : base("IFEI_Gauges", new Size(779, 702), "Alt", false)
         {
-            // adding the control buttons
-            // Fuel info
-
-            // Add various image components to the gauge
-            _gibackground = new GaugeImage(_imageLocation + "IFEI.png", new Rect(0d, 0d, 779d, 702d));
-            Components.Add(_gibackground);
-            _gibackground.IsHidden = true;  // This is to make sure that we do not mask anything while developing
+            // These points are an approximation because DCS does not expose the nozzle position so we infer it from the Fuel Flow
+            _needleLeftCalibration = new CalibrationPointCollectionDouble(0d, 0d, 400d, 90d) {
+                new CalibrationPointDouble(6d, 72d),
+                new CalibrationPointDouble(13d, 54d),
+                new CalibrationPointDouble(14d, 36d),
+                new CalibrationPointDouble(15d, 27d),
+                new CalibrationPointDouble(18d, 18d),
+                new CalibrationPointDouble(19d, 9d),
+                new CalibrationPointDouble(24d, 0d),
+                new CalibrationPointDouble(26d, 9d),
+                new CalibrationPointDouble(90d, 9d),
+                new CalibrationPointDouble(100d, 18d),
+                new CalibrationPointDouble(130d, 27d),
+                new CalibrationPointDouble(140d, 36d),
+                new CalibrationPointDouble(150d, 45d),
+                new CalibrationPointDouble(170d, 63d),
+                new CalibrationPointDouble(200d, 72d),
+                new CalibrationPointDouble(210d, 81d),
+                new CalibrationPointDouble(230d, 90d)
+            };
+            _needleRightCalibration = new CalibrationPointCollectionDouble(0d, 0d, 400d, -90d) {
+                new CalibrationPointDouble(6d, -72d),
+                new CalibrationPointDouble(13d, -54d),
+                new CalibrationPointDouble(14d, -36d),
+                new CalibrationPointDouble(15d, -27d),
+                new CalibrationPointDouble(18d, -18d),
+                new CalibrationPointDouble(19d, -9d),
+                new CalibrationPointDouble(24d, -0d),
+                new CalibrationPointDouble(26d, -9d),
+                new CalibrationPointDouble(90d, -9d),
+                new CalibrationPointDouble(100d, -18d),
+                new CalibrationPointDouble(130d, -27d),
+                new CalibrationPointDouble(140d, -36d),
+                new CalibrationPointDouble(150d, -45d),
+                new CalibrationPointDouble(170d, -63d),
+                new CalibrationPointDouble(200d, -72d),
+                new CalibrationPointDouble(210d, -81d),
+                new CalibrationPointDouble(230d, -90d)
+            };
 
             _giGaugeMarksL = new GaugeImage(_imageLocation + "IFEI Left Nozzle Gauge Marks.xaml", new Rect(80d, 270d, 277d, 137d));
             Components.Add(_giGaugeMarksL);
@@ -112,55 +144,19 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             Components.Add(_giGaugeMarksL100);
             _giGaugeMarksR100 = new GaugeImage(_imageLocation + "IFEI Right 100 Nozzle Gauge Marks.xaml", new Rect(80d, 270d, 277d, 137d));
             Components.Add(_giGaugeMarksR100);
-            //_needleLeftCalibration = new CalibrationPointCollectionDouble(0d, 0d, 100d, 90d);
-            // These points are an approximation because DCS does not expose the nozzle position so we infer it from the Fuel Flow
-            _needleLeftCalibration = new CalibrationPointCollectionDouble(0d, 0d, 400d, 90d);
-            _needleLeftCalibration.Add(new CalibrationPointDouble(6d, 72d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(13d, 54d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(14d, 36d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(15d, 27d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(18d, 18d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(19d, 9d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(24d, 0d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(26d, 9d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(90d, 9d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(100d, 18d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(130d, 27d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(140d, 36d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(150d, 45d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(170d, 63d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(200d, 72d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(210d, 81d));
-            _needleLeftCalibration.Add(new CalibrationPointDouble(230d, 90d));
+            _giNeedleBackground = new GaugeImage(_imageLocation + "IFEI Needle Background.xaml", new Rect(80d, 270d, 277d, 93.987d));
+            Components.Add(_giNeedleBackground);
+
             _gnleftnoz = new GaugeNeedle(_imageLocation + "IFEI Left Needle.xaml", new Point(83d, 273d), new Size(92d, 6d), new Point(3d, 3d));
             Components.Add(_gnleftnoz);
             _gnleftnoz.IsHidden = true;
-            //_needleRightCalibration = new CalibrationPointCollectionDouble(0d, 0d, 100d, -90d);
-            // These points are an approximation because DCS does not expose the nozzle position so we infer it from the Fuel Flow
-            _needleRightCalibration = new CalibrationPointCollectionDouble(0d, 0d, 400d, -90d);
-            _needleRightCalibration.Add(new CalibrationPointDouble(6d, -72d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(13d, -54d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(14d, -36d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(15d, -27d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(18d, -18d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(19d, -9d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(24d, -0d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(26d, -9d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(90d, -9d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(100d, -18d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(130d, -27d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(140d, -36d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(150d, -45d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(170d, -63d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(200d, -72d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(210d, -81d));
-            _needleRightCalibration.Add(new CalibrationPointDouble(230d, -90d));
-            _gnrightnoz = new GaugeNeedle(_imageLocation + "IFEI Right Needle.xaml", new Point(354d, 273d), new Size(92d, 6d), new Point(89d, 3d));
-            Components.Add(_gnrightnoz);
-            _gnrightnoz.IsHidden = true;
             _leftNozzle = new HeliosValue(this, BindingValue.Empty, "", "Left Nozzle Position", "Left Nozzle Position in %.", "", BindingValueUnits.Numeric);
             _leftNozzle.Execute += new HeliosActionHandler(LeftNozzlePosition_Execute);
             Actions.Add(_leftNozzle);
+
+            _gnrightnoz = new GaugeNeedle(_imageLocation + "IFEI Right Needle.xaml", new Point(354d, 273d), new Size(92d, 6d), new Point(89d, 3d));
+            Components.Add(_gnrightnoz);
+            _gnrightnoz.IsHidden = true;
             _rightNozzle = new HeliosValue(this, BindingValue.Empty, "", "Right Nozzle Position", "Right Nozzle Position in %.", "", BindingValueUnits.Numeric);
             _rightNozzle.Execute += new HeliosActionHandler(RightNozzlePosition_Execute);
             Actions.Add(_rightNozzle);
@@ -177,7 +173,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             Components.Add(_giBingo);
             _giLeftFuel = new GaugeImage(_imageLocation + "IFEI Legends L.xaml", new Rect(689d, 114d, 8d, 12d));
             Components.Add(_giLeftFuel);
-            _giRightFuel = new GaugeImage(_imageLocation + "IFEI Legends R.xaml", new Rect(689d, 180d,  8d, 12d));
+            _giRightFuel = new GaugeImage(_imageLocation + "IFEI Legends R.xaml", new Rect(689d, 180d, 8d, 12d));
             Components.Add(_giRightFuel);
             _giZulu = new GaugeImage(_imageLocation + "IFEI Legends Z.xaml", new Rect(688d, 376d, 8d, 12d));
             Components.Add(_giZulu);
@@ -193,6 +189,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             Components.Add(_giTimerDots2);
             _gireflection = new GaugeImage(_imageLocation + "IFEI Reflections.png", new Rect(0d, 0d, 779d, 702d));
             Components.Add(_gireflection);
+
             _gireflection.IsHidden = false;
             _giOil.IsHidden = true;
             _giZulu.IsHidden = true;
@@ -215,6 +212,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             _giClockDots2.IsHidden = true;
             _giTimerDots1.IsHidden = true;
             _giTimerDots2.IsHidden = true;
+            _giNeedleBackground.IsHidden = true;
 
             _indicatorZulu = new HeliosValue(this, new BindingValue(0d), "", "Zulu Time Flag", "Z flag indicating Zulu time on IFEI", "", BindingValueUnits.Boolean);
             _indicatorZulu.Execute += new HeliosActionHandler(Indicator_Execute);
@@ -285,12 +283,31 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             _rightNozzleNeedle = new HeliosValue(this, new BindingValue(0d), "", "Right Nozzle Needle Flag", "Right nozzle needle appearance on IFEI", "", BindingValueUnits.Boolean);
             _rightNozzleNeedle.Execute += new HeliosActionHandler(Indicator_Execute);
             Actions.Add(_rightNozzleNeedle);
-
+            _nozzleNeedleBackground = new HeliosValue(this, new BindingValue(0d), "", "Nozzle Needle Background Flag", "nozzle needle background appearance on IFEI", "", BindingValueUnits.Boolean);
+            _nozzleNeedleBackground.Execute += new HeliosActionHandler(Indicator_Execute);
+            Actions.Add(_nozzleNeedleBackground);
             // initialize opacity value and related visual
             GlassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
+
+
         }
 
         #region Properties
+        public override bool EnableAlternateImageSet
+        {
+            get => base.EnableAlternateImageSet;
+            set
+            {
+                bool newValue = value;
+                bool oldValue = base.EnableAlternateImageSet; 
+                
+                if (newValue != oldValue)
+                {
+                    base.EnableAlternateImageSet = newValue;
+                    _gireflection.IsHidden = newValue;
+                }
+            }
+        }
         public double GlassReflectionOpacity
         {
             get
@@ -363,6 +380,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                     break;
                 case "Left Scale Flag":
                     _giGaugeMarksL.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giNeedleBackground.IsHidden = (_hactionVal == "1") ? false : true;
                     break;
                 case "Right Scale Flag":
                     _giGaugeMarksR.IsHidden = (_hactionVal == "1") ? false : true;
@@ -397,6 +415,9 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 case "Timer MM SS separator":
                     _giTimerDots2.IsHidden = (_hactionVal == "1") ? false : true;
                     break;
+                case "Nozzle Needle Background Flag":
+                    _giNeedleBackground.IsHidden = (_hactionVal == "1") ? false : true;
+                    break;
                 case "Left Nozzle Needle Flag":
                     _gnleftnoz.IsHidden = (_hactionVal == "1") ? false : true;
                     break;
@@ -408,7 +429,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                     break;
                 case "Right Fuel Flag":
                     _giRightFuel.IsHidden = (_hactionVal == "1") ? false : true;
-                    break;
+                    break;                   
                 default:
                     break;
             }

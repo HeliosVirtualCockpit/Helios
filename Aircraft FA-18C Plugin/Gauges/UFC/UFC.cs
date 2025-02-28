@@ -22,7 +22,10 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
     using System;
     using System.Windows.Media;
     using System.Windows;
-
+    using System.IO;
+    using System.Xml;
+    using System.Globalization;
+    using System.ComponentModel;
 
     [HeliosControl("Helios.FA18C.UFC", "Up Front Controller", "F/A-18C", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     class UFC_FA18C : FA18CDevice
@@ -33,11 +36,35 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private string _font = "MS 33558";
         private string _ufcNumbers16 = "`0=«;`1=¬;`2=Ð;`3=®;`4=¯;`5=°;`6=±;`7=²;`8=³;`9=´;~0=µ;0=¡;1=¢;2=£;3=¤;4=¥;5=¦;6=§;7=¨;8=©;9=ª;_=É;!=È"; //Numeric mapping into characters in the UFC font
         private string _ufcNumbers16Tens = "`0=«;`1=¬;`2=Ð;`3=®;`4=¯;`5=°;`6=±;`7=²;`8=³;`9=´;~0=µ;a=Ñ;b=Ñ;c=Ñ;`=Ò;2=Ó;~=Ó;3=Ô;e=Ô;f=Ô;g=Ô;4=Õ;h=Õ;i=Õ;j=Õ;5=Ö;k=Ö;6=×;l=×;7=Ø;m=Ø;n=Ø;o=Ø;8=Ù;q=Ù;s=Ù;9=Ú;t=Ú;u=Ú;v=Ú;_=É;!=È"; //Numeric mapping into characters in the UFC font
-        private string _ufcCueing = "!=È;|=È"; 
+        private string _ufcCueing = "!=È;|=È";
+        private HeliosValue _alternateImages;
+        private string _altImageLocation = "Alt";
+        private bool _enableAlternateImageSet = false;
+        private string _defaultBackgroundImage = "{FA-18C}/Images/UFC Faceplate.png";
+
+        private Color _onTextColor = Color.FromArgb(0xff, 0x24, 0x8D, 0x22);
+        private Color _offTextColor = Color.FromArgb(0xff, 0x1C, 0x1C, 0x1C);
+        private Color _onTextDisplayColor = Color.FromArgb(0xff, 0x7e, 0xde, 0x72);
+        private Color _offTextDisplayColor = Color.FromArgb(0x00, 0x26, 0x3f, 0x36);
 
         public UFC_FA18C()
             : base("UFC", new Size(602, 470))
         {
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.FA18C.FA18CInterface) };
+
+            _alternateImages = new HeliosValue(this, new BindingValue(false), "", "Enable Alternate Image Set", "Indicates whether the alternate image set is to be used", "True or False", BindingValueUnits.Boolean);
+            _alternateImages.Execute += new HeliosActionHandler(EnableAltImages_Execute);
+            Actions.Add(_alternateImages);
+
+            AddDefaultInputBinding(
+                    childName: "",
+                    deviceActionName: "set.Enable Alternate Image Set",
+                    interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
+                    deviceTriggerName: "",
+                    triggerBindingValue: new BindingValue("return TriggerValue<3"),
+                    triggerBindingSource: BindingValueSources.LuaScript
+                    );
+
             AddButton("EMCON", 527, 129, new Size(48, 48), "UFC Emission Control Pushbutton");
             AddButton("1", 105, 116, new Size(48, 48), "UFC Keyboard Pushbutton 1");
             AddButton("2", 167, 116, new Size(48, 48), "UFC Keyboard Pushbutton 2");
@@ -102,7 +129,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
 
         public override string DefaultBackgroundImage
         {
-            get { return "{FA-18C}/Images/UFC Faceplate.png"; }
+            get => _defaultBackgroundImage;
         }
 
         private void AddPot(string name, Point posn, Size size, string interfaceElementName)
@@ -149,8 +176,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 horizontalAlignment: hTextAlign,
                 verticalAligment: TextVerticalAlignment.Center,
                 testTextDisplay: testDisp,
-                textColor: Color.FromArgb(0xff, 0x7e, 0xde, 0x72),
-                backgroundColor: Color.FromArgb(0x00, 0x26, 0x3f, 0x36),
+                textColor: _onTextDisplayColor,
+                backgroundColor: _offTextDisplayColor,
                 useBackground: false,
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: interfaceElementName,
@@ -186,8 +213,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
 
             // NOTE: for scaling purposes, we commit to the reference height at the time we set TextFormat, since that indirectly sets ConfiguredFontSize 
             display.TextFormat = textFormat;
-            display.OnTextColor = Color.FromArgb(0xff, 0x7e, 0xde, 0x72);
-            display.BackgroundColor = Color.FromArgb(0x00, 0x26, 0x3f, 0x36);
+            display.OnTextColor = _onTextDisplayColor;
+            display.BackgroundColor = _offTextDisplayColor;
             display.UseBackground = false;
 
             if (ufcDictionary.Equals(""))
@@ -260,8 +287,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 size: size,
                 onImage: "{Helios}/Images/Indicators/anunciator.png",
                 offImage: "{Helios}/Images/Indicators/anunciator.png",
-                onTextColor: Color.FromArgb(0xff, 0x24, 0x8D, 0x22),
-                offTextColor: Color.FromArgb(0xff, 0x1C, 0x1C, 0x1C),
+                onTextColor: _onTextColor,
+                offTextColor: _offTextColor,
                 font: _font,
                 vertical: _vertical,
                 interfaceDeviceName: "",
@@ -284,6 +311,83 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 interfaceElementName: interfaceElementName,
                 fromCenter: false
                 );
+        }
+
+        void EnableAltImages_Execute(object sender, HeliosActionEventArgs e)
+        {
+            EnableAlternateImageSet = e.Value.BoolValue;
+            _alternateImages.SetValue(e.Value, e.BypassCascadingTriggers);
+        }
+
+        public bool EnableAlternateImageSet
+        {
+            get => _enableAlternateImageSet;
+            set
+            {
+                bool newValue = value;
+                bool oldValue = _enableAlternateImageSet;
+
+                if (newValue != oldValue)
+                {
+                    _enableAlternateImageSet = newValue;
+
+                    foreach (HeliosVisual hv in this.Children)
+                    {
+                        if (hv is TextDisplay txtDisplay)
+                        {
+                            //txtDisplay.OnTextColor = newValue ? Color.FromArgb(0xff, 0x00, 0xc0, 0x00) : Color.FromArgb(0xff, 0xc0, 0xc0, 0xc0);
+                            continue;
+                        }
+                        if (hv is PushButton pb)
+                        {
+                            pb.Image = ImageSwitchName(pb.Image);
+                            pb.PushedImage = ImageSwitchName(pb.PushedImage);
+                            pb.GlyphColor = newValue ? Color.FromArgb(0xf0, 0x00, 0xc0, 0x00) : Color.FromArgb(0xf0, 0xc0, 0xc0, 0xc0);
+                            continue;
+                        }
+                        if (hv is ThreeWayToggleSwitch sw)
+                        {
+                            sw.PositionOneImage = ImageSwitchName(sw.PositionOneImage);
+                            sw.PositionTwoImage = ImageSwitchName(sw.PositionTwoImage);
+                            sw.PositionThreeImage = ImageSwitchName(sw.PositionThreeImage);
+                            continue;
+                        }
+                        if (hv is Indicator ind)
+                        {
+                            ind.OnImage = ImageSwitchName(ind.OnImage);
+                            ind.OffImage = ImageSwitchName(ind.OffImage);
+                            continue;
+                        }
+                        if (hv is Potentiometer pot)
+                        {
+                            pot.KnobImage = ImageSwitchName(pot.KnobImage);
+                            continue;
+                        }
+                        if (hv is RotaryEncoder enc)
+                        {
+                            enc.KnobImage = ImageSwitchName(enc.KnobImage);
+                            continue;
+                        }
+                    }
+
+                    BackgroundImage = ImageSwitchName(BackgroundImage);
+                    // notify change after change is made
+                    OnPropertyChanged("EnableAlternateImageSet", oldValue, newValue, true);
+                }
+            }
+        }
+
+        private string ImageSwitchName(string imageName)
+        {
+            string imageSubfolder = _enableAlternateImageSet ? $"/{_altImageLocation}" : "";
+
+            string dir = Path.GetDirectoryName(imageName);
+            if (new DirectoryInfo(dir).Name == _altImageLocation)
+            {
+                dir = Path.GetDirectoryName(dir);
+            }
+
+            return $"{dir}{imageSubfolder}/{Path.GetFileName(imageName)}";
         }
 
         public override bool HitTest(Point location)
@@ -309,6 +413,37 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         public override void MouseUp(Point location)
         {
             // No-Op
+        }
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+            //if (_IFEI_gauges.GlassReflectionOpacity != IFEI_Gauges.GLASS_REFLECTION_OPACITY_DEFAULT)
+            //{
+            //    writer.WriteElementString("GlassReflectionOpacity", GlassReflectionOpacity.ToString(CultureInfo.InvariantCulture));
+            //}
+            if (EnableAlternateImageSet) writer.WriteElementString("EnableAlternateImageSet", EnableAlternateImageSet.ToString(CultureInfo.InvariantCulture));
+
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            TypeConverter bc = TypeDescriptor.GetConverter(typeof(bool));
+            base.ReadXml(reader);
+            //if (reader.Name.Equals("GlassReflectionOpacity"))
+            //{
+            //    GlassReflectionOpacity = double.Parse(reader.ReadElementString("GlassReflectionOpacity"), CultureInfo.InvariantCulture);
+            //}
+            if (reader.Name.Equals("EnableAlternateImageSet"))
+            {
+                bool enableAlternateImageSet = (bool)bc.ConvertFromInvariantString(reader.ReadElementString("EnableAlternateImageSet"));
+                //_textColor = enableAlternateImageSet ? Color.FromArgb(0xff, 0, 220, 0) : Color.FromArgb(0xff, 220, 220, 220);
+                EnableAlternateImageSet = enableAlternateImageSet;
+            }
+            else
+            {
+                //_textColor = Color.FromArgb(0xff, 220, 220, 220);
+                EnableAlternateImageSet = false;
+            }
         }
 
     }

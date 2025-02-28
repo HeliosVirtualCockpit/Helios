@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="svg2" Width="36" Height="154">
+    <Canvas.Resources/>
+    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path5183" Fill="#FF00F000" Stroke="#FF008000" StrokeThickness="2" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="M135,135 L135,30 149,20 163,30 163,135 135,135 z" Height="136" Stretch="Fill" Width="22" Canvas.Left="7" Canvas.Top="0"/>
+    <Ellipse Fill="#FF202020" Height="36" Stroke="#1E1E1E1E" StrokeThickness="2" StrokeMiterLimit="4" VerticalAlignment="Bottom" Canvas.Left="0" Width="36" Canvas.Top="118.334" />
+</Canvas>

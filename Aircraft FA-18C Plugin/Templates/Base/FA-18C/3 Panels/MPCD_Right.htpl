@@ -1,11 +1,11 @@
 ﻿<ControlTemplate>
-	<Name>MPCD</Name>
+	<Name>Right MPCD</Name>
 	<Category>F/A-18C Hornet</Category>
-	<TypeIdentifier>FA18C.MPCD</TypeIdentifier>
+	<TypeIdentifier>Helios.FA18C.MPCD.Right</TypeIdentifier>
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>
-			<Size>656,706</Size>
+			<Size>656, 706</Size>
 			<Hidden>False</Hidden>
 			<Children />
 		</TemplateValues>

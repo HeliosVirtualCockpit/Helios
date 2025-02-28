@@ -24,22 +24,26 @@ namespace GadrocsWorkshop.Helios.Gauges
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            BaseGauge gauge = Visual as BaseGauge;
-            foreach (GaugeComponent component in gauge.Components)
+            if (Visual is IGauge gauge)
             {
-                component.Render(drawingContext);
+                foreach (GaugeComponent component in gauge.Components)
+                {
+                    component.Render(drawingContext);
+                }
             }
         }
 
         protected override void OnRefresh()
         {
-            BaseGauge gauge = Visual as BaseGauge;
-            _scaleX = gauge.Width / gauge.NativeSize.Width;
-            _scaleY = gauge.Height / gauge.NativeSize.Height;
-            foreach (GaugeComponent component in gauge.Components)
+            if (Visual is IGauge gauge)
             {
-                component.Refresh(_scaleX, _scaleY);
-                component.ImageRefresh = false;
+                _scaleX = gauge.Width / gauge.NativeWidth;
+                _scaleY = gauge.Height / gauge.NativeHeight;
+                foreach (GaugeComponent component in gauge.Components)
+                {
+                    component.Refresh(_scaleX, _scaleY);
+                    component.ImageRefresh = false;
+                }
             }
         }
     }

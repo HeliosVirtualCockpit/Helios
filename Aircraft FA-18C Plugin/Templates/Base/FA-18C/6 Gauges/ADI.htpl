@@ -5,7 +5,7 @@
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>
-			<Size>350,350</Size>
+			<Size>300,300</Size>
 			<Hidden>False</Hidden>
 			<Children />
 		</TemplateValues>

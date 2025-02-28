@@ -30,6 +30,7 @@ namespace GadrocsWorkshop.Helios
     {
         public string ChildName, InterfaceTriggerName, DeviceActionName, DeviceTriggerName;
         public BindingValue DeviceTriggerBindingValue;
+        public BindingValueSources DeviceTriggerBindingValueSource;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public DefaultInputBinding(string childName, string interfaceTriggerName, string deviceActionName)
@@ -39,6 +40,7 @@ namespace GadrocsWorkshop.Helios
             DeviceTriggerName = "";
             DeviceActionName = deviceActionName;
             DeviceTriggerBindingValue = null;
+            DeviceTriggerBindingValueSource = BindingValueSources.TriggerValue;
             Logger.Info("Default Input Binding: Trigger " + interfaceTriggerName + " to action " + deviceActionName + " for child " + childName);
         }
         /// <summary>
@@ -51,11 +53,24 @@ namespace GadrocsWorkshop.Helios
         /// <param name="deviceTriggerBindingValue">Static trigger value which only used with deviceTriggerValue</param>
         public DefaultInputBinding(string childName, string interfaceTriggerName, string deviceActionName, string deviceTriggerName, BindingValue deviceTriggerBindingValue)
         {
+            _ = interfaceTriggerName;
             ChildName = childName;
             InterfaceTriggerName = "";
             DeviceTriggerName = deviceTriggerName;
             DeviceActionName = deviceActionName;
-            DeviceTriggerBindingValue = deviceTriggerBindingValue; 
+            DeviceTriggerBindingValue = deviceTriggerBindingValue;
+            DeviceTriggerBindingValueSource = BindingValueSources.TriggerValue;
+            Logger.Info("Default Input Binding: Trigger " + deviceTriggerName + " to action " + deviceActionName + " for child " + childName);
+        }
+
+        public DefaultInputBinding(string childName, string interfaceTriggerName, string deviceActionName, string deviceTriggerName, BindingValue deviceTriggerBindingValue, BindingValueSources bindingValueSource)
+        {
+            ChildName = childName;
+            InterfaceTriggerName = interfaceTriggerName;
+            DeviceTriggerName = deviceTriggerName;
+            DeviceActionName = deviceActionName;
+            DeviceTriggerBindingValue = deviceTriggerBindingValue;
+            DeviceTriggerBindingValueSource = bindingValueSource;
             Logger.Info("Default Input Binding: Trigger " + deviceTriggerName + " to action " + deviceActionName + " for child " + childName);
         }
     }
@@ -106,7 +121,7 @@ namespace GadrocsWorkshop.Helios
 
     public abstract class CompositeVisual : HeliosVisual
     {
-        private Dictionary<HeliosVisual, Rect> _nativeSizes = new Dictionary<HeliosVisual, Rect>();
+        private readonly Dictionary<HeliosVisual, Rect> _nativeSizes = new Dictionary<HeliosVisual, Rect>();
         protected List<DefaultOutputBinding> _defaultOutputBindings;
         protected List<DefaultInputBinding> _defaultInputBindings;
         protected List<DefaultSelfBinding> _defaultSelfBindings;
@@ -262,12 +277,15 @@ namespace GadrocsWorkshop.Helios
             }
         }
 
-        protected virtual void AddDefaultInputBinding(string childName, string interfaceTriggerName, string deviceActionName)
+        protected virtual void AddDefaultInputBinding(string childName, string interfaceTriggerName, string deviceActionName, string deviceTriggerName = "", BindingValue triggerBindingValue = null, BindingValueSources triggerBindingSource = BindingValueSources.TriggerValue)
         {
             DefaultInputBindings.Add(new DefaultInputBinding(
                 childName: childName,
                 interfaceTriggerName: interfaceTriggerName,
-                deviceActionName: deviceActionName
+                deviceActionName: deviceActionName,
+                deviceTriggerName: deviceTriggerName,
+                deviceTriggerBindingValue: triggerBindingValue,
+                bindingValueSource: triggerBindingSource
                 ));
         }
 
@@ -297,31 +315,46 @@ namespace GadrocsWorkshop.Helios
 
         protected HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action)
         {
-           return CreateNewBinding(trigger, action, new BindingValue(null));
+            return CreateNewBinding(trigger, action, new BindingValue(null));
         }
         private HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action, BindingValue bindingValue)
         {
-            HeliosBinding binding = new HeliosBinding(trigger, action);
-
-            binding.BypassCascadingTriggers = true;
-
-            if (action.ActionRequiresValue && (ConfigManager.ModuleManager.CanConvertUnit(trigger.Unit, action.Unit)))
+            _ = bindingValue;
+            return CreateNewBinding(trigger, action, new BindingValue(null), BindingValueSources.TriggerValue);
+        }
+        private HeliosBinding CreateNewBinding(IBindingTrigger trigger, IBindingAction action, BindingValue bindingValue, BindingValueSources bindingValueSources)
             {
-                binding.ValueSource = BindingValueSources.TriggerValue;
-            }
-            else
+            HeliosBinding binding = new HeliosBinding(trigger, action) {
+                BypassCascadingTriggers = true
+            };
+
+            if(bindingValueSources == BindingValueSources.LuaScript)
             {
-                binding.ValueSource = BindingValueSources.StaticValue;
-                if (bindingValue is null)
+                binding.ValueSource = BindingValueSources.LuaScript;
+                binding.Value = bindingValue.StringValue;
+            } else
+            {
+
+                if (action.ActionRequiresValue && (ConfigManager.ModuleManager.CanConvertUnit(trigger.Unit, action.Unit)))
                 {
-                } else
+                    binding.ValueSource = BindingValueSources.TriggerValue;
+                }
+                else
                 {
-                    if (action.Unit.ShortName   == "Boolean")
+                    binding.ValueSource = BindingValueSources.StaticValue;
+                    if (bindingValue is null)
                     {
-                        binding.Value = bindingValue.BoolValue ? "True" : "False";
-                    } else
+                    }
+                    else
                     {
-                        binding.Value = bindingValue.StringValue;
+                        if (action.Unit.ShortName == "Boolean")
+                        {
+                            binding.Value = bindingValue.BoolValue ? "True" : "False";
+                        }
+                        else
+                        {
+                            binding.Value = bindingValue.StringValue;
+                        }
                     }
                 }
             }
@@ -354,13 +387,21 @@ namespace GadrocsWorkshop.Helios
             // looping for all default input bindings to assign the value
             foreach (DefaultInputBinding defaultBinding in _defaultInputBindings)
             {
-                if (!Children.ContainsKey(defaultBinding.ChildName))
+                bool me = false;
+                if(defaultBinding.ChildName == "")
+                {
+                    // This is a binding for the parent and not one of the children
+                    // although the defaultbinding is stored with the defaultbindings for
+                    // the children
+                    me = true;
+                }
+                if (!Children.ContainsKey(defaultBinding.ChildName) && !me)
                 {
                     Logger.Error("Cannot find child " + defaultBinding.ChildName);
                     continue;
                 }
-                Logger.Debug("Auto binding child " + defaultBinding.ChildName);
-                HeliosVisual child = Children[defaultBinding.ChildName];
+                Logger.Debug($"Auto binding child {(me ? Name : defaultBinding.ChildName)}");
+                HeliosVisual child = !me ? Children[defaultBinding.ChildName] : this;
                 if (!child.Actions.ContainsKey(defaultBinding.DeviceActionName))
                 {
                     Logger.Error("Cannot find action " + defaultBinding.DeviceActionName);
@@ -374,9 +415,16 @@ namespace GadrocsWorkshop.Helios
                         continue;
                     }
 
-                    Logger.Debug("Auto binding interface trigger " + defaultBinding.InterfaceTriggerName + " to " + defaultBinding.ChildName + "." + defaultBinding.DeviceActionName);
-                    child.OutputBindings.Add(CreateNewBinding(_defaultInterface.Triggers[defaultBinding.InterfaceTriggerName],
-                        child.Actions[defaultBinding.DeviceActionName]));
+                    Logger.Debug($"Auto binding interface trigger {defaultBinding.InterfaceTriggerName} to {(me ? Name : defaultBinding.ChildName)}.{defaultBinding.DeviceActionName}");
+                    if (defaultBinding.DeviceTriggerBindingValueSource != BindingValueSources.LuaScript)
+                    {
+                        child.OutputBindings.Add(CreateNewBinding(_defaultInterface.Triggers[defaultBinding.InterfaceTriggerName],
+                            child.Actions[defaultBinding.DeviceActionName]));
+                    } else
+                    {
+                        child.OutputBindings.Add(CreateNewBinding(_defaultInterface.Triggers[defaultBinding.InterfaceTriggerName],
+                            child.Actions[defaultBinding.DeviceActionName], defaultBinding.DeviceTriggerBindingValue, defaultBinding.DeviceTriggerBindingValueSource));
+                    }
                 } else
                 {
 
@@ -386,7 +434,7 @@ namespace GadrocsWorkshop.Helios
                         continue;
                     }
 
-                    Logger.Debug("Auto binding device trigger " + defaultBinding.DeviceTriggerName + " to " + defaultBinding.ChildName + "." + defaultBinding.DeviceActionName);
+                    Logger.Debug($"Auto binding device trigger {defaultBinding.DeviceTriggerName} to {(me ? Name : defaultBinding.ChildName)} .{defaultBinding.DeviceActionName}");
                     child.OutputBindings.Add(CreateNewBinding(Triggers[defaultBinding.DeviceTriggerName],
                         child.Actions[defaultBinding.DeviceActionName],defaultBinding.DeviceTriggerBindingValue));
 
@@ -620,6 +668,8 @@ namespace GadrocsWorkshop.Helios
         protected void AddRotarySwitchBindings(string name, Point posn, Size size, RotarySwitch rotarySwitch,
             string interfaceDeviceName, string interfaceElementName)
         {
+            _ = posn;
+            _ = size;
             string componentName = GetComponentName(name);
             Children.Add(rotarySwitch);
 
@@ -816,6 +866,7 @@ namespace GadrocsWorkshop.Helios
             bool horizontal = false)
         {
             string componentName = GetComponentName(name);
+            _ = fromCenter;
             ThreeWayToggleSwitch toggle = new ThreeWayToggleSwitch
             {
                 Top = posn.Y,
@@ -865,6 +916,7 @@ namespace GadrocsWorkshop.Helios
             LinearClickType clickType = LinearClickType.Touch,
             bool horizontal = false)
         {
+            _ = fromCenter;
             string componentName = GetComponentName(name);
             ThreeWayToggleSwitch rocker = new ThreeWayToggleSwitch
             {
@@ -1084,6 +1136,8 @@ namespace GadrocsWorkshop.Helios
             string interfaceElementName
             )
         {
+            _ = interfaceDeviceName;
+            _ = interfaceElementName;
             device.Name = GetComponentName(name);
             device.Top = posn.Y;
             device.Left = posn.X;

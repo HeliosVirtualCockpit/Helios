@@ -495,7 +495,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new PushButton(this, IFEI, "3004", "171", "IFEI", "IFEI Down Arrow Button", "1", "0", "%1d"));
             AddFunction(new PushButton(this, IFEI, "3005", "172", "IFEI", "IFEI ZONE Button", "1", "0", "%1d"));
             AddFunction(new PushButton(this, IFEI, "3006", "173", "IFEI", "IFEI ET Button", "1", "0", "%1d"));
-            AddFunction(new Axis(this, IFEI, "3007", "174", 0.1d, 0.5d, 1d, "IFEI", "IFEI Brightness Control Knob"));
+            AddFunction(new Axis(this, IFEI, "3007", "174", 0.1d, 0.0d, 1d, "IFEI", "IFEI Brightness Control Knob"));
             AddFunction(new FlagValue(this, "468", "IFEI", "IFEI", ""));
             AddFunction(new FlagValue(this, "469", "IFEI", "IFEI buttons", ""));
 

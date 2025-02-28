@@ -197,6 +197,139 @@
     <Resource Include="Images\MFD Rocker V Up.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gauges\ADI\Alt\adi_ball.png" />
+    <Resource Include="Gauges\ADI\Alt\adi_bezel.png" />
+    <Resource Include="Gauges\ADI\Alt\adi_glass.png" />
+    <Resource Include="Gauges\ADI\Alt\adi_inner_ring.png" />
+    <Resource Include="Gauges\ADI\Alt\adi_off_flag.png" />
+    <Resource Include="Gauges\ADI\Alt\adi_slip_bezel.png" />
+    <Resource Include="Gauges\ADI\Alt\adi_wings.png" />
+    <Resource Include="Gauges\Altimeter\Alt\Altimeter_Faceplate.png" />
+    <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Cover.png" />
+    <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Faceplate.png" />
+    <Resource Include="Gauges\Battery\Alt\Battery_Faceplate.png" />
+    <Resource Include="Gauges\Battery\Alt\Battery_Needle_Cover.png" />
+    <Resource Include="Gauges\BrakePressure\Alt\Brake_Pressure_Cover.png" />
+    <Resource Include="Gauges\BrakePressure\Alt\Brake_Pressure_Faceplate.png" />
+    <Resource Include="Gauges\CabinPressure\Alt\Cabin_Pressure_Faceplate.png" />
+    <Resource Include="Gauges\Common\Alt\Radar Altimeter Blank.png" />
+    <Resource Include="Gauges\Common\Alt\Radar Altimeter Off Flag.png" />
+    <Resource Include="Gauges\HydraulicPressure\Alt\Hyd_Pressure_Faceplate.png" />
+    <Resource Include="Gauges\HydraulicPressure\Alt\PRESS_1.png" />
+    <Resource Include="Gauges\HydraulicPressure\Alt\PRESS_2.png" />
+    <Resource Include="Gauges\IAS\Alt\IAS.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_DOWN.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_DOWN_DN.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_ET.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_ET_DN.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_MODE.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_MODE_DN.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_QTY.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_QTY_DN.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_UP.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_UP_DN.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_ZONE.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI_ZONE_DN.png" />
+    <Resource Include="Gauges\LOx\Alt\LOx_Faceplate.png" />
+    <Resource Include="Gauges\VVI\Alt\VVI_Faceplate.png" />
+    <Resource Include="Images\Alt\Common Knob.png" />
+    <Resource Include="Images\Alt\Radar Altimeter Blank.png" />
+    <Resource Include="Images\Alt\Radar Altimeter Off Flag.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 0 a.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 0.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 1.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 2.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 3.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 4.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 5.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 6.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 7.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 8.png" />
+    <Resource Include="Images\Alt\UFC Button Dn 9.png" />
+    <Resource Include="Images\Alt\UFC Button Dn ALT.png" />
+    <Resource Include="Images\Alt\UFC Button Dn AP.png" />
+    <Resource Include="Images\Alt\UFC Button Dn AWL.png" />
+    <Resource Include="Images\Alt\UFC Button Dn BCN.png" />
+    <Resource Include="Images\Alt\UFC Button Dn CLR.png" />
+    <Resource Include="Images\Alt\UFC Button Dn Dash.png" />
+    <Resource Include="Images\Alt\UFC Button Dn DL.png" />
+    <Resource Include="Images\Alt\UFC Button Dn Dot.png" />
+    <Resource Include="Images\Alt\UFC Button Dn EMCON.png" />
+    <Resource Include="Images\Alt\UFC Button Dn ENT.png" />
+    <Resource Include="Images\Alt\UFC Button Dn IFF.png" />
+    <Resource Include="Images\Alt\UFC Button Dn ILS.png" />
+    <Resource Include="Images\Alt\UFC Button Dn ONOFF.png" />
+    <Resource Include="Images\Alt\UFC Button Dn SVE.png" />
+    <Resource Include="Images\Alt\UFC Button Dn TCN.png" />
+    <Resource Include="Images\Alt\UFC Button Dn TMR.png" />
+    <Resource Include="Images\Alt\UFC Button Dn TOO.png" />
+    <Resource Include="Images\Alt\UFC Button Dn WOF.png" />
+    <Resource Include="Images\Alt\UFC Button Dn WPN.png" />
+    <Resource Include="Images\Alt\UFC Button Up 0 a.png" />
+    <Resource Include="Images\Alt\UFC Button Up 0.png" />
+    <Resource Include="Images\Alt\UFC Button Up 1.png" />
+    <Resource Include="Images\Alt\UFC Button Up 2.png" />
+    <Resource Include="Images\Alt\UFC Button Up 3.png" />
+    <Resource Include="Images\Alt\UFC Button Up 4.png" />
+    <Resource Include="Images\Alt\UFC Button Up 5.png" />
+    <Resource Include="Images\Alt\UFC Button Up 6.png" />
+    <Resource Include="Images\Alt\UFC Button Up 7.png" />
+    <Resource Include="Images\Alt\UFC Button Up 8.png" />
+    <Resource Include="Images\Alt\UFC Button Up 9.png" />
+    <Resource Include="Images\Alt\UFC Button Up ALT.png" />
+    <Resource Include="Images\Alt\UFC Button Up AP.png" />
+    <Resource Include="Images\Alt\UFC Button Up AWL.png" />
+    <Resource Include="Images\Alt\UFC Button Up BCN.png" />
+    <Resource Include="Images\Alt\UFC Button Up CLR.png" />
+    <Resource Include="Images\Alt\UFC Button Up Dash.png" />
+    <Resource Include="Images\Alt\UFC Button Up DL.png" />
+    <Resource Include="Images\Alt\UFC Button Up Dot.png" />
+    <Resource Include="Images\Alt\UFC Button Up EMCON.png" />
+    <Resource Include="Images\Alt\UFC Button Up ENT.png" />
+    <Resource Include="Images\Alt\UFC Button Up IFF.png" />
+    <Resource Include="Images\Alt\UFC Button Up ILS.png" />
+    <Resource Include="Images\Alt\UFC Button Up ONOFF.png" />
+    <Resource Include="Images\Alt\UFC Button Up SVE.png" />
+    <Resource Include="Images\Alt\UFC Button Up TCN.png" />
+    <Resource Include="Images\Alt\UFC Button Up TMR.png" />
+    <Resource Include="Images\Alt\UFC Button Up TOO.png" />
+    <Resource Include="Images\Alt\UFC Button Up WOF.png" />
+    <Resource Include="Images\Alt\UFC Button Up WPN.png" />
+    <Resource Include="Images\Alt\UFC Faceplate.png" />
+    <Resource Include="Images\Alt\UFC Rotator_U.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI Reflections.png" />
+    <Resource Include="Gauges\IFEI\Common Knob.png" />
+    <Resource Include="Gauges\IFEI\Alt\Common Knob.png" />
+    <Resource Include="Gauges\IFEI\Alt\IFEI.png" />
+    <Resource Include="Gauges\IFEI\Alt\orange-round-down.png" />
+    <Resource Include="Gauges\IFEI\Alt\orange-round-norm.png" />
+    <Resource Include="Gauges\IFEI\Alt\orange-round-up.png" />
+    <Resource Include="Gauges\IFEI\orange-round-down.png" />
+    <Resource Include="Gauges\IFEI\orange-round-norm.png" />
+    <Resource Include="Gauges\IFEI\orange-round-up.png" />
+    <Resource Include="Images\Alt\indicator_green.png" />
+    <Resource Include="Images\Alt\indicator_off.png" />
+    <Resource Include="Images\Alt\indicator_red.png" />
+    <Resource Include="Images\Alt\AMPCD Frame.png" />
+    <Resource Include="Images\Alt\MPCD Frame.png" />
+    <Resource Include="Images\Alt\MFD Button 1 DnH.png" />
+    <Resource Include="Images\Alt\MFD Button 1 DnV.png" />
+    <Resource Include="Images\Alt\MFD Button 1 UpH.png" />
+    <Resource Include="Images\Alt\MFD Button 1 UpV.png" />
+    <Resource Include="Images\Alt\MFD Button DnH.png" />
+    <Resource Include="Images\Alt\MFD Button DnV.png" />
+    <Resource Include="Images\Alt\MFD Button UpH.png" />
+    <Resource Include="Images\Alt\MFD Button UpV.png" />
+    <Resource Include="Images\Alt\MFD Rocker L Dn.png" />
+    <Resource Include="Images\Alt\MFD Rocker L Mid.png" />
+    <Resource Include="Images\Alt\MFD Rocker L Up.png" />
+    <Resource Include="Images\Alt\MFD Rocker R Dn.png" />
+    <Resource Include="Images\Alt\MFD Rocker R Mid.png" />
+    <Resource Include="Images\Alt\MFD Rocker R Up.png" />
+    <Resource Include="Images\Alt\MFD Rocker V Dn.png" />
+    <Resource Include="Images\Alt\MFD Rocker V Mid.png" />
+    <Resource Include="Images\Alt\MFD Rocker V Up.png" />
+    <Resource Include="Images\Alt\MPCD Knob.png" />
     <Content Include="Templates\Base\FA-18C\9 Components\ODU Display Element.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -211,7 +344,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
-    <None Include="Gauges\IFEI\IFEI.psd" />
     <Content Include="Templates\Base\FA-18C\3 Panels\UFC.htpl">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -254,13 +386,16 @@
     <Content Include="Templates\Base\FA-18C\6 Gauges\ADI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\FA-18C\3 Panels\MPCD.htpl">
+    <Content Include="Templates\Base\FA-18C\3 Panels\MPCD_Right.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\FA-18C\3 Panels\AMPCD.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <Content Include="Templates\Base\FA-18C\3 Panels\MPCD_Left.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +413,9 @@
     <Compile Include="Gauges\LOx\LOx.cs" />
     <Compile Include="Gauges\MFD\MFD-FA18C-Type-1.cs" />
     <Compile Include="Gauges\MFD\MFD-FA18C-Type-2.cs" />
+    <Compile Include="Gauges\MFD\MPCD.cs" />
+    <Compile Include="Gauges\MFD\MPCD-Right.cs" />
+    <Compile Include="Gauges\MFD\MPCD-Left.cs" />
     <Compile Include="Gauges\UFC\UFC.cs" />
     <Compile Include="Gauges\UFC\UFCScratchPadDisplay.cs" />
     <Compile Include="Gauges\UFC\UFCTextDisplay.cs" />
@@ -465,10 +603,215 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gauges\ADI\Alt\adi_arrow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_bank_pointer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_bank_steering_bar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_course_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_gs_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_gs_indicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_guides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_innermost_ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_inner_ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_outer_ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_pitch_steering_bar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_slip_ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_turn_marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\adi_wings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Alt\altimeter_needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Alt\alt_drum_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Min_Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\CabinPressure\cabin_pressure_needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\CabinPressure\Alt\cabin_pressure_needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\altimeter_mask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Alt\altimeter_mask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="Gauges\Common\needle_a10.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Gauges\Common\Alt\drum_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Alt\drum_tape_reverse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Alt\eng_small_needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Alt\needle_a.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Alt\needle_a10.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Alt\needle_b.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Clock Separator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Left 0 Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Left 100 Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Left 50 Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Left Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Left Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends Bingo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends FF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends L.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends Noz.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends Oil.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends RPM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends R.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends Temp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Legends Z.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Right 0 Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Right 100 Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Right 50 Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Right Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Right Nozzle Gauge Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\Alt\IFEI Needle Background.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\IFEI\IFEI Needle Background.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Images\RWRRings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\HeliosPlugin.targets" />
 </Project>

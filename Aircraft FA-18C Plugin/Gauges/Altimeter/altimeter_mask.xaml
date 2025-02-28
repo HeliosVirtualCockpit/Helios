@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  Name="Altimeter" Width="250" Height="250">
+    <Canvas>
+        <Path StrokeThickness="3.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 249.500,125.500 C 249.500,57.017 193.983,1.500 125.500,1.500 C 57.017,1.500 1.500,57.017 1.500,125.500 C 1.500,193.983 57.017,249.500 125.500,249.500 C 193.983,249.500 249.500,193.983 249.500,125.500 Z"/>
+
+    </Canvas>
+</Canvas>

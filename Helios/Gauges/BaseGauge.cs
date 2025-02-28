@@ -18,9 +18,9 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System;
     using System.Windows;
 
-    public class BaseGauge : HeliosVisual
+    public class BaseGauge : HeliosVisual, IGauge
     {
-        private GaugeComponentCollection _components = new GaugeComponentCollection();
+        private readonly GaugeComponentCollection _components = new GaugeComponentCollection();
 
         protected BaseGauge(string name, Size nativeSize)
             : base(name, nativeSize)
@@ -38,6 +38,24 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
         }
 
+        public double NativeWidth
+        {
+            get => NativeSize.Width;
+        }
+        public double NativeHeight
+        {
+            get => NativeSize.Height;
+        }
+        public new double Width
+        {
+            get => base.Width;
+            set => base.Width = value;
+        }
+        public new double Height
+        {
+            get => base.Height;
+            set => base.Height = value;
+        }
         #endregion
 
         void Components_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
