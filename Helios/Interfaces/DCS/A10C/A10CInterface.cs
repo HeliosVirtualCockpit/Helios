@@ -554,7 +554,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
 
             #region Electrical Power Panel
             AddFunction(Switch.CreateToggleSwitch(this, ELEC_INTERFACE, BUTTON_1, "241", "1", "Power", "0", "Off/Reset", "Electrical", "APU Generator", "%1d"));
-            AddFunction(Switch.CreateThreeWaySwitch(this, ELEC_INTERFACE, BUTTON_2, "242", "1", "STBY", "0", "Off", "-1.0", "Test", "Electrical", "Inverter", "%1d"));
+            AddFunction(new Switch(this, ELEC_INTERFACE, "242", new SwitchPosition[] { new SwitchPosition("1", "STBY", BUTTON_2, BUTTON_2, "0", "0"), new SwitchPosition("0", "OFF", BUTTON_55, BUTTON_55, "0", "0"), new SwitchPosition("-1", "TEST", BUTTON_55, BUTTON_55, "0", "0") }, "Electrical", "Inverter", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, LIGHT_SYSTEM, BUTTON_7, "243", "1", "On", "0", "Off", "Electrical", "Emergency Flood", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, ELEC_INTERFACE, BUTTON_4, "244", "1", "Power", "0", "Off/Reset", "Electrical", "AC Generator - Left", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, ELEC_INTERFACE, BUTTON_5, "245", "1", "Power", "0", "Off/Reset", "Electrical", "AC Generator - Right", "%1d"));
@@ -562,7 +562,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             #endregion
 
             #region Oxygen System Control Panel
-            AddFunction(Switch.CreateThreeWaySwitch(this, OXYGEN_SYSTEM, BUTTON_3, "601", "1", "Emergency", "0", "Normal", "-1", "Test Mask", "Oxygen System", "Emergency Lever", "%1d"));
+            AddFunction(new Switch(this, OXYGEN_SYSTEM, "601", new SwitchPosition[] { new SwitchPosition("1", "Emergency", BUTTON_3, BUTTON_3, "0", "0"), new SwitchPosition("0", "Normal", BUTTON_4, BUTTON_4, "0", "0"), new SwitchPosition("-1", "Test Mask", BUTTON_4, BUTTON_4, "0", "0") }, "Oxygen System", "Emergency Lever", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, OXYGEN_SYSTEM, BUTTON_2, "602", "1", "100%", "0", "Normal", "Oxygen System", "Dilution Lever", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, OXYGEN_SYSTEM, BUTTON_1, "603", "1", "On", "0", "Off", "Oxygen System", "Supply Lever", "%1d"));
             AddFunction(new ScaledNetworkValue(this, "274", 10d, "Oxygen System", "Volume", "Indicates the quantity of liquid oxygen in the regulator.", "", BindingValueUnits.Liters));
