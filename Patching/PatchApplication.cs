@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using GadrocsWorkshop.Helios.Patching.DCS;
 using GadrocsWorkshop.Helios.Util;
 
 namespace GadrocsWorkshop.Helios.Patching
@@ -36,10 +37,11 @@ namespace GadrocsWorkshop.Helios.Patching
         public bool Enabled { get; internal set; }
         public bool UseRemote { get; }
         public StatusCodes Status { get; internal set; }
+        public DCSIntallationType DCSIntallationType { get; }
 
         public HashSet<string> PatchExclusions { get; internal set; } = new HashSet<string>();
 
-        public PatchApplication(IPatchDestinationWritable destination, bool enabled, bool useRemote, string patchSet,
+        public PatchApplication(IPatchDestinationWritable destination, bool enabled, bool useRemote, string patchSet, DCSIntallationType installationType,
             params string[] patchesRoots)
         {
             PatchSet = patchSet;
@@ -47,20 +49,28 @@ namespace GadrocsWorkshop.Helios.Patching
             Destination = destination;
             Enabled = enabled;
             UseRemote = useRemote;
+            DCSIntallationType = installationType;
 
             PatchList patches = new PatchList();
             string selectedVersion = null;
             foreach (string patchesRoot in PatchesRoots)
             {
                 string previouslySelectedVersion = selectedVersion;
-                PatchList loaded = Destination.SelectPatches(patchesRoot, ref selectedVersion, PatchSet);
-                if (previouslySelectedVersion != null && 
-                    selectedVersion != null && 
-                    string.Compare(selectedVersion, previouslySelectedVersion, StringComparison.InvariantCulture) > 0)
+                PatchList loaded = Destination.SelectPatches(patchesRoot, ref selectedVersion, PatchSet, installationType);
+                if(installationType == DCSIntallationType.DCS)
                 {
-                    // replaced with higher version
-                    patches = new PatchList();
+                    if (previouslySelectedVersion != null &&
+                        selectedVersion != null &&
+                        string.Compare(selectedVersion, previouslySelectedVersion, StringComparison.InvariantCulture) > 0)
+                    {
+                        // replaced with higher version
+                        patches = new PatchList();
+                    }
+                } else
+                {
+                    selectedVersion = "";
                 }
+
                 patches.Merge(loaded);
             }
 
@@ -117,7 +127,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     new StatusReportItem
                     {
-                        Status = $"No applicable patches for {Destination.LongDescription} since none of the patched files are present",
+                        Status = $"No applicable patches for {Anonymizer.Anonymize(Destination.LongDescription)} since none of the patched files are present",
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                     }
                 };
@@ -129,9 +139,9 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     new StatusReportItem
                     {
-                        Status = $"No compatible patch set version available for {Destination.LongDescription}",
+                        Status = $"No compatible patch set version available for {Anonymizer.Anonymize(Destination.LongDescription)}",
                         Recommendation =
-                            $"Upgrade Helios to support {Destination.LongDescription} or install patches in user documents",
+                            $"Upgrade Helios to support {Anonymizer.Anonymize(Destination.LongDescription)} or install patches in user documents",
                         Severity = StatusReportItem.SeverityCode.Error
                     }
                 };
@@ -150,7 +160,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     new StatusReportItem
                     {
-                        Status = $"No applicable patches to revert for {Destination.LongDescription} since none of the patched files are present",
+                        Status = $"No applicable patches to revert for {Anonymizer.Anonymize(Destination.LongDescription)} since none of the patched files are present",
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                     }
                 };
@@ -162,7 +172,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     new StatusReportItem
                     {
-                        Status = $"Nothing to revert for for {Destination.LongDescription}",
+                        Status = $"Nothing to revert for for {Anonymizer.Anonymize(Destination.LongDescription)}",
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                     }
                 };

@@ -48,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS.Controls
             if (newInterface is AdditionalViewports viewportsInterface)
             {
                 _interface = viewportsInterface;
-                DataContext = new AdditionalViewportsViewModel(_interface.ViewportPatches);
+                DataContext = new AdditionalViewportsViewModel<DCSPatchInstallation>(_interface.ViewportPatches, _interface.CommunityPatches );
             }
             else
             {
@@ -63,12 +63,14 @@ namespace GadrocsWorkshop.Helios.Patching.DCS.Controls
         private void Configure_Click(object sender, RoutedEventArgs e)
         {
             _interface?.ViewportPatches.Install(_installationDialogs);
+            _interface?.CommunityPatches.Install(_installationDialogs);
             _interface?.InvalidateStatusReport();
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
             _interface?.ViewportPatches.Patching.Uninstall(_installationDialogs);
+            _interface?.CommunityPatches.Patching.Uninstall(_installationDialogs);
             _interface?.InvalidateStatusReport();
         }
 

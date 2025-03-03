@@ -26,15 +26,32 @@ using GadrocsWorkshop.Helios.Util.DCS;
 
 namespace GadrocsWorkshop.Helios.Patching.DCS
 {
-    [DebuggerDisplay("DCS in {" + nameof(_dcsRoot) + "}")]
+    [DebuggerDisplay("{" + nameof(_dcsInstallationType) + "} in {" + nameof(_dcsRoot) + "}")]
     public class PatchDestination : IPatchDestinationWritable
     {
         private readonly string _dcsRoot;
+        private readonly string _targetRoot;
+        private readonly string _installationType;
+        private readonly DCSIntallationType _dcsInstallationType;
+        private readonly InstallationLocation _location;
         private static readonly Encoding Utf8WithoutBom = new UTF8Encoding(false);
 
-        public PatchDestination(InstallationLocation location)
+        public PatchDestination(InstallationLocation location, DCSIntallationType installationType = DCSIntallationType.DCS)
         {
-            _dcsRoot = location.Path;
+            _dcsInstallationType = installationType;
+            _installationType = installationType.ToString("G").Replace('_',' ');
+            _location = location;
+            switch (installationType)
+            {
+                case DCSIntallationType.DCS_Community:
+                    _targetRoot = location.SavedGamesPath;
+                    _dcsRoot = location.Path;
+                    break;
+                case DCSIntallationType.DCS:
+                default:
+                    _dcsRoot = _targetRoot = location.Path;
+                    break;
+            }
             try
             {
                 Version = PatchVersion.SortableString(location.Version);
@@ -48,11 +65,12 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             DisplayVersion = location.Version;
         }
 
-        public string Description => $"DCS {DisplayVersion}";
-        public string LongDescription => $"DCS installation in '{_dcsRoot}'";
-        public string FailedPatchRecommendation => "Please make sure you do not have viewport mods installed and run a DCS Repair (slow mode) to clean up DCS.";
+        public string Description => $"{_installationType} {DisplayVersion}";
+        public string LongDescription => $"{_installationType} installation in '{_targetRoot}'";
+        public string FailedPatchRecommendation => _installationType == "DCS" ? "Please make sure you do not have viewport mods installed and run a DCS Repair (slow mode) to clean up DCS." : "Please make sure you have not made changes to the community mods installed.  Consider re-installing the mod.";
 
         public string RootFolder => _dcsRoot;
+        public string TargetRootFolder => _targetRoot;
 
         public string Version { get; }
         public string DisplayVersion { get; }
@@ -85,7 +103,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             return true;
         }
 
-        private string LocateFile(string targetPath) => Path.Combine(_dcsRoot, targetPath);
+        private string LocateFile(string targetPath) => Path.Combine(_targetRoot, targetPath);
 
         // REVISIT what sort of locking can we reasonably do?
         public bool TryLock() => true;
@@ -145,7 +163,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
         private string BackupPath(string targetPath) => $"{targetPath}.{Version}";
 
-        public PatchList SelectPatches(string patchesRoot, ref string selectedVersion, string patchSet)
+        public PatchList SelectPatches(string patchesRoot, ref string selectedVersion, string patchSet, DCSIntallationType intallationType = DCSIntallationType.DCS)
         {
             if (!Directory.Exists(patchesRoot))
             {
@@ -188,7 +206,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 candidatePatchSetPath = patchSetPath;
             }
 
-            if (candidatePatchSetPath == "")
+            if (candidatePatchSetPath == "" && _dcsInstallationType == DCSIntallationType.DCS)
             {
                 if (selectedVersion != null)
                 {
@@ -203,17 +221,32 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
                 return new PatchList();
             }
+            
+            if (_dcsInstallationType == DCSIntallationType.DCS_Community)
+            {
+                candidatePatchSetPath = patchesRoot;
+                candidateVersion = "";
+            }
 
-            ConfigManager.LogManager.LogInfo(
-                $"loading {patchSet} patches for DCS {DisplayVersion} from {Anonymizer.Anonymize(patchesRoot)} using version {candidateVersion} of the patches");
+            if (_dcsInstallationType == DCSIntallationType.DCS)
+            {
+                ConfigManager.LogManager.LogInfo(
+                    $"loading {patchSet} patches for DCS {DisplayVersion} from {Anonymizer.Anonymize(patchesRoot)} using version {candidateVersion} of the patches");
+            }
+            else
+            {
+                ConfigManager.LogManager.LogInfo(
+                    $"loading {patchSet} patches for DCS {DisplayVersion} from {Anonymizer.Anonymize(patchesRoot)} using unversioned patches");
+            }
 
             selectedVersion = candidateVersion;
-            return PatchList.Load(candidatePatchSetPath);
-        }
+
+            return PatchList.Load(candidatePatchSetPath, _targetRoot);
+                    }
 
         private IList<StatusReportItem> ExecuteRemote(string[] patchesRoots, string selectedVersion, string patchSet, string command)
         {
-            IEnumerable<string> args = new[] { "-h", $"\"{ConfigManager.DocumentPath}\"", "-d", $"\"{_dcsRoot}\"", command }
+            IEnumerable<string> args = new[] { "-h", $"\"{ConfigManager.DocumentPath}\"", "-d", $"\"{_targetRoot}\"", command }
                 .Concat(patchesRoots.Select(root => $"\"{Path.Combine(root, selectedVersion, patchSet)}\""));
             string myDirectory = Directory.GetParent(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)).FullName;
             string executablePath = Path.Combine(myDirectory ?? "", "HeliosPatching.exe");

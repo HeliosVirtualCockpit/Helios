@@ -14,6 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using GadrocsWorkshop.Helios.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,7 +56,7 @@ namespace GadrocsWorkshop.Helios.Patching
             {
                 yield return new StatusReportItem
                 {
-                    Status = $"cannot acquire lock on {destination.LongDescription} to verify patches",
+                    Status = $"cannot acquire lock on {Anonymizer.Anonymize(destination.LongDescription)} to verify patches",
                     Recommendation = "close any programs that are holding a lock on this location",
                     Severity = StatusReportItem.SeverityCode.Error
                 };
@@ -68,7 +69,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} will not patch {patch.TargetPath} because it was excluded from patching by the user"
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} will not patch {patch.TargetPath} because it was excluded from patching by the user"
                     };
                     continue;
                 }
@@ -76,7 +77,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 if (!destination.TryGetSource(patch.TargetPath, out string source))
                 {
                     ConfigManager.LogManager.LogDebug(
-                        $"{patch.TargetPath} does not exist in {destination.LongDescription}; patch does not apply");
+                        $"{patch.TargetPath} does not exist in {Anonymizer.Anonymize(destination.LongDescription)}; patch does not apply");
                     continue;
                 }
 
@@ -84,7 +85,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} has already patched {patch.TargetPath}",
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} has already patched {patch.TargetPath}",
                         // there will be a lot of these, don't show them in small views
                         Flags = StatusReportItem.StatusFlags.Verbose | StatusReportItem.StatusFlags.ConfigurationUpToDate
                     };
@@ -93,7 +94,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} is missing some patches in {patch.TargetPath}",
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} is missing some patches in {patch.TargetPath}",
                         Recommendation = "Apply patches",
                         Link = StatusReportItem.ProfileEditor,
                         Severity = StatusReportItem.SeverityCode.Error
@@ -104,7 +105,7 @@ namespace GadrocsWorkshop.Helios.Patching
             if (!destination.TryUnlock())
             {
                 ConfigManager.LogManager.LogError(
-                    $"cannot release lock on {destination.LongDescription} after verifying patches");
+                    $"cannot release lock on {Anonymizer.Anonymize(destination.LongDescription)} after verifying patches");
             }
         }
 
@@ -140,7 +141,7 @@ namespace GadrocsWorkshop.Helios.Patching
             {
                 yield return new StatusReportItem
                 {
-                    Status = $"cannot acquire lock on {destination.LongDescription} to {verb} patches",
+                    Status = $"cannot acquire lock on {Anonymizer.Anonymize(destination.LongDescription)} to {verb} patches",
                     Recommendation = "close any programs that are holding a lock on this location",
                     Severity = StatusReportItem.SeverityCode.Error
                 };
@@ -158,7 +159,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     yield return new StatusReportItem
                     {
-                        Status = $"{patch.TargetPath} does not exist in {destination.LongDescription}; ignoring patch"
+                        Status = $"{patch.TargetPath} does not exist in {Anonymizer.Anonymize(destination.LongDescription)}; ignoring patch"
                     };
                     continue;
                 }
@@ -168,7 +169,7 @@ namespace GadrocsWorkshop.Helios.Patching
                     // already applied, go to next patch
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} has already patched {patch.TargetPath}"
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} has already patched {patch.TargetPath}"
                     };
                     continue;
                 }
@@ -178,7 +179,7 @@ namespace GadrocsWorkshop.Helios.Patching
                     // send detail including code
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} {failureStatus}",
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} {failureStatus}",
                         Severity = StatusReportItem.SeverityCode.Error,
                         Code = expectedCode
                     };
@@ -199,7 +200,7 @@ namespace GadrocsWorkshop.Helios.Patching
                     yield return new StatusReportItem
                     {
                         Status =
-                            $"{destination.LongDescription} could not save original copy of {patch.TargetPath}",
+                            $"{Anonymizer.Anonymize(destination.LongDescription)} could not save original copy of {patch.TargetPath}",
                         Recommendation =
                             "please check write permissions to make sure you can write files in the DCS installation location",
                         Severity = StatusReportItem.SeverityCode.Error
@@ -224,14 +225,14 @@ namespace GadrocsWorkshop.Helios.Patching
             {
                 yield return new StatusReportItem
                 {
-                    Status = $"cannot release lock on {destination.LongDescription} after {verbing} patches",
+                    Status = $"cannot release lock on {Anonymizer.Anonymize(destination.LongDescription)} after {verbing} patches",
                     Recommendation = $"please restart and try the {verb} process again",
                     Severity = StatusReportItem.SeverityCode.Error
                 };
             }
         }
 
-        public static PatchList Load( string fromFolder)
+        public static PatchList Load(string fromFolder, string targetRoot = "")
         {
             PatchList patches = new PatchList();
             if (!Directory.Exists(fromFolder))
@@ -244,7 +245,8 @@ namespace GadrocsWorkshop.Helios.Patching
                 PatchFile patch = new PatchFile
                 {
                     TargetPath = patchPath.Substring(fromFolder.Length + 1,
-                        patchPath.Length - (fromFolder.Length + Path.GetExtension(patchPath).Length))
+                        patchPath.Length - (fromFolder.Length + Path.GetExtension(patchPath).Length)),
+                    TargetRoot = targetRoot
                 };
                 patch.Load(patchPath);
                 patches.Add(patch);
@@ -258,7 +260,7 @@ namespace GadrocsWorkshop.Helios.Patching
             {
                 yield return new StatusReportItem
                 {
-                    Status = $"cannot acquire lock on {destination.LongDescription} to revert patches",
+                    Status = $"cannot acquire lock on {Anonymizer.Anonymize(destination.LongDescription)} to revert patches",
                     Recommendation = "close any programs that are holding a lock on this location",
                     Severity = StatusReportItem.SeverityCode.Error
                 };
@@ -276,7 +278,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 {
                     yield return new StatusReportItem
                     {
-                        Status = $"{patch.TargetPath} does not exist in {destination.LongDescription}; ignoring patch"
+                        Status = $"{patch.TargetPath} does not exist in {Anonymizer.Anonymize(destination.LongDescription)}; ignoring patch"
                     };
                     continue;
                 }
@@ -286,7 +288,7 @@ namespace GadrocsWorkshop.Helios.Patching
                     // patch not present in this file any more, go to next patch
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} does not have our patches for {patch.TargetPath}"
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} does not have our patches for {patch.TargetPath}"
                     };
                     continue;
                 }
@@ -296,7 +298,7 @@ namespace GadrocsWorkshop.Helios.Patching
                     // restored original file for this version, no need to revert patch
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} restored original file {patch.TargetPath}",
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} restored original file {patch.TargetPath}",
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                     };
                     continue;
@@ -307,7 +309,7 @@ namespace GadrocsWorkshop.Helios.Patching
                     // could not apply reverse patch; keep going trying to fix up as much as possible
                     yield return new StatusReportItem
                     {
-                        Status = $"{destination.LongDescription} {failureStatus}",
+                        Status = $"{Anonymizer.Anonymize(destination.LongDescription)} {failureStatus}",
                         Recommendation = "please repair DCS installation using dcs_updater.exe",
                         Severity = StatusReportItem.SeverityCode.Error
                     };
@@ -327,7 +329,7 @@ namespace GadrocsWorkshop.Helios.Patching
             {
                 yield return new StatusReportItem
                 {
-                    Status = $"cannot release lock on {destination.LongDescription} after reverting patches",
+                    Status = $"cannot release lock on {Anonymizer.Anonymize(destination.LongDescription)} after reverting patches",
                     Recommendation = "please restart and try the revert patches process again",
                     Severity = StatusReportItem.SeverityCode.Error
                 };
@@ -341,7 +343,7 @@ namespace GadrocsWorkshop.Helios.Patching
             {
                 status = new StatusReportItem
                 {
-                    Status = $"{destination.LongDescription} successfully wrote {patch.TargetPath} after {verbing} patch"
+                    Status = $"{Anonymizer.Anonymize(destination.LongDescription)} successfully wrote {patch.TargetPath} after {verbing} patch"
                 };
                 return true;
             }
@@ -349,7 +351,7 @@ namespace GadrocsWorkshop.Helios.Patching
             status = new StatusReportItem
             {
                 Status =
-                    $"{destination.LongDescription} could not write {patch.TargetPath} after {verbing} patch",
+                    $"{Anonymizer.Anonymize(destination.LongDescription)} could not write {patch.TargetPath} after {verbing} patch",
                 Severity = StatusReportItem.SeverityCode.Error,
                 Recommendation = "please ensure you have write permission to all the files in the target location"
             };

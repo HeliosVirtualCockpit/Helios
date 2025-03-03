@@ -14,6 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities;
@@ -21,6 +22,8 @@ using GadrocsWorkshop.Helios.Util.DCS;
 
 namespace GadrocsWorkshop.Helios.Patching.DCS
 {
+    public enum DCSIntallationType { DCS, DCS_Community}
+
     /// <summary>
     /// the viewport patching functionality of DCS Additional Viewports
     ///
@@ -32,15 +35,17 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         /// our parent interface to which we indicate when the status report needs to be updated
         /// </summary>
         private readonly IStatusReportNotify _parent;
+        private readonly DCSIntallationType _dcsInstallationType;
 
-        internal DCSPatchInstallation(IStatusReportNotify parent, string patchSet, string patchSetShortName)
+        internal DCSPatchInstallation(IStatusReportNotify parent, string patchSet, string patchSetShortName, DCSIntallationType dcsInstallationType = DCSIntallationType.DCS)
         {
             _parent = parent;
+            _dcsInstallationType = dcsInstallationType;
             PatchSet = patchSet;
             PatchSetShortName = patchSetShortName;
             Patching = new PatchInstallation(LoadDestinations(Locations),
                 PatchSet,
-                $"Helios {PatchSetShortName} patches");
+                $"Helios {PatchSetShortName} patches", dcsInstallationType);
             Patching.PatchesChanged += Patching_PatchesChanged;
             SubscribeToLocationChanges();
         }
@@ -65,21 +70,30 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         /// </summary>
         public PatchInstallation Patching { get; }
 
+        internal IEnumerable<PatchApplication> CreatePatchDestinations(IList<InstallationLocation> locations, DCSIntallationType installationType)
+        {
+            foreach (InstallationLocation location in locations) {
+                yield return CreatePatchDestination(location, installationType);
+            }
+            yield break;
+
+        }
+
         /// <summary>
         /// set up the application of patches to a specific location in DCS-specific way
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        internal PatchApplication CreatePatchDestination(InstallationLocation location) =>
+        internal PatchApplication CreatePatchDestination(InstallationLocation location, DCSIntallationType installationType = DCSIntallationType.DCS) =>
             new PatchApplication(
-                new PatchDestination(location),
+                new PatchDestination(location, installationType),
                 location.IsEnabled,
-                !location.Writable,
-                PatchSet,
+                installationType == DCSIntallationType.DCS ? !location.Writable : false,
+                PatchSet, installationType,
                 // load user-provided patches from documents folder
-                System.IO.Path.Combine(ConfigManager.DocumentPath, "Patches", "DCS"),
+                System.IO.Path.Combine(ConfigManager.DocumentPath, "Patches", installationType.ToString("G").Replace('_',' ')),
                 // then load pre-installed patches from Helios installation folder
-                System.IO.Path.Combine(ConfigManager.ApplicationPath, "Plugins", "Patches", "DCS"));
+                System.IO.Path.Combine(ConfigManager.ApplicationPath, "Plugins", "Patches", installationType.ToString("G").Replace('_', ' ')));
 
 
         private Dictionary<string, PatchApplication> LoadDestinations(InstallationLocations locations)
@@ -95,7 +109,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
             foreach (InstallationLocation location in locations.Items)
             {
-                destinations[location.Path] = CreatePatchDestination(location);
+                destinations[location.Path] = CreatePatchDestination(location, _dcsInstallationType);
             }
 
             return destinations;
@@ -110,7 +124,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
         protected override void Location_Added(object sender, InstallationLocations.LocationEvent e)
         {
-            Patching?.OnAdded(e.Location.Path, CreatePatchDestination(e.Location));
+            Patching?.OnAdded(e.Location.Path, CreatePatchDestination(e.Location, DCSIntallationType.DCS));
             base.Location_Added(sender, e);
         }
 
@@ -170,34 +184,34 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             }
 
             // check if all our patches are installed
-            foreach (PatchApplication item in locations
-                .Select(CreatePatchDestination))
-            {
-                if (item.SelectedVersion == null)
+                foreach (PatchApplication item in CreatePatchDestinations(locations, _dcsInstallationType))
                 {
-                    yield return new StatusReportItem
+                    if (item.SelectedVersion == null)
                     {
-                        Status = $"No {PatchSetShortName} patches compatible with {item.Destination.Description} found",
-                        Recommendation =
-                            "Please reinstall Helios to install these patches or provide them in documents folder",
-                        Severity = StatusReportItem.SeverityCode.Error
-                    };
-                }
+                        yield return new StatusReportItem
+                        {
+                            Status = $"No {PatchSetShortName} patches compatible with {item.Destination.Description} found",
+                            Recommendation =
+                                "Please reinstall Helios to install these patches or provide them in documents folder",
+                            Severity = StatusReportItem.SeverityCode.Error
+                        };
+                    }
 
-                foreach (StatusReportItem result in item.Patches.Verify(item.Destination, patchExclusions))
+                    foreach (StatusReportItem result in item.Patches.Verify(item.Destination, patchExclusions))
+                    {
+                        // return detailed results instead of just "up to date or not"
+                        yield return result;
+                    }
+                }
+                
+                string cleanInstallationType = _dcsInstallationType.ToString("G").Replace('_',' ');
+                yield return new StatusReportItem
                 {
-                    // return detailed results instead of just "up to date or not"
-                    yield return result;
-                }
-            }
-
-            yield return new StatusReportItem
-            {
-                Status = $"Helios is managing DCS {PatchSetShortName} patches",
-                Recommendation =
-                    $"Do not also install {PatchSetShortName} mods manually or via a mod manager like OVGME",
-                Flags = StatusReportItem.StatusFlags.Verbose | StatusReportItem.StatusFlags.ConfigurationUpToDate
-            };
+                    Status = $"Helios is managing {cleanInstallationType} {PatchSetShortName} patches",
+                    Recommendation =
+                        $"Do not also install {PatchSetShortName} mods manually or via a mod manager like OVGME",
+                    Flags = StatusReportItem.StatusFlags.Verbose | StatusReportItem.StatusFlags.ConfigurationUpToDate
+                };
         }
 
         #endregion

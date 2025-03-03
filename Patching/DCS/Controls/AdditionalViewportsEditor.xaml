@@ -136,6 +136,18 @@
                 <ItemsControl Grid.Row="1" ItemsSource="{Binding Data.Patching.PatchedPaths}"/>
             </Grid>
         </Expander>
+        <Expander Header="Details of Community Patches" Margin="0,0,0,12" IsExpanded="False" Style="{StaticResource GroupBoxWithExpanderStyle}">
+            <Grid Height="Auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="6">These are the files that are patched for you by Helios which you have installed in your Saved Games folder from the community.
+                Disabling one of the items here allows you to take control of that file yourself so that you can modify it freely without Helios complaining about it.
+                However, Helios may no longer function correctly unless you know exactly what you are doing.</TextBlock>
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding CommunityData.Patching.PatchedPaths}"/>
+            </Grid>
+        </Expander>
         <GroupBox Header="DCS Additional Viewports" Style="{StaticResource BasicGroup}">
             <Grid Height="Auto">
                 <Grid.ColumnDefinitions>

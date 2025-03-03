@@ -13220,7 +13220,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Patches\DCS Community\mods\Aircraft\" />
+  </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
   <PropertyGroup>
     <PreBuildEvent>

@@ -14,7 +14,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using GadrocsWorkshop.Helios.ComponentModel;
 using GadrocsWorkshop.Helios.Windows;
+using System.Windows;
 
 namespace GadrocsWorkshop.Helios.Patching.DCS.ViewModel
 {
@@ -23,11 +25,33 @@ namespace GadrocsWorkshop.Helios.Patching.DCS.ViewModel
     ///
     /// this will grow if the additional viewports interface ever does something else
     /// </summary>
-    public class AdditionalViewportsViewModel: HeliosViewModel<DCSPatchInstallation>
+    public class AdditionalViewportsViewModel<T> : DependencyObject where T : NotificationObject
     {
-        public AdditionalViewportsViewModel(DCSPatchInstallation data) : base(data)
+        public AdditionalViewportsViewModel(DCSPatchInstallation viewportData, DCSPatchInstallation communityData)
         {
-            // no code
+            Data = viewportData;
+            CommunityData = communityData;
         }
+
+        protected static void GenerateHeliosUndoForProperty(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // pretend this dependency object is a NotificationObject in the tree under our data object and
+            // generate an Undo record that will set our property back if called
+            AdditionalViewportsViewModel<DCSPatchInstallation> sourceObject = (AdditionalViewportsViewModel<DCSPatchInstallation>)d;
+            /// ToDo:  Determine which of the two source objects actually changed
+            sourceObject.Data.OnPropertyChanged(
+                e.Property.Name,
+                new PropertyNotificationEventArgs(sourceObject, e.Property.Name, e.OldValue, e.NewValue));
+            sourceObject.CommunityData.OnPropertyChanged(
+                e.Property.Name,
+                new PropertyNotificationEventArgs(sourceObject, e.Property.Name, e.OldValue, e.NewValue));
+        }
+
+        #region Properties
+
+        public DCSPatchInstallation Data { get; }
+        public DCSPatchInstallation CommunityData { get; }
+
+        #endregion        
     }
 }

@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Patching
         private List<Patch> _reversePatches;
 
         public string TargetPath { get; internal set; }
+        public string TargetRoot { get; internal set; }
 
         internal bool TryApply(string source, out string patched, out string status, out string expected)
         {

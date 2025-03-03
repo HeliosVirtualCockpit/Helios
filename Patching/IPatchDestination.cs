@@ -14,6 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using GadrocsWorkshop.Helios.Patching.DCS;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -65,8 +66,9 @@ namespace GadrocsWorkshop.Helios.Patching
         /// version will be considered.
         /// </param>
         /// <param name="patchSet">the patch set, such as 'Viewports'</param>
+        /// <param name="intallationType">whether a patch set will apply to program files or to Saved Games</param>
         /// <returns>a patchlist that may be empty if no matches were found</returns>
-        PatchList SelectPatches(string patchesRoot, ref string selectedVersion, string patchSet);
+        PatchList SelectPatches(string patchesRoot, ref string selectedVersion, string patchSet, DCSIntallationType intallationType );
 
         /// <summary>
         /// using an elevated process or whatever other mechanism is required to get a writable destination

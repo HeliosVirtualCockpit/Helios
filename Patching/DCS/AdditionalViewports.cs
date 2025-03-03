@@ -46,6 +46,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
         {
             base.AttachToProfileOnMainThread();
             ViewportPatches = new DCSPatchInstallation(this, "Viewports", "viewport");
+            CommunityPatches = new DCSPatchInstallation(this, "DCS Community", "viewport", DCSIntallationType.DCS_Community);
         }
 
         protected override void DetachFromProfileOnMainThread(HeliosProfile oldProfile)
@@ -53,9 +54,13 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             base.DetachFromProfileOnMainThread(oldProfile);
             ViewportPatches.Dispose();
             ViewportPatches = null;
+            CommunityPatches.Dispose();
+            CommunityPatches = null;
         }
 
         public DCSPatchInstallation ViewportPatches { get; private set; }
+
+        public DCSPatchInstallation CommunityPatches { get; private set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -81,7 +86,11 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
         public IEnumerable<StatusReportItem> PerformReadyCheck()
         {
-            return ViewportPatches.PerformReadyCheck();
+            foreach (StatusReportItem item in ViewportPatches.PerformReadyCheck().ToList().Concat(CommunityPatches.PerformReadyCheck().ToList()))
+            {
+                yield return item;
+            }
+            yield break;
         }
 
         #endregion

@@ -15,6 +15,7 @@
 // 
 
 using GadrocsWorkshop.Helios.ComponentModel;
+using GadrocsWorkshop.Helios.Patching.DCS;
 using GadrocsWorkshop.Helios.Util;
 using System;
 using System.Collections.Generic;
@@ -36,15 +37,18 @@ namespace GadrocsWorkshop.Helios.Patching
         private readonly Dictionary<string, PatchApplication> _destinations;
         private readonly string _patchSetDescription;
         private bool _isAdvancedWarningSuppressed = false;
+        private readonly DCSIntallationType _dcsInstallationType;
 
         public PatchInstallation(
             Dictionary<string, PatchApplication> destinations, 
             string patchSet,
-            string patchSetDescription)
+            string patchSetDescription,
+            DCSIntallationType dcsInstallationType = DCSIntallationType.DCS)
         {
             _destinations = destinations;
             _ = patchSet;
             _patchSetDescription = patchSetDescription;
+            _dcsInstallationType = dcsInstallationType;
 
             PatchedPaths = new ObservableCollection<PatchedPath>();
 
@@ -412,9 +416,12 @@ namespace GadrocsWorkshop.Helios.Patching
                 // ReSharper disable once InvertIf early exit on error condition should have a block
                 if (failed)
                 {
-                    // give up and just direct the user to fix one installation this time, meaning they may have to do this multiple times
-                    message +=
-                        $"\nPlease execute 'bin\\dcs_updater.exe repair' in your {item.Destination.LongDescription} to restore to original files";
+                    if (item.PatchSet == "Viewports")
+                    {
+                        // give up and just direct the user to fix one installation this time, meaning they may have to do this multiple times
+                        message +=
+                            $"\nPlease execute 'bin\\dcs_updater.exe repair' in your {item.Destination.LongDescription} to restore to original files";
+                    }
                     break;
                 }
             }
