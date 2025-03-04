@@ -174,12 +174,18 @@ namespace GadrocsWorkshop.Helios.Controls
         /// </summary>
         private readonly double _swipeThreshold = 45d;
 
+        /// <summary>
+        /// Indicates if the direction of swipe is to be reversed
+        /// </summary>
+        private readonly bool _reversed = false;
+
         public SwipeRotaryInteraction()
         {
         }
 
-        public SwipeRotaryInteraction(double initialControlAngle, Point centerPoint, Point location, double sensitivity)
+        public SwipeRotaryInteraction(double initialControlAngle, Point centerPoint, Point location, double sensitivity, bool reversed = false)
         {
+            _reversed = reversed;
             _ = initialControlAngle;
             _centerPoint = centerPoint;
             _swipeThreshold = SWIPE_SENSITIVY_BASE * SwipeCalibration.Interpolate(sensitivity);
@@ -208,7 +214,15 @@ namespace GadrocsWorkshop.Helios.Controls
                 "swipe interaction pulsing rotary after change of {Degrees} against threshold of {Threshold} at {Location}",
                 newAngle, _swipeThreshold, location);
             _lastUpdateLocation = location;
-            control.Pulse(newAngle > 0 ? 1 : -1);
+            //control.Pulse(newAngle > 0 ? 1 : -1);
+            if (!_reversed)
+            {
+                control.Pulse(newAngle > 0 ? 1 : -1);
+            }
+            else
+            {
+                control.Pulse(newAngle > 0 ? -1 : 1);
+            }
             return true;
         }
     }

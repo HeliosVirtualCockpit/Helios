@@ -201,6 +201,10 @@ namespace GadrocsWorkshop.Helios.Controls
                     _interaction =
                         new SwipeRotaryInteraction(ControlAngle, GenerateCenterPoint(), location, Sensitivity);
                     break;
+                case RotaryClickType.ReverseSwipe:
+                    _interaction =
+                        new SwipeRotaryInteraction(ControlAngle, GenerateCenterPoint(), location, Sensitivity, true);
+                    break;
                 case RotaryClickType.Radial:
                     _interaction =
                         new RadialRotaryInteraction(ControlAngle, GenerateCenterPoint(), location, Sensitivity);
