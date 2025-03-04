@@ -687,10 +687,27 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             //AddFunction(new Axis(this, ADC, "3653", "653", 0.01d, 0d, 1d, "Altimeter", "Barometric pressure calibration adjust", true, "%.3f"));  // not sure what this is
             #endregion
             #region  Radar Altimeter Height Indicator
+            CalibrationPointCollectionDouble radAltScale = new CalibrationPointCollectionDouble(0.0d, -10d, 0.98d, 5100d) {
+                new CalibrationPointDouble(0.048d, 0d),
+                new CalibrationPointDouble(0.171d, 100d),
+                new CalibrationPointDouble(0.296d, 200d),
+                new CalibrationPointDouble(0.416d, 300d),
+                new CalibrationPointDouble(0.530d, 400d),
+                new CalibrationPointDouble(0.616d, 600d),
+                new CalibrationPointDouble(0.706d, 800d),
+                new CalibrationPointDouble(0.799d, 1000d),
+                new CalibrationPointDouble(0.886d, 3000d),
+                new CalibrationPointDouble(0.974d, 5000d)
+            };
+            CalibrationPointCollectionDouble minAltScale = new CalibrationPointCollectionDouble(-0.03d, 0.0d, 1.0d, 0.982d, 4) {
+                new CalibrationPointDouble(0.0d, 0.031d),
+                new CalibrationPointDouble(0.5d, 0.525d),
+                new CalibrationPointDouble(0.8d, 0.802d)
+            };
             AddFunction(new PushButton(this, ID2163A, "3001", "292", "Radar Altimeter ID2163A", "Push to Test Button"));
             AddFunction(new Axis(this, ID2163A, "3002", "291", 0.001d, 0d, 1d, "Radar Altimeter ID2163A", "Set Minimum Altitude", true, "%.3f"));
-            AddFunction(new NetworkValue(this, "287", "Radar Altimeter ID2163A", "Minimum Height Indicator", "Minimum Altitude in Feet.", "", BindingValueUnits.Feet));
-            AddFunction(new NetworkValue(this, "286", "Radar Altimeter ID2163A", "RADAR Altitude", "Altitude in feet measured by RADAR.", "", BindingValueUnits.Feet));
+            AddFunction(new ScaledNetworkValue(this, "287", minAltScale, "Radar Altimeter ID2163A", "Minimum Height Indicator", "Minimum Altitude in Feet.", "", BindingValueUnits.Feet));
+            AddFunction(new ScaledNetworkValue(this, "286", radAltScale, "Radar Altimeter ID2163A", "RADAR Altitude", "Altitude in feet measured by RADAR.", "", BindingValueUnits.Feet));
             AddFunction(new FlagValue(this, "288", "Radar Altimeter ID2163A", "Off Flag", ""));
             AddFunction(new FlagValue(this, "289", "Radar Altimeter ID2163A", "Green Lamp", ""));
             AddFunction(new FlagValue(this, "290", "Radar Altimeter ID2163A", "Red Lamp", ""));
@@ -709,16 +726,43 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new NetworkValue(this, "211", "SAI", "Bank Steering Bar", "Current position of the steering bar.", "(-1 to 1)", BindingValueUnits.Numeric));
             #endregion
             //  VVI
-            CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-1.0d, -6000d, 1.0d, 6000d);
-            vviScale.Add(new CalibrationPointDouble(0d, 0d));
+            CalibrationPointCollectionDouble vviScale = new CalibrationPointCollectionDouble(-1.0d, -6000d, 1.0d, 6000d) {
+                new CalibrationPointDouble(-0.83d, -4000d),
+                new CalibrationPointDouble(-0.73d, -3000d),
+                new CalibrationPointDouble(-0.605d, -2000d),
+                new CalibrationPointDouble(-0.40d, -1000d),
+                new CalibrationPointDouble(-0.22d, -500d),
+                new CalibrationPointDouble(0d, 0d),
+                new CalibrationPointDouble(0.22d, 500d),
+                new CalibrationPointDouble(0.40d, 1000d),
+                new CalibrationPointDouble(0.605d, 2000d),
+                new CalibrationPointDouble(0.73d, 3000d),
+                new CalibrationPointDouble(0.83d, 4000d),
+            };
             AddFunction(new ScaledNetworkValue(this, "225", vviScale, "Flight Instruments", "VVI", "Vertical velocity indicator -6000 to +6000.", "", BindingValueUnits.FeetPerMinute));
 
             //  IAS
-            CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 360d);
+            CalibrationPointCollectionDouble airspeedScale = new CalibrationPointCollectionDouble(0.0d, 0.0d, 1.0d, 850d) {
+                new CalibrationPointDouble(0.0445d, 60d),
+                new CalibrationPointDouble(0.15d, 100d),
+                new CalibrationPointDouble(0.348d, 150d),
+                new CalibrationPointDouble(0.586d, 200d),
+                new CalibrationPointDouble(0.636d, 250d),
+                new CalibrationPointDouble(0.673d, 300d),
+                new CalibrationPointDouble(0.715d, 350d),
+                new CalibrationPointDouble(0.748d, 400d),
+                new CalibrationPointDouble(0.782d, 450d),
+                new CalibrationPointDouble(0.819d, 500d),
+                new CalibrationPointDouble(0.849d, 550d),
+                new CalibrationPointDouble(0.870d, 600d),
+                new CalibrationPointDouble(0.898d, 650d),
+                new CalibrationPointDouble(0.922d, 700d),
+                new CalibrationPointDouble(0.950d, 750d),
+                new CalibrationPointDouble(0.976d, 800d),
+            };
             AddFunction(new ScaledNetworkValue(this, "217", airspeedScale, "Flight Instruments", "IAS Airspeed", "Current indicated air speed of the aircraft.", "", BindingValueUnits.Knots));
 
             //Cabin Altitude Pressure 
-            //CalibrationPointCollectionDouble cabinScale = new CalibrationPointCollectionDouble(-0.003d, -300d, 0.5000d, 50000d);
             CalibrationPointCollectionDouble cabinScale = new CalibrationPointCollectionDouble(-0.003d, -300d, 1.0d, 50000d);
             cabinScale.Add(new CalibrationPointDouble(0d, 0d));
             AddFunction(new ScaledNetworkValue(this, "285", cabinScale, "System Gauges", "Cabin Altitude", "Cabin altitude pressue in feet 0 to +50000.", "", BindingValueUnits.Numeric));
