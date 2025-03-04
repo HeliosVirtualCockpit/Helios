@@ -34,7 +34,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
         private readonly HeliosValue _greenIndicator;
         private readonly HeliosValue _offIndicator;
         private readonly GaugeNeedle _minimum_needle;
-        private readonly CalibrationPointCollectionDouble _needleCalibration;
+        private readonly CalibrationPointCollectionDouble _radAltScale;
+        private readonly CalibrationPointCollectionDouble _minAltScale;
         private readonly GaugeImage _giRed;
         private readonly GaugeImage _giGreen;
         private readonly GaugeImage _giOff;
@@ -72,23 +73,39 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Faceplate.png", new Rect(0d, 0d, 420d, 420d)));
 
-            _needleCalibration = new CalibrationPointCollectionDouble(0.048d, 0d, 1d, 330d)
-            {
-                new CalibrationPointDouble(0.000d, -12d)
+            double fullDeflection = 340d;
+            _radAltScale = new CalibrationPointCollectionDouble(-10d, 0.0d, 5100d, 0.98d * fullDeflection) {
+                new CalibrationPointDouble(0d, 0.048d * fullDeflection),
+                new CalibrationPointDouble(100d, 0.171d * fullDeflection),
+                new CalibrationPointDouble(200d, 0.296d * fullDeflection),
+                new CalibrationPointDouble(300d, 0.416d * fullDeflection),
+                new CalibrationPointDouble(400d, 0.530d * fullDeflection),
+                new CalibrationPointDouble(600d, 0.616d * fullDeflection),
+                new CalibrationPointDouble(800d, 0.706d * fullDeflection),
+                new CalibrationPointDouble(1000d, 0.799d * fullDeflection),
+                new CalibrationPointDouble(3000d, 0.886d * fullDeflection),
+                new CalibrationPointDouble(5000d, 0.974d * fullDeflection)
             };
+
             double needle = _needle != null ? _needle.Rotation : 0d;
-            _needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/altimeter_needle.xaml", new Point(210d, 210d), new Size(16d, 250d), new Point(8d, 200d), 0d) {
+            _needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Needle.xaml", new Point(210d, 210d), new Size(85d, 202d), new Point(42.5d, 159.5d), -16d) {
                 Rotation = needle
             };
             Components.Add(_needle);
 
+            _minAltScale = new CalibrationPointCollectionDouble(0d, -0.03d * fullDeflection, 0.982d, 1.0d * fullDeflection, 4) {
+                new CalibrationPointDouble(0.031d, 0.0d * fullDeflection),
+                new CalibrationPointDouble(0.525d, 0.5d * fullDeflection),
+                new CalibrationPointDouble(0.802d, 0.8d * fullDeflection)
+            };
+
             needle = _minimum_needle != null ? _minimum_needle.Rotation : 0d;
-            _minimum_needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Min_Needle.xaml", new Point(210d, 210d), new Size(46d, 205d), new Point(23d, 205d), 0d) {
+            _minimum_needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Min_Needle.xaml", new Point(210d, 210d), new Size(46d, 205d), new Point(23d, 205d), -12d) {
                 Rotation = needle
             };
             Components.Add(_minimum_needle);
 
-            Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Cover.png", new Rect(94d, 11d, 89d, 88d)));  // this is the needle cover
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Cover.xaml", new Rect(88d, 8d, 104d, 99d)));  // this is the needle cover
 
             //Components.Add(new GaugeImage("{FA-18C}/Gauges/Common/engine_bezel.png", new Rect(0d, 0d, 400d, 400d)));
 
@@ -144,11 +161,11 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
         }
         void Altitude_Execute(object action, HeliosActionEventArgs e)
         {
-            _needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
+            _needle.Rotation = _radAltScale.Interpolate(e.Value.DoubleValue);
         }
         void Min_Altitude_Execute(object action, HeliosActionEventArgs e)
         {
-            _minimum_needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
+            _minimum_needle.Rotation = _minAltScale.Interpolate(e.Value.DoubleValue);
         }
         void RedIndicator_Execute(object action, HeliosActionEventArgs e)
         {

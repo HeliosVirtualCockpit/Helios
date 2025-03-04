@@ -69,7 +69,6 @@
     <Resource Include="Gauges\ADI\adi_slip_bezel.png" />
     <Resource Include="Gauges\ADI\adi_wings.png" />
     <Resource Include="Gauges\Altimeter\Altimeter_Faceplate.png" />
-    <Resource Include="Gauges\Altimeter\RADAR_Altimeter_Cover.png" />
     <Resource Include="Gauges\Altimeter\RADAR_Altimeter_Faceplate.png" />
     <Resource Include="Gauges\Battery\Battery_Faceplate.png" />
     <Resource Include="Gauges\Battery\Battery_Needle_Cover.png" />
@@ -205,7 +204,6 @@
     <Resource Include="Gauges\ADI\Alt\adi_slip_bezel.png" />
     <Resource Include="Gauges\ADI\Alt\adi_wings.png" />
     <Resource Include="Gauges\Altimeter\Alt\Altimeter_Faceplate.png" />
-    <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Cover.png" />
     <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Faceplate.png" />
     <Resource Include="Gauges\Battery\Alt\Battery_Faceplate.png" />
     <Resource Include="Gauges\Battery\Alt\Battery_Needle_Cover.png" />
@@ -684,6 +682,22 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Altimeter\Alt\altimeter_mask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Cover.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\RADAR_Altimeter_Cover.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\RADAR_Altimeter_Needle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

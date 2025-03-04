@@ -41,8 +41,24 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             Components.Add(_needle);
 
 
-            _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 360d, 346d);
-
+            _needleCalibration = new CalibrationPointCollectionDouble(0.0d, 0.0d, 850d, 346d) {
+                new CalibrationPointDouble(60d , 14d),
+                new CalibrationPointDouble(100d, 52d),
+                new CalibrationPointDouble(150d, 119d),
+                new CalibrationPointDouble(200d, 202.7d),
+                new CalibrationPointDouble(250d, 220d),
+                new CalibrationPointDouble(300d, 234d),
+                new CalibrationPointDouble(350d, 248d),
+                new CalibrationPointDouble(400d, 260d),
+                new CalibrationPointDouble(450d, 272d),
+                new CalibrationPointDouble(500d, 284d),
+                new CalibrationPointDouble(550d, 295d),
+                new CalibrationPointDouble(600d, 302d),
+                new CalibrationPointDouble(650d, 311d),
+                new CalibrationPointDouble(700d, 320d),
+                new CalibrationPointDouble(750d, 329d),
+                new CalibrationPointDouble(800d, 337d),
+            };
             //Components.Add(new GaugeImage("{Helios}/Gauges/A-10/Common/gauge_bezel.png", new Rect(0d, 0d, 364d, 376d)));
 
             _indicatedAirSpeed = new HeliosValue(this, new BindingValue(0d), "", "indicated airspeed", "Current indicated airspeed of the aircraft.", "(0 - 850)", BindingValueUnits.Knots);

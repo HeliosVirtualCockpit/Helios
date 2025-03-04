@@ -45,6 +45,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             _calibrationPoints = new CalibrationPointCollectionDouble(-6000d, -169d, 6000d, 169d)
             {
                 new CalibrationPointDouble(-4000d, -140d),
+                new CalibrationPointDouble(-3000d, -123d),
                 new CalibrationPointDouble(-2000d, -102d),
                 new CalibrationPointDouble(-1000d, -67d),
                 new CalibrationPointDouble(-500d, -37d),
@@ -52,6 +53,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 new CalibrationPointDouble(500d, 37d),
                 new CalibrationPointDouble(1000d, 67d),
                 new CalibrationPointDouble(2000d, 102d),
+                new CalibrationPointDouble(3000d, 123d),
                 new CalibrationPointDouble(4000d, 140d)
             };
         }
