@@ -31,6 +31,9 @@ namespace GadrocsWorkshop.Helios.Controls
         [Description("Swipe around the control to increment or decrement")]
         Swipe,
 
+        [Description("Reverse Swipe around the control to decrement or increment")]
+        ReverseSwipe,
+
         [Description("Drag a radial handle for precise control")]
         Radial
     }
