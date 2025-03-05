@@ -1,0 +1,44 @@
+<Canvas Width="22.733" Height="204.434"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="22.733" Height="204.434">
+
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Fill="#fff3f3f3" Data="F1 M 6.447,132.140 L 6.447,129.756 L 6.447,10.076 C 6.447,9.851 6.501,9.629 6.604,9.429 L 11.095,0.699 C 11.326,0.251 11.970,0.257 12.191,0.711 L 16.570,9.684 C 16.665,9.878 16.714,10.090 16.714,10.305 L 16.714,132.381"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Fill="#ff1f1f1f" Data="F1 M 16.485,184.175 L 6.218,184.175 L 6.218,180.814 L 6.218,151.175 L 16.485,151.175 L 16.485,180.814 L 16.485,184.175 Z"/>
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path Fill="#ffff0000" Data="F1 M 11.733,141.978 C 11.733,142.181 11.569,142.345 11.367,142.345 C 11.164,142.345 11.000,142.181 11.000,141.978 C 11.000,141.776 11.164,141.611 11.367,141.611 C 11.569,141.611 11.733,141.776 11.733,141.978 Z"/>
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Fill="#ff1f1f1f" Data="F1 M 0.367,141.978 C 0.367,135.903 5.292,130.978 11.367,130.978 C 17.442,130.978 22.367,135.903 22.367,141.978 C 22.367,148.053 17.442,152.978 11.367,152.978 C 5.292,152.978 0.367,148.053 0.367,141.978 Z"/>
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Fill="#ff1f1f1f" Data="F1 M 0.367,193.067 C 0.367,186.992 5.292,182.067 11.367,182.067 C 17.442,182.067 22.367,186.992 22.367,193.067 C 22.367,199.142 17.442,204.067 11.367,204.067 C 5.292,204.067 0.367,199.142 0.367,193.067 Z"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Fill="#fff3f3f3" Data="F1 M 4.669,133.254 C 5.485,132.710 6.447,130.737 6.447,129.756"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Fill="#fff3f3f3" Data="F1 M 6.447,130.737"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Data="F1 M 16.714,129.756 C 16.714,130.678 17.300,132.618 18.007,133.209"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Data="F1 M 4.669,150.703 C 5.406,151.324 6.218,153.268 6.218,154.231"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Fill="#ff5f5f5f" Data="F1 M 16.485,154.231 C 16.485,152.978 17.381,151.387 18.063,150.703"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Data="F1 M 16.485,180.814 C 16.485,181.765 17.283,183.682 18.007,184.298"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.7" Stroke="#ff5f5f5f" StrokeMiterLimit="1.0" Data="F1 M 6.218,180.814 C 6.218,181.761 5.449,183.685 4.726,184.298"/>
+
+  </Canvas>
+</Canvas>

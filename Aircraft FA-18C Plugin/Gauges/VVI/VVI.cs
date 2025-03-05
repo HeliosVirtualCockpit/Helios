@@ -35,7 +35,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/VVI/VVI_Faceplate.png", new Rect(0d, 0d, 300d, 300d)));
 
-            _needle = new GaugeNeedle("{FA-18C}/Gauges/Common/needle_a.xaml", new Point(150d, 150d), new Size(22, 165), new Point(11, 130), -90d);
+            _needle = new GaugeNeedle("{FA-18C}/Gauges/Common/needle_d.xaml", new Point(150d, 150d), new Size(22.733d, 180.434d), new Point(11.733d, 117.978d), -90d);
             Components.Add(_needle);
 
             _verticalVelocity = new HeliosValue(this, new BindingValue(0d), "", "vertical velocity", "Veritcal velocity of the aircraft", "(-6,000 to 6,000)", BindingValueUnits.FeetPerMinute);

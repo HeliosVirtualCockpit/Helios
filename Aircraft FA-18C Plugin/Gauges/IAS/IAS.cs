@@ -37,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/IAS/IAS.png", new Rect(0d, 0d, 300, 300)));
 
-            _needle = new GaugeNeedle("{FA-18C}/Gauges/Common/needle_a.xaml", new Point(150d, 150d), new Size(22, 165), new Point(11, 130), 0d);
+            _needle = new GaugeNeedle("{FA-18C}/Gauges/Common/needle_d.xaml", new Point(150d, 150d), new Size(22.733d, 180.434d), new Point(11.733d, 117.978d), 0d);
             Components.Add(_needle);
 
 
