@@ -74,21 +74,21 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.Instruments
             Components.Add(new GaugeImage("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Faceplate.png", new Rect(0d, 0d, 420d, 420d)));
 
             double fullDeflection = 340d;
-            _radAltScale = new CalibrationPointCollectionDouble(-10d, 0.0d, 5100d, 0.98d * fullDeflection) {
+            _radAltScale = new CalibrationPointCollectionDouble(-10d, 0.0d, 5100d, 1.0d * fullDeflection) {
                 new CalibrationPointDouble(0d, 0.048d * fullDeflection),
                 new CalibrationPointDouble(100d, 0.171d * fullDeflection),
-                new CalibrationPointDouble(200d, 0.296d * fullDeflection),
-                new CalibrationPointDouble(300d, 0.416d * fullDeflection),
-                new CalibrationPointDouble(400d, 0.530d * fullDeflection),
-                new CalibrationPointDouble(600d, 0.616d * fullDeflection),
-                new CalibrationPointDouble(800d, 0.706d * fullDeflection),
-                new CalibrationPointDouble(1000d, 0.799d * fullDeflection),
-                new CalibrationPointDouble(3000d, 0.886d * fullDeflection),
-                new CalibrationPointDouble(5000d, 0.974d * fullDeflection)
+                new CalibrationPointDouble(200d, 0.300d * fullDeflection),
+                new CalibrationPointDouble(300d, 0.429d * fullDeflection),
+                new CalibrationPointDouble(400d, 0.544d * fullDeflection),
+                new CalibrationPointDouble(600d, 0.628d * fullDeflection),
+                new CalibrationPointDouble(800d, 0.720d * fullDeflection),
+                new CalibrationPointDouble(1000d, 0.814d * fullDeflection),
+                new CalibrationPointDouble(3000d, 0.899d * fullDeflection),
+                new CalibrationPointDouble(5000d, 0.986d * fullDeflection)
             };
 
             double needle = _needle != null ? _needle.Rotation : 0d;
-            _needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Needle.xaml", new Point(210d, 210d), new Size(85d, 202d), new Point(42.5d, 159.5d), -16d) {
+            _needle = new GaugeNeedle("{FA-18C}/Gauges/Altimeter/RADAR_Altimeter_Needle.xaml", new Point(210d, 210d), new Size(85d, 202d), new Point(42.5d, 159.5d), -18d) {
                 Rotation = needle
             };
             Components.Add(_needle);
