@@ -55,6 +55,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\F-16\CautionPanel\CautionPanel.cs" />
     <Compile Include="Gauges\F-16\HydraulicPressure\BaseHydraulicPressure.cs" />
     <Compile Include="Gauges\F-16\HydraulicPressure\HydraulicPressureA.cs" />
     <Compile Include="Gauges\F-16\HydraulicPressure\HydraulicPressureB.cs" />
@@ -801,6 +802,40 @@
     <Resource Include="Gauges\F-16\MFD\mfd_rocker_sym_down.png" />
     <Resource Include="Gauges\F-16\MFD\mfd_rocker_sym_up.png" />
     <Resource Include="Gauges\F-16\MFD\mfd_button_lit.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution_panel.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution00.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution01.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution02.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution03.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution04.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution05.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution06.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution07.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution08.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution09.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution10.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution11.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution12.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution13.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution14.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution15.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution16.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution17.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution18.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution19.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution20.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution21.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution22.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution23.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution24.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution25.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution26.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution27.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution28.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution29.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution30.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution31.png" />
+    <Resource Include="Gauges\F-16\CautionPanel\caution32.png" />
     <Content Include="Templates\HeliosFalcon\Falcon RTT DED.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
