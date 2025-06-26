@@ -20,6 +20,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
         MCPU = 1,
         CDU_LEFT,
         CDU_RIGHT,
+        MFD_KEYS,
         MFD_COPILOT_OUTBOARD,
         MFD_COPILOT_INBOARD,
         MFD_CENTER,
@@ -29,6 +30,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
         ADC,
         DTU,
         CAAS,
+        FPM,
         FADEC1,
         FADEC2,
         FM_PROXY,
@@ -89,6 +91,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
         VPM2,
         CREW_ANIMATION,
         VISOR,
+        AN_APX_118,
     }
-
 }
