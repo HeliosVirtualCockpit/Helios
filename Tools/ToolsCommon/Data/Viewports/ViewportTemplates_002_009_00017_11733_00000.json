@@ -1,0 +1,22 @@
+﻿[
+  {
+    "templateName": "F4U_1D BATBOMB",
+    "moduleId": "F4U-1D",
+    "categoryName": "F4U-1D Corsair",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "RP22",
+        "SuppressViewportNamePrefix": true,
+        "relativeInitFilePath": "Mods/aircraft/F4U-1D/Cockpit/Scripts/RP22/init.lua",
+        "requiresPatch": false,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 600
+      }
+    ]
+  }
+]

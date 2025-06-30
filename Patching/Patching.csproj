@@ -13219,6 +13219,9 @@
     <Content Include="Templates\Patching\Additional Simulator Viewports\F_5E_2024_RWR.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\F4U_1D_RP22.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Patches\DCS Community\mods\Aircraft\" />
