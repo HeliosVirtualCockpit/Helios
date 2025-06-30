@@ -409,7 +409,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Interfaces\DCS.F4U-1D.hif.json" />
+    <Content Include="Interfaces\DCS.F4U-1D.hif.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\Helios.targets" />
 </Project>
