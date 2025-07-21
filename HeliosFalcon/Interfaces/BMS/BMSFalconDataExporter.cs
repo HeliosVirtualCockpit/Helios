@@ -264,10 +264,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
             AddValue("Caution", "anti skid indicator", "Caution panel anti skid indicator.", "True if lit.", BindingValueUnits.Boolean);
             AddValue("Caution", "electric bus fail indicator", "Caution panel electric bus fail indicator.", "True if lit.", BindingValueUnits.Boolean);
             AddValue("Caution", "lef fault indicator", "Caution panel leading edge fault indicator.", "True if lit.", BindingValueUnits.Boolean);
-            
+            AddValue("Caution", "MAL/IND pressed", "test all indicator lamps", "True if pressed", BindingValueUnits.Boolean);
+
 
             // Test Panel Bits
-            AddValue("Test Panel", "FLCS channel lamp A", "FLCS channel lamp A on test panel (abcd)", "True if lit", BindingValueUnits.Boolean);
+AddValue("Test Panel", "FLCS channel lamp A", "FLCS channel lamp A on test panel (abcd)", "True if lit", BindingValueUnits.Boolean);
             AddValue("Test Panel", "FLCS channel lamp B", "FLCS channel lamp B on test panel (abcd)", "True if lit", BindingValueUnits.Boolean);
             AddValue("Test Panel", "FLCS channel lamp C", "FLCS channel lamp C on test panel (abcd)", "True if lit", BindingValueUnits.Boolean);
             AddValue("Test Panel", "FLCS channel lamp D", "FLCS channel lamp D on test panel (abcd)", "True if lit", BindingValueUnits.Boolean);
@@ -1038,6 +1039,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.Falcon.BMS
 
             UpdateBlinkingLightState(bits.HasFlag(BMSLightBits2.Unk), blinkBits.HasFlag(BlinkBits.Unk), ref _unkLastTick, ref _unkOnState);
             SetValue("Threat Warning Prime", "unknown mode indicator", new BindingValue(_unkOnState));
+
+            SetValue("Caution", "MAL/IND pressed", new BindingValue(bits.HasFlag(BMSLightBits2.AllLampBits2On)));
         }
 
         protected void ProcessLightBits3(BMSLightBits3 bits)
