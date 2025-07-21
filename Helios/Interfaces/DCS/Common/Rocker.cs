@@ -25,6 +25,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private string _id;
         private string _format;
 
+        [JsonProperty("triggereveryrelease")]
+        private bool _triggerEveryRelease;
+
         private string _position1Name;
         private string _position2Name;
 
@@ -52,17 +55,44 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         [JsonProperty("vertical")]
         private bool _vertical;
 
+        public Rocker(BaseUDPInterface sourceInterface, string deviceId, string buttonId, string argId, string device, string name, bool vertical)
+            : this(sourceInterface, deviceId, buttonId, buttonId, buttonId, buttonId, argId, device, name, vertical, "1", "-1", "0", "%1d")
+        {
+        }
         public Rocker(BaseUDPInterface sourceInterface, string deviceId, string button1Id, string button2Id, string releaseButtonId, string releaseButton2Id, string argId, string device, string name, bool vertical)
             : this(sourceInterface, deviceId, button1Id, button2Id, releaseButtonId, releaseButton2Id, argId, device, name, vertical, "1", "-1", "0", "%1d")
         {
         }
+        public Rocker(BaseUDPInterface sourceInterface, string deviceId, string buttonId, string argId, string device, string name, bool vertical, string push1Value, string push2Value, string releaseValue, string exportFormat, bool triggerEveryRelease = false)
+            : this(sourceInterface, deviceId, buttonId, buttonId, buttonId, buttonId, argId, device, name, vertical, push1Value, push2Value, releaseValue, exportFormat, triggerEveryRelease) 
+        {
+        }
 
-        public Rocker(BaseUDPInterface sourceInterface, string deviceId, string button1Id, string button2Id, string releaseButtonId, string releaseButton2Id, string argId, string device, string name, bool vertical, string push1Value, string push2Value, string releaseValue, string exportFormat)
+        /// <summary>
+        /// DCS Interface function for a rocker switch
+        /// </summary>
+        /// <param name="sourceInterface">Source Interface</param>
+        /// <param name="deviceId">ID of the device </param>
+        /// <param name="button1Id">Button Command for Pushed value 1</param>
+        /// <param name="button2Id">Button Command for Pushed value 2</param>
+        /// <param name="releaseButtonId">Button Command for Released value 1</param>
+        /// <param name="releaseButton2Id">Button Command for Released value 2</param>
+        /// <param name="argId">DCS argument ID</param>
+        /// <param name="device">argument device name</param>
+        /// <param name="name">argument name</param>
+        /// <param name="vertical"></param>
+        /// <param name="push1Value">Value associated with the pushed value 1</param>
+        /// <param name="push2Value">Value associated with the pushed value 2 </param>
+        /// <param name="releaseValue">Value associated with the release</param>
+        /// <param name="exportFormat">Format used for exporting the arg value</param>
+        /// <param name="triggerEveryRelease">This forces a trigger on every release, even if the new value is the same as the current value.  Needed if a pushed value needs to be followed by a release.</param>
+        public Rocker(BaseUDPInterface sourceInterface, string deviceId, string button1Id, string button2Id, string releaseButtonId, string releaseButton2Id, string argId, string device, string name, bool vertical, string push1Value, string push2Value, string releaseValue, string exportFormat, bool triggerEveryRelease = false)
             : base(sourceInterface, device, name, "Current state of this rocker.")
         {
             _id = argId;
             _format = exportFormat;
             _vertical = vertical;
+            _triggerEveryRelease = triggerEveryRelease;
             SerializedButtons.Add(new SerializedButton() { DeviceID = deviceId, PushID = button1Id, PushValue = push1Value, ReleaseID = releaseButtonId, ReleaseValue = releaseValue });
             SerializedButtons.Add(new SerializedButton() { DeviceID = deviceId, PushID = button2Id, PushValue = push2Value, ReleaseID = releaseButton2Id, ReleaseValue = releaseValue });
             DoBuild();
@@ -182,13 +212,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
             else if (value.Equals(_releaseValue))
             {
-                _value.SetValue(new BindingValue(2), false);
+                _value.SetValue(new BindingValue(2), false, _triggerEveryRelease);
                 _releasedTrigger.FireTrigger(BindingValue.Empty);
             }
         }
 
         protected override ExportDataElement[] DefaultDataElements =>
-            new ExportDataElement[] { new DCSDataElement(_id, _format) };
+            new ExportDataElement[] { new DCSDataElement(_id, _format, _triggerEveryRelease) };
 
         public override void Reset()
         {

@@ -113,13 +113,14 @@ namespace GadrocsWorkshop.Helios
         /// </summary>
         /// <param name="value">Value to be sent to bindings.</param>
         /// <param name="bypassCascadingTriggers">True if bindings should not trigger further triggers.</param>
-        public void SetValue(BindingValue value, bool bypassCascadingTriggers)
+        /// <param name="triggerAlways">True to trigger even if the value is unchanged.</param>
+        public void SetValue(BindingValue value, bool bypassCascadingTriggers, bool triggerAlways = false)
         {
             // factored this value out for readability
             bool valueChanged = (Value == null && value != null)
-                                || (Value != null && !Value.Equals(value));
+                                || (Value != null && !Value.Equals(value)) || triggerAlways;
 
-            if (bypassCascadingTriggers)
+                if (bypassCascadingTriggers)
             {
                 if (valueChanged)
                 {

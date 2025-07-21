@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HeliosProfile>
+  <Version>3</Version>
+  <Monitors>
+    <Monitor>
+      <Location>0,0</Location>
+      <Size>2560,1440</Size>
+      <Hidden>False</Hidden>
+      <Orientation>DMDO_DEFAULT</Orientation>
+      <AlwaysOnTop>True</AlwaysOnTop>
+      <Background />
+      <Children>
+        <Control TypeIdentifier="Helios.Base.ThreeWayToggleSwitch" Name="Three Way Toggle Switch" SnapTarget="True" Locked="False">
+          <Location>71,36</Location>
+          <Size>50,100</Size>
+          <Hidden>False</Hidden>
+          <SwitchType>OnOnOn</SwitchType>
+          <Orientation>Vertical</Orientation>
+          <ClickType>Swipe</ClickType>
+          <PositionOneImage>{Helios}/Images/Toggles/toggle-up.png</PositionOneImage>
+          <PositionTwoImage>{Helios}/Images/Toggles/toggle-norm.png</PositionTwoImage>
+          <PositionThreeImage>{Helios}/Images/Toggles/toggle-down.png</PositionThreeImage>
+          <DefaultPosition>Two</DefaultPosition>
+          <Children />
+        </Control>
+        <Control TypeIdentifier="Helios.Base.ThreeWayToggleSwitch" Name="Three Way Toggle Switch 1" SnapTarget="True" Locked="False">
+          <Location>196,36</Location>
+          <Size>50,100</Size>
+          <Hidden>False</Hidden>
+          <SwitchType>MomOnOn</SwitchType>
+          <Orientation>Vertical</Orientation>
+          <ClickType>Swipe</ClickType>
+          <PositionOneImage>{Helios}/Images/Toggles/toggle-up.png</PositionOneImage>
+          <PositionTwoImage>{Helios}/Images/Toggles/toggle-norm.png</PositionTwoImage>
+          <PositionThreeImage>{Helios}/Images/Toggles/toggle-down.png</PositionThreeImage>
+          <DefaultPosition>Two</DefaultPosition>
+          <Children />
+        </Control>
+        <Control TypeIdentifier="Helios.Base.ThreeWayToggleSwitch" Name="Three Way Toggle Switch 2" SnapTarget="True" Locked="False">
+          <Location>314,36</Location>
+          <Size>50,100</Size>
+          <Hidden>False</Hidden>
+          <SwitchType>OnOnOn</SwitchType>
+          <Orientation>Vertical</Orientation>
+          <ClickType>Swipe</ClickType>
+          <PositionOneImage>{Helios}/Images/Toggles/toggle-up.png</PositionOneImage>
+          <PositionTwoImage>{Helios}/Images/Toggles/toggle-norm.png</PositionTwoImage>
+          <PositionThreeImage>{Helios}/Images/Toggles/toggle-down.png</PositionThreeImage>
+          <DefaultPosition>Two</DefaultPosition>
+          <Children />
+        </Control>
+        <Control TypeIdentifier="Helios.Base.ToggleSwitch" Name="Toggle Switch" SnapTarget="True" Locked="False">
+          <Location>423,0</Location>
+          <Size>50,100</Size>
+          <Hidden>False</Hidden>
+          <SwitchType>OnOn</SwitchType>
+          <Orientation>Vertical</Orientation>
+          <ClickType>Swipe</ClickType>
+          <PositionOneImage>{Helios}/Images/Toggles/toggle-up.png</PositionOneImage>
+          <PositionTwoImage>{Helios}/Images/Toggles/toggle-down.png</PositionTwoImage>
+          <DefaultPosition>One</DefaultPosition>
+          <Children />
+        </Control>
+      </Children>
+    </Monitor>
+    <Monitor>
+      <Location>2560,0</Location>
+      <Size>3440,1440</Size>
+      <Hidden>False</Hidden>
+      <Orientation>DMDO_DEFAULT</Orientation>
+      <AlwaysOnTop>True</AlwaysOnTop>
+      <Background />
+      <Children />
+    </Monitor>
+    <Monitor>
+      <Location>6000,0</Location>
+      <Size>1920,1440</Size>
+      <Hidden>False</Hidden>
+      <Orientation>DMDO_DEFAULT</Orientation>
+      <AlwaysOnTop>True</AlwaysOnTop>
+      <Background />
+      <Children />
+    </Monitor>
+  </Monitors>
+  <Interfaces>
+    <Interface TypeIdentifier="Helios.Base.ProfileInterface" Name="Profile" />
+    <Interface TypeIdentifier="Helios.Base.Keyboard" Name="Keyboard">
+      <KeyDelay>30</KeyDelay>
+    </Interface>
+    <Interface TypeIdentifier="Helios.DH98Mosquito" Name="DCS DH98 Mosquito FB Mk VI" />
+  </Interfaces>
+  <Bindings>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.Bomb Doors Lever.changed" />
+      <Action Target="Visual;Monitor 1.Three Way Toggle Switch;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch" Name="set.position" />
+      <TriggerValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.Flaps Lever.changed" />
+      <Action Target="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="set.position" />
+      <TriggerValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.Flaps Lever Gate.changed" />
+      <Action Target="Visual;Monitor 1.Toggle Switch;Helios.Base.ToggleSwitch;Toggle Switch" Name="set.position" />
+      <TriggerValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.Gear (Chassis) Lever.changed" />
+      <Action Target="Visual;Monitor 1.Three Way Toggle Switch 1;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 1" Name="set.position" />
+      <TriggerValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch" Name="position one.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push up.Bomb Doors Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch" Name="position one.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Bomb Doors Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch" Name="position three.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push down.Bomb Doors Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch" Name="position three.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Bomb Doors Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 1;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 1" Name="position one.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push up.Gear (Chassis) Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 1;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 1" Name="position one.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Gear (Chassis) Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 1;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 1" Name="position three.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push down.Gear (Chassis) Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 1;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 1" Name="position three.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Gear (Chassis) Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 1;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 1" Name="position two.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Gear (Chassis) Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position one.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push up.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position one.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position three.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push down.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position three.entered" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position one.exited" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push down.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position one.exited" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position three.exited" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.push up.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Three Way Toggle Switch 2;Helios.Base.ThreeWayToggleSwitch;Three Way Toggle Switch 2" Name="position three.exited" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.release.Flaps Lever" />
+      <StaticValue />
+    </Binding>
+    <Binding BypassCascadingTriggers="True">
+      <Trigger Source="Visual;Monitor 1.Toggle Switch;Helios.Base.ToggleSwitch;Toggle Switch" Name="position.changed" />
+      <Action Target="Interface;;Helios.DH98Mosquito;DCS DH98 Mosquito FB Mk VI" Name="Main Panel.set.Flaps Lever Gate" />
+      <TriggerValue />
+    </Binding>
+  </Bindings>
+</HeliosProfile>
