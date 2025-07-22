@@ -61,6 +61,18 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Panels\Lever-Panel.png" />
+    <Resource Include="Images\Levers\Bomb-Lever-Down.png" />
+    <Resource Include="Images\Levers\Bomb-Lever-Middle.png" />
+    <Resource Include="Images\Levers\Bomb-Lever-Up.png" />
+    <Resource Include="Images\Levers\Flaps-Lever-Down.png" />
+    <Resource Include="Images\Levers\Flaps-Lever-Middle.png" />
+    <Resource Include="Images\Levers\Flaps-Lever-Up.png" />
+    <Resource Include="Images\Levers\Flaps-Lock-Closed.png" />
+    <Resource Include="Images\Levers\Flaps-Lock-Open.png" />
+    <Resource Include="Images\Levers\Gear-Lever-Down.png" />
+    <Resource Include="Images\Levers\Gear-Lever-Middle.png" />
+    <Resource Include="Images\Levers\Gear-Lever-Up.png" />
     <None Include="app.config" />
     <Content Include="Docs\Mossie_Levers_Example.hpf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -77,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\Instruments\" />
     <Folder Include="Interfaces\Functions\" />
     <Folder Include="Templates\Base\Mosquito\" />
   </ItemGroup>
@@ -84,8 +97,6 @@
     <Content Include="Docs\Mosquito.Plugin.Install.Read.Me.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Instruments\Boost-Faceplate.png" />
-    <Content Include="Images\Instruments\RPM-Faceplate.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Boost\Boost-Faceplate.xaml">
