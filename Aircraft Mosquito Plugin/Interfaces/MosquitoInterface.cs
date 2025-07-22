@@ -112,8 +112,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                         //    return;
                         //}
 #endif
-
-#if (DEBUG)
+// #define DEV
+#if (DEV)
 
             Dictionary<string, string> dcsBiosArgs = ProcessDCSBios.GetFunctions();
             Dictionary<string, FunctionData> clickableArgs = ProcessClickables.GetFunctions();
@@ -521,7 +521,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             }
             #endregion Radio Equipment
 
-#if (DEBUG)
+#if (DEV)
             Console.WriteLine("Number of functions:\t{0}",Functions.Count());
             foreach(DCSFunction nf in Functions)
             {
