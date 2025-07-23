@@ -150,22 +150,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new Axis(this, devices.SWITCHBOARD.ToString("d"), "3053", "14", 0.1d, 0d, 1d, "JBA", "Flood Light Dimmer Right", false, "%.1f"));   // "FLOOD_L_DIM_R"
             AddFunction(new Axis(this, devices.SWITCHBOARD.ToString("d"), "3056", "15", 0.1d, 0d, 1d, "JBA", "J.B.B. Flood Light Dimmer", false, "%.1f"));   // "BOX_B_L_DIM"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3066", "114", "0", "Position 1", "1", "Position 2", "JBA", "Tropical Air Filter Switch", "%1d"));   // "AIR_FILTER"
-            AddFunction(new FlagValue(this, "281", "JBA", "Fuel Pump Light (Yellow)", "True when indicator is lit", "%1d"));   // "FUEL_PUMP_L"
+            AddFunction(new FlagValue(this, "281", "JBA", "Fuel Pump Light (Yellow)", "True when indicator is lit"));   // "FUEL_PUMP_L"
             AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3065", "282", "1", "Position 1", "0", "Position 2", "JBA", "Fuel Pump Light Cover", "%1d"));   // "FUEL_PUMP_L_CVR"
-            AddFunction(new Axis(this, devices.REPEATER_COMPASS.ToString("d"), "3001", "49", 0.1d, 0d, 1d, "Main Panel", "Repeater Compass Course Set", false, "%.4f"));   // "REP_COMP"
-            AddFunction(new Axis(this, devices.CONTROLS.ToString("d"), "3010", "72", 0.1d, 0d, 1d, "Main Panel", "Altimeter Set", false, "%.4f"));   // "ALT_SET"
-            AddFunction(new Axis(this, devices.CONTROLS.ToString("d"), "3013", "74", 0.1d, 0d, 1d, "Main Panel", "Directional Gyro Set", false, "%.4f"));   // "DI_SET"
+            AddFunction(new RotaryEncoder(this, devices.REPEATER_COMPASS.ToString("d"), "3001", "49", 0.1d, "Main Panel", "Repeater Compass Course Set", "%.4f"));   // "REP_COMP"
+            AddFunction(new RotaryEncoder(this, devices.CONTROLS.ToString("d"), "3010", "72", 0.1d, "Main Panel", "Altimeter Set", "%.4f"));   // "ALT_SET"
+            AddFunction(new RotaryEncoder(this, devices.CONTROLS.ToString("d"), "3013", "74", 0.1d, "Main Panel", "Directional Gyro Set", "%.4f"));   // "DI_SET"
             AddFunction(Switch.CreateToggleSwitch(this, devices.PORT_OXYGEN_REGULATOR.ToString("d"), "3003", "84", "1", "Position 1", "0", "Position 2", "Main Panel", "Oxygen Regulator Port", "%1d"));   // "PORT_OXY_VALVE"
             AddFunction(new PushButton(this, devices.ENGINE_CONTROLS.ToString("d"), "3049", "292", "Main Panel", "Boost Cut-Off T-Handle", "%1d"));   // "BOOST_CUT_OFF"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3018", "62", "1", "Position 1", "0", "Position 2", "Main Panel", "Landing Light Switch Port", "%1d"));   // "PORT_LAND_L_SW"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3020", "63", "1", "Position 1", "0", "Position 2", "Main Panel", "Landing Light Switch Starboard", "%1d"));   // "STBD_LAND_L_SW"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3018", "62", "0", "Position 1", "1", "Position 2", "Main Panel", "Landing Light Switch Port", "%1d"));   // "PORT_LAND_L_SW"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3020", "63", "0", "Position 1", "1", "Position 2", "Main Panel", "Landing Light Switch Starboard", "%1d"));   // "STBD_LAND_L_SW"
 
             AddFunction(new Rocker(this, devices.THREE_WAY_SELECTOR.ToString("d"), "3001", "115", "Main Panel", "Bomb Doors Lever", true, "1", "-1", "0", "%1d", true));
             AddFunction(new Rocker(this, devices.THREE_WAY_SELECTOR.ToString("d"), "3002", "116", "Main Panel", "Gear (Chassis) Lever", true, "1", "-1", "0", "%1d", true));
-            AddFunction(Switch.CreateToggleSwitch(this, devices.THREE_WAY_SELECTOR.ToString("d"), "3004", "117", "1", "Open", "0", "Closed", "Main Panel", "Gear (Chassis) Lever Gate", "%1d"));   // "CHASSIS_GATE"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.THREE_WAY_SELECTOR.ToString("d"), "3004", "117", "0", "Open", "1", "Closed", "Main Panel", "Gear (Chassis) Lever Gate", "%1d"));   // "CHASSIS_GATE"
             AddFunction(new Rocker(this, devices.THREE_WAY_SELECTOR.ToString("d"), "3003", "118", "Main Panel", "Flaps Lever", true, "1", "-1", "0", "%1d", true));
             AddFunction(Switch.CreateToggleSwitch(this, devices.THREE_WAY_SELECTOR.ToString("d"), "3006", "119", "0", "Open", "1", "Closed", "Main Panel", "Flaps Lever Gate", "%1d"));   // "FLAPS_GATE"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3001", "120", "1", "Position 1", "0", "Position 2", "Main Panel", "Gun Firing Master Switch Cover", "%1d"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3001", "120", "0", "Safe", "1", "Fire", "Main Panel", "Gun Firing Master Switch Cover", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3003", "121", "0", "Position 1", "1", "Position 2", "Main Panel", "Gun Firing Master Switch", "%1d"));   // "GUN_MASTER"
             AddFunction(new PushButton(this, devices.GLYCOL_PUMP.ToString("d"), "3001", "370", "Main Panel", "De-Ice Glycol Pump Handle", "%1d"));   // "DE_ICE_PUMP"
 
@@ -174,8 +174,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new Rocker(this, devices.CONTROLS.ToString("d"), "3016", "279", "Port Wall", "Elevator Trim", true, "1", "-1", "0", "%1d", false));
 
             AddFunction(new Axis(this, devices.SWITCHBOARD.ToString("d"), "3059", "16", 0.1d, 0d, 1d, "Main Panel", "Bomb Panel Flood Dimmer", false, "%.1f"));   // "BOMB_PANEL_L_DIM"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3067", "284", "1", "Position 1", "0", "Position 2", "Main Panel", "Bomb Door Light Cover", "%1d"));   // "BOMB_DOOR_L_CVR"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3056", "144", "1", "Position 1", "0", "Position 2", "Main Panel", "Container Jettison Cover", "%1d"));   // "JETT_CONT_CVR"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3067", "284", "1", "Open", "0", "Closed", "Main Panel", "Bomb Door Light Cover", "%1d"));   // "BOMB_DOOR_L_CVR"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3056", "144", "1", "Open", "0", "Closed", "Main Panel", "Container Jettison Cover", "%1d"));   // "JETT_CONT_CVR"
             AddFunction(new PushButton(this, devices.WEAPONS.ToString("d"), "3058", "145", "Main Panel", "Container Jettison Button", "%1d"));   // "JETT_CONT"
             AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3059", "311", "0", "Position 1", "1", "Position 2", "Main Panel", "Bomb Panel Cover", "%1d"));   // "BOMB_PANEL_CVR"
             AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3061", "143", "0", "Position 1", "1", "Position 2", "Main Panel", "Cine Camera Changeover Switch", "%1d"));   // "CINE_CAM"
@@ -191,17 +191,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             /// TODO: check device and command
             AddFunction(new Axis(this, devices.DI.ToString("d"), "3001", "259", 0.01d, 0d, 1d, "Floor", "Drift Recorder", false, "%.3f"));   // "DRIFT_RECORDER_GAUGE"
 
-            AddFunction(new FlagValue(this, "283", "Main Panel", "Bomb Door Light (Yellow)", "True when indicator is lit", "%1d"));   // "BOMB_DOOR_L"
-            AddFunction(new FlagValue(this, "271", "Main Panel", "Center Lamp (White)", "True when indicator is lit", "%1d"));   // "MAIN_PANEL_C_LAMP_L"
-            AddFunction(new FlagValue(this, "270", "Main Panel", "Left Lamp (White)", "True when indicator is lit", "%1d"));   // "MAIN_PANEL_L_LAMP_L"
+            AddFunction(new FlagValue(this, "283", "Main Panel", "Bomb Door Light (Yellow)", "True when indicator is lit"));   // "BOMB_DOOR_L"
+            AddFunction(new FlagValue(this, "271", "Main Panel", "Center Lamp (White)", "True when indicator is lit"));   // "MAIN_PANEL_C_LAMP_L"
+            AddFunction(new FlagValue(this, "270", "Main Panel", "Left Lamp (White)", "True when indicator is lit"));   // "MAIN_PANEL_L_LAMP_L"
 
             AddFunction(Switch.CreateToggleSwitch(this, devices.ROCKETS.ToString("d"), "3003", "387", "0", "Off", "1", "On", "Rockets", "Rockets Salvo Selector Switch (Main Panel)", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.ROCKETS.ToString("d"), "3001", "385", "0", "Off", "1", "On", "Rockets", "Rockets Master Switch (Port Wall)", "%1d"));
             AddFunction(new PushButton(this, devices.ROCKETS.ToString("d"), "3005", "384", "Rockets", "Rockets Manual Advancement (Port Wall)", "%1d"));
             AddFunction(new PushButton(this, devices.ROCKETS.ToString("d"), "3006", "386", "Rockets", "Rockets Firing Switch (Right Engine Throttle)", "%1d"));
 
-            AddFunction(new FlagValue(this, "277", "Main Panel", "Fuel Pressure Warning Light Left (Red)", "True when indicator is lit", "%1d"));
-            AddFunction(new FlagValue(this, "278", "Main Panel", "Fuel Pressure Warning Light Right (Red)", "True when indicator is lit", "%1d"));
+            AddFunction(new FlagValue(this, "277", "Main Panel", "Fuel Pressure Warning Light Left (Red)", "True when indicator is lit"));
+            AddFunction(new FlagValue(this, "278", "Main Panel", "Fuel Pressure Warning Light Right (Red)", "True when indicator is lit"));
             /// TODO:  find out the correct device and command codes
             AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3001", "377", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Left", "%1d"));   
             AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3002", "378", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Right", "%1d"));
@@ -213,7 +213,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new ScaledNetworkValue(this, "98", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 360d), "Clock", "Hours", "", "Value between 0 and 360", BindingValueUnits.Degrees, "%.4f", true));   // "CLOCK_H_G"
             AddFunction(new ScaledNetworkValue(this, "99", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 360d), "Clock", "Minutes", "", "Value between 0 and 360", BindingValueUnits.Degrees, "%.4f", true));   // "CLOCK_M_G"
             AddFunction(new ScaledNetworkValue(this, "100", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 360d), "Clock", "Seconds", "", "Value between 0 and 360", BindingValueUnits.Degrees, "%.4f", true));   // "CLOCK_S_G"
-            AddFunction(new Axis(this, devices.CONTROLS.ToString("d"), "3007", "28", 0.1d, 0d, 1d, "Port Wall", "Magnetic Compass Ring", false, "%.4f"));   // "COMPASS_RING"
+            AddFunction(new RotaryEncoder(this, devices.CONTROLS.ToString("d"), "3007", "28", 0.0333d, "Port Wall", "Magnetic Compass Ring", "%.4f"));   // "COMPASS_RING"
             AddFunction(new Axis(this, devices.SWITCHBOARD.ToString("d"), "3006", "10", 0.1d, 0d, 1d, "Port Wall", "Emergency Light Rheostat", false, "%.1f"));   // "EMERG_L_DIM"
             AddFunction(new Axis(this, devices.SWITCHBOARD.ToString("d"), "3012", "11", 0.1d, 0d, 1d, "Port Wall", "Compass Flood Light Dimmer", false, "%.1f"));   // "COMPASS_L_DIM"
             AddFunction(new Axis(this, devices.SWITCHBOARD.ToString("d"), "3015", "12", 0.1d, 0d, 1d, "Port Wall", "Flood Light Dimmer Left", false, "%.1f"));   // "L_SIDE_L_DIM"
@@ -227,8 +227,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3002", "2", "0", "Position 1", "1", "Position 2", "Port Wall", "R.I. Compass De-ground Switch", "%1d"));   // "REP_COMPASS_SW2"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3004", "3", "0", "Position 1", "1", "Position 2", "Port Wall", "Beam Approach Switch", "%1d"));   // "BEAM_SW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.VHF_RADIO.ToString("d"), "3099", "4", "1", "Position 1", "0", "Position 2", "Port Wall", "SCR-522 PTT Button", "%1d"));   // "SCR_PTT"
-            AddFunction(new FlagValue(this, "325", "Port Wall", "UV Light Left (multi)", "True when indicator is lit", "%1d"));   // "UV_L_L"
-            AddFunction(new FlagValue(this, "326", "Port Wall", "UV Light Right (multi)", "True when indicator is lit", "%1d"));   // "UV_R_L"
+            AddFunction(new FlagValue(this, "325", "Port Wall", "UV Light Left (multi)", "True when indicator is lit"));   // "UV_L_L"
+            AddFunction(new FlagValue(this, "326", "Port Wall", "UV Light Right (multi)", "True when indicator is lit"));   // "UV_R_L"
             AddFunction(new PushButton(this, devices.VHF_RADIO.ToString("d"), "3001", "32", "Radio Remote Channel Switcher", "OFF Button", "%1d"));   // "RADIO_OFF"
             AddFunction(new PushButton(this, devices.VHF_RADIO.ToString("d"), "3002", "33", "Radio Remote Channel Switcher", "A Button", "%1d"));   // "RADIO_A"
             AddFunction(new PushButton(this, devices.VHF_RADIO.ToString("d"), "3003", "34", "Radio Remote Channel Switcher", "B Button", "%1d"));   // "RADIO_B"
@@ -238,11 +238,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.VHF_RADIO.ToString("d"), "3017", "43", "0", "Position 1", "1", "Position 2", "Radio Remote Channel Switcher", "Transmission Lock", "%1d"));   // "RADIO_TLOCK"
             AddFunction(new Switch(this, devices.VHF_RADIO.ToString("d"), "44", new SwitchPosition[] { new SwitchPosition("1.0", "Position 1", "3008"), new SwitchPosition("0.0", "Position 2", "3008"), new SwitchPosition("-1.0", "Position 3", "3007") }, "Radio Remote Channel Switcher", "Mode Switch", "%.1f"));   // "RADIO_T_MODE"
             AddFunction(new Axis(this, devices.VHF_RADIO.ToString("d"), "3015", "364", 0.1d, 0d, 1d, "Radio Remote Channel Switcher", "Volume Knob", false, "%.1f"));   // "RADIO_VOL"
-            AddFunction(new FlagValue(this, "37", "Radio Remote Channel Switcher", "A Light (White)", "True when indicator is lit", "%1d"));   // "RADIO_A_L"
-            AddFunction(new FlagValue(this, "38", "Radio Remote Channel Switcher", "B Light (White)", "True when indicator is lit", "%1d"));   // "RADIO_B_L"
-            AddFunction(new FlagValue(this, "39", "Radio Remote Channel Switcher", "C Light (White)", "True when indicator is lit", "%1d"));   // "RADIO_C_L"
-            AddFunction(new FlagValue(this, "40", "Radio Remote Channel Switcher", "D Light (White)", "True when indicator is lit", "%1d"));   // "RADIO_D_L"
-            AddFunction(new FlagValue(this, "41", "Radio Remote Channel Switcher", "TX Light (White)", "True when indicator is lit", "%1d"));   // "RADIO_TX_L"
+            AddFunction(new FlagValue(this, "37", "Radio Remote Channel Switcher", "A Light (White)", "True when indicator is lit"));   // "RADIO_A_L"
+            AddFunction(new FlagValue(this, "38", "Radio Remote Channel Switcher", "B Light (White)", "True when indicator is lit"));   // "RADIO_B_L"
+            AddFunction(new FlagValue(this, "39", "Radio Remote Channel Switcher", "C Light (White)", "True when indicator is lit"));   // "RADIO_C_L"
+            AddFunction(new FlagValue(this, "40", "Radio Remote Channel Switcher", "D Light (White)", "True when indicator is lit"));   // "RADIO_D_L"
+            AddFunction(new FlagValue(this, "41", "Radio Remote Channel Switcher", "TX Light (White)", "True when indicator is lit"));   // "RADIO_TX_L"
             AddFunction(new Axis(this, devices.ENGINE_CONTROLS.ToString("d"), "3030", "25", 0.1d, 0d, 1d, "Throttle Quadrant", "Throttle Friction", false, "%.1f"));   // "THROTTLE_FRICTION"
             AddFunction(new Axis(this, devices.ENGINE_CONTROLS.ToString("d"), "3020", "288", 0.1d, 0d, 1d, "Throttle Quadrant", "Throttles Control Left", false, "%.1f"));   // "THROTTLE_CONTROL_L"
             AddFunction(new Axis(this, devices.ENGINE_CONTROLS.ToString("d"), "3023", "289", 0.1d, 0d, 1d, "Throttle Quadrant", "Throttles Control Right", false, "%.1f"));   // "THROTTLE_CONTROL_R"
@@ -287,7 +287,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3113", "307", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Transmitter Type F Switch", "%1d"));   // "TRANS_TYPF_SW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.RADIO_POWERUNIT.ToString("d"), "3001", "305", "0", "Position 1", "1", "Position 2", "Starboard Wall", "T.1154 R.1155 L.T. Power Unit Switch", "%1d"));   // "LT_T1154_PW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.RADIO_POWERUNIT.ToString("d"), "3003", "306", "0", "Position 1", "1", "Position 2", "Starboard Wall", "T.1154 R.1155 H.T. Power Unit Switch", "%1d"));   // "HT_T1154_PW"
-            AddFunction(new FlagValue(this, "177", "Starboard Wall", "Generator Warning Light (Red)", "True when indicator is lit", "%1d"));   // "GEN_WARN_L"
+            AddFunction(new FlagValue(this, "177", "Starboard Wall", "Generator Warning Light (Red)", "True when indicator is lit"));   // "GEN_WARN_L"
             AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3071", "192", "1", "Position 1", "0", "Position 2", "Port Wall", "Engine Cut-Out Handle Port", "%1d"));   // "PORT_CUT-OUT"
             AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3095", "191", "1", "Position 1", "0", "Position 2", "Port Wall", "Engine Cut-Out Handle Starboard", "%1d"));   // "STBD_CUT-OUT"
             AddFunction(Switch.CreateThreeWaySwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3073", "193", "1", "Position 1", "0", "Position 2", "-1", "Position 3", "Port Wall", "Fuel Cock Port", "%1d"));   // "PORT_FUEL_COCK"
@@ -313,8 +313,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3107", "363", "1", "Position 1", "0", "Position 2", "Quarter", "IFF Detonator Switch Cover", "%1d"));   // "IFF_DETONATE_CVR"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3109", "189", "0", "Position 1", "1", "Position 2", "Quarter", "IFF Detonator Switch", "%1d"));   // "IFF_DETONATE"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3111", "190", "0", "Position 1", "1", "Position 2", "Quarter", "IFF Power Switch", "%1d"));   // "IFF_PW"
-            AddFunction(new FlagValue(this, "276", "Quarter", "Dome Lamp (White)", "True when indicator is lit", "%1d"));   // "DOME_LAMP_L"
-            AddFunction(new FlagValue(this, "275", "Quarter", "Antenna Lamp (White)", "True when indicator is lit", "%1d"));   // "LOOP_ANT_LAMP_L"
+            AddFunction(new FlagValue(this, "276", "Quarter", "Dome Lamp (White)", "True when indicator is lit"));   // "DOME_LAMP_L"
+            AddFunction(new FlagValue(this, "275", "Quarter", "Antenna Lamp (White)", "True when indicator is lit"));   // "LOOP_ANT_LAMP_L"
             AddFunction(new PushButton(this, devices.RADIO_INTERFACE.ToString("d"), "3001", "365", "T.1154", "Key", "%1d"));   // "T1154_KEY"
             AddFunction(new Axis(this, devices.RADIO_INTERFACE.ToString("d"), "3002", "358", 0.01d, 0d, 1d, "T.1154", "Master Oscillator Tuning Condenser C2", false, "%.4f"));   // "T1154_C2"
             AddFunction(new Axis(this, devices.RADIO_INTERFACE.ToString("d"), "3005", "359", 0.01d, 0d, 1d, "T.1154", "Master Oscillator Tuning Condenser C4", false, "%.4f"));   // "T1154_C4"
@@ -350,16 +350,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.RADIO_INTERFACE.ToString("d"), "3090", "237", "0", "Position 1", "1", "Position 2", "R.1155", "Meter Frequency Switch", "%1d"));   // "R1155_SW_SPEED"
 
             AddFunction(new NetworkValue(this, "255", "Cockpit", "Cockpit Hatch Position", "", "Numeric Value between 0 and 1", BindingValueUnits.Numeric));   // "COCKPIT_HATCH"
-            AddFunction(new FlagValue(this, "308", "Cockpit", "Transmitter Type F (Yellow)", "True when indicator is lit", "%1d"));   // "TRANS_TYPF_L"
-            AddFunction(new FlagValue(this, "379", "Cockpit", "Left Red Lamp (Red)", "True when indicator is lit", "%1d"));   // "RED_LAMP_L_L"
-            AddFunction(new FlagValue(this, "301", "Cockpit", "Right Lamp (White)", "True when indicator is lit", "%1d"));   // "WH_LAMP_R_L"
-            AddFunction(new FlagValue(this, "300", "Cockpit", "Front Lamp (White)", "True when indicator is lit", "%1d"));   // "WH_LAMP_F_L"
-            AddFunction(new FlagValue(this, "299", "Cockpit", "Left Lamp (White)", "True when indicator is lit", "%1d"));   // "WH_LAMP_L_L"
-            AddFunction(new FlagValue(this, "297", "Cockpit", "Gauges Glow (Green)", "True when indicator is lit", "%1d"));   // "GAUGES_GLOW_L"
-            AddFunction(new FlagValue(this, "77", "Main Panel", "Gear Left UP (Red)", "True when indicator is lit", "%1d"));   // "GEAR_UP_L_L"
-            AddFunction(new FlagValue(this, "79", "Main Panel", "Gear Right UP (Red)", "True when indicator is lit", "%1d"));   // "GEAR_UP_R_L"
-            AddFunction(new FlagValue(this, "78", "Main Panel", "Gear Left DOWN (Green)", "True when indicator is lit", "%1d"));   // "GEAR_DN_L_L"
-            AddFunction(new FlagValue(this, "80", "Main Panel", "Gear Right DOWN (Green)", "True when indicator is lit", "%1d"));   // "GEAR_DN_R_L"
+            AddFunction(new FlagValue(this, "308", "Cockpit", "Transmitter Type F (Yellow)", "True when indicator is lit"));   // "TRANS_TYPF_L"
+            AddFunction(new FlagValue(this, "379", "Cockpit", "Left Red Lamp (Red)", "True when indicator is lit"));   // "RED_LAMP_L_L"
+            AddFunction(new FlagValue(this, "301", "Cockpit", "Right Lamp (White)", "True when indicator is lit"));   // "WH_LAMP_R_L"
+            AddFunction(new FlagValue(this, "300", "Cockpit", "Front Lamp (White)", "True when indicator is lit"));   // "WH_LAMP_F_L"
+            AddFunction(new FlagValue(this, "299", "Cockpit", "Left Lamp (White)", "True when indicator is lit"));   // "WH_LAMP_L_L"
+            AddFunction(new FlagValue(this, "297", "Cockpit", "Gauges Glow (Green)", "True when indicator is lit"));   // "GAUGES_GLOW_L"
+            AddFunction(new FlagValue(this, "77", "Main Panel", "Gear Left UP (Red)", "True when indicator is lit"));   // "GEAR_UP_L_L"
+            AddFunction(new FlagValue(this, "79", "Main Panel", "Gear Right UP (Red)", "True when indicator is lit"));   // "GEAR_UP_R_L"
+            AddFunction(new FlagValue(this, "78", "Main Panel", "Gear Left DOWN (Green)", "True when indicator is lit"));   // "GEAR_DN_L_L"
+            AddFunction(new FlagValue(this, "80", "Main Panel", "Gear Right DOWN (Green)", "True when indicator is lit"));   // "GEAR_DN_R_L"
             AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3018", "304", "1", "Position 1", "0", "Position 2", "Main Panel", "Gear Indicator Blind Up/Down", "%1d"));   // "UC_BLIND"
 
 
