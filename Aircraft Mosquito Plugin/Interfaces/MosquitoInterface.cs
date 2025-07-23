@@ -387,10 +387,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
 
             #endregion Flight Instruments
             #region Engine Instruments
-            AddFunction(new ScaledNetworkValue(this, "50", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5d), "Engine Instruments", "Tacho (Port) 1000's", "0 to 5", "Number", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "51", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Engine Instruments", "Tacho (Port) 100's", "0 to 1", "Number", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "52", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5d), "Engine Instruments", "Tacho (Starboard) 1000's", "0 to 5", "Number", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "53", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Engine Instruments", "Tacho (Starboard) 100's", "0 to 1", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "50", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Engine Instruments", "Tacho (Port) 1000's", "0 to 5000", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "51", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1000d), "Engine Instruments", "Tacho (Port) 100's", "0 to 1000", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "52", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Engine Instruments", "Tacho (Starboard) 1000's", "0 to 5000", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "53", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1000d), "Engine Instruments", "Tacho (Starboard) 100's", "0 to 1000", "Number", BindingValueUnits.Numeric, "%.4f", true));
             {
                 double[] output = new double[] { -7.0, -6.0, 0.0, 6.0, 10.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 25.0 };
                 double[] input = new double[] { 0.000, 0.035, 0.280, 0.503, 0.629, 0.723, 0.778, 0.834, 0.887, 0.929, 0.980, 1.000 };

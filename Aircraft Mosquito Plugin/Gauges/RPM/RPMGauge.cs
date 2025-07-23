@@ -51,8 +51,8 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         private static string[] _elements;
         private static VehicleSubPosition _side;
 
-        private static CalibrationPointCollectionDouble _rpmHundredsCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d);
-        private static CalibrationPointCollectionDouble _rpmThousandsCalibration = new CalibrationPointCollectionDouble(0d, 0d, 5d, 180d);
+        private static CalibrationPointCollectionDouble _rpmHundredsCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1000d, 360d);
+        private static CalibrationPointCollectionDouble _rpmThousandsCalibration = new CalibrationPointCollectionDouble(0d, 0d, 5000d, 180d);
 
         public RPMGauge() : this("RPM Gauge", new Size(300, 300), "Engine Instruments", VehicleSubPosition.Port) { }
         public RPMGauge(string name, Size size, string device, VehicleSubPosition side) : this(name, size, device, side, new string[] { "1000's Needle", "100's Needle" }) { }
@@ -74,11 +74,11 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
             _rpmHundredsNeedle = new GaugeNeedle("{DH98Mosquito}/Gauges/RPM/RPM-Large-Needle.xaml", center, new Size(26d * scalingFactor, 311.337d * scalingFactor), new Point(13.5d * scalingFactor, 209.893005371094d * scalingFactor));
             Components.Add(_rpmHundredsNeedle);
 
-            _rpmThousands = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{_elements[0]} value for RPM Gauge {_side}.", "(0 - 1)", BindingValueUnits.RPM(5000) );
+            _rpmThousands = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{_elements[0]} value for RPM Gauge {_side}.", "(0 - 5000)", BindingValueUnits.Numeric );
             _rpmThousands.Execute += Thousands_Execute;
             Actions.Add(_rpmThousands);
 
-            _rpmHundreds = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[1], $"{_elements[1]} value for RPM Gauge {_side}.", "(0 - 1)", BindingValueUnits.RPM(1000) );
+            _rpmHundreds = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[1], $"{_elements[1]} value for RPM Gauge {_side}.", "(0 - 1000)", BindingValueUnits.Numeric );
             _rpmHundreds.Execute += Hundreds_Execute;
             Actions.Add(_rpmHundreds);
         }
