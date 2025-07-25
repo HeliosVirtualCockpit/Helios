@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.DH98Mosquito.RPMGaugePort", "RPM Gauge Port", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.DH98Mosquito.RPMGaugePort", "RPM Gauge Port", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class RPMGaugePort : RPMGauge
     {
         public RPMGaugePort()
@@ -32,7 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         { }
     }
 
-    [HeliosControl("Helios.DH98Mosquito.RPMGaugeStarboard", "RPM Gauge Starboard", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.DH98Mosquito.RPMGaugeStarboard", "RPM Gauge Starboard", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class RPMGaugeStarboard : RPMGauge
     {
         public RPMGaugeStarboard()

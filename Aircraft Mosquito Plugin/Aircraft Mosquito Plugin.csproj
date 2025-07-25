@@ -61,6 +61,25 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Levers\Flaps-Lock-Wide-Closed.png" />
+    <Resource Include="Images\Levers\Flaps-Lock-Wide-Open.png" />
+    <Content Include="Templates\Base\Mosquito\5 Lever Panel.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Boost Gauge Port.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Boost Gauge Starboard.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 RPM Gauge Port.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 RPM Gauge Starboard.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\Levers\Flaps-Lock-Spring-Closed.png" />
+    <Resource Include="Images\Levers\Flaps-Lock-Spring-Open.png" />
     <Resource Include="Images\Panels\Lever-Panel.png" />
     <Resource Include="Images\Levers\Bomb-Lever-Down.png" />
     <Resource Include="Images\Levers\Bomb-Lever-Middle.png" />
@@ -80,18 +99,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\LockingThreeWayToggleSwitch.cs" />
     <Compile Include="Gauges\Boost\BoostGauge.cs" />
+    <Compile Include="Gauges\LeverPanel.cs" />
     <Compile Include="Gauges\Common\VehicleSubPosition.cs" />
     <Compile Include="Gauges\RPM\RPMGauge.cs" />
     <Compile Include="Interfaces\MosquitoInterface.cs" />
-    <Compile Include="ProcessClickables.cs" />
-    <Compile Include="ProcessDCSBios.cs" />
+    <Compile Include="Interfaces\ProcessClickables.cs" />
+    <Compile Include="Interfaces\ProcessDCSBios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Instruments\" />
     <Folder Include="Interfaces\Functions\" />
-    <Folder Include="Templates\Base\Mosquito\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\Mosquito.Plugin.Install.Read.Me.rtf">

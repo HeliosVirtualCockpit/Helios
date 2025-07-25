@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
     using System.Windows.Media;
     using System.Xml.Linq;
 
-    [HeliosControl("Helios.DH98Mosquito.BoostGaugePort", "Boost Gauge Port", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.DH98Mosquito.BoostGaugePort", "Boost Gauge Port", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class BoostGaugePort : BoostGauge
     {
         public BoostGaugePort()
@@ -34,7 +34,7 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         { }
     }
 
-    [HeliosControl("Helios.DH98Mosquito.BoostGaugeStarboard", "Boost Gauge Starboard", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.DH98Mosquito.BoostGaugeStarboard", "Boost Gauge Starboard", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class BoostGaugeStarboard : BoostGauge
     {
         public BoostGaugeStarboard()
