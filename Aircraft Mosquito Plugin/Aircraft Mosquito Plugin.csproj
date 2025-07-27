@@ -61,6 +61,21 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\Base\Mosquito\6 Altimeter.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Radiator Temp Port.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Radiator Temp Starboard.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Oil Temp Port.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Oil Temp Starboard.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\Levers\Flaps-Lock-Wide-Closed.png" />
     <Resource Include="Images\Levers\Flaps-Lock-Wide-Open.png" />
     <Content Include="Templates\Base\Mosquito\5 Lever Panel.htpl">
@@ -100,9 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\LockingThreeWayToggleSwitch.cs" />
+    <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\Boost\BoostGauge.cs" />
     <Compile Include="Gauges\LeverPanel.cs" />
     <Compile Include="Gauges\Common\VehicleSubPosition.cs" />
+    <Compile Include="Gauges\OilTemp\OilTempGauge.cs" />
+    <Compile Include="Gauges\RadiatorTemp\RadiatorTempGauge.cs" />
     <Compile Include="Gauges\RPM\RPMGauge.cs" />
     <Compile Include="Interfaces\MosquitoInterface.cs" />
     <Compile Include="Interfaces\ProcessClickables.cs" />
@@ -136,6 +154,46 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\RPM\RPM-Small-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\RadiatorTemp\Rad-Temp-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\RadiatorTemp\Rad-Temp-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\OilTemp\Oil-Temp-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\OilTemp\Oil-Temp-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Altimeter\Altimeter-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Altimeter-Needle-Fat.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Altimeter-Needle-Long.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Altimeter-Needle-Small.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Altimeter-Pressure-Drum.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

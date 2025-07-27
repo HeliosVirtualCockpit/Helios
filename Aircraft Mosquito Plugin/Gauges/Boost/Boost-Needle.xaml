@@ -4,7 +4,7 @@
 <Canvas Width="52.209" Height="300.962">
 
   <!-- Layer 1/<Path> -->
-  <Path StrokeThickness="1.0" Stroke="#ff3f3f3f" StrokeMiterLimit="1.0" Fill="#ffffffea" Data="F1 M 13.181,213.109 L 13.181,128.384 L 13.181,43.659 L 24.851,1.294 C 25.141,0.241 26.632,0.234 26.932,1.284 L 39.029,43.659 L 39.029,128.384 L 39.029,213.109 L 26.105,213.109 L 13.181,213.109 Z"/>
+  <Path StrokeThickness="1.0" Stroke="#ff909987" StrokeMiterLimit="1.0" Fill="#ffbdc7ac" Data="F1 M 13.181,213.109 L 13.181,128.384 L 13.181,43.659 L 24.851,1.294 C 25.141,0.241 26.632,0.234 26.932,1.284 L 39.029,43.659 L 39.029,128.384 L 39.029,213.109 L 26.105,213.109 L 13.181,213.109 Z"/>
 
   <!-- Layer 1/<Rectangle> -->
   <Path StrokeThickness="0.9" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff464646" Data="F1 M 12.975,287.781 L 12.975,221.725 L 39.234,221.725 L 39.234,287.781 L 12.975,287.781 Z"/>

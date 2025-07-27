@@ -1,0 +1,22 @@
+<Canvas Width="17.667" Height="194.868"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="17.667" Height="194.868">
+
+  <!-- Layer 3 Image/<Rectangle> -->
+  <Path StrokeThickness="1.0" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ff0e0e0e" Data="F1 M 15.167,132.034 L 2.500,132.034 L 2.500,181.442 L 15.167,181.442 L 15.167,132.034 Z"/>
+
+  <!-- Layer 3 Image/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff8f9886" StrokeMiterLimit="1.0" Fill="#ffbcc6ab" Data="F1 M 15.167,14.479 L 8.833,1.164 L 2.500,14.479 L 2.500,132.034 L 15.167,132.034 L 15.167,14.479 Z"/>
+
+  <!-- Layer 3 Image/<Ellipse> -->
+  <Path StrokeThickness="1.0" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ff0e0e0e" Data="F1 M 2.500,132.034 C 2.500,128.537 5.336,125.701 8.833,125.701 C 12.331,125.701 15.167,128.537 15.167,132.034 C 15.167,135.532 12.331,138.368 8.833,138.368 C 5.336,138.368 2.500,135.532 2.500,132.034 Z"/>
+
+  <!-- Layer 3 Image/<Ellipse> -->
+  <Path StrokeThickness="1.0" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ff0e0e0e" Data="F1 M 0.500,186.034 C 0.500,181.432 4.231,177.701 8.833,177.701 C 13.436,177.701 17.167,181.432 17.167,186.034 C 17.167,190.637 13.436,194.368 8.833,194.368 C 4.231,194.368 0.500,190.637 0.500,186.034 Z"/>
+
+  <!-- Layer 3 Image/Centre -->
+  <Path Fill="#ff0e0e0e" Data="F1 M 8.333,132.034 C 8.333,131.758 8.557,131.534 8.833,131.534 C 9.109,131.534 9.333,131.758 9.333,132.034 C 9.333,132.311 9.109,132.534 8.833,132.534 C 8.557,132.534 8.333,132.311 8.333,132.034 Z"/>
+
+  </Canvas>
+</Canvas>

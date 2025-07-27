@@ -406,8 +406,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new ScaledNetworkValue(this, "58", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Port)", "0 to 150", "Number", BindingValueUnits.Numeric, "%.4f", true));
             AddFunction(new ScaledNetworkValue(this, "59", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Starboard)", "0 to 150", "Number", BindingValueUnits.Numeric, "%.4f", true));
             {
-                double[] output = new double[] { 39.0, 40.0, 60, 80, 90, 100, 110, 120, 140.0 };
-                double[] input = new double[] { -1.0, 0.0, 0.197, 0.485, 0.741, 0.867, 0.940, 1.0 };
+                double[] output = new double[] { 39.0, 40.0, 60   , 80   , 90   , 100  , 110  , 120      , 140.0 };
+                double[] input = new double[] { -1.0 , 0.0 , 0.08 , 0.2  , 0.29 , 0.39 , 0.5  , 0.64     , 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
                 AddFunction(new ScaledNetworkValue(this, "60", scale, "Engine Instruments", "Radiator Temperature (Port)", "39 to 140", "Number", BindingValueUnits.Numeric, "%.4f", true));
