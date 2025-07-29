@@ -1,0 +1,20 @@
+<Canvas Width="14.914" Height="208.979"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="14.914" Height="208.979">
+
+
+  <!-- Airspeed Needle/Narrow Needle -->
+  <Path StrokeThickness="1.0" Stroke="#ff8f9886" StrokeMiterLimit="1.0" Fill="#ffbcc6ab" Data="F1 M 9.407,208.479 L 5.059,208.479 L 5.059,0.500 L 9.407,0.500 L 9.407,208.479 Z"/>
+
+  <!-- Airspeed Needle/Wider Needle -->
+  <Path StrokeThickness="1.0" Stroke="#ff8f9886" StrokeMiterLimit="1.0" Fill="#ffbcc6ab" Data="F1 M 10.096,143.037 L 7.443,148.280 C 7.356,148.452 7.111,148.452 7.023,148.280 L 4.370,143.037 C 4.252,142.802 4.190,142.542 4.190,142.279 L 4.190,76.040 L 10.277,76.040 L 10.277,142.279 C 10.277,142.542 10.215,142.802 10.096,143.037 Z"/>
+
+  <!-- Airspeed Needle/<Ellipse> -->
+  <Path StrokeThickness="1.0" Stroke="#ff0e0e0e" StrokeMiterLimit="1.0" Fill="#ff3e3e3e" Data="F1 M 0.500,76.040 C 0.500,72.198 3.615,69.084 7.457,69.084 C 11.299,69.084 14.414,72.198 14.414,76.040 C 14.414,79.883 11.299,82.997 7.457,82.997 C 3.615,82.997 0.500,79.883 0.500,76.040 Z"/>
+
+  <!-- Airspeed Needle/Centre -->
+  <Path Fill="#ffe80033" Data="F1 M 7.239,76.040 C 7.239,75.920 7.337,75.823 7.457,75.823 C 7.577,75.823 7.674,75.920 7.674,76.040 C 7.674,76.161 7.577,76.258 7.457,76.258 C 7.337,76.258 7.239,76.161 7.239,76.040 Z"/>
+
+  </Canvas>
+</Canvas>

@@ -76,6 +76,21 @@
     <Content Include="Templates\Base\Mosquito\7 Oil Temp Starboard.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Base\Mosquito\6 VVI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\6 Airspeed.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\6 Artificial Horizon.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Flaps Indicator.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\6 Repeater Compass.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\Levers\Flaps-Lock-Wide-Closed.png" />
     <Resource Include="Images\Levers\Flaps-Lock-Wide-Open.png" />
     <Content Include="Templates\Base\Mosquito\5 Lever Panel.htpl">
@@ -115,13 +130,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\LockingThreeWayToggleSwitch.cs" />
+    <Compile Include="Gauges\Airspeed\AirspeedGauge.cs" />
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
+    <Compile Include="Gauges\Artificial Horizon\ArtificialHorizonGauge.cs" />
     <Compile Include="Gauges\Boost\BoostGauge.cs" />
+    <Compile Include="Gauges\Flaps Indicator\FlapsIndicator.cs" />
     <Compile Include="Gauges\LeverPanel.cs" />
     <Compile Include="Gauges\Common\VehicleSubPosition.cs" />
     <Compile Include="Gauges\OilTemp\OilTempGauge.cs" />
     <Compile Include="Gauges\RadiatorTemp\RadiatorTempGauge.cs" />
+    <Compile Include="Gauges\Repeater Compass\RepeaterCompass.cs" />
     <Compile Include="Gauges\RPM\RPMGauge.cs" />
+    <Compile Include="Gauges\VVI\VVIGauge.cs" />
     <Compile Include="Interfaces\MosquitoInterface.cs" />
     <Compile Include="Interfaces\ProcessClickables.cs" />
     <Compile Include="Interfaces\ProcessDCSBios.cs" />
@@ -194,6 +214,70 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Altimeter\Altimeter-Pressure-Drum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Airspeed\Airspeed-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Airspeed\Airspeed-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\VVI\VVI-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\VVI\VVI-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\VVI\VVI-Asymertric-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Artificial Horizon\Artificial-Horizon-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Artificial Horizon\Artificial-Horizon-Wings-Marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Artificial Horizon\Artificial-Horizon-Bank-Marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Flaps Indicator\Flaps-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Flaps Indicator\Flaps-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Repeater Compass\Repeater-Compass-Course-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Repeater Compass\Repeater-Compass-Heading-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Repeater Compass\Repeater-Compass-Faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

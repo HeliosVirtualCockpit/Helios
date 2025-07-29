@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Repeater Compass</Name>
+	<Category>Mosquito FB Mk VI</Category>
+	<TypeIdentifier>Helios.DH98Mosquito.RepeaterCompassGauge</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>300,300</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>
