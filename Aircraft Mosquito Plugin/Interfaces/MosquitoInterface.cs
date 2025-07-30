@@ -382,8 +382,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new ScaledNetworkValue(this, "65", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Artificial Horizon Bank", "Degrees", "-180 to 180", BindingValueUnits.Degrees, "%.4f", true));
             AddFunction(new ScaledNetworkValue(this, "66", new CalibrationPointCollectionDouble(-1d, -45d, 1d, 45d), "Flight Instruments", "Artificial Horizon Pitch", "Degrees", "-45 to 45", BindingValueUnits.Degrees, "%.4f", true));
             AddFunction(new ScaledNetworkValue(this, "73", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "DI", "Degrees", "0 to 360", BindingValueUnits.Degrees, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "75", new CalibrationPointCollectionDouble(-1d, -1d, 1d, 1d), "Flight Instruments", "Side Slip", "Number", "-1 to 1", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "76", new CalibrationPointCollectionDouble(-1d, -85.94d, 1d, 85.94d), "Flight Instruments", "Turn", "Degrees", "-85.94 to 85.94", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "75", new CalibrationPointCollectionDouble(-1d, -20d, 1d, 20d), "Flight Instruments", "Side Slip", "Degrees", "-20 to 20", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "76", new CalibrationPointCollectionDouble(-1d, -40d, 1d, 40d), "Flight Instruments", "Turn", "Degrees", "-40 to 40", BindingValueUnits.Degrees, "%.4f", true));
 
             #endregion Flight Instruments
             #region Engine Instruments

@@ -35,7 +35,6 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         private static VehicleSubPosition _side;
 
         private static CalibrationPointCollectionDouble _scale;
-        private static CalibrationPointCollectionDouble _rotationScale;
 
         public VVIGauge() : this("VVI Gauge", new Size(300, 300), "Flight Instruments", VehicleSubPosition.Port, new string[] { "Vertical Velocity" }) { }
     public VVIGauge(string name, Size size, string device, VehicleSubPosition side,  string[] elements)
@@ -82,7 +81,6 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         {
             _gauge.SetValue(e.Value, e.BypassCascadingTriggers);
             _gaugeNeedle.Rotation = _scale.Interpolate(e.Value.DoubleValue);
-            //_gaugeNeedle.Rotation = e.Value.DoubleValue * 144d;
         }
     }
 }

@@ -35,8 +35,8 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         private static HeliosValue _courseGauge;
         private static string[] _elements;
 
-        private static CalibrationPointCollectionDouble _headingScale;
-        private static CalibrationPointCollectionDouble _courseScale;
+        //private static CalibrationPointCollectionDouble _headingScale;
+        //private static CalibrationPointCollectionDouble _courseScale;
 
         public RepeaterCompassGauge() : this("Repeater Compass", new Size(300, 300), "Flight Instruments", new string[] { "heading", "course" }) { }
     public RepeaterCompassGauge(string name, Size size, string device, string[] elements)

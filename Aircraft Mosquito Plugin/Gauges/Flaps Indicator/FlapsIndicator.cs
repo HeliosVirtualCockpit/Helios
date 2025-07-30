@@ -32,19 +32,16 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         private static GaugeNeedle _gaugeNeedle;
         private static HeliosValue _gauge;
 
-        private static VehicleSubPosition _side;
 
         private static CalibrationPointCollectionDouble _scale;
-        private static CalibrationPointCollectionDouble _rotationScale;
 
-        public FlapsIndicator() : this("Flaps Indicator", new Size(300, 300), "Flight Instruments", VehicleSubPosition.Port, new string[] { "Position" }) { }
-    public FlapsIndicator(string name, Size size, string device, VehicleSubPosition side,  string[] elements)
+        public FlapsIndicator() : this("Flaps Indicator", new Size(300, 300), "Flight Instruments", new string[] { "Position" }) { }
+    public FlapsIndicator(string name, Size size, string device,  string[] elements)
             : base(name, size)
         {
             _scale = new CalibrationPointCollectionDouble(0d, 0d, 70d, 200d);
 
             SupportedInterfaces = new[] { typeof(DH98MosquitoInterface) };
-            _side = side;
 
             CreateInputBindings();
 
