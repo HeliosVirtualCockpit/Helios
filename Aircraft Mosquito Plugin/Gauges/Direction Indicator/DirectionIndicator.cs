@@ -26,34 +26,34 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
     using System.Windows.Media;
     using System.Xml.Linq;
 
-    [HeliosControl("Helios.DH98Mosquito.VVIGauge", "VVI Gauge", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
-    public class VVIGauge : CompositeBaseGauge
+    [HeliosControl("Helios.DH98Mosquito.DirectionIndicator", "Direction Indicator", "Mosquito FB Mk VI", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
+    public class DirectionIndicator : CompositeBaseGauge
     {
         private static GaugeNeedle _gaugeNeedle;
         private static HeliosValue _gauge;
 
-
         private static CalibrationPointCollectionDouble _scale;
 
-        public VVIGauge() : this("VVI Gauge", new Size(300, 300), "Flight Instruments", new string[] { "Vertical Velocity" }) { }
-    public VVIGauge(string name, Size size, string device,  string[] elements)
+        private static string[] _elements;
+
+        public DirectionIndicator() : this("Direction Indicator", new Size(300, 300), "Flight Instruments", new string[] { "Direction" }) { }
+    public DirectionIndicator(string name, Size size, string device,  string[] elements)
             : base(name, size)
         {
-            _scale = new CalibrationPointCollectionDouble(-4000d, -167d, 4000d, 144d) {
-                new CalibrationPointDouble(0d, 0d),
-            };
-
+            _scale = new CalibrationPointCollectionDouble(0d, 0d, 360d, 1256d);
+            _elements = elements;
             SupportedInterfaces = new[] { typeof(DH98MosquitoInterface) };
 
             CreateInputBindings();
 
             double scalingFactor = 1.0d;
             Point center = new Point(size.Width/2, size.Height/2);
-            Components.Add(new GaugeImage("{DH98Mosquito}/Gauges/VVI/VVI-Asymertric-Faceplate.xaml", new Rect(0d, 0d, size.Width, size.Height)));
-            _gaugeNeedle = new GaugeNeedle("{DH98Mosquito}/Gauges/VVI/VVI-Needle.xaml", center, new Size(190.350d * scalingFactor, 18.965d * scalingFactor), new Point(122.172d * scalingFactor, 9.482d * scalingFactor),0d);
+            Components.Add(new GaugeImage("{DH98Mosquito}/Gauges/Direction Indicator/Direction-Indicator-Faceplate.xaml", new Rect(0d, 0d, size.Width, size.Height)));
+            _gaugeNeedle = new GaugeNeedle("{DH98Mosquito}/Gauges/Direction Indicator/Direction-Indicator-Tape.xaml", new Point(40d + (220d / 2d), 64d + 19d ), new Size(1542.469d * scalingFactor, 74.896d * scalingFactor), new Point(1407.664d * scalingFactor, 18.386d * scalingFactor),0d);
+            _gaugeNeedle.Clip = new RectangleGeometry(new Rect(40d, 64d, 220d, 76d));
             Components.Add(_gaugeNeedle);
 
-            _gauge = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{elements[0]}", $"{elements[0]}", $"{_scale.MinimumInputValue} to {_scale.MaximumInputValue}", BindingValueUnits.FeetPerMinute);
+            _gauge = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{elements[0]}", $"{elements[0]}", $"{_scale.MinimumInputValue} to {_scale.MaximumInputValue}", BindingValueUnits.Degrees);
             _gauge.Execute += Gauge_Execute;
             Actions.Add(_gauge);
 
@@ -63,7 +63,7 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
  
             Dictionary<string, string> bindings = new Dictionary<string, string>
             {
-                { $"Flight Instruments.Vertical Velocity.changed", $"Flight Instruments_VVI Gauge.set.Vertical Velocity" }
+                { $"Flight Instruments.Direction Indicator.changed", $"Flight Instruments_{Name}.set.{_elements[0]}" }
             };
 
             foreach (string t in bindings.Keys)
@@ -78,7 +78,7 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         void Gauge_Execute(object action, HeliosActionEventArgs e)
         {
             _gauge.SetValue(e.Value, e.BypassCascadingTriggers);
-            _gaugeNeedle.Rotation = _scale.Interpolate(e.Value.DoubleValue);
+            _gaugeNeedle.HorizontalOffset = _scale.Interpolate(e.Value.DoubleValue);
         }
     }
 }

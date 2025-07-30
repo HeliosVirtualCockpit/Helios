@@ -94,6 +94,15 @@
     <Content Include="Templates\Base\Mosquito\6 SlipTurn.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Base\Mosquito\7 Oil Pressure Port.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\7 Oil Pressure Starboard.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\6 Direction Indicator.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\Levers\Flaps-Lock-Wide-Closed.png" />
     <Resource Include="Images\Levers\Flaps-Lock-Wide-Open.png" />
     <Content Include="Templates\Base\Mosquito\5 Lever Panel.htpl">
@@ -137,10 +146,12 @@
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\Artificial Horizon\ArtificialHorizonGauge.cs" />
     <Compile Include="Gauges\Boost\BoostGauge.cs" />
+    <Compile Include="Gauges\Direction Indicator\DirectionIndicator.cs" />
     <Compile Include="Gauges\Flaps Indicator\FlapsIndicator.cs" />
     <Compile Include="Gauges\LeverPanel.cs" />
     <Compile Include="Gauges\Common\VehicleSubPosition.cs" />
-    <Compile Include="Gauges\OilTemp\OilTempGauge.cs" />
+    <Compile Include="Gauges\Oil Gauges\OilPressureGauge.cs" />
+    <Compile Include="Gauges\Oil Gauges\OilTempGauge.cs" />
     <Compile Include="Gauges\RadiatorTemp\RadiatorTempGauge.cs" />
     <Compile Include="Gauges\Repeater Compass\RepeaterCompass.cs" />
     <Compile Include="Gauges\RPM\RPMGauge.cs" />
@@ -192,11 +203,11 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\OilTemp\Oil-Temp-Faceplate.xaml">
+    <Resource Include="Gauges\Oil Gauges\Oil-Temp-Faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\OilTemp\Oil-Temp-Needle.xaml">
+    <Resource Include="Gauges\Oil Gauges\Oil-Temp-Needle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
   </ItemGroup>
@@ -296,6 +307,26 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Slip Turn\Slip-Turn-Turn-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Oil Gauges\Oil-Pressure-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Oil Gauges\Oil-Pressure-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Direction Indicator\Direction-Indicator-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Direction Indicator\Direction-Indicator-Tape.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

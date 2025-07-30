@@ -66,11 +66,11 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
 
             double scalingFactor = 1.0d;
             Point center = new Point(size.Width/2, size.Height/2);
-            Components.Add(new GaugeImage("{DH98Mosquito}/Gauges/OilTemp/Oil-Temp-Faceplate.xaml", new Rect(0d, 0d, size.Width, size.Height)));
-            _gaugeNeedle = new GaugeNeedle("{DH98Mosquito}/Gauges/OilTemp/Oil-Temp-Needle.xaml", center, new Size(26.688d * scalingFactor, 200.786d * scalingFactor), new Point(12.659d * scalingFactor, 128.875d * scalingFactor),210d);
+            Components.Add(new GaugeImage("{DH98Mosquito}/Gauges/Oil Gauges/Oil-Temp-Faceplate.xaml", new Rect(0d, 0d, size.Width, size.Height)));
+            _gaugeNeedle = new GaugeNeedle("{DH98Mosquito}/Gauges/Oil Gauges/Oil-Temp-Needle.xaml", center, new Size(26.688d * scalingFactor, 200.786d * scalingFactor), new Point(12.659d * scalingFactor, 128.875d * scalingFactor),210d);
             Components.Add(_gaugeNeedle);
 
-            _gauge = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{elements[0]} {_side}.", "({elements[0]} {_side}.\", $\"({output[0]} - {output[output.Count() - 1]})", BindingValueUnits.Numeric);
+            _gauge = new HeliosValue(this, BindingValue.Empty, $"{device}_{name}", elements[0], $"{elements[0]} {_side}", $"({elements[0]} {_side}", $"{_scale.MinimumInputValue} to {_scale.MaximumInputValue}", BindingValueUnits.Numeric);
             _gauge.Execute += Gauge_Execute;
             Actions.Add(_gauge);
 
