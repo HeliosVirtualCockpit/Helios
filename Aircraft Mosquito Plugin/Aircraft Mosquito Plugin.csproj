@@ -85,7 +85,7 @@
     <Content Include="Templates\Base\Mosquito\6 Artificial Horizon.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Mosquito\7 Flaps Indicator.htpl">
+    <Content Include="Templates\Base\Mosquito\8 Flaps Indicator.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\Mosquito\6 Repeater Compass.htpl">
@@ -101,6 +101,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\Mosquito\6 Direction Indicator.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Mosquito\8 Brake Pressure Gauge.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\Levers\Flaps-Lock-Wide-Closed.png" />
@@ -146,6 +149,7 @@
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\Artificial Horizon\ArtificialHorizonGauge.cs" />
     <Compile Include="Gauges\Boost\BoostGauge.cs" />
+    <Compile Include="Gauges\Brake Pressure\BrakePressureGauge.cs" />
     <Compile Include="Gauges\Direction Indicator\DirectionIndicator.cs" />
     <Compile Include="Gauges\Flaps Indicator\FlapsIndicator.cs" />
     <Compile Include="Gauges\LeverPanel.cs" />
@@ -327,6 +331,20 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Direction Indicator\Direction-Indicator-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Brake Pressure\Brake-Pressure-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Brake Pressure\Brake-Pressure-Needle-1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Brake Pressure\Brake-Pressure-Needle-2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

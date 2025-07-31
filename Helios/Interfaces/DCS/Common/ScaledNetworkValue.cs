@@ -46,7 +46,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         }
 
         [JsonProperty("valueDescription")]
-        private string ValueDescription { get; set; }
+        protected string ValueDescription { get; set; }
         public bool ShouldSerializeValueDescription()
         {
             return !string.IsNullOrEmpty(ValueDescription);
@@ -58,6 +58,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         [JsonProperty("exposeunscaledvalue", NullValueHandling = NullValueHandling.Ignore)]
         protected bool? ExposeUnscaledValue { get; set; }
 
+        public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, BindingValueUnit unit, bool exposeUnscaledValue = false)
+           : this(sourceInterface, id, device, name, description, "", unit, "%.4f", calibration, 0d, 0d, exposeUnscaledValue)
+        {
+        }
+        public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, BindingValueUnit unit, string exportFormat, bool exposeUnscaledValue = false)
+            : this(sourceInterface, id, device, name, description, "", unit, exportFormat, calibration, 0d, 0d, exposeUnscaledValue)
+        {
+        }
         public ScaledNetworkValue(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble calibration, string device, string name, string description, string valueDescription, BindingValueUnit unit, bool exposeUnscaledValue = false)
            : this(sourceInterface, id, device, name, description, valueDescription, unit, "%.4f", calibration, 0d, 0d, exposeUnscaledValue)
         {
@@ -88,12 +96,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             _id = id;
             _format = exportFormat;
             _exposeUnscaledValue = exposeUnscaledValue;
-            ValueDescription = valueDescription;
             Unit = unit;
             CalibratedScale = calibration;
             BaseValue = baseValue;
             Scale = scale;
-            if(_exposeUnscaledValue)
+            if (Scale == 0 && calibration != null && string.IsNullOrEmpty(valueDescription))
+            {
+                ValueDescription = $"Value between {calibration.MinimumOutputValue} and {calibration.MaximumOutputValue}";
+            }
+            else
+            {
+                ValueDescription = valueDescription;
+            }
+
+            if (_exposeUnscaledValue)
             {
                 ExposeUnscaledValue = true;
             }

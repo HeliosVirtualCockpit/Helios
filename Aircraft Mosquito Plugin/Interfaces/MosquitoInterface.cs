@@ -363,108 +363,108 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3018", "304", "1", "Position 1", "0", "Position 2", "Main Panel", "Gear Indicator Blind Up/Down", "%1d"));   // "UC_BLIND"
 
 
-            AddFunction(new ScaledNetworkValue(this, "242", new CalibrationPointCollectionDouble(-1.0d, -100d, 1.0d, 100.0d), "Flight Controls", "Stick Pitch", "Percentage of Travel", "-100 to 100", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "243", new CalibrationPointCollectionDouble(-1.0d, -100d, 1.0d, 100.0d), "Flight Controls", "Stick Bank", "Percentage of Travel", "-100 to 100", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "249", new CalibrationPointCollectionDouble(-1.0d, -100d, 1.0d, 100.0d), "Flight Controls", "Rudder Yaw", "Percentage of Travel", "-100 to 100", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "242", new CalibrationPointCollectionDouble(-1.0d, -100d, 1.0d, 100.0d), "Flight Controls", "Stick Pitch", "Percentage of Travel", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "243", new CalibrationPointCollectionDouble(-1.0d, -100d, 1.0d, 100.0d), "Flight Controls", "Stick Bank", "Percentage of Travel", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "249", new CalibrationPointCollectionDouble(-1.0d, -100d, 1.0d, 100.0d), "Flight Controls", "Rudder Yaw", "Percentage of Travel", BindingValueUnits.Numeric, "%.4f", true));
 
             #region Flight Instruments
             // AN5730 Repeater Compass
-            AddFunction(new ScaledNetworkValue(this, "47", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "Repeater Compass Heading", "Degrees", "0 to 360", BindingValueUnits.Degrees, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "48", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "Repeater Compass Course", "Degrees", "0 to 360", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "47", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "Repeater Compass Heading", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "48", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "Repeater Compass Course", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
 
-            AddFunction(new ScaledNetworkValue(this, "68", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d), "Flight Instruments", "Altimeter 100's", "Number", "0 to 10", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "69", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d), "Flight Instruments", "Altimeter 1000's", "Number", "0 to 10", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "70", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d), "Flight Instruments", "Altimeter 10000's", "Number", "0 to 10", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "71", new CalibrationPointCollectionDouble(0d, 800d, 1d, 1050d), "Flight Instruments", "Air Pressure", "milliBar", "800 to 1050", BindingValueUnits.Millibar, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "67", new CalibrationPointCollectionDouble(-1d, -4000d, 1d, 4000d), "Flight Instruments", "Vertical Velocity", "Feet per Minute", "-4000 to 4000", BindingValueUnits.FeetPerMinute, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "64", new CalibrationPointCollectionDouble(0d, 0d, 0.5d, 500d), "Flight Instruments", "Airspeed", "Knots", "0 to 500", BindingValueUnits.Knots, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "68", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d), "Flight Instruments", "Altimeter 100's", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "69", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d), "Flight Instruments", "Altimeter 1000's", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "70", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10d), "Flight Instruments", "Altimeter 10000's", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "71", new CalibrationPointCollectionDouble(0d, 800d, 1d, 1050d), "Flight Instruments", "Air Pressure", "milliBar", BindingValueUnits.Millibar, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "67", new CalibrationPointCollectionDouble(-1d, -4000d, 1d, 4000d), "Flight Instruments", "Vertical Velocity", "Feet per Minute", BindingValueUnits.FeetPerMinute, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "64", new CalibrationPointCollectionDouble(0d, 0d, 0.5d, 500d), "Flight Instruments", "Airspeed", "Knots", BindingValueUnits.Knots, "%.4f", true));
 
-            AddFunction(new ScaledNetworkValue(this, "65", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Artificial Horizon Bank", "Degrees", "-180 to 180", BindingValueUnits.Degrees, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "66", new CalibrationPointCollectionDouble(-1d, -45d, 1d, 45d), "Flight Instruments", "Artificial Horizon Pitch", "Degrees", "-45 to 45", BindingValueUnits.Degrees, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "73", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "Direction Indicator", "Degrees", "0 to 360", BindingValueUnits.Degrees, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "75", new CalibrationPointCollectionDouble(-1d, -20d, 1d, 20d), "Flight Instruments", "Side Slip", "Degrees", "-20 to 20", BindingValueUnits.Degrees, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "76", new CalibrationPointCollectionDouble(-1d, -40d, 1d, 40d), "Flight Instruments", "Turn", "Degrees", "-40 to 40", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "65", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "Artificial Horizon Bank", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "66", new CalibrationPointCollectionDouble(-1d, -45d, 1d, 45d), "Flight Instruments", "Artificial Horizon Pitch", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "73", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "Direction Indicator", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "75", new CalibrationPointCollectionDouble(-1d, -20d, 1d, 20d), "Flight Instruments", "Side Slip", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "76", new CalibrationPointCollectionDouble(-1d, -40d, 1d, 40d), "Flight Instruments", "Turn", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
 
             #endregion Flight Instruments
             #region Engine Instruments
-            AddFunction(new ScaledNetworkValue(this, "50", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Engine Instruments", "Tacho (Port) 1000's", "Number", "0 to 5000", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "51", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1000d), "Engine Instruments", "Tacho (Port) 100's", "Number", "0 to 1000", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "52", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Engine Instruments", "Tacho (Starboard) 1000's", "Number", "0 to 5000", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "53", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1000d), "Engine Instruments", "Tacho (Starboard) 100's", "Number", "0 to 1000", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "50", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Engine Instruments", "Tacho (Port) 1000's", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "51", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1000d), "Engine Instruments", "Tacho (Port) 100's", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "52", new CalibrationPointCollectionDouble(0d, 0d, 1d, 5000d), "Engine Instruments", "Tacho (Starboard) 1000's", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "53", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1000d), "Engine Instruments", "Tacho (Starboard) 100's", "Number", BindingValueUnits.Numeric, "%.4f", true));
             {
                 double[] output = new double[] { -7.0, -6.0, 0.0, 6.0, 10.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 25.0 };
                 double[] input = new double[] { 0.000, 0.035, 0.280, 0.503, 0.629, 0.723, 0.778, 0.834, 0.887, 0.929, 0.980, 1.000 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "54", scale, "Engine Instruments", "Boost Gauge (Port)", "Number", "-7 to 25", BindingValueUnits.Numeric, "%.4f", true));
-                AddFunction(new ScaledNetworkValue(this, "55", scale, "Engine Instruments", "Boost Gauge (Starboard)", "Number", "-7 to 25", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "54", scale, "Engine Instruments", "Boost Gauge (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "55", scale, "Engine Instruments", "Boost Gauge (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
 
 
-            AddFunction(new ScaledNetworkValue(this, "56", new CalibrationPointCollectionDouble(-1d, -1d, 1d, 120d), "Engine Instruments", "Oil Temperature (Port)", "Number", "-1 to 120", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "57", new CalibrationPointCollectionDouble(-1d, -1d, 1d, 120d), "Engine Instruments", "Oil Temperature (Starboard)", "Number", "-1 to 120", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "58", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Port)", "Number", "0 to 150", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "59", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Starboard)", "Number", "0 to 150", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "56", new CalibrationPointCollectionDouble(-1d, -1d, 1d, 120d), "Engine Instruments", "Oil Temperature (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "57", new CalibrationPointCollectionDouble(-1d, -1d, 1d, 120d), "Engine Instruments", "Oil Temperature (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "58", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "59", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             {
                 double[] output = new double[] { 39.0, 40.0, 60   , 80   , 90   , 100  , 110  , 120      , 140.0 };
                 double[] input = new double[] { -1.0 , 0.0 , 0.08 , 0.2  , 0.29 , 0.39 , 0.5  , 0.64     , 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "60", scale, "Engine Instruments", "Radiator Temperature (Port)", "Number", "39 to 140", BindingValueUnits.Numeric, "%.4f", true));
-                AddFunction(new ScaledNetworkValue(this, "61", scale, "Engine Instruments", "Radiator Temperature (Starboard)", "Number", "39 to 140", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "60", scale, "Engine Instruments", "Radiator Temperature (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "61", scale, "Engine Instruments", "Radiator Temperature (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             {
                 double[] output = new double[] { -1.0, 0.0, 20.0, 60.0, 100.0, 120.0, 146.0, 160.0 };
                 double[] input = new double[] { -1.0, 0.0, 0.197, 0.485, 0.741, 0.867, 0.940, 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "92", scale, "Fuel Instruments", "Fuel Gauge (Inner Port)", "Number", "-1 to 160", BindingValueUnits.Numeric, "%.4f", true));
-                AddFunction(new ScaledNetworkValue(this, "93", scale, "Fuel Instruments", "Fuel Gauge (Inner Starboard)", "Number", "-1 to 160", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "92", scale, "Fuel Instruments", "Fuel Gauge (Inner Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "93", scale, "Fuel Instruments", "Fuel Gauge (Inner Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             {
                 double[] output = new double[] { -1.0, 0.0, 10.0, 20.0, 30.0, 40.0, 59.0, 70.0 };
                 double[] input = new double[] { -1.0, 0.0, 0.197, 0.485, 0.741, 0.867, 0.940, 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "96", scale, "Fuel Instruments", "Fuel Gauge (Outer Port)", "Number", "-1 to 70", BindingValueUnits.Numeric, "%.4f", true));
-                AddFunction(new ScaledNetworkValue(this, "97", scale, "Fuel Instruments", "Fuel Gauge (Outer Starboard)", "Number", "-1 to 70", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "96", scale, "Fuel Instruments", "Fuel Gauge (Outer Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "97", scale, "Fuel Instruments", "Fuel Gauge (Outer Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             {
                 double[] output = new double[] { -1.0, 0.0, 10.0, 20.0, 30.0, 40.0, 53.0, 60.0 };
                 double[] input = new double[] { -1.0, 0.0, 0.123, 0.306, 0.505, 0.686, 0.887, 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "94", scale, "Fuel Instruments", "Fuel Gauge (Center)", "Number", "-1 to 60", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "94", scale, "Fuel Instruments", "Fuel Gauge (Center)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             {
                 double[] output = new double[] { -1.0, 0.0, 5.0, 10.0, 20.0, 30.0, 50.0, 70.0 };
                 double[] input = new double[] { -1.0, 0.0, 0.08, 0.183, 0.37, 0.524, 0.815, 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "95", scale, "Fuel Instruments", "Fuel Gauge (Long Range)", "Number", "-1 to 70", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "95", scale, "Fuel Instruments", "Fuel Gauge (Long Range)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
 
             #endregion Engine Instruments
             #region Systematic Instruments
-            AddFunction(new ScaledNetworkValue(this, "82", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10000d), "Systematic Instruments", "Oxygen Delivery (Port)", "Number", "0 to 10,000", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "155", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10000d), "Systematic Instruments", "Oxygen Delivery (Starboard)", "Number", "0 to 10,000", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "83", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Systematic Instruments", "Oxygen Supply (Port)", "Number", "0 to 1", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "156", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Systematic Instruments", "Oxygen Supply (Starboard)", "Number", "0 to 1", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "82", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10000d), "Systematic Instruments", "Oxygen Delivery (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "155", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10000d), "Systematic Instruments", "Oxygen Delivery (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "83", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Systematic Instruments", "Oxygen Supply (Port)", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "156", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Systematic Instruments", "Oxygen Supply (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f"));
 
-            AddFunction(new ScaledNetworkValue(this, "81", new CalibrationPointCollectionDouble(0d, 0d, 0.7d, 70d), "Systematic Instruments", "Flaps", "Degrees", "0 to 70", BindingValueUnits.Degrees, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "81", new CalibrationPointCollectionDouble(0d, 0d, 0.7d, 70d), "Systematic Instruments", "Flaps", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
 
-            AddFunction(new ScaledNetworkValue(this, "85", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 220d), "Systematic Instruments", "Pneumatic Pressure", "Number", "0 to 220", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "86", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 130d), "Systematic Instruments", "Wheel Brake Gauge (Left)", "Number", "0 to 130", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "87", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 130d), "Systematic Instruments", "Wheel Brake Gauge (Right)", "Number", "0 to 130", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "85", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 220d), "Systematic Instruments", "Pneumatic Pressure", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "86", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 130d), "Systematic Instruments", "Wheel Brake Gauge (Left)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "87", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 130d), "Systematic Instruments", "Wheel Brake Gauge (Right)", "Number", BindingValueUnits.Numeric, "%.4f", true));
 
             {
                 double[] output = new double[] { -31, -30.0, 70.0 };
                 double[] input = new double[] { -1.0, 0.0, 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "314", scale, "Systematic Instruments", "Air Temperature", "-31 to 70", "Celsius", BindingValueUnits.Celsius, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "314", scale, "Systematic Instruments", "Air Temperature", "Celsius", BindingValueUnits.Celsius, "%.4f", true));
             }
-            AddFunction(new ScaledNetworkValue(this, "103", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 40d), "Systematic Instruments", "Volt Meter", "Number", "0 to 40", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "103", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 40d), "Systematic Instruments", "Volt Meter", "Number", BindingValueUnits.Numeric, "%.4f", true));
 
             #endregion Systematic Instruments
             #region Radio Equipment
@@ -473,31 +473,31 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                 double[] input = new double[] { 0.000, 0.039, 0.127, 0.218, 0.321, 0.416, 0.502, 0.578, 0.655, 0.734, 0.801, 0.867, 0.937 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "207", scale, "T.1154", "C2", "Number", "5.2 to 10.4", BindingValueUnits.Numeric, "%.4f", true));
-                AddFunction(new ScaledNetworkValue(this, "208", scale, "T.1154", "C15", "Number", "5.2 to 10.4", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "207", scale, "T.1154", "C2", "Number", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "208", scale, "T.1154", "C15", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             {
                 double[] output = new double[] { 2.9, 3.0, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.5, 5.0, 5.5, 5.7 };
                 double[] input = new double[] { 0.000, 0.057, 0.232, 0.263, 0.299, 0.334, 0.365, 0.400, 0.434, 0.588, 0.736, 0.859, 0.912 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "206", scale, "T.1154", "C4", "Number", "2.9 to 5.7", BindingValueUnits.Numeric, "%.4f", true));
-                AddFunction(new ScaledNetworkValue(this, "209", scale, "T.1154", "C16", "Number", "2.9 to 5.7", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "206", scale, "T.1154", "C4", "Number", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "209", scale, "T.1154", "C16", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             {
                 double[] output = new double[] { 180, 200, 220, 250, 300, 350, 380, 420, 460, 500, 520 };
                 double[] input = new double[] { 0.000, 0.137, 0.241, 0.361, 0.522, 0.643, 0.706, 0.769, 0.827, 0.879, 0.912 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "205", scale, "T.1154", "C17", "Number", "180 to 520", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "205", scale, "T.1154", "C17", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
-            AddFunction(new ScaledNetworkValue(this, "104", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 0.3d), "T.1154", "M1", "0 to 0.3", "Number", BindingValueUnits.Numeric, "%.4f", true));
+            AddFunction(new ScaledNetworkValue(this, "104", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 0.3d), "T.1154", "M1", "Number", BindingValueUnits.Numeric, "%.4f", true));
             {
                 double[] output = new double[] { 0.000, 0.050, 0.100, 0.150, 0.200, 0.250, 0.300, 0.350 };
                 double[] input = new double[] { 0.000, 0.016, 0.074, 0.165, 0.314, 0.505, 0.729, 1.000 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "105", scale, "T.1154", "M2", "Number", "0 to 0.35", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "105", scale, "T.1154", "M2", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
 
             {
@@ -505,19 +505,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                 double[] input = new double[] { 0.000, 0.032, 0.069, 0.149, 0.250, 0.388, 0.559, 0.761, 1.000 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "106", scale, "T.1154", "M3 HF Aerial Feed", "Number", "0 to 0.4", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "106", scale, "T.1154", "M3 HF Aerial Feed", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
 
-            AddFunction(new ScaledNetworkValue(this, "232", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuner", "Number", "0 to 1", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "239", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Cathode", "Number", "0 to 1", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "228", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Anode", "Number", "0 to 1", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "232", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuner", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "239", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Cathode", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "228", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Anode", "Number", BindingValueUnits.Numeric, "%.4f"));
             {
-                double[] output = new double[] { -1.0, 0.0, 100.0 };
+                double[] output = new double[] { -10.0, 0.0, 100.0 };
                 double[] input = new double[] { -1.0, 0.0, 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
-                AddFunction(new ScaledNetworkValue(this, "88", scale, "R.1155", "Direction Finder (Left)", "Number", "-1 to 100", BindingValueUnits.Numeric, "%.4f"));
-                AddFunction(new ScaledNetworkValue(this, "89", scale, "R.1155", "Direction Finder (Right)", "Number", "-1 to 100", BindingValueUnits.Numeric, "%.4f"));
+                AddFunction(new ScaledNetworkValue(this, "88", scale, "R.1155", "Direction Finder (Left)", "Number", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "89", scale, "R.1155", "Direction Finder (Right)", "Number","", BindingValueUnits.Numeric, "%.4f", true));
             }
             #endregion Radio Equipment
 
