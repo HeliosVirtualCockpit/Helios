@@ -512,7 +512,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new ScaledNetworkValue(this, "239", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Cathode", "Number", BindingValueUnits.Numeric, "%.4f"));
             AddFunction(new ScaledNetworkValue(this, "228", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Anode", "Number", BindingValueUnits.Numeric, "%.4f"));
             {
-                double[] output = new double[] { -10.0, 0.0, 100.0 };
+                double[] output = new double[] { -1.0, 0.0, 100.0 };
                 double[] input = new double[] { -1.0, 0.0, 1.0 };
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
