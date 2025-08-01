@@ -154,7 +154,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     int oldValue = _replicationsPerSecond;
                     _replicationsPerSecond = value;
-                    _millisecondsPerReplication = Math.Max(1000 / _replicationsPerSecond, 25);
+                    _millisecondsPerReplication = Math.Max(1000 / _replicationsPerSecond, 100);
                     OnPropertyChanged("ReplicationsPerSecond", oldValue, value, true);
                 }
             }
