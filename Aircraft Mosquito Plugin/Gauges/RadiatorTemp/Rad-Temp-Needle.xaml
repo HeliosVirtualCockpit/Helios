@@ -1,0 +1,22 @@
+<Canvas Width="31.825" Height="178.491"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="31.825" Height="178.491">
+
+  <!-- Radiator Needle/Joiner/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ff0e0e0e" Data=" M 8.720,139.974 L 8.720,162.579 L 23.105,162.579 L 23.105,139.974 L 8.720,139.974 Z"/>
+
+  <!-- Radiator Needle/Balance/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ff0e0e0e" Data=" M 15.913,151.276 C 8.535,151.276 2.555,157.256 2.555,164.634 C 2.555,172.011 8.535,177.991 15.913,177.991 C 23.290,177.991 29.270,172.011 29.270,164.634 C 29.270,157.256 23.290,151.276 15.913,151.276 Z"/>
+
+  <!-- Radiator Needle/Needle/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff909987" StrokeMiterLimit="1.0" Fill="#ffbdc7ac" Data=" M 20.028,4.652 C 20.025,4.453 19.951,4.261 19.820,4.111 L 16.830,0.676 C 16.626,0.442 16.262,0.441 16.057,0.674 L 13.035,4.110 C 12.903,4.261 12.828,4.454 12.824,4.654 L 10.775,116.341 L 22.077,116.341 L 20.028,4.652 Z"/>
+
+  <!-- Radiator Needle/Pivot/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ff0e0e0e" Data=" M 15.913,115.314 C 7.400,115.314 0.500,122.214 0.500,130.726 C 0.500,139.238 7.400,146.139 15.913,146.139 C 24.425,146.139 31.325,139.238 31.325,130.726 C 31.325,122.214 24.425,115.314 15.913,115.314 Z"/>
+
+  <!-- Radiator Needle/Centre/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff1e1e1e" Data=" M 15.913,130.041 C 15.534,130.041 15.227,130.348 15.227,130.726 C 15.227,131.104 15.534,131.411 15.913,131.411 C 16.291,131.411 16.597,131.104 16.597,130.726 C 16.597,130.348 16.291,130.041 15.913,130.041 Z"/>
+
+  </Canvas>
+</Canvas>

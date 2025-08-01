@@ -53,15 +53,15 @@ namespace GadrocsWorkshop.Helios.Controls
 
             _positionOneEnterAction = new HeliosTrigger(this, "", "position one", "entered", "Triggered when position one is entered or depressed.");
             Triggers.Add(_positionOneEnterAction);
-            _positionOneExitAction = new HeliosTrigger(this, "", "position one", "exited", "Triggered when posotion one is exited or released.");
+            _positionOneExitAction = new HeliosTrigger(this, "", "position one", "exited", "Triggered when position one is exited or released.");
             Triggers.Add(_positionOneExitAction);
             _positionTwoEnterAction = new HeliosTrigger(this, "", "position two", "entered", "Triggered when position two is entered or depressed.");
             Triggers.Add(_positionTwoEnterAction);
-            _positionTwoExitAction = new HeliosTrigger(this, "", "position two", "exited", "Triggered when posotion two is exited or released.");
+            _positionTwoExitAction = new HeliosTrigger(this, "", "position two", "exited", "Triggered when position two is exited or released.");
             Triggers.Add(_positionTwoExitAction);
             _positionThreeEnterAction = new HeliosTrigger(this, "", "position three", "entered", "Triggered when position three is entered or depressed.");
             Triggers.Add(_positionThreeEnterAction);
-            _positionThreeExitAction = new HeliosTrigger(this, "", "position three", "exited", "Triggered when posotion three is exited or released.");
+            _positionThreeExitAction = new HeliosTrigger(this, "", "position three", "exited", "Triggered when position three is exited or released.");
             Triggers.Add(_positionThreeExitAction);
 
             _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Position number 1,2 or 3.  Positions are numbered from top to bottom.", BindingValueUnits.Numeric);

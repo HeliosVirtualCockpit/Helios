@@ -97,25 +97,27 @@ namespace GadrocsWorkshop.Helios
     {
         public string TriggerChildName, DeviceTriggerName, ActionChildName, DeviceActionName;
         public BindingValue DeviceTriggerBindingValue;
+        public BindingValueSources DeviceTriggerBindingSource;
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName) {
-            TriggerChildName = triggerChildName;
-            DeviceTriggerName = deviceTriggerName;
-            ActionChildName = actionChildName;
-            DeviceActionName = deviceActionName;
-            DeviceTriggerBindingValue = null;
-            Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName}");
+        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName) : this( triggerChildName, deviceTriggerName, actionChildName, deviceActionName, BindingValueSources.TriggerValue, null)
+        {
+            //Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName} TriggerValue");
         }
 
-        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName, BindingValue deviceTriggerBindingValue)
+        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName, BindingValue deviceTriggerBindingValue) : this(triggerChildName, deviceTriggerName, actionChildName, deviceActionName, BindingValueSources.StaticValue, deviceTriggerBindingValue)
+        {
+            //Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName} StaticValue {deviceTriggerBindingValue}");
+        }
+        public DefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName, BindingValueSources deviceTriggerBindingSource, BindingValue deviceTriggerBindingValue)
         {
             TriggerChildName = triggerChildName;
             DeviceTriggerName = deviceTriggerName;
             ActionChildName = actionChildName;
             DeviceActionName = deviceActionName;
             DeviceTriggerBindingValue = deviceTriggerBindingValue;
-            Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName}");
+            DeviceTriggerBindingSource = deviceTriggerBindingSource;
+            Logger.Info($"Default Self Binding: Trigger {triggerChildName}.{deviceTriggerName} to action {deviceActionName} for child {actionChildName} - Binding Source {deviceTriggerBindingSource} - {deviceTriggerBindingValue}");
         }
     }
 
@@ -300,15 +302,20 @@ namespace GadrocsWorkshop.Helios
 
         protected virtual void AddDefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName)
         {
-            AddDefaultSelfBinding(triggerChildName, deviceTriggerName, actionChildName, deviceActionName, null);
+            AddDefaultSelfBinding(triggerChildName, deviceTriggerName, actionChildName, deviceActionName, BindingValueSources.TriggerValue, null);
         }
         protected virtual void AddDefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName, BindingValue deviceBindingValue)
+        {
+            AddDefaultSelfBinding(triggerChildName, deviceTriggerName, actionChildName, deviceActionName, BindingValueSources.StaticValue, deviceBindingValue);
+        }
+        protected virtual void AddDefaultSelfBinding(string triggerChildName, string deviceTriggerName, string actionChildName, string deviceActionName, BindingValueSources deviceBindingSource, BindingValue deviceBindingValue)
         {
             DefaultSelfBindings.Add(new DefaultSelfBinding(
                 triggerChildName: triggerChildName,
                 deviceTriggerName: deviceTriggerName,
                 actionChildName: actionChildName,
                 deviceActionName: deviceActionName,
+                deviceTriggerBindingSource: deviceBindingSource,
                 deviceTriggerBindingValue: deviceBindingValue
                 ));
         }
@@ -491,10 +498,9 @@ namespace GadrocsWorkshop.Helios
                     Logger.Error("Cannot find action " + defaultBinding.DeviceActionName);
                     continue;
                 }
-                Logger.Debug($"Child Self binding trigger {defaultBinding.TriggerChildName} {defaultBinding.DeviceTriggerName} to action {defaultBinding.ActionChildName} {defaultBinding.DeviceActionName}");
+                Logger.Debug($"Child Self binding trigger {defaultBinding.TriggerChildName} {defaultBinding.DeviceTriggerName} to action {defaultBinding.ActionChildName} {defaultBinding.DeviceActionName} Binding: {defaultBinding.DeviceTriggerBindingSource} | {defaultBinding.DeviceTriggerBindingValue}");
                 actionChild.InputBindings.Add(CreateNewBinding(triggerChild.Triggers[defaultBinding.DeviceTriggerName],
-                                      actionChild.Actions[defaultBinding.DeviceActionName]));
-
+                                      actionChild.Actions[defaultBinding.DeviceActionName], defaultBinding.DeviceTriggerBindingValue, defaultBinding.DeviceTriggerBindingSource));
             }
 
         }
