@@ -105,14 +105,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             // XXX not yet supported
             // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
-// see if we can restore from JSON
+            // see if we can restore from JSON
 #if (!DEBUG)
-                        //if (LoadFunctionsFromJson())
-                        //{
-                        //    return;
-                        //}
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
 #endif
-// #define DEV
+            // #define DEV
 #if (DEV)
 
             Dictionary<string, string> dcsBiosArgs = ProcessDCSBios.GetFunctions();

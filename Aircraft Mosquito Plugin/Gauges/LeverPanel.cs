@@ -39,7 +39,6 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
 
-        private HeliosPanel _frameBezelPanel;
         private HeliosPanel _displayBackgroundPanel;
         private readonly string _imageLocation = "{DH98Mosquito}/Images/";
 
@@ -362,7 +361,7 @@ namespace GadrocsWorkshop.Helios.Gauges.DH98Mosquito
 
         protected override void OnBackgroundImageChange()
         {
-            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : _imageLocation + "Panels/Lever-Panel.png";
+            _displayBackgroundPanel.BackgroundImage = BackgroundImageIsCustomized ? null : _imageLocation + "Panels/Lever-Panel.png";
         }
 
         private void CreateNewOutputBindings()
