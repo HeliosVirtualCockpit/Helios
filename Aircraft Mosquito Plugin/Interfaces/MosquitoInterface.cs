@@ -169,9 +169,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.WEAPONS.ToString("d"), "3003", "121", "0", "Position 1", "1", "Position 2", "Main Panel", "Gun Firing Master Switch", "%1d"));   // "GUN_MASTER"
             AddFunction(new PushButton(this, devices.GLYCOL_PUMP.ToString("d"), "3001", "370", "Main Panel", "De-Ice Glycol Pump Handle", "%1d"));   // "DE_ICE_PUMP"
 
-            AddFunction(new Rocker(this, devices.CONTROLS.ToString("d"), "3053", "111", "Main Panel", "Rudder Trim", true, "1", "-1", "0", "%1d", false));
-            AddFunction(new Rocker(this, devices.CONTROLS.ToString("d"), "3051", "280", "Main Panel", "Aileron Trim", true, "-1", "1", "0", "%1d", false));
-            AddFunction(new Rocker(this, devices.CONTROLS.ToString("d"), "3016", "279", "Port Wall", "Elevator Trim", true, "1", "-1", "0", "%1d", false));
+            AddFunction(new Rocker(this, devices.CONTROLS.ToString("d"), "3053", "111", "Trim Controls", "Rudder Trim", true, "1", "-1", "0", "%1d", false));
+            AddFunction(new NetworkValue(this, "110", "Trim Controls", "Rudder Trim Position", "Number", "number between -1 and 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new NetworkValue(this, "309", "Trim Controls", "Rudder Trim Knob Position", "Number", "number between 0 and 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new Rocker(this, devices.CONTROLS.ToString("d"), "3051", "280", "Trim Controls", "Aileron Trim", true, "-1", "1", "0", "%1d", false));
+            AddFunction(new NetworkValue(this, "122", "Trim Controls", "Aileron Trim Position", "Number", "number between -1 and 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new NetworkValue(this, "123", "Trim Controls", "Aileron Trim Knob Position", "Number", "number between 0 and 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new Rocker(this, devices.CONTROLS.ToString("d"), "3016", "279", "Trim Controls", "Elevator Trim", true, "1", "-1", "0", "%1d", false));
+            AddFunction(new NetworkValue(this, "6", "Trim Controls", "Elevator Trim Position", "Number", "number between -1 and 1", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new NetworkValue(this, "258", "Trim Controls", "Elevator Trim Knob Position", "Number", "number between 0 and 1", BindingValueUnits.Numeric, "%.3f"));
 
             AddFunction(new Axis(this, devices.SWITCHBOARD.ToString("d"), "3059", "16", 0.1d, 0d, 1d, "Main Panel", "Bomb Panel Flood Dimmer", false, "%.1f"));   // "BOMB_PANEL_L_DIM"
             AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3067", "284", "1", "Open", "0", "Closed", "Main Panel", "Bomb Door Light Cover", "%1d"));   // "BOMB_DOOR_L_CVR"
@@ -203,11 +209,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new FlagValue(this, "277", "Main Panel", "Fuel Pressure Warning Light Left (Red)", "True when indicator is lit"));
             AddFunction(new FlagValue(this, "278", "Main Panel", "Fuel Pressure Warning Light Right (Red)", "True when indicator is lit"));
             /// TODO:  find out the correct device and command codes
-            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3001", "377", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Left", "%1d"));   
-            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3002", "378", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Right", "%1d"));
+            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3098", "377", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Left", "%1d"));   
+            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3099", "378", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Right", "%1d"));
 
             AddFunction(new PushButton(this, devices.CLOCK.ToString("d"), "3003", "101", "Clock", "Set (Pull)", "%1d"));   // "CLOCK_PIN_PULL"
-            AddFunction(new Axis(this, devices.CLOCK.ToString("d"), "3001", "102", 0.01d, 0d, 1d, "Clock", "Set (Turn)", false, "%.4f"));   // "CLOCK_PIN_TURN"
+            AddFunction(new RotaryEncoder(this, devices.CLOCK.ToString("d"), "3001", "102", 0.05d, "Clock", "Set (Turn)", "%.4f"));   // "CLOCK_PIN_TURN"
             AddFunction(new Axis(this, devices.CLOCK.ToString("d"), "3005", "375", 0.01d, 0d, 1d, "Clock", "Reference Hours Knob", true, "%.4f"));   // "CLOCK_REF_H"
             AddFunction(new Axis(this, devices.CLOCK.ToString("d"), "3007", "376", 0.01d, 0d, 1d, "Clock", "Reference Minutes Knob", true, "%.4f"));   // "CLOCK_REF_M"
             AddFunction(new ScaledNetworkValue(this, "98", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 360d), "Clock", "Hours", "", "Value between 0 and 360", BindingValueUnits.Degrees, "%.4f", true));   // "CLOCK_H_G"
@@ -261,7 +267,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3078", "161", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Camera Gun Switch", "%1d"));   // "CAM_GUN_SW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3080", "162", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Nav Lights Switch", "%1d"));   // "NAV_L_SW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3082", "163", "0", "Position 1", "1", "Position 2", "Starboard Wall", "UV Lighting Switch", "%1d"));   // "UV_L_SW"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3084", "164", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Pitot Head Switch", "%1d"));   // "PITOT_SW"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3084", "164", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Pitot Heat Switch", "%1d"));   // "PITOT_SW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3086", "165", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Fuel Pump Switch", "%1d"));   // "FUEL_PUMP_SW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3051", "166", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Reflector Sight Switch", "%1d"));   // "REFLECTOR_SIGHT_SW"
             AddFunction(new Switch(this, devices.SWITCHBOARD.ToString("d"), "167", SwitchPositions.Create(3, 0, 0.5, "3048", "Position ", "%.2f"), "Starboard Wall", "Nav Head Lamp Switch", "%.2f"));   // "NAV_HEAD_L_SW"
@@ -311,13 +317,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new Axis(this, devices.RADIO_INTERFACE.ToString("d"), "3094", "240", 0.01d, 0d, 1d, "Quarter", "Loop Antenna Scale", false, "%.4f"));   // "LOOP_ANT_SCALE"
             AddFunction(new Switch(this, devices.SWITCHBOARD.ToString("d"), "188", SwitchPositions.Create(6, 0, 0.2, "3104", "Position ", "%.2f"), "Quarter", "IFF Channel Switch", "%.2f"));   // "IFF_CHAN"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3107", "363", "1", "Position 1", "0", "Position 2", "Quarter", "IFF Detonator Switch Cover", "%1d"));   // "IFF_DETONATE_CVR"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3109", "189", "0", "Position 1", "1", "Position 2", "Quarter", "IFF Detonator Switch", "%1d"));   // "IFF_DETONATE"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3111", "190", "0", "Position 1", "1", "Position 2", "Quarter", "IFF Power Switch", "%1d"));   // "IFF_PW"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3109", "189", "1", "Position 1", "0", "Position 2", "Quarter", "IFF Detonator Switch", "%1d"));   // "IFF_DETONATE"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3111", "190", "1", "Position 1", "0", "Position 2", "Quarter", "IFF Power Switch", "%1d"));   // "IFF_PW"
             AddFunction(new FlagValue(this, "276", "Quarter", "Dome Lamp (White)", "True when indicator is lit"));   // "DOME_LAMP_L"
             AddFunction(new FlagValue(this, "275", "Quarter", "Antenna Lamp (White)", "True when indicator is lit"));   // "LOOP_ANT_LAMP_L"
             AddFunction(new PushButton(this, devices.RADIO_INTERFACE.ToString("d"), "3001", "365", "T.1154", "Key", "%1d"));   // "T1154_KEY"
             AddFunction(new RotaryEncoder(this, devices.RADIO_INTERFACE.ToString("d"), "3002", "358", 0.01d, "T.1154", "Master Oscillator Tuning Condenser C2", "%.4f"));   // "T1154_C2"
             AddFunction(new RotaryEncoder(this, devices.RADIO_INTERFACE.ToString("d"), "3005", "359", 0.01d, "T.1154", "Master Oscillator Tuning Condenser C4", "%.4f"));   // "T1154_C4"
+            AddFunction(new RotaryEncoder(this, devices.RADIO_INTERFACE.ToString("d"), "3008", "360", 0.01d, "T.1154", "Output Tuning Condenser C15", "%.4f"));   // "T1154_C15"
+            AddFunction(new RotaryEncoder(this, devices.RADIO_INTERFACE.ToString("d"), "3011", "361", 0.01d, "T.1154", "Output Tuning Condenser C16", "%.4f"));   // "T1154_C16"
             AddFunction(new RotaryEncoder(this, devices.RADIO_INTERFACE.ToString("d"), "3014", "362", 0.01d, "T.1154", "Master Oscillator Tuning Condenser C17", "%.4f"));   // "T1154_C17"
             AddFunction(new Switch(this, devices.RADIO_INTERFACE.ToString("d"), "212", SwitchPositions.Create(8, 0, 0.1, "3017", "Position ", "%.2f"), "T.1154", "Condenser C2 Presets Knob", "%.2f"));   // "T1154_C2_B"
             AddFunction(new Switch(this, devices.RADIO_INTERFACE.ToString("d"), "211", SwitchPositions.Create(8, 0, 0.1, "3020", "Position ", "%.2f"), "T.1154", "Condenser C4 Presets Knob", "%.2f"));   // "T1154_C4_B"
@@ -506,9 +514,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                 AddFunction(new ScaledNetworkValue(this, "106", scale, "T.1154", "M3 HF Aerial Feed", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
 
-            AddFunction(new ScaledNetworkValue(this, "232", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuner", "Number", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "239", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Cathode", "Number", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "228", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1d), "R.1155", "Tuning Anode", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "232", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1.0d), "R.1155", "Tuner", "Number", BindingValueUnits.Numeric, "%.6f"));
+            AddFunction(new ScaledNetworkValue(this, "239", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1.0d), "R.1155", "Tuning Cathode", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new ScaledNetworkValue(this, "228", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1.0d), "R.1155", "Tuning Anode", "Number", BindingValueUnits.Numeric, "%.4f"));
             {
                 double[] output = new double[] { -1.0, 0.0, 100.0 };
                 double[] input = new double[] { -1.0, 0.0, 1.0 };
