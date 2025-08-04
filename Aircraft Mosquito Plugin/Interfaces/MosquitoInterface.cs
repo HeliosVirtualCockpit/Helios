@@ -454,8 +454,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             #region Systematic Instruments
             AddFunction(new ScaledNetworkValue(this, "82", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10000d), "Systematic Instruments", "Oxygen Delivery (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             AddFunction(new ScaledNetworkValue(this, "155", new CalibrationPointCollectionDouble(0d, 0d, 1d, 10000d), "Systematic Instruments", "Oxygen Delivery (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
-            AddFunction(new ScaledNetworkValue(this, "83", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Systematic Instruments", "Oxygen Supply (Port)", "Number", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "156", new CalibrationPointCollectionDouble(0d, 0d, 1d, 1d), "Systematic Instruments", "Oxygen Supply (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new NetworkValue(this, "83", "Systematic Instruments", "Oxygen Supply (Port)", "Number", "Number between 0 and 1", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new NetworkValue(this, "156", "Systematic Instruments", "Oxygen Supply (Starboard)", "Number", "Number between 0 and 1", BindingValueUnits.Numeric, "%.4f"));
 
             AddFunction(new ScaledNetworkValue(this, "81", new CalibrationPointCollectionDouble(0d, 0d, 0.7d, 70d), "Systematic Instruments", "Flaps", "Degrees", BindingValueUnits.Degrees, "%.4f", true));
 
