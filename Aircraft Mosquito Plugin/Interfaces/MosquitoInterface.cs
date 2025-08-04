@@ -107,10 +107,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
 
             // see if we can restore from JSON
 #if (!DEBUG)
-                        if (LoadFunctionsFromJson())
-                        {
-                            return;
-                        }
+                        //if (LoadFunctionsFromJson())
+                        //{
+                        //    return;
+                        //}
 #endif
             // #define DEV
 #if (DEV)
@@ -514,9 +514,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                 AddFunction(new ScaledNetworkValue(this, "106", scale, "T.1154", "M3 HF Aerial Feed", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
 
-            AddFunction(new ScaledNetworkValue(this, "232", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1.0d), "R.1155", "Tuner", "Number", BindingValueUnits.Numeric, "%.6f"));
-            AddFunction(new ScaledNetworkValue(this, "239", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1.0d), "R.1155", "Tuning Cathode", "Number", BindingValueUnits.Numeric, "%.4f"));
-            AddFunction(new ScaledNetworkValue(this, "228", new CalibrationPointCollectionDouble(0d, 0d, 1.0d, 1.0d), "R.1155", "Tuning Anode", "Number", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new NetworkValue(this, "232", "R.1155", "Tuner", "Number", "Number between 0 and 1", BindingValueUnits.Numeric, "%.5f"));
+            AddFunction(new NetworkValue(this, "239", "R.1155", "Tuning Cathode", "Number", "Number between 0 and 1", BindingValueUnits.Numeric, "%.4f"));
+            AddFunction(new NetworkValue(this, "228", "R.1155", "Tuning Anode", "Number", "Number between 0 and 1", BindingValueUnits.Numeric, "%.4f"));
             {
                 double[] output = new double[] { -1.0, 0.0, 100.0 };
                 double[] input = new double[] { -1.0, 0.0, 1.0 };
