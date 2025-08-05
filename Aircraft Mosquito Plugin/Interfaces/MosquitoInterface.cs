@@ -107,10 +107,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
 
             // see if we can restore from JSON
 #if (!DEBUG)
-                        //if (LoadFunctionsFromJson())
-                        //{
-                        //    return;
-                        //}
+                        if (LoadFunctionsFromJson())
+                        {
+                            return;
+                        }
 #endif
             // #define DEV
 #if (DEV)
@@ -272,7 +272,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3051", "166", "0", "Position 1", "1", "Position 2", "Starboard Wall", "Reflector Sight Switch", "%1d"));   // "REFLECTOR_SIGHT_SW"
             AddFunction(new Switch(this, devices.SWITCHBOARD.ToString("d"), "167", SwitchPositions.Create(3, 0, 0.5, "3048", "Position ", "%.2f"), "Starboard Wall", "Nav Head Lamp Switch", "%.2f"));   // "NAV_HEAD_L_SW"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3088", "168", "0", "Position 1", "1", "Position 2", "Starboard Wall", "IFF Switch", "%1d"));   // "IFF_SW"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3036", "169", "0", "Position 1", "1", "Position 2", "Starboard Wall", "IFF Detonator Cover", "%1d"));   // "IFF_DESRUCT_CVR"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3036", "169", "1", "Position 1", "0", "Position 2", "Starboard Wall", "IFF Detonator Cover", "%1d"));   // "IFF_DESRUCT_CVR"
             AddFunction(new PushButton(this, devices.SWITCHBOARD.ToString("d"), "3038", "170", "Starboard Wall", "IFF Detonator Left Switch", "%1d"));   // "IFF_DESRUCT_L_BTN"
             AddFunction(new PushButton(this, devices.SWITCHBOARD.ToString("d"), "3039", "171", "Starboard Wall", "IFF Detonator Right Switch", "%1d"));   // "IFF_DESRUCT_R_BTN"
             AddFunction(Switch.CreateToggleSwitch(this, devices.SWITCHBOARD.ToString("d"), "3040", "172", "1", "Position 1", "0", "Position 2", "Starboard Wall", "Extinguisher Switch Cover Port", "%1d"));   // "PORT_EXTG_CVR"
@@ -298,13 +298,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3095", "191", "1", "Position 1", "0", "Position 2", "Port Wall", "Engine Cut-Out Handle Starboard", "%1d"));   // "STBD_CUT-OUT"
             AddFunction(Switch.CreateThreeWaySwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3073", "193", "1", "Position 1", "0", "Position 2", "-1", "Position 3", "Port Wall", "Fuel Cock Port", "%1d"));   // "PORT_FUEL_COCK"
             AddFunction(Switch.CreateThreeWaySwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3076", "194", "1", "Position 1", "0", "Position 2", "-1", "Position 3", "Port Wall", "Fuel Cock Starboard", "%1d"));   // "STBD_FUEL_COCK"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3079", "195", "1", "Position 1", "0", "Position 2", "Port Wall", "Transfer Fuel Cock", "%1d"));   // "TRANSFER_COCK-OUT"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3079", "195", "0", "Position 1", "1", "Position 2", "Port Wall", "Fuel Transfer Cock", "%1d"));   // "TRANSFER_COCK-OUT"
             AddFunction(new PushButton(this, devices.ENGINE_CONTROLS.ToString("d"), "3050", "197", "Port Wall", "Oil Dilution Switch Port", "%1d"));   // "PORT_OIL_DILUTION"
             AddFunction(new PushButton(this, devices.ENGINE_CONTROLS.ToString("d"), "3051", "198", "Port Wall", "Oil Dilution Switch Starboard", "%1d"));   // "STBD_OIL_DILUTION"
             AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3089", "196", "1", "Position 1", "0", "Position 2", "Port Wall", "Tank Pressurizing Lever", "%1d"));   // "TANK_PRESS"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3091", "200", "1", "Position 1", "0", "Position 2", "Port Wall", "Auxiliary Oil Supply Lever Port", "%1d"));   // "PORT_OIL_SUPPLY"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3093", "199", "1", "Position 1", "0", "Position 2", "Port Wall", "Auxiliary Oil Supply Lever Starboard", "%1d"));   // "STBD_OIL_SUPPLY"
-            AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3057", "203", "1", "Position 1", "0", "Position 2", "Port Wall", "Cabin Heater Control", "%1d"));   // "CABIN_HEATER_LVR"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3091", "200", "0", "Position 1", "1", "Position 2", "Port Wall", "Auxiliary Oil Supply Lever Port", "%1d"));   // "PORT_OIL_SUPPLY"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3093", "199", "0", "Position 1", "1", "Position 2", "Port Wall", "Auxiliary Oil Supply Lever Starboard", "%1d"));   // "STBD_OIL_SUPPLY"
+            AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3057", "203", "0", "Position 1", "1", "Position 2", "Port Wall", "Cabin Heater Control", "%1d"));   // "CABIN_HEATER_LVR"
             AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3059", "204", "1", "Position 1", "0", "Position 2", "Port Wall", "Gun Heater Control", "%1d"));   // "GUN_HEATER_LVR"
             AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3020", "256", "1", "Position 1", "0", "Position 2", "Port Wall", "Arm Rest Port", "%1d"));   // "PORT_ARMREST"
             AddFunction(Switch.CreateToggleSwitch(this, devices.CONTROLS.ToString("d"), "3061", "257", "1", "Position 1", "0", "Position 2", "Port Wall", "Arm Rest Starboard", "%1d"));   // "STBD_ARMREST"
