@@ -185,17 +185,26 @@ namespace GadrocsWorkshop.Helios.Patching
         internal IList<StatusReportItem> Apply()
         {
             IList<StatusReportItem> results = Patches.Apply(Destination, PatchExclusions).ToList();
-            return ScanResults(results);
+            results = ScanResults(results);
+            if (Status == StatusCodes.NoActionsNeeded) Status = StatusCodes.UpToDate;
+            return results;
         }
 
         internal IList<StatusReportItem> Revert()
         {
             IList<StatusReportItem> results = Patches.Revert(Destination, PatchExclusions).ToList();
-            return ScanResults(results);
+            results = ScanResults(results);
+            if (Status == StatusCodes.NoActionsNeeded) Status = StatusCodes.OutOfDate;
+            return results;
         }
 
         private IList<StatusReportItem> ScanResults(IList<StatusReportItem> results)
         {
+            if (!results.Any())
+            {
+                Status = StatusCodes.NoActionsNeeded;
+                return results;
+            }
             if (results.Any(result => result.Severity >= StatusReportItem.SeverityCode.Error))
             {
                 // fatal error

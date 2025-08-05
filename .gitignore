@@ -25,6 +25,7 @@ TestResults
 
 # visual studio temp directory, including more per-user options and build state
 /.vs
+/*/.vs
 
 # archives
 Helios *.zip

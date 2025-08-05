@@ -29,6 +29,7 @@ namespace GadrocsWorkshop.Helios.Util
         ResetMonitorsRequired,
         ProfileSaveRequired,
         ResetRequired,
-        NotApplicable
+        NotApplicable,
+        NoActionsNeeded
     }
 }

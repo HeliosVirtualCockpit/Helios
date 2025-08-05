@@ -1,4 +1,4 @@
-﻿//  Copyright 2020 Ammo Goettsch
+//  Copyright 2020 Ammo Goettsch
 //  Copyright 2024 Helios Contributors
 //    
 //  Helios is free software: you can redistribute it and/or modify
@@ -208,8 +208,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
 
             AddFunction(new FlagValue(this, "277", "Main Panel", "Fuel Pressure Warning Light Left (Red)", "True when indicator is lit"));
             AddFunction(new FlagValue(this, "278", "Main Panel", "Fuel Pressure Warning Light Right (Red)", "True when indicator is lit"));
-            /// TODO:  find out the correct device and command codes
-            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3098", "377", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Left", "%1d"));   
+
+/// TODO:  find out the correct device and command codes
+            AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3098", "377", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Left", "%1d"));
             AddFunction(Switch.CreateToggleSwitch(this, devices.ENGINE_CONTROLS.ToString("d"), "3099", "378", "1", "Open", "0", "Closed", "Main Panel", "Fuel Pressure Warning Light Cover Right", "%1d"));
 
             AddFunction(new PushButton(this, devices.CLOCK.ToString("d"), "3003", "101", "Clock", "Set (Pull)", "%1d"));   // "CLOCK_PIN_PULL"
@@ -412,8 +413,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             AddFunction(new ScaledNetworkValue(this, "58", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             AddFunction(new ScaledNetworkValue(this, "59", new CalibrationPointCollectionDouble(0d, 0d, 1d, 150d), "Engine Instruments", "Oil Pressure (Starboard)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             {
-                double[] output = new double[] { 39.0, 40.0, 60   , 80   , 90   , 100  , 110  , 120      , 140.0 };
-                double[] input = new double[] { -1.0 , 0.0 , 0.08 , 0.2  , 0.29 , 0.39 , 0.5  , 0.64     , 1.0 };
+                double[] output = new double[] { 39.0, 40.0, 60, 80, 90, 100, 110, 120, 140.0 };
+                double[] input = new double[] { -1.0, 0.0, 0.08, 0.2, 0.29, 0.39, 0.5, 0.64, 1.0 };
+
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
                 AddFunction(new ScaledNetworkValue(this, "60", scale, "Engine Instruments", "Radiator Temperature (Port)", "Number", BindingValueUnits.Numeric, "%.4f", true));
@@ -523,7 +525,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                 CalibrationPointCollectionDouble scale = new CalibrationPointCollectionDouble(input[0], output[0], input[input.Count() - 1], output[output.Count() - 1]);
                 for (int ii = 1; ii < input.Count() - 2; ii++) scale.Add(new CalibrationPointDouble(input[ii], output[ii]));
                 AddFunction(new ScaledNetworkValue(this, "88", scale, "R.1155", "Direction Finder (Left)", "Number", BindingValueUnits.Numeric, "%.4f", true));
-                AddFunction(new ScaledNetworkValue(this, "89", scale, "R.1155", "Direction Finder (Right)", "Number","", BindingValueUnits.Numeric, "%.4f", true));
+                AddFunction(new ScaledNetworkValue(this, "89", scale, "R.1155", "Direction Finder (Right)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             #endregion Radio Equipment
 
