@@ -55,7 +55,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\Helios.Ka-50.Plugin.Install.Read.Me.rtf">
+    <Content Include="Docs\DCS.Ka-50.Plugin.Install.Read.Me.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

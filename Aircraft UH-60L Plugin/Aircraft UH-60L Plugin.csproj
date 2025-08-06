@@ -55,11 +55,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\Helios.UH-60L.Plugin.Install.Read.Me.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Gauges\AHRUDisplay.cs" />
     <Compile Include="Gauges\CenterDisplayUnit.cs" />
     <Compile Include="Gauges\ChronometerCopilotDisplay.cs" />
@@ -373,6 +368,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Docs\DCS.UH-60L.Plugin.Install.Read.Me.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>

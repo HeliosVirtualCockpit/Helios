@@ -55,11 +55,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\Helios.H-60.Plugin.Install.Read.Me.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Interfaces\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\Functions\Chronometer.cs" />
     <Compile Include="Interfaces\Functions\H60Function.cs" />
@@ -70,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Docs\DCS.H-60.Plugin.Install.Read.Me.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Templates\Base\H-60\0 Sample.htpl" />
   </ItemGroup>
   <ItemGroup>

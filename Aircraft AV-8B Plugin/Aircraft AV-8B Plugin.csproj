@@ -157,7 +157,7 @@
     <Resource Include="Gauges\ADI\adi_bezel.png" />
     <Content Include="Icons\AV-8B.ico" />
     <Content Include="Icons\DCS-AV-8B.ico" />
-    <Content Include="Docs\Helios.AV-8B.Plugin.Install.Read.Me.rtf">
+    <Content Include="Docs\DCS.AV-8B.Plugin.Install.Read.Me.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\AV-8B\9 Components\9 Button Flare Salvo.htpl">

@@ -58,9 +58,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\Helios.CH-47F.Plugin.Install.Read.Me.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Images\Power\CH-47F_Engine_Cond_Panel.png" />
     <Resource Include="Images\Power\Left_Power_Lever_0.png" />
     <Resource Include="Images\Power\Left_Power_Lever_1.png" />
@@ -284,6 +281,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Docs\DCS.CH-47F.Plugin.Install.Read.Me.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -138,7 +138,7 @@
     <Resource Include="Images\Levers\Gear-Lever-Middle.png" />
     <Resource Include="Images\Levers\Gear-Lever-Up.png" />
     <None Include="app.config" />
-    <Content Include="Docs\Mosquito.Plugin.Install.Read.Me.md">
+    <Content Include="Docs\DCS.Mosquito.Plugin.Install.Read.Me.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
@@ -169,11 +169,6 @@
   <ItemGroup>
     <Folder Include="Images\Instruments\" />
     <Folder Include="Interfaces\Functions\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Docs\Mosquito.Plugin.Install.Read.Me.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Boost\Boost-Faceplate.xaml">

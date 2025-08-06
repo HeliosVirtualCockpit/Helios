@@ -55,7 +55,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\Helios.MiG-21.Plugin.Install.Read.Me.rtf">
+    <Content Include="Docs\DCS.MiG-21.Plugin.Install.Read.Me.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Gauges\RSBNDistance\RSBNDistance.png" />

@@ -384,9 +384,6 @@
     <Resource Include="Images\Buttons\LG_Warn_Sil_Pressed.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\Helios.F-15E.Plugin.Install.Read.Me.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Images\UFC\UFC_Panel_Full.png" />
     <Content Include="Templates\Base\F-15E\W Keyboard Panel %28WSO%29.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -407,6 +404,9 @@
     </Content>
     <Resource Include="Interfaces\ExportFunctionsF15E.lua" />
     <None Include="app.config" />
+    <Content Include="Docs\DCS.F-15E.Plugin.Install.Read.Me.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Templates\Base\F-15E\W UFC Display Line.htpl.prototype">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

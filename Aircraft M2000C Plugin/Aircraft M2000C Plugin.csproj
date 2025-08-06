@@ -481,9 +481,6 @@
     <Resource Include="Images\AutopilotPanel\1y-on.png" />
     <Resource Include="Images\AutopilotPanel\1y-off.png" />
     <Resource Include="Images\yellow-indicator-on.png" />
-    <Content Include="Docs\Helios.M-2000C.Plugin.Install.Read.Me.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Templates\Base\M2000C\8 Components\After_Burner_Indicator.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -923,6 +920,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Docs\DCS.M-2000C.Plugin.Install.Read.Me.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>

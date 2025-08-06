@@ -1,7 +1,7 @@
-# **Helios Virtual Cockpit 1.6 Plugin: DH98 Mosquito FB Mk.VI**
+# **Helios Virtual Cockpit 1.6 Plugin: DCS UH-60L Blackhawk**
 
    
-This is a plugin component for Helios Virtual Cockpit 1.6 which provides an interface and controls for the Mosquito FB Mk.VI.  
+This is a plugin component for Helios Virtual Cockpit 1.6 which provides an interface and controls for the [Community developed DCS UH-60L Blackhawk](https://discordapp.com/channels/776815105810759701/1089623081963765780).  
 Helios 1.6 is not an explicit collaboration with Craig Courtney, but it relies heavily on the original Helios.  This distribution is not endorsed by Craig Courtney.   
                                                                       
 Helios is Community supported, and that community exists on [Discord](https://github.com/HeliosVirtualCockpit/Helios/wiki/Get-Help-with-Profiles#capt-zeen). If you encounter problems, please check for known issues [here](https://github.com/HeliosVirtualCockpit/Helios/issues) and if no existing issues appear relevant, and your problem cannot be solved by the community, then open a [new issue](https://github.com/HeliosVirtualCockpit/Helios/issues) with as much detail as possible about the problem.  
