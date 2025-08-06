@@ -58,7 +58,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\Helios.AH-64D.Plugin.Install.Read.Me.md">
+    <Content Include="Docs\DCS.AH-64D.Plugin.Install.Read.Me.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Interfaces\ExportFunctions.lua" />

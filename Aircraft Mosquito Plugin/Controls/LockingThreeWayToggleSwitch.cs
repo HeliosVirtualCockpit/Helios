@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls.DH98Mosquito
     using System.Xml;
     using static GadrocsWorkshop.Helios.Interfaces.DCS.Common.NetworkTriggerValue;
 
-    [HeliosControl("Helios.DH98Mosquito.LockingThreeWayToggleSwitch", "Locking Three Way Toggle Switches", "Development", typeof(ThreeWayToggleSwitchRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.DH98Mosquito.LockingThreeWayToggleSwitch", "Locking Three Way Toggle Switches", "Three Way Toggle Switches", typeof(ThreeWayToggleSwitchRenderer), HeliosControlFlags.None)]
     public class LockingThreeWayToggleSwitch : ThreeWayToggleSwitch
     {
         private HeliosValue _positionOneLockValue;

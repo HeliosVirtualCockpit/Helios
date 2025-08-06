@@ -1,5 +1,4 @@
 # **Helios Virtual Cockpit 1.6 Plugin: DCS AH-64D Apache**
-
    
 This is a plugin component for Helios Virtual Cockpit 1.6 which provides an interface and controls for the DCS AH-64D Apache from Eagle Dynamics.  
 Helios 1.6 is not an explicit collaboration with Craig Courtney, but it relies heavily on the original Helios.  This distribution is not endorsed by Craig Courtney.   
@@ -11,9 +10,7 @@ There is a growing collection of information on the wiki:
 
 ## **Before Installation**
 
- 
-
 1\) Make sure you virus scan the installation.  Helios is built on GitHub infrastructure and we believe this build system to be virus free, however we make no claims that it is virus free, and we take no responsibility for any damage to your system as a result of installation of Helios or its install mechanism.   
    
 2\) The executables are not currently signed so a warning for this will be issued during installation and running of the software.  It is completely your decision and risk if you ignore warnings.  
-   
+ 
