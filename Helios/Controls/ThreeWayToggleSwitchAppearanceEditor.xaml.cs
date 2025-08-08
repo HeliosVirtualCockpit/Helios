@@ -22,6 +22,9 @@ namespace GadrocsWorkshop.Helios.Controls
     /// Interaction logic for ToggleSwitchAppearanceEditor.xaml
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.ThreeWayToggleSwitch", "Appearance")]
+    [HeliosPropertyEditor("Helios.Base.LockingThreeWayToggleSwitch", "Appearance")]
+    [HeliosPropertyEditor("Helios.DH98Mosquito.LockingThreeWayToggleSwitch", "Appearance")]
+
     public partial class ThreeWayToggleSwitchAppearanceEditor : HeliosPropertyEditor
     {
         public ThreeWayToggleSwitchAppearanceEditor()
