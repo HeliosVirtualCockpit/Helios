@@ -23,6 +23,9 @@ namespace GadrocsWorkshop.Helios.Controls
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.ThreeWayToggleSwitch", "Behavior")]
     [HeliosPropertyEditor("Helios.Base.RockerSwitch", "Behavior")]
+    [HeliosPropertyEditor("Helios.Base.LockingThreeWayToggleSwitch", "Behavior")]
+    [HeliosPropertyEditor("Helios.DH98Mosquito.LockingThreeWayToggleSwitch", "Behavior")]
+
     public partial class ThreeWayToggleSwitchBehaviorEditor : HeliosPropertyEditor
     {
         public ThreeWayToggleSwitchBehaviorEditor()

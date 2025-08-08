@@ -103,6 +103,7 @@
       <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
+    <Compile Include="Controls\ThreeWayToggleSwitchLocking.cs" />
     <Compile Include="Controls\RotaryEncoderIndcatorClickable.cs" />
     <Compile Include="Controls\PotentiometerIndcatorClickable.cs" />
     <Compile Include="Controls\RotaryEncoderClickableAppearanceEditor.xaml.cs">
