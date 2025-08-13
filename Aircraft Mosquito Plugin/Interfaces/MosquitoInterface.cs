@@ -18,10 +18,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+    using GadrocsWorkshop.Helios.UDPInterface;
+    using GadrocsWorkshop.Helios.Util;
+    using NLog;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System;
-    using GadrocsWorkshop.Helios.UDPInterface;
 
     [HeliosInterface(
         "Helios.DH98Mosquito",                         // Helios internal type ID used in Profile XML, must never change
@@ -32,6 +34,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
 
     public class DH98MosquitoInterface : DCSInterface
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
 #pragma warning disable IDE1006 // Naming Standard issues
 #pragma warning disable IDE0051 // Remove unused private members
 
@@ -528,6 +532,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                 AddFunction(new ScaledNetworkValue(this, "89", scale, "R.1155", "Direction Finder (Right)", "Number", BindingValueUnits.Numeric, "%.4f", true));
             }
             #endregion Radio Equipment
+
+            Logger.Info($"Helios Style 1 interface loaded for {TypeIdentifier}. (Interface contained {Functions.Count()} Network Functions).");
 
 #if (DEV)
             Console.WriteLine("Number of functions:\t{0}",Functions.Count());

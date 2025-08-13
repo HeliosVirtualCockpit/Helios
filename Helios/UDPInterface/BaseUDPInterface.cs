@@ -18,6 +18,7 @@ using GadrocsWorkshop.Helios.Interfaces.Capabilities;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities.ProfileAwareInterface;
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.Json;
+using GadrocsWorkshop.Helios.Util;
 using GadrocsWorkshop.Helios.Windows;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Timers;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace GadrocsWorkshop.Helios.UDPInterface
@@ -525,6 +527,7 @@ namespace GadrocsWorkshop.Helios.UDPInterface
 
             // if we survive the loading, install all these functions
             InstallFunctions(loaded);
+            Logger.Info($"Soft interface definition {jsonFileName} loaded from {Anonymizer.Anonymize(jsonPath)}. (Interface contained {loaded.Functions.Count()} Network Functions).");
 
             return true;
         }
