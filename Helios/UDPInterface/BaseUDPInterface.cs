@@ -527,6 +527,7 @@ namespace GadrocsWorkshop.Helios.UDPInterface
 
             // if we survive the loading, install all these functions
             InstallFunctions(loaded);
+
             Logger.Debug($"Soft interface definition {jsonFileName} loaded from {Anonymizer.Anonymize(jsonPath)}. (Interface contained {loaded.Functions.Count()} Network Functions).");
 
             return true;
