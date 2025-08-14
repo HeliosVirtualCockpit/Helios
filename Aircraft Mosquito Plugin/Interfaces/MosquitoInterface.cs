@@ -111,10 +111,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
 
             // see if we can restore from JSON
 #if (!DEBUG)
-                        if (LoadFunctionsFromJson())
-                        {
-                            return;
-                        }
+            if (LoadFunctionsFromJson())
+            {
+                return;
+            }
 #endif
             // #define DEV
 #if (DEV)
@@ -533,7 +533,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             }
             #endregion Radio Equipment
 
-            Logger.Info($"Helios Style 1 interface loaded for {TypeIdentifier}. (Interface contained {Functions.Count()} Network Functions).");
+            Logger.Debug($"Helios Style 1 interface loaded for {TypeIdentifier}. (Interface contains {Functions.Count()} Network Functions).");
 
 #if (DEV)
             Console.WriteLine("Number of functions:\t{0}",Functions.Count());
