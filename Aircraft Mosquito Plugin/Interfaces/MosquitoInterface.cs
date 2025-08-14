@@ -116,7 +116,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
                             return;
                         }
 #endif
-            // #define DEV
+// #define DEV
 #if (DEV)
 
             Dictionary<string, string> dcsBiosArgs = ProcessDCSBios.GetFunctions();
@@ -533,7 +533,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.DH98Mosquito
             }
             #endregion Radio Equipment
 
-            Logger.Info($"Helios Style 1 interface loaded for {TypeIdentifier}. (Interface contained {Functions.Count()} Network Functions).");
+            Logger.Debug($"Helios Style 1 interface loaded for {TypeIdentifier}. (Interface contained {Functions.Count()} Network Functions).");
 
 #if (DEV)
             Console.WriteLine("Number of functions:\t{0}",Functions.Count());
