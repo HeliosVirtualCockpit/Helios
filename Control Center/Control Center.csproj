@@ -181,7 +181,6 @@
     <Resource Include="PreferencesBackground.png" />
     <Resource Include="PrevButton.png" />
     <Resource Include="PrevButtonPressed.png" />
-    <Resource Include="splash_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="StatusViewer\StatusBackground.png" />
