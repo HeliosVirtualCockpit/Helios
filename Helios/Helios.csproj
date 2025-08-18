@@ -232,6 +232,8 @@
     <Compile Include="Gauges\A-10\HARS\HARSSync_1.cs" />
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
     <Compile Include="Gauges\AltImageGauge.cs" />
+    <Compile Include="Gauges\GaugeBallSphere3DSnapshot.cs" />
+    <Compile Include="Gauges\GaugeBall.cs" />
     <Compile Include="Gauges\IGauge.cs" />
     <Compile Include="Gauges\CompositeBaseGauge.cs" />
     <Compile Include="Gauges\CompositeVisualWithBackgroundImage.cs" />
@@ -689,6 +691,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Common\Alt\needle_a.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\ChequerBoard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

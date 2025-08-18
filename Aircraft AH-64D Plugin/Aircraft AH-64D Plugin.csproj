@@ -64,6 +64,7 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
     <Resource Include="Images\SAI\adi_off_flag.png" />
     <Resource Include="Images\SAI\adi_ball.png" />
+    <Resource Include="Images\SAI\adi_ball2.png" />
     <Content Include="Templates\Base\AH-64D\0 Altimeter.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

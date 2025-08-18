@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.AH64D.SAI", "Standby Attitude Indicator", "AH-64D", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.AH64D.SAI", "Standby Attitude Indicator", "AH-64D", typeof(GaugeRenderer), HeliosControlFlags.None)]
     public class SAI : BaseGauge
     {
         private HeliosValue _pitch;
@@ -33,14 +33,13 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         private HeliosValue _offFlag;
 
         private GaugeImage _offFlagImage;
-
-        private GaugeNeedle _ball;
+        private GaugeBall _ball;
         private GaugeNeedle _bankNeedle;
         private GaugeNeedle _wingsNeedle;
         private GaugeNeedle _slipBallNeedle;
         private GaugeNeedle _TurnMarker;
 
-        private CalibrationPointCollectionDouble _pitchCalibration;
+        private CalibrationPointCollectionDouble _axisCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
         private CalibrationPointCollectionDouble _slipBallCalibration;
 
@@ -49,9 +48,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         {
             Point center = new Point(177d, 163d);
 
-            _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -1066d, 360d, 1066d);
-            _ball = new GaugeNeedle("{AH-64D}/Images/SAI/adi_ball.png", center, new Size(198d, 1160d), new Point(99d, 580d));
-            _ball.Clip = new EllipseGeometry(center, 99d, 99d);
+            _axisCalibration = new CalibrationPointCollectionDouble(-360d, -360d, 360d, 360d);
+
+            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball2.png", new Point(0d,-12d), new Size(350d, 350d), 0d, 0d, -90d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
@@ -122,7 +121,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue);
+            _ball.Pitch = e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -132,7 +131,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Rotation = -e.Value.DoubleValue;
+            _ball.Roll = e.Value.DoubleValue;
             _bankNeedle.Rotation = -e.Value.DoubleValue;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)
