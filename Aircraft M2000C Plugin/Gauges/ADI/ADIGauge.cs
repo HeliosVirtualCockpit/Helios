@@ -44,8 +44,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             Point center = new Point(200d, 200d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(-50,-50), new Size(500d, 500d));
-            //_ball.Clip = new EllipseGeometry(center, 150d, 150d);
+            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(-50,-50), new Size(500d, 500d), 180d, 0d, 0d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -60d, 1.0d, 60d);
@@ -76,7 +75,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
-            _yaw = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Yaw", "Current bank of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
+            _yaw = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Heading", "Current heading of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
             _yaw.Execute += new HeliosActionHandler(Yaw_Execute);
             Actions.Add(_yaw);
 
@@ -91,7 +90,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Pitch = e.Value.DoubleValue;
+            _ball.Pitch = -e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -101,7 +100,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = e.Value.DoubleValue;
+            _ball.Roll = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void Yaw_Execute(object action, HeliosActionEventArgs e)
