@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.AH64D.SAI", "Standby Attitude Indicator", "AH-64D", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.AH64D.SAI", "Standby Attitude Indicator", "AH-64D Apache", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class SAI : BaseGauge
     {
         private HeliosValue _pitch;
@@ -50,7 +50,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _axisCalibration = new CalibrationPointCollectionDouble(-360d, -360d, 360d, 360d);
 
-            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball2.png", new Point(0d,-12d), new Size(350d, 350d), 0d, 0d, -90d);
+            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball2.png", new Point(0d,-12d), new Size(350d, 350d), 90d, 90d, 90d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);

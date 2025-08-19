@@ -591,7 +591,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\ADI\ADI.cs" />
     <Compile Include="Gauges\ADI\BackupADI.cs" />
+    <Compile Include="Gauges\ADI\ADIGauge.cs" />
     <Compile Include="Gauges\ADI\BackupADIGauge.cs" />
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\CautionPanel\Caution_Panel.cs" />
@@ -821,12 +823,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\ADI\ADI_Tape.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Gauges\ADI\ADI_Pointer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -923,6 +919,18 @@
     <Content Include="Docs\DCS.M-2000C.Plugin.Install.Read.Me.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI_Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>
