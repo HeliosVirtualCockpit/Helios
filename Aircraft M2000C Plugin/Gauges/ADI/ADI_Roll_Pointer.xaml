@@ -1,0 +1,12 @@
+<Canvas Width="23.336" Height="137.488"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="23.336" Height="137.488">
+  <!-- Layer 1/Roll Arrow -->
+  <Path StrokeThickness="0.5" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 1.161,105.331 L 22.175,105.331 C 22.829,105.331 23.270,106.174 23.010,106.931 L 13.007,136.129 C 12.500,137.608 10.835,137.608 10.329,136.129 L 0.325,106.931 C 0.066,106.174 0.507,105.331 1.161,105.331 Z"/>
+
+  <!-- Layer 1/Centre Point -->
+  <Path Opacity="0.0" Fill="#ffffffff" Data="F1 M 11.611,0.057 C 11.611,0.026 11.636,0.000 11.668,0.000 C 11.700,0.000 11.725,0.026 11.725,0.057 C 11.725,0.089 11.700,0.114 11.668,0.114 C 11.636,0.114 11.611,0.089 11.611,0.057 Z"/>
+
+  </Canvas>
+</Canvas>

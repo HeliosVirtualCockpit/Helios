@@ -29,13 +29,20 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         private HeliosValue _yaw;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _offFlag;
+        private HeliosValue _localizerH;
+        private HeliosValue _localizerV;
+        private HeliosValue _slipBall;
 
         private GaugeNeedle _offFlagNeedle;
         private GaugeBall _ball;
         private GaugeNeedle _bankNeedle;
         private GaugeNeedle _wingsNeedle;
+        private GaugeNeedle _localizerHNeedle;
+        private GaugeNeedle _localizerVNeedle;
+        private GaugeNeedle _slipBallNeedle;
 
-        private CalibrationPointCollectionDouble _pitchCalibration;
+        private CalibrationPointCollectionDouble _slipCalibration;
+        private CalibrationPointCollectionDouble _glideCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
 
         public ADIGauge(string name, Size size, string device)
@@ -43,21 +50,33 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         {
             Point center = new Point(200d, 200d);
 
-            _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(-50,-50), new Size(500d, 500d), 180d, 0d, 0d);
+            _slipCalibration = new CalibrationPointCollectionDouble(-1d, 15d, 1d, -15d);
+            _glideCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d);
+
+            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(-50,-50), new Size(500d, 500d), 0d, 0d, 180d);
             Components.Add(_ball);
 
+            _localizerHNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Localizer-H.xaml", center, new Size(5.939d, 158.540d), new Point(5.939d / 2d, 0d));
+            Components.Add(_localizerHNeedle);
+
+            _localizerVNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Localizer-V.xaml", center, new Size(147.794d, 5.939d), new Point(0d, 5.939d / 2d));
+            Components.Add(_localizerVNeedle);
+
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -60d, 1.0d, 60d);
-            _wingsNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
+            _wingsNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Wings.xaml", new Point(52.3436d, 56.4174d), new Size(227.823d, 179.686d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
 
-            _bankNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Pointer.xaml", center, new Size(10d, 39d), new Point(5d, -111d));
+            _bankNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Roll_Pointer.xaml", center, new Size(23.336d, 137.488d), new Point(23.336d / 2d, 0d));
             Components.Add(_bankNeedle);
+
+            _offFlagNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Off_Flag.xaml", new Point(60.2338d, 107.6953d), new Size(92.279d, 21.828d), new Point(0d, 21.828d / 2d), 0d);
+            Components.Add(_offFlagNeedle);
 
             Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/ADI_Bezel.xaml", new Rect(0d, 0d, 400d, 400d)));
 
-            _offFlagNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Off_Flag.xaml", new Point(-14d, 315d), new Size(66d, 265d), new Point(5d, 260d), 0d);
-            Components.Add(_offFlagNeedle);
+            _slipBallNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Slip_Ball.xaml", center, new Size(20.799d, 199.113d), new Point(20.799d / 2d, 0d));
+            Components.Add(_slipBallNeedle);
+
 
             _offFlag = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI OFF Flag", "Indicates the position of the OFF flag.", "true if displayed.", BindingValueUnits.Boolean);
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
@@ -79,18 +98,44 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _yaw.Execute += new HeliosActionHandler(Yaw_Execute);
             Actions.Add(_yaw);
 
+            _slipBall = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI Slip Ball", "Indicates the amount of slip.", "-1 to 1", BindingValueUnits.Numeric);
+            _slipBall.Execute += new HeliosActionHandler(SlipBall_Execute);
+            Actions.Add(_slipBall);
+
+            _localizerH = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI ILS GS HORIZ SLOPE", "Indicates the Horizontal Glide Slope Deviation.", "-1 to 1", BindingValueUnits.Numeric);
+            _localizerH.Execute += new HeliosActionHandler(LocalizerH_Execute);
+            Actions.Add(_localizerH);
+            _localizerV = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI ILS LOC VERT GLIDE", "Indicates the Vertical Glide Slope Deviation.", "-1 to 1", BindingValueUnits.Numeric);
+            _localizerV.Execute += new HeliosActionHandler(LocalizerV_Execute);
+            Actions.Add(_localizerV);
+
         }
 
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
         {
             _offFlag.SetValue(e.Value, e.BypassCascadingTriggers);
-            _offFlagNeedle.Rotation = e.Value.BoolValue ? 15d : 0d;
+            _offFlagNeedle.Rotation = e.Value.BoolValue ? 0d : -45d;
+        }
+        void SlipBall_Execute(object action, HeliosActionEventArgs e)
+        {
+            _slipBall.SetValue(e.Value, e.BypassCascadingTriggers);
+            _slipBallNeedle.Rotation = _slipCalibration.Interpolate(e.Value.DoubleValue);
+        }
+        void LocalizerH_Execute(object action, HeliosActionEventArgs e)
+        {
+            _localizerH.SetValue(e.Value, e.BypassCascadingTriggers);
+            _localizerHNeedle.HorizontalOffset = _glideCalibration.Interpolate(e.Value.DoubleValue);
+        }
+        void LocalizerV_Execute(object action, HeliosActionEventArgs e)
+        {
+            _localizerV.SetValue(e.Value, e.BypassCascadingTriggers);
+            _localizerVNeedle.VerticalOffset = _glideCalibration.Interpolate(e.Value.DoubleValue);
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Pitch = -e.Value.DoubleValue;
+            _ball.Pitch = e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -106,7 +151,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         void Yaw_Execute(object action, HeliosActionEventArgs e)
         {
             _yaw.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Yaw = e.Value.DoubleValue;
+            _ball.Yaw = -e.Value.DoubleValue;
         }
     }
 }

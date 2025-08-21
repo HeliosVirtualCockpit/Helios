@@ -94,7 +94,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _basePitch)
                 {
                     _basePitch = value;
-                    _sphere3D.RotateY(_basePitch);
+                    _sphere3D.RotateX(_basePitch);
                     OnDisplayUpdate();
                 }
             }
@@ -126,7 +126,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _baseYaw)
                 {
                     _baseYaw = value;
-                    _sphere3D.RotateX(_baseYaw);
+                    _sphere3D.RotateY(_baseYaw);
                     OnDisplayUpdate();
                 }
             }
@@ -142,7 +142,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _pitch)
                 {
                     _pitch = value;
-                    _sphere3D.RotateY(_pitch + _basePitch);
+                    _sphere3D.RotateX(_pitch + _basePitch);
                     OnDisplayUpdate();
                 }
             }
@@ -174,7 +174,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _yaw)
                 {
                     _yaw = value;
-                    _sphere3D.RotateX(_yaw + _baseYaw);
+                    _sphere3D.RotateY(_yaw + _baseYaw);
                     OnDisplayUpdate();
                 }
             }

@@ -54,8 +54,9 @@ namespace GadrocsWorkshop.Helios.Gauges
             _rotY = new AxisAngleRotation3D(new Vector3D(0, 1, 0), 0);
             _rotZ = new AxisAngleRotation3D(new Vector3D(0, 0, 1), 0);
             var transform = new Transform3DGroup();
-            transform.Children.Add(new RotateTransform3D(_rotX));
+            // The order of the transformations is important!
             transform.Children.Add(new RotateTransform3D(_rotY));
+            transform.Children.Add(new RotateTransform3D(_rotX));
             transform.Children.Add(new RotateTransform3D(_rotZ));
             _sphereModel = new GeometryModel3D
             {

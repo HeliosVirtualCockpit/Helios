@@ -1,0 +1,25 @@
+<Canvas Width="20.799" Height="199.113"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="20.799" Height="199.113">
+  <!-- Layer 1/Centre Point -->
+  <Path Opacity="0.0" Fill="#ff000000" Data="F1 M 10.342,0.057 C 10.342,0.026 10.368,0.000 10.399,0.000 C 10.431,0.000 10.456,0.026 10.456,0.057 C 10.456,0.089 10.431,0.114 10.399,0.114 C 10.368,0.114 10.342,0.089 10.342,0.057 Z"/>
+
+  <!-- Layer 1/Ball -->
+  <Path StrokeThickness="0.5" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Data="F1 M 0.250,188.714 C 0.250,183.109 4.794,178.565 10.399,178.565 C 16.005,178.565 20.549,183.109 20.549,188.714 C 20.549,194.319 16.005,198.863 10.399,198.863 C 4.794,198.863 0.250,194.319 0.250,188.714 Z">
+    <Path.Fill>
+      <RadialGradientBrush MappingMode="Absolute" GradientOrigin="10.149,-188.714" Center="10.149,-188.714" RadiusX="10.149" RadiusY="10.149">
+        <RadialGradientBrush.GradientStops>
+          <GradientStop Offset="0.06" Color="#ffffffff"/>
+          <GradientStop Offset="0.46" Color="#ff7f7f7f"/>
+          <GradientStop Offset="0.75" Color="#ff000000"/>
+        </RadialGradientBrush.GradientStops>
+        <RadialGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.250,0.000" />
+        </RadialGradientBrush.Transform>
+      </RadialGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  </Canvas>
+</Canvas>
