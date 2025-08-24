@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _pitch;
         private double _roll;
         private double _yaw;
+        private double _fov;
 
         private double _xScale = 1.0;
         private double _yScale = 1.0;
@@ -43,12 +44,12 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
         }
 
-        public GaugeBall(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0)
+        public GaugeBall(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0, double FOV = 60d)
         {
             _imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
             _size = size;
-
+            _fov = FOV;
 
             _sphere3D = new GaugeBallSphere3DSnapshot
             {
@@ -57,7 +58,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 Top = _location.Y,
                 Left = _location.X,
                 SetTexture = ConfigManager.ImageManager.LoadImage(_imageFile, (int)_size.Width * 4, (int)_size.Height * 2),
-                FieldOfView = 55
+                FieldOfView = _fov
             };
             BasePitch = basePitch;
             BaseRoll = baseRoll;
@@ -179,7 +180,19 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
-
+        public double FieldOfView
+        {
+            get => _fov;
+            set
+            {
+                if (_fov != value)
+                {
+                    _fov = value;
+                    _sphere3D.FieldOfView = _fov;
+                    OnDisplayUpdate();
+                }
+            }
+        }
         #endregion
 
         protected override void OnRender(DrawingContext drawingContext)

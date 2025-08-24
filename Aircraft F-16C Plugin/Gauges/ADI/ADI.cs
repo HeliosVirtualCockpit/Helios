@@ -26,6 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private HeliosValue _pitch;
         private HeliosValue _roll;
         private HeliosValue _slipBall;
+        private HeliosValue _turn;
         private HeliosValue _ilsHorizontal;
         private HeliosValue _ilsVertical;
 
@@ -39,8 +40,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private GaugeImage _gsFlagImage;
         private GaugeImage _locFlagImage;
 
-        private GaugeNeedle _ball;
+        private GaugeBall _ball;
+        private GaugeNeedle _rollNeedle;
         private GaugeNeedle _slipBallNeedle;
+        private GaugeNeedle _turnNeedle;
         private GaugeNeedle _ilsHorizontalNeedle;
         private GaugeNeedle _ilsVerticalNeedle;
         private GaugeNeedle _ilsScaleNeedle;
@@ -48,57 +51,70 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private CalibrationPointCollectionDouble _pitchCalibration;
         private CalibrationPointCollectionDouble _ilsCalibration;
         private CalibrationPointCollectionDouble _slipBallCalibration;
+        private CalibrationPointCollectionDouble _turnCalibration;
 
         public ADI()
             : base("ADI", new Size(350, 350))
         {
+            double scale = 250d / 350d;
 
-            _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -1066d, 360d, 1066d);
-            _ball = new GaugeNeedle("{F-16C}/Gauges/ADI/adi_ball.xaml", new Point(175d, 175d), new Size(225d, 1350d), new Point(112.5d, 677d));
-            _ball.Clip = new EllipseGeometry(new Point(175d, 175d), 113d, 113d);
+            _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -180d, 360d, 180d);
+            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(-20d, -20d), new Size(400d, 400d), 0d, -90d, 180d, 55d);
             Components.Add(_ball);
+
+            _rollNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Roll-Arrows.xaml", new Point(175d, 175d), new Size(62.786d * scale, 308.846d * scale), new Point(62.786d * scale / 2d, 308.846d * scale / 2d));
+            Components.Add(_rollNeedle);
+
+            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Wings.xaml", new Rect(50d, 175d - (10.250d / 2d), 352.917d * scale, 87.492d * scale)));
 
             _ilsCalibration = new CalibrationPointCollectionDouble(-1d, -116d, 1d, 116d);
 
-            _ilsHorizontalNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/adi_ils_bar.xaml", new Point(175d, 175d), new Size(189d, 6d), new Point(95d, 4d), 90d);
-            _ilsHorizontalNeedle.VerticalOffset = _ilsCalibration.Interpolate(1d);
+            _ilsHorizontalNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Horizontal-GS.xaml", new Point(175d, 175d), new Size(69.167d * scale, 292.250d * scale), new Point(66.001d * scale, (204.921d * scale) - 14d)); //175d - (249.986d * scale) | (365.834d * scale) - (249.986d * scale)
+            _ilsHorizontalNeedle.VerticalOffset = _ilsCalibration.Interpolate(0d);
             Components.Add(_ilsHorizontalNeedle);
 
-            _ilsVerticalNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/adi_ils_bar.xaml", new Point(175d, 175d), new Size(189d, 6d), new Point(95d, 4d));
-            _ilsVerticalNeedle.VerticalOffset = _ilsCalibration.Interpolate(1d);
+            _ilsVerticalNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Vertical-GS.xaml", new Point(175d, 175d), new Size(299.778d * scale, 7.500d * scale), new Point(182.515d * scale, (3.750d * scale) / 2d));
+            _ilsVerticalNeedle.VerticalOffset = _ilsCalibration.Interpolate(0d);
             Components.Add(_ilsVerticalNeedle);
 
             Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_inner_ring.xaml", new Rect(0d, 0d, 350d, 350d)));
-
-            _auxFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/adi_aux_flag.xaml", new Rect(0d, 0d, 350d, 350d));
-            _auxFlagImage.IsHidden = true;
-            Components.Add(_auxFlagImage);
-
-            _offFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/adi_off_flag.xaml", new Rect(0d, 0d, 350d, 350d));
-            _offFlagImage.IsHidden = true;
-            Components.Add(_offFlagImage);
-
-            _gsFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/adi_gs_flag.xaml", new Rect(0d, 0d, 350d, 350d));
-            _gsFlagImage.IsHidden = true;
-            Components.Add(_gsFlagImage);
-
-            _locFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/adi_loc_flag.xaml", new Rect(0d, 0d, 350d, 350d));
-            _locFlagImage.IsHidden = true;
-            Components.Add(_locFlagImage);
 
             Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_outer_ring.xaml", new Rect(0d, 0d, 350d, 350d)));
 
             _ilsScaleNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/adi_ils_scale_needle.xaml", new Point(30d, 174d), new Size(14d, 12d), new Point(1d, 6d));
             Components.Add(_ilsScaleNeedle);
 
-            _slipBallCalibration = new CalibrationPointCollectionDouble(-1d, -26d, 1d, 26d);
+            _gsFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Flags-GS.xaml", new Rect(61d, 112d, 22.500d * scale, 44.500d * scale), 1 , -30);
+            _gsFlagImage.IsHidden = true;
+            Components.Add(_gsFlagImage);
 
-            _slipBallNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/adi_slip_ball.xaml", new Point(175d, 313d), new Size(10d, 10d), new Point(5d, 5d));
+            _locFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Flags-LOC.xaml", new Rect(273d, 93d, 22.500d * scale, 61.500d * scale), 1, 30);
+            _locFlagImage.IsHidden = true;
+            Components.Add(_locFlagImage);
+
+            _auxFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Flags-AUX.xaml", new Rect(273d, 187d, 22.500d * scale, 61.500d * scale), 1, -30);
+            _auxFlagImage.IsHidden = true;
+            Components.Add(_auxFlagImage);
+
+            _offFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Flags-OFF.xaml", new Rect(57d, 187d, 22.500d * scale, 61.500d * scale), 1, 30);
+            _offFlagImage.IsHidden = true;
+            Components.Add(_offFlagImage);
+
+            _slipBallCalibration = new CalibrationPointCollectionDouble(-1d, -44.75d, 1d, 44.75d);
+
+            _slipBallNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Slip-Ball.xaml", new Point(175d, 309d), new Size(12d, 12d), new Point(6d, 6d));
             Components.Add(_slipBallNeedle);
 
-            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_guides.xaml", new Rect(0d, 0d, 350d, 350d)));
-
             Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_bezel.png", new Rect(0d, 0d, 350d, 350d)));
+
+            _turnCalibration = new CalibrationPointCollectionDouble(-1d, -38.5d, 1d, 38.5d);
+            _turnNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Turn-Rate-Pointer.xaml", new Point(175d, 328d), new Size(24.5d, 12.5d), new Point(12.25d, 0d));
+            Components.Add(_turnNeedle);
+
+
+            _turn = new HeliosValue(this, new BindingValue(0d), "", "turn rate", "turn rate indicator offset.", "-1 to 1", BindingValueUnits.Numeric);
+            _turn.Execute += new HeliosActionHandler(Turn_Execute);
+            Actions.Add(_turn);
 
             _slipBall = new HeliosValue(this, new BindingValue(0d), "", "side slip", "Side slip indicator offset.", "-1 to 1", BindingValueUnits.Numeric);
             _slipBall.Execute += new HeliosActionHandler(SlipBall_Execute);
@@ -142,6 +158,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _slipBall.SetValue(e.Value, e.BypassCascadingTriggers);
             _slipBallNeedle.HorizontalOffset = _slipBallCalibration.Interpolate(e.Value.DoubleValue);
         }
+        void Turn_Execute(object action, HeliosActionEventArgs e)
+        {
+            _turn.SetValue(e.Value, e.BypassCascadingTriggers);
+            _turnNeedle.HorizontalOffset = _turnCalibration.Interpolate(e.Value.DoubleValue);
+        }
 
         void AuxFlag_Execute(object action, HeliosActionEventArgs e)
         {
@@ -176,17 +197,18 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         void ILSHorizontal_Execute(object action, HeliosActionEventArgs e)
         {
             _ilsHorizontal.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ilsHorizontalNeedle.VerticalOffset = _ilsCalibration.Interpolate(e.Value.DoubleValue);
+            _ilsHorizontalNeedle.HorizontalOffset = _ilsCalibration.Interpolate(e.Value.DoubleValue);
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
-            _ball.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue);
+            _ball.Yaw = _pitchCalibration.Interpolate(e.Value.DoubleValue);
         }
 
         void Roll_Execute(object action, HeliosActionEventArgs e)
         {
-            _ball.Rotation = -e.Value.DoubleValue;
+            _ball.Roll = -e.Value.DoubleValue;
+            _rollNeedle.Rotation = e.Value.DoubleValue;
         }
     }
 }

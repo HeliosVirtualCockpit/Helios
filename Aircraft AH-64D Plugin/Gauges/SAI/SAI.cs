@@ -50,7 +50,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _axisCalibration = new CalibrationPointCollectionDouble(-360d, -360d, 360d, 360d);
 
-            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball2.png", new Point(0d,-12d), new Size(350d, 350d), 90d, 90d, 90d);
+            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(0d, -12d), new Size(350d, 350d), 0d, -90d, 180d, 50d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
@@ -79,7 +79,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             Components.Add(new GaugeImage("{AH-64D}/Images/SAI/adi_outer_ring.xaml", new Rect(10d, 9d, 336d, 336d)));
 
             Components.Add(new GaugeImage("{AH-64D}/Images/SAI/adi_bezel.png", new Rect(0d, 0d, 350d, 350d)));
-
+            
             _slipBall = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Slip Ball Offset", "Side slip indicator offset from the center of the tube.", "(-1 to 1) -1 full left and 1 is full right.", BindingValueUnits.Numeric);
             _slipBall.Execute += new HeliosActionHandler(SlipBall_Execute);
             Actions.Add(_slipBall);
@@ -92,7 +92,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_offFlag);
 
-            _pitch = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Pitch", "Current ptich of the aircraft.", "(0 - 360)", BindingValueUnits.Degrees);
+            _pitch = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Pitch", "Current ptich of the aircraft.", "(-90 to +90)", BindingValueUnits.Degrees);
             _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
             Actions.Add(_pitch);
 
@@ -100,7 +100,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _pitchAdjustment.Execute += new HeliosActionHandler(PitchAdjust_Execute);
             Actions.Add(_pitchAdjustment);
 
-            _roll = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Bank", "Current bank of the aircraft.", "(0 - 360)", BindingValueUnits.Degrees);
+            _roll = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Bank", "Current bank of the aircraft.", "(-180 to +180)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
         }

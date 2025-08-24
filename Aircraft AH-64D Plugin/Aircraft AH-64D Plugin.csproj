@@ -63,8 +63,6 @@
     </Content>
     <Resource Include="Interfaces\ExportFunctions.lua" />
     <Resource Include="Images\SAI\adi_off_flag.png" />
-    <Resource Include="Images\SAI\adi_ball.png" />
-    <Resource Include="Images\SAI\adi_ball2.png" />
     <Content Include="Templates\Base\AH-64D\0 Altimeter.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -370,6 +368,24 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SAI\adi_ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SAI\adi_ball1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SAI\adi_ball2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>

@@ -53,7 +53,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _slipCalibration = new CalibrationPointCollectionDouble(-1d, 15d, 1d, -15d);
             _glideCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d);
 
-            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(-50,-50), new Size(500d, 500d), 0d, 0d, 180d);
+            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(-50,-50), new Size(500d, 500d), 0d, 0d, 180d, 55d);
             Components.Add(_ball);
 
             _localizerHNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Localizer-H.xaml", center, new Size(5.939d, 158.540d), new Point(5.939d / 2d, 0d));

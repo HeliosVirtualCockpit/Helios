@@ -1,0 +1,10 @@
+<Canvas Width="24.500" Height="12.500"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="24.500" Height="12.500">
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path StrokeThickness="0.5" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 23.759,12.250 L 0.741,12.250 C 0.470,12.250 0.250,12.030 0.250,11.759 L 0.250,0.741 C 0.250,0.470 0.470,0.250 0.741,0.250 L 23.759,0.250 C 24.030,0.250 24.250,0.470 24.250,0.741 L 24.250,11.759 C 24.250,12.030 24.030,12.250 23.759,12.250 Z"/>
+
+  </Canvas>
+</Canvas>
