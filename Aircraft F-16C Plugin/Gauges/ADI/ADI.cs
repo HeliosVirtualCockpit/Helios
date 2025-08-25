@@ -59,7 +59,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             double scale = 250d / 350d;
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -180d, 360d, 180d);
-            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(-20d, -20d), new Size(400d, 400d), 0d, -90d, 180d, 55d);
+            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(44d, 46d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
 
             _rollNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Roll-Arrows.xaml", new Point(175d, 175d), new Size(62.786d * scale, 308.846d * scale), new Point(62.786d * scale / 2d, 308.846d * scale / 2d));
@@ -69,12 +69,12 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
             _ilsCalibration = new CalibrationPointCollectionDouble(-1d, -116d, 1d, 116d);
 
-            _ilsHorizontalNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Horizontal-GS.xaml", new Point(175d, 175d), new Size(69.167d * scale, 292.250d * scale), new Point(66.001d * scale, (204.921d * scale) - 14d)); //175d - (249.986d * scale) | (365.834d * scale) - (249.986d * scale)
-            _ilsHorizontalNeedle.VerticalOffset = _ilsCalibration.Interpolate(0d);
+            _ilsHorizontalNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Horizontal-GS.xaml", new Point(175d, 175d), new Size(69.167d * scale, 292.250d * scale), new Point(66.001d * scale, (204.921d * scale) - 14d));
+            _ilsHorizontalNeedle.HorizontalOffset = _ilsCalibration.Interpolate(-1d);
             Components.Add(_ilsHorizontalNeedle);
 
             _ilsVerticalNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Vertical-GS.xaml", new Point(175d, 175d), new Size(299.778d * scale, 7.500d * scale), new Point(182.515d * scale, (3.750d * scale) / 2d));
-            _ilsVerticalNeedle.VerticalOffset = _ilsCalibration.Interpolate(0d);
+            _ilsVerticalNeedle.VerticalOffset = _ilsCalibration.Interpolate(-1d);
             Components.Add(_ilsVerticalNeedle);
 
             Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_inner_ring.xaml", new Rect(0d, 0d, 350d, 350d)));
@@ -209,6 +209,21 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         {
             _ball.Roll = -e.Value.DoubleValue;
             _rollNeedle.Rotation = e.Value.DoubleValue;
+        }
+        public override void Reset()
+        {
+            base.Reset();
+            _pitch.SetValue(new BindingValue(0d), true);
+            _roll.SetValue(new BindingValue(0d), true);
+            _slipBall.SetValue(new BindingValue(_slipBallCalibration.Interpolate(0d)), true);
+            _turn.SetValue(new BindingValue(_turnCalibration.Interpolate(0d)), true);
+            _ilsHorizontal.SetValue(new BindingValue(_ilsCalibration.Interpolate(-1d)), true);
+            _ilsVertical.SetValue(new BindingValue(_ilsCalibration.Interpolate(-1d)), true);
+
+            _auxFlag.SetValue(new BindingValue(true), true);
+            _offFlag.SetValue(new BindingValue(true), true);
+            _gsFlag.SetValue(new BindingValue(true), true);
+            _locFlag.SetValue(new BindingValue(true), true);
         }
     }
 }

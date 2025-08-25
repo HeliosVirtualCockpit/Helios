@@ -103,6 +103,10 @@
       <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
+    <Compile Include="Controls\CustomGaugeBallAppearanceEditor.xaml.cs">
+      <DependentUpon>CustomGaugeBallAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomGaugeBall.cs" />
     <Compile Include="Controls\ThreeWayToggleSwitchLocking.cs" />
     <Compile Include="Controls\RotaryEncoderIndcatorClickable.cs" />
     <Compile Include="Controls\PotentiometerIndcatorClickable.cs" />
@@ -538,6 +542,10 @@
     <Page Include="Controls\BacklitPushButtonAppearanceEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CustomGaugeBallAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GlassOpacityAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>

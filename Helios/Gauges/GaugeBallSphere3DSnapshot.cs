@@ -30,7 +30,11 @@ namespace GadrocsWorkshop.Helios.Gauges
         private readonly GeometryModel3D _sphereModel;
         private Point _location;
         private ImageSource _imageSource;
-        private double _fieldOfView = 45d;
+        private double _fieldOfView = 35d;
+        private Vector3D _lightingDirection;
+        private Color _lightingColor;
+        private DirectionalLight _lighting;
+        private double _lightingX, _lightingY, _lightingZ;
         public GaugeBallSphere3DSnapshot()
         {
             _visual = new DrawingVisual();
@@ -46,9 +50,15 @@ namespace GadrocsWorkshop.Helios.Gauges
                 _fieldOfView);
             _viewport.Camera = _camera;
 
-            var light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -2));
+            _lightingColor = Colors.White;
+            _lightingX = -1d;
+            _lightingY = -1d;
+            _lightingZ = -2d;
+            _lightingDirection = new Vector3D(_lightingX, _lightingY, _lightingZ);
+            _lighting  = new DirectionalLight(_lightingColor, _lightingDirection);
+
             var group = new Model3DGroup();
-            group.Children.Add(light);
+            group.Children.Add(_lighting);
 
             _rotX = new AxisAngleRotation3D(new Vector3D(1, 0, 0), 0);
             _rotY = new AxisAngleRotation3D(new Vector3D(0, 1, 0), 0);
@@ -108,7 +118,51 @@ namespace GadrocsWorkshop.Helios.Gauges
                         _fieldOfView);
                     _viewport.Camera = _camera;
                 }
-            } 
+            }
+        }
+        public Color LightingColor
+        {
+            get => _lightingColor;
+            set
+            {
+                if (value != _lightingColor)
+                {
+                    _lightingColor = value;
+                }
+            }
+        }
+        public double LightingX
+        {
+            get => _lightingX;
+            set
+            {
+                if (value != _lightingX)
+                {
+                    _lightingX = value;
+                }
+            }
+        }
+        public double LightingY
+        {
+            get => _lightingY;
+            set
+            {
+                if (value != _lightingY)
+                {
+                    _lightingY = value;
+                }
+            }
+        }
+        public double LightingZ
+        {
+            get => _lightingZ;
+            set
+            {
+                if (value != _lightingZ)
+                {
+                    _lightingZ = value;
+                }
+            }
         }
         /// <summary>
         /// Rotate programmatically and redraw.

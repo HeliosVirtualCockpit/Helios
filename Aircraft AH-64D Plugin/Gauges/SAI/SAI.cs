@@ -50,7 +50,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _axisCalibration = new CalibrationPointCollectionDouble(-360d, -360d, 360d, 360d);
 
-            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(0d, -12d), new Size(350d, 350d), 0d, -90d, 180d, 50d);
+            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(64d, 49d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
@@ -138,6 +138,16 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         {
             _turnIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
             _TurnMarker.HorizontalOffset = _slipBallCalibration.Interpolate(e.Value.DoubleValue);
+        }
+        public override void Reset()
+        {
+            base.Reset();
+            _pitch.SetValue(new BindingValue(0d), true);
+            _roll.SetValue(new BindingValue(0d), true);
+            _pitchAdjustment.SetValue(new BindingValue(0d), true);
+            _slipBall.SetValue(new BindingValue(0d), true);
+            _offFlag.SetValue(new BindingValue(false), true);
+            _pitchAdjustment.SetValue(new BindingValue(0d), true);
         }
 
     }

@@ -15,13 +15,14 @@
 
 namespace GadrocsWorkshop.Helios.Gauges
 {
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using GadrocsWorkshop.Helios.Windows.ViewModel;
     using System;
     using System.Windows;
     using System.Windows.Media;
 
 
-    public class GaugeBall : GaugeComponent
+    public class GaugeBall : GaugeComponent, IRefreshableImage
     {
         private string _imageFile;
         private Point _location;
@@ -44,7 +45,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
         }
 
-        public GaugeBall(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0, double FOV = 60d)
+        public GaugeBall(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0, double FOV = 35d)
         {
             _imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
@@ -63,6 +64,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             BasePitch = basePitch;
             BaseRoll = baseRoll;
             BaseYaw = baseYaw;
+            LightingColor = Colors.Green;
             OnDisplayUpdate();
         }
 
@@ -193,6 +195,55 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
+        public Color LightingColor
+        {
+            get => _sphere3D.LightingColor;
+            set
+            {
+                if (value != _sphere3D.LightingColor)
+                {
+                    _sphere3D.LightingColor = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
+        public double LightingX
+        {
+            get => _sphere3D.LightingX;
+            set
+            {
+                if (value != _sphere3D.LightingX)
+                {
+                    _sphere3D.LightingX = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
+        public double LightingY
+        {
+            get => _sphere3D.LightingY;
+            set
+            {
+                if (value != _sphere3D.LightingY)
+                {
+                    _sphere3D.LightingY = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
+        public double LightingZ
+        {
+            get => _sphere3D.LightingZ;
+            set
+            {
+                if (value != _sphere3D.LightingZ)
+                {
+                    _sphere3D.LightingZ = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
+
         #endregion
 
         protected override void OnRender(DrawingContext drawingContext)
@@ -209,6 +260,15 @@ namespace GadrocsWorkshop.Helios.Gauges
                 _sphere3D.Width = Math.Max(1d, _size.Width * xScale);
                 _sphere3D.Height = Math.Max(1d, _size.Height * yScale);
             }
+        }
+        public bool ConditionalImageRefresh(string imageName)
+        {
+            if ((Image ?? "").ToLower().Replace("/", @"\") == imageName || Image.ToLower().Replace("/", @"\") == imageName)
+            {
+                ImageRefresh = true;
+                //Refresh();
+            }
+            return ImageRefresh;
         }
     }
 }
