@@ -15,6 +15,7 @@
 
 namespace GadrocsWorkshop.Helios.Controls
 {
+    using System;
     using System.Windows;
 
     public abstract class ToggleSwitchBase : HeliosVisual
@@ -191,6 +192,12 @@ namespace GadrocsWorkshop.Helios.Controls
                     ThrowSwitch(action);
                     _mouseAction = true;
                 }
+            }
+
+            else if (ClickType == LinearClickType.OneTouch)
+            {
+                ThrowSwitch(SwitchAction.Increment);
+                _mouseAction = true;
             }
         }
 
