@@ -31,7 +31,6 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Point _location;
         private ImageSource _imageSource;
         private double _fieldOfView = 35d;
-        private Vector3D _lightingDirection;
         private Color _lightingColor;
         private DirectionalLight _lighting;
         private double _lightingX, _lightingY, _lightingZ;
@@ -54,8 +53,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _lightingX = -1d;
             _lightingY = -1d;
             _lightingZ = -2d;
-            _lightingDirection = new Vector3D(_lightingX, _lightingY, _lightingZ);
-            _lighting  = new DirectionalLight(_lightingColor, _lightingDirection);
+            _lighting  = new DirectionalLight(_lightingColor, new Vector3D(_lightingX, _lightingY, _lightingZ));
 
             var group = new Model3DGroup();
             group.Children.Add(_lighting);
@@ -111,13 +109,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _fieldOfView)
                 {
                     _fieldOfView = value;
-                    _camera = new PerspectiveCamera(
-                        new Point3D(0, 0, 5),
-                        new Vector3D(0, 0, -5),
-                        new Vector3D(0, 1, 0),
-                        _fieldOfView);
-                    _viewport.Camera = _camera;
-                }
+                    _camera.FieldOfView = _fieldOfView;
+                 }
             }
         }
         public Color LightingColor
@@ -128,6 +121,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _lightingColor)
                 {
                     _lightingColor = value;
+                    _lighting.Color = _lightingColor;
                 }
             }
         }
@@ -138,7 +132,8 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 if (value != _lightingX)
                 {
-                    _lightingX = value;
+                    _lightingX = value; 
+                    _lighting.Direction = new Vector3D(_lightingX, _lightingY, _lightingZ);
                 }
             }
         }
@@ -150,6 +145,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _lightingY)
                 {
                     _lightingY = value;
+                    _lighting.Direction = new Vector3D(_lightingX, _lightingY, _lightingZ);
                 }
             }
         }
@@ -161,6 +157,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _lightingZ)
                 {
                     _lightingZ = value;
+                    _lighting.Direction = new Vector3D(_lightingX, _lightingY, _lightingZ);
                 }
             }
         }

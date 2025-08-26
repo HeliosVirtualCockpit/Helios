@@ -16,10 +16,10 @@
 namespace GadrocsWorkshop.Helios.Gauges
 {
     using GadrocsWorkshop.Helios.Controls.Capabilities;
-    using GadrocsWorkshop.Helios.Windows.ViewModel;
     using System;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
 
 
     public class GaugeBall : GaugeComponent, IRefreshableImage
@@ -64,7 +64,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             BasePitch = basePitch;
             BaseRoll = baseRoll;
             BaseYaw = baseYaw;
-            LightingColor = Colors.Green;
+            LightingColor = Colors.White;
             OnDisplayUpdate();
         }
 

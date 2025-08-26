@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.M2000C.ADI.Gauge", "ADI Gauge", "M-2000C", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.M2000C.ADI.Gauge", "ADI", "M-2000C", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADIGauge : BaseGauge
     {
         private HeliosValue _pitch;
@@ -57,9 +57,11 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             Components.Add(_ball);
 
             _localizerHNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Localizer-H.xaml", center, new Size(5.939d, 158.540d), new Point(5.939d / 2d, 0d));
+            _localizerHNeedle.HorizontalOffset = _glideCalibration.Interpolate(-1d);
             Components.Add(_localizerHNeedle);
 
             _localizerVNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Localizer-V.xaml", center, new Size(147.794d, 5.939d), new Point(0d, 5.939d / 2d));
+            _localizerVNeedle.VerticalOffset = _glideCalibration.Interpolate(-1d);
             Components.Add(_localizerVNeedle);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -60d, 1.0d, 60d);
@@ -70,6 +72,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             Components.Add(_bankNeedle);
 
             _offFlagNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Off_Flag.xaml", new Point(60.2338d, 107.6953d), new Size(92.279d, 21.828d), new Point(0d, 21.828d / 2d), 0d);
+            _offFlagNeedle.Rotation = -45d;
             Components.Add(_offFlagNeedle);
 
             Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/ADI_Bezel.xaml", new Rect(0d, 0d, 400d, 400d)));
@@ -166,6 +169,11 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _slipBall.SetValue(new BindingValue(0d), true);
             _offFlag.SetValue(new BindingValue(false), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);
+        }
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            base.ScaleChildren(scaleX, scaleY);
+
         }
     }
 }
