@@ -98,6 +98,14 @@ namespace GadrocsWorkshop.Helios.Gauges
                     Refresh();
                     continue;
                 }
+                if (gc is GaugeBall gbp)
+                {
+                    gbp.LightingAltEnabled = enableAltImages;
+                }
+                if (gc is GaugeCylinder gcp)
+                {
+                    gcp.LightingAltEnabled = enableAltImages;
+                }
             }
         }
 

@@ -17,18 +17,17 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 namespace GadrocsWorkshop.Helios.Gauges
 {
-    public class GaugeBallSphere3DSnapshot : FrameworkElement
+    public class GaugeCylinder3DSnapshot : FrameworkElement
     {
         private readonly DrawingVisual _visual;
         private Viewport3D _viewport;
         private PerspectiveCamera _camera;
         private readonly AxisAngleRotation3D _rotX, _rotY, _rotZ;
-        private readonly GeometryModel3D _sphereModel;
+        private readonly GeometryModel3D _CylinderModel;
         private Point _location;
         private ImageSource _imageSource;
         private double _fieldOfView = 35d;
@@ -36,7 +35,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private bool _lightingAltEnabled = false;
         private DirectionalLight _lighting;
         private double _lightingX, _lightingY, _lightingZ;
-        public GaugeBallSphere3DSnapshot()
+        public GaugeCylinder3DSnapshot()
         {
             _visual = new DrawingVisual();
             AddVisualChild(_visual);
@@ -71,13 +70,13 @@ namespace GadrocsWorkshop.Helios.Gauges
             transform.Children.Add(new RotateTransform3D(_rotY));
             transform.Children.Add(new RotateTransform3D(_rotX));
             transform.Children.Add(new RotateTransform3D(_rotZ));
-            _sphereModel = new GeometryModel3D
+            _CylinderModel = new GeometryModel3D
             {
-                Geometry = BuildSphere(1.5, 64, 32),
+                Geometry = BuildCylinder(1.5, 64, 32),
                 BackMaterial = new DiffuseMaterial(Brushes.DarkBlue),
                 Transform = transform
             };
-            group.Children.Add(_sphereModel);
+            group.Children.Add(_CylinderModel);
 
             _viewport.Children.Add(new ModelVisual3D { Content = group });
         }
@@ -88,7 +87,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if(value != _imageSource)
                 {
                     _imageSource = value;
-                    _sphereModel.Material = new DiffuseMaterial(new ImageBrush(value));
+                    _CylinderModel.Material = new DiffuseMaterial(new ImageBrush(value));
                 }
             }   
         }
@@ -237,46 +236,45 @@ namespace GadrocsWorkshop.Helios.Gauges
         protected override int VisualChildrenCount => 1;
         protected override Visual GetVisualChild(int index) => _visual;
 
-        private MeshGeometry3D BuildSphere(double radius, int slices, int stacks)
+        private MeshGeometry3D BuildCylinder(double radius, double height, int slices)
         {
             var mesh = new MeshGeometry3D();
 
-            for (int stack = 0; stack <= stacks; stack++)
+            double halfH = height / 2.0;
+
+            // Generate side vertices
+            for (int i = 0; i <= slices; i++)
             {
-                double phi = Math.PI * stack / stacks;
-                double y = radius * Math.Cos(phi);
-                double r = radius * Math.Sin(phi);
+                double theta = 2 * Math.PI * i / slices;
+                double x = radius * Math.Cos(theta);
+                double z = radius * Math.Sin(theta);
 
-                for (int slice = 0; slice <= slices; slice++)
-                {
-                    double theta = 2 * Math.PI * slice / slices;
-                    double x = r * Math.Sin(theta);
-                    double z = r * Math.Cos(theta);
+                // Bottom vertex
+                mesh.Positions.Add(new Point3D(x, -halfH, z));
+                mesh.TextureCoordinates.Add(new Point((double)i / slices, 1));
 
-                    mesh.Positions.Add(new Point3D(x, y, z));
-
-                    double u = (double)slice / slices;
-                    double v = (double)stack / stacks;
-                    mesh.TextureCoordinates.Add(new Point(u, v));
-                }
+                // Top vertex
+                mesh.Positions.Add(new Point3D(x, halfH, z));
+                mesh.TextureCoordinates.Add(new Point((double)i / slices, 0));
             }
 
-            for (int stack = 0; stack < stacks; stack++)
+            // Create triangles for side
+            for (int i = 0; i < slices; i++)
             {
-                for (int slice = 0; slice < slices; slice++)
-                {
-                    int first = stack * (slices + 1) + slice;
-                    int second = first + slices + 1;
+                int bottom1 = i * 2;
+                int top1 = bottom1 + 1;
+                int bottom2 = bottom1 + 2;
+                int top2 = bottom2 + 1;
 
-                    mesh.TriangleIndices.Add(first);
-                    mesh.TriangleIndices.Add(second);
-                    mesh.TriangleIndices.Add(first + 1);
+                mesh.TriangleIndices.Add(bottom1);
+                mesh.TriangleIndices.Add(top1);
+                mesh.TriangleIndices.Add(bottom2);
 
-                    mesh.TriangleIndices.Add(second);
-                    mesh.TriangleIndices.Add(second + 1);
-                    mesh.TriangleIndices.Add(first + 1);
-                }
+                mesh.TriangleIndices.Add(top1);
+                mesh.TriangleIndices.Add(top2);
+                mesh.TriangleIndices.Add(bottom2);
             }
+
             return mesh;
         }
     }

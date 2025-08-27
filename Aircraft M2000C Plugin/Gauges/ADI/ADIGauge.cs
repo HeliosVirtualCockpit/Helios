@@ -156,7 +156,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _yaw.SetValue(e.Value, e.BypassCascadingTriggers);
             _ball.Yaw = -e.Value.DoubleValue;
         }
-
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            _ball.ScaleChildren(scaleX, scaleY);
+        }
         public override void Reset()
         {
             base.Reset();
@@ -169,11 +172,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _slipBall.SetValue(new BindingValue(0d), true);
             _offFlag.SetValue(new BindingValue(false), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);
-        }
-        public override void ScaleChildren(double scaleX, double scaleY)
-        {
-            base.ScaleChildren(scaleX, scaleY);
-
         }
     }
 }

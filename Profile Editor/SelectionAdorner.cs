@@ -409,10 +409,10 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
                 //    }
                 //}
 
-                if (forceProportions)
-                {
-                    visual.ScaleChildren(lScaleX, lScaleY);
-                }
+                //if (forceProportions)
+                //{
+                visual.ScaleChildren(lScaleX, lScaleY);
+                //}
             }
         }
         #endregion

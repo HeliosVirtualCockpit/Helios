@@ -236,6 +236,8 @@
     <Compile Include="Gauges\A-10\HARS\HARSSync_1.cs" />
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
     <Compile Include="Gauges\AltImageGauge.cs" />
+    <Compile Include="Gauges\GaugeCylinder.cs" />
+    <Compile Include="Gauges\GaugeCylinder3DSnapshot.cs" />
     <Compile Include="Gauges\GaugeBallSphere3DSnapshot.cs" />
     <Compile Include="Gauges\GaugeBall.cs" />
     <Compile Include="Gauges\IGauge.cs" />

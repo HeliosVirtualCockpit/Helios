@@ -33,11 +33,10 @@ namespace GadrocsWorkshop.Helios.Controls
         private Size _size;
         private double _fov;
         private double _baseX, _baseY, _baseZ;
-        //private double _rotX, _rotY, _rotZ;
         private GaugeBall _ball;
         private string _imageName;
 
-        private HeliosValue _rotXValue, _rotYValue, _rotZValue;
+        private HeliosValue _rotXValue, _rotYValue, _rotZValue, _altLightValue;
 
         public CustomGaugeBall()
             : base("Custom Gauge Ball", new Size(300, 300))
@@ -50,7 +49,8 @@ namespace GadrocsWorkshop.Helios.Controls
             _fov = 35d;
             _ball = new GaugeBall(_imageName, new Point(0d, 0d), _size, _baseX, _baseY, _baseZ, _fov);
             Components.Add(_ball);
-
+            LightingColor = Colors.White;
+            LightingColorAlt = Colors.Green;
             _rotXValue = new HeliosValue(this, new BindingValue(0d), "", "X Rotation", "Rotation in the X-Axis.", "(0 - 360)", BindingValueUnits.Degrees);
             _rotXValue.Execute += new HeliosActionHandler(X_Execute);
             Actions.Add(_rotXValue);
@@ -60,6 +60,9 @@ namespace GadrocsWorkshop.Helios.Controls
             _rotZValue = new HeliosValue(this, new BindingValue(0d), "", "Z Rotation", "Rotation in the Z-Axis.", "(0 - 360)", BindingValueUnits.Degrees);
             _rotZValue.Execute += new HeliosActionHandler(Z_Execute);
             Actions.Add(_rotZValue);
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Enable Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
 
 
         }
@@ -138,6 +141,18 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        public Color LightingColorAlt
+        {
+            get => _ball.LightingColorAlt;
+            set
+            {
+                if (value != _ball.LightingColorAlt)
+                {
+                    _ball.LightingColorAlt = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
         public double LightingX
         {
             get => _ball.LightingX;
@@ -186,15 +201,16 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             _ball.Roll = e.Value.DoubleValue;
         }
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltEnabled = e.Value.BoolValue;
+        }
         public override void Reset()
         {
             base.Reset();
             _rotXValue.SetValue(new BindingValue(0d), true);
             _rotYValue.SetValue(new BindingValue(0d), true);
             _rotZValue.SetValue(new BindingValue(0d), true);
-            //_ball.Pitch = 0d;
-            //_ball.Roll = 0d;
-            //_ball.Yaw = 0d;
         }
         #endregion
         #region de/serialize
@@ -213,6 +229,7 @@ namespace GadrocsWorkshop.Helios.Controls
             writer.WriteElementString("Y", LightingY.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("Z", LightingZ.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("Color", colorConverter.ConvertToInvariantString(LightingColor));
+            writer.WriteElementString("AltColor", colorConverter.ConvertToInvariantString(LightingColorAlt));
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
@@ -236,6 +253,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     LightingY = double.Parse(reader.ReadElementString("Y"), CultureInfo.InvariantCulture);
                     LightingZ = double.Parse(reader.ReadElementString("Z"), CultureInfo.InvariantCulture);
                     LightingColor = (Color)colorConverter.ConvertFromInvariantString(reader.ReadElementString("Color"));
+                    LightingColorAlt = (Color)colorConverter.ConvertFromInvariantString(reader.ReadElementString("AltColor"));
                     reader.ReadEndElement();
                 }
                 reader.ReadEndElement();

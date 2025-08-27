@@ -29,6 +29,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.3d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
         private HeliosPanel _frameGlassPanel;
+        private ADIGauge _display;
 
         public ADI()
             : base("ADI", new Size(400, 400))
@@ -42,7 +43,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         }
         private void AddGauge(string name, Point pos, Size size, string interfaceDevice, string interfaceElement)
         {
-            ADIGauge _display = new ADIGauge(name, new Size(400, 400), _interfaceDeviceName)
+            _display = new ADIGauge(name, new Size(400, 400), _interfaceDeviceName)
             {
                 Top = pos.Y,
                 Left = pos.X,
@@ -160,7 +161,12 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         {
             //_bezel.BackgroundImage = BackgroundImageIsCustomized ? null : System.IO.Path.Combine(_imageLocation, PANEL_IMAGE);
         }
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            _display.ScaleChildren(scaleX, scaleY);
+            base.ScaleChildren(scaleX, scaleY);
 
+        }
         public override void WriteXml(XmlWriter writer)
         {
             base.WriteXml(writer);

@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System.Windows.Media;
 
 
-    public class GaugeBall : GaugeComponent, IRefreshableImage
+    public class GaugeCylinder : GaugeComponent, IRefreshableImage
     {
         private string _imageFile;
         private Point _location;
@@ -37,21 +37,21 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _xScale = 1.0;
         private double _yScale = 1.0;
         
-        private GaugeBallSphere3DSnapshot _sphere3D;
+        private GaugeCylinder3DSnapshot _cylinder3D;
 
-        public GaugeBall(string imageFile, Point location, Size size, Point center)
+        public GaugeCylinder(string imageFile, Point location, Size size, Point center)
             : this(imageFile, location, size, 0d, 0d, 0d)
         {
         }
 
-        public GaugeBall(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0, double FOV = 35d)
+        public GaugeCylinder(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0, double FOV = 35d)
         {
             _imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
             _size = size;
             _fov = FOV;
 
-            _sphere3D = new GaugeBallSphere3DSnapshot
+            _cylinder3D = new GaugeCylinder3DSnapshot
             {
                 Width = _size.Width,
                 Height = _size.Height,
@@ -79,7 +79,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _imageFile)
                 {
                     _imageFile = value;
-                    _sphere3D.SetTexture = ConfigManager.ImageManager.LoadImage(value, (int)_size.Width * 4, (int)_size.Height * 2);
+                    _cylinder3D.SetTexture = ConfigManager.ImageManager.LoadImage(value, (int)_size.Width * 4, (int)_size.Height * 2);
                     OnDisplayUpdate();
                 }
             }
@@ -96,7 +96,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _basePitch)
                 {
                     _basePitch = value;
-                    _sphere3D.RotateX(_basePitch);
+                    _cylinder3D.RotateX(_basePitch);
                     OnDisplayUpdate();
                 }
             }
@@ -112,7 +112,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _baseRoll)
                 {
                     _baseRoll = value;
-                    _sphere3D.RotateZ(_baseRoll);
+                    _cylinder3D.RotateZ(_baseRoll);
                     OnDisplayUpdate();
                 }
             }
@@ -128,7 +128,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _baseYaw)
                 {
                     _baseYaw = value;
-                    _sphere3D.RotateY(_baseYaw);
+                    _cylinder3D.RotateY(_baseYaw);
                     OnDisplayUpdate();
                 }
             }
@@ -144,7 +144,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _pitch)
                 {
                     _pitch = value;
-                    _sphere3D.RotateX(_pitch + _basePitch);
+                    _cylinder3D.RotateX(_pitch + _basePitch);
                     OnDisplayUpdate();
                 }
             }
@@ -160,7 +160,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _roll)
                 {
                     _roll = value;
-                    _sphere3D.RotateZ(_roll + _baseRoll);
+                    _cylinder3D.RotateZ(_roll + _baseRoll);
                     OnDisplayUpdate();
                 }
             }
@@ -176,7 +176,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _yaw)
                 {
                     _yaw = value;
-                    _sphere3D.RotateY(_yaw + _baseYaw);
+                    _cylinder3D.RotateY(_yaw + _baseYaw);
                     OnDisplayUpdate();
                 }
             }
@@ -189,79 +189,79 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (_fov != value)
                 {
                     _fov = value;
-                    _sphere3D.FieldOfView = _fov;
+                    _cylinder3D.FieldOfView = _fov;
                     OnDisplayUpdate();
                 }
             }
         }
         public Color LightingColor
         {
-            get => _sphere3D.LightingColor;
+            get => _cylinder3D.LightingColor;
             set
             {
-                if (value != _sphere3D.LightingColor)
+                if (value != _cylinder3D.LightingColor)
                 {
-                    _sphere3D.LightingColor = value;
+                    _cylinder3D.LightingColor = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public Color LightingColorAlt
         {
-            get => _sphere3D.LightingColorAlt;
+            get => _cylinder3D.LightingColorAlt;
             set
             {
-                if (value != _sphere3D.LightingColorAlt)
+                if (value != _cylinder3D.LightingColorAlt)
                 {
-                    _sphere3D.LightingColorAlt = value;
+                    _cylinder3D.LightingColorAlt = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public bool LightingAltEnabled
         {
-            get => _sphere3D.LightingAltEnabled;
+            get => _cylinder3D.LightingAltEnabled;
             set
             {
-                if(value != _sphere3D.LightingAltEnabled)
+                if(value != _cylinder3D.LightingAltEnabled)
                 {
-                    _sphere3D.LightingAltEnabled = value;
+                    _cylinder3D.LightingAltEnabled = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public double LightingX
         {
-            get => _sphere3D.LightingX;
+            get => _cylinder3D.LightingX;
             set
             {
-                if (value != _sphere3D.LightingX)
+                if (value != _cylinder3D.LightingX)
                 {
-                    _sphere3D.LightingX = value;
+                    _cylinder3D.LightingX = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public double LightingY
         {
-            get => _sphere3D.LightingY;
+            get => _cylinder3D.LightingY;
             set
             {
-                if (value != _sphere3D.LightingY)
+                if (value != _cylinder3D.LightingY)
                 {
-                    _sphere3D.LightingY = value;
+                    _cylinder3D.LightingY = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public double LightingZ
         {
-            get => _sphere3D.LightingZ;
+            get => _cylinder3D.LightingZ;
             set
             {
-                if (value != _sphere3D.LightingZ)
+                if (value != _cylinder3D.LightingZ)
                 {
-                    _sphere3D.LightingZ = value;
+                    _cylinder3D.LightingZ = value;
                     OnDisplayUpdate();
                 }
             }
@@ -271,7 +271,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            _sphere3D.RedrawSnapshot(drawingContext);
+            _cylinder3D.RedrawSnapshot(drawingContext);
         }
 
         protected override void OnRefresh(double xScale, double yScale)
@@ -280,8 +280,8 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 _xScale = xScale;
                 _yScale = yScale;
-                _sphere3D.Width = Math.Max(1d, _size.Width * xScale);
-                _sphere3D.Height = Math.Max(1d, _size.Height * yScale);
+                _cylinder3D.Width = Math.Max(1d, _size.Width * xScale);
+                _cylinder3D.Height = Math.Max(1d, _size.Height * yScale);
             }
         }
         public bool ConditionalImageRefresh(string imageName)
@@ -297,8 +297,8 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             _location.X *= scaleX;
             _location.Y *= scaleY;
-            _sphere3D.Top = _location.Y;
-            _sphere3D.Left = _location.X;
+            _cylinder3D.Top = _location.Y;
+            _cylinder3D.Left = _location.X;
             OnDisplayUpdate();
         }
 

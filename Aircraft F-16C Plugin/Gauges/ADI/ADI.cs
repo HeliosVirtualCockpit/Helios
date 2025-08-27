@@ -210,6 +210,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ball.Roll = -e.Value.DoubleValue;
             _rollNeedle.Rotation = e.Value.DoubleValue;
         }
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            _ball.ScaleChildren(scaleX, scaleY);
+            base.ScaleChildren(scaleX, scaleY);
+        }
         public override void Reset()
         {
             base.Reset();

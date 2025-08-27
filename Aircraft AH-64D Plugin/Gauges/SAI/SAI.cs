@@ -139,6 +139,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _turnIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
             _TurnMarker.HorizontalOffset = _slipBallCalibration.Interpolate(e.Value.DoubleValue);
         }
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            _ball.ScaleChildren(scaleX, scaleY);
+            base.ScaleChildren(scaleX, scaleY);
+        }
         public override void Reset()
         {
             base.Reset();

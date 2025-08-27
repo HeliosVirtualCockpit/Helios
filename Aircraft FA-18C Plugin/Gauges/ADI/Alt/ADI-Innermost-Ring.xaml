@@ -6,7 +6,7 @@
         <Canvas>
 
             <!-- ADI Inner Ring/Innermost Ring and Pointer/Bicolour Ring Bottom/<Path> -->
-            <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff252525" Data="F1 M 284.329,150.878 C 284.155,224.474 224.460,284.083 150.842,284.083 C 77.225,284.083 17.529,224.474 17.356,150.878 L 0.683,150.878 C 0.856,233.504 67.870,300.433 150.515,300.433 C 233.160,300.433 300.174,233.504 300.347,150.878 L 284.329,150.878 Z"/>
+            <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff002500" Data="F1 M 284.329,150.878 C 284.155,224.474 224.460,284.083 150.842,284.083 C 77.225,284.083 17.529,224.474 17.356,150.878 L 0.683,150.878 C 0.856,233.504 67.870,300.433 150.515,300.433 C 233.160,300.433 300.174,233.504 300.347,150.878 L 284.329,150.878 Z"/>
 
             <!-- ADI Inner Ring/Innermost Ring and Pointer/Bicolour Ring Top/<Path> -->
             <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 17.682,150.273 C 17.836,76.660 77.539,17.031 151.169,17.031 C 224.799,17.031 284.503,76.660 284.656,150.273 L 300.675,150.273 C 300.521,67.630 233.500,0.681 150.842,0.681 C 68.185,0.681 1.163,67.630 1.009,150.273 L 17.682,150.273 Z">
@@ -14,9 +14,9 @@
                     <RadialGradientBrush MappingMode="Absolute" GradientOrigin="290.519,1103.045" Center="289.138,1118.437" RadiusX="252.618" RadiusY="252.618">
                         <RadialGradientBrush.GradientStops>
                             <GradientStop Offset="0.16" Color="#ff000000"/>
-                            <GradientStop Offset="0.36" Color="#f87f7f7f"/>
-                            <GradientStop Offset="0.76" Color="#f4ffffff"/>
-                            <GradientStop Offset="0.76" Color="#ff00bb00"/>
+                            <GradientStop Offset="0.36" Color="#f8007f00"/>
+                            <GradientStop Offset="0.76" Color="#f400ff00"/>
+                            <GradientStop Offset="0.76" Color="#f000ff00"/>
                         </RadialGradientBrush.GradientStops>
                         <RadialGradientBrush.Transform>
                             <MatrixTransform Matrix="1.000,0.000,0.000,-1.468,-23.535,1068.432" />

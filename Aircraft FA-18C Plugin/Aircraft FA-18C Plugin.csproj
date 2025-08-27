@@ -61,13 +61,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\ADI\adi_ball.png" />
-    <Resource Include="Gauges\ADI\adi_bezel.png" />
-    <Resource Include="Gauges\ADI\adi_glass.png" />
-    <Resource Include="Gauges\ADI\adi_inner_ring.png" />
-    <Resource Include="Gauges\ADI\adi_off_flag.png" />
-    <Resource Include="Gauges\ADI\adi_slip_bezel.png" />
-    <Resource Include="Gauges\ADI\adi_wings.png" />
+    <Resource Include="Gauges\ADI\ADI-Bezel.png" />
     <Resource Include="Gauges\Altimeter\Altimeter_Faceplate.png" />
     <Resource Include="Gauges\Altimeter\RADAR_Altimeter_Faceplate.png" />
     <Resource Include="Gauges\Battery\Battery_Faceplate.png" />
@@ -196,13 +190,6 @@
     <Resource Include="Images\MFD Rocker V Up.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\ADI\Alt\adi_ball.png" />
-    <Resource Include="Gauges\ADI\Alt\adi_bezel.png" />
-    <Resource Include="Gauges\ADI\Alt\adi_glass.png" />
-    <Resource Include="Gauges\ADI\Alt\adi_inner_ring.png" />
-    <Resource Include="Gauges\ADI\Alt\adi_off_flag.png" />
-    <Resource Include="Gauges\ADI\Alt\adi_slip_bezel.png" />
-    <Resource Include="Gauges\ADI\Alt\adi_wings.png" />
     <Resource Include="Gauges\Altimeter\Alt\Altimeter_Faceplate.png" />
     <Resource Include="Gauges\Altimeter\Alt\RADAR_Altimeter_Faceplate.png" />
     <Resource Include="Gauges\Battery\Alt\Battery_Faceplate.png" />
@@ -328,6 +315,7 @@
     <Resource Include="Images\Alt\MFD Rocker V Mid.png" />
     <Resource Include="Images\Alt\MFD Rocker V Up.png" />
     <Resource Include="Images\Alt\MPCD Knob.png" />
+    <Resource Include="Gauges\ADI\Alt\ADI-Bezel.png" />
     <Content Include="Templates\Base\FA-18C\9 Components\ODU Display Element.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -423,43 +411,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\ADI\adi_bank_pointer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_bank_steering_bar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_course_flag.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_gs_flag.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_gs_indicator.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_guides.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_inner_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_outer_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_pitch_steering_bar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\adi_slip_ball.xaml">
+    <Resource Include="Gauges\ADI\ADI-Guides.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -577,86 +529,12 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\ADI\adi_arrow.xaml">
+    <Resource Include="Gauges\ADI\ADI-Arrow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\ADI\adi_innermost_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Gauges\ADI\adi_turn_marker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Gauges\ADI\adi_wings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Gauges\ADI\Alt\adi_arrow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_bank_pointer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_bank_steering_bar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_course_flag.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_gs_flag.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_gs_indicator.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_guides.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_innermost_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_inner_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_outer_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_pitch_steering_bar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_slip_ball.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_turn_marker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\ADI\Alt\adi_wings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="Gauges\Altimeter\Alt\altimeter_needle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -706,6 +584,90 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Common\Alt\needle_d.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-GS-H.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-GS-V.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Slip-Ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Turn-Marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Wings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Off-Flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Inner-Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Outer-Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\ADI-Innermost-Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Arrow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-GS-H.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-GS-V.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Guides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Inner-Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Innermost-Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Off-Flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Outer-Ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Slip-Ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Turn-Marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Alt\ADI-Wings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
