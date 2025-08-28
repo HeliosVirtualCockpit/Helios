@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.FA18C.ADI", "ADI 1", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.FA18C.ADI", "ADI 1", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADI : AltImageGauge
     {
         private HeliosValue _pitch;
@@ -235,7 +235,6 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _slipBall.SetValue(new BindingValue(0d), true);
             _turnIndicator.SetValue(new BindingValue(0d), true);
             _offFlag.SetValue(new BindingValue(false), true);
-            _pitchAdjustment.SetValue(new BindingValue(0d), true);
             _pitchSteering.SetValue(new BindingValue(-1d),true);
             _bankSteering.SetValue(new BindingValue(-1d), true);
             _ball.LightingAltEnabled = false;

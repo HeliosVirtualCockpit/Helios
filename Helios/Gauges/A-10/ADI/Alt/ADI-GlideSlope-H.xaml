@@ -1,0 +1,19 @@
+<Canvas Width="4.512" Height="213.747"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="4.512" Height="213.747">
+  <Canvas>
+
+  <!-- Layer 1/GSH/<Rectangle> -->
+  <Path StrokeThickness="0.5" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff00dc00" Data="F1 M 0.250,47.719 L 4.250,47.719 L 4.250,212.372 C 4.250,212.993 3.747,213.497 3.126,213.497 L 1.374,213.497 C 0.753,213.497 0.250,212.993 0.250,212.372 L 0.250,47.719 Z"/>
+
+  <!-- Layer 1/GSH/<Rectangle> -->
+  <Path StrokeThickness="0.5" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 0.250,0.250 L 4.262,0.250 L 4.262,47.720 L 0.250,47.720 L 0.250,0.250 Z"/>
+
+  <!-- Layer 1/GSH/Centre Point -->
+  <Path Opacity="0.0" Fill="#ff00ff00" Data="F1 M 2.255,143.807 C 2.252,143.807 2.250,143.810 2.250,143.812 C 2.250,143.815 2.252,143.817 2.255,143.817 C 2.258,143.817 2.260,143.815 2.260,143.812 C 2.260,143.810 2.258,143.807 2.255,143.807 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>

@@ -44,7 +44,7 @@
                     <TranslateTransform X="-39.937742" Y="-156.51788"/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4001" Fill="#FFFFFFFF" Stroke="#FF141414" StrokeThickness="1" StrokeMiterLimit="4" Data="m 64.937742 174.5 12.093387 -6.98212 0 13.96424 z">
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4001" Fill="#ff00ff00" Stroke="#FF141414" StrokeThickness="1" StrokeMiterLimit="4" Data="m 64.937742 174.5 12.093387 -6.98212 0 13.96424 z">
                 <!--path-->
                 <Path.RenderTransform>
                     <MatrixTransform Matrix="1.0870816,0,0,0.82477469,-30.181439,18.826816"/>
