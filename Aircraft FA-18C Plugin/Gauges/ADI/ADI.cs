@@ -54,6 +54,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         private CalibrationPointCollectionDouble _pitchBarCalibration;
         private CalibrationPointCollectionDouble _bankBarCalibration;
 
+        private bool _suppressScale = false;
+
         public ADI()
             : base("ADI", new Size(350, 350), "Alt")
         {
@@ -70,6 +72,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -45d, 1.0d, 45d);
             _wingsNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/ADI-Wings.xaml", new Point(175d - 121d, 160d), new Size(204.025d, 29.333d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
+            
+            Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(78d, 65d, 197d, 197d)));
 
             Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/ADI-Innermost-Ring.xaml", new Rect(65d, 52d, 224d, 224d)));
 
@@ -196,8 +200,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = e.Value.DoubleValue;
-            _bankNeedle.Rotation = -e.Value.DoubleValue;
+            _ball.Roll = -e.Value.DoubleValue;
+            _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)
         {
@@ -223,12 +227,27 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
-            _ball.ScaleChildren(scaleX, scaleY);
+            if (!_suppressScale)
+            {
+                _ball.ScaleChildren(scaleX, scaleY);
+                _suppressScale = false;
+            }
             base.ScaleChildren(scaleX, scaleY);
+        }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                _suppressScale = true;
+            }
         }
         public override void Reset()
         {
             base.Reset();
+            _ball.Reset();
+            base.EnableAlternateImageSet = false;
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);
@@ -237,7 +256,6 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _offFlag.SetValue(new BindingValue(false), true);
             _pitchSteering.SetValue(new BindingValue(-1d),true);
             _bankSteering.SetValue(new BindingValue(-1d), true);
-            _ball.LightingAltEnabled = false;
         }
     }
 }

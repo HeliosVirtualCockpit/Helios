@@ -268,7 +268,11 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
 
         #endregion
-
+        public void Reset()
+        {
+            Pitch = Roll = Yaw = 0d;
+            LightingAltEnabled = false;
+        }
         protected override void OnRender(DrawingContext drawingContext)
         {
             _sphere3D.RedrawSnapshot(drawingContext);

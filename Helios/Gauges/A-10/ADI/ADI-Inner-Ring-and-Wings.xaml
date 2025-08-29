@@ -5,18 +5,18 @@
 
 
   <!-- Layer 1/Inner Ring/<Compound Path> -->
-  <Path StrokeThickness="1.0" Stroke="#ffebebeb" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 157.562,254.058 C 96.052,254.582 46.085,204.615 46.608,143.105 C 47.117,83.382 95.924,34.575 155.647,34.067 C 217.157,33.543 267.123,83.510 266.600,145.019 C 266.092,204.743 217.285,253.550 157.562,254.058 Z M 294.104,79.500 L 280.854,79.500 C 257.516,34.672 210.639,4.062 156.604,4.062 C 102.570,4.062 55.693,34.672 32.354,79.500 L 10.104,79.500 L 10.104,212.500 L 34.448,212.500 C 50.747,241.516 77.092,264.138 108.761,275.656 L 108.761,303.000 L 202.761,303.000 L 202.761,276.281 C 235.010,265.026 261.872,242.303 278.479,213.000 L 294.104,213.000 L 294.104,79.500 Z"/>
+  <Path StrokeThickness="0.0" Stroke="#ffebebeb" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 157.562,254.058 C 96.052,254.582 46.085,204.615 46.608,143.105 C 47.117,83.382 95.924,34.575 155.647,34.067 C 217.157,33.543 267.123,83.510 266.600,145.019 C 266.092,204.743 217.285,253.550 157.562,254.058 Z M 294.104,79.500 L 280.854,79.500 C 257.516,34.672 210.639,4.062 156.604,4.062 C 102.570,4.062 55.693,34.672 32.354,79.500 L 10.104,79.500 L 10.104,212.500 L 34.448,212.500 C 50.747,241.516 77.092,264.138 108.761,275.656 L 108.761,303.000 L 202.761,303.000 L 202.761,276.281 C 235.010,265.026 261.872,242.303 278.479,213.000 L 294.104,213.000 L 294.104,79.500 Z"/>
 
   <Canvas>
 
   <!-- Layer 1/Inner Ring/g10/path3876 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 43.615,144.069 L 26.115,144.069"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 43.615,144.069 L 26.115,144.069"/>
 
   <!-- Layer 1/Inner Ring/g10/path3878 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 286.615,144.069 L 269.115,144.069"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 286.615,144.069 L 269.115,144.069"/>
 
   <!-- Layer 1/Inner Ring/g10/path3878 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 156.604,14.999 L 156.604,32.499"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 156.604,14.999 L 156.604,32.499"/>
 
   </Canvas>
 
@@ -34,31 +34,31 @@
   </Canvas>
 
   <!-- Layer 1/Inner Ring/path3892 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 99.990,241.713 L 91.240,256.869"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 99.990,241.713 L 91.240,256.869"/>
 
   <!-- Layer 1/Inner Ring/path3906 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 221.490,256.869 L 212.740,241.713"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 221.490,256.869 L 212.740,241.713"/>
 
   <!-- Layer 1/Inner Ring/path3912 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 134.985,265.333 L 136.855,254.727"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 134.985,265.333 L 136.855,254.727"/>
 
   <!-- Layer 1/Inner Ring/path3956 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 114.254,259.778 L 117.937,249.658"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 114.254,259.778 L 117.937,249.658"/>
 
   <!-- Layer 1/Inner Ring/path3962 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 177.746,265.333 L 175.876,254.727"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 177.746,265.333 L 175.876,254.727"/>
 
   <!-- Layer 1/Inner Ring/path3968 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 198.477,259.778 L 194.794,249.658"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 198.477,259.778 L 194.794,249.658"/>
 
   <!-- Layer 1/Inner Ring/path3970 -->
   <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 161.425,267.759 L 151.805,267.759 L 156.492,257.081 C 156.539,256.974 156.692,256.974 156.739,257.081 L 161.425,267.759 Z"/>
 
   <!-- Layer 1/Inner Ring/path3886 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 58.960,200.444 L 43.805,209.194"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 58.960,200.444 L 43.805,209.194"/>
 
   <!-- Layer 1/Inner Ring/path3900 -->
-  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 269.404,209.194 L 254.249,200.444"/>
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 269.404,209.194 L 254.249,200.444"/>
 
   <!-- Layer 1/Inner Ring/<Path> -->
   <Path StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 191.790,271.569 L 141.684,271.569 L 122.566,271.569 C 121.799,271.569 121.178,272.190 121.178,272.957 L 121.178,284.181 C 121.178,284.947 121.799,285.569 122.566,285.569 L 141.684,285.569 L 191.790,285.569 C 192.557,285.569 193.178,284.947 193.178,284.181 L 193.178,272.957 C 193.178,272.190 192.557,271.569 191.790,271.569 Z"/>

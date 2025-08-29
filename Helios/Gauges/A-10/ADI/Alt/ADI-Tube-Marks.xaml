@@ -17,8 +17,8 @@
     <Path.Fill>
       <LinearGradientBrush MappingMode="Absolute" StartPoint="157.178,-271.569" EndPoint="157.178,-285.569">
         <LinearGradientBrush.GradientStops>
-          <GradientStop Offset="0.00" Color="#ff00ff00"/>
-          <GradientStop Offset="0.57" Color="#ff7f7f7f"/>
+          <GradientStop Offset="0.00" Color="#00000000"/>
+          <GradientStop Offset="0.57" Color="#ff000000"/>
           <GradientStop Offset="0.75" Color="#ff000000"/>
         </LinearGradientBrush.GradientStops>
         <LinearGradientBrush.Transform>

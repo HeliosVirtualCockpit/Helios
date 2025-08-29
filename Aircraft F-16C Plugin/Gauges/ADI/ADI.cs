@@ -53,19 +53,23 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private CalibrationPointCollectionDouble _slipBallCalibration;
         private CalibrationPointCollectionDouble _turnCalibration;
 
+        private bool _suppressScale = false;
+
         public ADI()
             : base("ADI", new Size(350, 350))
         {
             double scale = 250d / 350d;
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -180d, 360d, 180d);
-            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(44d, 46d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
+            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
+
+            Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(65d, 65d, 220d, 220d)));
 
             _rollNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Roll-Arrows.xaml", new Point(175d, 175d), new Size(62.786d * scale, 308.846d * scale), new Point(62.786d * scale / 2d, 308.846d * scale / 2d));
             Components.Add(_rollNeedle);
 
-            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Wings.xaml", new Rect(50d, 175d - (10.250d / 2d), 352.917d * scale, 87.492d * scale)));
+            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Wings.xaml", new Rect(50d, 168d, 352.917d * scale, 87.492d * scale)));
 
             _ilsCalibration = new CalibrationPointCollectionDouble(-1d, -116d, 1d, 116d);
 
@@ -102,7 +106,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
             _slipBallCalibration = new CalibrationPointCollectionDouble(-1d, -44.75d, 1d, 44.75d);
 
-            _slipBallNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Slip-Ball.xaml", new Point(175d, 309d), new Size(12d, 12d), new Point(6d, 6d));
+            _slipBallNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Slip-Ball.xaml", new Point(175d, 308d), new Size(12d, 12d), new Point(6d, 6d));
             Components.Add(_slipBallNeedle);
 
             Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_bezel.png", new Rect(0d, 0d, 350d, 350d)));
@@ -202,7 +206,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
-            _ball.Yaw = _pitchCalibration.Interpolate(e.Value.DoubleValue);
+            _ball.Yaw = e.Value.DoubleValue;
         }
 
         void Roll_Execute(object action, HeliosActionEventArgs e)
@@ -212,12 +216,25 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
-            _ball.ScaleChildren(scaleX, scaleY);
+            if (!_suppressScale)
+            {
+                _ball.ScaleChildren(scaleX, scaleY);
+            }
             base.ScaleChildren(scaleX, scaleY);
+        }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                _suppressScale = true;
+            }
         }
         public override void Reset()
         {
             base.Reset();
+            _ball.Reset();
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
             _slipBall.SetValue(new BindingValue(_slipBallCalibration.Interpolate(0d)), true);

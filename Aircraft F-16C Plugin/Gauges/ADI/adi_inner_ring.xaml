@@ -1,56 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="svg2" Width="350" Height="350">
-    <Canvas x:Name="layer2">
-        <Canvas>
-            <Canvas.RenderTransform>
-                <TransformGroup>
-                    <!--g-->
-                    <TranslateTransform X="3.0735841" Y="-0.93114572"/>
-                </TransformGroup>
-            </Canvas.RenderTransform>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3746" Fill="#FF1E1E1E" Stroke="#FFECECEC" StrokeThickness="1" StrokeMiterLimit="4" Data="m 175 34.0625 c -54.03466 0 -100.911482 30.609851 -124.25 75.4375 l -22.25 0 0 133 24.34375 0 c 16.298679 29.0156 42.64426 51.63762 74.3125 63.15625 l 0 27.34375 94 0 0 -26.71875 C 275.80256 287.20937 315 235.21295 315 174.0625 c 0 -77.319868 -62.68014 -140 -140 -140 z m 0 30 c 60.75132 0 110 49.24868 110 110 0 60.75132 -49.24868 110 -110 110 -60.75132 0 -110 -49.24868 -110 -110 0 -60.75132 49.24868 -110 110 -110 z">
-                <!--path-->
-                <Path.RenderTransform>
-                    <TranslateTransform X="-3.0735841" Y="0.93114572"/>
-                </Path.RenderTransform>
-            </Path>
-            <Canvas x:Name="g3880">
-                <Canvas>
-                    <Canvas.RenderTransform>
-                        <TransformGroup>
-                            <!--g-->
-                            <TranslateTransform X="-3.0625" Y="-1"/>
-                        </TransformGroup>
-                    </Canvas.RenderTransform>
-                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3876" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 62 176 -17.5 0"/>
-                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3878" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 305 176 -17.5 0"/>
-                </Canvas>
-            </Canvas>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3892" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 115.3125 272.64437 -8.75 15.15544"/>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3906" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 236.8125 287.79981 -8.75 -15.15545"/>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3912" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 150.30677 296.26405 1.87005 -10.60563"/>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3956" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 129.57567 290.70925 3.68329 -10.11978"/>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3962" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 193.06823 296.26397 -1.87006 -10.60563"/>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3968" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 213.79932 290.70917 -3.68329 -10.11978"/>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3970" Fill="#FFFFFFFF" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" Data="m 178.1998 295.57946 -12.3996 0 L 172 284.84109 z">
-                <!--path-->
-                <Path.RenderTransform>
-                    <TranslateTransform X="-0.0625" Y="3"/>
-                </Path.RenderTransform>
-            </Path>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3886" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 74.282052 231.375 -15.155445 8.75"/>
-            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3900" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 284.72623 240.125 -15.15545 -8.75"/>
-            <Path x:Name="new_pointer" Fill="#FFFFFFFF" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" Data="m 178.1998 295.57946 -12.3996 0 L 172 284.84109 z" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0,0">
-                <!--path-->
-                <Path.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform X="-0.0625" Y="346"/>
-                    </TransformGroup>
-                </Path.RenderTransform>
-            </Path>
-        </Canvas>
-    </Canvas>
+<Canvas Width="350" Height="350"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="350.000" Height="350">
+
+  
+
+  <Canvas>
+
+  <!-- svg3/g13/path1 -->
+  <Path Fill="#ff1d1d1d" Data="F1 M 175.000,64.062 C 235.751,64.062 285.000,113.311 285.000,174.062 C 285.000,234.814 235.751,284.062 175.000,284.062 C 114.249,284.062 65.000,234.814 65.000,174.062 C 65.000,113.311 114.249,64.062 175.000,64.062 Z M 175.000,34.062 C 120.965,34.062 74.089,64.672 50.750,109.500 L 28.500,109.500 L 28.500,242.500 L 52.844,242.500 C 69.142,271.516 95.488,294.138 127.156,305.656 L 127.156,333.000 L 221.156,333.000 L 221.156,306.281 C 275.803,287.209 315.000,235.213 315.000,174.062 C 315.000,96.743 252.320,34.062 175.000,34.062 Z"/>
+
+  <Canvas>
+
+  <!-- svg3/g13/g3/path2 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 62.011,174.069 L 44.511,174.069"/>
+
+  <!-- svg3/g13/g3/path3 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 305.011,174.069 L 287.511,174.069"/>
+
+  </Canvas>
+
+  <!-- svg3/g13/path4 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 118.386,271.713 L 109.636,286.869"/>
+
+  <!-- svg3/g13/path5 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 239.886,286.869 L 231.136,271.713"/>
+
+  <!-- svg3/g13/path6 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 153.380,295.333 L 155.250,284.727"/>
+
+  <!-- svg3/g13/path7 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 132.649,289.778 L 136.333,279.658"/>
+
+  <!-- svg3/g13/path8 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 196.142,295.333 L 194.272,284.727"/>
+
+  <!-- svg3/g13/path9 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 216.873,289.778 L 213.190,279.658"/>
+
+  <!-- svg3/g13/path10 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 181.211,297.648 L 168.811,297.648 L 175.011,286.910 L 181.211,297.648 Z"/>
+
+  <!-- svg3/g13/path11 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 77.356,230.444 L 62.200,239.194"/>
+
+  <!-- svg3/g13/path12 -->
+  <Path StrokeThickness="3.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 287.800,239.194 L 272.644,230.444"/>
+
+  <!-- svg3/g13/path13 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 181.211,640.648 L 168.811,640.648 L 175.011,629.910 L 181.211,640.648 Z"/>
+
+  </Canvas>
+  </Canvas>
 </Canvas>

@@ -36,7 +36,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private GaugeImage _gsFlag;
 		private GaugeImage _locFlag;
 
-		private GaugeNeedle _ball;
+		private GaugeBall _ball;
 		private GaugeNeedle _rollMarkers;
 		private GaugeNeedle _slipBall;
 		private GaugeNeedle _ilsHorizontalNeedleSolid;
@@ -83,7 +83,10 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private double _backlight;
 		private bool _inFlightLastValue = true;
 
-		public ADI()
+		private bool _suppressScale = false;
+
+
+        public ADI()
 			: base("ADI", new Size(350, 350))
 		{
 			AddComponents();
@@ -94,8 +97,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private void AddComponents()
 		{
 			_pitchCalibration = new CalibrationPointCollectionDouble(-360d, -990d, 360d, 990d);
-
-			_ball = new GaugeNeedle(_ballOffImage, new Point(175d, 165d), new Size(220d, 1320d), new Point(110d, 660d));
+            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 42d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
 
@@ -281,8 +283,8 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_ilsHorizontalNeedleDashed.VerticalOffset = _ilsCalibration.Interpolate(ILSDeviationHorizontal);
 			}
 
-			_ball.VerticalOffset = _pitchCalibration.Interpolate(PitchAngle);
-			_ball.Rotation = -RollAngle;
+			_ball.Yaw = PitchAngle;
+			_ball.Roll = -RollAngle;
 			_rollMarkers.Rotation = -RollAngle;
 			_slipBall.HorizontalOffset = _slipBallCalibration.Interpolate(SideSlipAngle);
 
@@ -346,8 +348,26 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 			ProcessADIValues();
 			ProcessBacklightValues();
 		}
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+			if (!_suppressScale)
+			{
+                _ball.ScaleChildren(scaleX, scaleY);
+				_suppressScale = false;
+            }
+            base.ScaleChildren(scaleX, scaleY);
+        }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+				_suppressScale = true;
+            }
+        }
 
-		private BindingValue GetValue(string device, string name)
+        private BindingValue GetValue(string device, string name)
 		{
 			return _falconInterface?.GetValue(device, name) ?? BindingValue.Empty;
 		}

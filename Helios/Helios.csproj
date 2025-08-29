@@ -103,9 +103,13 @@
       <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
-    <Compile Include="Controls\CustomGaugeBallAppearanceEditor.xaml.cs">
-      <DependentUpon>CustomGaugeBallAppearanceEditor.xaml</DependentUpon>
+    <Compile Include="Controls\CustomGauge3DLightingAppearanceEditor.xaml.cs">
+      <DependentUpon>CustomGauge3DLightingAppearanceEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomGauge3DAppearanceEditor.xaml.cs">
+      <DependentUpon>CustomGauge3DAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomGaugeCylinder.cs" />
     <Compile Include="Controls\CustomGaugeBall.cs" />
     <Compile Include="Controls\ThreeWayToggleSwitchLocking.cs" />
     <Compile Include="Controls\RotaryEncoderIndcatorClickable.cs" />
@@ -546,7 +550,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\CustomGaugeBallAppearanceEditor.xaml">
+    <Page Include="Controls\CustomGauge3DLightingAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CustomGauge3DAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -794,6 +802,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\A-10\ADI\Alt\adi_gs_flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Circular-Shading.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -2017,15 +2029,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_ball.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="Gauges\A-10\ADI\adi_bank_pointer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_bank_steering_bar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -2037,31 +2041,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_gs_indicator.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_guides.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_inner_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="Gauges\A-10\ADI\adi_off_flag.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_outer_ring.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_pitch_steering_bar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Gauges\A-10\ADI\adi_slip_ball.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

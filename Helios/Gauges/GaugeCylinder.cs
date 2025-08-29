@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     {
         private string _imageFile;
         private Point _location;
-        private Size _size;
+        private Size _size, _imageSize;
         private double _basePitch;
         private double _baseRoll;
         private double _baseYaw;
@@ -39,16 +39,17 @@ namespace GadrocsWorkshop.Helios.Gauges
         
         private GaugeCylinder3DSnapshot _cylinder3D;
 
-        public GaugeCylinder(string imageFile, Point location, Size size, Point center)
-            : this(imageFile, location, size, 0d, 0d, 0d)
+        public GaugeCylinder(string imageFile, Point location, Size size, Size imageSize, Point center)
+            : this(imageFile, location, size, imageSize, 0d, 0d, 0d)
         {
         }
 
-        public GaugeCylinder(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0, double FOV = 35d)
+        public GaugeCylinder(string imageFile, Point location, Size size, Size imageSize, double basePitch = 0, double baseRoll = 90, double baseYaw = 90, double FOV = 35d)
         {
             _imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
             _size = size;
+            _imageSize = imageSize;
             _fov = FOV;
 
             _cylinder3D = new GaugeCylinder3DSnapshot
@@ -57,7 +58,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 Height = _size.Height,
                 Top = _location.Y,
                 Left = _location.X,
-                SetTexture = ConfigManager.ImageManager.LoadImage(_imageFile, (int)_size.Width * 4, (int)_size.Height * 2),
+                SetTexture = ConfigManager.ImageManager.LoadImage(_imageFile, (int)_imageSize.Width, (int)_imageSize.Height),
                 FieldOfView = _fov
             };
             BasePitch = basePitch;
@@ -268,7 +269,9 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
 
         #endregion
-
+        public void Reset()
+        {
+        }
         protected override void OnRender(DrawingContext drawingContext)
         {
             _cylinder3D.RedrawSnapshot(drawingContext);

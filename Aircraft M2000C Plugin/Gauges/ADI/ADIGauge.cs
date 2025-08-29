@@ -45,6 +45,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         private CalibrationPointCollectionDouble _glideCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
 
+        private bool _suppressScale = false;
+
         public ADIGauge(string name, Size size, string device)
             : base(name, size)
         {
@@ -55,6 +57,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
 
             _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 35d);
             Components.Add(_ball);
+
+            Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(57d, 57d, 286d, 286d)));
 
             _localizerHNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Localizer-H.xaml", center, new Size(5.939d, 158.540d), new Point(5.939d / 2d, 0d));
             _localizerHNeedle.HorizontalOffset = _glideCalibration.Interpolate(-1d);
@@ -158,7 +162,21 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
-            _ball.ScaleChildren(scaleX, scaleY);
+            if (!_suppressScale)
+            {
+                _ball.ScaleChildren(scaleX, scaleY);
+                _suppressScale = false;
+            }
+            base.ScaleChildren(scaleX, scaleY);
+        }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                _suppressScale = true;
+            }
         }
         public override void Reset()
         {

@@ -43,6 +43,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
         private CalibrationPointCollectionDouble _slipBallCalibration;
 
+        private bool _suppressScale = false;
+
+
         public SAI()
             : base("Standby Attitude Indicator", new Size(350, 350))
         {
@@ -50,12 +53,14 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _axisCalibration = new CalibrationPointCollectionDouble(-360d, -360d, 360d, 360d);
 
-            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(64d, 49d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
+            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
             _wingsNeedle = new GaugeNeedle("{AH-64D}/Images/SAI/adi_wings.xaml", new Point(99d, 158d), new Size(157d, 31d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
+
+            Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(80, 65, 198d, 198d)));
 
             Components.Add(new GaugeImage("{AH-64D}/Images/SAI/adi_innermost_ring.xaml", new Rect(65d, 52d, 224d, 224d)));
             Components.Add(new GaugeImage("{AH-64D}/Images/SAI/adi_inner_ring.xaml", new Rect(30d, 23d, 287d, 305d)));
@@ -121,7 +126,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Pitch = e.Value.DoubleValue;
+            _ball.Yaw = e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -131,8 +136,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = e.Value.DoubleValue;
-            _bankNeedle.Rotation = -e.Value.DoubleValue;
+            _ball.Roll = -e.Value.DoubleValue;
+            _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)
         {
@@ -141,12 +146,27 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
-            _ball.ScaleChildren(scaleX, scaleY);
+            if (!_suppressScale)
+            {
+                _ball.ScaleChildren(scaleX, scaleY);
+                _suppressScale = false;
+            }
             base.ScaleChildren(scaleX, scaleY);
         }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                _suppressScale = true;
+            }
+        }
+
         public override void Reset()
         {
             base.Reset();
+            _ball.Reset();
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);

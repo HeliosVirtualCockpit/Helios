@@ -72,8 +72,8 @@ namespace GadrocsWorkshop.Helios.Gauges
             transform.Children.Add(new RotateTransform3D(_rotZ));
             _CylinderModel = new GeometryModel3D
             {
-                Geometry = BuildCylinder(1.5, 64, 32),
-                BackMaterial = new DiffuseMaterial(Brushes.DarkBlue),
+                Geometry = BuildCylinder(1.5, 2, 32),
+                BackMaterial = new DiffuseMaterial(Brushes.LightBlue),
                 Transform = transform
             };
             group.Children.Add(_CylinderModel);
@@ -251,11 +251,11 @@ namespace GadrocsWorkshop.Helios.Gauges
 
                 // Bottom vertex
                 mesh.Positions.Add(new Point3D(x, -halfH, z));
-                mesh.TextureCoordinates.Add(new Point((double)i / slices, 1));
+                mesh.TextureCoordinates.Add(new Point((double)i / slices, 0));
 
                 // Top vertex
                 mesh.Positions.Add(new Point3D(x, halfH, z));
-                mesh.TextureCoordinates.Add(new Point((double)i / slices, 0));
+                mesh.TextureCoordinates.Add(new Point((double)i / slices, 1));
             }
 
             // Create triangles for side

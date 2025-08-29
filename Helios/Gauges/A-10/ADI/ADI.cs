@@ -51,6 +51,8 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
         private CalibrationPointCollectionDouble _slipBallCalibration, _turnCalibration;
         private CalibrationPointCollectionDouble _gsCalibration;
 
+        private bool _suppressScale = false;
+
         public ADI()
             : base("ADI", new Size(350, 350))
         {
@@ -63,6 +65,8 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
             _ball.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
             _ball.LightingColor = Colors.White;
             Components.Add(_ball);
+
+            Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(64d, 51d, 220d, 220d)));
 
             Components.Add(new GaugeImage("{Helios}/Gauges/A-10/ADI/ADI-Inner-Ring-and-Wings.xaml", new Rect(17d, 18d, 294.604d, 303.500d)));
 
@@ -81,12 +85,12 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
 
             _pitchBarCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d) { new CalibrationPointDouble(0d, 0d) };
             _pitchSteeringNeedle = new GaugeNeedle("{Helios}/Gauges/A-10/ADI/ADI-GlideSlope-V.xaml", new Point(174d, 164d - (6d / 2d)), new Size(213.747d, 6d), new Point(81.600d, 6d / 2d),0d);
-            _pitchSteeringNeedle.VerticalOffset = _pitchBarCalibration.Interpolate(-1d);
+            _pitchSteeringNeedle.VerticalOffset = _pitchBarCalibration.Interpolate(1d);
             Components.Add(_pitchSteeringNeedle);
 
             _bankBarCalibration = new CalibrationPointCollectionDouble(-1d, -128d, 1d, 134d) { new CalibrationPointDouble(0d, 0d) };
             _bankSteeringNeedle = new GaugeNeedle("{Helios}/Gauges/A-10/ADI/ADI-GlideSlope-H.xaml", new Point(174d - (6d / 2d) , 163d), new Size(6d, 213.747d), new Point(6d / 2d, 143.807d));
-            _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(-1d);
+            _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(1d);
             Components.Add(_bankSteeringNeedle);
 
             _gsCalibration = new CalibrationPointCollectionDouble(-1d, -60d, 1d, 60d);
@@ -206,8 +210,8 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = e.Value.DoubleValue;
-            _bankNeedle.Rotation = -e.Value.DoubleValue;
+            _ball.Roll = -e.Value.DoubleValue;
+            _bankNeedle.Rotation = e.Value.DoubleValue;
         }
 
         protected override void OnProfileChanged(HeliosProfile oldProfile)
@@ -216,32 +220,46 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
-            _ball.ScaleChildren(scaleX, scaleY);
+            if (!_suppressScale)
+            {
+                _ball.ScaleChildren(scaleX, scaleY);
+                _suppressScale = false;
+            }
             base.ScaleChildren(scaleX, scaleY);
+        }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                _suppressScale = true;
+            }
         }
         public override void Reset()
         {
             base.Reset();
-            _pitch.SetValue(new BindingValue(0d), true);
-            _ball.Yaw = 0d;
-            _roll.SetValue(new BindingValue(0d), true);
-            _ball.Roll = 0d;
+            base.EnableAlternateImageSet = false;
+            _ball.Reset();
+
             _bankNeedle.Rotation = 0d;
             _gsIndicatorNeedle.VerticalOffset = 0d;
-            _slipBall.SetValue(new BindingValue(0d), true);
             _slipBallNeedle.HorizontalOffset = 0d;
-            _turn.SetValue(new BindingValue(0d), true);
             _turnNeedle.HorizontalOffset = 0d;
-            _offFlag.SetValue(new BindingValue(false), true);
             _offFlagImage.IsHidden = true;
             _gsFlagImage.IsHidden = true;
             _courseFlagImage.IsHidden = true;
-            _pitchSteering.SetValue(new BindingValue(-1d), true);
-            _pitchSteeringNeedle.VerticalOffset = -_pitchBarCalibration.Interpolate(-1d);
-            _bankSteering.SetValue(new BindingValue(-1d), true);
-            _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(-1d);
-            base.EnableAlternateImageSet = false;
-            
+            _pitchSteeringNeedle.VerticalOffset = -_pitchBarCalibration.Interpolate(1d);
+            _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(1d);
+
+            //_pitchSteering.SetValue(new BindingValue(1d), true);
+            //_pitch.SetValue(new BindingValue(0d), true);
+            //_roll.SetValue(new BindingValue(0d), true);
+            //_slipBall.SetValue(new BindingValue(0d), true);
+            //_turn.SetValue(new BindingValue(0d), true);
+            //_offFlag.SetValue(new BindingValue(false), true);
+            //_bankSteering.SetValue(new BindingValue(1d), true);
+
         }
 
     }
