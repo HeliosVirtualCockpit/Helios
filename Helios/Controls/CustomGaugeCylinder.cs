@@ -27,16 +27,12 @@ namespace GadrocsWorkshop.Helios.Controls
 
     [HeliosControl("Helios.Base.CustomGaugeCylinder", "Custom Gauge Cylinder", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.None)]
 
-    public class CustomGaugeCylinder : BaseGauge
+    public class CustomGaugeCylinder : CustomGauge3d
     {
 
         private Size _size;
-        private double _fov;
-        private double _baseX, _baseY, _baseZ;
         private GaugeCylinder _cylinder;
         private string _imageName;
-
-        private HeliosValue _rotXValue, _rotYValue, _rotZValue, _altLightValue;
 
         private bool _suppressScale = false;
 
@@ -44,28 +40,14 @@ namespace GadrocsWorkshop.Helios.Controls
             : base("Custom Gauge Cylinder", new Size(300, 300))
         {
             _size = base.NativeSize;
-            _imageName = "{F-15E}/Gauges/Instruments/ADI-Tape-1.xaml";
+            _imageName = "{F-15E}/Gauges/Instruments/ADI-Tape.xaml";
             //_imageName = "";
-            _baseX = 0d;
-            _baseY = 90d;
-            _baseZ = 90d;
-            _fov = 35d;
-            _cylinder = new GaugeCylinder(_imageName, new Point(0d, 0d), _size, new Size(1850d, 300d), _baseX, _baseY, _baseZ, _fov);
+            BasePitch = 0d;
+            BaseYaw = 90d;
+            BaseRoll = 90d;
+            FieldOfView = 35d;
+            _cylinder = new GaugeCylinder(_imageName, new Point(0d, 0d), _size, new Size(1850d, 300d), BasePitch, BaseYaw, BaseRoll, FieldOfView);
             Components.Add(_cylinder);
-            LightingColor = Colors.White;
-            LightingColorAlt = Colors.Green;
-            _rotXValue = new HeliosValue(this, new BindingValue(0d), "", "X Rotation", "Rotation in the X-Axis.", "(0 - 360)", BindingValueUnits.Degrees);
-            _rotXValue.Execute += new HeliosActionHandler(X_Execute);
-            Actions.Add(_rotXValue);
-            _rotYValue = new HeliosValue(this, new BindingValue(0d), "", "Y Rotation", "Rotation in the Y-AYis.", "(0 - 360)", BindingValueUnits.Degrees);
-            _rotYValue.Execute += new HeliosActionHandler(Y_Execute);
-            Actions.Add(_rotYValue);
-            _rotZValue = new HeliosValue(this, new BindingValue(0d), "", "Z Rotation", "Rotation in the Z-Axis.", "(0 - 360)", BindingValueUnits.Degrees);
-            _rotZValue.Execute += new HeliosActionHandler(Z_Execute);
-            Actions.Add(_rotZValue);
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Enable Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
-            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
-            Actions.Add(_altLightValue);
         }
 
         #region Properties
@@ -82,137 +64,32 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-        public double BasePitch
+        public double CylinderRadius
         {
-            get => _baseX;
+            get => _cylinder.CylinderRadius;
             set
             {
-                if (value != _baseX)
+                if (value != _cylinder.CylinderRadius)
                 {
-                    _baseX = value;
-                    _cylinder.BasePitch = _baseX;
+                    _cylinder.CylinderRadius = value;
                 }
             }
         }
-        public double BaseYaw
+        public double CylinderHeight
         {
-            get => _baseY;
+            get => _cylinder.CylinderHeight;
             set
             {
-                if (value != _baseY)
+                if (value != _cylinder.CylinderHeight)
                 {
-                    _baseY = value;
-                    _cylinder.BaseYaw = _baseY;
+                    _cylinder.CylinderHeight = value;
                 }
             }
-        }
-        public double BaseRoll
-        {
-            get => _baseZ;
-            set
-            {
-                if (value != _baseZ)
-                {
-                    _baseZ = value;
-                    _cylinder.BaseRoll = _baseZ;
-                }
-            }
-        }
-        public double FieldOfView
-        {
-            get => _fov;
-            set
-            {
-                if (value != _fov)
-                {
-                    _fov = value;
-                    _cylinder.FieldOfView = _fov;
-                }
-            }
-        }
-        public Color LightingColor
-        {
-            get => _cylinder.LightingColor;
-            set
-            {
-                if (value != _cylinder.LightingColor)
-                {
-                    _cylinder.LightingColor = value;
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        public Color LightingColorAlt
-        {
-            get => _cylinder.LightingColorAlt;
-            set
-            {
-                if (value != _cylinder.LightingColorAlt)
-                {
-                    _cylinder.LightingColorAlt = value;
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        public double LightingX
-        {
-            get => _cylinder.LightingX;
-            set
-            {
-                if (value != _cylinder.LightingX)
-                {
-                    _cylinder.LightingX = value;
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        public double LightingY
-        {
-            get => _cylinder.LightingY;
-            set
-            {
-                if (value != _cylinder.LightingY)
-                {
-                    _cylinder.LightingY = value;
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        public double LightingZ
-        {
-            get => _cylinder.LightingZ;
-            set
-            {
-                if (value != _cylinder.LightingZ)
-                {
-                    _cylinder.LightingZ = value;
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        void X_Execute(object action, HeliosActionEventArgs e)
-        {
-            _cylinder.Pitch = e.Value.DoubleValue;
-        }
-        void Y_Execute(object action, HeliosActionEventArgs e)
-        {
-            _cylinder.Yaw = e.Value.DoubleValue;
-        }
-        void Z_Execute(object action, HeliosActionEventArgs e)
-        {
-            _cylinder.Roll = e.Value.DoubleValue;
-        }
-        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
-        {
-            _cylinder.LightingAltEnabled = e.Value.BoolValue;
         }
         public override void Reset()
         {
             base.Reset();
             _cylinder.Reset();
-            _rotXValue.SetValue(new BindingValue(0d), true);
-            _rotYValue.SetValue(new BindingValue(0d), true);
-            _rotZValue.SetValue(new BindingValue(0d), true);
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
@@ -236,46 +113,22 @@ namespace GadrocsWorkshop.Helios.Controls
         #region de/serialize
         public override void WriteXml(XmlWriter writer)
         {
-            TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
-
             base.WriteXml(writer);
-            writer.WriteStartElement("Properties3D");
-            writer.WriteElementString("BasePitch", _baseX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("BaseRoll", _baseY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("BaseYaw", _baseZ.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("FieldOfView", _fov.ToString(CultureInfo.InvariantCulture));
-            writer.WriteStartElement("Lighting");
-            writer.WriteElementString("X", LightingX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("Y", LightingY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("Z", LightingZ.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("Color", colorConverter.ConvertToInvariantString(LightingColor));
-            writer.WriteElementString("AltColor", colorConverter.ConvertToInvariantString(LightingColorAlt));
-            writer.WriteEndElement();
+            writer.WriteStartElement("CylinderProperties");
+            writer.WriteElementString("Radius", CylinderRadius.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("Height", CylinderHeight.ToString(CultureInfo.InvariantCulture));
             writer.WriteEndElement();
         }
 
         public override void ReadXml(XmlReader reader)
         {
-            TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
 
             base.ReadXml(reader);
-            if (reader.Name.Equals("Properties3D"))
+            if (reader.Name.Equals("CylinderProperties"))
             {
-                reader.ReadStartElement("Properties3D");
-                BasePitch = double.Parse(reader.ReadElementString("BasePitch"), CultureInfo.InvariantCulture);
-                BaseRoll = double.Parse(reader.ReadElementString("BaseRoll"), CultureInfo.InvariantCulture);
-                BaseYaw = double.Parse(reader.ReadElementString("BaseYaw"), CultureInfo.InvariantCulture);
-                FieldOfView = double.Parse(reader.ReadElementString("FieldOfView"), CultureInfo.InvariantCulture);
-                if (reader.Name.Equals("Lighting"))
-                {
-                    reader.ReadStartElement("Lighting");
-                    LightingX = double.Parse(reader.ReadElementString("X"), CultureInfo.InvariantCulture);
-                    LightingY = double.Parse(reader.ReadElementString("Y"), CultureInfo.InvariantCulture);
-                    LightingZ = double.Parse(reader.ReadElementString("Z"), CultureInfo.InvariantCulture);
-                    LightingColor = (Color)colorConverter.ConvertFromInvariantString(reader.ReadElementString("Color"));
-                    LightingColorAlt = (Color)colorConverter.ConvertFromInvariantString(reader.ReadElementString("AltColor"));
-                    reader.ReadEndElement();
-                }
+                reader.ReadStartElement("CylinderProperties");
+                CylinderRadius = double.Parse(reader.ReadElementString("Radius"), CultureInfo.InvariantCulture);
+                CylinderHeight = double.Parse(reader.ReadElementString("Height"), CultureInfo.InvariantCulture);
                 reader.ReadEndElement();
             }
         }

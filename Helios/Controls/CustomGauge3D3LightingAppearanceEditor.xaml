@@ -1,4 +1,4 @@
-﻿<HeliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.CustomGauge3DLightingAppearanceEditor" 
+﻿<HeliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.CustomGauge3D3LightingAppearanceEditor" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -27,8 +27,6 @@
             </Style.Triggers>
         </Style>
     </HeliosSdk:HeliosPropertyEditor.Resources>
-
-
 
     <Grid Background="Transparent" Margin="7,6,6,7">
         <Grid.ColumnDefinitions>

@@ -103,12 +103,16 @@
       <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
-    <Compile Include="Controls\CustomGauge3DLightingAppearanceEditor.xaml.cs">
-      <DependentUpon>CustomGauge3DLightingAppearanceEditor.xaml</DependentUpon>
+    <Compile Include="Controls\CustomGauge3D2CylinderAppearanceEditor.xaml.cs">
+      <DependentUpon>CustomGauge3D2CylinderAppearanceEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CustomGauge3DAppearanceEditor.xaml.cs">
-      <DependentUpon>CustomGauge3DAppearanceEditor.xaml</DependentUpon>
+    <Compile Include="Controls\CustomGauge3D3LightingAppearanceEditor.xaml.cs">
+      <DependentUpon>CustomGauge3D3LightingAppearanceEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomGauge3D1AppearanceEditor.xaml.cs">
+      <DependentUpon>CustomGauge3D1AppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomGauge3d.cs" />
     <Compile Include="Controls\CustomGaugeCylinder.cs" />
     <Compile Include="Controls\CustomGaugeBall.cs" />
     <Compile Include="Controls\ThreeWayToggleSwitchLocking.cs" />
@@ -240,6 +244,8 @@
     <Compile Include="Gauges\A-10\HARS\HARSSync_1.cs" />
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
     <Compile Include="Gauges\AltImageGauge.cs" />
+    <Compile Include="Gauges\Gauge3d.cs" />
+    <Compile Include="Gauges\Gauge3dSnapshot.cs" />
     <Compile Include="Gauges\GaugeCylinder.cs" />
     <Compile Include="Gauges\GaugeCylinder3DSnapshot.cs" />
     <Compile Include="Gauges\GaugeBallSphere3DSnapshot.cs" />
@@ -550,11 +556,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\CustomGauge3DLightingAppearanceEditor.xaml">
+    <Page Include="Controls\CustomGauge3D2CylinderAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\CustomGauge3DAppearanceEditor.xaml">
+    <Page Include="Controls\CustomGauge3D3LightingAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CustomGauge3D1AppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

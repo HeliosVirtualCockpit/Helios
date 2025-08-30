@@ -26,14 +26,14 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
     /// <summary>
-    /// Interaction logic for CustomGauge3DAppearanceEditor.xaml
+    /// Interaction logic for CustomGauge3D1AppearanceEditor.xaml
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.CustomGaugeBall", "Appearance")]
     [HeliosPropertyEditor("Helios.Base.CustomGaugeCylinder", "Appearance")]
     
-    public partial class CustomGauge3DAppearanceEditor : HeliosPropertyEditor
+    public partial class CustomGauge3D1AppearanceEditor : HeliosPropertyEditor
     {
-        public CustomGauge3DAppearanceEditor()
+        public CustomGauge3D1AppearanceEditor()
         {
             InitializeComponent();
         }
