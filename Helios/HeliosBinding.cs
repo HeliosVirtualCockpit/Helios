@@ -271,6 +271,7 @@ namespace GadrocsWorkshop.Helios
                 if (_luaInterpreter == null)
                 {
                     _luaInterpreter = new Lua();
+                    _luaInterpreter.DoString("local utf8 = require(\"utf8\")");
 
                     // add lua environment variables
                     _luaInterpreter.DoString("HeliosPath = " + "'" + ConfigManager.DocumentPath.Replace("\\", "\\\\") + "'");

@@ -28,7 +28,8 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Viewport3D _viewport;
         private PerspectiveCamera _camera;
         private readonly AxisAngleRotation3D _rotX, _rotY, _rotZ;
-        private readonly GeometryModel3D _sphereModel;
+        private readonly GeometryModel3D _model;
+        private MeshGeometry3D _mesh;
         private Point _location;
         private ImageSource _imageSource;
         private double _fieldOfView = 35d;
@@ -36,8 +37,9 @@ namespace GadrocsWorkshop.Helios.Gauges
         private bool _lightingAltEnabled = false;
         private DirectionalLight _lighting;
         private double _lightingX, _lightingY, _lightingZ;
-        public Gauge3dSnapshot()
+        public Gauge3dSnapshot(MeshGeometry3D mesh)
         {
+            _mesh = mesh;
             _visual = new DrawingVisual();
             AddVisualChild(_visual);
 
@@ -71,13 +73,13 @@ namespace GadrocsWorkshop.Helios.Gauges
             transform.Children.Add(new RotateTransform3D(_rotY));
             transform.Children.Add(new RotateTransform3D(_rotX));
             transform.Children.Add(new RotateTransform3D(_rotZ));
-            _sphereModel = new GeometryModel3D
+            _model = new GeometryModel3D
             {
-                Geometry = BuildMesh(1.5, 64, 32),
+                Geometry = _mesh,
                 BackMaterial = new DiffuseMaterial(Brushes.DarkBlue),
                 Transform = transform
             };
-            group.Children.Add(_sphereModel);
+            group.Children.Add(_model);
 
             _viewport.Children.Add(new ModelVisual3D { Content = group });
         }
@@ -88,7 +90,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if(value != _imageSource)
                 {
                     _imageSource = value;
-                    _sphereModel.Material = new DiffuseMaterial(new ImageBrush(value));
+                    _model.Material = new DiffuseMaterial(new ImageBrush(value));
                 }
             }   
         }
@@ -195,6 +197,18 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
+      public MeshGeometry3D Mesh
+        {
+            set
+            {
+                if (!value.Equals(_mesh))
+                {
+                    _mesh = value;
+                    _model.Geometry = _mesh;
+                }
+            }
+        }
+
         /// <summary>
         /// Rotate programmatically and redraw.
         /// </summary>
@@ -210,7 +224,6 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             _rotZ.Angle = z;
         }
-
         /// <summary>
         /// Takes a snapshot of the Viewport3D and draws it into the DrawingContext.
         /// </summary>
@@ -233,54 +246,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             base.OnRenderSizeChanged(sizeInfo);
         }
-
         protected override int VisualChildrenCount => 1;
         protected override Visual GetVisualChild(int index) => _visual;
-
-        protected virtual MeshGeometry3D BuildMesh(double radius, int slices, int stacks) {
-            return BuildSphere(radius, slices, stacks);
-        }
-        private MeshGeometry3D BuildSphere(double radius, int slices, int stacks)
-        {
-            var mesh = new MeshGeometry3D();
-
-            for (int stack = 0; stack <= stacks; stack++)
-            {
-                double phi = Math.PI * stack / stacks;
-                double y = radius * Math.Cos(phi);
-                double r = radius * Math.Sin(phi);
-
-                for (int slice = 0; slice <= slices; slice++)
-                {
-                    double theta = 2 * Math.PI * slice / slices;
-                    double x = r * Math.Sin(theta);
-                    double z = r * Math.Cos(theta);
-
-                    mesh.Positions.Add(new Point3D(x, y, z));
-
-                    double u = (double)slice / slices;
-                    double v = (double)stack / stacks;
-                    mesh.TextureCoordinates.Add(new Point(u, v));
-                }
-            }
-
-            for (int stack = 0; stack < stacks; stack++)
-            {
-                for (int slice = 0; slice < slices; slice++)
-                {
-                    int first = stack * (slices + 1) + slice;
-                    int second = first + slices + 1;
-
-                    mesh.TriangleIndices.Add(first);
-                    mesh.TriangleIndices.Add(second);
-                    mesh.TriangleIndices.Add(first + 1);
-
-                    mesh.TriangleIndices.Add(second);
-                    mesh.TriangleIndices.Add(second + 1);
-                    mesh.TriangleIndices.Add(first + 1);
-                }
-            }
-            return mesh;
-        }
     }
 }

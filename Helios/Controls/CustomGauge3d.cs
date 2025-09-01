@@ -24,10 +24,10 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
+    using System.Security.Authentication.ExtendedProtection;
 
-    [HeliosControl("Helios.Base.CustomGauge3d", "Custom Gauge Cylinder", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.None)]
-
-    public class CustomGauge3d : BaseGauge
+    public abstract class CustomGauge3d : BaseGauge
     {
 
         private Size _size;
@@ -39,15 +39,9 @@ namespace GadrocsWorkshop.Helios.Controls
         private bool _suppressScale = false;
 
         public CustomGauge3d(string name, Size size)
-            : base("Custom Gauge Cylinder", new Size(300, 300))
+            : base(name, new Size(300, 300))
         {
             _size = base.NativeSize;
-            _baseX = 0d;
-            _baseY = 90d;
-            _baseZ = 90d;
-            _fov = 35d;
-            LightingColor = Colors.White;
-            LightingColorAlt = Colors.Green;
 
             _rotXValue = new HeliosValue(this, new BindingValue(0d), "", "X Rotation", "Rotation in the X-Axis.", "(0 - 360)", BindingValueUnits.Degrees);
             _rotXValue.Execute += new HeliosActionHandler(X_Execute);
@@ -73,7 +67,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 if (value != _baseX)
                 {
                     _baseX = value;
-                    _cylinder.BasePitch = _baseX;
+                    if (gauge != null)
+                    {
+                        gauge.BasePitch = _baseX;
+                    }
                 }
             }
         }
@@ -85,7 +82,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 if (value != _baseY)
                 {
                     _baseY = value;
-                    _cylinder.BaseYaw = _baseY;
+                    if (gauge != null)
+                    {
+                        gauge.BaseYaw = _baseY;
+                    }
                 }
             }
         }
@@ -97,7 +97,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 if (value != _baseZ)
                 {
                     _baseZ = value;
-                    _cylinder.BaseRoll = _baseZ;
+                    if(gauge != null)
+                    {
+                        gauge.BaseRoll = _baseZ;
+                    }
                 }
             }
         }
@@ -109,81 +112,89 @@ namespace GadrocsWorkshop.Helios.Controls
                 if (value != _fov)
                 {
                     _fov = value;
-                    _cylinder.FieldOfView = _fov;
+                    if(gauge != null)
+                    {
+                        gauge.FieldOfView = _fov;
+                    }
                 }
             }
         }
         public Color LightingColor
         {
-            get => _cylinder.LightingColor;
+            get => gauge.LightingColor;
             set
             {
-                if (value != _cylinder.LightingColor)
+                if (value != LightingColor && gauge != null)
                 {
-                    _cylinder.LightingColor = value;
+                    gauge.LightingColor = value;
                 }
             }
         }
         public Color LightingColorAlt
         {
-            get => _cylinder.LightingColorAlt;
+            get => gauge.LightingColorAlt;
             set
             {
-                if (value != _cylinder.LightingColorAlt)
+                if (value != LightingColorAlt && gauge != null)
                 {
-                    _cylinder.LightingColorAlt = value;
+                    gauge.LightingColorAlt = value;
                 }
             }
         }
         public double LightingX
         {
-            get => _cylinder.LightingX;
+            get => gauge.LightingX;
             set
             {
-                if (value != _cylinder.LightingX)
+                if (gauge != null && value != gauge.LightingX)
                 {
-                    _cylinder.LightingX = value;
+                    gauge.LightingX = value;
                 }
             }
         }
         public double LightingY
         {
-            get => _cylinder.LightingY;
+            get => gauge.LightingY;
             set
             {
-                if (value != _cylinder.LightingY)
+                if (gauge != null && value != gauge.LightingY)
                 {
-                    _cylinder.LightingY = value;
+                    gauge.LightingY = value;
                 }
             }
         }
         public double LightingZ
         {
-            get => _cylinder.LightingZ;
+            get => gauge.LightingZ;
             set
             {
-                if (value != _cylinder.LightingZ)
+                if (gauge != null && value != gauge.LightingZ)
                 {
-                    _cylinder.LightingZ = value;
+                    gauge.LightingZ = value;
                 }
             }
         }
+        protected abstract IGauge3d gauge { get;}
+
+        #endregion Properties
         void X_Execute(object action, HeliosActionEventArgs e)
         {
-            _cylinder.Pitch = e.Value.DoubleValue;
+            gauge.Pitch = e.Value.DoubleValue;
         }
         void Y_Execute(object action, HeliosActionEventArgs e)
         {
-            _cylinder.Yaw = e.Value.DoubleValue;
+            gauge.Yaw = e.Value.DoubleValue;
         }
         void Z_Execute(object action, HeliosActionEventArgs e)
         {
-            _cylinder.Roll = e.Value.DoubleValue;
+            gauge.Roll = e.Value.DoubleValue;
         }
         void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
         {
-            _cylinder.LightingAltEnabled = e.Value.BoolValue;
+            gauge.LightingAltEnabled = e.Value.BoolValue;
         }
+
+        #region actions 
         public override void Reset()
         {
             base.Reset();
@@ -195,7 +206,9 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             if (!_suppressScale)
             {
-                _cylinder.ScaleChildren(scaleX, scaleY);
+                if (gauge != null) { 
+                    gauge.ScaleChildren(scaleX, scaleY);
+                }
                 _suppressScale = false;
             }
             base.ScaleChildren(scaleX, scaleY);
@@ -205,7 +218,10 @@ namespace GadrocsWorkshop.Helios.Controls
             _suppressScale = false;
             if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
             {
-                _cylinder.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                if (gauge != null)
+                {
+                    gauge.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                }
                 _suppressScale = true;
             }
         }

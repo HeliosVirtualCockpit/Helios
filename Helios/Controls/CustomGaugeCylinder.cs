@@ -17,13 +17,13 @@ namespace GadrocsWorkshop.Helios.Controls
 
 {
     using GadrocsWorkshop.Helios.ComponentModel;
-     using GadrocsWorkshop.Helios.Util;
+    using GadrocsWorkshop.Helios.Util;
     using GadrocsWorkshop.Helios.Gauges;
     using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
-    using System.Windows.Media;
     using System.Xml;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
 
     [HeliosControl("Helios.Base.CustomGaugeCylinder", "Custom Gauge Cylinder", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.None)]
 
@@ -41,13 +41,14 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             _size = base.NativeSize;
             _imageName = "{F-15E}/Gauges/Instruments/ADI-Tape.xaml";
-            //_imageName = "";
             BasePitch = 0d;
             BaseYaw = 90d;
             BaseRoll = 90d;
             FieldOfView = 35d;
-            _cylinder = new GaugeCylinder(_imageName, new Point(0d, 0d), _size, new Size(1850d, 300d), BasePitch, BaseYaw, BaseRoll, FieldOfView);
+            _cylinder = new GaugeCylinder(_imageName, new Point(0d, 0d), _size, BasePitch, BaseYaw, BaseRoll, FieldOfView);
             Components.Add(_cylinder);
+
+
         }
 
         #region Properties
@@ -63,6 +64,10 @@ namespace GadrocsWorkshop.Helios.Controls
                     _cylinder.Image = _imageName;
                 }
             }
+        }
+        protected override IGauge3d gauge {
+            get => _cylinder;
+
         }
         public double CylinderRadius
         {

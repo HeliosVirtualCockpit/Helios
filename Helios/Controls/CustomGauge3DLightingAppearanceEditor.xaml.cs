@@ -26,16 +26,34 @@ namespace GadrocsWorkshop.Helios.Controls
 
 
     /// <summary>
-    /// Interaction logic for CustomGauge3D2CylinderAppearanceEditor.xaml
+    /// Interaction logic for CustomGauge3DLightingAppearanceEditor.xaml
     /// </summary>
+    [HeliosPropertyEditor("Helios.Base.CustomGaugeBall", "Appearance")]
     [HeliosPropertyEditor("Helios.Base.CustomGaugeCylinder", "Appearance")]
     
-    public partial class CustomGauge3D2CylinderAppearanceEditor : HeliosPropertyEditor
+    public partial class CustomGauge3DLightingAppearanceEditor : HeliosPropertyEditor
     {
-        public CustomGauge3D2CylinderAppearanceEditor()
+        public CustomGauge3DLightingAppearanceEditor()
         {
             InitializeComponent();
         }
 
+        private void MinPosition_GotFocus(object sender, RoutedEventArgs e)
+        {
+            CustomGauge pot = Control as CustomGauge;
+            if (pot != null)
+            {
+                pot.Value = pot.MinValue;
+            }
+        }
+
+        private void MaxPosition_GotFocus(object sender, RoutedEventArgs e)
+        {
+            CustomGauge pot = Control as CustomGauge;
+            if (pot != null)
+            {
+                pot.Value = pot.MaxValue;
+            }
+        }
     }
 }
