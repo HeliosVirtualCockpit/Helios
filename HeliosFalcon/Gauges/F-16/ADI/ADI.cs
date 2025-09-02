@@ -284,7 +284,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 			}
 
 			_ball.Yaw = PitchAngle / 2;
-			_ball.Roll = RollAngle;
+			_ball.Roll = RollAngle - 90;
 			_rollMarkers.Rotation = RollAngle;
 			_slipBall.HorizontalOffset = _slipBallCalibration.Interpolate(SideSlipAngle);
 
