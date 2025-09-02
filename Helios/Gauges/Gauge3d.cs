@@ -401,6 +401,5 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
             return mesh;
         }
-
     }
 }
