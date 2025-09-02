@@ -36,12 +36,11 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         private HeliosValue _turnIndicator;
         private HeliosValue _bankSteering;
         private HeliosValue _pitchSteering;
-
         private HeliosValue _offFlag;
-
-        private GaugeNeedle _offFlagImage;
+        private HeliosValue _altLightValue;
 
         private GaugeBall _ball;
+        private GaugeNeedle _offFlagImage;
         private GaugeNeedle _bankNeedle;
         private GaugeNeedle _wingsNeedle;
         private GaugeNeedle _slipBallNeedle;
@@ -140,6 +139,10 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _pitchSteering.Execute += new HeliosActionHandler(PitchSteering_Execute);
             Actions.Add(_pitchSteering);
 
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
+
         }
 
         void CreateInputBindings()
@@ -175,7 +178,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             }
         }
 
-            void SlipBall_Execute(object action, HeliosActionEventArgs e)
+        void SlipBall_Execute(object action, HeliosActionEventArgs e)
         {
             _slipBall.SetValue(e.Value, e.BypassCascadingTriggers);
             _slipBallNeedle.HorizontalOffset = _slipBallCalibration.Interpolate(e.Value.DoubleValue);
@@ -220,7 +223,10 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _bankSteering.SetValue(e.Value, e.BypassCascadingTriggers);
             _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(e.Value.DoubleValue);
         }
-
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltEnabled = e.Value.BoolValue;
+        }
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {
             base.OnProfileChanged(oldProfile);

@@ -7,8 +7,8 @@
     <Path.Fill>
       <RadialGradientBrush MappingMode="Absolute" GradientOrigin="25.000,-25.000" Center="25.000,-25.000" RadiusX="25.000" RadiusY="25.000">
         <RadialGradientBrush.GradientStops>
-          <GradientStop Offset="0.00" Color="#ffffffff"/>
-          <GradientStop Offset="0.42" Color="#ff7f7f7f"/>
+          <GradientStop Offset="0.00" Color="#ffbfbfbf"/>
+          <GradientStop Offset="0.25" Color="#ff7f7f7f"/>
           <GradientStop Offset="1.00" Color="#ff000000"/>
         </RadialGradientBrush.GradientStops>
         <RadialGradientBrush.Transform>

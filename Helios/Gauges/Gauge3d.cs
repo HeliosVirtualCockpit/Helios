@@ -77,7 +77,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _imageFile)
                 {
                     _imageFile = value;
-                    _gaugeSnapshot.SetTexture = ConfigManager.ImageManager.LoadImage(value, (int)_size.Width * 4, (int)_size.Height * 2);
+                    _gaugeSnapshot.SetTexture = ConfigManager.ImageManager.LoadImage(value);
                     OnDisplayUpdate();
                 }
             }

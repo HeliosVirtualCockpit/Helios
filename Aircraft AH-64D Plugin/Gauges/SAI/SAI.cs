@@ -31,6 +31,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         private HeliosValue _turnIndicator;
 
         private HeliosValue _offFlag;
+        private HeliosValue _altLightValue;
+
 
         private GaugeImage _offFlagImage;
         private GaugeBall _ball;
@@ -108,6 +110,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _roll = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Bank", "Current bank of the aircraft.", "(-180 to +180)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
+
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
+
         }
 
 
@@ -144,6 +151,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _turnIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
             _TurnMarker.HorizontalOffset = _slipBallCalibration.Interpolate(e.Value.DoubleValue);
         }
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltEnabled = e.Value.BoolValue;
+        }
+
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             if (!_suppressScale)

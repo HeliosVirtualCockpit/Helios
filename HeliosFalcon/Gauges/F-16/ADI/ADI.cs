@@ -97,7 +97,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private void AddComponents()
 		{
 			_pitchCalibration = new CalibrationPointCollectionDouble(-360d, -990d, 360d, 990d);
-            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 42d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
+            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball-2.xaml", new Point(50d, 42d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
 

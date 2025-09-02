@@ -29,6 +29,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         private HeliosValue _roll;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _warningFlag;
+        private HeliosValue _altLightValue;
+
 
         private CalibrationPointCollectionDouble _pitchCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
@@ -46,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             Point center = new Point(174d, 163d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -1066d, 360d, 1066d);
-            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260), new Size(2048d, 300d));
+            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260));
             _cylinder.Clip = new EllipseGeometry(center, 130d, 130d);
             Components.Add(_cylinder);
 
@@ -89,6 +91,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _warningFlag = new HeliosValue(this, new BindingValue(false), "Flight Instruments", "SAI Warning Flag", "Indicates whether the warning flag is displayed.", "True if displayed.", BindingValueUnits.Boolean);
             _warningFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_warningFlag);
+
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
@@ -115,6 +121,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _warningFlag.SetValue(e.Value, e.BypassCascadingTriggers);
             _warningFlagNeedle.Rotation = e.Value.BoolValue ? 0 : 20;
         }
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _cylinder.LightingAltEnabled = e.Value.BoolValue;
+        }
+
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             if (!_suppressScale)

@@ -34,6 +34,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private HeliosValue _offFlag;
         private HeliosValue _gsFlag;
         private HeliosValue _locFlag;
+        private HeliosValue _altLightValue;
 
         private GaugeImage _auxFlagImage;
         private GaugeImage _offFlagImage;
@@ -81,11 +82,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ilsVerticalNeedle.VerticalOffset = _ilsCalibration.Interpolate(-1d);
             Components.Add(_ilsVerticalNeedle);
 
-            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_inner_ring.xaml", new Rect(0d, 0d, 350d, 350d)));
+            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Inner_Ring.xaml", new Rect(0d, 0d, 315.000d, 333.000d)));
 
-            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/adi_outer_ring.xaml", new Rect(0d, 0d, 350d, 350d)));
+            Components.Add(new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Outer_Ring.xaml", new Rect(0d, 0d, 347.000d, 340.500d)));
 
-            _ilsScaleNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/adi_ils_scale_needle.xaml", new Point(30d, 174d), new Size(14d, 12d), new Point(1d, 6d));
+            _ilsScaleNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-GS-Pointer.xaml", new Point(35d, 174d), new Size(15.479d, 14.221d), new Point(1d, 14.221d / 2d));
             Components.Add(_ilsScaleNeedle);
 
             _gsFlagImage = new GaugeImage("{F-16C}/Gauges/ADI/Viper-ADI-Flags-GS.xaml", new Rect(61d, 112d, 22.500d * scale, 44.500d * scale), 1 , -30);
@@ -155,6 +156,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ilsVertical = new HeliosValue(this, new BindingValue(1d), "", "ils vertical deviation", "Current deviation from ILS side scope.", "-1 to 1", BindingValueUnits.Numeric);
             _ilsVertical.Execute += new HeliosActionHandler(ILSVertical_Execute);
             Actions.Add(_ilsVertical);
+
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
         }
 
         void SlipBall_Execute(object action, HeliosActionEventArgs e)
@@ -214,6 +219,12 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ball.Roll = -e.Value.DoubleValue;
             _rollNeedle.Rotation = e.Value.DoubleValue;
         }
+
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltEnabled = e.Value.BoolValue;
+        }
+
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             if (!_suppressScale)

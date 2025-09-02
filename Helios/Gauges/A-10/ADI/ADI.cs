@@ -33,6 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
         private HeliosValue _offFlag;
         private HeliosValue _gsFlag;
         private HeliosValue _courseFlag;
+        private HeliosValue _altLightValue;
 
         private GaugeImage _offFlagImage;
         private GaugeImage _gsFlagImage;
@@ -152,6 +153,10 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
             _gsIndicator = new HeliosValue(this, new BindingValue(0d), "", "Glide Scope Indicator Offset", "Location of glide scope indicator from middle of the scale.", "1 full up and -1 is full down.", BindingValueUnits.Numeric);
             _gsIndicator.Execute += new HeliosActionHandler(GsIndicator_Execute);
             Actions.Add(_gsIndicator);
+
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
         }
 
         void GsIndicator_Execute(object action, HeliosActionEventArgs e)
@@ -213,7 +218,10 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
             _ball.Roll = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
-
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltEnabled = e.Value.BoolValue;
+        }
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {
             base.OnProfileChanged(oldProfile);

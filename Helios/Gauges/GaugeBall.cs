@@ -23,14 +23,14 @@ namespace GadrocsWorkshop.Helios.Gauges
 
     public class GaugeBall : Gauge3d, IRefreshableImage, IGauge3d
     {
-        private string _imageFile;
+        // private string _imageFile;
         private Point _location;
         private Size _size;
 
         private double _xScale = 1.0;
         private double _yScale = 1.0;
         
-        private Gauge3dSnapshot _gauge;
+        // private Gauge3dSnapshot _gauge;
 
         public GaugeBall(string imageFile, Point location, Size size, Point center)
             : this(imageFile, location, size, 180d, 270d, 0d)

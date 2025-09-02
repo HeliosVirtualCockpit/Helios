@@ -22,6 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System.Windows.Media.Media3D;
     public class GaugeCylinder : Gauge3d, IGauge3d
     {
+        private Point _location;
         private Size _size;
 
         private double _xScale = 1.0;
@@ -30,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _cylinderHeight = 2.0;
         private double _radius = 1.5d;
  
-        public GaugeCylinder(string imageFile, Point location, Size size, Size imageSize, Point center)
+        public GaugeCylinder(string imageFile, Point location, Size size, Point center)
             : this(imageFile, location, size, 0d, 0d, 0d)
         {
         }
@@ -39,6 +40,8 @@ namespace GadrocsWorkshop.Helios.Gauges
             : base(imageFile, location, size, basePitch, baseRoll, baseYaw, FOV)
         {
             //_imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
+            _location = location;
+            _size = size;
 
         }
 
@@ -92,7 +95,11 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
-            base.ScaleChildren(scaleX, scaleY);
+            _location.X *= scaleX;
+            _location.Y *= scaleY;
+            Snapshot.Top = _location.Y;
+            Snapshot.Left = _location.X;
+            OnDisplayUpdate();
         }
     }
 }

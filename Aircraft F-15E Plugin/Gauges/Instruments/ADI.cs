@@ -28,6 +28,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         private HeliosValue _roll;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _offFlag;
+        private HeliosValue _altLightValue;
+
 
         private GaugeNeedle _offFlagNeedle;
         private GaugeCylinder _cylinder;
@@ -43,7 +45,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         {
             Point center = new Point(200d, 200d);
 
-            _cylinder = new GaugeCylinder("{F-15E}/Gauges/Instruments/ADI-Tape.xaml", new Point(25d, 25d), new Size(350d, 350d), new Size(1850d, 300d));
+            _cylinder = new GaugeCylinder("{F-15E}/Gauges/Instruments/ADI-Tape.xaml", new Point(25d, 25d), new Size(350d, 350d));
             _cylinder.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_cylinder);
 
@@ -77,6 +79,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
+
         }
 
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
@@ -100,6 +106,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
             _cylinder.Roll = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
+        }
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            _cylinder.LightingAltEnabled = e.Value.BoolValue;
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
