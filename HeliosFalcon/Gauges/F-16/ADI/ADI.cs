@@ -21,6 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 	using System;
 	using System.Windows;
 	using System.Windows.Media;
+    using static GadrocsWorkshop.Helios.Interfaces.DCS.Common.NetworkTriggerValue;
 
 	[HeliosControl("Helios.Falcon.ADI", "Falcon BMS ADI", "Falcon BMS F-16", typeof(GaugeRenderer))]
 	public class ADI : BaseGauge
@@ -85,6 +86,8 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 		private bool _suppressScale = false;
 
+        private HeliosValue _pitch;
+        private HeliosValue _roll;
 
         public ADI()
 			: base("ADI", new Size(350, 350))
@@ -101,7 +104,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
 
-			_ballMask = new GaugeImage(_ballMaskImage, new Rect(60d, 50d, 230d, 230d));
+            _ballMask = new GaugeImage(_ballMaskImage, new Rect(60d, 50d, 230d, 230d));
 			Components.Add(_ballMask);
 
 			_rollMarkers = new GaugeNeedle(_rollMarkersOffImage, new Point(175d, 165d), new Size(50d, 230d), new Point(25d, 115d));
@@ -157,7 +160,16 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 			_slipBall = new GaugeNeedle(_slipBallOffImage, new Point(175d, 305d), new Size(10d, 10d), new Point(5d, 5d));
 			Components.Add(_slipBall);
-		}
+
+            _pitch = new HeliosValue(this, new BindingValue(0d), "ADI", "Pitch", "Current pitch of the aircraft.", "(-2 Pi to + 2 Pi)", BindingValueUnits.Radians);
+            _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
+            Actions.Add(_pitch);
+
+            _roll = new HeliosValue(this, new BindingValue(0d), "ADI", "Bank", "Current bank of the aircraft.", "(-2 Pi to + 2 Pi)", BindingValueUnits.Radians);
+            _roll.Execute += new HeliosActionHandler(Bank_Execute);
+            Actions.Add(_roll);
+
+        }
 
 		#endregion Components
 
@@ -283,9 +295,9 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_ilsHorizontalNeedleDashed.VerticalOffset = _ilsCalibration.Interpolate(ILSDeviationHorizontal);
 			}
 
-			_ball.Yaw = PitchAngle / 2;
-			_ball.Roll = RollAngle - 90;
-			_rollMarkers.Rotation = RollAngle;
+			_ball.Yaw = PitchAngle;
+			_ball.Roll = RollAngle;
+			_rollMarkers.Rotation = -RollAngle;
 			_slipBall.HorizontalOffset = _slipBallCalibration.Interpolate(SideSlipAngle);
 
 			_offFlag.IsHidden = !FlagOff;
@@ -352,7 +364,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
         {
 			if (!_suppressScale)
 			{
-                _ball.ScaleChildren(scaleX, scaleY);
+                //_ball.ScaleChildren(scaleX, scaleY);
 				_suppressScale = false;
             }
             base.ScaleChildren(scaleX, scaleY);
@@ -362,7 +374,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
             _suppressScale = false;
             if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
             {
-                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                //_ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
 				_suppressScale = true;
             }
         }
@@ -405,6 +417,18 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 			}
 		}
 
-		#endregion Properties
-	}
+        #endregion Properties
+        void Pitch_Execute(object action, HeliosActionEventArgs e)
+        {
+            _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
+            PitchAngle = e.Value.DoubleValue * 180 / Math.PI;
+            ProcessADIValues();
+        }
+		void Bank_Execute(object action, HeliosActionEventArgs e)
+        {
+            _roll.SetValue(e.Value, e.BypassCascadingTriggers);
+            RollAngle = e.Value.DoubleValue * 180 / Math.PI;
+            ProcessADIValues();
+        }
+    }
 }

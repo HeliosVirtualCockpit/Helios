@@ -99,7 +99,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_offFlag);
 
-            _pitch = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Pitch", "Current ptich of the aircraft.", "(-90 to +90)", BindingValueUnits.Degrees);
+            _pitch = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Pitch", "Current pitch of the aircraft.", "(-90 to +90)", BindingValueUnits.Degrees);
             _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
             Actions.Add(_pitch);
 
