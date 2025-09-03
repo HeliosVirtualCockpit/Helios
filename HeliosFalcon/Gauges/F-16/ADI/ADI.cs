@@ -86,8 +86,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 		private bool _suppressScale = false;
 
-        private HeliosValue _pitch;
-        private HeliosValue _roll;
+        private HeliosValue _pitch, _roll, _altLightValue;
 
         public ADI()
 			: base("ADI", new Size(350, 350))
@@ -169,13 +168,17 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "ADI", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
+            Actions.Add(_altLightValue);
+
         }
 
-		#endregion Components
+        #endregion Components
 
-		#region Methods
+        #region Methods
 
-		protected override void OnProfileChanged(HeliosProfile oldProfile)
+        protected override void OnProfileChanged(HeliosProfile oldProfile)
 		{
 			base.OnProfileChanged(oldProfile);
 
@@ -314,7 +317,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersDimImage;
 				_slipBall.Image = _slipBallDimImage;
 				_ilsPointer.Image = _ilsPointerDimImage;
-				_ball.Image = _ballDimImage;
+				_ball.LightingAltEnabled = true;
 			}
 			else if (Backlight == 2)
 			{
@@ -322,7 +325,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersBrtImage;
 				_slipBall.Image = _slipBallBrtImage;
 				_ilsPointer.Image = _ilsPointerBrtImage;
-				_ball.Image = _ballBrtImage;
+				_ball.LightingAltEnabled = true;
 			}
 			else
 			{
@@ -330,7 +333,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersOffImage;
 				_slipBall.Image = _slipBallOffImage;
 				_ilsPointer.Image = _ilsPointerOffImage;
-				_ball.Image = _ballOffImage;
+				_ball.LightingAltEnabled = false;
 			}
 
 			Refresh();
@@ -364,7 +367,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
         {
 			if (!_suppressScale)
 			{
-                //_ball.ScaleChildren(scaleX, scaleY);
+                _ball.ScaleChildren(scaleX, scaleY);
 				_suppressScale = false;
             }
             base.ScaleChildren(scaleX, scaleY);
@@ -374,7 +377,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
             _suppressScale = false;
             if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
             {
-                //_ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
 				_suppressScale = true;
             }
         }
@@ -429,6 +432,10 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
             RollAngle = e.Value.DoubleValue * 180 / Math.PI;
             ProcessADIValues();
+        }
+        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        {
+            Backlight = e.Value.BoolValue ? 1 : 0;
         }
     }
 }
