@@ -14,6 +14,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Diagnostics.Contracts;
+using System.Drawing.Imaging;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -34,6 +36,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private ImageSource _imageSource;
         private double _fieldOfView = 35d;
         private Color _lightingColor, _lightingColorAlt;
+        private double _lightingBrightness = 1d, _lightingAltBrightness = 1d;
         private bool _lightingAltEnabled = false;
         private DirectionalLight _lighting;
         private double _lightingX, _lightingY, _lightingZ;
@@ -130,7 +133,22 @@ namespace GadrocsWorkshop.Helios.Gauges
                     _lightingColor = value;
                     if (!_lightingAltEnabled)
                     {
-                        _lighting.Color = _lightingColor;
+                        _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
+                    }
+                }
+            }
+        }
+        public double LightingBrightness
+        {
+            get => _lightingBrightness;
+            set
+            {
+                if (value != _lightingBrightness)
+                {
+                    _lightingBrightness = value;
+                    if (!_lightingAltEnabled)
+                    {
+                        _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
                     }
                 }
             }
@@ -145,7 +163,22 @@ namespace GadrocsWorkshop.Helios.Gauges
                     _lightingColorAlt = value;
                     if (_lightingAltEnabled)
                     {
-                        _lighting.Color = _lightingColorAlt;
+                        _lighting.Color = ScaleBrightness(_lightingColorAlt, _lightingAltBrightness);
+                    }
+                }
+            }
+        }
+        public double LightingAltBrightness
+        {
+            get => _lightingAltBrightness;
+            set
+            {
+                if (value != _lightingAltBrightness)
+                {
+                    _lightingAltBrightness = value;
+                    if (_lightingAltEnabled)
+                    {
+                        _lighting.Color = ScaleBrightness(_lightingColorAlt, _lightingAltBrightness);
                     }
                 }
             }
@@ -157,7 +190,13 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _lightingAltEnabled)
                 {
                     _lightingAltEnabled = value;
-                    _lighting.Color = _lightingAltEnabled ? _lightingColorAlt : _lightingColor;
+                    if (!_lightingAltEnabled)
+                    {
+                        _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
+                    } else
+                    {
+                        _lighting.Color = ScaleBrightness(_lightingColorAlt, _lightingAltBrightness);
+                    }
                 }
             }
         }
@@ -224,6 +263,14 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             _rotZ.Angle = z;
         }
+        public static Color ScaleBrightness(Color baseColor, double factor)
+        {
+            byte r = (byte)Math.Min(255, baseColor.R * factor);
+            byte g = (byte)Math.Min(255, baseColor.G * factor);
+            byte b = (byte)Math.Min(255, baseColor.B * factor);
+
+            return Color.FromArgb(baseColor.A, r, g, b);
+        }
         /// <summary>
         /// Takes a snapshot of the Viewport3D and draws it into the DrawingContext.
         /// </summary>
@@ -238,7 +285,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _viewport.Measure(new Size(w, h));
             _viewport.Arrange(new Rect(0, 0, w, h));
             rtb.Render(_viewport);
-
+            
             dc.DrawImage(rtb, new Rect(_location.X, _location.Y, w, h));
         }
 

@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         private HeliosValue _pitchAdjustment;
         private HeliosValue _warningFlag;
         private HeliosValue _altLightValue;
-
+        private HeliosValue _altLightingBrightnessValue;
 
         private CalibrationPointCollectionDouble _pitchCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
@@ -51,6 +51,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260));
             _cylinder.Clip = new EllipseGeometry(center, 130d, 130d);
             Components.Add(_cylinder);
+            _cylinder.LightingBrightness = 0.9d;
+            _cylinder.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
 
             Components.Add(new GaugeImage("{AV-8B}/Gauges/ADI/ADI-Inner-Ring.xaml", new Rect(center.X - (280d * 0.5d), center.Y - (280d * 0.5d), 280d, 280d)));
 
@@ -95,6 +97,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
             _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
             Actions.Add(_altLightValue);
+
+            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
+            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
+            Actions.Add(_altLightingBrightnessValue);
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
@@ -125,7 +131,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         {
             _cylinder.LightingAltEnabled = e.Value.BoolValue;
         }
-
+        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            _cylinder.LightingAltBrightness = e.Value.DoubleValue;
+        }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             if (!_suppressScale)

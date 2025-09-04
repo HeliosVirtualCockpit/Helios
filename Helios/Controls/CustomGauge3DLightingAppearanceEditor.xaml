@@ -7,7 +7,7 @@
              xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
              xmlns:controls="clr-namespace:GadrocsWorkshop.Helios.Controls"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             Height="220" d:DesignWidth="180"
+             Height="280" d:DesignWidth="180"
              d:DataContext="{d:DesignInstance Type={x:Type controls:DesignTimeCustomGaugeBall}}">
     <HeliosSdk:HeliosPropertyEditor.Resources>
         <Style x:Key="LineLabelStyle" TargetType="Label">
@@ -40,7 +40,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="28" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2" Style="{StaticResource Heading2}" Text=" Lighting Source"/>
@@ -52,28 +56,42 @@
                              Color="{Binding Control.LightingColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                              HorizontalAlignment="Left"
                              Margin="2,2,0,2" />
-        <Label Grid.Row="2" FontSize="10" HorizontalAlignment="Center" Width="51" Margin="0,0,0,2" Content="Alt Color">
+        <Label Grid.Row="2" FontSize="10" HorizontalAlignment="Left" Width="56" Grid.ColumnSpan="2" Content="Brightness" Margin="2,2,2,2" Grid.RowSpan="1">
+            <Label.ToolTip>Brightness of the default lighting</Label.ToolTip>
+        </Label>
+        <Slider Grid.Column="2" Grid.Row="2" Minimum="0" Maximum="1" Value="{Binding Control.LightingBrightness}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25"/>
+
+        <Label Grid.Row="3" FontSize="10" HorizontalAlignment="Center" Width="51" Margin="0,0,0,2" Content="Alt Color">
             <Label.ToolTip>Color of the light used to illuminate the ball when Enable Alt Lighting is true</Label.ToolTip>
         </Label>
         <HeliosSdk:ColorWell Grid.Column="1" Grid.ColumnSpan="2"
-                             Grid.Row="2"
+                             Grid.Row="3"
                              Color="{Binding Control.LightingColorAlt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                              HorizontalAlignment="Left"
                              Margin="2,2,0,2" />
-        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Left" Width="33" Content="X" Margin="20,0,0,2" Grid.RowSpan="1">
+
+        <Label Grid.Row="4" FontSize="10" HorizontalAlignment="Left" Width="56" Grid.ColumnSpan="2" Content="Brightness" Margin="2,2,2,2" Grid.RowSpan="1">
+            <Label.ToolTip>Brightness of the alternate lighting</Label.ToolTip>
+        </Label>
+        <Slider Grid.Column="2" Grid.Row="4" Minimum="0" Maximum="1" Value="{Binding Control.LightingAltBrightness}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="2,2,2,2" Style="{StaticResource Heading2}" Text=" Direction"/>
+
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Left" Width="33" Content="X" Margin="20,0,0,2" Grid.RowSpan="1">
             <Label.ToolTip>Lighting direction on the X-axis</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="2" Grid.Row="3" Minimum="-5" Maximum="5" Value="{Binding Control.LightingX}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="1"/>
-        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="3" FontSize="10" MaxWidth ="32" Text="{Binding Path=Control.LightingX}" Margin="2,2,2,2" Style="{StaticResource LineTextBoxStyle}" Visibility="Collapsed" />
-        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Left" Width="33" Content="Y" Margin="20,0,0,2" Grid.RowSpan="1">
+        <Slider Grid.Column="2" Grid.Row="6" Minimum="-5" Maximum="5" Value="{Binding Control.LightingX}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="1"/>
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="6" FontSize="10" MaxWidth ="32" Text="{Binding Path=Control.LightingX}" Margin="2,2,2,2" Style="{StaticResource LineTextBoxStyle}" Visibility="Collapsed" />
+        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Left" Width="33" Content="Y" Margin="20,0,0,2" Grid.RowSpan="1">
             <Label.ToolTip>Lighting direction on the Y-axis</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="2" Grid.Row="4" Minimum="-5" Maximum="5" Value="{Binding Control.LightingY}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="1"/>
-        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="4" FontSize="10" MaxWidth ="32" Text="{Binding Path=Control.LightingY}" Margin="2,2,2,2" Style="{StaticResource LineTextBoxStyle}" Visibility="Collapsed" />
-        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Left" Width="33" Content="Z" Margin="20,0,0,2" Grid.RowSpan="1">
+        <Slider Grid.Column="2" Grid.Row="7" Minimum="-5" Maximum="5" Value="{Binding Control.LightingY}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="1"/>
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="7" FontSize="10" MaxWidth ="32" Text="{Binding Path=Control.LightingY}" Margin="2,2,2,2" Style="{StaticResource LineTextBoxStyle}" Visibility="Collapsed" />
+        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Left" Width="33" Content="Z" Margin="20,0,0,2" Grid.RowSpan="1">
             <Label.ToolTip>Lighting direction on the Z-axis</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="2" Grid.Row="5" Minimum="-10" Maximum="0" Value="{Binding Control.LightingZ}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="2"/>
-        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="5" FontSize="10" MaxWidth ="32" Text="{Binding Path=Control.LightingZ}" Margin="2,2,2,2" Style="{StaticResource LineTextBoxStyle}" Visibility="Collapsed" />
+        <Slider Grid.Column="2" Grid.Row="8" Minimum="-10" Maximum="0" Value="{Binding Control.LightingZ}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="2"/>
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="8" FontSize="10" MaxWidth ="32" Text="{Binding Path=Control.LightingZ}" Margin="2,2,2,2" Style="{StaticResource LineTextBoxStyle}" Visibility="Collapsed" />
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2" Style="{StaticResource Heading2}" Text=" Lighting Source"/>
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

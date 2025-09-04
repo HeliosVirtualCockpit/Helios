@@ -34,7 +34,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private double _fov;
         private double _baseX, _baseY, _baseZ;
 
-        private HeliosValue _rotXValue, _rotYValue, _rotZValue, _altLightValue;
+        private HeliosValue _rotXValue, _rotYValue, _rotZValue, _altLightValue, _lightBrightnessValue, _altLightBrightnessValue;
 
         private bool _suppressScale = false;
 
@@ -52,9 +52,15 @@ namespace GadrocsWorkshop.Helios.Controls
             _rotZValue = new HeliosValue(this, new BindingValue(0d), "", "Z Rotation", "Rotation in the Z-Axis.", "(0 - 360)", BindingValueUnits.Degrees);
             _rotZValue.Execute += new HeliosActionHandler(Z_Execute);
             Actions.Add(_rotZValue);
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Enable Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
+            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Enable alternate lighting source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
             _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
             Actions.Add(_altLightValue);
+            _lightBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Brightness of default lighting source", "Number", "0 to 1", BindingValueUnits.Numeric);
+            _lightBrightnessValue.Execute += new HeliosActionHandler(LightingBrightness_Execute);
+            Actions.Add(_lightBrightnessValue);
+            _altLightBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Brightness of alternate lighting source", "Number", "0 to 1", BindingValueUnits.Numeric);
+            _altLightBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
+            Actions.Add(_altLightBrightnessValue);
         }
 
         #region Properties
@@ -130,6 +136,17 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        public double LightingBrightness
+        {
+            get => gauge.LightingBrightness;
+            set
+            {
+                if (value != LightingBrightness && gauge != null)
+                {
+                    gauge.LightingBrightness = value;
+                }
+            }
+        }
         public Color LightingColorAlt
         {
             get => gauge.LightingColorAlt;
@@ -141,6 +158,18 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        public double LightingAltBrightness
+        {
+            get => gauge.LightingAltBrightness;
+            set
+            {
+                if (value != LightingAltBrightness && gauge != null)
+                {
+                    gauge.LightingAltBrightness = value;
+                }
+            }
+        }
+
         public double LightingX
         {
             get => gauge.LightingX;
@@ -193,6 +222,14 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             gauge.LightingAltEnabled = e.Value.BoolValue;
         }
+        void LightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            gauge.LightingBrightness = e.Value.DoubleValue;
+        }
+        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            gauge.LightingAltBrightness = e.Value.DoubleValue;
+        }
 
         #region actions 
         public override void Reset()
@@ -242,7 +279,9 @@ namespace GadrocsWorkshop.Helios.Controls
             writer.WriteElementString("Y", LightingY.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("Z", LightingZ.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("Color", colorConverter.ConvertToInvariantString(LightingColor));
+            writer.WriteElementString("ColorBrightness", LightingBrightness.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("AltColor", colorConverter.ConvertToInvariantString(LightingColorAlt));
+            writer.WriteElementString("AltColorBrightness", LightingAltBrightness.ToString(CultureInfo.InvariantCulture));
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
@@ -266,7 +305,9 @@ namespace GadrocsWorkshop.Helios.Controls
                     LightingY = double.Parse(reader.ReadElementString("Y"), CultureInfo.InvariantCulture);
                     LightingZ = double.Parse(reader.ReadElementString("Z"), CultureInfo.InvariantCulture);
                     LightingColor = (Color)colorConverter.ConvertFromInvariantString(reader.ReadElementString("Color"));
+                    LightingBrightness = double.Parse(reader.ReadElementString("ColorBrightness"), CultureInfo.InvariantCulture);
                     LightingColorAlt = (Color)colorConverter.ConvertFromInvariantString(reader.ReadElementString("AltColor"));
+                    LightingAltBrightness = double.Parse(reader.ReadElementString("AltColorBrightness"), CultureInfo.InvariantCulture);
                     reader.ReadEndElement();
                 }
                 reader.ReadEndElement();

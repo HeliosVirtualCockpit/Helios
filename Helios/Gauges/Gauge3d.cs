@@ -228,6 +228,32 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
+        public double LightingBrightness
+        {
+            get => _gaugeSnapshot.LightingBrightness;
+            set
+            {
+                if (value != _gaugeSnapshot.LightingBrightness)
+                {
+                    _gaugeSnapshot.LightingBrightness = value;
+                    OnDisplayUpdate();
+                }
+            }
+
+        }
+        public double LightingAltBrightness
+        {
+            get => _gaugeSnapshot.LightingAltBrightness;
+            set
+            {
+                if (value != _gaugeSnapshot.LightingAltBrightness)
+                {
+                    _gaugeSnapshot.LightingAltBrightness = value;
+                    OnDisplayUpdate();
+                }
+            }
+
+        }
         public double LightingX
         {
             get => _gaugeSnapshot.LightingX;
@@ -289,7 +315,6 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             _gaugeSnapshot.RedrawSnapshot(drawingContext);
         }
-
         protected override void OnRefresh(double xScale, double yScale)
         {
             if(_xScale != xScale || _yScale != yScale)

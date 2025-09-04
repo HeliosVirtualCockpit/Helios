@@ -35,6 +35,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private HeliosValue _gsFlag;
         private HeliosValue _locFlag;
         private HeliosValue _altLightValue;
+        private HeliosValue _altLightingBrightnessValue;
 
         private GaugeImage _auxFlagImage;
         private GaugeImage _offFlagImage;
@@ -49,7 +50,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private GaugeNeedle _ilsVerticalNeedle;
         private GaugeNeedle _ilsScaleNeedle;
 
-        private CalibrationPointCollectionDouble _pitchCalibration;
         private CalibrationPointCollectionDouble _ilsCalibration;
         private CalibrationPointCollectionDouble _slipBallCalibration;
         private CalibrationPointCollectionDouble _turnCalibration;
@@ -61,9 +61,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         {
             double scale = 250d / 350d;
 
-            _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -180d, 360d, 180d);
             _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
+            _ball.LightingColorAlt = Color.FromArgb(0xff,0x00,0xff,0x00);
+            _ball.LightingBrightness = 0.9d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(65d, 65d, 220d, 220d)));
 
@@ -160,6 +161,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
             _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
             Actions.Add(_altLightValue);
+
+            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
+            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
+            Actions.Add(_altLightingBrightnessValue);
         }
 
         void SlipBall_Execute(object action, HeliosActionEventArgs e)
@@ -223,6 +228,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
         {
             _ball.LightingAltEnabled = e.Value.BoolValue;
+        }
+        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltBrightness = e.Value.DoubleValue;
         }
 
         public override void ScaleChildren(double scaleX, double scaleY)

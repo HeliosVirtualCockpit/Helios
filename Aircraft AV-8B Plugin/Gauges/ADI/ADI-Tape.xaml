@@ -13,7 +13,7 @@
         <Canvas>
 
             <!-- Layer 2/Background/<Rectangle> -->
-            <Path Fill="#ff727272" Data="F1 M 0.000,1024.000 L 0.000,0.000 L 300.000,0.000 L 300.000,1024.000 L 0.000,1024.000 Z"/>
+            <Path Fill="#ffc2c2c2" Data="F1 M 0.000,1024.000 L 0.000,0.000 L 300.000,0.000 L 300.000,1024.000 L 0.000,1024.000 Z"/>
 
             <!-- Layer 2/Background/<Rectangle> -->
             <Path Fill="#ff000000" Data="F1 M 0.000,2048.000 L 0.000,1024.000 L 300.000,1024.000 L 300.000,2048.000 L 0.000,2048.000 Z"/>
@@ -23,10 +23,10 @@
         <Canvas>
 
             <!-- Layer 2/Horizontal/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 150.000,512.500 L 150.000,1536.000"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 150.000,512.500 L 150.000,1536.000"/>
 
             <!-- Layer 2/Horizontal/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 150.000,1024.250 L 150.000,1536.000"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 150.000,1024.250 L 150.000,1536.000"/>
 
         </Canvas>
 
@@ -36,146 +36,146 @@
             <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 300.000,1024.000 L 0.000,1024.000"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1051.444 L 129.000,1051.444"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1051.444 L 129.000,1051.444"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1079.889 L 25.000,1079.889"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1079.889 L 25.000,1079.889"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1108.333 L 129.000,1108.333"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1108.333 L 129.000,1108.333"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1136.778 L 25.000,1136.778"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1136.778 L 25.000,1136.778"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1165.222 L 129.000,1165.222"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1165.222 L 129.000,1165.222"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1222.111 L 129.000,1222.111"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1222.111 L 129.000,1222.111"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1250.555 L 25.000,1250.555"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1250.555 L 25.000,1250.555"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1279.000 L 129.000,1279.000"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1279.000 L 129.000,1279.000"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1307.444 L 25.000,1307.444"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1307.444 L 25.000,1307.444"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1335.888 L 129.000,1335.888"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1335.888 L 129.000,1335.888"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1392.777 L 129.000,1392.777"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1392.777 L 129.000,1392.777"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1421.222 L 25.000,1421.222"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1421.222 L 25.000,1421.222"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1449.666 L 129.000,1449.666"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1449.666 L 129.000,1449.666"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1478.110 L 25.000,1478.110"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1478.110 L 25.000,1478.110"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1506.555 L 129.000,1506.555"/>
+            <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1506.555 L 129.000,1506.555"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,994.554 L 129.000,994.554"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,994.554 L 129.000,994.554"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,937.665 L 129.000,937.665"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,937.665 L 129.000,937.665"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,966.109 L 25.000,966.109"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,966.109 L 25.000,966.109"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,880.776 L 129.000,880.776"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,880.776 L 129.000,880.776"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,909.221 L 25.000,909.221"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,909.221 L 25.000,909.221"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,823.887 L 129.000,823.887"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,823.887 L 129.000,823.887"/>
 
             <Canvas>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Bottom -->
-                <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 105.000,1193.665 L 25.000,1193.665"/>
+                <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 105.000,1193.665 L 25.000,1193.665"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Middle -->
-                <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1193.665 L 129.000,1193.665"/>
+                <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1193.665 L 129.000,1193.665"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 top -->
-                <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1193.665 L 195.000,1193.665"/>
+                <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1193.665 L 195.000,1193.665"/>
 
             </Canvas>
 
             <Canvas>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Bottom -->
-                <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 105.000,1364.332 L 25.000,1364.332"/>
+                <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 105.000,1364.332 L 25.000,1364.332"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Middle -->
-                <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1364.332 L 129.000,1364.332"/>
+                <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 171.000,1364.332 L 129.000,1364.332"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 top -->
-                <Path StrokeThickness="1.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1364.332 L 195.000,1364.332"/>
+                <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 275.000,1364.332 L 195.000,1364.332"/>
 
             </Canvas>
 
             <Canvas>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Bottom -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 105.000,852.332 L 25.000,852.332"/>
+                <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 105.000,852.332 L 25.000,852.332"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Middle -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,852.332 L 129.000,852.332"/>
+                <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,852.332 L 129.000,852.332"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 top -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,852.332 L 195.000,852.332"/>
+                <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,852.332 L 195.000,852.332"/>
 
             </Canvas>
 
             <Canvas>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Bottom -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 105.000,681.665 L 25.000,681.665"/>
+                <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 105.000,681.665 L 25.000,681.665"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 Middle -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,681.665 L 129.000,681.665"/>
+                <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,681.665 L 129.000,681.665"/>
 
                 <!-- Layer 2/Vertical/Number Marker/30 top -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,681.665 L 195.000,681.665"/>
+                <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,681.665 L 195.000,681.665"/>
 
             </Canvas>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,766.998 L 129.000,766.998"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,766.998 L 129.000,766.998"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,795.443 L 25.000,795.443"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,795.443 L 25.000,795.443"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,710.109 L 129.000,710.109"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,710.109 L 129.000,710.109"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,738.554 L 25.000,738.554"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,738.554 L 25.000,738.554"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,653.221 L 129.000,653.221"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,653.221 L 129.000,653.221"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,596.332 L 129.000,596.332"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,596.332 L 129.000,596.332"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,624.776 L 25.000,624.776"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,624.776 L 25.000,624.776"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,539.443 L 129.000,539.443"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 171.000,539.443 L 129.000,539.443"/>
 
             <!-- Layer 2/Vertical/<Line> -->
-            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,567.887 L 25.000,567.887"/>
+            <Path StrokeThickness="2.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 275.000,567.887 L 25.000,567.887"/>
 
         </Canvas>
 

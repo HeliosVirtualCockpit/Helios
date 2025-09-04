@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.FA18C.ADI", "ADI 1", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.FA18C.ADI", "ADI", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADI : AltImageGauge
     {
         private HeliosValue _pitch;
@@ -37,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         private HeliosValue _bankSteering;
         private HeliosValue _pitchSteering;
         private HeliosValue _offFlag;
-        private HeliosValue _altLightValue;
+        private HeliosValue _altLightingBrightnessValue;
 
         private GaugeBall _ball;
         private GaugeNeedle _offFlagImage;
@@ -67,6 +67,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             Components.Add(_ball);
             _ball.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
             _ball.LightingColor = Color.FromArgb(0xff, 0xff, 0xff, 0xff);
+            _ball.LightingBrightness = 0.9d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -45d, 1.0d, 45d);
             _wingsNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/ADI-Wings.xaml", new Point(175d - 121d, 160d), new Size(204.025d, 29.333d), new Point(0d, 0d));
@@ -139,10 +140,9 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _pitchSteering.Execute += new HeliosActionHandler(PitchSteering_Execute);
             Actions.Add(_pitchSteering);
 
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
-            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
-            Actions.Add(_altLightValue);
-
+            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
+            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
+            Actions.Add(_altLightingBrightnessValue);
         }
 
         void CreateInputBindings()
@@ -223,9 +223,25 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _bankSteering.SetValue(e.Value, e.BypassCascadingTriggers);
             _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(e.Value.DoubleValue);
         }
-        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        public override bool EnableAlternateImageSet
         {
-            _ball.LightingAltEnabled = e.Value.BoolValue;
+            get => base.EnableAlternateImageSet;
+
+            set
+            {
+                bool newValue = value;
+                bool oldValue = base.EnableAlternateImageSet;
+
+                if (newValue != oldValue)
+                {
+                    _ball.LightingAltEnabled = newValue;
+                    base.EnableAlternateImageSet = newValue;
+                }
+            }
+        }
+        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltBrightness = e.Value.DoubleValue;
         }
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {

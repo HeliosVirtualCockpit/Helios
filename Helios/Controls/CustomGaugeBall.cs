@@ -90,16 +90,13 @@ namespace GadrocsWorkshop.Helios.Controls
         protected override IGauge3d gauge
         {
             get => _sphere;
-
         }
         #endregion
         #region de/serialize
         public override void WriteXml(XmlWriter writer)
         {
-
             base.WriteXml(writer);
         }
-
         public override void ReadXml(XmlReader reader)
         {
             base.ReadXml(reader);

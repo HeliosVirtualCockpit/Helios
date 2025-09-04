@@ -77,7 +77,6 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private const string _ilsPointerDimImage = "{HeliosFalcon}/Gauges/F-16/ADI/adi_ils_pointer_dim.xaml";
 		private const string _ilsPointerBrtImage = "{HeliosFalcon}/Gauges/F-16/ADI/adi_ils_pointer_brt.xaml";
 
-		private CalibrationPointCollectionDouble _pitchCalibration;
 		private CalibrationPointCollectionDouble _ilsCalibration;
 		private CalibrationPointCollectionDouble _slipBallCalibration;
 
@@ -85,8 +84,6 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private bool _inFlightLastValue = true;
 
 		private bool _suppressScale = false;
-
-        private HeliosValue _pitch, _roll, _altLightValue;
 
         public ADI()
 			: base("ADI", new Size(350, 350))
@@ -98,10 +95,11 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 		private void AddComponents()
 		{
-			_pitchCalibration = new CalibrationPointCollectionDouble(-360d, -990d, 360d, 990d);
             _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball-2.xaml", new Point(50d, 42d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
+            _ball.LightingBrightness = 0.9d;
+            _ball.LightingColorAlt = Color.FromArgb(0xFF, 0x77, 0xff, 0xA3);
 
             _ballMask = new GaugeImage(_ballMaskImage, new Rect(60d, 50d, 230d, 230d));
 			Components.Add(_ballMask);
@@ -159,19 +157,6 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 			_slipBall = new GaugeNeedle(_slipBallOffImage, new Point(175d, 305d), new Size(10d, 10d), new Point(5d, 5d));
 			Components.Add(_slipBall);
-
-            _pitch = new HeliosValue(this, new BindingValue(0d), "ADI", "Pitch", "Current pitch of the aircraft.", "(-2 Pi to + 2 Pi)", BindingValueUnits.Radians);
-            _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
-            Actions.Add(_pitch);
-
-            _roll = new HeliosValue(this, new BindingValue(0d), "ADI", "Bank", "Current bank of the aircraft.", "(-2 Pi to + 2 Pi)", BindingValueUnits.Radians);
-            _roll.Execute += new HeliosActionHandler(Bank_Execute);
-            Actions.Add(_roll);
-
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "ADI", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
-            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
-            Actions.Add(_altLightValue);
-
         }
 
         #endregion Components
@@ -317,7 +302,8 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersDimImage;
 				_slipBall.Image = _slipBallDimImage;
 				_ilsPointer.Image = _ilsPointerDimImage;
-				_ball.LightingAltEnabled = true;
+                _ball.LightingAltBrightness = 0.8d;
+                _ball.LightingAltEnabled = true;
 			}
 			else if (Backlight == 2)
 			{
@@ -325,7 +311,8 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersBrtImage;
 				_slipBall.Image = _slipBallBrtImage;
 				_ilsPointer.Image = _ilsPointerBrtImage;
-				_ball.LightingAltEnabled = true;
+                _ball.LightingAltBrightness = 1.0d;
+                _ball.LightingAltEnabled = true;
 			}
 			else
 			{
@@ -421,21 +408,5 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		}
 
         #endregion Properties
-        void Pitch_Execute(object action, HeliosActionEventArgs e)
-        {
-            _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            PitchAngle = e.Value.DoubleValue * 180 / Math.PI;
-            ProcessADIValues();
-        }
-		void Bank_Execute(object action, HeliosActionEventArgs e)
-        {
-            _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            RollAngle = e.Value.DoubleValue * 180 / Math.PI;
-            ProcessADIValues();
-        }
-        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
-        {
-            Backlight = e.Value.BoolValue ? 1 : 0;
-        }
     }
 }

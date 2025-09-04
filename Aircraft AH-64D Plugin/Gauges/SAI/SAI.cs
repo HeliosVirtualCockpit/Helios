@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
         private HeliosValue _offFlag;
         private HeliosValue _altLightValue;
+        private HeliosValue _altLightingBrightnessValue;
 
 
         private GaugeImage _offFlagImage;
@@ -57,6 +58,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
+            _ball.LightingBrightness = 0.9d;
+            _ball.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
+
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
             _wingsNeedle = new GaugeNeedle("{AH-64D}/Images/SAI/adi_wings.xaml", new Point(99d, 158d), new Size(157d, 31d), new Point(0d, 0d));
@@ -115,6 +119,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
             Actions.Add(_altLightValue);
 
+            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
+            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
+            Actions.Add(_altLightingBrightnessValue);
         }
 
 
@@ -155,7 +162,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         {
             _ball.LightingAltEnabled = e.Value.BoolValue;
         }
-
+        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            _ball.LightingAltBrightness = e.Value.DoubleValue;
+        }
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             if (!_suppressScale)
