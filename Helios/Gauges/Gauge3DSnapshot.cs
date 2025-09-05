@@ -35,11 +35,12 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Point _location;
         private ImageSource _imageSource;
         private double _fieldOfView = 35d;
-        private Color _lightingColor, _lightingColorAlt;
-        private double _lightingBrightness = 1d, _lightingAltBrightness = 1d;
-        private bool _lightingAltEnabled = false;
+        private Color _lightingColor;
+        private double _lightingBrightness = 1d;
         private DirectionalLight _lighting;
         private double _lightingX, _lightingY, _lightingZ;
+        private Effects.ColorAdjustEffect _effect;
+        private bool _effectsExclusion = false;
         public Gauge3dSnapshot(MeshGeometry3D mesh)
         {
             _mesh = mesh;
@@ -57,8 +58,6 @@ namespace GadrocsWorkshop.Helios.Gauges
             _viewport.Camera = _camera;
 
             _lightingColor = Colors.White;
-            _lightingColorAlt = Colors.Green;
-            _lightingAltEnabled = false;
 
             _lightingX = -1d;
             _lightingY = -1d;
@@ -131,10 +130,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _lightingColor)
                 {
                     _lightingColor = value;
-                    if (!_lightingAltEnabled)
-                    {
-                        _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
-                    }
+                    _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
+
                 }
             }
         }
@@ -146,57 +143,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _lightingBrightness)
                 {
                     _lightingBrightness = value;
-                    if (!_lightingAltEnabled)
-                    {
-                        _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
-                    }
-                }
-            }
-        }
-        public Color LightingColorAlt
-        {
-            get => _lightingColorAlt;
-            set
-            {
-                if (value != _lightingColorAlt)
-                {
-                    _lightingColorAlt = value;
-                    if (_lightingAltEnabled)
-                    {
-                        _lighting.Color = ScaleBrightness(_lightingColorAlt, _lightingAltBrightness);
-                    }
-                }
-            }
-        }
-        public double LightingAltBrightness
-        {
-            get => _lightingAltBrightness;
-            set
-            {
-                if (value != _lightingAltBrightness)
-                {
-                    _lightingAltBrightness = value;
-                    if (_lightingAltEnabled)
-                    {
-                        _lighting.Color = ScaleBrightness(_lightingColorAlt, _lightingAltBrightness);
-                    }
-                }
-            }
-        }
-        public bool LightingAltEnabled { 
-            get => _lightingAltEnabled; 
-            set
-            {
-                if (value != _lightingAltEnabled)
-                {
-                    _lightingAltEnabled = value;
-                    if (!_lightingAltEnabled)
-                    {
-                        _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
-                    } else
-                    {
-                        _lighting.Color = ScaleBrightness(_lightingColorAlt, _lightingAltBrightness);
-                    }
+                    _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
                 }
             }
         }
@@ -236,7 +183,18 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
-      public MeshGeometry3D Mesh
+        public bool EffectsExclusion
+        {
+            get => _effectsExclusion;
+            set
+            {
+                if (!_effectsExclusion.Equals(value))
+                {
+                    _effectsExclusion = value;
+                }
+            }
+        }
+        public MeshGeometry3D Mesh
         {
             set
             {
@@ -285,8 +243,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _viewport.Measure(new Size(w, h));
             _viewport.Arrange(new Rect(0, 0, w, h));
             rtb.Render(_viewport);
-            
-            dc.DrawImage(rtb, new Rect(_location.X, _location.Y, w, h));
+            RenderEffect(dc, rtb, new Rect(_location.X, _location.Y, w, h));
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
@@ -295,5 +252,25 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
         protected override int VisualChildrenCount => 1;
         protected override Visual GetVisualChild(int index) => _visual;
+        private void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
+        {
+            if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+            {
+                _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+            }
+
+            Image imageControl = new Image
+            {
+                Source = image,
+                Width = image != null ? image.Width : 0,
+                Height = image != null ? image.Height : 0,
+            };
+            if (_effect != null && !EffectsExclusion)
+            {
+                imageControl.Effect = _effect;
+            }
+            VisualBrush visualBrush = new VisualBrush(imageControl);
+            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
+        }
     }
 }

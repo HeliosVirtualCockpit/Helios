@@ -19,6 +19,7 @@ using System.Collections.Generic;
 namespace GadrocsWorkshop.Helios
 {
     using System.Windows.Threading;
+    using System.Windows.Media.Effects;
 
     public interface IProfileManager
     {
@@ -52,5 +53,9 @@ namespace GadrocsWorkshop.Helios
         /// <param name="loadingWork">iteration of progress strings that step executes the load process</param>
         /// <returns>a loaded profile or null</returns>
         HeliosProfile LoadProfile(string path, out IEnumerable<string> loadingWork);
+        /// <summary>
+        /// Required here so that the ShaderEffect can be accessed by visuals and gauges.
+        /// </summary>
+        ShaderEffect CurrentEffect { get; set; }
     }
 }

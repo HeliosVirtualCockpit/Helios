@@ -45,5 +45,10 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             Triggers.Add(numericSignal);
             Values.Add(numericSignal);
         }
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
     }
 }

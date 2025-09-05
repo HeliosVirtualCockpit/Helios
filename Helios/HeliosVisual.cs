@@ -24,6 +24,7 @@ using System.Windows.Media;
 using System.Xml;
 using GadrocsWorkshop.Helios.ComponentModel;
 using GadrocsWorkshop.Helios.Controls.Capabilities;
+using GadrocsWorkshop.Helios.Gauges;
 
 namespace GadrocsWorkshop.Helios
 {
@@ -45,6 +46,7 @@ namespace GadrocsWorkshop.Helios
         private bool _snapTarget = true;
         private bool _hidden;
         private bool _defaultHidden;
+        private bool _effectsExclusion = false;
         private bool _keepAspectRatio = false;
         private bool _imageRefresh = false;
         private double _aspectRatio = 1.0;
@@ -87,6 +89,8 @@ namespace GadrocsWorkshop.Helios
         public event EventHandler Moved;
 
         public event EventHandler HiddenChanged;
+
+        public event EventHandler EffectsExclusionChanged;
 
         #region Properties
 
@@ -171,7 +175,6 @@ namespace GadrocsWorkshop.Helios
                 OnHiddenChanged();
             }
         }
-
         /// <summary>
         /// Gets or sets whether this control is hidden load/reset of a profile.
         /// </summary>
@@ -188,6 +191,22 @@ namespace GadrocsWorkshop.Helios
                 bool oldValue = _defaultHidden;
                 _defaultHidden = value;
                 OnPropertyChanged("IsDefaultHidden", oldValue, value, true);
+            }
+        }
+        /// <summary>
+        /// Whether this control will have effects applied to is on rendering.
+        /// </summary>
+        public virtual bool EffectsExclusion
+        {
+            get => _effectsExclusion;
+            set
+            {
+                if (!_effectsExclusion.Equals(value))
+                {
+                    _effectsExclusion = value;
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                    OnEffectsExclusionChanged();
+                }
             }
         }
 
@@ -722,6 +741,10 @@ namespace GadrocsWorkshop.Helios
         {
             HiddenChanged?.Invoke(this, EventArgs.Empty);
         }
+        private void OnEffectsExclusionChanged()
+        {
+            EffectsExclusionChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         /// <summary>
         /// Method to override default configurations when this is used as an icon.
@@ -857,7 +880,12 @@ namespace GadrocsWorkshop.Helios
             }
 
             writer.WriteElementString("Hidden", boolConverter.ConvertToInvariantString(IsDefaultHidden));
- 
+
+            if (EffectsExclusion)
+            {
+                writer.WriteElementString("EffectsExclusion", boolConverter.ConvertToInvariantString(EffectsExclusion));
+            }
+
             if (PersistChildrenAsComment)
             {
                 writer.WriteElementString("PersistChildrenAsComment", boolConverter.ConvertToInvariantString(PersistChildrenAsComment));
@@ -880,19 +908,15 @@ namespace GadrocsWorkshop.Helios
                 Width = size.Width;
                 Height = size.Height;
             }
-            if (reader.Name.Equals("Rotation"))
-            {
-                Rotation = (HeliosVisualRotation)Enum.Parse(typeof(HeliosVisualRotation), reader.ReadElementString("Rotation"));
-            }
+            Rotation = reader.Name.Equals("Rotation") ? (HeliosVisualRotation)Enum.Parse(typeof(HeliosVisualRotation), reader.ReadElementString("Rotation")) : 0d;
+
             if (reader.Name.Equals("Hidden"))
             {
                 IsDefaultHidden = (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("Hidden"));
                 IsHidden = IsDefaultHidden;
             }
-            if (reader.Name.Equals("PersistChildrenAsComment"))
-            {
-                PersistChildrenAsComment = (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("PersistChildrenAsComment"));
-            }
+            EffectsExclusion = reader.Name.Equals("EffectsExclusion") ? (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("EffectsExclusion")) : false;
+            PersistChildrenAsComment = reader.Name.Equals("PersistChildrenAsComment") ? (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("PersistChildrenAsComment")) : false;
         }
     }
 }

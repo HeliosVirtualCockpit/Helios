@@ -32,9 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         private HeliosValue _localizerH;
         private HeliosValue _localizerV;
         private HeliosValue _slipBall;
-        private HeliosValue _altLightValue;
-        private HeliosValue _altLightingBrightnessValue;
-
+ 
         private GaugeNeedle _offFlagNeedle;
         private GaugeBall _ball;
         private GaugeNeedle _bankNeedle;
@@ -58,9 +56,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _glideCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d);
 
             _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 35d);
-            _ball.LightingColorAlt = Color.FromArgb(0xff, 0xff, 0x22, 0x00); 
             Components.Add(_ball);
-            _ball.LightingBrightness = 0.9d;
+            _ball.LightingBrightness = 1.0d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(57d, 57d, 286d, 286d)));
 
@@ -120,14 +117,6 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _localizerV = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI ILS LOC VERT GLIDE", "Indicates the Vertical Glide Slope Deviation.", "-1 to 1", BindingValueUnits.Numeric);
             _localizerV.Execute += new HeliosActionHandler(LocalizerV_Execute);
             Actions.Add(_localizerV);
-
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
-            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
-            Actions.Add(_altLightValue);
-
-            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
-            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
-            Actions.Add(_altLightingBrightnessValue);
         }
 
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
@@ -172,13 +161,21 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _yaw.SetValue(e.Value, e.BypassCascadingTriggers);
             _ball.Yaw = -e.Value.DoubleValue;
         }
-        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        public override bool EffectsExclusion
         {
-            _ball.LightingAltEnabled = e.Value.BoolValue;
-        }
-        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
-        {
-            _ball.LightingAltBrightness = e.Value.DoubleValue;
+            get => base.EffectsExclusion;
+            set
+            {
+                if (!base.EffectsExclusion.Equals(value))
+                {
+                    base.EffectsExclusion = value;
+                    foreach (GaugeComponent gc in Components)
+                    {
+                        gc.EffectsExclusion = value;
+                    }
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                }
+            }
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {

@@ -28,8 +28,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         private HeliosValue _roll;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _offFlag;
-        private HeliosValue _altLightValue;
-        private HeliosValue _altLightingBrightnessValue;
 
         private GaugeNeedle _offFlagNeedle;
         private GaugeCylinder _cylinder;
@@ -49,8 +47,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _cylinder.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_cylinder);
             _cylinder.LightingBrightness = 0.9d;
-            _cylinder.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
-
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
             _wingsNeedle = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
@@ -81,14 +77,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _roll = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "-180 to +180", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
-
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
-            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
-            Actions.Add(_altLightValue);
-
-            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
-            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
-            Actions.Add(_altLightingBrightnessValue);
         }
 
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
@@ -113,13 +101,21 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _cylinder.Roll = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
-        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        public override bool EffectsExclusion
         {
-            _cylinder.LightingAltEnabled = e.Value.BoolValue;
-        }
-        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
-        {
-            _cylinder.LightingAltBrightness = e.Value.DoubleValue;
+            get => base.EffectsExclusion;
+            set
+            {
+                if (!base.EffectsExclusion.Equals(value))
+                {
+                    base.EffectsExclusion = value;
+                    foreach (GaugeComponent gc in Components)
+                    {
+                        gc.EffectsExclusion = value;
+                    }
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                }
+            }
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {

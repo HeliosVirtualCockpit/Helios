@@ -44,7 +44,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (_backgroundImage != null)
             {
-                drawingContext.DrawImage(_backgroundImage, _backgroundRect);
+                RenderEffect(drawingContext, _backgroundImage, _backgroundRect);
             }
 
             // ReSharper disable once CompareOfFloatsByEqualityOperator checking for initialized
@@ -55,7 +55,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (_image != null)
             {
-                drawingContext.DrawImage(_image, _imageRect);
+                RenderEffect(drawingContext, _image, _imageRect);
                 drawingContext.DrawLine(_scopePen, _center, _nextToCenter); //draw rotation point for reference
             }
 

@@ -46,19 +46,19 @@ namespace GadrocsWorkshop.Helios.Controls
                 switch (_switch.SwitchPosition)
                 {
                     case HatSwitchPosition.Center:
-                        drawingContext.DrawImage(_centerImage, _imageRect);
+                        RenderEffect(drawingContext, _centerImage, _imageRect);
                         break;
                     case HatSwitchPosition.Up:
-                        drawingContext.DrawImage(_upImage, _imageRect);
+                        RenderEffect(drawingContext, _upImage, _imageRect);
                         break;
                     case HatSwitchPosition.Down:
-                        drawingContext.DrawImage(_downImage, _imageRect);
+                        RenderEffect(drawingContext, _downImage, _imageRect);
                         break;
                     case HatSwitchPosition.Left:
-                        drawingContext.DrawImage(_leftImage, _imageRect);
+                        RenderEffect(drawingContext, _leftImage, _imageRect);
                         break;
                     case HatSwitchPosition.Right:
-                        drawingContext.DrawImage(_rightImage, _imageRect);
+                        RenderEffect(drawingContext, _rightImage, _imageRect);
                         break;
                 }
             }

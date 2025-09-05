@@ -48,7 +48,6 @@ namespace GadrocsWorkshop.Helios.Controls
             Components.Add(_sphere);
 
             LightingColor = Colors.White;
-            LightingColorAlt = Colors.Green;
         }
 
         #region Properties

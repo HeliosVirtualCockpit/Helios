@@ -33,6 +33,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _roll;
         private double _yaw;
         private double _fov;
+        private bool _effectsExclusion = false;
 
         private double _xScale = 1.0;
         private double _yScale = 1.0;
@@ -60,6 +61,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 SetTexture = ConfigManager.ImageManager.LoadImage(_imageFile),
                 FieldOfView = _fov
             };
+            _gaugeSnapshot.EffectsExclusion = EffectsExclusion;
             BasePitch = basePitch;
             BaseRoll = baseRoll;
             BaseYaw = baseYaw;
@@ -204,30 +206,6 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
-        public Color LightingColorAlt
-        {
-            get => _gaugeSnapshot.LightingColorAlt;
-            set
-            {
-                if (value != _gaugeSnapshot.LightingColorAlt)
-                {
-                    _gaugeSnapshot.LightingColorAlt = value;
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        public bool LightingAltEnabled
-        {
-            get => _gaugeSnapshot.LightingAltEnabled;
-            set
-            {
-                if(value != _gaugeSnapshot.LightingAltEnabled)
-                {
-                    _gaugeSnapshot.LightingAltEnabled = value;
-                    OnDisplayUpdate();
-                }
-            }
-        }
         public double LightingBrightness
         {
             get => _gaugeSnapshot.LightingBrightness;
@@ -236,19 +214,6 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _gaugeSnapshot.LightingBrightness)
                 {
                     _gaugeSnapshot.LightingBrightness = value;
-                    OnDisplayUpdate();
-                }
-            }
-
-        }
-        public double LightingAltBrightness
-        {
-            get => _gaugeSnapshot.LightingAltBrightness;
-            set
-            {
-                if (value != _gaugeSnapshot.LightingAltBrightness)
-                {
-                    _gaugeSnapshot.LightingAltBrightness = value;
                     OnDisplayUpdate();
                 }
             }
@@ -290,6 +255,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
+
         public Gauge3dSnapshot Snapshot
         {
             get => _gaugeSnapshot;
@@ -309,7 +275,19 @@ namespace GadrocsWorkshop.Helios.Gauges
         public virtual void Reset()
         {
             Pitch = Roll = Yaw = 0d;
-            LightingAltEnabled = false;
+        }
+        public override bool EffectsExclusion
+        {
+            get => _effectsExclusion;
+            set
+            {
+                if (!_effectsExclusion.Equals(value))
+                {
+                    _effectsExclusion = value;
+                    Snapshot.EffectsExclusion = value;
+
+                }
+            }
         }
         protected override void OnRender(DrawingContext drawingContext)
         {

@@ -39,31 +39,31 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ThreeWayToggleSwitchPosition.One:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageOneIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageOneIndicatorOn, _imageRect);
+                            RenderEffect(drawingContext, _imageOneIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageOne, _imageRect);
+                            RenderEffect(drawingContext, _imageOne, _imageRect);
                         }
                         break;
                     case ThreeWayToggleSwitchPosition.Two:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageTwoIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageTwoIndicatorOn, _imageRect);
+                            RenderEffect(drawingContext, _imageTwoIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageTwo, _imageRect);
+                            RenderEffect(drawingContext, _imageTwo, _imageRect);
                         }
                         break;
                     case ThreeWayToggleSwitchPosition.Three:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageThreeIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageThreeIndicatorOn, _imageRect);
+                            RenderEffect(drawingContext, _imageThreeIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageThree, _imageRect);
+                            RenderEffect(drawingContext, _imageThree, _imageRect);
                         }
                         break;
                 }            

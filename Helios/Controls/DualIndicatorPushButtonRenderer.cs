@@ -49,19 +49,19 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Pushed && pushButton.Indicator && _pushedImage != null)
             {
-                drawingContext.DrawImage(_pushedIndicatorOnImage, _imageRect);
+                RenderEffect(drawingContext, _pushedIndicatorOnImage, _imageRect);
             }
             else if (pushButton.Pushed && !pushButton.Indicator && _pushedImage != null)
             {
-                drawingContext.DrawImage(_pushedImage, _imageRect);
+                RenderEffect(drawingContext, _pushedImage, _imageRect);
             }
             else if (!pushButton.Pushed && pushButton.Indicator && _indicatorOnImage != null)
             {
-                drawingContext.DrawImage(_indicatorOnImage, _imageRect);
+                RenderEffect(drawingContext, _indicatorOnImage, _imageRect);
             }
             else if (_image != null)
             {
-                drawingContext.DrawImage(_image, _imageRect);
+                RenderEffect(drawingContext, _image, _imageRect);
             }
 
             if (pushButton.Pushed)

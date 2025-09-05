@@ -1,0 +1,55 @@
+<Canvas Width="200.000" Height="200.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="200.000" Height="200.000">
+
+    <!-- Layer 1/<Rectangle> -->
+  <Path StrokeThickness="6.0" Stroke="#ff808080" StrokeMiterLimit="1.0" Data="F1 M 192.431,200.000 L 7.569,200.000 C 3.389,200.000 0.000,196.611 0.000,192.431 L 0.000,7.569 C 0.000,3.389 3.389,0.000 7.569,0.000 L 192.431,0.000 C 196.611,0.000 200.000,3.389 200.000,7.569 L 200.000,192.431 C 200.000,196.611 196.611,200.000 192.431,200.000 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Data="F1 M 42.222,180.000 L 42.222,180.000 C 29.949,180.000 20.000,170.051 20.000,157.778 L 20.000,42.222 C 20.000,29.949 29.949,20.000 42.222,20.000 L 42.222,20.000 C 54.495,20.000 64.444,29.949 64.444,42.222 L 64.444,157.778 C 64.444,170.051 54.495,180.000 42.222,180.000 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="47.000,-197.000" EndPoint="47.000,-27.000">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ffff0000"/>
+          <GradientStop Offset="1.00" Color="#ff00ff00"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,-12.000,-12.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Data="F1 M 100.000,180.000 L 100.000,180.000 C 87.727,180.000 77.778,170.051 77.778,157.778 L 77.778,42.222 C 77.778,29.949 87.727,20.000 100.000,20.000 L 100.000,20.000 C 112.273,20.000 122.222,29.949 122.222,42.222 L 122.222,157.778 C 122.222,170.051 112.273,180.000 100.000,180.000 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="112.000,-197.000" EndPoint="112.000,-27.000">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ff00ff00"/>
+          <GradientStop Offset="1.00" Color="#ff0000fc"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,-12.000,-12.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Data="F1 M 157.778,180.000 L 157.778,180.000 C 145.505,180.000 135.556,170.051 135.556,157.778 L 135.556,42.222 C 135.556,29.949 145.505,20.000 157.778,20.000 L 157.778,20.000 C 170.051,20.000 180.000,29.949 180.000,42.222 L 180.000,157.778 C 180.000,170.051 170.051,180.000 157.778,180.000 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="177.000,-197.000" EndPoint="177.000,-27.000">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ff0000ff"/>
+          <GradientStop Offset="1.00" Color="#ffff0000"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,-12.000,-12.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  </Canvas>
+</Canvas>

@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios
     using System;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Controls;
 
     /// <summary>
     /// Base class for visual renderers.
@@ -27,6 +28,7 @@ namespace GadrocsWorkshop.Helios
         private WeakReference _visual = new WeakReference(null);
         private bool _needsRefresh = true;
         private TransformGroup _transform;
+        private Effects.ColorAdjustEffect _effect;
 
         #region Properties
 
@@ -105,12 +107,14 @@ namespace GadrocsWorkshop.Helios
         /// <param name="drawingContext">Context on which to draw this control.</param>
         /// <param name="scaleX"></param>
         /// <param name="scaleY"></param>
+
         protected virtual void OnRender(DrawingContext drawingContext, double scaleX, double scaleY)
         {
             drawingContext.PushTransform(new ScaleTransform(scaleX, scaleY));
             OnRender(drawingContext);
             drawingContext.Pop();
         }
+
 
         /// <summary>
         /// Refreshes and reloads all resources needed to display this visual.
@@ -130,5 +134,27 @@ namespace GadrocsWorkshop.Helios
         {
             _transform = Visual?.CreateTransform();
         }
+        protected virtual void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
+        {
+            if(_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+            {
+                _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+            }
+
+            Image imageControl = new Image
+            {
+                Source = image,
+                Width = image != null ? image.Width : 0,
+                Height = image != null ? image.Width : 0,
+
+            };
+            if (!Visual.EffectsExclusion && Visual.IsVisible && _effect != null)
+            {
+                imageControl.Effect = _effect;
+            }
+            VisualBrush visualBrush = new VisualBrush(imageControl);
+            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
+        }
+
     }
 }

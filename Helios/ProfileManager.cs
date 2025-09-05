@@ -20,12 +20,14 @@ namespace GadrocsWorkshop.Helios
     using System;
     using System.ComponentModel;
     using System.IO;
+    using System.Windows.Media.Effects;
     using System.Windows.Threading;
     using System.Xml;
 
     internal class ProfileManager : IProfileManager2
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static ShaderEffect _currentEffect;
 
         public bool SaveProfile(HeliosProfile profile)
         {            
@@ -133,6 +135,7 @@ namespace GadrocsWorkshop.Helios
                 LoadTime = Directory.GetLastWriteTime(path)
             };
             loadingWork = LoadingWork(profile, dispatcher);
+            _currentEffect = profile.Effect;
             return profile;
         }
 
@@ -166,6 +169,15 @@ namespace GadrocsWorkshop.Helios
                 }
                 reader.Close();
             }
+        }
+        public ShaderEffect CurrentEffect {
+            get => _currentEffect;
+            set { 
+                if (!value.Equals(_currentEffect))
+                {
+                    _currentEffect = value;
+                }
+            } 
         }
     }
 

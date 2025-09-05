@@ -31,9 +31,6 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         private HeliosValue _turnIndicator;
 
         private HeliosValue _offFlag;
-        private HeliosValue _altLightValue;
-        private HeliosValue _altLightingBrightnessValue;
-
 
         private GaugeImage _offFlagImage;
         private GaugeBall _ball;
@@ -58,9 +55,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
-            _ball.LightingBrightness = 0.9d;
-            _ball.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
-
+            _ball.LightingBrightness = 1.0d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
             _wingsNeedle = new GaugeNeedle("{AH-64D}/Images/SAI/adi_wings.xaml", new Point(99d, 158d), new Size(157d, 31d), new Point(0d, 0d));
@@ -114,14 +109,6 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _roll = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Bank", "Current bank of the aircraft.", "(-180 to +180)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
-
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
-            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
-            Actions.Add(_altLightValue);
-
-            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
-            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
-            Actions.Add(_altLightingBrightnessValue);
         }
 
 
@@ -158,13 +145,21 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _turnIndicator.SetValue(e.Value, e.BypassCascadingTriggers);
             _TurnMarker.HorizontalOffset = _slipBallCalibration.Interpolate(e.Value.DoubleValue);
         }
-        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        public override bool EffectsExclusion
         {
-            _ball.LightingAltEnabled = e.Value.BoolValue;
-        }
-        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
-        {
-            _ball.LightingAltBrightness = e.Value.DoubleValue;
+            get => base.EffectsExclusion;
+            set
+            {
+                if (!base.EffectsExclusion.Equals(value))
+                {
+                    base.EffectsExclusion = value;
+                    foreach (GaugeComponent gc in Components)
+                    {
+                        gc.EffectsExclusion = value;
+                    }
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                }
+            }
         }
         public override void ScaleChildren(double scaleX, double scaleY)
         {

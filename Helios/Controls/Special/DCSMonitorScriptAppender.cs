@@ -102,7 +102,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         public override bool HitTest(Point location) =>
             // only design time
             ConfigManager.Application.ShowDesignTimeControls;
-
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
         public override void ReadXml(XmlReader reader)
         {
             base.ReadXml(reader);

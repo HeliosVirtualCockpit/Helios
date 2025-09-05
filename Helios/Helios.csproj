@@ -102,6 +102,11 @@
     <Compile Include="Controls\AlternateImageAppearanceEditor.xaml.cs">
       <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Special\EffectColorAdjusterAppearanceEditor.xaml.cs">
+      <DependentUpon>EffectColorAdjusterAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Special\EffectColorAdjusterRenderer.cs" />
+    <Compile Include="Controls\Special\EffectColorAdjuster.cs" />
     <Compile Include="Gauges\IGauge3d.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
     <Compile Include="Controls\CustomGauge3DCylinderAppearanceEditor.xaml.cs">
@@ -286,6 +291,7 @@
     <Compile Include="Json\Function\ConverterForJsonNet.cs" />
     <Compile Include="Json\InterfaceFile.cs" />
     <Compile Include="Json\NetworkFunction\SchemaGenerationProviderForJsonNet.cs" />
+    <Compile Include="ShaderWrapper.cs" />
     <Compile Include="UnitConverters\RawConverters.cs" />
     <Compile Include="Units\BarUnit.cs" />
     <Compile Include="Units\MillbarUnit.cs" />
@@ -426,6 +432,7 @@
     <Content Include="Docs\Licenses\RectpackSharp\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\ColorAdjust.psc" />
     <Resource Include="Images\Knobs\knob7.png" />
     <Resource Include="Images\Toggles\Alt\flattop-down.png" />
     <Resource Include="Images\Toggles\Alt\flattop-horiz-left.png" />
@@ -603,6 +610,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\Special\EffectColorAdjusterAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Special\DCSMonitorScriptAppenderAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -702,7 +713,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Images\Custom\VR_Goggles.xaml">
+    <Resource Include="Images\General\VR_Goggles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -815,6 +826,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Common\Circular-Shading.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\General\ColourAdjuster.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

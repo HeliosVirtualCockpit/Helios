@@ -18,41 +18,39 @@ using System.Windows;
 using System.Windows.Media;
 using GadrocsWorkshop.Helios.Controls.Capabilities;
 
-namespace GadrocsWorkshop.Helios.Controls
+namespace GadrocsWorkshop.Helios.Controls.Special
 {
-    public class BackgroundImageRenderer : HeliosVisualRenderer
+    internal class EffectColorAdjusterRenderer : ViewportExtentRenderer
     {
-        private ImageBrush _backgroundBrush;
-        private Rect _backgroundRectangle;
+        private ImageBrush _imageBrush;
+        private Rect _rectangle;
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (Visual is IBackgroundImage && _backgroundBrush != null)
+            // only in design mode
+            if (ConfigManager.Application.ShowDesignTimeControls)
             {
-                // drawingContext.DrawRectangle(_backgroundBrush, null, _backgroundRectangle);
-                RenderEffect(drawingContext, _backgroundBrush.ImageSource, _backgroundRectangle);
+                if (Visual is EffectColorAdjuster)
+                {
+                    drawingContext.DrawRectangle(_imageBrush, null, _rectangle);
+                    base.OnRender(drawingContext);
+                }
             }
         }
 
         protected override void OnRefresh()
         {
-            if (Visual is IBackgroundImage control)
+            if (Visual is EffectColorAdjuster control)
             {
-                _backgroundRectangle = new Rect(0, 0, Visual.Width, Visual.Height);
-                _backgroundBrush = CreateImageBrush(control.BackgroundImage, Visual.ImageRefresh);
-            }
-            else
-            {
-                _backgroundBrush = null;
+                base.OnRefresh();
+                _rectangle = new Rect(0, 0, Visual.Width, Visual.Height);
+                _imageBrush = CreateImageBrush(control.Image);
             }
         }
 
-        private ImageBrush CreateImageBrush(string imagefile, bool ImageRefresh)
+        private ImageBrush CreateImageBrush(string imagefile)
         {
-            IImageManager3 refreshCapableImage = ConfigManager.ImageManager as IImageManager3;
-            LoadImageOptions loadOptions = ImageRefresh ? LoadImageOptions.ReloadIfChangedExternally : LoadImageOptions.None;
-
-            ImageSource image = refreshCapableImage.LoadImage(imagefile, loadOptions);
+            ImageSource image = ConfigManager.ImageManager.LoadImage(imagefile);
             if (image == null)
             {
                 return null;

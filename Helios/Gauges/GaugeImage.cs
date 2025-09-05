@@ -20,6 +20,8 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Controls;
+
 
     public class GaugeImage : GaugeComponent
     {
@@ -28,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Rect _rectangle;
         private Rect _imageRectangle;
         private double _opacity;
-		private double _rotation; 
+		private double _rotation;
 
         public GaugeImage(string imageFile, Rect location, double opacity = 1, double rotation = 0)
         {
@@ -157,12 +159,14 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             if (_opacity >= 1.0 && _rotation == 0)
             {
-                drawingContext.DrawImage(_image, _imageRectangle);
+                RenderEffect(drawingContext, _image, _imageRectangle);
                 return;
             }
             drawingContext.PushTransform(new RotateTransform(_rotation, _imageRectangle.X + (_imageRectangle.Width/2), _imageRectangle.Y + (_imageRectangle.Height / 2)));
             drawingContext.PushOpacity(_opacity);
-            drawingContext.DrawImage(_image, _imageRectangle);
+
+			//RenderEffect(drawingContext, _image, _imageRectangle);
+            RenderEffect(drawingContext, _image, _imageRectangle);
             drawingContext.Pop();
             drawingContext.Pop();
         }

@@ -45,12 +45,12 @@ namespace GadrocsWorkshop.Helios.Controls
             if (pushButton.Pushed && _image != null)
             {
                 drawingContext.DrawRectangle(new SolidColorBrush(pushButton.PushBackingColor), null, colorRect);
-                drawingContext.DrawImage(_image, _imageRect);
+                RenderEffect(drawingContext, _image, _imageRect);
             }
             else if (_image != null)
             {
                 drawingContext.DrawRectangle(new SolidColorBrush(pushButton.NormalBackingColor), null, colorRect);
-                drawingContext.DrawImage(_image, _imageRect);
+                RenderEffect(drawingContext, _image, _imageRect);
             }
 
             if (pushButton.Pushed)

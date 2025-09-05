@@ -33,7 +33,6 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
         private HeliosValue _offFlag;
         private HeliosValue _gsFlag;
         private HeliosValue _courseFlag;
-        private HeliosValue _altLightingBrightnessValue;
 
         private GaugeImage _offFlagImage;
         private GaugeImage _gsFlagImage;
@@ -63,9 +62,8 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
 
             _ball = new GaugeBall("{Helios}/Gauges/A-10/ADI/ADI-Ball.xaml", new Point(center.X- 112.5d, center.Y- 112.5d), new Size(225d, 225d), 0d, -90d, 180d, 35d);
             _ball.Clip = new EllipseGeometry(center, 112.5d, 112.5d);
-            _ball.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
             _ball.LightingColor = Colors.White;
-            _ball.LightingBrightness = 0.9d;
+            _ball.LightingBrightness = 1.0d;
             Components.Add(_ball);
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(64d, 51d, 220d, 220d)));
@@ -154,11 +152,6 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
             _gsIndicator = new HeliosValue(this, new BindingValue(0d), "", "Glide Scope Indicator Offset", "Location of glide scope indicator from middle of the scale.", "1 full up and -1 is full down.", BindingValueUnits.Numeric);
             _gsIndicator.Execute += new HeliosActionHandler(GsIndicator_Execute);
             Actions.Add(_gsIndicator);
-
-            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
-            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
-            Actions.Add(_altLightingBrightnessValue);
-
         }
 
         void GsIndicator_Execute(object action, HeliosActionEventArgs e)
@@ -231,14 +224,25 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
 
                 if (newValue != oldValue)
                 {
-                    _ball.LightingAltEnabled = newValue;
                     base.EnableAlternateImageSet = newValue;
                 }
             }
         }
-        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        public override bool EffectsExclusion
         {
-            _ball.LightingAltBrightness = e.Value.DoubleValue;
+            get => base.EffectsExclusion;
+            set
+            {
+                if (!base.EffectsExclusion.Equals(value))
+                {
+                    base.EffectsExclusion = value;
+                    foreach (GaugeComponent gc in Components)
+                    {
+                        gc.EffectsExclusion = value;
+                    }
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                }
+            }
         }
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {

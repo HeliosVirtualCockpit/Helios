@@ -31,11 +31,11 @@ namespace GadrocsWorkshop.Helios.Controls
             {
 				if (toggleSwitch.GuardPosition == GuardPosition.Up)
 				{
-					drawingContext.DrawImage(_imageOneGuardUp, _imageRect);
+					RenderEffect(drawingContext, _imageOneGuardUp, _imageRect);
 				}
 				else
 				{
-					drawingContext.DrawImage(_imageTwoGuardDown, _imageRect);
+					RenderEffect(drawingContext, _imageTwoGuardDown, _imageRect);
 				}
 				
 			}

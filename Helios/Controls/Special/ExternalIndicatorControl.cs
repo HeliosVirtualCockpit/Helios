@@ -237,6 +237,12 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         #endregion
 
         #region Overrides
+
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
         public override void WriteXml(XmlWriter writer)
         {
             writer.WriteElementString("NumberOfIndicators", _numberOfIndicators.ToString(CultureInfo.InvariantCulture));

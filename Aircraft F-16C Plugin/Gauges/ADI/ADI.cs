@@ -34,8 +34,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         private HeliosValue _offFlag;
         private HeliosValue _gsFlag;
         private HeliosValue _locFlag;
-        private HeliosValue _altLightValue;
-        private HeliosValue _altLightingBrightnessValue;
 
         private GaugeImage _auxFlagImage;
         private GaugeImage _offFlagImage;
@@ -63,8 +61,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
             _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
-            _ball.LightingColorAlt = Color.FromArgb(0xff,0x00,0xff,0x00);
-            _ball.LightingBrightness = 0.9d;
+            _ball.LightingBrightness = 1.0d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(65d, 65d, 220d, 220d)));
 
@@ -117,7 +114,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _turnNeedle = new GaugeNeedle("{F-16C}/Gauges/ADI/Viper-ADI-Turn-Rate-Pointer.xaml", new Point(175d, 328d), new Size(24.5d, 12.5d), new Point(12.25d, 0d));
             Components.Add(_turnNeedle);
 
-
+            foreach (GaugeComponent gc in Components)
+            {
+                gc.EffectsExclusion = this.EffectsExclusion;
+            }
             _turn = new HeliosValue(this, new BindingValue(0d), "", "turn rate", "turn rate indicator offset.", "-1 to 1", BindingValueUnits.Numeric);
             _turn.Execute += new HeliosActionHandler(Turn_Execute);
             Actions.Add(_turn);
@@ -158,13 +158,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ilsVertical.Execute += new HeliosActionHandler(ILSVertical_Execute);
             Actions.Add(_ilsVertical);
 
-            _altLightValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source", "Boolean", "true if Alt Lighting is used", BindingValueUnits.Boolean);
-            _altLightValue.Execute += new HeliosActionHandler(AltLightingUsed_Execute);
-            Actions.Add(_altLightValue);
 
-            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
-            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
-            Actions.Add(_altLightingBrightnessValue);
         }
 
         void SlipBall_Execute(object action, HeliosActionEventArgs e)
@@ -224,16 +218,25 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ball.Roll = -e.Value.DoubleValue;
             _rollNeedle.Rotation = e.Value.DoubleValue;
         }
-
-        void AltLightingUsed_Execute(object action, HeliosActionEventArgs e)
+        /// <summary>
+        /// Whether this control will have effects applied to is on rendering.
+        /// </summary>
+        public override bool EffectsExclusion
         {
-            _ball.LightingAltEnabled = e.Value.BoolValue;
+            get => base.EffectsExclusion;
+            set
+            {
+                if (!base.EffectsExclusion.Equals(value))
+                {
+                    base.EffectsExclusion = value;
+                    foreach (GaugeComponent gc in Components)
+                    {
+                        gc.EffectsExclusion = value;
+                    }
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                }
+            }
         }
-        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
-        {
-            _ball.LightingAltBrightness = e.Value.DoubleValue;
-        }
-
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             if (!_suppressScale)

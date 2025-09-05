@@ -19,10 +19,7 @@
         double Yaw { get; set; }
         double FieldOfView { get; set; }
         Color LightingColor { get; set; }
-        Color LightingColorAlt { get; set; }
-        bool LightingAltEnabled { get; set; }
         double LightingBrightness { get; set; }
-        double LightingAltBrightness { get; set; }
         double LightingX { get; set; }
         double LightingY { get; set; }
         double LightingZ { get; set; }

@@ -37,7 +37,6 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         private HeliosValue _bankSteering;
         private HeliosValue _pitchSteering;
         private HeliosValue _offFlag;
-        private HeliosValue _altLightingBrightnessValue;
 
         private GaugeBall _ball;
         private GaugeNeedle _offFlagImage;
@@ -65,9 +64,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 
             _ball = new GaugeBall("{FA-18C}/Gauges/ADI/ADI-Ball.xaml", new Point(71d, 57d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
-            _ball.LightingColorAlt = Color.FromArgb(0xff, 0x00, 0xff, 0x00);
             _ball.LightingColor = Color.FromArgb(0xff, 0xff, 0xff, 0xff);
-            _ball.LightingBrightness = 0.9d;
+            _ball.LightingBrightness = 1.0d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -45d, 1.0d, 45d);
             _wingsNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/ADI-Wings.xaml", new Point(175d - 121d, 160d), new Size(204.025d, 29.333d), new Point(0d, 0d));
@@ -139,10 +137,6 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _pitchSteering = new HeliosValue(this, new BindingValue(1d), "", "Pitch steering bar offset", "Location of pitch steering bar.", "1 full up and -1 is full down.", BindingValueUnits.Numeric);
             _pitchSteering.Execute += new HeliosActionHandler(PitchSteering_Execute);
             Actions.Add(_pitchSteering);
-
-            _altLightingBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Alternate Lighting Source Brightness", "Number", "0 to 1", BindingValueUnits.Numeric);
-            _altLightingBrightnessValue.Execute += new HeliosActionHandler(AltLightingBrightness_Execute);
-            Actions.Add(_altLightingBrightnessValue);
         }
 
         void CreateInputBindings()
@@ -234,14 +228,25 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 
                 if (newValue != oldValue)
                 {
-                    _ball.LightingAltEnabled = newValue;
                     base.EnableAlternateImageSet = newValue;
                 }
             }
         }
-        void AltLightingBrightness_Execute(object action, HeliosActionEventArgs e)
+        public override bool EffectsExclusion
         {
-            _ball.LightingAltBrightness = e.Value.DoubleValue;
+            get => base.EffectsExclusion;
+            set
+            {
+                if (!base.EffectsExclusion.Equals(value))
+                {
+                    base.EffectsExclusion = value;
+                    foreach (GaugeComponent gc in Components)
+                    {
+                        gc.EffectsExclusion = value;
+                    }
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                }
+            }
         }
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {

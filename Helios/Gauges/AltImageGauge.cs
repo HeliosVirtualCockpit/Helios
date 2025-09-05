@@ -100,11 +100,11 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
                 if (gc is GaugeBall gbp)
                 {
-                    gbp.LightingAltEnabled = enableAltImages;
+                    continue;
                 }
                 if (gc is GaugeCylinder gcp)
                 {
-                    gcp.LightingAltEnabled = enableAltImages;
+                    continue;
                 }
             }
         }

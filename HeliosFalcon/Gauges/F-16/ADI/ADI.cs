@@ -95,12 +95,10 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 		private void AddComponents()
 		{
-            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball-2.xaml", new Point(50d, 42d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
+            _ball = new GaugeBall(_ballOffImage, new Point(50d, 42d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
-            _ball.LightingBrightness = 0.9d;
-            _ball.LightingColorAlt = Color.FromArgb(0xFF, 0x77, 0xff, 0xA3);
-
+ 
             _ballMask = new GaugeImage(_ballMaskImage, new Rect(60d, 50d, 230d, 230d));
 			Components.Add(_ballMask);
 
@@ -302,8 +300,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersDimImage;
 				_slipBall.Image = _slipBallDimImage;
 				_ilsPointer.Image = _ilsPointerDimImage;
-                _ball.LightingAltBrightness = 0.8d;
-                _ball.LightingAltEnabled = true;
+                _ball.Image = _ballDimImage;
 			}
 			else if (Backlight == 2)
 			{
@@ -311,19 +308,18 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersBrtImage;
 				_slipBall.Image = _slipBallBrtImage;
 				_ilsPointer.Image = _ilsPointerBrtImage;
-                _ball.LightingAltBrightness = 1.0d;
-                _ball.LightingAltEnabled = true;
-			}
-			else
+                _ball.Image = _ballBrtImage;
+            }
+            else
 			{
 				_adiFaceplate.Image = _faceplateOffImage;
 				_rollMarkers.Image = _rollMarkersOffImage;
 				_slipBall.Image = _slipBallOffImage;
 				_ilsPointer.Image = _ilsPointerOffImage;
-				_ball.LightingAltEnabled = false;
-			}
+                _ball.Image = _ballOffImage;
+            }
 
-			Refresh();
+            Refresh();
 		}
 
 		public override void Reset()

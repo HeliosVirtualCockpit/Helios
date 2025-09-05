@@ -77,7 +77,7 @@ namespace GadrocsWorkshop.Helios
                 int i = 0;
                 foreach (IBindingAction action in gauge.Actions)
                 {
-                    if (action.Name != "hidden")
+                    if (action.Name != "hidden" && !action.Name.Contains("Lighting"))
                     {
                         AddAction(action, action.Device);
 

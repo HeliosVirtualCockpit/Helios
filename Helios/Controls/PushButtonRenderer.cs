@@ -36,11 +36,11 @@ namespace GadrocsWorkshop.Helios.Controls
             PushButton pushButton = Visual as PushButton;
             if (pushButton.Pushed && _pushedImage != null)
             {
-                drawingContext.DrawImage(_pushedImage, _imageRect);
+                RenderEffect(drawingContext, _pushedImage, _imageRect);
             }
             else if (_image != null)
             {
-                drawingContext.DrawImage(_image, _imageRect);
+                RenderEffect(drawingContext, _image, _imageRect);
             }
 
             if (pushButton.Pushed)

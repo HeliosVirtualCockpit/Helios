@@ -165,7 +165,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 OnPropertyChanged("OutputUnit", oldValue, value, true);
             }
         }
-
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
         public override void WriteXml(XmlWriter writer)
         {
             base.WriteXml(writer);

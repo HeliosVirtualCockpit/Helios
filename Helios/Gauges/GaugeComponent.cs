@@ -17,6 +17,8 @@ namespace GadrocsWorkshop.Helios.Gauges
 {
     using System;
     using System.Windows.Media;
+    using System.Windows.Controls;
+    using System.Windows;
 
     public abstract class GaugeComponent
     {
@@ -24,8 +26,10 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Geometry _renderClip;
         private bool _hidden = false;
         private bool _imageRefresh = false;
-
+        private Effects.ColorAdjustEffect _effect;
         public event EventHandler DisplayUpdate;
+        private bool _effectsExclusion = false;
+
 
         #region Properties
 
@@ -66,6 +70,20 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             get => _imageRefresh;
             set => _imageRefresh = value;
+        }
+        /// <summary>
+        /// Whether this control will have effects applied to is on rendering.
+        /// </summary>
+        public virtual bool EffectsExclusion
+        {
+            get => _effectsExclusion;
+            set
+            {
+                if (!_effectsExclusion.Equals(value))
+                {
+                    _effectsExclusion = value;
+                }
+            }
         }
 
         #endregion
@@ -110,7 +128,29 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
             OnRefresh(xScale, yScale);
         }
-
         protected abstract void OnRefresh(double xScale, double yScale);
+
+        protected virtual void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
+        {
+            if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+            {
+                _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+            }
+
+            Image imageControl = new Image
+            {
+                Source = image,
+                Width = image != null ? image.Width : 0,
+                Height = image != null ? image.Height : 0,
+
+            };
+            if (_effect != null && !EffectsExclusion)
+            {
+                imageControl.Effect = _effect;
+            }
+            VisualBrush visualBrush = new VisualBrush(imageControl);
+            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
+        }
     }
+
 }

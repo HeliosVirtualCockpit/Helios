@@ -26,5 +26,4 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         // ADI kept for backwards compatibility
         public ADI() { }
     }
-
 }

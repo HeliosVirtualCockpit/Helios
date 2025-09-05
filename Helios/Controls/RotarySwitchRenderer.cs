@@ -63,7 +63,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
 
                 drawingContext.PushTransform(new RotateTransform(rotarySwitch.KnobRotation, _center.X, _center.Y));
-                drawingContext.DrawRectangle(_imageBrush, null, _imageRect);
+                RenderEffect(drawingContext, _imageBrush.ImageSource, _imageRect);
                 if (rotarySwitch.VisualizeDragging)
                 {
                     double length = (rotarySwitch.DragPoint - _center).Length;
