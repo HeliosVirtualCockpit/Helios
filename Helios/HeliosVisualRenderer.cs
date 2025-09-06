@@ -29,6 +29,7 @@ namespace GadrocsWorkshop.Helios
         private bool _needsRefresh = true;
         private TransformGroup _transform;
         private Effects.ColorAdjustEffect _effect;
+        private bool _designTime = false, _designTimeChecked = false;
 
         #region Properties
 
@@ -136,18 +137,32 @@ namespace GadrocsWorkshop.Helios
         }
         protected virtual void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
         {
-            if(_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+            // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
+            if (!_designTimeChecked)
+            {
+                _designTime = ConfigManager.Application.ShowDesignTimeControls;
+                _designTimeChecked = true;
+
+            }
+            if (!_designTime)
+            {
+                // Attempt to cache the ShaderEffect if we're in Control Center
+                if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+                {
+                    _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+                }
+            } else
             {
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }
 
             Image imageControl = new Image
-            {
-                Source = image,
-                Width = image != null ? image.Width : 0,
-                Height = image != null ? image.Width : 0,
+                {
+                    Source = image,
+                    Width = image != null ? image.Width : 0,
+                    Height = image != null ? image.Width : 0,
 
-            };
+                };
             if (!Visual.EffectsExclusion && Visual.IsVisible && _effect != null)
             {
                 imageControl.Effect = _effect;

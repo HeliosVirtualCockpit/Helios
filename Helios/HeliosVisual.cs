@@ -204,8 +204,20 @@ namespace GadrocsWorkshop.Helios
                 if (!_effectsExclusion.Equals(value))
                 {
                     _effectsExclusion = value;
+                    foreach(HeliosVisual hv in Children)
+                    {
+                        hv.EffectsExclusion = value;
+                    }
+                    if(this is BaseGauge bg)
+                    {
+                        foreach (GaugeComponent gc in bg.Components)
+                        {
+                            gc.EffectsExclusion = value;
+                        }
+                    }
                     OnPropertyChanged("EffectsExclusion", !value, value, true);
                     OnEffectsExclusionChanged();
+                    Refresh();
                 }
             }
         }

@@ -50,21 +50,27 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             Width = 128;
             Height = 128;
             AddEffect();
+
             _redFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Red Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
             _redFactorValue.Execute += new HeliosActionHandler(RedFactor_Execute);
             Actions.Add(_redFactorValue);
+
             _greenFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Green Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
             _greenFactorValue.Execute += new HeliosActionHandler(GreenFactor_Execute);
             Actions.Add(_greenFactorValue);
+
             _blueFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Blue Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
             _blueFactorValue.Execute += new HeliosActionHandler(BlueFactor_Execute);
             Actions.Add(_blueFactorValue);
-            _brightnessValue = new HeliosValue(this, new BindingValue(0d), "", "Brightness Adjustment.  Affects all colors", "Number", "-1 to +1", BindingValueUnits.Numeric);
+
+            _brightnessValue = new HeliosValue(this, new BindingValue(0d), "", "Brightness Adjustment", "Number", "-1 to +1", BindingValueUnits.Numeric);
             _brightnessValue.Execute += new HeliosActionHandler(Brightness_Execute);
             Actions.Add(_brightnessValue);
+
             _contrastValue = new HeliosValue(this, new BindingValue(0d), "", "Contrast Adjustment", "Number", "0 to 2.  1 = normal", BindingValueUnits.Numeric);
             _contrastValue.Execute += new HeliosActionHandler(Contrast_Execute);
             Actions.Add(_contrastValue);
+
             _gammaValue = new HeliosValue(this, new BindingValue(0d), "", "Gamma", "Number", "1.0 to 2.2", BindingValueUnits.Numeric);
             _gammaValue.Execute += new HeliosActionHandler(Gamma_Execute);
             Actions.Add(_gammaValue);
@@ -82,6 +88,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 };
                 ConfigManager.ProfileManager.CurrentEffect = _effect;
             }
+        }
+        public void DeleteEffect()
+        {
+            ConfigManager.ProfileManager.CurrentEffect = null;
+            _effect = null;
         }
         public double RedFactor
         {
@@ -230,6 +241,9 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 RedFactor = Double.Parse(reader.ReadElementString("RedFactor"));
                 GreenFactor = Double.Parse(reader.ReadElementString("GreenFactor"));
                 BlueFactor = Double.Parse(reader.ReadElementString("BlueFactor"));
+                Brightness = Double.Parse(reader.ReadElementString("Brightness"));
+                Contrast = Double.Parse(reader.ReadElementString("Contrast"));
+                Gamma = Double.Parse(reader.ReadElementString("Gamma"));
                 ShaderName = reader.ReadElementString("ShaderName");
                 reader.ReadEndElement();
             }
@@ -240,13 +254,15 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         {
             base.WriteXml(writer);
             writer.WriteStartElement("Adjustments");
-            writer.WriteElementString("RedFactor", RedFactor.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("GreenFactor", GreenFactor.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("BlueFactor", BlueFactor.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("RedFactor", RedFactor.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("GreenFactor", GreenFactor.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("BlueFactor", BlueFactor.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("Brightness", Brightness.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("Contrast", Contrast.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("Gamma", Gamma.ToString("N2", CultureInfo.InvariantCulture));
             writer.WriteElementString("ShaderName", ShaderName);
             writer.WriteEndElement();
         }
-
         #endregion
     }
 }

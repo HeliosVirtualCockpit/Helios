@@ -72,9 +72,12 @@ namespace GadrocsWorkshop.Helios.Controls
  
                         break;
                 }
-                toggleSwitch.TextFormat.RenderText(drawingContext, _textBrush, toggleSwitch.Text, _imageRect);
+                if (!string.IsNullOrEmpty(toggleSwitch.Text))
+                {
+                    toggleSwitch.TextFormat.EffectsExclusion = false;
+                    toggleSwitch.TextFormat.RenderText(drawingContext, _textBrush, toggleSwitch.Text, _imageRect);
+                }
             }
-
         }
 
         protected override void OnRefresh()

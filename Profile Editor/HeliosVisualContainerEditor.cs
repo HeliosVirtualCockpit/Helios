@@ -19,6 +19,7 @@ using System.Windows.Controls;
 
 namespace GadrocsWorkshop.Helios.ProfileEditor
 {
+    using GadrocsWorkshop.Helios.Controls.Special;
     using GadrocsWorkshop.Helios.ProfileEditor.UndoEvents;
     using GadrocsWorkshop.Helios.Windows.Controls;
     using System;
@@ -807,6 +808,10 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             {
                 removedControls.Add(control);
                 removedIndexes.Add(editor.VisualContainer.Children.IndexOf(control));
+                if(control is EffectColorAdjuster eFC)
+                {
+                    eFC.DeleteEffect();
+                }
             }
 
             foreach (HeliosVisual control in removedControls)

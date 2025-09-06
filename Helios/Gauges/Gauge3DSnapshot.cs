@@ -41,6 +41,8 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _lightingX, _lightingY, _lightingZ;
         private Effects.ColorAdjustEffect _effect;
         private bool _effectsExclusion = false;
+        private bool _designTime = false, _designTimeChecked = false;
+
         public Gauge3dSnapshot(MeshGeometry3D mesh)
         {
             _mesh = mesh;
@@ -254,7 +256,22 @@ namespace GadrocsWorkshop.Helios.Gauges
         protected override Visual GetVisualChild(int index) => _visual;
         private void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
         {
-            if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+            // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
+            if (!_designTimeChecked)
+            {
+                _designTime = ConfigManager.Application.ShowDesignTimeControls;
+                _designTimeChecked = true;
+
+            }
+            if (!_designTime)
+            {
+                // Attempt to cache the ShaderEffect if we're in Control Center
+                if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+                {
+                    _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+                }
+            }
+            else
             {
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }

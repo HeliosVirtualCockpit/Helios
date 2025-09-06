@@ -173,7 +173,7 @@ namespace GadrocsWorkshop.Helios
         public ShaderEffect CurrentEffect {
             get => _currentEffect;
             set { 
-                if (!value.Equals(_currentEffect))
+                if (value != _currentEffect)
                 {
                     _currentEffect = value;
                 }

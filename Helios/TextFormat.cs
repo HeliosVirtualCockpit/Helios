@@ -20,8 +20,11 @@ namespace GadrocsWorkshop.Helios
     using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Markup;
     using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Media.Media3D;
     using System.Xml;
 
     public class TextFormat : NotificationObject
@@ -41,6 +44,11 @@ namespace GadrocsWorkshop.Helios
         private double _textPaddingTop;
         private double _textPaddingRight;
         private double _textPaddingBottom;
+
+        private Effects.ColorAdjustEffect _effect;
+        private bool _effectsExclusion = false;
+        private bool _designTime = false, _designTimeChecked = false;
+
 
         /// <summary>
         /// backing field for property ConfiguredFontSize, contains
@@ -322,7 +330,17 @@ namespace GadrocsWorkshop.Helios
                 }
             }
         }
-
+        public virtual bool EffectsExclusion
+        {
+            get => _effectsExclusion;
+            set
+            {
+                if (!_effectsExclusion.Equals(value))
+                {
+                    _effectsExclusion = value;
+                }
+            }
+        }
         public FormattedText GetFormattedText(Brush textBrush, string text)
         {
             Typeface type = new Typeface(FontFamily, FontStyle, FontWeight, FontStretch);
@@ -350,26 +368,42 @@ namespace GadrocsWorkshop.Helios
 
         public void RenderText(DrawingContext drawingContext, Brush textBrush, string text, Rect rectangle)
         {
-            FormattedText formatedText = GetFormattedText(textBrush, text);
+            FormattedText formattedText = GetFormattedText(textBrush, text);
 
             Rect adjustedRect = new Rect(rectangle.X + (PaddingLeft * rectangle.Width), rectangle.Y + (PaddingTop * rectangle.Height),
                                             Math.Max(0.1d, rectangle.Width - ((PaddingLeft + PaddingRight) * rectangle.Width)),
                                             Math.Max(0.1d, rectangle.Height - ((PaddingTop + PaddingBottom) * rectangle.Height)));
 
-            formatedText.MaxTextHeight = adjustedRect.Height;
-            formatedText.MaxTextWidth = adjustedRect.Width;
+            formattedText.MaxTextHeight = adjustedRect.Height;
+            formattedText.MaxTextWidth = adjustedRect.Width;
 
             double yOffset = 0;
             if (_verticalAlignment != TextVerticalAlignment.Top)
             {
-                yOffset = Math.Max(0d, adjustedRect.Height - formatedText.Height);
+                yOffset = Math.Max(0d, adjustedRect.Height - formattedText.Height);
                 if (_verticalAlignment == TextVerticalAlignment.Center)
                 {
                     yOffset = yOffset / 2d;
                 }
             }
 
-            drawingContext.DrawText(formatedText, new Point(adjustedRect.X, adjustedRect.Y + yOffset));
+            //DrawingGroup textDrawing = new DrawingGroup();
+            //textDrawing.Open().DrawText(formattedText, new Point(0, 0));
+            //DrawingBrush txtBrush = new DrawingBrush(textDrawing)
+            //{
+            //    Stretch = Stretch.None,
+            //    AlignmentX = AlignmentX.Left,
+            //    AlignmentY = AlignmentY.Top
+            //};
+            //System.Windows.Shapes.Rectangle rectElement = new System.Windows.Shapes.Rectangle
+            //{
+            //    Width = adjustedRect.Width,
+            //    Height = adjustedRect.Height,
+            //    Fill = txtBrush
+            //};
+
+            //RenderEffect(drawingContext, rectElement, new Rect(0d, 0d, adjustedRect.X, adjustedRect.Y + yOffset));
+            drawingContext.DrawText(formattedText, new Point(adjustedRect.X, adjustedRect.Y + yOffset));
         }
 
         public void ReadXml(XmlReader reader)
@@ -521,7 +555,6 @@ namespace GadrocsWorkshop.Helios
                     bestName = pair.Value;
                 }
             }
-
             return bestName;
         }
 
@@ -576,6 +609,35 @@ namespace GadrocsWorkshop.Helios
             return prefix.Length < tag.Length &&
                 tag[prefix.Length] == '-' &&
                 string.CompareOrdinal(prefix, 0, tag, 0, prefix.Length) == 0;
+        }
+        protected virtual void RenderEffect(DrawingContext drawingContext, System.Windows.Shapes.Rectangle image, Rect imageRectangle)
+        {
+            // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
+            if (!_designTimeChecked)
+            {
+                _designTime = ConfigManager.Application.ShowDesignTimeControls;
+                _designTimeChecked = true;
+
+            }
+            if (!_designTime)
+            {
+                // Attempt to cache the ShaderEffect if we're in Control Center
+                if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+                {
+                    _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+                }
+            }
+            else
+            {
+                _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+            }
+
+            if (_effect != null && !EffectsExclusion)
+            {
+                image.Effect = _effect;
+            }
+            VisualBrush visualBrush = new VisualBrush(image);
+            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
         }
     }
 }

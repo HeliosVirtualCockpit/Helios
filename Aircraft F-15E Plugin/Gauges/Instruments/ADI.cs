@@ -109,10 +109,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
                 if (!base.EffectsExclusion.Equals(value))
                 {
                     base.EffectsExclusion = value;
-                    foreach (GaugeComponent gc in Components)
-                    {
-                        gc.EffectsExclusion = value;
-                    }
                     OnPropertyChanged("EffectsExclusion", !value, value, true);
                 }
             }

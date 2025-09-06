@@ -1,4 +1,4 @@
-HeliosColorAdjuster inputSampler : register(s0);
+sampler2D inputSampler : register(s0);
 
 // Parameters
 float Brightness  : register(c0); // -1.0 to +1.0
@@ -24,7 +24,7 @@ float4 main(float2 uv : TEXCOORD) : COLOR
     color.rgb = ((color.rgb - 0.5) * Contrast) + 0.5;
 
     // Gamma correction
-    color.rgb = pow(color.rgb, 1.0 / Gamma);
+    color.rgb = pow(abs(color.rgb), 1.0 / Gamma);
 
     // Clamp
     color.rgb = saturate(color.rgb);

@@ -29,7 +29,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Effects.ColorAdjustEffect _effect;
         public event EventHandler DisplayUpdate;
         private bool _effectsExclusion = false;
-
+        private bool _designTime = false, _designTimeChecked = false;
 
         #region Properties
 
@@ -132,7 +132,22 @@ namespace GadrocsWorkshop.Helios.Gauges
 
         protected virtual void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
         {
-            if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+            // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
+            if (!_designTimeChecked)
+            {
+                _designTime = ConfigManager.Application.ShowDesignTimeControls;
+                _designTimeChecked = true;
+
+            }
+            if (!_designTime)
+            {
+                // Attempt to cache the ShaderEffect if we're in Control Center
+                if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+                {
+                    _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+                }
+            }
+            else
             {
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }
