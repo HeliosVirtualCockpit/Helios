@@ -35,9 +35,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         private string _imageFile = "{helios}/Images/General/ColourAdjuster.xaml";
         private string _shaderName = "{helios}/Resources/ColorAdjust.psc";
         private double _greenFactor = 1.0d, _redFactor = 1.0d, _blueFactor = 1.0d;
+        private double _brightness, _contrast, _gamma;
         private Effects.ColorAdjustEffect _effect;
 
         private HeliosValue _redFactorValue, _greenFactorValue, _blueFactorValue;
+        private HeliosValue _brightnessValue, _contrastValue, _gammaValue;
 
         public EffectColorAdjuster()
             : base("Color Adjustment Effect")
@@ -48,15 +50,24 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             Width = 128;
             Height = 128;
             AddEffect();
-            _redFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Red Factor for Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
+            _redFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Red Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
             _redFactorValue.Execute += new HeliosActionHandler(RedFactor_Execute);
             Actions.Add(_redFactorValue);
-            _greenFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Green Factor for Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
+            _greenFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Green Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
             _greenFactorValue.Execute += new HeliosActionHandler(GreenFactor_Execute);
             Actions.Add(_greenFactorValue);
-            _blueFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Blue Factor for Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
+            _blueFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Blue Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
             _blueFactorValue.Execute += new HeliosActionHandler(BlueFactor_Execute);
             Actions.Add(_blueFactorValue);
+            _brightnessValue = new HeliosValue(this, new BindingValue(0d), "", "Brightness Adjustment.  Affects all colors", "Number", "-1 to +1", BindingValueUnits.Numeric);
+            _brightnessValue.Execute += new HeliosActionHandler(Brightness_Execute);
+            Actions.Add(_brightnessValue);
+            _contrastValue = new HeliosValue(this, new BindingValue(0d), "", "Contrast Adjustment", "Number", "0 to 2.  1 = normal", BindingValueUnits.Numeric);
+            _contrastValue.Execute += new HeliosActionHandler(Contrast_Execute);
+            Actions.Add(_contrastValue);
+            _gammaValue = new HeliosValue(this, new BindingValue(0d), "", "Gamma", "Number", "1.0 to 2.2", BindingValueUnits.Numeric);
+            _gammaValue.Execute += new HeliosActionHandler(Gamma_Execute);
+            Actions.Add(_gammaValue);
         }
         private void AddEffect()
         {
@@ -117,6 +128,51 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 }
             }
         }
+        public double Brightness
+        {
+            get => _brightness;
+            set
+            {
+                if (!value.Equals(_brightness))
+                {
+                    if (_effect != null)
+                    {
+                        _brightness = value;
+                        _effect.Brightness = _brightness;
+                    }
+                }
+            }
+        }
+        public double Contrast
+        {
+            get => _contrast;
+            set
+            {
+                if (!value.Equals(_contrast))
+                {
+                    if (_effect != null)
+                    {
+                        _contrast = value;
+                        _effect.Contrast = _contrast;
+                    }
+                }
+            }
+        }
+        public double Gamma
+        {
+            get => _gamma;
+            set
+            {
+                if (!value.Equals(_gamma))
+                {
+                    if (_effect != null)
+                    {
+                        _gamma = value;
+                        _effect.Gamma = _gamma;
+                    }
+                }
+            }
+        }
         public string ShaderName
         {
             get => _shaderName;
@@ -141,6 +197,18 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         void BlueFactor_Execute(object action, HeliosActionEventArgs e)
         {
             BlueFactor = e.Value.DoubleValue;
+        }
+        void Brightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            Brightness = e.Value.DoubleValue;
+        }
+        void Contrast_Execute(object action, HeliosActionEventArgs e)
+        {
+            Contrast = e.Value.DoubleValue;
+        }
+        void Gamma_Execute(object action, HeliosActionEventArgs e)
+        {
+            Gamma = e.Value.DoubleValue;
         }
         #endregion Actions
         #region Overrides

@@ -1,0 +1,33 @@
+HeliosColorAdjuster inputSampler : register(s0);
+
+// Parameters
+float Brightness  : register(c0); // -1.0 to +1.0
+float Contrast    : register(c1); // 0.0 = flat, 1.0 = normal, >1.0 = more contrast
+float Gamma       : register(c2); // e.g. 1.0 = none, 2.2 = gamma correction
+float RedFactor   : register(c3);
+float GreenFactor : register(c4);
+float BlueFactor  : register(c5);
+
+float4 main(float2 uv : TEXCOORD) : COLOR
+{
+    float4 color = tex2D(inputSampler, uv);
+
+    // Apply per-channel scaling
+    color.r = color.r * RedFactor;
+    color.g = color.g * GreenFactor;
+    color.b = color.b * BlueFactor;
+
+    // Brightness (shift)
+    color.rgb += Brightness;
+
+    // Contrast (center at 0.5)
+    color.rgb = ((color.rgb - 0.5) * Contrast) + 0.5;
+
+    // Gamma correction
+    color.rgb = pow(color.rgb, 1.0 / Gamma);
+
+    // Clamp
+    color.rgb = saturate(color.rgb);
+
+    return color;
+}

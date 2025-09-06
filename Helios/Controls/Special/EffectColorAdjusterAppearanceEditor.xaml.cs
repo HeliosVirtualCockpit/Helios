@@ -39,6 +39,34 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             SliderR.Value = 1.0;
             SliderG.Value = 1.0;
             SliderB.Value = 1.0;
+            SliderBrt.Value = 0;
+            SliderCont.Value = 1.0;
+            SliderGamma.Value = 1.0;
+        }
+
+        private void SliderR_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            ValueR.Content = SliderR.Value.ToString("N2");
+        }
+        private void SliderG_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            ValueG.Content = SliderG.Value.ToString("N2");
+        }
+        private void SliderB_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            ValueB.Content = SliderB.Value.ToString("N2");
+        }
+        private void SliderBrt_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            ValueBrt.Content = SliderBrt.Value.ToString("N2");
+        }
+        private void SliderCont_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            ValueContrast.Content = SliderCont.Value.ToString("N2");
+        }
+        private void SliderGamma_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            ValueGamma.Content = SliderGamma.Value.ToString("N2");
         }
     }
 }

@@ -291,7 +291,7 @@
     <Compile Include="Json\Function\ConverterForJsonNet.cs" />
     <Compile Include="Json\InterfaceFile.cs" />
     <Compile Include="Json\NetworkFunction\SchemaGenerationProviderForJsonNet.cs" />
-    <Compile Include="ShaderWrapper.cs" />
+    <Compile Include="Controls\Special\EffectColorAdjusterShaderWrapper.cs" />
     <Compile Include="UnitConverters\RawConverters.cs" />
     <Compile Include="Units\BarUnit.cs" />
     <Compile Include="Units\MillbarUnit.cs" />
@@ -432,6 +432,8 @@
     <Content Include="Docs\Licenses\RectpackSharp\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\HLSL Shader Source\ColorAdjust.ps" />
+    <None Include="Resources\HLSL Shader Source\readme.md" />
     <Resource Include="Resources\ColorAdjust.psc" />
     <Resource Include="Images\Knobs\knob7.png" />
     <Resource Include="Images\Toggles\Alt\flattop-down.png" />
