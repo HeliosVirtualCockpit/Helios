@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            drawingContext.DrawGeometry(null, _pathPen, _path);
+            RenderGeometry(drawingContext, null, _pathPen, _path);
         }
 
         protected override void OnRefresh()

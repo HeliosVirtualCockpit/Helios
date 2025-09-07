@@ -366,7 +366,7 @@ namespace GadrocsWorkshop.Helios
             return formatedText;
         }
 
-        public void RenderText(DrawingContext drawingContext, Brush textBrush, string text, Rect rectangle)
+        public FormattedText RenderText(DrawingContext drawingContext, Brush textBrush, string text, Rect rectangle)
         {
             FormattedText formattedText = GetFormattedText(textBrush, text);
 
@@ -387,23 +387,7 @@ namespace GadrocsWorkshop.Helios
                 }
             }
 
-            //DrawingGroup textDrawing = new DrawingGroup();
-            //textDrawing.Open().DrawText(formattedText, new Point(0, 0));
-            //DrawingBrush txtBrush = new DrawingBrush(textDrawing)
-            //{
-            //    Stretch = Stretch.None,
-            //    AlignmentX = AlignmentX.Left,
-            //    AlignmentY = AlignmentY.Top
-            //};
-            //System.Windows.Shapes.Rectangle rectElement = new System.Windows.Shapes.Rectangle
-            //{
-            //    Width = adjustedRect.Width,
-            //    Height = adjustedRect.Height,
-            //    Fill = txtBrush
-            //};
-
-            //RenderEffect(drawingContext, rectElement, new Rect(0d, 0d, adjustedRect.X, adjustedRect.Y + yOffset));
-            drawingContext.DrawText(formattedText, new Point(adjustedRect.X, adjustedRect.Y + yOffset));
+            return formattedText;
         }
 
         public void ReadXml(XmlReader reader)

@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     public class PushButtonRenderer : HeliosVisualRenderer
     {
@@ -50,9 +51,12 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                drawingContext.DrawGeometry(_glyphBrush, _glyphPen, _glyphPath);
+
+                RenderGeometry(drawingContext, _glyphBrush, _glyphPen, _glyphPath);
+                //drawingContext.DrawGeometry(_glyphBrush, _glyphPen, _glyphPath);
             }
-            pushButton.TextFormat.RenderText(drawingContext, _textBrush, pushButton.Text, _imageRect);
+            //FormattedText fText = pushButton.TextFormat.RenderText(drawingContext, _textBrush, pushButton.Text, _imageRect);
+            RenderTextEffect(drawingContext, pushButton.TextFormat.RenderText(drawingContext, _textBrush, pushButton.Text, _imageRect), _imageRect);
 
             if (pushButton.Pushed)
             {

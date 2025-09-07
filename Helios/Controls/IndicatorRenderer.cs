@@ -44,7 +44,9 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             ImageSource image = _indicator.On ? _onImage : _offImage;
             RenderEffect(drawingContext, image, _imageRect);
-            _indicator.TextFormat.RenderText(drawingContext, _indicator.On ? _onBrush : _offBrush, _indicator.Text, _imageRect);
+            //_indicator.TextFormat.RenderText(drawingContext, _indicator.On ? _onBrush : _offBrush, _indicator.Text, _imageRect);
+            RenderTextEffect(drawingContext, _indicator.TextFormat.RenderText(drawingContext, _indicator.On ? _onBrush : _offBrush, _indicator.Text, _imageRect), _imageRect);
+
         }
 
         protected override void OnRefresh()

@@ -42,7 +42,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 drawingContext.DrawRectangle(new SolidColorBrush(_textDisplay.BackgroundColor), null, _imageRect);
             }
-            _textDisplay.TextFormat.RenderText(drawingContext, _onBrush , _textDisplay.TextValue, _imageRect);
+            // _textDisplay.TextFormat.RenderText(drawingContext, _onBrush , _textDisplay.TextValue, _imageRect);
+            RenderTextEffect(drawingContext, _textDisplay.TextFormat.RenderText(drawingContext, _onBrush, _textDisplay.TextValue, _imageRect), _imageRect);
+
+
         }
 
         protected override void OnRefresh()

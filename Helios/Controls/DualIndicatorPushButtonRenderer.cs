@@ -71,10 +71,13 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                drawingContext.DrawGeometry(pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath);
+                RenderGeometry(drawingContext, pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath);
             }
-            pushButton.TextFormat.RenderText(drawingContext, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
-            pushButton.AdditionalTextFormat.RenderText(drawingContext, pushButton.AdditionalIndicator ? _additionalOnTextBrush : _additionalOffTextBrush, pushButton.AdditionalText, _imageRect);
+            //pushButton.TextFormat.RenderText(drawingContext, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
+            RenderTextEffect(drawingContext, pushButton.TextFormat.RenderText(drawingContext, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect), _imageRect);
+
+            //pushButton.AdditionalTextFormat.RenderText(drawingContext, pushButton.AdditionalIndicator ? _additionalOnTextBrush : _additionalOffTextBrush, pushButton.AdditionalText, _imageRect);
+            RenderTextEffect(drawingContext, pushButton.TextFormat.RenderText(drawingContext, pushButton.AdditionalIndicator ? _additionalOnTextBrush : _additionalOffTextBrush, pushButton.Text, _imageRect), _imageRect);
 
             if (pushButton.Pushed)
             {

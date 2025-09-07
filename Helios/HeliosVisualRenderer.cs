@@ -16,9 +16,11 @@
 namespace GadrocsWorkshop.Helios
 {
     using System;
+    using System.Drawing;
     using System.Windows;
-    using System.Windows.Media;
     using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// Base class for visual renderers.
@@ -76,7 +78,7 @@ namespace GadrocsWorkshop.Helios
         /// </summary>
         /// <param name="drawingContext">Context on which to draw this control.</param>
         /// <param name="size"></param>
-        public void Render(DrawingContext drawingContext, Size size)
+        public void Render(DrawingContext drawingContext, System.Windows.Size size)
         {
             CheckRefresh();
             OnRender(drawingContext, size.Width / Visual.Width, size.Height / Visual.Height);
@@ -135,6 +137,29 @@ namespace GadrocsWorkshop.Helios
         {
             _transform = Visual?.CreateTransform();
         }
+        protected virtual void RenderTextEffect(DrawingContext drawingContext, FormattedText formattedText, Rect rect)
+        {
+            DrawingVisual visual = new DrawingVisual();
+            DrawingContext tempDrawingContext = visual.RenderOpen();
+            tempDrawingContext.DrawText(formattedText, new System.Windows.Point(rect.X, rect.Y));
+            tempDrawingContext.Close();
+            RenderTargetBitmap rtb = new RenderTargetBitmap(200, 200, 96, 96, PixelFormats.Pbgra32);
+            rtb.Render(visual);
+
+            RenderEffect(drawingContext, rtb, new Rect(0, 0, 200, 200));
+        }
+        protected virtual void RenderGeometry(DrawingContext drawingContext, System.Windows.Media.Brush brush, System.Windows.Media.Pen pen, PathGeometry path)
+        {
+            DrawingVisual visual = new DrawingVisual();
+            DrawingContext tempDrawingContext = visual.RenderOpen();
+            tempDrawingContext.DrawGeometry(brush, pen, path);
+            tempDrawingContext.Close();
+
+            RenderTargetBitmap rtb = new RenderTargetBitmap(200, 200, 96, 96, PixelFormats.Pbgra32);
+            rtb.Render(visual);
+            
+            RenderEffect(drawingContext, rtb, new Rect(0, 0, 200, 200));
+        }
         protected virtual void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
         {
             // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
@@ -156,7 +181,7 @@ namespace GadrocsWorkshop.Helios
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }
 
-            Image imageControl = new Image
+            System.Windows.Controls.Image imageControl = new System.Windows.Controls.Image
                 {
                     Source = image,
                     Width = image != null ? image.Width : 0,
