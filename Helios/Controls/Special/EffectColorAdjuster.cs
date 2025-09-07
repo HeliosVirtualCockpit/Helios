@@ -35,8 +35,8 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         private string _imageFile = "{helios}/Images/General/ColourAdjuster.xaml";
         private string _shaderName = "{helios}/Resources/ColorAdjust.psc";
         private double _greenFactor = 1.0d, _redFactor = 1.0d, _blueFactor = 1.0d;
-        private double _brightness, _contrast, _gamma;
-        private Effects.ColorAdjustEffect _effect;
+        private double _brightness = 0d, _contrast = 1.0d, _gamma = 1.0d;
+        private Effects.ColorAdjustEffect _effect, _undoEffect;
         private bool _enabled = true;
 
         private HeliosValue _redFactorValue, _greenFactorValue, _blueFactorValue;
@@ -85,13 +85,16 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         private void AddEffect()
         {
             _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
-
             if (_effect == null) {
                 _effect = new Effects.ColorAdjustEffect
                 {
                     GreenFactor = _greenFactor,
                     RedFactor = _redFactor,
-                    BlueFactor = _blueFactor
+                    BlueFactor = _blueFactor,
+                    Brightness = _brightness,
+                    Contrast = _contrast,
+                    Gamma = _gamma,
+                    Enabled = _enabled
                 };
                 ConfigManager.ProfileManager.CurrentEffect = _effect;
             }
@@ -101,6 +104,25 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             ConfigManager.ProfileManager.CurrentEffect = null;
             _effect = null;
         }
+        private bool CheckEffect()
+        {
+            if(_effect == null)
+            {
+                AddEffect();
+                foreach (HeliosVisual hv in Profile.WalkVisuals())
+                {
+                    hv.RenderWithoutImageReload();
+                }
+                return (_effect != null);
+            } else
+            {
+                if(ConfigManager.ProfileManager.CurrentEffect == null)
+                {
+                    ConfigManager.ProfileManager.CurrentEffect = _effect;
+                }
+            }
+                return true;
+        }
         public double RedFactor
         {
             get => _redFactor;
@@ -108,7 +130,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 if (!value.Equals(_redFactor))
                 {
-                    if (_effect != null)
+                    if (CheckEffect())
                     {
                         _redFactor = value;
                         _effect.RedFactor = _redFactor;
@@ -123,7 +145,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 if (!value.Equals(_greenFactor))
                 {
-                    if (_effect != null)
+                    if (CheckEffect())
                     {
                         _greenFactor = value;
                         _effect.GreenFactor = _greenFactor;
@@ -138,7 +160,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 if (!value.Equals(_blueFactor))
                 {
-                    if (_effect != null)
+                    if (CheckEffect())
                     {
                         _blueFactor = value;
                         _effect.BlueFactor = _blueFactor;
@@ -153,7 +175,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 if (!value.Equals(_brightness))
                 {
-                    if (_effect != null)
+                    if (CheckEffect())
                     {
                         _brightness = value;
                         _effect.Brightness = _brightness;
@@ -168,7 +190,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 if (!value.Equals(_contrast))
                 {
-                    if (_effect != null)
+                    if (CheckEffect())
                     {
                         _contrast = value;
                         _effect.Contrast = _contrast;
@@ -183,7 +205,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 if (!value.Equals(_gamma))
                 {
-                    if (_effect != null)
+                    if (CheckEffect())
                     {
                         _gamma = value;
                         _effect.Gamma = _gamma;
@@ -207,13 +229,16 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             get => _enabled;
             set
             {
-                if (_enabled != value)
+                if (CheckEffect())
                 {
-                    _enabled = value;
-                    _effect.Enabled = _enabled;
-                    foreach (HeliosVisual hv in Profile.WalkVisuals())
+                    if (_enabled != value)
                     {
-                        hv.RenderWithoutImageReload();
+                        _enabled = value;
+                        _effect.Enabled = _enabled;
+                        foreach (HeliosVisual hv in Profile.WalkVisuals())
+                        {
+                            hv.RenderWithoutImageReload();
+                        }
                     }
                 }
             }
