@@ -282,7 +282,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 Width = image != null ? image.Width : 0,
                 Height = image != null ? image.Height : 0,
             };
-            if (_effect != null && !EffectsExclusion)
+            if (_effect != null && !EffectsExclusion && _effect.Enabled)
             {
                 imageControl.Effect = _effect;
             }

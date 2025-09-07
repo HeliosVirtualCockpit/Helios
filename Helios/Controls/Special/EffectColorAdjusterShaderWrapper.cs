@@ -7,6 +7,7 @@ namespace GadrocsWorkshop.Helios.Effects
 {
     public class ColorAdjustEffect : ShaderEffect
     {
+        private bool _enabled = true; 
         private static readonly PixelShader _shader = new PixelShader
         {
             UriSource = new Uri("pack://application:,,,/Helios;component/Resources/ColorAdjust.psc")
@@ -105,6 +106,17 @@ namespace GadrocsWorkshop.Helios.Effects
         {
             get => (double)GetValue(BlueFactorProperty);
             set => SetValue(BlueFactorProperty, value);
+        }
+        public bool Enabled
+        {
+            get => _enabled;
+            set
+            {
+                if (_enabled != value)
+                {
+                    _enabled = value;
+                }
+            }
         }
     }
 }

@@ -314,11 +314,18 @@ namespace GadrocsWorkshop.Helios
         public void BypassRendering()
         {
             RenderingBypassed = true;
-        } 
+        }
         public void ResumeRendering()
         {
             RenderingBypassed = false;
             Refresh();
+        }
+        /// <summary>
+        /// This results in a render being performed without image reloading
+        /// </summary>
+        public void RenderWithoutImageReload()
+        {
+            OnDisplayUpdate();
         }
 
         /// <summary>

@@ -163,7 +163,7 @@ namespace GadrocsWorkshop.Helios
                     Height = image != null ? image.Width : 0,
 
                 };
-            if (!Visual.EffectsExclusion && Visual.IsVisible && _effect != null)
+            if (!Visual.EffectsExclusion && Visual.IsVisible && _effect != null && _effect.Enabled)
             {
                 imageControl.Effect = _effect;
             }
