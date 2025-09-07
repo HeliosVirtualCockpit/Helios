@@ -47,6 +47,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             : base("Color Adjustment Effect")
         {
             DesignTimeOnly = true;
+            IsUnique = true;   // we only want one of these in the profile.
             Image = _imageFile;
             Alignment = ImageAlignment.Stretched;
             Width = 128;

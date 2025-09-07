@@ -50,6 +50,7 @@ namespace GadrocsWorkshop.Helios
         private bool _keepAspectRatio = false;
         private bool _imageRefresh = false;
         private double _aspectRatio = 1.0;
+        private bool _unique = false;
 
         private readonly HeliosValue _hiddenValue;
 
@@ -221,7 +222,14 @@ namespace GadrocsWorkshop.Helios
                 }
             }
         }
-
+        /// <summary>
+        /// This Visual can only exist in the profile once
+        /// </summary>
+        public virtual bool IsUnique
+        {
+            get => _unique;
+            set => _unique = value;
+        }
         /// <summary>
         /// Gets or sets whether this control keeps the same aspect ratio when Width/Height are changed.
         /// </summary>
