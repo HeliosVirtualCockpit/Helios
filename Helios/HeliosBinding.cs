@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios
     using NLua;
     using NLua.Exceptions;
     using System;
+    using System.Text;
 
     /// <summary>
     /// A binding from a source trigger to a target action
@@ -33,6 +34,7 @@ namespace GadrocsWorkshop.Helios
         private WeakReference _triggerSource = new WeakReference(null);
         private WeakReference _targetAction = new WeakReference(null);
         private bool _bypassTargetTriggers;
+        private bool _luaScriptUTF8Encoding = false;
         private BindingValueSources _valueSource;
         private BindingValue _value = BindingValue.Empty;
         private string _condition = "";
@@ -263,7 +265,19 @@ namespace GadrocsWorkshop.Helios
                 }
             }
         }
-
+        public bool LuaScriptUTF8Encoding
+        {
+            get => _luaScriptUTF8Encoding;
+            set
+            {
+                if (!_luaScriptUTF8Encoding.Equals(value))
+                {
+                    bool oldValue = _luaScriptUTF8Encoding;
+                    _luaScriptUTF8Encoding = value;
+                    OnPropertyChanged("LuaScriptUTF8Encoding", oldValue, value, true);
+                }
+            }
+        }
         private Lua LuaInterpreter
         {
             get
@@ -271,6 +285,7 @@ namespace GadrocsWorkshop.Helios
                 if (_luaInterpreter == null)
                 {
                     _luaInterpreter = new Lua();
+                    _luaInterpreter.State.Encoding = _luaScriptUTF8Encoding ? Encoding.UTF8 : Encoding.ASCII;
 
                     // add lua environment variables
                     _luaInterpreter.DoString("HeliosPath = " + "'" + ConfigManager.DocumentPath.Replace("\\", "\\\\") + "'");
