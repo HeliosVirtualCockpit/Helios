@@ -276,7 +276,10 @@ namespace GadrocsWorkshop.Helios
                 xmlWriter.WriteStartElement("Binding");
 
                 xmlWriter.WriteAttributeString("BypassCascadingTriggers", boolConverter.ConvertToInvariantString(binding.BypassCascadingTriggers));
-
+                if (binding.LuaScriptUTF8Encoding)
+                {
+                    xmlWriter.WriteAttributeString("LuaScriptUTF8Encoding", boolConverter.ConvertToInvariantString(binding.LuaScriptUTF8Encoding));
+                }
                 xmlWriter.WriteStartElement("Trigger");
                 xmlWriter.WriteAttributeString("Source", GetReferenceName(binding.Trigger.Source));
                 xmlWriter.WriteAttributeString("Name", binding.Trigger.TriggerID);
@@ -356,6 +359,10 @@ namespace GadrocsWorkshop.Helios
 
             HeliosBinding binding = (HeliosBinding)CreateNewObject("Binding", "");
             binding.BypassCascadingTriggers = (bool)boolConverter.ConvertFromString(null, CultureInfo.InvariantCulture, xmlReader.GetAttribute("BypassCascadingTriggers"));
+            if(xmlReader.GetAttribute("LuaScriptUTF8Encoding") != null)
+            {
+                binding.LuaScriptUTF8Encoding = (bool)boolConverter.ConvertFromString(null, CultureInfo.InvariantCulture, xmlReader.GetAttribute("LuaScriptUTF8Encoding"));
+            }
             xmlReader.ReadStartElement("Binding");
 
             string sourcePath = xmlReader.GetAttribute("Source");

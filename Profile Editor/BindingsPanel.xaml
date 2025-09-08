@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="600" Background="{StaticResource ToolBackground}">
     <UserControl.Resources>
         <ResourceDictionary>
-            
+
             <helios:EnumConverter Type="{x:Type helios:BindingValueSources}" x:Key="BindingSourceValues" />
 
             <Style x:Key="PropertiesTabs" TargetType="TabControl">
@@ -19,7 +19,7 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-            
+
             <Style x:Key="LuaHelpTextStyle" TargetType="TextBlock">
                 <Setter Property="Visibility" Value="Collapsed" />
                 <Style.Triggers>
@@ -42,8 +42,8 @@
             </Style>
 
             <local:BindingsDragDropAdvisor x:Key="DropAdvisor" />
-            
-            <Style x:Key="ValueExpanderStyle" TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">      
+
+            <Style x:Key="ValueExpanderStyle" TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding SelectedBinding.Action.ActionRequiresValue}" Value="false">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -78,13 +78,13 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-            
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ProfileExplorerResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>              
+        </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -94,7 +94,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TabControl Name="IOTab" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="6" SelectedValuePath="Tag" SelectedValue="{Binding BindingType}">
+        <TabControl Name="IOTab" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="6,6,6,6" SelectedValuePath="Tag" SelectedValue="{Binding BindingType}">
             <TabItem Header="Input" Tag="Input" />
             <TabItem Header="Output" Tag="Output" />
         </TabControl>
@@ -117,7 +117,7 @@
                             <ColumnDefinition Style="{StaticResource TriggerColumn}" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Margin="6,0,4,0">
                             <TextBlock Style="{StaticResource PropertyName}" VerticalAlignment="Center">Value Source</TextBlock>
                             <ComboBox MinWidth="120" ItemsSource="{Binding Source={StaticResource BindingSourceValues}, Path=DisplayNames}" SelectedItem="{Binding SelectedBinding.ValueSource, Converter={StaticResource BindingSourceValues}, Mode=TwoWay}" SelectionChanged="ValueSource_SelectionChanged" HorizontalAlignment="Left" FontSize="10" Margin="4" />
@@ -305,14 +305,41 @@ Other Global Variables:
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding SelectedBinding.BypassCascadingTriggers}" HorizontalAlignment="Center" Margin="4,12,8,4" />
                         <TextBlock Grid.Row="0" Grid.Column="1" Margin="4,8,0,0" Style="{StaticResource PropertyName}" VerticalAlignment="Center">Bypass Cascading Triggers</TextBlock>
                         <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Documentation}">When checked any triggers which would normally occur because of this action are surpressed.</TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,12,0,0" Style="{StaticResource PropertyName}" VerticalAlignment="Center">Conditional Expression</TextBlock>
-                        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,4,4,0" Height="60" Text="{Binding SelectedBinding.Condition}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
-                        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0,0,0" Style="{StaticResource Documentation}">If this LUA script returns false then this binding will abort without executing the action.</TextBlock>
+                        <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedBinding.ValueSource}" Value="LuaScript">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding SelectedBinding.LuaScriptUTF8Encoding}" HorizontalAlignment="Center" Margin="4,12,8,4" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Margin="4,8,0,0" Style="{StaticResource PropertyName}" VerticalAlignment="Center">Use UTF-8</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Documentation}">When checked strings in the LuaScript interpreter will be UTF-8 encoded.</TextBlock>
+                            </Grid>
+                        </StackPanel>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,12,0,0" Style="{StaticResource PropertyName}" VerticalAlignment="Center">Conditional Expression</TextBlock>
+                        <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,4,4,0" Height="60" Text="{Binding SelectedBinding.Condition}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+                        <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0,0,0" Style="{StaticResource Documentation}">If this LUA script returns false then this binding will abort without executing the action.</TextBlock>
                     </Grid>
                 </Expander>
             </StackPanel>
