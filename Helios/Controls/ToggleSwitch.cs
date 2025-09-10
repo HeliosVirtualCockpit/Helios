@@ -265,6 +265,9 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ToggleSwitchPosition.One:
                         SwitchPosition = ToggleSwitchPosition.Two;
                         break;
+                    default:
+                        SwitchPosition = ToggleSwitchPosition.One;
+                        break;
                 }
             }
             else if (action == SwitchAction.Decrement)
@@ -272,6 +275,9 @@ namespace GadrocsWorkshop.Helios.Controls
                 switch (SwitchPosition)
                 {
                     case ToggleSwitchPosition.Two:
+                        SwitchPosition = ToggleSwitchPosition.One;
+                        break;
+                    default:
                         SwitchPosition = ToggleSwitchPosition.One;
                         break;
                 }
