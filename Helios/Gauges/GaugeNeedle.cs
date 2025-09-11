@@ -141,7 +141,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             transform.Children.Add(new TranslateTransform(_location.X * _xScale, _location.Y * _yScale));
 
             drawingContext.PushTransform(transform);
-            RenderEffect(drawingContext, _image, _rectangle);
+            DrawImage(drawingContext, _image, _rectangle);
             drawingContext.Pop();
         }
 

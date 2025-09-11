@@ -36,34 +36,13 @@ namespace GadrocsWorkshop.Helios.Controls
                 switch (toggleSwitch.SwitchPosition)
                 {
                     case ThreeWayToggleSwitchPosition.One:
-                        if (toggleSwitch.GuardPosition == GuardPosition.Up)
-                        {
-                            RenderEffect(drawingContext, _imageOneGuardUp, _imageRect);
-                        }
-                        else
-                        {
-                            RenderEffect(drawingContext, _imageOneGuardDown, _imageRect);
-                        }
+                        DrawImage(drawingContext, toggleSwitch.GuardPosition == GuardPosition.Up ? _imageOneGuardUp : _imageOneGuardDown, _imageRect);
                         break;
                     case ThreeWayToggleSwitchPosition.Two:
-                        if (toggleSwitch.GuardPosition == GuardPosition.Up)
-                        {
-                            RenderEffect(drawingContext, _imageTwoGuardUp, _imageRect);
-                        }
-                        else
-                        {
-                            RenderEffect(drawingContext, _imageTwoGuardDown, _imageRect);
-                        }
+                        DrawImage(drawingContext, toggleSwitch.GuardPosition == GuardPosition.Up ? _imageTwoGuardUp : _imageTwoGuardDown, _imageRect);
                         break;
                     case ThreeWayToggleSwitchPosition.Three:
-                        if (toggleSwitch.GuardPosition == GuardPosition.Up)
-                        {
-                            RenderEffect(drawingContext, _imageThreeGuardUp, _imageRect);
-                        }
-                        else
-                        {
-                            RenderEffect(drawingContext, _imageThreeGuardDown, _imageRect);
-                        }
+                        DrawImage(drawingContext, toggleSwitch.GuardPosition == GuardPosition.Up ? _imageThreeGuardUp : _imageThreeGuardDown, _imageRect);
                         break;
                 }
             }

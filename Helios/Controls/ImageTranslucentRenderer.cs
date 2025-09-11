@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Controls
             if (_image != null)
             {
                   ImageTranslucent profileImage = Visual as ImageTranslucent;
-                RenderEffect(drawingContext, _image, _imageRect);
+                DrawImage(drawingContext, _image, _imageRect);
                 //drawingContext.DrawRoundedRectangle(_visualBrush, _borderPen, _imageRect, profileImage.CornerRadius, profileImage.CornerRadius);
             }
         }
@@ -44,7 +44,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 ImageTranslucent profileImage = Visual as ImageTranslucent;
                 drawingContext.PushOpacity(profileImage.ImageOpacity); 
                 Rect scaledRect = new Rect(_imageRect.X, _imageRect.Y, _imageRect.Width * scaleX, _imageRect.Height * scaleY);
-                RenderEffect(drawingContext, _image, scaledRect);
+                DrawImage(drawingContext, _image, scaledRect);
                 drawingContext.Pop();
             }            
         }

@@ -29,8 +29,7 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             if (Visual is IBackgroundImage && _backgroundBrush != null)
             {
-                // drawingContext.DrawRectangle(_backgroundBrush, null, _backgroundRectangle);
-                RenderEffect(drawingContext, _backgroundBrush.ImageSource, _backgroundRectangle);
+                DrawImage(drawingContext, _backgroundBrush.ImageSource, _backgroundRectangle);
             }
         }
 

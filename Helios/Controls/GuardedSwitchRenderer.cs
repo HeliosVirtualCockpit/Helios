@@ -29,16 +29,8 @@ namespace GadrocsWorkshop.Helios.Controls
             GuardedSwitch toggleSwitch = Visual as GuardedSwitch;
             if (toggleSwitch != null)
             {
-				if (toggleSwitch.GuardPosition == GuardPosition.Up)
-				{
-					RenderEffect(drawingContext, _imageOneGuardUp, _imageRect);
-				}
-				else
-				{
-					RenderEffect(drawingContext, _imageTwoGuardDown, _imageRect);
-				}
-				
-			}
+                 DrawImage(drawingContext, toggleSwitch.GuardPosition == GuardPosition.Up ? _imageOneGuardUp : _imageTwoGuardDown, _imageRect);
+            }
         }
 
         protected override void OnRefresh()

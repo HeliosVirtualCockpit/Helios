@@ -28,7 +28,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// This invisible control is used to communicate set-up and communicate with a
     /// ShaderEffect that is used for altering the colour of most visuals & gauges  
     /// </summary>
-    [HeliosControl("Helios.Base.Effects.ColorAdjuster", "Color Adjustment Effect", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Base.Effects.ColorAdjuster", "Color Adjustment Effect", "Special Controls", typeof(EffectColorAdjusterRenderer), HeliosControlFlags.None)]
     public class EffectColorAdjuster : ImageDecorationBase
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -36,7 +36,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         private string _shaderName = "{helios}/Resources/ColorAdjust.psc";
         private double _greenFactor = 1.0d, _redFactor = 1.0d, _blueFactor = 1.0d;
         private double _brightness = 0d, _contrast = 1.0d, _gamma = 1.0d;
-        private Effects.ColorAdjustEffect _effect, _undoEffect;
+        private Effects.ColorAdjustEffect _effect;
         private bool _enabled = true;
 
         private HeliosValue _redFactorValue, _greenFactorValue, _blueFactorValue;
@@ -123,6 +123,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             }
                 return true;
         }
+        #region Properties
         public double RedFactor
         {
             get => _redFactor;
@@ -243,7 +244,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 }
             }
         }
-
+#endregion Properties
         #region Actions
         void RedFactor_Execute(object action, HeliosActionEventArgs e)
         {

@@ -44,13 +44,13 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Pushed && _image != null)
             {
-                drawingContext.DrawRectangle(new SolidColorBrush(pushButton.PushBackingColor), null, colorRect);
-                RenderEffect(drawingContext, _image, _imageRect);
+                DrawRectangle(drawingContext, new SolidColorBrush(pushButton.PushBackingColor), null, colorRect);
+                DrawImage(drawingContext, _image, _imageRect);
             }
             else if (_image != null)
             {
-                drawingContext.DrawRectangle(new SolidColorBrush(pushButton.NormalBackingColor), null, colorRect);
-                RenderEffect(drawingContext, _image, _imageRect);
+                DrawRectangle(drawingContext, new SolidColorBrush(pushButton.NormalBackingColor), null, colorRect);
+                DrawImage(drawingContext, _image, _imageRect);
             }
 
             if (pushButton.Pushed)
@@ -60,11 +60,10 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                RenderGeometry(drawingContext, _glyphBrush, _glyphPen, _glyphPath);
+                DrawGeometry(drawingContext, _glyphBrush, _glyphPen, _glyphPath, _imageRect);
             }
-            //pushButton.TextFormat.RenderText(drawingContext, _textBrush, pushButton.Text, _imageRect);
-            RenderTextEffect(drawingContext, pushButton.TextFormat.RenderText(drawingContext, _textBrush, pushButton.Text, _imageRect), _imageRect);
 
+            DrawText(drawingContext, pushButton, _textBrush, pushButton.Text, _imageRect);
 
             if (pushButton.Pushed)
             {

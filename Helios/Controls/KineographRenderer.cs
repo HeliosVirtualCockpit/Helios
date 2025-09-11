@@ -41,7 +41,7 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if(animation.AnimationFrameCount > 0 && animation.AnimationFrameNumber <= animation.AnimationFrameCount-1)
                 {
-                    RenderEffect(drawingContext, animation.AnimationFrames[(int)animation.AnimationFrameNumber], _animationFrameRect);
+                    DrawImage(drawingContext, animation.AnimationFrames[(int)animation.AnimationFrameNumber], _animationFrameRect);
                 }
             }
         }

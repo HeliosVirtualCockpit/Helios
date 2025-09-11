@@ -40,7 +40,7 @@ namespace GadrocsWorkshop.Helios.Controls
             if (rotary != null)
             {
                 drawingContext.PushTransform(new RotateTransform(rotary.KnobRotation, _center.X, _center.Y));
-                RenderEffect(drawingContext, _image, _imageRect);
+                DrawImage(drawingContext, _image, _imageRect);
                 if (rotary.VisualizeDragging)
                 {
                     double length = (rotary.DragPoint - _center).Length;

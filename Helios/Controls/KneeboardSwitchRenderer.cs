@@ -38,31 +38,31 @@ namespace GadrocsWorkshop.Helios.Controls
                     case KneeboardSwitchPosition.One:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageOneIndicatorOn != null)
                         {
-                            RenderEffect(drawingContext, _imageOneIndicatorOn, _imageRect);
+                            drawingContext.DrawImage(_imageOneIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageOne, _imageRect);
+                            drawingContext.DrawImage(_imageOne, _imageRect);
                         }
                         break;
                     case KneeboardSwitchPosition.Two:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageTwoIndicatorOn != null)
                         {
-                            RenderEffect(drawingContext, _imageTwoIndicatorOn, _imageRect);
+                            drawingContext.DrawImage(_imageTwoIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageTwo, _imageRect);
+                            drawingContext.DrawImage(_imageTwo, _imageRect);
                         }
                         break;
                     case KneeboardSwitchPosition.Three:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageThreeIndicatorOn != null)
                         {
-                            RenderEffect(drawingContext, _imageThreeIndicatorOn, _imageRect);
+                            drawingContext.DrawImage(_imageThreeIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageThree, _imageRect);
+                            drawingContext.DrawImage(_imageThree, _imageRect);
                         }
                         break;
                 }            

@@ -26,7 +26,20 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            RenderGeometry(drawingContext, null, _pathPen, _path);
+            /// TODO: Effects on a line (both straight and curved need to be implemented at some point 
+            //if (!NeedsEffect || (Visual as LineDecoration).Curve)
+            //{
+                drawingContext.DrawGeometry(null, _pathPen, _path);
+            //}
+            //else
+            //{
+            //    DrawingVisual visual = new DrawingVisual();
+            //    DrawingContext tempDrawingContext = visual.RenderOpen();
+            //    drawingContext.DrawGeometry(null, _pathPen, _path);
+            //    tempDrawingContext.Close();
+            //    LineDecoration line = Visual as LineDecoration;
+            //    RenderVisual(drawingContext, visual, new Rect(0, 0, Math.Max(line.Rectangle.Width, line.Thickness), Math.Max(line.Rectangle.Height, line.Thickness)));
+            //}
         }
 
         protected override void OnRefresh()

@@ -205,7 +205,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 roll = renderValue % 1d;
                 renderValue += 1d; // Push up for the last digit
                 drawingContext.PushTransform(new TranslateTransform(xOffset, -(renderValue * _digitRenderSize.Height)));
-                RenderEffect(drawingContext, _image, _imageRect);
+                DrawImage(drawingContext, _image, _imageRect);
                 drawingContext.Pop();
 
                 previousDigitValue = digitValue;

@@ -210,7 +210,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.FuelPanel
                 }
 
                 drawingContext.PushTransform(new TranslateTransform(xOffset, -(renderValue * _digitRenderSize.Height)));
-                RenderEffect(drawingContext, _image, _imageRect);
+                drawingContext.DrawImage(_image, _imageRect);
                 drawingContext.Pop();
 
                 previousDigitValue = digitValue;

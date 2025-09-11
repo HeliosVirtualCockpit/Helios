@@ -14,6 +14,11 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using GadrocsWorkshop.Helios.ComponentModel;
+using GadrocsWorkshop.Helios.Controls.Capabilities;
+using GadrocsWorkshop.Helios.Controls.Special;
+using GadrocsWorkshop.Helios.Effects;
+using GadrocsWorkshop.Helios.Gauges;
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -22,9 +27,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml;
-using GadrocsWorkshop.Helios.ComponentModel;
-using GadrocsWorkshop.Helios.Controls.Capabilities;
-using GadrocsWorkshop.Helios.Gauges;
 
 namespace GadrocsWorkshop.Helios
 {
@@ -102,7 +104,6 @@ namespace GadrocsWorkshop.Helios
         public bool PersistChildrenAsComment { get; set; } = false;
 
         public bool InsideCommentBlock { get; set; } = false;
-
         public override string TypeIdentifier
         {
             get

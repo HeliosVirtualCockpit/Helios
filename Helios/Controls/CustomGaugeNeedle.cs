@@ -204,7 +204,7 @@ namespace GadrocsWorkshop.Helios.Gauges
           
 
             drawingContext.PushTransform(transform);
-            RenderEffect(drawingContext, _image, _rectangle);
+            drawingContext.DrawImage(_image, _rectangle);
             drawingContext.Pop();
         }
 

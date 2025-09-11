@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 drawingContext.PushTransform( new TranslateTransform( metric.MetricTranslationX, metric.MetricTranslationY ) );
                 drawingContext.PushTransform( new RotateTransform( metric.MetricRotation, _center.X, _center.Y - metric.MetricTranslationY ) );                
-                RenderEffect(drawingContext,  _image, _imageRect );
+                DrawImage(drawingContext, _image, _imageRect );
                 drawingContext.Pop( );
             }
         }

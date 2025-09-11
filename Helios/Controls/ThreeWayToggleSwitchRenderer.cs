@@ -39,31 +39,31 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ThreeWayToggleSwitchPosition.One:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageOneIndicatorOn != null)
                         {
-                            RenderEffect(drawingContext, _imageOneIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageOneIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageOne, _imageRect);
+                            DrawImage(drawingContext, _imageOne, _imageRect);
                         }
                         break;
                     case ThreeWayToggleSwitchPosition.Two:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageTwoIndicatorOn != null)
                         {
-                            RenderEffect(drawingContext, _imageTwoIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageTwoIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageTwo, _imageRect);
+                            DrawImage(drawingContext, _imageTwo, _imageRect);
                         }
                         break;
                     case ThreeWayToggleSwitchPosition.Three:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageThreeIndicatorOn != null)
                         {
-                            RenderEffect(drawingContext, _imageThreeIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageThreeIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageThree, _imageRect);
+                            DrawImage(drawingContext, _imageThree, _imageRect);
                         }
                         break;
                 }            

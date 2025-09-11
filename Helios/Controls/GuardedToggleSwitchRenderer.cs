@@ -36,21 +36,21 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ToggleSwitchPosition.One:
                         if (toggleSwitch.GuardPosition == GuardPosition.Up)
                         {
-                            RenderEffect(drawingContext, _imageOneGuardUp, _imageRect);
+                            DrawImage(drawingContext, _imageOneGuardUp, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageOneGuardDown, _imageRect);
+                            DrawImage(drawingContext, _imageOneGuardDown, _imageRect);
                         }
                         break;
                     case ToggleSwitchPosition.Two:
                         if (toggleSwitch.GuardPosition == GuardPosition.Up)
                         {
-                            RenderEffect(drawingContext, _imageTwoGuardUp, _imageRect);
+                            DrawImage(drawingContext, _imageTwoGuardUp, _imageRect);
                         }
                         else
                         {
-                            RenderEffect(drawingContext, _imageTwoGuardDown, _imageRect);
+                            DrawImage(drawingContext, _imageTwoGuardDown, _imageRect);
                         }
                         break;
                 }

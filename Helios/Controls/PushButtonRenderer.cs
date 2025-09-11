@@ -37,11 +37,11 @@ namespace GadrocsWorkshop.Helios.Controls
             PushButton pushButton = Visual as PushButton;
             if (pushButton.Pushed && _pushedImage != null)
             {
-                RenderEffect(drawingContext, _pushedImage, _imageRect);
+                DrawImage(drawingContext, _pushedImage, _imageRect);
             }
             else if (_image != null)
             {
-                RenderEffect(drawingContext, _image, _imageRect);
+                DrawImage(drawingContext,_image, _imageRect);
             }
 
             if (pushButton.Pushed)
@@ -51,17 +51,11 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-
-                RenderGeometry(drawingContext, _glyphBrush, _glyphPen, _glyphPath);
-                //drawingContext.DrawGeometry(_glyphBrush, _glyphPen, _glyphPath);
+                DrawGeometry(drawingContext, _glyphBrush, _glyphPen, _glyphPath, _imageRect);
             }
-            //FormattedText fText = pushButton.TextFormat.RenderText(drawingContext, _textBrush, pushButton.Text, _imageRect);
-            RenderTextEffect(drawingContext, pushButton.TextFormat.RenderText(drawingContext, _textBrush, pushButton.Text, _imageRect), _imageRect);
 
-            if (pushButton.Pushed)
-            {
-                drawingContext.Pop();
-            }
+            DrawText(drawingContext, pushButton, _textBrush, pushButton.Text, _imageRect);
+
         }
 
         private void RenderGlyph()

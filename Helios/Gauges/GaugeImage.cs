@@ -159,14 +159,12 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             if (_opacity >= 1.0 && _rotation == 0)
             {
-                RenderEffect(drawingContext, _image, _imageRectangle);
+                DrawImage(drawingContext, _image, _imageRectangle);
                 return;
             }
             drawingContext.PushTransform(new RotateTransform(_rotation, _imageRectangle.X + (_imageRectangle.Width/2), _imageRectangle.Y + (_imageRectangle.Height / 2)));
             drawingContext.PushOpacity(_opacity);
-
-			//RenderEffect(drawingContext, _image, _imageRectangle);
-            RenderEffect(drawingContext, _image, _imageRectangle);
+            DrawImage(drawingContext, _image, _rectangle);
             drawingContext.Pop();
             drawingContext.Pop();
         }

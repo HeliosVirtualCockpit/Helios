@@ -20,7 +20,7 @@ using GadrocsWorkshop.Helios.Controls.Capabilities;
 
 namespace GadrocsWorkshop.Helios.Controls.Special
 {
-    internal class EffectColorAdjusterRenderer : ViewportExtentRenderer
+    internal class EffectColorAdjusterRenderer : ImageDecorationRenderer
     {
         private ImageBrush _imageBrush;
         private Rect _rectangle;

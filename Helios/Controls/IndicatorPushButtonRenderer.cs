@@ -46,19 +46,19 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Pushed && pushButton.Indicator && _pushedImage != null)
             {
-                RenderEffect(drawingContext, _pushedIndicatorOnImage, _imageRect);
+                DrawImage(drawingContext, _pushedIndicatorOnImage, _imageRect);
             }
             else if (pushButton.Pushed && !pushButton.Indicator && _pushedImage != null)
             {
-                RenderEffect(drawingContext, _pushedImage, _imageRect);
+                DrawImage(drawingContext, _pushedImage, _imageRect);
             }
             else if (!pushButton.Pushed && pushButton.Indicator && _indicatorOnImage != null)
             {
-                RenderEffect(drawingContext, _indicatorOnImage, _imageRect);
+                DrawImage(drawingContext, _indicatorOnImage, _imageRect);
             }
             else if (_image != null)
             {
-                RenderEffect(drawingContext, _image, _imageRect);
+                DrawImage(drawingContext, _image, _imageRect);
             }
 
             if (pushButton.Pushed)
@@ -68,10 +68,10 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                RenderGeometry(drawingContext, pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath);
+                DrawGeometry(drawingContext, pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath, _imageRect);
             }
-            //pushButton.TextFormat.RenderText(drawingContext, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
-            RenderTextEffect(drawingContext, pushButton.TextFormat.RenderText(drawingContext, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect), _imageRect);
+            DrawText(drawingContext, pushButton, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
+
             if (pushButton.Pushed)
             {
                 drawingContext.Pop();

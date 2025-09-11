@@ -45,7 +45,6 @@ namespace GadrocsWorkshop.Helios
         private double _textPaddingRight;
         private double _textPaddingBottom;
 
-        private Effects.ColorAdjustEffect _effect;
         private bool _effectsExclusion = false;
         private bool _designTime = false, _designTimeChecked = false;
 
@@ -366,7 +365,7 @@ namespace GadrocsWorkshop.Helios
             return formatedText;
         }
 
-        public FormattedText RenderText(DrawingContext drawingContext, Brush textBrush, string text, Rect rectangle)
+        public void RenderText(DrawingContext drawingContext, Brush textBrush, string text, Rect rectangle)
         {
             FormattedText formattedText = GetFormattedText(textBrush, text);
 
@@ -387,9 +386,8 @@ namespace GadrocsWorkshop.Helios
                 }
             }
 
-            return formattedText;
+            drawingContext.DrawText(formattedText, new Point(adjustedRect.X, adjustedRect.Y + yOffset));
         }
-
         public void ReadXml(XmlReader reader)
         {
             TypeConverter ffc = TypeDescriptor.GetConverter(typeof(FontFamily));
@@ -593,35 +591,6 @@ namespace GadrocsWorkshop.Helios
             return prefix.Length < tag.Length &&
                 tag[prefix.Length] == '-' &&
                 string.CompareOrdinal(prefix, 0, tag, 0, prefix.Length) == 0;
-        }
-        protected virtual void RenderEffect(DrawingContext drawingContext, System.Windows.Shapes.Rectangle image, Rect imageRectangle)
-        {
-            // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
-            if (!_designTimeChecked)
-            {
-                _designTime = ConfigManager.Application.ShowDesignTimeControls;
-                _designTimeChecked = true;
-
-            }
-            if (!_designTime)
-            {
-                // Attempt to cache the ShaderEffect if we're in Control Center
-                if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
-                {
-                    _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
-                }
-            }
-            else
-            {
-                _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
-            }
-
-            if (_effect != null && !EffectsExclusion)
-            {
-                image.Effect = _effect;
-            }
-            VisualBrush visualBrush = new VisualBrush(image);
-            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
         }
     }
 }

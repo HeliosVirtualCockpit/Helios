@@ -102,6 +102,7 @@
     <Compile Include="Controls\AlternateImageAppearanceEditor.xaml.cs">
       <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Capabilities\ITextControl.cs" />
     <Compile Include="Controls\Special\EffectColorAdjusterAppearanceEditor.xaml.cs">
       <DependentUpon>EffectColorAdjusterAppearanceEditor.xaml</DependentUpon>
     </Compile>
