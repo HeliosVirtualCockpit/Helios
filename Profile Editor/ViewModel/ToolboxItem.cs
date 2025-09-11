@@ -31,6 +31,7 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.ViewModel
                     _iconInstance = CreateControl();
                     ConfigureIcon(_iconInstance);
                 }
+                _iconInstance.EffectsExclusion = true;
                 return _iconInstance;
             }
         }

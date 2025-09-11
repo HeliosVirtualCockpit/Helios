@@ -66,13 +66,13 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             _blueFactorValue.Execute += new HeliosActionHandler(BlueFactor_Execute);
             Actions.Add(_blueFactorValue);
 
-            _brightnessValue = new HeliosValue(this, new BindingValue(0d), "", "Brightness Adjustment", "Number to brighten image", "-1 to +1", BindingValueUnits.Numeric);
-            _brightnessValue.Execute += new HeliosActionHandler(Brightness_Execute);
-            Actions.Add(_brightnessValue);
+            //_brightnessValue = new HeliosValue(this, new BindingValue(0d), "", "Brightness Adjustment", "Number to brighten image", "-1 to +1", BindingValueUnits.Numeric);
+            //_brightnessValue.Execute += new HeliosActionHandler(Brightness_Execute);
+            //Actions.Add(_brightnessValue);
 
-            _contrastValue = new HeliosValue(this, new BindingValue(0d), "", "Contrast Adjustment", "Number to adjust contrast", "0 to 2.  1 = normal", BindingValueUnits.Numeric);
-            _contrastValue.Execute += new HeliosActionHandler(Contrast_Execute);
-            Actions.Add(_contrastValue);
+            //_contrastValue = new HeliosValue(this, new BindingValue(0d), "", "Contrast Adjustment", "Number to adjust contrast", "0 to 2.  1 = normal", BindingValueUnits.Numeric);
+            //_contrastValue.Execute += new HeliosActionHandler(Contrast_Execute);
+            //Actions.Add(_contrastValue);
 
             _gammaValue = new HeliosValue(this, new BindingValue(0d), "", "Gamma", "Number to alter the gamma", "1.0 to 2.2", BindingValueUnits.Numeric);
             _gammaValue.Execute += new HeliosActionHandler(Gamma_Execute);

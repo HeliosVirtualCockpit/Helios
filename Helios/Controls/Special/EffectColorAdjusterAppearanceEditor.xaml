@@ -8,7 +8,7 @@
              xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" 
-             d:DesignWidth="200" Height="280">
+             d:DesignWidth="200" Height="240">
     <Grid Background="Transparent" Margin="2,2,2,2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -27,7 +27,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Effects</TextBlock>
         
@@ -44,46 +45,46 @@
         <Label Grid.Row="3" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Margin="9,0,9,0" Content="Red">
             <Label.ToolTip>Value multiplier of the red component.</Label.ToolTip>
         </Label>
-        <Ellipse Fill="Red" Stroke="Black" Width="14"   Height="14" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" />
-        <Label Name="ValueR" Grid.Row="3" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Margin="3,0,0,28" Grid.RowSpan="2" Grid.Column="1" />
+        <Ellipse Fill="Red" Stroke="Black" Width="14" Height="14" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" />
+        <Label Name="ValueR" Grid.Row="3" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
         <Slider Name="SliderR" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="3" Minimum="0" Maximum="2.0" Value="{Binding Control.RedFactor}" Margin="2,0,2,0" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderR_ValueChanged"/>
 
         <Label Grid.Row="4" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Green" Margin="9,0,9,0" >
             <Label.ToolTip>Value multiplier of the green component.</Label.ToolTip>
         </Label>
-        <Label Name="ValueG" Grid.Row="4" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Margin="3,0,0,28" Grid.RowSpan="2" Grid.Column="1" />
+        <Label Name="ValueG" Grid.Row="4" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
         <Ellipse Fill="Green" Stroke="Black" Width="14" Height="14" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" />
         <Slider Name="SliderG" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="4" Minimum="0" Maximum="2.0" Value="{Binding Control.GreenFactor}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderG_ValueChanged"/>
 
         <Label Grid.Row="5" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Blue" Margin="9,0,9,0" >
             <Label.ToolTip>Value multiplier of the blue component.</Label.ToolTip>
         </Label>
-        <Label Name="ValueB" Grid.Row="5" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Margin="3,0,0,28" Grid.RowSpan="2" Grid.Column="1" />
+        <Label Name="ValueB" Grid.Row="5" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
         <Ellipse Fill="Blue" Stroke="Black" Width="14"  Height="14" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" />
         <Slider Name="SliderB" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="5" Minimum="0" Maximum="2.0" Value="{Binding Control.BlueFactor}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderB_ValueChanged"/>
 
-        <Label Grid.Row="6" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Brightness" Margin="9,0,9,0" >
+        <Label Grid.Row="6" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Brightness" Margin="9,0,9,0" Visibility="Collapsed">
             <Label.ToolTip>Brightness adjustment.  -1.0 = darker, +1.0 = brighter</Label.ToolTip>
         </Label>
-        <Label Name="ValueBrt" Grid.Row="6" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Margin="3,0,0,28" Grid.RowSpan="2" Grid.Column="1" />
-        <Slider Name="SliderBrt" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="6" Minimum="-1.0" Maximum="1.0" Value="{Binding Control.Brightness}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderBrt_ValueChanged"/>
+        <Label Name="ValueBrt" Grid.Row="6" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" Visibility="Collapsed" />
+        <Slider Name="SliderBrt" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="6" Minimum="-1.0" Maximum="1.0" Value="{Binding Control.Brightness}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Collapsed" ValueChanged="SliderBrt_ValueChanged"/>
 
-        <Label Grid.Row="7" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Contrast" Margin="9,0,9,0">
+        <Label Grid.Row="7" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Contrast" Margin="9,0,9,0"  Visibility="Collapsed">
             <Label.ToolTip>Contrast adjustment.  0.0 = flat, 1.0 = normal, >1.0 = more contrast</Label.ToolTip>
         </Label>
-        <Label Name="ValueContrast" Grid.Row="7" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Margin="3,0,0,28" Grid.RowSpan="2" Grid.Column="1" />
-        <Slider Name="SliderCont" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" Minimum="0" Maximum="2.0" Value="{Binding Control.Contrast}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderCont_ValueChanged"/>
+        <Label Name="ValueContrast" Grid.Row="7" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1"  Visibility="Collapsed"/>
+        <Slider Name="SliderCont" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" Minimum="0" Maximum="2.0" Value="{Binding Control.Contrast}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25"  Visibility="Collapsed" ValueChanged="SliderCont_ValueChanged"/>
 
         <Label Grid.Row="8" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Gamma" Margin="9,0,9,0">
             <Label.ToolTip>Gamma adjustment.  1.0 = none, 2.2 = gamma correction</Label.ToolTip>
         </Label>
-        <Label Name="ValueGamma" Grid.Row="8" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Margin="3,0,0,36" Grid.RowSpan="3" Grid.Column="1" />
+        <Label Name="ValueGamma" Grid.Row="8" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
         <Slider Name="SliderGamma" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="8" Minimum="1.0" Maximum="2.2" Value="{Binding Control.Gamma}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"  ValueChanged="SliderGamma_ValueChanged"/>
 
         <Label Grid.Row="9" FontSize="10" HorizontalAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Shader" Visibility="Collapsed" Margin="9,0,9,0" Width="0"/>
         <HeliosSdk:ImagePicker Grid.Row="9" ImageFilename="{Binding Control.ShaderName, Mode=TwoWay}" Visibility="Collapsed" Margin="3,0,0,36" Grid.RowSpan="2" Grid.Column="1"/>
 
-        <Button Grid.Row="10" Grid.Column="2" Width="48" Visibility="Visible" HorizontalAlignment="Left" Margin="5,2,0,2" 
+        <Button Grid.Row="10" Grid.Column="2" Width="48" Visibility="Visible" HorizontalAlignment="Left" Margin="5,2,0,2" Grid.ColumnSpan="2"
                 Content="Reset" Click="Reset_Button_Click"/>
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>
