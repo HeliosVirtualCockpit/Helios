@@ -40,7 +40,7 @@ float4 main(float2 uv : TEXCOORD) : COLOR
     color.rgb = pow(abs(color.rgb), 1.0 / Gamma);
 
     // Clamp
-    //color.rgb = saturate(color.rgb);
+    color.rgb = saturate(color.rgb);
 
     return color;
 }

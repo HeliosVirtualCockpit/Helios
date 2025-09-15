@@ -108,7 +108,6 @@
     </Compile>
     <Compile Include="Controls\Special\EffectColorAdjusterRenderer.cs" />
     <Compile Include="Controls\Special\EffectColorAdjuster.cs" />
-    <Compile Include="Controls\Special\EffectColorAdjusterWithCurveShaderWrapper.cs" />
     <Compile Include="Gauges\IGauge3d.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
     <Compile Include="Controls\CustomGauge3DCylinderAppearanceEditor.xaml.cs">
