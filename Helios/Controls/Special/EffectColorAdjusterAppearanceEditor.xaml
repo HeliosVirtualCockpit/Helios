@@ -6,9 +6,33 @@
              xmlns:Helios="clr-namespace:GadrocsWorkshop.Helios"
              xmlns:HeliosBase="clr-namespace:GadrocsWorkshop.Helios.Controls"
              xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
+             xmlns:conv="clr-namespace:GadrocsWorkshop.Helios.Controls.Special"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" 
-             d:DesignWidth="200" Height="240">
+             d:DesignWidth="200" Height="420">
+    <HeliosSdk:HeliosPropertyEditor.Resources>
+        <Style x:Key="AdvancedShader1Style"
+               TargetType="{x:Type StackPanel}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.ShaderName}" Value="ColorAdjust.psc">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="AdvancedShader2Style"
+               TargetType="{x:Type StackPanel}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.ShaderName}" Value="ColorAdjustWithCurve.psc">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <conv:DoubleToStringN2Converter x:Key="DoubleToStringN2Converter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </HeliosSdk:HeliosPropertyEditor.Resources>
+
     <Grid Background="Transparent" Margin="2,2,2,2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -27,64 +51,145 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Effects</TextBlock>
-        
+
         <Label Grid.Row="1" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Enabled" Margin="9,0,9,0" >
             <Label.ToolTip>Enabled means that the effect will be applied</Label.ToolTip>
         </Label>
         <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" IsChecked="{Binding Path=Control.Enabled}">
             <CheckBox.ToolTip>When checked, the effect is applied.</CheckBox.ToolTip>
         </CheckBox>
-
-        
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="4,10,2,2" Style="{StaticResource Heading2}">Color Adjustments</TextBlock>
 
         <Label Grid.Row="3" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Margin="9,0,9,0" Content="Red">
             <Label.ToolTip>Value multiplier of the red component.</Label.ToolTip>
         </Label>
         <Ellipse Fill="Red" Stroke="Black" Width="14" Height="14" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" />
-        <Label Name="ValueR" Grid.Row="3" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
-        <Slider Name="SliderR" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="3" Minimum="0" Maximum="2.0" Value="{Binding Control.RedFactor}" Margin="2,0,2,0" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderR_ValueChanged"/>
+        <Label Name="ValueR" Grid.Row="3" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderR, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1" />
+        <Slider Name="SliderR" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="3" Minimum="0" Maximum="2.0" Value="{Binding Control.RedAdjust}" Margin="2,0,2,0" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
 
         <Label Grid.Row="4" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Green" Margin="9,0,9,0" >
             <Label.ToolTip>Value multiplier of the green component.</Label.ToolTip>
         </Label>
-        <Label Name="ValueG" Grid.Row="4" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
+        <Label Name="ValueG" Grid.Row="4" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderG, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1" />
         <Ellipse Fill="Green" Stroke="Black" Width="14" Height="14" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" />
-        <Slider Name="SliderG" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="4" Minimum="0" Maximum="2.0" Value="{Binding Control.GreenFactor}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderG_ValueChanged"/>
+        <Slider Name="SliderG" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="4" Minimum="0" Maximum="2.0" Value="{Binding Control.GreenAdjust}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
 
         <Label Grid.Row="5" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Blue" Margin="9,0,9,0" >
             <Label.ToolTip>Value multiplier of the blue component.</Label.ToolTip>
         </Label>
-        <Label Name="ValueB" Grid.Row="5" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
+        <Label Name="ValueB" Grid.Row="5" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderB, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1" />
         <Ellipse Fill="Blue" Stroke="Black" Width="14"  Height="14" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" />
-        <Slider Name="SliderB" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="5" Minimum="0" Maximum="2.0" Value="{Binding Control.BlueFactor}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible" ValueChanged="SliderB_ValueChanged"/>
+        <Slider Name="SliderB" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="5" Minimum="0" Maximum="2.0" Value="{Binding Control.BlueAdjust}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
 
-        <Label Grid.Row="6" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Brightness" Margin="9,0,9,0" Visibility="Collapsed">
-            <Label.ToolTip>Brightness adjustment.  -1.0 = darker, +1.0 = brighter</Label.ToolTip>
+        <Label Grid.Row="6" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Advanced" Margin="9,0,9,0" >
+            <Label.ToolTip>When checked, advanced effects are used which may impact performance</Label.ToolTip>
         </Label>
-        <Label Name="ValueBrt" Grid.Row="6" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" Visibility="Collapsed" />
-        <Slider Name="SliderBrt" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="6" Minimum="-1.0" Maximum="1.0" Value="{Binding Control.Brightness}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Collapsed" ValueChanged="SliderBrt_ValueChanged"/>
+        <CheckBox Name="AdvancedFeaturesCheckBox" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" IsChecked="{Binding Control.AdvancedFeatures}">
+            <CheckBox.ToolTip>When checked, advanced effects are used which may impact performance.</CheckBox.ToolTip>
+        </CheckBox>
+        <StackPanel Grid.Row="7" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="4">
+            <Grid Visibility="{Binding ElementName=AdvancedFeaturesCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Advanced Features</TextBlock>
+                <StackPanel  Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource AdvancedShader1Style}">
+                    <Grid> 
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                       <RowDefinition Height="Auto"/>
+                       <RowDefinition Height="Auto"/>
+                       <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Brightness" Margin="9,0,9,0" Visibility="Visible">
+                    <Label.ToolTip>Brightness adjustment.  -1.0 = darker, +1.0 = brighter</Label.ToolTip>
+                </Label>
+                <Label Name="ValueBrt" Grid.Row="0" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderBrt, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1" Visibility="Visible" />
+                <Slider Name="SliderBrt" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="0" Minimum="-1.0" Maximum="1.0" Value="{Binding Control.Brightness}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
 
-        <Label Grid.Row="7" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Contrast" Margin="9,0,9,0"  Visibility="Collapsed">
-            <Label.ToolTip>Contrast adjustment.  0.0 = flat, 1.0 = normal, >1.0 = more contrast</Label.ToolTip>
-        </Label>
-        <Label Name="ValueContrast" Grid.Row="7" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1"  Visibility="Collapsed"/>
-        <Slider Name="SliderCont" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" Minimum="0" Maximum="2.0" Value="{Binding Control.Contrast}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25"  Visibility="Collapsed" ValueChanged="SliderCont_ValueChanged"/>
+                <Label Grid.Row="1" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Contrast" Margin="9,0,9,0"  Visibility="Visible">
+                    <Label.ToolTip>Contrast adjustment.  0.0 = flat, 1.0 = normal, >1.0 = more contrast</Label.ToolTip>
+                </Label>
+                <Label Name="ValueContrast" Grid.Row="1" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderCont, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1"  Visibility="Visible"/>
+                <Slider Name="SliderCont" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="2.0" Value="{Binding Control.Contrast}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25"  Visibility="Visible"/>
 
-        <Label Grid.Row="8" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Gamma" Margin="9,0,9,0">
-            <Label.ToolTip>Gamma adjustment.  1.0 = none, 2.2 = gamma correction</Label.ToolTip>
-        </Label>
-        <Label Name="ValueGamma" Grid.Row="8" FontSize="10" VerticalContentAlignment="Center" Content="1.0" Grid.Column="1" />
-        <Slider Name="SliderGamma" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="8" Minimum="1.0" Maximum="2.2" Value="{Binding Control.Gamma}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"  ValueChanged="SliderGamma_ValueChanged"/>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Gamma" Margin="9,0,9,0" Visibility="Visible">
+                    <Label.ToolTip>Gamma adjustment.  1.0 = none, 2.2 = gamma correction</Label.ToolTip>
+                </Label>
+                <Label Name="ValueGamma" Grid.Row="2" FontSize="10" VerticalContentAlignment="Center" Grid.Column="1" Visibility="Visible" Content="{Binding ElementName=SliderGamma, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }"/>
+                <Slider Name="SliderGamma" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="2" Minimum="1.0" Maximum="2.2" Value="{Binding Control.Gamma}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel  Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource AdvancedShader2Style}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-        <Label Grid.Row="9" FontSize="10" HorizontalAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Shader" Visibility="Collapsed" Margin="9,0,9,0" Width="0"/>
-        <HeliosSdk:ImagePicker Grid.Row="9" ImageFilename="{Binding Control.ShaderName, Mode=TwoWay}" Visibility="Collapsed" Margin="3,0,0,36" Grid.RowSpan="2" Grid.Column="1"/>
+                        <Label Grid.Row="0" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Highlights" Margin="9,0,9,0" Visibility="Visible">
+                            <Label.ToolTip>Image Highlights</Label.ToolTip>
+                        </Label>
+                        <Label Name="ValueHighlights" Grid.Row="0" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderHighlights, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1" Visibility="Visible"/>
+                        <Slider Name="SliderHighlights" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="0" Minimum="1.0" Maximum="2.5" Value="{Binding Control.HighlightStrength}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
 
-        <Button Grid.Row="10" Grid.Column="2" Width="48" Visibility="Visible" HorizontalAlignment="Left" Margin="5,2,0,2" Grid.ColumnSpan="2"
+                        <Label Grid.Row="1" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Midtones" Margin="9,0,9,0" Visibility="Visible">
+                            <Label.ToolTip>Image Midtones</Label.ToolTip>
+                        </Label>
+                        <Label Name="ValueMidtones" Grid.Row="1" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderMidtones, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1" Visibility="Visible"/>
+                        <Slider Name="SliderMidtones" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="1" Minimum="0.0" Maximum="1.0" Value="{Binding Control.MidtoneBalance}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" FontSize="10" HorizontalContentAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Shadows" Margin="9,0,9,0" Visibility="Visible">
+                            <Label.ToolTip>Image Shadows</Label.ToolTip>
+                        </Label>
+                        <Label Name="ValueShadows" Grid.Row="2" FontSize="10" VerticalContentAlignment="Center" Content="{Binding ElementName=SliderShadows, Path=Value, Converter={StaticResource DoubleToStringN2Converter} }" Grid.Column="1" Visibility="Visible"/>
+                        <Slider Name="SliderShadows" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="2" Minimum="1.0" Maximum="2.5" Value="{Binding Control.ShadowStrength}" Margin="2,2,2,2" TickPlacement="BottomRight" TickFrequency="0.25" Visibility="Visible"/>
+
+                    </Grid>
+                </StackPanel>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="10" HorizontalAlignment="Right" Padding="2,2,2,2" VerticalContentAlignment="Center" Content="Shader Name" Visibility="Collapsed" Margin="9,0,9,0"/>
+                <HeliosSdk:ImagePicker x:Name="ShaderName" Grid.Row="7" ImageFilename="{Binding Control.ShaderName, Mode=TwoWay}" Visibility="Collapsed" Margin="3,0,0,0" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="3"/>
+
+            </Grid>
+        </StackPanel>
+        <Button Grid.Row="8" Grid.Column="1" Width="48" Visibility="Visible" HorizontalAlignment="Left" Margin="5,2,0,2" Grid.ColumnSpan="2"
                 Content="Reset" Click="Reset_Button_Click"/>
+
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

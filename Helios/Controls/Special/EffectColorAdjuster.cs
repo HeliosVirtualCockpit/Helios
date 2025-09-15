@@ -16,6 +16,7 @@
 
 using GadrocsWorkshop.Helios.ComponentModel;
 using GadrocsWorkshop.Helios.Controls.Capabilities;
+using GadrocsWorkshop.Helios.Effects;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -33,14 +34,19 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private string _imageFile = "{helios}/Images/General/ColourAdjuster.xaml";
-        private string _shaderName = "{helios}/Resources/ColorAdjust.psc";
-        private double _greenFactor = 1.0d, _redFactor = 1.0d, _blueFactor = 1.0d;
+        private string _shaderName = "ColorAdjust.psc";
+        private double _greenAdjust = 1.0d, _redAdjust = 1.0d, _blueAdjust = 1.0d;
         private double _brightness = 0d, _contrast = 1.0d, _gamma = 1.0d;
+        private double _midtoneBalance = 0.5d, _highlightStrength = 1.0d, _shadowStrength = 1.0d;
         private Effects.ColorAdjustEffect _effect;
         private bool _enabled = true;
+        private bool _advancedFeatures = false;
+        private static readonly string _actionState = " (NOT IMPLEMENTED)";
+        private static readonly string _shaderLocation = "pack://application:,,,/Helios;component/Resources/";
 
-        private HeliosValue _redFactorValue, _greenFactorValue, _blueFactorValue;
+        private HeliosValue _redAdjustValue, _greenAdjustValue, _blueAdjustValue;
         private HeliosValue _brightnessValue, _contrastValue, _gammaValue;
+        private HeliosValue _midtoneBalanceValue, _highlightStrengthValue, _shadowStrengthValue;
         private HeliosValue _enabledValue;
 
         public EffectColorAdjuster()
@@ -54,47 +60,65 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             Height = 128;
             AddEffect();
 
-            _redFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Red Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
-            _redFactorValue.Execute += new HeliosActionHandler(RedFactor_Execute);
-            Actions.Add(_redFactorValue);
+            _redAdjustValue = new HeliosValue(this, new BindingValue(0d), "", "Red Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
+            _redAdjustValue.Execute += new HeliosActionHandler(RedAdjust_Execute);
+            Actions.Add(_redAdjustValue);
 
-            _greenFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Green Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
-            _greenFactorValue.Execute += new HeliosActionHandler(GreenFactor_Execute);
-            Actions.Add(_greenFactorValue);
+            _greenAdjustValue = new HeliosValue(this, new BindingValue(0d), "", "Green Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
+            _greenAdjustValue.Execute += new HeliosActionHandler(GreenAdjust_Execute);
+            Actions.Add(_greenAdjustValue);
 
-            _blueFactorValue = new HeliosValue(this, new BindingValue(0d), "", "Blue Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
-            _blueFactorValue.Execute += new HeliosActionHandler(BlueFactor_Execute);
-            Actions.Add(_blueFactorValue);
+            _blueAdjustValue = new HeliosValue(this, new BindingValue(0d), "", "Blue Color Adjustment", "Number to be used as multiplier", "0 to 2", BindingValueUnits.Numeric);
+            _blueAdjustValue.Execute += new HeliosActionHandler(BlueAdjust_Execute);
+            Actions.Add(_blueAdjustValue);
 
-            //_brightnessValue = new HeliosValue(this, new BindingValue(0d), "", "Brightness Adjustment", "Number to brighten image", "-1 to +1", BindingValueUnits.Numeric);
-            //_brightnessValue.Execute += new HeliosActionHandler(Brightness_Execute);
-            //Actions.Add(_brightnessValue);
+            _brightnessValue = new HeliosValue(this, new BindingValue(0d), "", "Brightness Adjustment", "Number to brighten image" + _actionState, "-1 to +1", BindingValueUnits.Numeric);
+            _brightnessValue.Execute += new HeliosActionHandler(Brightness_Execute);
+            Actions.Add(_brightnessValue);
 
-            //_contrastValue = new HeliosValue(this, new BindingValue(0d), "", "Contrast Adjustment", "Number to adjust contrast", "0 to 2.  1 = normal", BindingValueUnits.Numeric);
-            //_contrastValue.Execute += new HeliosActionHandler(Contrast_Execute);
-            //Actions.Add(_contrastValue);
+            _contrastValue = new HeliosValue(this, new BindingValue(0d), "", "Contrast Adjustment", "Number to adjust contrast" + _actionState, "0 to 2.  1 = normal", BindingValueUnits.Numeric);
+            _contrastValue.Execute += new HeliosActionHandler(Contrast_Execute);
+            Actions.Add(_contrastValue);
 
-            _gammaValue = new HeliosValue(this, new BindingValue(0d), "", "Gamma", "Number to alter the gamma", "1.0 to 2.2", BindingValueUnits.Numeric);
+            _gammaValue = new HeliosValue(this, new BindingValue(0d), "", "Gamma", "Number to alter the gamma" + _actionState, "1.0 to 2.2", BindingValueUnits.Numeric);
             _gammaValue.Execute += new HeliosActionHandler(Gamma_Execute);
             Actions.Add(_gammaValue);
 
-            _enabledValue = new HeliosValue(this, new BindingValue(0d), "", "Enabled", "Boolean to enable the effect", "true for effect to be applied", BindingValueUnits.Boolean);
+            _highlightStrengthValue = new HeliosValue(this, new BindingValue(0d), "", "Highlight Strength", "How much to boost the highlights" + _actionState, "1.0 to 2.0", BindingValueUnits.Numeric);
+            _highlightStrengthValue.Execute += new HeliosActionHandler(HighlightStrength_Execute);
+            Actions.Add(_highlightStrengthValue);
+
+            _midtoneBalanceValue = new HeliosValue(this, new BindingValue(0d), "", "Midtone Balance", "Midpoint position of the adjustment curve" + _actionState, "0.0 to 1.0", BindingValueUnits.Numeric);
+            _midtoneBalanceValue.Execute += new HeliosActionHandler(MidtoneBalance_Execute);
+            Actions.Add(_midtoneBalanceValue);
+
+            _shadowStrengthValue = new HeliosValue(this, new BindingValue(0d), "", "Shadow Strength", "How much to boost the shadows" + _actionState, "1.0 to 2.0", BindingValueUnits.Numeric);
+            _shadowStrengthValue.Execute += new HeliosActionHandler(ShadowStrength_Execute);
+            Actions.Add(_shadowStrengthValue);
+
+            _enabledValue = new HeliosValue(this, new BindingValue(0d), "", "Enabled", "Boolean to enable the effect" + _actionState, "true for effect to be applied", BindingValueUnits.Boolean);
             _enabledValue.Execute += new HeliosActionHandler(Enabled_Execute);
             Actions.Add(_enabledValue);
         }
         private void AddEffect()
         {
+//            AdvancedFeatures = true;
             _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             if (_effect == null) {
                 _effect = new Effects.ColorAdjustEffect
                 {
-                    GreenFactor = _greenFactor,
-                    RedFactor = _redFactor,
-                    BlueFactor = _blueFactor,
+                    GreenAdjust = _greenAdjust,
+                    RedAdjust = _redAdjust,
+                    BlueAdjust = _blueAdjust,
                     Brightness = _brightness,
                     Contrast = _contrast,
                     Gamma = _gamma,
-                    Enabled = _enabled
+                    ShadowStrength = _shadowStrength,
+                    MidtoneBalance = _midtoneBalance,
+                    HighlightStrength = _highlightStrength,
+                    Enabled = _enabled,
+                    EnableCurve = true,
+                    ShaderUri = $"{_shaderLocation}{_shaderName}"
                 };
                 ConfigManager.ProfileManager.CurrentEffect = _effect;
             }
@@ -124,47 +148,47 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 return true;
         }
         #region Properties
-        public double RedFactor
+        public double RedAdjust
         {
-            get => _redFactor;
+            get => _redAdjust;
             set
             {
-                if (!value.Equals(_redFactor))
+                if (!value.Equals(_redAdjust))
                 {
                     if (CheckEffect())
                     {
-                        _redFactor = value;
-                        _effect.RedFactor = _redFactor;
+                        _redAdjust = value;
+                        _effect.RedAdjust = _redAdjust;
                     }
                 }
             }
         }
-        public double GreenFactor
+        public double GreenAdjust
         {
-            get => _greenFactor;
+            get => _greenAdjust;
             set
             {
-                if (!value.Equals(_greenFactor))
+                if (!value.Equals(_greenAdjust))
                 {
                     if (CheckEffect())
                     {
-                        _greenFactor = value;
-                        _effect.GreenFactor = _greenFactor;
+                        _greenAdjust = value;
+                        _effect.GreenAdjust = _greenAdjust;
                     }
                 }
             }
         }
-        public double BlueFactor
+        public double BlueAdjust
         {
-            get => _blueFactor;
+            get => _blueAdjust;
             set
             {
-                if (!value.Equals(_blueFactor))
+                if (!value.Equals(_blueAdjust))
                 {
                     if (CheckEffect())
                     {
-                        _blueFactor = value;
-                        _effect.BlueFactor = _blueFactor;
+                        _blueAdjust = value;
+                        _effect.BlueAdjust = _blueAdjust;
                     }
                 }
             }
@@ -214,6 +238,66 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 }
             }
         }
+        public double HighlightStrength
+        {
+            get => _highlightStrength;
+            set
+            {
+                if (!value.Equals(_highlightStrength))
+                {
+                    if (CheckEffect())
+                    {
+                        _highlightStrength = value;
+                        _effect.HighlightStrength = _highlightStrength;
+                    }
+                }
+            }
+        }
+        public double MidtoneBalance
+        {
+            get => _midtoneBalance;
+            set
+            {
+                if (!value.Equals(_midtoneBalance))
+                {
+                    if (CheckEffect())
+                    {
+                        _midtoneBalance = value;
+                        _effect.MidtoneBalance = _midtoneBalance;
+                    }
+                }
+            }
+        }
+        public double ShadowStrength
+        {
+            get => _shadowStrength;
+            set
+            {
+                if (!value.Equals(_shadowStrength))
+                {
+                    if (CheckEffect())
+                    {
+                        _shadowStrength = value;
+                        _effect.ShadowStrength = _shadowStrength;
+                    }
+                }
+            }
+        }
+        public bool AdvancedFeatures
+        {
+            get => _advancedFeatures;
+            set
+            {
+                if (!value.Equals(_advancedFeatures))
+                {
+                    if (CheckEffect())
+                    {
+                        _advancedFeatures = value;
+                        _effect.EnableCurve = _advancedFeatures;
+                    }
+                }
+            }
+        }
         public string ShaderName
         {
             get => _shaderName;
@@ -246,17 +330,17 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         }
 #endregion Properties
         #region Actions
-        void RedFactor_Execute(object action, HeliosActionEventArgs e)
+        void RedAdjust_Execute(object action, HeliosActionEventArgs e)
         {
-            RedFactor = e.Value.DoubleValue;
+            RedAdjust = e.Value.DoubleValue;
         }
-        void GreenFactor_Execute(object action, HeliosActionEventArgs e)
+        void GreenAdjust_Execute(object action, HeliosActionEventArgs e)
         {
-            GreenFactor = e.Value.DoubleValue;
+            GreenAdjust = e.Value.DoubleValue;
         }
-        void BlueFactor_Execute(object action, HeliosActionEventArgs e)
+        void BlueAdjust_Execute(object action, HeliosActionEventArgs e)
         {
-            BlueFactor = e.Value.DoubleValue;
+            BlueAdjust = e.Value.DoubleValue;
         }
         void Brightness_Execute(object action, HeliosActionEventArgs e)
         {
@@ -270,6 +354,19 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         {
             Gamma = e.Value.DoubleValue;
         }
+        void HighlightStrength_Execute(object action, HeliosActionEventArgs e)
+        {
+            HighlightStrength = e.Value.DoubleValue;
+        }
+        void MidtoneBalance_Execute(object action, HeliosActionEventArgs e)
+        {
+            MidtoneBalance = e.Value.DoubleValue;
+        }
+        void ShadowStrength_Execute(object action, HeliosActionEventArgs e)
+        {
+           ShadowStrength = e.Value.DoubleValue;
+        }
+
         void Enabled_Execute(object action, HeliosActionEventArgs e)
         {
             Enabled = e.Value.BoolValue;
@@ -293,12 +390,15 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 reader.ReadStartElement("Effects");
                 Enabled = (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("EffectsEnabled"));
-                RedFactor = Double.Parse(reader.ReadElementString("RedFactor"));
-                GreenFactor = Double.Parse(reader.ReadElementString("GreenFactor"));
-                BlueFactor = Double.Parse(reader.ReadElementString("BlueFactor"));
+                RedAdjust = Double.Parse(reader.ReadElementString("RedAdjust"));
+                GreenAdjust = Double.Parse(reader.ReadElementString("GreenAdjust"));
+                BlueAdjust = Double.Parse(reader.ReadElementString("BlueAdjust"));
                 Brightness = Double.Parse(reader.ReadElementString("Brightness"));
                 Contrast = Double.Parse(reader.ReadElementString("Contrast"));
                 Gamma = Double.Parse(reader.ReadElementString("Gamma"));
+                HighlightStrength = Double.Parse(reader.ReadElementString("HighlightStrength"));
+                MidtoneBalance = Double.Parse(reader.ReadElementString("MidtoneBalance"));
+                ShadowStrength = Double.Parse(reader.ReadElementString("ShadowStrength"));
                 ShaderName = reader.ReadElementString("ShaderName");
                 reader.ReadEndElement();
             }
@@ -311,12 +411,15 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             base.WriteXml(writer);
             writer.WriteStartElement("Effects");
             writer.WriteElementString("EffectsEnabled", Enabled.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("RedFactor", RedFactor.ToString("N2", CultureInfo.InvariantCulture));
-            writer.WriteElementString("GreenFactor", GreenFactor.ToString("N2", CultureInfo.InvariantCulture));
-            writer.WriteElementString("BlueFactor", BlueFactor.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("RedAdjust", RedAdjust.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("GreenAdjust", GreenAdjust.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("BlueAdjust", BlueAdjust.ToString("N2", CultureInfo.InvariantCulture));
             writer.WriteElementString("Brightness", Brightness.ToString("N2", CultureInfo.InvariantCulture));
-            writer.WriteElementString("Contrast", Contrast.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("Contrast", Contrast.ToString("N", CultureInfo.InvariantCulture));
             writer.WriteElementString("Gamma", Gamma.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("HighlightStrength", HighlightStrength.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("MidtoneBalance", MidtoneBalance.ToString("N2", CultureInfo.InvariantCulture));
+            writer.WriteElementString("ShadowStrength", ShadowStrength.ToString("N2", CultureInfo.InvariantCulture));
             writer.WriteElementString("ShaderName", ShaderName);
             writer.WriteEndElement();
         }

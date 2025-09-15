@@ -199,7 +199,7 @@ namespace GadrocsWorkshop.Helios
             if(visual.ContentBounds.IsEmpty || rectangle.Width == 0 || rectangle.Height == 0) { return; }
             RenderTargetBitmap rtb = new RenderTargetBitmap(Convert.ToInt32(rectangle.Width), Convert.ToInt32(rectangle.Height), 96, 96, PixelFormats.Pbgra32);
             rtb.Render(visual);
-            drawingContext.DrawImage(rtb, rectangle);
+            //drawingContext.DrawImage(rtb, rectangle);
             RenderEffect(drawingContext, rtb, rectangle);
         }
 

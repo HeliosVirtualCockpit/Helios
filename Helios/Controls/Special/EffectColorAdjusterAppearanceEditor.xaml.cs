@@ -14,14 +14,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Input;
-using GadrocsWorkshop.Helios.Controls.Capabilities;
-using GadrocsWorkshop.Helios.Windows;
+
 
 namespace GadrocsWorkshop.Helios.Controls.Special
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Windows.Controls;
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
 
     /// <summary>
     /// Appearance editor for DCS Monitor Script Modifier Background Image
@@ -42,31 +43,30 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             SliderBrt.Value = 0;
             SliderCont.Value = 1.0;
             SliderGamma.Value = 1.0;
+            SliderHighlights.Value = 1.0;
+            SliderMidtones.Value = 0.5;
+            SliderShadows.Value = 1.0;
+            ShaderName.ImageFilename = "ColorAdjust.psc";
+        }
+    }
+    public class DoubleToStringN2Converter : IValueConverter
+    {
+        // double -> string
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is double d)
+                return d.ToString("N2", culture); // e.g. "1,234.57"
+            return "0.00";
         }
 
-        private void SliderR_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        // string -> double
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ValueR.Content = SliderR.Value.ToString("N2");
-        }
-        private void SliderG_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
-        {
-            ValueG.Content = SliderG.Value.ToString("N2");
-        }
-        private void SliderB_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
-        {
-            ValueB.Content = SliderB.Value.ToString("N2");
-        }
-        private void SliderBrt_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
-        {
-            ValueBrt.Content = SliderBrt.Value.ToString("N2");
-        }
-        private void SliderCont_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
-        {
-            ValueContrast.Content = SliderCont.Value.ToString("N2");
-        }
-        private void SliderGamma_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
-        {
-            ValueGamma.Content = SliderGamma.Value.ToString("N2");
+            if (value is string s && double.TryParse(s, NumberStyles.Any, culture, out double result))
+                return result;
+
+            return Binding.DoNothing; // prevents overwriting with invalid input
         }
     }
 }
+

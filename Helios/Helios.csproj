@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Controls\Special\EffectColorAdjusterRenderer.cs" />
     <Compile Include="Controls\Special\EffectColorAdjuster.cs" />
+    <Compile Include="Controls\Special\EffectColorAdjusterWithCurveShaderWrapper.cs" />
     <Compile Include="Gauges\IGauge3d.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
     <Compile Include="Controls\CustomGauge3DCylinderAppearanceEditor.xaml.cs">
@@ -434,6 +435,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\HLSL Shader Source\ColorAdjust.ps" />
+    <Content Include="Resources\HLSL Shader Source\ColorAdjustWithCurve.ps" />
+    <Resource Include="Resources\ColorAdjustWithCurve.psc" />
     <None Include="Resources\HLSL Shader Source\readme.md" />
     <Resource Include="Resources\ColorAdjust.psc" />
     <Resource Include="Images\Knobs\knob7.png" />

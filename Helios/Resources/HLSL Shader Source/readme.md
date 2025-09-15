@@ -9,9 +9,10 @@ The compiled shaders live in ``Helios/Resources`.
 If you need to re-compiler, then you can install the compiler via the **"Game development with DirectX”** workload in the VS Installer.
 
 Then from the Developer Command Prompt tool
-
-`fxc /T ps_2_0 /E main /Fo ColorAdjust.psc ColorAdjust.ps`
-
+```
+set shader=D:\Helios Virtual Cockpit\Helios\Helios\Resources
+fxc /T ps_2_0 /E main /Fo "%shader%\ColorAdjust.psc" "%shader%\HLSL Shader Source\ColorAdjust.ps"
+```
 WPF supports only Shader Model 2.0 (ps_2_0) — so don't go wild, keep your HLSL simple!
 
 ##### Note:

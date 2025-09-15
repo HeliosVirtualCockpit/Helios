@@ -671,7 +671,7 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 writer.WriteStartElement("Position");
                 writer.WriteAttributeString("Name", position.Name);
-                writer.WriteAttributeString("Rotation", position.Rotation.ToString(CultureInfo.InvariantCulture));
+                writer.WriteAttributeString("Rotation", position.Rotation.ToString("N2", CultureInfo.InvariantCulture));
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
