@@ -55,7 +55,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _slipCalibration = new CalibrationPointCollectionDouble(-1d, 15d, 1d, -15d);
             _glideCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d);
 
-            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 35d);
+            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 60d);
             Components.Add(_ball);
             _ball.LightingBrightness = 1.0d;
 
@@ -153,8 +153,8 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = e.Value.DoubleValue;
-            _bankNeedle.Rotation = -e.Value.DoubleValue;
+            _ball.Roll = -e.Value.DoubleValue;
+            _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void Yaw_Execute(object action, HeliosActionEventArgs e)
         {

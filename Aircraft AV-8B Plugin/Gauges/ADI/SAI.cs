@@ -104,8 +104,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Roll = e.Value.DoubleValue;
-            _bankNeedle.Rotation = -e.Value.DoubleValue;
+            _cylinder.Roll = -e.Value.DoubleValue;
+            _bankNeedle.Rotation = e.Value.DoubleValue;
         }
 
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
