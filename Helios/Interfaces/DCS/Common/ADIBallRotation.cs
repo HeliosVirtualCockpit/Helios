@@ -14,26 +14,27 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C.Functions
+namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
-    using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.UDPInterface;
     using GadrocsWorkshop.Helios.Util;
     using System;
     using System.Globalization;
-    using System.ServiceModel.Security;
 
     public class ADIBallRotation : DCSFunction
     {
-        private static readonly ExportDataElement[] DataElementsTemplate = { new DCSDataElement("2050", null, true)};
+        private readonly ExportDataElement[] DataElementsTemplate;
 
         private HeliosValue _combinedRotation;
         private CalibrationPointCollectionDouble _scaleX, _scaleY, _scaleZ;
+        private string _id;
 
-        public ADIBallRotation(BaseUDPInterface sourceInterface, CalibrationPointCollectionDouble scaleX, CalibrationPointCollectionDouble scaleY, CalibrationPointCollectionDouble scaleZ)
+        public ADIBallRotation(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble scaleX, CalibrationPointCollectionDouble scaleY, CalibrationPointCollectionDouble scaleZ)
             : base(sourceInterface,
-                   "Flight Instruments", "ADI Rotation", "Single value containing X, Y & Z movement of the aircraft.")
+                   "Flight Instruments", "ADI Ball Rotation", "Single value containing X, Y & Z movement of the ADI Ball.")
         {
+            _id = id;
+            DataElementsTemplate = new ExportDataElement[] { new DCSDataElement(_id, null, true) };
             _scaleX = scaleX;
             _scaleY = scaleY;
             _scaleZ = scaleZ;
@@ -55,7 +56,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C.Functions
         private void DoBuild()
         {
             _combinedRotation = new HeliosValue(SourceInterface, BindingValue.Empty, SerializedDeviceName, SerializedFunctionName,
-                SerializedDescription, "Single value containing X, Y & Z movement of the aircraft.", BindingValueUnits.Text);
+                SerializedDescription, "Single value containing X, Y & Z movement of the ADI ball.", BindingValueUnits.Text);
             Values.Add(_combinedRotation);
             Triggers.Add(_combinedRotation);
         }

@@ -639,7 +639,6 @@
     <Compile Include="Gauges\VTBPanel\VTB_Panel.cs" />
     <Compile Include="Gauges\VVI\VVI.cs" />
     <Compile Include="Gauges\VVI\VVIGauge.cs" />
-    <Compile Include="Interfaces\Functions\ADIBallRotation.cs" />
     <Compile Include="Interfaces\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\M2000CInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,7 +9,7 @@
   <Path StrokeThickness="0.5" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 226.573,148.078 L 178.291,148.078 C 177.739,148.078 177.291,147.630 177.291,147.078 L 177.291,140.719 C 177.291,140.167 177.739,139.719 178.291,139.719 L 226.573,139.719 C 227.125,139.719 227.573,140.167 227.573,140.719 L 227.573,147.078 C 227.573,147.630 227.125,148.078 226.573,148.078 Z"/>
 
   <!-- Layer 1/<Rectangle> -->
-  <Path StrokeThickness="0.5" StrokeMiterLimit="1.0" Data="F1 M 150.803,0.250 L 144.833,0.250 L 144.833,141.100 L 150.803,141.100 L 150.803,0.250 Z">
+  <Path StrokeThickness="0.5" StrokeMiterLimit="1.0" Data="F1 M 148.803,0.250 L 146.833,0.250 L 146.833,141.100 L 148.803,141.100 L 148.803,0.250 Z">
     <Path.Fill>
       <LinearGradientBrush MappingMode="Absolute" StartPoint="147.818,-140.850" EndPoint="147.818,-0.000">
         <LinearGradientBrush.GradientStops>
