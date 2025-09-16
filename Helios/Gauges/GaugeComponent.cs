@@ -17,6 +17,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 {
     using GadrocsWorkshop.Helios.Effects;
     using System;
+    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
@@ -196,6 +197,10 @@ namespace GadrocsWorkshop.Helios.Gauges
             rtb.Render(visual);
             drawingContext.DrawImage(rtb, rectangle);
             RenderEffect(drawingContext, rtb, rectangle);
+
+            // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
+            (rtb.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
+.GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
         }
     }
 }

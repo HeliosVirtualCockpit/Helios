@@ -16,6 +16,7 @@
 using System;
 using System.Diagnostics.Contracts;
 using System.Drawing.Imaging;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -246,6 +247,11 @@ namespace GadrocsWorkshop.Helios.Gauges
             _viewport.Arrange(new Rect(0, 0, w, h));
             rtb.Render(_viewport);
             RenderEffect(dc, rtb, new Rect(_location.X, _location.Y, w, h));
+
+            // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
+            (rtb.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
+.GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
+
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
