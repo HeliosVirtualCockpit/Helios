@@ -17,9 +17,13 @@
 namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Util;
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
+
 
     [HeliosControl("Helios.M2000C.ADI.Gauge", "ADI", "M-2000C", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADIGauge : BaseGauge
@@ -32,6 +36,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         private HeliosValue _localizerH;
         private HeliosValue _localizerV;
         private HeliosValue _slipBall;
+        private HeliosValue _rotationValue;
  
         private GaugeNeedle _offFlagNeedle;
         private GaugeBall _ball;
@@ -55,7 +60,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _slipCalibration = new CalibrationPointCollectionDouble(-1d, 15d, 1d, -15d);
             _glideCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d);
 
-            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 60d);
+            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 36d);
             Components.Add(_ball);
             _ball.LightingBrightness = 1.0d;
 
@@ -105,6 +110,10 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _yaw = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Heading", "Current heading of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
             _yaw.Execute += new HeliosActionHandler(Yaw_Execute);
             Actions.Add(_yaw);
+
+            _rotationValue = new HeliosValue(this, new BindingValue(""), $"{device}_{name}", "ADI Ball Rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
 
             _slipBall = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI Slip Ball", "Indicates the amount of slip.", "-1 to 1", BindingValueUnits.Numeric);
             _slipBall.Execute += new HeliosActionHandler(SlipBall_Execute);
@@ -160,6 +169,17 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         {
             _yaw.SetValue(e.Value, e.BypassCascadingTriggers);
             _ball.Yaw = -e.Value.DoubleValue;
+        }
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            _ball.Rotation3D = new Point3D(x, -y, -z);
+            _bankNeedle.Rotation = z;
         }
         public override bool EffectsExclusion
         {

@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _pitch;
         private double _roll;
         private double _yaw;
+        private Point3D _rotation3D;
         private double _fov;
         private bool _effectsExclusion = false;
 
@@ -178,6 +179,20 @@ namespace GadrocsWorkshop.Helios.Gauges
                     _yaw = value;
                     _gaugeSnapshot.RotateY(_yaw + _baseYaw);
                     OnDisplayUpdate();
+                }
+            }
+        }
+        public Point3D Rotation3D
+        {
+            get => _rotation3D;
+            set
+            {
+                if(_rotation3D != value)
+                {
+                    _rotation3D = value;
+                    _gaugeSnapshot.Rotation3D(new Point3D(_rotation3D.X + _basePitch, _rotation3D.Y + _baseYaw, _rotation3D.Z + _baseRoll));
+                    OnDisplayUpdate();
+
                 }
             }
         }

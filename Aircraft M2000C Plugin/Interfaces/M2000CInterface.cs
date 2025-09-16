@@ -1393,6 +1393,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
             AddFunction(new ScaledNetworkValue(this, "316", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Flight Instruments", "ADI Pitch", "Pitch", "-90 to 90", BindingValueUnits.Numeric,"%.5f"));
             AddFunction(new ScaledNetworkValue(this, "317", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Flight Instruments", "ADI Bank", "Bank", "-180 to 180", BindingValueUnits.Numeric, "%.5f"));
             AddFunction(new ScaledNetworkValue(this, "318", new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), "Flight Instruments", "ADI Heading", "Heading", "0 to 360", BindingValueUnits.Numeric, "%.5f"));
+            AddFunction(new ADIBallRotation(this, new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), new CalibrationPointCollectionDouble(0d, 0d, 1d, 360d), new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));
             AddFunction(new NetworkValue(this, "320", "Flight Instruments", "ADI Slip Ball", "Slip Ball turn coordinator", "-1 to 1", BindingValueUnits.Numeric, "%.4f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3314", "314", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Cage Lever", "%0.1f"));
             AddFunction(Switch.CreateToggleSwitch(this, FLIGHTINST, "3315", "315", "1.0", "On", "0.0", "Off", "Flight Instruments", "ADI Backlight Switch", "%0.1f"));

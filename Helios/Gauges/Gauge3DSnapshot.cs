@@ -224,6 +224,12 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             _rotZ.Angle = z;
         }
+        public void Rotation3D(Point3D point3D)
+        {
+            RotateX(point3D.X);
+            RotateY(point3D.Y); 
+            RotateZ(point3D.Z);
+        }
         public static Color ScaleBrightness(Color baseColor, double factor)
         {
             byte r = (byte)Math.Min(255, baseColor.R * factor);
@@ -246,6 +252,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _viewport.Measure(new Size(w, h));
             _viewport.Arrange(new Rect(0, 0, w, h));
             rtb.Render(_viewport);
+            rtb.Freeze();
             RenderEffect(dc, rtb, new Rect(_location.X, _location.Y, w, h));
 
             // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
