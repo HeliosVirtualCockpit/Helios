@@ -197,8 +197,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = -e.Value.DoubleValue;
-            _bankNeedle.Rotation = e.Value.DoubleValue;
+            _ball.Roll = e.Value.DoubleValue;
+            _bankNeedle.Rotation = -e.Value.DoubleValue;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)
         {

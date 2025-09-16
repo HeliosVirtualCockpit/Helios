@@ -98,8 +98,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Roll = -e.Value.DoubleValue;
-            _bankNeedle.Rotation = e.Value.DoubleValue;
+            _cylinder.Roll = e.Value.DoubleValue;
+            _bankNeedle.Rotation = -e.Value.DoubleValue;
         }
         public override bool EffectsExclusion
         {

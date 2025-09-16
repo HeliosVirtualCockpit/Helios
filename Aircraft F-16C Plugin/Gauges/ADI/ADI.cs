@@ -215,8 +215,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
         void Roll_Execute(object action, HeliosActionEventArgs e)
         {
-            _ball.Roll = -e.Value.DoubleValue;
-            _rollNeedle.Rotation = e.Value.DoubleValue;
+            _ball.Roll = e.Value.DoubleValue;
+            _rollNeedle.Rotation = -e.Value.DoubleValue;
         }
         /// <summary>
         /// Whether this control will have effects applied to is on rendering.

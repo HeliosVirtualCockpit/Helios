@@ -320,9 +320,12 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                     {
                         _enabled = value;
                         _effect.Enabled = _enabled;
-                        foreach (HeliosVisual hv in Profile.WalkVisuals())
+                        if(Profile != null)
                         {
-                            hv.RenderWithoutImageReload();
+                            foreach (HeliosVisual hv in Profile.WalkVisuals())
+                            {
+                                hv.RenderWithoutImageReload();
+                            }
                         }
                     }
                 }
@@ -407,7 +410,6 @@ namespace GadrocsWorkshop.Helios.Controls.Special
 
         public override void WriteXml(XmlWriter writer)
         {
-            TypeConverter boolConverter = TypeDescriptor.GetConverter(typeof(bool));
             base.WriteXml(writer);
             writer.WriteStartElement("Effects");
             writer.WriteElementString("EffectsEnabled", Enabled.ToString(CultureInfo.InvariantCulture));
