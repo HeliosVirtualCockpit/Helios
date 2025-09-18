@@ -45,7 +45,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         #region Properties
         protected override MeshGeometry3D BuildMesh()
         {
-            return BuildSphere(1.5d, 64, 32);
+            return BuildSphere(1, 64, 32);
         }
         #endregion
         protected override void OnRender(DrawingContext drawingContext)

@@ -13,6 +13,9 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using GadrocsWorkshop.Helios.Interfaces.Vendor.Functions;
+using GadrocsWorkshop.Helios.Windows.ViewModel;
+using NLog;
 using System;
 using System.Diagnostics.Contracts;
 using System.Drawing.Imaging;
@@ -23,12 +26,13 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
+
 namespace GadrocsWorkshop.Helios.Gauges
 {
     public class Gauge3dSnapshot : FrameworkElement
     {
-        private readonly DrawingVisual _visual;
-        private Viewport3D _viewport;
+        private Viewport3DVisual _viewport;
+        private VisualBrush _visualBrush;
         private PerspectiveCamera _camera;
         private readonly AxisAngleRotation3D _rotX, _rotY, _rotZ;
         private readonly GeometryModel3D _model;
@@ -43,21 +47,26 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Effects.ColorAdjustEffect _effect;
         private bool _effectsExclusion = false;
         private bool _designTime = false, _designTimeChecked = false;
+        private long _renderCalls = 0;
+        private long _totalRenderCallTime = 0;
+        private long _meanRenderCallTime = 0;
+        private long _hwmRenderCallTime = 0;
+        private long _lwmRenderCallTime = 1000;
+        private static readonly Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public Gauge3dSnapshot(MeshGeometry3D mesh)
         {
             _mesh = mesh;
-            _visual = new DrawingVisual();
-            AddVisualChild(_visual);
 
             // Build 3D viewport
-            _viewport = new Viewport3D();
+            _viewport = new Viewport3DVisual();
 
             _camera = new PerspectiveCamera(
-                new Point3D(0, 0, 5),
-                new Vector3D(0, 0, -5),
+                new Point3D(0, 0, 3),
+                new Vector3D(0, 0, -1),
                 new Vector3D(0, 1, 0),
                 _fieldOfView);
+
             _viewport.Camera = _camera;
 
             _lightingColor = Colors.White;
@@ -73,7 +82,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _rotX = new AxisAngleRotation3D(new Vector3D(1, 0, 0), 0);
             _rotY = new AxisAngleRotation3D(new Vector3D(0, 1, 0), 0);
             _rotZ = new AxisAngleRotation3D(new Vector3D(0, 0, 1), 0);
-            var transform = new Transform3DGroup();
+            Transform3DGroup transform = new Transform3DGroup();
             // The order of the transformations is important!
             transform.Children.Add(new RotateTransform3D(_rotY));
             transform.Children.Add(new RotateTransform3D(_rotX));
@@ -87,6 +96,17 @@ namespace GadrocsWorkshop.Helios.Gauges
             group.Children.Add(_model);
 
             _viewport.Children.Add(new ModelVisual3D { Content = group });
+
+            _visualBrush = new VisualBrush
+            {
+                Visual = _viewport,
+                Stretch = Stretch.None,
+                AlignmentX = AlignmentX.Left,
+                AlignmentY = AlignmentY.Top,
+                ViewboxUnits = BrushMappingMode.Absolute,
+                Viewbox = new Rect(0, 0, 1, 1)
+            };
+
         }
         public ImageSource SetTexture
         {
@@ -99,7 +119,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }   
         }
-        public Viewport3D GetViewport
+        public Viewport3DVisual GetViewport
         {
             get { return _viewport; }
         }
@@ -227,7 +247,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         public void Rotation3D(Point3D point3D)
         {
             RotateX(point3D.X);
-            RotateY(point3D.Y); 
+            RotateY(point3D.Y);
             RotateZ(point3D.Z);
         }
         public static Color ScaleBrightness(Color baseColor, double factor)
@@ -247,35 +267,16 @@ namespace GadrocsWorkshop.Helios.Gauges
             int h = (int)Height;
 
             if (w <= 0 || h <= 0) return;
+            _viewport.Viewport = new Rect(0, 0, w, h);
+            _visualBrush.Viewbox = new Rect(0, 0, w, h);
 
-            var rtb = new RenderTargetBitmap(w, h, 96, 96, PixelFormats.Pbgra32);
-            _viewport.Measure(new Size(w, h));
-            _viewport.Arrange(new Rect(0, 0, w, h));
-            rtb.Render(_viewport);
-            rtb.Freeze();
-            RenderEffect(dc, rtb, new Rect(_location.X, _location.Y, w, h));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            _renderCalls++;
 
-            // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
-            (rtb.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
-.GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
-
-        }
-
-        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        {
-            base.OnRenderSizeChanged(sizeInfo);
-        }
-        protected override int VisualChildrenCount => 1;
-        protected override Visual GetVisualChild(int index) => _visual;
-        private void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
-        {
-            // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
-            if (!_designTimeChecked)
-            {
-                _designTime = ConfigManager.Application.ShowDesignTimeControls;
-                _designTimeChecked = true;
-
-            }
+            DrawingVisual tempVisual = new DrawingVisual();
+            DrawingContext tdc = tempVisual.RenderOpen();
+            tdc.DrawRectangle(_visualBrush, null, new Rect(_location.X, _location.Y, w, h));
+            tdc.Close();
             if (!_designTime)
             {
                 // Attempt to cache the ShaderEffect if we're in Control Center
@@ -288,19 +289,32 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }
-
-            Image imageControl = new Image
-            {
-                Source = image,
-                Width = image != null ? image.Width : 0,
-                Height = image != null ? image.Height : 0,
-            };
             if (_effect != null && !EffectsExclusion && _effect.Enabled)
             {
-                imageControl.Effect = _effect;
+                tempVisual.Effect = _effect;
             }
-            VisualBrush visualBrush = new VisualBrush(imageControl);
-            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
+
+            dc.DrawRectangle(new VisualBrush(tempVisual), null, new Rect(_location.X, _location.Y, w, h));
+
+            watch.Stop();
+            _totalRenderCallTime += watch.ElapsedMilliseconds;
+            _meanRenderCallTime = _totalRenderCallTime / _renderCalls;
+            _hwmRenderCallTime = _hwmRenderCallTime < watch.ElapsedMilliseconds ? watch.ElapsedMilliseconds : _hwmRenderCallTime;
+            _lwmRenderCallTime = _lwmRenderCallTime > watch.ElapsedMilliseconds ? watch.ElapsedMilliseconds : _lwmRenderCallTime;
+
+            if (_renderCalls == 100)
+            {
+                Logger.Debug($"Total Render Calls: {_renderCalls}, Mean Render Time: {_meanRenderCallTime}ms, Shortest Render Time: {_lwmRenderCallTime}ms, Longest Render Time: {_hwmRenderCallTime}ms");
+                _renderCalls = _totalRenderCallTime = _hwmRenderCallTime = _meanRenderCallTime = 0;
+                _lwmRenderCallTime = 1000;
+            }
         }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged(sizeInfo);
+        }
+        protected override int VisualChildrenCount => 1;
+//        protected override Visual GetVisualChild(int index) => _visual;
     }
 }

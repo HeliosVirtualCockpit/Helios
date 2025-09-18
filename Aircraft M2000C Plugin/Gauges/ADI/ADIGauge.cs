@@ -62,6 +62,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
 
             _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 36d);
             Components.Add(_ball);
+            _ball.Pitch = 0d;
+            _ball.Roll = 0d;
+            _ball.Yaw = 0d;
             _ball.LightingBrightness = 1.0d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(57d, 57d, 286d, 286d)));
@@ -107,7 +110,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
-            _yaw = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Heading", "Current heading of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
+            _yaw = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Heading", "Current heading of the aircraft in degrees.", "(0 to +360)", BindingValueUnits.Degrees);
             _yaw.Execute += new HeliosActionHandler(Yaw_Execute);
             Actions.Add(_yaw);
 

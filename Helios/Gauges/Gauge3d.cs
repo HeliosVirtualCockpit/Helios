@@ -52,6 +52,9 @@ namespace GadrocsWorkshop.Helios.Gauges
             _location = location;
             _size = size;
             _fov = FOV;
+            _basePitch = basePitch;
+            _baseRoll = baseRoll;
+            _baseYaw = baseYaw; 
 
             _gaugeSnapshot = new Gauge3dSnapshot(BuildMesh())
             {
@@ -63,9 +66,9 @@ namespace GadrocsWorkshop.Helios.Gauges
                 FieldOfView = _fov
             };
             _gaugeSnapshot.EffectsExclusion = EffectsExclusion;
-            BasePitch = basePitch;
-            BaseRoll = baseRoll;
-            BaseYaw = baseYaw;
+            BasePitch = _basePitch;
+            BaseRoll = _baseRoll;
+            BaseYaw = _baseYaw;
             LightingColor = Colors.White;
             OnDisplayUpdate();
         }
@@ -353,11 +356,11 @@ namespace GadrocsWorkshop.Helios.Gauges
                     double x = r * Math.Sin(theta);
                     double z = r * Math.Cos(theta);
 
-                    mesh.Positions.Add(new Point3D(x, y, z));
-
-                    double u = (double)slice / slices;
-                    double v = (double)stack / stacks;
-                    mesh.TextureCoordinates.Add(new Point(u, v));
+                    mesh.Positions.Add(new Point3D(radius * x,
+                                                   radius * y,
+                                                   radius * z));
+                    mesh.Normals.Add(new Vector3D(x, y, z));
+                    mesh.TextureCoordinates.Add(new Point((double)slice / slices, (double)stack / stacks));
                 }
             }
 

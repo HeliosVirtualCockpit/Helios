@@ -61,6 +61,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
             _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
+            _ball.Pitch = 0d;
+            _ball.Roll = 0d;
             _ball.LightingBrightness = 1.0d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(65d, 65d, 220d, 220d)));
