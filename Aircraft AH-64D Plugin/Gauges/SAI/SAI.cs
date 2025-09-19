@@ -17,15 +17,19 @@
 namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Util;
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
 
     [HeliosControl("Helios.AH64D.SAI", "Standby Attitude Indicator", "AH-64D Apache", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class SAI : BaseGauge
     {
         private HeliosValue _pitch;
         private HeliosValue _roll;
+        private HeliosValue _rotationValue;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _slipBall;
         private HeliosValue _turnIndicator;
@@ -55,6 +59,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
+            _ball.Yaw = -0.001d;
+            _ball.Roll = 0.001d;
             _ball.LightingBrightness = 1.0d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
@@ -85,7 +91,12 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             Components.Add(new GaugeImage("{AH-64D}/Images/SAI/adi_outer_ring.xaml", new Rect(10d, 9d, 336d, 336d)));
 
             Components.Add(new GaugeImage("{AH-64D}/Images/SAI/adi_bezel.png", new Rect(0d, 0d, 350d, 350d)));
-            
+
+            foreach (GaugeComponent gc in Components)
+            {
+                gc.EffectsExclusion = this.EffectsExclusion;
+            }
+
             _slipBall = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Slip Ball Offset", "Side slip indicator offset from the center of the tube.", "(-1 to 1) -1 full left and 1 is full right.", BindingValueUnits.Numeric);
             _slipBall.Execute += new HeliosActionHandler(SlipBall_Execute);
             Actions.Add(_slipBall);
@@ -109,6 +120,11 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _roll = new HeliosValue(this, new BindingValue(0d), "Standby Attitude Indicator", "Bank", "Current bank of the aircraft.", "(-180 to +180)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
+
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "Standby Attitude Indicator", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
+
         }
 
 
@@ -139,6 +155,17 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
             _ball.Roll = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
+        }
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            _ball.Rotation3D = new Point3D(-y, x, -z);
+            _bankNeedle.Rotation = z;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)
         {
@@ -182,6 +209,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             _ball.Reset();
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
+            _rotationValue.SetValue(new BindingValue("0;0;0"), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);
             _slipBall.SetValue(new BindingValue(0d), true);
             _offFlag.SetValue(new BindingValue(false), true);

@@ -17,6 +17,7 @@
 namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Util;
     using NLog.Targets;
     using System;
     using System.Collections.Generic;
@@ -25,12 +26,14 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
     using System.IO;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
 
     [HeliosControl("Helios.FA18C.ADI", "ADI", "F/A-18C Gauges", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADI : AltImageGauge
     {
         private HeliosValue _pitch;
         private HeliosValue _roll;
+        private HeliosValue _rotationValue;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _slipBall;
         private HeliosValue _turnIndicator;
@@ -64,6 +67,9 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 
             _ball = new GaugeBall("{FA-18C}/Gauges/ADI/ADI-Ball.xaml", new Point(71d, 57d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
+            _ball.Yaw = -0.001d;
+            _ball.Roll = 0.001d;
+
             _ball.LightingColor = Color.FromArgb(0xff, 0xff, 0xff, 0xff);
             _ball.LightingBrightness = 1.0d;
 
@@ -130,6 +136,10 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
+
             _bankSteering = new HeliosValue(this, new BindingValue(1d), "", "Bank steering bar offset", "Location of bank steering bar.", "-1 full left and 1 is full right.", BindingValueUnits.Numeric);
             _bankSteering.Execute += new HeliosActionHandler(BankSteering_Execute);
             Actions.Add(_bankSteering);
@@ -152,8 +162,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 
             Dictionary<string, string> bindings = new Dictionary<string, string>
             {
-                { "SAI.Pitch.changed", "set.Pitch" },
-                { "SAI.Bank.changed", "set.Bank" },
+                { "SAI.ADI Ball Rotation.changed", "set.ADI ball rotation" },
                 { "SAI.Warning Flag.changed", "set.Off Flag" },
                 { "SAI.Rate of Turn.changed", "set.Turn Indicator Offset" },
                 { "SAI.Slip Ball.changed", "set.Slip Ball Offset" },
@@ -199,6 +208,17 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
             _ball.Roll = e.Value.DoubleValue;
             _bankNeedle.Rotation = -e.Value.DoubleValue;
+        }
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            _ball.Rotation3D = new Point3D(-y, x, -z);
+            _bankNeedle.Rotation = z;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)
         {
@@ -273,6 +293,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             base.EnableAlternateImageSet = false;
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
+            _rotationValue.SetValue(new BindingValue("0;0;0"), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);
             _slipBall.SetValue(new BindingValue(0d), true);
             _turnIndicator.SetValue(new BindingValue(0d), true);

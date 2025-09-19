@@ -91,12 +91,13 @@ namespace GadrocsWorkshop.Helios.Gauges
                 _yScale = yScale;
                 Snapshot.Width = Math.Max(1d, _size.Width * xScale);
                 Snapshot.Height = Math.Max(1d, _size.Height * yScale);
+
             }
         }
-        public override void ScaleChildren(double scaleX, double scaleY)
+        public override void ScaleChildren(double xScale, double yScale)
         {
-            _location.X *= scaleX;
-            _location.Y *= scaleY;
+            _location.X *= xScale;
+            _location.Y *= yScale;
             Snapshot.Top = _location.Y;
             Snapshot.Left = _location.X;
             OnDisplayUpdate();

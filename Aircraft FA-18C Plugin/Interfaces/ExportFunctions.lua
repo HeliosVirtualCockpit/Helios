@@ -18,6 +18,8 @@ function driver.processHighImportance(mainPanelDevice)
             mainPanelDevice:get_argument_value(221)
         )
     )
+	-- Send ADI Ball Values	
+	helios.send(2050, string.format("%0.4f;0.0;%0.4f", mainPanelDevice:get_argument_value(205), mainPanelDevice:get_argument_value(206)))
 
     -- Calcuate HSI Value
     -- helios.send(2029, string.format("%0.2f;%0.2f;%0.4f", mainPanelDevice:get_argument_value(29), mainPanelDevice:get_argument_value(30), mainPanelDevice:get_argument_value(31)))

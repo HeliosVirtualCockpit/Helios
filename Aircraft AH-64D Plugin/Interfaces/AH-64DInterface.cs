@@ -1650,6 +1650,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
 #region  Standby Attitude Indicator
             AddFunction(new ScaledNetworkValue(this, "622", 90d, "Standby Attitude Indicator", "Pitch", "Current pitch displayed on the SAI.", "", BindingValueUnits.Degrees));
             AddFunction(new ScaledNetworkValue(this, "623", -180d, "Standby Attitude Indicator", "Bank", "Current bank displayed on the SAI.", "", BindingValueUnits.Degrees));
+            AddFunction(new DCSBallRotation(this, "2050", "Standby Attitude Indicator", "ADI Ball Rotation", "Single value containing X, Y & Z movement of the ADI Ball.", new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));
             AddFunction(new NetworkValue(this, "625", "Standby Attitude Indicator", "Arrow Pointer", "Unclear what this is", "(-0.85 to 1)", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "626", "Standby Attitude Indicator", "Slip Ball", "Current position of the slip ball relative to the center of the tube.", "(-1 to 1) -1 is full left and 1 is full right.", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "627", "Standby Attitude Indicator", "Turn Marker", "Position of the turn marker.", "(-1 to 1)", BindingValueUnits.Numeric));

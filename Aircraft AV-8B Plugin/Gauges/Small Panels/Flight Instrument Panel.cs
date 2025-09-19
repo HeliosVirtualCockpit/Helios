@@ -190,7 +190,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _panel.DrawBorder = false;
             //_panel.BackgroundAlignment = ImageAlignment.Centered;
         }
-
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            base.ScaleChildren(scaleX, scaleY);
+        }
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))

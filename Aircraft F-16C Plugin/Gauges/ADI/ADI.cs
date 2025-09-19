@@ -16,15 +16,21 @@
 namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.F16C;
+    using GadrocsWorkshop.Helios.Util;
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
+    using System.Xml.Linq;
 
     [HeliosControl("Helios.F16.ADI", "ADI", "F-16", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class ADI : BaseGauge
     {
         private HeliosValue _pitch;
         private HeliosValue _roll;
+        private HeliosValue _rotationValue;
         private HeliosValue _slipBall;
         private HeliosValue _turn;
         private HeliosValue _ilsHorizontal;
@@ -61,8 +67,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
             _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
-            _ball.Pitch = 0d;
-            _ball.Roll = 0d;
+            _ball.Yaw = 0.0001d;
+            _ball.Roll = 0.0001d;
             _ball.LightingBrightness = 1.0d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(65d, 65d, 220d, 220d)));
@@ -152,6 +158,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _roll.Execute += new HeliosActionHandler(Roll_Execute);
             Actions.Add(_roll);
 
+            _rotationValue = new HeliosValue(this, new BindingValue(""),"", "ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
+
             _ilsHorizontal = new HeliosValue(this, new BindingValue(1d), "", "ils horizontal deviation", "Current deviation from glide scope.", "-1 to 1", BindingValueUnits.Numeric);
             _ilsHorizontal.Execute += new HeliosActionHandler(ILSHorizontal_Execute);
             Actions.Add(_ilsHorizontal);
@@ -159,7 +169,6 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ilsVertical = new HeliosValue(this, new BindingValue(1d), "", "ils vertical deviation", "Current deviation from ILS side scope.", "-1 to 1", BindingValueUnits.Numeric);
             _ilsVertical.Execute += new HeliosActionHandler(ILSVertical_Execute);
             Actions.Add(_ilsVertical);
-
 
         }
 
@@ -220,6 +229,18 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ball.Roll = -e.Value.DoubleValue;
             _rollNeedle.Rotation = e.Value.DoubleValue;
         }
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            _ball.Rotation3D = new Point3D(-y, x, -z);
+            _rollNeedle.Rotation = z;
+        }
+
         /// <summary>
         /// Whether this control will have effects applied to is on rendering.
         /// </summary>
@@ -258,6 +279,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _ball.Reset();
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
+            _rotationValue.SetValue(new BindingValue("0;0;0"), true);
             _slipBall.SetValue(new BindingValue(_slipBallCalibration.Interpolate(0d)), true);
             _turn.SetValue(new BindingValue(_turnCalibration.Interpolate(0d)), true);
             _ilsHorizontal.SetValue(new BindingValue(_ilsCalibration.Interpolate(-1d)), true);

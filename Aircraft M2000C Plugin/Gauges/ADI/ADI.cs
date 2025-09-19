@@ -164,6 +164,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             _display.ScaleChildren(scaleX, scaleY);
+            _frameGlassPanel.ScaleChildren(scaleX, scaleY);
             base.ScaleChildren(scaleX, scaleY);
 
         }

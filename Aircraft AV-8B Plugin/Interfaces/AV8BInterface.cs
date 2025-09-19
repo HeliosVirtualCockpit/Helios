@@ -652,6 +652,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AV8B
 
             AddFunction(new ScaledNetworkValue(this, "349", 90d, "Flight Instruments", "SAI Pitch", "Current pitch displayed on the SAI.", "", BindingValueUnits.Degrees));
             AddFunction(new ScaledNetworkValue(this, "348", -180d, "Flight Instruments", "SAI Bank", "Current bank displayed on the SAI.", "", BindingValueUnits.Degrees));
+            AddFunction(new DCSBallRotation(this, "2050", "Flight Instruments", "SAI Gauge Rotation", "Single value containing X, Y & Z movement of the ADI Gauge.", new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));
             AddFunction(new FlagValue(this, "347", "Flight Instruments", "SAI Warning Flag", "Displayed when SAI is caged or non-functional."));
             AddFunction(new Axis(this, FLIGHTINSTRUMENTS, "3351", "351", 0.1d, -1d, 1d, "Flight Instruments", "SAI Pitch Adjust Knob"));
             AddFunction(new PushButton(this, FLIGHTINSTRUMENTS, "3350", "350", "Flight Instruments", "SAI Cage Pull Switch"));

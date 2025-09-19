@@ -259,6 +259,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
 
             AddFunction(new ScaledNetworkValue(this, "17", -90d, "ADI", "Pitch", "Current pitch displayed on the ADI.", "", BindingValueUnits.Degrees));
             AddFunction(new ScaledNetworkValue(this, "18", 180d, "ADI", "Bank", "Current bank displayed on the ADI.", "", BindingValueUnits.Degrees));
+            AddFunction(new DCSBallRotation(this, "2050", "ADI", "ADI Ball Rotation", "Single value containing X, Y & Z movement of the ADI Ball.", new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));
             AddFunction(new NetworkValue(this, "24", "ADI", "Slip Ball", "Current position of the slip ball relative to the center of the tube.", "(-1 to 1) -1 is full left and 1 is full right.", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "23", "ADI", "Turn Needle", "Position of the turn needle.", "(-1 to 1)", BindingValueUnits.Numeric));
             AddFunction(new FlagValue(this, "25", "ADI", "Attitude Warning Flag", "Indicates that the ADI has lost electrical power or otherwise been disabled."));

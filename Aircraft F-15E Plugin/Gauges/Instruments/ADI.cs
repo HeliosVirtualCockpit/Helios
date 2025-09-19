@@ -17,15 +17,19 @@
 namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Util;
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
 
     [HeliosControl("Helios.F15E.Instruments.ADI", "ADI", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADIGauge : BaseGauge
     {
         private HeliosValue _pitch;
         private HeliosValue _roll;
+        private HeliosValue _rotationValue;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _offFlag;
 
@@ -46,6 +50,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _cylinder = new GaugeCylinder("{F-15E}/Gauges/Instruments/ADI-Tape.xaml", new Point(25d, 25d), new Size(350d, 350d));
             _cylinder.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_cylinder);
+            _cylinder.Yaw = -0.001d;
+            _cylinder.Roll = 0.001d;
             _cylinder.LightingBrightness = 0.9d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
@@ -77,6 +83,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _roll = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "-180 to +180", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
+
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "Standby Attitude Indicator", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
         }
 
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
@@ -100,6 +110,17 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
             _cylinder.Roll = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
+        }
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            _cylinder.Rotation3D = new Point3D(-y, x, -z);
+            _bankNeedle.Rotation = z;
         }
         public override bool EffectsExclusion
         {
@@ -137,6 +158,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _cylinder.Reset();
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
+            _rotationValue.SetValue(new BindingValue("0;0;0"), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);
             _offFlag.SetValue(new BindingValue(false), true);
         }

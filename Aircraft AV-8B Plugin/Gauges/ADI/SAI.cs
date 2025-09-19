@@ -16,16 +16,20 @@
 namespace GadrocsWorkshop.Helios.Gauges.AV8B
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Util;
     using NLog.LayoutRenderers.Wrappers;
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
 
-    [HeliosControl("Helios.AV8B.SAI", "SAI Gauge", "AV-8B Harrier", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.AV8B.SAI", "SAI Gauge", "AV-8B Harrier t", typeof(GaugeRenderer), HeliosControlFlags.None)]
     public class SAI : BaseGauge
     {
         private HeliosValue _pitch;
         private HeliosValue _roll;
+        private HeliosValue _rotationValue;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _warningFlag;
 
@@ -35,6 +39,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         private GaugeNeedle _wings;
         private GaugeNeedle _warningFlagNeedle;
         private GaugeNeedle _bankNeedle;
+        private GaugeImage _reflection;
 
         private bool _suppressScale = false;
 
@@ -45,6 +50,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
 
             _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260));
             _cylinder.Clip = new EllipseGeometry(center, 130d, 130d);
+            _cylinder.Yaw = -0.001d;
+            _cylinder.Roll = 0.001d;
             Components.Add(_cylinder);
             _cylinder.LightingBrightness = 1.0d;
 
@@ -64,7 +71,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
 
             Components.Add(new GaugeImage("{AV-8B}/Gauges/ADI/ADI-Outer-Ring.xaml", new Rect(0d, 0d, 350d, 350d)));
 
-            GaugeImage _reflection = new GaugeImage("{AV-8B}/Images/WQHD/Panel/crystal_reflection_round.png", new Rect(44d, 33d, 260d, 260d));
+            _reflection = new GaugeImage("{AV-8B}/Images/WQHD/Panel/crystal_reflection_round.png", new Rect(44d, 33d, 260d, 260d));
             _reflection.Opacity = 0.3;
             Components.Add(_reflection);
 
@@ -79,6 +86,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _roll = new HeliosValue(this, new BindingValue(0d), "Flight Instruments", "SAI Bank", "Current bank of the aircraft.", "(0 - 360)", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
+
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "Standby Attitude Indicator", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
 
             _pitchAdjustment = new HeliosValue(this, new BindingValue(0d), "Flight Instruments", "SAI Pitch adjustment offset", "Location of pitch reference wings.", "(-1 to 1) 1 full up and -1 is full down.", BindingValueUnits.Numeric);
             _pitchAdjustment.Execute += new HeliosActionHandler(PitchAdjust_Execute);
@@ -107,7 +118,17 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _cylinder.Roll = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
-
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            _cylinder.Rotation3D = new Point3D(-y, x, -z);
+            _bankNeedle.Rotation = z;
+        }
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
         {
             _warningFlag.SetValue(e.Value, e.BypassCascadingTriggers);
@@ -149,6 +170,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _cylinder.Reset();
             _pitch.SetValue(new BindingValue(0d), true);
             _roll.SetValue(new BindingValue(0d), true);
+            _rotationValue.SetValue(new BindingValue("0;0;0"), true);
             _pitchAdjustment.SetValue(new BindingValue(0d), true);
             //_offFlag.SetValue(new BindingValue(false), true);
         }

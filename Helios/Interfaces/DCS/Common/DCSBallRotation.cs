@@ -20,18 +20,28 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
     using GadrocsWorkshop.Helios.Util;
     using System;
     using System.Globalization;
+    using Newtonsoft.Json;
 
-    public class ADIBallRotation : DCSFunction
+
+    public class DCSBallRotation : DCSFunction
     {
         private readonly ExportDataElement[] DataElementsTemplate;
 
         private HeliosValue _combinedRotation;
-        private CalibrationPointCollectionDouble _scaleX, _scaleY, _scaleZ;
+
+        [JsonProperty("calibration x")]
+        private CalibrationPointCollectionDouble _scaleX;
+
+        [JsonProperty("calibration y")]
+        private CalibrationPointCollectionDouble _scaleY;
+
+        [JsonProperty("calibration z")]
+        private CalibrationPointCollectionDouble _scaleZ;
+
         private string _id;
 
-        public ADIBallRotation(BaseUDPInterface sourceInterface, string id, CalibrationPointCollectionDouble scaleX, CalibrationPointCollectionDouble scaleY, CalibrationPointCollectionDouble scaleZ)
-            : base(sourceInterface,
-                   "Flight Instruments", "ADI Ball Rotation", "Single value containing X, Y & Z movement of the ADI Ball.")
+        public DCSBallRotation(BaseUDPInterface sourceInterface, string id, string device, string name, string description, CalibrationPointCollectionDouble scaleX, CalibrationPointCollectionDouble scaleY, CalibrationPointCollectionDouble scaleZ)
+            : base(sourceInterface, device, name, description)
         {
             _id = id;
             DataElementsTemplate = new ExportDataElement[] { new DCSDataElement(_id, null, true) };
@@ -42,7 +52,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         }
 
         // deserialization constructor
-        public ADIBallRotation(BaseUDPInterface sourceInterface, System.Runtime.Serialization.StreamingContext context)
+        public DCSBallRotation(BaseUDPInterface sourceInterface, System.Runtime.Serialization.StreamingContext context)
             : base(sourceInterface, context)
         {
             // no code

@@ -164,7 +164,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
             drawingContext.PushTransform(new RotateTransform(_rotation, _imageRectangle.X + (_imageRectangle.Width/2), _imageRectangle.Y + (_imageRectangle.Height / 2)));
             drawingContext.PushOpacity(_opacity);
-            DrawImage(drawingContext, _image, _rectangle);
+            DrawImage(drawingContext, _image, _imageRectangle);
             drawingContext.Pop();
             drawingContext.Pop();
         }
