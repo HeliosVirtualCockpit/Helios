@@ -63,6 +63,7 @@ namespace GadrocsWorkshop.Helios.Controls
             get => _baseX;
             set
             {
+                double oldValue = _baseX;
                 if (value != _baseX)
                 {
                     _baseX = value;
@@ -70,6 +71,8 @@ namespace GadrocsWorkshop.Helios.Controls
                     {
                         gauge.BasePitch = _baseX;
                     }
+                    OnPropertyChanged("BasePitch", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -78,6 +81,8 @@ namespace GadrocsWorkshop.Helios.Controls
             get => _baseY;
             set
             {
+                double oldValue = _baseY;
+
                 if (value != _baseY)
                 {
                     _baseY = value;
@@ -85,6 +90,8 @@ namespace GadrocsWorkshop.Helios.Controls
                     {
                         gauge.BaseYaw = _baseY;
                     }
+                    OnPropertyChanged("BaseYaw", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -93,6 +100,7 @@ namespace GadrocsWorkshop.Helios.Controls
             get => _baseZ;
             set
             {
+                double oldValue = _baseZ;
                 if (value != _baseZ)
                 {
                     _baseZ = value;
@@ -100,6 +108,8 @@ namespace GadrocsWorkshop.Helios.Controls
                     {
                         gauge.BaseRoll = _baseZ;
                     }
+                    OnPropertyChanged("BaseRoll", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -110,11 +120,14 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (value != _fov)
                 {
+                    double oldValue = _fov;
                     _fov = value;
                     if(gauge != null)
                     {
                         gauge.FieldOfView = _fov;
                     }
+                    OnPropertyChanged("FieldOfView", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -125,7 +138,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (value != LightingColor && gauge != null)
                 {
+                    Color oldValue = gauge.LightingColor;
                     gauge.LightingColor = value;
+                    OnPropertyChanged("LightingColor", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -136,7 +152,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (value != LightingBrightness && gauge != null)
                 {
+                    double oldValue = gauge.LightingBrightness;
                     gauge.LightingBrightness = value;
+                    OnPropertyChanged("LightingBrightness", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -146,9 +165,14 @@ namespace GadrocsWorkshop.Helios.Controls
             get => gauge.LightingX;
             set
             {
+
                 if (gauge != null && value != gauge.LightingX)
                 {
+                    double oldValue = gauge.LightingX;
                     gauge.LightingX = value;
+                    OnPropertyChanged("LightingX", oldValue, value, true);
+                    Refresh();
+
                 }
             }
         }
@@ -159,7 +183,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (gauge != null && value != gauge.LightingY)
                 {
+                    double oldValue = gauge.LightingY;
                     gauge.LightingY = value;
+                    OnPropertyChanged("LightingY", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -170,7 +197,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (gauge != null && value != gauge.LightingZ)
                 {
+                    double oldValue = gauge.LightingZ;
                     gauge.LightingZ = value;
+                    OnPropertyChanged("LightingZ", oldValue, value, true);
+                    Refresh();
                 }
             }
         }

@@ -55,6 +55,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 pot.Value = pot.MaxValue;
             }
         }
+        private void HeliosTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
     public class DoubleToStringConverter : IValueConverter
     {
@@ -62,7 +66,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is double d)
-                return d.ToString("N3", culture); 
+                return d.ToString("N3", culture);
             return "0";
         }
 
@@ -82,6 +86,44 @@ namespace GadrocsWorkshop.Helios.Controls
                 return ValidationResult.ValidResult;
 
             return new ValidationResult(false, "Input must be a number");
+        }
+    }
+    public class DoubleToStringN2Converter : IValueConverter
+    {
+        // double -> string
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is double d)
+                return d.ToString("N2", culture); // e.g. "1,234.57"
+            return "0.00";
+        }
+
+        // string -> double
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string s && double.TryParse(s, NumberStyles.Any, culture, out double result))
+                return result;
+
+            return Binding.DoNothing; // prevents overwriting with invalid input
+        }
+    }
+    public class DoubleToStringN0Converter : IValueConverter
+    {
+        // double -> string
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is double d)
+                return d.ToString("N0", culture); // e.g. "1,234.57"
+            return "0";
+        }
+
+        // string -> double
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string s && double.TryParse(s, NumberStyles.Any, culture, out double result))
+                return result;
+
+            return Binding.DoNothing; // prevents overwriting with invalid input
         }
     }
 }

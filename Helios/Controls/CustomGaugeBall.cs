@@ -43,9 +43,16 @@ namespace GadrocsWorkshop.Helios.Controls
             BasePitch = 0d;
             BaseYaw = 270d;
             BaseRoll = 180d;
-            FieldOfView = 35d;
+            FieldOfView = 40d;
             _sphere = new GaugeBall(_imageName, new Point(0d, 0d), _size, BasePitch, BaseYaw, BaseRoll, FieldOfView);
+            _sphere.Pitch = 0.00001d;
+            _sphere.Yaw = 0.00001d;
+            _sphere.Roll = 0.00001d;
+            _sphere.Pitch = 0d;
+            _sphere.Yaw = 0d;
+            _sphere.Roll = 0d;
             Components.Add(_sphere);
+            
 
             LightingColor = Colors.White;
         }

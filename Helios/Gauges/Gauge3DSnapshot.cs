@@ -259,7 +259,8 @@ namespace GadrocsWorkshop.Helios.Gauges
             return Color.FromArgb(baseColor.A, r, g, b);
         }
         /// <summary>
-        /// Takes a snapshot of the Viewport3D and draws it into the DrawingContext.
+        /// Keeps the Viewport3D in a brush and then uses it to create a temporary rectangle which can then 
+        /// have a ShaderEffect applied to it, and then finally get drawn again as a rectangle.
         /// </summary>
         public void RedrawSnapshot(DrawingContext dc)
         {
@@ -297,14 +298,14 @@ namespace GadrocsWorkshop.Helios.Gauges
             dc.DrawRectangle(new VisualBrush(tempVisual), null, new Rect(_location.X, _location.Y, w, h));
 
             watch.Stop();
-            _totalRenderCallTime += watch.ElapsedMilliseconds;
+            _totalRenderCallTime += watch.ElapsedTicks;
             _meanRenderCallTime = _totalRenderCallTime / _renderCalls;
-            _hwmRenderCallTime = _hwmRenderCallTime < watch.ElapsedMilliseconds ? watch.ElapsedMilliseconds : _hwmRenderCallTime;
-            _lwmRenderCallTime = _lwmRenderCallTime > watch.ElapsedMilliseconds ? watch.ElapsedMilliseconds : _lwmRenderCallTime;
+            _hwmRenderCallTime = _hwmRenderCallTime < watch.ElapsedTicks ? watch.ElapsedTicks : _hwmRenderCallTime;
+            _lwmRenderCallTime = _lwmRenderCallTime > watch.ElapsedTicks ? watch.ElapsedTicks : _lwmRenderCallTime;
 
-            if (_renderCalls == 100)
+            if (_renderCalls == 5000)
             {
-                Logger.Debug($"Total Render Calls: {_renderCalls}, Mean Render Time: {_meanRenderCallTime}ms, Shortest Render Time: {_lwmRenderCallTime}ms, Longest Render Time: {_hwmRenderCallTime}ms");
+                Logger.Debug($"Total Render Calls: {_renderCalls}, Mean Render Time: {_meanRenderCallTime} Ticks, Shortest Render Time: {_lwmRenderCallTime} Ticks, Longest Render Time: {_hwmRenderCallTime} Ticks");
                 _renderCalls = _totalRenderCallTime = _hwmRenderCallTime = _meanRenderCallTime = 0;
                 _lwmRenderCallTime = 1000;
             }
@@ -315,6 +316,6 @@ namespace GadrocsWorkshop.Helios.Gauges
             base.OnRenderSizeChanged(sizeInfo);
         }
         protected override int VisualChildrenCount => 1;
-//        protected override Visual GetVisualChild(int index) => _visual;
+        // protected override Visual GetVisualChild(int index) => _visual;
     }
 }

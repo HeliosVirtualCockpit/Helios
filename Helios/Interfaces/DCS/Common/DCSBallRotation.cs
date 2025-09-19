@@ -91,13 +91,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 return scaledValue;
             }
 
-            if (scaledValue <= 1.0d)
+            if (scaledValue <= 1.0d && scale != null)
             {
                 scaledValue = scale.Interpolate(scaledValue);
-            }
-            else
-            {
-                scaledValue = 0d;
             }
             return scaledValue;
         }
