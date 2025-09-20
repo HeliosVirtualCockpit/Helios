@@ -62,9 +62,9 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
 
             _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 36d);
             Components.Add(_ball);
-            _ball.Pitch = 0.00001d;
-            _ball.Roll = 0.00001d;
-            _ball.Yaw = 0.00001d;
+            _ball.X = 0.00001d;
+            _ball.Z = 0.00001d;
+            _ball.Y = 0.00001d;
             _ball.LightingBrightness = 1.0d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(57d, 57d, 286d, 286d)));
@@ -155,7 +155,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Pitch = e.Value.DoubleValue;
+            _ball.X = e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -165,13 +165,13 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = -e.Value.DoubleValue;
+            _ball.Z = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void Yaw_Execute(object action, HeliosActionEventArgs e)
         {
             _yaw.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Yaw = -e.Value.DoubleValue;
+            _ball.Y = -e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)
         {

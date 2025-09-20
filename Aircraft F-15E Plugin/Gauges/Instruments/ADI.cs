@@ -50,8 +50,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _cylinder = new GaugeCylinder("{F-15E}/Gauges/Instruments/ADI-Tape.xaml", new Point(25d, 25d), new Size(350d, 350d));
             _cylinder.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_cylinder);
-            _cylinder.Yaw = -0.001d;
-            _cylinder.Roll = 0.001d;
+            _cylinder.Y = -0.001d;
+            _cylinder.Z = 0.001d;
             _cylinder.LightingBrightness = 0.9d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
@@ -98,7 +98,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Yaw = -e.Value.DoubleValue;
+            _cylinder.Y = -e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -108,7 +108,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Roll = -e.Value.DoubleValue;
+            _cylinder.Z = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)

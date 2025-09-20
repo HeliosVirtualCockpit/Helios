@@ -66,8 +66,8 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
 
             _ball = new GaugeBall("{Helios}/Gauges/A-10/ADI/ADI-Ball.xaml", new Point(center.X- 112.5d, center.Y- 112.5d), new Size(225d, 225d), 0d, -90d, 180d, 35d);
             _ball.Clip = new EllipseGeometry(center, 112.5d, 112.5d);
-            _ball.Yaw = -0.001d;
-            _ball.Roll = 0.001d;
+            _ball.Y = -0.001d;
+            _ball.Z = 0.001d;
             _ball.LightingColor = Colors.White;
             _ball.LightingBrightness = 1.0d;
             Components.Add(_ball);
@@ -214,13 +214,13 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Yaw = e.Value.DoubleValue;
+            _ball.Y = e.Value.DoubleValue;
         }
 
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = e.Value.DoubleValue;
+            _ball.Z = e.Value.DoubleValue;
             _bankNeedle.Rotation = -e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)

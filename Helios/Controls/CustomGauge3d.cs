@@ -17,23 +17,29 @@ namespace GadrocsWorkshop.Helios.Controls
 
 {
     using GadrocsWorkshop.Helios.ComponentModel;
-     using GadrocsWorkshop.Helios.Util;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using GadrocsWorkshop.Helios.Gauges;
+     using GadrocsWorkshop.Helios.Util;
     using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
     using System.Xml;
-    using GadrocsWorkshop.Helios.Controls.Capabilities;
 
     public abstract class CustomGauge3d : BaseGauge
     {
 
         private Size _size;
         private double _fov;
-        private double _baseX, _baseY, _baseZ;
+        private double _initialX, _initialY, _initialZ;
+        private bool _calibrationNeeded = false;
+        private double _minInputX, _minInputY, _minInputZ;
+        private double _maxInputX, _maxInputY, _maxInputZ;
+        private double _minOutputX, _minOutputY, _minOutputZ;
+        private double _maxOutputX, _maxOutputY, _maxOutputZ;   
 
-        private HeliosValue _rotXValue, _rotYValue, _rotZValue, _lightBrightnessValue;
+        private HeliosValue _rotXValue, _rotYValue, _rotZValue, _rotRotationValue, _lightBrightnessValue;
 
         private bool _suppressScale = false;
 
@@ -51,64 +57,67 @@ namespace GadrocsWorkshop.Helios.Controls
             _rotZValue = new HeliosValue(this, new BindingValue(0d), "", "Z Rotation", "Rotation in the Z-Axis.", "(0 - 360)", BindingValueUnits.Degrees);
             _rotZValue.Execute += new HeliosActionHandler(Z_Execute);
             Actions.Add(_rotZValue);
+            _rotRotationValue = new HeliosValue(this, new BindingValue("0;0;0"), "", "All Rotations", "Rotation of X, Y & Z Axes in degrees.", "Text String containing x°;y°;z° values", BindingValueUnits.Text);
+            _rotRotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotRotationValue);
             _lightBrightnessValue = new HeliosValue(this, new BindingValue(false), "", "Brightness of default lighting source", "Number", "0 to 1", BindingValueUnits.Numeric);
             _lightBrightnessValue.Execute += new HeliosActionHandler(LightingBrightness_Execute);
             Actions.Add(_lightBrightnessValue);
         }
-
+        protected abstract IGauge3d gauge { get; }
         #region Properties
 
-        public double BasePitch
+        public double InitialAngleX
         {
-            get => _baseX;
+            get => _initialX;
             set
             {
-                double oldValue = _baseX;
-                if (value != _baseX)
+                double oldValue = _initialX;
+                if (value != _initialX)
                 {
-                    _baseX = value;
+                    _initialX = value;
                     if (gauge != null)
                     {
-                        gauge.BasePitch = _baseX;
+                        gauge.InitialAngleX = _initialX;
                     }
-                    OnPropertyChanged("BasePitch", oldValue, value, true);
+                    OnPropertyChanged("InitialAngleX", oldValue, value, true);
                     Refresh();
                 }
             }
         }
-        public double BaseYaw
+        public double InitialAngleY
         {
-            get => _baseY;
+            get => _initialY;
             set
             {
-                double oldValue = _baseY;
+                double oldValue = _initialY;
 
-                if (value != _baseY)
+                if (value != _initialY)
                 {
-                    _baseY = value;
+                    _initialY = value;
                     if (gauge != null)
                     {
-                        gauge.BaseYaw = _baseY;
+                        gauge.InitialAngleY = _initialY;
                     }
-                    OnPropertyChanged("BaseYaw", oldValue, value, true);
+                    OnPropertyChanged("InitialAngleY", oldValue, value, true);
                     Refresh();
                 }
             }
         }
-        public double BaseRoll
+        public double InitialAngleZ
         {
-            get => _baseZ;
+            get => _initialZ;
             set
             {
-                double oldValue = _baseZ;
-                if (value != _baseZ)
+                double oldValue = _initialZ;
+                if (value != _initialZ)
                 {
-                    _baseZ = value;
+                    _initialZ = value;
                     if(gauge != null)
                     {
-                        gauge.BaseRoll = _baseZ;
+                        gauge.InitialAngleZ = _initialZ;
                     }
-                    OnPropertyChanged("BaseRoll", oldValue, value, true);
+                    OnPropertyChanged("InitialAngleZ", oldValue, value, true);
                     Refresh();
                 }
             }
@@ -204,20 +213,187 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-        protected abstract IGauge3d gauge { get;}
-
+        public bool CalibrationNeeded
+        {
+            get => _calibrationNeeded;
+            set
+            {
+                if (value != _calibrationNeeded)
+                {
+                    bool oldValue = _calibrationNeeded;
+                    _calibrationNeeded = value;
+                    OnPropertyChanged("CalibrationNeeded", oldValue, value, true);
+                    Refresh();
+                }
+            }
+        }
+        public double MinInputX
+        {
+            get => _minInputX;
+            set
+            {
+                if (value != _minInputX)
+                {
+                    double oldValue = _minInputX;
+                    _minInputX = value;
+                }
+            }
+        }
+        public double MinInputY
+        {
+            get => _minInputY;
+            set
+            {
+                if (value != _minInputY)
+                {
+                    double oldValue = _minInputY;
+                    _minInputY = value;
+                }
+            }
+        }
+        public double MinInputZ
+        {
+            get => _minInputZ;
+            set
+            {
+                if (value != _minInputZ)
+                {
+                    double oldValue = _minInputZ;
+                    _minInputZ = value;
+                }
+            }
+        }
+        public double MaxInputX
+        {
+            get => _maxInputX;
+            set
+            {
+                if (value != _maxInputX)
+                {
+                    double oldValue = _maxInputX;
+                    _maxInputX = value;
+                }
+            }
+        }
+        public double MaxInputY
+        {
+            get => _maxInputY;
+            set
+            {
+                if (value != _maxInputY)
+                {
+                    double oldValue = _maxInputY;
+                    _maxInputY = value;
+                }
+            }
+        }
+        public double MaxInputZ
+        {
+            get => _maxInputZ;
+            set
+            {
+                if (value != _maxInputZ)
+                {
+                    double oldValue = _maxInputZ;
+                    _maxInputZ = value;
+                }
+            }
+        }
+        public double MinOutputX
+        {
+            get => _minOutputX;
+            set
+            {
+                if (value != _minOutputX)
+                {
+                    double oldValue = _minOutputX;
+                    _minOutputX = value;
+                }
+            }
+        }
+        public double MinOutputY
+        {
+            get => _minOutputY;
+            set
+            {
+                if (value != _minOutputY)
+                {
+                    double oldValue = _minOutputY;
+                    _minOutputY = value;
+                }
+            }
+        }
+        public double MinOutputZ
+        {
+            get => _minOutputZ;
+            set
+            {
+                if (value != _minOutputZ)
+                {
+                    double oldValue = _minOutputZ;
+                    _minOutputZ = value;
+                }
+            }
+        }
+        public double MaxOutputX
+        {
+            get => _maxOutputX;
+            set
+            {
+                if (value != _maxOutputX)
+                {
+                    double oldValue = _maxOutputX;
+                    _maxOutputX = value;
+                }
+            }
+        }
+        public double MaxOutputY
+        {
+            get => _maxOutputY;
+            set
+            {
+                if (value != _maxOutputY)
+                {
+                    double oldValue = _maxOutputY;
+                    _maxOutputY = value;
+                }
+            }
+        }
+        public double MaxOutputZ
+        {
+            get => _maxOutputZ;
+            set
+            {
+                if (value != _maxOutputZ)
+                {
+                    double oldValue = _maxOutputZ;
+                    _maxOutputZ = value;
+                }
+            }
+        }
         #endregion Properties
+
         void X_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.Pitch = e.Value.DoubleValue;
+            gauge.X = e.Value.DoubleValue;
         }
         void Y_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.Yaw = e.Value.DoubleValue;
+            gauge.Y = e.Value.DoubleValue;
         }
         void Z_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.Roll = e.Value.DoubleValue;
+            gauge.Z = e.Value.DoubleValue;
+        }
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotRotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            (gauge as GaugeBall).Rotation3D = new Point3D(x, -y, -z);
         }
         void LightingBrightness_Execute(object action, HeliosActionEventArgs e)
         {
@@ -255,7 +431,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 _suppressScale = true;
             }
         }
-        #endregion
+        #endregion Actions
         #region de/serialize
         public override void WriteXml(XmlWriter writer)
         {
@@ -263,9 +439,23 @@ namespace GadrocsWorkshop.Helios.Controls
 
             base.WriteXml(writer);
             writer.WriteStartElement("Properties3D");
-            writer.WriteElementString("BasePitch", _baseX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("BaseRoll", _baseY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("BaseYaw", _baseZ.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("InitialAngleX", _initialX.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("InitialAngleZ", _initialY.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("InitialAngleY", _initialZ.ToString(CultureInfo.InvariantCulture));
+            writer.WriteStartElement("AxesCalibrationValues");
+            writer.WriteElementString("MinInputX", _minInputX.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MaxInputX", _maxInputX.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MinOutputX", _minOutputX.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MaxOutputX", _maxOutputX.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MinInputY", _minInputY.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MaxInputY", _maxInputY.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MinOutputY", _minOutputY.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MaxOutputY", _maxOutputY.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MinInputZ", _minInputZ.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MaxInputZ", _maxInputZ.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MinOutputZ", _minOutputZ.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("MaxOutputZ", _maxOutputZ.ToString(CultureInfo.InvariantCulture));
+            writer.WriteEndElement();
             writer.WriteElementString("FieldOfView", _fov.ToString(CultureInfo.InvariantCulture));
             writer.WriteStartElement("Lighting");
             writer.WriteElementString("X", LightingX.ToString(CultureInfo.InvariantCulture));
@@ -285,9 +475,26 @@ namespace GadrocsWorkshop.Helios.Controls
             if (reader.Name.Equals("Properties3D"))
             {
                 reader.ReadStartElement("Properties3D");
-                BasePitch = double.Parse(reader.ReadElementString("BasePitch"), CultureInfo.InvariantCulture);
-                BaseRoll = double.Parse(reader.ReadElementString("BaseRoll"), CultureInfo.InvariantCulture);
-                BaseYaw = double.Parse(reader.ReadElementString("BaseYaw"), CultureInfo.InvariantCulture);
+                InitialAngleX = double.Parse(reader.ReadElementString("InitialAngleX"), CultureInfo.InvariantCulture);
+                InitialAngleZ = double.Parse(reader.ReadElementString("InitialAngleZ"), CultureInfo.InvariantCulture);
+                InitialAngleY = double.Parse(reader.ReadElementString("InitialAngleY"), CultureInfo.InvariantCulture);
+                if (reader.Name.Equals("AxesCalibrationValues"))
+                {
+                    reader.ReadStartElement("AxesCalibrationValues");
+                    _minInputX = double.Parse(reader.ReadElementString("MinInputX"), CultureInfo.InvariantCulture);
+                    _maxInputX = double.Parse(reader.ReadElementString("MaxInputX"), CultureInfo.InvariantCulture);
+                    _minOutputX = double.Parse(reader.ReadElementString("MinOutputX"), CultureInfo.InvariantCulture);
+                    _maxOutputX = double.Parse(reader.ReadElementString("MaxOutputX"), CultureInfo.InvariantCulture);
+                    _minInputY = double.Parse(reader.ReadElementString("MinInputY"), CultureInfo.InvariantCulture);
+                    _maxInputY = double.Parse(reader.ReadElementString("MaxInputY"), CultureInfo.InvariantCulture);
+                    _minOutputY = double.Parse(reader.ReadElementString("MinOutputY"), CultureInfo.InvariantCulture);
+                    _maxOutputY = double.Parse(reader.ReadElementString("MaxOutputY"), CultureInfo.InvariantCulture);
+                    _minInputZ = double.Parse(reader.ReadElementString("MinInputZ"), CultureInfo.InvariantCulture);
+                    _maxInputZ = double.Parse(reader.ReadElementString("MaxInputZ"), CultureInfo.InvariantCulture);
+                    _minOutputZ = double.Parse(reader.ReadElementString("MinOutputZ"), CultureInfo.InvariantCulture);
+                    _maxOutputZ = double.Parse(reader.ReadElementString("MaxOutputZ"), CultureInfo.InvariantCulture);
+                    reader.ReadEndElement();
+                }
                 FieldOfView = double.Parse(reader.ReadElementString("FieldOfView"), CultureInfo.InvariantCulture);
                 if (reader.Name.Equals("Lighting"))
                 {

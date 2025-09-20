@@ -26,12 +26,12 @@ namespace GadrocsWorkshop.Helios.Gauges
         private string _imageFile;
         private Point _location;
         private Size _size;
-        private double _basePitch;
-        private double _baseRoll;
-        private double _baseYaw;
-        private double _pitch;
-        private double _roll;
-        private double _yaw;
+        private double _initialAngleX;
+        private double _initialAngleZ;
+        private double _initialAngleY;
+        private double _x;
+        private double _z;
+        private double _y;
         private Point3D _rotation3D;
         private double _fov;
         private bool _effectsExclusion = false;
@@ -46,15 +46,15 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
         }
 
-        public Gauge3d(string imageFile, Point location, Size size, double basePitch = 0, double baseRoll = 0, double baseYaw = 0, double FOV = 35d)
+        public Gauge3d(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleZ = 0, double initialAngleY = 0, double FOV = 35d)
         {
             _imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
             _size = size;
             _fov = FOV;
-            _basePitch = basePitch;
-            _baseRoll = baseRoll;
-            _baseYaw = baseYaw; 
+            _initialAngleX = initialAngleX;
+            _initialAngleZ = initialAngleZ;
+            _initialAngleY = initialAngleY; 
 
             _gaugeSnapshot = new Gauge3dSnapshot(BuildMesh())
             {
@@ -66,9 +66,9 @@ namespace GadrocsWorkshop.Helios.Gauges
                 FieldOfView = _fov
             };
             _gaugeSnapshot.EffectsExclusion = EffectsExclusion;
-            BasePitch = _basePitch;
-            BaseRoll = _baseRoll;
-            BaseYaw = _baseYaw;
+            InitialAngleX = _initialAngleX;
+            InitialAngleZ = _initialAngleZ;
+            InitialAngleY = _initialAngleY;
             LightingColor = Colors.White;
             OnDisplayUpdate();
         }
@@ -89,98 +89,98 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
         }
 
-        public double BasePitch
+        public double InitialAngleX
         {
             get
             {
-                return _basePitch;
+                return _initialAngleX;
             }
             set
             {
-                if (value != _basePitch)
+                if (value != _initialAngleX)
                 {
-                    _basePitch = value;
-                    _gaugeSnapshot.RotateX(_basePitch);
+                    _initialAngleX = value;
+                    _gaugeSnapshot.RotateX(_initialAngleX);
                     OnDisplayUpdate();
                 }
             }
         }
-        public double BaseRoll
+        public double InitialAngleZ
         {
             get
             {
-                return _baseRoll;
+                return _initialAngleZ;
             }
             set
             {
-                if (value != _baseRoll)
+                if (value != _initialAngleZ)
                 {
-                    _baseRoll = value;
-                    _gaugeSnapshot.RotateZ(_baseRoll);
+                    _initialAngleZ = value;
+                    _gaugeSnapshot.RotateZ(_initialAngleZ);
                     OnDisplayUpdate();
                 }
             }
         }
-        public double BaseYaw
+        public double InitialAngleY
         {
             get
             {
-                return _baseYaw;
+                return _initialAngleY;
             }
             set
             {
-                if (value != _baseYaw)
+                if (value != _initialAngleY)
                 {
-                    _baseYaw = value;
-                    _gaugeSnapshot.RotateY(_baseYaw);
+                    _initialAngleY = value;
+                    _gaugeSnapshot.RotateY(_initialAngleY);
                     OnDisplayUpdate();
                 }
             }
         }
-        public double Pitch
+        public double X
         {
             get
             {
-                return _pitch;
+                return _x;
             }
             set
             {
-                if (value != _pitch)
+                if (value != _x)
                 {
-                    _pitch = value;
-                    _gaugeSnapshot.RotateX(_pitch + _basePitch);
+                    _x = value;
+                    _gaugeSnapshot.RotateX(_x + _initialAngleX);
                     OnDisplayUpdate();
                 }
             }
         }
-        public double Roll
+        public double Z
         {
             get
             {
-                return _roll;
+                return _z;
             }
             set
             {
-                if (value != _roll)
+                if (value != _z)
                 {
-                    _roll = value;
-                    _gaugeSnapshot.RotateZ(_roll + _baseRoll);
+                    _z = value;
+                    _gaugeSnapshot.RotateZ(_z + _initialAngleZ);
                     OnDisplayUpdate();
                 }
             }
         }
-        public double Yaw
+        public double Y
         {
             get
             {
-                return _yaw;
+                return _y;
             }
             set
             {
-                if (value != _yaw)
+                if (value != _y)
                 {
-                    _yaw = value;
-                    _gaugeSnapshot.RotateY(_yaw + _baseYaw);
+                    _y = value;
+                    _gaugeSnapshot.RotateY(_y + _initialAngleY);
                     OnDisplayUpdate();
                 }
             }
@@ -193,7 +193,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if(_rotation3D != value)
                 {
                     _rotation3D = value;
-                    _gaugeSnapshot.Rotation3D(new Point3D(_rotation3D.X + _basePitch, _rotation3D.Y + _baseYaw, _rotation3D.Z + _baseRoll));
+                    _gaugeSnapshot.Rotation3D(new Point3D(_rotation3D.X + _initialAngleX, _rotation3D.Y + _initialAngleY, _rotation3D.Z + _initialAngleZ));
                     OnDisplayUpdate();
 
                 }
@@ -292,7 +292,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
         public virtual void Reset()
         {
-            Pitch = Roll = Yaw = 0d;
+            X = Z = Y = 0d;
         }
         public override bool EffectsExclusion
         {

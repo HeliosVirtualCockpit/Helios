@@ -67,8 +67,8 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
             _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
-            _ball.Yaw = 0.0001d;
-            _ball.Roll = 0.0001d;
+            _ball.Y = 0.0001d;
+            _ball.Z = 0.0001d;
             _ball.LightingBrightness = 1.0d;
 
             Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(65d, 65d, 220d, 220d)));
@@ -221,12 +221,12 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
-            _ball.Yaw = e.Value.DoubleValue;
+            _ball.Y = e.Value.DoubleValue;
         }
 
         void Roll_Execute(object action, HeliosActionEventArgs e)
         {
-            _ball.Roll = -e.Value.DoubleValue;
+            _ball.Z = -e.Value.DoubleValue;
             _rollNeedle.Rotation = e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)

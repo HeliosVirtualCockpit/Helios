@@ -67,8 +67,8 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
 
             _ball = new GaugeBall("{FA-18C}/Gauges/ADI/ADI-Ball.xaml", new Point(71d, 57d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
-            _ball.Yaw = -0.001d;
-            _ball.Roll = 0.001d;
+            _ball.Y = -0.001d;
+            _ball.Z = 0.001d;
 
             _ball.LightingColor = Color.FromArgb(0xff, 0xff, 0xff, 0xff);
             _ball.LightingBrightness = 1.0d;
@@ -196,7 +196,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Yaw = e.Value.DoubleValue;
+            _ball.Y = e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -206,7 +206,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = e.Value.DoubleValue;
+            _ball.Z = e.Value.DoubleValue;
             _bankNeedle.Rotation = -e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)

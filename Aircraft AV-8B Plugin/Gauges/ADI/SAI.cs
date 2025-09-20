@@ -50,8 +50,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
 
             _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260));
             _cylinder.Clip = new EllipseGeometry(center, 130d, 130d);
-            _cylinder.Yaw = -0.001d;
-            _cylinder.Roll = 0.001d;
+            _cylinder.Y = -0.001d;
+            _cylinder.Z = 0.001d;
             Components.Add(_cylinder);
             _cylinder.LightingBrightness = 1.0d;
 
@@ -103,7 +103,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Yaw = -e.Value.DoubleValue;
+            _cylinder.Y = -e.Value.DoubleValue;
         }
 
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
@@ -115,7 +115,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Roll = -e.Value.DoubleValue;
+            _cylinder.Z = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)

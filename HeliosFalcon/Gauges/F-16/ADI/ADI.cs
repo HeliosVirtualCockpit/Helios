@@ -281,8 +281,8 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_ilsHorizontalNeedleDashed.VerticalOffset = _ilsCalibration.Interpolate(ILSDeviationHorizontal);
 			}
 
-			_ball.Yaw = PitchAngle;
-			_ball.Roll = RollAngle;
+			_ball.Y = PitchAngle;
+			_ball.Z = RollAngle;
 			_rollMarkers.Rotation = -RollAngle;
 			_slipBall.HorizontalOffset = _slipBallCalibration.Interpolate(SideSlipAngle);
 

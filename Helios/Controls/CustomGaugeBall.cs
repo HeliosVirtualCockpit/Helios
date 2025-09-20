@@ -40,17 +40,13 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             _size = base.NativeSize;
             _imageName = "{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml";
-            BasePitch = 0d;
-            BaseYaw = 270d;
-            BaseRoll = 180d;
+            InitialAngleX = 0d;
+            InitialAngleY = 270d;
+            InitialAngleZ = 180d;
             FieldOfView = 40d;
-            _sphere = new GaugeBall(_imageName, new Point(0d, 0d), _size, BasePitch, BaseYaw, BaseRoll, FieldOfView);
-            _sphere.Pitch = 0.00001d;
-            _sphere.Yaw = 0.00001d;
-            _sphere.Roll = 0.00001d;
-            _sphere.Pitch = 0d;
-            _sphere.Yaw = 0d;
-            _sphere.Roll = 0d;
+            _sphere = new GaugeBall(_imageName, new Point(0d, 0d), _size, InitialAngleX, InitialAngleY, InitialAngleZ, FieldOfView);
+            _sphere.X = _sphere.Y = _sphere.Z = 0.00001d;
+            _sphere.X = _sphere.Y = _sphere.Z = 0.0d;
             Components.Add(_sphere);
             
 

@@ -59,8 +59,8 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
             Components.Add(_ball);
-            _ball.Yaw = -0.001d;
-            _ball.Roll = 0.001d;
+            _ball.Y = -0.001d;
+            _ball.Z = 0.001d;
             _ball.LightingBrightness = 1.0d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(0.11d, -36d, 0.89d, 36d);
@@ -143,7 +143,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Yaw = e.Value.DoubleValue;
+            _ball.Y = e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -153,7 +153,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Roll = -e.Value.DoubleValue;
+            _ball.Z = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)

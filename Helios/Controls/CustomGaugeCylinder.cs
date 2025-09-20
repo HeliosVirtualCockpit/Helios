@@ -41,11 +41,15 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             _size = base.NativeSize;
             _imageName = "{F-15E}/Gauges/Instruments/ADI-Tape.xaml";
-            BasePitch = 0d;
-            BaseYaw = 90d;
-            BaseRoll = 90d;
+            InitialAngleX = 0d;
+            InitialAngleY = 90d;
+            InitialAngleZ = 90d;
             FieldOfView = 35d;
-            _cylinder = new GaugeCylinder(_imageName, new Point(0d, 0d), _size, BasePitch, BaseYaw, BaseRoll, FieldOfView);
+            _cylinder = new GaugeCylinder(_imageName, new Point(0d, 0d), _size, InitialAngleX, InitialAngleY, InitialAngleZ, FieldOfView);
+            CylinderRadius = 0.9d;
+            CylinderHeight = 0.8d;
+            _cylinder.X = _cylinder.Y = _cylinder.Z = 0.00001d;
+            _cylinder.X = _cylinder.Y = _cylinder.Z = 0.0d;
             Components.Add(_cylinder);
 
 
@@ -76,7 +80,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (value != _cylinder.CylinderRadius)
                 {
+                    double oldValue = _cylinder.CylinderRadius;
                     _cylinder.CylinderRadius = value;
+                    OnPropertyChanged("CylinderRadius", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -87,7 +94,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (value != _cylinder.CylinderHeight)
                 {
+                    double oldValue = _cylinder.CylinderHeight;
                     _cylinder.CylinderHeight = value;
+                    OnPropertyChanged("CylinderHeight", oldValue, value, true);
+                    Refresh();
                 }
             }
         }
@@ -120,8 +130,8 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             base.WriteXml(writer);
             writer.WriteStartElement("CylinderProperties");
-            writer.WriteElementString("Radius", CylinderRadius.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("Height", CylinderHeight.ToString(CultureInfo.InvariantCulture));
+            writer.WriteElementString("Radius", CylinderRadius.ToString("N3", CultureInfo.InvariantCulture));
+            writer.WriteElementString("Height", CylinderHeight.ToString("N3", CultureInfo.InvariantCulture));
             writer.WriteEndElement();
         }
 
