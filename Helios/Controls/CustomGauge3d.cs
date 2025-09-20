@@ -16,7 +16,6 @@
 namespace GadrocsWorkshop.Helios.Controls
 
 {
-    using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls.Capabilities;
     using GadrocsWorkshop.Helios.Gauges;
      using GadrocsWorkshop.Helios.Util;
@@ -37,7 +36,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private double _minInputX, _minInputY, _minInputZ;
         private double _maxInputX, _maxInputY, _maxInputZ;
         private double _minOutputX, _minOutputY, _minOutputZ;
-        private double _maxOutputX, _maxOutputY, _maxOutputZ;   
+        private double _maxOutputX, _maxOutputY, _maxOutputZ;
+        private CalibrationPointCollectionDouble _xScale, _yScale, _zScale;
 
         private HeliosValue _rotXValue, _rotYValue, _rotZValue, _rotRotationValue, _lightBrightnessValue;
 
@@ -227,6 +227,26 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        private CalibrationPointCollectionDouble ReScaleX()
+        {
+            return ReScale(_minInputX, _minOutputX, _maxInputX, _maxOutputX);
+        }
+        private CalibrationPointCollectionDouble ReScaleY()
+        {
+            return ReScale(_minInputY, _minOutputY, _maxInputY, _maxOutputY);
+        }
+        private CalibrationPointCollectionDouble ReScaleZ()
+        {
+            return ReScale(_minInputZ, _minOutputZ, _maxInputZ, _maxOutputZ);
+        }
+        private CalibrationPointCollectionDouble ReScale(double in1, double out1, double in2, double out2)
+        {
+            if (in1 == in2 || out1 == out2)
+            {
+                return null;
+            }
+            return new CalibrationPointCollectionDouble(in1, out1, in2, out2);
+        }
         public double MinInputX
         {
             get => _minInputX;
@@ -236,6 +256,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _minInputX;
                     _minInputX = value;
+                    _xScale = ReScaleX();
                 }
             }
         }
@@ -248,6 +269,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _minInputY;
                     _minInputY = value;
+                    _yScale = ReScaleY();
                 }
             }
         }
@@ -260,6 +282,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _minInputZ;
                     _minInputZ = value;
+                    _zScale = ReScaleZ();
                 }
             }
         }
@@ -272,6 +295,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _maxInputX;
                     _maxInputX = value;
+                    _xScale = ReScaleX();
                 }
             }
         }
@@ -284,6 +308,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _maxInputY;
                     _maxInputY = value;
+                    _yScale = ReScaleY();
                 }
             }
         }
@@ -296,6 +321,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _maxInputZ;
                     _maxInputZ = value;
+                    _zScale = ReScaleZ();
                 }
             }
         }
@@ -308,6 +334,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _minOutputX;
                     _minOutputX = value;
+                    _xScale = ReScaleX();
                 }
             }
         }
@@ -320,6 +347,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _minOutputY;
                     _minOutputY = value;
+                    _yScale = ReScaleY();
                 }
             }
         }
@@ -332,6 +360,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _minOutputZ;
                     _minOutputZ = value;
+                    _zScale = ReScaleZ();
                 }
             }
         }
@@ -344,6 +373,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _maxOutputX;
                     _maxOutputX = value;
+                    _xScale = ReScaleX();
                 }
             }
         }
@@ -356,6 +386,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _maxOutputY;
                     _maxOutputY = value;
+                    _yScale = ReScaleY();
                 }
             }
         }
@@ -368,6 +399,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     double oldValue = _maxOutputZ;
                     _maxOutputZ = value;
+                    _zScale = ReScaleZ();
                 }
             }
         }
@@ -375,15 +407,15 @@ namespace GadrocsWorkshop.Helios.Controls
 
         void X_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.X = e.Value.DoubleValue;
+             gauge.X = _xScale == null ? e.Value.DoubleValue : _xScale.Interpolate(e.Value.DoubleValue);
         }
         void Y_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.Y = e.Value.DoubleValue;
+            gauge.Y = _yScale == null ? e.Value.DoubleValue : _yScale.Interpolate(e.Value.DoubleValue);
         }
         void Z_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.Z = e.Value.DoubleValue;
+            gauge.Z = _zScale == null ? e.Value.DoubleValue : _zScale.Interpolate(e.Value.DoubleValue);
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)
         {
@@ -442,20 +474,38 @@ namespace GadrocsWorkshop.Helios.Controls
             writer.WriteElementString("InitialAngleX", _initialX.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("InitialAngleZ", _initialY.ToString(CultureInfo.InvariantCulture));
             writer.WriteElementString("InitialAngleY", _initialZ.ToString(CultureInfo.InvariantCulture));
-            writer.WriteStartElement("AxesCalibrationValues");
-            writer.WriteElementString("MinInputX", _minInputX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MaxInputX", _maxInputX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MinOutputX", _minOutputX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MaxOutputX", _maxOutputX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MinInputY", _minInputY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MaxInputY", _maxInputY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MinOutputY", _minOutputY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MaxOutputY", _maxOutputY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MinInputZ", _minInputZ.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MaxInputZ", _maxInputZ.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MinOutputZ", _minOutputZ.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("MaxOutputZ", _maxOutputZ.ToString(CultureInfo.InvariantCulture));
-            writer.WriteEndElement();
+            if(_xScale != null || _yScale != null || _zScale != null)
+            {
+                writer.WriteStartElement("AxesCalibrations");
+                if (_xScale != null)
+                {
+                    writer.WriteStartElement("XCalibration");
+                    writer.WriteElementString("MinInputX", _minInputX.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MaxInputX", _maxInputX.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MinOutputX", _minOutputX.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MaxOutputX", _maxOutputX.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteEndElement();
+                }
+                if (_yScale != null)
+                {
+                    writer.WriteStartElement("YCalibration");
+                    writer.WriteElementString("MinInputY", _minInputY.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MaxInputY", _maxInputY.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MinOutputY", _minOutputY.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MaxOutputY", _maxOutputY.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteEndElement();
+                }
+                if (_zScale != null)
+                {
+                    writer.WriteStartElement("ZCalibration");
+                    writer.WriteElementString("MinInputZ", _minInputZ.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MaxInputZ", _maxInputZ.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MinOutputZ", _minOutputZ.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteElementString("MaxOutputZ", _maxOutputZ.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
             writer.WriteElementString("FieldOfView", _fov.ToString(CultureInfo.InvariantCulture));
             writer.WriteStartElement("Lighting");
             writer.WriteElementString("X", LightingX.ToString(CultureInfo.InvariantCulture));
@@ -478,21 +528,39 @@ namespace GadrocsWorkshop.Helios.Controls
                 InitialAngleX = double.Parse(reader.ReadElementString("InitialAngleX"), CultureInfo.InvariantCulture);
                 InitialAngleZ = double.Parse(reader.ReadElementString("InitialAngleZ"), CultureInfo.InvariantCulture);
                 InitialAngleY = double.Parse(reader.ReadElementString("InitialAngleY"), CultureInfo.InvariantCulture);
-                if (reader.Name.Equals("AxesCalibrationValues"))
+                if (reader.Name.Equals("AxesCalibrations"))
                 {
-                    reader.ReadStartElement("AxesCalibrationValues");
-                    _minInputX = double.Parse(reader.ReadElementString("MinInputX"), CultureInfo.InvariantCulture);
-                    _maxInputX = double.Parse(reader.ReadElementString("MaxInputX"), CultureInfo.InvariantCulture);
-                    _minOutputX = double.Parse(reader.ReadElementString("MinOutputX"), CultureInfo.InvariantCulture);
-                    _maxOutputX = double.Parse(reader.ReadElementString("MaxOutputX"), CultureInfo.InvariantCulture);
-                    _minInputY = double.Parse(reader.ReadElementString("MinInputY"), CultureInfo.InvariantCulture);
-                    _maxInputY = double.Parse(reader.ReadElementString("MaxInputY"), CultureInfo.InvariantCulture);
-                    _minOutputY = double.Parse(reader.ReadElementString("MinOutputY"), CultureInfo.InvariantCulture);
-                    _maxOutputY = double.Parse(reader.ReadElementString("MaxOutputY"), CultureInfo.InvariantCulture);
-                    _minInputZ = double.Parse(reader.ReadElementString("MinInputZ"), CultureInfo.InvariantCulture);
-                    _maxInputZ = double.Parse(reader.ReadElementString("MaxInputZ"), CultureInfo.InvariantCulture);
-                    _minOutputZ = double.Parse(reader.ReadElementString("MinOutputZ"), CultureInfo.InvariantCulture);
-                    _maxOutputZ = double.Parse(reader.ReadElementString("MaxOutputZ"), CultureInfo.InvariantCulture);
+                    reader.ReadStartElement("AxesCalibrations");
+                    if (reader.Name.Equals("XCalibration"))
+                    {
+                        reader.ReadStartElement("XCalibration");
+                        _minInputX = double.Parse(reader.ReadElementString("MinInputX"), CultureInfo.InvariantCulture);
+                        _maxInputX = double.Parse(reader.ReadElementString("MaxInputX"), CultureInfo.InvariantCulture);
+                        _minOutputX = double.Parse(reader.ReadElementString("MinOutputX"), CultureInfo.InvariantCulture);
+                        _maxOutputX = double.Parse(reader.ReadElementString("MaxOutputX"), CultureInfo.InvariantCulture);
+                        reader.ReadEndElement();
+                        _xScale = ReScaleX();
+                    }
+                    if (reader.Name.Equals("YCalibration"))
+                    {
+                        reader.ReadStartElement("YCalibration");
+                        _minInputY = double.Parse(reader.ReadElementString("MinInputY"), CultureInfo.InvariantCulture);
+                        _maxInputY = double.Parse(reader.ReadElementString("MaxInputY"), CultureInfo.InvariantCulture);
+                        _minOutputY = double.Parse(reader.ReadElementString("MinOutputY"), CultureInfo.InvariantCulture);
+                        _maxOutputY = double.Parse(reader.ReadElementString("MaxOutputY"), CultureInfo.InvariantCulture);
+                        reader.ReadEndElement();
+                        _yScale = ReScaleY();
+                    }
+                    if (reader.Name.Equals("ZCalibration"))
+                    {
+                        reader.ReadStartElement("ZCalibration");
+                        _minInputZ = double.Parse(reader.ReadElementString("MinInputZ"), CultureInfo.InvariantCulture);
+                        _maxInputZ = double.Parse(reader.ReadElementString("MaxInputZ"), CultureInfo.InvariantCulture);
+                        _minOutputZ = double.Parse(reader.ReadElementString("MinOutputZ"), CultureInfo.InvariantCulture);
+                        _maxOutputZ = double.Parse(reader.ReadElementString("MaxOutputZ"), CultureInfo.InvariantCulture);
+                        reader.ReadEndElement();
+                        _zScale = ReScaleZ();
+                    }
                     reader.ReadEndElement();
                 }
                 FieldOfView = double.Parse(reader.ReadElementString("FieldOfView"), CultureInfo.InvariantCulture);
