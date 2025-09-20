@@ -157,8 +157,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _redAdjust;
                         _redAdjust = value;
                         _effect.RedAdjust = _redAdjust;
+                        OnPropertyChanged("RedAdjust", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -172,8 +175,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _greenAdjust;
                         _greenAdjust = value;
                         _effect.GreenAdjust = _greenAdjust;
+                        OnPropertyChanged("GreenAdjust", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -187,8 +193,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _blueAdjust;
                         _blueAdjust = value;
                         _effect.BlueAdjust = _blueAdjust;
+                        OnPropertyChanged("BlueAdjust", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -202,8 +211,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _brightness;
                         _brightness = value;
                         _effect.Brightness = _brightness;
+                        OnPropertyChanged("Brightness", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -217,8 +229,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _contrast;
                         _contrast = value;
                         _effect.Contrast = _contrast;
+                        OnPropertyChanged("Contrast", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -232,8 +247,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _gamma;
                         _gamma = value;
                         _effect.Gamma = _gamma;
+                        OnPropertyChanged("Gamma", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -247,8 +265,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _highlightStrength;
                         _highlightStrength = value;
                         _effect.HighlightStrength = _highlightStrength;
+                        OnPropertyChanged("HighlightStrength", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -261,9 +282,12 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 if (!value.Equals(_midtoneBalance))
                 {
                     if (CheckEffect())
-                    {
+                    { 
+                        double oldValue = _midtoneBalance;
                         _midtoneBalance = value;
                         _effect.MidtoneBalance = _midtoneBalance;
+                        OnPropertyChanged("MidtoneBalance", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
@@ -277,8 +301,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
                 {
                     if (CheckEffect())
                     {
+                        double oldValue = _shadowStrength;
                         _shadowStrength = value;
                         _effect.ShadowStrength = _shadowStrength;
+                        OnPropertyChanged("ShadowStrength", oldValue, value, true);
+                        Refresh();
                     }
                 }
             }
