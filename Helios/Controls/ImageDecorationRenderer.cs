@@ -30,9 +30,7 @@ namespace GadrocsWorkshop.Helios.Controls
             if (_image != null)
             {
                 ImageDecorationBase profileImage = Visual as ImageDecorationBase;
-                /// Todo: BorderPen
-                //drawingContext.DrawRoundedRectangle(_imageBrush, _borderPen, _imageRect, profileImage.CornerRadius, profileImage.CornerRadius);
-                DrawImage(drawingContext, _image, _imageRect);
+                DrawRoundedRectangle(drawingContext, _imageBrush, _borderPen, _imageRect, profileImage.CornerRadius, profileImage.CornerRadius);
             }
         }
 
@@ -42,9 +40,7 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 ImageDecorationBase profileImage = Visual as ImageDecorationBase;
                 Rect scaledRect = new Rect(_imageRect.X, _imageRect.Y, _imageRect.Width * scaleX, _imageRect.Height * scaleY);
-                /// Todo: BorderPen
-                //drawingContext.DrawRoundedRectangle(_imageBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
-                DrawImage(drawingContext, _image, scaledRect);
+                DrawRoundedRectangle(drawingContext, _imageBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
             }
         }
 
