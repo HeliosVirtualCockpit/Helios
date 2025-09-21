@@ -46,7 +46,6 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             SliderHighlights.Value = 1.0;
             SliderMidtones.Value = 0.5;
             SliderShadows.Value = 1.0;
-            ShaderName.ImageFilename = "ColorAdjust.psc";
         }
     }
     public class DoubleToStringN2Converter : IValueConverter

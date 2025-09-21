@@ -81,7 +81,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
             _imageRect.X = _gauge.Width * _gauge.NeedlePosX;
             _imageRect.Y = _gauge.Height * _gauge.NeedlePosY;
-            _image = refreshCapableImage.LoadImage(_gauge.KnobImage, loadOptions) ?? ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/missing_image.png");
+            _image = refreshCapableImage.LoadImage(_gauge.KnobImage, loadOptions) ?? ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/MissingImage.xaml");
             // WARNING: needle scale applied to image but not rotation point
             _imageRect.Height = _gauge.Height * _gauge.NeedleScale;
             _imageRect.Width = _image.Width * (_imageRect.Height / _image.Height); // uniform image based on Height

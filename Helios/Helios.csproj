@@ -434,11 +434,11 @@
     <Content Include="Docs\Licenses\RectpackSharp\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\HLSL Shader Source\ColorAdjust.ps" />
-    <Content Include="Resources\HLSL Shader Source\ColorAdjustWithCurve.ps" />
-    <Resource Include="Resources\ColorAdjustWithCurve.psc" />
-    <None Include="Resources\HLSL Shader Source\readme.md" />
-    <Resource Include="Resources\ColorAdjust.psc" />
+    <None Include="Shaders\Source\ColorAdjust.ps" />
+    <None Include="Shaders\Source\ColorAdjustWithCurve.ps" />
+    <Resource Include="Shaders\ColorAdjustWithCurve.psc" />
+    <None Include="Shaders\Source\readme.md" />
+    <Resource Include="Shaders\ColorAdjust.psc" />
     <Resource Include="Images\Knobs\knob7.png" />
     <Resource Include="Images\Toggles\Alt\flattop-down.png" />
     <Resource Include="Images\Toggles\Alt\flattop-horiz-left.png" />
@@ -836,6 +836,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Images\General\ColourAdjuster.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Images\General\MissingImage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

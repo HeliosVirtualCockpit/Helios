@@ -76,7 +76,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
                 if (_image == null)
                 {
-                    _image = ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/missing_image.png");
+                    _image = ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/MissingImage.xaml");
 
                     _imageControl = new Image
                     {

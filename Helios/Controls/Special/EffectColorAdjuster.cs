@@ -42,7 +42,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         private bool _enabled = true;
         private bool _advancedFeatures = false;
         private static readonly string _actionState = " (NOT IMPLEMENTED)";
-        private static readonly string _shaderLocation = "pack://application:,,,/Helios;component/Resources/";
+        private static readonly string _shaderLocation = "pack://application:,,,/Helios;component/Shaders/";
 
         private HeliosValue _redAdjustValue, _greenAdjustValue, _blueAdjustValue;
         private HeliosValue _brightnessValue, _contrastValue, _gammaValue;

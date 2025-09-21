@@ -124,7 +124,7 @@ namespace GadrocsWorkshop.Helios.Effects
 
         public static readonly DependencyProperty HighlightStrengthProperty =
             DependencyProperty.Register("HighlightStrength", typeof(double), typeof(ColorAdjustEffect),
-                new UIPropertyMetadata(1.0, PixelShaderConstantCallback(8)));
+                new UIPropertyMetadata(1.0, PixelShaderConstantCallback(7)));
 
         public double HighlightStrength
         {
@@ -134,7 +134,7 @@ namespace GadrocsWorkshop.Helios.Effects
 
         public static readonly DependencyProperty MidtoneBalanceProperty =
             DependencyProperty.Register("MidtoneBalance", typeof(double), typeof(ColorAdjustEffect),
-                new UIPropertyMetadata(0.5, PixelShaderConstantCallback(7)));
+                new UIPropertyMetadata(0.5, PixelShaderConstantCallback(8)));
 
         public double MidtoneBalance
         {

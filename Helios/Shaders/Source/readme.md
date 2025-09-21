@@ -10,8 +10,8 @@ If you need to re-compiler, then you can install the compiler via the **"Game de
 
 Then from the Developer Command Prompt tool
 ```
-set shader=D:\Helios Virtual Cockpit\Helios\Helios\Resources
-fxc /T ps_2_0 /E main /Fo "%shader%\ColorAdjust.psc" "%shader%\HLSL Shader Source\ColorAdjust.ps"
+set shader=D:\Helios Virtual Cockpit\Helios\Helios\Shaders
+fxc /T ps_2_0 /E main /Fo "%shader%\ColorAdjust.psc" "%shader%\Source\ColorAdjust.ps"
 ```
 WPF supports only Shader Model 2.0 (ps_2_0) — so don't go wild, keep your HLSL simple!
 
