@@ -46,15 +46,15 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
         }
 
-        public Gauge3d(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleZ = 0, double initialAngleY = 0, double FOV = 35d)
+        public Gauge3d(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleY = 0, double initialAngleZ = 0, double FOV = 35d)
         {
             _imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
             _size = size;
             _fov = FOV;
             _initialAngleX = initialAngleX;
+            _initialAngleY = initialAngleY;
             _initialAngleZ = initialAngleZ;
-            _initialAngleY = initialAngleY; 
 
             _gaugeSnapshot = new Gauge3dSnapshot(BuildMesh())
             {
@@ -63,13 +63,13 @@ namespace GadrocsWorkshop.Helios.Gauges
                 Top = _location.Y,
                 Left = _location.X,
                 SetTexture = ConfigManager.ImageManager.LoadImage(_imageFile),
-                FieldOfView = _fov
+                FieldOfView = _fov,
+                InitialX = _initialAngleX,
+                InitialY = _initialAngleY,
+                InitialZ = _initialAngleZ,
+                LightingColor = Colors.White,
+                EffectsExclusion = EffectsExclusion
             };
-            _gaugeSnapshot.EffectsExclusion = EffectsExclusion;
-            InitialAngleX = _initialAngleX;
-            InitialAngleZ = _initialAngleZ;
-            InitialAngleY = _initialAngleY;
-            LightingColor = Colors.White;
             OnDisplayUpdate();
         }
 
@@ -100,23 +100,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _initialAngleX)
                 {
                     _initialAngleX = value;
-                    _gaugeSnapshot.RotateX(_initialAngleX);
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        public double InitialAngleZ
-        {
-            get
-            {
-                return _initialAngleZ;
-            }
-            set
-            {
-                if (value != _initialAngleZ)
-                {
-                    _initialAngleZ = value;
-                    _gaugeSnapshot.RotateZ(_initialAngleZ);
+                    _gaugeSnapshot.InitialX = _initialAngleX;
+                    _gaugeSnapshot.RotateX(0d);
                     OnDisplayUpdate();
                 }
             }
@@ -132,7 +117,25 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _initialAngleY)
                 {
                     _initialAngleY = value;
-                    _gaugeSnapshot.RotateY(_initialAngleY);
+                    _gaugeSnapshot.InitialY = _initialAngleY;
+                    _gaugeSnapshot.RotateY(0d);
+                    OnDisplayUpdate();
+                }
+            }
+        }
+        public double InitialAngleZ
+        {
+            get
+            {
+                return _initialAngleZ;
+            }
+            set
+            {
+                if (value != _initialAngleZ)
+                {
+                    _initialAngleZ = value;
+                    _gaugeSnapshot.InitialZ = _initialAngleZ;
+                    _gaugeSnapshot.RotateZ(0d);
                     OnDisplayUpdate();
                 }
             }
@@ -148,23 +151,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _x)
                 {
                     _x = value;
-                    _gaugeSnapshot.RotateX(_x + _initialAngleX);
-                    OnDisplayUpdate();
-                }
-            }
-        }
-        public double Z
-        {
-            get
-            {
-                return _z;
-            }
-            set
-            {
-                if (value != _z)
-                {
-                    _z = value;
-                    _gaugeSnapshot.RotateZ(_z + _initialAngleZ);
+                    _gaugeSnapshot.RotateX(_x);
                     OnDisplayUpdate();
                 }
             }
@@ -180,11 +167,28 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _y)
                 {
                     _y = value;
-                    _gaugeSnapshot.RotateY(_y + _initialAngleY);
+                    _gaugeSnapshot.RotateY(_y);
                     OnDisplayUpdate();
                 }
             }
         }
+        public double Z
+        {
+            get
+            {
+                return _z;
+            }
+            set
+            {
+                if (value != _z)
+                {
+                    _z = value;
+                    _gaugeSnapshot.RotateZ(_z);
+                    OnDisplayUpdate();
+                }
+            }
+        }
+
         public Point3D Rotation3D
         {
             get => _rotation3D;
@@ -193,9 +197,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if(_rotation3D != value)
                 {
                     _rotation3D = value;
-                    _gaugeSnapshot.Rotation3D(new Point3D(_rotation3D.X + _initialAngleX, _rotation3D.Y + _initialAngleY, _rotation3D.Z + _initialAngleZ));
+                    _gaugeSnapshot.Rotation3D(new Point3D(_rotation3D.X, _rotation3D.Y, _rotation3D.Z));
                     OnDisplayUpdate();
-
                 }
             }
         }
@@ -292,7 +295,9 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
         public virtual void Reset()
         {
-            X = Z = Y = 0d;
+            X = _initialAngleX;
+            Y = _initialAngleY;
+            Z = _initialAngleZ;
         }
         public override bool EffectsExclusion
         {
@@ -352,7 +357,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 
                 for (int slice = 0; slice <= slices; slice++)
                 {
-                    double theta = 2 * Math.PI * slice / slices;
+                    double theta = 2 * Math.PI * slice / slices + Math.PI;
                     double x = r * Math.Sin(theta);
                     double z = r * Math.Cos(theta);
 
@@ -391,7 +396,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             // Generate side vertices
             for (int i = 0; i <= slices; i++)
             {
-                double theta = 2 * Math.PI * i / slices;
+                double theta = 2 * Math.PI * i / slices - (Math.PI * 0.5);
                 double x = radius * Math.Cos(theta);
                 double z = radius * Math.Sin(theta);
 

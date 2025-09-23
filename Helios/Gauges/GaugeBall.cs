@@ -30,14 +30,13 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _yScale = 1.0;
         
         public GaugeBall(string imageFile, Point location, Size size, Point center)
-            : this(imageFile, location, size, 180d, 270d, 0d)
+            : this(imageFile, location, size, 0d, 0d, 0d)
         {
         }
 
-        public GaugeBall(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleZ = 0, double initialAngleY = 0, double FOV = 35d)
-            : base(imageFile, location, size, initialAngleX, initialAngleZ, initialAngleY, FOV)
+        public GaugeBall(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleY = 0, double initialAngleZ = 0, double FOV = 35d)
+            : base(imageFile, location, size, initialAngleX, initialAngleY, initialAngleZ, FOV)
         {
-            // _imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
             _size = size;
         }

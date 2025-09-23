@@ -41,12 +41,12 @@ namespace GadrocsWorkshop.Helios.Controls
             _size = base.NativeSize;
             _imageName = "{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml";
             InitialAngleX = 0d;
-            InitialAngleY = 270d;
-            InitialAngleZ = 180d;
+            InitialAngleY = 0d;
+            InitialAngleZ = 0d;
             FieldOfView = 40d;
             _sphere = new GaugeBall(_imageName, new Point(0d, 0d), _size, InitialAngleX, InitialAngleY, InitialAngleZ, FieldOfView);
             _sphere.X = _sphere.Y = _sphere.Z = 0.00001d;
-            _sphere.X = _sphere.Y = _sphere.Z = 0.0d;
+            //_sphere.X = _sphere.Y = _sphere.Z = 0.0d;
             Components.Add(_sphere);
             
 
@@ -54,7 +54,7 @@ namespace GadrocsWorkshop.Helios.Controls
         }
 
         #region Properties
-        public string Image
+        public override string Image
         {
             get => _imageName;
             set

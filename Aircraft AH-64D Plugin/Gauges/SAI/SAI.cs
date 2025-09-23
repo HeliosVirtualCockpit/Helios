@@ -57,7 +57,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _axisCalibration = new CalibrationPointCollectionDouble(-360d, -360d, 360d, 360d);
 
-            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, -90d, 180d, 35d);
+            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, 0d, -90d, 35d);
             Components.Add(_ball);
             _ball.Y = -0.001d;
             _ball.Z = 0.001d;
@@ -143,7 +143,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Y = e.Value.DoubleValue;
+            _ball.X = e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {

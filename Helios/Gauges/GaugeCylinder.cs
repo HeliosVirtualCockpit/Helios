@@ -36,7 +36,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
         }
 
-        public GaugeCylinder(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleZ = 90, double initialAngleY = 90, double FOV = 35d)
+        public GaugeCylinder(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleY = 0, double initialAngleZ = 0, double FOV = 35d)
             : base(imageFile, location, size, initialAngleX, initialAngleZ, initialAngleY, FOV)
         {
             //_imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;

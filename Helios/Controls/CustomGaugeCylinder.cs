@@ -42,8 +42,8 @@ namespace GadrocsWorkshop.Helios.Controls
             _size = base.NativeSize;
             _imageName = "{F-15E}/Gauges/Instruments/ADI-Tape.xaml";
             InitialAngleX = 0d;
-            InitialAngleY = 90d;
-            InitialAngleZ = 90d;
+            InitialAngleY = 0d;
+            InitialAngleZ = 0d;
             FieldOfView = 35d;
             _cylinder = new GaugeCylinder(_imageName, new Point(0d, 0d), _size, InitialAngleX, InitialAngleY, InitialAngleZ, FieldOfView);
             CylinderRadius = 0.9d;
@@ -57,7 +57,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
         #region Properties
 
-        public string Image
+        public override string Image
         {
             get => _imageName;
             set

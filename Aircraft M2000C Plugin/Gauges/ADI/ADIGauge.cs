@@ -60,7 +60,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
             _slipCalibration = new CalibrationPointCollectionDouble(-1d, 15d, 1d, -15d);
             _glideCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d);
 
-            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 180d, 36d);
+            _ball = new GaugeBall("{M2000C}/Gauges/ADI/ADI_Ball.xaml", new Point(50d,50d), new Size(300d, 300d), 0d, 0d, 0d, 36d);
             Components.Add(_ball);
             _ball.X = 0.00001d;
             _ball.Z = 0.00001d;

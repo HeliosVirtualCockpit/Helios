@@ -34,7 +34,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Viewport3DVisual _viewport;
         private VisualBrush _visualBrush;
         private PerspectiveCamera _camera;
-        private readonly AxisAngleRotation3D _rotX, _rotY, _rotZ;
+        private readonly AxisAngleRotation3D _rotA, _rotB, _rotC;
         private readonly GeometryModel3D _model;
         private MeshGeometry3D _mesh;
         private Point _location;
@@ -43,6 +43,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Color _lightingColor;
         private double _lightingBrightness = 1d;
         private DirectionalLight _lighting;
+        private AmbientLight _ambientLight;
         private double _lightingX, _lightingY, _lightingZ;
         private Effects.ColorAdjustEffect _effect;
         private bool _effectsExclusion = false;
@@ -52,7 +53,10 @@ namespace GadrocsWorkshop.Helios.Gauges
         private long _meanRenderCallTime = 0;
         private long _hwmRenderCallTime = 0;
         private long _lwmRenderCallTime = 1000;
+        private double _initialX = 0, _initialY = 0, _initialZ = 0;  // This is correct for the majority of the 3d objects.
         private static readonly Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private bool _flipXY = false;
+            
 
         public Gauge3dSnapshot(MeshGeometry3D mesh)
         {
@@ -75,18 +79,20 @@ namespace GadrocsWorkshop.Helios.Gauges
             _lightingY = -1d;
             _lightingZ = -2d;
             _lighting  = new DirectionalLight(_lightingColor, new Vector3D(_lightingX, _lightingY, _lightingZ));
+             _ambientLight = new AmbientLight(ScaleBrightness(Colors.White,0.25));
 
-            var group = new Model3DGroup();
+        var group = new Model3DGroup();
+            group.Children.Add(_ambientLight);
             group.Children.Add(_lighting);
 
-            _rotX = new AxisAngleRotation3D(new Vector3D(1, 0, 0), 0);
-            _rotY = new AxisAngleRotation3D(new Vector3D(0, 1, 0), 0);
-            _rotZ = new AxisAngleRotation3D(new Vector3D(0, 0, 1), 0);
+            _rotA = new AxisAngleRotation3D(new Vector3D(1, 0, 0), 0);
+            _rotB = new AxisAngleRotation3D(new Vector3D(0, 1, 0), 0);
+            _rotC = new AxisAngleRotation3D(new Vector3D(0, 0, 1), 0);
             Transform3DGroup transform = new Transform3DGroup();
             // The order of the transformations is important!
-            transform.Children.Add(new RotateTransform3D(_rotY));
-            transform.Children.Add(new RotateTransform3D(_rotX));
-            transform.Children.Add(new RotateTransform3D(_rotZ));
+            transform.Children.Add(new RotateTransform3D(_rotB));
+            transform.Children.Add(new RotateTransform3D(_rotA));
+            transform.Children.Add(new RotateTransform3D(_rotC));
             _model = new GeometryModel3D
             {
                 Geometry = _mesh,
@@ -106,7 +112,6 @@ namespace GadrocsWorkshop.Helios.Gauges
                 ViewboxUnits = BrushMappingMode.Absolute,
                 Viewbox = new Rect(0, 0, 1, 1)
             };
-
         }
         public ImageSource SetTexture
         {
@@ -155,6 +160,17 @@ namespace GadrocsWorkshop.Helios.Gauges
                     _lightingColor = value;
                     _lighting.Color = ScaleBrightness(_lightingColor, _lightingBrightness);
 
+                }
+            }
+        }
+        public Color AmbientLightingColor
+        {
+            get => _ambientLight.Color;
+            set
+            {
+                if (value != _ambientLight.Color)
+                {
+                    _ambientLight.Color = value;
                 }
             }
         }
@@ -228,21 +244,76 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
-
+        public double InitialX
+        {
+            get => _initialX;
+            set
+            {
+                if(value != _initialX)
+                {
+                    _initialX = value;
+                }
+            }
+        }
+        public double InitialY
+        {
+            get => _initialY;
+            set
+            {
+                if (value != _initialY)
+                {
+                    _initialY = value;
+                }
+            }
+        }
+        public double InitialZ
+        {
+            get => _initialZ;
+            set
+            {
+                if (value != _initialZ)
+                {
+                    _initialZ = value;
+                    _flipXY = _initialZ % 90 == 0 && _initialZ % 180 != 0 && _initialZ != 0;
+                }
+            }
+        }
         /// <summary>
         /// Rotate programmatically and redraw.
         /// </summary>
+        /// <remarks>The wrapping of the images is best performed with images which
+        /// have an aspect ratio of width = 2 x height, and oriented with the north
+        /// pole along the top or the image and the south pole along the bottom.  
+        /// This might requires the 3D object to be rotated to a sensible initial
+        /// position.  Reorientation of the sphere also causes the axes to be rotated 
+        /// so changes are made in this class so that the users of the class have an 
+        /// intuitive X, Y, Z set of axes to work with when the default rotations 
+        /// are in use
+        /// Because the axes of rotation can change due to initiatial orientation, the
+        /// rotations are referred to as A, B & C</remarks>
         public void RotateX(double x)
         {
-            _rotX.Angle = x;
+            if (!_flipXY)
+            {
+                _rotA.Angle = _initialX + x;
+            } else
+            {
+                _rotB.Angle = _initialX + x;
+            }
         }
         public void RotateY(double y)
         {
-            _rotY.Angle = y;
+            if (!_flipXY)
+            {
+                _rotB.Angle = _initialY + y;
+            } else
+            {
+                _rotA.Angle = _initialY + y;
+            }
         }
         public void RotateZ(double z)
         {
-            _rotZ.Angle = z;
+            _rotC.Angle = _initialZ + z;
         }
         public void Rotation3D(Point3D point3D)
         {

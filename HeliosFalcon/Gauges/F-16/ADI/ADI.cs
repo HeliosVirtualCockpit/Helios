@@ -95,7 +95,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 		private void AddComponents()
 		{
-            _ball = new GaugeBall(_ballOffImage, new Point(50d, 42d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
+            _ball = new GaugeBall(_ballOffImage, new Point(50d, 42d), new Size(250d, 250d), 0d, 0d, -90d, 35d);
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
  
@@ -281,7 +281,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_ilsHorizontalNeedleDashed.VerticalOffset = _ilsCalibration.Interpolate(ILSDeviationHorizontal);
 			}
 
-			_ball.Y = PitchAngle;
+			_ball.X = PitchAngle;
 			_ball.Z = RollAngle;
 			_rollMarkers.Rotation = -RollAngle;
 			_slipBall.HorizontalOffset = _slipBallCalibration.Interpolate(SideSlipAngle);

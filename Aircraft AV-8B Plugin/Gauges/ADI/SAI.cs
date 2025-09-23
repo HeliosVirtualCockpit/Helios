@@ -48,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         {
             Point center = new Point(174d, 163d);
 
-            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260));
+            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260), 0d, 90d, 0d);
             _cylinder.Clip = new EllipseGeometry(center, 130d, 130d);
             _cylinder.Y = -0.001d;
             _cylinder.Z = 0.001d;
@@ -103,7 +103,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Y = -e.Value.DoubleValue;
+            _cylinder.X = -e.Value.DoubleValue;
         }
 
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)

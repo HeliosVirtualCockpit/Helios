@@ -65,7 +65,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
         {
             double scale = 250d / 350d;
 
-            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, -90d, 180d, 35d);
+            _ball = new GaugeBall("{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, 0d, -90d, 35d);
             Components.Add(_ball);
             _ball.Y = 0.0001d;
             _ball.Z = 0.0001d;
@@ -221,7 +221,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
-            _ball.Y = e.Value.DoubleValue;
+            _ball.X = e.Value.DoubleValue;
         }
 
         void Roll_Execute(object action, HeliosActionEventArgs e)
@@ -237,7 +237,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
             double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
             double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
-            _ball.Rotation3D = new Point3D(-y, x, -z);
+            _ball.Rotation3D = new Point3D(x, y, -z);
             _rollNeedle.Rotation = z;
         }
 

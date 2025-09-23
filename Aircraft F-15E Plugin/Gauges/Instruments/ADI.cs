@@ -47,7 +47,10 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         {
             Point center = new Point(200d, 200d);
 
-            _cylinder = new GaugeCylinder("{F-15E}/Gauges/Instruments/ADI-Tape.xaml", new Point(25d, 25d), new Size(350d, 350d));
+            _cylinder = new GaugeCylinder("{F-15E}/Gauges/Instruments/ADI-Tape.xaml", new Point(25d, 25d), new Size(350d, 350d), 0d, 90d, 0d, 35) { 
+                CylinderHeight = 1.15d,
+                CylinderRadius = 0.8d
+            };
             _cylinder.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_cylinder);
             _cylinder.Y = -0.001d;
@@ -98,7 +101,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _cylinder.Y = -e.Value.DoubleValue;
+            _cylinder.X = -e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {

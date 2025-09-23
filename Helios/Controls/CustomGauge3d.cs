@@ -38,6 +38,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private double _minOutputX, _minOutputY, _minOutputZ;
         private double _maxOutputX, _maxOutputY, _maxOutputZ;
         private CalibrationPointCollectionDouble _xScale, _yScale, _zScale;
+        private double _ballDirection = 1d;
 
         private HeliosValue _rotXValue, _rotYValue, _rotZValue, _rotRotationValue, _lightBrightnessValue;
 
@@ -65,6 +66,9 @@ namespace GadrocsWorkshop.Helios.Controls
             Actions.Add(_lightBrightnessValue);
         }
         protected abstract IGauge3d gauge { get; }
+
+        public abstract string Image { get; set; }
+
         #region Properties
 
         public double InitialAngleX
@@ -72,6 +76,7 @@ namespace GadrocsWorkshop.Helios.Controls
             get => _initialX;
             set
             {
+                _ballDirection = gauge is GaugeBall ? 1d : -1d;
                 double oldValue = _initialX;
                 if (value != _initialX)
                 {
@@ -407,15 +412,15 @@ namespace GadrocsWorkshop.Helios.Controls
 
         void X_Execute(object action, HeliosActionEventArgs e)
         {
-             gauge.X = _xScale == null ? e.Value.DoubleValue : _xScale.Interpolate(e.Value.DoubleValue);
+             gauge.X = _xScale == null ? _ballDirection * e.Value.DoubleValue : _ballDirection * _xScale.Interpolate(e.Value.DoubleValue);
         }
         void Y_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.Y = _yScale == null ? e.Value.DoubleValue : _yScale.Interpolate(e.Value.DoubleValue);
+            gauge.Y = _yScale == null ? -e.Value.DoubleValue : -_yScale.Interpolate(e.Value.DoubleValue);
         }
         void Z_Execute(object action, HeliosActionEventArgs e)
         {
-            gauge.Z = _zScale == null ? e.Value.DoubleValue : _zScale.Interpolate(e.Value.DoubleValue);
+            gauge.Z = _zScale == null ? -e.Value.DoubleValue : -_zScale.Interpolate(e.Value.DoubleValue);
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)
         {
@@ -470,11 +475,12 @@ namespace GadrocsWorkshop.Helios.Controls
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
 
             base.WriteXml(writer);
+            writer.WriteElementString("Image", Image.ToString(CultureInfo.InvariantCulture));
             writer.WriteStartElement("Properties3D");
-            writer.WriteElementString("InitialAngleX", _initialX.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("InitialAngleZ", _initialY.ToString(CultureInfo.InvariantCulture));
-            writer.WriteElementString("InitialAngleY", _initialZ.ToString(CultureInfo.InvariantCulture));
-            if(_xScale != null || _yScale != null || _zScale != null)
+            writer.WriteElementString("InitialAngleX", _initialX.ToString("N0", CultureInfo.InvariantCulture));
+            writer.WriteElementString("InitialAngleY", _initialY.ToString("N0", CultureInfo.InvariantCulture));
+            writer.WriteElementString("InitialAngleZ", _initialZ.ToString("N0", CultureInfo.InvariantCulture));
+            if (_xScale != null || _yScale != null || _zScale != null)
             {
                 writer.WriteStartElement("AxesCalibrations");
                 if (_xScale != null)
@@ -522,15 +528,17 @@ namespace GadrocsWorkshop.Helios.Controls
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
 
             base.ReadXml(reader);
+            Image = reader.ReadElementString("Image");
             if (reader.Name.Equals("Properties3D"))
             {
                 reader.ReadStartElement("Properties3D");
                 InitialAngleX = double.Parse(reader.ReadElementString("InitialAngleX"), CultureInfo.InvariantCulture);
-                InitialAngleZ = double.Parse(reader.ReadElementString("InitialAngleZ"), CultureInfo.InvariantCulture);
                 InitialAngleY = double.Parse(reader.ReadElementString("InitialAngleY"), CultureInfo.InvariantCulture);
+                InitialAngleZ = double.Parse(reader.ReadElementString("InitialAngleZ"), CultureInfo.InvariantCulture);
                 if (reader.Name.Equals("AxesCalibrations"))
                 {
                     reader.ReadStartElement("AxesCalibrations");
+                    _calibrationNeeded = true;
                     if (reader.Name.Equals("XCalibration"))
                     {
                         reader.ReadStartElement("XCalibration");
