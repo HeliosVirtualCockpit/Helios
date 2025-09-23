@@ -3,7 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <Canvas Width="1500.000" Height="375.000">
   <!-- Background/<Rectangle> -->
-  <Path Fill="#ffd7dade" Data="F1 M 750.000,375.000 L 0.000,375.000 L 0.000,0.000 L 750.000,0.000 L 750.000,375.000 Z"/>
+        <Path Fill="#FFADD8E6" Data="F1 M 750.000,375.000 L 0.000,375.000 L 0.000,0.000 L 750.000,0.000 L 750.000,375.000 Z"/>
 
   <!-- Background/<Rectangle> -->
   <Path Fill="#ff000000" Data="F1 M 1500.000,375.000 L 750.000,375.000 L 750.000,0.000 L 1500.000,0.000 L 1500.000,375.000 Z"/>

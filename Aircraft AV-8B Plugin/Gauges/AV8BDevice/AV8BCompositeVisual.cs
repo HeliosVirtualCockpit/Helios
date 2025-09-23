@@ -80,12 +80,17 @@ namespace GadrocsWorkshop.Helios
                     if (action.Name != "hidden" && !action.Name.Contains("Lighting"))
                     {
                         AddAction(action, action.Device);
-
-                        AddDefaultInputBinding(
-                            componentName,
-                            interfaceDeviceName + "." + interfaceElementNames[i++] + ".changed",
-                            action.Device + "." + action.ActionVerb + "." + action.Name
-                        );
+                        if (i < interfaceElementNames.Length)
+                        {
+                            if (!string.IsNullOrEmpty(interfaceElementNames[i]))
+                            {
+                                AddDefaultInputBinding(
+                                    componentName,
+                                    interfaceDeviceName + "." + interfaceElementNames[i] + ".changed",
+                                    action.Device + "." + action.ActionVerb + "." + action.Name);
+                            }
+                            i++;
+                        }
                     }
                 }
 

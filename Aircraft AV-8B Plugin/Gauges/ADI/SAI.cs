@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
     using System.Windows.Media;
     using System.Windows.Media.Media3D;
 
-    [HeliosControl("Helios.AV8B.SAI", "SAI Gauge", "AV-8B Harrier t", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.AV8B.SAI", "SAI Gauge", "AV-8B Harrier", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class SAI : BaseGauge
     {
         private HeliosValue _pitch;
@@ -48,7 +48,12 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         {
             Point center = new Point(174d, 163d);
 
-            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape.xaml", new Point(46d, 33d), new Size(260, 260), 0d, 90d, 0d);
+            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape-1.xaml", new Point(46d, 33d), new Size(260, 260), 0d, 90d, 0d)
+            {
+                CylinderHeight = 0.9,
+                CylinderRadius = 0.9
+
+            };
             _cylinder.Clip = new EllipseGeometry(center, 130d, 130d);
             _cylinder.Y = -0.001d;
             _cylinder.Z = 0.001d;
@@ -87,7 +92,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
-            _rotationValue = new HeliosValue(this, new BindingValue(""), "Standby Attitude Indicator", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "Flight Instruments", "SAI Gauge Rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
             _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
             Actions.Add(_rotationValue);
 
@@ -126,7 +131,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
             double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
             double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
-            _cylinder.Rotation3D = new Point3D(-y, x, -z);
+            _cylinder.Rotation3D = new Point3D(-x, y, -z);
             _bankNeedle.Rotation = z;
         }
         void OffFlag_Execute(object action, HeliosActionEventArgs e)

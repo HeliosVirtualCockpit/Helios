@@ -57,7 +57,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
 
             _axisCalibration = new CalibrationPointCollectionDouble(-360d, -360d, 360d, 360d);
 
-            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, 0d, -90d, 35d);
+            _ball = new GaugeBall("{AH-64D}/Images/SAI/adi_ball1.xaml", new Point(72d, 58d), new Size(210d, 210d), 0d, 0d, -90d, 32d);
             Components.Add(_ball);
             _ball.Y = -0.001d;
             _ball.Z = 0.001d;
@@ -153,7 +153,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Z = -e.Value.DoubleValue;
+            _ball.Z = e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
         void Rotation_Execute(object action, HeliosActionEventArgs e)
@@ -164,7 +164,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.SAI
             double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
             double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
             double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
-            _ball.Rotation3D = new Point3D(-y, x, -z);
+            _ball.Rotation3D = new Point3D(x, y, -z);
             _bankNeedle.Rotation = z;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)

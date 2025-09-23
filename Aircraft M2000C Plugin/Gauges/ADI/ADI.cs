@@ -75,11 +75,14 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI
 
                     AddAction(action, _display.Name);
                     //Create the automatic input bindings for the sub component
-                    AddDefaultInputBinding(
-                       childName: _display.Name,
-                       deviceActionName: _display.Name + "." + action.ActionVerb + "." + action.Name,
-                       interfaceTriggerName: interfaceDevice + "." + action.Name + ".changed"
-                       );
+                    if (action.Name != "ADI Pitch" && action.Name != "ADI Bank" && action.Name != "ADI Heading")
+                    {
+                        AddDefaultInputBinding(
+                           childName: _display.Name,
+                           deviceActionName: _display.Name + "." + action.ActionVerb + "." + action.Name,
+                           interfaceTriggerName: interfaceDevice + "." + action.Name + ".changed"
+                           );
+                    }
                 }
 
             }

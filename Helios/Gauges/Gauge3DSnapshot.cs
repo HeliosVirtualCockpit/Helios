@@ -79,7 +79,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _lightingY = -1d;
             _lightingZ = -2d;
             _lighting  = new DirectionalLight(_lightingColor, new Vector3D(_lightingX, _lightingY, _lightingZ));
-             _ambientLight = new AmbientLight(ScaleBrightness(Colors.White,0.25));
+             _ambientLight = new AmbientLight(ScaleBrightness(Colors.White,0.0));
 
         var group = new Model3DGroup();
             group.Children.Add(_ambientLight);

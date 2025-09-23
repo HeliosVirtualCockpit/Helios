@@ -147,7 +147,7 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
-            _rotationValue = new HeliosValue(this, new BindingValue(""), "Standby Attitude Indicator", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
             _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
             Actions.Add(_rotationValue);
 
@@ -231,8 +231,8 @@ namespace GadrocsWorkshop.Helios.Gauges.A_10.ADI
             double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
             double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
             double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
-            _ball.Rotation3D = new Point3D(-y, x, -z);
-            _bankNeedle.Rotation = z;
+            _ball.Rotation3D = new Point3D(-x, y, z);
+            _bankNeedle.Rotation = -z;
         }
         public override bool EnableAlternateImageSet
         {

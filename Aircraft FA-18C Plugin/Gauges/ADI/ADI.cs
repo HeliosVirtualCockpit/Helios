@@ -217,7 +217,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
             double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
             double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
-            _ball.Rotation3D = new Point3D(-y, x, -z);
+            _ball.Rotation3D = new Point3D(x, y, -z);
             _bankNeedle.Rotation = z;
         }
         void turnIndicator_Execute(object action, HeliosActionEventArgs e)
