@@ -200,7 +200,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 
             // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
             (rtb.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
-.GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
+            .GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
         }
     }
 }

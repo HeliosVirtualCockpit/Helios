@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Xml;
     using GadrocsWorkshop.Helios.Controls.Capabilities;
 
-    [HeliosControl("Helios.Base.CustomGaugeCylinder", "Custom Gauge Cylinder", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Base.CustomGaugeCylinder", "Custom Gauge Cylinder", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
 
     public class CustomGaugeCylinder : CustomGauge3d
     {

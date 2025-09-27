@@ -20,6 +20,7 @@ using System;
 using System.Diagnostics.Contracts;
 using System.Drawing.Imaging;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -29,25 +30,27 @@ using System.Windows.Media.Media3D;
 
 namespace GadrocsWorkshop.Helios.Gauges
 {
-    public class Gauge3dSnapshot : FrameworkElement
+    public class Gauge3dRenderer : FrameworkElement
     {
-        private Viewport3DVisual _viewport;
-        private VisualBrush _visualBrush;
-        private PerspectiveCamera _camera;
+        private readonly Viewport3DVisual _viewport;
+        private readonly VisualBrush _visualBrush;
+        private readonly PerspectiveCamera _camera;
         private readonly AxisAngleRotation3D _rotA, _rotB, _rotC;
         private readonly GeometryModel3D _model;
+        private readonly Model3DCollection _models;
         private MeshGeometry3D _mesh;
+        private readonly MeshGeometry3D[] _meshs;
         private Point _location;
         private ImageSource _imageSource;
         private double _fieldOfView = 35d;
         private Color _lightingColor;
         private double _lightingBrightness = 1d;
-        private DirectionalLight _lighting;
-        private AmbientLight _ambientLight;
+        private readonly DirectionalLight _lighting;
+        private readonly AmbientLight _ambientLight;
         private double _lightingX, _lightingY, _lightingZ;
         private Effects.ColorAdjustEffect _effect;
         private bool _effectsExclusion = false;
-        private bool _designTime = false, _designTimeChecked = false;
+        private readonly bool _designTime = false;
         private long _renderCalls = 0;
         private long _totalRenderCallTime = 0;
         private long _meanRenderCallTime = 0;
@@ -56,11 +59,14 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _initialX = 0, _initialY = 0, _initialZ = 0;  // This is correct for the majority of the 3d objects.
         private static readonly Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private bool _flipXY = false;
-            
 
-        public Gauge3dSnapshot(MeshGeometry3D mesh)
+        public Gauge3dRenderer(MeshGeometry3D mesh) : this(new MeshGeometry3D[1] { mesh }) { }
+        public Gauge3dRenderer(MeshGeometry3D[] meshs)
         {
-            _mesh = mesh;
+            _models = new Model3DCollection();
+            var group = new Model3DGroup();
+            _meshs = meshs;
+            _mesh = meshs[0];
 
             // Build 3D viewport
             _viewport = new Viewport3DVisual();
@@ -81,7 +87,6 @@ namespace GadrocsWorkshop.Helios.Gauges
             _lighting  = new DirectionalLight(_lightingColor, new Vector3D(_lightingX, _lightingY, _lightingZ));
              _ambientLight = new AmbientLight(ScaleBrightness(Colors.White,0.0));
 
-        var group = new Model3DGroup();
             group.Children.Add(_ambientLight);
             group.Children.Add(_lighting);
 
@@ -95,12 +100,27 @@ namespace GadrocsWorkshop.Helios.Gauges
             transform.Children.Add(new RotateTransform3D(_rotC));
             _model = new GeometryModel3D
             {
-                Geometry = _mesh,
+                Geometry = _meshs[0],
                 BackMaterial = new DiffuseMaterial(Brushes.DarkBlue),
                 Transform = transform
             };
+            _models.Add(_model);
             group.Children.Add(_model);
 
+            if(_meshs.Length > 1)
+            {
+                for (int i = 1; i < _meshs.Length; i++)
+                {
+                    _models.Add(new GeometryModel3D
+                    {
+                        Geometry = meshs[i],
+                        Material = new DiffuseMaterial(Brushes.Black),
+                        BackMaterial = new DiffuseMaterial(Brushes.Black),
+                        Transform = transform
+                    });
+                    group.Children.Add(_models[i]);
+                }
+            }
             _viewport.Children.Add(new ModelVisual3D { Content = group });
 
             _visualBrush = new VisualBrush
@@ -328,6 +348,15 @@ namespace GadrocsWorkshop.Helios.Gauges
             byte b = (byte)Math.Min(255, baseColor.B * factor);
 
             return Color.FromArgb(baseColor.A, r, g, b);
+        }
+        public void UpdateModelGeometries(MeshGeometry3D[] meshs)
+        {
+            int i = 0;
+            foreach(Model3D model in _models)
+            {
+                GeometryModel3D model3D = model as GeometryModel3D;
+                model3D.Geometry = meshs[i++];
+            }
         }
         /// <summary>
         /// Keeps the Viewport3D in a brush and then uses it to create a temporary rectangle which can then 

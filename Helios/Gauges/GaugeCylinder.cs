@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Media.Media3D;
     public class GaugeCylinder : Gauge3d, IGauge3d
@@ -36,10 +37,9 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
         }
 
-        public GaugeCylinder(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleY = 0, double initialAngleZ = 0, double FOV = 35d)
+        public GaugeCylinder(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleY = 0, double initialAngleZ = 0, double FOV = 70d)
             : base(imageFile, location, size, initialAngleX, initialAngleZ, initialAngleY, FOV)
         {
-            //_imageFile = string.IsNullOrEmpty(imageFile) ? "{helios}/Gauges/Common/ChequerBoard.xaml" : imageFile;
             _location = location;
             _size = size;
 
@@ -74,9 +74,13 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
 
         #endregion
-        protected override MeshGeometry3D BuildMesh()
+        protected override MeshGeometry3D[] BuildMeshCollection()
         {
-            return BuildCylinder(_radius, _cylinderHeight, 32);
+            MeshGeometry3D[] meshs = new MeshGeometry3D[3];
+            meshs[0] = BuildCylinder(_radius, _cylinderHeight, 32);
+            meshs[1] = TopCap(_radius, _cylinderHeight, 32);
+            meshs[2] = BottomCap(_radius, _cylinderHeight, 32);
+            return meshs;
         }
         protected override void OnRender(DrawingContext drawingContext)
         {

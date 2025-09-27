@@ -252,7 +252,7 @@
     <Compile Include="Gauges\A-10\HMCS\HMCS.cs" />
     <Compile Include="Gauges\AltImageGauge.cs" />
     <Compile Include="Gauges\Gauge3d.cs" />
-    <Compile Include="Gauges\Gauge3dSnapshot.cs" />
+    <Compile Include="Gauges\Gauge3dRenderer.cs" />
     <Compile Include="Gauges\GaugeCylinder.cs" />
     <Compile Include="Gauges\GaugeBall.cs" />
     <Compile Include="Gauges\IGauge.cs" />
@@ -436,6 +436,12 @@
     </Content>
     <None Include="Shaders\Source\ColorAdjust.ps" />
     <None Include="Shaders\Source\ColorAdjustWithCurve.ps" />
+    <Content Include="Templates\Base\Special\CustomGaugeBall.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\Special\CustomGaugeCylinder.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Shaders\ColorAdjustWithCurve.psc" />
     <None Include="Shaders\Source\readme.md" />
     <Resource Include="Shaders\ColorAdjust.psc" />

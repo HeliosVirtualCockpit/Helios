@@ -1,0 +1,28 @@
+﻿<ControlTemplate>
+	<Name>Custom Gauge Cylinder</Name>
+	<Category>Custom Controls</Category>
+	<TypeIdentifier>Helios.Base.CustomGaugeCylinder</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Image>{F-15E}/Gauges/Instruments/ADI-Tape.xaml</Image>
+			<Properties3D>
+				<InitialAngleX>0</InitialAngleX>
+				<InitialAngleY>0</InitialAngleY>
+				<InitialAngleZ>90</InitialAngleZ>
+				<FieldOfView>35</FieldOfView>
+				<Lighting>
+					<X>-1</X>
+					<Y>-1</Y>
+					<Z>-2</Z>
+					<Color>#FFFFFFFF</Color>
+					<ColorBrightness>1</ColorBrightness>
+				</Lighting>
+			</Properties3D>
+			<CylinderProperties>
+				<Radius>0.900</Radius>
+				<Height>0.800</Height>
+			</CylinderProperties>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

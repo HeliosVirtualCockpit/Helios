@@ -18,6 +18,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Media.Media3D;
 
@@ -39,12 +40,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _xScale = 1.0;
         private double _yScale = 1.0;
         
-        private Gauge3dSnapshot _gaugeSnapshot;
-
-        public Gauge3d(string imageFile, Point location, Size size, Point center)
-            : this(imageFile, location, size, 0d, 0d, 0d)
-        {
-        }
+        private Gauge3dRenderer _GaugeRenderer;
 
         public Gauge3d(string imageFile, Point location, Size size, double initialAngleX = 0, double initialAngleY = 0, double initialAngleZ = 0, double FOV = 35d)
         {
@@ -56,7 +52,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _initialAngleY = initialAngleY;
             _initialAngleZ = initialAngleZ;
 
-            _gaugeSnapshot = new Gauge3dSnapshot(BuildMesh())
+            _GaugeRenderer = new Gauge3dRenderer(BuildMeshCollection())
             {
                 Width = _size.Width,
                 Height = _size.Height,
@@ -83,7 +79,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _imageFile)
                 {
                     _imageFile = value;
-                    _gaugeSnapshot.SetTexture = ConfigManager.ImageManager.LoadImage(value);
+                    _GaugeRenderer.SetTexture = ConfigManager.ImageManager.LoadImage(value);
                     OnDisplayUpdate();
                 }
             }
@@ -100,8 +96,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _initialAngleX)
                 {
                     _initialAngleX = value;
-                    _gaugeSnapshot.InitialX = _initialAngleX;
-                    _gaugeSnapshot.RotateX(0d);
+                    _GaugeRenderer.InitialX = _initialAngleX;
+                    _GaugeRenderer.RotateX(0d);
                     OnDisplayUpdate();
                 }
             }
@@ -117,8 +113,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _initialAngleY)
                 {
                     _initialAngleY = value;
-                    _gaugeSnapshot.InitialY = _initialAngleY;
-                    _gaugeSnapshot.RotateY(0d);
+                    _GaugeRenderer.InitialY = _initialAngleY;
+                    _GaugeRenderer.RotateY(0d);
                     OnDisplayUpdate();
                 }
             }
@@ -134,8 +130,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _initialAngleZ)
                 {
                     _initialAngleZ = value;
-                    _gaugeSnapshot.InitialZ = _initialAngleZ;
-                    _gaugeSnapshot.RotateZ(0d);
+                    _GaugeRenderer.InitialZ = _initialAngleZ;
+                    _GaugeRenderer.RotateZ(0d);
                     OnDisplayUpdate();
                 }
             }
@@ -151,7 +147,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _x)
                 {
                     _x = value;
-                    _gaugeSnapshot.RotateX(_x);
+                    _GaugeRenderer.RotateX(_x);
                     OnDisplayUpdate();
                 }
             }
@@ -167,7 +163,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _y)
                 {
                     _y = value;
-                    _gaugeSnapshot.RotateY(_y);
+                    _GaugeRenderer.RotateY(_y);
                     OnDisplayUpdate();
                 }
             }
@@ -183,7 +179,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (value != _z)
                 {
                     _z = value;
-                    _gaugeSnapshot.RotateZ(_z);
+                    _GaugeRenderer.RotateZ(_z);
                     OnDisplayUpdate();
                 }
             }
@@ -197,7 +193,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if(_rotation3D != value)
                 {
                     _rotation3D = value;
-                    _gaugeSnapshot.Rotation3D(new Point3D(_rotation3D.X, _rotation3D.Y, _rotation3D.Z));
+                    _GaugeRenderer.Rotation3D(new Point3D(_rotation3D.X, _rotation3D.Y, _rotation3D.Z));
                     OnDisplayUpdate();
                 }
             }
@@ -210,31 +206,31 @@ namespace GadrocsWorkshop.Helios.Gauges
                 if (_fov != value)
                 {
                     _fov = value;
-                    _gaugeSnapshot.FieldOfView = _fov;
+                    _GaugeRenderer.FieldOfView = _fov;
                     OnDisplayUpdate();
                 }
             }
         }
         public Color LightingColor
         {
-            get => _gaugeSnapshot.LightingColor;
+            get => _GaugeRenderer.LightingColor;
             set
             {
-                if (value != _gaugeSnapshot.LightingColor)
+                if (value != _GaugeRenderer.LightingColor)
                 {
-                    _gaugeSnapshot.LightingColor = value;
+                    _GaugeRenderer.LightingColor = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public double LightingBrightness
         {
-            get => _gaugeSnapshot.LightingBrightness;
+            get => _GaugeRenderer.LightingBrightness;
             set
             {
-                if (value != _gaugeSnapshot.LightingBrightness)
+                if (value != _GaugeRenderer.LightingBrightness)
                 {
-                    _gaugeSnapshot.LightingBrightness = value;
+                    _GaugeRenderer.LightingBrightness = value;
                     OnDisplayUpdate();
                 }
             }
@@ -242,56 +238,56 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
         public double LightingX
         {
-            get => _gaugeSnapshot.LightingX;
+            get => _GaugeRenderer.LightingX;
             set
             {
-                if (value != _gaugeSnapshot.LightingX)
+                if (value != _GaugeRenderer.LightingX)
                 {
-                    _gaugeSnapshot.LightingX = value;
+                    _GaugeRenderer.LightingX = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public double LightingY
         {
-            get => _gaugeSnapshot.LightingY;
+            get => _GaugeRenderer.LightingY;
             set
             {
-                if (value != _gaugeSnapshot.LightingY)
+                if (value != _GaugeRenderer.LightingY)
                 {
-                    _gaugeSnapshot.LightingY = value;
+                    _GaugeRenderer.LightingY = value;
                     OnDisplayUpdate();
                 }
             }
         }
         public double LightingZ
         {
-            get => _gaugeSnapshot.LightingZ;
+            get => _GaugeRenderer.LightingZ;
             set
             {
-                if (value != _gaugeSnapshot.LightingZ)
+                if (value != _GaugeRenderer.LightingZ)
                 {
-                    _gaugeSnapshot.LightingZ = value;
+                    _GaugeRenderer.LightingZ = value;
                     OnDisplayUpdate();
                 }
             }
         }
 
-        public Gauge3dSnapshot Snapshot
+        public Gauge3dRenderer Snapshot
         {
-            get => _gaugeSnapshot;
+            get => _GaugeRenderer;
             set
             {
-                if (!value.Equals(_gaugeSnapshot))
+                if (!value.Equals(_GaugeRenderer))
                 {
-                    _gaugeSnapshot = value;
+                    _GaugeRenderer = value;
                 }
             }
         }
         #endregion
         protected void UpdateMesh()
         {
-            _gaugeSnapshot.Mesh = BuildMesh();
+            _GaugeRenderer.UpdateModelGeometries(BuildMeshCollection());
         }
         public virtual void Reset()
         {
@@ -314,7 +310,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
         protected override void OnRender(DrawingContext drawingContext)
         {
-            _gaugeSnapshot.RedrawSnapshot(drawingContext);
+            _GaugeRenderer.RedrawSnapshot(drawingContext);
         }
         protected override void OnRefresh(double xScale, double yScale)
         {
@@ -322,8 +318,8 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 _xScale = xScale;
                 _yScale = yScale;
-                _gaugeSnapshot.Width = Math.Max(1d, _size.Width * xScale);
-                _gaugeSnapshot.Height = Math.Max(1d, _size.Height * yScale);
+                _GaugeRenderer.Width = Math.Max(1d, _size.Width * xScale);
+                _GaugeRenderer.Height = Math.Max(1d, _size.Height * yScale);
             }
         }
         public bool ConditionalImageRefresh(string imageName)
@@ -339,12 +335,11 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             _location.X *= scaleX;
             _location.Y *= scaleY;
-            _gaugeSnapshot.Top = _location.Y;
-            _gaugeSnapshot.Left = _location.X;
+            _GaugeRenderer.Top = _location.Y;
+            _GaugeRenderer.Left = _location.X;
             OnDisplayUpdate();
         }
-
-        protected abstract MeshGeometry3D BuildMesh();
+        protected abstract MeshGeometry3D[] BuildMeshCollection();
         protected static MeshGeometry3D BuildSphere(double radius, int slices, int stacks)
         {
             var mesh = new MeshGeometry3D();
@@ -426,6 +421,69 @@ namespace GadrocsWorkshop.Helios.Gauges
                 mesh.TriangleIndices.Add(bottom2);
             }
             return mesh;
+        }
+        protected static MeshGeometry3D TopCap(double radius, double height, int slices)
+        {
+            double halfH = height / 2.0;
+            Point3D center = new Point3D(0, 0, 0);
+
+            // --- TOP CAP ---
+            var topMesh = new MeshGeometry3D();
+            int topCenterIndex = topMesh.Positions.Count;
+            topMesh.Positions.Add(new Point3D(center.X, center.Y + halfH, center.Z));
+            topMesh.Normals.Add(new Vector3D(0, 1, 0));
+            topMesh.TextureCoordinates.Add(new Point(0.5, 0.5));
+
+            for (int i = 0; i <= slices; i++)
+            {
+                double theta = 2 * Math.PI * i / slices;
+                double x = Math.Cos(theta);
+                double z = Math.Sin(theta);
+
+                topMesh.Positions.Add(new Point3D(center.X + radius * x, center.Y + halfH, center.Z + radius * z));
+                topMesh.Normals.Add(new Vector3D(0, 1, 0));
+                topMesh.TextureCoordinates.Add(new Point((x + 1) / 2, (z + 1) / 2));
+            }
+
+            for (int i = 0; i < slices; i++)
+            {
+                topMesh.TriangleIndices.Add(topCenterIndex);
+                topMesh.TriangleIndices.Add(topCenterIndex + i + 1);
+                topMesh.TriangleIndices.Add(topCenterIndex + i + 2);
+            }
+
+            return topMesh;
+        }
+        protected static MeshGeometry3D BottomCap(double radius, double height, int slices)
+        {
+            double halfH = height / 2.0;
+            Point3D center = new Point3D(0, 0, 0);
+
+            // --- BOTTOM CAP ---
+            var bottomMesh = new MeshGeometry3D();
+            int bottomCenterIndex = bottomMesh.Positions.Count;
+            bottomMesh.Positions.Add(new Point3D(center.X, center.Y - halfH, center.Z));
+            bottomMesh.Normals.Add(new Vector3D(0, -1, 0));
+            bottomMesh.TextureCoordinates.Add(new Point(0.5, 0.5));
+
+            for (int i = 0; i <= slices; i++)
+            {
+                double theta = 2 * Math.PI * i / slices;
+                double x = Math.Cos(theta);
+                double z = Math.Sin(theta);
+
+                bottomMesh.Positions.Add(new Point3D(center.X + radius * x, center.Y - halfH, center.Z + radius * z));
+                bottomMesh.Normals.Add(new Vector3D(0, -1, 0));
+                bottomMesh.TextureCoordinates.Add(new Point((x + 1) / 2, (z + 1) / 2));
+            }
+
+            for (int i = 0; i < slices; i++)
+            {
+                bottomMesh.TriangleIndices.Add(bottomCenterIndex);
+                bottomMesh.TriangleIndices.Add(bottomCenterIndex + i + 2);
+                bottomMesh.TriangleIndices.Add(bottomCenterIndex + i + 1);
+            }
+            return bottomMesh;
         }
     }
 }

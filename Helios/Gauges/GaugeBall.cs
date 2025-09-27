@@ -42,9 +42,9 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
 
         #region Properties
-        protected override MeshGeometry3D BuildMesh()
+        protected override MeshGeometry3D[] BuildMeshCollection()
         {
-            return BuildSphere(1, 64, 32);
+            return new MeshGeometry3D[1] { BuildSphere(1, 64, 32) };
         }
         #endregion
         protected override void OnRender(DrawingContext drawingContext)

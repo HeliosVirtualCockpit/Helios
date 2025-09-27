@@ -46,7 +46,6 @@ namespace GadrocsWorkshop.Helios
         private double _textPaddingBottom;
 
         private bool _effectsExclusion = false;
-        private bool _designTime = false, _designTimeChecked = false;
 
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.CustomGaugeBall", "Custom Gauge Ball", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Base.CustomGaugeBall", "Custom Gauge Ball", "Custom Controls", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
 
     public class CustomGaugeBall : CustomGauge3d
     {
@@ -48,8 +48,6 @@ namespace GadrocsWorkshop.Helios.Controls
             _sphere.X = _sphere.Y = _sphere.Z = 0.00001d;
             //_sphere.X = _sphere.Y = _sphere.Z = 0.0d;
             Components.Add(_sphere);
-            
-
             LightingColor = Colors.White;
         }
 
