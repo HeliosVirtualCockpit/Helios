@@ -1,0 +1,42 @@
+<Canvas Width="27.000" Height="336.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="27.000" Height="336.000">
+  <Canvas>
+
+  <!-- Layer 1/Horizontal GS/<Path> -->
+  <Path Data="F1 M 27.000,107.842 L 23.978,107.842 L 23.978,92.380 C 23.978,88.798 22.218,85.171 18.853,85.171 L 9.781,85.171 C 4.577,85.171 0.343,80.292 0.343,74.296 L 0.000,0.000 L 3.365,0.000 L 3.365,74.296 C 3.365,78.640 6.243,82.174 9.781,82.174 L 18.853,82.174 C 23.574,82.174 27.000,86.466 27.000,92.380 L 27.000,107.842 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="27.000,-53.921" EndPoint="0.000,-53.921">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ffbfbfbf"/>
+          <GradientStop Offset="0.87" Color="#ff6f6f6f"/>
+          <GradientStop Offset="1.00" Color="#ff1f1f1f"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  <!-- Layer 1/Horizontal GS/<Path> -->
+  <Path Data="F1 M 27.000,336.000 L 23.978,336.000 L 23.978,107.842 L 27.000,107.842 L 27.000,336.000 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="27.000,-221.921" EndPoint="23.978,-221.921">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ffffff40"/>
+          <GradientStop Offset="0.81" Color="#ffbfbf30"/>
+          <GradientStop Offset="1.00" Color="#ff7f7f1f"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>

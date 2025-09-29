@@ -126,6 +126,19 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             {
                 gc.EffectsExclusion = this.EffectsExclusion;
             }
+
+            _pitch = new HeliosValue(this, new BindingValue(0d), "", "pitch", "Current pitch of the aircraft.", "(0 - 360)", BindingValueUnits.Degrees);
+            _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
+            Actions.Add(_pitch);
+
+            _roll = new HeliosValue(this, new BindingValue(0d), "", "roll", "Current roll of the aircraft.", "(0 - 360)", BindingValueUnits.Degrees);
+            _roll.Execute += new HeliosActionHandler(Roll_Execute);
+            Actions.Add(_roll);
+
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "", "ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
+
             _turn = new HeliosValue(this, new BindingValue(0d), "", "turn rate", "turn rate indicator offset.", "-1 to 1", BindingValueUnits.Numeric);
             _turn.Execute += new HeliosActionHandler(Turn_Execute);
             Actions.Add(_turn);
@@ -150,23 +163,11 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.ADI
             _locFlag.Execute += new HeliosActionHandler(LocFlag_Execute);
             Actions.Add(_locFlag);
 
-            _pitch = new HeliosValue(this, new BindingValue(0d), "", "pitch", "Current ptich of the aircraft.", "(0 - 360)", BindingValueUnits.Degrees);
-            _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
-            Actions.Add(_pitch);
-
-            _roll = new HeliosValue(this, new BindingValue(0d), "", "roll", "Current roll of the aircraft.", "(0 - 360)", BindingValueUnits.Degrees);
-            _roll.Execute += new HeliosActionHandler(Roll_Execute);
-            Actions.Add(_roll);
-
-            _rotationValue = new HeliosValue(this, new BindingValue(""),"", "ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
-            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
-            Actions.Add(_rotationValue);
-
-            _ilsHorizontal = new HeliosValue(this, new BindingValue(1d), "", "ils horizontal deviation", "Current deviation from glide scope.", "-1 to 1", BindingValueUnits.Numeric);
+            _ilsHorizontal = new HeliosValue(this, new BindingValue(1d), "", "ils horizontal deviation", "Current deviation from glide slope.", "-1 to 1", BindingValueUnits.Numeric);
             _ilsHorizontal.Execute += new HeliosActionHandler(ILSHorizontal_Execute);
             Actions.Add(_ilsHorizontal);
 
-            _ilsVertical = new HeliosValue(this, new BindingValue(1d), "", "ils vertical deviation", "Current deviation from ILS side scope.", "-1 to 1", BindingValueUnits.Numeric);
+            _ilsVertical = new HeliosValue(this, new BindingValue(1d), "", "ils vertical deviation", "Current deviation from glide slope.", "-1 to 1", BindingValueUnits.Numeric);
             _ilsVertical.Execute += new HeliosActionHandler(ILSVertical_Execute);
             Actions.Add(_ilsVertical);
 

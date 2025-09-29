@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+	<Name>VSI (Copilot)</Name>
+	<Category>UH-60L Blackhawk</Category>
+	<TypeIdentifier>Helios.UH60L.VSI.Copilot</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>296,300</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

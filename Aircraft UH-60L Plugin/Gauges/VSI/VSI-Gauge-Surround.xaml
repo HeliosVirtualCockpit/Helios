@@ -1,0 +1,105 @@
+<Canvas Width="596.000" Height="604.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="596.000" Height="604.000">
+
+  <Canvas>
+
+  <!-- Outer-Bezel/Gauge Faceplate/Gauge Background -->
+  <Path StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Fill="#ff2f2f2f" Data="F1 M 295.500,450.500 C 209.896,450.500 140.500,381.104 140.500,295.500 C 140.500,209.896 209.896,140.500 295.500,140.500 C 381.104,140.500 450.500,209.896 450.500,295.500 C 450.500,381.104 381.104,450.500 295.500,450.500 Z M 558.929,0.500 L 37.071,0.500 C 16.873,0.500 0.500,16.874 0.500,37.071 L 0.500,566.929 C 0.500,587.126 16.873,603.500 37.071,603.500 L 558.929,603.500 C 579.126,603.500 595.500,587.126 595.500,566.929 L 595.500,37.071 C 595.500,16.874 579.126,0.500 558.929,0.500 Z"/>
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/<Group>/<Path> -->
+  <Path Data="F1 M 295.500,154.544 C 217.652,154.544 154.544,217.652 154.544,295.500 C 154.544,373.348 217.652,436.456 295.500,436.456 C 373.348,436.456 436.456,373.348 436.456,295.500 C 436.456,217.652 373.348,154.544 295.500,154.544 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/<Group>/<Compound Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Fill="#ff1f1f1f" Data="F1 M 295.500,436.456 C 217.652,436.456 154.544,373.348 154.544,295.500 C 154.544,217.652 217.652,154.544 295.500,154.544 C 373.348,154.544 436.456,217.652 436.456,295.500 C 436.456,373.348 373.348,436.456 295.500,436.456 Z M 473.000,295.500 C 473.000,197.469 393.531,118.000 295.500,118.000 C 197.469,118.000 118.000,197.469 118.000,295.500 C 118.000,362.108 154.696,420.136 208.967,450.500 L 382.033,450.500 C 436.304,420.136 473.000,362.108 473.000,295.500 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/<Group>/<Path> -->
+  <Path Visibility="hidden" StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Fill="#ff1f1f1f" Data="F1 M 295.500,473.000 C 326.922,473.000 356.431,464.824 382.033,450.500 L 208.967,450.500 C 234.569,464.824 264.078,473.000 295.500,473.000 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 245.661,154.917 L 238.994,136.602 C 237.938,136.959 236.890,137.334 235.844,137.711 L 242.522,156.059 C 243.563,155.667 244.609,155.287 245.661,154.917 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 271.047,148.435 L 267.732,129.637 C 266.629,129.804 265.532,129.988 264.436,130.175 L 267.757,149.010 C 268.850,148.806 269.946,148.615 271.047,148.435 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 323.243,149.010 L 326.417,131.010 C 325.326,130.792 324.234,130.578 323.136,130.381 L 319.953,148.435 C 321.053,148.615 322.151,148.806 323.243,149.010 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 348.478,156.059 L 354.596,139.249 C 353.560,138.844 352.521,138.447 351.475,138.062 L 345.340,154.918 C 346.391,155.287 347.437,155.667 348.478,156.059 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 145.212,294.505 L 118.013,294.505 C 118.011,294.838 118.000,295.167 118.000,295.500 C 118.000,296.656 118.022,297.807 118.044,298.958 L 145.212,298.958 L 145.212,294.505 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 164.254,223.481 C 164.936,222.262 165.633,221.053 166.347,219.856 L 166.460,219.660 L 142.349,205.740 C 141.598,207.019 140.862,208.307 140.142,209.607 L 164.234,223.516 L 164.254,223.481 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 218.624,167.579 C 219.821,166.865 221.030,166.168 222.249,165.486 L 222.284,165.466 L 208.138,140.963 C 206.846,141.696 205.563,142.442 204.291,143.206 L 218.428,167.692 L 218.624,167.579 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 293.273,146.444 L 297.726,146.444 L 302.156,121.109 L 288.921,121.118 L 293.273,146.444 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 172.897,181.607 L 187.656,192.037 L 190.805,188.888 L 180.412,174.091 L 172.897,181.607 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 400.195,188.888 L 403.344,192.037 L 418.365,181.487 L 410.783,173.905 L 400.195,188.888 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 368.734,165.477 C 369.952,166.158 371.160,166.854 372.356,167.567 L 372.572,167.692 L 386.710,143.206 C 385.437,142.443 384.155,141.696 382.862,140.963 L 368.715,165.466 L 368.734,165.477 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 424.629,219.816 C 425.358,221.036 426.068,222.268 426.762,223.510 L 426.766,223.516 L 450.858,209.607 C 450.138,208.307 449.402,207.019 448.650,205.740 L 424.539,219.660 L 424.629,219.816 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/<Group>/Ticks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 472.987,294.505 L 445.788,294.505 L 445.788,298.958 L 472.956,298.958 C 472.978,297.807 473.000,296.656 473.000,295.500 C 473.000,295.167 472.989,294.838 472.987,294.505 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Outer-Bezel/Gauge Faceplate/Slip Marks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 283.841,512.519 L 306.985,512.519 L 306.985,500.316 L 283.841,500.316 L 283.841,512.519 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/Slip Marks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 331.832,500.316 L 331.832,512.519 L 352.227,512.519 L 352.227,500.316 L 331.832,500.316 Z"/>
+
+  <!-- Outer-Bezel/Gauge Faceplate/Slip Marks/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 258.993,500.316 L 237.114,500.316 L 237.114,512.519 L 258.993,512.519 L 258.993,500.316 Z"/>
+
+  </Canvas>
+
+  <!-- Outer-Bezel/Gauge Faceplate/Ball Slide -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Data="F1 M 223.714,495.524 C 223.400,498.177 225.309,500.575 227.966,500.864 C 239.134,502.075 268.016,504.872 296.489,504.876 C 323.432,504.879 351.284,502.107 362.031,500.912 C 364.605,500.626 366.488,498.355 366.291,495.773 L 365.650,487.376 C 365.445,484.703 363.094,482.708 360.425,482.960 C 340.447,484.849 318.535,486.044 294.951,486.033 C 271.533,486.022 249.768,484.824 229.911,482.941 C 227.320,482.696 225.011,484.574 224.705,487.159 L 223.714,495.524 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="294.493,-504.376" EndPoint="294.493,-482.420">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ffbfbfbf"/>
+          <GradientStop Offset="0.20" Color="#ff8f8f8f"/>
+          <GradientStop Offset="0.56" Color="#ff5e5e5e"/>
+          <GradientStop Offset="0.78" Color="#ff8f8f8f"/>
+          <GradientStop Offset="1.00" Color="#ffbfbfbf"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.500,0.500" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>

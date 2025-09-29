@@ -1,0 +1,48 @@
+<Canvas Width="79.009" Height="44.003"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="79.009" Height="44.003">
+
+  <Canvas>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 78.236,0.500 L 20.729,0.500 L 0.506,19.712 L 1.113,43.067 L 78.506,43.500 L 78.236,0.500 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path Fill="#ffcd6151" Data="F1 M 20.729,0.500 L 29.943,0.500 L 72.986,43.469 L 63.056,43.414 L 20.391,0.821 L 20.729,0.500 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path Fill="#ffcd6151" Data="F1 M 15.497,5.471 L 53.450,43.360 L 43.521,43.304 L 10.437,10.277 L 15.497,5.471 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path Fill="#ffcd6151" Data="F1 M 0.506,19.712 L 5.034,15.410 L 32.916,43.245 L 22.987,43.189 L 0.533,20.773 L 0.506,19.712 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path Fill="#ffcd6151" Data="F1 M 51.979,0.500 L 78.402,26.878 L 78.464,36.797 L 42.105,0.500 L 51.979,0.500 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path Fill="#ffcd6151" Data="F1 M 78.236,0.500 L 78.338,16.699 L 62.111,0.500 L 78.236,0.500 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path Fill="#ffcd6151" Data="F1 M 0.768,29.788 L 14.142,43.140 L 1.113,43.067 L 0.768,29.788 Z"/>
+
+  <Canvas>
+
+  <!-- Bottom Pointer/ATT Flag/<Group>/<Compound Path> -->
+  <Path Fill="#ff000000" Data="F1 M 14.057,35.531 L 14.057,33.742 L 21.585,33.742 L 21.585,35.531 L 14.057,35.531 Z M 11.625,38.472 L 16.900,25.066 L 18.613,25.066 L 23.888,38.472 L 21.723,38.472 L 17.757,27.657 L 13.791,38.472 L 11.625,38.472 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Group>/<Compound Path> -->
+  <Path Fill="#ff000000" Data="F1 M 29.006,38.472 L 29.006,26.163 L 31.014,26.163 L 31.014,38.472 L 29.006,38.472 Z M 24.961,26.854 L 24.961,25.066 L 35.059,25.066 L 35.059,26.854 L 24.961,26.854 Z"/>
+
+  <!-- Bottom Pointer/ATT Flag/<Group>/<Compound Path> -->
+  <Path Fill="#ff000000" Data="F1 M 41.455,38.472 L 41.455,26.163 L 43.463,26.163 L 43.463,38.472 L 41.455,38.472 Z M 37.410,26.854 L 37.410,25.066 L 47.508,25.066 L 47.508,26.854 L 37.410,26.854 Z"/>
+
+  </Canvas>
+
+  <!-- Bottom Pointer/ATT Flag/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Data="F1 M 78.236,0.500 L 20.729,0.500 L 0.506,19.712 L 1.113,43.067 L 78.506,43.500 L 78.236,0.500 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>

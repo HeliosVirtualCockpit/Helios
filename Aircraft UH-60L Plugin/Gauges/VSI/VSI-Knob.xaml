@@ -1,0 +1,1076 @@
+<Canvas Width="101.025" Height="101.036"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="101.025" Height="101.036">
+<Canvas>
+  <Canvas>
+
+  <!-- Layer 1/Knob/Knob/<Ellipse> -->
+  <Path StrokeThickness="1.0" Stroke="#ff2f2f2f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 95.862,70.510 C 84.837,95.549 55.602,106.911 30.562,95.886 C 5.523,84.861 -5.839,55.625 5.186,30.586 C 16.211,5.546 45.447,-5.815 70.486,5.210 C 95.526,16.235 106.887,45.470 95.862,70.510 Z"/>
+
+  <!-- Layer 1/Knob/Knob/<Compound Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff2f2f2f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 30.698,95.578 C 55.527,106.510 84.621,95.204 95.554,70.374 C 106.486,45.545 95.179,16.450 70.350,5.518 C 45.521,-5.414 16.427,5.892 5.494,30.722 C -5.438,55.551 5.868,84.645 30.698,95.578 Z M 70.622,4.901 C 95.791,15.983 107.252,45.476 96.170,70.646 C 85.088,95.815 55.596,107.276 30.426,96.194 C 5.257,85.112 -6.205,55.620 4.877,30.450 C 15.959,5.281 45.452,-6.181 70.622,4.901 Z"/>
+
+  </Canvas>
+
+  <!-- Layer 1/Knob/<Path> -->
+  <Path Fill="#ffffffff" Data="F1 M 82.021,87.700 L 82.021,87.700 C 81.275,87.993 80.426,87.799 79.882,87.211 L 29.483,32.705 L 25.223,36.125 C 24.892,36.391 24.397,36.252 24.254,35.852 L 18.001,18.414 C 17.827,17.931 17.952,17.391 18.320,17.034 L 18.320,17.034 C 18.600,16.761 19.020,16.693 19.371,16.861 L 36.891,25.256 C 37.292,25.448 37.365,25.988 37.029,26.280 L 32.963,29.819 L 83.119,83.874 C 83.647,84.442 83.786,85.270 83.474,85.980 L 83.226,86.544 C 82.992,87.073 82.559,87.489 82.021,87.700 Z"/>
+
+  <Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 28.209,94.908 L 28.209,94.908 L 29.008,95.300 L 29.008,95.300 C 28.924,95.469 28.720,95.539 28.550,95.456 L 28.365,95.365 C 28.196,95.282 28.126,95.077 28.209,94.908 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 26.370,93.935 L 26.370,93.935 L 27.151,94.360 L 27.151,94.360 C 27.061,94.526 26.853,94.587 26.688,94.497 L 26.507,94.398 C 26.341,94.308 26.280,94.101 26.370,93.935 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 24.573,92.886 L 24.573,92.886 L 25.336,93.344 L 25.336,93.344 C 25.239,93.505 25.029,93.558 24.867,93.461 L 24.690,93.355 C 24.529,93.258 24.476,93.048 24.573,92.886 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 22.822,91.763 L 22.822,91.763 L 23.564,92.252 L 23.564,92.252 C 23.461,92.409 23.249,92.453 23.091,92.349 L 22.919,92.236 C 22.762,92.132 22.718,91.920 22.822,91.763 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 21.119,90.567 L 21.119,90.567 L 21.840,91.087 L 21.840,91.087 C 21.730,91.240 21.517,91.274 21.364,91.164 L 21.196,91.044 C 21.043,90.933 21.009,90.720 21.119,90.567 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 19.468,89.301 L 19.468,89.301 L 20.167,89.850 L 20.167,89.850 C 20.050,89.999 19.835,90.024 19.687,89.908 L 19.525,89.781 C 19.377,89.664 19.351,89.449 19.468,89.301 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 17.871,87.967 L 17.871,87.967 L 18.546,88.545 L 18.546,88.545 C 18.424,88.688 18.208,88.705 18.065,88.582 L 17.908,88.449 C 17.765,88.326 17.748,88.110 17.871,87.967 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 16.331,86.567 L 16.331,86.567 L 16.982,87.173 L 16.982,87.173 C 16.853,87.311 16.637,87.319 16.499,87.190 L 16.348,87.050 C 16.210,86.921 16.203,86.705 16.331,86.567 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 14.852,85.104 L 14.852,85.104 L 15.476,85.737 L 15.476,85.737 C 15.342,85.869 15.126,85.868 14.993,85.734 L 14.848,85.587 C 14.716,85.453 14.717,85.237 14.852,85.104 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 13.435,83.580 L 13.435,83.580 L 14.032,84.239 L 14.032,84.239 C 13.893,84.366 13.676,84.355 13.550,84.216 L 13.411,84.063 C 13.284,83.923 13.295,83.707 13.435,83.580 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 12.083,81.999 L 12.083,81.999 L 12.652,82.682 L 12.652,82.682 C 12.507,82.802 12.292,82.783 12.171,82.638 L 12.039,82.480 C 11.918,82.335 11.938,82.120 12.083,81.999 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 10.798,80.362 L 10.798,80.362 L 11.339,81.068 L 11.339,81.068 C 11.189,81.183 10.974,81.154 10.860,81.004 L 10.734,80.841 C 10.620,80.691 10.648,80.477 10.798,80.362 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 9.583,78.673 L 9.583,78.673 L 10.094,79.401 L 10.094,79.401 C 9.939,79.509 9.726,79.472 9.618,79.317 L 9.499,79.148 C 9.391,78.994 9.429,78.781 9.583,78.673 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 8.440,76.934 L 8.440,76.934 L 8.920,77.683 L 8.920,77.683 C 8.761,77.785 8.549,77.738 8.448,77.579 L 8.336,77.406 C 8.235,77.247 8.281,77.036 8.440,76.934 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 7.371,75.149 L 7.371,75.149 L 7.818,75.917 L 7.818,75.917 C 7.655,76.012 7.446,75.957 7.351,75.794 L 7.248,75.616 C 7.152,75.453 7.208,75.244 7.371,75.149 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 6.377,73.321 L 6.377,73.321 L 6.792,74.107 L 6.792,74.107 C 6.625,74.195 6.419,74.131 6.331,73.965 L 6.234,73.782 C 6.146,73.616 6.210,73.409 6.377,73.321 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 5.461,71.453 L 5.461,71.453 L 5.843,72.256 L 5.843,72.256 C 5.672,72.337 5.469,72.264 5.388,72.094 L 5.299,71.908 C 5.218,71.737 5.290,71.534 5.461,71.453 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 4.624,69.548 L 4.624,69.548 L 4.972,70.366 L 4.972,70.366 C 4.798,70.440 4.597,70.359 4.524,70.185 L 4.443,69.996 C 4.369,69.822 4.450,69.621 4.624,69.548 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 3.867,67.609 L 3.867,67.609 L 4.181,68.442 L 4.181,68.442 C 4.004,68.508 3.807,68.419 3.740,68.242 L 3.668,68.049 C 3.601,67.873 3.690,67.676 3.867,67.609 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 3.192,65.641 L 3.192,65.641 L 3.471,66.486 L 3.471,66.486 C 3.291,66.545 3.098,66.447 3.039,66.268 L 2.975,66.072 C 2.916,65.893 3.013,65.700 3.192,65.641 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 2.601,63.646 L 2.601,63.646 L 2.843,64.502 L 2.843,64.502 C 2.662,64.553 2.473,64.448 2.421,64.266 L 2.365,64.068 C 2.314,63.887 2.419,63.698 2.601,63.646 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 2.093,61.628 L 2.093,61.628 L 2.299,62.493 L 2.299,62.493 C 2.116,62.537 1.932,62.424 1.888,62.240 L 1.840,62.040 C 1.796,61.856 1.909,61.672 2.093,61.628 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 1.670,59.591 L 1.670,59.591 L 1.840,60.464 L 1.840,60.464 C 1.655,60.500 1.476,60.379 1.439,60.194 L 1.400,59.992 C 1.364,59.807 1.485,59.627 1.670,59.591 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 1.333,57.538 L 1.333,57.538 L 1.466,58.417 L 1.466,58.417 C 1.280,58.445 1.106,58.317 1.077,58.130 L 1.046,57.927 C 1.018,57.740 1.146,57.566 1.333,57.538 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 1.082,55.472 L 1.082,55.472 L 1.179,56.356 L 1.179,56.356 C 0.991,56.377 0.822,56.241 0.802,56.054 L 0.780,55.849 C 0.759,55.661 0.894,55.493 1.082,55.472 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 0.918,53.398 L 0.918,53.398 L 0.977,54.285 L 0.977,54.285 C 0.789,54.298 0.626,54.155 0.614,53.967 L 0.600,53.762 C 0.587,53.573 0.730,53.410 0.918,53.398 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 0.841,51.318 L 0.841,51.318 L 0.863,52.208 L 0.863,52.208 C 0.674,52.212 0.518,52.063 0.513,51.875 L 0.508,51.669 C 0.503,51.480 0.652,51.323 0.841,51.318 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 0.851,49.238 L 0.851,49.238 L 0.836,50.127 L 0.836,50.127 C 0.647,50.124 0.497,49.968 0.500,49.780 L 0.504,49.574 C 0.507,49.385 0.662,49.235 0.851,49.238 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 0.948,47.159 L 0.948,47.159 L 0.896,48.047 L 0.896,48.047 C 0.707,48.036 0.564,47.874 0.575,47.686 L 0.587,47.480 C 0.598,47.292 0.760,47.148 0.948,47.159 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 1.132,45.087 L 1.132,45.087 L 1.043,45.971 L 1.043,45.971 C 0.855,45.953 0.718,45.785 0.737,45.597 L 0.758,45.392 C 0.777,45.205 0.944,45.068 1.132,45.087 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 1.403,43.024 L 1.403,43.024 L 1.277,43.904 L 1.277,43.904 C 1.090,43.877 0.960,43.704 0.987,43.517 L 1.016,43.313 C 1.043,43.127 1.216,42.997 1.403,43.024 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 1.760,40.974 L 1.760,40.974 L 1.597,41.848 L 1.597,41.848 C 1.411,41.813 1.289,41.635 1.324,41.449 L 1.361,41.247 C 1.396,41.061 1.574,40.939 1.760,40.974 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 2.202,38.941 L 2.202,38.941 L 2.003,39.807 L 2.003,39.807 C 1.819,39.765 1.704,39.581 1.746,39.398 L 1.793,39.197 C 1.835,39.013 2.018,38.898 2.202,38.941 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 2.729,36.928 L 2.729,36.928 L 2.494,37.785 L 2.494,37.785 C 2.312,37.735 2.205,37.547 2.255,37.365 L 2.309,37.167 C 2.359,36.985 2.547,36.878 2.729,36.928 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 3.340,34.939 L 3.340,34.939 L 3.069,35.786 L 3.069,35.786 C 2.889,35.728 2.790,35.536 2.848,35.356 L 2.911,35.160 C 2.968,34.980 3.161,34.881 3.340,34.939 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 4.034,32.977 L 4.034,32.977 L 3.728,33.812 L 3.728,33.812 C 3.551,33.747 3.460,33.550 3.525,33.373 L 3.596,33.180 C 3.661,33.003 3.857,32.912 4.034,32.977 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 4.810,31.046 L 4.810,31.046 L 4.468,31.867 L 4.468,31.867 C 4.294,31.795 4.211,31.595 4.284,31.421 L 4.363,31.230 C 4.435,31.056 4.635,30.974 4.810,31.046 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 5.665,29.149 L 5.665,29.149 L 5.290,29.955 L 5.290,29.955 C 5.119,29.876 5.044,29.673 5.124,29.501 L 5.211,29.315 C 5.291,29.144 5.494,29.070 5.665,29.149 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 6.599,27.290 L 6.599,27.290 L 6.190,28.080 L 6.190,28.080 C 6.023,27.993 5.957,27.787 6.044,27.619 L 6.139,27.436 C 6.225,27.269 6.432,27.203 6.599,27.290 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 7.610,25.471 L 7.610,25.471 L 7.169,26.243 L 7.169,26.243 C 7.005,26.150 6.948,25.941 7.042,25.777 L 7.144,25.598 C 7.238,25.435 7.447,25.378 7.610,25.471 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 8.697,23.697 L 8.697,23.697 L 8.223,24.450 L 8.223,24.450 C 8.064,24.349 8.016,24.138 8.116,23.979 L 8.226,23.804 C 8.326,23.644 8.537,23.596 8.697,23.697 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 9.857,21.969 L 9.857,21.969 L 9.352,22.702 L 9.352,22.702 C 9.197,22.595 9.158,22.382 9.265,22.226 L 9.381,22.057 C 9.488,21.901 9.701,21.862 9.857,21.969 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 11.088,20.292 L 11.088,20.292 L 10.553,21.002 L 10.553,21.002 C 10.402,20.889 10.372,20.675 10.485,20.524 L 10.609,20.359 C 10.723,20.209 10.937,20.178 11.088,20.292 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 12.388,18.667 L 12.388,18.667 L 11.824,19.355 L 11.824,19.355 C 11.678,19.235 11.657,19.020 11.777,18.874 L 11.907,18.715 C 12.027,18.569 12.242,18.548 12.388,18.667 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 13.755,17.099 L 13.755,17.099 L 13.163,17.762 L 13.163,17.762 C 13.022,17.637 13.010,17.421 13.136,17.280 L 13.273,17.126 C 13.399,16.985 13.615,16.973 13.755,17.099 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 15.187,15.589 L 15.187,15.589 L 14.567,16.227 L 14.567,16.227 C 14.432,16.095 14.429,15.879 14.560,15.744 L 14.704,15.596 C 14.835,15.461 15.052,15.458 15.187,15.589 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 16.681,14.140 L 16.681,14.140 L 16.035,14.752 L 16.035,14.752 C 15.905,14.615 15.911,14.398 16.048,14.269 L 16.198,14.127 C 16.335,13.997 16.551,14.003 16.681,14.140 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 18.234,12.756 L 18.234,12.756 L 17.563,13.339 L 17.563,13.339 C 17.439,13.197 17.454,12.981 17.596,12.857 L 17.752,12.722 C 17.894,12.598 18.110,12.613 18.234,12.756 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 19.843,11.437 L 19.843,11.437 L 19.149,11.992 L 19.149,11.992 C 19.031,11.845 19.055,11.630 19.202,11.512 L 19.363,11.383 C 19.510,11.266 19.725,11.290 19.843,11.437 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 21.507,10.187 L 21.507,10.187 L 20.789,10.713 L 20.789,10.713 C 20.678,10.560 20.711,10.347 20.863,10.235 L 21.029,10.113 C 21.181,10.002 21.395,10.035 21.507,10.187 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 23.221,9.008 L 23.221,9.008 L 22.482,9.503 L 22.482,9.503 C 22.377,9.346 22.419,9.134 22.576,9.029 L 22.747,8.914 C 22.904,8.809 23.116,8.851 23.221,9.008 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 24.983,7.901 L 24.983,7.901 L 24.224,8.365 L 24.224,8.365 C 24.126,8.204 24.177,7.994 24.338,7.895 L 24.514,7.788 C 24.675,7.689 24.885,7.740 24.983,7.901 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 26.790,6.870 L 26.790,6.870 L 26.013,7.301 L 26.013,7.301 C 25.921,7.136 25.981,6.928 26.146,6.837 L 26.326,6.737 C 26.491,6.645 26.699,6.705 26.790,6.870 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 28.639,5.914 L 28.639,5.914 L 27.844,6.313 L 27.844,6.313 C 27.759,6.144 27.827,5.939 27.996,5.855 L 28.180,5.762 C 28.349,5.678 28.554,5.746 28.639,5.914 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 30.526,5.038 L 30.526,5.038 L 29.715,5.403 L 29.715,5.403 C 29.637,5.231 29.714,5.028 29.886,4.951 L 30.074,4.866 C 30.246,4.789 30.448,4.866 30.526,5.038 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 32.448,4.241 L 32.448,4.241 L 31.622,4.571 L 31.622,4.571 C 31.552,4.396 31.637,4.197 31.812,4.127 L 32.004,4.050 C 32.179,3.980 32.378,4.065 32.448,4.241 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 34.402,3.525 L 34.402,3.525 L 33.563,3.821 L 33.563,3.821 C 33.500,3.643 33.594,3.447 33.771,3.385 L 33.966,3.316 C 34.144,3.253 34.339,3.347 34.402,3.525 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 36.384,2.891 L 36.384,2.891 L 35.533,3.152 L 35.533,3.152 C 35.478,2.971 35.579,2.780 35.760,2.725 L 35.957,2.665 C 36.137,2.609 36.328,2.711 36.384,2.891 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 38.390,2.341 L 38.390,2.341 L 37.530,2.566 L 37.530,2.566 C 37.482,2.383 37.592,2.197 37.774,2.149 L 37.973,2.097 C 38.156,2.049 38.343,2.159 38.390,2.341 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 40.418,1.876 L 40.418,1.876 L 39.549,2.064 L 39.549,2.064 C 39.509,1.880 39.626,1.698 39.811,1.658 L 40.012,1.615 C 40.197,1.575 40.378,1.692 40.418,1.876 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 42.464,1.496 L 42.464,1.496 L 41.588,1.648 L 41.588,1.648 C 41.556,1.462 41.680,1.285 41.866,1.253 L 42.069,1.218 C 42.255,1.185 42.432,1.310 42.464,1.496 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 44.524,1.202 L 44.524,1.202 L 43.642,1.317 L 43.642,1.317 C 43.618,1.130 43.750,0.958 43.937,0.934 L 44.141,0.907 C 44.328,0.883 44.500,1.015 44.524,1.202 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 46.594,0.994 L 46.594,0.994 L 45.709,1.073 L 45.709,1.073 C 45.692,0.885 45.831,0.719 46.019,0.702 L 46.224,0.684 C 46.412,0.668 46.578,0.806 46.594,0.994 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 48.672,0.874 L 48.672,0.874 L 47.783,0.915 L 47.783,0.915 C 47.775,0.726 47.920,0.566 48.109,0.558 L 48.315,0.548 C 48.503,0.540 48.663,0.685 48.672,0.874 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 50.752,0.840 L 50.752,0.840 L 49.863,0.844 L 49.863,0.844 C 49.862,0.655 50.014,0.502 50.203,0.501 L 50.409,0.500 C 50.598,0.499 50.751,0.652 50.752,0.840 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 52.832,0.894 L 52.832,0.894 L 51.944,0.860 L 51.944,0.860 C 51.951,0.672 52.109,0.525 52.298,0.532 L 52.504,0.540 C 52.692,0.547 52.839,0.705 52.832,0.894 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 54.908,1.035 L 54.908,1.035 L 54.022,0.964 L 54.022,0.964 C 54.037,0.776 54.201,0.635 54.390,0.650 L 54.595,0.667 C 54.783,0.682 54.923,0.846 54.908,1.035 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 56.977,1.262 L 56.977,1.262 L 56.094,1.154 L 56.094,1.154 C 56.117,0.967 56.287,0.834 56.474,0.856 L 56.679,0.881 C 56.866,0.904 56.999,1.075 56.977,1.262 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 59.033,1.576 L 59.033,1.576 L 58.156,1.431 L 58.156,1.431 C 58.187,1.245 58.363,1.119 58.549,1.150 L 58.752,1.183 C 58.938,1.214 59.064,1.390 59.033,1.576 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 61.075,1.976 L 61.075,1.976 L 60.205,1.794 L 60.205,1.794 C 60.243,1.610 60.424,1.491 60.609,1.530 L 60.811,1.572 C 60.995,1.610 61.114,1.791 61.075,1.976 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 63.099,2.461 L 63.099,2.461 L 62.237,2.243 L 62.237,2.243 C 62.283,2.060 62.469,1.949 62.652,1.995 L 62.851,2.046 C 63.034,2.092 63.145,2.278 63.099,2.461 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 65.100,3.030 L 65.100,3.030 L 64.248,2.776 L 64.248,2.776 C 64.302,2.595 64.492,2.492 64.673,2.546 L 64.870,2.605 C 65.051,2.659 65.154,2.849 65.100,3.030 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 67.076,3.682 L 67.076,3.682 L 66.235,3.393 L 66.235,3.393 C 66.296,3.215 66.491,3.120 66.669,3.181 L 66.864,3.248 C 67.042,3.309 67.137,3.504 67.076,3.682 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 69.023,4.417 L 69.023,4.417 L 68.195,4.093 L 68.195,4.093 C 68.263,3.917 68.462,3.831 68.637,3.899 L 68.829,3.974 C 69.005,4.043 69.092,4.241 69.023,4.417 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 70.937,5.233 L 70.937,5.233 L 70.123,4.874 L 70.123,4.874 C 70.199,4.702 70.401,4.623 70.574,4.699 L 70.762,4.782 C 70.935,4.858 71.013,5.060 70.937,5.233 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 72.816,6.128 L 72.816,6.128 L 72.017,5.736 L 72.017,5.736 C 72.101,5.566 72.305,5.496 72.475,5.579 L 72.660,5.670 C 72.829,5.754 72.899,5.958 72.816,6.128 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 74.655,7.101 L 74.655,7.101 L 73.874,6.675 L 73.874,6.675 C 73.964,6.510 74.172,6.448 74.337,6.539 L 74.518,6.637 C 74.684,6.727 74.745,6.935 74.655,7.101 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 76.452,8.150 L 76.452,8.150 L 75.689,7.692 L 75.689,7.692 C 75.786,7.530 75.996,7.478 76.158,7.575 L 76.335,7.681 C 76.496,7.778 76.549,7.988 76.452,8.150 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 78.203,9.273 L 78.203,9.273 L 77.461,8.784 L 77.461,8.784 C 77.564,8.626 77.776,8.583 77.934,8.686 L 78.106,8.800 C 78.263,8.903 78.307,9.115 78.203,9.273 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 79.906,10.469 L 79.906,10.469 L 79.185,9.949 L 79.185,9.949 C 79.295,9.796 79.508,9.761 79.661,9.871 L 79.829,9.992 C 79.982,10.102 80.016,10.316 79.906,10.469 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 81.557,11.735 L 81.557,11.735 L 80.858,11.185 L 80.858,11.185 C 80.975,11.037 81.190,11.011 81.338,11.128 L 81.500,11.255 C 81.648,11.372 81.674,11.586 81.557,11.735 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 83.154,13.069 L 83.154,13.069 L 82.479,12.490 L 82.479,12.490 C 82.601,12.347 82.817,12.330 82.960,12.453 L 83.117,12.587 C 83.260,12.710 83.277,12.925 83.154,13.069 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 84.694,14.469 L 84.694,14.469 L 84.043,13.862 L 84.043,13.862 C 84.172,13.724 84.388,13.717 84.526,13.845 L 84.677,13.986 C 84.815,14.114 84.822,14.330 84.694,14.469 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 86.173,15.932 L 86.173,15.932 L 85.549,15.299 L 85.549,15.299 C 85.683,15.166 85.899,15.167 86.032,15.302 L 86.176,15.448 C 86.309,15.583 86.308,15.799 86.173,15.932 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 87.590,17.455 L 87.590,17.455 L 86.993,16.797 L 86.993,16.797 C 87.132,16.670 87.348,16.680 87.475,16.820 L 87.614,16.973 C 87.741,17.112 87.730,17.328 87.590,17.455 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 88.942,19.037 L 88.942,19.037 L 88.373,18.354 L 88.373,18.354 C 88.518,18.233 88.733,18.253 88.854,18.397 L 88.986,18.556 C 89.107,18.700 89.087,18.916 88.942,19.037 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 90.227,20.674 L 90.227,20.674 L 89.686,19.968 L 89.686,19.968 C 89.836,19.853 90.051,19.881 90.165,20.031 L 90.291,20.195 C 90.405,20.345 90.377,20.559 90.227,20.674 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 91.442,22.363 L 91.442,22.363 L 90.931,21.635 L 90.931,21.635 C 91.086,21.527 91.299,21.564 91.407,21.718 L 91.526,21.887 C 91.634,22.042 91.596,22.255 91.442,22.363 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 92.585,24.102 L 92.585,24.102 L 92.105,23.353 L 92.105,23.353 C 92.264,23.251 92.476,23.297 92.577,23.456 L 92.688,23.630 C 92.790,23.789 92.744,24.000 92.585,24.102 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 93.654,25.887 L 93.654,25.887 L 93.207,25.118 L 93.207,25.118 C 93.370,25.023 93.579,25.078 93.674,25.241 L 93.777,25.419 C 93.872,25.582 93.817,25.792 93.654,25.887 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 94.648,27.715 L 94.648,27.715 L 94.233,26.928 L 94.233,26.928 C 94.400,26.840 94.606,26.904 94.694,27.071 L 94.791,27.253 C 94.879,27.420 94.815,27.627 94.648,27.715 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 95.564,29.583 L 95.564,29.583 L 95.182,28.780 L 95.182,28.780 C 95.353,28.699 95.556,28.771 95.637,28.942 L 95.726,29.128 C 95.807,29.298 95.735,29.502 95.564,29.583 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 96.401,31.488 L 96.401,31.488 L 96.053,30.670 L 96.053,30.670 C 96.227,30.596 96.428,30.677 96.501,30.850 L 96.582,31.040 C 96.656,31.213 96.575,31.414 96.401,31.488 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 97.158,33.426 L 97.158,33.426 L 96.844,32.594 L 96.844,32.594 C 97.021,32.528 97.218,32.617 97.285,32.793 L 97.357,32.986 C 97.424,33.163 97.334,33.360 97.158,33.426 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 97.833,35.395 L 97.833,35.395 L 97.554,34.550 L 97.554,34.550 C 97.734,34.491 97.927,34.588 97.986,34.768 L 98.050,34.963 C 98.109,35.142 98.012,35.336 97.833,35.395 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 98.424,37.389 L 98.424,37.389 L 98.182,36.534 L 98.182,36.534 C 98.363,36.482 98.552,36.588 98.604,36.769 L 98.660,36.967 C 98.711,37.149 98.606,37.338 98.424,37.389 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 98.932,39.407 L 98.932,39.407 L 98.726,38.542 L 98.726,38.542 C 98.909,38.498 99.093,38.612 99.137,38.795 L 99.185,38.996 C 99.229,39.179 99.116,39.363 98.932,39.407 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 99.355,41.445 L 99.355,41.445 L 99.185,40.572 L 99.185,40.572 C 99.370,40.536 99.549,40.656 99.586,40.842 L 99.625,41.044 C 99.661,41.229 99.540,41.408 99.355,41.445 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 99.692,43.498 L 99.692,43.498 L 99.559,42.619 L 99.559,42.619 C 99.745,42.590 99.919,42.719 99.948,42.905 L 99.979,43.109 C 100.007,43.295 99.879,43.470 99.692,43.498 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 99.943,45.563 L 99.943,45.563 L 99.846,44.679 L 99.846,44.679 C 100.034,44.659 100.203,44.794 100.223,44.982 L 100.245,45.187 C 100.266,45.374 100.131,45.543 99.943,45.563 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 100.107,47.638 L 100.107,47.638 L 100.048,46.750 L 100.048,46.750 C 100.236,46.738 100.399,46.880 100.411,47.068 L 100.425,47.274 C 100.438,47.462 100.295,47.625 100.107,47.638 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 100.184,49.717 L 100.184,49.717 L 100.162,48.828 L 100.162,48.828 C 100.350,48.823 100.507,48.972 100.512,49.161 L 100.517,49.367 C 100.522,49.556 100.373,49.712 100.184,49.717 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 100.174,51.798 L 100.174,51.798 L 100.189,50.909 L 100.189,50.909 C 100.378,50.912 100.528,51.067 100.525,51.256 L 100.521,51.462 C 100.518,51.651 100.363,51.801 100.174,51.798 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 100.077,53.876 L 100.077,53.876 L 100.129,52.989 L 100.129,52.989 C 100.317,53.000 100.461,53.161 100.450,53.350 L 100.438,53.555 C 100.427,53.744 100.265,53.887 100.077,53.876 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 99.893,55.949 L 99.893,55.949 L 99.982,55.064 L 99.982,55.064 C 100.170,55.083 100.307,55.251 100.288,55.438 L 100.267,55.643 C 100.248,55.831 100.081,55.968 99.893,55.949 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 99.622,58.012 L 99.622,58.012 L 99.748,57.132 L 99.748,57.132 C 99.935,57.158 100.065,57.332 100.038,57.518 L 100.009,57.722 C 99.982,57.909 99.809,58.039 99.622,58.012 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 99.265,60.062 L 99.265,60.062 L 99.428,59.188 L 99.428,59.188 C 99.614,59.222 99.736,59.401 99.701,59.586 L 99.664,59.789 C 99.629,59.974 99.451,60.096 99.265,60.062 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 98.823,62.095 L 98.823,62.095 L 99.022,61.228 L 99.022,61.228 C 99.206,61.271 99.321,61.454 99.279,61.638 L 99.232,61.839 C 99.190,62.023 99.007,62.137 98.823,62.095 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 98.296,64.108 L 98.296,64.108 L 98.531,63.250 L 98.531,63.250 C 98.713,63.300 98.820,63.488 98.770,63.670 L 98.716,63.869 C 98.666,64.051 98.478,64.158 98.296,64.108 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 97.685,66.097 L 97.685,66.097 L 97.956,65.250 L 97.956,65.250 C 98.136,65.308 98.235,65.500 98.177,65.680 L 98.114,65.876 C 98.057,66.056 97.864,66.155 97.685,66.097 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 96.991,68.059 L 96.991,68.059 L 97.297,67.224 L 97.297,67.224 C 97.474,67.289 97.565,67.485 97.500,67.662 L 97.429,67.856 C 97.364,68.033 97.168,68.124 96.991,68.059 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 96.215,69.990 L 96.215,69.990 L 96.557,69.168 L 96.557,69.168 C 96.731,69.241 96.814,69.441 96.741,69.615 L 96.662,69.805 C 96.590,69.979 96.390,70.062 96.215,69.990 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 95.360,71.886 L 95.360,71.886 L 95.735,71.080 L 95.735,71.080 C 95.906,71.160 95.980,71.363 95.901,71.534 L 95.814,71.721 C 95.734,71.892 95.531,71.966 95.360,71.886 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 94.426,73.746 L 94.426,73.746 L 94.835,72.956 L 94.835,72.956 C 95.002,73.043 95.068,73.249 94.981,73.416 L 94.886,73.599 C 94.800,73.767 94.593,73.832 94.426,73.746 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 93.415,75.564 L 93.415,75.564 L 93.856,74.792 L 93.856,74.792 C 94.020,74.886 94.077,75.095 93.983,75.258 L 93.881,75.437 C 93.787,75.601 93.578,75.658 93.415,75.564 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 92.328,77.339 L 92.328,77.339 L 92.802,76.586 L 92.802,76.586 C 92.961,76.686 93.009,76.897 92.909,77.057 L 92.799,77.231 C 92.699,77.391 92.488,77.439 92.328,77.339 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 91.168,79.066 L 91.168,79.066 L 91.673,78.334 L 91.673,78.334 C 91.828,78.441 91.867,78.654 91.760,78.809 L 91.644,78.979 C 91.536,79.134 91.324,79.173 91.168,79.066 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 89.937,80.744 L 89.937,80.744 L 90.472,80.033 L 90.472,80.033 C 90.623,80.147 90.653,80.361 90.539,80.512 L 90.416,80.676 C 90.302,80.827 90.088,80.857 89.937,80.744 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 88.637,82.368 L 88.637,82.368 L 89.201,81.681 L 89.201,81.681 C 89.347,81.800 89.368,82.016 89.248,82.161 L 89.118,82.321 C 88.998,82.467 88.783,82.488 88.637,82.368 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 87.270,83.937 L 87.270,83.937 L 87.862,83.273 L 87.862,83.273 C 88.003,83.399 88.015,83.615 87.889,83.756 L 87.752,83.909 C 87.626,84.050 87.410,84.062 87.270,83.937 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 85.838,85.447 L 85.838,85.447 L 86.458,84.809 L 86.458,84.809 C 86.593,84.940 86.596,85.156 86.465,85.292 L 86.321,85.440 C 86.190,85.575 85.973,85.578 85.838,85.447 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 84.344,86.895 L 84.344,86.895 L 84.990,86.284 L 84.990,86.284 C 85.120,86.421 85.114,86.637 84.977,86.767 L 84.827,86.908 C 84.690,87.038 84.474,87.032 84.344,86.895 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 82.791,88.280 L 82.791,88.280 L 83.462,87.696 L 83.462,87.696 C 83.586,87.839 83.571,88.054 83.429,88.178 L 83.273,88.313 C 83.131,88.437 82.915,88.422 82.791,88.280 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 81.182,89.599 L 81.182,89.599 L 81.876,89.043 L 81.876,89.043 C 81.994,89.191 81.970,89.406 81.823,89.524 L 81.662,89.652 C 81.515,89.770 81.300,89.746 81.182,89.599 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 79.518,90.849 L 79.518,90.849 L 80.236,90.323 L 80.236,90.323 C 80.347,90.475 80.314,90.689 80.162,90.801 L 79.996,90.922 C 79.844,91.034 79.630,91.001 79.518,90.849 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 77.804,92.028 L 77.804,92.028 L 78.543,91.533 L 78.543,91.533 C 78.648,91.689 78.606,91.902 78.449,92.007 L 78.278,92.121 C 78.121,92.227 77.909,92.185 77.804,92.028 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 76.042,93.134 L 76.042,93.134 L 76.801,92.671 L 76.801,92.671 C 76.899,92.832 76.848,93.042 76.687,93.140 L 76.511,93.248 C 76.350,93.346 76.140,93.295 76.042,93.134 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 74.235,94.166 L 74.235,94.166 L 75.012,93.734 L 75.012,93.734 C 75.104,93.899 75.044,94.107 74.879,94.199 L 74.699,94.299 C 74.534,94.390 74.326,94.331 74.235,94.166 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 72.386,95.121 L 72.386,95.121 L 73.181,94.722 L 73.181,94.722 C 73.266,94.891 73.198,95.096 73.029,95.181 L 72.845,95.273 C 72.676,95.358 72.471,95.290 72.386,95.121 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 70.499,95.998 L 70.499,95.998 L 71.310,95.633 L 71.310,95.633 C 71.388,95.805 71.311,96.007 71.139,96.085 L 70.951,96.169 C 70.779,96.247 70.577,96.170 70.499,95.998 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 68.577,96.795 L 68.577,96.795 L 69.403,96.464 L 69.403,96.464 C 69.473,96.639 69.388,96.838 69.213,96.908 L 69.021,96.985 C 68.846,97.055 68.647,96.970 68.577,96.795 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 66.623,97.511 L 66.623,97.511 L 67.462,97.215 L 67.462,97.215 C 67.525,97.393 67.431,97.588 67.253,97.651 L 67.059,97.719 C 66.881,97.782 66.686,97.689 66.623,97.511 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 64.641,98.144 L 64.641,98.144 L 65.492,97.884 L 65.492,97.884 C 65.547,98.064 65.446,98.255 65.265,98.311 L 65.068,98.371 C 64.888,98.426 64.697,98.325 64.641,98.144 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 62.635,98.694 L 62.635,98.694 L 63.495,98.469 L 63.495,98.469 C 63.543,98.652 63.433,98.839 63.251,98.886 L 63.052,98.938 C 62.869,98.986 62.682,98.877 62.635,98.694 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 60.607,99.160 L 60.607,99.160 L 61.476,98.971 L 61.476,98.971 C 61.516,99.155 61.399,99.337 61.214,99.377 L 61.013,99.421 C 60.828,99.461 60.647,99.344 60.607,99.160 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 58.561,99.540 L 58.561,99.540 L 59.437,99.388 L 59.437,99.388 C 59.469,99.574 59.345,99.750 59.159,99.783 L 58.956,99.818 C 58.770,99.850 58.593,99.726 58.561,99.540 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 56.501,99.834 L 56.501,99.834 L 57.383,99.719 L 57.383,99.719 C 57.407,99.906 57.275,100.077 57.088,100.102 L 56.884,100.128 C 56.697,100.153 56.525,100.021 56.501,99.834 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 54.431,100.041 L 54.431,100.041 L 55.316,99.963 L 55.316,99.963 C 55.333,100.151 55.194,100.317 55.006,100.333 L 54.801,100.351 C 54.613,100.368 54.447,100.229 54.431,100.041 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 52.353,100.162 L 52.353,100.162 L 53.242,100.121 L 53.242,100.121 C 53.250,100.309 53.105,100.469 52.916,100.478 L 52.710,100.487 C 52.522,100.496 52.362,100.350 52.353,100.162 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 50.273,100.195 L 50.273,100.195 L 51.162,100.192 L 51.162,100.192 C 51.163,100.380 51.011,100.534 50.822,100.535 L 50.616,100.536 C 50.427,100.536 50.274,100.384 50.273,100.195 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 48.193,100.142 L 48.193,100.142 L 49.081,100.175 L 49.081,100.175 C 49.074,100.364 48.916,100.511 48.727,100.504 L 48.521,100.496 C 48.333,100.489 48.186,100.330 48.193,100.142 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 46.117,100.001 L 46.117,100.001 L 47.003,100.072 L 47.003,100.072 C 46.988,100.260 46.824,100.400 46.635,100.385 L 46.430,100.369 C 46.242,100.354 46.102,100.189 46.117,100.001 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 44.048,99.774 L 44.048,99.774 L 44.931,99.881 L 44.931,99.881 C 44.908,100.069 44.738,100.202 44.551,100.179 L 44.346,100.154 C 44.159,100.131 44.026,99.961 44.048,99.774 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 41.991,99.460 L 41.991,99.460 L 42.869,99.604 L 42.869,99.604 C 42.838,99.791 42.662,99.917 42.476,99.886 L 42.273,99.852 C 42.087,99.822 41.961,99.646 41.991,99.460 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 39.949,99.060 L 39.949,99.060 L 40.820,99.241 L 40.820,99.241 C 40.782,99.426 40.601,99.544 40.416,99.506 L 40.214,99.464 C 40.030,99.426 39.911,99.245 39.949,99.060 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 37.926,98.575 L 37.926,98.575 L 38.788,98.793 L 38.788,98.793 C 38.742,98.976 38.556,99.086 38.373,99.040 L 38.174,98.990 C 37.991,98.944 37.880,98.758 37.926,98.575 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 35.925,98.006 L 35.925,98.006 L 36.777,98.259 L 36.777,98.259 C 36.723,98.440 36.533,98.543 36.352,98.489 L 36.155,98.431 C 35.974,98.377 35.871,98.187 35.925,98.006 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 33.949,97.353 L 33.949,97.353 L 34.790,97.642 L 34.790,97.642 C 34.729,97.821 34.534,97.916 34.356,97.854 L 34.161,97.787 C 33.982,97.726 33.888,97.532 33.949,97.353 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 32.002,96.619 L 32.002,96.619 L 32.830,96.942 L 32.830,96.942 C 32.762,97.118 32.563,97.205 32.388,97.136 L 32.196,97.061 C 32.020,96.992 31.933,96.794 32.002,96.619 Z"/>
+
+  </Canvas>
+
+  <Canvas>
+
+  <!-- Layer 1/Knob/<Group>/<Group>/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff1f1f1f" StrokeMiterLimit="1.0" Fill="#ff3f3f3f" Data="F1 M 30.088,95.803 L 30.088,95.803 L 30.902,96.161 L 30.902,96.161 C 30.826,96.334 30.624,96.412 30.451,96.336 L 30.263,96.253 C 30.090,96.177 30.012,95.976 30.088,95.803 Z"/>
+
+  </Canvas>
+
+  </Canvas>
+
+  </Canvas>
+
+  </Canvas>
+</Canvas>

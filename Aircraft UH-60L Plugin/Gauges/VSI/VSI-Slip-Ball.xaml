@@ -1,0 +1,24 @@
+<Canvas Width="16.000" Height="16.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="16.000" Height="16.000">
+
+
+  <!-- Slip Ball/Slip Ball -->
+  <Path Data="F1 M 0.000,8.000 C 0.000,3.582 3.582,0.000 8.000,0.000 C 12.418,0.000 16.000,3.582 16.000,8.000 C 16.000,12.418 12.418,16.000 8.000,16.000 C 3.582,16.000 0.000,12.418 0.000,8.000 Z">
+    <Path.Fill>
+      <RadialGradientBrush MappingMode="Absolute" GradientOrigin="8.000,-8.000" Center="8.000,-8.000" RadiusX="8.000" RadiusY="8.000">
+        <RadialGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ffffffff"/>
+          <GradientStop Offset="0.83" Color="#ff9f9f9f"/>
+          <GradientStop Offset="1.00" Color="#ff3f3f3f"/>
+        </RadialGradientBrush.GradientStops>
+        <RadialGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.000" />
+        </RadialGradientBrush.Transform>
+      </RadialGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  </Canvas>
+</Canvas>

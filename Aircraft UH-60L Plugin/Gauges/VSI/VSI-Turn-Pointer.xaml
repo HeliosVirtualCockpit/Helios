@@ -1,0 +1,10 @@
+<Canvas Width="23.500" Height="13.500"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="23.500" Height="13.500">
+
+  <!-- Turn/Turn -->
+  <Path StrokeThickness="0.5" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 23.250,0.250 L 0.250,0.250 L 0.250,6.223 L 1.616,6.223 L 4.265,9.690 L 4.265,13.250 L 19.387,13.250 L 19.276,9.852 L 21.650,6.223 L 23.250,6.223 L 23.250,0.250 Z"/>
+
+  </Canvas>
+</Canvas>
