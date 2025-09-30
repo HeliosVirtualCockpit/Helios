@@ -397,6 +397,7 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\ADI\ADI_V1.cs" />
     <Compile Include="Gauges\ADI\ADI.cs" />
     <Compile Include="Gauges\Altimeter\BarometricAltimeter.cs" />
     <Compile Include="Gauges\Altimeter\RADARAltimeter.cs" />

@@ -592,6 +592,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gauges\ADI\BackupADI.cs" />
+    <Compile Include="Gauges\ADI\BackupADIGauge_V1.cs" />
     <Compile Include="Gauges\ADI\BackupADIGauge.cs" />
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\CautionPanel\Caution_Panel.cs" />

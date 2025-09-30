@@ -69,6 +69,7 @@
     <Compile Include="Gauges\Fuel Panel\FuelGaugeWSO.cs" />
     <Compile Include="Gauges\Fuel Panel\FuelPanel.cs" />
     <Compile Include="Gauges\Fuel Panel\FuelPanelWSO.cs" />
+    <Compile Include="Gauges\Instruments\ADI_V1.cs" />
     <Compile Include="Gauges\Instruments\Compass Pilot.cs" />
     <Compile Include="Gauges\Instruments\Compass.cs" />
     <Compile Include="Gauges\Instruments\ADI Pilot.cs" />

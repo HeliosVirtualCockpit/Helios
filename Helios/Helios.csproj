@@ -217,6 +217,7 @@
       <DependentUpon>HeliosPanelBehaviorEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="EnumDisplayEntry.cs" />
+    <Compile Include="Gauges\A-10\ADI\ADI_V1.cs" />
     <Compile Include="Gauges\A-10\Common\Blanking Panel Left.cs" />
     <Compile Include="Gauges\A-10\Radios\UHFRadio.cs" />
     <Compile Include="Gauges\A-10\Radios\ARC-210.cs" />

@@ -62,8 +62,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Interfaces\ExportFunctions.lua" />
-    <Resource Include="Images\SAI\adi_off_flag.png" />
-    <Resource Include="Images\SAI\adi_ball.png" />
+    <Resource Include="Images\SAI\V1\adi_off_flag.png" />
+    <Resource Include="Images\SAI\V1\adi_ball.png" />
     <Content Include="Templates\Base\AH-64D\0 Altimeter.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -125,7 +125,7 @@
     <Compile Include="Gauges\MFD\MFD Pilot Right.cs" />
     <Compile Include="Gauges\MFD\MFD.cs" />
     <Compile Include="Gauges\Power\PowerLever.cs" />
-    <Compile Include="Gauges\SAI\SAI.cs" />
+    <Compile Include="Gauges\SAI\SAI_V1.cs" />
     <Compile Include="Gauges\TEDAC\TEDAC.cs" />
     <Compile Include="Interfaces\AH-64DInterface.cs" />
     <Compile Include="Interfaces\Functions\AH-64DFunction.cs" />
@@ -313,46 +313,46 @@
     <Resource Include="Images\Power\Lever_5.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_arrow.xaml">
+    <Resource Include="Images\SAI\V1\adi_arrow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_bezel.png" />
+    <Resource Include="Images\SAI\V1\adi_bezel.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_guides.xaml">
+    <Resource Include="Images\SAI\V1\adi_guides.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_inner_ring.xaml">
+    <Resource Include="Images\SAI\V1\adi_inner_ring.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_innermost_ring.xaml">
+    <Resource Include="Images\SAI\V1\adi_innermost_ring.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_outer_ring.xaml">
+    <Resource Include="Images\SAI\V1\adi_outer_ring.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_turn_marker.xaml">
+    <Resource Include="Images\SAI\V1\adi_turn_marker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_wings.xaml">
+    <Resource Include="Images\SAI\V1\adi_wings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -361,7 +361,7 @@
     <Resource Include="Images\TEDAC\TEDAC_frame.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SAI\adi_slip_ball.xaml">
+    <Resource Include="Images\SAI\V1\adi_slip_ball.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
