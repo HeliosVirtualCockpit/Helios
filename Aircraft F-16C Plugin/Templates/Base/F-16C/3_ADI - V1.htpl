@@ -1,13 +1,12 @@
 ﻿<ControlTemplate>
-	<Name>VSI (Copilot)</Name>
-	<Category>UH-60L Blackhawk</Category>
-	<TypeIdentifier>Helios.UH60L.VSI.Copilot</TypeIdentifier>
+	<Name>ADI Gauge (2D)</Name>
+	<Category>F-16</Category>
+	<TypeIdentifier>Helios.F16.ADI.V1</TypeIdentifier>
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>
 			<Size>300,300</Size>
 			<Hidden>False</Hidden>
-			<Children />
 		</TemplateValues>
 	</Template>
 </ControlTemplate>

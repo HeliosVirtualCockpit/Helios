@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+	<Name>ADI (2D)</Name>
+	<Category>A-10C Warthog</Category>
+	<TypeIdentifier>Helios.A10.ADI.V1</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>350,350</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

@@ -1,12 +1,13 @@
 ﻿<ControlTemplate>
-	<Name>VSI (Copilot)</Name>
-	<Category>UH-60L Blackhawk</Category>
-	<TypeIdentifier>Helios.UH60L.VSI.Copilot</TypeIdentifier>
+	<Name>ADI</Name>
+	<Category>M-2000C</Category>
+	<TypeIdentifier>Helios.M2000C.ADI</TypeIdentifier>
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>
 			<Size>300,300</Size>
 			<Hidden>False</Hidden>
+			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
 			<Children />
 		</TemplateValues>
 	</Template>

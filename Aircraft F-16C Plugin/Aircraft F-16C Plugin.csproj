@@ -56,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Templates\Base\F-16C\3_ADI - V1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Gauges\Instruments\fuelflow_bezel.png" />
     <Resource Include="Images\a-a-press.png" />
     <Resource Include="Images\a-a.png" />
@@ -292,6 +295,7 @@
     <Resource Include="Interfaces\ExportFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gauges\ADI\ADI_V1.cs" />
     <Compile Include="Gauges\ADI\ADI.cs" />
     <Compile Include="Gauges\Airspeed\Airspeed.cs" />
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />

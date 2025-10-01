@@ -915,6 +915,9 @@
     <Content Include="Templates\Base\A-10C\8 Components\Keys\UFC_IFF.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Base\A-10C\3 Gauges\1 Primary Instruments\ADI - V1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\Helios.targets" />
   <PropertyGroup>

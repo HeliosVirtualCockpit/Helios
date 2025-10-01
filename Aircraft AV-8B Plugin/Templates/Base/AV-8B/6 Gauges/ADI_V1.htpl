@@ -1,7 +1,7 @@
 ﻿<ControlTemplate>
-	<Name>VSI (Copilot)</Name>
-	<Category>UH-60L Blackhawk</Category>
-	<TypeIdentifier>Helios.UH60L.VSI.Copilot</TypeIdentifier>
+	<Name>ADI Gauge (2D)</Name>
+	<Category>AV-8B Harrier</Category>
+	<TypeIdentifier>Helios.AV8B.SAI.V1</TypeIdentifier>
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>

@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Standby Attitude Indicator (2D)</Name>
+	<Category>AH-64D Apache</Category>
+	<TypeIdentifier>Helios.AH64D.SAI.V1</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>300,300</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

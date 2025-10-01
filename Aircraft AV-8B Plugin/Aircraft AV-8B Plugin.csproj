@@ -239,6 +239,7 @@
     <Compile Include="Gauges\5 Digit Display\5DigitDisplay.cs" />
     <Compile Include="Gauges\Accumulator\Accumulator.cs" />
     <Compile Include="Gauges\ADI\ADI.cs" />
+    <Compile Include="Gauges\ADI\SAI_V1.cs" />
     <Compile Include="Gauges\ADI\SAI.cs" />
     <Compile Include="Gauges\ADI\SlipTurn.cs" />
     <Compile Include="Gauges\Advisory Panel\advisory_Panel.cs" />
@@ -1494,12 +1495,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Gauges\ADI\ADI-Tape.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
+    <Content Include="Templates\Base\AV-8B\6 Gauges\ADI_V1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\ADI\ADI-Bank-Needle.xaml">
@@ -1545,6 +1543,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\ADI\ADI-Tape-1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\V1\adi_inner_ring.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\V1\adi_adjustment_scale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\ADI-Background.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

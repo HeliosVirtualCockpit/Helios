@@ -48,7 +48,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
         {
             Point center = new Point(174d, 163d);
 
-            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape-1.xaml", new Point(46d, 33d), new Size(260, 260), 0d, 90d, 0d)
+            Components.Add(new GaugeImage("{AV-8B}/Gauges/ADI/ADI-Background.xaml", new Rect(25d, 25d, 300d, 300d)));
+
+            _cylinder = new GaugeCylinder("{AV-8B}/Gauges/ADI/ADI-Tape-1.xaml", new Point(46d, 33d), new Size(260, 260), 0d, 90d, 0d, 35d)
             {
                 CylinderHeight = 0.9,
                 CylinderRadius = 0.9

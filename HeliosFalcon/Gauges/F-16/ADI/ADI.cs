@@ -98,7 +98,8 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
             _ball = new GaugeBall(_ballOffImage, new Point(50d, 42d), new Size(250d, 250d), 0d, 0d, -90d, 35d);
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
- 
+            _ball.Y = _ball.Z = -0.001d;
+
             _ballMask = new GaugeImage(_ballMaskImage, new Rect(60d, 50d, 230d, 230d));
 			Components.Add(_ballMask);
 

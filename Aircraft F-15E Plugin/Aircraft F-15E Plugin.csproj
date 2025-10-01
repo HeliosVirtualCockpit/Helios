@@ -69,6 +69,7 @@
     <Compile Include="Gauges\Fuel Panel\FuelGaugeWSO.cs" />
     <Compile Include="Gauges\Fuel Panel\FuelPanel.cs" />
     <Compile Include="Gauges\Fuel Panel\FuelPanelWSO.cs" />
+    <Compile Include="Gauges\Instruments\ADI_V1.cs" />
     <Compile Include="Gauges\Instruments\Compass Pilot.cs" />
     <Compile Include="Gauges\Instruments\Compass.cs" />
     <Compile Include="Gauges\Instruments\ADI Pilot.cs" />
@@ -405,6 +406,9 @@
     <Resource Include="Interfaces\ExportFunctionsF15E.lua" />
     <None Include="app.config" />
     <Content Include="Docs\DCS.F-15E.Plugin.Install.Read.Me.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\F-15E\Z ADI Gauge - V1.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Templates\Base\F-15E\W UFC Display Line.htpl.prototype">

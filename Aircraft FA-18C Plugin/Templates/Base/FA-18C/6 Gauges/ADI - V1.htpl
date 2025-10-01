@@ -1,7 +1,7 @@
 ﻿<ControlTemplate>
-	<Name>VSI (Copilot)</Name>
-	<Category>UH-60L Blackhawk</Category>
-	<TypeIdentifier>Helios.UH60L.VSI.Copilot</TypeIdentifier>
+	<Name>ADI (2D)</Name>
+	<Category>F/A-18C Hornet</Category>
+	<TypeIdentifier>Helios.FA18C.ADI.V1</TypeIdentifier>
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>

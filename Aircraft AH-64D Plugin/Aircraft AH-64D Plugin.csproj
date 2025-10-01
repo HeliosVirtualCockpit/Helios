@@ -63,6 +63,7 @@
     </Content>
     <Resource Include="Interfaces\ExportFunctions.lua" />
     <Resource Include="Images\SAI\adi_off_flag.png" />
+    <Resource Include="Images\SAI\V1\adi_ball.png" />
     <Content Include="Templates\Base\AH-64D\0 Altimeter.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -125,6 +126,7 @@
     <Compile Include="Gauges\MFD\MFD.cs" />
     <Compile Include="Gauges\Power\PowerLever.cs" />
     <Compile Include="Gauges\SAI\SAI.cs" />
+    <Compile Include="Gauges\SAI\SAI_V1.cs" />
     <Compile Include="Gauges\TEDAC\TEDAC.cs" />
     <Compile Include="Interfaces\AH-64DInterface.cs" />
     <Compile Include="Interfaces\Functions\AH-64DFunction.cs" />
@@ -368,6 +370,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Content Include="Templates\Base\AH-64D\0 Standby Attitude Indicator-V1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\SAI\adi_ball.xaml">
