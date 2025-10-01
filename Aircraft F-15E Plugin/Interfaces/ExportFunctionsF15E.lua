@@ -5,6 +5,8 @@ function driver.processHighImportance(mainPanelDevice)
 	helios.send(2059, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(356), mainPanelDevice:get_argument_value(357), mainPanelDevice:get_argument_value(358), mainPanelDevice:get_argument_value(359)))		-- QNH pressure 	
 	helios.send(2251, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(1359), mainPanelDevice:get_argument_value(1358), mainPanelDevice:get_argument_value(1356)))													--  Altitude (WSO)
 	helios.send(2259, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(1360), mainPanelDevice:get_argument_value(1361), mainPanelDevice:get_argument_value(1362), mainPanelDevice:get_argument_value(1363)))	-- QNH pressure 	
+	-- Send ADI Ball Values	
+	helios.send(2050, string.format("%0.4f;0.0;%0.4f", mainPanelDevice:get_argument_value(349), mainPanelDevice:get_argument_value(348)))
 end
 local oduVarNames = {
 "UFC_SC_01",

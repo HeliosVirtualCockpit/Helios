@@ -1,7 +1,16 @@
 -- Exports.Lua from Helios UH-60L interface
+-- Version: 1.6.6160.0000
+-- Commit: f114afb9621c70d0211b82d84cb4664ab140dec4
+
 driver.state = {}
 
 function driver.processHighImportance(mainPanelDevice)
+
+	-- Pilot VSI ball combined movement values
+	helios.send(2049, string.format("%0.3f;0.0;%0.3f", mainPanelDevice:get_argument_value(420), mainPanelDevice:get_argument_value(421)))
+	-- Copilot VSI ball combined movement values
+	helios.send(2050, string.format("%0.3f;0.0;%0.3f", mainPanelDevice:get_argument_value(433), mainPanelDevice:get_argument_value(434)))
+
     -- Pilot Barometric Altimeter
     helios.send(
         2051,

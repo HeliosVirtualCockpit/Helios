@@ -17,44 +17,54 @@
 namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Util;
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Media3D;
 
     [HeliosControl("Helios.F15E.Instruments.ADI", "ADI", "F-15E Strike Eagle", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class ADIGauge : BaseGauge
     {
         private HeliosValue _pitch;
         private HeliosValue _roll;
+        private HeliosValue _rotationValue;
         private HeliosValue _pitchAdjustment;
         private HeliosValue _offFlag;
 
         private GaugeNeedle _offFlagNeedle;
-        private GaugeNeedle _ball;
+        private GaugeCylinder _cylinder;
         private GaugeNeedle _bankNeedle;
         private GaugeNeedle _wingsNeedle;
 
-        private CalibrationPointCollectionDouble _pitchCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
+
+        private bool _suppressScale = false;
 
         public ADIGauge(string name, Size size, string device)
             : base(name, size)
         {
             Point center = new Point(200d, 200d);
 
-            _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI_Tape.xaml", center, new Size(300d, 1440d), new Point(150d, 1440d / 2d));
-            _ball.Clip = new EllipseGeometry(center, 150d, 150d);
-            Components.Add(_ball);
-
-            Components.Add(new GaugeImage("{F-15E}/Gauges/Instruments/ADI_Gradiant.xaml", new Rect(50d, 50d, 300d, 300d)));
+            _cylinder = new GaugeCylinder("{F-15E}/Gauges/Instruments/ADI-Tape.xaml", new Point(25d, 25d), new Size(350d, 350d), 0d, 90d, 0d, 35) { 
+                CylinderHeight = 1.15d,
+                CylinderRadius = 0.8d
+            };
+            _cylinder.Clip = new EllipseGeometry(center, 150d, 150d);
+            Components.Add(_cylinder);
+            _cylinder.Y = -0.001d;
+            _cylinder.Z = 0.001d;
+            _cylinder.LightingBrightness = 0.9d;
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
             _wingsNeedle = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
 
-            _bankNeedle = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI_Pointer.xaml", center, new Size(30d, 39d), new Point(15d, -111d));
+            _bankNeedle = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI-Needle.xaml", center, new Size(300d, 300d), new Point(150d, 150d));
             Components.Add(_bankNeedle);
+
+            Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(50d, 50d, 300d, 300d)));
 
             Components.Add(new GaugeImage("{F-15E}/Gauges/Instruments/ADI_Bezel.xaml", new Rect(0d, 0d, 400d, 400d)));
 
@@ -65,18 +75,21 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_offFlag);
 
-            _pitch = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Pitch Angle", "Current pitch of the aircraft in degrees.", "(-90 to +90)", BindingValueUnits.Degrees);
+            _pitch = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Pitch Angle", "Current pitch of the aircraft in degrees.", "-90 to +90", BindingValueUnits.Degrees);
             _pitch.Execute += new HeliosActionHandler(Pitch_Execute);
             Actions.Add(_pitch);
 
-            _pitchAdjustment = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Pitch adjustment offset", "Location of pitch reference wings.", "(-1 to 1) 1 full up and -1 is full down.", BindingValueUnits.Numeric);
+            _pitchAdjustment = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Pitch adjustment offset", "Location of pitch reference wings.", "1 full up and -1 is full down.", BindingValueUnits.Numeric);
             _pitchAdjustment.Execute += new HeliosActionHandler(PitchAdjust_Execute);
             Actions.Add(_pitchAdjustment);
 
-            _roll = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "(-180 to +180)", BindingValueUnits.Degrees);
+            _roll = new HeliosValue(this, new BindingValue(0d), $"{device}_{name}", "ADI Aircraft Bank Angle", "Current bank of the aircraft in degrees.", "-180 to +180", BindingValueUnits.Degrees);
             _roll.Execute += new HeliosActionHandler(Bank_Execute);
             Actions.Add(_roll);
 
+            _rotationValue = new HeliosValue(this, new BindingValue(""), "Standby Attitude Indicator", "ADI ball rotation", "X/Y/Z angle changes for the ADI ball.", "Text containing three numbers x;y;z", BindingValueUnits.Text);
+            _rotationValue.Execute += new HeliosActionHandler(Rotation_Execute);
+            Actions.Add(_rotationValue);
         }
 
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
@@ -88,7 +101,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue);
+            _cylinder.X = -e.Value.DoubleValue;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
@@ -98,8 +111,60 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         void Bank_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Rotation = e.Value.DoubleValue;
+            _cylinder.Z = -e.Value.DoubleValue;
             _bankNeedle.Rotation = e.Value.DoubleValue;
         }
+        void Rotation_Execute(object action, HeliosActionEventArgs e)
+        {
+            _rotationValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            string[] parts;
+            parts = Tokenizer.TokenizeAtLeast(e.Value.StringValue, 3, ';');
+            double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
+            double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
+            double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
+            _cylinder.Rotation3D = new Point3D(-y, x, -z);
+            _bankNeedle.Rotation = z;
+        }
+        public override bool EffectsExclusion
+        {
+            get => base.EffectsExclusion;
+            set
+            {
+                if (!base.EffectsExclusion.Equals(value))
+                {
+                    base.EffectsExclusion = value;
+                    OnPropertyChanged("EffectsExclusion", !value, value, true);
+                }
+            }
+        }
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            if (!_suppressScale)
+            {
+                _cylinder.ScaleChildren(scaleX, scaleY);
+                _suppressScale = false;
+            }
+            base.ScaleChildren(scaleX, scaleY);
+        }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _cylinder.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+                _suppressScale = true;
+            }
+        }
+        public override void Reset()
+        {
+            base.Reset();
+            _cylinder.Reset();
+            _pitch.SetValue(new BindingValue(0d), true);
+            _roll.SetValue(new BindingValue(0d), true);
+            _rotationValue.SetValue(new BindingValue("0;0;0"), true);
+            _pitchAdjustment.SetValue(new BindingValue(0d), true);
+            _offFlag.SetValue(new BindingValue(false), true);
+        }
+
     }
 }

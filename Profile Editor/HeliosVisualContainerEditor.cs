@@ -19,8 +19,10 @@ using System.Windows.Controls;
 
 namespace GadrocsWorkshop.Helios.ProfileEditor
 {
+    using GadrocsWorkshop.Helios.Controls.Special;
     using GadrocsWorkshop.Helios.ProfileEditor.UndoEvents;
     using GadrocsWorkshop.Helios.Windows.Controls;
+    using NLog.Targets;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -807,6 +809,10 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             {
                 removedControls.Add(control);
                 removedIndexes.Add(editor.VisualContainer.Children.IndexOf(control));
+                if(control is EffectColorAdjuster eFC)
+                {
+                    eFC.DeleteEffect();
+                }
             }
 
             foreach (HeliosVisual control in removedControls)
@@ -1254,7 +1260,11 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
                 List<HeliosVisual> localObjects = new List<HeliosVisual>();
                 foreach (HeliosVisual control in newControls)
                 {
-                    localObjects.Add(control);
+                    if(!(control.IsUnique && editor.VisualContainer.Children.Where(visual => visual.TypeIdentifier == control.TypeIdentifier)
+                   .Select(visual => visual.TypeIdentifier)
+                   .Count() > 0)){
+                        localObjects.Add(control);
+                    }
                 }
 
                 // load all these now, instead of streaming enumeration (just for ease of debugging really)

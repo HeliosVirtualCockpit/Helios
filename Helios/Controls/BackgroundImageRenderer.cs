@@ -27,9 +27,9 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (Visual is IBackgroundImage)
+            if (Visual is IBackgroundImage && _backgroundBrush != null)
             {
-                drawingContext.DrawRectangle(_backgroundBrush, null, _backgroundRectangle);
+                DrawImage(drawingContext, _backgroundBrush.ImageSource, _backgroundRectangle);
             }
         }
 

@@ -1,2 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="svg2" Width="350" Height="350"><Canvas.Resources/><Canvas Name="layer1"><Canvas><Canvas.RenderTransform><TransformGroup><!--g--><TranslateTransform X="3.0735841" Y="-703.29333"/></TransformGroup></Canvas.RenderTransform><Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3736" Fill="#FF232323" Stroke="#FF000000" StrokeThickness="1" StrokeMiterLimit="4" Data="m 5 15 0 325 341.5 0 0 -325 L 5 15 z m 170.09375 20.125 c 81.53746 0 135.875 62.95724 135.875 139.9375 0 62.45668 -36.24664 112.42216 -93.46875 129.0625 l 0 18.875 -85 0 0 -18.46875 C 95.037828 294.0271 66.68482 269.28439 51.40625 236 L 35.5 236 l 0 -122 16 0 C 72.252977 67.475826 116.87641 35.125 175.09375 35.125 z M 33 62 33.0625 62 C 33.04294 62.022 33.01955 62.0405 33 62.0625 L 33 62 z"><!--path--><Path.RenderTransform><TranslateTransform X="-3.0735841" Y="703.29333"/></Path.RenderTransform></Path><Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3751" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 18.322416 877.36218 13.332607 0"/><Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="25" Canvas.Top="850" Width="1" Height="1" Name="rect3753" Fill="#FF1A1A1A" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4"/><Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="25" Canvas.Top="823" Width="1" Height="1" Name="rect3755" Fill="#FF1A1A1A" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4"/><Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="25" Canvas.Top="904" Width="1" Height="1" Name="rect3757" Fill="#FF1A1A1A" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4"/><Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="25" Canvas.Top="931" Width="1" Height="1" Name="rect3759" Fill="#FF1A1A1A" Stroke="#FFFFFFFF" StrokeThickness="2" StrokeMiterLimit="4"/><Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="139" Canvas.Top="1009" Width="67" Height="14" Name="rect3775" Fill="#FF787878" Stroke="#FF000000" StrokeThickness="1" StrokeMiterLimit="4"/></Canvas></Canvas></Canvas>
+<Canvas Width="350" Height="350"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="350.000" Height="350">
+
+  
+  <Canvas>
+
+  <!-- svg9/g7/path1 -->
+  <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff222222" Data="F1 M 33.000,62.000 L 33.062,62.000 C 33.043,62.022 33.020,62.041 33.000,62.062 L 33.000,62.000 Z M 175.094,35.125 C 256.631,35.125 310.969,98.082 310.969,175.062 C 310.969,237.519 274.722,287.485 217.500,304.125 L 217.611,313.125 L 132.611,313.125 L 132.500,304.531 C 95.038,294.027 66.685,269.284 51.406,236.000 L 35.500,236.000 L 35.500,114.000 L 51.500,114.000 C 72.253,67.476 116.876,35.125 175.094,35.125 Z M 5.000,15.000 L 5.000,340.000 L 346.500,340.000 L 346.500,15.000 L 5.000,15.000 Z"/>
+
+  <!-- svg9/g7/path2 -->
+  <Path StrokeThickness="4.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 21.396,174.069 L 34.729,174.069"/>
+
+  <!-- svg9/g7/rect2 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 30.074,146.707 L 30.074,146.707 C 31.178,146.707 32.074,147.602 32.074,148.707 L 32.074,148.707 C 32.074,149.811 31.178,150.707 30.074,150.707 L 30.074,150.707 C 28.969,150.707 28.074,149.811 28.074,148.707 L 28.074,148.707 C 28.074,147.602 28.969,146.707 30.074,146.707 Z"/>
+
+  <!-- svg9/g7/rect3 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 30.074,119.707 L 30.074,119.707 C 31.178,119.707 32.074,120.602 32.074,121.707 L 32.074,121.707 C 32.074,122.811 31.178,123.707 30.074,123.707 L 30.074,123.707 C 28.969,123.707 28.074,122.811 28.074,121.707 L 28.074,121.707 C 28.074,120.602 28.969,119.707 30.074,119.707 Z"/>
+
+  <!-- svg9/g7/rect4 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 30.074,200.707 L 30.074,200.707 C 31.178,200.707 32.074,201.602 32.074,202.707 L 32.074,202.707 C 32.074,203.811 31.178,204.707 30.074,204.707 L 30.074,204.707 C 28.969,204.707 28.074,203.811 28.074,202.707 L 28.074,202.707 C 28.074,201.602 28.969,200.707 30.074,200.707 Z"/>
+
+  <!-- svg9/g7/rect5 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 30.074,227.707 L 30.074,227.707 C 31.178,227.707 32.074,228.602 32.074,229.707 L 32.074,229.707 C 32.074,230.811 31.178,231.707 30.074,231.707 L 30.074,231.707 C 28.969,231.707 28.074,230.811 28.074,229.707 L 28.074,229.707 C 28.074,228.602 28.969,227.707 30.074,227.707 Z"/>
+
+  <!-- svg9/g7/rect6 -->
+  <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffcecece" Data="F1 M 132.074,301.707 L 218.074,301.707 C 221.940,301.707 225.074,304.841 225.074,308.707 L 225.074,308.707 C 225.074,312.573 221.940,315.707 218.074,315.707 L 132.074,315.707 C 128.208,315.707 125.074,312.573 125.074,308.707 L 125.074,308.707 C 125.074,304.841 128.208,301.707 132.074,301.707 Z"/>
+
+  <!-- svg9/g7/Shadow -->
+  <Path Data="F1 M 132.074,301.707 L 218.074,301.707 C 221.940,301.707 225.074,304.841 225.074,308.707 L 225.074,308.707 C 225.074,312.573 221.940,315.707 218.074,315.707 L 132.074,315.707 C 128.208,315.707 125.074,312.573 125.074,308.707 L 125.074,308.707 C 125.074,304.841 128.208,301.707 132.074,301.707 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="175.074,48.293" EndPoint="175.074,34.293">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.30" Color="#ffffffff"/>
+          <GradientStop Offset="0.58" Color="#ff7f7f7f"/>
+          <GradientStop Offset="1.00" Color="#ff000000"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,350.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  <!-- svg9/g7/<Compound Path> -->
+  <Path Fill="#ff000000" Data="F1 M 183.073,315.707 L 167.074,315.707 L 167.074,301.707 L 183.073,301.707 L 183.073,315.707 Z M 165.074,301.596 L 165.074,317.707 L 185.073,317.707 L 185.073,301.596 L 165.074,301.596 Z"/>
+
+  </Canvas>
+
+  <!-- svg9/path7 -->
+  <Path StrokeThickness="0.5" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 149.022,328.222 L 124.978,328.222 C 124.714,328.222 124.500,328.008 124.500,327.744 L 124.500,316.700 C 124.500,316.436 124.714,316.222 124.978,316.222 L 149.022,316.222 C 149.286,316.222 149.500,316.436 149.500,316.700 L 149.500,327.744 C 149.500,328.008 149.286,328.222 149.022,328.222 Z"/>
+
+  <!-- svg9/path8 -->
+  <Path StrokeThickness="0.5" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 186.504,328.222 L 163.496,328.222 C 163.222,328.222 163.000,328.000 163.000,327.726 L 163.000,316.718 C 163.000,316.444 163.222,316.222 163.496,316.222 L 186.504,316.222 C 186.778,316.222 187.000,316.444 187.000,316.718 L 187.000,327.726 C 187.000,328.000 186.778,328.222 186.504,328.222 Z"/>
+
+  <!-- svg9/path9 -->
+  <Path StrokeThickness="0.5" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 225.018,328.222 L 201.982,328.222 C 201.716,328.222 201.500,328.006 201.500,327.740 L 201.500,316.704 C 201.500,316.438 201.716,316.222 201.982,316.222 L 225.018,316.222 C 225.284,316.222 225.500,316.438 225.500,316.704 L 225.500,327.740 C 225.500,328.006 225.284,328.222 225.018,328.222 Z"/>
+
+  </Canvas>
+</Canvas>

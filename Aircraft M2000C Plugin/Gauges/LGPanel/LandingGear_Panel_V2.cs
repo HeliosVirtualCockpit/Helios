@@ -213,7 +213,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C
             customDrum.Drum_Height = 110;
             customDrum.MinVertical = 20;
             customDrum.VerticalTravel = -20;
-            customDrum.InitialVertical = -20;
+            customDrum.InitialVertical = 0;
             customDrum.MinInputVertical = -1;
             customDrum.MaxInputVertical = 1;
             if (vertical) { customDrum.Rotation = HeliosVisualRotation.CW; }

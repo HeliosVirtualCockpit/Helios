@@ -18,12 +18,15 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
     using GadrocsWorkshop.Helios.ProfileEditor.UndoEvents;
     using GadrocsWorkshop.Helios.Windows.Controls;
     using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Input;
 
     class VisualContainerDropAdvisor : IDropTargetAdvisor
     {
         private HeliosVisualContainerEditor _target;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
 
         public System.Windows.UIElement TargetUI
         {
@@ -73,7 +76,13 @@ namespace GadrocsWorkshop.Helios.ProfileEditor
             {
                 return;
             }
-
+            if (item.IsUnique && _target.VisualContainer.Children.Where(visual => visual.TypeIdentifier == item.TypeIdentifier)
+                   .Select(visual => visual.TypeIdentifier)
+                   .Count() > 0)
+            {
+                Logger.Debug($"Dropping second instance of unique type {item.TypeIdentifier} refused.");
+                return;
+            }
             if (Math.Abs(_target.ZoomFactor) < 0.0001)
             {
                 return;

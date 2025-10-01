@@ -271,7 +271,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             IsRunning = true;
             IsReplicating = ReplicatesOnProfileStart;
         }
-
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
         public override void MouseDown(System.Windows.Point location)
         {
             // No-Op

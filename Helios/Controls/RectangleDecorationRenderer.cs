@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Controls
         protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
         {
             RectangleDecoration profileRectangle = Visual as RectangleDecoration;
-            drawingContext.DrawRoundedRectangle(_fillBrush, _borderPen, _imageRect, profileRectangle.CornerRadius, profileRectangle.CornerRadius);
+            DrawRoundedRectangle(drawingContext, _fillBrush, _borderPen, _imageRect, profileRectangle.CornerRadius, profileRectangle.CornerRadius);
         }
 
         protected override void OnRefresh()

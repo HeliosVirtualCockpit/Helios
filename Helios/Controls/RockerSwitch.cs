@@ -17,6 +17,7 @@
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.ComponentModel;
     using System.Globalization;
@@ -25,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Xml;
 
     [HeliosControl("Helios.Base.RockerSwitch", "Rocker Switch with Label", "Rockers", typeof(RockerSwitchRenderer))]
-    public class RockerSwitch : ThreeWayToggleSwitch
+    public class RockerSwitch : ThreeWayToggleSwitch, ITextControl
     {
         private string _label = "";
         private TextFormat _labelFormat = new TextFormat();
@@ -95,6 +96,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public TextFormat TextFormat
         {
             get { return _labelFormat; }
+            set { return; }
         }
 
         public Point TextPushOffset

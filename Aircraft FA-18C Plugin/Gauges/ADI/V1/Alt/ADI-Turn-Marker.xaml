@@ -1,0 +1,19 @@
+<Canvas Width="14.4" Height="12.5"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="14.4" Height="12.5" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <!-- Layer 1/Slip Marker -->
+        <Path Stroke="#ff000000" Data="F1 M 0.000,7.483 L 4.000,10.824 L 4.000,10.824 L 4.000,19.037 C 4.000,19.154 4.095,19.248 4.211,19.248 L 17.789,19.248 C 17.905,19.248 18.000,19.154 18.000,19.037 L 18.000,10.824 L 22.000,7.483 L 22.000,0.000 L 0.000,0.000 L 0.000,7.483 Z" Fill="#ff00ff00" StrokeThickness="0.25" RenderTransformOrigin="0,0">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.65" ScaleY="0.65"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0" Y="0"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+
+    </Canvas>
+</Canvas>

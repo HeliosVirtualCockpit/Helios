@@ -104,8 +104,6 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-
-
         public double NeedleHeight
         {
             get => _needleHeight;

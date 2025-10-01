@@ -1,0 +1,62 @@
+<Canvas Width="280.000" Height="280.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="280.000" Height="280.000">
+  <!-- ADI-Inner-Ring/<Compound Path> -->
+  <Path Data="F1 M 140.000,251.000 C 78.696,251.000 29.000,201.304 29.000,140.000 C 29.000,78.696 78.696,29.000 140.000,29.000 C 201.304,29.000 251.000,78.696 251.000,140.000 C 251.000,201.304 201.304,251.000 140.000,251.000 Z M 140.000,0.000 C 62.680,0.000 0.000,62.680 0.000,140.000 C 0.000,164.594 6.350,187.702 17.487,207.788 L 17.694,207.788 C 33.993,236.804 60.339,259.426 92.007,270.944 L 92.007,271.555 C 106.977,277.018 123.140,280.000 140.000,280.000 C 156.118,280.000 171.596,277.267 186.007,272.255 L 186.007,271.569 C 218.256,260.314 245.118,237.591 261.726,208.288 L 262.233,208.288 C 273.544,188.086 280.000,164.799 280.000,140.000 C 280.000,62.680 217.320,0.000 140.000,0.000 Z">
+    <Path.Fill>
+      <RadialGradientBrush MappingMode="Absolute" GradientOrigin="140.000,210.000" Center="140.000,210.000" RadiusX="140.000" RadiusY="140.000">
+        <RadialGradientBrush.GradientStops>
+          <GradientStop Offset="0.73" Color="#ff000000"/>
+          <GradientStop Offset="0.86" Color="#ff2b2b2b"/>
+          <GradientStop Offset="1.00" Color="#ff575757"/>
+          <GradientStop Offset="1.00" Color="#ff575757"/>
+        </RadialGradientBrush.GradientStops>
+        <RadialGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,350.000" />
+        </RadialGradientBrush.Transform>
+      </RadialGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  <!-- ADI-Inner-Ring/path2 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 26.862,139.357 L 9.362,139.357"/>
+
+  <!-- ADI-Inner-Ring/path3 -->
+  <Path StrokeThickness="2.0" Stroke="#ffffffff" StrokeMiterLimit="1.0" Data="F1 M 269.862,139.357 L 252.362,139.357"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 252.362,137.330 L 252.362,141.330 L 270.362,141.330 L 270.362,137.330 L 252.362,137.330 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 252.025,72.481 L 236.437,81.481 L 238.437,84.945 L 254.025,75.945 L 252.025,72.481 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 194.721,41.077 L 198.185,43.077 L 207.185,27.488 L 203.721,25.488 L 194.721,41.077 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 157.899,28.337 L 161.838,29.031 L 163.575,19.183 L 159.635,18.489 L 157.899,28.337 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 176.867,33.096 L 180.626,34.464 L 184.046,25.067 L 180.287,23.699 L 176.867,33.096 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 117.203,19.111 L 118.940,28.959 L 122.879,28.264 L 121.143,18.416 L 117.203,19.111 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 96.713,24.925 L 100.133,34.322 L 103.892,32.953 L 100.472,23.557 L 96.713,24.925 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 73.543,27.280 L 82.543,42.868 L 86.007,40.868 L 77.007,25.280 L 73.543,27.280 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 26.551,75.584 L 42.139,84.584 L 44.139,81.120 L 28.551,72.120 L 26.551,75.584 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.4" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 10.006,140.913 L 28.006,140.913 L 28.006,136.913 L 10.006,136.913 L 10.006,140.913 Z"/>
+
+  <!-- ADI-Inner-Ring/<Path> -->
+  <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 132.184,6.121 L 136.184,17.532 L 139.473,26.916 C 139.709,27.588 140.659,27.588 140.895,26.916 L 144.184,17.532 L 148.184,6.121 L 140.184,6.121 L 132.184,6.121 Z"/>
+
+  </Canvas>
+</Canvas>

@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Xml;
 
     [HeliosControl("Helios.Base.PushButton", "Tactile Square", "Push Buttons", typeof(PushButtonRenderer))]
-    public class PushButton : HeliosVisual, IConfigurableImageLocation, IRefreshableImage
+    public class PushButton : HeliosVisual, IConfigurableImageLocation, IRefreshableImage, ITextControl
     {
         private PushButtonType _buttonType;
         private string _imageFile = "{Helios}/Images/Buttons/tactile-dark-square.png";
@@ -323,6 +323,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public TextFormat TextFormat
         {
             get { return _labelFormat; }
+            set { return; }
         }
 
 

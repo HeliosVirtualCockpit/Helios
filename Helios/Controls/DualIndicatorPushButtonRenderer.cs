@@ -49,19 +49,19 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Pushed && pushButton.Indicator && _pushedImage != null)
             {
-                drawingContext.DrawImage(_pushedIndicatorOnImage, _imageRect);
+                DrawImage(drawingContext, _pushedIndicatorOnImage, _imageRect);
             }
             else if (pushButton.Pushed && !pushButton.Indicator && _pushedImage != null)
             {
-                drawingContext.DrawImage(_pushedImage, _imageRect);
+                DrawImage(drawingContext, _pushedImage, _imageRect);
             }
             else if (!pushButton.Pushed && pushButton.Indicator && _indicatorOnImage != null)
             {
-                drawingContext.DrawImage(_indicatorOnImage, _imageRect);
+                DrawImage(drawingContext, _indicatorOnImage, _imageRect);
             }
             else if (_image != null)
             {
-                drawingContext.DrawImage(_image, _imageRect);
+                DrawImage(drawingContext, _image, _imageRect);
             }
 
             if (pushButton.Pushed)
@@ -71,10 +71,23 @@ namespace GadrocsWorkshop.Helios.Controls
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                drawingContext.DrawGeometry(pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath);
+                DrawGeometry(drawingContext, pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath, _imageRect);
             }
-            pushButton.TextFormat.RenderText(drawingContext, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
-            pushButton.AdditionalTextFormat.RenderText(drawingContext, pushButton.AdditionalIndicator ? _additionalOnTextBrush : _additionalOffTextBrush, pushButton.AdditionalText, _imageRect);
+
+            DrawText(drawingContext, pushButton, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
+
+            if (!NeedsEffect)
+            {
+                pushButton.AdditionalTextFormat.RenderText(drawingContext, pushButton.AdditionalIndicator ? _additionalOnTextBrush : _additionalOffTextBrush, pushButton.AdditionalText, _imageRect);
+            }
+            else
+            {
+                DrawingVisual visual = new DrawingVisual();
+                DrawingContext tempDrawingContext = visual.RenderOpen();
+                pushButton.AdditionalTextFormat.RenderText(tempDrawingContext, pushButton.AdditionalIndicator ? _additionalOnTextBrush : _additionalOffTextBrush, pushButton.AdditionalText, _imageRect);
+                tempDrawingContext.Close();
+                RenderVisual(drawingContext, visual, _imageRect);
+            }
 
             if (pushButton.Pushed)
             {

@@ -49,12 +49,12 @@ namespace GadrocsWorkshop.Helios.Controls
 
                 if (panel.FillBackground)
                 {
-                    drawingContext.DrawRectangle(new SolidColorBrush(panel.BackgroundColor), null, new Rect(0, 0, width, height));
+                    DrawRectangle(drawingContext, new SolidColorBrush(panel.BackgroundColor), null, new Rect(0, 0, width, height));
                 }
 
                 if (_backgroundBrush != null)
                 {
-                    drawingContext.DrawRectangle(_backgroundBrush, null, new Rect(0, 0, width, height));
+                    DrawImage(drawingContext, _backgroundImage, new Rect(0d, 0d, width, height));
                 }
 
                 if (panel.DrawBorder)
@@ -62,42 +62,42 @@ namespace GadrocsWorkshop.Helios.Controls
 
                     if (_topBorderImage != null)
                     {
-                        drawingContext.DrawImage(_topBorderImage, new Rect(0, 0, width, _topBorderImage.Height));
+                        DrawImage(drawingContext, _topBorderImage, new Rect(0, 0, width, _topBorderImage.Height));
                     }
 
                     if (_rightBorderImage != null)
                     {
-                        drawingContext.DrawImage(_rightBorderImage, new Rect(width - _rightBorderImage.Width, 0, _rightBorderImage.Width, height));
+                        DrawImage(drawingContext, _rightBorderImage, new Rect(width - _rightBorderImage.Width, 0, _rightBorderImage.Width, height));
                     }
 
                     if (_bottomBorderImage != null)
                     {
-                        drawingContext.DrawImage(_bottomBorderImage, new Rect(0, height - _bottomBorderImage.Height, width, _bottomBorderImage.Height));
+                        DrawImage(drawingContext, _bottomBorderImage, new Rect(0, height - _bottomBorderImage.Height, width, _bottomBorderImage.Height));
                     }
 
                     if (_leftBorderImage != null)
                     {
-                        drawingContext.DrawImage(_leftBorderImage, new Rect(0, 0, _leftBorderImage.Width, height));
+                        DrawImage(drawingContext, _leftBorderImage, new Rect(0, 0, _leftBorderImage.Width, height));
                     }
 
                     if (_topLeftCornerImage != null)
                     {
-                        drawingContext.DrawImage(_topLeftCornerImage, new Rect(0, 0, _topLeftCornerImage.Width, _topLeftCornerImage.Height));
+                        DrawImage(drawingContext, _topLeftCornerImage, new Rect(0, 0, _topLeftCornerImage.Width, _topLeftCornerImage.Height));
                     }
 
                     if (_topRigthCornerImage != null)
                     {
-                        drawingContext.DrawImage(_topRigthCornerImage, new Rect(width - _topRigthCornerImage.Width, 0, _topRigthCornerImage.Width, _topRigthCornerImage.Height));
+                        DrawImage(drawingContext, _topRigthCornerImage, new Rect(width - _topRigthCornerImage.Width, 0, _topRigthCornerImage.Width, _topRigthCornerImage.Height));
                     }
 
                     if (_bottomRightCornerImage != null)
                     {
-                        drawingContext.DrawImage(_bottomRightCornerImage, new Rect(width - _bottomRightCornerImage.Width, height - _bottomRightCornerImage.Height, _bottomRightCornerImage.Width, _bottomRightCornerImage.Height));
+                        DrawImage(drawingContext, _bottomRightCornerImage, new Rect(width - _bottomRightCornerImage.Width, height - _bottomRightCornerImage.Height, _bottomRightCornerImage.Width, _bottomRightCornerImage.Height));
                     }
 
                     if (_bottomLeftCornerImage != null)
                     {
-                        drawingContext.DrawImage(_bottomLeftCornerImage, new Rect(0, height - _bottomLeftCornerImage.Height, _bottomLeftCornerImage.Width, _bottomLeftCornerImage.Height));
+                        DrawImage(drawingContext, _bottomLeftCornerImage, new Rect(0, height - _bottomLeftCornerImage.Height, _bottomLeftCornerImage.Width, _bottomLeftCornerImage.Height));
                     }
                 }
                 drawingContext.Pop();       // pop the opacity

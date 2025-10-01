@@ -199,6 +199,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             }
         }
         #region overrides
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
         public override void ReadXml(XmlReader reader)
         {
             base.ReadXml(reader);

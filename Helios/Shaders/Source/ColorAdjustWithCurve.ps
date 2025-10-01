@@ -1,0 +1,85 @@
+// SCurve_RGB_Optimized.fx
+// ps_2_0 compatible — cheap ops only, avoids full RGB<->HSV
+
+sampler2D inputSampler : register(s0);
+
+// We want a commonly named set of parameters in the shader to allow ease of 
+// interchanging effects via the wrappers.  This means that there will be
+// parameters defined which are not used.
+
+// c6: ShadowStrength (>=1.0, 1.0 = none, >1 stronger shadow compression)
+// c7: HighlightStrength (>=1.0, 1.0 = none, >1 stronger highlight lift)
+// c8: MidtoneBalance (0..1, pivot position, 0.5 = neutral)
+// c9: EnableCurve (0 or 1)
+
+// Parameters
+float RedAdjust   : register(c0);
+float GreenAdjust : register(c1);
+float BlueAdjust  : register(c2);
+float Brightness  : register(c3);        // -1.0 to +1.0
+float Contrast    : register(c4);        // 0.0 = flat, 1.0 = normal, >1.0 = more contrast
+float Gamma       : register(c5);        // e.g. 1.0 = none, 2.2 = gamma correction
+float ShadowStrength    : register(c6);  // >=1.0, 1.0 = none, >1 stronger shadow compression
+float HighlightStrength : register(c7);  // >=1.0, 1.0 = none, >1 stronger highlight lift
+float MidtoneBalance    : register(c8);  // 0..1, pivot position, 0.5 = neutral
+float EnableCurve       : register(c9);  // 0 or 1
+
+float4 main(float2 uv : TEXCOORD) : COLOR
+{
+    float4 src = tex2D(inputSampler, uv);
+
+    // 1) Apply RGB multipliers (pre-adjust)
+    float3 rgbAdj = saturate(float3(src.r * RedAdjust,
+                                    src.g * GreenAdjust,
+                                    src.b * BlueAdjust));
+
+    // 2) Luminance (perceptual)
+    float v = dot(rgbAdj, float3(0.299, 0.587, 0.114)); // 0..1
+
+    // 3) Remap around midtone to [0..1] with pivot at MidtoneBalance
+    // shifted in [0..1], 0..0.5 = lower half, 0.5..1 = upper half
+    float mid = saturate(MidtoneBalance);
+    // avoid divide-by-zero on extreme mid values
+    float invMid = (mid > 0.001) ? (1.0 / mid) : 1e3;
+    float invOneMinusMid = (mid < 0.999) ? (1.0 / (1.0 - mid)) : 1e3;
+
+    // compute shifted branchless
+    float less = v * invMid * 0.5; // v < mid
+    float greater = 0.5 + (v - mid) * invOneMinusMid * 0.5; // v >= mid
+
+    float isGreater = step(mid, v); // 0 if v < mid, 1 if v >= mid
+    float shifted = lerp(less, greater, isGreater);
+
+    // 4) Cheap shadow/highlight curves (quadratic approximations)
+    // darkPart ~ compressed shadows (shifted^2)
+    float darkQuad = shifted * shifted;               // cheaper than pow
+    // lightPart ~ lifted highlights: 1 - (1 - shifted)^2 = 2*shifted - shifted^2
+    float lightQuad = 2.0*shifted - shifted*shifted;
+
+    // Strength parameters are >=1.0. Map to interpolation alpha in [0..1]
+    // alpha = clamp((strength-1)/maxRange, 0,1) where maxRange chosen = 1.0 (i.e. 1..2)
+    float alphaS = saturate(ShadowStrength - 1.0);    // 0 => no shadow effect, 1 => full
+    float alphaH = saturate(HighlightStrength - 1.0); // 0 => no highlight effect, 1 => full
+
+    // Blend identity vs quadratic using alpha
+    float darkPart  = lerp(shifted, darkQuad, alphaS);
+    float lightPart = lerp(shifted, lightQuad, alphaH);
+
+    // Interpolate between dark and light based on shifted
+    float curved = lerp(darkPart, lightPart, shifted);
+
+    // 5) Remap curved back to original v scale
+    // branchless remap:
+    float remappedLower = curved * mid / 0.5; // when v < mid
+    float remappedUpper = mid + (curved - 0.5) * (1.0 - mid) / 0.5; // when v >= mid
+    float resultV = lerp(remappedLower, remappedUpper, isGreater);
+
+    // 6) Blend between original and adjusted V based on EnableCurve
+    float finalV = lerp(v, resultV, saturate(EnableCurve));
+
+    // 7) Compute scale factor to apply to RGB (preserve color)
+    float scale = finalV / (v + 1e-6); // safe divide
+    float3 outRgb = saturate(rgbAdj * scale);
+
+    return float4(outRgb, src.a);
+}

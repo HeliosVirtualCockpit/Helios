@@ -132,7 +132,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             roll = renderValue % 1d;
             renderValue += 1d; // Push up for the 9
             drawingContext.PushTransform(new TranslateTransform(xOffset, -(renderValue * _digitRenderSize.Height)));
-            drawingContext.DrawImage(_image, _imageRect);
+            DrawImage(drawingContext, _image, _imageRect);
             drawingContext.Pop();
 
             previousDigitValue = digitValue;

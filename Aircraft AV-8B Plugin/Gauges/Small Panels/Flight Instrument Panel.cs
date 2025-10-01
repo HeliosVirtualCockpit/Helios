@@ -37,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             AddGauge("VVI Gauge", new VVI1(), new Point(387, 456), new Size(238, 247), _interfaceDeviceName, "VVI", _generalComponentName);
             AddGauge("IAS Gauge", new IAS(), new Point(70, 186), new Size(203, 203), _interfaceDeviceName, "IAS Airspeed", _generalComponentName);
             AddGauge("AOA Gauge", new AOA(), new Point(61, 473), new Size(221, 221), _interfaceDeviceName, new string[2] { "AOA Flag", "Angle of Attack" }, _generalComponentName);
-            AddGauge("SAI Gauge", new SAI(), new Point(350, 59), new Size(293, 293), _interfaceDeviceName, new string[4] { "SAI Pitch" , "SAI Bank", "SAI Pitch Adjust Knob", "SAI Warning Flag" }, _generalComponentName);
+            AddGauge("SAI Gauge", new SAI(), new Point(350, 59), new Size(293, 293), _interfaceDeviceName, new string[5] { "" , "", "SAI Gauge Rotation", "SAI Pitch Adjust Knob", "SAI Warning Flag" }, _generalComponentName);
 
             AddButton("SAI Cage Pull Switch", 515, 218, new Size(60, 60), "Flight Instruments", "SAI Cage Pull Switch");
             AddPot("SAI Pitch Adjust Knob", new Point(575, 278), new Size(60, 60), "Flight Instruments", "SAI Pitch Adjust Knob", "WQHD/Knob/Cage Knob.png");
@@ -190,7 +190,10 @@ namespace GadrocsWorkshop.Helios.Gauges.AV8B
             _panel.DrawBorder = false;
             //_panel.BackgroundAlignment = ImageAlignment.Centered;
         }
-
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+            base.ScaleChildren(scaleX, scaleY);
+        }
         public override bool HitTest(Point location)
         {
             if (_scaledScreenRect.Contains(location))

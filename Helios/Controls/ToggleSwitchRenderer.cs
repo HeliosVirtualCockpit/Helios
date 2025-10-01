@@ -36,21 +36,21 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ToggleSwitchPosition.One:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageOneIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageOneIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageOneIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageOne, _imageRect);
+                            DrawImage(drawingContext, _imageOne, _imageRect);
                         }
                         break;
                     case ToggleSwitchPosition.Two:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageOneIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageTwoIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageTwoIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageTwo, _imageRect);
+                            DrawImage(drawingContext, _imageTwo, _imageRect);
                         }
                         break;
                 }

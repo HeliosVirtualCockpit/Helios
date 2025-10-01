@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="svg2" Width="44" Height="26">
+    <Canvas.Resources>
+        <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient4269" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FF046404" Offset="0"/>
+                    <GradientStop Color="#FF041404" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient3897" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#00505050" Offset="0"/>
+                    <GradientStop Color="#00505050" Offset="0.81944442"/>
+                    <GradientStop Color="#9F005000" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <RadialGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="radialGradient3903" MappingMode="Absolute" Center="174,159.5" GradientOrigin="174,159.5" RadiusX="111.4995" RadiusY="111.4995">
+            <RadialGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#00505050" Offset="0"/>
+                    <GradientStop Color="#00505050" Offset="0.81944442"/>
+                    <GradientStop Color="#9F005000" Offset="1"/>
+                </GradientStopCollection>
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+        <RadialGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="radialGradient4275" MappingMode="Absolute" Center="175,312" GradientOrigin="175,312" RadiusX="5" RadiusY="5">
+            <RadialGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FF006400" Offset="0"/>
+                    <GradientStop Color="#FF001400" Offset="1"/>
+                </GradientStopCollection>
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+    </Canvas.Resources>
+    <Canvas Name="layer10">
+        <Canvas>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <!--g-->
+                    <TranslateTransform X="-151" Y="-38.5"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rect4183" Fill="#FF004900" Stroke="#FF000000" StrokeThickness="1" StrokeMiterLimit="4" Data="m 151.5 39 43 9 0 15.5 -43 -9 z"/>
+        </Canvas>
+    </Canvas>
+</Canvas>

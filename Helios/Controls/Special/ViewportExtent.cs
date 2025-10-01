@@ -62,7 +62,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         }
 
         #region Overrides
-
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
         public override bool HitTest(Point location) =>
             // only design time
             ConfigManager.Application.ShowDesignTimeControls;

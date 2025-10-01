@@ -716,6 +716,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new PushButton(this, SAI, "3001", "215", "SAI", "SAI Test Button - Push to test", "1", "0", "%1d"));
             AddFunction(new ScaledNetworkValue(this, "205", 90d, "SAI", "Pitch", "Current pitch displayed on the SAI.", "", BindingValueUnits.Degrees));
             AddFunction(new ScaledNetworkValue(this, "206", -180d, "SAI", "Bank", "Current bank displayed on the SAI.", "", BindingValueUnits.Degrees));
+            AddFunction(new DCSBallRotation(this, "2050", "SAI", "ADI Ball Rotation", "Single value containing X, Y & Z movement of the ADI Ball.", new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));
             AddFunction(new FlagValue(this, "209", "SAI", "Warning Flag", "Displayed when SAI is caged or non-functional."));
             AddFunction(new NetworkValue(this, "207", "SAI", "Slip Ball", "Current position of the slip ball relative to the center of the tube.", "(-1 to 1) -1 is full left and 1 is full right.", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, "208", "SAI", "Rate of Turn", "Turn indicator position", "(-1 to 1) -1 is full left and 1 is full right.", BindingValueUnits.Numeric));

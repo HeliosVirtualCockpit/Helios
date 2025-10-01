@@ -1,0 +1,12 @@
+<ControlTemplate>
+	<Name>ADI Gauge (2D)</Name>
+	<Category>F-15E Strike Eagle</Category>
+	<TypeIdentifier>Helios.F15E.Instruments.ADI.V1</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>300,300</Size>
+			<Hidden>False</Hidden>
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

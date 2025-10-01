@@ -1,0 +1,779 @@
+<Canvas Width="200.000" Height="100.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="200.000" Height="100.000">
+
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,6.250 L 0.000,6.250 L 0.000,0.000 L 6.250,0.000 L 6.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,12.500 L 6.250,12.500 L 6.250,6.250 L 12.500,6.250 L 12.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,6.250 L 12.500,6.250 L 12.500,0.000 L 18.750,0.000 L 18.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,12.500 L 18.750,12.500 L 18.750,6.250 L 25.000,6.250 L 25.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,6.250 L 25.000,6.250 L 25.000,0.000 L 31.250,0.000 L 31.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,12.500 L 31.250,12.500 L 31.250,6.250 L 37.500,6.250 L 37.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,6.250 L 37.500,6.250 L 37.500,0.000 L 43.750,0.000 L 43.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,12.500 L 43.750,12.500 L 43.750,6.250 L 50.000,6.250 L 50.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,18.750 L 0.000,18.750 L 0.000,12.500 L 6.250,12.500 L 6.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,25.000 L 6.250,25.000 L 6.250,18.750 L 12.500,18.750 L 12.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,18.750 L 12.500,18.750 L 12.500,12.500 L 18.750,12.500 L 18.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,25.000 L 18.750,25.000 L 18.750,18.750 L 25.000,18.750 L 25.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,18.750 L 25.000,18.750 L 25.000,12.500 L 31.250,12.500 L 31.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,25.000 L 31.250,25.000 L 31.250,18.750 L 37.500,18.750 L 37.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,18.750 L 37.500,18.750 L 37.500,12.500 L 43.750,12.500 L 43.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,25.000 L 43.750,25.000 L 43.750,18.750 L 50.000,18.750 L 50.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,31.250 L 0.000,31.250 L 0.000,25.000 L 6.250,25.000 L 6.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,37.500 L 6.250,37.500 L 6.250,31.250 L 12.500,31.250 L 12.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,31.250 L 12.500,31.250 L 12.500,25.000 L 18.750,25.000 L 18.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,37.500 L 18.750,37.500 L 18.750,31.250 L 25.000,31.250 L 25.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,31.250 L 25.000,31.250 L 25.000,25.000 L 31.250,25.000 L 31.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,37.500 L 31.250,37.500 L 31.250,31.250 L 37.500,31.250 L 37.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,31.250 L 37.500,31.250 L 37.500,25.000 L 43.750,25.000 L 43.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,37.500 L 43.750,37.500 L 43.750,31.250 L 50.000,31.250 L 50.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,43.750 L 0.000,43.750 L 0.000,37.500 L 6.250,37.500 L 6.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,50.000 L 6.250,50.000 L 6.250,43.750 L 12.500,43.750 L 12.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,43.750 L 12.500,43.750 L 12.500,37.500 L 18.750,37.500 L 18.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,50.000 L 18.750,50.000 L 18.750,43.750 L 25.000,43.750 L 25.000,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,43.750 L 25.000,43.750 L 25.000,37.500 L 31.250,37.500 L 31.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,50.000 L 31.250,50.000 L 31.250,43.750 L 37.500,43.750 L 37.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,43.750 L 37.500,43.750 L 37.500,37.500 L 43.750,37.500 L 43.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,50.000 L 43.750,50.000 L 43.750,43.750 L 50.000,43.750 L 50.000,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,6.250 L 50.000,6.250 L 50.000,0.000 L 56.250,0.000 L 56.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,12.500 L 56.250,12.500 L 56.250,6.250 L 62.500,6.250 L 62.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,6.250 L 62.500,6.250 L 62.500,0.000 L 68.750,0.000 L 68.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,12.500 L 68.750,12.500 L 68.750,6.250 L 75.000,6.250 L 75.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,6.250 L 75.000,6.250 L 75.000,0.000 L 81.250,0.000 L 81.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,12.500 L 81.250,12.500 L 81.250,6.250 L 87.500,6.250 L 87.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,6.250 L 87.500,6.250 L 87.500,0.000 L 93.750,0.000 L 93.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,12.500 L 93.750,12.500 L 93.750,6.250 L 100.000,6.250 L 100.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,18.750 L 50.000,18.750 L 50.000,12.500 L 56.250,12.500 L 56.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,25.000 L 56.250,25.000 L 56.250,18.750 L 62.500,18.750 L 62.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,18.750 L 62.500,18.750 L 62.500,12.500 L 68.750,12.500 L 68.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,25.000 L 68.750,25.000 L 68.750,18.750 L 75.000,18.750 L 75.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,18.750 L 75.000,18.750 L 75.000,12.500 L 81.250,12.500 L 81.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,25.000 L 81.250,25.000 L 81.250,18.750 L 87.500,18.750 L 87.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,18.750 L 87.500,18.750 L 87.500,12.500 L 93.750,12.500 L 93.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,25.000 L 93.750,25.000 L 93.750,18.750 L 100.000,18.750 L 100.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,31.250 L 50.000,31.250 L 50.000,25.000 L 56.250,25.000 L 56.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,37.500 L 56.250,37.500 L 56.250,31.250 L 62.500,31.250 L 62.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,31.250 L 62.500,31.250 L 62.500,25.000 L 68.750,25.000 L 68.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,37.500 L 68.750,37.500 L 68.750,31.250 L 75.000,31.250 L 75.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,31.250 L 75.000,31.250 L 75.000,25.000 L 81.250,25.000 L 81.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,37.500 L 81.250,37.500 L 81.250,31.250 L 87.500,31.250 L 87.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,31.250 L 87.500,31.250 L 87.500,25.000 L 93.750,25.000 L 93.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,37.500 L 93.750,37.500 L 93.750,31.250 L 100.000,31.250 L 100.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,43.750 L 50.000,43.750 L 50.000,37.500 L 56.250,37.500 L 56.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,50.000 L 56.250,50.000 L 56.250,43.750 L 62.500,43.750 L 62.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,43.750 L 62.500,43.750 L 62.500,37.500 L 68.750,37.500 L 68.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,50.000 L 68.750,50.000 L 68.750,43.750 L 75.000,43.750 L 75.000,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,43.750 L 75.000,43.750 L 75.000,37.500 L 81.250,37.500 L 81.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,50.000 L 81.250,50.000 L 81.250,43.750 L 87.500,43.750 L 87.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,43.750 L 87.500,43.750 L 87.500,37.500 L 93.750,37.500 L 93.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,50.000 L 93.750,50.000 L 93.750,43.750 L 100.000,43.750 L 100.000,50.000 Z"/>
+
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,6.250 L 100.000,6.250 L 100.000,0.000 L 106.250,0.000 L 106.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,12.500 L 106.250,12.500 L 106.250,6.250 L 112.500,6.250 L 112.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,6.250 L 112.500,6.250 L 112.500,0.000 L 118.750,0.000 L 118.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,12.500 L 118.750,12.500 L 118.750,6.250 L 125.000,6.250 L 125.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,6.250 L 125.000,6.250 L 125.000,0.000 L 131.250,0.000 L 131.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,12.500 L 131.250,12.500 L 131.250,6.250 L 137.500,6.250 L 137.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,6.250 L 137.500,6.250 L 137.500,0.000 L 143.750,0.000 L 143.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,12.500 L 143.750,12.500 L 143.750,6.250 L 150.000,6.250 L 150.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,18.750 L 100.000,18.750 L 100.000,12.500 L 106.250,12.500 L 106.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,25.000 L 106.250,25.000 L 106.250,18.750 L 112.500,18.750 L 112.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,18.750 L 112.500,18.750 L 112.500,12.500 L 118.750,12.500 L 118.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,25.000 L 118.750,25.000 L 118.750,18.750 L 125.000,18.750 L 125.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,18.750 L 125.000,18.750 L 125.000,12.500 L 131.250,12.500 L 131.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,25.000 L 131.250,25.000 L 131.250,18.750 L 137.500,18.750 L 137.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,18.750 L 137.500,18.750 L 137.500,12.500 L 143.750,12.500 L 143.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,25.000 L 143.750,25.000 L 143.750,18.750 L 150.000,18.750 L 150.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,31.250 L 100.000,31.250 L 100.000,25.000 L 106.250,25.000 L 106.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,37.500 L 106.250,37.500 L 106.250,31.250 L 112.500,31.250 L 112.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,31.250 L 112.500,31.250 L 112.500,25.000 L 118.750,25.000 L 118.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,37.500 L 118.750,37.500 L 118.750,31.250 L 125.000,31.250 L 125.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,31.250 L 125.000,31.250 L 125.000,25.000 L 131.250,25.000 L 131.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,37.500 L 131.250,37.500 L 131.250,31.250 L 137.500,31.250 L 137.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,31.250 L 137.500,31.250 L 137.500,25.000 L 143.750,25.000 L 143.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,37.500 L 143.750,37.500 L 143.750,31.250 L 150.000,31.250 L 150.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,43.750 L 100.000,43.750 L 100.000,37.500 L 106.250,37.500 L 106.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,50.000 L 106.250,50.000 L 106.250,43.750 L 112.500,43.750 L 112.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,43.750 L 112.500,43.750 L 112.500,37.500 L 118.750,37.500 L 118.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,50.000 L 118.750,50.000 L 118.750,43.750 L 125.000,43.750 L 125.000,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,43.750 L 125.000,43.750 L 125.000,37.500 L 131.250,37.500 L 131.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,50.000 L 131.250,50.000 L 131.250,43.750 L 137.500,43.750 L 137.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,43.750 L 137.500,43.750 L 137.500,37.500 L 143.750,37.500 L 143.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,50.000 L 143.750,50.000 L 143.750,43.750 L 150.000,43.750 L 150.000,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,6.250 L 150.000,6.250 L 150.000,0.000 L 156.250,0.000 L 156.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,12.500 L 156.250,12.500 L 156.250,6.250 L 162.500,6.250 L 162.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,6.250 L 162.500,6.250 L 162.500,0.000 L 168.750,0.000 L 168.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,12.500 L 168.750,12.500 L 168.750,6.250 L 175.000,6.250 L 175.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,6.250 L 175.000,6.250 L 175.000,0.000 L 181.250,0.000 L 181.250,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,12.500 L 181.250,12.500 L 181.250,6.250 L 187.500,6.250 L 187.500,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,6.250 L 187.500,6.250 L 187.500,0.000 L 193.750,0.000 L 193.750,6.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,12.500 L 193.750,12.500 L 193.750,6.250 L 200.000,6.250 L 200.000,12.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,18.750 L 150.000,18.750 L 150.000,12.500 L 156.250,12.500 L 156.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,25.000 L 156.250,25.000 L 156.250,18.750 L 162.500,18.750 L 162.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,18.750 L 162.500,18.750 L 162.500,12.500 L 168.750,12.500 L 168.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,25.000 L 168.750,25.000 L 168.750,18.750 L 175.000,18.750 L 175.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,18.750 L 175.000,18.750 L 175.000,12.500 L 181.250,12.500 L 181.250,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,25.000 L 181.250,25.000 L 181.250,18.750 L 187.500,18.750 L 187.500,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,18.750 L 187.500,18.750 L 187.500,12.500 L 193.750,12.500 L 193.750,18.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,25.000 L 193.750,25.000 L 193.750,18.750 L 200.000,18.750 L 200.000,25.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,31.250 L 150.000,31.250 L 150.000,25.000 L 156.250,25.000 L 156.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,37.500 L 156.250,37.500 L 156.250,31.250 L 162.500,31.250 L 162.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,31.250 L 162.500,31.250 L 162.500,25.000 L 168.750,25.000 L 168.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,37.500 L 168.750,37.500 L 168.750,31.250 L 175.000,31.250 L 175.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,31.250 L 175.000,31.250 L 175.000,25.000 L 181.250,25.000 L 181.250,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,37.500 L 181.250,37.500 L 181.250,31.250 L 187.500,31.250 L 187.500,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,31.250 L 187.500,31.250 L 187.500,25.000 L 193.750,25.000 L 193.750,31.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,37.500 L 193.750,37.500 L 193.750,31.250 L 200.000,31.250 L 200.000,37.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,43.750 L 150.000,43.750 L 150.000,37.500 L 156.250,37.500 L 156.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,50.000 L 156.250,50.000 L 156.250,43.750 L 162.500,43.750 L 162.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,43.750 L 162.500,43.750 L 162.500,37.500 L 168.750,37.500 L 168.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,50.000 L 168.750,50.000 L 168.750,43.750 L 175.000,43.750 L 175.000,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,43.750 L 175.000,43.750 L 175.000,37.500 L 181.250,37.500 L 181.250,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,50.000 L 181.250,50.000 L 181.250,43.750 L 187.500,43.750 L 187.500,50.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,43.750 L 187.500,43.750 L 187.500,37.500 L 193.750,37.500 L 193.750,43.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,50.000 L 193.750,50.000 L 193.750,43.750 L 200.000,43.750 L 200.000,50.000 Z"/>
+
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,56.250 L 0.000,56.250 L 0.000,50.000 L 6.250,50.000 L 6.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,62.500 L 6.250,62.500 L 6.250,56.250 L 12.500,56.250 L 12.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,56.250 L 12.500,56.250 L 12.500,50.000 L 18.750,50.000 L 18.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,62.500 L 18.750,62.500 L 18.750,56.250 L 25.000,56.250 L 25.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,56.250 L 25.000,56.250 L 25.000,50.000 L 31.250,50.000 L 31.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,62.500 L 31.250,62.500 L 31.250,56.250 L 37.500,56.250 L 37.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,56.250 L 37.500,56.250 L 37.500,50.000 L 43.750,50.000 L 43.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,62.500 L 43.750,62.500 L 43.750,56.250 L 50.000,56.250 L 50.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,68.750 L 0.000,68.750 L 0.000,62.500 L 6.250,62.500 L 6.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,75.000 L 6.250,75.000 L 6.250,68.750 L 12.500,68.750 L 12.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,68.750 L 12.500,68.750 L 12.500,62.500 L 18.750,62.500 L 18.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,75.000 L 18.750,75.000 L 18.750,68.750 L 25.000,68.750 L 25.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,68.750 L 25.000,68.750 L 25.000,62.500 L 31.250,62.500 L 31.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,75.000 L 31.250,75.000 L 31.250,68.750 L 37.500,68.750 L 37.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,68.750 L 37.500,68.750 L 37.500,62.500 L 43.750,62.500 L 43.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,75.000 L 43.750,75.000 L 43.750,68.750 L 50.000,68.750 L 50.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,81.250 L 0.000,81.250 L 0.000,75.000 L 6.250,75.000 L 6.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,87.500 L 6.250,87.500 L 6.250,81.250 L 12.500,81.250 L 12.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,81.250 L 12.500,81.250 L 12.500,75.000 L 18.750,75.000 L 18.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,87.500 L 18.750,87.500 L 18.750,81.250 L 25.000,81.250 L 25.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,81.250 L 25.000,81.250 L 25.000,75.000 L 31.250,75.000 L 31.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,87.500 L 31.250,87.500 L 31.250,81.250 L 37.500,81.250 L 37.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,81.250 L 37.500,81.250 L 37.500,75.000 L 43.750,75.000 L 43.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,87.500 L 43.750,87.500 L 43.750,81.250 L 50.000,81.250 L 50.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 6.250,93.750 L 0.000,93.750 L 0.000,87.500 L 6.250,87.500 L 6.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 12.500,100.000 L 6.250,100.000 L 6.250,93.750 L 12.500,93.750 L 12.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 18.750,93.750 L 12.500,93.750 L 12.500,87.500 L 18.750,87.500 L 18.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 25.000,100.000 L 18.750,100.000 L 18.750,93.750 L 25.000,93.750 L 25.000,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 31.250,93.750 L 25.000,93.750 L 25.000,87.500 L 31.250,87.500 L 31.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 37.500,100.000 L 31.250,100.000 L 31.250,93.750 L 37.500,93.750 L 37.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 43.750,93.750 L 37.500,93.750 L 37.500,87.500 L 43.750,87.500 L 43.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 50.000,100.000 L 43.750,100.000 L 43.750,93.750 L 50.000,93.750 L 50.000,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,56.250 L 50.000,56.250 L 50.000,50.000 L 56.250,50.000 L 56.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,62.500 L 56.250,62.500 L 56.250,56.250 L 62.500,56.250 L 62.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,56.250 L 62.500,56.250 L 62.500,50.000 L 68.750,50.000 L 68.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,62.500 L 68.750,62.500 L 68.750,56.250 L 75.000,56.250 L 75.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,56.250 L 75.000,56.250 L 75.000,50.000 L 81.250,50.000 L 81.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,62.500 L 81.250,62.500 L 81.250,56.250 L 87.500,56.250 L 87.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,56.250 L 87.500,56.250 L 87.500,50.000 L 93.750,50.000 L 93.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,62.500 L 93.750,62.500 L 93.750,56.250 L 100.000,56.250 L 100.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,68.750 L 50.000,68.750 L 50.000,62.500 L 56.250,62.500 L 56.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,75.000 L 56.250,75.000 L 56.250,68.750 L 62.500,68.750 L 62.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,68.750 L 62.500,68.750 L 62.500,62.500 L 68.750,62.500 L 68.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,75.000 L 68.750,75.000 L 68.750,68.750 L 75.000,68.750 L 75.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,68.750 L 75.000,68.750 L 75.000,62.500 L 81.250,62.500 L 81.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,75.000 L 81.250,75.000 L 81.250,68.750 L 87.500,68.750 L 87.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,68.750 L 87.500,68.750 L 87.500,62.500 L 93.750,62.500 L 93.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,75.000 L 93.750,75.000 L 93.750,68.750 L 100.000,68.750 L 100.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,81.250 L 50.000,81.250 L 50.000,75.000 L 56.250,75.000 L 56.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,87.500 L 56.250,87.500 L 56.250,81.250 L 62.500,81.250 L 62.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,81.250 L 62.500,81.250 L 62.500,75.000 L 68.750,75.000 L 68.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,87.500 L 68.750,87.500 L 68.750,81.250 L 75.000,81.250 L 75.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,81.250 L 75.000,81.250 L 75.000,75.000 L 81.250,75.000 L 81.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,87.500 L 81.250,87.500 L 81.250,81.250 L 87.500,81.250 L 87.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,81.250 L 87.500,81.250 L 87.500,75.000 L 93.750,75.000 L 93.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,87.500 L 93.750,87.500 L 93.750,81.250 L 100.000,81.250 L 100.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 56.250,93.750 L 50.000,93.750 L 50.000,87.500 L 56.250,87.500 L 56.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 62.500,100.000 L 56.250,100.000 L 56.250,93.750 L 62.500,93.750 L 62.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 68.750,93.750 L 62.500,93.750 L 62.500,87.500 L 68.750,87.500 L 68.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 75.000,100.000 L 68.750,100.000 L 68.750,93.750 L 75.000,93.750 L 75.000,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 81.250,93.750 L 75.000,93.750 L 75.000,87.500 L 81.250,87.500 L 81.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 87.500,100.000 L 81.250,100.000 L 81.250,93.750 L 87.500,93.750 L 87.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 93.750,93.750 L 87.500,93.750 L 87.500,87.500 L 93.750,87.500 L 93.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 100.000,100.000 L 93.750,100.000 L 93.750,93.750 L 100.000,93.750 L 100.000,100.000 Z"/>
+
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,56.250 L 100.000,56.250 L 100.000,50.000 L 106.250,50.000 L 106.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,62.500 L 106.250,62.500 L 106.250,56.250 L 112.500,56.250 L 112.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,56.250 L 112.500,56.250 L 112.500,50.000 L 118.750,50.000 L 118.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,62.500 L 118.750,62.500 L 118.750,56.250 L 125.000,56.250 L 125.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,56.250 L 125.000,56.250 L 125.000,50.000 L 131.250,50.000 L 131.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,62.500 L 131.250,62.500 L 131.250,56.250 L 137.500,56.250 L 137.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,56.250 L 137.500,56.250 L 137.500,50.000 L 143.750,50.000 L 143.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,62.500 L 143.750,62.500 L 143.750,56.250 L 150.000,56.250 L 150.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,68.750 L 100.000,68.750 L 100.000,62.500 L 106.250,62.500 L 106.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,75.000 L 106.250,75.000 L 106.250,68.750 L 112.500,68.750 L 112.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,68.750 L 112.500,68.750 L 112.500,62.500 L 118.750,62.500 L 118.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,75.000 L 118.750,75.000 L 118.750,68.750 L 125.000,68.750 L 125.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,68.750 L 125.000,68.750 L 125.000,62.500 L 131.250,62.500 L 131.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,75.000 L 131.250,75.000 L 131.250,68.750 L 137.500,68.750 L 137.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,68.750 L 137.500,68.750 L 137.500,62.500 L 143.750,62.500 L 143.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,75.000 L 143.750,75.000 L 143.750,68.750 L 150.000,68.750 L 150.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,81.250 L 100.000,81.250 L 100.000,75.000 L 106.250,75.000 L 106.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,87.500 L 106.250,87.500 L 106.250,81.250 L 112.500,81.250 L 112.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,81.250 L 112.500,81.250 L 112.500,75.000 L 118.750,75.000 L 118.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,87.500 L 118.750,87.500 L 118.750,81.250 L 125.000,81.250 L 125.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,81.250 L 125.000,81.250 L 125.000,75.000 L 131.250,75.000 L 131.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,87.500 L 131.250,87.500 L 131.250,81.250 L 137.500,81.250 L 137.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,81.250 L 137.500,81.250 L 137.500,75.000 L 143.750,75.000 L 143.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,87.500 L 143.750,87.500 L 143.750,81.250 L 150.000,81.250 L 150.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 106.250,93.750 L 100.000,93.750 L 100.000,87.500 L 106.250,87.500 L 106.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 112.500,100.000 L 106.250,100.000 L 106.250,93.750 L 112.500,93.750 L 112.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 118.750,93.750 L 112.500,93.750 L 112.500,87.500 L 118.750,87.500 L 118.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 125.000,100.000 L 118.750,100.000 L 118.750,93.750 L 125.000,93.750 L 125.000,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 131.250,93.750 L 125.000,93.750 L 125.000,87.500 L 131.250,87.500 L 131.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 137.500,100.000 L 131.250,100.000 L 131.250,93.750 L 137.500,93.750 L 137.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 143.750,93.750 L 137.500,93.750 L 137.500,87.500 L 143.750,87.500 L 143.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 150.000,100.000 L 143.750,100.000 L 143.750,93.750 L 150.000,93.750 L 150.000,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,56.250 L 150.000,56.250 L 150.000,50.000 L 156.250,50.000 L 156.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,62.500 L 156.250,62.500 L 156.250,56.250 L 162.500,56.250 L 162.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,56.250 L 162.500,56.250 L 162.500,50.000 L 168.750,50.000 L 168.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,62.500 L 168.750,62.500 L 168.750,56.250 L 175.000,56.250 L 175.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,56.250 L 175.000,56.250 L 175.000,50.000 L 181.250,50.000 L 181.250,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,62.500 L 181.250,62.500 L 181.250,56.250 L 187.500,56.250 L 187.500,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,56.250 L 187.500,56.250 L 187.500,50.000 L 193.750,50.000 L 193.750,56.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,62.500 L 193.750,62.500 L 193.750,56.250 L 200.000,56.250 L 200.000,62.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,68.750 L 150.000,68.750 L 150.000,62.500 L 156.250,62.500 L 156.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,75.000 L 156.250,75.000 L 156.250,68.750 L 162.500,68.750 L 162.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,68.750 L 162.500,68.750 L 162.500,62.500 L 168.750,62.500 L 168.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,75.000 L 168.750,75.000 L 168.750,68.750 L 175.000,68.750 L 175.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,68.750 L 175.000,68.750 L 175.000,62.500 L 181.250,62.500 L 181.250,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,75.000 L 181.250,75.000 L 181.250,68.750 L 187.500,68.750 L 187.500,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,68.750 L 187.500,68.750 L 187.500,62.500 L 193.750,62.500 L 193.750,68.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,75.000 L 193.750,75.000 L 193.750,68.750 L 200.000,68.750 L 200.000,75.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,81.250 L 150.000,81.250 L 150.000,75.000 L 156.250,75.000 L 156.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,87.500 L 156.250,87.500 L 156.250,81.250 L 162.500,81.250 L 162.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,81.250 L 162.500,81.250 L 162.500,75.000 L 168.750,75.000 L 168.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,87.500 L 168.750,87.500 L 168.750,81.250 L 175.000,81.250 L 175.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,81.250 L 175.000,81.250 L 175.000,75.000 L 181.250,75.000 L 181.250,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,87.500 L 181.250,87.500 L 181.250,81.250 L 187.500,81.250 L 187.500,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,81.250 L 187.500,81.250 L 187.500,75.000 L 193.750,75.000 L 193.750,81.250 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,87.500 L 193.750,87.500 L 193.750,81.250 L 200.000,81.250 L 200.000,87.500 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 156.250,93.750 L 150.000,93.750 L 150.000,87.500 L 156.250,87.500 L 156.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 162.500,100.000 L 156.250,100.000 L 156.250,93.750 L 162.500,93.750 L 162.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 168.750,93.750 L 162.500,93.750 L 162.500,87.500 L 168.750,87.500 L 168.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 175.000,100.000 L 168.750,100.000 L 168.750,93.750 L 175.000,93.750 L 175.000,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 181.250,93.750 L 175.000,93.750 L 175.000,87.500 L 181.250,87.500 L 181.250,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 187.500,100.000 L 181.250,100.000 L 181.250,93.750 L 187.500,93.750 L 187.500,100.000 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 193.750,93.750 L 187.500,93.750 L 187.500,87.500 L 193.750,87.500 L 193.750,93.750 Z"/>
+
+  <!-- Layer 1/<Group>/Green/<Rectangle> -->
+  <Path Fill="#ff38b449" Data="F1 M 200.000,100.000 L 193.750,100.000 L 193.750,93.750 L 200.000,93.750 L 200.000,100.000 Z"/>
+
+  </Canvas>
+</Canvas>

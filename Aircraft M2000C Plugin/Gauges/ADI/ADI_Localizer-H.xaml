@@ -1,0 +1,15 @@
+<Canvas Width="5.939" Height="158.540"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="5.939" Height="158.540">
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.5" Stroke="#ff3e3e3e" StrokeMiterLimit="1.0" Fill="#ffc3cfb1" Data="F1 M 4.495,134.908 L 2.970,134.908 L 1.444,134.908 C 0.785,134.908 0.250,134.373 0.250,133.714 L 0.250,22.802 C 0.250,22.142 0.785,21.608 1.444,21.608 L 4.495,21.608 C 5.155,21.608 5.689,22.142 5.689,22.802 L 5.689,133.714 C 5.689,134.373 5.155,134.908 4.495,134.908 Z"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path Fill="#ff3e3e3e" Data="F1 M 3.567,158.540 L 2.373,158.540 L 2.373,134.907 L 3.567,134.907 L 3.567,158.540 Z"/>
+
+  <!-- Layer 1/Centre Point -->
+  <Path Opacity="0.0" Fill="#ffffffff" Data="F1 M 2.913,0.057 C 2.913,0.026 2.938,0.000 2.970,0.000 C 3.001,0.000 3.027,0.026 3.027,0.057 C 3.027,0.089 3.001,0.114 2.970,0.114 C 2.938,0.114 2.913,0.089 2.913,0.057 Z"/>
+
+  </Canvas>
+</Canvas>

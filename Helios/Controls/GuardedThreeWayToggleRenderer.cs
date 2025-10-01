@@ -36,34 +36,13 @@ namespace GadrocsWorkshop.Helios.Controls
                 switch (toggleSwitch.SwitchPosition)
                 {
                     case ThreeWayToggleSwitchPosition.One:
-                        if (toggleSwitch.GuardPosition == GuardPosition.Up)
-                        {
-                            drawingContext.DrawImage(_imageOneGuardUp, _imageRect);
-                        }
-                        else
-                        {
-                            drawingContext.DrawImage(_imageOneGuardDown, _imageRect);
-                        }
+                        DrawImage(drawingContext, toggleSwitch.GuardPosition == GuardPosition.Up ? _imageOneGuardUp : _imageOneGuardDown, _imageRect);
                         break;
                     case ThreeWayToggleSwitchPosition.Two:
-                        if (toggleSwitch.GuardPosition == GuardPosition.Up)
-                        {
-                            drawingContext.DrawImage(_imageTwoGuardUp, _imageRect);
-                        }
-                        else
-                        {
-                            drawingContext.DrawImage(_imageTwoGuardDown, _imageRect);
-                        }
+                        DrawImage(drawingContext, toggleSwitch.GuardPosition == GuardPosition.Up ? _imageTwoGuardUp : _imageTwoGuardDown, _imageRect);
                         break;
                     case ThreeWayToggleSwitchPosition.Three:
-                        if (toggleSwitch.GuardPosition == GuardPosition.Up)
-                        {
-                            drawingContext.DrawImage(_imageThreeGuardUp, _imageRect);
-                        }
-                        else
-                        {
-                            drawingContext.DrawImage(_imageThreeGuardDown, _imageRect);
-                        }
+                        DrawImage(drawingContext, toggleSwitch.GuardPosition == GuardPosition.Up ? _imageThreeGuardUp : _imageThreeGuardDown, _imageRect);
                         break;
                 }
             }

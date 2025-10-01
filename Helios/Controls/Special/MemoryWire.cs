@@ -153,5 +153,10 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             set => _numericValueInitialized = value;
         }
         #endregion properties
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
     }
 }

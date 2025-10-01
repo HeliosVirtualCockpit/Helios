@@ -13,6 +13,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using GadrocsWorkshop.Helios.Gauges;
+
 namespace GadrocsWorkshop.Helios.ProfileEditor.ViewModel
 {
     public abstract class ToolboxItem : NotificationObject
@@ -30,6 +32,14 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.ViewModel
                 {
                     _iconInstance = CreateControl();
                     ConfigureIcon(_iconInstance);
+                }
+                _iconInstance.EffectsExclusion = true;
+                if(_iconInstance is CompositeBaseGauge cbg)
+                {       
+                    foreach(var g in cbg.Components)
+                    {
+                        g.EffectsExclusion = true;
+                    }
                 }
                 return _iconInstance;
             }

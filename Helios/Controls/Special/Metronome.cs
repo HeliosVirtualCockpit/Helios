@@ -127,7 +127,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
         }
 
         #endregion
-
+        public override bool EffectsExclusion
+        {
+            get => true;
+            set { }
+        }
         protected override void OnProfileChanged(HeliosProfile oldProfile)
         {
             base.OnProfileChanged(oldProfile);

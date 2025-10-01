@@ -17,6 +17,7 @@ namespace GadrocsWorkshop.Helios.Controls
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices.ComTypes;
     using System.Windows;
     using System.Windows.Media;
 
@@ -50,20 +51,46 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
         {
+            bool needsEffect = NeedsEffect;
             RotarySwitch rotarySwitch = Visual as RotarySwitch;
             if (rotarySwitch != null)
             {
                 if (rotarySwitch.DrawLines)
                 {
-                    drawingContext.DrawDrawing(_lines);
+                    if (!needsEffect)
+                    {
+                        drawingContext.DrawDrawing(_lines);
+                    }
+                    else
+                    {
+                        DrawingVisual visual = new DrawingVisual();
+                        DrawingContext tempDrawingContext = visual.RenderOpen();
+                        tempDrawingContext.DrawDrawing(_lines);
+                        tempDrawingContext.Close();
+                        RenderVisual(drawingContext, visual, _imageRect);
+                    }
                 }
-                foreach (SwitchPositionLabel label in _labels)
+                if (!needsEffect)
                 {
-                    drawingContext.DrawText(label.Text, label.Location);
+                    foreach (SwitchPositionLabel label in _labels)
+                    {
+                        drawingContext.DrawText(label.Text, label.Location);
+                    }
+                } else
+                {
+                    DrawingVisual visual = new DrawingVisual();
+                    DrawingContext tempDrawingContext = visual.RenderOpen();
+                    foreach (SwitchPositionLabel label in _labels)
+                    {
+                        tempDrawingContext.DrawText(label.Text, new Point(label.Location.X * 1.25, label.Location.Y * 1.25));
+                    }
+                    tempDrawingContext.Close();
+                    RenderVisual(drawingContext, visual, new Rect(_imageRect.X - (_imageRect.Width * 0.25), _imageRect.Y - (_imageRect.Height * 0.25), _imageRect.Width * 1.5, _imageRect.Height * 1.5));
                 }
 
                 drawingContext.PushTransform(new RotateTransform(rotarySwitch.KnobRotation, _center.X, _center.Y));
-                drawingContext.DrawRectangle(_imageBrush, null, _imageRect);
+                DrawRectangle(drawingContext, _imageBrush, null, _imageRect);
+
                 if (rotarySwitch.VisualizeDragging)
                 {
                     double length = (rotarySwitch.DragPoint - _center).Length;

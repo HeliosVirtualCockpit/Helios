@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI.Backup
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.M2000C.ADI.Backup.Gauge", "Backup ADI Gauge", "M-2000C", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.M2000C.ADI.Backup.Gauge", "Backup ADI Gauge", "M-2000C", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class BackupADIGauge : BaseGauge
     {
         private HeliosValue _pitch;
@@ -43,22 +43,22 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI.Backup
             Point center = new Point(200d, 200d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Tape.xaml", center, new Size(300d, 1440d), new Point(150d, 1440d / 2d));
+            _ball = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Tape.xaml", center, new Size(300d, 1440d), new Point(150d, 1440d / 2d));
             _ball.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_ball);
 
-            Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/ADI_Gradiant.xaml", new Rect(50d, 50d, 300d, 300d)));
+            Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/SADI_Gradiant.xaml", new Rect(50d, 50d, 300d, 300d)));
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -60d, 1.0d, 60d);
-            _wingsNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
+            _wingsNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
 
-            _bankNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Pointer.xaml", center, new Size(10d, 39d), new Point(5d, -111d));
+            _bankNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Pointer.xaml", center, new Size(10d, 39d), new Point(5d, -111d));
             Components.Add(_bankNeedle);
 
-            Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/ADI_Bezel.xaml", new Rect(0d, 0d, 400d, 400d)));
+            Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/SADI_Bezel.xaml", new Rect(0d, 0d, 400d, 400d)));
 
-            _offFlagNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/ADI_Off_Flag.xaml", new Point(-14d, 315d), new Size(66d, 265d), new Point(5d, 260d), 0d);
+            _offFlagNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Off_Flag.xaml", new Point(-14d, 315d), new Size(66d, 265d), new Point(5d, 260d), 0d);
             Components.Add(_offFlagNeedle);
 
             _offFlag = new HeliosValue(this, new BindingValue(false), $"{device}_{name}", "ADI Backup OFF Flag", "Indicates the position of the OFF flag.", "true if displayed.", BindingValueUnits.Boolean);

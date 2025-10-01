@@ -1,0 +1,22 @@
+<Canvas Width="16.000" Height="16.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="16.000" Height="16.000">
+  <!-- Layer 1/Ball -->
+  <Path Data="F1 M 0.000,8.000 C 0.000,3.582 3.582,0.000 8.000,0.000 C 12.418,0.000 16.000,3.582 16.000,8.000 C 16.000,12.418 12.418,16.000 8.000,16.000 C 3.582,16.000 0.000,12.418 0.000,8.000 Z">
+    <Path.Fill>
+      <RadialGradientBrush MappingMode="Absolute" GradientOrigin="-0.315,-8.210" Center="-0.315,-8.210" RadiusX="9.000" RadiusY="9.000">
+        <RadialGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#ff00ff00"/>
+          <GradientStop Offset="0.42" Color="#ff007f00"/>
+          <GradientStop Offset="1.00" Color="#ff000000"/>
+        </RadialGradientBrush.GradientStops>
+        <RadialGradientBrush.Transform>
+          <MatrixTransform Matrix="0.889,0.000,0.000,-0.889,8.280,0.702" />
+        </RadialGradientBrush.Transform>
+      </RadialGradientBrush>
+    </Path.Fill>
+  </Path>
+
+  </Canvas>
+</Canvas>

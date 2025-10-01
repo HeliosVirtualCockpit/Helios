@@ -22,9 +22,10 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
 
     [HeliosControl("Helios.Base.BacklitPushButton", "Backlit Button", "Push Buttons", typeof(BacklitPushButtonRenderer))]
-    public class BacklitPushButton : HeliosVisual
+    public class BacklitPushButton : HeliosVisual, ITextControl
     {
         private PushButtonType _buttonType;
         private string _imageFile = "{Helios}/Images/Buttons/backlit.png";
@@ -355,6 +356,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public TextFormat TextFormat
         {
             get { return _labelFormat; }
+            set { return; }
         }
 
         public Point TextPushOffset

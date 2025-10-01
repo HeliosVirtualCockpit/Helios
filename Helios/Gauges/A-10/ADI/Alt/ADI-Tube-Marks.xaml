@@ -1,0 +1,33 @@
+<Canvas Width="193.678" Height="286.069"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="193.678" Height="286.069">
+
+        <Canvas>
+
+            <!-- Layer 1/Tube Marks/<Path> -->
+            <Path StrokeThickness="0.25" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff00ff00" Data="F1 M 150.104,285.568 L 149.104,285.568 L 149.104,271.968 L 150.104,271.968 L 150.104,285.568 Z"/>
+
+            <!-- Layer 1/Tube Marks/<Path> -->
+            <Path StrokeThickness="0.25" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff00ff00" Data="F1 M 164.104,285.568 L 163.104,285.568 L 163.104,271.968 L 164.104,271.968 L 164.104,285.568 Z"/>
+
+        </Canvas>
+  <!-- Layer 1/Tube Shadow -->
+  <Path Opacity="0.3"  StrokeMiterLimit="1.0" Data="F1 M 191.790,271.569 L 122.566,271.569 C 121.799,271.569 121.178,272.190 121.178,272.957 L 121.178,284.181 C 121.178,284.948 121.799,285.569 122.566,285.569 L 191.790,285.569 C 192.557,285.569 193.178,284.948 193.178,284.181 L 193.178,272.957 C 193.178,272.190 192.557,271.569 191.790,271.569 Z">
+    <Path.Fill>
+      <LinearGradientBrush MappingMode="Absolute" StartPoint="157.178,-271.569" EndPoint="157.178,-285.569">
+        <LinearGradientBrush.GradientStops>
+          <GradientStop Offset="0.00" Color="#00000000"/>
+          <GradientStop Offset="0.57" Color="#ff000000"/>
+          <GradientStop Offset="0.75" Color="#ff000000"/>
+        </LinearGradientBrush.GradientStops>
+        <LinearGradientBrush.Transform>
+          <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,0.000,0.000" />
+        </LinearGradientBrush.Transform>
+      </LinearGradientBrush>
+    </Path.Fill>
+  </Path>
+
+
+    </Canvas>
+</Canvas>

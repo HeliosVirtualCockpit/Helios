@@ -19,6 +19,7 @@ using System;
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
@@ -29,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Xml.Schema;
 
     [HeliosControl("Helios.Base.Text", "Label", "Panel Decorations", typeof(TextDecorationRenderer))]
-    public class TextDecoration : HeliosVisual
+    public class TextDecoration : HeliosVisual, ITextControl
     {
         HeliosValue _textValue;
 

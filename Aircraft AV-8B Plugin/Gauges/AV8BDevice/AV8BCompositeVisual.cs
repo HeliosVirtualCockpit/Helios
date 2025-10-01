@@ -77,15 +77,20 @@ namespace GadrocsWorkshop.Helios
                 int i = 0;
                 foreach (IBindingAction action in gauge.Actions)
                 {
-                    if (action.Name != "hidden")
+                    if (action.Name != "hidden" && !action.Name.Contains("Lighting"))
                     {
                         AddAction(action, action.Device);
-
-                        AddDefaultInputBinding(
-                            componentName,
-                            interfaceDeviceName + "." + interfaceElementNames[i++] + ".changed",
-                            action.Device + "." + action.ActionVerb + "." + action.Name
-                        );
+                        if (i < interfaceElementNames.Length)
+                        {
+                            if (!string.IsNullOrEmpty(interfaceElementNames[i]))
+                            {
+                                AddDefaultInputBinding(
+                                    componentName,
+                                    interfaceDeviceName + "." + interfaceElementNames[i] + ".changed",
+                                    action.Device + "." + action.ActionVerb + "." + action.Name);
+                            }
+                            i++;
+                        }
                     }
                 }
 

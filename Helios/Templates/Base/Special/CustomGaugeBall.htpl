@@ -1,0 +1,24 @@
+﻿<ControlTemplate>
+	<Name>Custom Gauge Sphere</Name>
+	<Category>Custom Controls</Category>
+	<TypeIdentifier>Helios.Base.CustomGaugeBall</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Image>{F-16C}/Gauges/ADI/Viper-ADI-Ball.xaml</Image>
+			<Properties3D>
+				<InitialAngleX>0</InitialAngleX>
+				<InitialAngleY>0</InitialAngleY>
+				<InitialAngleZ>-90</InitialAngleZ>
+				<FieldOfView>40</FieldOfView>
+				<Lighting>
+					<X>-1</X>
+					<Y>-1</Y>
+					<Z>-2</Z>
+					<Color>#FFFFFFFF</Color>
+					<ColorBrightness>1</ColorBrightness>
+				</Lighting>
+			</Properties3D>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

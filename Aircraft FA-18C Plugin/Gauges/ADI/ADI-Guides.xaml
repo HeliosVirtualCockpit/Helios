@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas Width="334.000" Height="376.751"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas>
+
+        <!-- svg40/Glass Edge -->
+        <Path Data="F1 M 334.000,167.000 C 334.000,259.232 259.232,334.000 167.000,334.000 C 74.768,334.000 0.000,259.232 0.000,167.000 C 0.000,74.768 74.768,0.000 167.000,0.000 C 259.232,0.000 334.000,74.768 334.000,167.000 Z">
+            <Path.Fill>
+                <RadialGradientBrush MappingMode="Absolute" GradientOrigin="85.309,767.387" Center="85.309,767.387" RadiusX="167.000" RadiusY="167.000">
+                    <RadialGradientBrush.GradientStops>
+                        <GradientStop Offset="0.40" Color="#00ffffff"/>
+                        <GradientStop Offset="0.46" Color="#00ffffff"/>
+                        <GradientStop Offset="0.89" Color="#08ffffff"/>
+                        <GradientStop Offset="0.95" Color="#187f7f7f"/>
+                        <GradientStop Offset="1.00" Color="#ff000000"/>
+                    </RadialGradientBrush.GradientStops>
+                    <RadialGradientBrush.Transform>
+                        <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,81.691,934.387" />
+                    </RadialGradientBrush.Transform>
+                </RadialGradientBrush>
+            </Path.Fill>
+        </Path>
+
+    </Canvas>
+</Canvas>
+  

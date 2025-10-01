@@ -1,0 +1,46 @@
+sampler2D inputSampler : register(s0);
+
+// We want a commonly named set of parameters in the shader to allow ease of 
+// interchanging effects via the wrappers.  This means that there will be
+// parameters defined which are not used.
+
+// c6: ShadowStrength (>=1.0, 1.0 = none, >1 stronger shadow compression)
+// c7: HighlightStrength (>=1.0, 1.0 = none, >1 stronger highlight lift)
+// c8: MidtoneBalance (0..1, pivot position, 0.5 = neutral)
+// c9: EnableCurve (0 or 1)
+
+// Parameters
+float RedAdjust   : register(c0);
+float GreenAdjust : register(c1);
+float BlueAdjust  : register(c2);
+float Brightness  : register(c3);        // -1.0 to +1.0
+float Contrast    : register(c4);        // 0.0 = flat, 1.0 = normal, >1.0 = more contrast
+float Gamma       : register(c5);        // e.g. 1.0 = none, 2.2 = gamma correction
+float ShadowStrength    : register(c6);  // >=1.0, 1.0 = none, >1 stronger shadow compression
+float HighlightStrength : register(c7);  // >=1.0, 1.0 = none, >1 stronger highlight lift
+float MidtoneBalance    : register(c8);  // 0..1, pivot position, 0.5 = neutral
+float EnableCurve       : register(c9);  // 0 or 1
+
+float4 main(float2 uv : TEXCOORD) : COLOR
+{
+    float4 color = tex2D(inputSampler, uv);
+
+    // Apply per-channel scaling
+    color.r = color.r * RedAdjust;
+    color.g = color.g * GreenAdjust;
+    color.b = color.b * BlueAdjust;
+
+    // Brightness (shift)
+    color.rgb += Brightness;
+
+    // Contrast (center at 0.5)
+    color.rgb = ((color.rgb - 0.5) * Contrast) + 0.5;
+
+    // Gamma correction
+    color.rgb = pow(abs(color.rgb), 1.0 / Gamma);
+
+    // Clamp
+    color.rgb = saturate(color.rgb);
+
+    return color;
+}

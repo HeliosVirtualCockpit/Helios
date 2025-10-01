@@ -5,7 +5,7 @@
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>
-			<Size>400,400</Size>
+			<Size>300,300</Size>
 			<Hidden>False</Hidden>
 			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
 			<Children />

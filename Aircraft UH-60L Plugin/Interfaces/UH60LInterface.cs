@@ -860,6 +860,42 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             capExtPwr = 395,
             capBlank = 396,
 
+            //PILOT VSI
+            PILOT_VSI_PITCH = 420,
+            PILOT_VSI_ROLL = 421,
+            PILOT_VSI_SLIP_IND = 422,
+            PILOT_VSI_ROLL_CMD_BAR = 423,
+            PILOT_VSI_PITCH_CMD_BAR = 424,
+            PILOT_VSI_COLLECTIVE_CMD_BAR = 425,
+            PILOT_VSI_TURN_RATE_IND = 426,
+            PILOT_VSI_TRACK_ERROR_IND = 427,
+            PILOT_VSI_GLIDE_SLOPE_IND = 428,
+            PILOT_VSI_CMD_FLAG = 429,
+            PILOT_VSI_ATT_FLAG = 430,
+            PILOT_VSI_NAV_FLAG = 431,
+            PILOT_VSI_GS_FLAG = 432,
+            pilotVSILtGA = 980,
+            PILOT_APN209_LOLIGHT = 981,
+            pilotVSILtMB = 982,
+
+            //COPILOT VSI
+            COPILOT_VSI_PITCH = 433,
+            COPILOT_VSI_ROLL = 434,
+            COPILOT_VSI_SLIP_IND = 435,
+            COPILOT_VSI_ROLL_CMD_BAR = 436,
+            COPILOT_VSI_PITCH_CMD_BAR = 437,
+            COPILOT_VSI_COLLECTIVE_CMD_BAR = 438,
+            COPILOT_VSI_TURN_RATE_IND = 439,
+            COPILOT_VSI_TRACK_ERROR_IND = 440,
+            COPILOT_VSI_GLIDE_SLOPE_IND = 441,
+            COPILOT_VSI_CMD_FLAG = 442,
+            COPILOT_VSI_ATT_FLAG = 443,
+            COPILOT_VSI_NAV_FLAG = 444,
+            COPILOT_VSI_GS_FLAG = 445,
+            copilotVSILtGA = 983,
+            COPILOT_APN209_LOLIGHT = 984,
+            copilotVSILtMB = 985,
+
             pduPltOverspeed1 = 450,
             pduPltOverspeed2 = 451,
             pduPltOverspeed3 = 452,
@@ -1458,6 +1494,44 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             // COPILOT ALTIMETER
             AddFunction(new Altimeter(this, FLYER.Copilot));
             AddFunction(new FlagValue(this, mainpanel.copilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ENCODER FLAG", ""));
+
+            // PILOT VSI (ADI)
+            AddFunction(new ScaledNetworkValue(this, mainpanel.PILOT_VSI_PITCH.ToString("d"), 90d, "VSI (Pilot)", "pitch", "VSI pitch value in degrees", "-90 to +90", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.PILOT_VSI_ROLL.ToString("d"), -180d, "VSI (Pilot)", "roll", "VSI Bank value in degrees", "-180 to +180", BindingValueUnits.Degrees));
+            AddFunction(new DCSBallRotation(this, "2049", "VSI (Pilot)", "ball rotation", "Single value containing X, Y & Z movement of the VSI Ball.", new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_SLIP_IND.ToString("d"), "VSI (Pilot)", "side slip", "VSI Bank value in degrees", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_ROLL_CMD_BAR.ToString("d"), "VSI (Pilot)", "GS horizontal deviation", "VSI Glide Slope indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_PITCH_CMD_BAR.ToString("d"), "VSI (Pilot)", "GS vertical deviation", "VSI Glide Slope indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_COLLECTIVE_CMD_BAR.ToString("d"), "VSI (Pilot)", "Collective Indicator", "VSI Collective CMD indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_TURN_RATE_IND.ToString("d"), "VSI (Pilot)", "turn rate", "VSI Turn Rate Indicator as a numeric", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_TRACK_ERROR_IND.ToString("d"), "VSI (Pilot)", "Track Error Indicator", "VSI Track Error Indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_GLIDE_SLOPE_IND.ToString("d"), "VSI (Pilot)", "Glide Slope Indicator", "VSI Glide Slope Indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_CMD_FLAG.ToString("d"), "VSI (Pilot)", "CMD flag", "VSI CMD flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_ATT_FLAG.ToString("d"), "VSI (Pilot)", "ATT flag", "VSI ATT flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_NAV_FLAG.ToString("d"), "VSI (Pilot)", "NAV flag", "VSI NAV flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_GS_FLAG.ToString("d"), "VSI (Pilot)", "GS flag", "VSI GS flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new FlagValue(this, mainpanel.pilotVSILtGA.ToString("d"), "VSI (Pilot)", "GA Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.PILOT_APN209_LOLIGHT.ToString("d"), "VSI (Pilot)", "DH Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.pilotVSILtMB.ToString("d"), "VSI (Pilot)", "MB Indicator", "VSI Indicator, value of 1 turns on"));
+
+            // COPILOT VSI (ADI)
+            AddFunction(new ScaledNetworkValue(this, mainpanel.COPILOT_VSI_PITCH.ToString("d"), 90d, "VSI (Copilot)", "pitch", "VSI pitch value in degrees", "-90 to +90", BindingValueUnits.Degrees));
+            AddFunction(new ScaledNetworkValue(this, mainpanel.COPILOT_VSI_ROLL.ToString("d"), -180d, "VSI (Copilot)", "roll", "VSI Bank value in degrees", "-180 to +180", BindingValueUnits.Degrees));
+            AddFunction(new DCSBallRotation(this, "2050", "VSI (Copilot)", "ball rotation", "Single value containing X, Y & Z movement of the VSI Ball.", new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_SLIP_IND.ToString("d"), "VSI (Copilot)", "side slip", "VSI Bank value in degrees", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_ROLL_CMD_BAR.ToString("d"), "VSI (Copilot)", "GS horizontal deviation", "VSI Glide Slope indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_PITCH_CMD_BAR.ToString("d"), "VSI (Copilot)", "GS vertical deviation", "VSI Glide Slope indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_COLLECTIVE_CMD_BAR.ToString("d"), "VSI (Copilot)", "Collective Indicator", "VSI Collective CMD indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_TURN_RATE_IND.ToString("d"), "VSI (Copilot)", "turn rate", "VSI Turn Rate Indicator as a numeric", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_TRACK_ERROR_IND.ToString("d"), "VSI (Copilot)", "Track Error Indicator", "VSI Track Error Indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_GLIDE_SLOPE_IND.ToString("d"), "VSI (Copilot)", "Glide Slope Indicator", "VSI Glide Slope Indicator as a numeric value", "-1 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_CMD_FLAG.ToString("d"), "VSI (Copilot)", "CMD flag", "VSI CMD flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_ATT_FLAG.ToString("d"), "VSI (Copilot)", "ATT flag", "VSI ATT flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_NAV_FLAG.ToString("d"), "VSI (Copilot)", "NAV flag", "VSI NAV flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_GS_FLAG.ToString("d"), "VSI (Copilot)", "GS flag", "VSI GS flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new FlagValue(this, mainpanel.copilotVSILtGA.ToString("d"), "VSI (Copilot)", "GA Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.COPILOT_APN209_LOLIGHT.ToString("d"), "VSI (Copilot)", "DH Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.copilotVSILtMB.ToString("d"), "VSI (Copilot)", "MB Indicator", "VSI Indicator, value of 1 turns on"));
 
             // MISC
             AddFunction(new FlagValue(this, mainpanel.parkingBrakeHandle.ToString("d"), "Indicators/Lamps/Flags", "PARKING BRAKE HANDLE", ""));

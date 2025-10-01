@@ -19,6 +19,7 @@ using System.Globalization;
 namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
@@ -31,7 +32,7 @@ namespace GadrocsWorkshop.Helios.Controls
     /// <summary>
     /// base class for text displays, does not include any actions or values, just the ability to display text
     /// </summary>
-    public abstract class TextDisplayRect : HeliosVisual
+    public abstract class TextDisplayRect : HeliosVisual, ITextControl
     {
         protected bool _useParseDicationary = false;
         protected string _textValue = "";

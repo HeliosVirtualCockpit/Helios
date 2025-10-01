@@ -15,8 +15,13 @@
 
 namespace GadrocsWorkshop.Helios.Gauges
 {
+    using GadrocsWorkshop.Helios.Effects;
     using System;
+    using System.Reflection;
+    using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     public abstract class GaugeComponent
     {
@@ -24,8 +29,10 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Geometry _renderClip;
         private bool _hidden = false;
         private bool _imageRefresh = false;
-
+        private Effects.ColorAdjustEffect _effect;
         public event EventHandler DisplayUpdate;
+        private bool _effectsExclusion = false;
+        private bool _designTime = false, _designTimeChecked = false;
 
         #region Properties
 
@@ -66,6 +73,24 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             get => _imageRefresh;
             set => _imageRefresh = value;
+        }
+        /// <summary>
+        /// Whether this control will have effects applied to is on rendering.
+        /// </summary>
+        public virtual bool EffectsExclusion
+        {
+            get => _effectsExclusion;
+            set
+            {
+                if (!_effectsExclusion.Equals(value))
+                {
+                    _effectsExclusion = value;
+                }
+            }
+        }
+        protected bool NeedsEffect
+        {
+            get => ConfigManager.ProfileManager.CurrentEffect != null && (ConfigManager.ProfileManager.CurrentEffect as ColorAdjustEffect).Enabled && !_hidden && !_effectsExclusion;
         }
 
         #endregion
@@ -110,7 +135,72 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
             OnRefresh(xScale, yScale);
         }
-
         protected abstract void OnRefresh(double xScale, double yScale);
+
+        protected virtual void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
+        {
+            // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
+            if (!_designTimeChecked)
+            {
+                _designTime = ConfigManager.Application.ShowDesignTimeControls;
+                _designTimeChecked = true;
+
+            }
+            if (!_designTime)
+            {
+                // Attempt to cache the ShaderEffect if we're in Control Center
+                if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+                {
+                    _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+                }
+            }
+            else
+            {
+                _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
+            }
+
+            Image imageControl = new Image
+            {
+                Source = image,
+                Width = image != null ? image.Width : 0,
+                Height = image != null ? image.Height : 0,
+            };
+            if (_effect != null && _effect.Enabled && !EffectsExclusion)
+            {
+                imageControl.Effect = _effect;
+            }
+            VisualBrush visualBrush = new VisualBrush(imageControl);
+            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
+        }
+        protected void DrawImage(DrawingContext drawingContext, ImageSource image, Rect rectangle)
+        {
+            if (!NeedsEffect)
+            {
+                drawingContext.DrawImage(image, rectangle);
+            }
+            else
+            {
+                DrawingVisual visual = new DrawingVisual();
+                DrawingContext tempDrawingContext = visual.RenderOpen();
+                tempDrawingContext.DrawImage(image, rectangle);
+                tempDrawingContext.Close();
+                RenderVisual(drawingContext, visual, rectangle);
+            }
+        }
+        protected virtual void RenderVisual(DrawingContext drawingContext, DrawingVisual visual, Rect rectangle)
+        {
+            if (visual.ContentBounds.IsEmpty) { return; }
+            rectangle.Width += rectangle.X;
+            rectangle.Height += rectangle.Y;
+            rectangle.X = rectangle.Y = 0;
+            RenderTargetBitmap rtb = new RenderTargetBitmap(Convert.ToInt32(rectangle.Width), Convert.ToInt32(rectangle.Height), 96, 96, PixelFormats.Pbgra32);
+            rtb.Render(visual);
+            drawingContext.DrawImage(rtb, rectangle);
+            RenderEffect(drawingContext, rtb, rectangle);
+
+            // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
+            (rtb.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
+            .GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
+        }
     }
 }

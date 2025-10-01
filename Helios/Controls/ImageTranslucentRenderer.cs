@@ -17,20 +17,21 @@ namespace GadrocsWorkshop.Helios.Controls
 {
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Controls;
 
     public class ImageTranslucentRenderer : HeliosVisualRenderer
     {
         private ImageSource _image;
         private Rect _imageRect;
-        private ImageBrush _imageBrush;
+        private VisualBrush _visualBrush;
+        private Image _imageControl;
         private Pen _borderPen;
-
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        protected override void OnRender(DrawingContext drawingContext)
         {
             if (_image != null)
             {
                 ImageTranslucent profileImage = Visual as ImageTranslucent;
-                drawingContext.DrawRoundedRectangle(_imageBrush, _borderPen, _imageRect, profileImage.CornerRadius, profileImage.CornerRadius);
+                DrawRoundedRectangle(drawingContext, _visualBrush, _borderPen, _imageRect, profileImage.CornerRadius, profileImage.CornerRadius);
             }
         }
 
@@ -38,16 +39,19 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             if (_image != null)
             {
+
                 ImageTranslucent profileImage = Visual as ImageTranslucent;
                 drawingContext.PushOpacity(profileImage.ImageOpacity); 
                 Rect scaledRect = new Rect(_imageRect.X, _imageRect.Y, _imageRect.Width * scaleX, _imageRect.Height * scaleY);
-                drawingContext.DrawRoundedRectangle(_imageBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
+                DrawRoundedRectangle(drawingContext, _visualBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
                 drawingContext.Pop();
             }            
         }
 
         protected override void OnRefresh()
         {
+
+
             ImageTranslucent profileImage = Visual as ImageTranslucent;
             if (profileImage != null)
             {
@@ -67,40 +71,59 @@ namespace GadrocsWorkshop.Helios.Controls
                     _borderPen = null;
                 }
 
+
+
                 if (_image == null)
                 {
-                    _image = ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/missing_image.png");
-                    _imageBrush = new ImageBrush(_image);
-                    _imageBrush.Stretch = Stretch.Fill;
-                    _imageBrush.TileMode = TileMode.None;
-                    _imageBrush.Viewport = new Rect(0d, 0d, 1d, 1d);
-                    _imageBrush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
+                    _image = ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/MissingImage.xaml");
+
+                    _imageControl = new Image
+                    {
+                        Source = _image,
+                        Width = _image.Width,
+                        Height = _image.Height,
+                    };
+                    _visualBrush = new VisualBrush(_imageControl);
+
+                    _visualBrush.Stretch = Stretch.Fill;
+                    _visualBrush.TileMode = TileMode.None;
+                    _visualBrush.Viewport = new Rect(0d, 0d, 1d, 1d);
+                    _visualBrush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
                 }
                 else
                 {
-                    _imageBrush = new ImageBrush(_image);
-                    
+                    _imageControl = new Image
+                    {
+                        Source = _image,
+                        Width = _image.Width,
+                        Height = _image.Height,
+
+                    };
+
+
+                    _visualBrush = new VisualBrush(_imageControl);
+
                     switch (profileImage.Alignment)
                     {
                         case ImageAlignment.Centered:
-                            _imageBrush.Stretch = Stretch.None;
-                            _imageBrush.TileMode = TileMode.None;
-                            _imageBrush.Viewport = new Rect(0d, 0d, 1d, 1d);
-                            _imageBrush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
+                            _visualBrush.Stretch = Stretch.None;
+                            _visualBrush.TileMode = TileMode.None;
+                            _visualBrush.Viewport = new Rect(0d, 0d, 1d, 1d);
+                            _visualBrush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
                             break;
 
                         case ImageAlignment.Stretched:
-                            _imageBrush.Stretch = Stretch.Fill;
-                            _imageBrush.TileMode = TileMode.None;
-                            _imageBrush.Viewport = new Rect(0d, 0d, 1d, 1d);
-                            _imageBrush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
+                            _visualBrush.Stretch = Stretch.Fill;
+                            _visualBrush.TileMode = TileMode.None;
+                            _visualBrush.Viewport = new Rect(0d, 0d, 1d, 1d);
+                            _visualBrush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
                             break;
 
                         case ImageAlignment.Tiled:
-                            _imageBrush.Stretch = Stretch.None;
-                            _imageBrush.TileMode = TileMode.Tile;
-                            _imageBrush.Viewport = new Rect(0d, 0d, _image.Width, _image.Height);
-                            _imageBrush.ViewportUnits = BrushMappingMode.Absolute;
+                            _visualBrush.Stretch = Stretch.None;
+                            _visualBrush.TileMode = TileMode.Tile;
+                            _visualBrush.Viewport = new Rect(0d, 0d, _image.Width, _image.Height);
+                            _visualBrush.ViewportUnits = BrushMappingMode.Absolute;
                             break;
                     }
                 }

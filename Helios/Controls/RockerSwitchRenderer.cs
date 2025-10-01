@@ -40,11 +40,11 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ThreeWayToggleSwitchPosition.One:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageOneIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageOneIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageOneIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageOne, _imageRect);
+                            DrawImage(drawingContext, _imageOne, _imageRect);
                         }
                         drawingContext.PushTransform(new TranslateTransform(toggleSwitch.TextPushOffset.X * -1d, toggleSwitch.TextPushOffset.Y * -1d));
 
@@ -52,29 +52,31 @@ namespace GadrocsWorkshop.Helios.Controls
                     case ThreeWayToggleSwitchPosition.Two:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageTwoIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageTwoIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageTwoIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageTwo, _imageRect);
+                            DrawImage(drawingContext, _imageTwo, _imageRect);
                         }
                         break;
                     case ThreeWayToggleSwitchPosition.Three:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageThreeIndicatorOn != null)
                         {
-                            drawingContext.DrawImage(_imageThreeIndicatorOn, _imageRect);
+                            DrawImage(drawingContext, _imageThreeIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            drawingContext.DrawImage(_imageThree, _imageRect);
+                            DrawImage(drawingContext, _imageThree, _imageRect);
                         }
                         drawingContext.PushTransform(new TranslateTransform(toggleSwitch.TextPushOffset.X, toggleSwitch.TextPushOffset.Y));
  
                         break;
                 }
-                toggleSwitch.TextFormat.RenderText(drawingContext, _textBrush, toggleSwitch.Text, _imageRect);
+                if (!string.IsNullOrEmpty(toggleSwitch.Text))
+                {
+                    DrawText(drawingContext, toggleSwitch, _textBrush, toggleSwitch.Text, _imageRect);
+                }
             }
-
         }
 
         protected override void OnRefresh()

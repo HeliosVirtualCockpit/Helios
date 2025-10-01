@@ -21,6 +21,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 	using System;
 	using System.Windows;
 	using System.Windows.Media;
+    using static GadrocsWorkshop.Helios.Interfaces.DCS.Common.NetworkTriggerValue;
 
 	[HeliosControl("Helios.Falcon.ADI", "Falcon BMS ADI", "Falcon BMS F-16", typeof(GaugeRenderer))]
 	public class ADI : BaseGauge
@@ -36,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private GaugeImage _gsFlag;
 		private GaugeImage _locFlag;
 
-		private GaugeNeedle _ball;
+		private GaugeBall _ball;
 		private GaugeNeedle _rollMarkers;
 		private GaugeNeedle _slipBall;
 		private GaugeNeedle _ilsHorizontalNeedleSolid;
@@ -76,14 +77,15 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 		private const string _ilsPointerDimImage = "{HeliosFalcon}/Gauges/F-16/ADI/adi_ils_pointer_dim.xaml";
 		private const string _ilsPointerBrtImage = "{HeliosFalcon}/Gauges/F-16/ADI/adi_ils_pointer_brt.xaml";
 
-		private CalibrationPointCollectionDouble _pitchCalibration;
 		private CalibrationPointCollectionDouble _ilsCalibration;
 		private CalibrationPointCollectionDouble _slipBallCalibration;
 
 		private double _backlight;
 		private bool _inFlightLastValue = true;
 
-		public ADI()
+		private bool _suppressScale = false;
+
+        public ADI()
 			: base("ADI", new Size(350, 350))
 		{
 			AddComponents();
@@ -93,13 +95,12 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 		private void AddComponents()
 		{
-			_pitchCalibration = new CalibrationPointCollectionDouble(-360d, -990d, 360d, 990d);
-
-			_ball = new GaugeNeedle(_ballOffImage, new Point(175d, 165d), new Size(220d, 1320d), new Point(110d, 660d));
+            _ball = new GaugeBall(_ballOffImage, new Point(50d, 42d), new Size(250d, 250d), 0d, 0d, -90d, 35d);
 			_ball.Clip = new EllipseGeometry(new Point(175d, 165d), 110d, 110d);
 			Components.Add(_ball);
+            _ball.Y = _ball.Z = -0.001d;
 
-			_ballMask = new GaugeImage(_ballMaskImage, new Rect(60d, 50d, 230d, 230d));
+            _ballMask = new GaugeImage(_ballMaskImage, new Rect(60d, 50d, 230d, 230d));
 			Components.Add(_ballMask);
 
 			_rollMarkers = new GaugeNeedle(_rollMarkersOffImage, new Point(175d, 165d), new Size(50d, 230d), new Point(25d, 115d));
@@ -155,13 +156,13 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 
 			_slipBall = new GaugeNeedle(_slipBallOffImage, new Point(175d, 305d), new Size(10d, 10d), new Point(5d, 5d));
 			Components.Add(_slipBall);
-		}
+        }
 
-		#endregion Components
+        #endregion Components
 
-		#region Methods
+        #region Methods
 
-		protected override void OnProfileChanged(HeliosProfile oldProfile)
+        protected override void OnProfileChanged(HeliosProfile oldProfile)
 		{
 			base.OnProfileChanged(oldProfile);
 
@@ -281,8 +282,8 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_ilsHorizontalNeedleDashed.VerticalOffset = _ilsCalibration.Interpolate(ILSDeviationHorizontal);
 			}
 
-			_ball.VerticalOffset = _pitchCalibration.Interpolate(PitchAngle);
-			_ball.Rotation = -RollAngle;
+			_ball.X = PitchAngle;
+			_ball.Z = RollAngle;
 			_rollMarkers.Rotation = -RollAngle;
 			_slipBall.HorizontalOffset = _slipBallCalibration.Interpolate(SideSlipAngle);
 
@@ -300,7 +301,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersDimImage;
 				_slipBall.Image = _slipBallDimImage;
 				_ilsPointer.Image = _ilsPointerDimImage;
-				_ball.Image = _ballDimImage;
+                _ball.Image = _ballDimImage;
 			}
 			else if (Backlight == 2)
 			{
@@ -308,18 +309,18 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 				_rollMarkers.Image = _rollMarkersBrtImage;
 				_slipBall.Image = _slipBallBrtImage;
 				_ilsPointer.Image = _ilsPointerBrtImage;
-				_ball.Image = _ballBrtImage;
-			}
-			else
+                _ball.Image = _ballBrtImage;
+            }
+            else
 			{
 				_adiFaceplate.Image = _faceplateOffImage;
 				_rollMarkers.Image = _rollMarkersOffImage;
 				_slipBall.Image = _slipBallOffImage;
 				_ilsPointer.Image = _ilsPointerOffImage;
-				_ball.Image = _ballOffImage;
-			}
+                _ball.Image = _ballOffImage;
+            }
 
-			Refresh();
+            Refresh();
 		}
 
 		public override void Reset()
@@ -346,8 +347,26 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 			ProcessADIValues();
 			ProcessBacklightValues();
 		}
+        public override void ScaleChildren(double scaleX, double scaleY)
+        {
+			if (!_suppressScale)
+			{
+                _ball.ScaleChildren(scaleX, scaleY);
+				_suppressScale = false;
+            }
+            base.ScaleChildren(scaleX, scaleY);
+        }
+        protected override void PostUpdateRectangle(Rect previous, Rect current)
+        {
+            _suppressScale = false;
+            if (!previous.Equals(new Rect(0, 0, 0, 0)) && !(previous.Width == current.Width && previous.Height == current.Height))
+            {
+                _ball.ScaleChildren(current.Width / previous.Width, current.Height / previous.Height);
+				_suppressScale = true;
+            }
+        }
 
-		private BindingValue GetValue(string device, string name)
+        private BindingValue GetValue(string device, string name)
 		{
 			return _falconInterface?.GetValue(device, name) ?? BindingValue.Empty;
 		}
@@ -385,6 +404,6 @@ namespace GadrocsWorkshop.Helios.Gauges.Falcon.ADI
 			}
 		}
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

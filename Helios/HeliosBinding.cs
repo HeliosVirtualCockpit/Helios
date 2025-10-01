@@ -286,7 +286,6 @@ namespace GadrocsWorkshop.Helios
                 {
                     _luaInterpreter = new Lua();
                     _luaInterpreter.State.Encoding = _luaScriptUTF8Encoding ? Encoding.UTF8 : Encoding.ASCII;
-
                     // add lua environment variables
                     _luaInterpreter.DoString("HeliosPath = " + "'" + ConfigManager.DocumentPath.Replace("\\", "\\\\") + "'");
                     _luaInterpreter.DoString("BMSFalconPath = " + "'" + ConfigManager.BMSFalconPath.Replace("\\", "\\\\") + "'");

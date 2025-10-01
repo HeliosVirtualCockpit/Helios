@@ -3,6 +3,8 @@ function driver.processHighImportance(mainPanelDevice)
 	-- Send Altimeter Values	
 	helios.send(2051, string.format("%0.4f;%0.4f;%0.4f", mainPanelDevice:get_argument_value(355), mainPanelDevice:get_argument_value(354), mainPanelDevice:get_argument_value(352)))
 	helios.send(2059, string.format("%0.2f;%0.2f;%0.2f;%0.3f", mainPanelDevice:get_argument_value(356), mainPanelDevice:get_argument_value(357), mainPanelDevice:get_argument_value(358), mainPanelDevice:get_argument_value(359)))		
+	-- Send ADI Ball Values	
+	helios.send(2050, string.format("%0.4f;0.0;%0.4f", mainPanelDevice:get_argument_value(349), mainPanelDevice:get_argument_value(348)))
 end
 
 function driver.processLowImportance(mainPanelDevice)

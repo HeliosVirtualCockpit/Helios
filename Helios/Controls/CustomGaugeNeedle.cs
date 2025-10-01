@@ -226,7 +226,7 @@ namespace GadrocsWorkshop.Helios.Gauges
 
             if (_image == null)
 			{
-				_image = ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/missing_image.png", (int)_rectangle.Width, (int)_rectangle.Height);
+				_image = ConfigManager.ImageManager.LoadImage("{Helios}/Images/General/MissingImage.xaml", (int)_rectangle.Width, (int)_rectangle.Height);
 			}
         }
     }

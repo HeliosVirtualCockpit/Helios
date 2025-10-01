@@ -13,21 +13,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Linq;
 using GadrocsWorkshop.Helios.Controls;
 using GadrocsWorkshop.Helios.Controls.Capabilities;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities;
 using GadrocsWorkshop.Helios.Interfaces.Capabilities.ProfileAwareInterface;
+using System.Linq;
 
 namespace GadrocsWorkshop.Helios
 {
+    using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.Soft;
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
-
-    using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Interfaces.DCS.Soft;
+    using System.Windows.Media.Effects;
 
     public class HeliosProfile : NotificationObject, IReadyCheck
     {
@@ -43,6 +43,7 @@ namespace GadrocsWorkshop.Helios
         private string _name = "Untitled";
         private string _path = "";
         private readonly HashSet<string> _tags = new HashSet<string>();
+        private ShaderEffect _shaderEffect;
 
         public HeliosProfile() : this(true)
         {
@@ -234,6 +235,18 @@ namespace GadrocsWorkshop.Helios
         /// WARNING: there is currently no mechanism for Helios to learn the displays on the local machine have changed
         /// </summary>
         public MonitorCollection CheckedDisplays { get; private set; }
+
+        public ShaderEffect Effect
+        {
+            get => _shaderEffect;
+            set
+            {
+                if (!value.Equals(_shaderEffect))
+                {
+                    _shaderEffect = value;
+                }
+            }
+        }
 
         public bool IsStarted
         {

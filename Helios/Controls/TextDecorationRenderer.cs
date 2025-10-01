@@ -30,9 +30,9 @@ namespace GadrocsWorkshop.Helios.Controls
             TextDecoration profileText = Visual as TextDecoration;
             if (profileText.FillBackground && profileText.BackgroundColor.A > 0)
             {
-                drawingContext.DrawRectangle(_backgroundBrush, null, _rectangle);
+                DrawRectangle(drawingContext, _backgroundBrush, null, _rectangle);
             }
-            profileText.Format.RenderText(drawingContext, _fontBrush, profileText.Text, _rectangle);
+            DrawText(drawingContext, profileText, _fontBrush, profileText.Text, _rectangle);
         }
 
         //protected override void OnRender(DrawingContext drawingContext, double scaleX, double scaleY)

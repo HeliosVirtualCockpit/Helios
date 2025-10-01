@@ -98,6 +98,14 @@ namespace GadrocsWorkshop.Helios.Gauges
                     Refresh();
                     continue;
                 }
+                if (gc is GaugeBall gbp)
+                {
+                    continue;
+                }
+                if (gc is GaugeCylinder gcp)
+                {
+                    continue;
+                }
             }
         }
 

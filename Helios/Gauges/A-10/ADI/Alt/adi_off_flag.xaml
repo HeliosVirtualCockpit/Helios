@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="svg2" Width="55" Height="56">
+    <Canvas.Resources>
+        <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient4269" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FF006400" Offset="0"/>
+                    <GradientStop Color="#FF001400" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient3897" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#00005000" Offset="0"/>
+                    <GradientStop Color="#00005000" Offset="0.81944442"/>
+                    <GradientStop Color="#9F005000" Offset="1"/>
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <RadialGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="radialGradient3903" MappingMode="Absolute" Center="174,159.5" GradientOrigin="174,159.5" RadiusX="111.4995" RadiusY="111.4995">
+            <RadialGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#00005000" Offset="0"/>
+                    <GradientStop Color="#00005000" Offset="0.81944442"/>
+                    <GradientStop Color="#9F005000" Offset="1"/>
+                </GradientStopCollection>
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+        <RadialGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="radialGradient4275" MappingMode="Absolute" Center="175,312" GradientOrigin="175,312" RadiusX="5" RadiusY="5">
+            <RadialGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FF006400" Offset="0"/>
+                    <GradientStop Color="#FF001400" Offset="1"/>
+                </GradientStopCollection>
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+    </Canvas.Resources>
+    <Canvas Name="layer8">
+        <Canvas>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <!--g-->
+                    <TranslateTransform X="-57.912164" Y="-213.4312"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Canvas Name="g4253">
+                <Canvas>
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <!--g-->
+                            <TranslateTransform X="-1.0606602" Y="1.4142136"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rect4209" Fill="#FF004900" Stroke="#FF000000" StrokeThickness="1" StrokeMiterLimit="4" Data="m 77.367063 212.56868 36.075417 38.68614 -3.35801 13.7667 -14.484551 2.87175 -36.075404 -38.68614 3.875146 -14.24894 z"/>
+                    <Canvas Name="flowRoot4215" Opacity="1">
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <!--g-->
+                                    <TranslateTransform X="-5.1265242" Y="-1.767767"/>
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3057" Fill="#FF000000" Data="m 85.453125 224.69182 c 0.598945 1.80339 0.825181 3.67514 0.678711 5.61523 -0.146498 1.94011 -0.678724 3.71094 -1.59668 5.3125 -0.579438 0.9961 -1.370453 1.84245 -2.373047 2.53906 -1.002612 0.69662 -2.109382 0.94076 -3.320312 0.73242 -1.972661 -0.34505 -3.483076 -1.37369 -4.53125 -3.08593 -1.048178 -1.71224 -1.648763 -3.61816 -1.801758 -5.71778 -0.152995 -2.09959 0.130208 -4.14549 0.849609 -6.13769 0.7194 -1.99217 1.86686 -3.44074 3.442383 -4.3457 0.768224 -0.44269 1.57226 -0.66405 2.41211 -0.66407 1.601554 2e-5 2.910146 0.60386 3.925781 1.81153 1.015613 1.2077 1.787097 2.52117 2.314453 3.94043 z m -6.162109 -2.97852 c -1.197923 2e-5 -2.104497 0.64455 -2.719727 1.93359 -0.615238 1.28908 -1.004235 2.38934 -1.166992 3.30079 -0.123701 0.66407 -0.169274 1.46811 -0.136719 2.4121 0.03255 0.94402 0.169268 1.87664 0.410156 2.79786 0.240882 0.92123 0.60221 1.7513 1.083985 2.49023 0.481766 0.73894 1.113276 1.22885 1.894531 1.46973 0.911451 0.28646 1.697583 0.10579 2.358398 -0.54199 0.660799 -0.64779 1.160472 -1.33626 1.499024 -2.06543 0.345042 -0.7487 0.581044 -1.73177 0.708008 -2.94922 0.126942 -1.21744 0.09764 -2.43326 -0.08789 -3.64746 -0.185557 -1.21418 -0.548513 -2.30793 -1.088867 -3.28125 -0.540374 -0.9733 -1.308602 -1.59341 -2.304688 -1.86036 -0.130215 -0.039 -0.279955 -0.0586 -0.449218 -0.0586 z"/>
+                        </Canvas>
+                    </Canvas>
+                    <Canvas Name="flowRoot4223" Opacity="1">
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <!--g-->
+                                    <TranslateTransform X="8.662058" Y="12.374369"/>
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3060" Fill="#FF000000" Data="m 73.148437 237.55314 0 -17.22656 c 0.117188 -0.85935 0.579427 -1.32159 1.386719 -1.38672 l 9.453125 0 c 0.904936 0.0716 1.35741 0.53225 1.357422 1.38184 -1.2e-5 0.84963 -0.458996 1.30373 -1.376953 1.3623 l -8.076172 0 0 5.3418 6.298828 0 c 0.898428 0.0651 1.354157 0.50457 1.367188 1.31836 -1.1e-5 0.013 -1.1e-5 0.0228 0 0.0293 -1.1e-5 0.79428 -0.455739 1.25977 -1.367188 1.39648 l -6.298828 0 0 7.7832 c -0.06511 0.89844 -0.504559 1.35417 -1.318359 1.36719 -0.01302 0 -0.02604 0 -0.03906 0 -0.794271 0 -1.25651 -0.45573 -1.386719 -1.36719 z"/>
+                        </Canvas>
+                    </Canvas>
+                    <Canvas Name="flowRoot4231" Opacity="1">
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <!--g-->
+                                    <TranslateTransform X="20.32932" Y="25.279068"/>
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3063" Fill="#FF000000" Data="m 73.148437 237.55314 0 -17.22656 c 0.117188 -0.85935 0.579427 -1.32159 1.386719 -1.38672 l 9.453125 0 c 0.904936 0.0716 1.35741 0.53225 1.357422 1.38184 -1.2e-5 0.84963 -0.458996 1.30373 -1.376953 1.3623 l -8.076172 0 0 5.3418 6.298828 0 c 0.898428 0.0651 1.354157 0.50457 1.367188 1.31836 -1.1e-5 0.013 -1.1e-5 0.0228 0 0.0293 -1.1e-5 0.79428 -0.455739 1.25977 -1.367188 1.39648 l -6.298828 0 0 7.7832 c -0.06511 0.89844 -0.504559 1.35417 -1.318359 1.36719 -0.01302 0 -0.02604 0 -0.03906 0 -0.794271 0 -1.25651 -0.45573 -1.386719 -1.36719 z"/>
+                        </Canvas>
+                    </Canvas>
+                </Canvas>
+            </Canvas>
+        </Canvas>
+    </Canvas>
+</Canvas>
