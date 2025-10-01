@@ -64,45 +64,45 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C.ADI
             Point center = new Point(177d, 163d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-360d, -1066d, 360d, 1066d);
-            _ball = new GaugeNeedle("{FA-18C}/Gauges/ADI/adi_ball.png", center, new Size(198d, 1160d), new Point(99d, 580d));
+            _ball = new GaugeNeedle("{FA-18C}/Gauges/ADI/V1/adi_ball.png", center, new Size(198d, 1160d), new Point(99d, 580d));
             _ball.Clip = new EllipseGeometry(center, 99d, 99d);
             Components.Add(_ball);
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -45d, 1.0d, 45d);
-            _wingsNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/adi_wings.xaml", new Point(99d, 158d), new Size(157d, 31d), new Point(0d, 0d));
+            _wingsNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/V1/adi_wings.xaml", new Point(99d, 158d), new Size(157d, 31d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
 
-            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/adi_innermost_ring.xaml", new Rect(65d, 52d, 224d, 224d)));
-            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/adi_inner_ring.xaml", new Rect(30d, 23d, 287d, 305d)));
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/V1/adi_innermost_ring.xaml", new Rect(65d, 52d, 224d, 224d)));
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/V1/adi_inner_ring.xaml", new Rect(30d, 23d, 287d, 305d)));
 
-            _bankNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/adi_arrow.xaml", center, new Size(17d, 110d), new Point(8.5d, 110d));
+            _bankNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/V1/adi_arrow.xaml", center, new Size(17d, 110d), new Point(8.5d, 110d));
             Components.Add(_bankNeedle);
 
             _slipBallCalibration = new CalibrationPointCollectionDouble(-1d, -26d, 1d, 26d);
-            _slipBallNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/adi_slip_ball.xaml", new Point(176d, 297d), new Size(14d, 14d), new Point(7d, 7d));
+            _slipBallNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/V1/adi_slip_ball.xaml", new Point(176d, 297d), new Size(14d, 14d), new Point(7d, 7d));
             Components.Add(_slipBallNeedle);
 
-            _TurnMarker = new GaugeNeedle("{FA-18C}/Gauges/ADI/adi_turn_marker.xaml", new Point(178d, 315d), new Size(12d, 9d), new Point(7d, 0d));
+            _TurnMarker = new GaugeNeedle("{FA-18C}/Gauges/ADI/V1/adi_turn_marker.xaml", new Point(178d, 315d), new Size(12d, 9d), new Point(7d, 0d));
             Components.Add(_TurnMarker);
 
-            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/adi_guides.xaml", new Rect(66d, 54d, 222d, 250d)));
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/V1/adi_guides.xaml", new Rect(66d, 54d, 222d, 250d)));
 
             _pitchBarCalibration = new CalibrationPointCollectionDouble(-1d, -150d, 1d, 150d);
-            _pitchSteeringNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/adi_pitch_steering_bar.xaml", new Point(0d, 163d), new Size(252d, 6d), new Point(0d, 3d));
+            _pitchSteeringNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/V1/adi_pitch_steering_bar.xaml", new Point(0d, 163d), new Size(252d, 6d), new Point(0d, 3d));
             _pitchSteeringNeedle.VerticalOffset = _pitchBarCalibration.Interpolate(-1d);
             Components.Add(_pitchSteeringNeedle);
 
             _bankBarCalibration = new CalibrationPointCollectionDouble(-1d, -134d, 1d, 134d);
-            _bankSteeringNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/adi_bank_steering_bar.xaml", new Point(175d, 0d), new Size(24d, 252d), new Point(23d, 0d));
+            _bankSteeringNeedle = new GaugeNeedle("{FA-18C}/Gauges/ADI/V1/adi_bank_steering_bar.xaml", new Point(175d, 0d), new Size(24d, 252d), new Point(23d, 0d));
             _bankSteeringNeedle.HorizontalOffset = _bankBarCalibration.Interpolate(-1d);
             Components.Add(_bankSteeringNeedle);
 
-            _offFlagImage = new GaugeImage("{FA-18C}/Gauges/ADI/adi_off_flag.png", new Rect(270d, 40d, 44d, 166d));
+            _offFlagImage = new GaugeImage("{FA-18C}/Gauges/ADI/V1/adi_off_flag.png", new Rect(270d, 40d, 44d, 166d));
             _offFlagImage.IsHidden = true;
             Components.Add(_offFlagImage);
 
-            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/adi_outer_ring.xaml", new Rect(10d, 9d, 336d, 336d)));
-            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/adi_bezel.png", new Rect(0d, 0d, 350d, 350d)));
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/V1/adi_outer_ring.xaml", new Rect(10d, 9d, 336d, 336d)));
+            Components.Add(new GaugeImage("{FA-18C}/Gauges/ADI/V1/adi_bezel.png", new Rect(0d, 0d, 350d, 350d)));
 
             _slipBall = new HeliosValue(this, new BindingValue(0d), "", "Slip Ball Offset", "Side slip indicator offset from the center of the tube.", "(-1 to 1) -1 full left and 1 is full right.", BindingValueUnits.Numeric);
             _slipBall.Execute += new HeliosActionHandler(SlipBall_Execute);

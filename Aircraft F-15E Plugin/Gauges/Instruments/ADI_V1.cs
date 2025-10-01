@@ -37,13 +37,14 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
         private CalibrationPointCollectionDouble _pitchCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
 
+        public ADIGauge_V1() : this("ADI (2D)", new Size(400, 400), "Flight Instruments") { }
         public ADIGauge_V1(string name, Size size, string device)
             : base(name, size)
         {
             Point center = new Point(200d, 200d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI_Tape.xaml", center, new Size(300d, 1440d), new Point(150d, 1440d / 2d));
+            _ball = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI_Tape_2D.xaml", center, new Size(300d, 1440d), new Point(150d, 1440d / 2d));
             _ball.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_ball);
 
