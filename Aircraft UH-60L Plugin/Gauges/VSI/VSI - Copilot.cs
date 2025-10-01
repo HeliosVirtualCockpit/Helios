@@ -27,7 +27,6 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         public VSICopilot()
             : base(FLYER.Copilot, new Size(596, 604))
         {
-            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
         }
     }
 }

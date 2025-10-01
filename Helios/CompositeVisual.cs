@@ -132,6 +132,7 @@ namespace GadrocsWorkshop.Helios
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public Type[] SupportedInterfaces { get; protected set; } = new Type[0];
+        public string[] SupportedSoftInterfaceNames { get; protected set; } = new string[0];
 
         protected CompositeVisual(string name, Size nativeSize)
             : base(name, nativeSize)
@@ -378,6 +379,11 @@ namespace GadrocsWorkshop.Helios
             foreach (Type supportedInterface in SupportedInterfaces)
             {
                 _defaultInterface = Profile.Interfaces.FirstOrDefault(i => supportedInterface.IsInstanceOfType(i));
+                if (_defaultInterface != null 
+                    && _defaultInterface.GetType() ==  typeof(Interfaces.DCS.Soft.SoftInterface) 
+                    && !SupportedSoftInterfaceNames.Any(_defaultInterface.Name.Contains)) {
+                        _defaultInterface = null;
+                }
                 if (_defaultInterface != null)
                 {
                     Logger.Info($"{Name} auto binding to interface '{_defaultInterface.Name}'");

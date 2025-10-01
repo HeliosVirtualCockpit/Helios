@@ -32,6 +32,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         private readonly HeliosValue _slipBall, _turn;
         private readonly HeliosValue _gsHorizontal, _gsVertical;
         private readonly HeliosValue _collectiveIndicatorValue, _trackErrorIndicatorValue, _gsIndicatorValue;
+        private readonly HeliosValue _gaIndicatorValue, _dhIndicatorValue, _mbIndicatorValue;
 
         private readonly HeliosValue _attFlag, _cmdFlag, _gsFlag, _navFlag;
 
@@ -43,16 +44,22 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         private readonly GaugeNeedle _gsHorizontalNeedle, _gsVerticalNeedle;
         private readonly GaugeNeedle _glideSlopeIndicatorNeedle, _trackErrorNeedle, _collectiveIndicatorNeedle;
 
+        private readonly GaugeImage _gaIndicatorLit, _dhIndicatorLit, _mbIndicatorLit;
+
         private readonly CalibrationPointCollectionDouble _ilsHCalibration, _ilsVCalibration;
         private readonly CalibrationPointCollectionDouble _slipBallCalibration, _turnCalibration;
         private readonly CalibrationPointCollectionDouble _trackErrorScale, _collectiveScale, _gsScale;
         private readonly FLYER _flyer;
+        private readonly Dictionary<string, string> _bindingDictionary = new Dictionary<string, string>();
 
         private bool _suppressScale = false;
 
         public VSI(FLYER flyer, Size size)
             : base($"VSI ({flyer})", size)
         {
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface), typeof(Interfaces.DCS.Soft.SoftInterface) };
+            SupportedSoftInterfaceNames = new[] { "DCS H-60 (UH-60L Blackhawk)", "DCS H-60 (MH-60R Seahawk)" };
+
             _flyer = flyer;
             _trackErrorScale = new CalibrationPointCollectionDouble(-1d, -110d, 1d, 110d);
             _collectiveScale = new CalibrationPointCollectionDouble(-1d, 200d, 1d, 200d) {
@@ -126,6 +133,20 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             _turnNeedle = new GaugeNeedle("{UH-60L}/Gauges/VSI/VSI-Turn-Pointer.xaml", new Point(295d, 518d), new Size(23.500d, 13.500d), new Point(11.525d, 0d));
             Components.Add(_turnNeedle);
 
+            Components.Add(new GaugeImage("{UH-60L}/Gauges/VSI/VSI-GA-Unlit.xaml", new Rect(157.180d - 38.782d, 66.766d - 26.559d, 38.782d, 26.559d), 1d, 0d));
+            Components.Add(new GaugeImage("{UH-60L}/Gauges/VSI/VSI-DH-Unlit.xaml", new Rect(265.194d - 38.782d, 66.766d - 26.559d, 38.782d, 26.559d), 1d, 0d));
+            Components.Add(new GaugeImage("{UH-60L}/Gauges/VSI/VSI-MB-Unlit.xaml", new Rect(373.207d - 38.782d, 66.766d - 26.559d, 38.782d, 26.559d), 1d, 0d));
+
+            _gaIndicatorLit = new GaugeImage("{UH-60L}/Gauges/VSI/VSI-GA-Lit.xaml", new Rect(157.180 - 38.782d, 66.766d - 26.559d, 38.782d, 26.559d), 1d, 0d);
+            _gaIndicatorLit.IsHidden = true;
+            Components.Add(_gaIndicatorLit);
+            _dhIndicatorLit = new GaugeImage("{UH-60L}/Gauges/VSI/VSI-DH-Lit.xaml", new Rect(265.194d - 38.782d, 66.766d - 26.559d, 38.782d, 26.559d), 1d, 0d);
+            _dhIndicatorLit.IsHidden = true;
+            Components.Add(_dhIndicatorLit);
+            _mbIndicatorLit = new GaugeImage("{UH-60L}/Gauges/VSI/VSI-MB-Lit.xaml", new Rect(373.207d - 38.782d, 66.766d - 26.559d, 38.782d, 26.559d), 1d, 0d);
+            _mbIndicatorLit.IsHidden = true;
+            Components.Add(_mbIndicatorLit);
+
             // dummy knobs because the UH-60L V2 mod does not implement them. 
             Components.Add(new GaugeImage("{UH-60L}/Gauges/VSI/VSI-Knob.xaml", new Rect(25, 475, 101.025d, 101.036d), 1d, 90d));
             Components.Add(new GaugeImage("{UH-60L}/Gauges/VSI/VSI-Knob.xaml", new Rect(460, 475, 101.025d, 101.036d), 1d, 0d));
@@ -174,25 +195,54 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             _gsIndicatorValue.Execute += new HeliosActionHandler(GSIndicator_Execute);
             Actions.Add(_gsIndicatorValue);
 
-            _attFlag = new HeliosValue(this, new BindingValue(false), "", "ATT flag", "Indicates whether the ATT flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
+            _attFlag = new HeliosValue(this, new BindingValue(0d), "", "ATT flag", "Indicates whether the ATT flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
             _attFlag.Execute += new HeliosActionHandler(AttFlag_Execute);
             Actions.Add(_attFlag);
 
-            _cmdFlag = new HeliosValue(this, new BindingValue(false), "", "CMD flag", "Indicates whether the CMD flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
+            _cmdFlag = new HeliosValue(this, new BindingValue(0d), "", "CMD flag", "Indicates whether the CMD flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
             _cmdFlag.Execute += new HeliosActionHandler(CmdFlag_Execute);
             Actions.Add(_cmdFlag);
 
-            _gsFlag = new HeliosValue(this, new BindingValue(false), "", "GS flag", "Indicates whether the GS flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
+            _gsFlag = new HeliosValue(this, new BindingValue(0d), "", "GS flag", "Indicates whether the GS flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
             _gsFlag.Execute += new HeliosActionHandler(GsFlag_Execute);
             Actions.Add(_gsFlag);
 
-            _navFlag = new HeliosValue(this, new BindingValue(false), "", "NAV flag", "Indicates whether the NAV flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
+            _navFlag = new HeliosValue(this, new BindingValue(0d), "", "NAV flag", "Indicates whether the NAV flag is displayed.", "0 to 1", BindingValueUnits.Numeric);
             _navFlag.Execute += new HeliosActionHandler(NavFlag_Execute);
             Actions.Add(_navFlag);
+
+            _gaIndicatorValue = new HeliosValue(this, new BindingValue(false), "", "GA Indicator", "Indicates whether the GA Indicator is displayed.", "0 to 1", BindingValueUnits.Boolean);
+            _gaIndicatorValue.Execute += new HeliosActionHandler(GAIndicator_Execute);
+            Actions.Add(_gaIndicatorValue);
+
+            _dhIndicatorValue = new HeliosValue(this, new BindingValue(false), "", "DH Indicator", "Indicates whether the GA Indicator is displayed.", "0 to 1", BindingValueUnits.Boolean);
+            _dhIndicatorValue.Execute += new HeliosActionHandler(DHIndicator_Execute);
+            Actions.Add(_dhIndicatorValue);
+
+            _mbIndicatorValue = new HeliosValue(this, new BindingValue(false), "", "MB Indicator", "Indicates whether the GA Indicator is displayed.", "0 to 1", BindingValueUnits.Boolean);
+            _mbIndicatorValue.Execute += new HeliosActionHandler(MBIndicator_Execute);
+            Actions.Add(_mbIndicatorValue);
+
+            _bindingDictionary.Add("ball rotation", "_ball rotation");
+            _bindingDictionary.Add("side slip", "_VSI_SLIP_IND");
+            _bindingDictionary.Add("turn rate", "_VSI_TURN_RATE_IND");
+            _bindingDictionary.Add("GS horizontal deviation", "_VSI_ROLL_CMD_BAR");
+            _bindingDictionary.Add("GS vertical deviation", "_VSI_PITCH_CMD_BAR");
+            _bindingDictionary.Add("Collective Indicator", "_VSI_COLLECTIVE_CMD_BAR");
+            _bindingDictionary.Add("Track Error Indicator", "_VSI_TRACK_ERROR_IND");
+            _bindingDictionary.Add("Glide Slope Indicator", "_VSI_GLIDE_SLOPE_IND");
+            _bindingDictionary.Add("ATT flag", "_VSI_ATT_FLAG");
+            _bindingDictionary.Add("CMD flag", "_VSI_CMD_FLAG");
+            _bindingDictionary.Add("GS flag", "_VSI_GS_FLAG");
+            _bindingDictionary.Add("NAV flag", "_VSI_NAV_FLAG");
+            _bindingDictionary.Add("GA Indicator", "VSILtGA");
+            _bindingDictionary.Add("DH Indicator", "_APN209_LOLIGHT");
+            _bindingDictionary.Add("MB Indicator", "VSILtMB");
 
             BuildBindings();
         }
         private void BuildBindings() {
+            
 
             foreach (IBindingAction action in Actions)
             {
@@ -202,8 +252,20 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
                         childName: "",
                         interfaceTriggerName: $"VSI ({_flyer}).{action.Name}.changed",
                         deviceActionName: action.ActionID);
+                    
+                    string flyer;
+                    if (_bindingDictionary.ContainsKey(action.Name))
+                    {
+                        flyer = _bindingDictionary[action.Name].StartsWith("_") ? _flyer.ToString().ToUpperInvariant() : _flyer.ToString().ToLowerInvariant();
+                        AddDefaultInputBinding(
+                            childName: "",
+                            interfaceTriggerName: $"{_flyer.ToString().ToUpperInvariant()} VSI.{flyer}{_bindingDictionary[action.Name]}.changed",
+                            deviceActionName: action.ActionID);
+
+                    }
                 }
             }
+
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
@@ -288,6 +350,22 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
         {
             _cmdFlag.SetValue(e.Value, e.BypassCascadingTriggers);
             _cmdFlagNeedle.VerticalOffset = -e.Value.DoubleValue * 90;
+        }
+
+        void GAIndicator_Execute(object action, HeliosActionEventArgs e)
+        {
+            _gaIndicatorValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            _gaIndicatorLit.IsHidden = !e.Value.BoolValue;
+        }
+        void DHIndicator_Execute(object action, HeliosActionEventArgs e)
+        {
+            _dhIndicatorValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            _dhIndicatorLit.IsHidden = !e.Value.BoolValue;
+        }
+        void MBIndicator_Execute(object action, HeliosActionEventArgs e)
+        {
+            _mbIndicatorValue.SetValue(e.Value, e.BypassCascadingTriggers);
+            _mbIndicatorLit.IsHidden = !e.Value.BoolValue;
         }
 
         /// <summary>

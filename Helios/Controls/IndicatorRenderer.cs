@@ -43,7 +43,7 @@ namespace GadrocsWorkshop.Helios.Controls
         protected override void OnRender(DrawingContext drawingContext)
         {
             ImageSource image = _indicator.On ? _onImage : _offImage;
-
+            DrawImage(drawingContext, image, _imageRect);
             DrawText(drawingContext, _indicator, _indicator.On ? _onBrush : _offBrush, _indicator.Text, _imageRect);
 
         }

@@ -874,6 +874,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             PILOT_VSI_ATT_FLAG = 430,
             PILOT_VSI_NAV_FLAG = 431,
             PILOT_VSI_GS_FLAG = 432,
+            pilotVSILtGA = 980,
+            PILOT_APN209_LOLIGHT = 981,
+            pilotVSILtMB = 982,
 
             //COPILOT VSI
             COPILOT_VSI_PITCH = 433,
@@ -889,6 +892,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             COPILOT_VSI_ATT_FLAG = 443,
             COPILOT_VSI_NAV_FLAG = 444,
             COPILOT_VSI_GS_FLAG = 445,
+            copilotVSILtGA = 983,
+            COPILOT_APN209_LOLIGHT = 984,
+            copilotVSILtMB = 985,
 
             pduPltOverspeed1 = 450,
             pduPltOverspeed2 = 451,
@@ -1504,6 +1510,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_ATT_FLAG.ToString("d"), "VSI (Pilot)", "ATT flag", "VSI ATT flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_NAV_FLAG.ToString("d"), "VSI (Pilot)", "NAV flag", "VSI NAV flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, mainpanel.PILOT_VSI_GS_FLAG.ToString("d"), "VSI (Pilot)", "GS flag", "VSI GS flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new FlagValue(this, mainpanel.pilotVSILtGA.ToString("d"), "VSI (Pilot)", "GA Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.PILOT_APN209_LOLIGHT.ToString("d"), "VSI (Pilot)", "DH Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.pilotVSILtMB.ToString("d"), "VSI (Pilot)", "MB Indicator", "VSI Indicator, value of 1 turns on"));
 
             // COPILOT VSI (ADI)
             AddFunction(new ScaledNetworkValue(this, mainpanel.COPILOT_VSI_PITCH.ToString("d"), 90d, "VSI (Copilot)", "pitch", "VSI pitch value in degrees", "-90 to +90", BindingValueUnits.Degrees));
@@ -1520,6 +1529,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_ATT_FLAG.ToString("d"), "VSI (Copilot)", "ATT flag", "VSI ATT flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_NAV_FLAG.ToString("d"), "VSI (Copilot)", "NAV flag", "VSI NAV flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
             AddFunction(new NetworkValue(this, mainpanel.COPILOT_VSI_GS_FLAG.ToString("d"), "VSI (Copilot)", "GS flag", "VSI GS flag as a numeric value", "0 to +1", BindingValueUnits.Numeric));
+            AddFunction(new FlagValue(this, mainpanel.copilotVSILtGA.ToString("d"), "VSI (Copilot)", "GA Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.COPILOT_APN209_LOLIGHT.ToString("d"), "VSI (Copilot)", "DH Indicator", "VSI Indicator, value of 1 turns on"));
+            AddFunction(new FlagValue(this, mainpanel.copilotVSILtMB.ToString("d"), "VSI (Copilot)", "MB Indicator", "VSI Indicator, value of 1 turns on"));
 
             // MISC
             AddFunction(new FlagValue(this, mainpanel.parkingBrakeHandle.ToString("d"), "Indicators/Lamps/Flags", "PARKING BRAKE HANDLE", ""));

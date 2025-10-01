@@ -57,15 +57,6 @@
   <Canvas>
 
   <!-- Outer-Bezel/Top Indicators/<Rectangle> -->
-  <Path StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Data="F1 M 157.180,66.766 L 119.398,66.766 L 119.398,41.207 L 157.180,41.207 L 157.180,66.766 Z"/>
-
-  <!-- Outer-Bezel/Top Indicators/<Rectangle> -->
-  <Path StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Data="F1 M 265.194,66.766 L 227.411,66.766 L 227.411,41.207 L 265.194,41.207 L 265.194,66.766 Z"/>
-
-  <!-- Outer-Bezel/Top Indicators/<Rectangle> -->
-  <Path StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Data="F1 M 373.207,66.766 L 335.425,66.766 L 335.425,41.207 L 373.207,41.207 L 373.207,66.766 Z"/>
-
-  <!-- Outer-Bezel/Top Indicators/<Rectangle> -->
   <Path StrokeThickness="1.0" Stroke="#ff7f7f7f" StrokeMiterLimit="1.0" Data="F1 M 481.221,66.766 L 443.438,66.766 L 443.438,41.207 L 481.221,41.207 L 481.221,66.766 Z"/>
 
   </Canvas>
