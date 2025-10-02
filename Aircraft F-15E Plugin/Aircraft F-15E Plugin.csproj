@@ -952,5 +952,11 @@
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Instruments\ADI_Pointer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
   <Import Project="..\HeliosPlugin.targets" />
 </Project>

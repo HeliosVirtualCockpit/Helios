@@ -48,7 +48,7 @@ namespace GadrocsWorkshop.Helios.Gauges.F15E.Instruments.ADI
             _ball.Clip = new EllipseGeometry(center, 150d, 150d);
             Components.Add(_ball);
 
-            Components.Add(new GaugeImage("{F-15E}/Gauges/Instruments/ADI_Gradiant.xaml", new Rect(50d, 50d, 300d, 300d)));
+            Components.Add(new GaugeImage("{helios}/Gauges/Common/Circular-Shading.xaml", new Rect(50d, 50d, 300d, 300d)));
 
             _pitchAdjustCalibaration = new CalibrationPointCollectionDouble(-1.0d, -30d, 1.0d, 30d);
             _wingsNeedle = new GaugeNeedle("{F-15E}/Gauges/Instruments/ADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
