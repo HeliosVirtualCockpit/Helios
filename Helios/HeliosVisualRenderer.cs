@@ -120,9 +120,15 @@ namespace GadrocsWorkshop.Helios
 
         protected virtual void OnRender(DrawingContext drawingContext, double scaleX, double scaleY)
         {
-            drawingContext.PushTransform(new ScaleTransform(scaleX, scaleY));
+            if (scaleX != 1d || scaleY != 1d)
+            {
+                drawingContext.PushTransform(new ScaleTransform(scaleX, scaleY));
+            }
             OnRender(drawingContext);
-            drawingContext.Pop();
+            if (scaleX != 1d || scaleY != 1d)
+            {
+                drawingContext.Pop();
+            }
         }
 
 
@@ -152,7 +158,7 @@ namespace GadrocsWorkshop.Helios
         /// <param name="drawingContext"></param>
         /// <param name="image"></param>
         /// <param name="imageRectangle"></param>
-        private void RenderEffect(DrawingContext drawingContext, ImageSource image, Rect imageRectangle)
+        private void RenderEffect(DrawingContext drawingContext, DrawingVisual image, Rect imageRectangle)
         {
             // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
             if (!_designTimeChecked)
@@ -174,19 +180,12 @@ namespace GadrocsWorkshop.Helios
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }
 
-            System.Windows.Controls.Image imageControl = new System.Windows.Controls.Image
-            {
-                Source = image,
-                Width = image != null ? image.Width : 0,
-                Height = image != null ? image.Width : 0,
-
-            };
             if (!Visual.EffectsExclusion)
             {
-                imageControl.Effect = _effect;
+                image.Effect = _effect;
             }
-            VisualBrush visualBrush = new VisualBrush(imageControl);
-            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
+
+            drawingContext.DrawRectangle(new VisualBrush(image), null, imageRectangle);
         }
 
         /// <summary>
@@ -197,16 +196,12 @@ namespace GadrocsWorkshop.Helios
         /// <param name="rectangle"></param>
         protected void RenderVisual(DrawingContext drawingContext, DrawingVisual visual, Rect rectangle)
         {
-            if(visual.ContentBounds.IsEmpty || rectangle.Width == 0 || rectangle.Height == 0) { return; }
-            RenderTargetBitmap rtb = new RenderTargetBitmap(Convert.ToInt32(rectangle.Width), Convert.ToInt32(rectangle.Height), 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(visual);
-            //drawingContext.DrawImage(rtb, rectangle);
-            RenderEffect(drawingContext, rtb, rectangle);
+            if(visual.ContentBounds.IsEmpty || rectangle.Width == 0 || rectangle.Height == 0) 
+            { 
+                return; 
+            }
 
-            // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
-            (rtb.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
-.GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
-
+            RenderEffect(drawingContext, visual, rectangle);
         }
 
         #region Draw Proxies

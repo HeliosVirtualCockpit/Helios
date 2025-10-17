@@ -24,9 +24,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D
     [HeliosControl("Helios.AH64D.IAS", "Standby IAS Gauge", "AH-64D", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class IAS : BaseGauge
     {
-        private HeliosValue _indicatedAirSpeed;
-        private GaugeNeedle _needle;
-        private CalibrationPointCollectionDouble _needleCalibration;
+        private readonly HeliosValue _indicatedAirSpeed;
+        private readonly GaugeNeedle _needle;
+        private readonly CalibrationPointCollectionDouble _needleCalibration;
         
         public IAS()
             : base("Standby IAS Gauge", new Size(300, 300))

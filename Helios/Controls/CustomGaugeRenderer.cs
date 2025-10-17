@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private Rect _imageRect, _backgroundRect;
         private Point _center, _nextToCenter;
         private double _rotation;
-        private readonly Brush _scopeBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+        private readonly Brush _scopeBrush = new SolidColorBrush(Color.FromRgb(127, 0, 0));
         private readonly Pen _scopePen;
         private CustomGauge _gauge;
 

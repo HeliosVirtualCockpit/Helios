@@ -133,7 +133,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         
         #endregion
 
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        protected override void OnRender(DrawingContext drawingContext)
         {
             TransformGroup transform = new TransformGroup();
             transform.Children.Add(new TranslateTransform((-_center.X + HorizontalOffset) * _xScale, (-_center.Y + VerticalOffset) * _yScale));
