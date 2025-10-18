@@ -226,7 +226,7 @@ namespace GadrocsWorkshop.Helios
                 DrawingContext tempDrawingContext = visual.RenderOpen();
                 tempDrawingContext.DrawImage(image, rectangle);
                 tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, rectangle);
+                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
             }
 
         }
@@ -253,7 +253,7 @@ namespace GadrocsWorkshop.Helios
                 DrawingContext tempDrawingContext = visual.RenderOpen();
                 tempDrawingContext.DrawGeometry(brush, pen, path);
                 tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, rectangle);
+                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
             }
         }
         /// <summary>
@@ -278,7 +278,7 @@ namespace GadrocsWorkshop.Helios
                 DrawingContext tempDrawingContext = visual.RenderOpen();
                 tempDrawingContext.DrawRectangle(brush, pen, rectangle);
                 tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, rectangle);
+                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
             }
         }
         /// <summary>
@@ -303,7 +303,7 @@ namespace GadrocsWorkshop.Helios
                 DrawingContext tempDrawingContext = visual.RenderOpen();
                 tempDrawingContext.DrawRoundedRectangle(brush, pen, rectangle, radiusX, radiusY);
                 tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, rectangle);
+                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
             }
         }
         /// <summary>
@@ -331,7 +331,7 @@ namespace GadrocsWorkshop.Helios
                 DrawingContext tempDrawingContext = visual.RenderOpen();
                 textVisual.TextFormat.RenderText(tempDrawingContext, brush, text, rectangle);
                 tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, rectangle);
+                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
             }
         }
 #endregion Draw Proxies
