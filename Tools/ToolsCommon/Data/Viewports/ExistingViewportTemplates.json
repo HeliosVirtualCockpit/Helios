@@ -127,6 +127,7 @@
   {
     "templateName": "Ka-50 Unmodified",
     "moduleId": "Ka-50",
+    "categoryName": "Ka-50 Black Shark",
     "viewports": [
       {
         "viewportName": "ABRIS",

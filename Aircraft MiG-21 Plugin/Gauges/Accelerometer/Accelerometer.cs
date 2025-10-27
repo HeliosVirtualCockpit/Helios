@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.Accelerometer
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.Accelerometer", "Accelerometer", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.Accelerometer", "Accelerometer", "MiG-21", typeof(GaugeRenderer))]
     public class Accelerometer : BaseGauge
     {
         private GaugeNeedle _lowNeedle;

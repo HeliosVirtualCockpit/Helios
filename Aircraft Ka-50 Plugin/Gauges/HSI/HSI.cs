@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.HSI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.KA50.HSI", "HSI", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.HSI", "HSI", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class HSI : BaseGauge
     {
         private GaugeNeedle _longDeviationNeedle;

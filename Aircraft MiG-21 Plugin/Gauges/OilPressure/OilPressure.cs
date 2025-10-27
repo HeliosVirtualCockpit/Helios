@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.OilPressure
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.OilPressure", "Oil Pressure", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.OilPressure", "Oil Pressure", "MiG-21", typeof(GaugeRenderer))]
     public class OilPressure : BaseGauge
     {
         private GaugeNeedle _currentNeedle;

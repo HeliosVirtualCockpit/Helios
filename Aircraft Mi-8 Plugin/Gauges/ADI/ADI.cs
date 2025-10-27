@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.Mi_8.ADI
 	using System.Windows;
 	using System.Windows.Media;
 
-	[HeliosControl("Helios.Mi-8.ADI", "ADI", "Mi-8 Gauges", typeof(GaugeRenderer))]
+	[HeliosControl("Helios.Mi-8.ADI", "ADI", "Mi-8", typeof(GaugeRenderer))]
 	public class ADI : BaseGauge
 	{
 		GaugeNeedle _pitchBallNeedle;

@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.RotorRPM
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.RotorRPM", "Rotor RPM", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.RotorRPM", "Rotor RPM", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class RotorRPM : BaseGauge
     {
         private GaugeNeedle _needle;

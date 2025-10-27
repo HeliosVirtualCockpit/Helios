@@ -2,6 +2,7 @@
   {
     "templateName": "A-10C II",
     "moduleId": "A-10C_2",
+    "categoryName": "A-10C Warthog",
     "isHeliosTemplate": true,
     "viewports": [
       {

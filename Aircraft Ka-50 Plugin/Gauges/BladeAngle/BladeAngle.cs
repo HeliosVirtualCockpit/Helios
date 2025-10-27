@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BladeAngle
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.BladeAngle", "Blade Angle", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.BladeAngle", "Blade Angle", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class BladeAngle : BaseGauge
     {
         private GaugeNeedle _needle;

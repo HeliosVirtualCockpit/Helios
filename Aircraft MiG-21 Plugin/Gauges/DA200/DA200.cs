@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.DA200
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.DA200", "DA200", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.DA200", "DA200", "MiG-21", typeof(GaugeRenderer))]
     public class DA200 : BaseGauge
     {
         private GaugeNeedle _vviNeedle;

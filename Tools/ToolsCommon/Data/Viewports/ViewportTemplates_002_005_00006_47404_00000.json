@@ -1,7 +1,8 @@
 ﻿[
   {
-    "templateName": "KA-50 (Helios 16/9)",
-    "moduleId": "KA-50",
+    "templateName": "Ka-50 (Helios 16/9)",
+    "moduleId": "Ka-50",
+    "categoryName": "Ka-50 Black Shark",
     "isHeliosTemplate": true,
     "viewports": [
       {

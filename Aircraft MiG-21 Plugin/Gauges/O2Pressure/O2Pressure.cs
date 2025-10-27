@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.O2Pressure
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.O2Pressure", "O2 Pressure", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.O2Pressure", "O2 Pressure", "MiG-21", typeof(GaugeRenderer))]
     public class O2Pressure : BaseGauge
     {
 

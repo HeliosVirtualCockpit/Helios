@@ -50,10 +50,10 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
             switch (_interfaceDevice)
             {
                 case "SFD (Right)":
-                    _vpName = "CH47F_SFD_PILOT";
+                    _vpName = "RIGHT_SFD";
                     break;
                 case "SFD (Left)":
-                    _vpName = "CH47F_SFD_COPILOT";
+                    _vpName = "LEFT_SFD";
                     break;
                 default:
                     break;
@@ -108,7 +108,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
         }
         public bool RequiresPatches
         {
-            get => _vpName != "" ? true : false;
+            get => false;
             set => _ = value;
         }
         public double GlassReflectionOpacity

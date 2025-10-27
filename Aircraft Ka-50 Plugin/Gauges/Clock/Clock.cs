@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.Clock
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.Clock", "Clock", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.Clock", "Clock", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class Clock : BaseGauge
     {
         private GaugeImage _flightTimeIndicatorLight;

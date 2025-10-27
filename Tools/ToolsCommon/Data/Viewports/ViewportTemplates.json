@@ -235,8 +235,9 @@
     ]
   },
   {
-    "templateName": "KA-50 (Helios 16/9)",
-    "moduleId": "KA-50",
+    "templateName": "Ka-50 (Helios 16/9)",
+    "moduleId": "Ka-50",
+    "categoryName": "Ka-50 Black Shark",
     "isHeliosTemplate": true,
     "viewports": [
       {
@@ -384,6 +385,7 @@
   {
     "templateName": "A-10C (Helios 16/9)",
     "moduleId": "A-10C",
+    "categoryName": "A-10C Warthog",
     "isHeliosTemplate": true,
     "viewports": [
       {
@@ -512,6 +514,7 @@
   {
     "templateName": "A-10C II",
     "moduleId": "A-10C_2",
+    "categoryName": "A-10C Warthog",
     "isHeliosTemplate": true,
     "viewports": [
       {

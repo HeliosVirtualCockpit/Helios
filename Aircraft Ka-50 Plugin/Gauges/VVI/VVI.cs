@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.VVI
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.VVI", "VVI", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.VVI", "VVI", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class VVI : BaseGauge
     {
         private GaugeNeedle _needle;

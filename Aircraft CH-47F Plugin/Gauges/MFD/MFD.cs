@@ -50,10 +50,9 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
             switch (_interfaceDevice)
             {
                 case "MFD (Pilot Left)":
-                    _vpName = "CH47F_MFD_PILOT_LEFT";
+                    _vpName = "LEFT_MFCD";
                     break;
                 case "MFD (Pilot Right)":
-                    //_vpName = "CH47F_MFD_PILOT_RIGHT";
                     _vpName = "RIGHT_MFCD";
                     break;
                 case "MFD (Copilot Left)":
@@ -63,7 +62,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
                     _vpName = "CH47F_MFD_COPILOT_RIGHT";
                     break;
                 case "MFD (Center)":
-                    _vpName = "CH47F_MFD_CENTER";
+                    _vpName = "CENTER_MFCD";
                     break;
                 default:
                     break;
@@ -144,7 +143,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
         }
         public bool RequiresPatches
         {
-            get => _vpName != "" ? true : false;
+            get => _vpName.Contains("CH47F_") ? true : false;
             set => _ = value;
         }
         public double GlassReflectionOpacity

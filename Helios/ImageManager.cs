@@ -13,21 +13,23 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using GadrocsWorkshop.Helios.Util;
+using NLog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
 using System.Windows.Resources;
-using GadrocsWorkshop.Helios.Util;
-using NLog;
 
 namespace GadrocsWorkshop.Helios
 {
@@ -364,6 +366,8 @@ namespace GadrocsWorkshop.Helios
             {
                 string packPath = MakeImagePathAbsolute(path);
                 Uri imageUri = new Uri(packPath, UriKind.Absolute);
+                ListResources(imageUri);
+
 
                 if (CanOpenPackUri(imageUri))
                 {
@@ -388,7 +392,42 @@ namespace GadrocsWorkshop.Helios
 
             return null;
         }
+        private void ListResources(Uri uri)
+        {
+            string[] parts = uri.AbsolutePath.TrimStart('/').Split(new[] { ";component/" }, StringSplitOptions.None);
+            string assemblyName = parts[0];
+            string resourcePrefix  = Path.GetDirectoryName(parts.Length > 1 ? parts[1] : string.Empty).Replace('\\', '/');
+            string fileNameTemplate = Path.GetFileNameWithoutExtension(parts.Length > 1 ? parts[1] : string.Empty).Replace('\\', '/');
 
+            // Try to find the already loaded assembly
+            Assembly asm = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .FirstOrDefault(a => a.GetName().Name.Equals(assemblyName, StringComparison.OrdinalIgnoreCase));
+            if(asm != null)
+            {
+
+                Logger.Info("Loaded assembly: " + asm.FullName);
+                Logger.Info("Manifest resources:");
+
+                foreach (var r in asm.GetManifestResourceNames())
+                    Logger.Info($"  - {r}");
+
+                string resourceName = assemblyName.ToLower() + ".g.resources";
+                Logger.Info($"Attempting to extract {resourceName}");
+
+                var rm = new ResourceManager(assemblyName.ToLower() + ".g", asm);
+
+                ResourceSet set = rm.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+                Logger.Info($"Resources under \'{resourcePrefix}\':");
+
+                foreach (DictionaryEntry entry in set)
+                {
+                    string key = (string)entry.Key;
+                    if (key.StartsWith(resourcePrefix, StringComparison.OrdinalIgnoreCase))
+                        Logger.Info("  " + key);
+                }
+            }
+        }
         public string MakeImagePathRelative(string filename)
         {
             string newFilename = filename;
