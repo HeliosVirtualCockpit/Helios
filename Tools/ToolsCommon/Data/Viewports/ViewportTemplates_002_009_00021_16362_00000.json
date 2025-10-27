@@ -131,7 +131,6 @@
         "viewportName": "LEFT_SFD",
         "SuppressViewportNamePrefix": true,
         "relativeInitFilePath": "Mods/Aircraft/CH-47F/Cockpit/Scripts/SFD/indicator/init1.lua",
-        : null,
         "requiresPatch": true,
         "originalDisplayHeight": 1080,
         "originalDisplayWidth": 1920,
