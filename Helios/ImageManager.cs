@@ -366,7 +366,7 @@ namespace GadrocsWorkshop.Helios
             {
                 string packPath = MakeImagePathAbsolute(path);
                 Uri imageUri = new Uri(packPath, UriKind.Absolute);
-                ListResources(imageUri);
+                // ListResources(imageUri);  //WiP
 
 
                 if (CanOpenPackUri(imageUri))
