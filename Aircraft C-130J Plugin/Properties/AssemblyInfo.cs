@@ -3,17 +3,17 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using GadrocsWorkshop.Helios.ComponentModel;
 
-[assembly: HeliosModule("Helios AH-64D Apache Support for DCS", "CH-47F")]
+[assembly: HeliosModule("Helios C-130J Hercules Support for DCS", "C-130J")]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Helios CH-47F Plugin")]
-[assembly: AssemblyDescription("Resources for Helios relating to Eagle Dynamics CH-47F Module for DCS World")]
+[assembly: AssemblyTitle("Helios C-130J Plugin")]
+[assembly: AssemblyDescription("Resources for Helios relating to ASC C-130J Module for DCS World")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("github.com/HeliosVirtualCockpit")]
 [assembly: AssemblyProduct("Helios")]
-[assembly: AssemblyCopyright("Copyright (c) 2024 Helios Contributors")]
+[assembly: AssemblyCopyright("Copyright (c) 2025 Helios Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -23,7 +23,7 @@ using GadrocsWorkshop.Helios.ComponentModel;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("C94666CD-47BD-4BC3-8E1B-478C1E8431EF")]
+[assembly: Guid("60EFC353-F68F-4CEA-9D20-B2FAF1907DBE")]
 
 // Version information for an assembly consists of the following four values:
 //
