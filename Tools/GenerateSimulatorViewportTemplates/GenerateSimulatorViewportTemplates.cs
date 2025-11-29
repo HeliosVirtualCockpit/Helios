@@ -57,7 +57,7 @@ namespace GenerateSimulatorViewportTemplates
             HashSet<string> generated = new HashSet<string>();
 
             // HACK: instead of reading the specified file, read all versions of it
-            foreach (string jsonFilePath in Directory.EnumerateFiles(Path.GetDirectoryName(jsonPath) ?? ".", Path.GetFileName(jsonPath).Replace("Templates.json", "Templates*.json")))
+            foreach (string jsonFilePath in Directory.EnumerateFiles(Path.GetDirectoryName(jsonPath) ?? ".", Path.GetFileName(jsonPath).Replace("Templates.json", "Templates*.json")).Reverse())
             {
                 Console.WriteLine($"reading {jsonFilePath}");
                 string json = File.ReadAllText(jsonFilePath);
@@ -69,13 +69,13 @@ namespace GenerateSimulatorViewportTemplates
                 int colorIndex = Math.Abs(template.TemplateDisplayName.GetHashCode()) % _colors.Length;
 
                 // generate all valid viewports as templates
-                foreach (Viewport viewport in template.Viewports.Where(v => v.IsValid || !usesPatches))
+                foreach (Viewport viewport in template.Viewports.Where(v => v.IsValid || template.IsAdditionalTemplate || !usesPatches))
                 {
                     string viewportName = viewport.ViewportName;
                     string category = "Simulator Viewports";
-                    if (usesPatches)
+                    if (usesPatches || template.IsAdditionalTemplate)
                     {
-                        viewportName = $"{(viewport.SuppressViewportNamePrefix? "" : template.ViewportPrefix+"_")}{viewport.ViewportName}";
+                        viewportName = $"{(viewport.SuppressViewportNamePrefix ? "" : template.ViewportPrefix+"_")}{viewport.ViewportName}";
                         category = $"{template.TemplateCategory}";
                     }
 
@@ -111,10 +111,10 @@ namespace GenerateSimulatorViewportTemplates
                     lines.Add("                    <Bottom>0</Bottom>");
                     lines.Add("                </Padding>");
                     lines.Add("            </Font>");
-                    lines.Add($"            <Text>{viewportName}</Text>");
+                    lines.Add($"            <Text>{template.DisplayName(viewport)}</Text>");
                     lines.Add("            <ScalingMode>None</ScalingMode>");
 
-                        lines.Add(FormattableString.Invariant($"            <Location>{viewport.X},{viewport.Y}</Location>"));
+                    lines.Add(FormattableString.Invariant($"            <Location>{viewport.X},{viewport.Y}</Location>"));
                     int width = viewport.Width;
                     if (width < 1)
                     {
@@ -140,15 +140,17 @@ namespace GenerateSimulatorViewportTemplates
                     lines.Add("</ControlTemplate>");
 
                     string outputDirectoryPath = Path.Combine(templatePath,
-                        usesPatches ? "Additional Simulator Viewports" : "Simulator Viewports");
+                        (usesPatches || template.IsAdditionalTemplate) ? "Additional Simulator Viewports" : "Simulator Viewports");
                     if (!Directory.Exists(outputDirectoryPath))
                     {
                         Directory.CreateDirectory(outputDirectoryPath);
                     }
 
-                    File.WriteAllLines(Path.Combine(outputDirectoryPath, $"{(viewport.SuppressViewportNamePrefix ? template.ViewportPrefix + "_" + viewportName : viewportName)}.htpl"), lines);
+                    /// The "9" in the filename is used to order the viewports to the end of the Toolbox category
+                    File.WriteAllLines(Path.Combine(outputDirectoryPath, $"9 {(viewport.SuppressViewportNamePrefix ? template.ViewportPrefix + "_" + viewportName : viewportName)}.htpl"), lines);
+                    Console.WriteLine($"File Written {outputDirectoryPath}/{(viewport.SuppressViewportNamePrefix ? template.ViewportPrefix + "_" + viewportName : viewportName)}.htpl");
+                    }
                 }
-            }
             }
         }
     }

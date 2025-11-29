@@ -10111,291 +10111,6 @@
     <Content Include="Patches\DCS\002_009_00004_53990_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_CMWS.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_EUFD_CPG.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_EUFD_PLT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_LEFT_MFCD_CPG.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_LEFT_MFCD_PLT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_RIGHT_MFCD_CPG.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_RIGHT_MFCD_PLT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AH_64D_TEDAC.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AJS37_DATA.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AJS37_DESTINATION.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AJS37_RADAR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AJS37_Viggen_TV.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AV8BNA_LEFT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\AV8BNA_RIGHT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_ARC210_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_CDU_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_CMSC_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_CMSP_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_DIGIT_CLOCK.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_LEFT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_RIGHT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_RWR_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_UHF_FREQUENCY_STATUS.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_UHF_PRESET_CHANNEL.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_2_UHF_REPEATER.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_CDU_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_CMSC_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_CMSP_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_DIGIT_CLOCK.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_LEFT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_RIGHT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_RWR_SCREEN.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_UHF_FREQUENCY_STATUS.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_UHF_PRESET_CHANNEL.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\A_10C_UHF_REPEATER.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\FA_18C_CENTER_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\FA_18C_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\FA_18C_IFEI.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\FA_18C_LEFT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\FA_18C_RIGHT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\FA_18C_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\FA_18C_UFC.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_RWR_PILOT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_RWR_RIO.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_UHF_ARC159_M.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_UHF_ARC159_RP.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_UHF_ARC159_RR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_VHF_ARC182_M.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_14_VHF_ARC182_RP.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_15E_CENTER_MPCD_PLT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_15E_LEFT_MPCD_WSO.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_15E_LEFT_MPD_PLT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_15E_LEFT_MPD_WSO.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_15E_RIGHT_MPCD_WSO.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_15E_RIGHT_MPD_PLT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_15E_RIGHT_MPD_WSO.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_16C_DED.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_16C_EHSI.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_16C_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_16C_LEFT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_16C_RIGHT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_16C_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_5E_RADAR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_5E_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\KA_50_3_ABRIS.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\KA_50_3_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\KA_50_3_SHKVAL.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\KA_50_ABRIS.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\KA_50_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\KA_50_SHKVAL.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_COM.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_COM_GREENBOX.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_FUEL.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_HUD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_PCA_BR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_PCA_UR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_PCN_BR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_PCN_UR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_PPA.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\M2000C_VTB.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\MiG_21_RP22.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\Mi_24P_Map.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\SA342_FM.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\SA342_NADIR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\SA342_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\SA342_TV.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\SA342_UHF.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\SA342_WP1.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\Mi_24P_TV.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\MIRAGE_F1_RADAR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\MIRAGE_F1_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -11018,18 +10733,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00005_55300_00000\Viewports\mods\Aircraft\F-4E\Cockpit\Scripts\RHAW\indicator\init_bake.lua.grevert">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_4E_DSCG_Pilot.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_4E_DSCG_WSO.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_4E_RHAW_Pilot.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_4E_DSCG_BOTH.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00007_59074_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch">
@@ -11692,30 +11395,6 @@
     <Content Include="Patches\DCS\002_009_00007_59074_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_CDU_COPILOT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_CDU_PILOT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_CHRONOMETER.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_MFD_CENTER.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_MFD_COPILOT_LEFT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_MFD_COPILOT_RIGHT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_MFD_PILOT_LEFT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Patches\DCS\002_009_00007_59074_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\SFD\indicator\init1.lua.gpatch">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -11726,15 +11405,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00007_59074_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\SFD\indicator\init2.lua.grevert">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_SFD_COPILOT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_SFD_PILOT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\CH47F_RIGHT_MFCD.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00007_59074_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.gpatch">
@@ -12455,33 +12125,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00007_59263_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_CLOCK.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_CMWS.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_MPD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_RFD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_RPM_TORQUE.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_L2MUMS.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_LEFT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\OH58D_RIGHT_MFCD.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00007_59263_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\L2MUMS\Indicator\init.lua.gpatch">
@@ -13216,10 +12859,1069 @@
     <Content Include="Patches\DCS\002_009_00010_04160_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F_5E_2024_RWR.htpl">
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_CMWS.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\F4U_1D_RP22.htpl">
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_EUFD_CPG.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_EUFD_PLT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_LEFT_MFCD_CPG.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_LEFT_MFCD_PLT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_RIGHT_MFCD_CPG.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_RIGHT_MFCD_PLT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AH_64D_TEDAC.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AJS37_DATA.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AJS37_DESTINATION.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AJS37_RADAR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AJS37_Viggen_TV.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AV8BNA_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 AV8BNA_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_ARC210_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_CDU_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_CMSC_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_CMSP_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_DIGIT_CLOCK.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_RWR_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_UHF_FREQUENCY_STATUS.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_UHF_PRESET_CHANNEL.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_2_UHF_REPEATER.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_CDU_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_CMSC_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_CMSP_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_DIGIT_CLOCK.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_RWR_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_UHF_FREQUENCY_STATUS.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_UHF_PRESET_CHANNEL.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_UHF_REPEATER.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CDU_COPILOT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CDU_PILOT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CENTER_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CHRONOMETER.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_LEFT_SFD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_MFD_COPILOT_LEFT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_MFD_COPILOT_RIGHT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RIGHT_SFD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F4U_1D_RP22.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 FA_18C_CENTER_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 FA_18C_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 FA_18C_IFEI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 FA_18C_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 FA_18C_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 FA_18C_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 FA_18C_UFC.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_RWR_PILOT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_RWR_RIO.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_UHF_ARC159_M.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_UHF_ARC159_RP.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_UHF_ARC159_RR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_VHF_ARC182_M.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_14_VHF_ARC182_RP.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_15E_CENTER_MPCD_PLT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_15E_LEFT_MPCD_WSO.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_15E_LEFT_MPD_PLT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_15E_LEFT_MPD_WSO.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_15E_RIGHT_MPCD_WSO.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_15E_RIGHT_MPD_PLT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_15E_RIGHT_MPD_WSO.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_16C_DED.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_16C_EHSI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_16C_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_16C_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_16C_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_16C_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_4E_DSCG_BOTH.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_4E_DSCG_PILOT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_4E_DSCG_WSO.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_4E_RHAW_PILOT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_5E_2024_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_5E_RADAR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 F_5E_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 KA_50_3_ABRIS.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 KA_50_3_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 KA_50_3_SHKVAL.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 KA_50_ABRIS.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 KA_50_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 KA_50_SHKVAL.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_COM.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_COM_GREENBOX.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_FUEL.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_HUD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_PCA_BR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_PCA_UR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_PCN_BR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_PCN_UR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_PPA.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 M2000C_VTB.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 MiG_21_RP22.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mirage_F1_RADAR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mirage_F1_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mi_24P_MAP.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mi_24P_TV.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_CLOCK.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_CMWS.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_L2MUMS.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_MPD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_RFD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_RPM_TORQUE.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 OH58D_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 SA342_FM.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 SA342_NADIR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 SA342_RWR.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 SA342_TV.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 SA342_UHF.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 SA342_WP1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\AN_ALR69V\indicator\AN_ALR69V_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\ARC_210\Indicator\ARC_210_Init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CDU\indicator\CDU_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSC\indicator\CMSC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\CMSP\indicator\CMSP_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\DigitalClock\Indicator\DIGIT_CLK_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\HUD\Indicator\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\MFCD\indicator\MFCD_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\freq_status_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\preset_channel_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\A-10C_2\Cockpit\Scripts\UHF_Radio\indicator\repeater_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\ASE\CMWS\CMWS_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_cpg_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\EUFD\EUFD_plt_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_cpg_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AH-64D\Cockpit\Scripts\Displays\MFD\indicator\MFD_plt_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Data\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\Destination\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\radar\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AJS37\Cockpit\scripts\TV-Indicator\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDL_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDL_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\AV8BNA\Cockpit\MPCD\indicator\MPCDR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\ASE\APR39_indicator\BAKE\APR39_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\ASE\APR39_indicator\BAKE\APR39_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_FCC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_FCC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_FCL_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_FCL_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_FCR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_FCR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCLI_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCLI_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCLO_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCLO_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCRI_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCRI_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCRO_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-15E\Cockpit\Bake\MFDG\Bake_RCRO_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\DED\indicator\DED_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\EHSI_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\EHSI\indicator\LCD\EHSI_LCD.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\HUD\indicator\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\LCD\MFD_LCD.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_left_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\Displays\MFD\indicator\MFD_right_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-16C\Cockpit\Scripts\EWS\RWR\indicator\RWR_ALR56_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-4E\Cockpit\Scripts\DSCG\indicator\DSCG_Pilot\init_bake.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-4E\Cockpit\Scripts\DSCG\indicator\DSCG_Pilot\init_bake.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-4E\Cockpit\Scripts\DSCG\indicator\DSCG_WSO\init_bake.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-4E\Cockpit\Scripts\DSCG\indicator\DSCG_WSO\init_bake.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-4E\Cockpit\Scripts\RHAW\indicator\init_bake.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-4E\Cockpit\Scripts\RHAW\indicator\init_bake.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-5E 2024\Cockpit\Scripts\AN_ALR87\indicator\AN_ALR87_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F-5E 2024\Cockpit\Scripts\AN_ALR87\indicator\AN_ALR87_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\HeadUpDisplay\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\Pilot\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\RWR\Indicator\RIO\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\Main\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemotePilot\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\UHF_Radio\Indicator\RemoteRIO\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\Main\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\F14\Cockpit\Scripts\VHF_Radio\Indicator\RemotePilot\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\fonts.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\IFEI\indicator\IFEI_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\AMPCD_viewport_cfg.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\AMPCD\indicator\BAKE\AMPCD_bake_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\Common\indicator\BAKE\MPD_common_bake_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\HUD_AVQ32\indicator\AVQ32_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_left_viewport_cfg.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\Multipurpose_Display_Group\MDI_IP1556A\indicator\MDI_right_viewport_cfg.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\BAKE\RWR_ALR67_bake_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\TEWS\indicator\BAKE\RWR_ALR67_bake_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\FA-18C\Cockpit\Scripts\UFC\indicator\UFC_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\CDU\indicator\BAKE\init_left.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\CDU\indicator\BAKE\init_left.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\CDU\indicator\BAKE\init_right.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\CDU\indicator\BAKE\init_right.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\chronometer_indicator_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\chronometer_indicator_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\MFD\indicator\BAKE\init_copilot_in.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\MFD\indicator\BAKE\init_copilot_in.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\MFD\indicator\BAKE\init_copilot_out.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\GCBase\Cockpit\Scripts\MFD\indicator\BAKE\init_copilot_out.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\device_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\HUD\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\ABRIS\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\device_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\HUD\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Ka-50_3\Cockpit\Scripts\SHKVAL\BAKE\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_GreenBox_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\COM\COM_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\FUEL\FUEL_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_BR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PCA_UR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCA_PPA\PPA_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_BR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\PCN\PCN_UR_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VCM\VCM_screen_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTB\VTB_viewport_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\M-2000C\Cockpit\VTH\HUD_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mi-24P\Cockpit\Scripts\9K113_CAM\9K113_CAM_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mi-24P\Cockpit\Scripts\9K113_CAM\9K113_CAM_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mi-24P\Cockpit\Scripts\MapDisplay\bake\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mi-24P\Cockpit\Scripts\MapDisplay\bake\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Common\ALR_300\Indicator\Baked\ALR_300_bake_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\Mirage-F1\Cockpit\Mirage-F1\Mirage-F1_Common\Radar_Cyrano_IV_legacy\Indicator\BakedGeneral\CyranoLegacy_bake_general_init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\CI\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\CI\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\CLOCK\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\CLOCK\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\L2MUMS\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\L2MUMS\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\MPD\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\MPD\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\RFD\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\RFD\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\RPMTRQ\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\RPMTRQ\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\RWR\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\OH-58D\Cockpit\RWR\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\NADIR\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\FM\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\Radio\Indicator\UHF\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\RWR\indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\TV\Indicator\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\SFD\indicator\init1.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\SFD\indicator\init1.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\SFD\indicator\init2.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\SFD\indicator\init2.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

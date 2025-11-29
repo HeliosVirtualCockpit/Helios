@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.EGT
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.EGT", "Exhaust Gas Temperature", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.EGT", "Exhaust Gas Temperature", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class EGT : BaseGauge
     {
         private GaugeNeedle _leftLargeNeedle;

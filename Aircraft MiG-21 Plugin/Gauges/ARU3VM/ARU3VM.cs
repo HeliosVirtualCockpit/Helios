@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.ARU3VM
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.ARU3VM", "ARU", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.ARU3VM", "ARU", "MiG-21", typeof(GaugeRenderer))]
     public class ARU3VM : BaseGauge
     {
 

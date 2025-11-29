@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.TAS
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.TAS", "TAS", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.TAS", "TAS", "MiG-21", typeof(GaugeRenderer))]
     public class TAS : BaseGauge
     {
         private GaugeNeedle _currentTasNeedle;

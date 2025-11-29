@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.AOA
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.AOA", "AOA", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.AOA", "AOA", "MiG-21", typeof(GaugeRenderer))]
     public class AOA : BaseGauge
     {
 

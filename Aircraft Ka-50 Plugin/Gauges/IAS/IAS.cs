@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.IAS
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.IAS", "IAS", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.IAS", "IAS", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class IAS : BaseGauge
     {
         private GaugeNeedle _needle;

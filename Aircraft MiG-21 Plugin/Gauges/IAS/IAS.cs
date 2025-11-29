@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.IAS
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.IAS", "IAS", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.IAS", "IAS", "MiG-21", typeof(GaugeRenderer))]
     public class IAS : BaseGauge
     {
 

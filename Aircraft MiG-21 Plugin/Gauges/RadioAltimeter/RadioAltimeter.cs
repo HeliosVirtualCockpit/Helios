@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.RadioAltimeter
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.RadioAltimeter", "Radio Altimeter", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.RadioAltimeter", "Radio Altimeter", "MiG-21", typeof(GaugeRenderer))]
     public class RadioAltimeter : BaseGauge
     {
 

@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.Nosecone
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.Nosecone", "Nosecone", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.Nosecone", "Nosecone", "MiG-21", typeof(GaugeRenderer))]
     public class Nosecone : BaseGauge
     {
         private GaugeNeedle _currentNeedle;

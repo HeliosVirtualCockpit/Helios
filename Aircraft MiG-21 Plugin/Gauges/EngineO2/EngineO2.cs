@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.EngineO2
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.EngineO2", "Enginge O2", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.EngineO2", "Enginge O2", "MiG-21", typeof(GaugeRenderer))]
     public class EngineO2 : BaseGauge
     {
         private GaugeNeedle _needle;

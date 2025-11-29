@@ -53,6 +53,7 @@ namespace ToolsCommon
         [JsonProperty("SuppressViewportNamePrefix")] public bool SuppressViewportNamePrefix { get; set; } = false;
 
         [JsonProperty("requiresPatch")] public bool RequiresPatch { get; set; } = true;
+        [JsonProperty("viewportDisplayName")] public string ViewportDisplayName { get; set; }
 
         [JsonIgnore] public bool IsValid => RelativeInitFilePath != null && RelativeInitFilePath.Length > 0;
     }

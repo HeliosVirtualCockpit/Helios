@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.ADI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.MiG21.KPP", "KPP", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG21.KPP", "KPP", "MiG-21", typeof(GaugeRenderer))]
     public class KPP : BaseGauge
     {
         GaugeNeedle _pitchBallNeedle;

@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.Accelerometer
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.Accelerometer", "Accelerometer", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.Accelerometer", "Accelerometer", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class Accelerometer : BaseGauge
     {
         private GaugeNeedle _lowNeedle;

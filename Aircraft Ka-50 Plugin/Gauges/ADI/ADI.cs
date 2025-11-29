@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.ADI
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.KA50.ADI", "ADI", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.ADI", "ADI", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class ADI : BaseGauge
     {
         GaugeNeedle _pitchBallNeedle;

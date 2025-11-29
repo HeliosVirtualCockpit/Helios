@@ -67,7 +67,7 @@ namespace GadrocsWorkshop.Helios.Controls
                         DrawingContext tempDrawingContext = visual.RenderOpen();
                         tempDrawingContext.DrawDrawing(_lines);
                         tempDrawingContext.Close();
-                        RenderVisual(drawingContext, visual, _imageRect);
+                        RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : _imageRect);
                     }
                 }
                 if (!needsEffect)
@@ -82,10 +82,10 @@ namespace GadrocsWorkshop.Helios.Controls
                     DrawingContext tempDrawingContext = visual.RenderOpen();
                     foreach (SwitchPositionLabel label in _labels)
                     {
-                        tempDrawingContext.DrawText(label.Text, new Point(label.Location.X * 1.25, label.Location.Y * 1.25));
+                        tempDrawingContext.DrawText(label.Text, new Point(label.Location.X, label.Location.Y));
                     }
                     tempDrawingContext.Close();
-                    RenderVisual(drawingContext, visual, new Rect(_imageRect.X - (_imageRect.Width * 0.25), _imageRect.Y - (_imageRect.Height * 0.25), _imageRect.Width * 1.5, _imageRect.Height * 1.5));
+                    RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : _imageRect);
                 }
 
                 drawingContext.PushTransform(new RotateTransform(rotarySwitch.KnobRotation, _center.X, _center.Y));

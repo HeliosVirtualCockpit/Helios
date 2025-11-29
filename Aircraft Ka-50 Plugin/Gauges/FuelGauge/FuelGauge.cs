@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.FuelGauge
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.Fuel", "Fuel Quantity Indicator", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.Fuel", "Fuel Quantity Indicator", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class FuelGauge : BaseGauge
     {
         private GaugeNeedle _needleFwd;

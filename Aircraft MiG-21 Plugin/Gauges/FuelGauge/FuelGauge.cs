@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.FuelGauge
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.FuelGauge", "Fuel Gauge", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.FuelGauge", "Fuel Gauge", "MiG-21", typeof(GaugeRenderer))]
     public class FuelGauge : BaseGauge
     {
         private GaugeNeedle _currentNeedle;

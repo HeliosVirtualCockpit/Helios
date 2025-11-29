@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.RadarAltimeter
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.RadarAltimeter", "Radar Altimeter", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.RadarAltimeter", "Radar Altimeter", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class RadarAltimeter : BaseGauge
     {
         private GaugeNeedle _needle;

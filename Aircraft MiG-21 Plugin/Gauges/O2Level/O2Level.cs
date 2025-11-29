@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.O2Level
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.O2Level", "O2 Level", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.O2Level", "O2 Level", "MiG-21", typeof(GaugeRenderer))]
     public class O2Level : BaseGauge
     {
         private GaugeNeedle _currentNeedle;

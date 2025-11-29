@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.BaroAltimeter
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.BarometricAltimeter", "Barometric Altimeter", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.BarometricAltimeter", "Barometric Altimeter", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class BarometricAltimeter : BaseGauge
     {
         private GaugeNeedle _qfeCard;

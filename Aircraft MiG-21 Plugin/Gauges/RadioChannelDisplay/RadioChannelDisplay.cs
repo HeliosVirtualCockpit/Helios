@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.ChannelDisplay
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.MiG-21.ChannelDisplay", "Radio/RSBN Land & Nav Channel Displays", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.ChannelDisplay", "Radio/RSBN Land & Nav Channel Displays", "MiG-21", typeof(GaugeRenderer))]
     public class ChannelDisplay : BaseGauge
     {
         private HeliosValue _val;

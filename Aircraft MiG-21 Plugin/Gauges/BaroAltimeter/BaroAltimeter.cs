@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.BaroAltimeter
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG21.BarometricAltimeter", "Barometric Altimeter", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG21.BarometricAltimeter", "Barometric Altimeter", "MiG-21", typeof(GaugeRenderer))]
     public class BarometricAltimeter : BaseGauge
     {
         private GaugeNeedle _qfeCard;

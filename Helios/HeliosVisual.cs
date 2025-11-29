@@ -196,7 +196,7 @@ namespace GadrocsWorkshop.Helios
             }
         }
         /// <summary>
-        /// Whether this control will have effects applied to is on rendering.
+        /// Whether this control will have effects applied to it on rendering.
         /// </summary>
         public virtual bool EffectsExclusion
         {
@@ -210,9 +210,16 @@ namespace GadrocsWorkshop.Helios
                     {
                         hv.EffectsExclusion = value;
                     }
-                    if(this is BaseGauge bg)
+                    if (this is BaseGauge bg)
                     {
                         foreach (GaugeComponent gc in bg.Components)
+                        {
+                            gc.EffectsExclusion = value;
+                        }
+                    }
+                    if (this is CompositeBaseGauge cbg)
+                    {
+                        foreach (GaugeComponent gc in cbg.Components)
                         {
                             gc.EffectsExclusion = value;
                         }

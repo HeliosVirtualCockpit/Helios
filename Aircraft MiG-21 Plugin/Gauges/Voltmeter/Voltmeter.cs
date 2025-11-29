@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.Voltmeter
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.Voltmeter", "Voltmeter", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.Voltmeter", "Voltmeter", "MiG-21", typeof(GaugeRenderer))]
     public class Voltmeter : BaseGauge
     {
         private GaugeNeedle _currentNeedle;

@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.EngExhaustTempGauge
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.MiG-21.EngExhaustTempGauge", "Engine Temp Gauge", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.EngExhaustTempGauge", "Engine Temp Gauge", "MiG-21", typeof(GaugeRenderer))]
     public class EngExhaustTempGauge : BaseGauge
     {
         private GaugeNeedle _currentNeedle;

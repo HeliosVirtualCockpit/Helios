@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.MiG21.RSBNDistance
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.MiG-21.RSBNDistance", "RSBN Distance", "MiG-21 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.MiG-21.RSBNDistance", "RSBN Distance", "MiG-21", typeof(GaugeRenderer))]
     public class RSBNDistance : BaseGauge
     {
         private HeliosValue _ones;

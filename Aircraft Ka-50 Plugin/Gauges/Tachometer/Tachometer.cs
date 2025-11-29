@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.KA_50.Tachometer
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.KA50.Tachometer", "Tachometer", "KA-50 Gauges", typeof(GaugeRenderer))]
+    [HeliosControl("Helios.KA50.Tachometer", "Tachometer", "Ka-50 Black Shark", typeof(GaugeRenderer))]
     public class Tachometer : BaseGauge
     {
         private GaugeNeedle _needle1;
