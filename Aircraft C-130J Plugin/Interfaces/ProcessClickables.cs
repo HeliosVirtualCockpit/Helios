@@ -15,12 +15,15 @@
 
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.UDPInterface;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Net.Security;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Xml.Linq;
@@ -34,7 +37,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static Dictionary<string, FunctionData> _functions = new Dictionary<string, FunctionData>();
         private static NetworkFunctionCollection _functionList = new NetworkFunctionCollection();
         private static BaseUDPInterface _baseUDPInterface;
-        static ProcessClickables(){}
+        static ProcessClickables() { }
         internal static NetworkFunctionCollection Process(BaseUDPInterface udpInterface)
         {
             _baseUDPInterface = udpInterface;
@@ -58,34 +61,58 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     {
                         argKey = (i + 9000).ToString();
                     }
-                } else
-                {
-                duplicateArg = _functions.ContainsKey(argArray[0]);
-                argKey = duplicateArg ? "D_" + argArray[0] : argArray[0];  // this obviously will only allow one duplicate
                 }
-                    _functions.Add(argKey, new FunctionData()
-                    {
-                        Fn = m.Groups["function"].Value,
-                        Name = m.Groups["name"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
-                        Val = m.Groups["value"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
-                        Arg = argArray,
-                        Device = m.Groups["device"].Value,
-                        Command = m.Groups["command"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
-                        Head = "",
-                        Tail = "",
-                        Description = "",
-                        Duplicate = duplicateArg
-                    });
-
+                else
+                {
+                    duplicateArg = _functions.ContainsKey(argArray[0]);
+                    argKey = duplicateArg ? "D_" + argArray[0] : argArray[0];  // this obviously will only allow one duplicate
+                }
+                _functions.Add(argKey, new FunctionData()
+                {
+                    Fn = m.Groups["function"].Value,
+                    Name = m.Groups["name"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
+                    Val = m.Groups["value"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
+                    Arg = argArray,
+                    Device = m.Groups["device"].Value,
+                    Command = m.Groups["command"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
+                    Head = "",
+                    Tail = "",
+                    Description = "",
+                    Duplicate = duplicateArg
+                });
             }
-            foreach(FunctionData fd in _functions.Values)
+            string[,] lamps = LampsToArray();
+            for (int j = 0; j < lamps.GetLength(0); j++)
+            {
+                if (string.IsNullOrEmpty(lamps[j, 2]))
+                {
+                    continue;
+                }
+                _functions.Add(lamps[j, 0], new FunctionData()
+                {
+                    Fn = "Lamp",
+                    Name = new string[] { lamps[j, 1], $"{lamps[j, 2]} Indicator" },
+                    Val = null,
+                    Arg = new string[] { lamps[j, 0] },
+                    Device = null,
+                    Command = null,
+                    Head = "",
+                    Tail = "",
+                    Description = "",
+                    Duplicate = false
+                });
+            }
+
+
+            foreach (FunctionData fd in _functions.Values)
             {
                 if (!fd.Duplicate)
                 {
                     FunctionBuilder(fd);
-                } else
+                }
+                else
                 {
-                    Console.WriteLine("Not creating function for duplicate \"{0}\"",fd.Name);
+                    Console.WriteLine("Not creating function for duplicate \"{0}\"", fd.Name);
                 }
 
             }
@@ -107,10 +134,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             }
             Console.WriteLine("\t\tdefault:\n\t\t\tbreak;\n\t}");
         }
-        
+
         internal static void FunctionBuilder(FunctionData fd)
         {
-            switch(fd.Fn){
+            switch (fd.Fn)
+            {
+                case "Lamp":
+                    Console.WriteLine("\t\t{0}", BuildFnLamp(fd));
+                    break;
                 case "display_rocker_hdd":
                 case "master_warning":
                 case "master_caution":
@@ -188,7 +219,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     break;
                 case "three_pos_switch_spring":
                     break;
-                 case "knob_rot_rel":
+                case "knob_rot_rel":
                     break;
                 case "fuel_transfer":
                     break;
@@ -227,8 +258,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 default:
                     break;
             }
+
         }
 
+        private static string BuildFnLamp(FunctionData fd)
+        {
+            _functionList.Add(new FlagValue(_baseUDPInterface, fd.Arg[0], fd.Name[0], fd.Name[1],""));
+            return $"AddFunction(new FlagValue(this, \"{fd.Arg[0]}\", \"{fd.Name[0]}\", \"{fd.Name[1]}\", \"\"));";
+        }
         private static string BuildFnKey(FunctionData fd)
         {
             //devices d = (devices)Enum.Parse(typeof(devices),fd.Device);
@@ -266,24 +303,30 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             string name;
             if (origName.Length > 1)
             {
+                //Pilot Master Warning Button -Push to Reset
                 if (origName[0] == "ARC")
                 {
                     category = "ARC-210";
                     name = origName[1].Substring(origName[1].IndexOf("210") + 3).Trim();
                 }
+                else if (origName[1].Contains("Push to Reset"))
+                {
+                    category = "Ref Panel";
+                    name = origName[0].Trim();
+                }
                 else if (origName[0].Contains("Microwave") || origName[0].Contains("Btm drawer") || origName[0].Contains("Top shelf") || origName[0].Contains("Galley"))
                 {
                     category = "Galley";
-                    name = ($"{origName[0].Trim()}-{origName[1]}").Replace("Btm", "Bottom").Replace("Galley ","");
+                    name = ($"{origName[0].Trim()}-{origName[1]}").Replace("Btm", "Bottom").Replace("Galley ", "");
                 }
                 else if (origName[0].Contains("Anti"))
                 {
-                    category = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origDevice.ToLower().Replace("_", " ").Replace("C ", "Copilot ").Replace("P ", "Pilot "));
+                    category = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origDevice.ToLower().Replace("_", " "));
                     name = $"{origName[0].Trim()}-{origName[1]}";
                 }
                 else
                 {
-                    category = origName[0].Trim().Replace("C ", "Copilot ").Replace("P ", "Pilot ");
+                    category = origName[0].Trim();
                     name = origName[1].Trim();
                 }
             }
@@ -326,10 +369,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 }
                 else
                 {
-                    category = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origDevice.ToLower().Replace("_", " ").Replace("C ", "Copilot ").Replace("P ", "Pilot "));
+                    category = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origDevice.ToLower().Replace("_", " "));
                     name = origName[0].Trim();
                 }
             }
+            category = category.Replace("C ", "Copilot ").Replace("P ", "Pilot ");
             return (category, name);
         }
         private static void SetClickables()
@@ -1280,9 +1324,128 @@ elements[""PNT_TABLET_CLICK""] = tab(""Tablet"", CARGO_HANDLER.TABLET_CLICK, nil
 ";
             #endregion
         }
-    }
 
- 
+        private static string[,] LampsToArray()
+        {
+            return new string[116, 3]
+           { {"4011", "", ""},
+{"4012", "", ""},
+{"4013", "", ""},
+{"4014", "", ""},
+{"4017", "", ""},
+{"4018", "", ""},
+{"4019", "", ""},
+{"4020", "", ""},
+{"4023", "", ""},
+{"4024", "", ""},
+{"4025", "", ""},
+{"4026", "", ""},
+{"4027", "", ""},
+{"4028", "", ""},
+{"4032", "Landing Gear", "Nose Gear"},
+{"4033", "Landing Gear", "Left Gear"},
+{"4034", "Landing Gear", "Right Gear"},
+{"4035", "Landing Gear", "Warning"},
+{"4036", "", ""},
+{"4037", "", ""},
+{"4038", "", ""},
+{"4039", "", ""},
+{"4040", "Brightness of push buttons - Needs to be 1.0 during MV2 testing in order to view changes of other buttons.", ""},
+{"4042", "Descriptions on the legends of the 2x10 pushbuttons (ALT, Nav, HDG etc)", ""},
+{"4045", "Ref Panel", "Master Warning"},
+{"4046", "Ref Panel", "Master Caution"},
+{"4047", "AutoPilot Mode", "ALT ON"},
+{"4048", "AutoPilot Mode", "VS ON"},
+{"4049", "AutoPilot Mode", "SEL ON"},
+{"4050", "AutoPilot Mode", "IAS ON"},
+{"4051", "AutoPilot Mode", "HDG ON"},
+{"4052", "AutoPilot Mode", "NAV ON"},
+{"4053", "AutoPilot Mode", "CAPS ON"},
+{"4054", "AutoPilot Mode", "APPR ON"},
+{"4055", "AutoPilot Mode", "A/T ON"},
+{"4056", "Caution Panel Pilot", "AP ON"},
+{"4057", "Caution Panel Pilot", "PITCH OFF"},
+{"4058", "Caution Panel Pilot", "NAV ARM"},
+{"4059", "Caution Panel Pilot", "GS ARM"},
+{"4060", "Caution Panel Pilot", "GO ARND"},
+{"4061", "Caution Panel Pilot", "CAT2 ARM"},
+{"4062", "Caution Panel Pilot", "AP DSGN"},
+{"4063", "Caution Panel Pilot", "LAT OFF"},
+{"4064", "Caution Panel Pilot", "NAV CAPT"},
+{"4065", "Caution Panel Pilot", "GS CAPT"},
+{"4066", "Caution Panel Pilot", "BACK LOC"},
+{"4067", "Caution Panel Pilot", "CAT2"},
+{"4068", "Hydraulics", "EMER Brake Sel"},
+{"4069", "Hydraulics", "Engine 1 Pumps OFF"},
+{"4070", "Hydraulics", "Engine 2 Pumps OFF"},
+{"4071", "Hydraulics", "Engine 3 Pumps OFF"},
+{"4072", "Hydraulics", "Engine 4 Pumps OFF"},
+{"4073", "Hydraulics", "Util Suction Pump OFF "},
+{"4074", "Hydraulics", "Boost Suction Pump OFF "},
+{"4075", "Aerial Delivery", "Ramp Door FULL"},
+{"4077", "RADAR", "PRCN"},
+{"4078", "RADAR", "MAP Mode"},
+{"4079", "RADAR", "WX Mode"},
+{"4080", "RADAR", "SP Mode"},
+{"4081", "RADAR", "MGM Mode"},
+{"4082", "RADAR", "WS Mode"},
+{"4083", "RADAR", "BCN Mode"},
+{"4084", "RADAR", "PSEL"},
+{"4085", "RADAR", "OFS Function"},
+{"4086", "RADAR", "FRZ Function"},
+{"4087", "RADAR", "PEN Function"},
+{"4088", "RADAR", "SCTR Function"},
+{"4089", "AFCS", "Pitch OFF"},
+{"4090", "AFCS", "Lat OFF"},
+{"4091", "Engine", "1 Low Speed"},
+{"4092", "Engine", "2 Low Speed"},
+{"4093", "Engine", "3 Low Speed"},
+{"4094", "Engine", "4 Low Speed"},
+{"4095", "Aerial Delivery", "Caution"},
+{"4096", "Aerial Delivery", "Jump"},
+{"4097", "RWR", "SRCH ON"},
+{"4098", "RWR", "MODE PRI"},
+{"4099", "RWR", "HAND OFF DIAMOND"},
+{"4100", "RWR", "ALT HIGH"},
+{"4101", "RWR", "TGT SEP ON"},
+{"4102", "Air Conditioning", "Flight Station Power OFF"},
+{"4103", "Air Conditioning", "Cargo Compartment Power OFF"},
+{"4104", "Air Conditioning", "Flight Station Man ON"},
+{"4105", "Air Conditioning", "Cargo Compartment Man ON"},
+{"4106", "Air Conditioning", "Flight Station X-Flow Man ON"},
+{"4107", "FLCV", "FLCV TEST ON"},
+{"4108", "Bleed Air", "APU OPEN"},
+{"4114", "Caution Panel Copilot", "AP ON"},
+{"4115", "Caution Panel Copilot", "PITCH OFF"},
+{"4116", "Caution Panel Copilot", "NAV ARM"},
+{"4117", "Caution Panel Copilot", "GS ARM"},
+{"4118", "Caution Panel Copilot", "GO ARND"},
+{"4119", "Caution Panel Copilot", "CAT2 ARM"},
+{"4120", "Caution Panel Copilot", "AP DSGN"},
+{"4121", "Caution Panel Copilot", "LAT OFF"},
+{"4122", "Caution Panel Copilot", "NAV CAPT"},
+{"4123", "Caution Panel Copilot", "GS CAPT"},
+{"4124", "Caution Panel Copilot", "BACK LOC"},
+{"4125", "Caution Panel Copilot", "CAT2"},
+{"4131", "Fire Panel", "Eng 1 Fire"},
+{"4132", "Fire Panel", "Eng 2 Fire"},
+{"4133", "Fire Panel", "Eng 3 Fire"},
+{"4134", "Fire Panel", "Eng 4 Fire"},
+{"4135", "Fire Panel", "APU Fire"},
+{"4137", "", ""},
+{"4138", "", ""},
+{"4139", "", ""},
+{"4140", "", ""},
+{"4141", "", ""},
+{"4142", "", ""},
+{"4143", "", ""},
+{"4144", "", ""},
+{"4145", "", ""},
+{"4146", "", ""},
+{"4147", "", ""},
+{"4148", "", ""},};
+        }
+    }
     internal class FunctionData
     {
         internal string[] Name;
