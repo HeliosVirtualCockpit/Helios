@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\C-130JInterface.cs" />
     <Compile Include="Interfaces\Commands.cs" />
+    <Compile Include="Interfaces\ProcessClickables.cs" />
     <Compile Include="Interfaces\Devices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,5 +74,5 @@
     </Content>
     <None Include="packages.config" />
   </ItemGroup>
-   <Import Project="..\HeliosPlugin.targets" />
+  <Import Project="..\HeliosPlugin.targets" />
 </Project>

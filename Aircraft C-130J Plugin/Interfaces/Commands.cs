@@ -968,7 +968,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
             copilot_top_latch,
             copilot_bottom_latch,
-        	lock,
+        	Lock,
 	        unlock,
 
             left_troop_door_close,
