@@ -37,7 +37,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static Dictionary<string, FunctionData> _functions = new Dictionary<string, FunctionData>();
         private static NetworkFunctionCollection _functionList = new NetworkFunctionCollection();
         private static BaseUDPInterface _baseUDPInterface;
-        static ProcessClickables() { }
+        private static readonly Dictionary <string, string>_categorySubstitutions;
+        static ProcessClickables() {
+            _categorySubstitutions = CategoryInit();
+        }
         internal static NetworkFunctionCollection Process(BaseUDPInterface udpInterface)
         {
             _baseUDPInterface = udpInterface;
@@ -263,8 +266,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
         private static string BuildFnLamp(FunctionData fd)
         {
-            _functionList.Add(new FlagValue(_baseUDPInterface, fd.Arg[0], fd.Name[0], fd.Name[1],""));
-            return $"AddFunction(new FlagValue(this, \"{fd.Arg[0]}\", \"{fd.Name[0]}\", \"{fd.Name[1]}\", \"\"));";
+            (string category, string name) = AdjustName(fd.Name, fd.Device);
+            _functionList.Add(new FlagValue(_baseUDPInterface, fd.Arg[0], category, name,""));
+            return $"AddFunction(new FlagValue(this, \"{fd.Arg[0]}\", \"{category}\", \"{name}\", \"\"));";
         }
         private static string BuildFnKey(FunctionData fd)
         {
@@ -278,14 +282,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             ////string dj = c.ToString("d");
 
             (string category, string name) = AdjustName(fd.Name, fd.Device);
-
             _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], category, name));
             return $"AddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{category}\", \"{name}\"));";
         }
         private static string BuildFnToggle(FunctionData fd)
         {
             (string category, string name) = AdjustName(fd.Name, fd.Device);
-            //Console.WriteLine("About to process {0}",fd.Name);
             _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
             return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
         }
@@ -373,8 +375,34 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     name = origName[0].Trim();
                 }
             }
-            category = category.Replace("C ", "Copilot ").Replace("P ", "Pilot ");
+
+            foreach (var pair in _categorySubstitutions)
+            {
+                category = category.Replace(pair.Key, pair.Value);
+            }
+
+            foreach (var swap in new List<string>{ " AMU", " Displays", " CNI" })
+            {
+                if (category.Contains(swap))
+                {
+                    category = $"{swap.Trim()} {category.Replace(swap, "")}";
+                    break;
+                }
+            }
             return (category, name);
+        }
+        private static Dictionary<string, string> CategoryInit()
+        {
+            return new Dictionary<string, string> {
+                { "C ", "Copilot " },
+                { "P ", "Pilot " },
+                { "Ap Interface", "Autopilot" },
+                { "Cms Mgr", "Counter Measure System" },
+                { "Atm", "Atmospheric" },
+                { " Apu Ctrl", "" },
+                { "Copilot Ref Mode Panel", "Ref Mode Panel Copilot" },
+                { "Ref Panel", "Ref Mode Panel Pilot" },
+                };
         }
         private static void SetClickables()
         {
@@ -1327,42 +1355,48 @@ elements[""PNT_TABLET_CLICK""] = tab(""Tablet"", CARGO_HANDLER.TABLET_CLICK, nil
 
         private static string[,] LampsToArray()
         {
-            return new string[116, 3]
-           { {"4011", "", ""},
-{"4012", "", ""},
-{"4013", "", ""},
-{"4014", "", ""},
-{"4017", "", ""},
-{"4018", "", ""},
-{"4019", "", ""},
-{"4020", "", ""},
-{"4023", "", ""},
-{"4024", "", ""},
-{"4025", "", ""},
-{"4026", "", ""},
-{"4027", "", ""},
-{"4028", "", ""},
+            return new string[,]
+           { {"4000", "CNI (All)", "CNI Power Lights "},
+{"4011", "Pilot Displays", "HUD Vis Mode"},
+{"4012", "Pilot Displays", "CAT 2"},
+{"4013", "Pilot Displays", "O/S"},
+{"4014", "Pilot Displays", "UNCG"},
+{"4015", "Pilot Displays", "NAV"},
+{"4016", "Pilot Displays", "TACT"},
+{"4017", "Copilot Displays", "HUD Vis Mode"},
+{"4018", "Copilot Displays", "CAT 2"},
+{"4019", "Copilot Displays", "O/S"},
+{"4020", "Copilot Displays", "UNCG"},
+{"4021", "Copilot Displays", "NAV"},
+{"4022", "Copilot Displays", "TACT"},
+{"4023", "Engine", "Engine 1 Start"},
+{"4024", "Engine", "Engine 2 Start"},
+{"4025", "Engine", "Engine 3 Start"},
+{"4026", "Engine", "Engine 4 Start"},
+{"4027", "Engine", "APU Start"},
+{"4028", "Fuel System", "SPR Valve "},
+{"4030", "Hydraulics", "AUX Pump On"},
 {"4032", "Landing Gear", "Nose Gear"},
 {"4033", "Landing Gear", "Left Gear"},
 {"4034", "Landing Gear", "Right Gear"},
 {"4035", "Landing Gear", "Warning"},
-{"4036", "", ""},
-{"4037", "", ""},
-{"4038", "", ""},
-{"4039", "", ""},
-{"4040", "Brightness of push buttons - Needs to be 1.0 during MV2 testing in order to view changes of other buttons.", ""},
-{"4042", "Descriptions on the legends of the 2x10 pushbuttons (ALT, Nav, HDG etc)", ""},
+{"4036", "Engine", "Generator 1"},
+{"4037", "Engine", "Generator 2"},
+{"4038", "Engine", "Generator 3"},
+{"4039", "Engine", "Generator 4"},
+{"4040", "Indicators", "Button Brightness"},
+{"4042", "Indicators", "Button Legend Brightness"},
 {"4045", "Ref Panel", "Master Warning"},
 {"4046", "Ref Panel", "Master Caution"},
-{"4047", "AutoPilot Mode", "ALT ON"},
-{"4048", "AutoPilot Mode", "VS ON"},
-{"4049", "AutoPilot Mode", "SEL ON"},
-{"4050", "AutoPilot Mode", "IAS ON"},
-{"4051", "AutoPilot Mode", "HDG ON"},
-{"4052", "AutoPilot Mode", "NAV ON"},
-{"4053", "AutoPilot Mode", "CAPS ON"},
-{"4054", "AutoPilot Mode", "APPR ON"},
-{"4055", "AutoPilot Mode", "A/T ON"},
+{"4047", "AutoPilot", "Mode ALT ON"},
+{"4048", "AutoPilot", "Mode VS ON"},
+{"4049", "AutoPilot", "Mode SEL ON"},
+{"4050", "AutoPilot", "Mode IAS ON"},
+{"4051", "AutoPilot", "Mode HDG ON"},
+{"4052", "AutoPilot", "Mode NAV ON"},
+{"4053", "AutoPilot", "Mode CAPS ON"},
+{"4054", "AutoPilot", "Mode APPR ON "},
+{"4055", "AutoPilot", "Mode A/T ON"},
 {"4056", "Caution Panel Pilot", "AP ON"},
 {"4057", "Caution Panel Pilot", "PITCH OFF"},
 {"4058", "Caution Panel Pilot", "NAV ARM"},
@@ -1432,18 +1466,18 @@ elements[""PNT_TABLET_CLICK""] = tab(""Tablet"", CARGO_HANDLER.TABLET_CLICK, nil
 {"4133", "Fire Panel", "Eng 3 Fire"},
 {"4134", "Fire Panel", "Eng 4 Fire"},
 {"4135", "Fire Panel", "APU Fire"},
-{"4137", "", ""},
-{"4138", "", ""},
-{"4139", "", ""},
-{"4140", "", ""},
-{"4141", "", ""},
-{"4142", "", ""},
-{"4143", "", ""},
-{"4144", "", ""},
-{"4145", "", ""},
-{"4146", "", ""},
-{"4147", "", ""},
-{"4148", "", ""},};
+{"4137", "CNI Pilot", "DSPY"},
+{"4138", "CNI Pilot", "MSG"},
+{"4139", "CNI Pilot", "FAIL"},
+{"4140", "CNI Pilot", "OFST"},
+{"4141", "CNI Copilot", "DSPY"},
+{"4142", "CNI Copilot", "MSG"},
+{"4143", "CNI Copilot", "FAIL"},
+{"4144", "CNI Copilot", "OFST"},
+{"4145", "CNI Aug Crew", "DSPY"},
+{"4146", "CNI Aug Crew", "MSG"},
+{"4147", "CNI Aug Crew", "FAIL"},
+{"4148", "CNI Aug Crew", "OFST"}};
         }
     }
     internal class FunctionData
