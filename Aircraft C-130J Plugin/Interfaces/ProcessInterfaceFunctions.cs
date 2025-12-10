@@ -1,0 +1,663 @@
+﻿//  Copyright 2025 Helios Contributors
+//    
+//  Helios is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Helios is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+using GadrocsWorkshop.Helios.UDPInterface;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing.Drawing2D;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Security;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.ServiceModel.Dispatcher;
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Media.Media3D;
+using System.Xml.Linq;
+
+namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
+{
+    internal static class ProcessInterfaceFunctions
+    {
+        private static string _pattern;
+        private static string _input;
+        private static StreamWriter _streamWriter;
+        private static Dictionary<string, FunctionData> _functions = new Dictionary<string, FunctionData>();
+        private static NetworkFunctionCollection _functionList = new NetworkFunctionCollection();
+        private static BaseUDPInterface _baseUDPInterface;
+        private static readonly Dictionary <string, string>_categorySubstitutions;
+        private static readonly RegexOptions _options = RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled;
+        static ProcessInterfaceFunctions() {
+            _categorySubstitutions = CategoryInit();
+        }
+        internal static NetworkFunctionCollection Process(BaseUDPInterface udpInterface)
+        {
+            _baseUDPInterface = udpInterface;
+            SetDevices();
+            SetClickables();
+
+            int i = 0;
+            foreach (Match m in Regex.Matches(_input, _pattern, _options))
+            {
+                i++;
+                var argArray = m.Groups["arg"].Captures.OfType<Capture>().Select(c => c.Value).ToArray();
+                bool duplicateArg = false;
+                string argKey;
+                if (!argArray.Any())
+                {
+                    if (m.Groups["value"].Captures.Count >= 1 && Int32.TryParse(m.Groups["value"].Captures[0].Value, out int newArg))
+                    {
+                        argKey = newArg.ToString();
+                        argArray = new string[] { argKey };
+                    }
+                    else
+                    {
+                        argKey = (i + 9000).ToString();
+                    }
+                }
+                else
+                {
+                    duplicateArg = _functions.ContainsKey(argArray[0]);
+                    argKey = duplicateArg ? "D_" + argArray[0] : argArray[0];  // this obviously will only allow one duplicate
+                }
+                _functions.Add(argKey, new FunctionData()
+                {
+                    Fn = m.Groups["function"].Value,
+                    Name = m.Groups["name"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
+                    Val = m.Groups["value"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
+                    Arg = argArray,
+                    Device = m.Groups["device"].Value,
+                    Command = m.Groups["command"].Captures.OfType<Capture>().Select(c => c.Value).ToArray(),
+                    Head = "",
+                    Tail = "",
+                    Description = "",
+                    Duplicate = duplicateArg
+                });
+            }
+            string[,] lamps = LampsToArray();
+            for (int j = 0; j < lamps.GetLength(0); j++)
+            {
+                if (string.IsNullOrEmpty(lamps[j, 2]))
+                {
+                    continue;
+                }
+                _functions.Add(lamps[j, 0], new FunctionData()
+                {
+                    Fn = "Lamp",
+                    Name = new string[] { lamps[j, 1], $"{lamps[j, 2]} Indicator" },
+                    Val = null,
+                    Arg = new string[] { lamps[j, 0] },
+                    Device = null,
+                    Command = null,
+                    Head = "",
+                    Tail = "",
+                    Description = "Boolean value. Illuminated when value is true",
+                    Duplicate = false
+                });
+            }
+
+            string[,] indications = IndicationsToTextArray();
+            for (int j = 0; j < indications.GetLength(0); j++)
+            {
+                if (string.IsNullOrEmpty(indications[j, 2]))
+                {
+                    continue;
+                }
+                _functions.Add(indications[j, 0], new FunctionData()
+                {
+                    Fn = "IndicationText",
+                    Name = new string[] { indications[j, 1], indications[j, 2] },
+                    Val = null,
+                    Arg = new string[] { indications[j, 0] },
+                    Device = null,
+                    Command = null,
+                    Head = "",
+                    Tail = "",
+                    Description = indications[j, 3],
+                    Duplicate = false
+                });
+            }
+
+            string clickableFilename = "C-130J_Functions";
+#if (DEBUG)
+            _streamWriter = new StreamWriter($@"{Environment.GetEnvironmentVariable("userprofile")}\Documents\HeliosDev\Interfaces\{clickableFilename}.txt", false);
+#endif
+            foreach (FunctionData fd in _functions.Values)
+            {
+                if (!fd.Duplicate)
+                {
+                    FunctionBuilder(fd);
+                }
+                else
+                {
+#if (DEBUG)
+                    WriteCsFunction($"Not creating function for duplicate \"{fd.Name}\"");
+#endif
+                }
+
+            }
+#if (DEBUG)
+            _streamWriter.Close();
+#endif
+            return _functionList;
+        }
+        internal static void Analyze()
+        {
+            foreach (string fn in _functions.Values.Select(f => f.Fn).Distinct())
+            {
+                //Console.WriteLine("\t\t\t case \"{0}\":\n\t\t\tbreak;", fn);
+            }
+        }
+        internal static void CreateFunctionSwitcher()
+        {
+            Console.WriteLine("\tswitch(fd.Fn){");
+            foreach (string fn in _functions.Values.Select(f => f.Fn).Distinct())
+            {
+                Console.WriteLine("\t\t\t case \"{0}\":\n\t\t\tbreak;", fn);
+            }
+            Console.WriteLine("\t\tdefault:\n\t\t\tbreak;\n\t}");
+        }
+
+        internal static void FunctionBuilder(FunctionData fd)
+        {
+            switch (fd.Fn)
+            {
+                case "Lamp":
+                    WriteCsFunction($"\t\t{BuildFnLamp(fd)}");
+                    break;
+                case "IndicationText":
+                    WriteCsFunction($"\t\t{BuildIndicationsText(fd)}");
+                    break;
+                case "display_rocker_hdd":
+                case "master_warning":
+                case "master_caution":
+                case "ref_btn":
+                case "push_button":
+                case "base_btn":
+                case "microwave_key":
+                case "amu_key":
+                case "cni_key_no_stop":
+                    WriteCsFunction($"\t\t{BuildFnKey(fd)}");
+                    break;
+                case "boost_guard":
+                case "fuel_xfeed":
+                case "parking_brake":
+                case "air_deflector":
+                case "landing_lights":
+                case "two_pos_switch_ap":
+                case "two_pos_switch_spring":
+                case "two_pos_switch":
+                    WriteCsFunction($"\t\t{BuildFnToggle(fd)}");
+                    break;
+                case "generator_switch":
+                case "two_pos_switch_rev":
+                    break;
+                case "fire_pull":
+                    break;
+                case "multiswitch_stop":
+                    break;
+                case "lsgi_btn":
+                    break;
+                case "at_disconnect":
+                    break;
+                case "gear_handle":
+                    break;
+                case "landing_lights_motor":
+                    break;
+                case "base_btn_cycle3":
+                    break;
+                case "cni_brt":
+                    break;
+                case "multiswitch":
+                    break;
+                case "wiper":
+                    break;
+                case "knob_360_press":
+                    break;
+                case "rotary":
+                    break;
+                case "knob_360_0_1":
+                    break;
+                case "knob_fixed":
+                    break;
+                case "knob_rot":
+                    break;
+                case "ics_knob":
+                    break;
+                case "one_way_rocker":
+                    break;
+                case "rocker_centering":
+                    break;
+                case "stby_altim":
+                    break;
+                case "adi_cage":
+                    break;
+                case "flap_switch":
+                    break;
+                case "hud_btn":
+                    break;
+                case "hud_latch":
+                    break;
+                case "hud_brt_knob":
+                    break;
+                case "guard":
+                    break;
+                case "three_pos_switch_spring":
+                    break;
+                case "knob_rot_rel":
+                    break;
+                case "fuel_transfer":
+                    break;
+                case "three_pos_spring_load_on":
+                    break;
+                case "three_pos_spring_load_on_inv":
+                    break;
+                case "emg_ext_light":
+                    break;
+                case "rudder_trim":
+                    break;
+                case "oil_flap_switch":
+                    break;
+                case "oil_flap_switch_open_close":
+                    break;
+                case "oxygen_switch":
+                    break;
+                case "glare_activate":
+                    break;
+                case "scroll_point_axis":
+                    break;
+                case "base_btn_cycle":
+                    break;
+                case "base_btn_cycle2":
+                    break;
+                case "base_btn_cycle_release":
+                    break;
+                case "cable_interaction":
+                    break;
+                case "knob_360":
+                    break;
+                case "emergency_trim":
+                    break;
+                case "tab":
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static string BuildFnLamp(FunctionData fd)
+        {
+            (string category, string name) = AdjustName(fd.Name, fd.Device);
+            _functionList.Add(new FlagValue(_baseUDPInterface, fd.Arg[0], category, name, fd.Description));
+            return $"AddFunction(new FlagValue(this, \"{fd.Arg[0]}\", \"{category}\", \"{name}\", \"{fd.Description}\"));";
+        }
+        private static string BuildIndicationsText(FunctionData fd)
+        {
+            _functionList.Add(new Text(_baseUDPInterface, fd.Arg[0], fd.Name[0], fd.Name[1], fd.Description));
+            return $"AddFunction(new Text(this, \"{fd.Arg[0]}\", \"{fd.Name[0]}\", \"{fd.Name[1]}\", \"{fd.Description}\"));";
+        }
+        private static string BuildFnKey(FunctionData fd)
+        {
+            (string category, string name) = AdjustName(fd.Name, fd.Device);
+            _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], category, name));
+            return $"AddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{category}\", \"{name}\"));";
+        }
+        private static string BuildFnToggle(FunctionData fd)
+        {
+            (string category, string name) = AdjustName(fd.Name, fd.Device);
+            _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
+            return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
+        }
+        private static string CommandEnumToString(string commandEnum)
+        {
+            return ((int)Enum.Parse(Type.GetType($"GadrocsWorkshop.Helios.Interfaces.DCS.C130J.Commands+{commandEnum.Split('.')[0]}"), commandEnum.Split('.')[1])).ToString();
+        }
+        private static string DeviceEnumToString(string deviceEnum)
+        {
+            return ((devices)Enum.Parse(typeof(devices), deviceEnum)).ToString("d");
+        }
+        private static (string, string) AdjustName(string[] origName, string origDevice)
+        {
+            string category;
+            string name;
+            if (origName.Length > 1)
+            {
+                //Pilot Master Warning Button -Push to Reset
+                if (origName[0] == "ARC")
+                {
+                    category = "ARC-210";
+                    name = origName[1].Substring(origName[1].IndexOf("210") + 3).Trim();
+                }
+                else if (origName[1].Contains("Push to Reset"))
+                {
+                    category = "Ref Panel";
+                    name = origName[0].Trim();
+                }
+                else if (origName[0].Contains("Microwave") || origName[0].Contains("Btm drawer") || origName[0].Contains("Top shelf") || origName[0].Contains("Galley"))
+                {
+                    category = "Galley";
+                    name = ($"{origName[0].Trim()}-{origName[1]}").Replace("Btm", "Bottom").Replace("Galley ", "");
+                }
+                else if (origName[0].Contains("Anti"))
+                {
+                    category = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origDevice.ToLower().Replace("_", " "));
+                    name = $"{origName[0].Trim()}-{origName[1]}";
+                }
+                else
+                {
+                    category = origName[0].Trim();
+                    name = origName[1].Trim();
+                }
+            }
+            else
+            {
+                if (origName[0].Contains("LSK"))
+                {
+                    category = origName[0].Substring(0, origName[0].IndexOf("LSK")).Trim();
+                    name = origName[0].Substring(origName[0].IndexOf("LSK")).Trim();
+                }
+                else if (origName[0].Contains("FLCV"))
+                {
+                    category = "FLCV";
+                    name = origName[0].Substring(origName[0].IndexOf("FLCV") + 4).Trim();
+                }
+                else if (origName[0].Contains("CNBP"))
+                {
+                    category = "CNBP";
+                    name = origName[0].Substring(origName[0].IndexOf("CNBP") + 4).Trim();
+                }
+                else if (origName[0].Contains("Microwave") || origName[0].Contains("Galley"))
+                {
+                    category = "Galley";
+                    name = origName[0].Replace("Galley ", "");
+                }
+                else if (origName[0].Contains("Radar"))
+                {
+                    category = "RADAR";
+                    name = origName[0].Substring(origName[0].IndexOf("Radar") + 5).Trim();
+                }
+                else if (origName[0].Contains("RWR"))
+                {
+                    category = "RWR";
+                    name = origName[0].Substring(origName[0].IndexOf("RWR") + 3).Trim();
+                }
+                else if (origName[0].Contains("Landing Gear"))
+                {
+                    category = "Landing Gear";
+                    name = origName[0].Substring(origName[0].IndexOf("Landing Gear") + 12).Trim();
+                }
+                else
+                {
+                    category = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origDevice.ToLower().Replace("_", " "));
+                    name = origName[0].Trim();
+                }
+            }
+
+            foreach (var pair in _categorySubstitutions)
+            {
+                category = category.Replace(pair.Key, pair.Value);
+            }
+
+            foreach (var swap in new List<string>{ " AMU", " Displays", " CNI" })
+            {
+                if (category.Contains(swap))
+                {
+                    category = $"{swap.Trim()} {category.Replace(swap, "")}";
+                    break;
+                }
+            }
+            return (category, name);
+        }
+        private static Dictionary<string, string> CategoryInit()
+        {
+            return new Dictionary<string, string> {
+                { "C ", "Copilot " },
+                { "P ", "Pilot " },
+                { "Ap Interface", "AFCS" },
+                { "Cms Mgr", "Counter Measure System" },
+                { "Atm", "Environment" },
+                { " Apu Ctrl", "" },
+                { "Copilot Ref Mode Panel", "Ref Mode Panel Copilot" },
+                { "Ref Panel", "Ref Mode Panel Pilot" },
+                { "FLCV", "Fuel" },
+                { "Fuel System", "Fuel" },
+                { "Air Conditioning","Environment"},
+                { "Plane ",""},
+                };
+        }
+        private static void SetClickables()
+        {
+            #region Process Clickables
+            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J";
+            string path = $@"{DCSAircraft}\Cockpit\Scripts\clickabledata.lua";
+            _pattern = @"^elements\[""[^""]*?(?:_(?<arg>\d{2,4}))*""\].*=\s*(?'function'.*)\((?:""(?'name'[^-,]*)(?:\s*-\s*(?'name'[^-,]*))*"")(((?:\s*,\s*devices\.(?'device'[^,\s\)]*))(?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*((?'value'[^,\s]*)))*)|((?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*(?'value'[^,\s\)]*))*)(?:\s*,\s*devices\.(?'device'[^,\s\)]*)))(?:\s*,\s*(?'value'[^,\s\)]*))*\s*\)\s*";
+            _input = "";
+            string clickableFilename = Path.GetFileNameWithoutExtension(path);
+            using (StreamReader streamReader = new StreamReader(path))
+            {
+                _input = streamReader.ReadToEnd();
+            }
+            // Console.Write(_input);
+            #endregion
+        }
+        private static void SetDevices()
+        {
+#if (DEBUG)
+            #region Process Clickables
+            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J";
+            string path = $@"{DCSAircraft}\Cockpit\Scripts\devices.lua";
+            _pattern = @"^devices\[""(?'device'.*)""\].*";
+            string input = "";
+            string clickableFilename = Path.GetFileNameWithoutExtension(path);
+            using (StreamReader streamReader = new StreamReader(path))
+            {
+                input = streamReader.ReadToEnd();
+            }
+            _streamWriter = new StreamWriter($@"{Environment.GetEnvironmentVariable("userprofile")}\Documents\HeliosDev\Interfaces\devicesEnum.txt", false);
+            _streamWriter.WriteLine("    internal enum devices\r\n    {\r\n");
+            int i = 1;
+            foreach (Match m in Regex.Matches(input, _pattern, _options))
+            {
+                _streamWriter.WriteLine($"     {m.Groups["device"].Value} = {i++},");
+            }
+            _streamWriter.WriteLine("    }");
+            _streamWriter.Close();
+
+            #endregion
+#endif
+        }
+        private static string[,] LampsToArray()
+        {
+            return new string[,]
+           { {"4000", "CNI (All)", "CNI Power Lights "},
+            {"4011", "Pilot Displays", "HUD Vis Mode"},
+            {"4012", "Pilot Displays", "CAT 2"},
+            {"4013", "Pilot Displays", "O/S"},
+            {"4014", "Pilot Displays", "UNCG"},
+            {"4015", "Pilot Displays", "NAV"},
+            {"4016", "Pilot Displays", "TACT"},
+            {"4017", "Copilot Displays", "HUD Vis Mode"},
+            {"4018", "Copilot Displays", "CAT 2"},
+            {"4019", "Copilot Displays", "O/S"},
+            {"4020", "Copilot Displays", "UNCG"},
+            {"4021", "Copilot Displays", "NAV"},
+            {"4022", "Copilot Displays", "TACT"},
+            {"4023", "Engines", "Engine 1 Start"},
+            {"4024", "Engines", "Engine 2 Start"},
+            {"4025", "Engines", "Engine 3 Start"},
+            {"4026", "Engines", "Engine 4 Start"},
+            {"4027", "Engines", "APU Start"},
+            {"4028", "Fuel System", "SPR Valve "},
+            {"4030", "Hydraulics", "AUX Pump On"},
+            {"4032", "Landing Gear", "Nose Gear"},
+            {"4033", "Landing Gear", "Left Gear"},
+            {"4034", "Landing Gear", "Right Gear"},
+            {"4035", "Landing Gear", "Warning"},
+            {"4036", "Engines", "Generator 1"},
+            {"4037", "Engines", "Generator 2"},
+            {"4038", "Engines", "Generator 3"},
+            {"4039", "Engines", "Generator 4"},
+            {"4040", "Indicators", "Button Brightness"},
+            {"4042", "Indicators", "Button Legend Brightness"},
+            {"4045", "Ref Panel", "Master Warning"},
+            {"4046", "Ref Panel", "Master Caution"},
+            {"4047", "AFCS", "Mode ALT ON"},
+            {"4048", "AFCS", "Mode VS ON"},
+            {"4049", "AFCS", "Mode SEL ON"},
+            {"4050", "AFCS", "Mode IAS ON"},
+            {"4051", "AFCS", "Mode HDG ON"},
+            {"4052", "AFCS", "Mode NAV ON"},
+            {"4053", "AFCS", "Mode CAPS ON"},
+            {"4054", "AFCS", "Mode APPR ON "},
+            {"4055", "AFCS", "Mode A/T ON"},
+            {"4056", "Caution Panel Pilot", "AP ON"},
+            {"4057", "Caution Panel Pilot", "PITCH OFF"},
+            {"4058", "Caution Panel Pilot", "NAV ARM"},
+            {"4059", "Caution Panel Pilot", "GS ARM"},
+            {"4060", "Caution Panel Pilot", "GO ARND"},
+            {"4061", "Caution Panel Pilot", "CAT2 ARM"},
+            {"4062", "Caution Panel Pilot", "AP DSGN"},
+            {"4063", "Caution Panel Pilot", "LAT OFF"},
+            {"4064", "Caution Panel Pilot", "NAV CAPT"},
+            {"4065", "Caution Panel Pilot", "GS CAPT"},
+            {"4066", "Caution Panel Pilot", "BACK LOC"},
+            {"4067", "Caution Panel Pilot", "CAT2"},
+            {"4068", "Hydraulics", "EMER Brake Sel"},
+            {"4069", "Hydraulics", "Engine 1 Pumps OFF"},
+            {"4070", "Hydraulics", "Engine 2 Pumps OFF"},
+            {"4071", "Hydraulics", "Engine 3 Pumps OFF"},
+            {"4072", "Hydraulics", "Engine 4 Pumps OFF"},
+            {"4073", "Hydraulics", "Util Suction Pump OFF "},
+            {"4074", "Hydraulics", "Boost Suction Pump OFF "},
+            {"4075", "Aerial Delivery", "Ramp Door FULL"},
+            {"4077", "RADAR", "PRCN"},
+            {"4078", "RADAR", "MAP Mode"},
+            {"4079", "RADAR", "WX Mode"},
+            {"4080", "RADAR", "SP Mode"},
+            {"4081", "RADAR", "MGM Mode"},
+            {"4082", "RADAR", "WS Mode"},
+            {"4083", "RADAR", "BCN Mode"},
+            {"4084", "RADAR", "PSEL"},
+            {"4085", "RADAR", "OFS Function"},
+            {"4086", "RADAR", "FRZ Function"},
+            {"4087", "RADAR", "PEN Function"},
+            {"4088", "RADAR", "SCTR Function"},
+            {"4089", "AFCS", "Pitch OFF"},
+            {"4090", "AFCS", "Lat OFF"},
+            {"4091", "Engines", "1 Low Speed"},
+            {"4092", "Engines", "2 Low Speed"},
+            {"4093", "Engines", "3 Low Speed"},
+            {"4094", "Engines", "4 Low Speed"},
+            {"4095", "Aerial Delivery", "Caution"},
+            {"4096", "Aerial Delivery", "Jump"},
+            {"4097", "RWR", "SRCH ON"},
+            {"4098", "RWR", "MODE PRI"},
+            {"4099", "RWR", "HAND OFF DIAMOND"},
+            {"4100", "RWR", "ALT HIGH"},
+            {"4101", "RWR", "TGT SEP ON"},
+            {"4102", "Air Conditioning", "Flight Station Power OFF"},
+            {"4103", "Air Conditioning", "Cargo Compartment Power OFF"},
+            {"4104", "Air Conditioning", "Flight Station Man ON"},
+            {"4105", "Air Conditioning", "Cargo Compartment Man ON"},
+            {"4106", "Air Conditioning", "Flight Station X-Flow Man ON"},
+            {"4107", "Fuel", "FLCV TEST ON"},
+            {"4108", "Engines", "Bleed Air APU OPEN"},
+            {"4114", "Caution Panel Copilot", "AP ON"},
+            {"4115", "Caution Panel Copilot", "PITCH OFF"},
+            {"4116", "Caution Panel Copilot", "NAV ARM"},
+            {"4117", "Caution Panel Copilot", "GS ARM"},
+            {"4118", "Caution Panel Copilot", "GO ARND"},
+            {"4119", "Caution Panel Copilot", "CAT2 ARM"},
+            {"4120", "Caution Panel Copilot", "AP DSGN"},
+            {"4121", "Caution Panel Copilot", "LAT OFF"},
+            {"4122", "Caution Panel Copilot", "NAV CAPT"},
+            {"4123", "Caution Panel Copilot", "GS CAPT"},
+            {"4124", "Caution Panel Copilot", "BACK LOC"},
+            {"4125", "Caution Panel Copilot", "CAT2"},
+            {"4131", "Fire Panel", "Eng 1 Fire"},
+            {"4132", "Fire Panel", "Eng 2 Fire"},
+            {"4133", "Fire Panel", "Eng 3 Fire"},
+            {"4134", "Fire Panel", "Eng 4 Fire"},
+            {"4135", "Fire Panel", "APU Fire"},
+            {"4137", "CNI Pilot", "DSPY"},
+            {"4138", "CNI Pilot", "MSG"},
+            {"4139", "CNI Pilot", "FAIL"},
+            {"4140", "CNI Pilot", "OFST"},
+            {"4141", "CNI Copilot", "DSPY"},
+            {"4142", "CNI Copilot", "MSG"},
+            {"4143", "CNI Copilot", "FAIL"},
+            {"4144", "CNI Copilot", "OFST"},
+            {"4145", "CNI Aug Crew", "DSPY"},
+            {"4146", "CNI Aug Crew", "MSG"},
+            {"4147", "CNI Aug Crew", "FAIL"},
+            {"4148", "CNI Aug Crew", "OFST"}};
+            
+        }
+        private static string[,] IndicationsToTextArray()
+        {
+            return new string[,]
+           {
+            {"2902", "Electrics", "Battery Voltage Display", "Text Value"},     //  Battery Voltage
+            {"2903", "Ref Mode", "Pilot Ref Mode Display", "Text Value"},     //  Pilot Ref Mode
+            {"2904", "Ref Mode", "Copilot Ref Mode Display", "Text Value"},     //  Copilot Ref Mode
+            {"2905", "Fuel", "Total Amount Display", "Text Value"},     //  Fuel Total
+            {"2906", "Fuel", "1 Main Amount Display", "Text Value"},     //  Fuel 1 Main
+            {"2907", "Fuel", "2 Main Amount Display", "Text Value"},     //  Fuel 2 Main
+            {"2908", "Fuel", "3 Main Amount Display", "Text Value"},     //  Fuel 3 Main
+            {"2909", "Fuel", "4 Main Amount Display", "Text Value"},     //  Fuel 4 Main
+            {"2910", "Fuel", "L Aux Amount Display", "Text Value"},     //  Fuel L Aux
+            {"2911", "Fuel", "R Aux Amount Display", "Text Value"},     //  Fuel R Aux
+            {"2912", "Fuel", "L Ext Amount Display", "Text Value"},     //  Fuel L Ext
+            {"2913", "Fuel", "R Ext Amount Display", "Text Value"},     //  Fuel R Ext
+            {"2914", "Engines", "APU % RPM Display", "Text Value"},     //  APU % RPM
+            {"2915", "Engines", "APU EGT Display", "Text Value"},     //  APU EGT
+            {"2916", "Engines", "Bleed Air Pressure Display", "Text Value"},     //  Bleed Air Pressure
+            {"2917", "Environment", "Flight Deck Air Con Temp Display", "Text Value"},     //  Flight Deck Air Con Temp "84" "86"
+            {"2918", "Environment", "Flight Deck Air Con Temp Set Display", "Text Value"},     //  Flight Deck Air Con Temp Set "84" "86"
+            {"2919", "Environment", "Cargo Air Con Temp Display", "Text Value"},     //  Cargo Air Con  Temp "86" "86"
+            {"2920", "Environment", "Cargo Air Con Temp Set Display", "Text Value"},     //  Cargo Air Con  Temp Set "86" "86"
+            {"2921", "Environment", "Pressurization Rate Display", "Text Value"},     //  Pressurization Rate
+            {"2922", "Environment", "Pressurization Cabin Alt Display", "Text Value"},     //  Pressurization Cabin Alt
+            {"2923", "Environment", "Pressurization Difference Display", "Text Value"},     //  Pressurization Difference "88" "." "8"
+            {"2924", "Environment", "LGD/CONST Display", "Text Value"},     //  LGD/CONST					 
+            {"2925", "Fuel", "Pressure Display", "Text Value"},     //  Fuel Pressure				 
+            {"2926", "Hydraulics", "Aux Hydraulic Pump Display", "Text Value"}};    //  Aux Hydraulic Pump
+        }
+        private static void WriteCsFunction(string fn)
+        {
+#if (DEBUG)
+            _streamWriter.WriteLine(fn);
+#endif
+        } 
+    }
+    internal class FunctionData
+    {
+        internal string[] Name;
+        internal string Fn;
+        internal string[] Val;
+        internal string[] Arg;
+        internal string Device;
+        internal string[] Command;
+        internal string Head;
+        internal string Tail;
+        internal string Description;
+        internal bool Duplicate;
+    }
+}

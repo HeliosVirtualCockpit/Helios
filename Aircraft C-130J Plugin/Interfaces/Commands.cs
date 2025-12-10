@@ -860,7 +860,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         internal enum MISCELLANEOUS
         {
-            Both_Windows_Toggle = 4001,
+            Both_Windows_Toggle = 5001,
             wipers,
             hide_yoke,
             cargo_door_bottom,

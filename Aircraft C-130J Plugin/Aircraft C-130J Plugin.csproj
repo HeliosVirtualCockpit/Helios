@@ -58,12 +58,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Interfaces\ExportFunctions.lua" />
+    <Resource Include="Interfaces\ExportC130JFunctions.lua" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\C-130JInterface.cs" />
     <Compile Include="Interfaces\Commands.cs" />
-    <Compile Include="Interfaces\ProcessClickables.cs" />
+    <Compile Include="Interfaces\Functions\ARC210Display.cs" />
+    <Compile Include="Interfaces\ProcessInterfaceFunctions.cs" />
     <Compile Include="Interfaces\Devices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
