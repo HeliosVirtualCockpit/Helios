@@ -15,22 +15,13 @@
 
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.UDPInterface;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Security;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.ServiceModel.Dispatcher;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
-using System.Windows.Media.Media3D;
-using System.Xml.Linq;
+
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 {
@@ -42,16 +33,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static Dictionary<string, FunctionData> _functions = new Dictionary<string, FunctionData>();
         private static NetworkFunctionCollection _functionList = new NetworkFunctionCollection();
         private static BaseUDPInterface _baseUDPInterface;
-        private static readonly Dictionary <string, string>_categorySubstitutions;
+        private static readonly Dictionary <string, string> _categorySubstitutions, _nameSubstitutions, _clickableSubstitutions;
         private static readonly RegexOptions _options = RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled;
+        private static Dictionary<string, FunctionData> _dualFunctions = new Dictionary<string, FunctionData>();
+
         static ProcessInterfaceFunctions() {
             _categorySubstitutions = CategoryInit();
+            _nameSubstitutions = ElementInit();
+            _clickableSubstitutions = ClickableCorrectionsInit();
         }
         internal static NetworkFunctionCollection Process(BaseUDPInterface udpInterface)
         {
             _baseUDPInterface = udpInterface;
             SetDevices();
-            SetClickables();
+            _input = SetClickables();
+            //  we do a quick edit on mis-coded clickable data in order to avoid downstream issues
+
+            foreach (var pair in _clickableSubstitutions)
+            {
+                _input = _input.Replace(pair.Key, pair.Value);
+            }
 
             int i = 0;
             foreach (Match m in Regex.Matches(_input, _pattern, _options))
@@ -74,8 +75,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 }
                 else
                 {
-                    duplicateArg = _functions.ContainsKey(argArray[0]);
-                    argKey = duplicateArg ? "D_" + argArray[0] : argArray[0];  // this obviously will only allow one duplicate
+                    argKey = argArray[0];
+                    if (m.Groups["function"].Value == "display_rocker_hdd")
+                    {
+                        argKey = m.Groups["value"].Captures[0].Value;
+                        argArray = new string[] { argKey };
+                    }
+                    duplicateArg = _functions.ContainsKey(argKey);
+                    argKey = duplicateArg ? "D_" + argKey : argKey;  // this obviously will only allow one duplicate
                 }
                 _functions.Add(argKey, new FunctionData()
                 {
@@ -148,7 +155,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 else
                 {
 #if (DEBUG)
-                    WriteCsFunction($"Not creating function for duplicate \"{fd.Name}\"");
+                    if (string.Join("_", fd.Name).Contains("Brightness") || fd.Fn.Contains("rocker"))
+                    {
+                        FunctionBuilder(fd);
+                    }
+                    else
+                    {
+                        WriteCsFunction($"Not creating function for duplicate \"{fd.Arg[0]}\" - \"{string.Join("_", fd.Name)}\"");
+                    }
 #endif
                 }
 
@@ -185,7 +199,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "IndicationText":
                     WriteCsFunction($"\t\t{BuildIndicationsText(fd)}");
                     break;
-                case "display_rocker_hdd":
                 case "master_warning":
                 case "master_caution":
                 case "ref_btn":
@@ -223,7 +236,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     break;
                 case "base_btn_cycle3":
                     break;
+                case "one_way_rocker":
+                case "display_rocker_hdd":
                 case "cni_brt":
+                    WriteCsFunction($"\t\t{BuildRocker(fd)}");
                     break;
                 case "multiswitch":
                     break;
@@ -240,8 +256,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "knob_rot":
                     break;
                 case "ics_knob":
-                    break;
-                case "one_way_rocker":
                     break;
                 case "rocker_centering":
                     break;
@@ -325,6 +339,28 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
             return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
         }
+        private static string BuildRocker(FunctionData fd)
+        {
+            // This is a rocker which is defined as two elements and two buttons in the clickables so we get called twice for each rocker.
+            // For rockers especially, the arg in the element name is unreliable so we use the real one from Val[0]
+
+            (string category, string name) = AdjustName(fd.Name, fd.Device);
+//            if (name.Contains("Increase") || name.Contains("Decrease")){
+                name = name.Replace(" Increase", "").Replace(" Decrease", "");
+            if (_dualFunctions.ContainsKey($"{fd.Val[0]}"))
+                {
+                    FunctionData fd1 = _dualFunctions[$"{fd.Val[0]}"];
+                    _dualFunctions.Remove($"{fd.Val[0]}");
+                    _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], new SwitchPosition[] { new SwitchPosition("1.0", "Increase", CommandEnumToString(fd1.Command[0]), CommandEnumToString(fd1.Command[0]), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Decrease", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Command[0]), "0.0", "0.0") }, category, name, "%0.1f"));
+                    return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"1.0\", \"Up\", Commands.{fd1.Command[0]}.ToString(\"d\"), Commands.{fd1.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\"), new SwitchPosition(\"0.0\", \"Middle\", null), new SwitchPosition(\"-1.0\", \"Down\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\") }}, \"{category}\", \"{name}\", \"%0.1f\"));";
+                }
+                else
+                {
+                    _dualFunctions.Add($"{fd.Val[0]}", fd);
+                }
+//            }
+            return "";
+        }
         private static string CommandEnumToString(string commandEnum)
         {
             return ((int)Enum.Parse(Type.GetType($"GadrocsWorkshop.Helios.Interfaces.DCS.C130J.Commands+{commandEnum.Split('.')[0]}"), commandEnum.Split('.')[1])).ToString();
@@ -368,7 +404,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             }
             else
             {
-                if (origName[0].Contains("LSK"))
+                if (origName[0].Contains("AMU Brightness"))
+                {
+                    string[] namePieces = origName[0].Split(' ');
+                    category = $"{namePieces[1]} {namePieces[0]}";
+                    name = $"{namePieces[2]} Switch"; ;
+                }
+                else if (origName[0].Contains("AMU LSK"))
+                {
+                    string[] namePieces = origName[0].Split(' ');
+                    category = $"{namePieces[0]} {namePieces[2]}";
+                    name = $"{namePieces[1]} {namePieces[3]} {namePieces[4]}"; ;
+                }
+                else if(origName[0].Contains("LSK"))
                 {
                     category = origName[0].Substring(0, origName[0].IndexOf("LSK")).Trim();
                     name = origName[0].Substring(origName[0].IndexOf("LSK")).Trim();
@@ -398,6 +446,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     category = "RWR";
                     name = origName[0].Substring(origName[0].IndexOf("RWR") + 3).Trim();
                 }
+                else if (origDevice.Contains("VOLUME_MANAGER"))
+                {
+                    string[] origWords = origName[0].Split(' ');
+                    category = $"ICS Control {origWords[0]}";
+                    name = origName[0].Replace(origWords[0], "").Trim();
+                }
                 else if (origName[0].Contains("Landing Gear"))
                 {
                     category = "Landing Gear";
@@ -413,6 +467,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             foreach (var pair in _categorySubstitutions)
             {
                 category = category.Replace(pair.Key, pair.Value);
+            }
+
+            foreach (var pair in _nameSubstitutions)
+            {
+                name = name.Replace(pair.Key, pair.Value);
             }
 
             foreach (var swap in new List<string>{ " AMU", " Displays", " CNI" })
@@ -440,27 +499,45 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 { "Fuel System", "Fuel" },
                 { "Air Conditioning","Environment"},
                 { "Plane ",""},
+                { "AUG ICS","ICS Control Aug"},
                 };
         }
-        private static void SetClickables()
+        private static Dictionary<string, string> ElementInit()
+        {
+            return new Dictionary<string, string> {
+                { "Brighness ","Brightness "},
+                };
+        }
+        private static Dictionary<string, string> ClickableCorrectionsInit()
+        {
+            return new Dictionary<string, string> {
+                { "Brighness ","Brightness "},
+                { "PNT_CNBP_NUM8_168","PNT_CNBP_NUM8_169"},
+                { "PNT_CNBP_NUM7_167","PNT_CNBP_NUM7_168"},
+                { "ilot Radio Transmit","ilot Radio/Intercom Transmit"},
+                { "AUG ICS - Radio","AUG ICS - Radio/Intercom Transmit"},
+                };
+        }
+        private static string SetClickables()
         {
             #region Process Clickables
             string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J";
             string path = $@"{DCSAircraft}\Cockpit\Scripts\clickabledata.lua";
             _pattern = @"^elements\[""[^""]*?(?:_(?<arg>\d{2,4}))*""\].*=\s*(?'function'.*)\((?:""(?'name'[^-,]*)(?:\s*-\s*(?'name'[^-,]*))*"")(((?:\s*,\s*devices\.(?'device'[^,\s\)]*))(?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*((?'value'[^,\s]*)))*)|((?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*(?'value'[^,\s\)]*))*)(?:\s*,\s*devices\.(?'device'[^,\s\)]*)))(?:\s*,\s*(?'value'[^,\s\)]*))*\s*\)\s*";
-            _input = "";
+            string input = "";
             string clickableFilename = Path.GetFileNameWithoutExtension(path);
             using (StreamReader streamReader = new StreamReader(path))
             {
-                _input = streamReader.ReadToEnd();
+                input = streamReader.ReadToEnd();
             }
             // Console.Write(_input);
             #endregion
+            return input;
         }
         private static void SetDevices()
         {
 #if (DEBUG)
-            #region Process Clickables
+            #region Process Devices
             string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J";
             string path = $@"{DCSAircraft}\Cockpit\Scripts\devices.lua";
             _pattern = @"^devices\[""(?'device'.*)""\].*";
@@ -486,7 +563,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static string[,] LampsToArray()
         {
             return new string[,]
-           { {"4000", "CNI (All)", "CNI Power Lights "},
+           { {"3990", "CNI Pilot", "Exec"},
+            {"3992", "CNI Copilot", "Exec"},
+            {"3994", "CNI Aug Crew", "Exec"},
             {"4011", "Pilot Displays", "HUD Vis Mode"},
             {"4012", "Pilot Displays", "CAT 2"},
             {"4013", "Pilot Displays", "O/S"},
@@ -643,7 +722,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static void WriteCsFunction(string fn)
         {
 #if (DEBUG)
-            _streamWriter.WriteLine(fn);
+            if(!string.IsNullOrEmpty(fn)) _streamWriter.WriteLine(fn);
 #endif
         } 
     }

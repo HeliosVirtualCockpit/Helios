@@ -76,7 +76,7 @@ function driver.processLowImportance(mainPanelDevice)
 end
 
 function ExtractIndicationValue(ii, just)
-		li = parse_indication(ii)
+		li = helios.parseIndication(ii)
 		if li then
 			for _, v in pairs(li) do
 			  if v ~= nil and v ~= "" then

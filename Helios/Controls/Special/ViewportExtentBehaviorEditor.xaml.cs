@@ -54,6 +54,16 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     [HeliosPropertyEditor("FA18C.AMPCD", "Behavior")]
     [HeliosPropertyEditor("Helios.FA18C.MPCD.Right", "Behavior")]
     [HeliosPropertyEditor("Helios.FA18C.MPCD.Left", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.CNI.PILOT", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.CNI.COILOT", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.CNI.AUGCREW", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.CNBP", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.AMU.PILOT", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.AMU.COPILOT", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.HDD.Pilot.Left", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.HDD.Pilot.Right", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.HDD.Copilot.Left", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.HDD.Copilot.Right", "Behavior")]
 
 
     public partial class ViewportExtentBehaviorEditor : HeliosPropertyEditor
