@@ -47,6 +47,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private double _maxLabelHeight = 0d;
         private Color _labelColor = Colors.White;
         private readonly HeliosValue _positionValue;
+        private readonly HeliosTrigger _firstPositionReleasedTrigger;
+        private readonly HeliosTrigger _lastPositionReleasedTrigger;
         private readonly HeliosValue _positionNameValue;
         private readonly HeliosValue _incrementValue;
         private readonly HeliosValue _decrementValue;
@@ -70,6 +72,12 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_positionValue);
             Actions.Add(_positionValue);
             Triggers.Add(_positionValue);
+
+            _firstPositionReleasedTrigger = new HeliosTrigger(this, "", "", "first position released", "Fired when the first switch position is released.", "Always returns false.", BindingValueUnits.Boolean);
+            Triggers.Add(_firstPositionReleasedTrigger);
+
+            _lastPositionReleasedTrigger = new HeliosTrigger(this, "", "", "last position released", "Fired when the last switch position is released.", "Always returns false.", BindingValueUnits.Boolean);
+            Triggers.Add(_lastPositionReleasedTrigger);
 
             _incrementValue = new HeliosValue(this, new BindingValue(1), "", "increment", "Increment current position of the switch.", "Set true to increment position.", BindingValueUnits.Boolean);
             _incrementValue.Execute += IncrementPositionAction_Execute;
@@ -459,6 +467,19 @@ namespace GadrocsWorkshop.Helios.Controls
                     }
                 }
             }
+            if (!BypassTriggers)
+            {
+                if (CurrentPosition == 1)
+                {
+                    _firstPositionReleasedTrigger.FireTrigger(new BindingValue(false));
+                }
+                else if (CurrentPosition == Positions.Count)
+                {
+                    _lastPositionReleasedTrigger.FireTrigger(new BindingValue(false));
+                }
+                else { }
+            }
+
             base.MouseUp(location);
         }
 
@@ -614,7 +635,6 @@ namespace GadrocsWorkshop.Helios.Controls
             }
             EndTriggerBypass(e.BypassCascadingTriggers);
         }
-
         void IncrementPositionAction_Execute(object action, HeliosActionEventArgs e)
         {
             int newPosition = CurrentPosition + 1;

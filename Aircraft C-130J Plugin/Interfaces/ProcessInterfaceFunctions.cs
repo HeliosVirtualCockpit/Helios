@@ -36,6 +36,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static readonly Dictionary <string, string> _categorySubstitutions, _nameSubstitutions, _clickableSubstitutions;
         private static readonly RegexOptions _options = RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled;
         private static Dictionary<string, FunctionData> _dualFunctions = new Dictionary<string, FunctionData>();
+        private static string _DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
+        //private static string _DCSAircraft = _DCSAircraft = $@"\\atlas\users\Neil\Documents\DCS\C-130J-30";
+
+
 
         static ProcessInterfaceFunctions() {
             _categorySubstitutions = CategoryInit();
@@ -220,14 +224,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "two_pos_switch":
                     WriteCsFunction($"\t\t{BuildFnToggle(fd)}");
                     break;
+                case "multiswitch_stop":
+                    WriteCsFunction($"\t\t{BuildFnMultiSwitchStop(fd)}");
+                    break;
                 case "generator_switch":
                 case "two_pos_switch_rev":
                     break;
                 case "fire_pull":
-                    break;
-                case "multiswitch_stop":
-                    WriteCsFunction($"\t\t{BuildFnToggle1(fd)}");
-
                     break;
                 case "lsgi_btn":
                     break;
@@ -344,11 +347,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
             return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
         }
-        private static string BuildFnToggle1(FunctionData fd)
+        private static string BuildFnMultiSwitchStop(FunctionData fd)
         {
+            SwitchPosition[] sp = new SwitchPosition[] { new SwitchPosition("-0.33", "MOTOR", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), "1.0", null), new SwitchPosition("0.00", "STOP", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), null, null), new SwitchPosition("0.5", "RUN", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), null, null), new SwitchPosition("1.00", "START", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), "-1.0", null) };
+            string switchPositionsInsert = fd.Val[1] == "{0" ? "" : $"new SwitchPosition(\"-0.33\", \"MOTOR\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Val[4]}.ToString(\"d\"), \"1.0\", null), ";
+            string swPositions = $"{{{switchPositionsInsert}new SwitchPosition(\"0.0\", \"STOP\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Val[4]}.ToString(\"d\"), null, null), new SwitchPosition(\"0.0\", \"RUN\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Val[4]}.ToString(\"d\"), null, null), new SwitchPosition(\"1.0\", \"START\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Val[4]}.ToString(\"d\"), \"-1.0\", null) }}";
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
-            _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
-            return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
+            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], fd.Val[1] == "{0" ? new SwitchPosition[] { sp[1], sp[2], sp[3] } : sp, category, name, "%0.2f"));
+            return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {swPositions}, \"{category}\", \"{name}\", \"%0.2f\"));";
         }
         private static string BuildRocker(FunctionData fd)
         {
@@ -356,8 +362,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             // For rockers especially, the arg in the element name is unreliable so we use the real one from Val[0]
 
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
-//            if (name.Contains("Increase") || name.Contains("Decrease")){
-                name = name.Replace(" Increase", "").Replace(" Decrease", "");
+            name = name.Replace(" Increase", "").Replace(" Decrease", "");
             if (_dualFunctions.ContainsKey($"{fd.Val[0]}"))
                 {
                     FunctionData fd1 = _dualFunctions[$"{fd.Val[0]}"];
@@ -369,7 +374,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 {
                     _dualFunctions.Add($"{fd.Val[0]}", fd);
                 }
-//            }
+
             return "";
         }
 
@@ -593,9 +598,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static string SetClickables()
         {
             #region Process Clickables
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
-            DCSAircraft = $@"\\atlas\users\Neil\Documents\DCS\C-130J-30";
-            string path = $@"{DCSAircraft}\clickabledata.lua";
+            string path = $@"{_DCSAircraft}\clickabledata.lua";
             _pattern = @"^elements\[""PNT_(?'element'[^""]*?)(?:_(?<arg>\d{2,4}))*""\].*=\s*(?'function'.*)\((?:""(?'name'[^-,]*)(?:\s*-\s*(?'name'[^-,]*))*"")(((?:\s*,\s*devices\.(?'device'[^,\s\)]*))(?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*((?'value'[^,\s]*)))*)|((?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*(?'value'[^,\s\)]*))*)(?:\s*,\s*devices\.(?'device'[^,\s\)]*)))(?:\s*,\s*(?'value'[^,\s\)]*))*\s*\)\s*";
             string input = "";
             string clickableFilename = Path.GetFileNameWithoutExtension(path);
@@ -611,9 +614,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         {
 #if (DEBUG)
             #region Process Devices
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
-            DCSAircraft = $@"\\atlas\users\Neil\Documents\DCS\C-130J-30";
-            string path = $@"{DCSAircraft}\devices.lua";
+            string path = $@"{_DCSAircraft}\devices.lua";
             _pattern = @"^devices\[""(?'device'.*)""\].*";
             string input = "";
             string clickableFilename = Path.GetFileNameWithoutExtension(path);
@@ -652,21 +653,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"4020", "Copilot Displays", "UNCG"},
             {"4021", "Copilot Displays", "NAV"},
             {"4022", "Copilot Displays", "TACT"},
-            {"4023", "Engines", "Engine 1 Start"},
-            {"4024", "Engines", "Engine 2 Start"},
-            {"4025", "Engines", "Engine 3 Start"},
-            {"4026", "Engines", "Engine 4 Start"},
-            {"4027", "Engines", "APU Start"},
+            {"4023", "Engine", "Engine 1 Start"},
+            {"4024", "Engine", "Engine 2 Start"},
+            {"4025", "Engine", "Engine 3 Start"},
+            {"4026", "Engine", "Engine 4 Start"},
+            {"4027", "Engine", "APU Start"},
             {"4028", "Fuel System", "SPR Valve "},
             {"4030", "Hydraulics", "AUX Pump On"},
             {"4032", "Landing Gear", "Nose Gear"},
             {"4033", "Landing Gear", "Left Gear"},
             {"4034", "Landing Gear", "Right Gear"},
             {"4035", "Landing Gear", "Warning"},
-            {"4036", "Engines", "Generator 1"},
-            {"4037", "Engines", "Generator 2"},
-            {"4038", "Engines", "Generator 3"},
-            {"4039", "Engines", "Generator 4"},
+            {"4036", "Engine", "Generator 1"},
+            {"4037", "Engine", "Generator 2"},
+            {"4038", "Engine", "Generator 3"},
+            {"4039", "Engine", "Generator 4"},
             {"4040", "Indicators", "Button Brightness"},
             {"4042", "Indicators", "Button Legend Brightness"},
             {"4045", "Ref Panel", "Master Warning"},
@@ -714,10 +715,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"4088", "RADAR", "SCTR Function"},
             {"4089", "AFCS", "Pitch OFF"},
             {"4090", "AFCS", "Lat OFF"},
-            {"4091", "Engines", "1 Low Speed"},
-            {"4092", "Engines", "2 Low Speed"},
-            {"4093", "Engines", "3 Low Speed"},
-            {"4094", "Engines", "4 Low Speed"},
+            {"4091", "Engine", "1 Low Speed"},
+            {"4092", "Engine", "2 Low Speed"},
+            {"4093", "Engine", "3 Low Speed"},
+            {"4094", "Engine", "4 Low Speed"},
             {"4095", "Aerial Delivery", "Caution"},
             {"4096", "Aerial Delivery", "Jump"},
             {"4097", "RWR", "SRCH ON"},
@@ -731,7 +732,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"4105", "Air Conditioning", "Cargo Compartment Man ON"},
             {"4106", "Air Conditioning", "Flight Station X-Flow Man ON"},
             {"4107", "Fuel", "FLCV TEST ON"},
-            {"4108", "Engines", "Bleed Air APU OPEN"},
+            {"4108", "Engine", "Bleed Air APU OPEN"},
             {"4114", "Caution Panel Copilot", "AP ON"},
             {"4115", "Caution Panel Copilot", "PITCH OFF"},
             {"4116", "Caution Panel Copilot", "NAV ARM"},
@@ -779,9 +780,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"2911", "Fuel", "R Aux Amount Display", "Text Value"},     //  Fuel R Aux
             {"2912", "Fuel", "L Ext Amount Display", "Text Value"},     //  Fuel L Ext
             {"2913", "Fuel", "R Ext Amount Display", "Text Value"},     //  Fuel R Ext
-            {"2914", "Engines", "APU % RPM Display", "Text Value"},     //  APU % RPM
-            {"2915", "Engines", "APU EGT Display", "Text Value"},     //  APU EGT
-            {"2916", "Engines", "Bleed Air Pressure Display", "Text Value"},     //  Bleed Air Pressure
+            {"2914", "Engine", "APU % RPM Display", "Text Value"},     //  APU % RPM
+            {"2915", "Engine", "APU EGT Display", "Text Value"},     //  APU EGT
+            {"2916", "Engine", "Bleed Air Pressure Display", "Text Value"},     //  Bleed Air Pressure
             {"2917", "Environment", "Flight Deck Air Con Temp Display", "Text Value"},     //  Flight Deck Air Con Temp "84" "86"
             {"2918", "Environment", "Flight Deck Air Con Temp Set Display", "Text Value"},     //  Flight Deck Air Con Temp Set "84" "86"
             {"2919", "Environment", "Cargo Air Con Temp Display", "Text Value"},     //  Cargo Air Con  Temp "86" "86"
