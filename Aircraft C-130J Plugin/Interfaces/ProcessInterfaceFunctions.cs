@@ -226,6 +226,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "fire_pull":
                     break;
                 case "multiswitch_stop":
+                    WriteCsFunction($"\t\t{BuildFnToggle1(fd)}");
+
                     break;
                 case "lsgi_btn":
                     break;
@@ -255,10 +257,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "knob_fixed":
                     break;
                 case "knob_rot":
+                    WriteCsFunction($"\t\t{BuildKnob(fd)}");
                     break;
                 case "ics_knob":
                     WriteCsFunction($"\t\t{BuildKnobWithPull(fd)}");
-
                     break;
                 case "rocker_centering":
                     break;
@@ -342,6 +344,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
             return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
         }
+        private static string BuildFnToggle1(FunctionData fd)
+        {
+            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
+            return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
+        }
         private static string BuildRocker(FunctionData fd)
         {
             // This is a rocker which is defined as two elements and two buttons in the clickables so we get called twice for each rocker.
@@ -364,14 +372,28 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 //            }
             return "";
         }
-       
+
         private static string BuildKnobWithPull(FunctionData fd)
         {
+            string retValue = "";
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+
             _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Val[0]), fd.Arg[1], 0.05, 0d, 1d, category, name, false, "%0.2f"));
+            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Val[0]}.ToString(\"d\"), \"{fd.Arg[1]}\", 0.05d, 0d, 1, \"{category}\", \"{name}\", false, \"%0.2f\"));";
             _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], category, name + " Monitor Switch"));
-            return $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Val[0]}.ToString(\"d\"), \"{fd.Arg[1]}\", 0.05d, 0d, 1, \"{category}\", \"{name}\", false, \"%0.2f\"));\n" +
-                   $"\t\tAddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{category}\", \"{name}\" + \"  Monitor Switch\"));";
+            retValue += $"\n\t\tAddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{category}\", \"{name}\" + \"  Monitor Switch\"));";
+            return retValue;
+
+        }
+        private static string BuildKnob(FunctionData fd)
+        {
+            string retValue = "";
+            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+
+            _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], 0.05, 0d, 1d, category, name, false, "%0.2f"));
+            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", 0.05d, 0d, 1, \"{category}\", \"{name}\", false, \"%0.2f\"));";
+            return retValue;
+
         }
 
         private static string CommandEnumToString(string commandEnum)
@@ -411,6 +433,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 }
                 else if (origDevice.Contains("VOLUME_MANAGER"))
                 {
+                    
                     string[] origWords = origName[0].Split(' ');
                     string panel = "";
                     if (elementName.Contains("ICS_"))
@@ -423,7 +446,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     {
                         panel = "Unknown";
                     }
-                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0])}";
+                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0].ToLower())}";
                     name = origName[0].Replace(origWords[0], "").Replace("ICS ", "").Replace("Mon", "").Trim();
                     if (string.IsNullOrEmpty(name))
                     {
@@ -497,7 +520,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     }
 
                     string[] origWords = origName[0].Split(' ');
-                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0])}";
+                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0].ToLower())}";
                     name = origName[0].Replace(origWords[0], "").Trim();
                 }
                 else if (origName[0].Contains("Landing Gear"))
@@ -570,8 +593,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static string SetClickables()
         {
             #region Process Clickables
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J";
-            string path = $@"{DCSAircraft}\Cockpit\Scripts\clickabledata.lua";
+            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
+            DCSAircraft = $@"\\atlas\users\Neil\Documents\DCS\C-130J-30";
+            string path = $@"{DCSAircraft}\clickabledata.lua";
             _pattern = @"^elements\[""PNT_(?'element'[^""]*?)(?:_(?<arg>\d{2,4}))*""\].*=\s*(?'function'.*)\((?:""(?'name'[^-,]*)(?:\s*-\s*(?'name'[^-,]*))*"")(((?:\s*,\s*devices\.(?'device'[^,\s\)]*))(?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*((?'value'[^,\s]*)))*)|((?:\s*,\s*(?'command'[^,\s\)]*))(?:\s*,\s*(?'value'[^,\s\)]*))*)(?:\s*,\s*devices\.(?'device'[^,\s\)]*)))(?:\s*,\s*(?'value'[^,\s\)]*))*\s*\)\s*";
             string input = "";
             string clickableFilename = Path.GetFileNameWithoutExtension(path);
@@ -587,8 +611,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         {
 #if (DEBUG)
             #region Process Devices
-            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J";
-            string path = $@"{DCSAircraft}\Cockpit\Scripts\devices.lua";
+            string DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
+            DCSAircraft = $@"\\atlas\users\Neil\Documents\DCS\C-130J-30";
+            string path = $@"{DCSAircraft}\devices.lua";
             _pattern = @"^devices\[""(?'device'.*)""\].*";
             string input = "";
             string clickableFilename = Path.GetFileNameWithoutExtension(path);
