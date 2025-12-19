@@ -353,6 +353,10 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     Pushed = false;
                     IsClosed = false;
+                    if (!BypassTriggers)
+                    {
+                        _releasedTrigger.FireTrigger(new BindingValue(true));
+                    }
                 }
             } else
             {

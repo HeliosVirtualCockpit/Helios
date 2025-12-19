@@ -21,6 +21,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Data;
 
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
@@ -204,6 +205,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "IndicationText":
                     WriteCsFunction($"\t\t{BuildIndicationsText(fd)}");
                     break;
+                case "oil_flap_switch":
+                case "hud_btn":
+                case "lsgi_btn":
                 case "master_warning":
                 case "master_caution":
                 case "ref_btn":
@@ -212,8 +216,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "microwave_key":
                 case "amu_key":
                 case "cni_key_no_stop":
-                    WriteCsFunction($"\t\t{BuildFnKey(fd)}");
+                    WriteCsFunction($"\t\t{BuildFnButton(fd)}");
                     break;
+                case "flap_switch":
                 case "boost_guard":
                 case "fuel_xfeed":
                 case "parking_brake":
@@ -221,59 +226,58 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "landing_lights":
                 case "two_pos_switch_ap":
                 case "two_pos_switch_spring":
+                case "two_pos_switch_cargo":
+                case "generator_switch":
+                case "two_pos_switch_rev":
+                case "gear_handle":
                 case "two_pos_switch":
                     WriteCsFunction($"\t\t{BuildFnToggle(fd)}");
                     break;
                 case "multiswitch_stop":
                     WriteCsFunction($"\t\t{BuildFnMultiSwitchStop(fd)}");
                     break;
-                case "generator_switch":
-                case "two_pos_switch_rev":
-                    break;
-                case "fire_pull":
-                    break;
-                case "lsgi_btn":
-                    break;
-                case "at_disconnect":
-                    break;
-                case "gear_handle":
-                    break;
                 case "landing_lights_motor":
+                case "rotary":
+                case "multiswitch":
+                    WriteCsFunction($"\t\t{BuildFnMultiSwitch(fd)}");
                     break;
-                case "base_btn_cycle3":
+                case "three_pos_switch_spring":
+                case "three_pos_spring_load_on_inv":
+                case "three_pos_spring_load_on":
+                    WriteCsFunction($"\t\t{BuildFnThreeWayToggle(fd)}");
                     break;
+                case "rocker_centering":
                 case "one_way_rocker":
                 case "display_rocker_hdd":
                 case "cni_brt":
                     WriteCsFunction($"\t\t{BuildRocker(fd)}");
                     break;
-                case "multiswitch":
-                    break;
-                case "wiper":
-                    break;
-                case "knob_360_press":
-                    break;
-                case "rotary":
+                case "knob_fixed":
+                    WriteCsFunction($"\t\t{BuildKnob(fd)}");  // note that this has a sep command to reset which is not currently in the interface.
                     break;
                 case "knob_360_0_1":
-                    break;
-                case "knob_fixed":
-                    break;
+                case "knob_360":
+                case "knob_rot_rel":
                 case "knob_rot":
                     WriteCsFunction($"\t\t{BuildKnob(fd)}");
+                    break;
+                case "knob_360_press":
+                    WriteCsFunction($"\t\t{BuildKnobWithPull1(fd)}");
                     break;
                 case "ics_knob":
                     WriteCsFunction($"\t\t{BuildKnobWithPull(fd)}");
                     break;
-                case "rocker_centering":
+                case "fire_pull":
+                    break;
+                case "at_disconnect":
+                    break;
+                case "base_btn_cycle3":
+                    break;
+                case "wiper":
                     break;
                 case "stby_altim":
                     break;
                 case "adi_cage":
-                    break;
-                case "flap_switch":
-                    break;
-                case "hud_btn":
                     break;
                 case "hud_latch":
                     break;
@@ -281,21 +285,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     break;
                 case "guard":
                     break;
-                case "three_pos_switch_spring":
-                    break;
-                case "knob_rot_rel":
-                    break;
                 case "fuel_transfer":
-                    break;
-                case "three_pos_spring_load_on":
-                    break;
-                case "three_pos_spring_load_on_inv":
                     break;
                 case "emg_ext_light":
                     break;
                 case "rudder_trim":
-                    break;
-                case "oil_flap_switch":
                     break;
                 case "oil_flap_switch_open_close":
                     break;
@@ -312,8 +306,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "base_btn_cycle_release":
                     break;
                 case "cable_interaction":
-                    break;
-                case "knob_360":
                     break;
                 case "emergency_trim":
                     break;
@@ -335,7 +327,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(new Text(_baseUDPInterface, fd.Arg[0], fd.Name[0], fd.Name[1], fd.Description));
             return $"AddFunction(new Text(this, \"{fd.Arg[0]}\", \"{fd.Name[0]}\", \"{fd.Name[1]}\", \"{fd.Description}\"));";
         }
-        private static string BuildFnKey(FunctionData fd)
+        private static string BuildFnButton(FunctionData fd)
         {
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
             _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], category, name));
@@ -344,9 +336,40 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static string BuildFnToggle(FunctionData fd)
         {
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
-            _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], "1.0", "OPEN", "0.0", "CLOSE", category, name, "%0.1f"));
-            return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"1.0\", \"OPEN\", \"0.0\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
+            string startVal, endVal;
+            if (fd.Fn.EndsWith("_rev") || fd.Fn.StartsWith("generator"))
+            {
+                startVal = "0.0";
+                endVal = "1.0";
+            } else
+            {
+                startVal = "1.0";
+                endVal = "0.0";
+            }
+            _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], startVal, "OPEN", endVal, "CLOSE", category, name, "%0.1f"));
+            return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{startVal}\", \"OPEN\", \"{endVal}\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
         }
+        
+        private static string BuildFnThreeWayToggle(FunctionData fd)
+        {
+            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            string startVal, endVal, midVal;
+            if (fd.Fn.EndsWith("_inv"))
+            {
+                startVal = "1.0";
+                endVal = "-1.0";
+                midVal = "0.0";
+            }
+            else
+            {
+                startVal = "1.0";
+                endVal = "-1.0";
+                midVal = "0.0";
+            }
+            _functionList.Add(Switch.CreateThreeWaySwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], startVal, "Posn 1", midVal, "Posn 2", endVal, "Posn 3", category, name, "%0.1f"));
+            return $"AddFunction(Switch.CreateThreeWaySwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{startVal}\", \"Posn 1\", \"{midVal}\", \"Posn 2\", \"{endVal}\", \"Posn 3\", \"{category}\", \"{name}\", \"%0.1f\"));";
+        }
+
         private static string BuildFnMultiSwitchStop(FunctionData fd)
         {
             SwitchPosition[] sp = new SwitchPosition[] { new SwitchPosition("-0.33", "MOTOR", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), "1.0", null), new SwitchPosition("0.00", "STOP", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), null, null), new SwitchPosition("0.5", "RUN", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), null, null), new SwitchPosition("1.00", "START", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[4]), "-1.0", null) };
@@ -355,6 +378,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
             _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], fd.Val[1] == "{0" ? new SwitchPosition[] { sp[1], sp[2], sp[3] } : sp, category, name, "%0.2f"));
             return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {swPositions}, \"{category}\", \"{name}\", \"%0.2f\"));";
+        }
+        private static string BuildFnMultiSwitch(FunctionData fd)
+        {
+            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            DataTable dt = new DataTable();
+            double startVal = Convert.ToDouble(dt.Compute(fd.Val[1].Replace("{", ""), ""));
+            double endVal = Convert.ToDouble(dt.Compute(fd.Val[2].Replace("}", ""), ""));
+            double intervalVal = Convert.ToDouble(dt.Compute(fd.Val[3], ""));
+            int positions = Convert.ToInt32(((endVal - startVal) / intervalVal) + 1);
+            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], SwitchPositions.Create(positions, startVal, intervalVal, CommandEnumToString(fd.Command[0]), "Posn", "%.2f"), category, name, "%0.2f"));
+            return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", SwitchPositions.Create({positions}, {startVal}, {endVal}, Commands.{fd.Command[0]}.ToString(\"d\"), \"%.2f\"), \"{category}\", \"{name}\", \"%0.2f\"));";
         }
         private static string BuildRocker(FunctionData fd)
         {
@@ -390,13 +424,46 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             return retValue;
 
         }
-        private static string BuildKnob(FunctionData fd)
+        private static string BuildKnobWithPull1(FunctionData fd)
         {
             string retValue = "";
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
 
-            _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], 0.05, 0d, 1d, category, name, false, "%0.2f"));
-            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", 0.05d, 0d, 1, \"{category}\", \"{name}\", false, \"%0.2f\"));";
+            _functionList.Add(new RotaryEncoder(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Val[0], 0.05, category, name.Split('-')[0].Trim(), "%0.2f"));
+            //_functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Val[0], 0.01, -1d, 1d, category, name.Split('-')[0].Trim(), true, "%0.2f"));
+            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Val[0]}\", 0.05d, 0d, 1, \"{category}\", \"{name.Split('-')[0].Trim()}\", false, \"%0.2f\"));";
+            _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Val[2]), fd.Val[3], category, name + " Push Switch"));
+            retValue += $"\n\t\tAddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Val[2]}.ToString(\"d\"), \"{fd.Val[3]}\", \"{category}\", \"{name}\" + \"  Push Switch\"));";
+            return retValue;
+
+        }
+        private static string BuildKnob(FunctionData fd)
+        {
+            string retValue = "";
+            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            double startVal, endVal, intervalVal;
+            if (fd.Fn == "knob_fixed")
+            {
+                startVal = Convert.ToDouble(fd.Val[2].Replace("{", ""));
+                endVal = Convert.ToDouble(fd.Val[3].Replace("}", ""));
+                intervalVal = Convert.ToDouble(fd.Val[1]);
+            }
+            else if (fd.Fn == "knob_360")
+            {
+                startVal = -1d;
+                endVal = 1d;
+                intervalVal = 0.1d;
+            }
+            else
+
+            {
+                startVal = 0d;
+                endVal = 1d;
+                intervalVal = 0.05d;
+            }
+
+            _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], intervalVal, startVal, endVal, category, name, false, "%0.2f"));
+            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", {intervalVal}d, {startVal}d, {endVal}d, \"{category}\", \"{name}\", false, \"%0.2f\"));";
             return retValue;
 
         }
@@ -415,16 +482,20 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             string name;
             if (origName.Length > 1)
             {
-                //Pilot Master Warning Button -Push to Reset
-                if (origName[0] == "ARC")
+                if (origDevice.Contains("_CPT_INTERFACE"))
+                {
+                    category = $"Cockpit {origName[0].Split(' ')[0]}";
+                    name = $"{origName[0].Replace(origName[0].Split(' ')[0], "").Trim()} - {origName[1]}";
+                }
+                else if (origDevice.Contains("_REF_MODE_PANEL"))
+                {
+                    category = $"Ref Mode {origName[0].Split(' ')[0]}";
+                    name = $"{origName[0].Replace(origName[0].Split(' ')[0], "").Trim()} - {origName[1]}";
+                }
+                else if (origName[0] == "ARC")
                 {
                     category = "ARC-210";
                     name = origName[1].Substring(origName[1].IndexOf("210") + 3).Trim();
-                }
-                else if (origName[1].Contains("Push to Reset"))
-                {
-                    category = "Ref Panel";
-                    name = origName[0].Trim();
                 }
                 else if (origName[0].Contains("Microwave") || origName[0].Contains("Btm drawer") || origName[0].Contains("Top shelf") || origName[0].Contains("Galley"))
                 {
@@ -451,7 +522,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     {
                         panel = "Unknown";
                     }
-                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0].ToLower())}";
+                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0].ToLower())}{(origWords[0].ToLower() == "aug" ? " Crew" : "")}";
                     name = origName[0].Replace(origWords[0], "").Replace("ICS ", "").Replace("Mon", "").Trim();
                     if (string.IsNullOrEmpty(name))
                     {
@@ -493,6 +564,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     category = "CNBP";
                     name = origName[0].Substring(origName[0].IndexOf("CNBP") + 4).Trim();
                 }
+                else if (origDevice.Contains("_REF_MODE_PANEL"))
+                {
+                    category = $"Ref Mode {origName[0].Split(' ')[0]}";
+                    name = $"{origName[0].Replace(origName[0].Split(' ')[0], "").Replace("Reference ", "").Trim()}";
+                }
                 else if (origName[0].Contains("Microwave") || origName[0].Contains("Galley"))
                 {
                     category = "Galley";
@@ -525,7 +601,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     }
 
                     string[] origWords = origName[0].Split(' ');
-                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0].ToLower())}";
+                    category = $"{panel} Control {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origWords[0].ToLower())}{(origWords[0].ToLower() == "aug" ? " Crew" : "")}";
                     name = origName[0].Replace(origWords[0], "").Trim();
                 }
                 else if (origName[0].Contains("Landing Gear"))
@@ -569,13 +645,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 { "Cms Mgr", "Counter Measure System" },
                 { "Atm", "Environment" },
                 { " Apu Ctrl", "" },
-                { "Copilot Ref Mode Panel", "Ref Mode Panel Copilot" },
-                { "Ref Panel", "Ref Mode Panel Pilot" },
+                { "Copilot Ref Mode Panel", "Ref Mode Copilot" },
+                { "Pilot Ref Mode Panel", "Ref Mode Pilot" },
+                { "Ref Panel", "Ref Mode Pilot" },
                 { "FLCV", "Fuel" },
                 { "Fuel System", "Fuel" },
                 { "Air Conditioning","Environment"},
                 { "Plane ",""},
-                { "AUG ICS","ICS Control Aug"},
+                { "AUG ICS","ICS Control Aug Crew"},
+                { "Radar","RADAR"},
                 };
         }
         private static Dictionary<string, string> ElementInit()
@@ -591,7 +669,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 { "PNT_CNBP_NUM8_168","PNT_CNBP_NUM8_169"},
                 { "PNT_CNBP_NUM7_167","PNT_CNBP_NUM7_168"},
                 { "ilot Radio Transmit","ilot Radio/Intercom Transmit"},
-                { "AUG ICS - Radio","AUG ICS - Radio/Intercom Transmit"},
+                { "AUG ICS - Radio","Aug Crew ICS - Radio/Intercom Transmit"},
                 { "_ISCP_","_ICS_"},
                 };
         }
@@ -670,8 +748,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"4039", "Engine", "Generator 4"},
             {"4040", "Indicators", "Button Brightness"},
             {"4042", "Indicators", "Button Legend Brightness"},
-            {"4045", "Ref Panel", "Master Warning"},
-            {"4046", "Ref Panel", "Master Caution"},
+            {"4045", "Ref Mode Pilot", "Master Warning"},
+            {"4046", "Ref Mode Pilot", "Master Caution"},
             {"4047", "AFCS", "Mode ALT ON"},
             {"4048", "AFCS", "Mode VS ON"},
             {"4049", "AFCS", "Mode SEL ON"},
@@ -769,8 +847,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             return new string[,]
            {
             {"2902", "Electrics", "Battery Voltage Display", "Text Value"},     //  Battery Voltage
-            {"2903", "Ref Mode", "Pilot Ref Mode Display", "Text Value"},     //  Pilot Ref Mode
-            {"2904", "Ref Mode", "Copilot Ref Mode Display", "Text Value"},     //  Copilot Ref Mode
+            {"2903", "Ref Mode Pilot", "Ref Mode Display", "Text Value"},     //  Pilot Ref Mode
+            {"2904", "Ref Mode Copilot", "Ref Mode Display", "Text Value"},     //  Copilot Ref Mode
             {"2905", "Fuel", "Total Amount Display", "Text Value"},     //  Fuel Total
             {"2906", "Fuel", "1 Main Amount Display", "Text Value"},     //  Fuel 1 Main
             {"2907", "Fuel", "2 Main Amount Display", "Text Value"},     //  Fuel 2 Main

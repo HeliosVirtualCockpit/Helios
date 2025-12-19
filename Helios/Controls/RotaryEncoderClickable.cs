@@ -339,6 +339,10 @@ namespace GadrocsWorkshop.Helios.Controls
 
                 if (ButtonType == PushButtonType.Momentary)
                 {
+                    if (!BypassTriggers)
+                    {
+                        _releasedTrigger.FireTrigger(new BindingValue(false));
+                    }
                     Pushed = false;
                     IsClosed = false;
                 }
