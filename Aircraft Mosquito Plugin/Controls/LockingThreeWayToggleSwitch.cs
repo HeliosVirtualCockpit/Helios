@@ -19,7 +19,7 @@ namespace GadrocsWorkshop.Helios.Controls.DH98Mosquito
     using GadrocsWorkshop.Helios.Controls;
     using GadrocsWorkshop.Helios.ComponentModel;
 
-    [HeliosControl("Helios.DH98Mosquito.LockingThreeWayToggleSwitch", "Locking Three Way Toggle Switches", "Three Way Toggle Switches", typeof(ThreeWayToggleSwitchRenderer), HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.DH98Mosquito.LockingThreeWayToggleSwitch", "Locking Three Way Toggle Switch", "Toggle Switches (Multi-Way)", typeof(ThreeWayToggleSwitchRenderer), HeliosControlFlags.NotShownInUI)]
     public class LockingThreeWayToggleSwitch : Controls.ThreeWayToggleSwitchLocking
     {
         // Retained for Backwards Compatibility following move of this control to Helios.Controls
