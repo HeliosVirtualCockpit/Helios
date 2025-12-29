@@ -205,7 +205,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "IndicationText":
                     WriteCsFunction($"\t\t{BuildIndicationsText(fd)}");
                     break;
-                case "oil_flap_switch":
                 case "hud_btn":
                 case "lsgi_btn":
                 case "master_warning":
@@ -267,6 +266,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "ics_knob":
                     WriteCsFunction($"\t\t{BuildKnobWithPull(fd)}");
                     break;
+                case "oil_flap_switch":
+                    break;
+                case "oil_flap_switch_open_close":
+                    break;
                 case "fire_pull":
                     break;
                 case "at_disconnect":
@@ -290,8 +293,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "emg_ext_light":
                     break;
                 case "rudder_trim":
-                    break;
-                case "oil_flap_switch_open_close":
                     break;
                 case "oxygen_switch":
                     break;
@@ -329,7 +330,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         private static string BuildFnButton(FunctionData fd)
         {
-            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName, fd);
             _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], category, name));
             return $"AddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{category}\", \"{name}\"));";
         }
@@ -476,7 +477,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         {
             return ((devices)Enum.Parse(typeof(devices), deviceEnum)).ToString("d");
         }
-        private static (string, string) AdjustName(string[] origName, string origDevice, string elementName)
+        private static (string, string) AdjustName(string[] origName, string origDevice, string elementName, FunctionData fd = null)
         {
             string category;
             string name;
@@ -609,6 +610,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     category = "Landing Gear";
                     name = origName[0].Substring(origName[0].IndexOf("Landing Gear") + 12).Trim();
                 }
+                else if (string.IsNullOrEmpty(origName[0]))
+                {
+                    category = origDevice;
+                    name = fd.Command[0].Replace("AMU.blank", "HUD Blank ").Replace("C_", "Copilot ").Replace("P_", "Pilot ");
+                }
                 else
                 {
                     category = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origDevice.ToLower().Replace("_", " "));
@@ -654,6 +660,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 { "Plane ",""},
                 { "AUG ICS","ICS Control Aug Crew"},
                 { "Radar","RADAR"},
+                { "P_DISPLAYS","Displays Pilot"},
+                { "C_DISPLAYS","Displays Copilot"},
+                { "C_AMU.","Copilot HUD "},
+                { "P_AMU.","Pilot HUD "},
                 };
         }
         private static Dictionary<string, string> ElementInit()
