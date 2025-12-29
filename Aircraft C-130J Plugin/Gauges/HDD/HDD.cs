@@ -53,25 +53,25 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
             switch (_interfaceDevice)
             {
                 case "HDD Pilot Left":
-                    _vpName = "C_130J_HDD_PLT_LEFT";
+                    _vpName = "C130J_HDD1";
                     _interfaceDevice = "Displays Pilot";
                     _interfaceElement = "HDD 1 Brightness";
                     slip = true;
                     break;
                 case "HDD Pilot Right":
-                    _vpName = "C_130J_HDD_PLT_RIGHT";
+                    _vpName = "C130J_HDD2";
                     _interfaceDevice = "Displays Pilot";
                     _interfaceElement = "HDD 2 Brightness";
                     slip = false;
                     break;
                 case "HDD Copilot Left":
-                    _vpName = "C_130J_HDD_COPLT_LEFT";
+                    _vpName = "C130J_HDD3";
                     _interfaceDevice = "Displays Copilot";
                     _interfaceElement = "HDD 3 Brightness";
                     slip = false;
                     break;
                 case "HDD Copilot Right":
-                    _vpName = "C_130J_HDD_COPLT_RIGHT";
+                    _vpName = "C130J_HDD4";
                     _interfaceDevice = "Displays Copilot";
                     _interfaceElement = "HDD 4 Brightness";
                     slip = true;

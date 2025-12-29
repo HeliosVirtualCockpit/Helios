@@ -54,13 +54,13 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNI
             switch (_interfaceDevice)
             {
                 case "CNI Pilot":
-                    _vpName = "C_130J_CNI_PLT";
+                    _vpName = "C130J_PILOT_CNI";
                     break;
                 case "CNI Copilot":
-                    _vpName = "C_130J_CNI_COPLT";
+                    _vpName = "C130J_COPILOT_CNI";
                     break;
                 case "CNI Aug Crew":
-                    _vpName = "C_130J_CNI_AUGCREW";
+                    _vpName = "C130J_AC_CNI";
                     break;
                 default:
                     break;

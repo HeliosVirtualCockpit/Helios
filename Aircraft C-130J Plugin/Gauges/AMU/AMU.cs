@@ -53,10 +53,10 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
             switch (_interfaceDevice)
             {
                 case "AMU Pilot":
-                    _vpName = "C_130J_AMU_PLT";
+                    _vpName = "C130J_PILOT_AMU";
                     break;
                 case "AMU Copilot":
-                    _vpName = "C_130J_AMU_COPLT";
+                    _vpName = "C130J_COPILOT_AMU";
                     break;
                  default:
                     break;
@@ -64,8 +64,8 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
 
             if (_vpName != "" && _includeViewport)
             {
-                AddViewport($"{_vpName}_L", new Rect(56, 28, 379, 283));
-                AddViewport($"{_vpName}_R", new Rect(563, 28, 379, 283));
+                AddViewport($"{_vpName}_LEFT", new Rect(56, 28, 379, 283));
+                AddViewport($"{_vpName}_RIGHT", new Rect(563, 28, 379, 283));
             }
 
             //_frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{AH-64D}/Images/MFD/MFD_glass.png", _interfaceDevice);
@@ -129,7 +129,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
         }
         public bool RequiresPatches
         {
-            get => _vpName != "" ? true : false;
+            get => false;
             set => _ = value;
         }
         private void AddViewport(string name, Rect vpRect)

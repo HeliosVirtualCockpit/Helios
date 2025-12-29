@@ -51,7 +51,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNBP
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.C130J.C130JInterface) };
             _interfaceDevice = "CNBP";
             InitDimensions();
-            _vpName = "C_130J_CNBP";
+            _vpName = "C130J_CNBP";
 
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
             //_frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{AH-64D}/Images/MFD/MFD_glass.png", _interfaceDevice);
@@ -114,7 +114,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNBP
         }
         public bool RequiresPatches
         {
-            get => _vpName != "" ? true : false;
+            get => false;
             set => _ = value;
         }
         private void AddViewport(string name)
