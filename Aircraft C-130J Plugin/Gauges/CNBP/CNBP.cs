@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNBP
     [HeliosControl("Helios.C130J.CNBP", "CNBP", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
     public class CNBP : CompositeVisualWithBackgroundImage
     {
-        private static readonly Rect SCREEN_RECT = new Rect(55, 28, 382, 283);
+        private static readonly Rect SCREEN_RECT = new Rect(55, 34, 382, 283);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDevice = "";
         private double _size_Multiplier = 1;
@@ -119,7 +119,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNBP
         }
         private void AddViewport(string name)
         {
-            Rect vpRect = new Rect(55, 28, 382, 283);
+            Rect vpRect = new Rect(55, 34, 382, 283);
             vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
             TextFormat tf = new TextFormat()
             {

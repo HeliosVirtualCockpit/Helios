@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
     [HeliosControl("Helios.C130J.AMU", "AMU", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class AMU : CompositeVisualWithBackgroundImage
     {
-        private static readonly Rect SCREEN_RECT = new Rect(56, 28, 379, 283);
+        private static readonly Rect SCREEN_RECT = new Rect(56, 32, 379, 283);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private string _interfaceDevice = "";
         private double _size_Multiplier = 1;
@@ -64,8 +64,8 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
 
             if (_vpName != "" && _includeViewport)
             {
-                AddViewport($"{_vpName}_LEFT", new Rect(56, 28, 379, 283));
-                AddViewport($"{_vpName}_RIGHT", new Rect(563, 28, 379, 283));
+                AddViewport($"{_vpName}_LEFT", new Rect(56, 34, 379, 283));
+                AddViewport($"{_vpName}_RIGHT", new Rect(563, 34, 379, 283));
             }
 
             //_frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{AH-64D}/Images/MFD/MFD_glass.png", _interfaceDevice);
@@ -102,8 +102,8 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
                 {
                     if (_vpName == "")
                     {
-                        AddViewport($"{value}_L", new Rect(56, 28, 379, 283));
-                        AddViewport($"{value}_R", new Rect(563, 28, 379, 283));
+                        AddViewport($"{value}_L", new Rect(56, 34, 379, 283));
+                        AddViewport($"{value}_R", new Rect(563, 34, 379, 283));
                         OnDisplayUpdate();
                     }
                     else if (value != "")

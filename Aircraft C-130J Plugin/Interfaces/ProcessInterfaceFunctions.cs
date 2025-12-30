@@ -15,13 +15,14 @@
 
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.UDPInterface;
+using GadrocsWorkshop.Helios.Util.DCS;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Data;
 
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
@@ -49,6 +50,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         internal static NetworkFunctionCollection Process(BaseUDPInterface udpInterface)
         {
+            InstallationLocations locations = InstallationLocations.Singleton;
+            if(locations.Items.Count > 0)
+            {
+                _DCSAircraft = $@"{locations.Items[0].Path}\Mods\aircraft\C130J\Cockpit\Scripts";
+            }
             _baseUDPInterface = udpInterface;
             SetDevices();
             _input = SetClickables();
