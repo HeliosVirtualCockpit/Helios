@@ -8,15 +8,23 @@ function driver.processLowImportance(mainPanelDevice)
 
     li = helios.parseIndication(16) -- 16 Pilot Ref Mode Heading
     if li then
-        helios.send(2900, string.format("%s", helios.ensureString(li.ref_mode_value):gsub(":", "!")))
+		if li.ref_symbol_period then 
+	        helios.send(2900, string.format("%3s.%1s", helios.ensureString(li.ref_mode_value):sub(1,-2):gsub(":", "!"),helios.ensureString(li.ref_mode_value):sub(-1):gsub(":", "!")))
+		else
+	        helios.send(2900, string.format("%5s", helios.ensureString(li.ref_mode_value):gsub(":", "!")))
+		end
 	else
-		helios.send(2900,"")
+		helios.send(2900,"     ")
     end
     li = helios.parseIndication(17) -- 17 Copilot Ref Mode Heading
     if li then
-        helios.send(2901, string.format("%s", helios.ensureString(li.ref_mode_value):gsub(":", "!")))
+		if li.ref_symbol_period then 
+	        helios.send(2901, string.format("%3s.%1s", helios.ensureString(li.ref_mode_value):sub(1,-2):gsub(":", "!"),helios.ensureString(li.ref_mode_value):sub(-1):gsub(":", "!")))
+		else
+	        helios.send(2901, string.format("%5s", helios.ensureString(li.ref_mode_value):gsub(":", "!")))
+		end
 	else
-		helios.send(2901,"")
+		helios.send(2901,"     ")
     end
 
     li = helios.parseIndication(23) -- 23 DC Voltage
@@ -25,8 +33,6 @@ function driver.processLowImportance(mainPanelDevice)
 	else
 	        helios.send(2902, "    ")
     end
-    helios.send(2903 ,ExtractIndicationValue(16, 5))		-- Pilot Ref Mode
-	helios.send(2904 ,ExtractIndicationValue(17, 5))		-- Copilot Ref Mode
 	helios.send(2905 ,ExtractIndicationValue(24, 5))		-- Fuel Total
 	helios.send(2906 ,ExtractIndicationValue(25, 4))		-- Fuel 1 Main
 	helios.send(2907 ,ExtractIndicationValue(26, 4))		-- Fuel 2 Main

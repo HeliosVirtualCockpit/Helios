@@ -59,10 +59,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             //#endregion
 
             //#endregion
-            foreach(NetworkFunction nf in ProcessInterfaceFunctions.Process(this)){
-                AddFunction(nf);
+            if (Functions.Count <= 17)
+            {
+                foreach (NetworkFunction nf in ProcessInterfaceFunctions.Process(this))
+                {
+                    AddFunction(nf);
+                }
             }
-            ;
+
             //ProcessClickables.Analyze();
             //ProcessClickables.CreateFunctionSwitcher();
             #region VHF AM Radio (ARC-210)
