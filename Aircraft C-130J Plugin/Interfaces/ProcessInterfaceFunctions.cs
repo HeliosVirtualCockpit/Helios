@@ -211,6 +211,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "IndicationText":
                     WriteCsFunction($"\t\t{BuildIndicationsText(fd)}");
                     break;
+                case "at_disconnect":
                 case "hud_btn":
                 case "lsgi_btn":
                 case "master_warning":
@@ -249,12 +250,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "rotary":
                     WriteCsFunction($"\t\t{BuildFnMultiSwitch(fd)}");
                     break;
+                case "rudder_trim":
+                case "rocker_centering":
                 case "three_pos_switch_spring":
                 case "three_pos_spring_load_on_inv":
                 case "three_pos_spring_load_on":
                     WriteCsFunction($"\t\t{BuildFnThreeWayToggle(fd)}");
                     break;
-                case "one_way_rocker":
+               case "one_way_rocker":
                 case "display_rocker_hdd":
                 case "cni_brt":
                     WriteCsFunction($"\t\t{BuildRocker(fd)}");
@@ -281,13 +284,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "oil_flap_switch_open_close":
                     WriteCsFunction($"\t\t{BuildYSwitch(fd)}");
                     break;
-                case "fire_pull":
-                    break;
-                case "at_disconnect":
-                    break;
                 case "base_btn_cycle3":
+                    // these are used to combine two arguments which are covered elsewhere so these are a nop
                     break;
-                case "rocker_centering":
+                case "fire_pull":
                     break;
                 case "wiper":
                     break;
@@ -302,8 +302,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "fuel_transfer":
                     break;
                 case "emg_ext_light":
-                    break;
-                case "rudder_trim":
                     break;
                 case "glare_activate":
                     break;
@@ -434,7 +432,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         private static string BuildYSwitch(FunctionData fd)
         {
-            // This is a new Y Switch is defined by four elements in the clickables so we get called four times for each switch.
+            // This is a new Y Switch and is defined by four elements in the clickables so we get called four times for each switch.
             // The Arg has value 0 as the centre, 0.333 is the bottom position (Auto), 0.6667 is the -60 deg postion (Open) and 1.0 is the +60 deg postion (Closed)
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
             if (_dualFunctions.Count < 3)
@@ -461,7 +459,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     _dualFunctions[$"{name} {posns[3]}"],
                 };
 
-                int positions = 4;
                 fd = fDs[0];
                 category = "Engine";
                 _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[0], new SwitchPosition[] { new SwitchPosition("0.00", posns[0], CommandEnumToString(fDs[0].Command[0])), new SwitchPosition("0.33", posns[1], CommandEnumToString(fDs[1].Command[0])), new SwitchPosition("0.70", posns[2], CommandEnumToString(fDs[2].Command[0]), CommandEnumToString(fDs[2].Command[0]), "0.50"), new SwitchPosition("1.00", posns[3], CommandEnumToString(fDs[3].Command[0]), CommandEnumToString(fDs[3].Command[0]),"0.50") }, category, name, "%0.2f"));
@@ -504,8 +501,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
             _functionList.Add(new RotaryEncoder(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], 0.05, category, name.Split('-')[0].Trim(), "%0.2f"));
             retValue += $"AddFunction(new RotaryEncoder(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", 0.05d, \"{category}\", \"{name.Split('-')[0].Trim()}\", false, \"%0.2f\"));";
-            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[1], new SwitchPosition[] { new SwitchPosition("1.0", "In", CommandEnumToString(fd.Val[1])), new SwitchPosition("0.0", "Out", CommandEnumToString(fd.Val[1]))}, category, name + " Push", "%0.1f"));
-            retValue += $"\n\t\tAddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Arg[1]}\", new SwitchPosition[] {{ new SwitchPosition(\"1.0\", \"In\", Commands.{fd.Val[1]}.ToString(\"d\")),  new SwitchPosition(\"0.0\", \"Out\", Commands.{fd.Val[1]}.ToString(\"d\"))}}, \"{category}\", \"{name}\" + \" Push\", \"%0.1f\"));";
+            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[1], new SwitchPosition[] { new SwitchPosition("1.0", "Out", CommandEnumToString(fd.Val[1])), new SwitchPosition("0.0", "In", CommandEnumToString(fd.Val[1]))}, category, name + " Push", "%0.1f"));
+            retValue += $"\n\t\tAddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Arg[1]}\", new SwitchPosition[] {{ new SwitchPosition(\"1.0\", \"Out\", Commands.{fd.Val[1]}.ToString(\"d\")),  new SwitchPosition(\"0.0\", \"In\", Commands.{fd.Val[1]}.ToString(\"d\"))}}, \"{category}\", \"{name}\" + \" Push\", \"%0.1f\"));";
             return retValue;
 
         }

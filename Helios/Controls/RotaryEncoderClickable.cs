@@ -19,9 +19,10 @@ namespace GadrocsWorkshop.Helios.Controls
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls.Capabilities;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+    using System;
     using System.ComponentModel;
     using System.Globalization;
-    using System;
     using System.Windows;
     using System.Xml;
 
@@ -43,6 +44,14 @@ namespace GadrocsWorkshop.Helios.Controls
         private HeliosTrigger _closedTrigger;
         private HeliosTrigger _pushedTrigger;
         private HeliosTrigger _releasedTrigger;
+
+        private ToggleSwitchPosition _position = ToggleSwitchPosition.Two;
+
+        private HeliosValue _positionValue;
+        private HeliosTrigger _positionOneEnterAction;
+        private HeliosTrigger _positionOneExitAction;
+        private HeliosTrigger _positionTwoEnterAction;
+        private HeliosTrigger _positionTwoExitAction;
 
         private HeliosValue _value;
         private HeliosValue _pushedValue;
@@ -75,6 +84,22 @@ namespace GadrocsWorkshop.Helios.Controls
 
             _value = new HeliosValue(this, new BindingValue(false), "", "circuit state", "Current open/closed state of this buttons circuit.", "True if the button is currently closed (on), otherwise false.", BindingValueUnits.Boolean);
             Values.Add(_value);
+
+            _positionOneEnterAction = new HeliosTrigger(this, "", "position one", "entered", "Triggered when position one is entered or depressed.");
+            Triggers.Add(_positionOneEnterAction);
+            _positionOneExitAction = new HeliosTrigger(this, "", "position one", "exited", "Triggered when position one is exited or released.");
+            Triggers.Add(_positionOneExitAction);
+            _positionTwoEnterAction = new HeliosTrigger(this, "", "position two", "entered", "Triggered when position two is entered or depressed.");
+            Triggers.Add(_positionTwoEnterAction);
+            _positionTwoExitAction = new HeliosTrigger(this, "", "position two", "exited", "Triggered when position two is exited or released.");
+            Triggers.Add(_positionTwoExitAction);
+
+            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Position number 1 or 2.  Positions are numbered from top to bottom.", BindingValueUnits.Numeric);
+            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
+            Values.Add(_positionValue);
+            Actions.Add(_positionValue);
+            Triggers.Add(_positionValue);
+
         }
         #region properties
         public override PushButtonType ButtonType
@@ -197,7 +222,52 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             get => true;
         }
+        public ToggleSwitchPosition SwitchPosition
+        {
+            get
+            {
+                return _position;
+            }
+            set
+            {
+                if (!_position.Equals(value))
+                {
+                    ToggleSwitchPosition oldValue = _position;
+
+                    _position = value;
+                    _positionValue.SetValue(new BindingValue((double)_position), BypassTriggers);
+
+                    if (!BypassTriggers)
+                    {
+                        switch (oldValue)
+                        {
+                            case ToggleSwitchPosition.One:
+                                _positionOneExitAction.FireTrigger(BindingValue.Empty);
+                                break;
+                            case ToggleSwitchPosition.Two:
+                                _positionTwoExitAction.FireTrigger(BindingValue.Empty);
+                                break;
+                        }
+
+                        switch (value)
+                        {
+                            case ToggleSwitchPosition.One:
+                                _positionOneEnterAction.FireTrigger(BindingValue.Empty);
+                                break;
+                            case ToggleSwitchPosition.Two:
+                                _positionTwoEnterAction.FireTrigger(BindingValue.Empty);
+                                break;
+                        }
+                    }
+
+                    OnPropertyChanged("SwitchPosition", oldValue, value, false);
+                    OnDisplayUpdate();
+                }
+            }
+        }
+
         #endregion
+        #region Actions
         void PushedValue_Execute(object action, HeliosActionEventArgs e)
         {
             BeginTriggerBypass(e.BypassCascadingTriggers);
@@ -207,7 +277,6 @@ namespace GadrocsWorkshop.Helios.Controls
 
             EndTriggerBypass(e.BypassCascadingTriggers);
         }
-
         void Push_ExecuteAction(object action, HeliosActionEventArgs e)
         {
             BeginTriggerBypass(e.BypassCascadingTriggers);
@@ -229,7 +298,6 @@ namespace GadrocsWorkshop.Helios.Controls
             }
             EndTriggerBypass(e.BypassCascadingTriggers);
         }
-
         void Release_ExecuteAction(object action, HeliosActionEventArgs e)
         {
             BeginTriggerBypass(e.BypassCascadingTriggers);
@@ -247,12 +315,41 @@ namespace GadrocsWorkshop.Helios.Controls
             EndTriggerBypass(e.BypassCascadingTriggers);
         }
 
+        void SetPositionAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            try
+            {
+                BeginTriggerBypass(e.BypassCascadingTriggers);
+                int newPosition = 0;
+                if (int.TryParse(e.Value.StringValue, out newPosition))
+                {
+                    if (newPosition > 0 && newPosition < 3)
+                    {
+                        SwitchPosition = (ToggleSwitchPosition)newPosition;
+                    }
+                }
+
+                EndTriggerBypass(e.BypassCascadingTriggers);
+            }
+            catch
+            {
+                // No-op if the parse fails we won't set the position.
+            }
+        }
+
+        #endregion
+
         protected override void OnPropertyChanged(PropertyNotificationEventArgs args)
         {
             switch (args.PropertyName)
             {
                 case "Pushed":
                     KnobImage = Pushed ? PushedImage : UnpushedImage;
+                    OnDisplayUpdate();
+                    Refresh();
+                    break;
+                case "SwitchPosition":
+                    KnobImage = _position == ToggleSwitchPosition.Two ? PushedImage : UnpushedImage;
                     OnDisplayUpdate();
                     Refresh();
                     break;
@@ -324,6 +421,7 @@ namespace GadrocsWorkshop.Helios.Controls
                     case PushButtonType.Toggle:
                         Pushed = !Pushed;
                         IsClosed = Pushed;
+                        SwitchPosition = Pushed ? ToggleSwitchPosition.Two : ToggleSwitchPosition.One;
                         break;
                 }
             } else
