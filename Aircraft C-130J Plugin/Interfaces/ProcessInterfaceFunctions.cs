@@ -435,6 +435,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             // This is a new Y Switch and is defined by four elements in the clickables so we get called four times for each switch.
             // The Arg has value 0 as the centre, 0.333 is the bottom position (Auto), 0.6667 is the -60 deg postion (Open) and 1.0 is the +60 deg postion (Closed)
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            string retValue =  "";
             if (_dualFunctions.Count < 3)
             {
                 _dualFunctions.Add($"{fd.Name[0]}", fd);
@@ -451,18 +452,34 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                         name = k.Replace(positionClickables[0], "").Trim();
                     }
                 }
-                string[] posns = new string[] { "Fixed", "Auto", "Open", "Close"};
-                FunctionData[] fDs = new FunctionData[] {
+                FunctionData[] fDs;
+                string[] posns = new string[] { "Fixed", "Auto", "Open", "Close" };
+
+                try
+                {
+                    fDs = new FunctionData[] {
                     _dualFunctions[$"{name} {posns[0]}"],
                     _dualFunctions[$"{name} {posns[1]}"],
                     _dualFunctions[$"{name} {posns[2]}"],
                     _dualFunctions[$"{name} {posns[3]}"],
-                };
+                    };
+                    fd = fDs[0];
+                    category = "Engine";
+                    _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[0], new SwitchPosition[] { new SwitchPosition("0.00", posns[0], CommandEnumToString(fDs[0].Command[0])), new SwitchPosition("0.33", posns[1], CommandEnumToString(fDs[1].Command[0])), new SwitchPosition("0.70", posns[2], CommandEnumToString(fDs[2].Command[0]), CommandEnumToString(fDs[2].Command[0]), "0.50"), new SwitchPosition("1.00", posns[3], CommandEnumToString(fDs[3].Command[0]), CommandEnumToString(fDs[3].Command[0]), "0.50") }, category, name, "%0.2f"));
+                    retValue = $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Arg[0]}\",  new SwitchPosition[] {{ new SwitchPosition(\"0.00\", \"{posns[0]}\", Commands.{fDs[0].Command[0]}.ToString(\"d\")), new SwitchPosition(\"0.33\", \"{posns[1]}\", Commands.{fDs[1].Command[0]}.ToString(\"d\")), new SwitchPosition(\"0.67\", \"{posns[2]}\", Commands.{fDs[2].Command[0]}.ToString(\"d\"), Commands.{fDs[2].Command[0]}.ToString(\"d\"), \"0.50\"), new SwitchPosition(\"1.00\", \"{posns[3]}\", Commands.{fDs[3].Command[0]}.ToString(\"d\"), Commands.{fDs[3].Command[0]}.ToString(\"d\"), \"0.50\")}}, \"{category}\", \"{name}\", \"%0.2f\"));";
+                }
+                catch (Exception ex)
+                {
+                    WriteCsFunction($"Caught: {ex}\nDualFunctions List Item Count:{_dualFunctions.Count}");
+                    WriteCsFunction($"Stack Trace: {ex.StackTrace}");
+                    foreach (string k in _dualFunctions.Keys)
+                    {
+                        WriteCsFunction($"DualFunctions Item: - {k}\n{_dualFunctions[k]}");
+                        WriteCsFunction($"DualFunctions: \nName: {_dualFunctions[k].Name}\nFunction: {_dualFunctions[k].Fn}\nDevice: {_dualFunctions[k].Device}\nValues: {_dualFunctions[k].Val.Count()}\nCommand 0: {_dualFunctions[k].Command[0]}");
+                    }
+                    throw ex;
+                }
 
-                fd = fDs[0];
-                category = "Engine";
-                _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[0], new SwitchPosition[] { new SwitchPosition("0.00", posns[0], CommandEnumToString(fDs[0].Command[0])), new SwitchPosition("0.33", posns[1], CommandEnumToString(fDs[1].Command[0])), new SwitchPosition("0.70", posns[2], CommandEnumToString(fDs[2].Command[0]), CommandEnumToString(fDs[2].Command[0]), "0.50"), new SwitchPosition("1.00", posns[3], CommandEnumToString(fDs[3].Command[0]), CommandEnumToString(fDs[3].Command[0]),"0.50") }, category, name, "%0.2f"));
-                string retValue =  $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Arg[0]}\",  new SwitchPosition[] {{ new SwitchPosition(\"0.00\", \"{posns[0]}\", Commands.{fDs[0].Command[0]}.ToString(\"d\")), new SwitchPosition(\"0.33\", \"{posns[1]}\", Commands.{fDs[1].Command[0]}.ToString(\"d\")), new SwitchPosition(\"0.67\", \"{posns[2]}\", Commands.{fDs[2].Command[0]}.ToString(\"d\"), Commands.{fDs[2].Command[0]}.ToString(\"d\"), \"0.50\"), new SwitchPosition(\"1.00\", \"{posns[3]}\", Commands.{fDs[3].Command[0]}.ToString(\"d\"), Commands.{fDs[3].Command[0]}.ToString(\"d\"), \"0.50\")}}, \"{category}\", \"{name}\", \"%0.2f\"));";
                 _dualFunctions.Clear();
                 return retValue;
             }
