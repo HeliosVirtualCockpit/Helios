@@ -12,7 +12,7 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+#define DEBUGLOGGING
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.UDPInterface;
 using GadrocsWorkshop.Helios.Util.DCS;
@@ -155,7 +155,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             }
 
             string clickableFilename = "C-130J_Functions";
-#if (DEBUG)
+#if (DEBUGLOGGING)
             _streamWriter = new StreamWriter($@"{Environment.GetEnvironmentVariable("userprofile")}\Documents\HeliosDev\Interfaces\{clickableFilename}.txt", false);
 #endif
             foreach (FunctionData fd in _functions.Values)
@@ -166,20 +166,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 }
                 else
                 {
-#if (DEBUG)
                     if (string.Join("_", fd.Name).Contains("Brightness") || fd.Fn.Contains("rocker"))
                     {
                         FunctionBuilder(fd);
                     }
                     else
                     {
+#if (DEBUGLOGGING)
                         WriteCsFunction($"Not creating function for duplicate \"{fd.Arg[0]}\" - \"{string.Join("_", fd.Name)}\"");
-                    }
 #endif
+                    }
+
                 }
 
             }
-#if (DEBUG)
+#if (DEBUGLOGGING)
             _streamWriter.Close();
 #endif
             return _functionList;
@@ -797,7 +798,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         private static void SetDevices()
         {
-#if (DEBUG)
+#if (DEBUGLOGGING)
             #region Process Devices
             string path = $@"{_DCSAircraft}\devices.lua";
             _pattern = @"^devices\[""(?'device'.*)""\].*";
@@ -981,7 +982,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         private static void WriteCsFunction(string fn)
         {
-#if (DEBUG)
+#if (DEBUGLOGGING)
             if(!string.IsNullOrEmpty(fn)) _streamWriter.WriteLine(fn);
 #endif
         } 
