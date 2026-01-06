@@ -26,6 +26,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
@@ -183,6 +184,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 }
 
             }
+            AddInstrumentFunctions();
 #if (DEBUGLOGGING)
             _streamWriter.Close();
 #endif
@@ -611,8 +613,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
             _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Val[0]), fd.Arg[1], -0.5d, 0.5d, 0.5d, category, name.Split('-')[0].Trim(), false, "%0.1f"));
             retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Val[0]}.ToString(\"d\"), \"{fd.Arg[1]}\",-1d, 1d, 0.1d, \"{category}\", \"{name.Split('-')[0].Trim()}\", false, \"%0.1f\"));";
-            //_functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[0], new SwitchPosition[] { new SwitchPosition("1.0", "Out", CommandEnumToString(fd.Command[0])), new SwitchPosition("0.0", "In", CommandEnumToString(fd.Command[0])) }, category, name + " Pull", "%0.1f"));
-            _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], category, name + " Pull", "%0.1f"));
+            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[0], new SwitchPosition[] { new SwitchPosition("1.0", "Out", CommandEnumToString(fd.Command[0])), new SwitchPosition("0.0", "In", CommandEnumToString(fd.Command[0])) }, category, name + " Pull", "%0.1f"));
             retValue += $"\n\t\tAddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Arg[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"1.0\", \"Out\", Commands.{fd.Command[0]}.ToString(\"d\")),  new SwitchPosition(\"0.0\", \"In\", Commands.{fd.Command[0]}.ToString(\"d\"))}}, \"{category}\", \"{name}\" + \" Pull\", \"%0.1f\"));";
             return retValue;
 
@@ -1087,31 +1088,66 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         {
             return new string[,]
            {
-            {"2900", "Ref Mode Pilot", "Ref Mode Display", "Text Value"},     //  Pilot Ref Mode
-            {"2901", "Ref Mode Copilot", "Ref Mode Display", "Text Value"},     //  Copilot Ref Mode
-            {"2902", "Electrics", "Battery Voltage Display", "Text Value"},     //  Battery Voltage
-            {"2905", "Fuel", "Total Amount Display", "Text Value"},     //  Fuel Total
-            {"2906", "Fuel", "1 Main Amount Display", "Text Value"},     //  Fuel 1 Main
-            {"2907", "Fuel", "2 Main Amount Display", "Text Value"},     //  Fuel 2 Main
-            {"2908", "Fuel", "3 Main Amount Display", "Text Value"},     //  Fuel 3 Main
-            {"2909", "Fuel", "4 Main Amount Display", "Text Value"},     //  Fuel 4 Main
-            {"2910", "Fuel", "L Aux Amount Display", "Text Value"},     //  Fuel L Aux
-            {"2911", "Fuel", "R Aux Amount Display", "Text Value"},     //  Fuel R Aux
-            {"2912", "Fuel", "L Ext Amount Display", "Text Value"},     //  Fuel L Ext
-            {"2913", "Fuel", "R Ext Amount Display", "Text Value"},     //  Fuel R Ext
-            {"2914", "Engine", "APU % RPM Display", "Text Value"},     //  APU % RPM
-            {"2915", "Engine", "APU EGT Display", "Text Value"},     //  APU EGT
-            {"2916", "Engine", "Bleed Air Pressure Display", "Text Value"},     //  Bleed Air Pressure
-            {"2917", "Environment", "Flight Deck Air Con Temp Display", "Text Value"},     //  Flight Deck Air Con Temp "84" "86"
-            {"2918", "Environment", "Flight Deck Air Con Temp Set Display", "Text Value"},     //  Flight Deck Air Con Temp Set "84" "86"
-            {"2919", "Environment", "Cargo Air Con Temp Display", "Text Value"},     //  Cargo Air Con  Temp "86" "86"
-            {"2920", "Environment", "Cargo Air Con Temp Set Display", "Text Value"},     //  Cargo Air Con  Temp Set "86" "86"
-            {"2921", "Environment", "Pressurization Rate Display", "Text Value"},     //  Pressurization Rate
-            {"2922", "Environment", "Pressurization Cabin Alt Display", "Text Value"},     //  Pressurization Cabin Alt
-            {"2923", "Environment", "Pressurization Difference Display", "Text Value"},     //  Pressurization Difference "88" "." "8"
-            {"2924", "Environment", "LGD/CONST Display", "Text Value"},     //  LGD/CONST					 
-            {"2925", "Fuel", "Pressure Display", "Text Value"},     //  Fuel Pressure				 
-            {"2926", "Hydraulics", "Aux Hydraulic Pump Display", "Text Value"}};    //  Aux Hydraulic Pump
+            {"2900", "Ref Mode Pilot", "Ref Mode Display", "Text Value"},                       //  Pilot Ref Mode
+            {"2901", "Ref Mode Copilot", "Ref Mode Display", "Text Value"},                     //  Copilot Ref Mode
+            {"2902", "Electrics", "Battery Voltage Display", "Text Value"},                     //  Battery Voltage
+            {"2905", "Fuel", "Total Amount Display", "Text Value"},                             //  Fuel Total
+            {"2906", "Fuel", "1 Main Amount Display", "Text Value"},                            //  Fuel 1 Main
+            {"2907", "Fuel", "2 Main Amount Display", "Text Value"},                            //  Fuel 2 Main
+            {"2908", "Fuel", "3 Main Amount Display", "Text Value"},                            //  Fuel 3 Main
+            {"2909", "Fuel", "4 Main Amount Display", "Text Value"},                            //  Fuel 4 Main
+            {"2910", "Fuel", "L Aux Amount Display", "Text Value"},                             //  Fuel L Aux
+            {"2911", "Fuel", "R Aux Amount Display", "Text Value"},                             //  Fuel R Aux
+            {"2912", "Fuel", "L Ext Amount Display", "Text Value"},                             //  Fuel L Ext
+            {"2913", "Fuel", "R Ext Amount Display", "Text Value"},                             //  Fuel R Ext
+            {"2914", "Engine", "APU % RPM Display", "Text Value"},                              //  APU % RPM
+            {"2915", "Engine", "APU EGT Display", "Text Value"},                                //  APU EGT
+            {"2916", "Engine", "Bleed Air Pressure Display", "Text Value"},                     //  Bleed Air Pressure
+            {"2917", "Environment", "Flight Deck Air Con Temp Display", "Text Value"},          //  Flight Deck Air Con Temp "84" "86"
+            {"2918", "Environment", "Flight Deck Air Con Temp Set Display", "Text Value"},      //  Flight Deck Air Con Temp Set "84" "86"
+            {"2919", "Environment", "Cargo Air Con Temp Display", "Text Value"},                //  Cargo Air Con  Temp "86" "86"
+            {"2920", "Environment", "Cargo Air Con Temp Set Display", "Text Value"},            //  Cargo Air Con  Temp Set "86" "86"
+            {"2921", "Environment", "Pressurization Rate Display", "Text Value"},               //  Pressurization Rate
+            {"2922", "Environment", "Pressurization Cabin Alt Display", "Text Value"},          //  Pressurization Cabin Alt
+            {"2923", "Environment", "Pressurization Difference Display", "Text Value"},         //  Pressurization Difference "88" "." "8"
+            {"2924", "Environment", "LGD/CONST Display", "Text Value"},                         //  LGD/CONST					 
+            {"2925", "Fuel", "Pressure Display", "Text Value"},                                 //  Fuel Pressure				 
+            {"2926", "Hydraulics", "Aux Hydraulic Pump Display", "Text Value"}};                //  Aux Hydraulic Pump
+        }
+        private static void AddInstrumentFunctions()
+        {
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "120", new CalibrationPointCollectionDouble(-1d, -30d, 1d, 30d), "Instruments", "ADI Horizon", "-30 to +30 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new FlagValue(_baseUDPInterface, "121", "Instruments", "ADI Off Flag", "Bool to indicate flag is visible", "%1d"));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "122", new CalibrationPointCollectionDouble(-1d, -90d, 1d, 90d), "Instruments", "ADI Pitch", "-90 to 90 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "123", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Instruments", "ADI Roll", "-180 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "129", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1500", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Gauge 1K Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1501", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Gauge 10K Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1502", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment InHg 1s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1503", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment InHg 10s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1504", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment InHg 100s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1505", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment MBar 1s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1506", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment MBar 10s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1507", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Altimeter Pressure Adjustment MBar 100s Drum", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1508", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "IAS Gauge Tape Position", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "5", new CalibrationPointCollectionDouble(-1d, -80d, 1d, 80d), "Mech Interface", "Nose Wheel Position Indicator", "-80 to +80 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new RotaryEncoder(_baseUDPInterface, devices.MECH_INTERFACE.ToString("d"), Commands.JOYSTICK.NoseWheelSteering.ToString("d"), "12", 0.1d, "Mech Interface (TBC)", "Nose Wheel Steering Wheel", "%0.3f"));  // Arg ID correct, Command could not be determined
+
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "17", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Magnetic Compass Heading", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "511", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Environment", "Pilot Oxygen Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "512", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Environment", "Copilot Oxygen Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "426", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Flaps Needle", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "470", new CalibrationPointCollectionDouble(0d, 0d, 1d, 90d), "Instruments", "Aileron Trim Left Needle", "0 to 90 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "471", new CalibrationPointCollectionDouble(0d, 0d, 1d, -90d), "Instruments", "Aileron Trim Right Needle", "0 to -90 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "472", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Rudder Trim Needle", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "473", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Elevator Trim Needle", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+
+
         }
         private static void WriteCsFunction(string fn)
         {

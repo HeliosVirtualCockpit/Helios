@@ -67,4 +67,11 @@ namespace GadrocsWorkshop.Helios.Controls
         [Description("Swipe over the control in the direction it should move")]
         Swipe,
     }
+    public enum ClickControlType
+    {
+        [Description("Push Button")]
+        PushButton,
+        [Description("Toggle Switch")]
+        Switch
+    }
 }

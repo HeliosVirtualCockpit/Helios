@@ -103,6 +103,9 @@
       <DependentUpon>AlternateImageAppearanceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Capabilities\ITextControl.cs" />
+    <Compile Include="Controls\RotaryClickBehaviorEditor.xaml.cs">
+      <DependentUpon>RotaryClickBehaviorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Special\EffectColorAdjusterAppearanceEditor.xaml.cs">
       <DependentUpon>EffectColorAdjusterAppearanceEditor.xaml</DependentUpon>
     </Compile>
@@ -688,6 +691,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PotentiometerClickableAppearanceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RotaryClickBehaviorEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
