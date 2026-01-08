@@ -280,6 +280,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "cni_brt":
                     WriteCsFunction($"\t\t{BuildRocker(fd)}");
                     break;
+                case "knob_rot_rel":
+                    WriteCsFunction($"\t\t{BuildEnc1(fd)}");
+                    break;
                 case "stby_altim":
                     WriteCsFunction($"\t\t{BuildEnc(fd)}");
                     break;
@@ -289,7 +292,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "scroll_point_axis":
                 case "knob_360_0_1":
                 case "knob_360":
-                case "knob_rot_rel":
                 case "knob_rot":
                     WriteCsFunction($"\t\t{BuildKnob(fd)}");
                     break;
@@ -675,6 +677,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             return retValue;
 
         }
+        private static string BuildEnc1(FunctionData fd)
+        {
+            string retValue = "";
+            (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            double intervalVal;
+            intervalVal = 0.05d;
+
+            _functionList.Add(new RotaryEncoder(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], intervalVal, category, name, "%0.2f"));
+            retValue += $"AddFunction(new RotaryEncoder(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", {intervalVal}d, \"{category}\", \"{name}\", \"%0.2f\"));";
+            return retValue;
+
+        }
         private static string CommandEnumToString(string commandEnum)
         {
             return ((int)Enum.Parse(Type.GetType($"GadrocsWorkshop.Helios.Interfaces.DCS.C130J.Commands+{commandEnum.Split('.')[0]}"), commandEnum.Split('.')[1])).ToString();
@@ -803,7 +817,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 }
                 else if (origName[0].Contains("Radar"))
                 {
-                    category = "RADAR";
+                    category = "Nav RADAR";
                     name = origName[0].Substring(origName[0].IndexOf("Radar") + 5).Trim();
                 }
                 else if (origName[0].Contains("RWR"))
@@ -979,7 +993,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"4026", "Engine", "Engine 4 Start"},
             {"4027", "Engine", "APU Start"},
             {"4028", "Fuel System", "SPR Valve "},
-            {"4030", "Hydraulics", "Auxiliary Pump On"},
+            {"4041", "Hydraulics", "Auxiliary Pump On"},
             {"4032", "Landing Gear", "Nose Gear"},
             {"4033", "Landing Gear", "Left Gear"},
             {"4034", "Landing Gear", "Right Gear"},
@@ -1021,18 +1035,18 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"4073", "Hydraulics", "Util Suction Pump OFF "},
             {"4074", "Hydraulics", "Boost Suction Pump OFF "},
             {"4075", "Aerial Delivery", "Ramp Door FULL"},
-            {"4077", "RADAR", "PRCN"},
-            {"4078", "RADAR", "MAP Mode"},
-            {"4079", "RADAR", "WX Mode"},
-            {"4080", "RADAR", "SP Mode"},
-            {"4081", "RADAR", "MGM Mode"},
-            {"4082", "RADAR", "WS Mode"},
-            {"4083", "RADAR", "BCN Mode"},
-            {"4084", "RADAR", "PSEL"},
-            {"4085", "RADAR", "OFS Function"},
-            {"4086", "RADAR", "FRZ Function"},
-            {"4087", "RADAR", "PEN Function"},
-            {"4088", "RADAR", "SCTR Function"},
+            {"4077", "Nav RADAR", "PRCN"},
+            {"4078", "Nav RADAR", "MAP Mode"},
+            {"4079", "Nav RADAR", "WX Mode"},
+            {"4080", "Nav RADAR", "SP Mode"},
+            {"4081", "Nav RADAR", "MGM Mode"},
+            {"4082", "Nav RADAR", "WS Mode"},
+            {"4083", "Nav RADAR", "BCN Mode"},
+            {"4084", "Nav RADAR", "PSEL"},
+            {"4085", "Nav RADAR", "OFS Function"},
+            {"4086", "Nav RADAR", "FRZ Function"},
+            {"4087", "Nav RADAR", "PEN Function"},
+            {"4088", "Nav RADAR", "SCTR Function"},
             {"4089", "AFCS", "Pitch OFF"},
             {"4090", "AFCS", "Lat OFF"},
             {"4091", "Engine", "1 Low Speed"},
