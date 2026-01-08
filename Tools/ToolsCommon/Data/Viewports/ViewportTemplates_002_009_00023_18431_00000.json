@@ -1,0 +1,35 @@
+﻿[
+  {
+    "templateName": "MIRAGE F1",
+    "moduleId": "Mirage-F1",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "ALR300",
+        "SuppressViewportNamePrefix": true,
+        "relativeInitFilePath": "Mods/aircraft/Mirage-F1/Cockpit/Common/ALR_300/Indicator/Baked/ALR_300_bake_init.lua",
+        "requiresPatch": false,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+      },
+      {
+        "viewportName": "RADAR",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/Mirage-F1/Cockpit/Mirage-F1/Mirage-F1_Common/Radar_Cyrano_IV_legacy/Indicator/BakedGeneral/CyranoLegacy_bake_general_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": true,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+      }
+    ]
+  }
+]

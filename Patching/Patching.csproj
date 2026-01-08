@@ -13168,9 +13168,6 @@
     <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mirage_F1_RADAR.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mirage_F1_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mi_24P_MAP.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -13922,6 +13919,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00021_16362_00000\Viewports\mods\Aircraft\CH-47F\Cockpit\Scripts\SFD\indicator\init2.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mirage_F1_ALR300.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
