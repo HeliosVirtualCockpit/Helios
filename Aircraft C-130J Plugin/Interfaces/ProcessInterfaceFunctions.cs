@@ -237,7 +237,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "base_btn_cycle2":
                 case "hud_latch":
                 case "guard":
-                case "flap_switch":
                 case "boost_guard":
                 case "fuel_xfeed":
                 case "parking_brake":
@@ -289,6 +288,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "knob_fixed":
                     WriteCsFunction($"\t\t{BuildKnob(fd)}");  // note that this has a sep command to reset which is not currently in the interface.
                     break;
+                case "flap_switch":
                 case "scroll_point_axis":
                 case "knob_360_0_1":
                 case "knob_360":
@@ -359,7 +359,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 name = "Cargo " + name;
             }
             string startVal, endVal;
-            if (fd.Fn.EndsWith("_rev") || fd.Fn.StartsWith("generator"))
+            if (fd.Fn.EndsWith("_rev") || fd.Fn.StartsWith("generator") || (fd.Val.Count() >= 3 && fd.Val[2] == "true"))
             {
                 startVal = "0.0";
                 endVal = "1.0";
@@ -413,6 +413,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             double endVal = Convert.ToDouble(dt.Compute(fd.Val[2].Replace("}", ""), ""));
             double intervalVal = Convert.ToDouble(dt.Compute(fd.Val[3], ""));
             int positions = Convert.ToInt32(((endVal - startVal) / intervalVal) + 1);
+            invert = fd.Val[0] == "74" ? false : invert;
             if (invert)
             {
                 double tempVal = endVal;
@@ -462,8 +463,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {
                 FunctionData fd1 = _dualFunctions[$"{fd.Val[0]}"];
                 _dualFunctions.Remove($"{fd.Val[0]}");
-                _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], new SwitchPosition[] { new SwitchPosition("1.0", "Position 1", CommandEnumToString(fd1.Command[0]), CommandEnumToString(fd1.Command[0]), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Position 3", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Command[0]), "0.0", "0.0") }, category, name, "%0.1f"));
-                return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"1.0\", \"Position 1\", Commands.{fd1.Command[0]}.ToString(\"d\"), Commands.{fd1.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\"), new SwitchPosition(\"0.0\", \"Middle\", null), new SwitchPosition(\"-1.0\", \"Position 3\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\") }}, \"{category}\", \"{name}\", \"%0.1f\"));";
+                string switchVal1 = Double.Parse(fd1.Val[1]).ToString("N1");
+                string switchVal2 = Double.Parse(fd.Val[1]).ToString("N1");
+                _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], new SwitchPosition[] { new SwitchPosition(switchVal1, "Position 1", CommandEnumToString(fd1.Command[0]), CommandEnumToString(fd1.Command[0]), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition(switchVal2, "Position 3", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Command[0]), "0.0", "0.0") }, category, name, "%0.1f"));
+                return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"{switchVal1}\", \"Position 1\", Commands.{fd1.Command[0]}.ToString(\"d\"), Commands.{fd1.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\"), new SwitchPosition(\"0.0\", \"Middle\", null), new SwitchPosition(\"{switchVal2}\", \"Position 3\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\") }}, \"{category}\", \"{name}\", \"%0.1f\"));";
             }
             else
             {
@@ -472,27 +475,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
             return "";
         }
-        //private static string BuildRocker1(FunctionData fd)
-        //{
-        //    // This is a rocker which is defined as two elements and two buttons in the clickables so we get called twice for each rocker.
-        //    // For rockers especially, the arg in the element name is unreliable so we use the real one from Val[0]
 
-        //    (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
-        //    name = name.Replace(" Down", "").Replace(" Up", "").Replace(" Left", "").Replace(" Right", "");
-        //    if (_dualFunctions.ContainsKey($"{fd.Val[0]}"))
-        //    {
-        //        FunctionData fd1 = _dualFunctions[$"{fd.Val[0]}"];
-        //        _dualFunctions.Remove($"{fd.Val[0]}");
-        //        _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], new SwitchPosition[] { new SwitchPosition("1.0", "Position 1", CommandEnumToString(fd1.Command[0]), CommandEnumToString(fd1.Command[0]), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition("-1.0", "Position 3", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Command[0]), "0.0", "0.0") }, category, name, "%0.1f"));
-        //        return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"1.0\", \"Position 1\", Commands.{fd1.Command[0]}.ToString(\"d\"), Commands.{fd1.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\"), new SwitchPosition(\"0.0\", \"Middle\", null), new SwitchPosition(\"-1.0\", \"Position 3\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\") }}, \"{category}\", \"{name}\", \"%0.1f\"));";
-        //    }
-        //    else
-        //    {
-        //        _dualFunctions.Add($"{fd.Val[0]}", fd);
-        //    }
-
-        //    return "";
-        //}
         private static string BuildYSwitch(FunctionData fd)
         {
             // This is a new Y Switch and is defined by four elements in the clickables so we get called four times for each switch.
@@ -625,6 +608,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         {
             string retValue = "";
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
+            string arg = fd.Arg[0];
             double startVal, endVal, intervalVal;
             if (fd.Fn == "knob_fixed")
             {
@@ -638,16 +622,22 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 endVal = 1d;
                 intervalVal = 0.1d;
             }
+            else if (fd.Fn == "flap_switch")
+            {
+                startVal = 0d;
+                endVal = 1d;
+                intervalVal = 0.10d;
+                arg = fd.Val[0];
+            }
             else
-
             {
                 startVal = 0d;
                 endVal = 1d;
                 intervalVal = 0.05d;
             }
 
-            _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], intervalVal, startVal, endVal, category, name, false, "%0.2f"));
-            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", {intervalVal}d, {startVal}d, {endVal}d, \"{category}\", \"{name}\", false, \"%0.2f\"));";
+            _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), arg, intervalVal, startVal, endVal, category, name, false, "%0.2f"));
+            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{arg}\", {intervalVal}d, {startVal}d, {endVal}d, \"{category}\", \"{name}\", false, \"%0.2f\"));";
             return retValue;
 
         }

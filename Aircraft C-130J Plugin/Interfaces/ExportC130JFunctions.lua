@@ -27,7 +27,7 @@ function driver.processLowImportance(mainPanelDevice)
 		helios.send(2901,"     ")
     end
 
-    li = helios.parseIndication(23) -- 23 DC Voltage
+    li = helios.parseIndication(23) -- 23 DC Voltage  09/01/26 note: this requires a patch to operate correctly
     if li then
 	        helios.send(2902, string.format("%-2s.%s", helios.ensureString(li.dc_voltage):gsub(":", "!"), helios.ensureString(li.dc_voltage_dec):gsub(":", "!")))
 	else
@@ -45,7 +45,7 @@ function driver.processLowImportance(mainPanelDevice)
 	helios.send(2914 ,ExtractIndicationValue(33, 4))		-- APU % RPM
 	helios.send(2915 ,ExtractIndicationValue(34, 4))		-- APU EGT
 	helios.send(2916 ,ExtractIndicationValue(35, 3))		-- Bleed Air Pressure
-	li = helios.parseIndication(36) -- Flight Air Con
+	li = helios.parseIndication(36) -- Flight Air Con   09/01/26 note: this requires a patch to operate correctly
     if li then
 	        helios.send(2917, string.format("%-2s", helios.ensureString(li.act):gsub(":", "!")))
 	        helios.send(2918, string.format("%-2s", helios.ensureString(li.tgt):gsub(":", "!")))
@@ -54,7 +54,7 @@ function driver.processLowImportance(mainPanelDevice)
 	        helios.send(2918, "  ")
     end
 
-	li = helios.parseIndication(37) -- Cargo Air Con
+	li = helios.parseIndication(37) -- Cargo Air Con  09/01/26 note: this requires a patch to operate correctly
     if li then
 	        helios.send(2919, string.format("%-2s", helios.ensureString(li.act):gsub(":", "!")))
 	        helios.send(2920, string.format("%-2s", helios.ensureString(li.tgt):gsub(":", "!")))
@@ -64,9 +64,9 @@ function driver.processLowImportance(mainPanelDevice)
     end
 	helios.send(2921 ,ExtractIndicationValue(38, 5))		-- Pressurization Rate
 	helios.send(2922 ,ExtractIndicationValue(39, 5))		-- Pressurization Cabin Alt
-	li = helios.parseIndication(40) -- Pressurization Difference
+	li = helios.parseIndication(40) -- Pressurization Difference   09/01/26 note: this requires a patch to operate correctly
     if li then
-	        helios.send(2923, string.format("%-2s.%s", helios.ensureString(li.diff_press):gsub(":", "!"), helios.ensureString(li.dc_voltage_dec):gsub(":", "!")))
+	        helios.send(2923, string.format("%-2s.%s", helios.ensureString(li.diff_press):gsub(":", "!"), helios.ensureString(li.diff_press_dec):gsub(":", "!")))
 	else
 	        helios.send(2923, "    ")
     end
