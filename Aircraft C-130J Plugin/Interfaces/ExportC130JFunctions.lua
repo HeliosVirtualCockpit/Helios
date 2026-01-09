@@ -33,18 +33,19 @@ function driver.processLowImportance(mainPanelDevice)
 	else
 	        helios.send(2902, "    ")
     end
-	helios.send(2905 ,ExtractIndicationValue(24, 5))		-- Fuel Total
-	helios.send(2906 ,ExtractIndicationValue(25, 4))		-- Fuel 1 Main
-	helios.send(2907 ,ExtractIndicationValue(26, 4))		-- Fuel 2 Main
-	helios.send(2908 ,ExtractIndicationValue(27, 4))		-- Fuel 3 Main
-	helios.send(2909 ,ExtractIndicationValue(28, 4))		-- Fuel 4 Main
-	helios.send(2910 ,ExtractIndicationValue(29, 4))		-- Fuel L Aux
-	helios.send(2911 ,ExtractIndicationValue(30, 4))		-- Fuel R Aux
-	helios.send(2912 ,ExtractIndicationValue(31, 4))		-- Fuel L Ext
-	helios.send(2913 ,ExtractIndicationValue(32, 4))		-- Fuel R Ext
-	helios.send(2914 ,ExtractIndicationValue(33, 4))		-- APU % RPM
-	helios.send(2915 ,ExtractIndicationValue(34, 4))		-- APU EGT
-	helios.send(2916 ,ExtractIndicationValue(35, 3))		-- Bleed Air Pressure
+	ExtractFuelIndicationValue(2940, 24, 5)		-- Fuel Total  09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2942, 25, 4)		-- Fuel 1 Main 09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2944, 26, 4)		-- Fuel 2 Main 09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2946, 27, 4)		-- Fuel 3 Main 09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2948, 28, 4)		-- Fuel 4 Main 09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2950, 29, 4)		-- Fuel L Aux  09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2952, 30, 4)		-- Fuel R Aux  09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2954, 31, 4)		-- Fuel L Ext  09/01/26 note: this requires a patch to operate correctly
+	ExtractFuelIndicationValue(2956, 32, 4)		-- Fuel R Ext  09/01/26 note: this requires a patch to operate correctly
+
+	helios.send(2914, ExtractIndicationValue(33, 4))		-- APU % RPM
+	helios.send(2915, ExtractIndicationValue(34, 4))		-- APU EGT
+	helios.send(2916, ExtractIndicationValue(35, 3))		-- Bleed Air Pressure
 	li = helios.parseIndication(36) -- Flight Air Con   09/01/26 note: this requires a patch to operate correctly
     if li then
 	        helios.send(2917, string.format("%-2s", helios.ensureString(li.act):gsub(":", "!")))
@@ -91,4 +92,12 @@ function ExtractIndicationValue(ii, just)
 			end
 		end	
 	return ""
+end
+
+function ExtractFuelIndicationValue(argId, ii, just)
+		li = helios.parseIndication(ii)
+		if li then
+			helios.send(argId, string.format("%" .. just .. "s", helios.ensureString(li.amt):gsub(":", "!")))
+			helios.send(argId + 1, string.format("%" .. just .. "s", helios.ensureString(li.transfer):gsub(":", "!")))
+		end	
 end

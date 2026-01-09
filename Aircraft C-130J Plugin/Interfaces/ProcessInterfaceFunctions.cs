@@ -1095,15 +1095,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"2900", "Ref Mode Pilot", "Ref Mode Display", "Text Value"},                       //  Pilot Ref Mode
             {"2901", "Ref Mode Copilot", "Ref Mode Display", "Text Value"},                     //  Copilot Ref Mode
             {"2902", "Electrics", "Battery Voltage Display", "Text Value"},                     //  Battery Voltage
-            {"2905", "Fuel", "Total Amount Display", "Text Value"},                             //  Fuel Total
-            {"2906", "Fuel", "1 Main Amount Display", "Text Value"},                            //  Fuel 1 Main
-            {"2907", "Fuel", "2 Main Amount Display", "Text Value"},                            //  Fuel 2 Main
-            {"2908", "Fuel", "3 Main Amount Display", "Text Value"},                            //  Fuel 3 Main
-            {"2909", "Fuel", "4 Main Amount Display", "Text Value"},                            //  Fuel 4 Main
-            {"2910", "Fuel", "L Aux Amount Display", "Text Value"},                             //  Fuel L Aux
-            {"2911", "Fuel", "R Aux Amount Display", "Text Value"},                             //  Fuel R Aux
-            {"2912", "Fuel", "L Ext Amount Display", "Text Value"},                             //  Fuel L Ext
-            {"2913", "Fuel", "R Ext Amount Display", "Text Value"},                             //  Fuel R Ext
             {"2914", "Engine", "APU % RPM Display", "Text Value"},                              //  APU % RPM
             {"2915", "Engine", "APU EGT Display", "Text Value"},                                //  APU EGT
             {"2916", "Engine", "Bleed Air Pressure Display", "Text Value"},                     //  Bleed Air Pressure
@@ -1116,7 +1107,26 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {"2923", "Environment", "Pressurization Difference Display", "Text Value"},         //  Pressurization Difference "88" "." "8"
             {"2924", "Environment", "LGD/CONST Display", "Text Value"},                         //  LGD/CONST					 
             {"2925", "Fuel", "Pressure Display", "Text Value"},                                 //  Fuel Pressure				 
-            {"2926", "Hydraulics", "Aux Hydraulic Pump Display", "Text Value"}};                //  Aux Hydraulic Pump
+            {"2926", "Hydraulics", "Aux Hydraulic Pump Display", "Text Value"},                 //  Aux Hydraulic Pump
+            {"2940", "Fuel", "Total Amount Display", "Text Value"},                            //  Fuel Total
+            {"2941", "Fuel", "Total Transfer Display", "Text Value"},                          //  Fuel Total
+            {"2942", "Fuel", "1 Main Amount Display", "Text Value"},                           //  Fuel 1 Main
+            {"2943", "Fuel", "1 Main Transfer Display", "Text Value"},                         //  Fuel 1 Main
+            {"2944", "Fuel", "2 Main Amount Display", "Text Value"},                           //  Fuel 2 Main
+            {"2945", "Fuel", "2 Main Transfer Display", "Text Value"},                         //  Fuel 2 Main
+            {"2946", "Fuel", "3 Main Amount Display", "Text Value"},                           //  Fuel 3 Main
+            {"2947", "Fuel", "3 Main Transfer Display", "Text Value"},                         //  Fuel 3 Main
+            {"2948", "Fuel", "4 Main Amount Display", "Text Value"},                           //  Fuel 4 Main
+            {"2949", "Fuel", "4 Main Transfer Display", "Text Value"},                         //  Fuel 4 Main
+            {"2950", "Fuel", "L Aux Amount Display", "Text Value"},                            //  Fuel L Aux
+            {"2951", "Fuel", "L Aux Transfer Display", "Text Value"},                          //  Fuel L Aux
+            {"2952", "Fuel", "R Aux Amount Display", "Text Value"},                            //  Fuel R Aux
+            {"2953", "Fuel", "R Aux Transfer Display", "Text Value"},                          //  Fuel R Aux
+            {"2954", "Fuel", "L Ext Amount Display", "Text Value"},                            //  Fuel L Ext
+            {"2955", "Fuel", "L Ext Transfer Display", "Text Value"},                          //  Fuel L Ext
+            {"2956", "Fuel", "R Ext Amount Display", "Text Value"},                            //  Fuel R Ext
+            {"2957", "Fuel", "R Ext Transfer Display", "Text Value"},                          //  Fuel R Ext
+            };
         }
         private static void AddInstrumentFunctions()
         {

@@ -1,0 +1,10 @@
+﻿@@ -123,21 +123,36 @@
+ ame%09%09%09%3D 
+-%22amt%22
++create_guid_string()
+ %0D%0Atxt.ma
+@@ -492,26 +492,36 @@
+ ame%09%09%09%3D 
+-%22transfer%22
++create_guid_string()
+ %0D%0Atxt.ma
