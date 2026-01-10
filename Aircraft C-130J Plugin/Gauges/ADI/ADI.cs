@@ -65,7 +65,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
         {
             double scale = 250d / 350d;
 
-            _ball = new GaugeBall("{C-130J}/Gauges/ADI/Viper-ADI-Ball.xaml", new Point(50d, 50d), new Size(250d, 250d), 0d, 0d, -90d, 35d);
+            _ball = new GaugeBall("{C-130J}/Gauges/ADI/Herc-ADI-Ball-L.xaml", new Point(25d, 25d), new Size(300d, 300d), 0d, 0d, -90d, 50d);
             Components.Add(_ball);
             _ball.Y = 0.0001d;
             _ball.Z = 0.0001d;
@@ -238,7 +238,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
             double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double x);
             double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double y);
             double.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double z);
-            _ball.Rotation3D = new Point3D(x, y, -z);
+            _ball.Rotation3D = new Point3D(x * 1.44d, y, -z);  // the x multiplier is because an input of 1.0d is 125 degrees on the pitch
             _rollNeedle.Rotation = z;
         }
 
