@@ -6,6 +6,8 @@ end
 
 function driver.processLowImportance(mainPanelDevice)
 
+	helios.send(2960, string.format("%0.4f;0.0;%0.4f", mainPanelDevice:get_argument_value(122), mainPanelDevice:get_argument_value(123))) -- ADI Ball
+
     li = helios.parseIndication(16) -- 16 Pilot Ref Mode Heading
     if li then
 		if li.ref_symbol_period then 
