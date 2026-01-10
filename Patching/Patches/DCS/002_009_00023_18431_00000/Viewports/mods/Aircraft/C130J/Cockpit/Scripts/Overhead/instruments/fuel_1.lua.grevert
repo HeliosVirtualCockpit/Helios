@@ -1,8 +1,8 @@
-﻿@@ -76,20 +76,43 @@
- txt%09%09%09%3D 
--%22amt
-+CreateElement %22ceStringPoly
- %22%0D%0Atxt.n
+﻿@@ -119,21 +119,36 @@
+ ame%09%09%09%3D 
+-%22amt%22
++create_guid_string()
+ %0D%0Atxt.ma
 @@ -486,26 +486,36 @@
  ame%09%09%09%3D 
 -%22transfer%22

@@ -1,10 +1,10 @@
-﻿@@ -80,35 +80,12 @@
- %09%09%3D 
--CreateElement %22ceStringPoly
-+%22amt
- %22%0D%0At
-@@ -463,36 +463,26 @@
+﻿@@ -119,36 +119,21 @@
  ame%09%09%09%3D 
 -create_guid_string()
-+%22transfer%22
++%22amt%22
  %0D%0Atxt.ma
+@@ -475,28 +475,18 @@
+ %09%09%3D 
+-create_guid_string()
++%22transfer%22
+ %0D%0Atx
