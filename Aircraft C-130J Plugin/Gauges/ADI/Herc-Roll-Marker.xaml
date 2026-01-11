@@ -1,0 +1,28 @@
+<!-- Created with Ai->XAML Export Plug-In Version 0.7 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
+
+<Canvas Width="230.000" Height="230.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="230.000" Height="230.000">
+
+  <!-- Layer 1/<Ellipse> -->
+  <Path Fill="#fff0f0f0" Data="F1 M 115.058,115.000 C 115.058,115.032 115.032,115.058 115.000,115.058 C 114.968,115.058 114.942,115.032 114.942,115.000 C 114.942,114.968 114.968,114.942 115.000,114.942 C 115.032,114.942 115.058,114.968 115.058,115.000 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+        <Path StrokeThickness="0.2" Stroke="#ff121212" StrokeMiterLimit="1.0" Fill="#ffC69246" Data="F1 M 127.711,229.751 L 102.289,229.751 L 102.289,205.242 L 127.711,205.242 L 127.711,229.751 Z"/>
+
+  <!-- Layer 1/<Polygon> -->
+        <Path StrokeThickness="0.2" Stroke="#ff121212" StrokeMiterLimit="1.0" Fill="#ffC69246" Data="F1 M 102.332,229.751 L 86.859,224.709 L 102.332,205.242 L 102.332,229.751 Z"/>
+
+  <!-- Layer 1/<Polygon> -->
+        <Path StrokeThickness="0.2" Stroke="#ff121212" StrokeMiterLimit="1.0" Fill="#ffC69246" Data="F1 M 127.711,229.915 L 143.183,224.873 L 127.711,205.406 L 127.711,229.915 Z"/>
+
+  <!-- Layer 1/<Path> -->
+  <Path StrokeThickness="0.8" Stroke="#ff121212" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 126.780,205.711 L 103.220,205.711 C 102.932,205.711 102.733,206.003 102.837,206.275 L 111.443,228.869 L 118.557,228.869 L 127.163,206.275 C 127.267,206.003 127.068,205.711 126.780,205.711 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Fill="#ff121212" Data="F1 M 124.333,205.686 L 105.667,205.686 L 105.667,202.186 L 124.333,202.186 L 124.333,205.686 Z"/>
+
+  </Canvas>
+</Canvas>

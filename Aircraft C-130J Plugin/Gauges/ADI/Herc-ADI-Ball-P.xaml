@@ -7,7 +7,7 @@
   <Canvas>
 
   <!-- Layer 2/Background/<Rectangle> -->
-  <Path Fill="#ffa5bacc" Data="F1 M 0.000,1024.000 L 0.000,0.000 L 512.000,0.000 L 512.000,1024.000 L 0.000,1024.000 Z"/>
+            <Path Fill="#ff4C93AC" Data="F1 M 0.000,1024.000 L 0.000,0.000 L 512.000,0.000 L 512.000,1024.000 L 0.000,1024.000 Z"/>
 
   <!-- Layer 2/Background/<Rectangle> -->
   <Path Fill="#ff7d5848" Data="F1 M 0.000,2048.000 L 0.000,1024.000 L 512.000,1024.000 L 512.000,2048.000 L 0.000,2048.000 Z"/>
