@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ElevatorTrim
     using System.Xml.Linq;
 
     [HeliosControl("Helios.C130J.ElevatorTrim", "Elevator Trim Gauge", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.None)]
-    public class ElevatorTrim : CompositeBaseGauge
+    public class O2 : CompositeBaseGauge
     {
         private HeliosValue _position;
 
@@ -37,12 +37,12 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ElevatorTrim
 
         private bool _suppressScale = false;
 
-        public ElevatorTrim()
+        public O2()
             : base("ElevatorTrim", new Size(300, 300))
         {
             SupportedInterfaces = new[] { typeof(C130JInterface) };
 
-            Components.Add(new GaugeImage("{C-130J}/Gauges/Trim/Herc-Elevator-Trim-Bezel.xaml", new Rect(0d, 0d, 300d, 300d)));
+            Components.Add(new GaugeImage("{C-130J}/Gauges/Trim/Herc-Elevator-Trim-Faceplate.xaml", new Rect(0d, 0d, 300d, 300d)));
 
             _positionNeedle = new GaugeNeedle("{C-130J}/Gauges/Trim/Herc-Elevator-Trim-Needle.xaml", new Point(150d, 150d), new Size(26.250d, 107.561d), new Point(13.130d, 94.436d),-90d);
             Components.Add(_positionNeedle);

@@ -220,7 +220,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.A10C
             #endregion
 
             #region Flight Gauges
-            AddFunction(new Altimeter(this));
+            AddFunction(new A10C.Functions.Altimeter(this));
             //argId 62 has been changed because the element Altimeter, Pressure was already in use inside the Altimeter Function and was causing an exception.
             //AddFunction(new RotaryEncoder(this, FM_PROXY, BUTTON_1, "62", 0.04d, "Altimeter", "Pressure"));
             AddFunction(new RotaryEncoder(this, FM_PROXY, BUTTON_1, "62", 0.04d, "Altimeter", "Pressure Adjustment Knob", "%.1f"));

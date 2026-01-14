@@ -35,6 +35,7 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Point _scaledLocation;
         private double _startRoll = 0d;
         private double _tapeDigits = 10d;
+        private readonly bool _reverseRoll  = false;
 
         private double _value;
 
@@ -51,7 +52,8 @@ namespace GadrocsWorkshop.Helios.Gauges
         /// <param name="digitSize">digit size on the image of the tape</param>
         /// <param name="digitRenderSize">size of digits rendered on screen</param>
         /// <param name="tapeDigits">The number of digits looped through. Default = 10</param>
-        public GaugeDrumCounter(string imageFile, Point location, string format, Size digitSize, Size digitRenderSize, double tapeDigits = 10d)
+        /// <param name="reverseRoll">Reverse the direction of the drum roll. Default = false</param>
+        public GaugeDrumCounter(string imageFile, Point location, string format, Size digitSize, Size digitRenderSize, double tapeDigits = 10d, bool reverseRoll = false)
         {
             _imageFile = imageFile;
             _digitSize = digitSize;
@@ -59,6 +61,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _location = location;
             _format = format;
             _tapeDigits = tapeDigits;
+            _reverseRoll = reverseRoll;
         }
 
         #region Properties
@@ -204,7 +207,8 @@ namespace GadrocsWorkshop.Helios.Gauges
 
                 roll = renderValue % 1d;
                 renderValue += 1d; // Push up for the last digit
-                drawingContext.PushTransform(new TranslateTransform(xOffset, -(renderValue * _digitRenderSize.Height)));
+                double inverse = _reverseRoll ? -1d : 1d;
+                drawingContext.PushTransform(new TranslateTransform(xOffset, -(renderValue * _digitRenderSize.Height * inverse)));
                 DrawImage(drawingContext, _image, _imageRect);
                 drawingContext.Pop();
 

@@ -1,8 +1,11 @@
 -- Exports.Lua from Helios C-130J interface
 
 function driver.processHighImportance(mainPanelDevice)
-	helios.send(2960, string.format("%0.4f;0.0;%0.4f", mainPanelDevice:get_argument_value(122), mainPanelDevice:get_argument_value(123))) -- ADI Ball
-
+	-- send ADI Ball
+	helios.send(2960, string.format("%0.4f;0.0;%0.4f", mainPanelDevice:get_argument_value(122), mainPanelDevice:get_argument_value(123))) 
+	-- Send Altimeter Values	
+	helios.send(2961, string.format("%0.4f;%0.4f;%0.4f", (mainPanelDevice:get_argument_value(1501)+1)/2, (mainPanelDevice:get_argument_value(1500)+1)/2, (mainPanelDevice:get_argument_value(129)+1)/2))  -- Altitude
+	helios.send(2962, string.format("%0.2f;%0.2f;%0.3f", (mainPanelDevice:get_argument_value(1504)+1)/2, (mainPanelDevice:get_argument_value(1503)+1)/2, (mainPanelDevice:get_argument_value(1502)+1)/2))	-- Pressure in inHg
 end
 
 function driver.processLowImportance(mainPanelDevice)

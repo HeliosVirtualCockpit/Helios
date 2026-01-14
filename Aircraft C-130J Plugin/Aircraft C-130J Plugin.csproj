@@ -62,10 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gauges\ADI\ADI.cs" />
+    <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\CNBP\CNBP.cs" />
     <Compile Include="Gauges\AMU\AMU CPG.cs" />
     <Compile Include="Gauges\AMU\AMU Pilot.cs" />
     <Compile Include="Gauges\AMU\AMU.cs" />
+    <Compile Include="Gauges\Compass\Compass.cs" />
     <Compile Include="Gauges\HDD\HDDCopilotLeft.cs" />
     <Compile Include="Gauges\HDD\HDDCopilotRight.cs" />
     <Compile Include="Gauges\HDD\HDDPilotRight.cs" />
@@ -76,12 +78,16 @@
     <Compile Include="Gauges\CNI\CNI Pilot.cs" />
     <Compile Include="Gauges\CNI\CNI.cs" />
     <Compile Include="Gauges\NoseWheel\NoseWheel.cs" />
+    <Compile Include="Gauges\O2\O2 Copilot.cs" />
+    <Compile Include="Gauges\O2\O2 Pilot.cs" />
+    <Compile Include="Gauges\O2\O2.cs" />
     <Compile Include="Gauges\Trim\ElevatorTrim.cs" />
     <Compile Include="Gauges\Trim\Flaps.cs" />
     <Compile Include="Gauges\Trim\RudderTrim.cs" />
     <Compile Include="Gauges\Trim\AileronTrim.cs" />
     <Compile Include="Interfaces\C-130JInterface.cs" />
     <Compile Include="Interfaces\Commands.cs" />
+    <Compile Include="Interfaces\Functions\Altimeter.cs" />
     <Compile Include="Interfaces\Functions\ARC210Display.cs" />
     <Compile Include="Interfaces\ProcessInterfaceFunctions.cs" />
     <Compile Include="Interfaces\Devices.cs" />
@@ -321,7 +327,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\Trim\Herc-Aileron-Trim-Bezel.xaml">
+    <Resource Include="Gauges\Trim\Herc-Aileron-Trim-Faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -335,7 +341,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gauges\Trim\Herc-Elevator-Trim-Bezel.xaml">
+    <Resource Include="Gauges\Trim\Herc-Elevator-Trim-Faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -343,7 +349,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Trim\Herc-Flaps-Bezel.xaml">
+    <Resource Include="Gauges\Trim\Herc-Flaps-Faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
@@ -351,11 +357,71 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Gauges\Trim\Herc-Rudder-Trim-Bezel.xaml">
+    <Resource Include="Gauges\Trim\Herc-Rudder-Trim-Faceplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\Trim\Herc-Rudder-Trim-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-0to0-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-10K-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-1K-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-InHg-100s-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-MB-100s-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-IAS-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\O2\Herc-O2-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\O2\Herc-O2-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\NoseWheel\Herc-Nosewheel-Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Compass\Herc-Mag-Compass-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Compass\Herc-Mag-Compass-Base.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

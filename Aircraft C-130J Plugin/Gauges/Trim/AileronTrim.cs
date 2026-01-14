@@ -44,7 +44,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AileronTrim
         {
             SupportedInterfaces = new[] { typeof(C130JInterface) };
 
-            Components.Add(new GaugeImage("{C-130J}/Gauges/Trim/Herc-Aileron-Trim-Bezel.xaml", new Rect(0d, 0d, 300d, 300d)));
+            Components.Add(new GaugeImage("{C-130J}/Gauges/Trim/Herc-Aileron-Trim-Faceplate.xaml", new Rect(0d, 0d, 300d, 300d)));
 
             _leftPositionNeedle = new GaugeNeedle("{C-130J}/Gauges/Trim/Herc-Aileron-Trim-Left-Needle.xaml", new Point(150d, 150d), new Size(93.678d, 24.772d), new Point(81.374d, 12.386d));
             Components.Add(_leftPositionNeedle);

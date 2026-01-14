@@ -683,7 +683,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             #region  Instruments
             #region  Standby Baro Altimeter AAU-52/A
             AddFunction(new Axis(this, AAU52, "3001", "224", 0.01d, 0d, 1d, "Standby Baro Altimeter AAU-52/A", "Pressure Setting Knob", true, "%.3f"));    // elements["pnt_224"]     = default_axis(_("AAU-52 Altimeter Pressure Setting Knob"), devices.AAU52, aau52_commands.AAU52_ClkCmd_ZeroSetting, 224, 0.04, 0.1, false, true)
-            AddFunction(new Altimeter(this, "Standby Baro Altimeter AAU-52/A", "2051", "Altitude", "Barometric altitude above sea level of the aircraft.", "Value is adjusted per altimeter pressure setting.", "2059", "Pressure", "Manually set barometric altitude.", ""));
+            AddFunction(new Functions.Altimeter(this, "Standby Baro Altimeter AAU-52/A", "2051", "Altitude", "Barometric altitude above sea level of the aircraft.", "Value is adjusted per altimeter pressure setting.", "2059", "Pressure", "Manually set barometric altitude.", ""));
             //AddFunction(new Axis(this, ADC, "3653", "653", 0.01d, 0d, 1d, "Altimeter", "Barometric pressure calibration adjust", true, "%.3f"));  // not sure what this is
             #endregion
             #region  Radar Altimeter Height Indicator

@@ -46,6 +46,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.NoseWheel
             _positionNeedle = new GaugeNeedle("{C-130J}/Gauges/NoseWheel/Herc-Nosewheel-Needle.xaml", new Point(150d, 158.119d), new Size(15.600d, 134.682d), new Point(8.301d, 134.177d)); // 
             Components.Add(_positionNeedle);
 
+            Components.Add(new GaugeImage("{C-130J}/Gauges/NoseWheel/Herc-Nosewheel-Marks.xaml", new Rect(17d, 18d, 265.720d, 98.491d)));
             Components.Add(new GaugeImage("{C-130J}/Gauges/NoseWheel/Herc-Nosewheel-Bezel.xaml", new Rect(0d, 0d, 300d, 200d)));
 
 

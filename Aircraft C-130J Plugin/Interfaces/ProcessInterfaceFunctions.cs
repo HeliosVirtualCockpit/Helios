@@ -1137,24 +1137,38 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(new DCSBallRotation(_baseUDPInterface, "2960", "Instruments", "ADI Ball Rotation", "Single value containing X, Y & Z movement of the ADI Ball.", new CalibrationPointCollectionDouble(-1.0d, -125d, 1.0d, 125d), null, new CalibrationPointCollectionDouble(-1d, 180d, 1d, -180d)));
 
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "129", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1500", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Gauge 1K Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1501", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Gauge 10K Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1500", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 1d), "Instruments", "Altimeter Gauge 1K Drum", "0 to 1", BindingValueUnits.Numeric, "%0.3f", false));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1501", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 1d), "Instruments", "Altimeter Gauge 10K Drum", "0 to 1", BindingValueUnits.Numeric, "%0.3f", false));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1502", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment InHg 1s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1503", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment InHg 10s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1504", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment InHg 100s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1505", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment MBar 1s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1506", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment MBar 10s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1507", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Altimeter Pressure Adjustment MBar 100s Drum", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1505", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment mBar 1s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1506", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment mBar 10s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1507", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Altimeter Pressure Adjustment mBar 100s Drum", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new Functions.Altimeter(_baseUDPInterface, "Instruments", "2961", "2962"));
+            CalibrationPointCollectionDouble iasCalibration = new CalibrationPointCollectionDouble(-1d, 0d, 0.8d, 360d) {
+            new CalibrationPointDouble(-0.958d, 60d),
+            new CalibrationPointDouble(-0.799d, 80d),
+            new CalibrationPointDouble(-0.64d, 100d),
+            new CalibrationPointDouble(-0.48d, 120d),
+            new CalibrationPointDouble(-0.323d, 140d),
+            new CalibrationPointDouble(-0.1625d, 160d),
+            new CalibrationPointDouble(0.005d, 180d),
+            new CalibrationPointDouble(0.154d, 200d),
+            new CalibrationPointDouble(0.313d, 220d),
+            new CalibrationPointDouble(0.471d, 250d),
+            new CalibrationPointDouble(0.629d, 300d),
+            new CalibrationPointDouble(0.7856d, 350d),
+            };
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1508", iasCalibration, "Instruments", "air speed", "0 to 360 knots", BindingValueUnits.Knots, "%0.4f", false));
 
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1508", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "IAS Gauge Tape Position", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
-
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "5", new CalibrationPointCollectionDouble(-1d, -80d, 1d, 80d), "Mech Interface", "Nose Wheel Position Indicator", "-80 to +80 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "5", new CalibrationPointCollectionDouble(-1d, -65d, 1d, 65d), "Mech Interface", "Nose Wheel Position Indicator", "-80 to +80 degrees", BindingValueUnits.Degrees, "%0.3f", true));
             _functionList.Add(new RotaryEncoder(_baseUDPInterface, devices.MECH_INTERFACE.ToString("d"), Commands.JOYSTICK.NoseWheelSteering.ToString("d"), "12", 0.1d, "Mech Interface (TBC)", "Nose Wheel Steering Wheel", "%0.3f"));  // Arg ID correct, Command could not be determined
 
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "17", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Magnetic Compass Heading", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
 
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "511", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Environment", "Pilot Oxygen Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
-            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "512", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Environment", "Copilot Oxygen Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "511", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 180d), "Environment", "Pilot Oxygen Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
+            _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "512", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 180d), "Environment", "Copilot Oxygen Needle", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
 
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "426", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Flaps Needle", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "470", new CalibrationPointCollectionDouble(0d, -45d, 1d, 45d), "Instruments", "Aileron Trim Left Needle", "-45 to 45 degrees", BindingValueUnits.Degrees, "%0.3f", true));
@@ -1163,36 +1177,52 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "473", new CalibrationPointCollectionDouble(0d, -10d, 1d, +30d) { new CalibrationPointDouble(0.5d, 0d)}, "Instruments", "Elevator Trim Needle", "-10 to +30", BindingValueUnits.Degrees, "%0.3f", true));
 
 
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""120"", AddFunction(new CalibrationPointCollectionDouble(0d, -10d, 1d, 15d) { new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""ADI Horizon"", ""-10 to +15 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""120"", new CalibrationPointCollectionDouble(0d, -10d, 1d, 15d) { new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""ADI Horizon"", ""-10 to +15 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
             WriteCsFunction(@"AddFunction(new FlagValue(this, ""121"", ""Instruments"", ""ADI Off Flag"", ""Bool to indicate flag is visible"", ""%1d""));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""122"", AddFunction(new CalibrationPointCollectionDouble(-1d, -125d, 1d, 125d), ""Instruments"", ""ADI Pitch"", ""-125 to 125 degrees"", BindingValueUnits.Degrees, ""%0.4f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""123"", AddFunction(new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), ""Instruments"", ""ADI Roll"", ""-180 to 180 degrees"", BindingValueUnits.Degrees, ""%0.4f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""122"", new CalibrationPointCollectionDouble(-1d, -125d, 1d, 125d), ""Instruments"", ""ADI Pitch"", ""-125 to 125 degrees"", BindingValueUnits.Degrees, ""%0.4f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""123"", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), ""Instruments"", ""ADI Roll"", ""-180 to 180 degrees"", BindingValueUnits.Degrees, ""%0.4f"", true));");
             WriteCsFunction(@"AddFunction(new DCSBallRotation(this, ""2960"", ""Instruments"", ""ADI Ball Rotation"", ""Single value containing X, Y & Z movement of the ADI Ball."", AddFunction(new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, AddFunction(new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));");
 
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""129"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Needle"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1500"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Gauge 1K Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1501"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Gauge 10K Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1502"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment InHg 1s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1503"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment InHg 10s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1504"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment InHg 100s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1505"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 1s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1506"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 10s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1507"", AddFunction(new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 100s Drum"", ""0 to 180 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""129"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Needle"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1500"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Gauge 1K Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1501"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Gauge 10K Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1502"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment InHg 1s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1503"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment InHg 10s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1504"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment InHg 100s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1505"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 1s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1506"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 10s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1507"", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 100s Drum"", ""0 to 180 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new Functions.Altimeter(_baseUDPInterface, ""Instruments"", ""2961"", ""2962""));");
 
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1508"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""IAS Gauge Tape Position"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"CalibrationPointCollectionDouble iasCalibration = new CalibrationPointCollectionDouble(-1d, 0d, 0.8d, 360d) {
+            new CalibrationPointDouble(-0.958d, 60d),
+            new CalibrationPointDouble(-0.799d, 80d),
+            new CalibrationPointDouble(-0.64d, 100d),
+            new CalibrationPointDouble(-0.48d, 120d),
+            new CalibrationPointDouble(-0.323d, 140d),
+            new CalibrationPointDouble(-0.1625d, 160d),
+            new CalibrationPointDouble(0.005d, 180d),
+            new CalibrationPointDouble(0.154d, 200d),
+            new CalibrationPointDouble(0.313d, 220d),
+            new CalibrationPointDouble(0.471d, 250d),
+            new CalibrationPointDouble(0.629d, 300d),
+            new CalibrationPointDouble(0.7856d, 350d),
+            };");
 
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""5"", AddFunction(new CalibrationPointCollectionDouble(-1d, -80d, 1d, 80d), ""Mech Interface"", ""Nose Wheel Position Indicator"", ""-90 to +90 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1508"", iasCalibration, ""Instruments"", ""air speed"", ""0 to 360 knots"", BindingValueUnits.Knots, ""%0.3f"", true));");
 
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""17"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Magnetic Compass Heading"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""5"", new CalibrationPointCollectionDouble(-1d, -65d, 1d, 65d), ""Mech Interface"", ""Nose Wheel Position Indicator"", ""-90 to +90 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
 
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""511"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Environment"", ""Pilot Oxygen Needle"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""512"", AddFunction(new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Environment"", ""Copilot Oxygen Needle"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""17"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Magnetic Compass Heading"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
 
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""426"", AddFunction(new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), ""Instruments"", ""Flaps Needle"", ""0 to 180 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""470"", AddFunction(new CalibrationPointCollectionDouble(0d, -45d, 1d, 45d), ""Instruments"", ""Aileron Trim Left Needle"", ""-45 to 45 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""471"", AddFunction(new CalibrationPointCollectionDouble(0d, -45d, 1d, 45d), ""Instruments"", ""Aileron Trim Right Needle"", ""-45 to 45 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""472"", AddFunction(new CalibrationPointCollectionDouble(0d, -30d, 1d, 30d), ""Instruments"", ""Rudder Trim Needle"", ""-30 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""473"", AddFunction(new CalibrationPointCollectionDouble(0d, -10d, 1d, 30d){ new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""Elevator Trim Needle"", ""-10 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""511"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 180d), ""Environment"", ""Pilot Oxygen Needle"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""512"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 180d), ""Environment"", ""Copilot Oxygen Needle"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""426"", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), ""Instruments"", ""Flaps Needle"", ""0 to 180 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""470"", new CalibrationPointCollectionDouble(0d, -45d, 1d, 45d), ""Instruments"", ""Aileron Trim Left Needle"", ""-45 to 45 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""471"", new CalibrationPointCollectionDouble(0d, -45d, 1d, 45d), ""Instruments"", ""Aileron Trim Right Needle"", ""-45 to 45 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""472"", new CalibrationPointCollectionDouble(0d, -30d, 1d, 30d), ""Instruments"", ""Rudder Trim Needle"", ""-30 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+            WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""473"", new CalibrationPointCollectionDouble(0d, -10d, 1d, 30d){ new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""Elevator Trim Needle"", ""-10 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
 
         }
         private static void WriteCsFunction(string fn)

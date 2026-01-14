@@ -42,7 +42,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.RudderTrim
         {
             SupportedInterfaces = new[] { typeof(C130JInterface) };
 
-            Components.Add(new GaugeImage("{C-130J}/Gauges/Trim/Herc-Rudder-Trim-Bezel.xaml", new Rect(0d, 0d, 300d, 300d)));
+            Components.Add(new GaugeImage("{C-130J}/Gauges/Trim/Herc-Rudder-Trim-Faceplate.xaml", new Rect(0d, 0d, 300d, 300d)));
 
             _positionNeedle = new GaugeNeedle("{C-130J}/Gauges/Trim/Herc-Rudder-Trim-Needle.xaml", new Point(150d, 150d), new Size(24.772d, 93.688d), new Point(12.391d, 81.302d));
             Components.Add(_positionNeedle);

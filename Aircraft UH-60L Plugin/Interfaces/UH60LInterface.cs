@@ -1488,11 +1488,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             // Indicators / Lamps / Flags
 
             // PILOT BARO ALTIMETER
-            AddFunction(new Altimeter(this, FLYER.Pilot));
+            AddFunction(new Functions.Altimeter(this, FLYER.Pilot));
             AddFunction(new FlagValue(this, mainpanel.pilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "PILOT BAROALT ENCODER FLAG", ""));
 
             // COPILOT ALTIMETER
-            AddFunction(new Altimeter(this, FLYER.Copilot));
+            AddFunction(new Functions.Altimeter(this, FLYER.Copilot));
             AddFunction(new FlagValue(this, mainpanel.copilotBaroAltEncoderFlag.ToString("d"), "Indicators/Lamps/Flags", "COPILOT BAROALT ENCODER FLAG", ""));
 
             // PILOT VSI (ADI)
