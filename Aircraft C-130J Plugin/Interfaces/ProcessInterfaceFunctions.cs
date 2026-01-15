@@ -257,12 +257,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "fuel_transfer":
                 case "oxygen_switch":
                 case "landing_lights_motor":
-                case "multiswitch":
                     WriteCsFunction($"\t\t{BuildFnMultiSwitch(fd, true)}");
                     break;
                 case "wiper":
                     WriteCsFunction($"\t\t{BuildFnMultiSwitchWipers(fd)}");
                     break;
+                case "multiswitch":
                 case "rotary":
                     WriteCsFunction($"\t\t{BuildFnMultiSwitch(fd)}");
                     break;
@@ -282,6 +282,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "knob_rot_rel":
                     WriteCsFunction($"\t\t{BuildEnc1(fd)}");
                     break;
+                case "knob_360":
                 case "stby_altim":
                     WriteCsFunction($"\t\t{BuildEnc(fd)}");
                     break;
@@ -291,7 +292,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 case "flap_switch":
                 case "scroll_point_axis":
                 case "knob_360_0_1":
-                case "knob_360":
                 case "knob_rot":
                     WriteCsFunction($"\t\t{BuildKnob(fd)}");
                     break;
