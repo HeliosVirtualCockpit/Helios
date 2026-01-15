@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Altimeter
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.C130J.Altimeter", "Altimeter", "C-130J Hercules", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.Altimeter", "Altimeter", "C-130J Hercules", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class Altimeter : CompositeBaseGauge
     {
         private HeliosValue _altitude;

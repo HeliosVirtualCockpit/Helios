@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.C130J.HDD.Copilot.Left", "HDD Copilot Left", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.HDD.Copilot.Left", "HDD Copilot Left", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class HDDCopilotLeft : HDD
     {
         private static readonly Rect SCREEN_RECT = new Rect(60, 89, 465, 619);

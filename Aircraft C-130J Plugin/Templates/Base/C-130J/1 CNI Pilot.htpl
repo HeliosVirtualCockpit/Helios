@@ -1,0 +1,16 @@
+<ControlTemplate>
+	<Name>CNI (Pilot)</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.CNI.PILOT</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,361</Location>
+			<Size>346,500</Size>
+			<Hidden>False</Hidden>
+			<EmbeddedViewportName>C130J_PILOT_CNI</EmbeddedViewportName>
+			<RequiresPatches>True</RequiresPatches>
+			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

@@ -1,0 +1,15 @@
+<ControlTemplate>
+	<Name>CNBP</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.CNBP</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>999,361</Location>
+			<Size>350,175</Size>
+			<Hidden>False</Hidden>
+			<EmbeddedViewportName>C130J_CNBP</EmbeddedViewportName>
+			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

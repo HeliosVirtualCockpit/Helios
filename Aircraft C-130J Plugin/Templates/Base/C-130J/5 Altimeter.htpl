@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Altimeter</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.Altimeter</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>586,361</Location>
+			<Size>300,300</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNI.PILOT
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.C130J.CNI.PILOT", "CNI Pilot", "C-130J Hercules", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.CNI.PILOT", "CNI Pilot", "C-130J Hercules", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class CNIPilot : AMU
     {
         public CNIPilot()

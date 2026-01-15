@@ -1,0 +1,16 @@
+<ControlTemplate>
+	<Name>HDD Right (Pilot)</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.HDD.Pilot.Right</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>1093,640</Location>
+			<Size>293,400</Size>
+			<Hidden>False</Hidden>
+			<EmbeddedViewportName>C130J_HDD2</EmbeddedViewportName>
+			<RequiresPatches>True</RequiresPatches>
+			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

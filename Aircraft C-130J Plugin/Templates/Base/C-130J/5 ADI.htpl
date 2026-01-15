@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Attitude Director Indicator</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.ADI</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>1069,322</Location>
+			<Size>350,350</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

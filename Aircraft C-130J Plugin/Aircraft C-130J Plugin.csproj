@@ -64,7 +64,7 @@
     <Compile Include="Gauges\ADI\ADI.cs" />
     <Compile Include="Gauges\Altimeter\Altimeter.cs" />
     <Compile Include="Gauges\CNBP\CNBP.cs" />
-    <Compile Include="Gauges\AMU\AMU CPG.cs" />
+    <Compile Include="Gauges\AMU\AMU Copilot.cs" />
     <Compile Include="Gauges\AMU\AMU Pilot.cs" />
     <Compile Include="Gauges\AMU\AMU.cs" />
     <Compile Include="Gauges\Compass\Compass.cs" />
@@ -73,8 +73,8 @@
     <Compile Include="Gauges\HDD\HDDPilotRight.cs" />
     <Compile Include="Gauges\HDD\HDDPilotLeft.cs" />
     <Compile Include="Gauges\HDD\HDD.cs" />
-    <Compile Include="Gauges\CNI\CNI AUG.cs" />
-    <Compile Include="Gauges\CNI\CNI CPG.cs" />
+    <Compile Include="Gauges\CNI\CNI Aug.cs" />
+    <Compile Include="Gauges\CNI\CNI Copliot.cs" />
     <Compile Include="Gauges\CNI\CNI Pilot.cs" />
     <Compile Include="Gauges\CNI\CNI.cs" />
     <Compile Include="Gauges\NoseWheel\NoseWheel.cs" />
@@ -94,6 +94,72 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\Base\C-130J\8 Nose Wheel.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\5 Altimeter.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\5 ADI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Trim Aileron.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Trim Rudder.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Flaps.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Trim Elevator.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\8 O2 B.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\8 O2 A.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 CNI Pilot.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 HDD 1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\5 Compass.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 AMU.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 EUFD CPG.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 Keyboard CPG.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 CNI Copilot.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\3 CNI Augmented  Crew.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 HDD 2.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 HDD 1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 HDD 2.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 AMU.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\0 CNBP.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Gauges\HDD\HDD_Bezel.png" />
     <Resource Include="Gauges\HDD\HDD_Blank.png" />
     <Resource Include="Gauges\HDD\HDD_Brt_Dec.png" />
@@ -422,6 +488,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Compass\Herc-Mag-Compass-Base.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Compass\compass_tape.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

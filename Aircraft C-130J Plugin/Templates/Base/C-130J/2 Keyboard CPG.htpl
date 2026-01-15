@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Keyboard Unit (CP/G)</Name>
+	<Category>AH-64D Apache</Category>
+	<TypeIdentifier>Helios.AH64D.KU.CPG</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>300,234</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

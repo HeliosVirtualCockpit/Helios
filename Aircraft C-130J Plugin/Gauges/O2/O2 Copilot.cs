@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.O2Gauge
     using System.Windows.Media.Media3D;
     using System.Xml.Linq;
 
-    [HeliosControl("Helios.C130J.O2Gauge.Copilot", "Oxygen Gauge (Copilot)", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.O2Gauge.Copilot", "Oxygen Gauge (Copilot)", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class O2Copilot : O2
     {
         public O2Copilot()

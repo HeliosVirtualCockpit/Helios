@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU.PILOT
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.C130J.AMU.PILOT", "AMU Pilot", "C-130J Hercules", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.AMU.PILOT", "AMU Pilot", "C-130J Hercules", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class AMUPilot : AMU
     {
         public AMUPilot()

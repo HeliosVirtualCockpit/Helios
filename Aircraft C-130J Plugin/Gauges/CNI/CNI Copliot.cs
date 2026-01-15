@@ -14,7 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU.COPILOT
+namespace GadrocsWorkshop.Helios.Gauges.C130J.CNI.COPILOT
 {
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
@@ -22,11 +22,11 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU.COPILOT
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.C130J.AMU.COPILOT", "AMU Copilot", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
-    public class AMUCopilot : AMU
+    [HeliosControl("Helios.C130J.CNI.COPILOT", "CNI Copilot", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
+    public class CNICopilot : AMU
     {
-        public AMUCopilot()
-            : base("AMU Copilot")
+        public CNICopilot()
+            : base("CNI Copilot")
         {
         }
     }

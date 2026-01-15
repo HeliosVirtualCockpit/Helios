@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
     using GadrocsWorkshop.Helios.Controls;
     using System.Windows;
 
-    [HeliosControl("Helios.C130J.HDD.Pilot.Right", "HDD Pilot Right", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.HDD.Pilot.Right", "HDD Pilot Right", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class HDDPilotRight : HDD
     {
         private static readonly Rect SCREEN_RECT = new Rect(60, 89, 465, 619);

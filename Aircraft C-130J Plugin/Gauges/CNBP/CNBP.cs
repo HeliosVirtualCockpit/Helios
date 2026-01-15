@@ -28,7 +28,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNBP
     using System.Windows.Media;
     using System.Xml;
 
-    [HeliosControl("Helios.C130J.CNBP", "CNBP", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.CNBP", "CNBP", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class CNBP : CompositeVisualWithBackgroundImage
     {
         private static readonly Rect SCREEN_RECT = new Rect(55, 34, 382, 283);

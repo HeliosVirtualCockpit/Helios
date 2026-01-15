@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNI.AUGCREW
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.C130J.CNI.AUGCREW", "CNI Aug Crew", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.CNI.AUGCREW", "CNI Aug Crew", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class CNIAwg : AMU
     {
         public CNIAwg()

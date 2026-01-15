@@ -23,13 +23,13 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Compass
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.C130J.Compass", "Magnetic Compass", "C-130J Hercules", typeof(GaugeRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.Compass", "Magnetic Compass", "C-130J Hercules", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class CompassGauge : CompositeBaseGauge
     {
         private HeliosValue _heading;
         private HeliosValue _roll;
         private HeliosValue _pitch;
-        private GaugeNeedle _ball;
+        private GaugeNeedle _tape;
 
         private CalibrationPointCollectionDouble _headingCalibration;
         private CalibrationPointCollectionDouble _rollCalibration;
@@ -44,7 +44,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Compass
             _name = "Magnetic Compass";
             Size size = new Size(265.750d, 281.592d);
             Point center = new Point(132.875d, 149.092d);
-            double widthScaling = size.Width / 100d;
+            double widthScaling = size.Width / 200d;
             double heightScaling = size.Height / 100d * 0.6d;
             double tapeHeight = 50d * heightScaling;
             double tapeWidth = 556d * widthScaling;
@@ -54,9 +54,10 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Compass
             Components.Add(new GaugeImage("{C-130J}/Gauges/Compass/Herc-Mag-Compass-Base.xaml", new Rect(0d, 0d, size.Width, size.Height)));
 
             _headingCalibration = new CalibrationPointCollectionDouble(0d, -1 * tapeDeflection, 360d, tapeDeflection);
-            _ball = new GaugeNeedle("{F-15E}/Gauges/Common/Compass_Tape.xaml", center, new Size(tapeWidth, tapeHeight), new Point(tapeWidthCenter, tapeHeight / 2d));
-            _ball.Clip = new EllipseGeometry(center, size.Width / 2d, size.Height / 2d);
-            Components.Add(_ball);
+            _tape = new GaugeNeedle("{C-130J}/Gauges/Compass/Compass_Tape.xaml", center, new Size(tapeWidth, tapeHeight), new Point(tapeWidthCenter, tapeHeight / 2d));
+            _tape.Clip = new EllipseGeometry(center, size.Width / 2d, size.Height / 2d);
+            _tape.HorizontalOffset = _headingCalibration.Interpolate(0d);
+            Components.Add(_tape);
 
             Components.Add(new GaugeImage("{F-15E}/Gauges/Common/vertical_marker.xaml", new Rect(center.X, size.Height * 0.2d, 1d * widthScaling, size.Height * 0.6d)));
 
@@ -100,19 +101,19 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Compass
         void Heading_Execute(object action, HeliosActionEventArgs e)
         {
             _heading.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.HorizontalOffset = _headingCalibration.Interpolate(e.Value.DoubleValue);
+            _tape.HorizontalOffset = _headingCalibration.Interpolate(e.Value.DoubleValue);
         }
 
         void Roll_Execute(object action, HeliosActionEventArgs e)
         {
             _roll.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.Rotation = _rollCalibration.Interpolate(e.Value.DoubleValue);
+            _tape.Rotation = _rollCalibration.Interpolate(e.Value.DoubleValue);
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue);
+            _tape.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue);
         }
 
     }

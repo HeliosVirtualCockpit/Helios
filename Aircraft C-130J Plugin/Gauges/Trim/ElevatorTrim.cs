@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ElevatorTrim
     using System.Windows.Media.Media3D;
     using System.Xml.Linq;
 
-    [HeliosControl("Helios.C130J.ElevatorTrim", "Elevator Trim Gauge", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.ElevatorTrim", "Elevator Trim Gauge", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class O2 : CompositeBaseGauge
     {
         private HeliosValue _position;

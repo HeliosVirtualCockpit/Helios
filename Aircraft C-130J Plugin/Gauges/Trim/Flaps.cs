@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Flaps
     using System.Windows.Media.Media3D;
     using System.Xml.Linq;
 
-    [HeliosControl("Helios.C130J.Flaps", "Flaps Gauge", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.Flaps", "Flaps Gauge", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class Flaps : CompositeBaseGauge
     {
         private HeliosValue _position;

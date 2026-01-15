@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Aileron Trim</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.AileronTrim</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>565,0</Location>
+			<Size>200,200</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

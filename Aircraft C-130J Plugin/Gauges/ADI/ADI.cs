@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
     using System.Windows.Media.Media3D;
     using System.Xml.Linq;
 
-    [HeliosControl("Helios.C130J.ADI", "ADI", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.ADI", "ADI", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class ADI : CompositeBaseGauge
     {
         private HeliosValue _pitch;

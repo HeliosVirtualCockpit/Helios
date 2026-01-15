@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Flaps Position Indicator</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.Flaps</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>965,0</Location>
+			<Size>200,200</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

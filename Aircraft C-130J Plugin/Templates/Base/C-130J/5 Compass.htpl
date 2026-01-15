@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Magnetic Compass</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.Compass</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>652,672</Location>
+			<Size>188,200</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>
