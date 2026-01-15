@@ -82,9 +82,6 @@
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00004_53990_00000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Viewports\ViewportTemplates_002_009_00005_55300_00000.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00007_59263_00000.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

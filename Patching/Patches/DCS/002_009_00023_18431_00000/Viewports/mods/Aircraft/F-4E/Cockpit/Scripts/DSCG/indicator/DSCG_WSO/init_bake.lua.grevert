@@ -1,7 +1,0 @@
-﻿@@ -242,74 +242,8 @@
- 00%7D%0D
--%0Apurposes %3D %7Brender_purpose.GENERAL%2Crender_purpose.HUD_ONLY_VIEW%7D%0D
- %0A%0D%0AB
-@@ -525,64 +525,4 @@
-  %3D 1
--%0D%0A%0D%0Atry_find_assigned_viewport(%22F_4E_DSCG_WSO%22%2C %22DSCG_BOTH%22)

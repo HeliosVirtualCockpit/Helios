@@ -100,6 +100,15 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
                 if (gc is GaugeBall gbp)
                 {
+                    string dir = System.IO.Path.GetDirectoryName(gbp.Image);
+                    if (new DirectoryInfo(dir).Name == _alternateImageSetFolderName)
+                    {
+                        dir = Path.GetDirectoryName(dir);
+                    }
+                    gbp.Image = $"{dir}{imageSubfolder}/{System.IO.Path.GetFileName(gbp.Image)}";
+                    gbp.ImageRefresh = true;
+
+                    Refresh();
                     continue;
                 }
                 if (gc is GaugeCylinder gcp)

@@ -7,7 +7,6 @@
       {
         "viewportName": "ALR300",
         "SuppressViewportNamePrefix": true,
-        "relativeInitFilePath": "Mods/aircraft/Mirage-F1/Cockpit/Common/ALR_300/Indicator/Baked/ALR_300_bake_init.lua",
         "requiresPatch": false,
         "originalDisplayWidth": 1920,
         "originalDisplayHeight": 1080,
@@ -29,6 +28,74 @@
         "y": 0,
         "width": 360,
         "height": 360
+      }
+    ]
+  },
+  {
+    "templateName": "F-4E",
+    "moduleId": "F-4E",
+    "categoryName": "F-4E Phantom II",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "F4E_Dscg_Pilot",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_Dscg_Wso",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_HeadUpDisplay",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_Rwr",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_Dscg_Tv",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
       }
     ]
   }

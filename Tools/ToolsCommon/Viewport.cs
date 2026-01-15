@@ -55,6 +55,6 @@ namespace ToolsCommon
         [JsonProperty("requiresPatch")] public bool RequiresPatch { get; set; } = true;
         [JsonProperty("viewportDisplayName")] public string ViewportDisplayName { get; set; }
 
-        [JsonIgnore] public bool IsValid => RelativeInitFilePath != null && RelativeInitFilePath.Length > 0;
+        [JsonIgnore] public bool IsValid => (RelativeInitFilePath != null && RelativeInitFilePath.Length > 0) || !RequiresPatch;
     }
 }

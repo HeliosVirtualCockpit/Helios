@@ -1,8 +1,0 @@
-﻿@@ -113,71 +113,202 @@
- %22)%0D%0A
--%0D%0Aindicator_type %3D indicator_types.COMMON%0D%0Apurposes %09 %3D %7B100%7D%0D%0A
-+dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0A%0D%0Aindicator_type %3D indicator_types.COMMON%0D%0Apurposes %09 %3D %7B100%7D%0D%0Apurposes %3D %7Brender_purpose.GENERAL%2Crender_purpose.HUD_ONLY_VIEW%7D
- %0D%0A%0D%0A
-@@ -587,12 +587,74 @@
- ID     %3D 2%0D%0A
-+%0D%0Atry_find_assigned_viewport(%22F_4E_DSCG_PILOT%22%2C %22DSCG_BOTH%22)%0D%0A

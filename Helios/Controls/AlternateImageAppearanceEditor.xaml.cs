@@ -25,6 +25,7 @@ namespace GadrocsWorkshop.Helios.Controls
     /// Interaction logic for AlternateImageAppearanceEditor.xaml
     /// </summary>
     [HeliosPropertyEditor("Helios.FA18C.ADI", "Appearance")]
+    [HeliosPropertyEditor("Helios.FA18C.ADI.V1", "Appearance")]
     [HeliosPropertyEditor("Helios.FA18C.IFEI", "Appearance")]
     [HeliosPropertyEditor("Helios.FA18C.Instruments.BAltimeter", "Appearance")]
     [HeliosPropertyEditor("Helios.FA18C.Instruments", "Appearance")] // RadAlt
