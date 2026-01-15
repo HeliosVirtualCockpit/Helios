@@ -917,6 +917,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 {"REF_MODE_PANEL.ref_select, 111, {-1, 1}", "REF_MODE_PANEL.ref_select, 111, {-0.8, 0.8}"},
                 {"356\"] = fuel_transfer(\"Left Auxiliary", "356\"] = fuel_transfer(\"Left External"},
                 {"_361\"] = fuel_transfer(\"Right External", "_361\"] = fuel_transfer(\"Right Auxiliary"},
+                {"532, {-1, 1}, 2)", "532, {-2, 2}, 4)"},  // odd one for the ARC-210 Squelch.
+                //
                 };
         }
         private static string SetClickables()
