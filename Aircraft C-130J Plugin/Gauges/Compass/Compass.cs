@@ -53,7 +53,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Compass
 
             Components.Add(new GaugeImage("{C-130J}/Gauges/Compass/Herc-Mag-Compass-Base.xaml", new Rect(0d, 0d, size.Width, size.Height)));
 
-            _headingCalibration = new CalibrationPointCollectionDouble(0d, -1 * tapeDeflection, 360d, tapeDeflection);
+            _headingCalibration = new CalibrationPointCollectionDouble(0d, tapeDeflection, 360d, -tapeDeflection);
             _tape = new GaugeNeedle("{C-130J}/Gauges/Compass/Compass_Tape.xaml", center, new Size(tapeWidth, tapeHeight), new Point(tapeWidthCenter, tapeHeight / 2d));
             _tape.Clip = new EllipseGeometry(center, size.Width / 2d, size.Height / 2d);
             _tape.HorizontalOffset = _headingCalibration.Interpolate(0d);
