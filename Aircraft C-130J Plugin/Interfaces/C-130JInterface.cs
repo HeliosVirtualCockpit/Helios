@@ -50,7 +50,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
             // see if we can restore from JSON
-#if (!DEBUG)
+#if (DEBUG)
             if (LoadFunctionsFromJson())
             {
                 return;

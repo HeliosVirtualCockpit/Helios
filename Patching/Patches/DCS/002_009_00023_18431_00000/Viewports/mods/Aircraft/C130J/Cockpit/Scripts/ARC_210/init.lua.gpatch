@@ -1,0 +1,8 @@
+﻿@@ -108,16 +108,83 @@
+ s.lua%22)%0D
++%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Aindic
+@@ -27033,16 +27033,135 @@
+ OIZE%0D%0A%0D%0A
++--%5B%5B %0D%0A%09%09Inserted by Helios Virtual Cockpit%0D%0A%5D%5D%0D%0A%0D%0Atry_find_assigned_viewport(%22C130J_ARC210_SCREEN%22%2C %22ARC210_SCREEN%22)%0D%0A
+ %0D%0A-- fun

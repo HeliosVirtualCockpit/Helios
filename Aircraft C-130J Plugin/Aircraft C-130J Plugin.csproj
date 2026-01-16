@@ -133,12 +133,6 @@
     <Content Include="Templates\Base\C-130J\1 AMU.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\C-130J\2 EUFD CPG.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Base\C-130J\2 Keyboard CPG.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Templates\Base\C-130J\2 CNI Copilot.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

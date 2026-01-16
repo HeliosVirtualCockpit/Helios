@@ -8,7 +8,6 @@
 			<Size>346,500</Size>
 			<Hidden>False</Hidden>
 			<EmbeddedViewportName>C130J_COPILOT_CNI</EmbeddedViewportName>
-			<RequiresPatches>True</RequiresPatches>
 			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
 			<Children />
 		</TemplateValues>

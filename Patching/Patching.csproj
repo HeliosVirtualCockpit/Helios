@@ -14683,6 +14683,51 @@
     <Content Include="Templates\Patching\Additional Simulator Viewports\9 Mirage_F1_ALR300.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Patches\DCS\002_009_00023_18431_00000\Viewports\mods\Aircraft\C130J\Cockpit\Scripts\ARC_210\init.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS\002_009_00023_18431_00000\Viewports\mods\Aircraft\C130J\Cockpit\Scripts\ARC_210\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_ARC210_SCREEN.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_AC_CNI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_CNBP.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_COPILOT_AMU_LEFT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_COPILOT_AMU_RIGHT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_COPILOT_CNI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_HDD_1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_HDD_2.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_HDD_3.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_HDD_4.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_PILOT_AMU_LEFT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_PILOT_AMU_RIGHT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_PILOT_CNI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Patches\DCS Community\mods\Aircraft\" />

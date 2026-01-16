@@ -53,25 +53,25 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
             switch (_interfaceDevice)
             {
                 case "HDD Pilot Left":
-                    _vpName = "C130J_HDD1";
+                    _vpName = "C130J_HDD_1";
                     _interfaceDevice = "Displays Pilot";
                     _interfaceElement = "HDD 1 Brightness";
                     slip = true;
                     break;
                 case "HDD Pilot Right":
-                    _vpName = "C130J_HDD2";
+                    _vpName = "C130J_HDD_2";
                     _interfaceDevice = "Displays Pilot";
                     _interfaceElement = "HDD 2 Brightness";
                     slip = false;
                     break;
                 case "HDD Copilot Left":
-                    _vpName = "C130J_HDD3";
+                    _vpName = "C130J_HDD_3";
                     _interfaceDevice = "Displays Copilot";
                     _interfaceElement = "HDD 3 Brightness";
                     slip = false;
                     break;
                 case "HDD Copilot Right":
-                    _vpName = "C130J_HDD4";
+                    _vpName = "C130J_HDD_4";
                     _interfaceDevice = "Displays Copilot";
                     _interfaceElement = "HDD 4 Brightness";
                     slip = true;
@@ -132,7 +132,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
         }
         public bool RequiresPatches
         {
-            get => _vpName != "" ? true : false;
+            get => false;
             set => _ = value;
         }
         private void AddViewport(string name)
@@ -152,7 +152,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
             Children.Add(new Helios.Controls.Special.ViewportExtent
             {
                 FillBackground = true,
-                BackgroundColor = Color.FromArgb(128, 128, 0, 0),
+                BackgroundColor = Color.FromArgb(0x80, 0xd9, 0x27, 0x62),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
                 TextFormat = tf,

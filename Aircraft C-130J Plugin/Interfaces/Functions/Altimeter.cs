@@ -28,8 +28,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J.Functions
 
         private HeliosValue _altitude;
         private HeliosValue _pressure;
-        private readonly string _altitudeArg = "2051";
-        private readonly string _pressureArg = "2059";
+        private string _altitudeArg = "2051";
+        private string _pressureArg = "2059";
         private double _prevThousands = 0d;
         private double _prevTenThousands = 0d;
         private double _prevHundreds = 0d;
@@ -55,6 +55,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J.Functions
 
         public override void BuildAfterDeserialization()
         {
+            _altitudeArg = SerializedDataElements[0].ID;
+            _pressureArg = SerializedDataElements[1].ID;
             DoBuild();
         }
 

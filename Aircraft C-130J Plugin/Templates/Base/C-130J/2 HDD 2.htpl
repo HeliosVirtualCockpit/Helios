@@ -7,8 +7,7 @@
 			<Location>1331,439</Location>
 			<Size>293,400</Size>
 			<Hidden>False</Hidden>
-			<EmbeddedViewportName>C130J_HDD4</EmbeddedViewportName>
-			<RequiresPatches>True</RequiresPatches>
+			<EmbeddedViewportName>C130J_HDD_4</EmbeddedViewportName>
 			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
 			<Children />
 		</TemplateValues>

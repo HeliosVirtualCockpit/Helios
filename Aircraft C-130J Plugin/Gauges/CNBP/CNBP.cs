@@ -134,7 +134,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNBP
             Children.Add(new Helios.Controls.Special.ViewportExtent
             {
                 FillBackground = true,
-                BackgroundColor = Color.FromArgb(128, 128, 0, 0),
+                BackgroundColor = Color.FromArgb(0x80, 0xd9, 0x27, 0x62),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
                 TextFormat = tf,
