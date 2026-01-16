@@ -77,12 +77,11 @@ function driver.processLowImportance(mainPanelDevice)
 	helios.send(2924 ,ExtractIndicationValue(41, 5))		-- LGD/CONST					 
 	helios.send(2925 ,ExtractIndicationValue(42, 3))		-- Fuel Pressure				 
 	helios.send(2926 ,ExtractIndicationValue(43, 4))		-- Aux Hydraulic Pump
-	--[[
-    li = helios.encodeIndication(??) -- ARC-210
+
+    li = helios.encodeIndication(44) -- ARC-210
     if li then
             helios.send(2927, string.format("%s", li))      -- Encode and send everything
     end
-	]]
 end
 
 function ExtractIndicationValue(ii, just)

@@ -50,7 +50,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
             // see if we can restore from JSON
-#if (DEBUG)
+#if (!DEBUG)
             if (LoadFunctionsFromJson())
             {
                 return;
@@ -73,9 +73,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             //
             // Below are the switch and button functions for the A-10C II.  The C-130J has it's own functions with different names.
             //
-            //AddFunction(new PushButton(this, UFC, BUTTON_33, "534", "UFC", "Toggle ARC-210 RT2 Status (long press)", "%0.1f"));
-            //AddFunction(new PushButton(this, UFC, BUTTON_34, "535", "UFC", "Toggle ECCM", "%0.1f"));
-            //AddFunction(new PushButton(this, UFC, BUTTON_35, "536", "UFC", "Toggle IDM R/T", "%0.1f"));
+
 
             //AddFunction(new Switch(this, VHF_AM_RADIO, "551", SwitchPositions.Create(7, 0d, 0.1d, BUTTON_43, new string[] { "OFF", "TR G", "TR", "ADF", "CHG PRST", "TEST", "ZERO (PULL)" }, "%0.1f"), "ARC-210", "Master switch", "%0.1f"));
             //AddFunction(new RotaryEncoder(this, VHF_AM_RADIO, BUTTON_27, "552", 0.1d, "ARC-210", "Channel select knob"));
@@ -105,7 +103,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             //AddFunction(new PushButton(this, VHF_AM_RADIO, BUTTON_8, "560", "ARC-210", "Brightness increase", "%0.1f"));
             //AddFunction(new PushButton(this, VHF_AM_RADIO, BUTTON_9, "559", "ARC-210", "Brightness decrease", "%0.1f"));
 
-            AddFunction(new ARC210Display(this)); // 2927
+            // AddFunction(new ARC210Display(this)); // 2927
             #endregion
 
 

@@ -64,6 +64,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     [HeliosPropertyEditor("Helios.C130J.HDD.Pilot.Right", "Behavior")]
     [HeliosPropertyEditor("Helios.C130J.HDD.Copilot.Left", "Behavior")]
     [HeliosPropertyEditor("Helios.C130J.HDD.Copilot.Right", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.ARC210Radio", "Behavior")]
 
 
     public partial class ViewportExtentBehaviorEditor : HeliosPropertyEditor

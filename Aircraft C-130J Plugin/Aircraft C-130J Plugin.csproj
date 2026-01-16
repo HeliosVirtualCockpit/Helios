@@ -81,6 +81,7 @@
     <Compile Include="Gauges\O2\O2 Copilot.cs" />
     <Compile Include="Gauges\O2\O2 Pilot.cs" />
     <Compile Include="Gauges\O2\O2.cs" />
+    <Compile Include="Gauges\Radio\ARC-210.cs" />
     <Compile Include="Gauges\Trim\ElevatorTrim.cs" />
     <Compile Include="Gauges\Trim\Flaps.cs" />
     <Compile Include="Gauges\Trim\RudderTrim.cs" />
@@ -152,6 +153,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\C-130J\0 CNBP.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 Radio ARC-210.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Gauges\HDD\HDD_Bezel.png" />

@@ -1148,6 +1148,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1506", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), "Instruments", "Altimeter Pressure Adjustment mBar 10s Drum", "0 to 360 degrees", BindingValueUnits.Degrees, "%0.3f", true));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "1507", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), "Instruments", "Altimeter Pressure Adjustment mBar 100s Drum", "0 to 180 degrees", BindingValueUnits.Degrees, "%0.3f", true));
             _functionList.Add(new Functions.Altimeter(_baseUDPInterface, "Instruments", "2961", "2962"));
+            _functionList.Add(new Functions.ARC210Display(_baseUDPInterface));
             CalibrationPointCollectionDouble iasCalibration = new CalibrationPointCollectionDouble(-1d, 0d, 0.8d, 360d) {
             new CalibrationPointDouble(-0.958d, 60d),
             new CalibrationPointDouble(-0.799d, 80d),
@@ -1195,6 +1196,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1506"", new CalibrationPointCollectionDouble(-1d, 0d, 1d, 360d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 10s Drum"", ""0 to 360 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""1507"", new CalibrationPointCollectionDouble(0d, 0d, 1d, 180d), ""Instruments"", ""Altimeter Pressure Adjustment MBar 100s Drum"", ""0 to 180 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
             WriteCsFunction(@"AddFunction(new Functions.Altimeter(_baseUDPInterface, ""Instruments"", ""2961"", ""2962""));");
+            WriteCsFunction(@"AddFunction(new Functions.ARC210Display(this);");
 
             WriteCsFunction(@"CalibrationPointCollectionDouble iasCalibration = new CalibrationPointCollectionDouble(-1d, 0d, 0.8d, 360d) {
             new CalibrationPointDouble(-0.958d, 60d),
