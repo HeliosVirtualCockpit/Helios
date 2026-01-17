@@ -81,7 +81,7 @@
     <Compile Include="Gauges\O2\O2 Copilot.cs" />
     <Compile Include="Gauges\O2\O2 Pilot.cs" />
     <Compile Include="Gauges\O2\O2.cs" />
-    <Compile Include="Gauges\Radio\ARC-210.cs" />
+    <Compile Include="Gauges\Radios\ARC-210.cs" />
     <Compile Include="Gauges\Trim\ElevatorTrim.cs" />
     <Compile Include="Gauges\Trim\Flaps.cs" />
     <Compile Include="Gauges\Trim\RudderTrim.cs" />
@@ -95,6 +95,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gauges\Radios\ARC210_1_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_1_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_2_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_2_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_3_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_3_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_4_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_4_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_Knob_1.png" />
+    <Resource Include="Gauges\Radios\ARC210_Knob_2.png" />
+    <Resource Include="Gauges\Radios\ARC210_Knob_3.png" />
+    <Resource Include="Gauges\Radios\ARC210_Panel.png" />
+    <Resource Include="Gauges\Radios\ARC210_Display.png" />
     <Content Include="Templates\Base\C-130J\8 Nose Wheel.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

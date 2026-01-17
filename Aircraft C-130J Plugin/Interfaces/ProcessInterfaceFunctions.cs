@@ -348,8 +348,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 suppressExport = true;
                 fd.Arg = new string[] { _nullArgCounter++.ToString() };
             }
-            _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], category, name, suppressExport?null:"%.1f"));
-            return $"AddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{category}\", \"{name}\", {(suppressExport ? "null":"\"%.1f\"")}));";
+            _functionList.Add(new PushButton(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0].TrimStart('0'), category, name, suppressExport?null:"%.1f"));
+            return $"AddFunction(new PushButton(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0].TrimStart('0')}\", \"{category}\", \"{name}\", {(suppressExport ? "null":"\"%.1f\"")}));";
         }
         private static string BuildFnToggle(FunctionData fd)
         {
@@ -368,8 +368,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 startVal = "1.0";
                 endVal = "0.0";
             }
-            _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], startVal, "OPEN", endVal, "CLOSE", category, name, "%0.1f"));
-            return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{startVal}\", \"OPEN\", \"{endVal}\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
+            _functionList.Add(Switch.CreateToggleSwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0].TrimStart('0'), startVal, "OPEN", endVal, "CLOSE", category, name, "%0.1f"));
+            return $"AddFunction(Switch.CreateToggleSwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0].TrimStart('0')}\", \"{startVal}\", \"OPEN\", \"{endVal}\", \"CLOSE\", \"{category}\", \"{name}\", \"%0.1f\"));";
         }
         
         private static string BuildFnThreeWayToggle(FunctionData fd)
@@ -392,8 +392,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {
                 fd.Arg[0] = arg.ToString();
             }
-            _functionList.Add(Switch.CreateThreeWaySwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0], startVal, "Posn 1", midVal, "Posn 2", endVal, "Posn 3", category, name, "%0.1f"));
-            return $"AddFunction(Switch.CreateThreeWaySwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0]}\", \"{startVal}\", \"Posn 1\", \"{midVal}\", \"Posn 2\", \"{endVal}\", \"Posn 3\", \"{category}\", \"{name}\", \"%0.1f\"));";
+            _functionList.Add(Switch.CreateThreeWaySwitch(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Command[0]), fd.Arg[0].TrimStart('0'), startVal, "Posn 1", midVal, "Posn 2", endVal, "Posn 3", category, name, "%0.1f"));
+            return $"AddFunction(Switch.CreateThreeWaySwitch(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{fd.Arg[0].TrimStart('0')}\", \"{startVal}\", \"Posn 1\", \"{midVal}\", \"Posn 2\", \"{endVal}\", \"Posn 3\", \"{category}\", \"{name}\", \"%0.1f\"));";
         }
 
         private static string BuildFnMultiSwitchStop(FunctionData fd)
@@ -413,7 +413,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             double endVal = Convert.ToDouble(dt.Compute(fd.Val[2].Replace("}", ""), ""));
             double intervalVal = Convert.ToDouble(dt.Compute(fd.Val[3], ""));
             int positions = Convert.ToInt32(((endVal - startVal) / intervalVal) + 1);
-            invert = fd.Val[0] == "74" ? false : invert;
+            invert = (fd.Fn == "multiswitch" && positions == 3) ? true : invert;
             if (invert)
             {
                 double tempVal = endVal;

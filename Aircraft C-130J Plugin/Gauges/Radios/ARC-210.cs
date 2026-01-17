@@ -23,11 +23,9 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Globalization;
-    using System.Security.RightsManagement;
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
-    using static GadrocsWorkshop.Helios.Interfaces.DCS.Common.NetworkTriggerValue;
 
     /// <summary>
     /// This is an A-10C UHF Radio that uses text displays instead of an exported viewport.
@@ -37,7 +35,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
     {
         //private const double SCREENRES = 1.0;
         private readonly string _interfaceDeviceName = "ARC-210";
-        private readonly string _imageLocation = "{A-10C}/Images/A-10CII/";
+        private readonly string _imageLocation = "{C-130J}/Gauges/Radios/";
         private bool _useTextualDisplays = true;
         private ImageDecoration _displayBackground;
         private bool _includeViewport = true;
@@ -46,42 +44,55 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
         private string _font = "Helios Virtual Cockpit A-10C_ARC-210_Large";
         private string _font2 = "Helios Virtual Cockpit A-10C_ARC-210_Small";
         private List<TextDisplay> _textDisplayList = new List<TextDisplay>();
+        private HeliosValue _hv, _hvBrightness;
+        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private HeliosAction _incrementBrightnessAction;
+        private HeliosAction _decrementBrightnessAction;
+        private double _displayBrightness = 8;
 
         public ARC210Radio()
-            : base("ARC-210 Radio", new Size(640, 523))
+            : base("ARC-210 Radio", new Size(500, 401))
         {
 
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.C130J.C130JInterface) };
 
-            HeliosValue hv = new HeliosValue(this, new BindingValue(false), "", "clear radio display", "When true, the display is cleared.", "True or False", BindingValueUnits.Boolean);
-            hv.Execute += new HeliosActionHandler(ClearDisplay_Execute);
-            Actions.Add(hv);
-            Values.Add(hv);
+            _hv = new HeliosValue(this, new BindingValue(false), "", "clear radio display", "When true, the display is cleared.", "True or False", BindingValueUnits.Boolean);
+            _hv.Execute += new HeliosActionHandler(ClearDisplay_Execute);
+            Actions.Add(_hv);
+            Values.Add(_hv);
 
-            _displayBackground = AddImage($"{_imageLocation}ARC-210_Display.png", new Point(148d, 91d), new Size(297d,193d), $"{_imageLocation}ARC-210_Display.png");
+            _incrementBrightnessAction = new HeliosAction(this, "", "display brightness", "increment", "Increments the display brightness.");
+            _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
+            Actions.Add(_incrementBrightnessAction);
+
+            _decrementBrightnessAction = new HeliosAction(this, "", "display brightness", "decrement", "decrements the display brightness.");
+            _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
+            Actions.Add(_decrementBrightnessAction);
+
+            _displayBackground = AddImage($"{_imageLocation}ARC210_Display.png", new Point(116d, 75d), new Size(230d, 144d), $"{_imageLocation}ARC210_Display.png");
             UseTextualDisplays = false;
 
-            _textDisplayList.Add(AddTextDisplay("Frequency Display", new Point(180, 223), new Size(259, 72), _interfaceDeviceName, "Frequency Display", _font, 40, "133.888", TextHorizontalAlignment.Right, ""));
-            _textDisplayList.Add(AddTextDisplay("Modulation Mode", new Point(360, 194), new Size(72, 42), _interfaceDeviceName, "Modulation Mode", 20, "AM", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("XMIT/RECV Label", new Point(260, 194), new Size(72, 42), _interfaceDeviceName, "XMIT/RECV Label", 20, "XMIT", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Communications Security Mode", new Point(150, 150), new Size(291, 42), _interfaceDeviceName, "Communications Security Mode", 20, "KY-58 VOICE", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Communications Security Submode", new Point(150, 175), new Size(291, 48), _interfaceDeviceName, "Communications Security Submode", 20, "PT", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Display of Previous Manual Frequency", new Point(240, 90), new Size(180, 32), _interfaceDeviceName, "Display of Previous Manual Frequency", 20, "133.100", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("RT Label", new Point(368, 85), new Size(68, 42), _interfaceDeviceName, "RT Label", 20, "RT1", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("Frequency Display", new Point(140, 172), new Size(197, 52), _interfaceDeviceName, "Frequency Display", _font, 29, "133.888", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("Modulation Mode", new Point(277, 151), new Size(55, 30), _interfaceDeviceName, "Modulation Mode", 15, "AM", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("XMIT/RECV Label", new Point(201, 151), new Size(55, 30), _interfaceDeviceName, "XMIT/RECV Label", 15, "XMIT", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Communications Security Mode", new Point(118, 119), new Size(221, 30), _interfaceDeviceName, "Communications Security Mode", 15, "KY-58 VOICE", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Communications Security Submode", new Point(118, 137), new Size(221, 35), _interfaceDeviceName, "Communications Security Submode", 15, "PT", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Display of Previous Manual Frequency", new Point(186, 75), new Size(137, 23), _interfaceDeviceName, "Display of Previous Manual Frequency", 15, "133.100", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("RT Label", new Point(283, 72), new Size(52, 30), _interfaceDeviceName, "RT Label", 15, "RT1", TextHorizontalAlignment.Right, ""));
 
-            _textDisplayList.Add(AddTextDisplay("Upper Button Label", new Point(151, 90), new Size(280, 32), _interfaceDeviceName, "Upper FSK Label", 20, "LABEL 1", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Middle Button Label", new Point(151, 154), new Size(300, 64), _interfaceDeviceName, "Middle FSK Label", 20, "LABEL 2", TextHorizontalAlignment.Left, TextVerticalAlignment.Center, ""));
-            _textDisplayList.Add(AddTextDisplay("Lower Button Label", new Point(151, 249), new Size(280, 32), _interfaceDeviceName, "Lower FSK Label", 20, "LABEL 3", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Upper Button Label", new Point(118, 75), new Size(213, 23), _interfaceDeviceName, "Upper FSK Label", 15, "LABEL 1", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Middle Button Label", new Point(118, 122), new Size(228, 46), _interfaceDeviceName, "Middle FSK Label", 15, "LABEL 2", TextHorizontalAlignment.Left, TextVerticalAlignment.Center, ""));
+            _textDisplayList.Add(AddTextDisplay("Lower Button Label", new Point(118, 191), new Size(213, 23), _interfaceDeviceName, "Lower FSK Label", 15, "LABEL 3", TextHorizontalAlignment.Left, ""));
 
-            _textDisplayList.Add(AddTextDisplay("Preset Display", new Point(368, 125), new Size(68, 72), _interfaceDeviceName, "Active Channel Number", _font, 40, "88", TextHorizontalAlignment.Right, ""));
-            _textDisplayList.Add(AddTextDisplay("SatCom Type", new Point(344, 182), new Size(92, 42), _interfaceDeviceName, "Sat comm channel type", 20, "IDLE", TextHorizontalAlignment.Right, ""));
-            _textDisplayList.Add(AddTextDisplay("SatCom Timeout", new Point(156, 125), new Size(140, 32), _interfaceDeviceName, "Sat comm activated time remaining", 20, "00:00:00", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("SatCom Status", new Point(220, 223), new Size(270, 72), _interfaceDeviceName, "Sat comm activated status", _font, 40, "ACTIVE", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Lower Left Number", new Point(151, 240), new Size(72, 32), _interfaceDeviceName, "Comm security sat comm delay", 20, "5", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Lower Right Status", new Point(252, 214), new Size(188, 64), _interfaceDeviceName, "Sat comm connection status", 20, "LOGGED IN-\nCONNECTING", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("SatCom Channel Label", new Point(275, 90), new Size(120, 32), _interfaceDeviceName, "Sat comm channel label", 20, "DAMA", TextHorizontalAlignment.Left, ""));
-            _textDisplayList.Add(AddTextDisplay("Central Information Area", new Point(148, 91), new Size(297, 193), _interfaceDeviceName, "KY label", 20, "DAMA\nCOMSEC\nPARAMETRS\nUPDATED", TextHorizontalAlignment.Center, TextVerticalAlignment.Center,  ""));
-            _textDisplayList.Add(AddTextDisplay("WOD Segment Display", new Point(270, 160), new Size(68, 72), _interfaceDeviceName, "WOD Segment Display", _font, 40, "20", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("Preset Display", new Point(283, 101), new Size(52, 52), _interfaceDeviceName, "Active Channel Number", _font, 29, "88", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Type", new Point(265, 142), new Size(70, 30), _interfaceDeviceName, "Sat comm channel type", 15, "IDLE", TextHorizontalAlignment.Right, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Timeout", new Point(122, 101), new Size(107, 23), _interfaceDeviceName, "Sat comm activated time remaining", 15, "00:00:00", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Status", new Point(171, 172), new Size(205, 52), _interfaceDeviceName, "Sat comm activated status", _font, 29, "ACTIVE", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Lower Left Number", new Point(118, 184), new Size(55, 23), _interfaceDeviceName, "Comm security sat comm delay", 15, "5", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Lower Right Status", new Point(195, 165), new Size(143, 46), _interfaceDeviceName, "Sat comm connection status", 15, "LOGGED IN-\nCONNECTING", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("SatCom Channel Label", new Point(213, 75), new Size(91, 23), _interfaceDeviceName, "Sat comm channel label", 15, "DAMA", TextHorizontalAlignment.Left, ""));
+            _textDisplayList.Add(AddTextDisplay("Central Information Area", new Point(116, 76), new Size(226, 140), _interfaceDeviceName, "KY label", 15, "DAMA\nCOMSEC\nPARAMETRS\nUPDATED", TextHorizontalAlignment.Center, TextVerticalAlignment.Center, ""));
+            _textDisplayList.Add(AddTextDisplay("WOD Segment Display", new Point(209, 126), new Size(52, 52), _interfaceDeviceName, "WOD Segment Display", _font, 29, "20", TextHorizontalAlignment.Right, ""));
 
             RotarySwitchPositionCollection positions = new RotarySwitchPositionCollection();
             positions.Clear();
@@ -92,7 +103,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
             positions.Add(new RotarySwitchPosition(this, 5, "CHG PRST", 45d));
             positions.Add(new RotarySwitchPosition(this, 6, "TEST", 90d));
             positions.Add(new RotarySwitchPosition(this, 7, "ZERO (PULL)", 135d));
-            AddRotarySwitch("Master switch", new Point(119, 418), new Size(90, 90), $"{_imageLocation}ARC-210_Rotary_Switch.png", 1, positions, "Operational Mode Switch");
+            AddRotarySwitch("Operational Mode Switch", new Point(107, 327), new Size(50, 50), $"{_imageLocation}ARC210_Knob_2.png", 1, positions, "Operational Mode Switch");
             positions.Clear();
             positions.Add(new RotarySwitchPosition(this, 1, "ECCM MASTER", 225d));
             positions.Add(new RotarySwitchPosition(this, 2, "ECCM", 270d));
@@ -101,36 +112,36 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
             positions.Add(new RotarySwitchPosition(this, 5, "MAR", 45d));
             positions.Add(new RotarySwitchPosition(this, 6, "243", 90d));
             positions.Add(new RotarySwitchPosition(this, 7, "121 (PULL)", 135d));
-            AddRotarySwitch("Secondary switch", new Point(430, 418), new Size(90, 90), $"{_imageLocation}ARC-210_Rotary_Switch.png", 1, positions, "Frequency Mode Switch");
+            AddRotarySwitch("Frequency Mode Switch", new Point(341, 327), new Size(50, 50), $"{_imageLocation}ARC210_Knob_2.png", 1, positions, "Frequency Mode Switch");
 
             RotaryEncoder enc;
-            enc = AddEncoder("Channel select knob", new Point(276, 420), new Size(82,82),  $"{_imageLocation}ARC-210_Channel_Knob.png", 0.1d, 30d, _interfaceDeviceName, "Channel Selector", false);
+            enc = AddEncoder("Channel Selector", new Point(223, 326), new Size(54,54),  $"{_imageLocation}ARC210_Knob_3.png", 0.1d, 30d, _interfaceDeviceName, "Channel Selector", false);
             enc.InitialRotation = 15;
 
-            AddPushButton("Upper FSK", 44, 91, new Size(44, 30), $"{_imageLocation}ARC-210_Button_FSK_Up.png", "LSK 1");
-            AddPushButton("Middle FSK", 44, 171, new Size(44, 30), $"{_imageLocation}ARC-210_Button_FSK_Up.png", "LSK 2");
-            AddPushButton("Lower FSK", 44, 251, new Size(44, 30), $"{_imageLocation}ARC-210_Button_FSK_Up.png", "LSK 3");
+            AddPushButton("LSK 1", 36, 77, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "LSK 1");
+            AddPushButton("LSK 2", 36, 137, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "LSK 2");
+            AddPushButton("LSK 3", 36, 197, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "LSK 3");
 
-            AddPushButton("Brightness increase", 16, 304, new Size(35, 43), $"{_imageLocation}ARC-210_Button_UpArrow_Up.png", "Brightness Increase");
-            AddPushButton("Brightness decrease", 16, 383, new Size(35, 43), $"{_imageLocation}ARC-210_Button_DownArrow_Up.png", "Brightness Decrease");
+            AddPushButton("Brightness Increase", 20, 241, new Size(22, 28), $"{_imageLocation}ARC210_3_Norm.png", "Brightness Increase");
+            AddPushButton("Brightness Decrease", 20, 297, new Size(22, 28), $"{_imageLocation}ARC210_3_Norm.png", "Brightness Decrease");
 
-            AddPushButton("Time of day send", 121, 7, new Size(45, 33), $"{_imageLocation}ARC-210_Button_Up.png", "TOD SND Key");
-            AddPushButton("Time of day receive", 243, 7, new Size(45, 33), $"{_imageLocation}ARC-210_Button_Up.png", "TOD RCV Key");
-            AddPushButton("Global positioning system", 331, 7, new Size(45, 33), $"{_imageLocation}ARC-210_Button_Up.png", "GPS Key");
-            AddPushButton("Select receiver - transmitter", 417, 7, new Size(70, 33), $"{_imageLocation}ARC-210_WideButton_Up.png", "RT SELECT Key");
+            AddPushButton("TOD SND Key", 95, 14, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "TOD SND Key");
+            AddPushButton("TOD RCV Key", 184, 14, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "TOD RCV Key");
+            AddPushButton("GPS Key", 249, 14, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "GPS Key");
+            AddPushButton("RT SELECT Key", 312, 14, new Size(53, 21), $"{_imageLocation}ARC210_1_Norm.png", "RT SELECT Key");
 
-            AddPushButton("Menu pages", 494, 177, new Size(45, 33), $"{_imageLocation}ARC-210_Button_Up.png", "MENU/TIME Key");
-            AddPushButton("Amplitude modulation / frequency modulation select", 579, 177, new Size(45, 33), $"{_imageLocation}ARC-210_Button_Up.png", "AM/FM Key");
-            AddPushButton("Transmit / receive function toggle", 494, 254, new Size(45, 33), $"{_imageLocation}ARC-210_Button_Up.png", "XMT/REC or SEND Key");
-            AddPushButton("Offset frequency", 579, 254, new Size(45, 33), $"{_imageLocation}ARC-210_Button_Up.png", "OFFSET or RCV Key");
-            AddPushButton("Enter", 585, 323, new Size(45, 101), $"{_imageLocation}ARC-210_Button_Enter_Up.png", "ENTER Key");
+            AddPushButton("MENU/TIME Key", 380, 138, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "MENU/TIME Key");
+            AddPushButton("AM/FM Key", 454, 138, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "AM/FM Key");
+            AddPushButton("XMT/REC or SEND Key", 380, 196, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "XMT/REC or SEND Key");
+            AddPushButton("OFFSET or RCV Key", 454, 196, new Size(29d, 21d), $"{_imageLocation}ARC210_2_Norm.png", "OFFSET or RCV Key");
+            AddPushButton("ENTER Key", 457, 249, new Size(30, 73), $"{_imageLocation}ARC210_4_Norm.png", "ENTER Key");
 
             positions.Clear();
             positions.Add(new RotarySwitchPosition(this, 1, "0 MHz", 330d));
             positions.Add(new RotarySwitchPosition(this, 2, "100 MHz", 350d));
             positions.Add(new RotarySwitchPosition(this, 3, "200 MHz", 10d));
             positions.Add(new RotarySwitchPosition(this, 4, "300 MHz", 30d));
-            AddRotarySwitch("100 MHz Selector", new Point(77, 329), new Size(70, 70), $"{_imageLocation}ARC-210_Frequency_Knob.png", 1, positions, "100 MHz Selector");
+            AddRotarySwitch("100 MHz Selector", new Point(69, 263), new Size(40,40), $"{_imageLocation}ARC210_Knob_1.png", 1, positions, "100 MHz Selector");
 
             positions.Clear();
             positions.Add(new RotarySwitchPosition(this, 1, "0 MHz",  270d));
@@ -143,7 +154,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
             positions.Add(new RotarySwitchPosition(this, 8, "70 MHz", 50d));
             positions.Add(new RotarySwitchPosition(this, 9, "80 MHz", 70d));
             positions.Add(new RotarySwitchPosition(this, 10, "90 MHz", 90d));
-            AddRotarySwitch("10 MHz Selector", new Point(182, 329), new Size(70, 70), $"{_imageLocation}ARC-210_Frequency_Knob.png", 1, positions, "10 MHz Selector");
+            AddRotarySwitch("10 MHz Selector", new Point(152, 265), new Size(36, 36), $"{_imageLocation}ARC210_Knob_1.png", 1, positions, "10 MHz Selector");
 
             positions.Clear();
             positions.Add(new RotarySwitchPosition(this, 1, "0 MHz", 270d));
@@ -156,7 +167,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
             positions.Add(new RotarySwitchPosition(this, 8, "7 MHz", 50d));
             positions.Add(new RotarySwitchPosition(this, 9, "8 MHz", 70d));
             positions.Add(new RotarySwitchPosition(this, 10, "9 MHz", 90d));
-            AddRotarySwitch("1 MHz Selector", new Point(288, 329), new Size(70, 70), $"{_imageLocation}ARC-210_Frequency_Knob.png", 1, positions, "1 MHz Selector");
+            AddRotarySwitch("1 MHz Selector", new Point(233, 265), new Size(36, 36), $"{_imageLocation}ARC210_Knob_1.png", 1, positions, "1 MHz Selector");
 
             positions.Clear();
             positions.Add(new RotarySwitchPosition(this, 1, "0 KHz",   270d));
@@ -169,20 +180,20 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
             positions.Add(new RotarySwitchPosition(this, 8, "700 KHz", 50d));
             positions.Add(new RotarySwitchPosition(this, 9, "800 KHz", 70d));
             positions.Add(new RotarySwitchPosition(this, 10, "900 KHz", 90d));
-            AddRotarySwitch("100 KHz Selector", new Point(388, 329), new Size(70, 70), $"{_imageLocation}ARC-210_Frequency_Knob.png", 1, positions, "100 KHz Selector");
+            AddRotarySwitch("100 KHz Selector", new Point(313, 265), new Size(36, 36), $"{_imageLocation}ARC210_Knob_1.png", 1, positions, "100 KHz Selector");
 
             positions.Clear();
             positions.Add(new RotarySwitchPosition(this, 1, "0 KHz", 330d));
             positions.Add(new RotarySwitchPosition(this, 2, "25 KHz", 350d));
             positions.Add(new RotarySwitchPosition(this, 3, "50 KHz", 10d));
             positions.Add(new RotarySwitchPosition(this, 4, "75 KHz", 30d));
-            AddRotarySwitch("25 KHz Selector", new Point(494, 329), new Size(70, 70), $"{_imageLocation}ARC-210_Frequency_Knob.png", 1, positions, "25 KHz Selector");
+            AddRotarySwitch("25 KHz Selector", new Point(395, 265), new Size(36, 36), $"{_imageLocation}ARC210_Knob_1.png", 1, positions, "25 KHz Selector");
 
             positions.Clear();
             positions.Add(new RotarySwitchPosition(this, 1, "OFF", 330d));
             positions.Add(new RotarySwitchPosition(this, 2, "ON", 30d));
-            AddRotarySwitch("Squelch on/off", new Point(506, 74), new Size(70, 70), $"{_imageLocation}ARC-210_Squelch_Knob.png", 1, positions, "Squelch Switch");
-            UseTextualDisplays = false;
+            AddRotarySwitch("Squelch Switch", new Point(385, 68), new Size(44, 44), $"{_imageLocation}ARC210_Knob_3.png", 1, positions, "Squelch Switch");
+
 
             // this is to allow the displays to be cleared when the OFF switch is selected.
             DefaultSelfBindings.Add(new DefaultSelfBinding(
@@ -192,10 +203,24 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
                 actionChildName: "",
                 deviceActionName: "set.clear radio display"
                 ));
+            DefaultSelfBindings.Add(new DefaultSelfBinding(
+                triggerChildName: "",
+                deviceTriggerName: "ARC-210 Radio_Brightness Increase.pushed",
+                deviceTriggerBindingValue: null,
+                actionChildName: "",
+                deviceActionName: "increment.display brightness"
+                ));
+            DefaultSelfBindings.Add(new DefaultSelfBinding(
+                triggerChildName: "",
+                deviceTriggerName: "ARC-210 Radio_Brightness Decrease.pushed",
+                deviceTriggerBindingValue: null,
+                actionChildName: "",
+                deviceActionName: "decrement.display brightness"
+                ));
 
         }
 
-        public override string DefaultBackgroundImage => _imageLocation + "ARC-210_Faceplate.png";
+        public override string DefaultBackgroundImage => _imageLocation + "ARC210_Panel.png";
 
         public bool UseTextualDisplays
         {
@@ -267,7 +292,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
                 posn: pos,
                 size: size,
                 image: buttonImage,
-                pushedImage: buttonImage.Replace("_Up.", "_Down."),
+                pushedImage: buttonImage.Replace("_Norm.", "_Pressed."),
                 buttonText: "",
                 interfaceDeviceName: _interfaceDeviceName,
                 interfaceElementName: interfaceElement,
@@ -318,12 +343,13 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
         }
         private TextDisplay AddTextDisplay(string name, Point posn, Size size,
                 string interfaceDeviceName, string interfaceElementName, string fontFamily, double baseFontsize, string testDisp, 
-                TextHorizontalAlignment hTextAlign, TextVerticalAlignment vTextAlign, string devDictionary)
+                TextHorizontalAlignment hTextAlign, TextVerticalAlignment vTextAlign, string devDictionary) 
         {
+
             TextDisplay display = AddTextDisplay(
                 name: name,
                 posn: posn,
-            size: size,
+                size: size,
                 font: fontFamily,
                 baseFontsize: baseFontsize,
                 horizontalAlignment: hTextAlign,
@@ -361,7 +387,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
 
         private void AddViewport(string name)
         {
-            Rect vpRect = new Rect(147, 90, 299, 195);
+            Rect vpRect = new Rect(114d, 74d, 230d, 144d);
             vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
             TextFormat tf = new TextFormat()
             {
@@ -402,12 +428,36 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
         }
         private void ClearDisplay_Execute(object action, HeliosActionEventArgs e)
         {
-            if(e.Value.BoolValue)
+            if (e.Value.BoolValue)
             {
-                foreach(TextDisplay td in _textDisplayList)
+                foreach (TextDisplay td in _textDisplayList)
                 {
-                        td.TextValue = "";
+                    td.TextValue = "";
                 }
+            }
+        }
+        private void DisplayBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            double brightness = e.Value.DoubleValue / 10d ;
+            foreach (TextDisplay td in _textDisplayList)
+            {
+                td.OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)0x78 * brightness), Convert.ToByte((double)0xdf * brightness), Convert.ToByte((double)0x9d * brightness));
+            }
+        }
+        private void IncrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            _displayBrightness = _displayBrightness >= 10 ? 10 : ++_displayBrightness;
+            foreach (TextDisplay td in _textDisplayList)
+            {
+                td.OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)0x78 * _displayBrightness / 10d), Convert.ToByte((double)0xdf * _displayBrightness / 10d), Convert.ToByte((double)0x9d * _displayBrightness / 10d));
+            }
+        }
+        private void DecrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            _displayBrightness = _displayBrightness <= 0 ? 0 : --_displayBrightness;
+            foreach (TextDisplay td in _textDisplayList)
+            {
+                td.OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)0x78 * _displayBrightness / 10d), Convert.ToByte((double)0xdf * _displayBrightness / 10d), Convert.ToByte((double)0x9d * _displayBrightness / 10d));
             }
         }
         public override void MouseDown(Point location)

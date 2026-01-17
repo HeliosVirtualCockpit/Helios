@@ -5,7 +5,7 @@
 	<Template>
 		<TemplateValues>
 			<Location>0,0</Location>
-			<Size>640,523</Size>
+			<Size>500,401</Size>
 			<Hidden>False</Hidden>
 			<EmbeddedViewportName>C130J_ARC210_SCREEN</EmbeddedViewportName>
 			<RequiresPatches>True</RequiresPatches>
