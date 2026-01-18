@@ -19,6 +19,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
     using GadrocsWorkshop.Helios.ComponentModel;
     using GadrocsWorkshop.Helios.Controls;
     using GadrocsWorkshop.Helios.Controls.Capabilities;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.C130J;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
+    using System.Xml.Linq;
 
     /// <summary>
     /// This is an A-10C UHF Radio that uses text displays instead of an exported viewport.
@@ -204,12 +206,31 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
                 deviceActionName: "set.clear radio display"
                 ));
             DefaultSelfBindings.Add(new DefaultSelfBinding(
+                triggerChildName: "ARC-210 Radio_Operational Mode Switch",
+                deviceTriggerName: "position 1.exited",
+                deviceTriggerBindingValue: new BindingValue(false),
+                actionChildName: "",
+                deviceActionName: "set.clear radio display"
+                ));
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "ARC-210.Operational Mode Switch.changed",
+                deviceActionName: "set.clear radio display",
+                triggerBindingSource: BindingValueSources.LuaScript,
+                triggerBindingValue: new BindingValue("return TriggerValue==1")
+                );
+            DefaultSelfBindings.Add(new DefaultSelfBinding(
                 triggerChildName: "",
                 deviceTriggerName: "ARC-210 Radio_Brightness Increase.pushed",
                 deviceTriggerBindingValue: null,
                 actionChildName: "",
                 deviceActionName: "increment.display brightness"
                 ));
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "ARC-210.Brightness Increase.changed",
+                deviceActionName: "increment.display brightness"
+                );
             DefaultSelfBindings.Add(new DefaultSelfBinding(
                 triggerChildName: "",
                 deviceTriggerName: "ARC-210 Radio_Brightness Decrease.pushed",
@@ -217,7 +238,11 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
                 actionChildName: "",
                 deviceActionName: "decrement.display brightness"
                 ));
-
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "ARC-210.Brightness Decrease.changed",
+                deviceActionName: "decrement.display brightness"
+                );
         }
 
         public override string DefaultBackgroundImage => _imageLocation + "ARC210_Panel.png";
@@ -428,12 +453,9 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
         }
         private void ClearDisplay_Execute(object action, HeliosActionEventArgs e)
         {
-            if (e.Value.BoolValue)
+            foreach (TextDisplay td in _textDisplayList)
             {
-                foreach (TextDisplay td in _textDisplayList)
-                {
-                    td.TextValue = "";
-                }
+                td.IsHidden = e.Value.BoolValue;
             }
         }
         private void DisplayBrightness_Execute(object action, HeliosActionEventArgs e)

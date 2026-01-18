@@ -182,7 +182,20 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
                 actionChildName: "",
                 deviceActionName: "set.clear radio display"
                 ));
-
+            DefaultSelfBindings.Add(new DefaultSelfBinding(
+                triggerChildName: "ARC-210 Radio_Master switch",
+                deviceTriggerName: "position 1.exited",
+                deviceTriggerBindingValue: new BindingValue(false),
+                actionChildName: "",
+                deviceActionName: "set.clear radio display"
+                ));
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "ARC-210.Master switch.changed",
+                deviceActionName: "set.clear radio display",
+                triggerBindingSource: BindingValueSources.LuaScript,
+                triggerBindingValue: new BindingValue("return TriggerValue==1")
+                );
         }
 
         public override string DefaultBackgroundImage => _imageLocation + "ARC-210_Faceplate.png";
@@ -382,12 +395,9 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
         }
         private void ClearDisplay_Execute(object action, HeliosActionEventArgs e)
         {
-            if(e.Value.BoolValue)
+            foreach(TextDisplay td in _textDisplayList)
             {
-                foreach(TextDisplay td in _textDisplayList)
-                {
-                        td.TextValue = "";
-                }
+                    td.IsHidden = e.Value.BoolValue;
             }
         }
         public override void ReadXml(XmlReader reader)

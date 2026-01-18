@@ -413,7 +413,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             double endVal = Convert.ToDouble(dt.Compute(fd.Val[2].Replace("}", ""), ""));
             double intervalVal = Convert.ToDouble(dt.Compute(fd.Val[3], ""));
             int positions = Convert.ToInt32(((endVal - startVal) / intervalVal) + 1);
-            invert = (fd.Fn == "multiswitch" && positions == 3) ? true : invert;
+            invert = (fd.Fn == "multiswitch" && ( positions == 3 || positions == 2) && !(fd.Val[0]=="532")) ? true : invert;
             if (invert)
             {
                 double tempVal = endVal;
