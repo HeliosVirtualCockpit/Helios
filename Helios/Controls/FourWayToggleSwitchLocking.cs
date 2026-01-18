@@ -22,18 +22,20 @@ namespace GadrocsWorkshop.Helios.Controls
     using System;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.LockingThreeWayToggleSwitch", "Locking Three Way Toggle Switch", "Toggle Switches (Multi-Way)", typeof(ThreeWayToggleSwitchRenderer), HeliosControlFlags.None)]
-    public class ThreeWayToggleSwitchLocking : ThreeWayToggleSwitch
+    [HeliosControl("Helios.Base.LockingFourWayToggleSwitch", "Locking \"Y\" Toggle Switches", "Toggle Switches (Multi-Way)", typeof(FourWayToggleSwitchRenderer), HeliosControlFlags.None)]
+    public class FourWayToggleSwitchLocking : FourWayToggleSwitch
     {
         private HeliosValue _positionOneLockValue;
         private HeliosValue _positionTwoLockValue;
         private HeliosValue _positionThreeLockValue;
+        private HeliosValue _positionCenterLockValue;
 
         private bool _positionOneLocked = false; 
-        private bool _positionTwoLocked = false; 
+        private bool _positionTwoLocked = false;
         private bool _positionThreeLocked = false;
-        public ThreeWayToggleSwitchLocking() : this("Locking Three Way Toggle Switch", new System.Windows.Size(50, 100)) {}
-        public ThreeWayToggleSwitchLocking(string name, System.Windows.Size size)
+        private bool _positionCenterLocked = false;
+        public FourWayToggleSwitchLocking() : this("Locking Four Way Toggle Switch", new System.Windows.Size(100, 100)) {}
+        public FourWayToggleSwitchLocking(string name, System.Windows.Size size)
             : base(name, size)
         {
             _positionOneLockValue = new HeliosValue(this, BindingValue.Empty, "", "position one lock", "Lock Position 1.", "True / False", BindingValueUnits.Boolean);
@@ -48,6 +50,10 @@ namespace GadrocsWorkshop.Helios.Controls
             _positionThreeLockValue.Execute += PositionThreeLock_Execute;
             Values.Add(_positionThreeLockValue);
             Actions.Add(_positionThreeLockValue);
+            _positionCenterLockValue = new HeliosValue(this, BindingValue.Empty, "", "Center position lock", "Lock Center Position.", "True / False", BindingValueUnits.Boolean);
+            _positionCenterLockValue.Execute += PositionCenterLock_Execute;
+            Values.Add(_positionCenterLockValue);
+            Actions.Add(_positionCenterLockValue);
 
         }
 
@@ -67,6 +73,10 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             _positionThreeLocked = e.Value.BoolValue;
         }
+        void PositionCenterLock_Execute(object action, HeliosActionEventArgs e)
+        {
+            _positionCenterLocked = e.Value.BoolValue;
+        }
         #region HeliosControl Implementation
 
         public override void Reset()
@@ -84,16 +94,16 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 switch (SwitchPosition)
                 {
-                    case ThreeWayToggleSwitchPosition.One:
+                    case FourWayToggleSwitchPosition.One:
                         if (!_positionTwoLocked)
                         {
-                            SwitchPosition = ThreeWayToggleSwitchPosition.Two;
+                            SwitchPosition = FourWayToggleSwitchPosition.Two;
                         }
                         break;
-                    case ThreeWayToggleSwitchPosition.Two:
+                    case FourWayToggleSwitchPosition.Two:
                         if (!_positionThreeLocked)
                         {
-                            SwitchPosition = ThreeWayToggleSwitchPosition.Three;
+                            SwitchPosition = FourWayToggleSwitchPosition.Three;
                         }
                         break;
                 }                
@@ -102,16 +112,16 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 switch (SwitchPosition)
                 {
-                    case ThreeWayToggleSwitchPosition.Two:
+                    case FourWayToggleSwitchPosition.Two:
                         if (!_positionOneLocked)
                         {
-                            SwitchPosition = ThreeWayToggleSwitchPosition.One;
+                            SwitchPosition = FourWayToggleSwitchPosition.One;
                         }
                         break;
-                    case ThreeWayToggleSwitchPosition.Three:
+                    case FourWayToggleSwitchPosition.Three:
                         if (!_positionTwoLocked)
                         {
-                            SwitchPosition = ThreeWayToggleSwitchPosition.Two;
+                            SwitchPosition = FourWayToggleSwitchPosition.Two;
                         }
                         break;
                 }
@@ -124,21 +134,21 @@ namespace GadrocsWorkshop.Helios.Controls
 
             switch (SwitchPosition)
             {
-                case ThreeWayToggleSwitchPosition.One:
-                    if (SwitchType == ThreeWayToggleSwitchType.MomOnMom || SwitchType == ThreeWayToggleSwitchType.MomOnOn)
+                case FourWayToggleSwitchPosition.One:
+                    if (SwitchType1 == FourWayToggleSwitchType.Mom || SwitchType1 == FourWayToggleSwitchType.On)
                     {
                         if (!_positionTwoLocked)
                         {
-                            SwitchPosition = ThreeWayToggleSwitchPosition.Two;
+                            SwitchPosition = FourWayToggleSwitchPosition.Two;
                         }
                     }
                     break;
-                case ThreeWayToggleSwitchPosition.Three:
-                    if (SwitchType == ThreeWayToggleSwitchType.OnOnMom || SwitchType == ThreeWayToggleSwitchType.MomOnMom)
+                case FourWayToggleSwitchPosition.Three:
+                    if (SwitchType3 == FourWayToggleSwitchType.On || SwitchType3 == FourWayToggleSwitchType.Mom)
                     {
                         if (!_positionTwoLocked)
                         {
-                            SwitchPosition = ThreeWayToggleSwitchPosition.Two;
+                            SwitchPosition = FourWayToggleSwitchPosition.Two;
                         }
                     }
                     break;
@@ -169,7 +179,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     if (newPosition > 0 && newPosition <= 3)
                     {
-                        SwitchPosition = (ThreeWayToggleSwitchPosition)newPosition;
+                        SwitchPosition = (FourWayToggleSwitchPosition)newPosition;
                     }
                 }
                 EndTriggerBypass(e.BypassCascadingTriggers);

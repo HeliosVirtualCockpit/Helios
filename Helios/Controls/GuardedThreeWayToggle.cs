@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System;
     using System.Windows;
 
-    [HeliosControl("Helios.Base.GuardedThreeWayToggle", "Guarded Three Way Toggle Switch", "Three Way Toggle Switches", typeof(GuardedThreeWayToggleRenderer))]
+    [HeliosControl("Helios.Base.GuardedThreeWayToggle", "Guarded Three Way Toggle Switch", "Toggle Switches (Multi-Way)", typeof(GuardedThreeWayToggleRenderer))]
     public class GuardedThreeWayToggle : HeliosVisual, IRefreshableImage
     {
         private static readonly Rect GuardUpRegion = new Rect(0, 0, 65, 123);

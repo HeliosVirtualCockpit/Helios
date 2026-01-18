@@ -1,0 +1,95 @@
+﻿<HeliosSdk:HeliosPropertyEditor x:Class="GadrocsWorkshop.Helios.Controls.FourWayToggleSwitchAppearanceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Helios="clr-namespace:GadrocsWorkshop.Helios"
+             xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"
+             xmlns:HeliosTouch="clr-namespace:GadrocsWorkshop.Helios.Controls"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             Height="Auto"
+             mc:Ignorable="d"          
+             d:DesignWidth="180">
+    <HeliosSdk:HeliosPropertyEditor.Resources>
+        <Helios:EnumConverter Type="{x:Type HeliosTouch:FourWayToggleSwitchType}" x:Key="ToggleSwitchTypes" />
+
+        <Style x:Key="IndicatorLabelStyle" TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasIndicator}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="IndicatorTextBlockStyle" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasIndicator}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="IndicatorImagePickerStyle" TargetType="{x:Type HeliosSdk:ImagePicker}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.HasIndicator}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </HeliosSdk:HeliosPropertyEditor.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Margin="4,10,2,2" Style="{StaticResource Heading2}">Position Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image displayed when the switch is in position one.</Label.ToolTip> One
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="1" ImageFilename="{Binding Control.PositionOneImage, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image displayed when the switch is in position two.</Label.ToolTip> Two
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="2" ImageFilename="{Binding Control.PositionTwoImage, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image displayed when the switch is in position three.</Label.ToolTip> Three
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="3" ImageFilename="{Binding Control.PositionThreeImage, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image displayed when the switch is in central position.</Label.ToolTip> Center
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="4" ImageFilename="{Binding Control.PositionCenterImage, Mode=TwoWay}" />
+
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="4,10,2,2" Style="{StaticResource IndicatorTextBlockStyle}">Indicator On Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource IndicatorLabelStyle}">
+            <Label.ToolTip>Image displayed when the switch is in position one and the indicator light is on.</Label.ToolTip> One
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="6" ImageFilename="{Binding Control.PositionOneIndicatorOnImage, Mode=TwoWay}" Style="{StaticResource IndicatorImagePickerStyle}" />
+        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource IndicatorLabelStyle}">
+            <Label.ToolTip>Image displayed when the switch is in position two and the indicator light is on.</Label.ToolTip> Two
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="7" ImageFilename="{Binding Control.PositionTwoIndicatorOnImage, Mode=TwoWay}" Style="{StaticResource IndicatorImagePickerStyle}" />
+        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource IndicatorLabelStyle}">
+            <Label.ToolTip>Image displayed when the switch is in position three and the indicator light is on.</Label.ToolTip> Three
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="8" ImageFilename="{Binding Control.PositionThreeIndicatorOnImage, Mode=TwoWay}" Style="{StaticResource IndicatorImagePickerStyle}" />
+        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource IndicatorLabelStyle}">
+            <Label.ToolTip>Image displayed when the switch is in central position and the indicator light is on.</Label.ToolTip> Center
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="9" ImageFilename="{Binding Control.PositionCenterIndicatorOnImage, Mode=TwoWay}" Style="{StaticResource IndicatorImagePickerStyle}" />
+
+    </Grid>
+</HeliosSdk:HeliosPropertyEditor>
