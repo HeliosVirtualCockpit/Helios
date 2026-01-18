@@ -69,9 +69,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
             //ProcessClickables.Analyze();
             //ProcessClickables.CreateFunctionSwitcher();
-            #region VHF AM Radio (ARC-210)
-            // AddFunction(new ARC210Display(this)); // 2927
-            #endregion
 
 
         }
