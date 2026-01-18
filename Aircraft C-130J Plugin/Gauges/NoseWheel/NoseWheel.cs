@@ -29,12 +29,10 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.NoseWheel
     [HeliosControl("Helios.C130J.NoseWheel", "Nose Wheel Gauge", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class AileronTrim : CompositeBaseGauge
     {
-        private HeliosValue _position;
+        private readonly HeliosValue _position;
 
-        private GaugeNeedle _positionNeedle;
-        private CalibrationPointCollectionDouble _wheelCalibration;
-
-        private bool _suppressScale = false;
+        private readonly GaugeNeedle _positionNeedle;
+        private readonly CalibrationPointCollectionDouble _wheelCalibration;
 
         public AileronTrim()
             : base("NoseWheel", new Size(300, 200))

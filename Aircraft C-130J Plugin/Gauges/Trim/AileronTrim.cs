@@ -37,8 +37,6 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AileronTrim
 
         private CalibrationPointCollectionDouble _needleCalibration;
 
-        private bool _suppressScale = false;
-
         public AileronTrim()
             : base("AileronTrim", new Size(300, 300))
         {

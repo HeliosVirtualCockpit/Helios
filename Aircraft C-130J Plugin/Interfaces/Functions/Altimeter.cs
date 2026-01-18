@@ -33,7 +33,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J.Functions
         private double _prevThousands = 0d;
         private double _prevTenThousands = 0d;
         private double _prevHundreds = 0d;
-        private double _prevTens = 0d;
         private bool _initialised = false;
         public Altimeter(BaseUDPInterface sourceInterface, string device = "Altimeter", string altitudeArg = "2051", string pressureArg = "2059")
             : base(sourceInterface,

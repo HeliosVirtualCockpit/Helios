@@ -29,13 +29,12 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.O2Gauge
     [HeliosControl("Helios.C130J.O2Gauge", "Oxygen Gauge", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class O2 : CompositeBaseGauge
     {
-        private HeliosValue _position;
+        private readonly HeliosValue _position;
 
-        private GaugeNeedle _needle;
+        private readonly GaugeNeedle _needle;
 
-        private CalibrationPointCollectionDouble _needleCalibration;
+        private readonly CalibrationPointCollectionDouble _needleCalibration;
 
-        private bool _suppressScale = false;
         private readonly string _person;
 
         public O2(string name, Size size)

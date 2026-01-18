@@ -39,17 +39,17 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
         private readonly string _interfaceDeviceName = "ARC-210";
         private readonly string _imageLocation = "{C-130J}/Gauges/Radios/";
         private bool _useTextualDisplays = true;
-        private ImageDecoration _displayBackground;
+        private readonly ImageDecoration _displayBackground;
         private bool _includeViewport = true;
         private bool _requiresPatches = true;
         private string _vpName = "";
-        private string _font = "Helios Virtual Cockpit A-10C_ARC-210_Large";
-        private string _font2 = "Helios Virtual Cockpit A-10C_ARC-210_Small";
-        private List<TextDisplay> _textDisplayList = new List<TextDisplay>();
-        private HeliosValue _hv, _hvBrightness;
+        private readonly string _font = "Helios Virtual Cockpit A-10C_ARC-210_Large";
+        private readonly string _font2 = "Helios Virtual Cockpit A-10C_ARC-210_Small";
+        private readonly List<TextDisplay> _textDisplayList = new List<TextDisplay>();
+        private readonly HeliosValue _hv;
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        private HeliosAction _incrementBrightnessAction;
-        private HeliosAction _decrementBrightnessAction;
+        private readonly HeliosAction _incrementBrightnessAction;
+        private readonly HeliosAction _decrementBrightnessAction;
         private double _displayBrightness = 8;
 
         public ARC210Radio()
@@ -301,7 +301,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
                     }
                     else
                     {
-                        RemoveViewport(_vpName);
+                        RemoveViewport();
                     }
                     OnPropertyChanged("ViewportName", _vpName, value, false);
                     _vpName = value;
@@ -440,7 +440,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
             });
         }
 
-        private void RemoveViewport(string name)
+        private void RemoveViewport()
         {
             foreach (HeliosVisual visual in this.Children)
             {
@@ -506,7 +506,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
             {
                 _includeViewport = false;
                 UseTextualDisplays = true;
-                RemoveViewport("");
+                RemoveViewport();
             }
             _useTextualDisplays = reader.Name.Equals("UseTextualDisplays") ? bool.Parse(reader.ReadElementString("UseTextualDisplays")) : false;
         }

@@ -32,17 +32,17 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
     {
         private static readonly Rect SCREEN_RECT = new Rect(56, 32, 379, 283);
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private string _interfaceDevice = "";
-        private double _size_Multiplier = 1;
+        private readonly string _interfaceDevice = "";
+        private readonly double _size_Multiplier = 1;
         // private HeliosPanel _frameGlassPanel;
-        private HeliosPanel _frameBezelPanel;
+        // private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
         private const string PANEL_IMAGE = "{C-130J}/Gauges/AMU/AMU_Bezel.png";
         private const string IMAGE_PATH = "{C-130J}/Gauges/AMU/";
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.30d;
         private double _glassReflectionOpacity = GLASS_REFLECTION_OPACITY_DEFAULT;
-        private List<hControl> _dimensions;
+        private List<HeliosControl> _dimensions;
 
         public AMU(string interfaceDevice)
             : base(interfaceDevice, new Size(1000, 350))
@@ -78,7 +78,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
             //_frameBezelPanel.FillBackground = false;
             //_frameBezelPanel.DrawBorder = false;
 
-            foreach (hControl amuC in _dimensions)
+            foreach (HeliosControl amuC in _dimensions)
             {
                 switch (amuC.Type)
                 {
@@ -120,7 +120,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
                     }
                     else
                     {
-                        RemoveViewport(value);
+                        RemoveViewport();
                     }
                     OnPropertyChanged("ViewportName", _vpName, value, false);
                     _vpName = value;
@@ -158,7 +158,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
                 Height = vpRect.Height
             });
         }
-        private void RemoveViewport(string name)
+        private void RemoveViewport()
         {
             _includeViewport = false;
             foreach (HeliosVisual visual in this.Children)
@@ -263,7 +263,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
 
         protected override void OnBackgroundImageChange()
         {
-            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : PANEL_IMAGE;
+            //_frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : PANEL_IMAGE;
         }
         public double GlassReflectionOpacity
         {
@@ -336,33 +336,33 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
             if (_vpName == "")
             {
                 _includeViewport = false;
-                RemoveViewport("");
+                RemoveViewport();
             }
             GlassReflectionOpacity = reader.Name.Equals("GlassReflectionOpacity") ? double.Parse(reader.ReadElementString("GlassReflectionOpacity"), CultureInfo.InvariantCulture) : 0d;
         }
         private void InitDimensions()
         {  
-             _dimensions = new List<hControl> () {
-                {new hControl("AMU_LSK_Left", new Rect(4,56,37,44), "BUTTON",  _interfaceDevice, "Left LSK L1")},
-                {new hControl("AMU_LSK_Left", new Rect(4,109,37,44), "BUTTON",  _interfaceDevice, "Left LSK L2")},
-                {new hControl("AMU_LSK_Left", new Rect(4,162,37,44), "BUTTON",  _interfaceDevice, "Left LSK L3")},
-                {new hControl("AMU_LSK_Left", new Rect(4,215,37,44), "BUTTON",  _interfaceDevice, "Left LSK L4")},
-                {new hControl("AMU_LSK_Left", new Rect(511,56,37,44), "BUTTON",  _interfaceDevice, "Right LSK L1")},
-                {new hControl("AMU_LSK_Left", new Rect(511,109,37,44), "BUTTON", _interfaceDevice, "Right LSK L2")},
-                {new hControl("AMU_LSK_Left", new Rect(511,162,37,44), "BUTTON", _interfaceDevice, "Right LSK L3")},
-                {new hControl("AMU_LSK_Left", new Rect(511,215,37,44), "BUTTON", _interfaceDevice, "Right LSK L4")},
-                {new hControl("AMU_LSK_Right", new Rect(450,83,37,44), "BUTTON", _interfaceDevice, "Left LSK R1")},
-                {new hControl("AMU_LSK_Right", new Rect(450,136,37,44), "BUTTON", _interfaceDevice, "Left LSK R2")},
-                {new hControl("AMU_LSK_Right", new Rect(450,189,37,44), "BUTTON", _interfaceDevice, "Left LSK R3")},
-                {new hControl("AMU_LSK_Right", new Rect(450,242,37,44), "BUTTON", _interfaceDevice, "Left LSK R4")},
-                {new hControl("AMU_LSK_Right", new Rect(956,83,37,44), "BUTTON", _interfaceDevice, "Right LSK R1")},
-                {new hControl("AMU_LSK_Right", new Rect(956,136,37,44), "BUTTON", _interfaceDevice, "Right LSK R2")},
-                {new hControl("AMU_LSK_Right", new Rect(956,189,37,44), "BUTTON", _interfaceDevice, "Right LSK R3")},
-                {new hControl("AMU_LSK_Right", new Rect(956,242,37,44), "BUTTON", _interfaceDevice, "Right LSK R4")},
-                {new hControl("AMU_Brt", new Rect(460,298,33,77), "ROCKER", _interfaceDevice, "Brightness Switch")},             };
+             _dimensions = new List<HeliosControl> () {
+                {new HeliosControl("AMU_LSK_Left", new Rect(4,56,37,44), "BUTTON",  _interfaceDevice, "Left LSK L1")},
+                {new HeliosControl("AMU_LSK_Left", new Rect(4,109,37,44), "BUTTON",  _interfaceDevice, "Left LSK L2")},
+                {new HeliosControl("AMU_LSK_Left", new Rect(4,162,37,44), "BUTTON",  _interfaceDevice, "Left LSK L3")},
+                {new HeliosControl("AMU_LSK_Left", new Rect(4,215,37,44), "BUTTON",  _interfaceDevice, "Left LSK L4")},
+                {new HeliosControl("AMU_LSK_Left", new Rect(511,56,37,44), "BUTTON",  _interfaceDevice, "Right LSK L1")},
+                {new HeliosControl("AMU_LSK_Left", new Rect(511,109,37,44), "BUTTON", _interfaceDevice, "Right LSK L2")},
+                {new HeliosControl("AMU_LSK_Left", new Rect(511,162,37,44), "BUTTON", _interfaceDevice, "Right LSK L3")},
+                {new HeliosControl("AMU_LSK_Left", new Rect(511,215,37,44), "BUTTON", _interfaceDevice, "Right LSK L4")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(450,83,37,44), "BUTTON", _interfaceDevice, "Left LSK R1")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(450,136,37,44), "BUTTON", _interfaceDevice, "Left LSK R2")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(450,189,37,44), "BUTTON", _interfaceDevice, "Left LSK R3")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(450,242,37,44), "BUTTON", _interfaceDevice, "Left LSK R4")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(956,83,37,44), "BUTTON", _interfaceDevice, "Right LSK R1")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(956,136,37,44), "BUTTON", _interfaceDevice, "Right LSK R2")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(956,189,37,44), "BUTTON", _interfaceDevice, "Right LSK R3")},
+                {new HeliosControl("AMU_LSK_Right", new Rect(956,242,37,44), "BUTTON", _interfaceDevice, "Right LSK R4")},
+                {new HeliosControl("AMU_Brt", new Rect(460,298,33,77), "ROCKER", _interfaceDevice, "Brightness Switch")},             };
         }
     }
-    internal class hControl
+    internal class HeliosControl
     {
         private readonly string _image;
         private readonly Rect _rect;
@@ -370,7 +370,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
         private readonly string _device;
         private readonly string _element;
 
-        internal hControl(string image, Rect rect, string controlType, string device, string element)
+        internal HeliosControl(string image, Rect rect, string controlType, string device, string element)
         {
             _image = image;
             _rect = rect;

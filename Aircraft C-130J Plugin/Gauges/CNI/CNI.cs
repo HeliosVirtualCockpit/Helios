@@ -33,10 +33,10 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNI
     {
         private static readonly Rect SCREEN_RECT = new Rect(86, 74, 522, 359);
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private string _interfaceDevice = "";
+        private readonly string _interfaceDevice = "";
         private double _size_Multiplier = 1;
-        private HeliosPanel _frameGlassPanel;
-        private HeliosPanel _frameBezelPanel;
+        //private HeliosPanel _frameGlassPanel;
+        //private HeliosPanel _frameBezelPanel;
         private bool _includeViewport = true;
         private string _vpName = "";
         private const string PANEL_IMAGE = "{C-130J}/Gauges/CNI/CNI_Bezel.png";
@@ -289,7 +289,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNI
 
         protected override void OnBackgroundImageChange()
         {
-            _frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : PANEL_IMAGE;
+            //_frameBezelPanel.BackgroundImage = BackgroundImageIsCustomized ? null : PANEL_IMAGE;
         }
         public double GlassReflectionOpacity
         {
@@ -304,8 +304,8 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNI
                 {
                     _glassReflectionOpacity = value;
                     OnPropertyChanged("GlassReflectionOpacity", oldValue, value, true);
-                    _frameGlassPanel.IsHidden = _glassReflectionOpacity == 0d ? true : false;
-                    _frameGlassPanel.Opacity = _glassReflectionOpacity;
+                    //_frameGlassPanel.IsHidden = _glassReflectionOpacity == 0d ? true : false;
+                    //_frameGlassPanel.Opacity = _glassReflectionOpacity;
                 }
             }
         }

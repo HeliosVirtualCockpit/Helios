@@ -35,7 +35,6 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.Flaps
 
         private CalibrationPointCollectionDouble _needleCalibration;
 
-        private bool _suppressScale = false;
 
         public Flaps()
             : base("Flaps", new Size(300, 300))

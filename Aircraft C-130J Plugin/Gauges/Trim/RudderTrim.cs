@@ -35,7 +35,6 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.RudderTrim
 
         private CalibrationPointCollectionDouble _needleCalibration;
 
-        private bool _suppressScale = false;
 
         public RudderTrim()
             : base("RudderTrim", new Size(300, 300))

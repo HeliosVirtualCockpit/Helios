@@ -35,8 +35,6 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ElevatorTrim
 
         private CalibrationPointCollectionDouble _needleCalibration;
 
-        private bool _suppressScale = false;
-
         public O2()
             : base("ElevatorTrim", new Size(300, 300))
         {

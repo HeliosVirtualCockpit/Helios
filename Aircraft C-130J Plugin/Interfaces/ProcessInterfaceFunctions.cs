@@ -36,12 +36,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static string _pattern;
         private static string _input;
         private static StreamWriter _streamWriter;
-        private static Dictionary<string, FunctionData> _functions = new Dictionary<string, FunctionData>();
-        private static NetworkFunctionCollection _functionList = new NetworkFunctionCollection();
+        private readonly static Dictionary<string, FunctionData> _functions = new Dictionary<string, FunctionData>();
+        private readonly static NetworkFunctionCollection _functionList = new NetworkFunctionCollection();
         private static BaseUDPInterface _baseUDPInterface;
         private static readonly Dictionary <string, string> _categorySubstitutions, _nameSubstitutions, _clickableSubstitutions;
         private static readonly RegexOptions _options = RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled;
-        private static Dictionary<string, FunctionData> _dualFunctions = new Dictionary<string, FunctionData>();
+        private readonly static Dictionary<string, FunctionData> _dualFunctions = new Dictionary<string, FunctionData>();
         private static string _DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
         //private static string _DCSAircraft = _DCSAircraft = $@"\\atlas\users\Neil\Documents\DCS\C-130J-30";
         private static int _nullArgCounter = -9999;
@@ -416,9 +416,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             invert = (fd.Fn == "multiswitch" && ( positions == 3 || positions == 2) && !(fd.Val[0]=="532")) ? true : invert;
             if (invert)
             {
-                double tempVal = endVal;
-                endVal = startVal;
-                startVal = tempVal;
+                (startVal, endVal) = (endVal, startVal);
                 intervalVal *= -1;
             }
             _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], SwitchPositions.Create(positions, startVal, intervalVal, CommandEnumToString(fd.Command[0]), "Posn", "%.2f"), category, name, "%0.2f"));
@@ -434,9 +432,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             int positions = Convert.ToInt32(((endVal - startVal) / intervalVal) + 1);
             if (invert)
             {
-                double tempVal = endVal;
-                endVal = startVal;
-                startVal = tempVal;
+                (startVal, endVal) = (endVal, startVal);
                 intervalVal *= -1;
             }
             SwitchPosition[] swPosns = SwitchPositions.Create(positions, startVal, intervalVal, CommandEnumToString(fd.Command[0]), "Posn", "%.2f");
