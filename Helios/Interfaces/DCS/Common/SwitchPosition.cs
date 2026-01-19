@@ -29,17 +29,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             // no code
         }
 
-        public SwitchPosition(string argValue, string name, string action)
-            : this(argValue, name, action, null, null)
+        public SwitchPosition(string argValue, string name, string action, string entryActionValue = null)
+            : this(argValue, name, action, null, null, null, entryActionValue)
         {
         }
 
         public SwitchPosition(string argValue, string name, string action, string stopAction, string stopActionValue)
-            : this(argValue, name, action, stopAction, stopActionValue, null)
+            : this(argValue, name, action, stopAction, stopActionValue, null, null)
         {
         }
 
-        public SwitchPosition(string argValue, string name, string action, string stopAction, string stopActionValue, string exitValue)
+        public SwitchPosition(string argValue, string name, string action, string stopAction, string stopActionValue, string exitValue, string entryActionValue = null)
         {
             ArgValue = argValue;
             Name = name;
@@ -47,6 +47,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             StopAction = stopAction;
             StopActionValue = stopActionValue;
             ExitValue = exitValue;
+            EntryActionValue = entryActionValue;
         }
 
         #region Properties
@@ -68,6 +69,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         [JsonProperty("stopActionValue", NullValueHandling = NullValueHandling.Ignore)]
         public string StopActionValue { get; private set; }
+
+        [JsonProperty("entryActionValue", NullValueHandling = NullValueHandling.Ignore)]
+        public string EntryActionValue { get; private set; }
 
         #endregion
 

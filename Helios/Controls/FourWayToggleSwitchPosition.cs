@@ -17,9 +17,9 @@ namespace GadrocsWorkshop.Helios.Controls
 {
     public enum FourWayToggleSwitchPosition
     {
-        One = 1,
-        Two,
-        Three,
-        Center
+        Center = 1,
+        One = 2,
+        Two = 3,
+        Three = 4,
     }
 }

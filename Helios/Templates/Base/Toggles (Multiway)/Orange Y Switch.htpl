@@ -1,0 +1,22 @@
+﻿<ControlTemplate>
+	<Name>Orange "Y" Toggle Switch</Name>
+	<Category>Toggle Switches (Multi-Way)</Category>
+	<TypeIdentifier>Helios.Base.FourWayToggleSwitch</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>100,100</Size>
+			<Hidden>False</Hidden>
+			<SwitchType1>On</SwitchType1>
+			<SwitchType2>On</SwitchType2>
+			<SwitchType3>On</SwitchType3>
+			<SwitchOrientation>Rotation180</SwitchOrientation>
+			<ClickType>Swipe</ClickType>
+			<PositionOneImage>{Helios}/Images/Toggles/Orange-Round-180.png</PositionOneImage>
+			<PositionTwoImage>{Helios}/Images/Toggles/Orange-Round-300.png</PositionTwoImage>
+			<PositionThreeImage>{Helios}/Images/Toggles/Orange-Round-60.png</PositionThreeImage>
+			<PositionCenterImage>{Helios}/Images/Toggles/Orange-Round-Center-inverted.png</PositionCenterImage>
+			<DefaultPosition>Center</DefaultPosition>
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

@@ -27,5 +27,21 @@ namespace GadrocsWorkshop.Helios.Controls
         Rotation60 = 60,
         [Description("90° CW Rotation")]
         Rotation90 = 90,
+        [Description("120° CW Rotation")]
+        Rotation120 = 120,
+        [Description("150° CW Rotation")]
+        Rotation150 = 150,
+        [Description("180° CW Rotation")]
+        Rotation180 = 180,
+        [Description("210° CW Rotation")]
+        Rotation210 = 210,
+        [Description("240° CW Rotation")]
+        Rotation240 = 240,
+        [Description("270° CW Rotation")]
+        Rotation270 = 270,
+        [Description("300° CW Rotation")]
+        Rotation300 = 300,
+        [Description("330° CW Rotation")]
+        Rotation330 = 330,
     }
 }

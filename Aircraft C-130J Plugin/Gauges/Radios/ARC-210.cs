@@ -23,6 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
@@ -529,5 +530,17 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ARC210
         }
 
         public override bool HitTest(Point location) => false;
+
+        public override void Reset ()
+        {
+            base.Reset ();
+            foreach(HeliosVisual hV in Children)
+            {
+                hV.Reset ();
+                //if (hV is RotarySwitch sw) { 
+                //    sw.Reset();
+                //}
+            }
+        }
     }
 }

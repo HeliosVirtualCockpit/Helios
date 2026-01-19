@@ -11,6 +11,8 @@
              mc:Ignorable="d"          
              d:DesignWidth="180">
     <HeliosSdk:HeliosPropertyEditor.Resources>
+        <Helios:EnumToNegativeIntConverter Type="{x:Type HeliosTouch:FourWayToggleSwitchOrientation}" x:Key="FourWayToggleSwitchOrientationAsNegativeInt" />
+        <Helios:EnumToIntConverter Type="{x:Type HeliosTouch:FourWayToggleSwitchOrientation}" x:Key="FourWayToggleSwitchOrientationAsInt" />
         <Helios:EnumConverter Type="{x:Type HeliosTouch:FourWayToggleSwitchOrientation}" x:Key="FourWayToggleSwitchOrientation" />
         <Helios:EnumConverter Type="{x:Type HeliosTouch:FourWayToggleSwitchType}" x:Key="FourWayToggleSwitchTypes" />
         <Helios:EnumConverter Type="{x:Type HeliosTouch:FourWayToggleSwitchPosition}" x:Key="FourWayToggleSwitchPosition" />
@@ -24,6 +26,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -31,40 +34,102 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Interactions</TextBlock>
         <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right" Content="Orientation">
-            <Label.ToolTip>Selects the direction / position for swipes and clicks.</Label.ToolTip>
+            <Label.ToolTip>This changes the positions where the clicks for each position register.  It does not change the images.</Label.ToolTip>
         </Label>
         <ComboBox Grid.Column="1" Grid.Row="1" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchOrientation}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchOrientation, Converter={StaticResource FourWayToggleSwitchOrientation}}" />
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="4,10,2,2" Style="{StaticResource Heading2}">Switch Actions</TextBlock>
-        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right" Content="Position 1 Switch Type">
+        <TextBlock Grid.ColumnSpan="2" Grid.Row="2" Margin="94,31,0,34" Style="{StaticResource Heading2}">
+            <TextBlock.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.LayoutTransform>Touch Zones</TextBlock>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding Path=Control.SwitchOrientation, Converter={StaticResource FourWayToggleSwitchOrientationAsInt}}" CenterX="70" CenterY="78" />
+            </Grid.RenderTransform>
+            <Ellipse  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="85,60,0,0" Grid.Row="0" Fill="LightBlue" Stroke="Black" Width="40" Height="40" Opacity="0.5" RenderTransformOrigin="0,0">
+            </Ellipse>
+            <Ellipse  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="15,60,0,0" Grid.Row="0" Fill="LightGreen" Stroke="Black" Width="40" Height="40" Opacity="0.5" RenderTransformOrigin="0,0">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="50,-55,0,0" Grid.Row="0" Fill="LightPink" Stroke="Black" Width="40" Height="40" Opacity="0.5"/>
+            <Ellipse  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="50,24,0,0" Grid.Row="0" Fill="LightGray" Stroke="Black" Width="40" Height="40" Opacity="0.5"/>
+            <Ellipse  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="30,24,0,0" Grid.Row="0" Stroke="Black" Width="80" Height="80" Opacity="0.5"/>
+            <Label Content="1" HorizontalAlignment="Left"  FontSize="24" Height="36" Grid.Row="0" VerticalAlignment="Top" Width="26" Grid.Column="0" RenderTransformOrigin="0.5,0.5" Margin="57,15,0,0">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="{Binding Path=Control.SwitchOrientation, Converter={StaticResource FourWayToggleSwitchOrientationAsNegativeInt}}"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label Content="2" HorizontalAlignment="Left"  FontSize="24" Height="49" Margin="95,69,0,0" Grid.Row="0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="33" Grid.Column="0">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="{Binding Path=Control.SwitchOrientation, Converter={StaticResource FourWayToggleSwitchOrientationAsNegativeInt}}"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label Content="3" HorizontalAlignment="Left"  FontSize="24" Height="41" Margin="24,70,0,0" Grid.Row="0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="22" Grid.Column="0">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="{Binding Path=Control.SwitchOrientation, Converter={StaticResource FourWayToggleSwitchOrientationAsNegativeInt}}"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+        </Grid>
+        <Label Content="Center" HorizontalAlignment="Left"  FontSize="10" Height="23" Margin="51,65,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40" Grid.Column="0"/>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="4,10,2,2" Style="{StaticResource Heading2}">Switch Actions</TextBlock>
+        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" Content="Position 1 Switch Type">
             <Label.ToolTip>Selects what kind of toggle switch to emulate for position 1.</Label.ToolTip>
         </Label>
-        <ComboBox Grid.Column="1" Grid.Row="3" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchType1, Converter={StaticResource FourWayToggleSwitchTypes}}" />
+        <ComboBox Grid.Column="1" Grid.Row="4" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchType1, Converter={StaticResource FourWayToggleSwitchTypes}}" />
 
-        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" Content="Position 2 Switch Type">
+        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Content="Position 2 Switch Type">
             <Label.ToolTip>Selects what kind of toggle switch to emulate for position 1.</Label.ToolTip>
         </Label>
-        <ComboBox Grid.Column="1" Grid.Row="4" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchType2, Converter={StaticResource FourWayToggleSwitchTypes}}" />
+        <ComboBox Grid.Column="1" Grid.Row="5" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchType2, Converter={StaticResource FourWayToggleSwitchTypes}}" />
 
-        <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Content="Position 3 Switch Type">
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Content="Position 3 Switch Type">
             <Label.ToolTip>Selects what kind of toggle switch to emulate for position 1.</Label.ToolTip>
         </Label>
-        <ComboBox Grid.Column="1" Grid.Row="5" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchType3, Converter={StaticResource FourWayToggleSwitchTypes}}" />
+        <ComboBox Grid.Column="1" Grid.Row="6" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.SwitchType3, Converter={StaticResource FourWayToggleSwitchTypes}}" />
 
-        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Content="Default Position">
+        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" Content="Default Position">
             <Label.ToolTip>Position which this switch will default to on profile load or reset.</Label.ToolTip>
         </Label>
-        <ComboBox Grid.Column="1" Grid.Row="6" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchPosition}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.DefaultPosition, Converter={StaticResource FourWayToggleSwitchPosition}}" />
+        <ComboBox Grid.Column="1" Grid.Row="7" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource FourWayToggleSwitchPosition}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.DefaultPosition, Converter={StaticResource FourWayToggleSwitchPosition}}" />
 
-        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right">
+        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>When checked this switch has an indicator light.</Label.ToolTip> Indicator Light
         </Label>
-        <CheckBox Grid.Column="1" Grid.Row="7" FontSize="10" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Control.HasIndicator}" />
-        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Right">
+        <CheckBox Grid.Column="1" Grid.Row="8" FontSize="10" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Control.HasIndicator}" />
+        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>When set to touch this switch will respond to control regions (upper/lower, left/right) and switch the switch appropriatly. Swipe will switch the switch in the direction you swipe your finger or mouse.</Label.ToolTip> Click Type
         </Label>
-        <ComboBox Grid.Column="1" Grid.Row="8" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource ClickTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.ClickType, Converter={StaticResource ClickTypes}}" />
+        <ComboBox Grid.Column="1" Grid.Row="9" FontSize="10" Margin="0,2,0,2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource ClickTypes}, Path=DisplayNames}" SelectedItem="{Binding Path=Control.ClickType, Converter={StaticResource ClickTypes}}" />
+
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

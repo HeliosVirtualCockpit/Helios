@@ -526,7 +526,7 @@ namespace GadrocsWorkshop.Helios
         /// <summary>
         /// Gets and sets the rotation of this visual
         /// </summary>
-        public HeliosVisualRotation Rotation
+        public virtual HeliosVisualRotation Rotation
         {
             get => _rotation;
             set

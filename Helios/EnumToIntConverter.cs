@@ -1,5 +1,6 @@
 //  Copyright 2014 Craig Courtney
 //  Copyright 2020 Ammo Goettsch
+//  Copyright 2026 Helios Contributors
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,7 +27,7 @@ using System.Windows.Documents;
 
 namespace GadrocsWorkshop.Helios
 {
-    public class EnumConverter : IValueConverter
+    public class EnumToIntConverter : IValueConverter
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -35,11 +36,11 @@ namespace GadrocsWorkshop.Helios
         private IDictionary _reverseValues;
         private List<EnumDisplayEntry> _overriddenDisplayEntries;
 
-        public EnumConverter()
+        public EnumToIntConverter()
         {
         }
 
-        public EnumConverter(Type type)
+        public EnumToIntConverter(Type type)
         {
             Type = type;
         }
@@ -163,24 +164,18 @@ namespace GadrocsWorkshop.Helios
         {
             EnsureLoaded();
             Logger.Debug("attempting to convert from {Value} to {Type}", value, targetType);
-            if (!_displayValues.Contains(value))
-            {
-                Logger.Warn("value {Value} of type {Type} was not found in mappings:", value, value.GetType());
-                foreach (DictionaryEntry displayValue in _displayValues)
-                {
-                    Logger.Warn("{Source} of type {Type} -> {Target}", displayValue.Key, displayValue.Key.GetType(),
-                        displayValue.Value);
-                }
-            }
-
-            return _displayValues[value];
+            if (value is Enum enumValue)
+                return Convert.ToInt32(enumValue);
+            return value;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             EnsureLoaded();
-            Logger.Debug("attempting to convert back from {Value} to {Type}", value, targetType);
-            return _reverseValues[value];
+            Logger.Debug("attempting to convert back from {Value} to Int", value, targetType);
+            if (value is int intValue && targetType.IsEnum)
+                return Enum.ToObject(targetType, intValue);
+            return value;
         }
     }
 }

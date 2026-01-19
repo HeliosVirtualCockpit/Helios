@@ -19,12 +19,13 @@ namespace GadrocsWorkshop.Helios.Controls
     using GadrocsWorkshop.Helios.Controls.Capabilities;
     using GadrocsWorkshop.Helios.Interfaces.DirectX;
     using System;
+    using System.Windows;
     using System.Drawing;
     using System.Windows.Input;
+    using System.Windows.Media.Imaging;
     using System.Xml;
-    using static GadrocsWorkshop.Helios.Interfaces.DCS.Common.NetworkTriggerValue;
 
-    [HeliosControl("Helios.Base.FourWayToggleSwitch", "\"Y\" Toggle Switch", "Toggle Switches (Multi-Way)", typeof(FourWayToggleSwitchRenderer))]
+    [HeliosControl("Helios.Base.FourWayToggleSwitch", "4 Position (Center off) Toggle Switch", "Toggle Switches (Multi-Way)", typeof(FourWayToggleSwitchRenderer))]
     public class FourWayToggleSwitch : ToggleSwitchBase, IConfigurableImageLocation, IRefreshableImage
     {
         private FourWayToggleSwitchType _switchType1 = FourWayToggleSwitchType.On;
@@ -63,11 +64,23 @@ namespace GadrocsWorkshop.Helios.Controls
         public FourWayToggleSwitch(string name, System.Windows.Size size)
             : base(name, size)
         {
+
+            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Positions center, 1, 2 or 3.  Positions are numbered clock-wise from the bottom.", BindingValueUnits.Numeric);
+            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
+            Values.Add(_positionValue);
+            Actions.Add(_positionValue);
+            Triggers.Add(_positionValue);
+
+
             _positionOneImage = "{Helios}/Images/Toggles/Orange-Round-000.png";
             _positionTwoImage = "{Helios}/Images/Toggles/Orange-Round-120.png";
             _positionThreeImage = "{Helios}/Images/Toggles/Orange-Round-240.png";
             _positionCenterImage = "{Helios}/Images/Toggles/Orange-Round-Center.png";
 
+            _positionCenterEnterAction = new HeliosTrigger(this, "", "position center", "entered", "Triggered when position Center is entered or depressed.");
+            Triggers.Add(_positionCenterEnterAction);
+            _positionCenterExitAction = new HeliosTrigger(this, "", "position center", "exited", "Triggered when position Center is exited or released.");
+            Triggers.Add(_positionCenterExitAction);
             _positionOneEnterAction = new HeliosTrigger(this, "", "position one", "entered", "Triggered when position one is entered or depressed.");
             Triggers.Add(_positionOneEnterAction);
             _positionOneExitAction = new HeliosTrigger(this, "", "position one", "exited", "Triggered when position one is exited or released.");
@@ -80,16 +93,7 @@ namespace GadrocsWorkshop.Helios.Controls
             Triggers.Add(_positionThreeEnterAction);
             _positionThreeExitAction = new HeliosTrigger(this, "", "position three", "exited", "Triggered when position three is exited or released.");
             Triggers.Add(_positionThreeExitAction);
-            _positionCenterEnterAction = new HeliosTrigger(this, "", "position center", "entered", "Triggered when position Center is entered or depressed.");
-            Triggers.Add(_positionCenterEnterAction);
-            _positionCenterExitAction = new HeliosTrigger(this, "", "position center", "exited", "Triggered when position Center is exited or released.");
-            Triggers.Add(_positionCenterExitAction);
 
-            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Position number 1,2 or 3.  Positions are numbered from top to bottom.", BindingValueUnits.Numeric);
-            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
-            Values.Add(_positionValue);
-            Actions.Add(_positionValue);
-            Triggers.Add(_positionValue);
 
         }
         public override bool ConditionalImageRefresh(string imageName)
@@ -144,6 +148,20 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        /// <summary>
+        /// HeliosVisual Rotation Override
+        /// This is used to block any attempts to use the HeliosVisual Rotation.  Rotation is achieved
+        /// using the images and the Orientation available in this control
+        /// </summary>
+        public override HeliosVisualRotation Rotation
+        {
+            get => HeliosVisualRotation.None;
+            set
+            {
+                base.Rotation = HeliosVisualRotation.None;
+            }
+        }
+
         public FourWayToggleSwitchType SwitchType1
         {
             get
@@ -224,9 +242,6 @@ namespace GadrocsWorkshop.Helios.Controls
                         }
                     }
 
-                    _position = value;
-                    _positionValue.SetValue(new BindingValue((double)_position), BypassTriggers);
-
                     if (!BypassTriggers)
                     {
                         switch (value)
@@ -245,6 +260,9 @@ namespace GadrocsWorkshop.Helios.Controls
                                 break;
                         }
                     }
+
+                    _position = value;
+                    _positionValue.SetValue(new BindingValue((double)_position), BypassTriggers);
 
                     OnPropertyChanged("SwitchPosition", oldValue, value, false);
                     OnDisplayUpdate();
@@ -446,41 +464,6 @@ namespace GadrocsWorkshop.Helios.Controls
                 SwitchPosition = _positionArray[_positionArrayIndex];
             }
         }
-
-        public override void MouseUp(System.Windows.Point location)
-        {
-            //base.MouseUp(location);
-            SetSwitchPosition(
-                rectX: 0,
-                rectY: 0,
-                rectWidth: Width,
-                rectHeight: Height,
-                orientation: _switchOrientation,
-                location: location);
-
-        }
-        public override void MouseDown(System.Windows.Point location)
-        {
-            _mouseAction = false;
-
-            if (ClickType == LinearClickType.Swipe)
-            {
-                _mouseDownLocation = location;
-                if (DesignMode && HasIndicator)
-                {
-                    IndicatorOn = !IndicatorOn;
-                }
-            }
-            else if (ClickType == LinearClickType.Touch)
-            {
-
-                //if (action != SwitchAction.None)
-                //{
-                //    ThrowSwitch(action);
-                //    _mouseAction = true;
-                //}
-            }
-        }
         public override void WriteXml(XmlWriter writer)
         {
             base.WriteXml(writer);
@@ -556,10 +539,10 @@ namespace GadrocsWorkshop.Helios.Controls
             try
             {
                 BeginTriggerBypass(e.BypassCascadingTriggers);
-                int newPosition = 0;
+                int newPosition = 1;
                 if (int.TryParse(e.Value.StringValue, out newPosition))
                 {
-                    if (newPosition > 0 && newPosition <= 3)
+                    if (newPosition >= 1 && newPosition <= 4)
                     {
                         SwitchPosition = (FourWayToggleSwitchPosition)newPosition;
                     }
@@ -569,6 +552,76 @@ namespace GadrocsWorkshop.Helios.Controls
             catch
             {
                 // No-op if the parse fails we won't set the position.
+            }
+        }
+        public override void MouseUp(System.Windows.Point location)
+        {
+            _mouseAction = true;
+            if(ClickType == LinearClickType.Swipe)
+            {
+                Vector swipeVector = location - _mouseDownLocation;
+                if (swipeVector.Length <= 2)
+                {
+                    SetSwitchPosition(
+                        rectX: 0,
+                        rectY: 0,
+                        rectWidth: Width,
+                        rectHeight: Height,
+                        orientation: _switchOrientation,
+                        location: location);
+                }
+            }
+            //base.MouseUp(location);
+            //SetSwitchPosition(
+            //    rectX: 0,
+            //    rectY: 0,
+            //    rectWidth: Width,
+            //    rectHeight: Height,
+            //    orientation: _switchOrientation,
+            //    location: location);
+            if ((SwitchPosition == FourWayToggleSwitchPosition.One && SwitchType1 == FourWayToggleSwitchType.Mom) ||
+                (SwitchPosition == FourWayToggleSwitchPosition.Two && SwitchType2 == FourWayToggleSwitchType.Mom) ||
+                (SwitchPosition == FourWayToggleSwitchPosition.Three && SwitchType3 == FourWayToggleSwitchType.Mom))
+            {
+                SwitchPosition = FourWayToggleSwitchPosition.Center;
+            }
+        }
+        public override void MouseDown(System.Windows.Point location)
+        {
+            _mouseAction = false;
+
+            if (ClickType == LinearClickType.Swipe)
+            {
+                _mouseDownLocation = location;
+                if (DesignMode && HasIndicator)
+                {
+                    IndicatorOn = !IndicatorOn;
+                }
+            }
+            else if (ClickType == LinearClickType.Touch)
+            {
+                SetSwitchPosition(
+                    rectX: 0,
+                    rectY: 0,
+                    rectWidth: Width,
+                    rectHeight: Height,
+                    orientation: _switchOrientation,
+                    location: location);
+            }
+        }
+        public override void MouseDrag(System.Windows.Point location)
+        {
+            if (!_mouseAction)
+            {
+                if (ClickType == LinearClickType.Swipe)
+                {                 
+                    Vector swipeVector = location - _mouseDownLocation;
+                    if (swipeVector.Length > 10)
+                    {
+                        CheckAngle(Math.Atan2(swipeVector.X, swipeVector.Y), (int)_switchOrientation);
+                        _mouseAction = true;
+                    }
+                }
             }
         }
 
@@ -582,7 +635,7 @@ namespace GadrocsWorkshop.Helios.Controls
             System.Windows.Point location)
         {
             double pointX = location.X, pointY = location.Y;
-            double circleRadius = rectHeight / 3;
+            double circleRadius = rectHeight / 4;
             int offsetAngle = (int) orientation;
             
             // Rectangle bounds check
@@ -608,19 +661,25 @@ namespace GadrocsWorkshop.Helios.Controls
 
             // Angle from centre (degrees, 0° = +X axis)
             double angleRadians = Math.Atan2(dx, -dy);
-            double angleDegrees = angleRadians * (180.0 / Math.PI);
+            CheckAngle(Math.Atan2(dx, -dy), offsetAngle);
+            return;
+        }
+        private void CheckAngle(double angleRadians, int offsetAngle)
+        {
+            double angleDegrees = Math.Abs(((angleRadians * (180.0 / Math.PI) - 180) % 360));
 
-            if(IsAngleBetween(angleDegrees, -60d, 60d, offsetAngle))
+            if (IsAngleBetween(angleDegrees, -60d, 60d, offsetAngle))
             {
                 SwitchPosition = FourWayToggleSwitchPosition.One;
-            } else if (IsAngleBetween(angleDegrees, 60d, 180d, offsetAngle))
+            }
+            else if (IsAngleBetween(angleDegrees, 60d, 180d, offsetAngle))
             {
                 SwitchPosition = FourWayToggleSwitchPosition.Two;
-            } else
+            }
+            else
             {
                 SwitchPosition = FourWayToggleSwitchPosition.Three;
             }
-            return;
         }
         private static bool IsAngleBetween(double angle, double start, double end, int offsetAngle)
         {

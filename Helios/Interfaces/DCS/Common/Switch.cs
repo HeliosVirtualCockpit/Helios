@@ -128,7 +128,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             _everyframe = everyFrame;
             _deviceId = deviceId;
             _incrementalPulseValue = incrementalPulseValue;
-            _incrementalPulseSwitch = !string.IsNullOrWhiteSpace(incrementalPulseValue); _positions = positions;
+            _incrementalPulseSwitch = !string.IsNullOrWhiteSpace(incrementalPulseValue); 
+            _positions = positions;
             if (build)
             {
                 DoBuild();
@@ -172,7 +173,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 ValueDescriptions += (i + 1).ToString() + "=" + position.Name;
                 if (position.Action != null)
                 {
-                    _sendAction[i] = "C" + _deviceId + "," + position.Action + "," + position.ArgValue;
+                       _sendAction[i] = $"C{_deviceId},{position.Action},{(position.EntryActionValue == null ? position.ArgValue : position.EntryActionValue)}";
                 }
 
                 if (position.StopAction != null)

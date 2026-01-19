@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.LockingFourWayToggleSwitch", "Locking \"Y\" Toggle Switches", "Toggle Switches (Multi-Way)", typeof(FourWayToggleSwitchRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Base.LockingFourWayToggleSwitch", "Locking 4 Position (Center Off) Toggle Switch", "Toggle Switches (Multi-Way)", typeof(FourWayToggleSwitchRenderer), HeliosControlFlags.None)]
     public class FourWayToggleSwitchLocking : FourWayToggleSwitch
     {
         private HeliosValue _positionOneLockValue;

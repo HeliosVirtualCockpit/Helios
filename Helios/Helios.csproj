@@ -123,6 +123,8 @@
     <Compile Include="Controls\FourWayToggleSwitchRenderer.cs" />
     <Compile Include="Controls\FourWayToggleSwitchType.cs" />
     <Compile Include="Controls\FourWayToggleSwitchOrientation.cs" />
+    <Compile Include="EnumToNegativeIntConverter.cs" />
+    <Compile Include="EnumToIntConverter.cs" />
     <Compile Include="Gauges\IGauge3d.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
     <Compile Include="Controls\CustomGauge3DCylinderAppearanceEditor.xaml.cs">
@@ -452,13 +454,16 @@
     </Content>
     <None Include="Shaders\Source\ColorAdjust.ps" />
     <None Include="Shaders\Source\ColorAdjustWithCurve.ps" />
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Orange Y Switch.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\Toggles\Orange-Round-000.png" />
     <Resource Include="Images\Toggles\Orange-Round-120.png" />
     <Resource Include="Images\Toggles\Orange-Round-240.png" />
     <Resource Include="Images\Toggles\Orange-Round-Center.png" />
-    <Resource Include="Images\Toggles\Orange-Round-060.png" />
     <Resource Include="Images\Toggles\Orange-Round-180.png" />
     <Resource Include="Images\Toggles\Orange-Round-300.png" />
+    <Resource Include="Images\Toggles\Orange-Round-060.png" />
     <Resource Include="Images\Toggles\Orange-Round-Center-Inverted.png" />
     <Content Include="Templates\Base\Special\CustomGaugeBall.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1885,25 +1890,25 @@
     <Content Include="Templates\Base\Rotaries\Rotary - Knob 5.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Threeway Toggles\Flat Top - Locking.htpl">
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Flat Top - Locking.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Threeway Toggles\Flat Top.htpl">
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Flat Top.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Threeway Toggles\Orange Seal - Round.htpl">
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Orange Seal - Round.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Threeway Toggles\Orange Seal.htpl">
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Orange Seal.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Threeway Toggles\Round - Locking.htpl">
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Round - Locking.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Threeway Toggles\Round.htpl">
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Round.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Base\Threeway Toggles\Square - Tan.htpl">
+    <Content Include="Templates\Base\Toggles %28Multiway%29\Square - Tan.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\Toggles\Flat Top - Locking.htpl">
