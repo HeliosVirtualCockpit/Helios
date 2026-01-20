@@ -413,14 +413,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             double endVal = Convert.ToDouble(dt.Compute(fd.Val[2].Replace("}", ""), ""));
             double intervalVal = Convert.ToDouble(dt.Compute(fd.Val[3], ""));
             int positions = Convert.ToInt32(((endVal - startVal) / intervalVal) + 1);
+            string format = positions <= 10 ? "%.1f" : "%.2f"; 
             invert = (fd.Fn == "multiswitch" && ( positions == 3 || positions == 2) && !(fd.Val[0]=="532")) ? true : invert;
             if (invert)
             {
                 (startVal, endVal) = (endVal, startVal);
                 intervalVal *= -1;
             }
-            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], SwitchPositions.Create(positions, startVal, intervalVal, CommandEnumToString(fd.Command[0]), "Posn", "%.2f"), category, name, "%0.2f"));
-            return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", SwitchPositions.Create({positions}, {startVal}, {endVal}, Commands.{fd.Command[0]}.ToString(\"d\"), \"%.2f\"), \"{category}\", \"{name}\", \"%0.2f\"));";
+            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], SwitchPositions.Create(positions, startVal, intervalVal, CommandEnumToString(fd.Command[0]), "Posn", format), category, name, format));
+            return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", SwitchPositions.Create({positions}, {startVal}, {endVal}, Commands.{fd.Command[0]}.ToString(\"d\"), \"{format}\"), \"{category}\", \"{name}\", \"{format}\"));";
         }
         private static string BuildFnMultiSwitchWipers(FunctionData fd, bool invert = false)
         {
@@ -435,17 +436,17 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 (startVal, endVal) = (endVal, startVal);
                 intervalVal *= -1;
             }
-            SwitchPosition[] swPosns = SwitchPositions.Create(positions, startVal, intervalVal, CommandEnumToString(fd.Command[0]), "Posn", "%.2f");
-            swPosns[0] = new SwitchPosition("-0.20", "Park", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[6]), "-1.00", null);
-            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], swPosns, category, name, "%0.2f"));
+            SwitchPosition[] swPosns = SwitchPositions.Create(positions, startVal, intervalVal, CommandEnumToString(fd.Command[0]), new string[] {"Park", "Stop", "1", "2", "3","Fast" }, "%.1f");
+            swPosns[0] = new SwitchPosition("-0.2", "Park", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Val[6]), "-1.0", null);
+            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], swPosns, category, name, "%0.1f"));
             return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[]{{ " +
-                $"new SwitchPosition(\"-0.20\", \"Park\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Val[6]}.ToString(\"d\"), \"-1.0\", null), " +
-                $"new SwitchPosition(\"0.00\", \"Stop\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
-                $"new SwitchPosition(\"0.20\", \"1\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
-                $"new SwitchPosition(\"0.40\", \"2\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
-                $"new SwitchPosition(\"0.60\", \"3\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
-                $"new SwitchPosition(\"0.80\", \"Fast\", Commands.{fd.Command[0]}.ToString(\"d\"))" +
-                $"}}, \"{category}\", \"{name}\", \"%0.2f\"));";
+                $"new SwitchPosition(\"-0.2\", \"Park\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Val[6]}.ToString(\"d\"), \"-1.0\", null), " +
+                $"new SwitchPosition(\"0.0\", \"Stop\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
+                $"new SwitchPosition(\"0.2\", \"1\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
+                $"new SwitchPosition(\"0.4\", \"2\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
+                $"new SwitchPosition(\"0.6\", \"3\", Commands.{fd.Command[0]}.ToString(\"d\")), " +
+                $"new SwitchPosition(\"0.8\", \"Fast\", Commands.{fd.Command[0]}.ToString(\"d\"))" +
+                $"}}, \"{category}\", \"{name}\", \"%.1f\"));";
 
         }
         private static string BuildRocker(FunctionData fd)
