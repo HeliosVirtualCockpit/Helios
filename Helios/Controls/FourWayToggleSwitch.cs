@@ -563,27 +563,25 @@ namespace GadrocsWorkshop.Helios.Controls
                 if (swipeVector.Length <= 2)
                 {
                     SetSwitchPosition(
-                        rectX: 0,
-                        rectY: 0,
-                        rectWidth: Width,
-                        rectHeight: Height,
+                        rect: new Rect(0, 0, Width, Height),
                         orientation: _switchOrientation,
-                        location: location);
+                        point: location);
+                    return;
                 }
-            }
-            //base.MouseUp(location);
-            //SetSwitchPosition(
-            //    rectX: 0,
-            //    rectY: 0,
-            //    rectWidth: Width,
-            //    rectHeight: Height,
-            //    orientation: _switchOrientation,
-            //    location: location);
-            if ((SwitchPosition == FourWayToggleSwitchPosition.One && SwitchType1 == FourWayToggleSwitchType.Mom) ||
-                (SwitchPosition == FourWayToggleSwitchPosition.Two && SwitchType2 == FourWayToggleSwitchType.Mom) ||
-                (SwitchPosition == FourWayToggleSwitchPosition.Three && SwitchType3 == FourWayToggleSwitchType.Mom))
+                if ((SwitchPosition == FourWayToggleSwitchPosition.One && SwitchType1 == FourWayToggleSwitchType.Mom) ||
+                    (SwitchPosition == FourWayToggleSwitchPosition.Two && SwitchType2 == FourWayToggleSwitchType.Mom) ||
+                    (SwitchPosition == FourWayToggleSwitchPosition.Three && SwitchType3 == FourWayToggleSwitchType.Mom))
+                {
+                    SwitchPosition = FourWayToggleSwitchPosition.Center;
+                }
+            } else if(ClickType == LinearClickType.Touch)
             {
-                SwitchPosition = FourWayToggleSwitchPosition.Center;
+                if ((SwitchPosition == FourWayToggleSwitchPosition.One && SwitchType1 == FourWayToggleSwitchType.Mom) ||
+                    (SwitchPosition == FourWayToggleSwitchPosition.Two && SwitchType2 == FourWayToggleSwitchType.Mom) ||
+                    (SwitchPosition == FourWayToggleSwitchPosition.Three && SwitchType3 == FourWayToggleSwitchType.Mom))
+                {
+                    SwitchPosition = FourWayToggleSwitchPosition.Center;
+                }
             }
         }
         public override void MouseDown(System.Windows.Point location)
@@ -601,12 +599,9 @@ namespace GadrocsWorkshop.Helios.Controls
             else if (ClickType == LinearClickType.Touch)
             {
                 SetSwitchPosition(
-                    rectX: 0,
-                    rectY: 0,
-                    rectWidth: Width,
-                    rectHeight: Height,
+                    rect: new Rect(0, 0, Width, Height),
                     orientation: _switchOrientation,
-                    location: location);
+                    point: location);
             }
         }
         public override void MouseDrag(System.Windows.Point location)
@@ -615,10 +610,10 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 if (ClickType == LinearClickType.Swipe)
                 {                 
-                    Vector swipeVector = location - _mouseDownLocation;
+                    Vector swipeVector = _mouseDownLocation - location;
                     if (swipeVector.Length > 10)
                     {
-                        CheckAngle(Math.Atan2(swipeVector.X, swipeVector.Y), (int)_switchOrientation);
+                        SwitchPosition = CheckAngle(-Math.Atan2(swipeVector.X, swipeVector.Y) * 180.0 / Math.PI % 360, (int)_switchOrientation);
                         _mouseAction = true;
                     }
                 }
@@ -627,58 +622,64 @@ namespace GadrocsWorkshop.Helios.Controls
 
         #endregion
         private void SetSwitchPosition(
-            double rectX,
-            double rectY,
-            double rectWidth,
-            double rectHeight,
-            FourWayToggleSwitchOrientation orientation,
-            System.Windows.Point location)
+            System.Windows.Point point,
+            Rect rect,
+            FourWayToggleSwitchOrientation orientation)
         {
-            double pointX = location.X, pointY = location.Y;
-            double circleRadius = rectHeight / 4;
-            int offsetAngle = (int) orientation;
-            
-            // Rectangle bounds check
-            if (pointX < rectX || pointX > rectX + rectWidth ||
-                pointY < rectY || pointY > rectY + rectHeight)
+            if (!BoundsCheck(point, rect))
             {
                 return;
             }
-
-            // Rectangle centre
-            double cx = rectX + rectWidth / 2.0;
-            double cy = rectY + rectHeight / 2.0;
-
-            double dx = pointX - cx;
-            double dy = pointY - cy;
-
-            // Central circle check
-            if (dx * dx + dy * dy <= circleRadius * circleRadius)
+            (bool center, double dx, double dy) = CheckCenter(point, rect);
+            if (center)
             {
                 SwitchPosition = FourWayToggleSwitchPosition.Center;
                 return;
             }
 
-            // Angle from centre (degrees, 0° = +X axis)
-            double angleRadians = Math.Atan2(dx, -dy);
-            CheckAngle(Math.Atan2(dx, -dy), offsetAngle);
+            SwitchPosition = CheckAngle(Math.Atan2(dx, -dy) / Math.PI * 180 % 360, (int)orientation);
             return;
         }
-        private void CheckAngle(double angleRadians, int offsetAngle)
+        private bool BoundsCheck(System.Windows.Point point, Rect rect)
         {
-            double angleDegrees = Math.Abs(((angleRadians * (180.0 / Math.PI) - 180) % 360));
+            if (point.X < rect.X || point.X > rect.X + rect.Width ||
+                point.Y < rect.Y || point.Y > rect.Y + rect.Height)
+            {
+                return false;
+            }
+            return true;
+        }
+        private (bool, double, double) CheckCenter(System.Windows.Point location, Rect rect)
+        {
+            double circleRadius = rect.Height / 8;
 
+            // Rectangle centre
+            double cx = rect.X + rect.Width / 2.0;
+            double cy = rect.Y + rect.Height / 2.0;
+
+            double dx = location.X - cx;
+            double dy = location.Y - cy;
+
+            if (dx * dx + dy * dy <= circleRadius * circleRadius)
+            {
+                SwitchPosition = FourWayToggleSwitchPosition.Center;
+                return (true, 0, 0);
+            }
+            return (false, dx, dy);
+        }
+        private FourWayToggleSwitchPosition CheckAngle(double angleDegrees, int offsetAngle)
+        {
             if (IsAngleBetween(angleDegrees, -60d, 60d, offsetAngle))
             {
-                SwitchPosition = FourWayToggleSwitchPosition.One;
+                return FourWayToggleSwitchPosition.One;
             }
             else if (IsAngleBetween(angleDegrees, 60d, 180d, offsetAngle))
             {
-                SwitchPosition = FourWayToggleSwitchPosition.Two;
+                return FourWayToggleSwitchPosition.Two;
             }
             else
             {
-                SwitchPosition = FourWayToggleSwitchPosition.Three;
+                return FourWayToggleSwitchPosition.Three;
             }
         }
         private static bool IsAngleBetween(double angle, double start, double end, int offsetAngle)
