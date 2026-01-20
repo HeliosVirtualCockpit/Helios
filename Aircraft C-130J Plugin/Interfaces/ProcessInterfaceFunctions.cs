@@ -43,7 +43,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static readonly RegexOptions _options = RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled;
         private readonly static Dictionary<string, FunctionData> _dualFunctions = new Dictionary<string, FunctionData>();
         private static string _DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
-        //private static string _DCSAircraft = _DCSAircraft = $@"\\atlas\users\Neil\Documents\DCS\C-130J-30";
         private static int _nullArgCounter = -9999;
 
 

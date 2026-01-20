@@ -1,5 +1,5 @@
 ﻿//  Copyright 2020 Ammo Goettsch
-//  Copyright 2024 Helios Contributors
+//  Copyright 2025 Helios Contributors
 //    
 //  Helios is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,20 +34,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
     public class C130JInterface : DCSInterface
     {
-        //#pragma warning disable IDE1006 // Naming Standard issues
-        //#pragma warning disable IDE0051 // Remove unused private members
-
-        //#pragma warning restore IDE0051 // Remove unused private members
-        //#pragma warning restore IDE1006 // Naming Standard issues
-
         public C130JInterface(string name)
             : base(name, "C-130J-30", "pack://application:,,,/C-130J;component/Interfaces/ExportC130JFunctions.lua")
         {
-
-            // not setting Vehicles at all results in the module name identifying the only 
-            // supported aircraft
-            // XXX not yet supported
-            // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
 
             // see if we can restore from JSON
 #if (!DEBUG)
@@ -56,9 +45,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 return;
             }
 #endif
-            //#endregion
-
-            //#endregion
             if (Functions.Count <= 17)
             {
                 foreach (NetworkFunction nf in ProcessInterfaceFunctions.Process(this))
@@ -71,25 +57,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             //ProcessClickables.CreateFunctionSwitcher();
 
 
-        }
-        /// <summary>
-        /// Converts a circuit breaker Row/Col to the arg code
-        /// </summary>
-        /// <param name="panel"></param>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
-        /// <returns>Arg ID in a string</returns>
-        private string CbToArg(int panel, char row, int column)
-        {
-            return (((((int)row - 65) * 33) + column - 1) + (panel == 1 ? 12 : 177)).ToString();
-        }
-
-        /// <summary>
-        /// Converts a circuit breaker Row/Col to the command code
-        /// </summary>
-        private string CbToCommand(char row, int column)
-        {
-            return ((((int)row - 65) * 33) + column - 1 + Commands.Button.Button_1).ToString();
         }
     }
 }
