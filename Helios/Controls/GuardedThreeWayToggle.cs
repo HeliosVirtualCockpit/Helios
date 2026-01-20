@@ -74,6 +74,19 @@ namespace GadrocsWorkshop.Helios.Controls
             _positionThreeGuardUpImage = "{Helios}/Images/Toggles/guard-up-off.png";
             _positionThreeGuardDownImage = "{Helios}/Images/Toggles/guard-down-off.png";
 
+            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Position number 1, 2 or 3.  Positions are numbered from top to bottom.", BindingValueUnits.Numeric);
+            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
+            Values.Add(_positionValue);
+            Actions.Add(_positionValue);
+            Triggers.Add(_positionValue);
+
+            _guardPositionValue = new HeliosValue(this, new BindingValue((double)GuardPosition), "", "guard position", "Current position of the switch guard.", "1 = Up, 2 = Down.", BindingValueUnits.Numeric);
+            _guardPositionValue.Execute += new HeliosActionHandler(SetGuardPositionAction_Execute);
+            Values.Add(_guardPositionValue);
+            Actions.Add(_guardPositionValue);
+            Triggers.Add(_guardPositionValue);
+
+
             _positionOneEnterAction = new HeliosTrigger(this, "", "position one", "entered", "Triggered when position one is entered or depressed.");
             Triggers.Add(_positionOneEnterAction);
             _positionOneExitAction = new HeliosTrigger(this, "", "position one", "exited", "Triggered when posotion one is exited or released.");
@@ -93,17 +106,6 @@ namespace GadrocsWorkshop.Helios.Controls
             _releaseTrigger = new HeliosTrigger(this, "", "", "released", "This trigger is fired when the user releases pressure on the switch (lifts finger or mouse button.).");
             Triggers.Add(_releaseTrigger);
 
-            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Position number 1, 2 or 3.  Positions are numbered from top to bottom.", BindingValueUnits.Numeric);
-            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
-            Values.Add(_positionValue);
-            Actions.Add(_positionValue);
-            Triggers.Add(_positionValue);
-
-            _guardPositionValue = new HeliosValue(this, new BindingValue((double)GuardPosition), "", "guard position", "Current position of the switch guard.", "1 = Up, 2 = Down.", BindingValueUnits.Numeric);
-            _guardPositionValue.Execute += new HeliosActionHandler(SetGuardPositionAction_Execute);
-            Values.Add(_guardPositionValue);
-            Actions.Add(_guardPositionValue);
-            Triggers.Add(_guardPositionValue);
         }
 
         #region Properties

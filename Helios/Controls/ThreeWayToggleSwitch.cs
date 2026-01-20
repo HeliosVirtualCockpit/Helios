@@ -51,6 +51,12 @@ namespace GadrocsWorkshop.Helios.Controls
             _positionTwoImage = "{Helios}/Images/Toggles/toggle-norm.png";
             _positionThreeImage = "{Helios}/Images/Toggles/toggle-down.png";
 
+            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Position number 1,2 or 3.  Positions are numbered from top to bottom.", BindingValueUnits.Numeric);
+            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
+            Values.Add(_positionValue);
+            Actions.Add(_positionValue);
+            Triggers.Add(_positionValue);
+
             _positionOneEnterAction = new HeliosTrigger(this, "", "position one", "entered", "Triggered when position one is entered or depressed.");
             Triggers.Add(_positionOneEnterAction);
             _positionOneExitAction = new HeliosTrigger(this, "", "position one", "exited", "Triggered when position one is exited or released.");
@@ -64,11 +70,6 @@ namespace GadrocsWorkshop.Helios.Controls
             _positionThreeExitAction = new HeliosTrigger(this, "", "position three", "exited", "Triggered when position three is exited or released.");
             Triggers.Add(_positionThreeExitAction);
 
-            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the switch.", "Position number 1,2 or 3.  Positions are numbered from top to bottom.", BindingValueUnits.Numeric);
-            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
-            Values.Add(_positionValue);
-            Actions.Add(_positionValue);
-            Triggers.Add(_positionValue);
 
         }
         public override bool ConditionalImageRefresh(string imageName)

@@ -77,6 +77,14 @@ namespace GadrocsWorkshop.Helios.Controls
             _labelFormat.HorizontalAlignment = TextHorizontalAlignment.Center;
             _labelFormat.VerticalAlignment = TextVerticalAlignment.Center;
 
+            _pushedValue = new HeliosValue(this, new BindingValue(false), "", "physical state", "Current state of this button.", "True if the button is currently pushed (either via pressure or toggle), otherwise false.  Setting this value will not fire pushed/released triggers, but will fire on/off triggers.  Directly setting this state to on for a momentary buttons will not auto release, the state must be manually reset to false.", BindingValueUnits.Boolean);
+            _pushedValue.Execute += new HeliosActionHandler(PushedValue_Execute);
+            Values.Add(_pushedValue);
+            Actions.Add(_pushedValue);
+
+            _value = new HeliosValue(this, new BindingValue(false), "", "circuit state", "Current open/closed state of this buttons circuit.", "True if the button is currently closed (on), otherwise false.", BindingValueUnits.Boolean);
+            Values.Add(_value);
+
             _pushedTrigger = new HeliosTrigger(this, "", "", "pushed", "Fired when this button is pushed.", "Always returns true.", BindingValueUnits.Boolean);
             _releasedTrigger = new HeliosTrigger(this, "", "", "released", "Fired when this button is released.", "Always returns false.", BindingValueUnits.Boolean);
             _closedTrigger = new HeliosTrigger(this, "", "", "closed", "Fired when this button is in the closed state.", "Always returns true.", BindingValueUnits.Boolean);
@@ -93,13 +101,6 @@ namespace GadrocsWorkshop.Helios.Controls
             Actions.Add(_pushAction);
             Actions.Add(_releaseAction);
 
-            _pushedValue = new HeliosValue(this, new BindingValue(false), "", "physical state", "Current state of this button.", "True if the button is currently pushed (either via pressure or toggle), otherwise false.  Setting this value will not fire pushed/released triggers, but will fire on/off triggers.  Directly setting this state to on for a momentary buttons will not auto release, the state must be manually reset to false.", BindingValueUnits.Boolean);
-            _pushedValue.Execute += new HeliosActionHandler(PushedValue_Execute);
-            Values.Add(_pushedValue);
-            Actions.Add(_pushedValue);
-
-            _value = new HeliosValue(this, new BindingValue(false), "", "circuit state", "Current open/closed state of this buttons circuit.", "True if the button is currently closed (on), otherwise false.", BindingValueUnits.Boolean);
-            Values.Add(_value);
         }
 
         #region Properties

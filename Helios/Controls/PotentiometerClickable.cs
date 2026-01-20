@@ -34,8 +34,11 @@ namespace GadrocsWorkshop.Helios.Controls
         private Rect _centreZone;
         private PushButtonType _buttonType = PushButtonType.Toggle;
         private ClickControlType _clickControlType = ClickControlType.PushButton;
+        private bool _isSwitch = false;
         private string _pushedImage = "{Helios}/Images/Knobs/knob6.png";
         private string _unpushedImage = "{Helios}/Images/Knobs/knob1.png";
+
+        private ToggleSwitchLockPosition _lockPosition = ToggleSwitchLockPosition.None;
 
         private bool _pushed;
         private bool _closed;
@@ -124,6 +127,8 @@ namespace GadrocsWorkshop.Helios.Controls
                     ClickControlType oldValue = _clickControlType;
                     _clickControlType = value;
                     OnPropertyChanged("ClickControlType", oldValue, value, true);
+                    _isSwitch = _clickControlType == ClickControlType.Switch;
+                    OnPropertyChanged("IsSwitch", !_isSwitch, _isSwitch, true);
                 }
             }
         }
@@ -245,6 +250,10 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             get => true;
         }
+        public bool IsSwitch
+        {
+            get => _isSwitch;
+        }
         public ToggleSwitchPosition SwitchPosition
         {
             get
@@ -288,7 +297,19 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-
+        public ToggleSwitchLockPosition LockPosition
+        {
+            get => _lockPosition;
+            set
+            {
+                if (!_lockPosition.Equals(value))
+                {
+                    ToggleSwitchLockPosition oldValue = _lockPosition;
+                    _lockPosition = value;
+                    OnPropertyChanged("LockPosition", oldValue, value, false);
+                }
+            }
+        }
         #endregion
         void PushedValue_Execute(object action, HeliosActionEventArgs e)
         {
@@ -535,12 +556,21 @@ namespace GadrocsWorkshop.Helios.Controls
 
         public override void MouseWheel(int delta)
         {
-            if(AllowMouseActivity) { base.MouseWheel(delta); }  
+            if(_clickControlType == ClickControlType.PushButton && AllowMouseActivity) { base.MouseWheel(delta); }
+            if (_clickControlType == ClickControlType.Switch && (int)_lockPosition != (int)_position)
+            {
+                base.MouseWheel(delta);
+            }
+
         }
 
         public override void MouseDrag(Point location)
         {
-            if(AllowMouseActivity) base.MouseDrag(location);
+            if(_clickControlType == ClickControlType.PushButton && AllowMouseActivity) base.MouseDrag(location);
+            if(_clickControlType == ClickControlType.Switch && (int)_lockPosition != (int)_position)
+            {
+                base.MouseDrag(location);
+            } 
         }
         private bool AllowMouseActivity
         {
@@ -563,6 +593,7 @@ namespace GadrocsWorkshop.Helios.Controls
             PushedImage = reader.ReadElementString("PushedImage");
             UnpushedImage = reader.ReadElementString("UnpushedImage");
             if(reader.Name.Equals("AllowRotation")) AllowRotation = (RotaryClickAllowRotationType)Enum.Parse(typeof(RotaryClickAllowRotationType), reader.ReadElementString("AllowRotation"));
+            LockPosition = reader.Name.Equals("SwitchLockPosition") ? (ToggleSwitchLockPosition)Enum.Parse(typeof(ToggleSwitchLockPosition), reader.ReadElementString("SwitchLockPosition")) : ToggleSwitchLockPosition.None;
             base.ReadXml(reader);
             KnobImage = UnpushedImage;
             _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
@@ -572,12 +603,14 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             TypeConverter allowRotationConverter = TypeDescriptor.GetConverter(typeof(RotaryClickAllowRotationType));
             TypeConverter clickControlConverter = TypeDescriptor.GetConverter(typeof(ClickControlType));
+            TypeConverter SwitchLockPositionConverter = TypeDescriptor.GetConverter(typeof(ToggleSwitchLockPosition));
 
             writer.WriteElementString("ButtonClickType", ButtonType.ToString());
             if (_clickControlType != ClickControlType.PushButton) writer.WriteElementString("ClickControlType", clickControlConverter.ConvertToInvariantString(ClickControlType));
             writer.WriteElementString("PushedImage", PushedImage);
             writer.WriteElementString("UnpushedImage", UnpushedImage);
             if(AllowRotation != RotaryClickAllowRotationType.Both) writer.WriteElementString("AllowRotation", allowRotationConverter.ConvertToInvariantString(AllowRotation));
+            if (LockPosition != ToggleSwitchLockPosition.None) writer.WriteElementString("SwitchLockPosition", SwitchLockPositionConverter.ConvertToInvariantString(LockPosition));
             KnobImage = UnpushedImage;
             base.WriteXml(writer);
         }

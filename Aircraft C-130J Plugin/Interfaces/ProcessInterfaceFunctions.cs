@@ -592,12 +592,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             string retValue = "";
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName, fd);
 
-            _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Val[0]), fd.Arg[1], -0.5d, 0.5d, 0.5d, category, name.Split('-')[0].Trim(), false, "%0.1f"));
-            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Val[0]}.ToString(\"d\"), \"{fd.Arg[1]}\",-1d, 1d, 0.1d, \"{category}\", \"{name.Split('-')[0].Trim()}\", false, \"%0.1f\"));";
-            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[0], new SwitchPosition[] { new SwitchPosition("1.0", "Out", CommandEnumToString(fd.Command[0])), new SwitchPosition("0.0", "In", CommandEnumToString(fd.Command[0])) }, category, name + " Pull", "%0.1f"));
-            retValue += $"\n\t\tAddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Arg[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"1.0\", \"Out\", Commands.{fd.Command[0]}.ToString(\"d\")),  new SwitchPosition(\"0.0\", \"In\", Commands.{fd.Command[0]}.ToString(\"d\"))}}, \"{category}\", \"{name}\" + \" Pull\", \"%0.1f\"));";
+            _functionList.Add(new Axis(_baseUDPInterface, DeviceEnumToString(fd.Device), CommandEnumToString(fd.Val[0]), fd.Arg[1], 0.5d, -0.5d, 0.5d, category, name.Split('-')[0].Trim(), false, "%0.1f"));
+            retValue += $"AddFunction(new Axis(this, devices.{fd.Device}.ToString(\"d\"), Commands.{fd.Val[0]}.ToString(\"d\"), \"{fd.Arg[1]}\",0.5d, -0.5d, 0.5d, \"{category}\", \"{name.Split('-')[0].Trim()}\", false, \"%0.1f\"));";
+            _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Arg[0], new SwitchPosition[] { new SwitchPosition("0.0", "Out", CommandEnumToString(fd.Command[0])), new SwitchPosition("1.0", "In", CommandEnumToString(fd.Command[0])) }, category, name + " Pull", "%0.1f"));
+            retValue += $"\n\t\tAddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Arg[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"0.0\", \"Out\", Commands.{fd.Command[0]}.ToString(\"d\")),  new SwitchPosition(\"1.0\", \"In\", Commands.{fd.Command[0]}.ToString(\"d\"))}}, \"{category}\", \"{name}\" + \" Pull\", \"%0.1f\"));";
             return retValue;
-
         }
 
         private static string BuildKnob(FunctionData fd)

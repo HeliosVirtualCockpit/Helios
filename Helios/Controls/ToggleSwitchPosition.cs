@@ -12,11 +12,22 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System.ComponentModel;
+
 namespace GadrocsWorkshop.Helios.Controls
 {
     public enum ToggleSwitchPosition : int
     {
         One = 1,
         Two
+    }
+    public enum ToggleSwitchLockPosition : int
+    {
+        [Description("No Locking")]
+        None = 0,
+        [Description("Lock rotation on position 1")]
+        One = 1,
+        [Description("Lock rotation on position 2")]
+        Two = 2
     }
 }
