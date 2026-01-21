@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             // only in design mode
             if (ConfigManager.Application.ShowDesignTimeControls)
             {
-                if (Visual is EffectColorAdjuster)
+                if (Visual is EffectColorAdjuster && _imageBrush != null)
                 {
                     drawingContext.DrawRectangle(_imageBrush, null, _rectangle);
                     base.OnRender(drawingContext);
@@ -43,8 +43,11 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             if (Visual is EffectColorAdjuster control)
             {
                 base.OnRefresh();
-                _rectangle = new Rect(0, 0, Visual.Width, Visual.Height);
-                _imageBrush = CreateImageBrush(control.Image);
+                if (_imageBrush == null)
+                {
+                    _rectangle = new Rect(0, 0, Visual.Width, Visual.Height);
+                    _imageBrush = CreateImageBrush(control.Image);
+                }
             }
         }
 
