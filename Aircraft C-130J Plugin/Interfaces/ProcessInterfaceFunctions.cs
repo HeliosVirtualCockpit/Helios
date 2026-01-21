@@ -1128,7 +1128,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private static void AddInstrumentFunctions()
         {
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "120", new CalibrationPointCollectionDouble(0d, -10d, 1d, 15d) { new CalibrationPointDouble(0.5d, 0d)}, "Instruments", "ADI Horizon", "-10 to +15 degrees", BindingValueUnits.Degrees, "%0.3f", false));
-            _functionList.Add(new FlagValue(_baseUDPInterface, "121", "Instruments", "ADI Off Flag", "Bool to indicate flag is visible", "%1d"));
+            _functionList.Add(new NetworkValue(_baseUDPInterface, "121", "Instruments", "ADI Off Flag", "0.0 to 1.0", "Number: 1 is the flag off", BindingValueUnits.Numeric, "%.1f"));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "122", new CalibrationPointCollectionDouble(-1d, -125d, 1d, 125d), "Instruments", "ADI Pitch", "-125 to +125 degrees", BindingValueUnits.Degrees, "%0.4f", false));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "123", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "Instruments", "ADI Roll", "-180 to 180 degrees", BindingValueUnits.Degrees, "%0.4f", false));
             _functionList.Add(new DCSBallRotation(_baseUDPInterface, "2960", "Instruments", "ADI Ball Rotation", "Single value containing X, Y & Z movement of the ADI Ball.", new CalibrationPointCollectionDouble(-1.0d, -125d, 1.0d, 125d), null, new CalibrationPointCollectionDouble(-1d, 180d, 1d, -180d)));
@@ -1176,7 +1176,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 
 
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""120"", new CalibrationPointCollectionDouble(0d, -10d, 1d, 15d) { new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""ADI Horizon"", ""-10 to +15 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
-            WriteCsFunction(@"AddFunction(new FlagValue(this, ""121"", ""Instruments"", ""ADI Off Flag"", ""Bool to indicate flag is visible"", ""%1d""));");
+            WriteCsFunction(@"AddFunction(new NetworkValue(this, ""121"", ""Instruments"", ""ADI Off Flag"", ""0.0 to 1.0"", ""Number: 1 is the flag off"", BindingValueUnits.Numeric, ""%.1f""));");
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""122"", new CalibrationPointCollectionDouble(-1d, -125d, 1d, 125d), ""Instruments"", ""ADI Pitch"", ""-125 to 125 degrees"", BindingValueUnits.Degrees, ""%0.4f"", true));");
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""123"", new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), ""Instruments"", ""ADI Roll"", ""-180 to 180 degrees"", BindingValueUnits.Degrees, ""%0.4f"", true));");
             WriteCsFunction(@"AddFunction(new DCSBallRotation(this, ""2960"", ""Instruments"", ""ADI Ball Rotation"", ""Single value containing X, Y & Z movement of the ADI Ball."", AddFunction(new CalibrationPointCollectionDouble(-1.0d, -90d, 1.0d, 90d), null, AddFunction(new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d)));");

@@ -36,7 +36,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
 
         private HeliosValue _offFlag;
 
-        private GaugeImage _offFlagImage;
+        private GaugeNeedle _offFlagNeedle;
 
         private GaugeBall _ball;
         private GaugeNeedle _rollNeedle;
@@ -67,9 +67,9 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
             _wingsNeedle = new GaugeNeedle("{C-130J}/Gauges/ADI/Herc-Horizon.xaml", new Point(175d, 175d), new Size(225.550d, 30.747d), new Point(147.910d, 2.833d));
             Components.Add(_wingsNeedle);
 
-            _offFlagImage = new GaugeImage("{C-130J}/Gauges/ADI/Herc-Flag.xaml", new Rect(261.9067d, 57.5725d, 41.672d, 125.206d), 1, 0);
-            _offFlagImage.IsHidden = true;
-            Components.Add(_offFlagImage);
+            _offFlagNeedle = new GaugeNeedle("{C-130J}/Gauges/ADI/Herc-Flag.xaml", new Point(300d, 65.0d), new Size(41.672d, 125.206d), new Point(36.413d, 0d));
+            _offFlagNeedle.Rotation = 0d;
+            Components.Add(_offFlagNeedle);
 
             Components.Add(new GaugeImage("{C-130J}/Gauges/ADI/Herc-Mask.xaml", new Rect(0d, 0d, 350d, 350d)));
 
@@ -96,7 +96,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
             Actions.Add(_wingsValue);
 
 
-            _offFlag = new HeliosValue(this, new BindingValue(false), "ADI", "off flag", "Indicates whether the off flag is displayed.", "True if displayed.", BindingValueUnits.Boolean);
+            _offFlag = new HeliosValue(this, BindingValue.Empty, "ADI", "off flag", "Indicates whether the off flag is displayed.", "0 if the flag is displayed.", BindingValueUnits.Numeric);
             _offFlag.Execute += new HeliosActionHandler(OffFlag_Execute);
             Actions.Add(_offFlag);
 
@@ -136,7 +136,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
         void OffFlag_Execute(object action, HeliosActionEventArgs e)
         {
             _offFlag.SetValue(e.Value, e.BypassCascadingTriggers);
-            _offFlagImage.IsHidden = e.Value.BoolValue;
+            _offFlagNeedle.Rotation = -e.Value.DoubleValue * 33d;
         }
 
         void Pitch_Execute(object action, HeliosActionEventArgs e)
@@ -201,7 +201,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
             _roll.SetValue(new BindingValue(0d), true);
             _rotationValue.SetValue(new BindingValue("0;0;0"), true);
             _wingsValue.SetValue(new BindingValue(0d), true);
-            _offFlag.SetValue(new BindingValue(true), true);
+            _offFlag.SetValue(new BindingValue(0d), true);
         }
     }
 }
