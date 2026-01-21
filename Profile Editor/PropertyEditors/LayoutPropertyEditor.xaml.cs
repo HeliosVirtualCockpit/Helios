@@ -67,17 +67,31 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
             DependencyProperty.Register("ControlTypeName", typeof(string), typeof(LayoutPropertyEditor),
                 new PropertyMetadata(null));
 
+
         /// <summary>
         /// the friendly name of the IsRotateable attribute
         /// </summary>
         public Visibility IsRotateable
         {
-            get => (Visibility) GetValue(IsRotateableProperty);
+            get => (Visibility)GetValue(IsRotateableProperty);
             set => SetValue(IsRotateableProperty, value);
         }
 
         public static readonly DependencyProperty IsRotateableProperty =
             DependencyProperty.Register("IsRotateable", typeof(Visibility), typeof(LayoutPropertyEditor),
+                new PropertyMetadata(null));
+
+        /// <summary>
+        /// the friendly name of the NoEffects attribute
+        /// </summary>
+        public Visibility NoEffects
+        {
+            get => (Visibility)GetValue(NoEffectsProperty);
+            set => SetValue(NoEffectsProperty, value);
+        }
+
+        public static readonly DependencyProperty NoEffectsProperty =
+            DependencyProperty.Register("NoEffects", typeof(Visibility), typeof(LayoutPropertyEditor),
                 new PropertyMetadata(null));
 
         #endregion
@@ -97,11 +111,6 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
                 {
                     VisualName = Control.Name;
                     LoadControlTypeName();
-                    if(ControlTypeName == "Simulator Viewport" || ControlTypeName == "DCS Monitor Setup Script Appender")
-                    {
-                        IsRotateable = Visibility.Collapsed;
-                    }
-
                 }
                 finally
                 {
@@ -131,6 +140,8 @@ namespace GadrocsWorkshop.Helios.ProfileEditor.PropertyEditors
                 }
 
                 ControlTypeName = controlAttribute.Name;
+                IsRotateable = controlAttribute.Flags.HasFlag(HeliosControlFlags.NotRotatable) ? Visibility.Collapsed : Visibility.Visible;
+                NoEffects = controlAttribute.Flags.HasFlag(HeliosControlFlags.NoEffects) ? Visibility.Collapsed : Visibility.Visible;
                 return;
             }
 

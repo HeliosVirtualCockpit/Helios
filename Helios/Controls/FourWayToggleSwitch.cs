@@ -25,7 +25,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows.Media.Imaging;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.FourWayToggleSwitch", "4 Position (Center off) Toggle Switch", "Toggle Switches (Multi-Way)", typeof(FourWayToggleSwitchRenderer))]
+    [HeliosControl("Helios.Base.FourWayToggleSwitch", "4 Position (Center off) Toggle Switch", "Toggle Switches (Multi-Way)", typeof(FourWayToggleSwitchRenderer), HeliosControlFlags.None | HeliosControlFlags.NotRotatable)]
     public class FourWayToggleSwitch : ToggleSwitchBase, IConfigurableImageLocation, IRefreshableImage
     {
         private FourWayToggleSwitchType _switchType1 = FourWayToggleSwitchType.On;
@@ -148,19 +148,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-        /// <summary>
-        /// HeliosVisual Rotation Override
-        /// This is used to block any attempts to use the HeliosVisual Rotation.  Rotation is achieved
-        /// using the images and the Orientation available in this control
-        /// </summary>
-        public override HeliosVisualRotation Rotation
-        {
-            get => HeliosVisualRotation.None;
-            set
-            {
-                base.Rotation = HeliosVisualRotation.None;
-            }
-        }
+
 
         public FourWayToggleSwitchType SwitchType1
         {

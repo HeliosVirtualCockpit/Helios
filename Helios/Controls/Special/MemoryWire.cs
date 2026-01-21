@@ -21,7 +21,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// a piece of wire with memory, simply sends any value on its input side to its output side
     /// and on a resend request sends any last values entered on its input side to its output side
     /// </summary>
-    [HeliosControl("Helios.Base.MemoryWire", "Memory Wire", "Special Controls", typeof(ImageDecorationRenderer))]
+    [HeliosControl("Helios.Base.MemoryWire", "Memory Wire", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.NoEffects | HeliosControlFlags.NotRotatable | HeliosControlFlags.None)]
     public class MemoryWire : ImageDecorationBase
     {
         private HeliosValue _numericSignal;

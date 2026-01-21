@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// a version of ViewportExtent that can't be edited, so its viewport name can be set in a template and never changed
     /// by the UI
     /// </summary>
-    [HeliosControl("Helios.Base.LockedViewportExtent", "Simulator Viewport", "Special Controls", typeof(ViewportExtentRenderer), HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.Base.LockedViewportExtent", "Simulator Viewport", "Special Controls", typeof(ViewportExtentRenderer), HeliosControlFlags.NotShownInUI| HeliosControlFlags.NotRotatable)]
     public class LockedViewportExtent : ViewportExtentBase
     {
         // no code, just a version of the class without an associated behavior editor

@@ -88,10 +88,10 @@
             <Label.ToolTip>When checked this control will default to being hidden when the profile is loaded or reset.</Label.ToolTip>
         </Label>
         <CheckBox Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Control.IsDefaultHidden}" />
-        <Label Grid.Column="0" Grid.Row="8" FontSize="10" VerticalContentAlignment="Center" HorizontalAlignment="Right" Content="No Effects">
+        <Label Visibility="{Binding Path=NoEffects}" Grid.Column="0" Grid.Row="8" FontSize="10" VerticalContentAlignment="Center" HorizontalAlignment="Right" Content="No Effects">
             <Label.ToolTip>When checked this control will not have visual Effects applied to it.</Label.ToolTip>
         </Label>
-        <CheckBox Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Control.EffectsExclusion}" />
+        <CheckBox Visibility="{Binding Path=NoEffects}" Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Control.EffectsExclusion}" />
         <Label Grid.Column="0" Grid.Row="9" FontSize="10" VerticalContentAlignment="Center" HorizontalAlignment="Right" Content="Lock Aspect">
             <Label.ToolTip>When checked this control will keep its aspect ratio when Width or Height are changed.</Label.ToolTip>
         </Label>

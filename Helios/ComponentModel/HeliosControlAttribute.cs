@@ -20,8 +20,10 @@ namespace GadrocsWorkshop.Helios.ComponentModel
     [Flags]
     public enum HeliosControlFlags
     {
-        None = 0,
-        NotShownInUI = 1
+        None = 1,
+        NotShownInUI = 2,
+        NotRotatable = 4,
+        NoEffects = 8,
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]

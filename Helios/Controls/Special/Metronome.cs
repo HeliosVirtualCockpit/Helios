@@ -33,7 +33,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// within a given time period
     /// </summary>
 
-    [HeliosControl("Helios.Special.Metronome", "Metronome", "Special Controls",typeof(ImageDecorationRenderer))]
+    [HeliosControl("Helios.Special.Metronome", "Metronome", "Special Controls",typeof(ImageDecorationRenderer), HeliosControlFlags.NoEffects | HeliosControlFlags.NotRotatable | HeliosControlFlags.None)]
     public class Metronome : ImageDecorationBase, IWindowsPreviewInput
     {
         private bool _metronomeEnabled = true;
