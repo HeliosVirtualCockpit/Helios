@@ -22,7 +22,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
     using GadrocsWorkshop.Helios.Interfaces.DCS.C130J.Functions;
 
 
-    public enum Cockpit { Pilot, Copilot, Augpilot }
+    public enum Cockpit { Pilot, Copilot, AugCrew }
 
 
     [HeliosInterface(
