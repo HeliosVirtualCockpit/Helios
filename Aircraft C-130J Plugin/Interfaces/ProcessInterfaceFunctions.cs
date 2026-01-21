@@ -323,6 +323,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     // these are just to wiggle the cable going from the overhead to the seat.  Let's hope nobody needs this!
                     break;
                 default:
+                    Console.WriteLine($"# # # # Unprocessed Function Detected in C-130J Function Builder: {fd.Fn}");
                     break;
             }
         }
