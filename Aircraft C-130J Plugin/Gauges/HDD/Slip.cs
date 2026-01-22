@@ -33,12 +33,12 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD.Slip
         private bool _suppressScale = false;
         private readonly string _interfaceDevice = "";
 
-
+            
         public Slip()
             : base("Slip", new Size(111, 14))
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.C130J.C130JInterface) };
-            _interfaceDevice = "Displays Pilot";
+            _interfaceDevice = "Slip Gauge";
 
             Components.Add(new GaugeImage("{C-130J}/Gauges/HDD/Herc-Slip-Tube.xaml", new Rect(0, 0, 111, 14)));
 
@@ -55,29 +55,10 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD.Slip
             {
                 gc.EffectsExclusion = this.EffectsExclusion;
             }
-
-            CreateInputBindings();
-        }
-        private void CreateInputBindings()
-        {
-
-            Dictionary<string, string> bindings = new Dictionary<string, string>
-            {
-                { "Instruments.ADI Horizon.changed", "ADI.set.Wing position" },
-            };
-
-            foreach (string t in bindings.Keys)
-            {
-                AddDefaultInputBinding(
-                    childName: "",
-                    interfaceTriggerName: t,
-                    deviceActionName: bindings[t]
-                    );
-            }
         }
         private void SlipBall_Execute(object action, HeliosActionEventArgs e)
         {
-            _slipBall.HorizontalOffset = e.Value.DoubleValue * 30d;
+            _slipBall.HorizontalOffset = -e.Value.DoubleValue * 45d;
         }
 
         /// <summary>

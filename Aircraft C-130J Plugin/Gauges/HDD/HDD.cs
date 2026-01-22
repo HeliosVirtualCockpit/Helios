@@ -26,6 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
     using System.Windows;
     using System.Windows.Media;
     using System.Xml;
+    using System.Xml.Linq;
 
     [HeliosControl("Helios.C130J.HDD", "HDD", "C-130J Hercules", typeof(BackgroundImageRenderer), HeliosControlFlags.NotShownInUI)]
     public class HDD : CompositeVisualWithBackgroundImage
@@ -33,6 +34,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
         private static readonly Rect SCREEN_RECT = new Rect(60, 89, 465, 619);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private readonly string _interfaceDevice = "";
+        private readonly string _device = "";
         private readonly string _interfaceElement = "";
         //private HeliosPanel _frameGlassPanel;
         //private HeliosPanel _frameBezelPanel;
@@ -48,7 +50,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
         {
             bool slip = false;
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.C130J.C130JInterface) };
-            _interfaceDevice = interfaceDevice;
+            _device = _interfaceDevice = interfaceDevice;
             switch (_interfaceDevice)
             {
                 case "HDD Pilot Left":
@@ -86,8 +88,21 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
             {
                 Slip.Slip slipGauge = new Slip.Slip();
                 slipGauge.Top = 48;
-                slipGauge.Left = 237;
+                slipGauge.Left = 238;
                 Children.Add(slipGauge);
+                foreach (IBindingAction action in slipGauge.Actions)
+                {
+                    if (action.Name == "hidden")
+                    {
+                        continue;
+                    }
+                    AddAction(action, action.Device);
+                }
+                AddDefaultInputBinding(
+                    childName: "",
+                    interfaceTriggerName: "Instruments.Slip Ball.changed",
+                    deviceActionName: $"{_device}_Slip Gauge.set.slip ball"
+                    );
             }
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
             //_frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{AH-64D}/Images/MFD/MFD_glass.png", _interfaceDevice);
