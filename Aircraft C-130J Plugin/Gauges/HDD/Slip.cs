@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD.Slip
     using System.Windows.Media;
     using System.Xml.Linq;
 
-    [HeliosControl("Helios.C130J.HDD.Slip", "Slip", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.C130J.HDD.Slip", "Slip", "C-130J Hercules", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
     public class Slip : CompositeBaseGauge
     {
         private GaugeNeedle _slipBall;
