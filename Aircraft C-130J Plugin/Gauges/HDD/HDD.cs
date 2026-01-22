@@ -82,6 +82,12 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD
             if (!slip)
             {
                 AddImage("Blanking", new Point(225, 38), new Size(136, 40), $"{IMAGE_PATH}HDD_Blank.png");
+            } else
+            {
+                Slip.Slip slipGauge = new Slip.Slip();
+                slipGauge.Top = 48;
+                slipGauge.Left = 237;
+                Children.Add(slipGauge);
             }
             if (_vpName != "" && _includeViewport) AddViewport(_vpName);
             //_frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{AH-64D}/Images/MFD/MFD_glass.png", _interfaceDevice);

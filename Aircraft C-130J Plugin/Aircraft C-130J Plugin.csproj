@@ -68,6 +68,7 @@
     <Compile Include="Gauges\AMU\AMU Pilot.cs" />
     <Compile Include="Gauges\AMU\AMU.cs" />
     <Compile Include="Gauges\Compass\Compass.cs" />
+    <Compile Include="Gauges\HDD\Slip.cs" />
     <Compile Include="Gauges\HDD\HDDCopilotLeft.cs" />
     <Compile Include="Gauges\HDD\HDDCopilotRight.cs" />
     <Compile Include="Gauges\HDD\HDDPilotRight.cs" />
@@ -505,6 +506,20 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gauges\Compass\compass_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\HDD\Herc-Slip-Ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\HDD\Herc-Slip-Markers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\HDD\Herc-Slip-Tube.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

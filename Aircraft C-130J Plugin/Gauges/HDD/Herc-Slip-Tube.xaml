@@ -1,0 +1,11 @@
+<Canvas Width="111.000" Height="14.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas Width="111.000" Height="14.000">
+
+
+        <!-- Layer 1/<Rectangle> -->
+        <Path Fill="#ff3f3f3f" Data="F1 M 111.000,14.000 L 0.000,14.000 L 0.000,0.000 L 111.000,0.000 L 111.000,14.000 Z"/>
+
+    </Canvas>
+</Canvas>

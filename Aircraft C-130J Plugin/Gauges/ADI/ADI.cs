@@ -16,7 +16,6 @@
 namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
 {
     using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Interfaces.DCS.C130J;
     using GadrocsWorkshop.Helios.Util;
     using System;
     using System.Collections.Generic;
@@ -50,7 +49,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.ADI
         public ADI()
             : base("ADI", new Size(350, 350))
         {
-            SupportedInterfaces = new[] { typeof(C130JInterface) };
+            SupportedInterfaces = new[] { typeof(Interfaces.DCS.C130J.C130JInterface) };
 
             _ball = new GaugeBall("{C-130J}/Gauges/ADI/Herc-ADI-Ball-L.xaml", new Point(25d, 25d), new Size(300d, 300d), 0d, 0d, -90d, 50d);
             Components.Add(_ball);
