@@ -30,13 +30,14 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
+using System.Runtime.InteropServices;
 
 namespace GadrocsWorkshop.Helios
 {
     /// <summary>
     /// ImageManager gives access to loading and resizing images from the appropriate locations.
     /// </summary>
-    public class ImageManager : IImageManager4
+    public class ImageManager : IImageManager5
     {
         private readonly string _documentImagePath;
         private static readonly Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -248,12 +249,12 @@ namespace GadrocsWorkshop.Helios
                         break;
                     }
 
-                    switch (components[2])
+                    switch (components[2].ToLower())
                     {
-                        case "Images":
-                        case "Gauges":
+                        case "images":
+                        case "gauges":
                             return true;
-                        case "Interfaces":
+                        case "interfaces":
                             // it is possible that this was only ever used in a single BMS-centric template
                             if (imageUri.AbsolutePath.EndsWith(".png"))
                             {
@@ -368,7 +369,6 @@ namespace GadrocsWorkshop.Helios
                 Uri imageUri = new Uri(packPath, UriKind.Absolute);
                 // ListResources(imageUri);  //WiP
 
-
                 if (CanOpenPackUri(imageUri))
                 {
                     return imageUri;
@@ -391,42 +391,6 @@ namespace GadrocsWorkshop.Helios
             }
 
             return null;
-        }
-        private void ListResources(Uri uri)
-        {
-            string[] parts = uri.AbsolutePath.TrimStart('/').Split(new[] { ";component/" }, StringSplitOptions.None);
-            string assemblyName = parts[0];
-            string resourcePrefix  = Path.GetDirectoryName(parts.Length > 1 ? parts[1] : string.Empty).Replace('\\', '/');
-            string fileNameTemplate = Path.GetFileNameWithoutExtension(parts.Length > 1 ? parts[1] : string.Empty).Replace('\\', '/');
-
-            // Try to find the already loaded assembly
-            Assembly asm = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .FirstOrDefault(a => a.GetName().Name.Equals(assemblyName, StringComparison.OrdinalIgnoreCase));
-            if(asm != null)
-            {
-
-                Logger.Info("Loaded assembly: " + asm.FullName);
-                Logger.Info("Manifest resources:");
-
-                foreach (var r in asm.GetManifestResourceNames())
-                    Logger.Info($"  - {r}");
-
-                string resourceName = assemblyName.ToLower() + ".g.resources";
-                Logger.Info($"Attempting to extract {resourceName}");
-
-                var rm = new ResourceManager(assemblyName.ToLower() + ".g", asm);
-
-                ResourceSet set = rm.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-                Logger.Info($"Resources under \'{resourcePrefix}\':");
-
-                foreach (DictionaryEntry entry in set)
-                {
-                    string key = (string)entry.Key;
-                    if (key.StartsWith(resourcePrefix, StringComparison.OrdinalIgnoreCase))
-                        Logger.Info("  " + key);
-                }
-            }
         }
         public string MakeImagePathRelative(string filename)
         {
@@ -670,6 +634,141 @@ namespace GadrocsWorkshop.Helios
             get => _changedImages;
             set => _changedImages = value;
         }
+
+        #endregion
+        #region IImageManager5
+        /// <summary>
+        /// Iteratively loads images with a name matching the supplied parameter. 
+        /// </summary>
+        /// <param name="animationName">A representative file name</param>
+        /// <returns>ImageSource for the loaded image in "Normal" order</returns>
+        public IEnumerable<ImageSource> LoadAnimationFrames(string animationName) {
+
+            //Path.Combine(_documentImagePath,animationName)
+
+            if (null == animationName)
+            {
+                yield break;
+            }
+
+            // parse as URI and check for existence of file, return Uri for resource that exists
+            // or null (note: resource is not necesarily allowed to be read)
+            Uri imageUri = GetImageUri(animationName);
+            if (imageUri == null)
+            {
+                // cache denial
+                yield break;
+            }
+
+            // based on protocol/scheme, check to make sure source location is permitted
+            if (!CheckImageLocationSecurity(imageUri))
+            {
+                // cache denial
+                yield break;
+            }
+
+            List<string> files;
+            switch (imageUri.Scheme)
+            {
+                case "pack":
+                    files = ListResources(imageUri);
+                    foreach (string file in files)
+                    {
+                        yield return LoadImage(file);
+                    }
+                    break;
+                case "file":
+                    files = ListFiles(imageUri);
+                    foreach (string file in files)
+                    {
+                        yield return LoadImage(file);
+                    }
+                    break;
+            }
+            yield break;
+        }
+        /// <summary>
+        /// Lists files in the supplied assembly directory that match a pattern computed from the uri provided.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>Naturally Ordered List of filenames matching the pattern or null 
+        /// </returns>
+        private List<string> ListResources(Uri uri)
+        {
+            string[] parts = uri.AbsolutePath.TrimStart('/').Split(new[] { ";component/" }, StringSplitOptions.None);
+            string assemblyName = parts[0];
+            string resourcePrefix = Path.GetDirectoryName(parts.Length > 1 ? parts[1] : string.Empty).Replace('\\', '/');
+            string fileNameTemplate = Path.GetFileNameWithoutExtension(parts.Length > 1 ? parts[1] : string.Empty).Replace('\\', '/').TrimEnd("0123456789*".ToCharArray());
+
+            // Try to find the already loaded assembly
+            Assembly asm = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .FirstOrDefault(a => a.GetName().Name.Equals(assemblyName, StringComparison.OrdinalIgnoreCase));
+            if (asm != null)
+            {
+
+                Logger.Debug("Loaded assembly: " + asm.FullName);
+                Logger.Debug("Manifest resources:");
+
+                foreach (var r in asm.GetManifestResourceNames())
+                    Logger.Debug($"  - {r}");
+
+                string resourceName = assemblyName.ToLower() + ".g.resources";
+                Logger.Debug($"Attempting to extract {resourceName}");
+
+                var rm = new ResourceManager(assemblyName.ToLower() + ".g", asm);
+
+                ResourceSet set = rm.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+
+                List<string> files = set.Cast<DictionaryEntry>()
+                 .Where(entry => entry.Key.ToString().StartsWith($"{resourcePrefix}/{fileNameTemplate}", StringComparison.InvariantCultureIgnoreCase))
+                 .OrderBy(entry => (string)entry.Key, Comparer<string>.Create((x, y) => StrCmpLogicalW(x, y)))
+                 .Select(entry => $"{{{assemblyName}}}/{entry.Key}")
+                 .ToList();
+
+                
+                Logger.Debug($"Resources under \'{resourcePrefix}\':");
+
+                foreach (string entry in files)
+                {
+                    Logger.Debug("  " + entry);
+                }
+                return files;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Lists files in the supplied directory that match a pattern computed from the path provided.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>Naturally Ordered List of filenames matching the pattern or null 
+        /// </returns>
+        private List<string> ListFiles(Uri uri)
+        {
+            string resourcePrefix = Path.GetDirectoryName(uri.AbsolutePath).Replace('\\', '/');
+            string fileNameTemplate = Path.GetFileNameWithoutExtension(uri.AbsolutePath).TrimEnd("0123456789*".ToCharArray());
+            string fileExtension = Path.GetExtension(uri.AbsolutePath).ToLower();
+
+            List<string> files = Directory.EnumerateFiles(resourcePrefix)
+                .Where(file => Path.GetFileName(file).StartsWith(fileNameTemplate, StringComparison.InvariantCultureIgnoreCase))
+                .OrderBy(file => Path.GetFileName(file), Comparer<string>.Create((x, y) => StrCmpLogicalW(x, y))).ToList();
+
+                Logger.Debug($"Files under \'{resourcePrefix}\':");
+
+                foreach (string entry in files)
+                {
+                    Logger.Debug("  " + entry);
+                }
+                return files;
+        }
+        /// <summary>
+        /// Comparer for Normal Ordering
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
+        private static extern int StrCmpLogicalW(string x, string y);
 
         #endregion
     }

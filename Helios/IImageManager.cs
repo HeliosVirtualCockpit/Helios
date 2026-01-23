@@ -20,6 +20,7 @@ using System.ComponentModel;
 namespace GadrocsWorkshop.Helios
 {
     using System.Windows.Media;
+    using System.Collections.Generic;
 
     public interface IImageManager
     {
@@ -131,4 +132,16 @@ namespace GadrocsWorkshop.Helios
         /// </summary>
         void DropObjectCache();
     }
+    /// <summary>
+    /// version 4 of public cross-assembly interface IImageManager
+    /// </summary>
+    public interface IImageManager5 : IImageManager4
+    {
+        /// <summary>
+        /// when called with a filename, it returns a list containing all
+        /// files with the same pattern
+        /// </summary>
+        IEnumerable<ImageSource> LoadAnimationFrames(string animationName);
+    }
+
 }

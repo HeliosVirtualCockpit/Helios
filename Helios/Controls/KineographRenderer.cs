@@ -23,6 +23,7 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Collections.Generic;
     using System.Windows.Media;
     using GadrocsWorkshop.Helios.Controls.Capabilities;
+    using System.Linq;
 
     public class KineographRenderer : HeliosVisualRenderer
     {
@@ -63,29 +64,9 @@ namespace GadrocsWorkshop.Helios.Controls
                 {
                     if (animation.AnimationFrames.Count == 0)
                     {
-                        bool imageLoaded = true;
-                        if (ConfigManager.ImageManager is IImageManager3 animationCapable)
+                        if (ConfigManager.ImageManager is IImageManager5 animationCapable)
                         {
-                            for (int i = 0; i < 20 && imageLoaded; i++)
-                            {
-                                try
-                                {
-                                    animation.AnimationFrames.Add(animationCapable.LoadImage(ImageFileName(animation.AnimationFrameImageNamePattern, i, substitutionChar), LoadImageOptions.SuppressMissingImageMessages));
-                                    if (animation.AnimationFrames[animation.AnimationFrames.Count - 1] == null)
-                                    {
-                                        imageLoaded = false;
-                                        animation.AnimationFrames.RemoveAt(animation.AnimationFrames.Count - 1);
-                                    }
-                                }
-                                catch
-                                {
-                                    if (i > 0)
-                                    {
-                                        imageLoaded = false; // tolerate image sequences starting at 0 or 1
-                                        Logger.Debug($"Unable to load image name {ImageFileName(animation.AnimationFrameImageNamePattern, i, substitutionChar)}");
-                                    }
-                                }
-                            }
+                            animation.AnimationFrames = animationCapable.LoadAnimationFrames(animation.AnimationFrameImageNamePattern).ToList<ImageSource>();
                             animation.AnimationIsPng = animation.AnimationFrameImageNamePattern.IndexOf(".png", StringComparison.InvariantCultureIgnoreCase) >= 0;
                             animation.AnimationFrameCount = animation.AnimationFrames.Count;
                             animation.AnimationFrameNumber = 0;
