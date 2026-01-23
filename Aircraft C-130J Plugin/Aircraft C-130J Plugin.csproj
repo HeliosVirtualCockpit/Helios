@@ -96,6 +96,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\Base\C-130J\5 Slip Gauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Gauges\Radios\ARC210_1_Norm.png" />
     <Resource Include="Gauges\Radios\ARC210_1_Pressed.png" />
     <Resource Include="Gauges\Radios\ARC210_2_Norm.png" />

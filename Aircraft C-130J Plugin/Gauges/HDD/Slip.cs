@@ -30,7 +30,6 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.HDD.Slip
         private GaugeNeedle _slipBall;
         private HeliosValue _slipBallValue;
 
-        private bool _suppressScale = false;
         private readonly string _interfaceDevice = "";
 
             

@@ -53,6 +53,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         internal static NetworkFunctionCollection Process(BaseUDPInterface udpInterface)
         {
+            _functions.Clear();
+            _functionList.Clear();
+
             InstallationLocations locations = InstallationLocations.Singleton;
             if(locations.Items.Count > 0)
             {
@@ -327,7 +330,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     break;
             }
         }
-
+        internal static void Clear()
+        {
+            _functions.Clear();
+        }
         private static string BuildFnLamp(FunctionData fd)
         {
             (string category, string name) = AdjustName(fd.Name, fd.Device, fd.ElementName);
