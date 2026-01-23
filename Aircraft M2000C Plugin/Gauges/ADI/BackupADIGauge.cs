@@ -36,15 +36,15 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI.Backup
 
         private CalibrationPointCollectionDouble _pitchCalibration;
         private CalibrationPointCollectionDouble _pitchAdjustCalibaration;
-
+        public BackupADIGauge() : this("Backup ADI", new Size(400d, 400d), "Backup ADI") { }
         public BackupADIGauge(string name, Size size, string device)
             : base(name, size)
         {
             Point center = new Point(200d, 200d);
 
             _pitchCalibration = new CalibrationPointCollectionDouble(-90d, -461d, 90d, 461d);
-            _ball = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Tape.xaml", center, new Size(300d, 1440d), new Point(150d, 1440d / 2d));
-            _ball.Clip = new EllipseGeometry(center, 150d, 150d);
+            _ball = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Tape.xaml", center, new Size(210d, 1440d * 0.7d), new Point(105d, 1440d / 2d * 0.7d));
+            _ball.Clip = new RectangleGeometry(new Rect(95d, 95d,  210d, 210d));
             Components.Add(_ball);
 
             Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/SADI_Gradiant.xaml", new Rect(50d, 50d, 300d, 300d)));
@@ -53,7 +53,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI.Backup
             _wingsNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Wings.xaml", new Point(50d, 194d), new Size(300d, 55d), new Point(0d, 0d));
             Components.Add(_wingsNeedle);
 
-            _bankNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Pointer.xaml", center, new Size(10d, 39d), new Point(5d, -111d));
+            _bankNeedle = new GaugeNeedle("{M2000C}/Gauges/ADI/SADI_Pointer.xaml", center, new Size(300d, 300d), new Point(150d, 150d));
             Components.Add(_bankNeedle);
 
             Components.Add(new GaugeImage("{M2000C}/Gauges/ADI/SADI_Bezel.xaml", new Rect(0d, 0d, 400d, 400d)));
@@ -88,7 +88,7 @@ namespace GadrocsWorkshop.Helios.Gauges.M2000C.ADI.Backup
         void Pitch_Execute(object action, HeliosActionEventArgs e)
         {
             _pitch.SetValue(e.Value, e.BypassCascadingTriggers);
-            _ball.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue);
+            _ball.VerticalOffset = _pitchCalibration.Interpolate(e.Value.DoubleValue) * 0.7d;
         }
         void PitchAdjust_Execute(object action, HeliosActionEventArgs e)
         {
