@@ -12,10 +12,11 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#define DEBUGLOGGING
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.UDPInterface;
+using GadrocsWorkshop.Helios.Util;
 using GadrocsWorkshop.Helios.Util.DCS;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,11 +24,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media;
-using System.Xml.Linq;
-
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
 {
@@ -44,6 +40,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         private readonly static Dictionary<string, FunctionData> _dualFunctions = new Dictionary<string, FunctionData>();
         private static string _DCSAircraft = $@"{Environment.GetEnvironmentVariable("ProgramFiles")}\Eagle Dynamics\DCS World\Mods\aircraft\C130J\Cockpit\Scripts";
         private static int _nullArgCounter = -9999;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly bool inDevelopment = true;
+
 
 
         static ProcessInterfaceFunctions() {
@@ -53,6 +52,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         internal static NetworkFunctionCollection Process(BaseUDPInterface udpInterface)
         {
+
             _functions.Clear();
             _functionList.Clear();
 
@@ -71,6 +71,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                 _input = _input.Replace(pair.Key, pair.Value);
             }
 
+            Logger.Info($"Building C-130J interface from files at {Anonymizer.Anonymize(_DCSAircraft)}");
             int i = 0;
             foreach (Match m in Regex.Matches(_input, _pattern, _options))
             {
@@ -161,9 +162,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             }
 
             string clickableFilename = "C-130J_Functions";
-#if (DEBUGLOGGING)
-            _streamWriter = new StreamWriter($@"{Environment.GetEnvironmentVariable("userprofile")}\Documents\HeliosDev\Interfaces\{clickableFilename}.txt", false);
-#endif
+
+            _streamWriter = inDevelopment ? new StreamWriter($@"{Environment.GetEnvironmentVariable("userprofile")}\Documents\HeliosDev\Interfaces\{clickableFilename}.txt", false) : null;
+
             foreach (FunctionData fd in _functions.Values)
             {
                 if (!fd.Duplicate)
@@ -178,25 +179,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     }
                     else
                     {
-#if (DEBUGLOGGING)
                         WriteCsFunction($"Not creating function for duplicate \"{fd.Arg[0]}\" - \"{string.Join("_", fd.Name)}\"");
-#endif
                     }
 
                 }
 
             }
             AddInstrumentFunctions();
-#if (DEBUGLOGGING)
-            _streamWriter.Close();
-#endif
+
+            if (_streamWriter != null) _streamWriter.Close();
+
+            Logger.Info($"C-130J Interface generation resulted in {_functionList.Count()} functions.");
             return _functionList;
         }
         internal static void Analyze()
         {
             foreach (string fn in _functions.Values.Select(f => f.Fn).Distinct())
             {
-                //Console.WriteLine("\t\t\t case \"{0}\":\n\t\t\tbreak;", fn);
+                Console.WriteLine("\t\t\t case \"{0}\":\n\t\t\tbreak;", fn);
             }
         }
         internal static void CreateFunctionSwitcher()
@@ -326,7 +326,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
                     // these are just to wiggle the cable going from the overhead to the seat.  Let's hope nobody needs this!
                     break;
                 default:
-                    Console.WriteLine($"# # # # Unprocessed Function Detected in C-130J Function Builder: {fd.Fn}");
+                    Logger.Warn($"Unprocessed Function Detected in C-130J Interface Function Builder: {fd.Fn}");
                     break;
             }
         }
@@ -1235,9 +1235,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         }
         private static void WriteCsFunction(string fn)
         {
-#if (DEBUGLOGGING)
-            if(!string.IsNullOrEmpty(fn)) _streamWriter.WriteLine(fn);
-#endif
+            if(_streamWriter != null && !string.IsNullOrEmpty(fn)) _streamWriter.WriteLine(fn);
         } 
     }
     internal class FunctionData
