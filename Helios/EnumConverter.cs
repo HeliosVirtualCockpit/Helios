@@ -179,7 +179,7 @@ namespace GadrocsWorkshop.Helios
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             EnsureLoaded();
-            Logger.Debug("attempting to convert back from from {Value} to {Type}", value, targetType);
+            Logger.Debug("attempting to convert back from {Value} to {Type}", value, targetType);
             return _reverseValues[value];
         }
     }

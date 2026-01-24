@@ -1,0 +1,15 @@
+<ControlTemplate>
+	<Name>HDD Right (Copilot)</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.HDD.Copilot.Right</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>1331,439</Location>
+			<Size>293,400</Size>
+			<Hidden>False</Hidden>
+			<EmbeddedViewportName>C130J_HDD_4</EmbeddedViewportName>
+			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

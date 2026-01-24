@@ -1,0 +1,14 @@
+<Canvas Width="15.600" Height="134.682"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="15.600" Height="134.682">
+
+  
+
+  <!-- Layer 1/Pointer Rotation Point -->
+  <Path Fill="#ffff0000" Data="F1 M 8.301,134.177 C 8.301,133.898 8.077,133.672 7.800,133.672 C 7.523,133.672 7.299,133.898 7.299,134.177 C 7.299,134.456 7.523,134.682 7.800,134.682 C 8.077,134.682 8.301,134.456 8.301,134.177 Z"/>
+
+    <Path Opacity="1.0" Fill="#fff0f0f0" Data="F1 M 8.973,0.819 C 8.567,-0.273 7.033,-0.273 6.626,0.819 L 0.000,18.613 L 15.600,18.613 L 8.973,0.819 Z"/>
+
+    </Canvas>
+</Canvas>

@@ -1,0 +1,15 @@
+<ControlTemplate>
+	<Name>AMU (Copilot)</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.AMU.COPILOT</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>535,608</Location>
+			<Size>500,175</Size>
+			<Hidden>False</Hidden>
+			<EmbeddedViewportName>C130J_COPILOT_AMU</EmbeddedViewportName>
+			<GlassReflectionOpacity>0.3</GlassReflectionOpacity>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

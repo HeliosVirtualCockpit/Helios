@@ -1,0 +1,279 @@
+﻿[
+  {
+    "templateName": "MIRAGE F1",
+    "moduleId": "Mirage-F1",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "ALR300",
+        "SuppressViewportNamePrefix": true,
+        "requiresPatch": false,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+      },
+      {
+        "viewportName": "RADAR",
+        "SuppressViewportNamePrefix": false,
+        "relativeInitFilePath": "Mods/aircraft/Mirage-F1/Cockpit/Mirage-F1/Mirage-F1_Common/Radar_Cyrano_IV_legacy/Indicator/BakedGeneral/CyranoLegacy_bake_general_init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": true,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+      }
+    ]
+  },
+  {
+    "templateName": "F-4E",
+    "moduleId": "F-4E",
+    "categoryName": "F-4E Phantom II",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "F4E_Dscg_Pilot",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_Dscg_Wso",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_HeadUpDisplay",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_Rwr",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      {
+        "viewportName": "F4E_Dscg_Tv",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      }
+    ]
+  },
+  {
+    "templateName": "C130J",
+    "moduleId": "C-130J-30",
+    "categoryName": "C-130J Hercules",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "C130J_HDD_1",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 800
+      },
+      {
+        "viewportName": "C130J_HDD_1",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 800
+      },
+      {
+        "viewportName": "C130J_HDD_2",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 800
+      },
+      {
+        "viewportName": "C130J_HDD_3",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 800
+      },
+      {
+        "viewportName": "C130J_HDD_4",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 800
+      },
+      {
+        "viewportName": "C130J_PILOT_CNI",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 400
+      },
+      {
+        "viewportName": "C130J_COPILOT_CNI",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 400
+      },
+      {
+        "viewportName": "C130J_AC_CNI",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 600,
+        "height": 400
+      },
+      {
+        "viewportName": "C130J_CNBP",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 300
+      },
+      {
+        "viewportName": "C130J_PILOT_AMU_LEFT",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 300
+      },
+      {
+        "viewportName": "C130J_PILOT_AMU_RIGHT",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 300
+      },
+      {
+        "viewportName": "C130J_COPILOT_AMU_LEFT",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 300
+      },
+      {
+        "viewportName": "C130J_COPILOT_AMU_RIGHT",
+        "SuppressViewportNamePrefix": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": false,
+        "seatIndex": 2,
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 300
+      },
+      {
+        "viewportName": "C130J_ARC210_SCREEN",
+        "SuppressViewportNamePrefix": true,
+        "relativeInitFilePath": "Mods/aircraft/C130J/Cockpit/Scripts/ARC_210/Init.lua",
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "requiresPatch": true,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 200
+      }
+    ]
+  }
+]

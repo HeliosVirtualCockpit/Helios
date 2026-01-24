@@ -1,0 +1,16 @@
+<ControlTemplate>
+	<Name>ARC-210 Radio</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.ARC210Radio</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>500,401</Size>
+			<Hidden>False</Hidden>
+			<EmbeddedViewportName>C130J_ARC210_SCREEN</EmbeddedViewportName>
+			<RequiresPatches>True</RequiresPatches>
+			<UseTextualDisplays>False</UseTextualDisplays>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

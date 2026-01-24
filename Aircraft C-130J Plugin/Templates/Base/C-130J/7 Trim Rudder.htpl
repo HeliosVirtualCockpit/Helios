@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Rudder Trim</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.RudderTrim</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>765,0</Location>
+			<Size>200,200</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

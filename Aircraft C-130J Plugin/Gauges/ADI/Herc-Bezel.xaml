@@ -1,0 +1,49 @@
+<Canvas Width="350.000" Height="350.000"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="350.000" Height="350.000">
+
+  <!-- Layer 1/<Compound Path> -->
+  <Path Fill="#ff222222" Data="F1 M 175.000,281.167 C 116.366,281.167 68.833,233.634 68.833,175.000 C 68.833,116.366 116.366,68.833 175.000,68.833 C 233.634,68.833 281.167,116.366 281.167,175.000 C 281.167,233.634 233.634,281.167 175.000,281.167 Z M 175.000,0.000 C 78.350,0.000 0.000,78.350 0.000,175.000 C 0.000,271.650 78.350,350.000 175.000,350.000 C 271.650,350.000 350.000,271.650 350.000,175.000 C 350.000,78.350 271.650,0.000 175.000,0.000 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Fill="#fff0f0f0" Data="F1 M 36.750,252.583 L 35.583,252.583 L 35.583,97.417 L 36.750,97.417 L 36.750,252.583 Z"/>
+
+  <!-- Layer 1/<Compound Path> -->
+  <Path Fill="#ff171717" Data="F1 M 175.000,281.167 C 116.366,281.167 68.833,233.634 68.833,175.000 C 68.833,116.366 116.366,68.833 175.000,68.833 C 233.634,68.833 281.167,116.366 281.167,175.000 C 281.167,233.634 233.634,281.167 175.000,281.167 Z M 175.000,58.333 C 110.567,58.333 58.333,110.567 58.333,175.000 C 58.333,239.433 110.567,291.667 175.000,291.667 C 239.433,291.667 291.667,239.433 291.667,175.000 C 291.667,110.567 239.433,58.333 175.000,58.333 Z"/>
+
+  <!-- Layer 1/<Polygon> -->
+  <Path StrokeThickness="0.8" Stroke="#ff121212" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 177.232,286.822 L 186.125,309.899 C 186.729,311.466 185.572,313.151 183.893,313.151 L 166.107,313.151 C 164.428,313.151 163.271,311.466 163.875,309.899 L 172.768,286.822 C 173.555,284.780 176.445,284.780 177.232,286.822 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 45.226,172.083 L 58.059,172.083 L 58.059,177.917 L 45.226,177.917 L 45.226,172.083 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 61.154,237.361 L 72.268,230.944 L 75.185,235.996 L 64.071,242.413 L 61.154,237.361 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 107.587,285.929 L 114.004,274.815 L 119.056,277.732 L 112.639,288.846 L 107.587,285.929 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 237.361,288.846 L 230.944,277.732 L 235.996,274.815 L 242.413,285.929 L 237.361,288.846 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 285.929,242.413 L 274.815,235.996 L 277.732,230.944 L 288.846,237.361 L 285.929,242.413 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 130.393,293.142 L 133.586,284.372 L 136.422,285.404 L 133.230,294.175 L 130.393,293.142 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 151.586,299.093 L 153.207,289.902 L 156.180,290.426 L 154.559,299.617 L 151.586,299.093 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 195.441,299.617 L 193.820,290.426 L 196.793,289.902 L 198.414,299.093 L 195.441,299.617 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 216.770,294.175 L 213.578,285.404 L 216.414,284.372 L 219.607,293.142 L 216.770,294.175 Z"/>
+
+  <!-- Layer 1/<Rectangle> -->
+  <Path Opacity="0.9" StrokeThickness="0.2" Stroke="#ff989898" StrokeMiterLimit="1.0" Fill="#fff0f0f0" Data="F1 M 304.774,177.917 L 291.941,177.917 L 291.941,172.083 L 304.774,172.083 L 304.774,177.917 Z"/>
+
+  </Canvas>
+</Canvas>

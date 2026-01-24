@@ -29,7 +29,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// This invisible control is used to communicate set-up and communicate with a
     /// ShaderEffect that is used for altering the colour of most visuals & gauges  
     /// </summary>
-    [HeliosControl("Helios.Base.Effects.ColorAdjuster", "Color Adjustment Effect", "Special Controls", typeof(EffectColorAdjusterRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Base.Effects.ColorAdjuster", "Color Adjustment Effect", "Special Controls", typeof(EffectColorAdjusterRenderer), HeliosControlFlags.NoEffects | HeliosControlFlags.NotRotatable | HeliosControlFlags.None)]
     public class EffectColorAdjuster : ImageDecorationBase
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();

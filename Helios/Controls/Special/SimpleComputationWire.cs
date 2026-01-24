@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// a piece of wire with memory which can have simple arithmetic operations applied to it in a cumulative manner.  The wire also 
     /// has the ability to detect threshold values and trigger on these.
     /// </summary>
-    [HeliosControl("Helios.Base.SimpleComputationWire", "Simple Computation Wire", "Special Controls", typeof(ImageDecorationRenderer))]
+    [HeliosControl("Helios.Base.SimpleComputationWire", "Simple Computation Wire", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.NoEffects | HeliosControlFlags.NotRotatable | HeliosControlFlags.None)]
     public class SimpleComputationWire : MemoryWire, IPropertyNotification
     {
         private HeliosValue _booleanXorSignal;

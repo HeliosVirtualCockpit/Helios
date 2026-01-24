@@ -1,0 +1,14 @@
+<Canvas Width="265.720" Height="98.491"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Canvas Width="265.720" Height="98.491">
+
+  <!-- Layer 1/<Compound Path> -->
+  <Path StrokeThickness="3.0" Stroke="#ff000000" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Fill="#ff2f2f2f" Data=" M 239.031,96.991 C 221.910,54.717 180.713,24.921 132.604,24.921 C 84.495,24.921 43.298,54.717 26.176,96.991 L 1.500,96.991 C 19.772,41.516 71.675,1.500 132.860,1.500 C 194.044,1.500 245.948,41.516 264.220,96.991 L 239.031,96.991 Z"/>
+
+  <!-- Layer 1/<Path> -->
+
+        <!-- Layer 1/<Path> -->
+
+    </Canvas>
+</Canvas>

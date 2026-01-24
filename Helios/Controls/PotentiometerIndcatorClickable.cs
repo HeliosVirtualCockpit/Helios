@@ -76,7 +76,7 @@ namespace GadrocsWorkshop.Helios.Controls
             }
         }
 
-        public string IndicatorOnNormalImage
+        public override string IndicatorOnNormalImage
         {
             get
             {
@@ -98,7 +98,7 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
-        public string IndicatorOnClickedImage
+        public override string IndicatorOnClickedImage
         {
             get
             {

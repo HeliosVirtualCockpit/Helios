@@ -1,0 +1,13 @@
+<ControlTemplate>
+	<Name>Oxygen Gauge (Copilot)</Name>
+	<Category>C-130J Hercules</Category>
+	<TypeIdentifier>Helios.C130J.O2Gauge.Copilot</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>765,200</Location>
+			<Size>200,200</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

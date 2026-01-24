@@ -105,6 +105,6 @@ namespace ToolsCommon
         /// <param name="viewport"></param>
         /// <returns></returns>
         public string DisplayName(Viewport viewport) =>
-            $"{viewport.ViewportDisplayName ?? TemplateDisplayName} {(viewport.Description ?? viewport.ViewportName).Replace("-", " ").Replace("_", " ")}";
+            $"{(viewport.SuppressViewportNamePrefix ? "" : viewport.ViewportDisplayName ?? TemplateDisplayName)}{(viewport.SuppressViewportNamePrefix ? "" : " ")}{(viewport.Description ?? viewport.ViewportName).Replace("-", " ").Replace("_", " ")}";
     }
 }

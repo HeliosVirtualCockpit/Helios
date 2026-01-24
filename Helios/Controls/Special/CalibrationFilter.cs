@@ -28,7 +28,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// without having to write a calibration function in code or Lua script
     /// </summary>
     [HeliosControl("Helios.Base.CalibrationFilter", "Calibration Filter", "Special Controls",
-        typeof(ImageDecorationRenderer))]
+        typeof(ImageDecorationRenderer), HeliosControlFlags.NoEffects | HeliosControlFlags.NotRotatable | HeliosControlFlags.None)]
     public class CalibrationFilter : ImageDecorationBase
     {
         /// <summary>

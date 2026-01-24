@@ -1630,7 +1630,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.AH64D
 #endregion
 #region Standby Instruments
 #region Altimeter
-            AddFunction(new Altimeter(this, "Standby Altimeter", "2051", "Altitude", "Barometric altitude above sea level of the aircraft.", "Value is adjusted per altimeter pressure setting.", "2059", "Pressure", "Manually set barometric altitude.", ""));
+            AddFunction(new Functions.Altimeter(this, "Standby Altimeter", "2051", "Altitude", "Barometric altitude above sea level of the aircraft.", "Value is adjusted per altimeter pressure setting.", "2059", "Pressure", "Manually set barometric altitude.", ""));
             AddFunction(new Axis(this, BARO_ALTIMETER, baro_alt_commands.PressureSet.ToString("d"), "477", 0.002d, 0d, 1d, "Standby Altimeter", "Pressure Setting Knob", true, "%.4f"));
 #endregion
 #region Standby Airspeed Indicator

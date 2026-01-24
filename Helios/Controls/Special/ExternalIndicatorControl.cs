@@ -34,7 +34,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// is still using it, but is no longer appearing in the toolbox.
     /// </summary>
 #if DEBUG
-    [HeliosControl("Helios.Base.Special.ExternalIndicatorControl", "External Indicator Control", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.None)]
+    [HeliosControl("Helios.Base.Special.ExternalIndicatorControl", "External Indicator Control", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.NoEffects | HeliosControlFlags.None)]
 #else
     [HeliosControl("Helios.Base.Special.ExternalIndicatorControl", "External Indicator Control", "Special Controls", typeof(ImageDecorationRenderer), HeliosControlFlags.NotShownInUI)]
 #endif

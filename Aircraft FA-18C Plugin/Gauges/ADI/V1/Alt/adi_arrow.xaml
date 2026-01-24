@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Canvas Width="17.410" Height="110" Name="ADI_Bank_Arrow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+
+        <Canvas>
+
+            <!-- ADI Inner Ring/Innermost Ring and Pointer/Inside Ring and Pointer -->
+            <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff00ff00" Data="F1 M 12.705,12.923 L 8.705,1.511 L 4.705,12.923 L 0.705,24.334 L 8.705,24.334 L 16.705,24.334 L 12.705,12.923 Z"/>
+
+        </Canvas>
+
+    </Canvas>
+</Canvas>

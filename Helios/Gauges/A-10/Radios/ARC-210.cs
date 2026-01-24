@@ -36,11 +36,11 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
         private readonly string _interfaceDeviceName = "ARC-210";
         private readonly string _imageLocation = "{A-10C}/Images/A-10CII/";
         private bool _useTextualDisplays = false;
-        private ImageDecoration _displayBackground;
+        private readonly ImageDecoration _displayBackground;
         private string _vpName = "";
-        private string _font = "Helios Virtual Cockpit A-10C_ARC-210_Large";
-        private string _font2 = "Helios Virtual Cockpit A-10C_ARC-210_Small";
-        private List<TextDisplay> _textDisplayList = new List<TextDisplay>();
+        private readonly string _font = "Helios Virtual Cockpit A-10C_ARC-210_Large";
+        private readonly string _font2 = "Helios Virtual Cockpit A-10C_ARC-210_Small";
+        private readonly List<TextDisplay> _textDisplayList = new List<TextDisplay>();
 
         public ARC210Radio()
             : base("ARC-210 Radio", new Size(640, 523))
@@ -182,7 +182,20 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
                 actionChildName: "",
                 deviceActionName: "set.clear radio display"
                 ));
-
+            DefaultSelfBindings.Add(new DefaultSelfBinding(
+                triggerChildName: "ARC-210 Radio_Master switch",
+                deviceTriggerName: "position 1.exited",
+                deviceTriggerBindingValue: new BindingValue(false),
+                actionChildName: "",
+                deviceActionName: "set.clear radio display"
+                ));
+            AddDefaultInputBinding(
+                childName: "",
+                interfaceTriggerName: "ARC-210.Master switch.changed",
+                deviceActionName: "set.clear radio display",
+                triggerBindingSource: BindingValueSources.LuaScript,
+                triggerBindingValue: new BindingValue("return TriggerValue==1")
+                );
         }
 
         public override string DefaultBackgroundImage => _imageLocation + "ARC-210_Faceplate.png";
@@ -331,7 +344,7 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
                     }
                     else
                     {
-                        RemoveViewport(value);
+                        RemoveViewport();
                     }
                     OnPropertyChanged("ViewportName", _vpName, value, false);
                     _vpName = value;
@@ -369,7 +382,7 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
             });
         }
 
-        private void RemoveViewport(string name)
+        private void RemoveViewport()
         {
             foreach (HeliosVisual visual in this.Children)
             {
@@ -382,12 +395,9 @@ namespace GadrocsWorkshop.Helios.Gauges.A10C.ARC210
         }
         private void ClearDisplay_Execute(object action, HeliosActionEventArgs e)
         {
-            if(e.Value.BoolValue)
+            foreach(TextDisplay td in _textDisplayList)
             {
-                foreach(TextDisplay td in _textDisplayList)
-                {
-                        td.TextValue = "";
-                }
+                    td.IsHidden = e.Value.BoolValue;
             }
         }
         public override void ReadXml(XmlReader reader)

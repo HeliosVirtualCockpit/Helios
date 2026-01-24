@@ -30,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// Special viewport extent with an associated editor, so the user can introduce lua at the end of monitorsetup files without
     /// triggering the warning to reconfigure monitors in the DCS Monitor Setup interface
     /// </summary>
-    [HeliosControl("Helios.Base.DCSMonitorScriptAppender", "DCS Monitor Setup Script Appender", "Special Controls", typeof(DCSMonitorScriptAppenderRenderer),HeliosControlFlags.NotShownInUI)]
+    [HeliosControl("Helios.Base.DCSMonitorScriptAppender", "DCS Monitor Setup Script Appender", "Special Controls", typeof(DCSMonitorScriptAppenderRenderer),HeliosControlFlags.NotShownInUI | HeliosControlFlags.NotRotatable)]
     public class DCSMonitorScriptAppender : ViewportExtentBase
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();

@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     /// <summary>
     /// viewport extent with an associated editor, so the user can control the name of the viewport being represented
     /// </summary>
-    [HeliosControl("Helios.Base.ViewportExtent", "Simulator Viewport", "Special Controls", typeof(ViewportExtentRenderer))]
+    [HeliosControl("Helios.Base.ViewportExtent", "Simulator Viewport", "Special Controls", typeof(ViewportExtentRenderer), HeliosControlFlags.NotRotatable | HeliosControlFlags.None)]
     public class ViewportExtent : ViewportExtentBase
     {
         // no code

@@ -1387,7 +1387,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.M2000C
 
             #endregion
             #region  Flight Instruments
-            AddFunction(new Altimeter(this));
+            AddFunction(new Functions.Altimeter(this));
             AddFunction(new RotaryEncoder(this, FLIGHTINST, "3309", "309", 0.01d, "Flight Instruments", "Barometric Pressure Calibration Knob"));
 
             AddFunction(new ScaledNetworkValue(this, "316", new CalibrationPointCollectionDouble(-0.9d, -90d, 0.9d, 90d), "Flight Instruments", "ADI Pitch", "Pitch", "-90 to 90", BindingValueUnits.Numeric,"%.5f"));

@@ -150,7 +150,7 @@ namespace GadrocsWorkshop.Helios.ControlCenter
                 RegistryKey pathKey =
                     Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
                 pathKey?.SetValue("Helios",
-                    "\"" + System.IO.Path.Combine(ConfigManager.ApplicationPath, "ControlCenter.exe") + "\"");
+                    "\"" + System.IO.Path.Combine(ConfigManager.ApplicationPath, "Control Center.exe") + "\"");
                 pathKey?.Close();
             }
             else

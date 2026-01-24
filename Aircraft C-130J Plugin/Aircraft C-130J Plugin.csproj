@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{60EFC353-F68F-4CEA-9D20-B2FAF1907DBE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GadrocsWorkshop.Helios</RootNamespace>
+    <AssemblyName>C-130J</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.0\lib\net45\NLog.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Interfaces\ExportC130JFunctions.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gauges\ADI\ADI.cs" />
+    <Compile Include="Gauges\Altimeter\Altimeter.cs" />
+    <Compile Include="Gauges\CNBP\CNBP.cs" />
+    <Compile Include="Gauges\AMU\AMU Copilot.cs" />
+    <Compile Include="Gauges\AMU\AMU Pilot.cs" />
+    <Compile Include="Gauges\AMU\AMU.cs" />
+    <Compile Include="Gauges\Compass\Compass.cs" />
+    <Compile Include="Gauges\HDD\Slip.cs" />
+    <Compile Include="Gauges\HDD\HDDCopilotLeft.cs" />
+    <Compile Include="Gauges\HDD\HDDCopilotRight.cs" />
+    <Compile Include="Gauges\HDD\HDDPilotRight.cs" />
+    <Compile Include="Gauges\HDD\HDDPilotLeft.cs" />
+    <Compile Include="Gauges\HDD\HDD.cs" />
+    <Compile Include="Gauges\CNI\CNI Aug.cs" />
+    <Compile Include="Gauges\CNI\CNI Copliot.cs" />
+    <Compile Include="Gauges\CNI\CNI Pilot.cs" />
+    <Compile Include="Gauges\CNI\CNI.cs" />
+    <Compile Include="Gauges\NoseWheel\NoseWheel.cs" />
+    <Compile Include="Gauges\O2\O2 Copilot.cs" />
+    <Compile Include="Gauges\O2\O2 Pilot.cs" />
+    <Compile Include="Gauges\O2\O2.cs" />
+    <Compile Include="Gauges\Radios\ARC-210.cs" />
+    <Compile Include="Gauges\Trim\ElevatorTrim.cs" />
+    <Compile Include="Gauges\Trim\Flaps.cs" />
+    <Compile Include="Gauges\Trim\RudderTrim.cs" />
+    <Compile Include="Gauges\Trim\AileronTrim.cs" />
+    <Compile Include="Interfaces\C-130JInterface.cs" />
+    <Compile Include="Interfaces\Commands.cs" />
+    <Compile Include="Interfaces\Functions\Altimeter.cs" />
+    <Compile Include="Interfaces\Functions\ARC210Display.cs" />
+    <Compile Include="Interfaces\ProcessInterfaceFunctions.cs" />
+    <Compile Include="Interfaces\Devices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Base\C-130J\5 Slip Gauge.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Gauges\Radios\ARC210_1_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_1_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_2_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_2_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_3_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_3_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_4_Norm.png" />
+    <Resource Include="Gauges\Radios\ARC210_4_Pressed.png" />
+    <Resource Include="Gauges\Radios\ARC210_Knob_1.png" />
+    <Resource Include="Gauges\Radios\ARC210_Knob_2.png" />
+    <Resource Include="Gauges\Radios\ARC210_Knob_3.png" />
+    <Resource Include="Gauges\Radios\ARC210_Panel.png" />
+    <Resource Include="Gauges\Radios\ARC210_Display.png" />
+    <Content Include="Templates\Base\C-130J\8 Nose Wheel.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\5 Altimeter.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\5 ADI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Trim Aileron.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Trim Rudder.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Flaps.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\7 Trim Elevator.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\8 O2 B.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\8 O2 A.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 CNI Pilot.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 HDD 1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\5 Compass.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 AMU.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 CNI Copilot.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\3 CNI Augmented  Crew.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 HDD 2.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 HDD 1.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\1 HDD 2.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 AMU.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\0 CNBP.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\C-130J\2 Radio ARC-210.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Gauges\HDD\HDD_Bezel.png" />
+    <Resource Include="Gauges\HDD\HDD_Blank.png" />
+    <Resource Include="Gauges\HDD\HDD_Brt_Dec.png" />
+    <Resource Include="Gauges\HDD\HDD_Brt_Inc.png" />
+    <Resource Include="Gauges\HDD\HDD_Brt_Norm.png" />
+    <Resource Include="Gauges\AMU\AMU_Bezel.png" />
+    <Resource Include="Gauges\AMU\AMU_Brt_Decr.png" />
+    <Resource Include="Gauges\AMU\AMU_Brt_Incr.png" />
+    <Resource Include="Gauges\AMU\AMU_Brt_Norm.png" />
+    <Resource Include="Gauges\AMU\AMU_LSK_Left_Norm.png" />
+    <Resource Include="Gauges\AMU\AMU_LSK_Left_Pressed.png" />
+    <Resource Include="Gauges\AMU\AMU_LSK_Right_Norm.png" />
+    <Resource Include="Gauges\AMU\AMU_LSK_Right_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_0_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_0_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_1_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_1_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_2_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_2_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_3_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_3_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_4_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_4_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_5_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_5_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_6_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_6_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_7_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_7_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_8_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_8_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_9_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_9_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Bezel.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Brt_Decr.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Brt_Incr.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Brt_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Clr_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Clr_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Comm_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Comm_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Decimal_Key_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Decimal_Key_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Ecb_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Ecb_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_LSK_Left_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_LSK_Left_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_LSK_Right_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_LSK_Right_Pressed.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Nav_Norm.png" />
+    <Resource Include="Gauges\CNBP\CNBP_Nav_Pressed.png" />
+    <Resource Include="Gauges\CNI\A_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\A_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Brt_Key_DN.png" />
+    <Resource Include="Gauges\CNI\Brt_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Brt_Key_UP.png" />
+    <Resource Include="Gauges\CNI\B_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\B_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Caps_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Caps_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Clr_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Clr_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Comm_Tune_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Comm_Tune_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\C_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\C_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Decimal_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Decimal_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Del_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Del_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Dir_Intc_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Dir_Intc_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Dspy.png" />
+    <Resource Include="Gauges\CNI\D_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\D_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Eight_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Eight_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Empty_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Empty_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Exec_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Exec_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\E_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\E_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Fail.png" />
+    <Resource Include="Gauges\CNI\Five_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Five_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Four_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Four_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\F_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\F_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\G_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\G_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\H_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\H_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Iff_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Iff_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Indx_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Indx_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\I_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\I_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\J_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\J_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\K_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\K_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Legs_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Legs_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\L_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\L_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Mark_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Mark_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Mc_Indx_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Mc_Indx_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Minus_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Minus_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Msg.png" />
+    <Resource Include="Gauges\CNI\Msn_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Msn_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\M_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\M_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Nav_Ctrl_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Nav_Ctrl_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Nav_Tune_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Nav_Tune_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Next_Page_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Next_Page_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Nine_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Nine_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\N_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\N_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Ofst.png" />
+    <Resource Include="Gauges\CNI\One_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\One_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\O_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\O_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Power_Indicator_On.png" />
+    <Resource Include="Gauges\CNI\Prev_Page_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Prev_Page_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\P_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\P_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Q_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Q_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\R_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\R_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Seven_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Seven_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Six_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Six_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Slash_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Slash_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\S_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\S_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Three_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Three_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Told_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Told_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Two_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Two_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\T_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\T_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\U_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\U_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\V_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\V_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\W_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\W_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\X_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\X_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Y_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Y_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Zero_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Zero_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\Z_Key_Norm.png" />
+    <Resource Include="Gauges\CNI\Z_Key_Pressed.png" />
+    <Resource Include="Gauges\CNI\CNI_Bezel.png" />
+    <Resource Include="Gauges\CNI\CNI_LSK_Norm.png" />
+    <Resource Include="Gauges\CNI\CNI_LSK_Pressed.png" />
+    <None Include="app.config" />
+    <Content Include="Docs\DCS.C-130J_Plugin.Install.Read.Me.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\Herc-ADI-Ball-L.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\Herc-ADI-Ball-P.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\Herc-Bezel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Herc-Flag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Herc-Horizon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\ADI\Herc-Mask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\ADI\Herc-Roll-Marker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\NoseWheel\Herc-Nosewheel-Bezel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\NoseWheel\Herc-Nosewheel-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\NoseWheel\Herc-Nosewheel-Scale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Trim\Herc-Aileron-Trim-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Trim\Herc-Aileron-Trim-Left-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Trim\Herc-Aileron-Trim-Right-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Trim\Herc-Elevator-Trim-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Trim\Herc-Elevator-Trim-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Trim\Herc-Flaps-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Trim\Herc-Flaps-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Trim\Herc-Rudder-Trim-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Trim\Herc-Rudder-Trim-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-0to0-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-10K-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-1K-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-InHg-100s-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-MB-100s-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-Altimeter-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Altimeter\Herc-IAS-Tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\O2\Herc-O2-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\O2\Herc-O2-Needle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\NoseWheel\Herc-Nosewheel-Marks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Compass\Herc-Mag-Compass-Faceplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Compass\Herc-Mag-Compass-Base.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\Compass\compass_tape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gauges\HDD\Herc-Slip-Ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\HDD\Herc-Slip-Markers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\HDD\Herc-Slip-Tube.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <Import Project="..\HeliosPlugin.targets" />
+</Project>

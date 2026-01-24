@@ -24,7 +24,7 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.Altimeter
     [HeliosControl("Helios.AH64D.Altimeter", "Standby Altimeter", "AH-64D", typeof(GaugeRenderer),HeliosControlFlags.NotShownInUI)]
     public class Altimeter : BaseGauge
     {
-        private HeliosValue _altitdue;
+        private HeliosValue _altitude;
         private HeliosValue _airPressure;
         private GaugeNeedle _needle;
         private CalibrationPointCollectionDouble _needleCalibration;
@@ -63,9 +63,9 @@ namespace GadrocsWorkshop.Helios.Gauges.AH64D.Altimeter
             _airPressure.Execute += new HeliosActionHandler(AirPressure_Execute);
             Actions.Add(_airPressure);
 
-            _altitdue = new HeliosValue(this, new BindingValue(0d), "", "altitude", "Current altitude of the aircraft.", "", BindingValueUnits.Feet);
-            _altitdue.Execute += new HeliosActionHandler(Altitude_Execute);
-            Actions.Add(_altitdue);
+            _altitude = new HeliosValue(this, new BindingValue(0d), "", "altitude", "Current altitude of the aircraft.", "", BindingValueUnits.Feet);
+            _altitude.Execute += new HeliosActionHandler(Altitude_Execute);
+            Actions.Add(_altitude);
         }
 
         void Altitude_Execute(object action, HeliosActionEventArgs e)

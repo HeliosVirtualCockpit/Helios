@@ -1,0 +1,10 @@
+﻿@@ -297,36 +297,21 @@
+ ame%09%09%09%3D 
+-create_guid_string()
++%22amt%22
+ %0D%0Atxt.ma
+@@ -659,28 +659,18 @@
+ %09%09%3D 
+-create_guid_string()
++%22transfer%22
+ %0D%0Atx

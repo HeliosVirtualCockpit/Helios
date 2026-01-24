@@ -62,6 +62,24 @@ namespace GadrocsWorkshop.Helios.Controls
             _leftImage = "{Helios}/Images/Hats/hat-left.png";
             _rightImage = "{Helios}/Images/Hats/hat-right.png";
 
+            _horizontalPositionValue = new HeliosValue(this, new BindingValue((double)HorizontalSwitchPosition), "", "horizontal position", "Current horizontal position of the hat switch.", "Position 1 = left, 2 = center, 3 = right.", BindingValueUnits.Numeric);
+            _horizontalPositionValue.Execute += new HeliosActionHandler(SetHorizontalPositionAction_Execute);
+            Values.Add(_horizontalPositionValue);
+            Triggers.Add(_horizontalPositionValue);
+            Actions.Add(_horizontalPositionValue);
+
+            _verticalPositionValue = new HeliosValue(this, new BindingValue((double)VerticalSwitchPosition), "", "vertical position", "Current vertical position of the hat switch.", "Position 1 = Up, 2 = center, 3 = down.", BindingValueUnits.Numeric);
+            _verticalPositionValue.Execute += new HeliosActionHandler(SetVerticalPositionAction_Execute);
+            Values.Add(_verticalPositionValue);
+            Triggers.Add(_verticalPositionValue);
+            Actions.Add(_verticalPositionValue);
+
+            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the hat switch.", "Position 0 = center, 1 = up, 2 = down, 3 = left,  or 4 = right.", BindingValueUnits.Numeric);
+            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
+            Values.Add(_positionValue);
+            Triggers.Add(_positionValue);
+            Actions.Add(_positionValue);
+
             _upTrigger = new HeliosTrigger(this, "", "up", "entered", "Triggered when the hat is moved into the up position.");
             Triggers.Add(_upTrigger);
             _upExitTrigger = new HeliosTrigger(this, "", "up", "exited", "Triggered when the hat is returning from the up position.");
@@ -83,23 +101,7 @@ namespace GadrocsWorkshop.Helios.Controls
             _centerExitTrigger = new HeliosTrigger(this, "", "center", "exited", "Triggered when the hat is exiting from the center position.");
             Triggers.Add(_centerExitTrigger);
 
-            _horizontalPositionValue = new HeliosValue(this, new BindingValue((double)HorizontalSwitchPosition), "", "horizontal position", "Current horizontal position of the hat switch.", "Position 1 = left, 2 = center, 3 = right.", BindingValueUnits.Numeric);
-            _horizontalPositionValue.Execute += new HeliosActionHandler(SetHorizontalPositionAction_Execute);
-            Values.Add(_horizontalPositionValue);
-            Triggers.Add(_horizontalPositionValue);
-            Actions.Add(_horizontalPositionValue);
 
-            _verticalPositionValue = new HeliosValue(this, new BindingValue((double)VerticalSwitchPosition), "", "vertical position", "Current vertical position of the hat switch.", "Position 1 = Up, 2 = center, 3 = down.", BindingValueUnits.Numeric);
-            _verticalPositionValue.Execute += new HeliosActionHandler(SetVerticalPositionAction_Execute);
-            Values.Add(_verticalPositionValue);
-            Triggers.Add(_verticalPositionValue);
-            Actions.Add(_verticalPositionValue);
-
-            _positionValue = new HeliosValue(this, new BindingValue((double)SwitchPosition), "", "position", "Current position of the hat switch.", "Position 0 = center, 1 = up, 2 = down, 3 = left,  or 4 = right.", BindingValueUnits.Numeric);
-            _positionValue.Execute += new HeliosActionHandler(SetPositionAction_Execute);
-            Values.Add(_positionValue);
-            Triggers.Add(_positionValue);
-            Actions.Add(_positionValue);
 
             UpdatePoints();
         }
