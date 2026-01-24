@@ -1182,6 +1182,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "472", new CalibrationPointCollectionDouble(0d, -30d, 1d, 30d), "Instruments", "Rudder Trim Needle", "-30 to +30 degrees", BindingValueUnits.Degrees, "%0.3f", true));
             _functionList.Add(new ScaledNetworkValue(_baseUDPInterface, "473", new CalibrationPointCollectionDouble(0d, -10d, 1d, +30d) { new CalibrationPointDouble(0.5d, 0d)}, "Instruments", "Elevator Trim Needle", "-10 to +30", BindingValueUnits.Degrees, "%0.3f", true));
 
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "86", "Mech Interface", "Ramp Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "622", "Mech Interface", "Cargo Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "38", "Mech Interface", "Front Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "88", "Mech Interface", "Port Rear Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "97", "Mech Interface", "Starboard Rear Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "623", "Mech Interface", "Port Jump Deflector Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "624", "Mech Interface", "Starboard Jump Deflector Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            _functionList.Add(new DrawingValue(_baseUDPInterface, "501", "Mech Interface", "Starboard refueling Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
 
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""120"", new CalibrationPointCollectionDouble(0d, -10d, 1d, 15d) { new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""ADI Horizon"", ""-10 to +15 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
             WriteCsFunction(@"AddFunction(new NetworkValue(this, ""121"", ""Instruments"", ""ADI Off Flag"", ""0.0 to 1.0"", ""Number: 1 is the flag off"", BindingValueUnits.Numeric, ""%.1f""));");

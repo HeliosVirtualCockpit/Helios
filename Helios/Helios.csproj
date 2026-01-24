@@ -290,6 +290,7 @@
     <Compile Include="Interfaces\Common\Ignored.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSBallRotation.cs" />
     <Compile Include="Interfaces\DCS\Common\DCSInterfaceEditorBase.cs" />
+    <Compile Include="Interfaces\DCS\Common\DrawingValue.cs" />
     <Compile Include="Interfaces\DCS\Soft\SoftInterfaceEditor.xaml.cs">
       <DependentUpon>SoftInterfaceEditor.xaml</DependentUpon>
     </Compile>

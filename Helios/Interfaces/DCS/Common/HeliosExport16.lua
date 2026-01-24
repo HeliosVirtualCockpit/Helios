@@ -170,6 +170,7 @@ function helios_impl.LuaExportBeforeNextFrame()
     
             if updateHigh then
                 helios_private.processArguments(mainPanelDevice, helios_private.driver.everyFrameArguments)
+                helios_private.processDrawingArguments(helios_private.driver.everyFrameDrawingArguments)
                 helios_private.driver.processHighImportance(mainPanelDevice)
                 if helios_private.driver.processSimulatorData ~= nil then
                     helios_private.driver.processSimulatorData(LoGetSelfData())
@@ -178,9 +179,11 @@ function helios_impl.LuaExportBeforeNextFrame()
 
             if updateLow then
                 helios_private.processArguments(mainPanelDevice, helios_private.driver.arguments)
+                helios_private.processDrawingArguments(helios_private.driver.drawingArguments)
                 helios_private.driver.processLowImportance(mainPanelDevice)
             end
-        end    end
+        end    
+    end
 
     local heartBeat = nil
     if helios_private.clock > (helios_impl.announceInterval + helios_private.state.lastSend) then
@@ -680,6 +683,21 @@ function helios_private.processArguments(device, arguments)
             error(lArgumentValue)
         end
         helios.send(lArgument, lArgumentValue)
+    end
+end
+
+function helios_private.processDrawingArguments(arguments)
+    if arguments == nil then
+        return
+    end
+    local lArgumentValue
+    for lArgument, lFormat in pairs(arguments) do
+        success, lArgumentValue = pcall(string.format, lFormat, LoGetAircraftDrawArgumentValue(lArgument))
+        if not success then
+            log.write("HELIOS.EXPORT", log.ERROR, string.format("drawing argument %d has an invalid format string '%s'", lArgument, lFormat))
+            error(lArgumentValue)
+        end
+        helios.send(string.format("D%d",lArgument), lArgumentValue)
     end
 end
 

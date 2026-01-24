@@ -1107,7 +1107,24 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         private string GenerateElement(DCSDataElement element)
         {
             string luaTableIndex = element.ID;
-            if (int.TryParse(luaTableIndex, out int numericValue) 
+            if (int.TryParse(luaTableIndex, out int numericValue)
+                && numericValue > 0
+                && numericValue < 10000)
+            {
+                // use integer index, which is faster in Lua
+                // so don't quote the index
+            }
+            else
+            {
+                // use string index
+                luaTableIndex = $"\"{luaTableIndex}\"";
+            }
+            return $"[{luaTableIndex}]=\"{element.Format}\"";
+        }
+        private string GenerateDrawingElement(DCSDataElement element)
+        {
+            string luaTableIndex = element.ID.StartsWith("D") ? element.ID.Remove(0, 1) : element.ID;
+            if (int.TryParse(luaTableIndex, out int numericValue)
                 && numericValue > 0
                 && numericValue < 10000)
             {
@@ -1125,15 +1142,31 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// <summary>
         /// generates the export format strings for any DCS functions that export something
         /// </summary>
+        /// <remarks>The generate function only processes ID which are numeric</remarks>
         /// <param name="everyFrame"></param>
         /// <returns></returns>
         private IEnumerable<string> GenerateFunctions(bool everyFrame)
         {
             return SelectElements(everyFrame)
+                .Where(element => element.ID.Length > 0 && Char.IsDigit(element.ID[0]))
                 .OrderBy(element => element.ID.Length)
                 .ThenBy(element => element.ID)
                 .Select(GenerateElement);
         }
+        /// <summary>
+        /// generates the export format strings for any DCS functions which export something to extract a drawingArgument
+        /// </summary>
+        /// <param name="everyFrame"></param>
+        /// <returns></returns>
+        private IEnumerable<string> GenerateDrawingFunctions(bool everyFrame)
+        {
+            return SelectElements(everyFrame)
+                .Where(element => element.ID.Length > 0 && element.ID[0] == 'D')
+                .OrderBy(element => element.ID.Length)
+                .ThenBy(element => element.ID)
+                .Select(GenerateDrawingElement);
+        }
+
 
         /// <summary>
         /// finds all the DCS elements that match the export frequency given
@@ -1168,6 +1201,12 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             yield return "}";
             yield return "driver.arguments = {";
             yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateFunctions(false))}";
+            yield return "}";
+            yield return "driver.everyFrameDrawingArguments = {";
+            yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateDrawingFunctions(true))}";
+            yield return "}";
+            yield return "driver.drawingArguments = {";
+            yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateDrawingFunctions(false))}";
             yield return "}";
             yield return "";
         }
