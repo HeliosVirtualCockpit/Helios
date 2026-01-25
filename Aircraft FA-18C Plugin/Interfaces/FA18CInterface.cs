@@ -548,8 +548,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
             AddFunction(new FlagValue(this, commandCode++.ToString(), "IFEI", "Zulu Time Flag", "Z flag indicating Zulu time on IFEI", null));
             AddFunction(new FlagValue(this, commandCode++.ToString(), "IFEI", "Left Fuel Flag", "L flag indicating Left fuel quantity on IFEI", null));
             AddFunction(new FlagValue(this, commandCode++.ToString(), "IFEI", "Right Fuel Flag", "R flag indicating Right fuel quantity on IFEI", null));
-            AddFunction(new Axis(this, IFEI, commandCode.ToString(), commandCode++.ToString(), 1d, 0d, 400d, "IFEI", "Left Nozzle Position", false, null));
-            AddFunction(new Axis(this, IFEI, commandCode.ToString(), commandCode++.ToString(), 1d, 0d, 400d, "IFEI", "Right Nozzle Position", false, null));
+            AddFunction(new DrawingValue(this, "90", "IFEI", "Left Nozzle Position", "0 to 1", "Number", BindingValueUnits.Numeric, "%.3f"));
+            AddFunction(new DrawingValue(this, "89", "IFEI", "Right Nozzle Position", "0 to 1", "Number", BindingValueUnits.Numeric, "%.3f"));
 
             #endregion
             #region  Sensor panel

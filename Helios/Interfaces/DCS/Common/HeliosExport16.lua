@@ -170,7 +170,9 @@ function helios_impl.LuaExportBeforeNextFrame()
     
             if updateHigh then
                 helios_private.processArguments(mainPanelDevice, helios_private.driver.everyFrameArguments)
-                helios_private.processDrawingArguments(helios_private.driver.everyFrameDrawingArguments)
+                if helios_private.driver.everyFrameDrawingArguments ~= nil then
+                    helios_private.processDrawingArguments(helios_private.driver.everyFrameDrawingArguments)
+                end
                 helios_private.driver.processHighImportance(mainPanelDevice)
                 if helios_private.driver.processSimulatorData ~= nil then
                     helios_private.driver.processSimulatorData(LoGetSelfData())
@@ -179,7 +181,9 @@ function helios_impl.LuaExportBeforeNextFrame()
 
             if updateLow then
                 helios_private.processArguments(mainPanelDevice, helios_private.driver.arguments)
-                helios_private.processDrawingArguments(helios_private.driver.drawingArguments)
+                if helios_private.driver.drawingArguments then
+                    helios_private.processDrawingArguments(helios_private.driver.drawingArguments)
+                end
                 helios_private.driver.processLowImportance(mainPanelDevice)
             end
         end    

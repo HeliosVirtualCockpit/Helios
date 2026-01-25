@@ -644,8 +644,6 @@ namespace GadrocsWorkshop.Helios
         /// <returns>ImageSource for the loaded image in "Normal" order</returns>
         public IEnumerable<ImageSource> LoadAnimationFrames(string animationName) {
 
-            //Path.Combine(_documentImagePath,animationName)
-
             if (null == animationName)
             {
                 yield break;
@@ -745,9 +743,9 @@ namespace GadrocsWorkshop.Helios
         /// </returns>
         private List<string> ListFiles(Uri uri)
         {
-            string resourcePrefix = Path.GetDirectoryName(uri.AbsolutePath).Replace('\\', '/');
-            string fileNameTemplate = Path.GetFileNameWithoutExtension(uri.AbsolutePath).TrimEnd("0123456789*".ToCharArray());
-            string fileExtension = Path.GetExtension(uri.AbsolutePath).ToLower();
+            string resourcePrefix = Path.GetDirectoryName(uri.LocalPath).Replace('\\', '/');
+            string fileNameTemplate = Path.GetFileNameWithoutExtension(uri.LocalPath).TrimEnd("0123456789*".ToCharArray());
+            string fileExtension = Path.GetExtension(uri.LocalPath).ToLower();
 
             List<string> files = Directory.EnumerateFiles(resourcePrefix)
                 .Where(file => Path.GetFileName(file).StartsWith(fileNameTemplate, StringComparison.InvariantCultureIgnoreCase))

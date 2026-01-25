@@ -1202,12 +1202,19 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             yield return "driver.arguments = {";
             yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateFunctions(false))}";
             yield return "}";
-            yield return "driver.everyFrameDrawingArguments = {";
-            yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateDrawingFunctions(true))}";
-            yield return "}";
-            yield return "driver.drawingArguments = {";
-            yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateDrawingFunctions(false))}";
-            yield return "}";
+
+            if (GenerateDrawingFunctions(true).Count() > 0)  // Only build when there are args to avoid users doing unnecessary DCS Setup for all of their drivers
+            {
+                yield return "driver.everyFrameDrawingArguments = {";
+                yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateDrawingFunctions(true))}";
+                yield return "}";
+            }
+            if (GenerateDrawingFunctions(false).Count() > 0)  // Only build when there are args to avoid users doing unnecessary DCS Setup for all of their drivers
+            {
+                yield return "driver.drawingArguments = {";
+                yield return $"  {string.Join($",{Environment.NewLine}  ", GenerateDrawingFunctions(false))}";
+                yield return "}";
+            }
             yield return "";
         }
 

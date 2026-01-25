@@ -14,7 +14,7 @@
 			<ClickType>Swipe</ClickType>
 			<PositionOneImage>{Helios}/Images/Toggles/Orange-Round-180.png</PositionOneImage>
 			<PositionTwoImage>{Helios}/Images/Toggles/Orange-Round-300.png</PositionTwoImage>
-			<PositionThreeImage>{Helios}/Images/Toggles/Orange-Round-60.png</PositionThreeImage>
+			<PositionThreeImage>{Helios}/Images/Toggles/Orange-Round-060.png</PositionThreeImage>
 			<PositionCenterImage>{Helios}/Images/Toggles/Orange-Round-Center-inverted.png</PositionCenterImage>
 			<DefaultPosition>Center</DefaultPosition>
 		</TemplateValues>
