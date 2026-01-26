@@ -55,7 +55,7 @@ namespace GadrocsWorkshop.Helios.Controls.Special
     [HeliosPropertyEditor("Helios.FA18C.MPCD.Right", "Behavior")]
     [HeliosPropertyEditor("Helios.FA18C.MPCD.Left", "Behavior")]
     [HeliosPropertyEditor("Helios.C130J.CNI.PILOT", "Behavior")]
-    [HeliosPropertyEditor("Helios.C130J.CNI.COILOT", "Behavior")]
+    [HeliosPropertyEditor("Helios.C130J.CNI.COPILOT", "Behavior")]
     [HeliosPropertyEditor("Helios.C130J.CNI.AUGCREW", "Behavior")]
     [HeliosPropertyEditor("Helios.C130J.CNBP", "Behavior")]
     [HeliosPropertyEditor("Helios.C130J.AMU.PILOT", "Behavior")]
