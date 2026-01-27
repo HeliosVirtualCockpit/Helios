@@ -1245,6 +1245,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""472"", new CalibrationPointCollectionDouble(0d, -30d, 1d, 30d), ""Instruments"", ""Rudder Trim Needle"", ""-30 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""473"", new CalibrationPointCollectionDouble(0d, -10d, 1d, 30d){ new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""Elevator Trim Needle"", ""-10 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
 
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""86"", ""Mech Interface"", ""Ramp Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""622"", ""Mech Interface"", ""Cargo Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""38"", ""Mech Interface"", ""Front Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""88"", ""Mech Interface"", ""Port Rear Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""97"", ""Mech Interface"", ""Starboard Rear Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""623"", ""Mech Interface"", ""Port Jump Deflector Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""624"", ""Mech Interface"", ""Starboard Jump Deflector Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""501"", ""Mech Interface"", ""Starboard refueling Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+
         }
         private static void WriteCsFunction(string fn)
         {

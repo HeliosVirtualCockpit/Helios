@@ -30,6 +30,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         [JsonProperty("unit")]
         private BindingValueUnit _unit;
+
+        [JsonProperty("aircraftDrawArgument")]
+        private string _aircraftDrawArgument;
+
         /// <summary>
         /// Defines a value which is obtained from a LoGetAircraftDrawArgumentValue() call
         /// </summary>
@@ -58,7 +62,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         public DrawingValue(BaseUDPInterface sourceInterface, string id, string device, string name, string description, string valueDescription, BindingValueUnit unit, string exportFormat)
             : base(sourceInterface, device, name, description)
         {
-            _id = "D" + id;
+            _id = id;
+            _aircraftDrawArgument = id;
             _format = exportFormat;
             _valueDescription = valueDescription;
             _unit = unit;
@@ -91,7 +96,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         }
 
         protected override ExportDataElement[] DefaultDataElements =>
-            new ExportDataElement[] { new DCSDataElement(_id, _format, true) };
+            new ExportDataElement[] { new DCSDataElement("D" + _id, _format, true) };
 
         public override void Reset()
         {
