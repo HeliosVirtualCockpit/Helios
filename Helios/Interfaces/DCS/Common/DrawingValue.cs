@@ -16,6 +16,7 @@
 
 using GadrocsWorkshop.Helios.UDPInterface;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
@@ -92,7 +93,14 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         public override void ProcessNetworkData(string id, string value)
         {
-            _value.SetValue(new BindingValue(value), false);
+            if(double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out double v))
+            {
+                _value.SetValue(new BindingValue(v), false);
+            } 
+            else
+            {
+                _value.SetValue(new BindingValue(value), false);
+            }
         }
 
         protected override ExportDataElement[] DefaultDataElements =>
