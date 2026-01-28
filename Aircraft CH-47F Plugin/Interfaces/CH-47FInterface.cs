@@ -17,8 +17,9 @@
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
 {
     using GadrocsWorkshop.Helios.ComponentModel;
-    using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
     using GadrocsWorkshop.Helios.Interfaces.DCS.CH47F.Functions;
+    using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+    using GadrocsWorkshop.Helios.UDPInterface;
     using System.Windows;
 
     public enum Cockpit { Pilot, Copilot, TroopCommander, LHGunner, RHGunner, AftEngineer}
@@ -1028,6 +1029,13 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.CH47F
             AddFunction(new ScaledNetworkValue(this, "746", new CalibrationPointCollectionDouble(-1.0d, -100d, 1.0d, 100.0d), "Flight Controls", "Pedals", "-100 to 100", "Percentage of Travel", BindingValueUnits.Numeric, "%.4f"));
 
             #endregion Control Positions
+
+            AddFunction(new DrawingValue(this, "26", "Doors", "Center Hook Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new DrawingValue(this, "38", "Doors", "Cargo Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new DrawingValue(this, "85", "Doors", "Ramp Lip Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new DrawingValue(this, "86", "Doors", "Ramp Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new DrawingValue(this, "349", "Doors", "Front Door Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
+            AddFunction(new DrawingValue(this, "350", "Doors", "Front Door Step Position", "0.0 to 1.0", "Number with 0 being closed", BindingValueUnits.Numeric, "%.2f"));
 
         }
         /// <summary>

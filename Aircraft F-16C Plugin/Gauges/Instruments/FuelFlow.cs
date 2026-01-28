@@ -53,12 +53,12 @@ namespace GadrocsWorkshop.Helios.Gauges.F_16.FuelFlow
         {
             double fuelFlow = 0d;
             HeliosValue hValue = action as HeliosValue;
-            switch (hValue.Unit.LongName)
+            switch (hValue.Unit.LongName.ToLower())
             {
-                case "Numeric":
+                case "numeric":
                     fuelFlow = e.Value.DoubleValue * 5000d;
                     break;
-                case "Pounds":
+                case "pound per hour":
                     fuelFlow = e.Value.DoubleValue;
                     break;
                 default:

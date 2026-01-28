@@ -64,8 +64,8 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
 
             if (_vpName != "" && _includeViewport)
             {
-                AddViewport($"{_vpName}_LEFT", new Rect(56, 34, 379, 283));
-                AddViewport($"{_vpName}_RIGHT", new Rect(563, 34, 379, 283));
+                AddViewport($"{_vpName}_LEFT", SCREEN_RECT);
+                AddViewport($"{_vpName}_RIGHT", new Rect(SCREEN_RECT.Left + 507d, SCREEN_RECT.Top, SCREEN_RECT.Width, SCREEN_RECT.Height));
             }
 
             //_frameGlassPanel = AddPanel("MFD Glass", new Point(Left + (109), Top + (88)), new Size(500d, 500d), "{AH-64D}/Images/MFD/MFD_glass.png", _interfaceDevice);
@@ -102,8 +102,8 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.AMU
                 {
                     if (_vpName == "")
                     {
-                        AddViewport($"{value}_LEFT", new Rect(56, 34, 379, 283));
-                        AddViewport($"{value}_RIGHT", new Rect(563, 34, 379, 283));
+                        AddViewport($"{value}_LEFT", SCREEN_RECT);
+                        AddViewport($"{value}_RIGHT", new Rect(SCREEN_RECT.Left + 507d, SCREEN_RECT.Top, SCREEN_RECT.Width, SCREEN_RECT.Height));
                         OnDisplayUpdate();
                     }
                     else if (value != "")

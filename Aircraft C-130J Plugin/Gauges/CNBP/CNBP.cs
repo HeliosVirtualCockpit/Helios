@@ -119,7 +119,7 @@ namespace GadrocsWorkshop.Helios.Gauges.C130J.CNBP
         }
         private void AddViewport(string name)
         {
-            Rect vpRect = new Rect(55, 34, 382, 283);
+            Rect vpRect = SCREEN_RECT;
             vpRect.Scale(Width / NativeSize.Width, Height / NativeSize.Height);
             TextFormat tf = new TextFormat()
             {

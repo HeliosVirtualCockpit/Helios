@@ -187,7 +187,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             }
             AddInstrumentFunctions();
 
-            if (_streamWriter != null) _streamWriter.Close();
+            _streamWriter?.Close();
 
             Logger.Info($"C-130J Interface generation resulted in {_functionList.Count()} functions.");
             return _functionList;
@@ -466,10 +466,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             {
                 FunctionData fd1 = _dualFunctions[$"{fd.Val[0]}"];
                 _dualFunctions.Remove($"{fd.Val[0]}");
-                string switchVal1 = Double.Parse(fd1.Val[1]).ToString("N1");
-                string switchVal2 = Double.Parse(fd.Val[1]).ToString("N1");
-                _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], new SwitchPosition[] { new SwitchPosition(switchVal1, "Position 1", CommandEnumToString(fd1.Command[0]), CommandEnumToString(fd1.Command[0]), "0.0", "0.0"), new SwitchPosition("0.0", "Middle", null), new SwitchPosition(switchVal2, "Position 3", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Command[0]), "0.0", "0.0") }, category, name, "%0.1f"));
-                return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"{switchVal1}\", \"Position 1\", Commands.{fd1.Command[0]}.ToString(\"d\"), Commands.{fd1.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\"), new SwitchPosition(\"0.0\", \"Middle\", null), new SwitchPosition(\"{switchVal2}\", \"Position 3\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"0.0\", \"0.0\") }}, \"{category}\", \"{name}\", \"%0.1f\"));";
+
+                double switchDouble1 = Double.Parse(fd1.Val[1]);
+                double switchDouble2 = Double.Parse(fd.Val[1]);
+                string switchValMid = ((switchDouble1 + switchDouble2) / 2).ToString("N1");    
+                string switchVal1 = switchDouble1.ToString("N1");
+                string switchVal2 = switchDouble2.ToString("N1");
+
+                _functionList.Add(new Switch(_baseUDPInterface, DeviceEnumToString(fd.Device), fd.Val[0], new SwitchPosition[] { new SwitchPosition(switchVal1, "Position 1", CommandEnumToString(fd1.Command[0]), CommandEnumToString(fd1.Command[0]), switchValMid, switchValMid), new SwitchPosition(switchValMid, "Middle", null), new SwitchPosition(switchVal2, "Position 3", CommandEnumToString(fd.Command[0]), CommandEnumToString(fd.Command[0]), switchValMid, switchValMid) }, category, name, "%0.1f"));
+                return $"AddFunction(new Switch(this, devices.{fd.Device}.ToString(\"d\"), \"{fd.Val[0]}\", new SwitchPosition[] {{ new SwitchPosition(\"{switchVal1}\", \"Position 1\", Commands.{fd1.Command[0]}.ToString(\"d\"), Commands.{fd1.Command[0]}.ToString(\"d\"), \"{switchValMid}\", \"{switchValMid}\"), new SwitchPosition(\"{switchValMid}\", \"Middle\", null), new SwitchPosition(\"{switchVal2}\", \"Position 3\", Commands.{fd.Command[0]}.ToString(\"d\"), Commands.{fd.Command[0]}.ToString(\"d\"), \"{switchValMid}\", \"{switchValMid}\") }}, \"{category}\", \"{name}\", \"%0.1f\"));";
             }
             else
             {
@@ -1239,6 +1244,15 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""471"", new CalibrationPointCollectionDouble(0d, -45d, 1d, 45d), ""Instruments"", ""Aileron Trim Right Needle"", ""-45 to 45 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""472"", new CalibrationPointCollectionDouble(0d, -30d, 1d, 30d), ""Instruments"", ""Rudder Trim Needle"", ""-30 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
             WriteCsFunction(@"AddFunction(new ScaledNetworkValue(this, ""473"", new CalibrationPointCollectionDouble(0d, -10d, 1d, 30d){ new CalibrationPointDouble(0.5d, 0d)}, ""Instruments"", ""Elevator Trim Needle"", ""-10 to +30 degrees"", BindingValueUnits.Degrees, ""%0.3f"", true));");
+
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""86"", ""Mech Interface"", ""Ramp Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""622"", ""Mech Interface"", ""Cargo Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""38"", ""Mech Interface"", ""Front Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""88"", ""Mech Interface"", ""Port Rear Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""97"", ""Mech Interface"", ""Starboard Rear Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""623"", ""Mech Interface"", ""Port Jump Deflector Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""624"", ""Mech Interface"", ""Starboard Jump Deflector Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
+            WriteCsFunction(@"AddFunction(new DrawingValue(this, ""501"", ""Mech Interface"", ""Starboard refueling Door Position"", ""0.0 to 1.0"", ""Number with 0 being closed"", BindingValueUnits.Numeric, ""%.2f""));");
 
         }
         private static void WriteCsFunction(string fn)
