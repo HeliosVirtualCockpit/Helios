@@ -40,42 +40,48 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private Rect _imageRect;
 
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
+
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             IndicatorPushButton pushButton = Visual as IndicatorPushButton;
-
+            _ctx = _group.Open();   
             if (pushButton.Pushed && pushButton.Indicator && _pushedImage != null)
             {
-                DrawImage(drawingContext, _pushedIndicatorOnImage, _imageRect);
+                _ctx.DrawImage(_pushedIndicatorOnImage, _imageRect);
             }
             else if (pushButton.Pushed && !pushButton.Indicator && _pushedImage != null)
             {
-                DrawImage(drawingContext, _pushedImage, _imageRect);
+                _ctx.DrawImage(_pushedImage, _imageRect);
             }
             else if (!pushButton.Pushed && pushButton.Indicator && _indicatorOnImage != null)
             {
-                DrawImage(drawingContext, _indicatorOnImage, _imageRect);
+                _ctx.DrawImage(_indicatorOnImage, _imageRect);
             }
             else if (_image != null)
             {
-                DrawImage(drawingContext, _image, _imageRect);
+                _ctx.DrawImage(_image, _imageRect);
             }
 
             if (pushButton.Pushed)
             {
-                drawingContext.PushTransform(new TranslateTransform(pushButton.TextPushOffset.X, pushButton.TextPushOffset.Y));
+                _ctx.PushTransform(new TranslateTransform(pushButton.TextPushOffset.X, pushButton.TextPushOffset.Y));
             }
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                DrawGeometry(drawingContext, pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath, _imageRect);
+                _ctx.DrawGeometry(pushButton.Indicator ? _onGlyphBrush : _offGlyphBrush, pushButton.Indicator ? _onGlyphPen : _offGlyphPen, _glyphPath);
             }
-            DrawText(drawingContext, pushButton, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
+            pushButton.TextFormat.RenderText(_ctx, pushButton.Indicator ? _onTextBrush : _offTextBrush, pushButton.Text, _imageRect);
 
             if (pushButton.Pushed)
             {
-                drawingContext.Pop();
+                _ctx.Pop();
             }
+            _ctx.Close();
+            DrawGroup(drawingContext, _group);
         }
 
         protected override void OnRefresh()

@@ -15,10 +15,12 @@
 
 namespace GadrocsWorkshop.Helios.Controls
 {
+    using AvalonDock.Controls;
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices.ComTypes;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Media;
 
     public class RotarySwitchRenderer : HeliosVisualRenderer
@@ -39,9 +41,13 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private GeometryDrawing _lines;
         private ImageSource _image;
-        private ImageBrush _imageBrush;
         private Rect _imageRect;
         private Point _center;
+        private VisualBrush _visualBrush = new VisualBrush();
+        private Image _imageControl = new Image();
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
+
 
         private static readonly Pen DragPen = new Pen(Brushes.White, 1.0)
         {
@@ -49,59 +55,38 @@ namespace GadrocsWorkshop.Helios.Controls
         };
         private static readonly Pen HeadingPen = new Pen(Brushes.White, 1.0);
 
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        protected override void OnRender(DrawingContext drawingContext)
         {
             bool needsEffect = NeedsEffect;
             RotarySwitch rotarySwitch = Visual as RotarySwitch;
             if (rotarySwitch != null)
             {
+                _ctx = _group.Open();
                 if (rotarySwitch.DrawLines)
                 {
-                    if (!needsEffect)
-                    {
-                        drawingContext.DrawDrawing(_lines);
-                    }
-                    else
-                    {
-                        DrawingVisual visual = new DrawingVisual();
-                        DrawingContext tempDrawingContext = visual.RenderOpen();
-                        tempDrawingContext.DrawDrawing(_lines);
-                        tempDrawingContext.Close();
-                        RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : _imageRect);
-                    }
+                    _ctx.DrawDrawing(_lines);
                 }
-                if (!needsEffect)
+                foreach (SwitchPositionLabel label in _labels)
                 {
-                    foreach (SwitchPositionLabel label in _labels)
-                    {
-                        drawingContext.DrawText(label.Text, label.Location);
-                    }
-                } else
-                {
-                    DrawingVisual visual = new DrawingVisual();
-                    DrawingContext tempDrawingContext = visual.RenderOpen();
-                    foreach (SwitchPositionLabel label in _labels)
-                    {
-                        tempDrawingContext.DrawText(label.Text, new Point(label.Location.X, label.Location.Y));
-                    }
-                    tempDrawingContext.Close();
-                    RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : _imageRect);
+                    _ctx.DrawText(label.Text, label.Location);
                 }
 
-                drawingContext.PushTransform(new RotateTransform(rotarySwitch.KnobRotation, _center.X, _center.Y));
-                DrawRectangle(drawingContext, _imageBrush, null, _imageRect);
+                _ctx.PushTransform(new RotateTransform(rotarySwitch.KnobRotation, _center.X, _center.Y));
+                _ctx.DrawRectangle(_visualBrush, null, _imageRect);
 
                 if (rotarySwitch.VisualizeDragging)
                 {
                     double length = (rotarySwitch.DragPoint - _center).Length;
-                    drawingContext.DrawLine(HeadingPen, _center, _center + new Vector(0d, -length));
+                    _ctx.DrawLine(HeadingPen, _center, _center + new Vector(0d, -length));
                 }
-                drawingContext.Pop();
+                _ctx.Pop();
 
                 if (rotarySwitch.VisualizeDragging)
                 {
-                    drawingContext.DrawLine(DragPen, _center, rotarySwitch.DragPoint);
+                    _ctx.DrawLine(DragPen, _center, rotarySwitch.DragPoint);
                 }
+                _ctx.Close();
+                DrawGroup(drawingContext, _group);
             }
         }
 
@@ -116,7 +101,8 @@ namespace GadrocsWorkshop.Helios.Controls
                 _imageRect.Width = rotarySwitch.Width;
                 _imageRect.Height = rotarySwitch.Height;
                 _image = refreshCapableImage.LoadImage(rotarySwitch.KnobImage, loadOptions);
-                _imageBrush = new ImageBrush(_image);
+                _imageControl.Source = _image;
+                _visualBrush.Visual = _imageControl;
                 _center = new Point(rotarySwitch.Width / 2d, rotarySwitch.Height / 2d);
 
                 _lines = new GeometryDrawing();
@@ -191,7 +177,6 @@ namespace GadrocsWorkshop.Helios.Controls
             else
             {
                 _image = null;
-                _imageBrush = null;
                 _lines = null;
                 _labels.Clear();
             }

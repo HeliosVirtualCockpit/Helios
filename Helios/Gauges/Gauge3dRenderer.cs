@@ -49,6 +49,9 @@ namespace GadrocsWorkshop.Helios.Gauges
         private readonly AmbientLight _ambientLight;
         private double _lightingX, _lightingY, _lightingZ;
         private Effects.ColorAdjustEffect _effect;
+        private VisualBrush _vb = new VisualBrush();
+        private DrawingVisual _tempVisual = new DrawingVisual();
+        private DrawingContext _tdc;
         private bool _effectsExclusion = false;
         private readonly bool _designTime = false;
         private long _renderCalls = 0;
@@ -374,10 +377,9 @@ namespace GadrocsWorkshop.Helios.Gauges
             var watch = System.Diagnostics.Stopwatch.StartNew();
             _renderCalls++;
 
-            DrawingVisual tempVisual = new DrawingVisual();
-            DrawingContext tdc = tempVisual.RenderOpen();
-            tdc.DrawRectangle(_visualBrush, null, new Rect(_location.X, _location.Y, w, h));
-            tdc.Close();
+            _tdc = _tempVisual.RenderOpen();
+            _tdc.DrawRectangle(_visualBrush, null, new Rect(_location.X, _location.Y, w, h));
+            _tdc.Close();
             if (!_designTime)
             {
                 // Attempt to cache the ShaderEffect if we're in Control Center
@@ -390,12 +392,17 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }
+
             if (_effect != null && !EffectsExclusion && _effect.Enabled)
             {
-                tempVisual.Effect = _effect;
+                _tempVisual.Effect = _effect;
+            } else
+            {
+                _tempVisual.Effect = null;
             }
 
-            dc.DrawRectangle(new VisualBrush(tempVisual), null, new Rect(_location.X, _location.Y, w, h));
+            _vb.Visual = _tempVisual;
+            dc.DrawRectangle(_vb, null, new Rect(_location.X, _location.Y, w, h));
 
             watch.Stop();
             _totalRenderCallTime += watch.ElapsedTicks;

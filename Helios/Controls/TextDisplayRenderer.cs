@@ -25,6 +25,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private Brush _onBrush;
         private Brush _backgroundBrush;
         private Rect _imageRect;
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
 
         protected override void OnPropertyChanged(Helios.ComponentModel.PropertyNotificationEventArgs args)
         {
@@ -37,12 +39,15 @@ namespace GadrocsWorkshop.Helios.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
+            _ctx = _group.Open();
             if (_textDisplay.UseBackground)
             {
-                DrawRectangle(drawingContext, new SolidColorBrush(_textDisplay.BackgroundColor), null, _imageRect);
+                _ctx.DrawRectangle(new SolidColorBrush(_textDisplay.BackgroundColor), null, _imageRect);
             }
 
-            DrawText(drawingContext, _textDisplay, _onBrush, _textDisplay.TextValue, _imageRect);
+            _textDisplay.TextFormat.RenderText(_ctx, _onBrush, _textDisplay.TextValue, _imageRect);
+            _ctx.Close();
+            DrawGroup(drawingContext, _group);
         }
 
         protected override void OnRefresh()

@@ -23,11 +23,16 @@ namespace GadrocsWorkshop.Helios.Controls
         private Rect _imageRect;
         private Brush _fillBrush;
         private Pen _borderPen;
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
 
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        protected override void OnRender(DrawingContext drawingContext)
         {
+            _ctx = _group.Open();
             RectangleDecoration profileRectangle = Visual as RectangleDecoration;
-            DrawRoundedRectangle(drawingContext, _fillBrush, _borderPen, _imageRect, profileRectangle.CornerRadius, profileRectangle.CornerRadius);
+            _ctx.DrawRoundedRectangle(_fillBrush, _borderPen, _imageRect, profileRectangle.CornerRadius, profileRectangle.CornerRadius);
+            _ctx.Close();
+            DrawGroup(drawingContext, _group);
         }
 
         protected override void OnRefresh()

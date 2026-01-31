@@ -25,16 +25,21 @@ namespace GadrocsWorkshop.Helios.Controls
         private ImageBrush _brush;
         private Rect _imageRect;
         private Point _center;
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup( );
 
-        protected override void OnRender ( System.Windows.Media.DrawingContext drawingContext )
+        protected override void OnRender ( DrawingContext drawingContext )
         {
             Metric metric = Visual as Metric;
             if ( metric != null )
             {
-                drawingContext.PushTransform( new TranslateTransform( metric.MetricTranslationX, metric.MetricTranslationY ) );
-                drawingContext.PushTransform( new RotateTransform( metric.MetricRotation, _center.X, _center.Y - metric.MetricTranslationY ) );                
-                DrawImage(drawingContext, _image, _imageRect );
-                drawingContext.Pop( );
+                _ctx = _group.Open( );
+                _ctx.PushTransform( new TranslateTransform( metric.MetricTranslationX, metric.MetricTranslationY ) );
+                _ctx.PushTransform( new RotateTransform( metric.MetricRotation, _center.X, _center.Y - metric.MetricTranslationY ) );                
+                _ctx.DrawImage(_image, _imageRect );
+                _ctx.Pop( );
+                _ctx.Close( );
+                DrawGroup( drawingContext, _group );
             }
         }
 

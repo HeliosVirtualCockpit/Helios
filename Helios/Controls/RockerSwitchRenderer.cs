@@ -29,54 +29,63 @@ namespace GadrocsWorkshop.Helios.Controls
         private ImageSource _imageThreeIndicatorOn;
         private Rect _imageRect;
         private Brush _textBrush;
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-           RockerSwitch toggleSwitch = Visual as RockerSwitch;
+
+            RockerSwitch toggleSwitch = Visual as RockerSwitch;
             if (toggleSwitch != null)
             {
+                TranslateTransform xform = null;
+                _ctx = _group.Open();
                 switch (toggleSwitch.SwitchPosition)
                 {
                     case ThreeWayToggleSwitchPosition.One:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageOneIndicatorOn != null)
                         {
-                            DrawImage(drawingContext, _imageOneIndicatorOn, _imageRect);
+                            _ctx.DrawImage(_imageOneIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            DrawImage(drawingContext, _imageOne, _imageRect);
+                            _ctx.DrawImage(_imageOne, _imageRect);
                         }
-                        drawingContext.PushTransform(new TranslateTransform(toggleSwitch.TextPushOffset.X * -1d, toggleSwitch.TextPushOffset.Y * -1d));
+                        xform = new TranslateTransform(toggleSwitch.TextPushOffset.X * -1d, toggleSwitch.TextPushOffset.Y * -1d);
 
                         break;
                     case ThreeWayToggleSwitchPosition.Two:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageTwoIndicatorOn != null)
                         {
-                            DrawImage(drawingContext, _imageTwoIndicatorOn, _imageRect);
+                            _ctx.DrawImage(_imageTwoIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            DrawImage(drawingContext, _imageTwo, _imageRect);
+                            _ctx.DrawImage(_imageTwo, _imageRect);
                         }
                         break;
                     case ThreeWayToggleSwitchPosition.Three:
                         if (toggleSwitch.HasIndicator && toggleSwitch.IndicatorOn && _imageThreeIndicatorOn != null)
                         {
-                            DrawImage(drawingContext, _imageThreeIndicatorOn, _imageRect);
+                            _ctx.DrawImage(_imageThreeIndicatorOn, _imageRect);
                         }
                         else
                         {
-                            DrawImage(drawingContext, _imageThree, _imageRect);
+                            _ctx.DrawImage(_imageThree, _imageRect);
                         }
-                        drawingContext.PushTransform(new TranslateTransform(toggleSwitch.TextPushOffset.X, toggleSwitch.TextPushOffset.Y));
- 
+                        xform = new TranslateTransform(toggleSwitch.TextPushOffset.X, toggleSwitch.TextPushOffset.Y);
+
                         break;
                 }
                 if (!string.IsNullOrEmpty(toggleSwitch.Text))
                 {
-                    DrawText(drawingContext, toggleSwitch, _textBrush, toggleSwitch.Text, _imageRect);
+                    _ctx.PushTransform(xform);
+                    toggleSwitch.TextFormat.RenderText(_ctx, _textBrush, toggleSwitch.Text, _imageRect);
+                    _ctx.Pop();
                 }
+                _ctx.Close();
             }
+            DrawGroup(drawingContext, _group);
         }
 
         protected override void OnRefresh()
