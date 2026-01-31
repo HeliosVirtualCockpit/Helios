@@ -30,6 +30,8 @@ namespace GadrocsWorkshop.Helios.Controls
         private Brush _offBrush;
 
         private Rect _imageRect;
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();   
 
         protected override void OnPropertyChanged(Helios.ComponentModel.PropertyNotificationEventArgs args)
         {
@@ -43,8 +45,12 @@ namespace GadrocsWorkshop.Helios.Controls
         protected override void OnRender(DrawingContext drawingContext)
         {
             ImageSource image = _indicator.On ? _onImage : _offImage;
-            DrawImage(drawingContext, image, _imageRect);
-            DrawText(drawingContext, _indicator, _indicator.On ? _onBrush : _offBrush, _indicator.Text, _imageRect);
+            _ctx = _group.Open();
+
+            _ctx.DrawImage(image, _imageRect);
+            _indicator.TextFormat.RenderText(_ctx, _indicator.On ? _onBrush : _offBrush, _indicator.Text, _imageRect);
+            _ctx.Close();
+            DrawGroup(drawingContext, _group);
 
         }
 

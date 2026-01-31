@@ -30,6 +30,9 @@ namespace GadrocsWorkshop.Helios.Controls
         private Brush _glyphBrush;
         private Pen _glyphPen;
 
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             BacklitPushButton pushButton = Visual as BacklitPushButton;
@@ -42,33 +45,36 @@ namespace GadrocsWorkshop.Helios.Controls
             Rect colorRect = new Rect(0, 0, colorWidth, colorHeight);
             colorRect.Offset(new Vector(colorOffsetX, colorOffsetY));
 
+            _ctx = _group.Open();
+
             if (pushButton.Pushed && _image != null)
             {
-                DrawRectangle(drawingContext, new SolidColorBrush(pushButton.PushBackingColor), null, colorRect);
-                DrawImage(drawingContext, _image, _imageRect);
+                _ctx.DrawRectangle(new SolidColorBrush(pushButton.PushBackingColor), null, colorRect);
+                _ctx.DrawImage(_image, _imageRect);
             }
             else if (_image != null)
             {
-                DrawRectangle(drawingContext, new SolidColorBrush(pushButton.NormalBackingColor), null, colorRect);
-                DrawImage(drawingContext, _image, _imageRect);
+                _ctx.DrawRectangle(new SolidColorBrush(pushButton.NormalBackingColor), null, colorRect);
+                _ctx.DrawImage(_image, _imageRect);
             }
 
             if (pushButton.Pushed)
             {
-                drawingContext.PushTransform(new TranslateTransform(pushButton.TextPushOffset.X, pushButton.TextPushOffset.Y));
+                _ctx.PushTransform(new TranslateTransform(pushButton.TextPushOffset.X, pushButton.TextPushOffset.Y));
             }
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                DrawGeometry(drawingContext, _glyphBrush, _glyphPen, _glyphPath, _imageRect);
+                _ctx.DrawGeometry(_glyphBrush, _glyphPen, _glyphPath);
             }
-
-            DrawText(drawingContext, pushButton, _textBrush, pushButton.Text, _imageRect);
-
+            pushButton.TextFormat.RenderText(_ctx, _textBrush, pushButton.Text, _imageRect);
+ 
             if (pushButton.Pushed)
             {
-                drawingContext.Pop();
+                _ctx.Pop();
             }
+            _ctx.Close();
+            DrawGroup(drawingContext, _group);
         }
 
         private void RenderGlyph()

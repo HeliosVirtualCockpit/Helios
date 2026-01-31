@@ -32,30 +32,34 @@ namespace GadrocsWorkshop.Helios.Controls
         private Brush _glyphBrush;
         private Pen _glyphPen;
 
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             PushButton pushButton = Visual as PushButton;
+            _ctx = _group.Open();
             if (pushButton.Pushed && _pushedImage != null)
             {
-                DrawImage(drawingContext, _pushedImage, _imageRect);
+                _ctx.DrawImage(_pushedImage, _imageRect);
             }
             else if (_image != null)
             {
-                DrawImage(drawingContext,_image, _imageRect);
+                _ctx.DrawImage(_image, _imageRect);
             }
 
             if (pushButton.Pushed)
             {
-                drawingContext.PushTransform(new TranslateTransform(pushButton.TextPushOffset.X, pushButton.TextPushOffset.Y));
+                _ctx.PushTransform(new TranslateTransform(pushButton.TextPushOffset.X, pushButton.TextPushOffset.Y));
             }
 
             if (pushButton.Glyph != PushButtonGlyph.None)
             {
-                DrawGeometry(drawingContext, _glyphBrush, _glyphPen, _glyphPath, _imageRect);
+                _ctx.DrawGeometry(_glyphBrush, _glyphPen, _glyphPath);
             }
-
-            DrawText(drawingContext, pushButton, _textBrush, pushButton.Text, _imageRect);
-
+            pushButton.TextFormat.RenderText(_ctx, _textBrush, pushButton.Text, _imageRect);
+            _ctx.Close();
+            DrawGroup(drawingContext, _group);
         }
 
         private void RenderGlyph()

@@ -26,25 +26,26 @@ namespace GadrocsWorkshop.Helios.Controls
         private VisualBrush _visualBrush;
         private Image _imageControl;
         private Pen _borderPen;
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
+
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (_image != null)
-            {
-                ImageTranslucent profileImage = Visual as ImageTranslucent;
-                DrawRoundedRectangle(drawingContext, _visualBrush, _borderPen, _imageRect, profileImage.CornerRadius, profileImage.CornerRadius);
-            }
+            OnRender(drawingContext, 1d, 1d);
         }
 
-        protected override void OnRender(DrawingContext drawingContext, double scaleX, double scaleY)
+        protected override void OnRender(DrawingContext drawingContext, double scaleX = 1d, double scaleY = 1d)
         {
             if (_image != null)
             {
-
+                _ctx = _group.Open();
                 ImageTranslucent profileImage = Visual as ImageTranslucent;
-                drawingContext.PushOpacity(profileImage.ImageOpacity); 
+                _ctx.PushOpacity(profileImage.ImageOpacity); 
                 Rect scaledRect = new Rect(_imageRect.X, _imageRect.Y, _imageRect.Width * scaleX, _imageRect.Height * scaleY);
-                DrawRoundedRectangle(drawingContext, _visualBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
-                drawingContext.Pop();
+                _ctx.DrawRoundedRectangle(_visualBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
+                _ctx.Pop();
+                _ctx.Close();
+                DrawGroup(drawingContext, _group);
             }            
         }
 

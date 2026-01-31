@@ -24,15 +24,20 @@ namespace GadrocsWorkshop.Helios.Controls
         private Rect _rectangle;
         private Brush _backgroundBrush;
         private Brush _fontBrush;
+        private DrawingGroup _group = new DrawingGroup();
+        private DrawingContext _ctx;
 
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        protected override void OnRender(DrawingContext drawingContext)
         {
             TextDecoration profileText = Visual as TextDecoration;
+            _ctx = _group.Open();
             if (profileText.FillBackground && profileText.BackgroundColor.A > 0)
             {
-                DrawRectangle(drawingContext, _backgroundBrush, null, _rectangle);
+                _ctx.DrawRectangle(_backgroundBrush, null, _rectangle);
             }
-            DrawText(drawingContext, profileText, _fontBrush, profileText.Text, _rectangle);
+            profileText.TextFormat.RenderText(_ctx, _fontBrush, profileText.Text, _rectangle);
+            _ctx.Close();
+            DrawGroup(drawingContext, _group);
         }
 
         //protected override void OnRender(DrawingContext drawingContext, double scaleX, double scaleY)

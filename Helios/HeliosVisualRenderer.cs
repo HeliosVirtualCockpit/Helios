@@ -34,6 +34,10 @@ namespace GadrocsWorkshop.Helios
         private bool _needsRefresh = true;
         private TransformGroup _transform;
         private Effects.ColorAdjustEffect _effect;
+        private DrawingVisual _dVisual = new DrawingVisual();
+        private DrawingContext _tempDrawingContext;
+        private VisualBrush _brush = new VisualBrush();
+
         private bool _designTime = false, _designTimeChecked = false;
 
         #region Properties
@@ -67,7 +71,39 @@ namespace GadrocsWorkshop.Helios
         {
             get => ConfigManager.ProfileManager.CurrentEffect != null && (ConfigManager.ProfileManager.CurrentEffect as ColorAdjustEffect).Enabled && Visual.IsVisible && !Visual.EffectsExclusion;
         }
+        protected ColorAdjustEffect Effect
+        {
+            get
+            {
+                if (!NeedsEffect) return null;
 
+                if(_effect == null)
+                {
+                    _effect = GetEffect;
+                }
+                return _effect;
+            }
+        }
+        private ColorAdjustEffect GetEffect
+        {
+            get
+            {
+                ColorAdjustEffect effect = null;
+                if (!_designTime)
+                {
+                    // Attempt to cache the ShaderEffect if we're in Control Center
+                    if (effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
+                    {
+                        effect = ConfigManager.ProfileManager.CurrentEffect as ColorAdjustEffect;
+                    }
+                }
+                else
+                {
+                    effect = ConfigManager.ProfileManager.CurrentEffect as ColorAdjustEffect;
+                }
+                return effect;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -158,7 +194,7 @@ namespace GadrocsWorkshop.Helios
         /// <param name="drawingContext"></param>
         /// <param name="image"></param>
         /// <param name="imageRectangle"></param>
-        private void RenderEffect(DrawingContext drawingContext, DrawingVisual image, Rect imageRectangle)
+        private void RenderEffect(DrawingContext drawingContext, DrawingVisual dVisual, Rect imageRectangle)
         {
             // ShaderEffect can be deleted in Profile Editor so we always need to get it from ProfileManager
             if (!_designTimeChecked)
@@ -167,25 +203,11 @@ namespace GadrocsWorkshop.Helios
                 _designTimeChecked = true;
 
             }
-            if (!_designTime)
-            {
-                // Attempt to cache the ShaderEffect if we're in Control Center
-                if (_effect == null && ConfigManager.ProfileManager.CurrentEffect != null)
-                {
-                    _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
-                }
-            }
-            else
-            {
-                _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
-            }
+            _effect = GetEffect;
 
-            if (!Visual.EffectsExclusion)
-            {
-                image.Effect = _effect;
-            }
-
-            drawingContext.DrawRectangle(new VisualBrush(image), null, imageRectangle);
+            dVisual.Effect = !Visual.EffectsExclusion ? _effect : null;
+            _brush.Visual = dVisual;
+            drawingContext.DrawRectangle(_brush, null, imageRectangle);
         }
 
         /// <summary>
@@ -214,124 +236,32 @@ namespace GadrocsWorkshop.Helios
         /// <param name="drawingContext">Default DrawingContext</param>
         /// <param name="image">ImageSource to be drawn</param>
         /// <param name="rectangle"></param>
-        protected void DrawImage(DrawingContext drawingContext, ImageSource image, Rect rectangle)
+        protected void DrawImage(DrawingContext drawingContext, ImageSource imageSource, Rect rectangle)
         {
             if (!NeedsEffect)
             {
-                drawingContext.DrawImage(image, rectangle);
+                drawingContext.DrawImage(imageSource, rectangle);
             }
             else
             {
-                DrawingVisual visual = new DrawingVisual();
-                DrawingContext tempDrawingContext = visual.RenderOpen();
-                tempDrawingContext.DrawImage(image, rectangle);
-                tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
-            }
-
-        }
-        /// <summary>
-        /// Proxy for the DrawingContext DrawGeometry method.
-        /// Determines whether a shader effect is to be used, and if so,
-        /// then it will render the Geometry into a DrawingVisual which can then 
-        /// be manipulated and have a shader effect added to it.
-        /// </summary>
-        /// <param name="drawingContext"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="path"></param>
-        /// <param name="rectangle"></param>
-        protected void DrawGeometry(DrawingContext drawingContext, Brush brush, Pen pen, PathGeometry path, Rect rectangle)
-        {
-            if (!NeedsEffect)
-            {
-                drawingContext.DrawGeometry(brush, pen, path);
-            }
-            else
-            {
-                DrawingVisual visual = new DrawingVisual();
-                DrawingContext tempDrawingContext = visual.RenderOpen();
-                tempDrawingContext.DrawGeometry(brush, pen, path);
-                tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
+                _tempDrawingContext = _dVisual.RenderOpen();
+                _tempDrawingContext.DrawImage(imageSource, rectangle);
+                _tempDrawingContext.Close();
+                RenderVisual(drawingContext, _dVisual, !_dVisual.ContentBounds.IsEmpty ? _dVisual.ContentBounds : rectangle);
             }
         }
-        /// <summary>
-        /// Proxy for the DrawingContext DrawRectangle method.
-        /// Determines whether a shader effect is to be used, and if so,
-        /// then it will render the Rectangle into a DrawingVisual which can then 
-        /// be manipulated and have a shader effect added to it.        
-        /// </summary>
-        /// <param name="drawingContext"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="rectangle"></param>
-        protected void DrawRectangle(DrawingContext drawingContext, Brush brush, Pen pen, Rect rectangle)
+        protected void DrawGroup(DrawingContext drawingContext, DrawingGroup group)
         {
             if (!NeedsEffect)
             {
-                drawingContext.DrawRectangle(brush, pen, rectangle);
+                drawingContext.DrawDrawing(group);
             }
             else
             {
-                DrawingVisual visual = new DrawingVisual();
-                DrawingContext tempDrawingContext = visual.RenderOpen();
-                tempDrawingContext.DrawRectangle(brush, pen, rectangle);
-                tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
-            }
-        }
-        /// <summary>
-        /// Proxy for the DrawingContext DrawRoundedRectangle method.
-        /// Determines whether a shader effect is to be used, and if so,
-        /// then it will render the RoundedRectangle into a DrawingVisual which can then 
-        /// be manipulated and have a shader effect added to it.        
-        /// </summary>
-        /// <param name="drawingContext"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="rectangle"></param>
-        protected void DrawRoundedRectangle(DrawingContext drawingContext, Brush brush, Pen pen, Rect rectangle, double radiusX, double radiusY)
-        {
-            if (!NeedsEffect)
-            {
-                drawingContext.DrawRoundedRectangle(brush, pen, rectangle, radiusX, radiusY);
-            }
-            else
-            {
-                DrawingVisual visual = new DrawingVisual();
-                DrawingContext tempDrawingContext = visual.RenderOpen();
-                tempDrawingContext.DrawRoundedRectangle(brush, pen, rectangle, radiusX, radiusY);
-                tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
-            }
-        }
-        /// <summary>
-        /// Proxy for the DrawingContext DrawText method.
-        /// Determines whether a shader effect is to be used, and if so,
-        /// then it will render the Text into the appropraite DrawingContext.
-        /// If Effects are used then this is a temporary Context for conversion 
-        /// into a DrawingVisual which can then 
-        /// be manipulated and have a shader effect added to it.        
-        /// </summary>
-        /// <param name="drawingContext"></param>
-        /// <param name="textVisual"></param>
-        /// <param name="brush"></param>
-        /// <param name="text"></param>
-        /// <param name="rectangle"></param>
-        protected void DrawText(DrawingContext drawingContext, ITextControl textVisual, Brush brush, string text, Rect rectangle)
-        {
-            if (!NeedsEffect)
-            {
-                textVisual.TextFormat.RenderText(drawingContext, brush, text, rectangle);
-            }
-            else
-            {
-                DrawingVisual visual = new DrawingVisual();
-                DrawingContext tempDrawingContext = visual.RenderOpen();
-                textVisual.TextFormat.RenderText(tempDrawingContext, brush, text, rectangle);
-                tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, !visual.ContentBounds.IsEmpty ? visual.ContentBounds : rectangle);
+                _tempDrawingContext = _dVisual.RenderOpen();
+                _tempDrawingContext.DrawDrawing(group);
+                _tempDrawingContext.Close();
+                RenderVisual(drawingContext, _dVisual, !_dVisual.ContentBounds.IsEmpty ? _dVisual.ContentBounds : new Rect(0,0,Visual.Width, Visual.Height));
             }
         }
 #endregion Draw Proxies

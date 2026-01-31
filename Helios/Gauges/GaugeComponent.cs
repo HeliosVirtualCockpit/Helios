@@ -33,6 +33,11 @@ namespace GadrocsWorkshop.Helios.Gauges
         public event EventHandler DisplayUpdate;
         private bool _effectsExclusion = false;
         private bool _designTime = false, _designTimeChecked = false;
+        private RenderTargetBitmap _rtb;
+        private DrawingVisual _visual = new DrawingVisual();
+        private VisualBrush _visualBrush = new VisualBrush();
+        private Image _imageControl = new Image();
+        private DrawingContext _tempDrawingContext;
 
         #region Properties
 
@@ -159,18 +164,20 @@ namespace GadrocsWorkshop.Helios.Gauges
                 _effect = ConfigManager.ProfileManager.CurrentEffect as Effects.ColorAdjustEffect;
             }
 
-            Image imageControl = new Image
-            {
-                Source = image,
-                Width = image != null ? image.Width : 0,
-                Height = image != null ? image.Height : 0,
-            };
+            _imageControl.Source = image;
+            _imageControl.Width = image != null ? image.Width : 0;
+            _imageControl.Height = image != null ? image.Height : 0;
+            _imageControl.Effect = null;
+
             if (_effect != null && _effect.Enabled && !EffectsExclusion)
             {
-                imageControl.Effect = _effect;
+                _imageControl.Effect = _effect;
+            } else
+            {
+                _imageControl.Effect = null;
             }
-            VisualBrush visualBrush = new VisualBrush(imageControl);
-            drawingContext.DrawRectangle(visualBrush, null, imageRectangle);
+            _visualBrush.Visual = _imageControl;
+            drawingContext.DrawRectangle(_visualBrush, null, imageRectangle);
         }
         protected void DrawImage(DrawingContext drawingContext, ImageSource image, Rect rectangle)
         {
@@ -180,11 +187,10 @@ namespace GadrocsWorkshop.Helios.Gauges
             }
             else
             {
-                DrawingVisual visual = new DrawingVisual();
-                DrawingContext tempDrawingContext = visual.RenderOpen();
-                tempDrawingContext.DrawImage(image, rectangle);
-                tempDrawingContext.Close();
-                RenderVisual(drawingContext, visual, rectangle);
+                _tempDrawingContext = _visual.RenderOpen();
+                _tempDrawingContext.DrawImage(image, rectangle);
+                _tempDrawingContext.Close();
+                RenderVisual(drawingContext, _visual, rectangle);
             }
         }
         protected virtual void RenderVisual(DrawingContext drawingContext, DrawingVisual visual, Rect rectangle)
@@ -193,14 +199,20 @@ namespace GadrocsWorkshop.Helios.Gauges
             rectangle.Width += rectangle.X;
             rectangle.Height += rectangle.Y;
             rectangle.X = rectangle.Y = 0;
-            RenderTargetBitmap rtb = new RenderTargetBitmap(Convert.ToInt32(rectangle.Width), Convert.ToInt32(rectangle.Height), 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(visual);
-            drawingContext.DrawImage(rtb, rectangle);
-            RenderEffect(drawingContext, rtb, rectangle);
+            if (_rtb == null || _rtb.PixelWidth != Convert.ToInt32(rectangle.Width) || _rtb.PixelHeight != Convert.ToInt32(rectangle.Height))
+            {
+                // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore
+                (_rtb?.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
+                .GetValue(_rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
 
-            // Address MILERR_WIN32ERROR (Exception from HRESULT: 0x88980003 in PresentationCore 
-            (rtb.GetType().GetField("_renderTargetBitmap", BindingFlags.Instance | BindingFlags.NonPublic)?
-            .GetValue(rtb) as IDisposable)?.Dispose();  // from https://github.com/dotnet/wpf/issues/3067
+                _rtb = new RenderTargetBitmap(Convert.ToInt32(rectangle.Width), Convert.ToInt32(rectangle.Height), 96, 96, PixelFormats.Pbgra32);
+            } else
+            {
+                _rtb.Clear();
+            }
+            _rtb.Render(visual);
+            drawingContext.DrawImage(_rtb, rectangle);
+            RenderEffect(drawingContext, _rtb, rectangle);
         }
     }
 }

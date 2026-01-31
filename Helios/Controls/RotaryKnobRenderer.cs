@@ -20,38 +20,47 @@ namespace GadrocsWorkshop.Helios.Controls
     using System;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Controls;
     using System.Windows.Media.Media3D;
 
     public class RotaryKnobRenderer : HeliosVisualRenderer
     {
         private ImageSource _image;
-        private ImageBrush _brush;
+        private VisualBrush _brush = new VisualBrush();
+        private DrawingContext _ctx;
+        private DrawingGroup _group = new DrawingGroup();
+
+        private Image _imageControl = new Image();
         private Rect _imageRect;
         private Point _center;
+
         private static readonly Pen DragPen = new Pen(Brushes.White, 1.0)
         {
             DashStyle = new DashStyle(new [] {6d, 6d}, 0d)
         };
         private static readonly Pen HeadingPen = new Pen(Brushes.White, 1.0);
 
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        protected override void OnRender(DrawingContext drawingContext)
         {
             RotaryKnob rotary = Visual as RotaryKnob;
             if (rotary != null)
             {
-                drawingContext.PushTransform(new RotateTransform(rotary.KnobRotation, _center.X, _center.Y));
-                DrawImage(drawingContext, _image, _imageRect);
+                _ctx = _group.Open();
+               _ctx.PushTransform(new RotateTransform(rotary.KnobRotation, _center.X, _center.Y));
+                _ctx.DrawImage(_image, _imageRect);
                 if (rotary.VisualizeDragging)
                 {
                     double length = (rotary.DragPoint - _center).Length;
-                    drawingContext.DrawLine(HeadingPen, _center, _center + new Vector(0d, -length));
+                    _ctx.DrawLine(HeadingPen, _center, _center + new Vector(0d, -length));
                 }
-                drawingContext.Pop();
+                _ctx.Pop();
 
                 if (rotary.VisualizeDragging)
                 {
                     drawingContext.DrawLine(DragPen, _center, rotary.DragPoint);
                 }
+                _ctx.Close();
+                DrawGroup(drawingContext, _group);
             }
         }
 
@@ -66,7 +75,8 @@ namespace GadrocsWorkshop.Helios.Controls
                 _imageRect.Height = rotary.Height;
 
                 _image = refreshCapableImage.LoadImage(rotary.KnobImage, loadOptions);
-                _brush = new ImageBrush(_image);
+                _imageControl.Source = _image;
+                _brush.Visual = _imageControl;
                 _center = new Point(rotary.Width / 2d, rotary.Height / 2d);
             }
             else
