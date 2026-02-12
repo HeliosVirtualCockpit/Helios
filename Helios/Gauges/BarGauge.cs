@@ -79,6 +79,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 case "Start Segment":
                     _barSegmentStartValue = e.Value.DoubleValue;                                                   
                     _barSegmentStart.SetValue(e.Value, e.BypassCascadingTriggers);
+                    _barImage.Clip = new RectangleGeometry(new Rect(0, (_size.Height - (_barSegmentEndValue + 0) * _segmentHeight), _size.Width, (_barSegmentEndValue - _barSegmentStartValue + 1) * _segmentHeight));
+                    Refresh();
                     break;
                 case "Finish Segment":
                     _barSegmentEndValue = e.Value.DoubleValue;
@@ -111,7 +113,7 @@ namespace GadrocsWorkshop.Helios.Gauges
                     {
                         _barImage.Clip = new RectangleGeometry(new Rect(0, 0, image.Width, image.Height));
                         _barImage.Image = _imageFile;
-                        _segmentHeight = image.Height / _segmentCount;
+                        _segmentHeight = _size.Height / _segmentCount;
                     }
                     OnPropertyChanged("Image", oldValue, value, true);
                     Refresh();
@@ -210,7 +212,24 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
-
+        public Size Size
+        {
+            get
+            {
+                return _size;
+            }
+            set
+            {
+                if (!_size.Equals(value))
+                {
+                    Size oldValue = _size;
+                    _size = value;
+                    _segmentHeight = _size.Height / _segmentCount;
+                    OnPropertyChanged("Size", oldValue, value, true);
+                    Refresh();
+                }
+            }
+        }
 
         /// <summary>
         /// true if this decoration is only shown at design time and hidden
@@ -244,6 +263,11 @@ namespace GadrocsWorkshop.Helios.Gauges
         {
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
 
+            bool lateBaseRead = reader.Name.Equals("Image");  // test to see if this is old format
+            if ( !lateBaseRead)
+            {
+                base.ReadXml(reader);
+            }
             Image = reader.ReadElementString("Image");
             if (reader.Name.Equals("Alignment"))
             {
@@ -268,12 +292,20 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 SegmentCount = Double.Parse(reader.ReadElementString("SegmentCount"), CultureInfo.InvariantCulture);
             }
-            // Load base after image so size is properly persisted.
-            base.ReadXml(reader);
+
+            // This code needs to remain for backwards compatibility.  It was incorrectly positioned here to circumvent
+            // a problem. (see https://github.com/HeliosVirtualCockpit/Helios/issues/947)
+
+            if (lateBaseRead)
+            {
+                base.ReadXml(reader);
+            }
+            Size = new Size(Width, Height);
         }
 
         public override void WriteXml(XmlWriter writer)
         {
+            base.WriteXml(writer);
             TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
             
             writer.WriteElementString("Image", Image);
@@ -287,9 +319,6 @@ namespace GadrocsWorkshop.Helios.Gauges
                 writer.WriteEndElement();
             }
             writer.WriteElementString("SegmentCount", SegmentCount.ToString(CultureInfo.InvariantCulture));
-
-            // Save base after image so size is properly persisted.
-            base.WriteXml(writer);
         }
     }
 }
