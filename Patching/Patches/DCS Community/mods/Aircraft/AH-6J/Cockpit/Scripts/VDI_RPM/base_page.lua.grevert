@@ -1,0 +1,10 @@
+﻿@@ -934,28 +934,36 @@
+       %3D 
+-%22N2_PERCENT%22
++create_guid_string()
+ %0D%0AN2rpm.
+@@ -1552,28 +1552,36 @@
+       %3D 
+-%22NR_PERCENT%22
++create_guid_string()
+ %0D%0ANRrpm.

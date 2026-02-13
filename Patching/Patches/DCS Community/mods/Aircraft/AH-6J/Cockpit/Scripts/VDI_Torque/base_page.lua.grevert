@@ -1,0 +1,10 @@
+﻿@@ -934,26 +934,36 @@
+       %3D 
+-%22IND_TEMP%22
++create_guid_string()
+ %0D%0AN2rpm.
+@@ -1589,28 +1589,36 @@
+       %3D 
+-%22TORQUE_PSI%22
++create_guid_string()
+ %0D%0ANRrpm.
