@@ -14728,10 +14728,20 @@
     <Content Include="Templates\Patching\Additional Simulator Viewports\9 C_130J_30_C130J_PILOT_CNI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Patches\DCS Community\mods\Aircraft\AH-6J\Cockpit\Scripts\VDI_RPM\base_page.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS Community\mods\Aircraft\AH-6J\Cockpit\Scripts\VDI_RPM\base_page.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS Community\mods\Aircraft\AH-6J\Cockpit\Scripts\VDI_Torque\base_page.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS Community\mods\Aircraft\AH-6J\Cockpit\Scripts\VDI_Torque\base_page.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Patches\DCS Community\mods\Aircraft\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\HeliosPlugin.targets" />
   <PropertyGroup>
     <PreBuildEvent>
