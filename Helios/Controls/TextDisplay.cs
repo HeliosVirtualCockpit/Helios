@@ -41,6 +41,7 @@ namespace GadrocsWorkshop.Helios.Controls
         protected string _onImage = "{Helios}/Images/Indicators/anunciator.png";
         protected bool _useBackground = true;    // displaying the background or not
         protected Color _onTextColor = Color.FromArgb(0xff, 0x40, 0xb3, 0x29);
+        protected Color _onTextColorDefault = Color.FromArgb(0xff, 0x40, 0xb3, 0x29);
         protected Color _backgroundColor = Color.FromArgb(0xff, 0, 0, 0);
         protected Dictionary<string, string> _parserDictionary = new Dictionary<string, string>(); // the list of input -> output string modifications
         protected TextFormat _textFormat = new TextFormat();
@@ -396,7 +397,7 @@ namespace GadrocsWorkshop.Helios.Controls
             _textFormat.ReadXml(reader);
 
             reader.ReadEndElement();
-            OnTextColor = (Color)colorConverter.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("OnTextColor"));
+            _onTextColorDefault = OnTextColor = (Color)colorConverter.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("OnTextColor"));
             BackgroundColor = (Color)colorConverter.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, reader.ReadElementString("BackgroundColor"));
             TextTestValue = reader.ReadElementString("TextTest");
             ParserDictionary = reader.ReadElementString("ParserDictionary");
@@ -457,15 +458,53 @@ namespace GadrocsWorkshop.Helios.Controls
     public class TextDisplay : TextDisplayRect
     {
         private readonly HeliosValue _value;
+        private readonly HeliosValue _brightnessValue;
+        private readonly HeliosAction _incrementBrightnessAction;
+        private readonly HeliosAction _decrementBrightnessAction;
+        private double _displayBrightness = 8;
+        private CalibrationPointCollectionDouble _calBrightness = new CalibrationPointCollectionDouble(0, 0, 1, 1) {
+                new CalibrationPointDouble(0.25,0.5),
+                new CalibrationPointDouble(0.5,0.75),
+            };
 
-        public TextDisplay() : this("TextDisplay", new System.Windows.Size(100, 50)) { }
-        public TextDisplay(string name, System.Windows.Size nativeSize)
+        public TextDisplay() : this("TextDisplay", new Size(100, 50)) { }
+        public TextDisplay(string name, Size nativeSize)
             : base(name,nativeSize)
         {
             _value = new HeliosValue(this, new BindingValue(false), "", "TextDisplay", "Value of this Text Display", "A text string.", BindingValueUnits.Text);
             _value.Execute += On_Execute;
             Values.Add(_value);
             Actions.Add(_value);
+
+            _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "text display brightness value", "Number", "0.0 to 1.0", BindingValueUnits.Numeric);
+            _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
+            Actions.Add(_brightnessValue);
+            Values.Add(_brightnessValue);
+
+            _incrementBrightnessAction = new HeliosAction(this, "", "text display brightness", "increment", "Increments the display brightness.");
+            _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
+            Actions.Add(_incrementBrightnessAction);
+
+            _decrementBrightnessAction = new HeliosAction(this, "", "text display brightness", "decrement", "decrements the display brightness.");
+            _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
+            Actions.Add(_decrementBrightnessAction);
+        }
+        private void DisplayBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            double brightness = _calBrightness.Interpolate(e.Value.DoubleValue);
+            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+        }
+        private void IncrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            _displayBrightness = _displayBrightness >= 10 ? 10 : ++_displayBrightness;
+            double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
+            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+        }
+        private void DecrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            _displayBrightness = _displayBrightness <= 0 ? 0 : --_displayBrightness;
+            double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
+            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
         }
 
         protected override void OnTextValueChange()

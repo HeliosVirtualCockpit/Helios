@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
+using System.Windows.Media;
 using GadrocsWorkshop.Helios.ComponentModel;
 
 namespace GadrocsWorkshop.Helios.Controls
@@ -30,6 +31,14 @@ namespace GadrocsWorkshop.Helios.Controls
         protected const int DEFAULT_PRECISION = 0;
 
         private HeliosValue _value;
+        private HeliosValue _brightnessValue;
+        private HeliosAction _incrementBrightnessAction;
+        private HeliosAction _decrementBrightnessAction;
+        private double _displayBrightness = 8;
+        private CalibrationPointCollectionDouble _calBrightness = new CalibrationPointCollectionDouble(0, 0, 1, 1) {
+                new CalibrationPointDouble(0.25,0.5),
+                new CalibrationPointDouble(0.5,0.75),
+            };
 
         /// <summary>
         /// backing field for property Unit, contains
@@ -68,6 +77,19 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_value);
             Actions.Add(_value);
 
+            _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "number display brightness value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
+            _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
+            Actions.Add(_brightnessValue);
+            Values.Add(_brightnessValue);
+
+            _incrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "increment", "Increments the display brightness.");
+            _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
+            Actions.Add(_incrementBrightnessAction);
+
+            _decrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "decrement", "decrements the display brightness.");
+            _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
+            Actions.Add(_decrementBrightnessAction);
+
             if (oldValue != null)
             {
                 // update any bindings to it, since we cannot change the target of a binding
@@ -86,6 +108,23 @@ namespace GadrocsWorkshop.Helios.Controls
             BeginTriggerBypass(e.BypassCascadingTriggers);
             TextValue = e.Value.DoubleValue.ToString($"F{Math.Max(0, Precision)}", CultureInfo.InvariantCulture);
             EndTriggerBypass(e.BypassCascadingTriggers);
+        }
+        private void DisplayBrightness_Execute(object action, HeliosActionEventArgs e)
+        {
+            double brightness = _calBrightness.Interpolate(e.Value.DoubleValue);
+            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+        }
+        private void IncrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            _displayBrightness = _displayBrightness >= 10 ? 10 : ++_displayBrightness;
+            double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
+            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+        }
+        private void DecrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            _displayBrightness = _displayBrightness <= 0 ? 0 : --_displayBrightness;
+            double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
+            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
         }
 
         #endregion
