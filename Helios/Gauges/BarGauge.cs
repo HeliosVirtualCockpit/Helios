@@ -17,6 +17,7 @@
 namespace GadrocsWorkshop.Helios.Gauges
 {
     using GadrocsWorkshop.Helios.ComponentModel;
+    using GadrocsWorkshop.Helios.Controls;
     using GadrocsWorkshop.Helios.Controls.Capabilities;
     using System;
     using System.ComponentModel;
@@ -43,7 +44,6 @@ namespace GadrocsWorkshop.Helios.Gauges
         private double _barSegmentEndValue;
         private double _segmentCount;
         private double _segmentHeight;
-        private Size _size;
 
         private GaugeImage _barImage;
 
@@ -52,15 +52,10 @@ namespace GadrocsWorkshop.Helios.Gauges
         public BarGauge(string name, Size size, string image, double segmentCount)
             : base(name, size)
         {
-            _imageFile = image;
             SegmentCount = segmentCount;
-            _segmentHeight = size.Height / segmentCount;
-            _size = size;
-            double barDisplayX = 0; double barDisplayY = 0;
-            _barImage = new GaugeImage(image, new Rect(barDisplayX, barDisplayY,size.Width, size.Height));
-            _barImage.Clip = new RectangleGeometry(new Rect(0, 0, size.Width, size.Height));
-            _barImage.IsHidden = false;
-            Components.Add(_barImage);
+            _segmentHeight = Height / segmentCount;
+
+            Image = image;
 
             _barSegmentStart = new HeliosValue(this, new BindingValue(false), name, "Start Segment", "The first segment of a run.", "Number", BindingValueUnits.Numeric);
             _barSegmentStart.Execute += new HeliosActionHandler(Flag_Execute);
@@ -69,7 +64,6 @@ namespace GadrocsWorkshop.Helios.Gauges
             _barSegmentEnd.Execute += new HeliosActionHandler(Flag_Execute);
             Actions.Add(_barSegmentEnd);
         }
-
         protected void Flag_Execute(object action, HeliosActionEventArgs e)
         {
             HeliosValue hAction = (HeliosValue)action;
@@ -79,13 +73,13 @@ namespace GadrocsWorkshop.Helios.Gauges
                 case "Start Segment":
                     _barSegmentStartValue = e.Value.DoubleValue;                                                   
                     _barSegmentStart.SetValue(e.Value, e.BypassCascadingTriggers);
-                    _barImage.Clip = new RectangleGeometry(new Rect(0, (_size.Height - (_barSegmentEndValue + 0) * _segmentHeight), _size.Width, (_barSegmentEndValue - _barSegmentStartValue + 1) * _segmentHeight));
+                    _barImage.Clip = new RectangleGeometry(new Rect(0, NativeSize.Height - ((_barSegmentEndValue + 0) * _segmentHeight), NativeSize.Width, (_barSegmentEndValue - _barSegmentStartValue + 1) * _segmentHeight));
                     Refresh();
                     break;
                 case "Finish Segment":
                     _barSegmentEndValue = e.Value.DoubleValue;
                     _barSegmentEnd.SetValue(e.Value, e.BypassCascadingTriggers);
-                    _barImage.Clip = new RectangleGeometry(new Rect(0, (_size.Height - (_barSegmentEndValue + 0 ) * _segmentHeight), _size.Width, (_barSegmentEndValue  - _barSegmentStartValue +1 ) * _segmentHeight));
+                    _barImage.Clip = new RectangleGeometry(new Rect(0, NativeSize.Height - ((_barSegmentEndValue + 0) * _segmentHeight), NativeSize.Width, (_barSegmentEndValue - _barSegmentStartValue + 1) * _segmentHeight));
                     Refresh();
                     break;
                 default:
@@ -108,19 +102,17 @@ namespace GadrocsWorkshop.Helios.Gauges
                     string oldValue = _imageFile;
                     _imageFile = value;
 
-                    ImageSource image = ConfigManager.ImageManager.LoadImage(_imageFile);
-                    if (image != null)
-                    {
-                        _barImage.Clip = new RectangleGeometry(new Rect(0, 0, image.Width, image.Height));
-                        _barImage.Image = _imageFile;
-                        _segmentHeight = _size.Height / _segmentCount;
-                    }
+                    if (Components.Contains(_barImage)) { Components.Remove(_barImage); }
+                    _barImage = new GaugeImage(_imageFile, new Rect(0, 0, NativeSize.Width, NativeSize.Height));
+                    _barImage.Clip = new RectangleGeometry(new Rect(0, 0, NativeSize.Width, NativeSize.Height));
+                    _barImage.IsHidden = false;
+                    Components.Add(_barImage);    
+                    _segmentHeight = NativeSize.Height / _segmentCount;
                     OnPropertyChanged("Image", oldValue, value, true);
                     Refresh();
                 }
             }
         }
-
         public ImageAlignment Alignment
         {
             get
@@ -206,26 +198,8 @@ namespace GadrocsWorkshop.Helios.Gauges
                 {
                     double oldValue = _segmentCount;
                     _segmentCount = value;
-                    _segmentHeight = _size.Height / _segmentCount;
+                    _segmentHeight = NativeSize.Height / _segmentCount;
                     OnPropertyChanged("SegmentCount", oldValue, value, true);
-                    Refresh();
-                }
-            }
-        }
-        public Size Size
-        {
-            get
-            {
-                return _size;
-            }
-            set
-            {
-                if (!_size.Equals(value))
-                {
-                    Size oldValue = _size;
-                    _size = value;
-                    _segmentHeight = _size.Height / _segmentCount;
-                    OnPropertyChanged("Size", oldValue, value, true);
                     Refresh();
                 }
             }
@@ -300,7 +274,6 @@ namespace GadrocsWorkshop.Helios.Gauges
             {
                 base.ReadXml(reader);
             }
-            Size = new Size(Width, Height);
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -322,4 +295,3 @@ namespace GadrocsWorkshop.Helios.Gauges
         }
     }
 }
-
