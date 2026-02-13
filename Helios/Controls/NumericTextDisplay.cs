@@ -77,19 +77,6 @@ namespace GadrocsWorkshop.Helios.Controls
             Values.Add(_value);
             Actions.Add(_value);
 
-            _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "number display brightness value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
-            _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
-            Actions.Add(_brightnessValue);
-            Values.Add(_brightnessValue);
-
-            _incrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "increment", "Increments the display brightness.");
-            _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
-            Actions.Add(_incrementBrightnessAction);
-
-            _decrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "decrement", "decrements the display brightness.");
-            _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
-            Actions.Add(_decrementBrightnessAction);
-
             if (oldValue != null)
             {
                 // update any bindings to it, since we cannot change the target of a binding
@@ -99,6 +86,29 @@ namespace GadrocsWorkshop.Helios.Controls
                     binding.Action = _value;
                 });
             }
+
+            if (_brightnessValue == null)
+            {
+                _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "number display brightness value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
+                _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
+                Actions.Add(_brightnessValue);
+                Values.Add(_brightnessValue);
+            }
+
+            if (_incrementBrightnessAction == null)
+            {
+                _incrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "increment", "Increments the display brightness.");
+                _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
+                Actions.Add(_incrementBrightnessAction);
+            }
+
+            if (_decrementBrightnessAction == null)
+            {
+                _decrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "decrement", "decrements the display brightness.");
+                _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
+                Actions.Add(_decrementBrightnessAction);
+            }
+
         }
 
         #region Event Handlers
