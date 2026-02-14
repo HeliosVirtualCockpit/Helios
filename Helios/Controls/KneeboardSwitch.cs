@@ -316,6 +316,9 @@ namespace GadrocsWorkshop.Helios.Controls
                     case KneeboardSwitchPosition.Two:
                         SwitchPosition = KneeboardSwitchPosition.Three;
                         break;
+                    default:
+                        SwitchPosition = KneeboardSwitchPosition.One;
+                        break;
                 }                
             }
             else if (action == SwitchAction.Decrement)
@@ -327,6 +330,9 @@ namespace GadrocsWorkshop.Helios.Controls
                         break;
                     case KneeboardSwitchPosition.Three:
                         SwitchPosition = KneeboardSwitchPosition.Two;
+                        break;
+                    default:
+                        SwitchPosition = KneeboardSwitchPosition.One;
                         break;
                 }
             }
