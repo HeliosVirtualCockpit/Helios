@@ -15,6 +15,7 @@
 
 namespace GadrocsWorkshop.Helios.Controls
 {
+    using CommandLine;
     using System.Windows;
     using System.Windows.Media;
 
@@ -26,7 +27,6 @@ namespace GadrocsWorkshop.Helios.Controls
         private Pen _borderPen;
 
         private DrawingContext _ctx;
-        private DrawingGroup _group = new DrawingGroup();
 
         protected override void OnRender(DrawingContext drawingContext) {
             OnRender(drawingContext, 1d, 1d);
@@ -37,13 +37,15 @@ namespace GadrocsWorkshop.Helios.Controls
             {
                 ImageDecorationBase profileImage = Visual as ImageDecorationBase;
                 Rect scaledRect = new Rect(_imageRect.X, _imageRect.Y, _imageRect.Width * scaleX, _imageRect.Height * scaleY);
-                _ctx = _group.Open();
+                /// Note: We need to use a new DrawingGroup because the Bounds are cached internally and this causes problems
+                /// when moving from a large drawing to a small one.
+                DrawingGroup group = new DrawingGroup();
+                _ctx = group.Open();
                 _ctx.DrawRoundedRectangle(_imageBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
                 _ctx.Close();
-                DrawGroup(drawingContext, _group);
+                DrawGroup(drawingContext, group);
             }
         }
-
         protected override void OnRefresh()
         {
             ImageDecorationBase profileImage = Visual as ImageDecorationBase;
