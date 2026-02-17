@@ -453,6 +453,12 @@
     <Content Include="Docs\Licenses\RectpackSharp\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Fonts\Helios Virtual Cockpit LED Dots 5x7.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Helios Virtual Cockpit LED Dots 5x7 Italics.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Shaders\Source\ColorAdjust.ps" />
     <None Include="Shaders\Source\ColorAdjustWithCurve.ps" />
     <Content Include="Templates\Base\Toggles %28Multiway%29\Orange Y Switch.htpl">
