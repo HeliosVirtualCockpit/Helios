@@ -38,21 +38,23 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             if (_image != null)
             {
-                _ctx = _group.Open();
+                /// Note: We need to use a new DrawingGroup in Profile Editor because the Bounds are cached internally and this
+                /// causes problems when moving from a large drawing to a small one.  Primarily this is seen in the Profile Editor preview.
+
+                DrawingGroup group = Visual.DesignMode ? new DrawingGroup() : _group;
+                _ctx = group.Open();
                 ImageTranslucent profileImage = Visual as ImageTranslucent;
                 _ctx.PushOpacity(profileImage.ImageOpacity); 
                 Rect scaledRect = new Rect(_imageRect.X, _imageRect.Y, _imageRect.Width * scaleX, _imageRect.Height * scaleY);
                 _ctx.DrawRoundedRectangle(_visualBrush, _borderPen, scaledRect, profileImage.CornerRadius, profileImage.CornerRadius);
                 _ctx.Pop();
                 _ctx.Close();
-                DrawGroup(drawingContext, _group);
+                DrawGroup(drawingContext, group);
             }            
         }
 
         protected override void OnRefresh()
         {
-
-
             ImageTranslucent profileImage = Visual as ImageTranslucent;
             if (profileImage != null)
             {
