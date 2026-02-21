@@ -26,7 +26,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt";
-        private string _font = "Helios Virtual Cockpit APN209 LED";
+        private string _font = "Helios Virtual Cockpit LED Dots 5x7 Italic";
         private FontStyle _fontStyle = FontStyles.Normal;
         private FontWeight _fontWeight = FontWeights.Normal;
 
@@ -41,8 +41,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
         {
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.CH47F.CH47FInterface) };
             _interfaceDeviceName = $"RADAR Alt";
-            AddLabel("Digital Altitude Background", new Point(63d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);
-            AddNumericTextDisplay("Digital Altitude", new Point(63d, 239d), new Size(296d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
+            AddLabel("Digital Altitude Background", new Point(58d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);
+            AddNumericTextDisplay("Digital Altitude", new Point(55d, 239d), new Size(296d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
             AddPart("Instrument", new Point(0d, 0d), new Size(420d, 420d), _interfaceDeviceName, "Instrument");
         }
         private void AddNumericTextDisplay(string name, Point posn, Size size,

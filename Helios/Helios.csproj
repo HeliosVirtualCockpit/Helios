@@ -456,7 +456,7 @@
     <Content Include="Fonts\Helios Virtual Cockpit LED Dots 5x7.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Fonts\Helios Virtual Cockpit LED Dots 5x7 Italics.ttf">
+    <Content Include="Fonts\Helios Virtual Cockpit LED Dots 5x7 Italic.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Shaders\Source\ColorAdjust.ps" />
