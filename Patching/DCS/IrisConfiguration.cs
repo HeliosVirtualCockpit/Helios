@@ -445,7 +445,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                 {
                     if (_parent.Profile.Interfaces.FirstOrDefault(i => i is DCSInterface) is DCSInterface dcsInterface)
                     {
-                        if (dcsInterface is Interfaces.DCS.Soft.SoftInterface softInterface)
+                        if (dcsInterface is Interfaces.Capabilities.ISoftInterface softInterface)
                         {
                             _vehicleName = softInterface.ImpersonatedVehicles[0];
                         }

@@ -15,6 +15,7 @@
 // 
 
 using System;
+using System.Collections.Generic;
 
 namespace GadrocsWorkshop.Helios.Interfaces.Capabilities
 {
@@ -26,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.Capabilities
         #region Hooks
 
         Type ResolveFunctionType(string typeName);
-
+        IList<string> ImpersonatedVehicles { get; }
         #endregion
     }
 }

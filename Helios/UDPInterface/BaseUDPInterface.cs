@@ -54,6 +54,10 @@ namespace GadrocsWorkshop.Helios.UDPInterface
         // event to notify potentially other threads that the client connection has changed
         public event EventHandler<ClientChange> ClientChanged;
 
+        private string _exportFunctionsPath;
+        private string _vehicleName;
+        private IList<string> _impersonatedVehicles;
+
         /// <summary>
         /// accessed only by main thread
         /// </summary>
@@ -470,7 +474,27 @@ namespace GadrocsWorkshop.Helios.UDPInterface
                 }
             }
         }
-
+        public string ExportLuaFunctionsPath
+        {
+            get
+            {
+                return _exportFunctionsPath;
+            }
+        }
+        public string VehicleNameFromUDPInterface
+        {
+            get
+            {
+                return _vehicleName;
+            }
+        }
+        public virtual IList<string> ImpersonatedVehicles
+        {
+            get
+            {
+                return _impersonatedVehicles;
+            }
+        }
         public int Port
         {
             get => _shared.Port;
@@ -527,9 +551,18 @@ namespace GadrocsWorkshop.Helios.UDPInterface
 
             // if we survive the loading, install all these functions
             InstallFunctions(loaded);
-
             Logger.Debug($"Soft interface definition {jsonFileName} loaded from {Anonymizer.Anonymize(jsonPath)}. (Interface contained {loaded.Functions.Count()} Network Functions).");
 
+            _vehicleName = loaded.Vehicles.FirstOrDefault();
+            _impersonatedVehicles = loaded.Vehicles as IList<string>;
+
+            if (File.Exists(Path.ChangeExtension(jsonPath, ".lua")))
+            {
+                _exportFunctionsPath = Path.ChangeExtension(jsonPath, ".lua");
+                Logger.Info(
+                    "Custom Lua export functions found at {Path}; this custom code will be used to create a driver for this interface",
+                    Anonymizer.Anonymize(_exportFunctionsPath));
+            }
             return true;
         }
 
