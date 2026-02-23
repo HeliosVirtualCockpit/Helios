@@ -1001,6 +1001,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Resource Include="Gauges\Common\Alt\Circular-Shading.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Interfaces\DCS\Common\RemoteConfigurationSection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
