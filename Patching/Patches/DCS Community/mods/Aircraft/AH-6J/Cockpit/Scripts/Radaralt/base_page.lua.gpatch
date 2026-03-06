@@ -1,0 +1,15 @@
+﻿@@ -571,36 +571,34 @@
+       %3D 
+-create_guid_string()
++%22RAD_ALT_LOW_STAT%22
+ %0D%0Alow_te
+@@ -1188,36 +1188,35 @@
+       %3D 
+-create_guid_string()
++%22RAD_ALT_HIGH_STAT%22
+ %0D%0Ahigh_t
+@@ -2383,28 +2383,22 @@
+   %3D 
+-create_guid_string()
++%22CURRENT_RALT%22
+ %0D%0ARa

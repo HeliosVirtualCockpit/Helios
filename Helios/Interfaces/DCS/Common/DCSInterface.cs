@@ -183,7 +183,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         public virtual string StatusName
         {
             get {
-                if(this is SoftInterface softwareInterface && softwareInterface.ImpersonatedVehicles != null && softwareInterface.ImpersonatedVehicles.Count() > 1)
+                if(this is ISoftInterface softwareInterface && softwareInterface.ImpersonatedVehicles != null && softwareInterface.ImpersonatedVehicles.Count() > 1)
                 {
                     string vehicles = string.Empty;
                     foreach(string vehicle in softwareInterface.ImpersonatedVehicles)

@@ -14740,6 +14740,12 @@
     <Content Include="Patches\DCS Community\mods\Aircraft\AH-6J\Cockpit\Scripts\VDI_Torque\base_page.lua.grevert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Patches\DCS Community\mods\Aircraft\AH-6J\Cockpit\Scripts\Radaralt\base_page.lua.gpatch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Patches\DCS Community\mods\Aircraft\AH-6J\Cockpit\Scripts\Radaralt\base_page.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\HeliosPlugin.targets" />

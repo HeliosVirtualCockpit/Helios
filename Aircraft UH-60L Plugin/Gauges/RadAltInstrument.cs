@@ -63,6 +63,8 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             Values.Add(_HighIndicator);
             Actions.Add(_HighIndicator);
 
+            Components.Add(new GaugeImage("{UH-60L}/Images/RadAltFaceplate.xaml", new Rect(0d, 0d, 420d, 420d)));
+
             _giOffIndicator = new GaugeImage("{UH-60L}/Images/RadAltFlagOff.xaml", new Rect(238d, 290d, 74d, 42d));
             Components.Add(_giOffIndicator);
             _offIndicator = new HeliosValue(this, new BindingValue(0d), name, "Off flag", "Indicator to show instrument is off.", "", BindingValueUnits.Boolean);
@@ -70,7 +72,6 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             Values.Add(_offIndicator);
             Actions.Add(_offIndicator);
 
-            Components.Add(new GaugeImage("{UH-60L}/Images/RadAltFaceplate.xaml", new Rect(0d, 0d, 420d, 420d)));
 
             _needleCalibration = new CalibrationPointCollectionDouble(0d, 0d, 180d, 180d);
             _needleCalibration.Add(new CalibrationPointDouble(360d, 270d));

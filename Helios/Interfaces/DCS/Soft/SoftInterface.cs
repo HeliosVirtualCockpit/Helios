@@ -14,13 +14,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using GadrocsWorkshop.Helios.ComponentModel;
+using GadrocsWorkshop.Helios.Interfaces.Capabilities;
 using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
 using GadrocsWorkshop.Helios.Json;
 using GadrocsWorkshop.Helios.Util;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Soft
 {
@@ -29,7 +30,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Soft
     /// </summary>
     [HeliosInterface("Helios.DCSInterfaceFile", "DCS Interface File", typeof(SoftInterfaceEditor),
         typeof(SoftInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
-    public class SoftInterface : DCSInterface
+    public class SoftInterface : DCSInterface, ISoftInterface
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private IList<string> _vehicles;
@@ -77,7 +78,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Soft
 
             // the first listed vehicle is all we support right now
             VehicleName = loaded.Vehicles.FirstOrDefault();
-            ImpersonatedVehicles = loaded.Vehicles as IList<string>;
+            _vehicles = loaded.Vehicles as IList<string>;
             // XXX enable this once implemented
             // ModuleName = loaded.Module
 
@@ -160,10 +161,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Soft
 
         public bool Incomplete { get; private set; }
 
-        public IList<string> ImpersonatedVehicles
+        public override IList<string> ImpersonatedVehicles
         {
             get => _vehicles;
-            set { _vehicles = value; }
+            // set { _vehicles = value; }
         }
 
         #endregion

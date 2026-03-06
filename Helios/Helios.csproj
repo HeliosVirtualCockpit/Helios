@@ -453,6 +453,12 @@
     <Content Include="Docs\Licenses\RectpackSharp\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Fonts\Helios Virtual Cockpit LED Dots 5x7.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Helios Virtual Cockpit LED Dots 5x7 Italic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Shaders\Source\ColorAdjust.ps" />
     <None Include="Shaders\Source\ColorAdjustWithCurve.ps" />
     <Content Include="Templates\Base\Toggles %28Multiway%29\Orange Y Switch.htpl">
@@ -992,6 +998,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Gauges\A-10\ADI\V1\adi_slip_ball.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Gauges\Common\Alt\Circular-Shading.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

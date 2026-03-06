@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt (Pilot)";
-        private string _font = "Helios Virtual Cockpit APN209 LED";
+        private string _font = "Helios Virtual Cockpit LED Dots 5x7 Italic";
         private FontStyle _fontStyle = FontStyles.Normal;
         private FontWeight _fontWeight = FontWeights.Normal;
 
@@ -44,8 +44,8 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             SupportedInterfaces = new[] { typeof(Interfaces.DCS.UH60L.UH60LInterface) };
             _flyer = flyer;
             _interfaceDeviceName = $"RADAR Alt ({flyer})";
-            AddLabel("Digital Altitude Background", new Point(63d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);
-            AddNumericTextDisplay("Digital Altitude", new Point(63d, 239d), new Size(296d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
+            AddLabel("Digital Altitude Background", new Point(58d, 239d), new Size(310d, 113d), 81, "\ufb01\ufb01\ufb01\ufb01", TextHorizontalAlignment.Right);
+            AddNumericTextDisplay("Digital Altitude", new Point(55d, 239d), new Size(296d, 113d), _interfaceDeviceName, "Digital Altitude", 81, "8888", TextHorizontalAlignment.Right, "");
             AddPart("Instrument", new Point(0d, 0d), new Size(420d, 420d), _interfaceDeviceName, "Instrument");
         }
         private void AddNumericTextDisplay(string name, Point posn, Size size,
@@ -82,6 +82,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             };
             _digitalAltDisplay.IsHidden = false;
             Children.Add(_digitalAltDisplay);
+            _digitalAltDisplay.TextValue = "9999";
             foreach (IBindingAction action in _digitalAltDisplay.Actions)
             {
                 if (action.Name != "hidden")

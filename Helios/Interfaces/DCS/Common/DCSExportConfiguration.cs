@@ -19,6 +19,7 @@ using GadrocsWorkshop.Helios.Interfaces.DCS.Soft;
 using GadrocsWorkshop.Helios.UDPInterface;
 using GadrocsWorkshop.Helios.Util;
 using GadrocsWorkshop.Helios.Util.DCS;
+using GadrocsWorkshop.Helios.Interfaces.Capabilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -564,7 +565,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                     });
 
-                    if(_parent is SoftInterface softInterface && softInterface.ImpersonatedVehicles.Count() > 1 && !softInterface.ImpersonatedVehicles.Contains(softInterface.Name))
+                    if(_parent is ISoftInterface softInterface && softInterface.ImpersonatedVehicles.Count() > 1 && !softInterface.ImpersonatedVehicles.Contains(_parent.Name))
                     {
                         foreach (string vehicle in softInterface.ImpersonatedVehicles)
                         {
@@ -1079,7 +1080,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             switch (_parent.ExportModuleFormat)
             {
                 case DCSExportModuleFormat.HeliosDriver16:
-                    if (_parent is SoftInterface softInterface)
+                    if (_parent is ISoftInterface softInterface)
                     {
                         if (softInterface.ImpersonatedVehicles.Count() > 1)
                         {
