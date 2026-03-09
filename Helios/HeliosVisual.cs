@@ -396,6 +396,7 @@ namespace GadrocsWorkshop.Helios
             get => _rectangle.Width;
             set
             {
+                value = Math.Abs(value);
                 double newValue = Math.Truncate(value);
                 if (_rectangle.Width.Equals(newValue))
                 {
@@ -423,8 +424,8 @@ namespace GadrocsWorkshop.Helios
             get => _rectangle.Height;
             set
             {
-                double newValue = Math.Truncate(value);
-                if (_rectangle.Height.Equals(newValue))
+                value = Math.Abs(value);
+                double newValue = Math.Truncate(value); if (_rectangle.Height.Equals(newValue))
                 {
                     return;
                 }

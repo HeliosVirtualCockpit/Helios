@@ -152,11 +152,16 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
                     yield return new StatusReportItem
                     {
                         Status =
-                            $"viewport '{viewport.Key}' was not included in monitor setup because it is not entirely contained in rendered resolution",
-                        Severity = StatusReportItem.SeverityCode.Warning,
-                        Recommendation = "adjust the viewport location or the monitor layout",
+                        $"viewport '{viewport.Key}' is not entirely contained in the rendered resolution, and DCS may not render the viewport",
+                        Severity = StatusReportItem.SeverityCode.Info,
+                        Recommendation = "If DCS does not render the viewport, adjust the viewport location or the monitor layout",
                         Link = StatusReportItem.ProfileEditor,
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
+                    };
+                    yield return new StatusReportItem
+                    {
+                        Status = $"{template.MonitorSetupFileBaseName}: {(code.ToString().TrimStart())}",
+                        Flags = INFORMATIONAL
                     };
                 }
             }
@@ -313,16 +318,17 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
 
         private bool TryCreateViewport(ICollection<FormattableString> lines, KeyValuePair<string, Rect> viewport, string indent, out FormattableString code)
         {
+            bool insideRenderedREsolution = true;
             Rect viewportRect = viewport.Value;
             viewportRect.Intersect(_parent.Rendered);
             if (viewportRect.Width < viewport.Value.Width || viewportRect.Height < viewport.Value.Height)
             {
                 // viewports that aren't entire rendered do not work
-                string message = $"viewport '{viewport.Key}' not included in monitor setup because it is not entirely contained in rendered resolution";
+                string message = $"viewport '{viewport.Key}' is not entirely contained in the rendered resolution, and DCS may not render the viewport";
                 ConfigManager.LogManager.LogInfo(message);
-                lines.Add($"--- {message}");
-                code = null;
-                return false;
+                lines.Add($"{indent}--- {message}");
+                viewportRect = viewport.Value;
+                insideRenderedREsolution = false;
             }
             foreach(ShadowVisual shadowVisual in _parent.Viewports)
             {
@@ -340,7 +346,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             ConvertToDCS(ref viewportRect);
             code = $"{indent}{(viewport.Key.Contains(".") ? viewport.Key.Split('.')[1] : viewport.Key)} = {{ x = {viewportRect.Left}, y = {viewportRect.Top}, width = {viewportRect.Width}, height = {viewportRect.Height} }}";
             lines.Add(code);
-            return true;
+            return insideRenderedREsolution;
         }
 
         private static List<FormattableString> CreateHeader(MonitorSetupTemplate template, bool originalStyle)
