@@ -1,0 +1,7 @@
+﻿@@ -56,16 +56,83 @@
+ .lua%22)%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0A
+ indicato
+@@ -560,12 +560,54 @@
+ %0A%09 %7D%2C%0D%0A%7D%0D%0A%0D%0A
++try_find_assigned_viewport(%22AJS37_DATA%22)%0D%0A

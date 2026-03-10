@@ -1,0 +1,8 @@
+﻿@@ -127,75 +127,8 @@
+ a%22)%0D
+-%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Ao
+@@ -557,69 +557,6 @@
+ %0D%0A%0D%0A
+---ViewportHandling%0D%0Atry_find_assigned_viewport(%22AH_64D_CMWS%22)%0D%0A
+ %0D%0A

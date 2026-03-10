@@ -1,0 +1,15 @@
+﻿@@ -508,464 +508,9 @@
+ %0A%09%0D%0A
+-   if try_find_assigned_viewport(%22Mi_24P_TV%22) %7E%3D nil then%0D%0A    -- this does not currently export the view image%2C only the reticle.  To see the reticle use RCtl%2BL to turn on back-lighting  %0D%0A%09-- Looking for improvements to this implementation.%0D%0A%09indicator_type %3D indicator_types.COMMON%0D%0A%09purposes %3D %7Brender_purpose.AUXILLARY_SIGHT_SCREENSPACE%2C render_purpose.GENERAL%2C render_purpose.SCREENSPACE_OUTSIDE_COCKPIT%7D%0D%0A%09render_target_always %3D true%0D%0A   else %0D%0A    
++%09
+ loca
+@@ -629,19 +629,16 @@
+ ale%0D%0A%09%0D%0A
+-   
+ %09dedicat
+@@ -719,26 +719,13 @@
+ rt%0D%0A
+-   
+ end%0D%0A
+-end%0D%0A%0D%0A   
+ %0D%0Apa

@@ -39,7 +39,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.C130J
         {
 
             // see if we can restore from JSON
-#if (!DEBUG)
+// #if (!DEBUG)
+#if (true)
             if (LoadFunctionsFromJson())
             {
                 return;

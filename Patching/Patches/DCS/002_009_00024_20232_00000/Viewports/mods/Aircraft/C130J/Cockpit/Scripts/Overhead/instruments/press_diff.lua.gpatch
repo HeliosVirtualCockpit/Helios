@@ -1,0 +1,15 @@
+﻿@@ -340,36 +340,28 @@
+ ame%09%09%09%3D 
+-create_guid_string()
++%22diff_press%22
+ %0D%0Atxt.ma
+@@ -694,36 +694,32 @@
+ ame%09%09%09%3D 
+-create_guid_string()
++%22diff_press_dot%22
+ %0D%0Atxt.ma
+@@ -1110,28 +1110,24 @@
+ %09%09%3D 
+-create_guid_string()
++%22diff_press_dec%22
+ %0D%0Atx

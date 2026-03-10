@@ -1,0 +1,3 @@
+﻿@@ -185,8 +185,157 @@
+ STATUS%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22A_10C_UHF_FREQUENCY_STATUS%22%2C %22UHF_FREQUENCY_STATUS%22)%0D%0A

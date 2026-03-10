@@ -1,0 +1,3 @@
+﻿@@ -282,133 +282,4 @@
+ %0D%0A%0D%0A
+-dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22A_10C_RIGHT_MFCD%22%2C %22RIGHT_MFCD%22)%0D%0A
