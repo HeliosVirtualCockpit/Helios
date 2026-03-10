@@ -1,0 +1,3 @@
+﻿@@ -527,8 +527,124 @@
+ nt%22%2C %7D%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22M2000C_PPA%22%2C %22PPA%22)%0D%0A

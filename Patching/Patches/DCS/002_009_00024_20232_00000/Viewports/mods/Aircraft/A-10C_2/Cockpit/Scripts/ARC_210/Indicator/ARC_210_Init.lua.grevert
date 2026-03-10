@@ -1,0 +1,8 @@
+﻿@@ -112,75 +112,8 @@
+ a%22)%0D
+-%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Ai
+@@ -27167,78 +27167,8 @@
+ %0D%0A%0D%0A
+-try_find_assigned_viewport(%22A_10C_2_ARC210_SCREEN%22%2C %22ARC210_SCREEN%22)%0D%0A
+ %0D%0Afu

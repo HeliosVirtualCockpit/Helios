@@ -1,0 +1,22 @@
+﻿[
+  {
+    "templateName": "F-16C",
+    "moduleId": "F-16C",
+    "isHeliosTemplate": true,
+    "viewports": [
+      {
+        "viewportName": "CMDS",
+        "relativeInitFilePath": "Mods\\aircraft\\F-16C\\Cockpit\\Scripts\\EWS\\CMDS\\indicator\\CMDS_ALE47_init.lua",
+        "SuppressViewportNamePrefix": false,
+        "requiresPatch": true,
+        "originalDisplayWidth": 1920,
+        "originalDisplayHeight": 1080,
+        "seatIndex": 1,
+        "x": 0,
+        "y": 0,
+        "width": 240,
+        "height": 20
+      }
+    ]
+  }
+]

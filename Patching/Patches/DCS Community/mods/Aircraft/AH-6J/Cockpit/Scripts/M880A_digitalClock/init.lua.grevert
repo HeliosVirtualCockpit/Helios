@@ -1,0 +1,7 @@
+﻿@@ -60,77 +60,8 @@
+ %22)%0D%0A
+-dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0A%0D%0A
+ indi
+@@ -315,94 +315,4 @@
+ %2C%7D%2C%7D
+-%0D%0A%0D%0A-- Viewport added by Helios Virtual Cockpit%0D%0Atry_find_assigned_viewport(%22AH6_M880A%22)%0D%0A

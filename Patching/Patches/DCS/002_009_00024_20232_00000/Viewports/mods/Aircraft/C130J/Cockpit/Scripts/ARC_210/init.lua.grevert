@@ -1,0 +1,8 @@
+﻿@@ -112,75 +112,8 @@
+ a%22)%0D
+-%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Ai
+@@ -26970,127 +26970,8 @@
+ %0D%0A%0D%0A
+---%5B%5B %0D%0A%09%09Inserted by Helios Virtual Cockpit%0D%0A%5D%5D%0D%0A%0D%0Atry_find_assigned_viewport(%22C130J_ARC210_SCREEN%22%2C %22ARC210_SCREEN%22)%0D%0A
+ %0D%0A--

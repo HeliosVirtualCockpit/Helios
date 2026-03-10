@@ -1,0 +1,7 @@
+﻿@@ -133,75 +133,8 @@
+ %22)%0D%0A
+-dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0A
+ dofi
+@@ -452,73 +452,4 @@
+ lt%22)
+-%0D%0A%0D%0A--ViewportHandling%0D%0Atry_find_assigned_viewport(%22AH_64D_EUFD_PLT%22)

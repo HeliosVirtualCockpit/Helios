@@ -1,0 +1,8 @@
+﻿@@ -56,16 +56,83 @@
+ .lua%22)%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0A
+ indicato
+@@ -595,10 +595,68 @@
+  %7D%2C%0D%0A%7D%0D%0A
++try_find_assigned_viewport(%22AJS37_VIGGEN_TV%22%2C %22VIGGEN_TV%22)
+ %0D%0A

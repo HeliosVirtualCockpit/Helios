@@ -1,0 +1,7 @@
+﻿@@ -55,16 +55,83 @@
+ s.lua%22)%0D
++%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Aindic
+@@ -1080,16 +1080,107 @@
+ ometry%09%3D false%0D%0A
++%0D%0A-- Viewport Patched by Helios Virtual Cockpit%0D%0Atry_find_assigned_viewport(%22F_16C_CMDS%22)%0D%0A

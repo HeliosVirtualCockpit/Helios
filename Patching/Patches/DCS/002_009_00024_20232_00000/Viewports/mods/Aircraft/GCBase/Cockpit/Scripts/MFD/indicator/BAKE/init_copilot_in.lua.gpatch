@@ -1,0 +1,3 @@
+﻿@@ -236,12 +236,69 @@
+ init.lua%22)%0D%0A
++%0D%0Atry_find_assigned_viewport(%22CH47F_MFD_COPILOT_RIGHT%22)%0D%0A

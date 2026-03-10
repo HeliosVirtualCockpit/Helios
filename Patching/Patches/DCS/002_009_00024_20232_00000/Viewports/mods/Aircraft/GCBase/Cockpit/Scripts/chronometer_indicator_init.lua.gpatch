@@ -1,0 +1,3 @@
+﻿@@ -531,8 +531,170 @@
+ zation%0D%0A
++%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Aupdate_screenspace_diplacement(1%2C true%2C 1)%0D%0Atry_find_assigned_viewport(%22CH47F_CHRONOMETER%22)%0D%0A

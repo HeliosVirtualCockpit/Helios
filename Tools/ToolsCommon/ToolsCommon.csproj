@@ -97,6 +97,9 @@
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00023_18431_00000.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\Viewports\ViewportTemplates_002_009_00024_20232_00000.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\..\Helios.targets" />

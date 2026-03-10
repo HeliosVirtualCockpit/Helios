@@ -1,0 +1,7 @@
+﻿@@ -55,16 +55,83 @@
+ s.lua%22)%0D
++%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Aindic
+@@ -1948,8 +1948,106 @@
+ _RWR%22%0D%0A%7D
++%0D%0A%0D%0A-- Added by Helios%0D%0Atry_find_assigned_viewport(%22F_5E_2024_RWR%22%2C%22LEFT_MFCD%22)%0D%0A-- End Addition%0D%0A

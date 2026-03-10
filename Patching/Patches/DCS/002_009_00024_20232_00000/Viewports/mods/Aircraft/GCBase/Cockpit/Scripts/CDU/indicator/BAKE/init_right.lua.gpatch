@@ -1,0 +1,3 @@
+﻿@@ -231,12 +231,61 @@
+ init.lua%22)%0D%0A
++%0D%0Atry_find_assigned_viewport(%22CH47F_CDU_PILOT%22)%0D%0A

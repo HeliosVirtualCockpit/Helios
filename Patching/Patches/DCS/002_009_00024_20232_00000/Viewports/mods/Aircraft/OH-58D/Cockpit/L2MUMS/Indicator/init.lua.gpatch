@@ -1,0 +1,7 @@
+﻿@@ -55,16 +55,83 @@
+ s.lua%22)%0D
++%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D
+ %0A%0D%0Aindic
+@@ -2242,12 +2242,101 @@
+ %2C 150%2F255%7D%0D%0A
++%0D%0Aupdate_screenspace_diplacement(1%2C true%2C 0)%0D%0Atry_find_assigned_viewport(%22OH58D_L2MUMS%22) 
