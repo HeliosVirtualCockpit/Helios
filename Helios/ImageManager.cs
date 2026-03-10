@@ -249,7 +249,7 @@ namespace GadrocsWorkshop.Helios
                         break;
                     }
 
-                    switch (components[2].ToLower(CultureInfo.InvariantCulture))
+                    switch (components[2].ToLower(CultureInfo.CurrentCulture))
                     {
                         case "images":
                         case "gauges":
