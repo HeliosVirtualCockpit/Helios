@@ -1082,7 +1082,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 case DCSExportModuleFormat.HeliosDriver16:
                     if (_parent is ISoftInterface softInterface)
                     {
-                        if (softInterface.ImpersonatedVehicles.Count() > 1)
+                        if (softInterface.ImpersonatedVehicles?.Count() > 1)
                         {
                             _parent.ImpersonatedVehicleName = _parent.Name;
                             _exportImpersonationModuleText =
