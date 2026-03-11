@@ -249,7 +249,7 @@ namespace GadrocsWorkshop.Helios
                         break;
                     }
 
-                    switch (components[2].ToLower(CultureInfo.CurrentCulture))
+                    switch (components[2].ToLower(CultureInfo.InvariantCulture))
                     {
                         case "images":
                         case "gauges":
@@ -262,8 +262,6 @@ namespace GadrocsWorkshop.Helios
                             }
                             break;
                     }
-                    Logger.Warn(
-                        $"Debug Message:  Current |{components[2].ToLower(CultureInfo.CurrentCulture)}| Invariant |{components[2].ToLower(CultureInfo.InvariantCulture)}|.");
                     Logger.Warn(
                         "pack reference into assembly disallowed because it does not target 'Images' or 'Gauges' folder or a PNG file in 'Interfaces': {URI}",
                         Anonymizer.Anonymize(imageUri));
