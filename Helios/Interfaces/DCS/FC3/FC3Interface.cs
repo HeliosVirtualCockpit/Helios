@@ -25,6 +25,34 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FC2
         public FC3Interface()
             : base("Flaming Cliffs 3", "FC3", "pack://application:,,,/Helios;component/Interfaces/DCS/FC3/ExportFunctions.lua")
         {
+            // copy received traffic in both directions (we need to update both models regardless of received code)
+            DuplicateReceivedNetworkData("1", "T1");
+            DuplicateReceivedNetworkData("2", "T2");
+            DuplicateReceivedNetworkData("3", "T3");
+            DuplicateReceivedNetworkData("4", "T4");
+            DuplicateReceivedNetworkData("5", "T5");
+            DuplicateReceivedNetworkData("13", "T13");
+            DuplicateReceivedNetworkData("14", "T14");
+            DuplicateReceivedNetworkData("16", "T16");
+            DuplicateReceivedNetworkData("17", "T17");
+            DuplicateReceivedNetworkData("18", "T18");
+            DuplicateReceivedNetworkData("19", "T19");
+            DuplicateReceivedNetworkData("20", "T20");
+
+            // not setting Vehicles at all results in the module name identifying the only 
+            // supported aircraft
+            // XXX not yet supported
+            // Vehicles = new string[] { ModuleName, "other aircraft", "another aircraft" };
+
+            // see if we can restore from JSON
+            //#if (!DEBUG)
+            if (LoadFunctionsFromJson())
+            {
+                return;
+            }
+            //#endif
+
+
             Functions.Add(new NetworkValue(this, "6", "HSI", "ADF bearing", "Current ADF heading.", "(0 - 360)", BindingValueUnits.Degrees, null));
             Functions.Add(new NetworkValue(this, "7", "HSI", "RMI bearing", "Current RMI heading.", "(0 - 360)", BindingValueUnits.Degrees, null));
             Functions.Add(new NetworkValue(this, "8", "HSI", "heading", "Current compass heading.", "(0 - 360)", BindingValueUnits.Degrees, null));
@@ -51,19 +79,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FC2
             Functions.Add(new NetworkValue(this, "19", "", "Mach", "Current Mach number", "number in M", BindingValueUnits.Numeric, null));
             Functions.Add(new NetworkValue(this, "20", "", "G", "Current G load", "number in g", BindingValueUnits.Numeric, null));
 
-            // copy received traffic in both directions (we need to update both models regardless of received code)
-            DuplicateReceivedNetworkData("1", "T1");
-            DuplicateReceivedNetworkData("2", "T2");
-            DuplicateReceivedNetworkData("3", "T3");
-            DuplicateReceivedNetworkData("4", "T4");
-            DuplicateReceivedNetworkData("5", "T5");
-            DuplicateReceivedNetworkData("13", "T13");
-            DuplicateReceivedNetworkData("14", "T14");
-            DuplicateReceivedNetworkData("16", "T16");
-            DuplicateReceivedNetworkData("17", "T17");
-            DuplicateReceivedNetworkData("18", "T18");
-            DuplicateReceivedNetworkData("19", "T19");
-            DuplicateReceivedNetworkData("20", "T20");
         }
 
         public override string StatusName =>
