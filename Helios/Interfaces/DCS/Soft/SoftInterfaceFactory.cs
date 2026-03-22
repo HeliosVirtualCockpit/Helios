@@ -54,7 +54,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Soft
                 loadedNames.Add(header.Name);
 
                 // create candidate instance, without loading it fully
-                yield return new SoftInterface(header.Name, header.Module, specFilePath);
+                yield return new SoftInterface(header.Name, header.Module, specFilePath, header.Vehicles);
             }
         }
 

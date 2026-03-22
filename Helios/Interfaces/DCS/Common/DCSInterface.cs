@@ -84,6 +84,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// </summary>
         private string _exportModuleBaseName;
 
+        /// <summary>
+        /// Backing field for the property holding the path to the export functions file, which 
+        /// is used by the profile editor to know where to write the export module file that it 
+        /// generates for this interface.  This is not serialized because it is only relevant on 
+        /// the machine running the profile editor, and may differ across machines and sessions.  
+        /// It is set by the profile editor when it creates this interface in a profile, and 
+        /// should be used by any code that generates an export module for this interface to 
+        /// know where to write the file that the export script will pick up on the next export cycle.
+        /// </summary>
+        private string _exportFunctionsPath;
+
+        private string _vehicleName;
+
+        private IList<string> _impersonatedVehicles;
+
         // XXX temporary adaptatation, as we want to re-write the ModuleName and Vehicles support
         public string ModuleName => VehicleName;
         public IList<string> Vehicles => Tags.ToList();
@@ -139,19 +154,65 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             AddFunction(new NetworkValue(this, "T20", "Simulator Telemetry", "G", "Current G load", "number in g", BindingValueUnits.Numeric, null));
         }
 
-#region Events
+        #region Events
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
+
+        public override string ExportFunctionsPath
+        {
+            get
+            {
+                return _exportFunctionsPath;
+            }
+            protected set
+            {
+                if (!(value == _exportFunctionsPath))
+                {
+                    string oldvalue = _exportFunctionsPath;
+                    _exportFunctionsPath = value;
+                    OnPropertyChanged("ExportFunctionsPath", oldvalue, value, false);
+                }
+            }
+        }
 
         /// <summary>
         /// The vehicle (usually an aircraft) that DCS will report in LoGetSelfData when we are using this interface.
         /// </summary>
-        public string VehicleName { get; protected set; }
+        public override string VehicleName
+        {
+            get
+            {
+                return _vehicleName;
+            }
+            protected set
+            {
+                if (!(value == _vehicleName))
+                {
+                    string oldvalue = _vehicleName;
+                    _vehicleName = value;
+                }
+            }
+        }
+        public override IList<string> ImpersonatedVehicles
+        {
+            get
+            {
+                return _impersonatedVehicles;
+            }
+            protected set
+            {
+                if(!(value == _impersonatedVehicles))
+                {
+                    IList<string> oldvalue = _impersonatedVehicles;
+                    _impersonatedVehicles = value;
+                }   
+            }
+        }
 
         /// <summary>
-        /// If not null, the this interface instance is configured to impersonate the specified vehicle name.  This means
+        /// If not null, then this interface instance is configured to impersonate the specified vehicle name.  This means
         /// that Helios should select it for the given vehicle, instead of the one that the interface natively supports.
         /// </summary>
         public string ImpersonatedVehicleName
@@ -174,7 +235,6 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         /// <summary>
         /// vehicle-specific file resource to include
         /// </summary>
-        public string ExportFunctionsPath { get; protected set; }
 
         public DCSExportConfiguration Configuration => _configuration;
 

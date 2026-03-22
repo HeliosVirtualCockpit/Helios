@@ -54,10 +54,6 @@ namespace GadrocsWorkshop.Helios.UDPInterface
         // event to notify potentially other threads that the client connection has changed
         public event EventHandler<ClientChange> ClientChanged;
 
-        private string _exportFunctionsPath;
-        private string _vehicleName;
-        private IList<string> _impersonatedVehicles;
-
         /// <summary>
         /// accessed only by main thread
         /// </summary>
@@ -474,27 +470,14 @@ namespace GadrocsWorkshop.Helios.UDPInterface
                 }
             }
         }
-        public string ExportLuaFunctionsPath
-        {
-            get
-            {
-                return _exportFunctionsPath;
-            }
-        }
-        public string VehicleNameFromUDPInterface
-        {
-            get
-            {
-                return _vehicleName;
-            }
-        }
-        public virtual IList<string> ImpersonatedVehicles
-        {
-            get
-            {
-                return _impersonatedVehicles;
-            }
-        }
+        public virtual string ExportFunctionsPath { get; protected set; }
+        /// <summary>
+        /// The vehicle (usually an aircraft) that DCS will report in LoGetSelfData when we are using this interface.
+        /// </summary>
+        /// 
+        public virtual string VehicleName { get; protected set; }
+        public virtual IList<string> ImpersonatedVehicles { get; protected set; }
+
         public int Port
         {
             get => _shared.Port;
@@ -544,7 +527,6 @@ namespace GadrocsWorkshop.Helios.UDPInterface
                 return false;
             }
 
-
             // load from Json
             // WARNING: this can be InterfaceType.Existing or InterfaceType.DCS, but either way we just use the functions
             InterfaceFile<NetworkFunction> loaded = InterfaceFile<NetworkFunction>.Load(this, jsonPath);
@@ -553,15 +535,16 @@ namespace GadrocsWorkshop.Helios.UDPInterface
             InstallFunctions(loaded);
             Logger.Debug($"Soft interface definition {jsonFileName} loaded from {Anonymizer.Anonymize(jsonPath)}. (Interface contained {loaded.Functions.Count()} Network Functions).");
 
-            _vehicleName = loaded.Vehicles.FirstOrDefault();
-            _impersonatedVehicles = loaded.Vehicles as IList<string>;
+            VehicleName = loaded.Vehicles.FirstOrDefault();
+            
+            ImpersonatedVehicles = loaded.Vehicles as IList<string>;
 
             if (File.Exists(Path.ChangeExtension(jsonPath, ".lua")))
             {
-                _exportFunctionsPath = Path.ChangeExtension(jsonPath, ".lua");
+                ExportFunctionsPath = Path.ChangeExtension(jsonPath, ".lua");
                 Logger.Info(
                     "Custom Lua export functions found at {Path}; this custom code will be used to create a driver for this interface",
-                    Anonymizer.Anonymize(_exportFunctionsPath));
+                    Anonymizer.Anonymize(ExportFunctionsPath));
             }
             return true;
         }

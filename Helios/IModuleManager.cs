@@ -46,4 +46,9 @@ namespace GadrocsWorkshop.Helios
         IEnumerable<HeliosToolDescriptor> Tools { get; }
         IEnumerable<HeliosCapabilityEditorDescriptor> GetCapabilityEditors(HeliosVisual visual);
     }
+    public interface IModuleManager3 : IModuleManager2
+    {
+        IList<string> InterfaceKnownVehicles { get; }
+        void AddSoftInterfaceKnownVehicles(List<string> vehiclesToAdd);
+    }
 }

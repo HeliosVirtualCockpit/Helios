@@ -14,20 +14,26 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
+using GadrocsWorkshop.Helios.Interfaces.DCS.FC2;
+using GadrocsWorkshop.Helios.Json.BindingValue;
+using GadrocsWorkshop.Helios.Util;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using GadrocsWorkshop.Helios.Interfaces.DCS.Common;
-using GadrocsWorkshop.Helios.Json.BindingValue;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
 
 namespace GadrocsWorkshop.Helios.Json
 {
     public class InterfaceExport
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// find all the network functions; slow
         /// </summary>
@@ -86,11 +92,11 @@ namespace GadrocsWorkshop.Helios.Json
                 }
 
                 string moduleName = name;
-                IEnumerable<string> vehicles = new string[0];
+                IList<string> vehicles = null;
                 if (udpInterface is DCSInterface dcs)
                 {
                     moduleName = dcs.ModuleName;
-                    vehicles = dcs.Vehicles;
+                    vehicles = descriptor.ImpersonatedVehicleNames?? dcs.Vehicles;
                 }
 
                 IComparer<UDPInterface.NetworkFunction> functionComparer = new CanonicalFunctionOrder();
@@ -123,11 +129,44 @@ namespace GadrocsWorkshop.Helios.Json
                             }
                         })
                 );
+                if (udpInterface is DCSInterface dcsInterface && dcsInterface.ExportFunctionsPath != null)
+                {
+                    string luaPath = Path.ChangeExtension(jsonPath, "lua");
+                    File.WriteAllText(luaPath, GetExportFunctions(dcsInterface));
+                }
             }
 
             UDPInterface.BaseUDPInterface.IsWritingFunctionsToJson = false;
         }
 
+        private string GetExportFunctions(DCSInterface dcs)
+        {
+            try
+            {
+                Uri exportFunctionsUri = new Uri(dcs.ExportFunctionsPath);
+                if (exportFunctionsUri.IsFile)
+                {
+                    if (!File.Exists(dcs.ExportFunctionsPath))
+                    {
+                        // this should have been detected by parent
+                        Logger.Error("custom Lua export functions not found at {Path}; there will be no custom code in the associated interface", Anonymizer.Anonymize(dcs.ExportFunctionsPath));
+                        return "";
+                    }
+
+                    // this is allowed only for export functions, other resources must be read from compiled packs, which is
+                    // why ReadResourceFile does not allow this case
+                    return FileUtility.ReadFile(dcs.ExportFunctionsPath);
+                }
+                return Resources.ReadResourceFile(dcs.ExportFunctionsPath);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"failed to load interface-specific functions for {dcs.VehicleName} from '{Anonymizer.Anonymize(dcs.ExportFunctionsPath)}'");
+                throw;
+            }
+
+
+        }
         public void GenerateInterfaceSchema()
         {
             JsonLicenses.LoadLicenses();

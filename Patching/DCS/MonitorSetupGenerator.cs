@@ -390,7 +390,7 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             };
             if (_parent.Profile.Interfaces.FirstOrDefault(i => i is DCSInterface) is DCSInterface dcsInterface)
             {
-                if(dcsInterface.VehicleName != "DCSGeneric" && dcsInterface is ISoftInterface softInterface)
+                if(dcsInterface.VehicleName != "DCSGeneric" && dcsInterface is ISoftInterface softInterface && softInterface.ImpersonatedVehicles != null)
                 {
                     _localViewports.DCSRestrictToVehicle = string.Join(",", softInterface.ImpersonatedVehicles);
                 } else

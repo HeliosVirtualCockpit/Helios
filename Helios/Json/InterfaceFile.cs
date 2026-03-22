@@ -163,6 +163,7 @@ namespace GadrocsWorkshop.Helios.Json
         public string Name { get; set; }
 
         [JsonProperty("module", Order = -11)] public string Module { get; set; }
+        [JsonProperty("vehicles", Order = -2)] public IList<string> Vehicles { get; set; }
 
         #endregion
 
@@ -209,8 +210,6 @@ namespace GadrocsWorkshop.Helios.Json
         }
 
         #region Properties
-
-        [JsonProperty("vehicles", Order = -2)] public IEnumerable<string> Vehicles { get; set; }
 
         [JsonProperty("functions", Order = -1)]
         public IEnumerable<TFunction> Functions { get; set; }

@@ -132,7 +132,7 @@ namespace GadrocsWorkshop.Helios
 
         public static ITemplateManager TemplateManager { get; internal set; }
 
-        public static IModuleManager ModuleManager { get; internal set; }
+        public static IModuleManager3 ModuleManager { get; internal set; }
 
         public static IProfileManager2 ProfileManager { get; internal set; }
 

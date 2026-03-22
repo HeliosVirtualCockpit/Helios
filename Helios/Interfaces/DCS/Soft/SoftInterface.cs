@@ -41,10 +41,16 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Soft
         /// <param name="name"></param>
         /// <param name="exportDeviceName"></param>
         /// <param name="specFilePath"></param>
-        public SoftInterface(string name, string exportDeviceName, string specFilePath) : base(name, exportDeviceName,
+        /// <param name="vehicles">List of vehicles which can share an interface</param>
+        public SoftInterface(string name, string exportDeviceName, string specFilePath, IList<string> vehicles = null) : base(name, exportDeviceName,
             null)
         {
             SpecFilePath = specFilePath;
+            _vehicles = vehicles;
+            if (_vehicles != null)
+            {
+                ConfigManager.ModuleManager.AddSoftInterfaceKnownVehicles(_vehicles.ToList());
+            }
         }
 
         /// <summary>
@@ -79,6 +85,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Soft
             // the first listed vehicle is all we support right now
             VehicleName = loaded.Vehicles.FirstOrDefault();
             _vehicles = loaded.Vehicles as IList<string>;
+            if(_vehicles != null)
+            {
+                ConfigManager.ModuleManager.AddSoftInterfaceKnownVehicles(_vehicles.ToList());
+            }
+            
             // XXX enable this once implemented
             // ModuleName = loaded.Module
 

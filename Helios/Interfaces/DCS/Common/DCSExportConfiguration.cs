@@ -565,18 +565,21 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                         Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
                     });
 
-                    if(_parent is ISoftInterface softInterface && softInterface.ImpersonatedVehicles.Count() > 1 && !softInterface.ImpersonatedVehicles.Contains(_parent.Name))
-                    {
-                        foreach (string vehicle in softInterface.ImpersonatedVehicles)
+                    if (_parent is ISoftInterface softInterface) 
+                    { 
+                        if (softInterface.ImpersonatedVehicles?.Count() > 1 && !softInterface.ImpersonatedVehicles.Contains(_parent.Name))
                         {
-                            File.WriteAllText(
-                                location.ExportModulePath(moduleInfo.ModuleLocation, vehicle),
-                                _exportImpersonationModuleText);
-                            report.Add(new StatusReportItem
+                            foreach (string vehicle in softInterface.ImpersonatedVehicles)
                             {
-                                Status = $"Wrote {moduleInfo.DisplayName} for {vehicle} - {baseName} to {location.SavedGamesName}",
-                                Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
-                            });
+                                File.WriteAllText(
+                                    location.ExportModulePath(moduleInfo.ModuleLocation, vehicle),
+                                    _exportImpersonationModuleText);
+                                report.Add(new StatusReportItem
+                                {
+                                    Status = $"Wrote {moduleInfo.DisplayName} for {vehicle} - {baseName} to {location.SavedGamesName}",
+                                    Flags = StatusReportItem.StatusFlags.ConfigurationUpToDate
+                                });
+                            }
                         }
                     }
                 }

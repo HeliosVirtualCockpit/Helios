@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GadrocsWorkshop.Helios.ComponentModel;
 
 namespace GadrocsWorkshop.Helios
@@ -37,9 +38,10 @@ namespace GadrocsWorkshop.Helios
             FactoryType = attribute.Factory;
             UniquenessKey = attribute.UniquenessKey ?? attribute.TypeIdentifier;
             AutoAdd = attribute.AutoAdd;
+            ImpersonatedVehicleNames = attribute.ImpersonatedVehicleNames?.ToList<string>();
         }
 
-        protected HeliosInterfaceDescriptor(Type interfaceType, string name, string typeIdentifier, string parentTypeIdentifier, Type interfaceEditorType, Type factoryType, string uniquenessKey, bool autoAdd)
+        protected HeliosInterfaceDescriptor(Type interfaceType, string name, string typeIdentifier, string parentTypeIdentifier, Type interfaceEditorType, Type factoryType, string uniquenessKey, bool autoAdd, string[] impersonatedVehicleNames = null)
         {
             InterfaceType = interfaceType;
             Name = name;
@@ -49,6 +51,7 @@ namespace GadrocsWorkshop.Helios
             FactoryType = factoryType;
             UniquenessKey = uniquenessKey;
             AutoAdd = autoAdd;
+            ImpersonatedVehicleNames = impersonatedVehicleNames.ToList<string>();
         }
 
         public virtual HeliosInterface CreateInstance()
@@ -98,6 +101,11 @@ namespace GadrocsWorkshop.Helios
         /// true if an instance of this control will automatically be added to a new profile.
         /// </summary>
         public bool AutoAdd { get; }
+
+        /// <summary>
+        /// This is the list of vehicle names that will share the same interface.
+        /// </summary>
+        public IList<string> ImpersonatedVehicleNames { get; }
 
         public HeliosInterfaceFactory Factory =>
             _factory ??

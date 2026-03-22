@@ -28,7 +28,7 @@ namespace GadrocsWorkshop.Helios
     /// <summary>
     /// ModuleManager gives access to all plugin component (Controls, Interfaces, Converters and Property Editors).
     /// </summary>
-    internal class ModuleManager : IModuleManager2, IModuleManagerWritable
+    internal class ModuleManager : IModuleManager3, IModuleManagerWritable
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -36,6 +36,7 @@ namespace GadrocsWorkshop.Helios
         private readonly Dictionary<string, HeliosPropertyEditorDescriptorCollection> _propertyEditors = new Dictionary<string, HeliosPropertyEditorDescriptorCollection>();
         private readonly List<HeliosToolDescriptor> _tools = new List<HeliosToolDescriptor>();
         private readonly List<HeliosCapabilityEditorDescriptor> _capabilityEditors = new List<HeliosCapabilityEditorDescriptor>();
+        private List<string> _softInterfaceKnownVehicles = new List<string>();
 
         internal ModuleManager(string applicationPath)
         {
@@ -45,6 +46,20 @@ namespace GadrocsWorkshop.Helios
         public HeliosDescriptorCollection ControlDescriptors { get; } = new HeliosDescriptorCollection();
 
         public HeliosInterfaceDescriptorCollection InterfaceDescriptors { get; } = new HeliosInterfaceDescriptorCollection();
+
+        public IList<string> InterfaceKnownVehicles
+        {
+            get {
+                return InterfaceDescriptors.Where(descriptor => descriptor.UniquenessKey == "Helios.DCSInterface" 
+                    && descriptor.ImpersonatedVehicleNames != null).
+                    Select(descriptor => descriptor.ImpersonatedVehicleNames).
+                    SelectMany(list => list).Concat(_softInterfaceKnownVehicles).Distinct().ToList();
+            }
+        }
+        public void AddSoftInterfaceKnownVehicles(List<string> vehiclesToAdd)
+        {
+            _softInterfaceKnownVehicles = _softInterfaceKnownVehicles.Union(vehiclesToAdd).ToList();
+        }
 
         public HeliosVisual CreateControl(string typeIdentifier)
         {
@@ -140,6 +155,7 @@ namespace GadrocsWorkshop.Helios
                 {
                     if (type.IsAbstract) continue;
                     object[] attrs = type.GetCustomAttributes(false);
+                    string fullName = asm.FullName;
                     foreach (object attribute in attrs)
                     {
                         switch (attribute)

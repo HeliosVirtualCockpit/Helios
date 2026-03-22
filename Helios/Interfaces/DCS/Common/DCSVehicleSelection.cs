@@ -80,7 +80,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 
         private static SortedSet<string> CreateItemSet()
         {
-            SortedSet<string> vehicles = new SortedSet<string>(KnownVehicles);
+            SortedSet<string> vehicles = new SortedSet<string>((ICollection<string>)ConfigManager.ModuleManager.InterfaceKnownVehicles);
+            vehicles.UnionWith(KnownVehicles);
             vehicles.Remove("DCSGeneric");
             // REVISIT load set from config file and merge
             return vehicles;

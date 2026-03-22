@@ -17,7 +17,8 @@
 namespace GadrocsWorkshop.Helios.ComponentModel
 {
     using System;
-
+    using System.Collections;
+    using System.Collections.Generic;
     using GadrocsWorkshop.Helios;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
@@ -71,6 +72,11 @@ namespace GadrocsWorkshop.Helios.ComponentModel
         }
 
         public string Name { get; }
+
+        /// <summary>
+        /// This array is the list of vehicle names that will share the same interface.
+        /// </summary>
+        public string[] ImpersonatedVehicleNames { get; set; }
 
         public Type InterfaceEditorType { get; }
 
