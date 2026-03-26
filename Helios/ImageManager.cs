@@ -319,7 +319,7 @@ namespace GadrocsWorkshop.Helios
         private ImageSource LoadXamlFile(Uri imageUri, int? width, int? height)
         {
             Logger.Debug("XAML being loaded as vector drawing from {URI}", Anonymizer.Anonymize(imageUri));
-            using (Stream xamlStream = new FileStream(imageUri.LocalPath, FileMode.Open))
+            using (Stream xamlStream = new FileStream(imageUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 try
                 {
