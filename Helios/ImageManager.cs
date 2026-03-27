@@ -338,7 +338,7 @@ namespace GadrocsWorkshop.Helios
             }
             catch (UnauthorizedAccessException ex)
             {
-                Logger.Error("Unauthorized access error loading XAML image from {URI}.  Check access mode and priviledges for file and directories.", Anonymizer.Anonymize(imageUri));
+                Logger.Error(ex, "Unauthorized access error loading XAML image from {URI}.  Check access mode and priviledges for file and directories.", Anonymizer.Anonymize(imageUri));
                 return null;
             }
             catch (Exception ex)
