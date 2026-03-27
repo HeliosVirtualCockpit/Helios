@@ -319,19 +319,32 @@ namespace GadrocsWorkshop.Helios
         private ImageSource LoadXamlFile(Uri imageUri, int? width, int? height)
         {
             Logger.Debug("XAML being loaded as vector drawing from {URI}", Anonymizer.Anonymize(imageUri));
-            using (Stream xamlStream = new FileStream(imageUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            try
             {
-                try
+                using (Stream xamlStream = new FileStream(imageUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    Canvas canvas = _xamlFirewall.LoadXamlDefensively<Canvas>(xamlStream);
-                    return RenderXaml(canvas, width, height);
+                    try
+                    {
+                        Canvas canvas = _xamlFirewall.LoadXamlDefensively<Canvas>(xamlStream);
+                        return RenderXaml(canvas, width, height);
+                    }
+                    catch (XamlFirewall.DisallowedElementException ex)
+                    {
+                        Logger.Error("attempt to load XAML {URI} that did not contain simple drawing code denied. {Element} is not allowed.",
+                            imageUri, ex.ElementName);
+                        return null;
+                    }
                 }
-                catch (XamlFirewall.DisallowedElementException ex)
-                {
-                    Logger.Error("attempt to load XAML {URI} that did not contain simple drawing code denied. {Element} is not allowed.",
-                        imageUri, ex.ElementName);
-                    return null;
-                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Logger.Error("Unauthorized access error loading XAML image from {URI}.  Check access mode and priviledges for file and directories.", Anonymizer.Anonymize(imageUri));
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "error loading XAML image from {URI}", Anonymizer.Anonymize(imageUri));
+                return null;
             }
         }
 
