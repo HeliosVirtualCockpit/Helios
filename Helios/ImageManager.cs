@@ -423,9 +423,9 @@ namespace GadrocsWorkshop.Helios
                 else
                 {
                     string fullFilename = Path.GetFullPath(filename);
-                    if (fullFilename.StartsWith(ConfigManager.ImagePath, StringComparison.CurrentCulture))
+                    if (fullFilename.StartsWith(ConfigManager.ImagePath, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (fullFilename.Equals(ConfigManager.ImagePath))
+                        if (fullFilename.Equals(ConfigManager.ImagePath, StringComparison.InvariantCultureIgnoreCase))
                         {
                             newFilename ="";
                         }

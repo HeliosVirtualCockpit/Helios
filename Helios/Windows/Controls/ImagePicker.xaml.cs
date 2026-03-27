@@ -15,10 +15,10 @@
 
 namespace GadrocsWorkshop.Helios.Windows.Controls
 {
+    using Microsoft.Win32;
+    using System;
     using System.Windows;
     using System.Windows.Controls;
-
-    using Microsoft.Win32;
  
     /// <summary>
     /// Interaction logic for ImagePicker.xaml
@@ -61,7 +61,7 @@ namespace GadrocsWorkshop.Helios.Windows.Controls
             
             string path = ConfigManager.ImageManager.MakeImagePathAbsolute(ImageFilename);
 
-            if (string.IsNullOrEmpty(path) || !path.StartsWith(ConfigManager.ImagePath))
+            if (string.IsNullOrEmpty(path) || !path.StartsWith(ConfigManager.ImagePath, StringComparison.InvariantCultureIgnoreCase))
             {
                 ofd.InitialDirectory = ConfigManager.ImagePath;
             }
