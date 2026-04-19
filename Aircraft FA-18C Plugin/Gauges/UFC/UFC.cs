@@ -47,6 +47,9 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private Color _onTextDisplayColor = Color.FromArgb(0xff, 0x7e, 0xde, 0x72);
         private Color _offTextDisplayColor = Color.FromArgb(0x00, 0x26, 0x3f, 0x36);
 
+        private double _brightnessValue = 1.0;
+        private HeliosValue _brightness;
+
         public UFC_FA18C()
             : base("UFC", new Size(602, 470))
         {
@@ -65,6 +68,15 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                     triggerBindingSource: BindingValueSources.LuaScript
                     );
 
+            _brightness = new HeliosValue(this, new BindingValue(1.0), "", "Display Brightness", "Brightness level of the UFC displays", "0.0 to 1.0", BindingValueUnits.Numeric);
+            _brightness.Execute += Brightness_Execute;
+            Actions.Add(_brightness);
+            AddDefaultInputBinding(
+                childName: "",
+                deviceActionName: "set.Display Brightness",
+                interfaceTriggerName: "UFC.UFC Brightness Control Knob.changed",
+                deviceTriggerName: ""
+                );
             AddButton("EMCON", 527, 129, new Size(48, 48), "UFC Emission Control Pushbutton");
             AddButton("1", 105, 116, new Size(48, 48), "UFC Keyboard Pushbutton 1");
             AddButton("2", 167, 116, new Size(48, 48), "UFC Keyboard Pushbutton 2");
@@ -126,12 +138,91 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             AddTextDisplay("Comm1", 26, 314, new Size(41, 42), "Comm Channel 1",32, "~", TextHorizontalAlignment.Center, " =;" + _ufcNumbers16);
             AddTextDisplay("Comm2", 538, 309, new Size(40, 42), "Comm Channel 2",32, "~", TextHorizontalAlignment.Center, " =;" + _ufcNumbers16);
         }
-
+        #region Properties
         public override string DefaultBackgroundImage
         {
             get => _defaultBackgroundImage;
         }
+        public bool EnableAlternateImageSet
+        {
+            get => _enableAlternateImageSet;
+            set
+            {
+                bool newValue = value;
+                bool oldValue = _enableAlternateImageSet;
 
+                if (newValue != oldValue)
+                {
+                    _enableAlternateImageSet = newValue;
+
+                    foreach (HeliosVisual hv in this.Children)
+                    {
+                        if (hv is TextDisplay txtDisplay)
+                        {
+                            //txtDisplay.OnTextColor = newValue ? Color.FromArgb(0xff, 0x00, 0xc0, 0x00) : Color.FromArgb(0xff, 0xc0, 0xc0, 0xc0);
+                            continue;
+                        }
+                        if (hv is PushButton pb)
+                        {
+                            pb.Image = ImageSwitchName(pb.Image);
+                            pb.PushedImage = ImageSwitchName(pb.PushedImage);
+                            pb.GlyphColor = newValue ? Color.FromArgb(0xf0, 0x00, 0xc0, 0x00) : Color.FromArgb(0xf0, 0xc0, 0xc0, 0xc0);
+                            continue;
+                        }
+                        if (hv is ThreeWayToggleSwitch sw)
+                        {
+                            sw.PositionOneImage = ImageSwitchName(sw.PositionOneImage);
+                            sw.PositionTwoImage = ImageSwitchName(sw.PositionTwoImage);
+                            sw.PositionThreeImage = ImageSwitchName(sw.PositionThreeImage);
+                            continue;
+                        }
+                        if (hv is Indicator ind)
+                        {
+                            ind.OnImage = ImageSwitchName(ind.OnImage);
+                            ind.OffImage = ImageSwitchName(ind.OffImage);
+                            continue;
+                        }
+                        if (hv is Potentiometer pot)
+                        {
+                            pot.KnobImage = ImageSwitchName(pot.KnobImage);
+                            continue;
+                        }
+                        if (hv is RotaryEncoder enc)
+                        {
+                            enc.KnobImage = ImageSwitchName(enc.KnobImage);
+                            continue;
+                        }
+                    }
+
+                    BackgroundImage = ImageSwitchName(BackgroundImage);
+                    // notify change after change is made
+                    OnPropertyChanged("EnableAlternateImageSet", oldValue, newValue, true);
+                }
+            }
+        }
+        public double Brightness
+        {
+            get => _brightnessValue;
+            set
+            {
+                if(value != _brightnessValue)
+                {
+                    double oldValue = _brightnessValue;
+                    _brightnessValue = value;
+                    foreach (HeliosVisual hv in this.Children)
+                    {
+                        if(hv is TextDisplay td)
+                        {
+                            td.Brightness = _brightnessValue;
+                        }
+                    }
+                    OnPropertyChanged("Brightness", oldValue, _brightnessValue, true);
+
+                }
+            }
+        }
+
+        #endregion Properties
         private void AddPot(string name, Point posn, Size size, string interfaceElementName)
         {
             AddPot(name: name, 
@@ -313,68 +404,16 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 );
         }
 
-        void EnableAltImages_Execute(object sender, HeliosActionEventArgs e)
+        private void EnableAltImages_Execute(object sender, HeliosActionEventArgs e)
         {
             EnableAlternateImageSet = e.Value.BoolValue;
             _alternateImages.SetValue(e.Value, e.BypassCascadingTriggers);
         }
-
-        public bool EnableAlternateImageSet
+        private void Brightness_Execute(object sender, HeliosActionEventArgs e)
         {
-            get => _enableAlternateImageSet;
-            set
-            {
-                bool newValue = value;
-                bool oldValue = _enableAlternateImageSet;
-
-                if (newValue != oldValue)
-                {
-                    _enableAlternateImageSet = newValue;
-
-                    foreach (HeliosVisual hv in this.Children)
-                    {
-                        if (hv is TextDisplay txtDisplay)
-                        {
-                            //txtDisplay.OnTextColor = newValue ? Color.FromArgb(0xff, 0x00, 0xc0, 0x00) : Color.FromArgb(0xff, 0xc0, 0xc0, 0xc0);
-                            continue;
-                        }
-                        if (hv is PushButton pb)
-                        {
-                            pb.Image = ImageSwitchName(pb.Image);
-                            pb.PushedImage = ImageSwitchName(pb.PushedImage);
-                            pb.GlyphColor = newValue ? Color.FromArgb(0xf0, 0x00, 0xc0, 0x00) : Color.FromArgb(0xf0, 0xc0, 0xc0, 0xc0);
-                            continue;
-                        }
-                        if (hv is ThreeWayToggleSwitch sw)
-                        {
-                            sw.PositionOneImage = ImageSwitchName(sw.PositionOneImage);
-                            sw.PositionTwoImage = ImageSwitchName(sw.PositionTwoImage);
-                            sw.PositionThreeImage = ImageSwitchName(sw.PositionThreeImage);
-                            continue;
-                        }
-                        if (hv is Indicator ind)
-                        {
-                            ind.OnImage = ImageSwitchName(ind.OnImage);
-                            ind.OffImage = ImageSwitchName(ind.OffImage);
-                            continue;
-                        }
-                        if (hv is Potentiometer pot)
-                        {
-                            pot.KnobImage = ImageSwitchName(pot.KnobImage);
-                            continue;
-                        }
-                        if (hv is RotaryEncoder enc)
-                        {
-                            enc.KnobImage = ImageSwitchName(enc.KnobImage);
-                            continue;
-                        }
-                    }
-
-                    BackgroundImage = ImageSwitchName(BackgroundImage);
-                    // notify change after change is made
-                    OnPropertyChanged("EnableAlternateImageSet", oldValue, newValue, true);
-                }
-            }
+            Brightness = Math.Max(Math.Min(e.Value.DoubleValue, 1d),0d);
+            _brightness.SetValue(new BindingValue(_brightnessValue), e.BypassCascadingTriggers);
+            OnPropertyChanged("Brightness", null, _brightnessValue, true);
         }
 
         private string ImageSwitchName(string imageName)

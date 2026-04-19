@@ -28,69 +28,69 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
         private double _glassReflectionOpacity;
+        private double _brightnessValue = 0.8d;
         public const double GLASS_REFLECTION_OPACITY_DEFAULT = 0.3;
 
-        private string _imageLocation = "{FA-18C}/Gauges/IFEI/";
-        private GaugeNeedle _gnleftnoz;
-        private HeliosValue _leftNozzle;
-        private HeliosValue _leftNozzleNeedle;
-        private CalibrationPointCollectionDouble _needleLeftCalibration;
-        private GaugeNeedle _gnrightnoz;
-        private HeliosValue _rightNozzle;
-        private HeliosValue _rightNozzleNeedle;
-        private CalibrationPointCollectionDouble _needleRightCalibration;
-        private GaugeImage _giNeedleBackground;
-        private HeliosValue _nozzleNeedleBackground;
-        private GaugeImage _gireflection;
-        private GaugeImage _giZulu;
-        private HeliosValue _indicatorZulu;
-        private GaugeImage _giBingo;
-        private HeliosValue _indicatorBingo;
-        private GaugeImage _giFF;
-        private HeliosValue _indicatorFuelFlow;
-        private GaugeImage _giTemp;
-        private HeliosValue _indicatorTemp;
-        private GaugeImage _giRPM;
-        private HeliosValue _indicatorRPM;
-        private GaugeImage _giOil;
-        private HeliosValue _indicatorOil;
-        private GaugeImage _giNoz;
-        private HeliosValue _indicator_Noz;
-        private GaugeImage _giGaugeMarksL;
-        private HeliosValue _indicatorMarksLeft;
-        private GaugeImage _giGaugeMarksR;
-        private HeliosValue _indicatorMarksRight;
-        private GaugeImage _giGaugeMarksL000;
-        private HeliosValue _indicatorMarksLeft000;
-        private GaugeImage _giGaugeMarksR000;
-        private HeliosValue _indicatorMarksRight000;
-        private GaugeImage _giGaugeMarksL050;
-        private HeliosValue _indicatorMarksLeft050;
-        private GaugeImage _giGaugeMarksR050;
-        private HeliosValue _indicatorMarksRight050;
-        private GaugeImage _giGaugeMarksL100;
-        private HeliosValue _indicatorMarksLeft100;
-        private GaugeImage _giGaugeMarksR100;
-        private HeliosValue _indicatorMarksRight100;
-        private GaugeImage _giClockDots1;
-        private HeliosValue _indicatorClockDots1;
-        private GaugeImage _giClockDots2;
-        private HeliosValue _indicatorClockDots2;
-        private GaugeImage _giTimerDots1;
-        private HeliosValue _indicatorTimerDots1;
-        private GaugeImage _giTimerDots2;
-        private HeliosValue _indicatorTimerDots2;
-        private HeliosValue _indicatorLFuel;
-        private GaugeImage _giLeftFuel;
-        private HeliosValue _indicatorRFuel;
-        private GaugeImage _giRightFuel;
+        private readonly string _imageLocation = "{FA-18C}/Gauges/IFEI/";
+        private readonly GaugeNeedle _gnleftnoz;
+        private readonly HeliosValue _leftNozzle;
+        private readonly HeliosValue _leftNozzleNeedle;
+        private readonly CalibrationPointCollectionDouble _needleLeftCalibration;
+        private readonly GaugeNeedle _gnrightnoz;
+        private readonly HeliosValue _rightNozzle;
+        private readonly HeliosValue _rightNozzleNeedle;
+        private readonly CalibrationPointCollectionDouble _needleRightCalibration;
+        private readonly GaugeImage _giNeedleBackground;
+        private readonly HeliosValue _nozzleNeedleBackground;
+        private readonly GaugeImage _gireflection;
+        private readonly GaugeImage _giZulu;
+        private readonly HeliosValue _indicatorZulu;
+        private readonly GaugeImage _giBingo;
+        private readonly HeliosValue _indicatorBingo;
+        private readonly GaugeImage _giFF;
+        private readonly HeliosValue _indicatorFuelFlow;
+        private readonly GaugeImage _giTemp;
+        private readonly HeliosValue _indicatorTemp;
+        private readonly GaugeImage _giRPM;
+        private readonly HeliosValue _indicatorRPM;
+        private readonly GaugeImage _giOil;
+        private readonly HeliosValue _indicatorOil;
+        private readonly GaugeImage _giNoz;
+        private readonly HeliosValue _indicator_Noz;
+        private readonly GaugeImage _giGaugeMarksL;
+        private readonly HeliosValue _indicatorMarksLeft;
+        private readonly GaugeImage _giGaugeMarksR;
+        private readonly HeliosValue _indicatorMarksRight;
+        private readonly GaugeImage _giGaugeMarksL000;
+        private readonly HeliosValue _indicatorMarksLeft000;
+        private readonly GaugeImage _giGaugeMarksR000;
+        private readonly HeliosValue _indicatorMarksRight000;
+        private readonly GaugeImage _giGaugeMarksL050;
+        private readonly HeliosValue _indicatorMarksLeft050;
+        private readonly GaugeImage _giGaugeMarksR050;
+        private readonly HeliosValue _indicatorMarksRight050;
+        private readonly GaugeImage _giGaugeMarksL100;
+        private readonly HeliosValue _indicatorMarksLeft100;
+        private readonly GaugeImage _giGaugeMarksR100;
+        private readonly HeliosValue _indicatorMarksRight100;
+        private readonly GaugeImage _giClockDots1;
+        private readonly HeliosValue _indicatorClockDots1;
+        private readonly GaugeImage _giClockDots2;
+        private readonly HeliosValue _indicatorClockDots2;
+        private readonly GaugeImage _giTimerDots1;
+        private readonly HeliosValue _indicatorTimerDots1;
+        private readonly GaugeImage _giTimerDots2;
+        private readonly HeliosValue _indicatorTimerDots2;
+        private readonly HeliosValue _indicatorLFuel;
+        private readonly GaugeImage _giLeftFuel;
+        private readonly HeliosValue _indicatorRFuel;
+        private readonly GaugeImage _giRightFuel;
 
         public IFEI_Gauges()
             : base("IFEI_Gauges", new Size(779, 702), "Alt", false)
         {
-            // These points are an approximation because DCS does not expose the nozzle position so we infer it from the Fuel Flow
-            _needleLeftCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1d, 90d, 0);
-            _needleRightCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1d, -90d, 0);
+            _needleLeftCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1d, 90d);
+            _needleRightCalibration = new CalibrationPointCollectionDouble(0d, 0d, 1d, -90d);
 
             _giGaugeMarksL = new GaugeImage(_imageLocation + "IFEI Left Nozzle Gauge Marks.xaml", new Rect(80d, 270d, 277d, 137d));
             Components.Add(_giGaugeMarksL);
@@ -297,6 +297,26 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 }
             }
         }
+        public double Brightness
+        {
+            get => _brightnessValue;
+            set
+            {
+                if (value != _brightnessValue)
+                {
+                    double oldValue = _brightnessValue;
+                    _brightnessValue = Math.Min(value, 1.0);
+                    foreach (GaugeComponent component in Components)
+                    {
+                        if (component is IGaugeOpacity o && o != _gireflection)
+                        {
+                            o.Opacity = value;
+                        }
+                    }
+                    OnPropertyChanged("Brightness", oldValue, value, true);
+                }
+            }
+        }
         #endregion
 
         protected override void OnProfileChanged(HeliosProfile oldProfile) {
@@ -320,77 +340,77 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             switch (_haction.Name)
             {
                 case "Zulu Time Flag":
-                    _giZulu.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giZulu.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Bingo Flag":
-                    _giBingo.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giBingo.IsHidden = !(_hactionVal == "1");
                     break;
                 case "FF Flag":
-                    _giFF.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giFF.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Temp Flag":
-                    _giTemp.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giTemp.IsHidden = !(_hactionVal == "1");
                     break;
                 case "RPM Flag":
-                    _giRPM.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giRPM.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Oil Flag":
-                    _giOil.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giOil.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Noz Flag":
-                    _giNoz.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giNoz.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Left Scale Flag":
-                    _giGaugeMarksL.IsHidden = (_hactionVal == "1") ? false : true;
-                    _giNeedleBackground.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksL.IsHidden = !(_hactionVal == "1");
+                    _giNeedleBackground.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Right Scale Flag":
-                    _giGaugeMarksR.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksR.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Left Scale 0 Flag":
-                    _giGaugeMarksL000.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksL000.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Right Scale 0 Flag":
-                    _giGaugeMarksR000.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksR000.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Left Scale 50 Flag":
-                    _giGaugeMarksL050.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksL050.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Right Scale 50 Flag":
-                    _giGaugeMarksR050.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksR050.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Left Scale 100 Flag":
-                    _giGaugeMarksL100.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksL100.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Right Scale 100 Flag":
-                    _giGaugeMarksR100.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giGaugeMarksR100.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Clock HH MM separator":
-                    _giClockDots1.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giClockDots1.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Clock MM SS separator":
-                    _giClockDots2.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giClockDots2.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Timer H MM separator":
-                    _giTimerDots1.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giTimerDots1.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Timer MM SS separator":
-                    _giTimerDots2.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giTimerDots2.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Nozzle Needle Background Flag":
-                    _giNeedleBackground.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giNeedleBackground.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Left Nozzle Needle Flag":
-                    _gnleftnoz.IsHidden = (_hactionVal == "1") ? false : true;
+                    _gnleftnoz.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Right Nozzle Needle Flag":
-                    _gnrightnoz.IsHidden = (_hactionVal == "1") ? false : true;
+                    _gnrightnoz.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Left Fuel Flag":
-                    _giLeftFuel.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giLeftFuel.IsHidden = !(_hactionVal == "1");
                     break;
                 case "Right Fuel Flag":
-                    _giRightFuel.IsHidden = (_hactionVal == "1") ? false : true;
+                    _giRightFuel.IsHidden = !(_hactionVal == "1");
                     break;                   
                 default:
                     break;

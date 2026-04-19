@@ -125,6 +125,7 @@
     <Compile Include="Controls\FourWayToggleSwitchOrientation.cs" />
     <Compile Include="EnumToNegativeIntConverter.cs" />
     <Compile Include="EnumToIntConverter.cs" />
+    <Compile Include="Gauges\IGaugeOpacity.cs" />
     <Compile Include="Gauges\IGauge3d.cs" />
     <Compile Include="Controls\Capabilities\IRefreshableImage.cs" />
     <Compile Include="Controls\CustomGauge3DCylinderAppearanceEditor.xaml.cs">

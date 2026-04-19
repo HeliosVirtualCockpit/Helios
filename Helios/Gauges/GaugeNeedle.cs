@@ -20,7 +20,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System.Windows;
     using System.Windows.Media;
 
-    public class GaugeNeedle : GaugeComponent
+    public class GaugeNeedle : GaugeComponent, IGaugeOpacity
     {
         private string _imageFile;
         private ImageSource _image;
@@ -32,21 +32,28 @@ namespace GadrocsWorkshop.Helios.Gauges
         private Rect _rectangle;
         private double _horizontalOffset;
         private double _verticalOffset;
-        private double _xScale = 1.0;
-        private double _yScale = 1.0;
+        private double _xScale = 1.0d;
+        private double _yScale = 1.0d;
+        private double _opacity = 1.0d;
+
 
         public GaugeNeedle(string imageFile, Point location, Size size, Point center)
             : this(imageFile, location, size, center, 0d)
         {
         }
-
         public GaugeNeedle(string imageFile, Point location, Size size, Point center, double baseRotation)
+            : this(imageFile, location, size, center, baseRotation, 1.0d)
+        {
+        }
+
+        public GaugeNeedle(string imageFile, Point location, Size size, Point center, double baseRotation, double opacity)
         {
             _imageFile = imageFile;
             _location = location;
             _size = size;
             _center = center;
             _baseRotation = baseRotation;
+            _opacity = opacity;
         }
 
         #region Properties
@@ -96,6 +103,21 @@ namespace GadrocsWorkshop.Helios.Gauges
                 }
             }
         }
+        public double Opacity
+        {
+            get
+            {
+                return _opacity;
+            }
+            set
+            {
+                if (value != _opacity)
+                {
+                    _opacity = value;
+                    OnDisplayUpdate();
+                }
+            }
+        }
 
         public double HorizontalOffset
         {
@@ -141,10 +163,11 @@ namespace GadrocsWorkshop.Helios.Gauges
             transform.Children.Add(new TranslateTransform(_location.X * _xScale, _location.Y * _yScale));
 
             drawingContext.PushTransform(transform);
+            if (_opacity < 1.0d ) drawingContext.PushOpacity(_opacity);
             DrawImage(drawingContext, _image, _rectangle);
+            if (_opacity < 1.0d) drawingContext.Pop();
             drawingContext.Pop();
         }
-
         protected override void OnRefresh(double xScale, double yScale)
         {
             _xScale = xScale;
