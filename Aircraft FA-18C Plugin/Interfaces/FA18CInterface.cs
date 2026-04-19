@@ -139,6 +139,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
                     return;
                 }
 #endif
+#if DEBUG
+    #warning "Interface FA-18C_hornet is the c# version which is at a divergent (and lower) level than the JSON version because compilation has DEBUG flag."
+#endif
             Logger.Warn($"Interface {name} is the c# version which is at a divergent (and lower) level than the JSON version.  Ensure that the JSON version is available.");
             #region Caution Indicators
             // Caution Light Indicator Panel
