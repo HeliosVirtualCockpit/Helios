@@ -23,6 +23,8 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
     [HeliosInterface("Helios.FA18C", "DCS F/A-18C", typeof(DCSInterfaceEditor), typeof(UniqueHeliosInterfaceFactory), UniquenessKey = "Helios.DCSInterface")]
     public class FA18CInterface : DCSInterface
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         #region Devices
         //  From devices.lua - DCS seem to want this to remain constant which is great 
         private const string FM_PROXY = "1";
@@ -138,7 +140,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.FA18C
                 }
 #endif
 #if DEBUG
-    #warning "Interface FA-18C_hornet is the c# version which is at a divergent (and lower) level than the JSON version because compilation has DEBUG flag."
+    #warning "Interface FA-18C_hornet is the c# version which is at a divergent (and lower) level than the JSON version due to compilation having DEBUG flag."
 #endif
             Logger.Warn($"Interface {name} is the c# version which is at a divergent (and lower) level than the JSON version.  Ensure that the JSON version is available.");
             #region Caution Indicators
