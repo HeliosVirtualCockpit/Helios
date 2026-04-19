@@ -237,6 +237,23 @@ namespace GadrocsWorkshop.Helios.Controls
                 }
             }
         }
+        public Color OnTextColorDefault
+        {
+            get
+            {
+                return _onTextColorDefault;
+            }
+            set
+            {
+                if (!_onTextColorDefault.Equals(value))
+                {
+                    Color oldValue = _onTextColorDefault;
+                    _onTextColorDefault = _onTextColor = value;
+                    OnPropertyChanged("OnTextColorDefault", oldValue, value, true);
+                    Refresh();
+                }
+            }
+        }
 
         public TextFormat TextFormat
         {
@@ -420,7 +437,7 @@ namespace GadrocsWorkshop.Helios.Controls
             _referenceHeight = Height;
         }
 
-        private double Clamp(double value, double min, double max)
+        protected double Clamp(double value, double min, double max)
         {
             if (value < min)
             {
@@ -461,10 +478,10 @@ namespace GadrocsWorkshop.Helios.Controls
         private readonly HeliosValue _brightnessValue;
         private readonly HeliosAction _incrementBrightnessAction;
         private readonly HeliosAction _decrementBrightnessAction;
-        private double _displayBrightness = 8;
-        private CalibrationPointCollectionDouble _calBrightness = new CalibrationPointCollectionDouble(0, 0, 1, 1) {
-                new CalibrationPointDouble(0.25,0.5),
-                new CalibrationPointDouble(0.5,0.75),
+        private double _displayBrightness = 1.0;
+        private readonly CalibrationPointCollectionDouble _calBrightness = new CalibrationPointCollectionDouble(0, 0, 1, 1) {
+                new CalibrationPointDouble(0.10,0.6),
+                new CalibrationPointDouble(0.30,0.80),
             };
 
         public TextDisplay() : this("TextDisplay", new Size(100, 50)) { }
@@ -489,22 +506,37 @@ namespace GadrocsWorkshop.Helios.Controls
             _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
             Actions.Add(_decrementBrightnessAction);
         }
+        public double Brightness
+        {
+            get => _displayBrightness;
+            set
+            {
+                if (value != _displayBrightness)
+                {
+                    double oldValue = _displayBrightness;
+                    _displayBrightness = Clamp(value, 0, 1);
+                    double brightness = _calBrightness.Interpolate(_displayBrightness);
+                    OnTextColor = Color.FromArgb(Convert.ToByte((double)_onTextColorDefault.A * brightness), Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+                    OnPropertyChanged("Brightness", oldValue, value, true);
+                }
+            }
+        }
         private void DisplayBrightness_Execute(object action, HeliosActionEventArgs e)
         {
             double brightness = _calBrightness.Interpolate(e.Value.DoubleValue);
-            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+            OnTextColor = Color.FromArgb(_onTextColorDefault.A, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
         }
         private void IncrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
         {
             _displayBrightness = _displayBrightness >= 10 ? 10 : ++_displayBrightness;
             double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
-            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+            OnTextColor = Color.FromArgb(_onTextColorDefault.A, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
         }
         private void DecrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
         {
             _displayBrightness = _displayBrightness <= 0 ? 0 : --_displayBrightness;
             double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
-            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+            OnTextColor = Color.FromArgb(_onTextColorDefault.A, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
         }
 
         protected override void OnTextValueChange()
@@ -518,5 +550,12 @@ namespace GadrocsWorkshop.Helios.Controls
             TextValue = e.Value.StringValue;
             EndTriggerBypass(e.BypassCascadingTriggers);
         }
+        public override void Reset()
+        {
+            _onTextColor = _onTextColorDefault;
+            Brightness = 1.0d;
+            base.Reset();
+        }
+
     }
 }

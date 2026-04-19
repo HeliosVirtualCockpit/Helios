@@ -1089,7 +1089,7 @@ namespace GadrocsWorkshop.Helios
 
             // NOTE: for scaling purposes, we commit to the reference height at the time we set TextFormat, since that indirectly sets ConfiguredFontSize 
             display.TextFormat = textFormat;
-            display.OnTextColor = textColor; // Color.FromArgb(0xff, 0x40, 0xb3, 0x29);
+            display.OnTextColorDefault = display.OnTextColor = textColor; // Color.FromArgb(0xff, 0x40, 0xb3, 0x29);
             display.BackgroundColor = backgroundColor; // Color.FromArgb(0xff, 0x00, 0x00, 0x00);
             display.UseBackground = useBackground;
             if (textDisplayDictionary.Equals(""))

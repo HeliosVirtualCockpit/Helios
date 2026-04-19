@@ -23,7 +23,7 @@ namespace GadrocsWorkshop.Helios.Gauges
     using System.Windows.Controls;
 
 
-    public class GaugeImage : GaugeComponent
+    public class GaugeImage : GaugeComponent, IGaugeOpacity
     {
         private string _imageFile;
         private ImageSource _image;

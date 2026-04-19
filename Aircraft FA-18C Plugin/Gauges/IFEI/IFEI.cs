@@ -29,16 +29,18 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
     {
         private static readonly Rect SCREEN_RECT = new Rect(0, 0, 1, 1);
         private Rect _scaledScreenRect = SCREEN_RECT;
-        private string _interfaceDeviceName = "IFEI";
+        private readonly string _interfaceDeviceName = "IFEI";
 
-        private String _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI"; // "Segment7 Standard"; //"Seven Segment";
+        private readonly String _font = "Helios Virtual Cockpit F/A-18C Hornet IFEI"; // "Segment7 Standard"; //"Seven Segment";
         private Color _textColor = Color.FromArgb(0xff, 220, 220, 220);
         private Color _backGroundColor = Color.FromArgb(100, 100, 20, 50);
         private string _imageLocation = "{FA-18C}/Gauges/IFEI/";
-        private bool _useBackGround = false;
+        private readonly bool _useBackGround = false;
         private IFEI_Gauges _IFEI_gauges;
 
-        private HeliosValue _alternateImages;
+        private readonly HeliosValue _brightness;
+        private double _brightnessValue = 1.0d;
+        private readonly HeliosValue _alternateImages;
         private string _altImageLocation = "";
 
         public IFEI_FA18C()
@@ -57,15 +59,17 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                     triggerBindingValue: new BindingValue("return TriggerValue<3"),
                     triggerBindingSource: BindingValueSources.LuaScript
                     );
- 
-            //DefaultInputBindings.Add(new DefaultInputBinding(
-            //childName: "",
-            //interfaceTriggerName: "Cockpit Lights.MODE Switch.changed",
-            //deviceActionName: "set.Enable Alternate Image Set",
-            //deviceTriggerName: "",
-            //deviceTriggerBindingValue: new BindingValue("return TriggerValue<3"),
-            //bindingValueSource: BindingValueSources.LuaScript
-            //));
+
+            _brightness = new HeliosValue(this, new BindingValue(0d), "", "Display Brightness", "Controls the brightness of the IFEI display", "0 to 1", BindingValueUnits.Numeric);
+            _brightness.Execute += new HeliosActionHandler(Brightness_Execute);
+            Actions.Add(_brightness);
+
+            AddDefaultInputBinding(
+                childName: "",
+                deviceActionName: "set.Display Brightness",
+                interfaceTriggerName: "IFEI.IFEI Brightness Control Knob.changed",
+                deviceTriggerName: ""
+                );
 
             // adding the text displays
             double dispHeight = 50;
@@ -95,7 +99,7 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             AddTextDisplay("T Value", fuelX, 93, new Size(fuelWidth, dispHeight), fontSize, "T", _interfaceDeviceName, "T Value");
             AddTextDisplay("Time Set Mode", fuelX, 159, new Size(fuelWidth, dispHeight), fontSize, "H", _interfaceDeviceName, "Time Set Mode");
 
-            double RPMWidth = 60;
+            double RPMWidth = 64;
             AddTextDisplay("RPM Left", 104, 86, new Size(RPMWidth, dispHeight), fontSize, "65", _interfaceDeviceName, "Left RPM Value");
             AddTextDisplay("RPM Right", 255, 86, new Size(RPMWidth, dispHeight), fontSize, "65", _interfaceDeviceName, "Right RPM Value");
             
@@ -243,23 +247,37 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
                 
             }
         }
+        public override string DefaultBackgroundImage
+        {
+            get { return _imageLocation + "IFEI.png"; }
+        }
+
         #endregion
 
         protected override void OnProfileChanged(HeliosProfile oldProfile) {
             base.OnProfileChanged(oldProfile);
         }
 
-        public override string DefaultBackgroundImage
-        {
-            get { return _imageLocation + "IFEI.png"; }
-        }
 
-        void EnableAltImages_Execute(object sender, HeliosActionEventArgs e)
+        private void EnableAltImages_Execute(object sender, HeliosActionEventArgs e)
         {
             EnableAlternateImageSet = e.Value.BoolValue;
             _alternateImages.SetValue(e.Value, e.BypassCascadingTriggers);
         }
 
+        private void Brightness_Execute(object sender, HeliosActionEventArgs e)
+        {
+            _brightnessValue = e.Value.DoubleValue;
+            _brightness.SetValue(e.Value, e.BypassCascadingTriggers);
+            foreach (HeliosVisual hv in this.Children)
+            {
+                if (hv is TextDisplay td)
+                {
+                    td.Brightness = _brightnessValue;
+                }
+                _IFEI_gauges.Brightness = _brightnessValue;
+            }
+        }
         private void AddTextDisplay(string name, double x, double y, Size size, double baseFontsize, string testDisp,
             string interfaceDevice, string interfaceElement)
         {
