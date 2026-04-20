@@ -239,22 +239,19 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             if (_isOpen)
             {
                 if (_isRemote) WriteServerProfile();
+                _xmlWriter.WriteEndElement();  // Viewports
                 if (_hasBackground)
                 {
-                    _xmlWriter.WriteStartElement("Viewport");
-                    _xmlWriter.WriteElementString("Name", "Background");
-                    _xmlWriter.WriteElementString("Description", "This is the full screen background for the back of the screen");
-                    _xmlWriter.WriteElementString("Host", _remoteHost);
-                    _xmlWriter.WriteElementString("Port", $"{_portNumber++}");
-                    _xmlWriter.WriteElementString("ScreenCaptureX", "0");
-                    _xmlWriter.WriteElementString("ScreenCaptureY", "0");
+                    _xmlWriter.WriteStartElement("Background");
+                    _xmlWriter.WriteElementString("Visible", "true");
+                    _xmlWriter.WriteElementString("Color", "#FF000000");
                     _xmlWriter.WriteElementString("SizeX", _backgroundRect.Width.ToString());
                     _xmlWriter.WriteElementString("SizeY", _backgroundRect.Height.ToString());
                     _xmlWriter.WriteElementString("ScreenPositionX", _backgroundRect.X.ToString());
                     _xmlWriter.WriteElementString("ScreenPositionY", _backgroundRect.Y.ToString());
-                    _xmlWriter.WriteEndElement();  // background viewport
+                    _xmlWriter.WriteEndElement();  // background
                 }
-                _xmlWriter.WriteEndElement();  // Viewports
+
                 _xmlWriter.WriteElementString("PollingInterval", "100");
 
                 _xmlWriter.WriteStartElement("GlobalImageAdjustment");
