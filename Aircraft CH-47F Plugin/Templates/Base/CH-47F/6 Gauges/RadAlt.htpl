@@ -1,0 +1,13 @@
+﻿<ControlTemplate>
+	<Name>RADAR Altimeter</Name>
+	<Category>CH-47F Chinook</Category>
+	<TypeIdentifier>Helios.CH47F.RadAlt</TypeIdentifier>
+	<Template>
+		<TemplateValues>
+			<Location>0,0</Location>
+			<Size>300,300</Size>
+			<Hidden>False</Hidden>
+			<Children />
+		</TemplateValues>
+	</Template>
+</ControlTemplate>

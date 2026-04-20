@@ -22,11 +22,11 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.CH47F.RadAlt", "RADAR Altimeter", "CH-47F Chinook", typeof(BackgroundImageRenderer),HeliosControlFlags.None)]
+    [HeliosControl("Helios.CH47F.RadAlt", "RADAR Altimeter", "CH-47F Chinook", typeof(BackgroundImageRenderer),HeliosControlFlags.NotShownInUI)]
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt";
-        private string _font = "Helios Virtual Cockpit LED Dots 5x7 Italic";
+        private string _font = "Helios Virtual Cockpit LED Dots 5x7 Italic Regular";
         private FontStyle _fontStyle = FontStyles.Normal;
         private FontWeight _fontWeight = FontWeights.Normal;
 
@@ -78,6 +78,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.Instruments
                 }
             };
             _digitalAltDisplay.IsHidden = false;
+            _digitalAltDisplay.TextValue = "9999";
+
             Children.Add(_digitalAltDisplay);
             foreach (IBindingAction action in _digitalAltDisplay.Actions)
             {
