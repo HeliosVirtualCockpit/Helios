@@ -27,7 +27,7 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     public class RadAlt : CompositeVisualWithBackgroundImage
     {
         private string _interfaceDeviceName = "RADAR Alt (Pilot)";
-        private string _font = "Helios Virtual Cockpit LED Dots 5x7 Italic";
+        private string _font = "Helios Virtual Cockpit LED Dots 5x7 Italic Regular";
         private FontStyle _fontStyle = FontStyles.Normal;
         private FontWeight _fontWeight = FontWeights.Normal;
 

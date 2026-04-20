@@ -114,16 +114,18 @@ namespace GadrocsWorkshop.Helios.Gauges.FA18C
             AddButtonIP("Radio 2 Pull", 523, 408, new Size(28, 28), "UFC COMM 2 Channel Selector Pull", false);
 
             /// adding the displays
-            AddTextDisplay("OptionCueing1", 358, 45, new Size(40, 42), "Option Display 1 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
-            AddTextDisplay("OptionDisplay1", 381, 45, new Size(129, 42), "Option Display 1", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
-            AddTextDisplay("OptionCueing2", 358, 111, new Size(40, 42), "Option Display 2 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
-            AddTextDisplay("OptionDisplay2", 381, 111, new Size(129, 42), "Option Display 2",32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
-            AddTextDisplay("OptionCueing3", 358, 177, new Size(40, 42), "Option Display 3 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
-            AddTextDisplay("OptionDisplay3", 381, 177, new Size(129, 42), "Option Display 3", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
-            AddTextDisplay("OptionCueing4", 358, 244, new Size(40, 42), "Option Display 4 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
-            AddTextDisplay("OptionDisplay4", 381, 244, new Size(129,42), "Option Display 4", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
-            AddTextDisplay("OptionCueing5", 358, 310, new Size(40, 42), "Option Display 5 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
-            AddTextDisplay("OptionDisplay5", 381, 310, new Size(129,42), "Option Display 5", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
+            double cueingX = 364;
+            double optionX = 381;
+            AddTextDisplay("OptionCueing1", cueingX, 45, new Size(40, 42), "Option Display 1 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
+            AddTextDisplay("OptionDisplay1", optionX, 45, new Size(129, 42), "Option Display 1", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
+            AddTextDisplay("OptionCueing2", cueingX, 111, new Size(40, 42), "Option Display 2 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
+            AddTextDisplay("OptionDisplay2", optionX, 111, new Size(129, 42), "Option Display 2",32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
+            AddTextDisplay("OptionCueing3", cueingX, 177, new Size(40, 42), "Option Display 3 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
+            AddTextDisplay("OptionDisplay3", optionX, 177, new Size(129, 42), "Option Display 3", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
+            AddTextDisplay("OptionCueing4", cueingX, 244, new Size(40, 42), "Option Display 4 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
+            AddTextDisplay("OptionDisplay4", optionX, 244, new Size(129,42), "Option Display 4", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
+            AddTextDisplay("OptionCueing5", cueingX, 310, new Size(40, 42), "Option Display 5 Selected", 32, "~", TextHorizontalAlignment.Left, _ufcCueing);
+            AddTextDisplay("OptionDisplay5", optionX, 310, new Size(129,42), "Option Display 5", 32, "~", TextHorizontalAlignment.Left, _ufcNumbers16);
             ///
             /// The following overlaying of textdisplays is needed because double digits up to 99 can be sent to a single 16 segment display element
             /// when precise coordinates are being entered.  The font has numerals which are left aligned and right aligned (handled by different 
