@@ -1,13 +1,10 @@
-﻿<!-- Created with Ai->XAML Export Plug-In Version 0.7 (PC/64) -->
-<!-- By Mike Swanson (http://blog.mikeswanson.com/)           -->
-
-<Canvas Width="420.947" Height="420.947"
+﻿<Canvas Width="420" Height="420"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Canvas>
 
         <!-- Layer 1/<Ellipse> -->
-        <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff404040" Data="F1 M 420.447,210.474 C 420.447,326.439 326.439,420.447 210.474,420.447 C 94.508,420.447 0.500,326.439 0.500,210.474 C 0.500,94.508 94.508,0.500 210.474,0.500 C 326.439,0.500 420.447,94.508 420.447,210.474 Z"/>
+        <Path StrokeThickness="1.0" Stroke="#ff080808" StrokeMiterLimit="1.0" Fill="#ff191919" Data="F1 M 420.447,210.474 C 420.447,326.439 326.439,420.447 210.474,420.447 C 94.508,420.447 0.500,326.439 0.500,210.474 C 0.500,94.508 94.508,0.500 210.474,0.500 C 326.439,0.500 420.447,94.508 420.447,210.474 Z"/>
 
         <Canvas>
 

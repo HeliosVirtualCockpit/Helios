@@ -65,7 +65,10 @@
     <Compile Include="Gauges\DisplayUnitPilot.cs" />
     <Compile Include="Gauges\DopplerNavDisplay.cs" />
     <Compile Include="Gauges\Flyer.cs" />
+    <Compile Include="Gauges\VVIInstrument.cs" />
+    <Compile Include="Gauges\VVI.cs" />
     <Compile Include="Gauges\IASInstrument.cs" />
+    <Compile Include="Gauges\IAS.cs" />
     <Compile Include="Gauges\RadAlt.cs" />
     <Compile Include="Gauges\RadAltCopilot.cs" />
     <Compile Include="Gauges\RadAltInstrument.cs" />
@@ -332,7 +335,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Base\UH-60L\0 IAS.htpl">
+    <Content Include="Templates\Base\UH-60L\1 IAS.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -378,6 +381,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Base\UH-60L\1 VSI.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Base\UH-60L\1 VVI.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -493,6 +499,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\RadAltFaceplateAlt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\VVI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>

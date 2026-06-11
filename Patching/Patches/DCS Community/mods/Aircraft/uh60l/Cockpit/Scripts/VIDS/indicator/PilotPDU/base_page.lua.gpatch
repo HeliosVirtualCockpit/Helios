@@ -1,0 +1,196 @@
+﻿@@ -1446,32 +1446,62 @@
+ ame            %3D
++ %22E1TRQ_Text%22 -- Helios Change
+  create_guid_str
+@@ -1506,16 +1506,16 @@
+ tring()%0A
+-
+ eng1TrqT
+@@ -2327,16 +2327,46 @@
+        %3D
++ %22E2TRQ_Text%22 -- Helios Change
+  create_
+@@ -3762,32 +3762,41 @@
+ 1.name%09%09 %09   %3D %22
++PLT_E1NP_
+ segment_%22.._i%0A%09E
+@@ -3784,32 +3784,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E1RPM_1.init_p
+@@ -4187,32 +4187,41 @@
+ 2.name%09%09 %09   %3D %22
++PLT_E1NP_
+ segment_%22.._i%0A%09E
+@@ -4209,32 +4209,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E1RPM_2.init_p
+@@ -4612,32 +4612,41 @@
+ 3.name%09%09 %09   %3D %22
++PLT_E1NP_
+ segment_%22.._i%0A%09E
+@@ -4634,32 +4634,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E1RPM_3.init_p
+@@ -5086,32 +5086,41 @@
+ 4.name%09%09 %09   %3D %22
++PLT_E1NP_
+ segment_%22.._i%0A%09E
+@@ -5108,32 +5108,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E1RPM_4.init_p
+@@ -5517,32 +5517,41 @@
+ 5.name%09%09 %09   %3D %22
++PLT_E1NP_
+ segment_%22.._i%0A%09E
+@@ -5539,32 +5539,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E1RPM_5.init_p
+@@ -5949,32 +5949,41 @@
+ 6.name%09%09 %09   %3D %22
++PLT_E1NP_
+ segment_%22.._i%0A%09E
+@@ -5971,32 +5971,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E1RPM_6.init_p
+@@ -6378,32 +6378,41 @@
+ 7.name%09%09 %09   %3D %22
++PLT_E1NP_
+ segment_%22.._i%0A%09E
+@@ -6404,24 +6404,41 @@
+ egment_%22.._i
++ -- Helios Change
+ %0A%09E1RPM_7.in
+@@ -7030,32 +7030,41 @@
+ 1.name%09%09 %09   %3D %22
++PLT_RRPM_
+ segment_%22.._i%0A%09R
+@@ -7056,24 +7056,41 @@
+ egment_%22.._i
++ -- Helios Change
+ %0A%09RRPM_1.ini
+@@ -7448,32 +7448,41 @@
+ 2.name%09%09 %09   %3D %22
++PLT_RRPM_
+ segment_%22.._i%0A%09R
+@@ -7474,24 +7474,41 @@
+ egment_%22.._i
++ -- Helios Change
+ %0A%09RRPM_2.ini
+@@ -7866,32 +7866,41 @@
+ 3.name%09%09 %09   %3D %22
++PLT_RRPM_
+ segment_%22.._i%0A%09R
+@@ -7892,24 +7892,41 @@
+ egment_%22.._i
++ -- Helios Change
+ %0A%09RRPM_3.ini
+@@ -8333,32 +8333,41 @@
+ 4.name%09%09 %09   %3D %22
++PLT_RRPM_
+ segment_%22.._i%0A%09R
+@@ -8359,24 +8359,41 @@
+ egment_%22.._i
++ -- Helios Change
+ %0A%09RRPM_4.ini
+@@ -8757,32 +8757,41 @@
+ 5.name%09%09 %09   %3D %22
++PLT_RRPM_
+ segment_%22.._i%0A%09R
+@@ -8783,24 +8783,41 @@
+ egment_%22.._i
++ -- Helios Change
+ %0A%09RRPM_5.ini
+@@ -9182,32 +9182,41 @@
+ 6.name%09%09 %09   %3D %22
++PLT_RRPM_
+ segment_%22.._i%0A%09R
+@@ -9208,24 +9208,41 @@
+ egment_%22.._i
++ -- Helios Change
+ %0A%09RRPM_6.ini
+@@ -9604,32 +9604,41 @@
+ 7.name%09%09 %09   %3D %22
++PLT_RRPM_
+ segment_%22.._i%0A%09R
+@@ -9634,16 +9634,33 @@
+ nt_%22.._i
++ -- Helios Change
+ %0A%09RRPM_7
+@@ -10255,32 +10255,41 @@
+ 1.name%09%09 %09   %3D %22
++PLT_E2NP_
+ segment_%22.._i%0A%09E
+@@ -10277,32 +10277,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E2RPM_1.init_p
+@@ -10680,32 +10680,41 @@
+ 2.name%09%09 %09   %3D %22
++PLT_E2NP_
+ segment_%22.._i%0A%09E
+@@ -10702,32 +10702,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E2RPM_2.init_p
+@@ -11105,32 +11105,41 @@
+ 3.name%09%09 %09   %3D %22
++PLT_E2NP_
+ segment_%22.._i%0A%09E
+@@ -11127,32 +11127,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E2RPM_3.init_p
+@@ -11579,32 +11579,41 @@
+ 4.name%09%09 %09   %3D %22
++PLT_E2NP_
+ segment_%22.._i%0A%09E
+@@ -11601,32 +11601,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E2RPM_4.init_p
+@@ -12010,32 +12010,41 @@
+ 5.name%09%09 %09   %3D %22
++PLT_E2NP_
+ segment_%22.._i%0A%09E
+@@ -12032,32 +12032,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E2RPM_5.init_p
+@@ -12442,32 +12442,41 @@
+ 6.name%09%09 %09   %3D %22
++PLT_E2NP_
+ segment_%22.._i%0A%09E
+@@ -12464,32 +12464,49 @@
+ NP_segment_%22.._i
++ -- Helios Change
+ %0A%09E2RPM_6.init_p
+@@ -12871,32 +12871,41 @@
+ 7.name%09%09 %09   %3D %22
++PLT_E2NP_
+ segment_%22.._i%0A%09E
+@@ -12901,16 +12901,33 @@
+ nt_%22.._i
++ -- Helios Change
+ %0A%09E2RPM_
+@@ -14012,32 +14012,42 @@
+ Q.name%09%09 %09   %3D %22
++PLT_E1TRQ_
+ segment_%22.._i%0A%09E
+@@ -14035,32 +14035,49 @@
+ RQ_segment_%22.._i
++ -- Helios Change
+ %0A%09E1TRQ.init_pos
+@@ -14734,16 +14734,26 @@
+  %09   %3D %22
++PLT_E2TRQ_
+ segment_
+@@ -14757,16 +14757,33 @@
+ nt_%22.._i
++ -- Helios Change
+ %0A%09E1TRQ.

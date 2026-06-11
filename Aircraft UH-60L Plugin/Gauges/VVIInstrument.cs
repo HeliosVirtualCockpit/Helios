@@ -21,21 +21,21 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
     using System.Windows;
     using System.Windows.Media;
 
-    [HeliosControl("Helios.UH60L.IAS.Indicator", "Indicated Air Speed Instrument", "UH-60L Blackhawk", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
-    public class IASInstrument : BaseGauge
+    [HeliosControl("Helios.UH60L.VVI.Indicator", "Vertical Velocity Indicator Instrument", "UH-60L Blackhawk", typeof(GaugeRenderer), HeliosControlFlags.NotShownInUI)]
+    public class VVIInstrument : BaseGauge
     {
-        private HeliosValue _iasPosition;
+        private HeliosValue _VVIPosition;
         private GaugeNeedle _needle;
         //        private GaugeNeedle _offFlagNeedle;
         //        private HeliosValue _offIndicator;
         //        private CalibrationPointCollectionDouble _needleCalibration;
 
-        public IASInstrument() : this("IAS Instrument", new Size(420, 420)) { }
-        public IASInstrument(string name, Size size)
+        public VVIInstrument() : this("VVI Instrument", new Size(300, 300)) { }
+        public VVIInstrument(string name, Size size)
             : base(name, size)
         {
             //  The first three images are the default images which appear behind the indicators.
-            Components.Add(new GaugeImage("{UH-60L}/Images/IAS.xaml", new Rect(0d, 4d, 420d, 420d)));
+            Components.Add(new GaugeImage("{UH-60L}/Images/VVI.xaml", new Rect(0d, 0d, 300d, 300d)));
             // m/s to degrees  (Knots to m/s = 0.5144444)
             //_needleCalibration = new CalibrationPointCollectionDouble(0d, 3d, 250d, 333d);
             //_needleCalibration.Add(new CalibrationPointDouble(20d, 11d));
@@ -66,15 +66,15 @@ namespace GadrocsWorkshop.Helios.Gauges.UH60L.Instruments
             //_needleCalibration.Add(new CalibrationPointDouble(225d, 300d));
             //_needleCalibration.Add(new CalibrationPointDouble(230d, 307d));
             //_needleCalibration.Add(new CalibrationPointDouble(240d, 320d));
-            _needle = new GaugeNeedle("{UH-60L}/Images/IASNeedle.xaml", new Point(210d, 210d), new Size(48d, 230d), new Point(24d, 129d), 0d);
+            _needle = new GaugeNeedle("{F-15E}/Gauges/Instruments/NeedleA.xaml", new Point(150d, 150d), new Size(34d, 214d), new Point(17d, 130d), -90d);
             Components.Add(_needle);
-            _iasPosition = new HeliosValue(this, new BindingValue(0d), name, "Air Speed Needle", "Indicated air speed.", "Rotation 0 and 333", BindingValueUnits.Degrees);
-            _iasPosition.Execute += new HeliosActionHandler(iasExecute);
-            Actions.Add(_iasPosition);
+            _VVIPosition = new HeliosValue(this, new BindingValue(0d), name, "Vertical Velocity Needle", "Vertical Velocity.", "Rotation -170 to +170", BindingValueUnits.Degrees);
+            _VVIPosition.Execute += new HeliosActionHandler(VVIExecute);
+            Actions.Add(_VVIPosition);
 
         }
 
-        void iasExecute(object action, HeliosActionEventArgs e)
+        void VVIExecute(object action, HeliosActionEventArgs e)
         {
             // _needle.Rotation = _needleCalibration.Interpolate(e.Value.DoubleValue);
             _needle.Rotation = e.Value.DoubleValue;

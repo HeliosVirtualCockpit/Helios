@@ -700,6 +700,9 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             ahruIndFail = 98,
             ahruIndAln = 99,
 
+            IASneedle = 100,
+            VVIneedle = 103,
+
             apn209PilotAltNeedle = 173,
             apn209PilotAltDigit1 = 174,
             apn209PilotAltDigit2 = 175,
@@ -1486,6 +1489,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.UH60L
             //elements["PNT-3000"]	= default_2_position_tumb(_("Debug Visualisation ON/OFF"), devices.DEBUG, device_commands.visualisationToggle, 3000, 8)
 
             // Indicators / Lamps / Flags
+
+            //  Pilot IAS
+            AddFunction(new ScaledNetworkValue(this, mainpanel.IASneedle.ToString("d"), new CalibrationPointCollectionDouble(0d, 0d, 1d, 333d), "IAS", "Air Speed Needle", "IAS needle position in degrees", "0 to 333", BindingValueUnits.Degrees, "%0.5f", false));
+            //  Pilot VVI
+            AddFunction(new ScaledNetworkValue(this, mainpanel.VVIneedle.ToString("d"), new CalibrationPointCollectionDouble(-1d, -180d, 1d, 180d), "VVI", "Vertical Velocity Needle", "VVI needle position in degrees", "-170 to +170", BindingValueUnits.Degrees, "%0.5f", false));
 
             // PILOT BARO ALTIMETER
             AddFunction(new Functions.Altimeter(this, FLYER.Pilot));

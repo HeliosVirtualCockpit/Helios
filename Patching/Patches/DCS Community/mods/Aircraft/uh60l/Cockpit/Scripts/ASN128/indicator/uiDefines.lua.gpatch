@@ -1,0 +1,8 @@
+﻿@@ -898,32 +898,61 @@
+ me            %09%3D
++ %22line1Text%22 -- Helios Change
+  create_guid_str
+@@ -1622,16 +1622,54 @@
+       %09%3D
++ %22line1TextHardCoded%22 -- Helios Change
+  create_

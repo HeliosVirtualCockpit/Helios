@@ -8,7 +8,7 @@
     <Canvas>
 
         <!-- Layer 1/Panel -->
-        <Path Fill="#ff404041" Data="F1 M 1250.000,712.000 L 0.000,712.000 L 0.000,0.000 L 1250.000,0.000 L 1250.000,712.000 Z"/>
+        <Path Fill="#ff202021" Data="F1 M 1250.000,712.000 L 0.000,712.000 L 0.000,0.000 L 1250.000,0.000 L 1250.000,712.000 Z"/>
 
         <Canvas>
 
@@ -5207,22 +5207,22 @@
         <Canvas>
 
             <!-- Layer 1/Panel Lines/<Path> -->
-            <Path StrokeThickness="8.0" Stroke="#fff1f1f2" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 203.681,680.440 L 203.945,712.000 L 198.000,0.000"/>
+            <Path StrokeThickness="8.0" Stroke="#ff313132" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 203.681,680.440 L 203.945,712.000 L 198.000,0.000"/>
 
             <!-- Layer 1/Panel Lines/<Path> -->
-            <Path StrokeThickness="8.0" Stroke="#fff1f1f2" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 409.028,126.129 L 409.028,712.000"/>
+            <Path StrokeThickness="8.0" Stroke="#ff313132" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 409.028,126.129 L 409.028,712.000"/>
 
             <!-- Layer 1/Panel Lines/<Path> -->
-            <Path StrokeThickness="8.0" Stroke="#fff1f1f2" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 601.028,126.129 L 601.028,712.000"/>
+            <Path StrokeThickness="8.0" Stroke="#ff313132" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 601.028,126.129 L 601.028,712.000"/>
 
             <!-- Layer 1/Panel Lines/<Line> -->
-            <Path StrokeThickness="8.0" Stroke="#fff1f1f2" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 814.945,712.000 L 809.000,0.000"/>
+            <Path StrokeThickness="8.0" Stroke="#ff313132" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 814.945,712.000 L 809.000,0.000"/>
 
             <!-- Layer 1/Panel Lines/<Line> -->
-            <Path StrokeThickness="8.0" Stroke="#fff1f1f2" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 1029.000,0.000 L 1034.945,712.000"/>
+            <Path StrokeThickness="8.0" Stroke="#ff313132" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 1029.000,0.000 L 1034.945,712.000"/>
 
             <!-- Layer 1/Panel Lines/<Path> -->
-            <Path StrokeThickness="8.0" Stroke="#fff1f1f2" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 601.028,708.198 L 815.714,708.198 L 409.028,708.198 L 203.681,708.198 L 201.810,708.198"/>
+            <Path StrokeThickness="8.0" Stroke="#ff313132" StrokeMiterLimit="1.0" Fill="#fff1f1f2" Data="F1 M 601.028,708.198 L 815.714,708.198 L 409.028,708.198 L 203.681,708.198 L 201.810,708.198"/>
 
         </Canvas>
 

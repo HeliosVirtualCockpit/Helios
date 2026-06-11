@@ -1,0 +1,20 @@
+﻿@@ -1393,32 +1393,63 @@
+ ame            %3D
++ %22baroAltText%22 -- Helios Change
+  create_guid_str
+@@ -5716,32 +5716,60 @@
+ ox.name %09%09%09    %3D
++ %22e1TRQBox%22 -- Helios Change
+  create_guid_str
+@@ -6714,32 +6714,60 @@
+ ox.name %09%09%09    %3D
++ %22e2TRQBox%22 -- Helios Change
+  create_guid_str
+@@ -7870,24 +7870,54 @@
+            %3D
++ %22cautionATT%22 -- Helios Change
+  create_guid
+@@ -21157,32 +21157,61 @@
+ nd.name %09%09%09    %3D
++ %22rdrAlrInd%22 -- Helios Change
+  create_guid_str
