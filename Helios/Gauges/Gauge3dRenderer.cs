@@ -104,7 +104,7 @@ namespace GadrocsWorkshop.Helios.Gauges
             _model = new GeometryModel3D
             {
                 Geometry = _meshs[0],
-                BackMaterial = new DiffuseMaterial(Brushes.DarkBlue),
+                //BackMaterial = new DiffuseMaterial(Brushes.DarkBlue),
                 Transform = transform
             };
             _models.Add(_model);
