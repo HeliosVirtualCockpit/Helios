@@ -58,8 +58,12 @@ namespace GeneratePatches
                 HelpText =
                     "Path to 'Patches' folder.  If not specified, will find nearest folder 'Patching\\Patches' in directory tree above.")]
             public string OutputPath { get; set; }
-        }
 
+            [Option('m', "setmargin", Required = false, Default = 4,
+                HelpText =
+                "value to set the patch-margin size to (default is 4) which may need to be increased if there are multiple changes on a single line.  Typically the need for increasing this is seen when the patch applies, but does not verify.")]
+            public int SetMargin { get; set; }
+        }
         private class AutoUpdateConfig
         {
             [JsonProperty("version")] public string Version { get; private set; }
@@ -71,11 +75,11 @@ namespace GeneratePatches
                 .WithParsed<InitOptions>(options => { InitializeRepo(options.DcsRoot); })
                 .WithParsed<GenerateOptions>(options =>
                 {
-                    UpdatePatches(options.DcsRoot, options.PatchSet, options.OutputPath);
+                    UpdatePatches(options.DcsRoot, options.PatchSet, options.OutputPath, options.SetMargin);
                 });
         }
 
-        private static void UpdatePatches(string dcsRoot, string patchSet, string outputPath)
+        private static void UpdatePatches(string dcsRoot, string patchSet, string outputPath, int setMargin)
         {
             // determine DCS version
             string autoUpdatePath = Path.Combine(dcsRoot, "autoupdate.cfg");
@@ -119,8 +123,8 @@ namespace GeneratePatches
                         }
 
                         Console.WriteLine($"writing patch {patchPath}");
-                        WritePatch(source, target, patchPath);
-                        WritePatch(target, source, reversePath);
+                        WritePatch(source, target, patchPath, setMargin);
+                        WritePatch(target, source, reversePath, setMargin);
                         nCount++;
                     }
                 }
@@ -132,11 +136,15 @@ namespace GeneratePatches
             }
         }
 
-        private static void WritePatch(string source, string target, string outputPath)
+        private static void WritePatch(string source, string target, string outputPath, int setMargin)
         {
             // NOTE: do our own diffs so we just do semantic cleanup. 
             // We don't want to optimize for efficiency.
-            diff_match_patch googleDiff = new diff_match_patch();
+            diff_match_patch googleDiff = new diff_match_patch()
+            {
+                Patch_Margin = (short) setMargin,
+                //Diff_EditCost = 16,
+            };
             List<Diff> diffs = googleDiff.diff_main(source, target);
             googleDiff.diff_cleanupSemantic(diffs);
 

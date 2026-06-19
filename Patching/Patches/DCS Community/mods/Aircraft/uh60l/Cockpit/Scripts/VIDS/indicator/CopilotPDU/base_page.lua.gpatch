@@ -1,196 +1,148 @@
-﻿@@ -1448,32 +1448,62 @@
+﻿@@ -1448,54 +1448,84 @@
  ame            %3D
 + %22E1TRQ_Text%22 -- Helios Change
-  create_guid_str
-@@ -1508,16 +1508,16 @@
- tring()%0A
+  create_guid_string()%0A
 -
- eng1TrqT
-@@ -2330,16 +2330,46 @@
-        %3D
+ eng1TrqText.mate
+@@ -2322,32 +2322,62 @@
+ ame            %3D
 + %22E2TRQ_Text%22 -- Helios Change
-  create_
-@@ -3756,32 +3756,42 @@
+  create_guid_str
+@@ -3756,45 +3756,72 @@
  1.name%09%09 %09   %3D %22
 +CPLT_E1NP_
- segment_%22.._i%0A%09E
-@@ -3779,32 +3779,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E1RPM_1.init_p
-@@ -4183,32 +4183,42 @@
+@@ -4183,45 +4183,72 @@
  2.name%09%09 %09   %3D %22
 +CPLT_E1NP_
- segment_%22.._i%0A%09E
-@@ -4206,32 +4206,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E1RPM_2.init_p
-@@ -4610,32 +4610,42 @@
+@@ -4610,45 +4610,72 @@
  3.name%09%09 %09   %3D %22
 +CPLT_E1NP_
- segment_%22.._i%0A%09E
-@@ -4633,32 +4633,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E1RPM_3.init_p
-@@ -5086,32 +5086,42 @@
+@@ -5086,45 +5086,72 @@
  4.name%09%09 %09   %3D %22
 +CPLT_E1NP_
- segment_%22.._i%0A%09E
-@@ -5109,32 +5109,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E1RPM_4.init_p
-@@ -5519,32 +5519,42 @@
+@@ -5519,45 +5519,72 @@
  5.name%09%09 %09   %3D %22
 +CPLT_E1NP_
- segment_%22.._i%0A%09E
-@@ -5542,32 +5542,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E1RPM_5.init_p
-@@ -5953,32 +5953,42 @@
+@@ -5953,45 +5953,72 @@
  6.name%09%09 %09   %3D %22
 +CPLT_E1NP_
- segment_%22.._i%0A%09E
-@@ -5976,32 +5976,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E1RPM_6.init_p
-@@ -6384,32 +6384,42 @@
+@@ -6384,45 +6384,72 @@
  7.name%09%09 %09   %3D %22
 +CPLT_E1NP_
- segment_%22.._i%0A%09E
-@@ -6411,24 +6411,41 @@
- egment_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09E1RPM_7.in
-@@ -7039,32 +7039,42 @@
+ %0A%09E1RPM_7.init_p
+@@ -7039,45 +7039,72 @@
  1.name%09%09 %09   %3D %22
 +CPLT_RRPM_
- segment_%22.._i%0A%09R
-@@ -7066,24 +7066,41 @@
- egment_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09RRPM_1.ini
-@@ -7459,32 +7459,42 @@
+ %0A%09RRPM_1.init_po
+@@ -7459,45 +7459,72 @@
  2.name%09%09 %09   %3D %22
 +CPLT_RRPM_
- segment_%22.._i%0A%09R
-@@ -7486,24 +7486,41 @@
- egment_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09RRPM_2.ini
-@@ -7879,32 +7879,42 @@
+ %0A%09RRPM_2.init_po
+@@ -7879,45 +7879,72 @@
  3.name%09%09 %09   %3D %22
 +CPLT_RRPM_
- segment_%22.._i%0A%09R
-@@ -7906,24 +7906,41 @@
- egment_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09RRPM_3.ini
-@@ -8348,32 +8348,42 @@
+ %0A%09RRPM_3.init_po
+@@ -8348,45 +8348,72 @@
  4.name%09%09 %09   %3D %22
 +CPLT_RRPM_
- segment_%22.._i%0A%09R
-@@ -8375,24 +8375,41 @@
- egment_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09RRPM_4.ini
-@@ -8774,32 +8774,42 @@
+ %0A%09RRPM_4.init_po
+@@ -8774,45 +8774,72 @@
  5.name%09%09 %09   %3D %22
 +CPLT_RRPM_
- segment_%22.._i%0A%09R
-@@ -8801,24 +8801,41 @@
- egment_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09RRPM_5.ini
-@@ -9201,32 +9201,42 @@
+ %0A%09RRPM_5.init_po
+@@ -9201,45 +9201,72 @@
  6.name%09%09 %09   %3D %22
 +CPLT_RRPM_
- segment_%22.._i%0A%09R
-@@ -9228,24 +9228,41 @@
- egment_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09RRPM_6.ini
-@@ -9625,32 +9625,42 @@
+ %0A%09RRPM_6.init_po
+@@ -9625,45 +9625,72 @@
  7.name%09%09 %09   %3D %22
 +CPLT_RRPM_
- segment_%22.._i%0A%09R
-@@ -9656,16 +9656,33 @@
- nt_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09RRPM_7
-@@ -10278,32 +10278,42 @@
+ %0A%09RRPM_7.init_po
+@@ -10278,45 +10278,72 @@
  1.name%09%09 %09   %3D %22
 +CPLT_E2NP_
- segment_%22.._i%0A%09E
-@@ -10301,32 +10301,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E2RPM_1.init_p
-@@ -10705,32 +10705,42 @@
+@@ -10705,45 +10705,72 @@
  2.name%09%09 %09   %3D %22
 +CPLT_E2NP_
- segment_%22.._i%0A%09E
-@@ -10728,32 +10728,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E2RPM_2.init_p
-@@ -11132,32 +11132,42 @@
+@@ -11132,45 +11132,72 @@
  3.name%09%09 %09   %3D %22
 +CPLT_E2NP_
- segment_%22.._i%0A%09E
-@@ -11155,32 +11155,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E2RPM_3.init_p
-@@ -11608,32 +11608,42 @@
+@@ -11608,45 +11608,72 @@
  4.name%09%09 %09   %3D %22
 +CPLT_E2NP_
- segment_%22.._i%0A%09E
-@@ -11631,32 +11631,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E2RPM_4.init_p
-@@ -12041,32 +12041,42 @@
+@@ -12041,45 +12041,72 @@
  5.name%09%09 %09   %3D %22
 +CPLT_E2NP_
- segment_%22.._i%0A%09E
-@@ -12064,32 +12064,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E2RPM_5.init_p
-@@ -12475,32 +12475,42 @@
+@@ -12475,45 +12475,72 @@
  6.name%09%09 %09   %3D %22
 +CPLT_E2NP_
- segment_%22.._i%0A%09E
-@@ -12498,32 +12498,49 @@
- NP_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E2RPM_6.init_p
-@@ -12906,32 +12906,42 @@
+@@ -12906,45 +12906,72 @@
  7.name%09%09 %09   %3D %22
 +CPLT_E2NP_
- segment_%22.._i%0A%09E
-@@ -12937,16 +12937,33 @@
- nt_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09E2RPM_
-@@ -14049,32 +14049,43 @@
+ %0A%09E2RPM_7.init_p
+@@ -14049,45 +14049,73 @@
  Q.name%09%09 %09   %3D %22
 +CPLT_E1TRQ_
- segment_%22.._i%0A%09E
-@@ -14073,32 +14073,49 @@
- RQ_segment_%22.._i
+ segment_%22.._i
 + -- Helios Change
  %0A%09E1TRQ.init_pos
-@@ -14773,16 +14773,27 @@
-  %09   %3D %22
+@@ -14765,45 +14765,73 @@
+ Q.name%09%09 %09   %3D %22
 +CPLT_E2TRQ_
- segment_
-@@ -14797,16 +14797,33 @@
- nt_%22.._i
+ segment_%22.._i
 + -- Helios Change
- %0A%09E1TRQ.
+ %0A%09E1TRQ.init_pos
