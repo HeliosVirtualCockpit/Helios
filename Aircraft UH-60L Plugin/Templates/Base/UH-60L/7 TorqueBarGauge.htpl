@@ -7,7 +7,7 @@
       <Image>{UH-60L}/Images/SegmentBarDisplay30Torque.xaml</Image>
       <Alignment>Centered</Alignment>
       <CornerRadius>0</CornerRadius>
-      <SegmentCount>22</SegmentCount>
+      <SegmentCount>30</SegmentCount>
       <Location>0,0</Location>
       <Size>20,540</Size>
       <Hidden>False</Hidden>

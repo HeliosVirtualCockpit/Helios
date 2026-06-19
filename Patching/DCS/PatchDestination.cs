@@ -145,7 +145,20 @@ namespace GadrocsWorkshop.Helios.Patching.DCS
             string backupAbsolute = LocateFile(BackupPath(targetPath));
             if (!File.Exists(backupAbsolute))
             {
-                return false;
+                // this code is required because of an error which introduced an extra period character into the backup file name.
+                string backupAbsoluteWithExtraPeriod = LocateFile(Path.ChangeExtension(backupAbsolute,$"..{Path.GetExtension(backupAbsolute)}"));
+                if (File.Exists(backupAbsoluteWithExtraPeriod))
+                {
+                    File.Move(backupAbsoluteWithExtraPeriod, backupAbsolute);
+                    if (!File.Exists(backupAbsolute))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             string path = LocateFile(targetPath);

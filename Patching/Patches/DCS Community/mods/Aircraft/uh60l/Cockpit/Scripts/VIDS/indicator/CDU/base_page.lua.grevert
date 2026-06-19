@@ -1,368 +1,280 @@
-﻿@@ -1272,38 +1272,8 @@
-    %3D
+﻿@@ -1260,84 +1260,54 @@
+ ame            %3D
 - %22FuelAmount%22 -- Helios Change
-  cre
-@@ -1290,16 +1290,16 @@
- tring()%0A
+  create_guid_string()%0A
 +
- FuelAmou
-@@ -1885,33 +1885,8 @@
-    %3D
+ FuelAmount.mater
+@@ -1873,57 +1873,32 @@
+ ame            %3D
 - %22E1TGT%22 -- Helios Change
-  cre
-@@ -2446,33 +2446,8 @@
-    %3D
+  create_guid_str
+@@ -2434,57 +2434,32 @@
+ ame            %3D
 - %22E2TGT%22 -- Helios Change
-  cre
-@@ -3006,32 +3006,8 @@
-    %3D
+  create_guid_str
+@@ -2994,56 +2994,32 @@
+ ame            %3D
 - %22E1NG%22 -- Helios Change
-  cre
-@@ -3554,32 +3554,8 @@
-    %3D
+  create_guid_str
+@@ -3542,56 +3542,32 @@
+ ame            %3D
 - %22E2NG%22 -- Helios Change
-  cre
-@@ -5293,39 +5293,32 @@
+  create_guid_str
+@@ -5293,68 +5293,44 @@
  1.name%09%09 %09   %3D %22
 -FUEL_L_
- segment_%22..i -- 
-@@ -5313,33 +5313,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -5654,23 +5654,16 @@
-  %09   %3D %22
+ %0A%09fuelL1.init_po
+@@ -5646,68 +5646,44 @@
+ 1.name%09%09 %09   %3D %22
 -FUEL_L_
- segment_
-@@ -5666,33 +5666,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -6033,39 +6033,32 @@
+ %0A%09fuelL1.init_po
+@@ -6033,68 +6033,44 @@
  1.name%09%09 %09   %3D %22
 -FUEL_R_
- segment_%22..i -- 
-@@ -6053,33 +6053,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -6394,23 +6394,16 @@
-  %09   %3D %22
+ %0A%09fuelL1.init_po
+@@ -6386,68 +6386,44 @@
+ 1.name%09%09 %09   %3D %22
 -FUEL_R_
- segment_
-@@ -6406,33 +6406,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -6996,33 +6996,24 @@
- me%09%09 %09   %3D %22
+ %0A%09fuelL1.init_po
+@@ -6992,70 +6992,44 @@
+ r.name%09%09 %09   %3D %22
 -XMSNTEMP_
  segment_%22..i
-@@ -7012,33 +7012,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09XMSNTE
-@@ -7402,33 +7402,24 @@
- me%09%09 %09   %3D %22
+ %0A%09XMSNTEMP1bar.i
+@@ -7398,70 +7398,44 @@
+ r.name%09%09 %09   %3D %22
 -XMSNTEMP_
  segment_%22..i
-@@ -7418,33 +7418,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09XMSNTE
-@@ -7830,25 +7830,16 @@
-  %09   %3D %22
+ %0A%09XMSNTEMP2bar.i
+@@ -7822,70 +7822,44 @@
+ r.name%09%09 %09   %3D %22
 -XMSNTEMP_
- segment_
-@@ -7842,33 +7842,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09XMSNTE
-@@ -8508,34 +8508,24 @@
- me%09%09 %09   %3D %22
+ %0A%09XMSNTEMP3bar.i
+@@ -8504,71 +8504,44 @@
+ r.name%09%09 %09   %3D %22
 -XMSNPRESS_
  segment_%22..i
-@@ -8524,33 +8524,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09XMSNPR
-@@ -8921,34 +8921,24 @@
- me%09%09 %09   %3D %22
+ %0A%09XMSNPRESS1bar.
+@@ -8917,71 +8917,44 @@
+ r.name%09%09 %09   %3D %22
 -XMSNPRESS_
  segment_%22..i
-@@ -8937,33 +8937,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09XMSNPR
-@@ -9350,34 +9350,24 @@
- me%09%09 %09   %3D %22
+ %0A%09XMSNPRESS2bar.
+@@ -9346,71 +9346,44 @@
+ r.name%09%09 %09   %3D %22
 -XMSNPRESS_
  segment_%22..i
-@@ -9366,33 +9366,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09XMSNPR
-@@ -9743,26 +9743,16 @@
-  %09   %3D %22
+ %0A%09XMSNPRESS3bar.
+@@ -9735,71 +9735,44 @@
+ r.name%09%09 %09   %3D %22
 -XMSNPRESS_
- segment_
-@@ -9755,33 +9755,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09XMSNPR
-@@ -10479,34 +10479,24 @@
- me%09%09 %09   %3D %22
+ %0A%09XMSNPRESS4bar.
+@@ -10475,71 +10475,44 @@
+ r.name%09%09 %09   %3D %22
 -E1OILTEMP_
  segment_%22..i
-@@ -10495,33 +10495,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E1OILT
-@@ -10900,34 +10900,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E1OILTEMPbar.i
+@@ -10896,71 +10896,44 @@
+ r.name%09%09 %09   %3D %22
 -E1OILTEMP_
  segment_%22..i
-@@ -10916,33 +10916,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E1OILT
-@@ -11415,26 +11415,16 @@
-  %09   %3D %22
+ %0A%09E1OILTEMPbar.i
+@@ -11407,71 +11407,44 @@
+ r.name%09%09 %09   %3D %22
 -E1OILTEMP_
- segment_
-@@ -11427,33 +11427,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09E1OILT
-@@ -12176,34 +12176,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E1OILTEMPbar.i
+@@ -12172,71 +12172,44 @@
+ r.name%09%09 %09   %3D %22
 -E2OILTEMP_
  segment_%22..i
-@@ -12192,33 +12192,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E2OILT
-@@ -12597,34 +12597,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E2OILTEMPbar.i
+@@ -12593,71 +12593,44 @@
+ r.name%09%09 %09   %3D %22
 -E2OILTEMP_
  segment_%22..i
-@@ -12613,33 +12613,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E2OILT
-@@ -13112,26 +13112,16 @@
-  %09   %3D %22
+ %0A%09E2OILTEMPbar.i
+@@ -13104,71 +13104,44 @@
+ r.name%09%09 %09   %3D %22
 -E2OILTEMP_
- segment_
-@@ -13124,33 +13124,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09E2OILT
-@@ -13837,32 +13837,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E2OILTEMPbar.i
+@@ -13833,69 +13833,44 @@
+ r.name%09%09 %09   %3D %22
 -E1PRESS_
  segment_%22..i
-@@ -13853,33 +13853,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E1PRES
-@@ -14272,32 +14272,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E1PRESS1bar.in
+@@ -14268,69 +14268,44 @@
+ r.name%09%09 %09   %3D %22
 -E1PRESS_
  segment_%22..i
-@@ -14288,33 +14288,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E1PRES
-@@ -14649,32 +14649,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E1PRESS2bar.in
+@@ -14645,69 +14645,44 @@
+ r.name%09%09 %09   %3D %22
 -E1PRESS_
  segment_%22..i
-@@ -14665,33 +14665,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E1PRES
-@@ -15035,16 +15035,8 @@
-  %3D %22
+ %0A%09E1PRESS2bar.in
+@@ -15023,69 +15023,44 @@
+ r.name%09%09 %09   %3D %22
 -E1PRESS_
- segm
-@@ -15043,33 +15043,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09E1PRES
-@@ -15728,32 +15728,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E1PRESS3bar.in
+@@ -15724,69 +15724,44 @@
+ r.name%09%09 %09   %3D %22
 -E2PRESS_
  segment_%22..i
-@@ -15744,33 +15744,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E2PRES
-@@ -16163,32 +16163,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E2PRESS1bar.in
+@@ -16159,69 +16159,44 @@
+ r.name%09%09 %09   %3D %22
 -E2PRESS_
  segment_%22..i
-@@ -16179,33 +16179,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E2PRES
-@@ -16540,32 +16540,24 @@
- me%09%09 %09   %3D %22
+ %0A%09E2PRESS2bar.in
+@@ -16536,69 +16536,44 @@
+ r.name%09%09 %09   %3D %22
 -E2PRESS_
  segment_%22..i
-@@ -16556,33 +16556,16 @@
- ent_%22..i
 - -- Helios Change
- %0A%09E2PRES
-@@ -16926,16 +16926,8 @@
-  %3D %22
+ %0A%09E2PRESS2bar.in
+@@ -16914,69 +16914,44 @@
+ r.name%09%09 %09   %3D %22
 -E2PRESS_
- segm
-@@ -16934,33 +16934,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09E2PRES
-@@ -17599,37 +17599,32 @@
+ %0A%09E2PRESS3bar.in
+@@ -17599,66 +17599,44 @@
  1.name%09%09 %09   %3D %22
 -TGT1_
- segment_%22..i -- 
-@@ -17619,33 +17619,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -17934,37 +17934,32 @@
+ %0A%09fuelL1.init_po
+@@ -17934,66 +17934,44 @@
  1.name%09%09 %09   %3D %22
 -TGT1_
- segment_%22..i -- 
-@@ -17954,33 +17954,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -18269,37 +18269,32 @@
+ %0A%09fuelL1.init_po
+@@ -18269,66 +18269,44 @@
  1.name%09%09 %09   %3D %22
 -TGT1_
- segment_%22..i -- 
-@@ -18289,33 +18289,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -18613,21 +18613,16 @@
-  %09   %3D %22
+ %0A%09fuelL1.init_po
+@@ -18605,66 +18605,44 @@
+ 1.name%09%09 %09   %3D %22
 -TGT1_
- segment_
-@@ -18625,33 +18625,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -19195,37 +19195,32 @@
+ %0A%09fuelL1.init_po
+@@ -19195,66 +19195,44 @@
  1.name%09%09 %09   %3D %22
 -TGT2_
- segment_%22..i -- 
-@@ -19215,33 +19215,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -19530,37 +19530,32 @@
+ %0A%09fuelL1.init_po
+@@ -19530,66 +19530,44 @@
  1.name%09%09 %09   %3D %22
 -TGT2_
- segment_%22..i -- 
-@@ -19550,33 +19550,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -19865,37 +19865,32 @@
+ %0A%09fuelL1.init_po
+@@ -19865,66 +19865,44 @@
  1.name%09%09 %09   %3D %22
 -TGT2_
- segment_%22..i -- 
-@@ -19885,33 +19885,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -20209,21 +20209,16 @@
-  %09   %3D %22
+ %0A%09fuelL1.init_po
+@@ -20201,66 +20201,44 @@
+ 1.name%09%09 %09   %3D %22
 -TGT2_
- segment_
-@@ -20221,33 +20221,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -20784,36 +20784,32 @@
+ %0A%09fuelL1.init_po
+@@ -20784,65 +20784,44 @@
  1.name%09%09 %09   %3D %22
 -NG1_
- segment_%22..i -- 
-@@ -20804,33 +20804,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -21115,36 +21115,32 @@
+ %0A%09fuelL1.init_po
+@@ -21115,65 +21115,44 @@
  1.name%09%09 %09   %3D %22
 -NG1_
- segment_%22..i -- 
-@@ -21135,33 +21135,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -21446,36 +21446,32 @@
+ %0A%09fuelL1.init_po
+@@ -21446,65 +21446,44 @@
  1.name%09%09 %09   %3D %22
 -NG1_
- segment_%22..i -- 
-@@ -21466,33 +21466,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -21778,36 +21778,32 @@
+ %0A%09fuelL1.init_po
+@@ -21778,65 +21778,44 @@
  1.name%09%09 %09   %3D %22
 -NG1_
- segment_%22..i -- 
-@@ -21798,33 +21798,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -22120,20 +22120,16 @@
-  %09   %3D %22
+ %0A%09fuelL1.init_po
+@@ -22112,65 +22112,44 @@
+ 1.name%09%09 %09   %3D %22
 -NG1_
- segment_
-@@ -22132,33 +22132,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -22694,36 +22694,32 @@
+ %0A%09fuelL1.init_po
+@@ -22694,65 +22694,44 @@
  1.name%09%09 %09   %3D %22
 -NG2_
- segment_%22..i -- 
-@@ -22714,33 +22714,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -23025,36 +23025,32 @@
+ %0A%09fuelL1.init_po
+@@ -23025,65 +23025,44 @@
  1.name%09%09 %09   %3D %22
 -NG2_
- segment_%22..i -- 
-@@ -23045,33 +23045,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -23356,36 +23356,32 @@
+ %0A%09fuelL1.init_po
+@@ -23356,65 +23356,44 @@
  1.name%09%09 %09   %3D %22
 -NG2_
- segment_%22..i -- 
-@@ -23376,33 +23376,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -23688,36 +23688,32 @@
+ %0A%09fuelL1.init_po
+@@ -23688,65 +23688,44 @@
  1.name%09%09 %09   %3D %22
 -NG2_
- segment_%22..i -- 
-@@ -23708,33 +23708,16 @@
- ent_%22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fuelL1
-@@ -24030,20 +24030,16 @@
-  %09   %3D %22
+ %0A%09fuelL1.init_po
+@@ -24022,65 +24022,44 @@
+ 1.name%09%09 %09   %3D %22
 -NG2_
- segment_
-@@ -24046,25 +24046,8 @@
- %22..i
+ segment_%22..i
 - -- Helios Change
- %0A%09fu
+ %0A%09fuelL1.init_po

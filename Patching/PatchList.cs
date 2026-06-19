@@ -245,7 +245,7 @@ namespace GadrocsWorkshop.Helios.Patching
                 PatchFile patch = new PatchFile
                 {
                     TargetPath = patchPath.Substring(fromFolder.Length + 1,
-                        patchPath.Length - (fromFolder.Length + Path.GetExtension(patchPath).Length)),
+                        patchPath.Length - (fromFolder.Length + 1 + Path.GetExtension(patchPath).Length)),
                     TargetRoot = targetRoot
                 };
                 patch.Load(patchPath);
