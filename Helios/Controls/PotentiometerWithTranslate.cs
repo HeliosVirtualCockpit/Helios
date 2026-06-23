@@ -680,7 +680,7 @@ namespace GadrocsWorkshop.Helios.Controls
 
             writer.WriteStartElement( "ClickType" );
             writer.WriteElementString( "Type", ClickType.ToString( ) );
-            if ( ClickType == LinearClickType.Swipe )
+            if ( ClickType == LinearClickTypeDirectional.Swipe )
             {
                 writer.WriteElementString( "Sensitivity", Sensitivity.ToString( CultureInfo.InvariantCulture ) );
             }
@@ -724,7 +724,7 @@ namespace GadrocsWorkshop.Helios.Controls
             if ( reader.Name.Equals( "ClickType" ) )
             {
                 reader.ReadStartElement( "ClickType" );
-                ClickType = (LinearClickType)Enum.Parse( typeof( LinearClickType ), reader.ReadElementString( "Type" ) );
+                ClickType = (LinearClickTypeDirectional)Enum.Parse( typeof( LinearClickTypeDirectional ), reader.ReadElementString( "Type" ) );
                 if (reader.Name == "Sensitivity")
                 {
                     Sensitivity = double.Parse( reader.ReadElementString( "Sensitivity" ), CultureInfo.InvariantCulture );
@@ -733,7 +733,7 @@ namespace GadrocsWorkshop.Helios.Controls
             }
             else
             {
-                ClickType = LinearClickType.Swipe;
+                ClickType = LinearClickTypeDirectional.Swipe;
                 Sensitivity = 0d;
             }
 
