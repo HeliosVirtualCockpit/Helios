@@ -51,6 +51,13 @@
         <CommandBinding Command="Close" Executed="Close_Executed" />
         <CommandBinding Command="heliosWindows:Dialog.ShowModalCommand" Executed="DialogShowModal_Executed"/>
     </Window.CommandBindings>
+    <Window.InputBindings>
+        <!-- Ctrl+S = Start/Run -->
+        <KeyBinding
+        Key="S"
+        Modifiers="Control"
+        Command="local:ControlCenterCommands.StartProfile" />
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -117,7 +124,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="9" Text="HIDE" Style="{StaticResource ButtonLabel}"/>
                 <Button x:Name="CautionButton" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="2" HorizontalAlignment="Left" Width="50" Margin="5,0,7,0" Style="{StaticResource HeliosCautionButtonStyle}" Command="local:ControlCenterCommands.ResetCaution"/>
                 <Rectangle x:Name="CautionLight" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="1" HorizontalAlignment="Left" Width="40" Height="40" Margin="10,5,12,5" Fill="#FFF1ED31" Visibility="{Binding Path=StatusViewer.CautionLightVisibility}"/>
-                <Button Grid.Row="1" Grid.Column="3" x:Name="StartButton" Style="{StaticResource HeliosPushButtonStyle}" Command="local:ControlCenterCommands.StartProfile"/>
+                <Button Grid.Row="1" Grid.Column="3" x:Name="StartButton" Style="{StaticResource HeliosPushButtonStyle}" Command="local:ControlCenterCommands.StartProfile" ToolTip="Starts the profile&#x0a;[Ctl+S]"/>
                 <Button Grid.Row="1" Grid.Column="5" x:Name="StopButton" Style="{StaticResource HeliosPushButtonStyle}" Command="local:ControlCenterCommands.StopProfile"/>
                 <Button Grid.Row="1" Grid.Column="7" x:Name="ResetProfileButton" Style="{StaticResource HeliosPushButtonStyle}" Command="local:ControlCenterCommands.ResetProfile" />
                 <Button Grid.Row="1" Grid.Column="9" Style="{StaticResource HeliosPushButtonStyle}" Click="HideButton_Clicked" />
