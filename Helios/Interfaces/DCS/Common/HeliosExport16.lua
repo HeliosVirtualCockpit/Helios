@@ -85,6 +85,7 @@ local helios_module_names = {
     ["A-10C"] = "Helios_A10C",
     ["A-10C_2"] = "Helios_A10C",
     ["F-14B"] = "Helios_F14",
+    ["F-14BU"] = "Helios_F14",  -- Allow existing CZ profile to be used with new F-14BU
     ["F-14A-135-GR"] = "Helios_F14",
     ["F-16C_50"] = "Helios_F16C",
     ["FA-18C_hornet"] = "Helios_F18C",
