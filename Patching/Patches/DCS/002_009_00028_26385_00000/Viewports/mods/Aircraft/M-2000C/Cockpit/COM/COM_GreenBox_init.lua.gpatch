@@ -1,0 +1,3 @@
+﻿@@ -615,28 +615,164 @@
+ ont%22%2C %22COM_greenbox_font%22%2C %7D
++%0D%0Adofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22M2000C_COM_GREENBOX%22%2C %22COM_GREENBOX%22)%0D%0A

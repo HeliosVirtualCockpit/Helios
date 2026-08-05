@@ -1,0 +1,3 @@
+﻿@@ -1631,135 +1631,4 @@
+ %0D%0A%0D%0A
+-dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22A_10C_2_RWR_SCREEN%22%2C %22RWR_SCREEN%22)%0D%0A

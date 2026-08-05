@@ -1,0 +1,15 @@
+﻿@@ -226,28 +226,36 @@
+ ame%09%09%09%3D 
+-%22dc_voltage%22
++create_guid_string()
+ %0D%0Atxt.ma
+@@ -657,32 +657,36 @@
+ ame%09%09%09%3D 
+-%22dc_voltage_dot%22
++create_guid_string()
+ %0D%0Atxt.ma
+@@ -1073,32 +1073,36 @@
+ ame%09%09%09%3D 
+-%22dc_voltage_dec%22
++create_guid_string()
+ %0D%0Atxt.ma

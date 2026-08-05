@@ -1,0 +1,8 @@
+﻿@@ -610,16 +610,35 @@
+ iewport(
++%22F_16C_LEFT_MFCD%22%2C 
+ %22LEFT_MF
+@@ -679,16 +679,36 @@
+ iewport(
++%22F_16C_RIGHT_MFCD%22%2C 
+ %22RIGHT_M

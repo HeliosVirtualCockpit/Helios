@@ -1,0 +1,10 @@
+﻿@@ -232,21 +232,36 @@
+ ame%09%09%09%3D 
+-%22act%22
++create_guid_string()
+ %0D%0Atxt.ma
+@@ -668,21 +668,36 @@
+ ame%09%09%09%3D 
+-%22tgt%22
++create_guid_string()
+ %0D%0Atxt.ma

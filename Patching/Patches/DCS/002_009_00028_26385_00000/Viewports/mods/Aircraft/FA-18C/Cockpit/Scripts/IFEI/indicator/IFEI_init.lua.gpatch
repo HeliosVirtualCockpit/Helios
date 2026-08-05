@@ -1,0 +1,3 @@
+﻿@@ -1723,8 +1723,126 @@
+ ME_SET%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22FA_18C_IFEI%22%2C %22IFEI%22)%0D%0A

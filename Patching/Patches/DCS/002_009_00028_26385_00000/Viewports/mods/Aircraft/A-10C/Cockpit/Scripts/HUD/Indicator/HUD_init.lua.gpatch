@@ -1,0 +1,3 @@
+﻿@@ -16977,20 +16977,135 @@
+ %2C 13%2F255%2C 255%2F255%7D%0D%0A
++dofile(LockOn_Options.common_script_path..%22ViewportHandling.lua%22)%0D%0Atry_find_assigned_viewport(%22A_10C_HUD%22%2C %22HUD%22)%0D%0A

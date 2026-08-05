@@ -1,0 +1,24 @@
+﻿@@ -2311,24 +2311,121 @@
+ ke_font%22%2C%0D%0A%09
++-- alternate values that can be used with Helios%0D%0A%09-- thickness  %3D 0.4%2C%0D%0A%09-- fuzziness  %3D 0.2%2C%0D%0A%09
+ thickness  %3D
+@@ -4784,32 +4784,187 @@
+ _stroke_MDG%22%5D)%0D%0A
++-- modified by Helios%0D%0Afontdescription%5B%22font_stroke_MDG_DMC_outline%22%5D.thickness %3D 3.0%0D%0Afontdescription%5B%22font_stroke_MDG_DMC_outline%22%5D.fuzziness %3D 0.85%0D%0A-- 
+ fontdescription%5B
+@@ -5021,32 +5021,35 @@
+ line_thickness%0D%0A
++-- 
+ fontdescription%5B
+@@ -5114,18 +5114,16 @@
+ ziness%0D%0A
+-%0D%0A
+ -- DMC g
+@@ -5284,16 +5284,194 @@
+ MDG%22%5D)%0D%0A
++-- alternate values that can be used with Helios%0D%0A-- fontdescription%5B%22font_stroke_MDG_DMC_main%22%5D.thickness %3D 0.4%0D%0A-- fontdescription%5B%22font_stroke_MDG_DMC_main%22%5D.fuzziness %3D 0.2%0D%0A
+ fontdesc
+@@ -5618,18 +5618,16 @@
+ ziness%0D%0A
+-%0D%0A
+ UFC_xsiz
