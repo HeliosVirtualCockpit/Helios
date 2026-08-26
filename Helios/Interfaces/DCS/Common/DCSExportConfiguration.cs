@@ -1113,7 +1113,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             string luaTableIndex = element.ID;
             if (int.TryParse(luaTableIndex, out int numericValue)
                 && numericValue > 0
-                && numericValue < 10000)
+                && numericValue < 100000)
             {
                 // use integer index, which is faster in Lua
                 // so don't quote the index
