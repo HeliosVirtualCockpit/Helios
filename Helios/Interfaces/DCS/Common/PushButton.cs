@@ -15,11 +15,14 @@
 // 
 
 using GadrocsWorkshop.Helios.UDPInterface;
+using System.Globalization;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
     public class PushButton : DCSFunctionWithButtons
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         private string _id;
         private string _format;
 
@@ -119,8 +122,11 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
         {
             bool pushNumericallyEqual = false;
             bool releaseNumericallyEqual = false;
-            if (double.TryParse(_releaseValue, out double releaseArgValue) && double.TryParse(_pushValue, out double pushArgValue) && double.TryParse(value, out double netValue))
+            if (double.TryParse(_releaseValue, NumberStyles.Float,CultureInfo.InvariantCulture, out double releaseArgValue) && 
+                double.TryParse(_pushValue, NumberStyles.Float, CultureInfo.InvariantCulture, out double pushArgValue) && 
+                double.TryParse(value, NumberStyles.Float,CultureInfo.InvariantCulture, out double netValue))
             {
+                Logger.Debug($"PushButton NetworkData id \"{id}\" has value \"{value}\".  Parsed release = {releaseArgValue} Parsed push = {pushArgValue} Parsed netValue = {netValue}.");
                 pushNumericallyEqual = pushArgValue == netValue ? true : false;
                 releaseNumericallyEqual = releaseArgValue == netValue ? true : false;
             }
