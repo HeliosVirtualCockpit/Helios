@@ -14,18 +14,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
+using GadrocsWorkshop.Helios.UDPInterface;
+using Newtonsoft.Json;
+using NLog;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using GadrocsWorkshop.Helios.UDPInterface;
-using Newtonsoft.Json;
 
 namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
 {
     public class Switch : DCSFunction
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         const int SWITCHINCREMENT = 0;
         const int SWITCHDECREMENT = 1;
         const int SWITCHNEUTRAL = 2;
@@ -293,9 +297,10 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
             for (int i = 0; i < _positions.Length; i++)
             {
                 bool numericallyEqual = false;
-                if(double.TryParse(_positions[i].ArgValue, out double argValue) && double.TryParse(value, out double netValue))
+                if(double.TryParse(_positions[i].ArgValue, NumberStyles.Float, CultureInfo.InvariantCulture, out double argValue) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out double netValue))
                 {
-                    numericallyEqual = argValue == netValue ? true : false; 
+                    numericallyEqual = argValue == netValue ? true : false;
+                    Logger.Debug($"Switch NetworkData id \"{id}\" has value \"{value}\".  Numerically Equal = {numericallyEqual}.  Parsed argValue = {argValue} Parsed netValue = {netValue}");
                 }
                 if (numericallyEqual || _positions[i].ArgValue.Equals(value))
                 {
