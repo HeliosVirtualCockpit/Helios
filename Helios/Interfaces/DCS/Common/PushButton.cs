@@ -129,6 +129,7 @@ namespace GadrocsWorkshop.Helios.Interfaces.DCS.Common
                 Logger.Debug($"PushButton NetworkData id \"{id}\" has value \"{value}\".  Parsed release = {releaseArgValue} Parsed push = {pushArgValue} Parsed netValue = {netValue}.");
                 pushNumericallyEqual = pushArgValue == netValue ? true : false;
                 releaseNumericallyEqual = releaseArgValue == netValue ? true : false;
+                Logger.Debug($"PushButton NetworkData id \"{id}\" has value \"{value}\".  Push Numerically Equal = {pushNumericallyEqual}.  Release Numerically Equal = {releaseNumericallyEqual}.  Parsed release = {releaseArgValue} Parsed push = {pushArgValue} Parsed netValue = {netValue}");
             }
 
             if (pushNumericallyEqual)
