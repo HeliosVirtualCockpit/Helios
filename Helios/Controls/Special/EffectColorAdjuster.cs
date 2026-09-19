@@ -420,15 +420,15 @@ namespace GadrocsWorkshop.Helios.Controls.Special
             {
                 reader.ReadStartElement("Effects");
                 Enabled = (bool)boolConverter.ConvertFromInvariantString(reader.ReadElementString("EffectsEnabled"));
-                RedAdjust = Double.Parse(reader.ReadElementString("RedAdjust"));
-                GreenAdjust = Double.Parse(reader.ReadElementString("GreenAdjust"));
-                BlueAdjust = Double.Parse(reader.ReadElementString("BlueAdjust"));
-                Brightness = Double.Parse(reader.ReadElementString("Brightness"));
-                Contrast = Double.Parse(reader.ReadElementString("Contrast"));
-                Gamma = Double.Parse(reader.ReadElementString("Gamma"));
-                HighlightStrength = Double.Parse(reader.ReadElementString("HighlightStrength"));
-                MidtoneBalance = Double.Parse(reader.ReadElementString("MidtoneBalance"));
-                ShadowStrength = Double.Parse(reader.ReadElementString("ShadowStrength"));
+                RedAdjust = Double.Parse(reader.ReadElementString("RedAdjust"), CultureInfo.InvariantCulture);
+                GreenAdjust = Double.Parse(reader.ReadElementString("GreenAdjust"), CultureInfo.InvariantCulture);
+                BlueAdjust = Double.Parse(reader.ReadElementString("BlueAdjust"), CultureInfo.InvariantCulture);
+                Brightness = Double.Parse(reader.ReadElementString("Brightness"), CultureInfo.InvariantCulture);
+                Contrast = Double.Parse(reader.ReadElementString("Contrast"), CultureInfo.InvariantCulture);
+                Gamma = Double.Parse(reader.ReadElementString("Gamma"), CultureInfo.InvariantCulture);
+                HighlightStrength = Double.Parse(reader.ReadElementString("HighlightStrength"), CultureInfo.InvariantCulture);    
+                MidtoneBalance = Double.Parse(reader.ReadElementString("MidtoneBalance"), CultureInfo.InvariantCulture);
+                ShadowStrength = Double.Parse(reader.ReadElementString("ShadowStrength"), CultureInfo.InvariantCulture);
                 ShaderName = reader.ReadElementString("ShaderName");
                 reader.ReadEndElement();
             }
