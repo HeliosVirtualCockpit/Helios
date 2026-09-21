@@ -238,7 +238,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
         private void AddEncoder(string name, Point posn, Size size, string interfaceElementName)
         {
  
-            RotaryEncoder knob = new RotaryEncoder
+            RotaryEncoderClickable knob = new RotaryEncoderClickable
             {
                 Name = name,
                 KnobImage = $"{{CH-47F}}/Gauges/SFD/Images/SFD_Knob.png",
@@ -269,11 +269,37 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
                 deviceTriggerName: "encoder.decremented",
                 interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
                 );
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "encoder.pushed",
+                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                );
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "encoder.released",
+                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                );
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "encoder.open",
+                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                );
+            AddDefaultOutputBinding(
+                childName: name,
+                deviceTriggerName: "encoder.closed",
+                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                );
+
 
             AddDefaultInputBinding(
                 childName: name,
                 interfaceTriggerName: $"{Name}.{name}.changed",
                 deviceActionName: "set.value"
+                );
+            AddDefaultInputBinding(
+                childName: name,
+                interfaceTriggerName: $"{Name}.{name}.changed",
+                deviceActionName: "set.physical.state"
                 );
         }
 
