@@ -439,6 +439,37 @@ namespace GadrocsWorkshop.Helios.Controls
                         break;
                 }
             }
+
+            else if (ClickType == LinearClickType.OneTouch)
+            {
+                switch (GuardPosition)
+                {
+                    case GuardPosition.Up:
+                        if (_guardUpRegion.Contains(location))
+                        {
+                            GuardPosition = Controls.GuardPosition.Down;
+                        }
+                        else if (_switchRegion.Contains(location))
+                        {
+                            switch (SwitchPosition)
+                            {
+                                case ToggleSwitchPosition.Two:
+                                    SwitchPosition = ToggleSwitchPosition.One;
+                                    break;
+                                default:
+                                    ++SwitchPosition;
+                                    break;
+                            }
+                        }
+                        break;
+                    case GuardPosition.Down:
+                        if (_guardDownRegion.Contains(location))
+                        {
+                            GuardPosition = Controls.GuardPosition.Up;
+                        }
+                        break;
+                }
+            }
         }
 
         public override void MouseDrag(Point location)
