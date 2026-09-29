@@ -272,7 +272,6 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
                 interfaceTriggerName: $"{Name}.{name}.changed",
                 deviceActionName: "set.physical state");
         }
-        private void AddRocker(string name, double x, double y) { AddRocker(name, x, y, _interfaceDevice, name); }
         private void AddRocker(string name, double x, double y, string interfaceDeviceName, string interfaceElementName)
         {
             Helios.Controls.RockerSwitch rocker = new Helios.Controls.RockerSwitch();
@@ -298,10 +297,15 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.MFD
             AddTrigger(rocker.Triggers["position three.entered"], name);
             AddTrigger(rocker.Triggers["position three.exited"], name);
             AddTrigger(rocker.Triggers["position.changed"], name);
+            AddTrigger(rocker.Triggers["released"], name);
             AddDefaultOutputBinding(
                 childName: ComponentName(name),
                 deviceTriggerName: "position.changed",
                 interfaceActionName: $"{interfaceDeviceName}.set.{interfaceElementName}");
+            AddDefaultOutputBinding(
+                childName: ComponentName(name),
+                deviceTriggerName: "released",
+                interfaceActionName: $"{interfaceDeviceName}.release.{interfaceElementName}");
 
             AddAction(rocker.Actions["set.position"], name);
             AddDefaultInputBinding(
