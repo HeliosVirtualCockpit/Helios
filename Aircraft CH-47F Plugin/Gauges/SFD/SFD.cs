@@ -51,9 +51,11 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
             {
                 case "SFD (Right)":
                     _vpName = "RIGHT_SFD";
+                    _interfaceDevice = "SFD 1-Right";
                     break;
                 case "SFD (Left)":
                     _vpName = "LEFT_SFD";
+                    _interfaceDevice = "SFD 2-Left";
                     break;
                 default:
                     break;
@@ -69,8 +71,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
             _frameBezelPanel.FillBackground = false;
             _frameBezelPanel.DrawBorder = false;
 
-            AddButton("SFD Mode Button", new Rect(204, 442 ,63, 50), "SFD Mode");
-            AddEncoder("SFD Knob", new Point(357d, 368d), new Size(127d, 127d), "SFD Knob");
+            AddButton("SFD Mode", new Rect(204, 442 ,63, 50), "Menu Access Button");
+            AddEncoder("Adjustment Knob", new Point(357d, 368d), new Size(127d, 127d), "Adjustment Knob");
             AddIndicator("SFD Indicator", new Point(90d, 453d), new Size(29d, 29d), "SFD Indicator");
         }
         public string ViewportName
@@ -206,6 +208,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
             button.Width = rect.Width * _size_Multiplier;
             button.Height = rect.Height * _size_Multiplier;
 
+            button.ButtonType = PushButtonType.Momentary;
+
             button.Image = $"{{CH-47F}}/Gauges/SFD/Images/{label.Replace(" ", "_")}_Norm.png";
             button.PushedImage = $"{{CH-47F}}/Gauges/SFD/Images/{(label.Replace(" ","_"))}_Pressed.png";
 
@@ -223,12 +227,12 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
             AddDefaultOutputBinding(
                 childName: name,
                 deviceTriggerName: "pushed",
-                interfaceActionName: $"{Name}.push.{name}"
+                interfaceActionName: $"{_interfaceDevice}.push.{label}"
                 );
             AddDefaultOutputBinding(
                 childName: name,
                 deviceTriggerName: "released",
-                interfaceActionName: $"{Name}.release.{name}"
+                interfaceActionName: $"{_interfaceDevice}.release.{label}"
                 );
             AddDefaultInputBinding(
                 childName: name,
@@ -237,11 +241,12 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
         }
         private void AddEncoder(string name, Point posn, Size size, string interfaceElementName)
         {
- 
+            string label = "SFD Knob";
             RotaryEncoderClickable knob = new RotaryEncoderClickable
             {
                 Name = name,
-                KnobImage = $"{{CH-47F}}/Gauges/SFD/Images/SFD_Knob.png",
+                PushedImage = $"{{CH-47F}}/Gauges/SFD/Images/{(label.Replace(" ", "_"))}_Pulled.png",
+                UnpushedImage = $"{{CH-47F}}/Gauges/SFD/Images/{(label.Replace(" ", "_"))}.png",
                 StepValue = 0.1d,
                 RotationStep = 5d,
                 Top = posn.Y,
@@ -258,48 +263,38 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
             }
 
             AddAction(knob.Actions["set.value"], name);
+            AddAction(knob.Actions["set.physical state"], name);
 
             AddDefaultOutputBinding(
                 childName: name,
                 deviceTriggerName: "encoder.incremented",
-                interfaceActionName: _interfaceDevice + ".increment." + interfaceElementName
+                interfaceActionName: _interfaceDevice + ".increment." + interfaceElementName + " Rotate"
             );
             AddDefaultOutputBinding(
                 childName: name,
                 deviceTriggerName: "encoder.decremented",
-                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName + " Rotate"
                 );
             AddDefaultOutputBinding(
                 childName: name,
-                deviceTriggerName: "encoder.pushed",
-                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                deviceTriggerName: "button pushed",
+                interfaceActionName: _interfaceDevice + ".push." + interfaceElementName + " Pull"
                 );
             AddDefaultOutputBinding(
                 childName: name,
-                deviceTriggerName: "encoder.released",
-                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
+                deviceTriggerName: "button released",
+                interfaceActionName: _interfaceDevice + ".release." + interfaceElementName + " Pull"
                 );
-            AddDefaultOutputBinding(
-                childName: name,
-                deviceTriggerName: "encoder.open",
-                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
-                );
-            AddDefaultOutputBinding(
-                childName: name,
-                deviceTriggerName: "encoder.closed",
-                interfaceActionName: _interfaceDevice + ".decrement." + interfaceElementName
-                );
-
 
             AddDefaultInputBinding(
                 childName: name,
-                interfaceTriggerName: $"{Name}.{name}.changed",
+                interfaceTriggerName: $"{_interfaceDevice}.{interfaceElementName} Rotate.changed",
                 deviceActionName: "set.value"
                 );
             AddDefaultInputBinding(
                 childName: name,
-                interfaceTriggerName: $"{Name}.{name}.changed",
-                deviceActionName: "set.physical.state"
+                interfaceTriggerName: $"{_interfaceDevice}.{interfaceElementName} Pull.changed",
+                deviceActionName: "set.physical state"
                 );
         }
 
@@ -312,6 +307,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
                 Width = size.Width,
                 Height = size.Height,
                 OnImage = "{CH-47F}/Gauges/SFD/Images/SFD_Indicator.png",
+                OffImage = "",
+                Text = "",
                 Name = interfaceElementName
             };
 

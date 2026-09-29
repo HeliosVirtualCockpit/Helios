@@ -80,8 +80,8 @@
     <Resource Include="Gauges\RWR\Images\RWR_glass.png" />
     <Resource Include="Gauges\SFD\Images\SFD_Bezel.png" />
     <Resource Include="Gauges\SFD\Images\SFD_Knob.png" />
-    <Resource Include="Gauges\SFD\Images\SFD_Mode_Norm.png" />
-    <Resource Include="Gauges\SFD\Images\SFD_Mode_Pressed.png" />
+    <Resource Include="Gauges\SFD\Images\Menu_Access_Button_Norm.png" />
+    <Resource Include="Gauges\SFD\Images\Menu_Access_Button_Pressed.png" />
     <Resource Include="Gauges\RWR\Images\RWR_Bezel.png" />
     <Resource Include="Gauges\RWR\Images\RWR_BRIL_Knob.png" />
     <Resource Include="Gauges\RWR\Images\RWR_DAY_SW_Down.png" />
@@ -285,6 +285,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <Resource Include="Gauges\SFD\Images\SFD_Knob_Pulled.png" />
     <Content Include="Templates\Base\CH-47F\6 Gauges\RadAlt.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
