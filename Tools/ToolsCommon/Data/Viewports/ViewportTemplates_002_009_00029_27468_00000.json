@@ -87,8 +87,8 @@
         "seatIndex": 1,
         "x": 0,
         "y": 0,
-        "width": 354,
-        "height": 470
+        "width": 360,
+        "height": 360
       },
       {
         "viewportDisplayName": "CH47F CDU COPILOT",
@@ -101,8 +101,8 @@
         "seatIndex": 2,
         "x": 0,
         "y": 0,
-        "width": 354,
-        "height": 470
+        "width": 360,
+        "height": 360
       },
       {
         "viewportDisplayName": "CH47F ASE RWR",

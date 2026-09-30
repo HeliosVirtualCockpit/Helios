@@ -50,10 +50,10 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
             switch (_interfaceDevice)
             {
                 case "CDU (Right)":
-                    _vpName = "CH47F_CDU_PILOT";
+                    _vpName = "RIGHT_CDU";
                     break;
                 case "CDU (Left)":
-                    _vpName = "CH47F_CDU_COPILOT";
+                    _vpName = "LEFT_CDU";
                     break;
                 default:
                     break;
@@ -200,6 +200,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.CDU
                 BackgroundColor = Color.FromArgb(128, 128, 32, 64),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
+                RequiresPatches = false,
                 TextFormat = tf,
                 Left = vpRect.Left,
                 Top = vpRect.Top,

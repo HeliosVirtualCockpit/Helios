@@ -180,6 +180,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
                 BackgroundColor = Color.FromArgb(128, 128, 32, 64),
                 FontColor = Color.FromArgb(255, 255, 255, 255),
                 ViewportName = name,
+                RequiresPatches = false,
                 TextFormat = tf,
                 Left = vpRect.Left,
                 Top = vpRect.Top,
