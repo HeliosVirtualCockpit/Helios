@@ -202,7 +202,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
 
         private void AddButton(string name, Rect rect, string label)
         {
-            Helios.Controls.PushButton button = new Helios.Controls.PushButton();
+            PushButton button = new PushButton();
             button.Top = rect.Y * _size_Multiplier;
             button.Left = rect.X * _size_Multiplier;
             button.Width = rect.Width * _size_Multiplier;
@@ -236,7 +236,7 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
                 );
             AddDefaultInputBinding(
                 childName: name,
-                interfaceTriggerName: $"{Name}.{name}.changed",
+                interfaceTriggerName: $"{_interfaceDevice}.{label}.changed",
                 deviceActionName: "set.physical state");
         }
         private void AddEncoder(string name, Point posn, Size size, string interfaceElementName)
@@ -253,7 +253,8 @@ namespace GadrocsWorkshop.Helios.Gauges.CH47F.SFD
                 Left = posn.X,
                 Width = size.Width,
                 Height = size.Height,
-                ClickType = RotaryClickType.Swipe
+                ClickType = RotaryClickType.Swipe,
+                ButtonType = PushButtonType.Momentary
             };
 
             Children.Add(knob);

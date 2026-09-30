@@ -12970,39 +12970,6 @@
     <Content Include="Templates\Patching\Additional Simulator Viewports\9 A_10C_UHF_REPEATER.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CDU_COPILOT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CDU_PILOT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CENTER_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CHRONOMETER.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_LEFT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_LEFT_SFD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_MFD_COPILOT_LEFT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_MFD_COPILOT_RIGHT.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RIGHT_MFCD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RIGHT_SFD.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RWR.htpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Templates\Patching\Additional Simulator Viewports\9 F4U_1D_RP22.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -16313,6 +16280,39 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Patches\DCS\002_009_00028_26385_00000\Viewports\mods\Aircraft\SA342\Cockpit\WP1\init.lua.grevert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CENTER_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CH47F_MFD_COPILOT_LEFT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CH47F_MFD_COPILOT_RIGHT.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_CLOCK.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_LEFT_CDU.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_LEFT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_LEFT_SFD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RIGHT_CDU.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RIGHT_MFCD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RIGHT_SFD.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Patching\Additional Simulator Viewports\9 CH47F_RWR.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

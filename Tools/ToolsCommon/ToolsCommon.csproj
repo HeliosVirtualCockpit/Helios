@@ -76,9 +76,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Data\Viewports\ViewportTemplates.md" />
-    <Content Include="Data\Viewports\ViewportTemplates_002_009_00007_59074_00000.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00004_53990_00000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -88,9 +85,6 @@
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00010_04160_00000.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Viewports\ViewportTemplates_002_009_00021_16362_00000.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00017_11733_00000.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -98,6 +92,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Viewports\ViewportTemplates_002_009_00024_20232_00000.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Viewports\ViewportTemplates_002_009_00029_27468_00000.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Viewports\ViewportTemplates_002_009_00007_59074_00000.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
