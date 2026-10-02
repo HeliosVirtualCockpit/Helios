@@ -34,11 +34,19 @@ namespace GadrocsWorkshop.Helios.Controls
         private HeliosValue _brightnessValue;
         private HeliosAction _incrementBrightnessAction;
         private HeliosAction _decrementBrightnessAction;
-        private double _displayBrightness = 8;
+        private double _displayBrightness = 10;
+
+        private HeliosValue _opacityValue;
+        private HeliosAction _incrementOpacityAction;
+        private HeliosAction _decrementOpacityAction;
+        private HeliosTrigger _incrementOpacityTrigger;
+        private HeliosTrigger _decrementOpacityTrigger;
+
         private CalibrationPointCollectionDouble _calBrightness = new CalibrationPointCollectionDouble(0, 0, 1, 1) {
                 new CalibrationPointDouble(0.25,0.5),
                 new CalibrationPointDouble(0.5,0.75),
             };
+        private CalibrationPointCollectionDouble _calOpacity = new CalibrationPointCollectionDouble(0, 0, 1, 255) { };
 
         /// <summary>
         /// backing field for property Unit, contains
@@ -87,27 +95,35 @@ namespace GadrocsWorkshop.Helios.Controls
                 });
             }
 
-            if (_brightnessValue == null)
-            {
-                _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "number display brightness value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
-                _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
-                Actions.Add(_brightnessValue);
-                Values.Add(_brightnessValue);
-            }
+            _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "number display brightness value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
+            _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
+            Actions.Add(_brightnessValue);
+            Values.Add(_brightnessValue);
+            _incrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "increment", "Increments the display brightness.");
+            _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
+            Actions.Add(_incrementBrightnessAction);
 
-            if (_incrementBrightnessAction == null)
-            {
-                _incrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "increment", "Increments the display brightness.");
-                _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
-                Actions.Add(_incrementBrightnessAction);
-            }
+            _decrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "decrement", "decrements the display brightness.");
+            _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
+            Actions.Add(_decrementBrightnessAction);
 
-            if (_decrementBrightnessAction == null)
-            {
-                _decrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "decrement", "decrements the display brightness.");
-                _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
-                Actions.Add(_decrementBrightnessAction);
-            }
+            _opacityValue = new HeliosValue(this, new BindingValue(false), "", "number display opacity value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
+            _opacityValue.Execute += new HeliosActionHandler(DisplayOpacity_Execute);
+            Actions.Add(_opacityValue);
+            Values.Add(_opacityValue);
+
+            _incrementOpacityAction = new HeliosAction(this, "", "number display opacity", "increment", "Increments the display opacity.");
+            _incrementOpacityAction.Execute += new HeliosActionHandler(IncrementOpacityAction_Execute);
+            Actions.Add(_incrementOpacityAction);
+
+            _decrementOpacityAction = new HeliosAction(this, "", "number display opacity", "decrement", "decrements the display opacity.");
+            _decrementOpacityAction.Execute += new HeliosActionHandler(DecrementOpacityAction_Execute);
+            Actions.Add(_decrementOpacityAction);
+
+            _incrementOpacityTrigger = new HeliosTrigger(this, "", "", "opacity maximum", "Fired when the opacity value has reached the maximum.", "returns true.", BindingValueUnits.Boolean);
+            Triggers.Add(_incrementOpacityTrigger);
+            _decrementOpacityTrigger = new HeliosTrigger(this, "", "", "opacity minimum", "Fired when the opacity value has reached the minimum.", "returns true.", BindingValueUnits.Boolean);
+            Triggers.Add(_decrementOpacityTrigger);
 
         }
 
@@ -122,19 +138,78 @@ namespace GadrocsWorkshop.Helios.Controls
         private void DisplayBrightness_Execute(object action, HeliosActionEventArgs e)
         {
             double brightness = _calBrightness.Interpolate(e.Value.DoubleValue);
-            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+            OnTextColor = Color.FromArgb(OnTextColor.A, Convert.ToByte((double)OnTextColorDefault.R * brightness), Convert.ToByte((double)OnTextColorDefault.G * brightness), Convert.ToByte((double)OnTextColorDefault.B * brightness));
         }
         private void IncrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
         {
             _displayBrightness = _displayBrightness >= 10 ? 10 : ++_displayBrightness;
             double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
-            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+            OnTextColor = Color.FromArgb(OnTextColor.A, Convert.ToByte((double)OnTextColorDefault.R * brightness), Convert.ToByte((double)OnTextColorDefault.G * brightness), Convert.ToByte((double)OnTextColorDefault.B * brightness));
         }
         private void DecrementBrightnessAction_Execute(object action, HeliosActionEventArgs e)
         {
             _displayBrightness = _displayBrightness <= 0 ? 0 : --_displayBrightness;
             double brightness = _calBrightness.Interpolate(_displayBrightness / 10d);
-            OnTextColor = Color.FromArgb(0xf0, Convert.ToByte((double)_onTextColorDefault.R * brightness), Convert.ToByte((double)_onTextColorDefault.G * brightness), Convert.ToByte((double)_onTextColorDefault.B * brightness));
+            OnTextColor = Color.FromArgb(OnTextColor.A, Convert.ToByte((double)OnTextColorDefault.R * brightness), Convert.ToByte((double)OnTextColorDefault.G * brightness), Convert.ToByte((double)OnTextColorDefault.B * brightness));
+        }
+
+        private void DisplayOpacity_Execute(object action, HeliosActionEventArgs e)
+        {
+            byte opacity = Convert.ToByte(_calOpacity.Interpolate(e.Value.DoubleValue));
+            OnTextColor = Color.FromArgb(opacity, OnTextColor.R, OnTextColor.G, OnTextColor.B);
+
+            if (UseBackground)
+            {
+                BackgroundColor = Color.FromArgb(Convert.ToByte(_calOpacity.Interpolate(e.Value.DoubleValue)), BackgroundColor.R, BackgroundColor.G, BackgroundColor.B);
+            }
+
+            if (!BypassTriggers)
+            {
+                if (opacity > 0xfc)
+                {
+                    _incrementOpacityTrigger.FireTrigger(new BindingValue(true));
+                }
+                else if (opacity < 0x04)
+                {
+                    _decrementOpacityTrigger.FireTrigger(new BindingValue(true));
+                }
+            }
+        }
+        private void IncrementOpacityAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            byte opacity = OnTextColor.A;
+            opacity = (byte)(opacity > 0xfc ? opacity : opacity + 0x04);
+            OnTextColor = Color.FromArgb(opacity, OnTextColor.R, OnTextColor.G, OnTextColor.B);
+
+            if (UseBackground)
+            {
+                byte bOpacity = BackgroundColor.A;
+                bOpacity = (byte)(bOpacity > 0xfc ? bOpacity : bOpacity + 0x04);
+                BackgroundColor = Color.FromArgb(bOpacity, BackgroundColor.R, BackgroundColor.G, BackgroundColor.B);
+            }
+
+            if (!BypassTriggers && opacity > 0xfc)
+            {
+                _incrementOpacityTrigger.FireTrigger(new BindingValue(true));
+            }
+        }
+        private void DecrementOpacityAction_Execute(object action, HeliosActionEventArgs e)
+        {
+            byte opacity = OnTextColor.A;
+            opacity = (byte)(opacity < 0x04 ? opacity : opacity - 0x04);
+            OnTextColor = Color.FromArgb(opacity, OnTextColor.R, OnTextColor.G, OnTextColor.B);
+
+            if (UseBackground)
+            {
+                byte bOpacity = BackgroundColor.A;
+                bOpacity = (byte)(bOpacity < 0x04 ? bOpacity : bOpacity - 0x04);
+                BackgroundColor = Color.FromArgb(bOpacity, BackgroundColor.R, BackgroundColor.G, BackgroundColor.B);
+            }
+
+            if (!BypassTriggers && opacity < 0x04)
+            {
+                _decrementOpacityTrigger.FireTrigger(new BindingValue(true));
+            }
         }
 
         #endregion
@@ -211,6 +286,11 @@ namespace GadrocsWorkshop.Helios.Controls
                 BuildValue();
                 OnPropertyChanged(nameof(Unit), oldValue, value, true);
             }
+        }
+        public override void Reset()
+        {
+            _displayBrightness = 10d;
+            base.Reset();
         }
 
         /// <summary>
