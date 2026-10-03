@@ -94,37 +94,40 @@ namespace GadrocsWorkshop.Helios.Controls
                     binding.Action = _value;
                 });
             }
+            if (_brightnessValue is null && _incrementBrightnessAction is null && _decrementBrightnessAction is null)
+            {
+                _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "number display brightness value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
+                _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
+                Actions.Add(_brightnessValue);
+                Values.Add(_brightnessValue);
 
-            _brightnessValue = new HeliosValue(this, new BindingValue(false), "", "number display brightness value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
-            _brightnessValue.Execute += new HeliosActionHandler(DisplayBrightness_Execute);
-            Actions.Add(_brightnessValue);
-            Values.Add(_brightnessValue);
-            _incrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "increment", "Increments the display brightness.");
-            _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
-            Actions.Add(_incrementBrightnessAction);
+                _incrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "increment", "Increments the display brightness.");
+                _incrementBrightnessAction.Execute += new HeliosActionHandler(IncrementBrightnessAction_Execute);
+                Actions.Add(_incrementBrightnessAction);
 
-            _decrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "decrement", "decrements the display brightness.");
-            _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
-            Actions.Add(_decrementBrightnessAction);
+                _decrementBrightnessAction = new HeliosAction(this, "", "number display brightness", "decrement", "decrements the display brightness.");
+                _decrementBrightnessAction.Execute += new HeliosActionHandler(DecrementBrightnessAction_Execute);
+                Actions.Add(_decrementBrightnessAction);
+            }
+            if (_opacityValue is null && _incrementOpacityAction is null && _decrementOpacityAction is null && _incrementOpacityTrigger is null && _decrementOpacityTrigger is null) {
+                _opacityValue = new HeliosValue(this, new BindingValue(false), "", "number display opacity value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
+                _opacityValue.Execute += new HeliosActionHandler(DisplayOpacity_Execute);
+                Actions.Add(_opacityValue);
+                Values.Add(_opacityValue);
 
-            _opacityValue = new HeliosValue(this, new BindingValue(false), "", "number display opacity value", "number", "0.0 to 1.0", BindingValueUnits.Numeric);
-            _opacityValue.Execute += new HeliosActionHandler(DisplayOpacity_Execute);
-            Actions.Add(_opacityValue);
-            Values.Add(_opacityValue);
+                _incrementOpacityAction = new HeliosAction(this, "", "number display opacity", "increment", "Increments the display opacity.");
+                _incrementOpacityAction.Execute += new HeliosActionHandler(IncrementOpacityAction_Execute);
+                Actions.Add(_incrementOpacityAction);
 
-            _incrementOpacityAction = new HeliosAction(this, "", "number display opacity", "increment", "Increments the display opacity.");
-            _incrementOpacityAction.Execute += new HeliosActionHandler(IncrementOpacityAction_Execute);
-            Actions.Add(_incrementOpacityAction);
+                _decrementOpacityAction = new HeliosAction(this, "", "number display opacity", "decrement", "decrements the display opacity.");
+                _decrementOpacityAction.Execute += new HeliosActionHandler(DecrementOpacityAction_Execute);
+                Actions.Add(_decrementOpacityAction);
 
-            _decrementOpacityAction = new HeliosAction(this, "", "number display opacity", "decrement", "decrements the display opacity.");
-            _decrementOpacityAction.Execute += new HeliosActionHandler(DecrementOpacityAction_Execute);
-            Actions.Add(_decrementOpacityAction);
-
-            _incrementOpacityTrigger = new HeliosTrigger(this, "", "", "opacity maximum", "Fired when the opacity value has reached the maximum.", "returns true.", BindingValueUnits.Boolean);
-            Triggers.Add(_incrementOpacityTrigger);
-            _decrementOpacityTrigger = new HeliosTrigger(this, "", "", "opacity minimum", "Fired when the opacity value has reached the minimum.", "returns true.", BindingValueUnits.Boolean);
-            Triggers.Add(_decrementOpacityTrigger);
-
+                _incrementOpacityTrigger = new HeliosTrigger(this, "", "", "opacity maximum", "Fired when the opacity value has reached the maximum.", "returns true.", BindingValueUnits.Boolean);
+                Triggers.Add(_incrementOpacityTrigger);
+                _decrementOpacityTrigger = new HeliosTrigger(this, "", "", "opacity minimum", "Fired when the opacity value has reached the minimum.", "returns true.", BindingValueUnits.Boolean);
+                Triggers.Add(_decrementOpacityTrigger);
+            }
         }
 
         #region Event Handlers
