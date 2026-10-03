@@ -26,8 +26,8 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.Windows;
     using System.Xml;
 
-    [HeliosControl("Helios.Base.RotaryEncoderClickable", "Rotary Encoder Clickable - Knob 6", "Rotary Encoders", typeof(RotaryKnobRenderer))]
-    public class RotaryEncoderClickable : RotaryEncoder, IConfigurableImageLocation, IRefreshableImage
+    [HeliosControl("Helios.Base.RotarySwitchClickable", "Rotary Switch Clickable", "Rotary Switches", typeof(RotaryKnobRenderer))]
+    public class RotarySwitchClickable : RotarySwitch, IConfigurableImageLocation, IRefreshableImage
     {
         private Rect _centreZone;
         private PushButtonType _buttonType;
@@ -36,7 +36,7 @@ namespace GadrocsWorkshop.Helios.Controls
         private bool _isSwitch = false;
 
         private string _pushedImageFile = "{Helios}/Images/Knobs/knob7.png";
-        private string _unpushedImageFile = "{Helios}/Images/Knobs/knob6.png";
+        private string _unpushedImageFile = "{Helios}/Images/Knobs/knob1.png";
 
         private bool _pushed;
         private bool _closed;
@@ -59,12 +59,12 @@ namespace GadrocsWorkshop.Helios.Controls
 
         private HeliosValue _value;
         private HeliosValue _pushedValue;
-        public RotaryEncoderClickable() : this("Clickable Rotary Encoder"){ }
-        public RotaryEncoderClickable(string name) : base(name)
+        public RotarySwitchClickable() : this("Clickable Rotary Switch"){ }
+        public RotarySwitchClickable(string name) : base(name)
         {
             _centreZone = new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3);
             _buttonType = PushButtonType.Toggle;
-            _unpushedImageFile = KnobImage;
+            KnobImage = _unpushedImageFile;
             _pushedTrigger = new HeliosTrigger(this, "", "", "button pushed", "Fired when this button is pushed.", "Always returns true.", BindingValueUnits.Boolean);
             _releasedTrigger = new HeliosTrigger(this, "", "", "button released", "Fired when this button is released.", "Always returns false.", BindingValueUnits.Boolean);
             _closedTrigger = new HeliosTrigger(this, "", "", "button closed", "Fired when this button is in the closed state.", "Always returns true.", BindingValueUnits.Boolean);

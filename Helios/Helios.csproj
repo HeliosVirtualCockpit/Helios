@@ -106,6 +106,10 @@
     <Compile Include="Controls\RotaryClickBehaviorEditor.xaml.cs">
       <DependentUpon>RotaryClickBehaviorEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RotarySwitchClickableAppearanceEditor.xaml.cs">
+      <DependentUpon>RotarySwitchClickableAppearanceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RotarySwitchClickable.cs" />
     <Compile Include="Controls\Special\EffectColorAdjusterAppearanceEditor.xaml.cs">
       <DependentUpon>EffectColorAdjusterAppearanceEditor.xaml</DependentUpon>
     </Compile>
@@ -728,6 +732,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\RotaryClickBehaviorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RotarySwitchClickableAppearanceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

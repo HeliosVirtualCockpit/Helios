@@ -20,13 +20,13 @@ namespace GadrocsWorkshop.Helios.Controls
     using GadrocsWorkshop.Helios.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for RotarySwitchAppearanceEditor.xaml
+    /// Interaction logic for RotarySwitchClickableAppearanceEditor.xaml
     /// </summary>
-    [HeliosPropertyEditor("Helios.Base.RotarySwitch", "Appearance")]
     [HeliosPropertyEditor("Helios.Base.RotarySwitchClickable", "Appearance")]
-    public partial class RotarySwitchAppearanceEditor : HeliosPropertyEditor
+    [HeliosPropertyEditor("Helios.Base.RotarySwitchIndicatorClickable", "Appearance")]
+    public partial class RotarySwitchClickableAppearanceEditor : HeliosPropertyEditor
     {
-        public RotarySwitchAppearanceEditor()
+        public RotarySwitchClickableAppearanceEditor()
         {
             InitializeComponent();
         }

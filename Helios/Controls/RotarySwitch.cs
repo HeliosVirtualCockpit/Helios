@@ -60,9 +60,10 @@ namespace GadrocsWorkshop.Helios.Controls
 
         // comparison function to binary search in sorted array
         private static readonly PositionSortComparer PositionIndexComparer = new PositionSortComparer();
+        public RotarySwitch() : this("Rotary Switch") { }
 
-        public RotarySwitch()
-            : base("Rotary Switch", new Size(100, 100))
+        public RotarySwitch(string name)
+            : base(name, new Size(100, 100))
         {
             KnobImage = "{Helios}/Images/Knobs/knob2.png";
             LabelFormat.PropertyChanged += LabelFormat_PropertyChanged;

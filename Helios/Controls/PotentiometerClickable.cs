@@ -503,6 +503,8 @@ namespace GadrocsWorkshop.Helios.Controls
 
         public override void MouseDown(Point location)
         {
+            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+
             if (_centreZone.Contains(location))
             {
                 if (!BypassTriggers)
@@ -536,6 +538,8 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override void MouseUp(Point location)
         {
+            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+
             if (_centreZone.Contains(location))
             {
 
