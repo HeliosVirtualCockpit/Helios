@@ -24,12 +24,13 @@ namespace GadrocsWorkshop.Helios.Controls
     using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
+    using System.Windows.Media;
     using System.Xml;
 
     [HeliosControl("Helios.Base.RotarySwitchClickable", "Rotary Switch Clickable", "Rotary Switches", typeof(RotaryKnobRenderer))]
     public class RotarySwitchClickable : RotarySwitch, IConfigurableImageLocation, IRefreshableImage
     {
-        private Rect _centreZone;
+        private EllipseGeometry _centreZone;
         private PushButtonType _buttonType;
         private ClickControlType _clickControlType = ClickControlType.PushButton;
         private ToggleSwitchLockPosition _lockPosition = ToggleSwitchLockPosition.None;
@@ -62,7 +63,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public RotarySwitchClickable() : this("Clickable Rotary Switch"){ }
         public RotarySwitchClickable(string name) : base(name)
         {
-            _centreZone = new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Width / 3, Height / 3, Width / 3, Height / 3));
             _buttonType = PushButtonType.Toggle;
             KnobImage = _unpushedImageFile;
             _pushedTrigger = new HeliosTrigger(this, "", "", "button pushed", "Fired when this button is pushed.", "Always returns true.", BindingValueUnits.Boolean);
@@ -419,7 +420,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             base.ScaleChildren(scaleX, scaleY);
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Width / 3, Height / 3, Width / 3, Height / 3));
         }
 
         /// <summary>
@@ -451,9 +452,8 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override void MouseDown(Point location)
         {
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
-
-            if (_centreZone.Contains(location))
+            _centreZone = new EllipseGeometry(new Rect(Width / 3, Height / 3, Width / 3, Height / 3));
+            if (_centreZone.FillContains(location))
             {
                 if (!BypassTriggers)
                 {
@@ -488,9 +488,9 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override void MouseUp(Point location)
         {
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Width / 3, Height / 3, Width / 3, Height / 3));
 
-            if (_centreZone.Contains(location))
+            if (_centreZone.FillContains(location))
             {
 
                 if (ButtonType == PushButtonType.Momentary)
@@ -590,7 +590,7 @@ namespace GadrocsWorkshop.Helios.Controls
             if (reader.Name.Equals("AllowRotation")) AllowRotation = (RotaryClickAllowRotationType)Enum.Parse(typeof(RotaryClickAllowRotationType), reader.ReadElementString("AllowRotation"));
             LockPosition = reader.Name.Equals("SwitchLockPosition") ? (ToggleSwitchLockPosition)Enum.Parse(typeof(ToggleSwitchLockPosition), reader.ReadElementString("SwitchLockPosition")) : ToggleSwitchLockPosition.None;
             base.ReadXml(reader);
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Width / 3, Height / 3, Width / 3, Height / 3));
         }
 
         public override void WriteXml(XmlWriter writer)

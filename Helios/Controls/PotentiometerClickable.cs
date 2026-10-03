@@ -31,7 +31,7 @@ namespace GadrocsWorkshop.Helios.Controls
     [HeliosControl("Helios.Base.PotentiometerClickable", "Potentiometer Clickable - Knob 1", "Potentiometers", typeof(RotaryKnobRenderer))]
     public class PotentiometerClickable : PotentiometerKnob, IConfigurableImageLocation, IRefreshableImage
     {
-        private Rect _centreZone;
+        private EllipseGeometry _centreZone;
         private PushButtonType _buttonType = PushButtonType.Toggle;
         private ClickControlType _clickControlType = ClickControlType.PushButton;
         private bool _isSwitch = false;
@@ -67,7 +67,7 @@ namespace GadrocsWorkshop.Helios.Controls
         {
             ContinuousConfigurable = true;
             IsContinuous = false;
-            _centreZone = new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3));
             _buttonType = PushButtonType.Toggle;
             _unpushedImage = KnobImage;
 
@@ -426,7 +426,7 @@ namespace GadrocsWorkshop.Helios.Controls
         public override void ScaleChildren(double scaleX, double scaleY)
         {
             base.ScaleChildren(scaleX, scaleY);
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3));
         }
 
         /// <summary>
@@ -503,9 +503,9 @@ namespace GadrocsWorkshop.Helios.Controls
 
         public override void MouseDown(Point location)
         {
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Width / 3, Height / 3, Width / 3, Height / 3));
 
-            if (_centreZone.Contains(location))
+            if (_centreZone.FillContains(location))
             {
                 if (!BypassTriggers)
                 {
@@ -538,9 +538,9 @@ namespace GadrocsWorkshop.Helios.Controls
         }
         public override void MouseUp(Point location)
         {
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Width / 3, Height / 3, Width / 3, Height / 3));
 
-            if (_centreZone.Contains(location))
+            if (_centreZone.FillContains(location))
             {
 
                 if (ButtonType == PushButtonType.Momentary)
@@ -600,7 +600,7 @@ namespace GadrocsWorkshop.Helios.Controls
             LockPosition = reader.Name.Equals("SwitchLockPosition") ? (ToggleSwitchLockPosition)Enum.Parse(typeof(ToggleSwitchLockPosition), reader.ReadElementString("SwitchLockPosition")) : ToggleSwitchLockPosition.None;
             base.ReadXml(reader);
             KnobImage = UnpushedImage;
-            _centreZone = new Rect(Width / 3, Height / 3, Width / 3, Height / 3);
+            _centreZone = new EllipseGeometry(new Rect(Left + Width / 3, Top + Height / 3, Width / 3, Height / 3));
         }
 
         public override void WriteXml(XmlWriter writer)
