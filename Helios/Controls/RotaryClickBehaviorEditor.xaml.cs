@@ -26,6 +26,7 @@ namespace GadrocsWorkshop.Helios.Controls
     [HeliosPropertyEditor("Helios.Base.RotaryEncoderIndicatorClickable", "Behavior")]
     [HeliosPropertyEditor("Helios.Base.PotentiometerClickable", "Behavior")]
     [HeliosPropertyEditor("Helios.Base.PotentiometerIndicatorClickable", "Behavior")]
+    [HeliosPropertyEditor("Helios.Base.RotarySwitchClickable", "Behavior")]
     public partial class RotaryClickBehaviorEditor : HeliosPropertyEditor
     {
         public RotaryClickBehaviorEditor()

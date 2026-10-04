@@ -7,17 +7,89 @@
              xmlns:HeliosSdk="clr-namespace:GadrocsWorkshop.Helios.Windows.Controls"                      
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Height="Auto" d:DesignWidth="180">
-    <Grid Background="Transparent" Margin="6">
-        <Grid.Resources>
-            <Style x:Key="ShowIfIndicatorConfigurable" TargetType="FrameworkElement">
-                <Setter Property="Visibility" Value="Collapsed"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Control.IndicatorConfigurable}" Value="true">
-                        <Setter Property="Visibility" Value="Visible"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Resources>
+    <HeliosSdk:HeliosPropertyEditor.Resources>
+        <Style x:Key="LineLabelStyle" TargetType="Label">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLines}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LineColorWellStyle" TargetType="{x:Type HeliosSdk:ColorWell}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLines}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LineTextBoxStyle" TargetType="{x:Type HeliosSdk:HeliosTextBox}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLines}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LineSliderStyle" TargetType="Slider">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLines}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelLabelStyle" TargetType="Label">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLabels}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelColorWellStyle" TargetType="{x:Type HeliosSdk:ColorWell}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLabels}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelFormatStyle" TargetType="{x:Type HeliosSdk:TextFormatButton}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLabels}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelTextBoxStyle" TargetType="{x:Type HeliosSdk:HeliosTextBox}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLabels}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelSliderStyle" TargetType="Slider">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Control.DrawLabels}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ShowIfIndicatorConfigurable" TargetType="FrameworkElement">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Control.IndicatorConfigurable}" Value="true">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </HeliosSdk:HeliosPropertyEditor.Resources>
+    <Grid Background="Transparent" Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -25,47 +97,90 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="4,10,2,2" Style="{StaticResource Heading2}">Knob</TextBlock>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="4,10,2,2" Style="{StaticResource ShowIfIndicatorConfigurable}">Indicator Off Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="1" FontSize="10" HorizontalAlignment="Right">
+            <Label.ToolTip>Image used for the rotary's knob.</Label.ToolTip> Image
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="1" ImageFilename="{Binding Control.UnpushedImage, Mode=TwoWay}" />
         <Label Grid.Column="0" Grid.Row="2" FontSize="10" HorizontalAlignment="Right">
-            <Label.ToolTip>Image used for the rotary's knob.</Label.ToolTip> Image
-        </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="2" ImageFilename="{Binding Control.UnpushedImage, Mode=TwoWay}" />
-        <Label Grid.Column="0" Grid.Row="3" FontSize="10" HorizontalAlignment="Right">
             <Label.ToolTip>Image used for the rotary's knob when clicked.</Label.ToolTip> Clicked Image
         </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="3" ImageFilename="{Binding Control.PushedImage, Mode=TwoWay}" />
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="4,10,2,2"  Style="{StaticResource ShowIfIndicatorConfigurable}">Indicator On Images</TextBlock>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="2" ImageFilename="{Binding Control.PushedImage, Mode=TwoWay}" />
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="4,10,2,2"  Style="{StaticResource ShowIfIndicatorConfigurable}">Indicator On Images</TextBlock>
+        <Label Grid.Column="0" Grid.Row="4" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource ShowIfIndicatorConfigurable}">
+            <Label.ToolTip>Image used for the rotary's knob.</Label.ToolTip> Image
+        </Label>
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="4" ImageFilename="{Binding Control.IndicatorOnNormalImage, Mode=TwoWay}" Style="{StaticResource ShowIfIndicatorConfigurable}"/>
         <Label Grid.Column="0" Grid.Row="5" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource ShowIfIndicatorConfigurable}">
-            <Label.ToolTip>Image used for the rotary's knob.</Label.ToolTip> Image
-        </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="5" ImageFilename="{Binding Control.IndicatorOnNormalImage, Mode=TwoWay}" Style="{StaticResource ShowIfIndicatorConfigurable}"/>
-        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource ShowIfIndicatorConfigurable}">
             <Label.ToolTip>Image used for the rotary's knob when clicked.</Label.ToolTip> Clicked Image
         </Label>
-        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="6" ImageFilename="{Binding Control.IndicatorOnClickedImage, Mode=TwoWay}" Style="{StaticResource ShowIfIndicatorConfigurable}"/>
-        <Label Grid.Column="0" Grid.Row="7" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource ShowIfIndicatorConfigurable}">
+        <HeliosSdk:ImagePicker Grid.Column="1" Grid.Row="5" ImageFilename="{Binding Control.IndicatorOnClickedImage, Mode=TwoWay}" Style="{StaticResource ShowIfIndicatorConfigurable}"/>
+        <Label Grid.Column="0" Grid.Row="6" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource ShowIfIndicatorConfigurable}">
             <Label.ToolTip>Display the indicator On images in Profile Editor.  This value is not persisted.</Label.ToolTip> Show Indicator On Images
         </Label>
-        <CheckBox Grid.Column="2" Grid.Row="7" Margin="3,4,10,0" IsChecked="{Binding Control.On}" Style="{StaticResource ShowIfIndicatorConfigurable}"   />
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Margin="4,10,2,2" Style="{StaticResource Heading2}">Rotation</TextBlock>
-        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right">
-            <Label.ToolTip>Initial rotation position used when profile is started or reset.</Label.ToolTip> Init
+        <CheckBox Grid.Column="2" Grid.Row="6" Margin="3,4,10,0" IsChecked="{Binding Control.On}" Style="{StaticResource ShowIfIndicatorConfigurable}"   />
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Orientation="Horizontal">
+            <CheckBox Margin="4,11,2,2" IsChecked="{Binding Path=Control.DrawLines}">
+                <CheckBox.ToolTip>When check lines will be renderd extending from the know for each switch position.</CheckBox.ToolTip>
+            </CheckBox>
+            <TextBlock Margin="4,10,2,2" Style="{StaticResource Heading2}">Lines</TextBlock>
+        </StackPanel>
+        <Label Grid.Column="0" Grid.Row="8" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LineLabelStyle}" Content="Color">
+            <Label.ToolTip>Color used to draw the lines.</Label.ToolTip>
         </Label>
-        <Slider Grid.Column="1" Grid.Row="9" Minimum="0" Maximum="360" Value="{Binding Control.InitialRotation}" Margin="2" />
-        <Label Grid.Column="0" Grid.Row="10" FontSize="10" HorizontalAlignment="Right">
-            <Label.ToolTip>Increment in degress the knob will rotate each time it is incremented or decremented.</Label.ToolTip> Step
+        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="8" Color="{Binding Path=Control.LineColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2"  Style="{StaticResource LineColorWellStyle}" />
+        <Label Grid.Column="0" Grid.Row="9" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LineLabelStyle}" Content="Thickness">
+            <Label.ToolTip>How thick the lines will be rendered.</Label.ToolTip>
         </Label>
-        <HeliosSdk:HeliosTextBox Grid.Column="1" Grid.Row="10" FontSize="10" Margin="2" Text="{Binding Control.RotationStep}" />
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="9" FontSize="10" Text="{Binding Path=Control.LineThickness}" Margin="2" Style="{StaticResource LineTextBoxStyle}" />
+        <Label Grid.Column="0" Grid.Row="10" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LineLabelStyle}" Content="Length">
+            <Label.ToolTip>How far the lines will extend from the knob center.</Label.ToolTip>
+        </Label>
+        <Slider Grid.Row="10" Grid.Column="1" Minimum="0.1" Maximum="1" Value="{Binding Control.LineLength}" Margin="4,4,4,15" TickPlacement="TopLeft" TickFrequency="0.1" Style="{StaticResource LineSliderStyle}" />
+
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" Orientation="Horizontal">
+            <CheckBox Margin="4,11,2,2" IsChecked="{Binding Path=Control.DrawLabels}">
+                <CheckBox.ToolTip>When check labels will be rendered for each switch position.</CheckBox.ToolTip>
+            </CheckBox>
+            <TextBlock Margin="4,10,2,2" Style="{StaticResource Heading2}">Labels</TextBlock>
+        </StackPanel>
+        <Label Grid.Column="0" Grid.Row="12" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LabelLabelStyle}" Content="Font">
+            <Label.ToolTip>Font which will be used to render the labels.</Label.ToolTip>
+        </Label>
+        <HeliosSdk:TextFormatButton Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2" TextFormat="{Binding Control.LabelFormat}" Margin="2" Style="{StaticResource LabelFormatStyle}" />
+        <Label Grid.Column="0" Grid.Row="13" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LabelLabelStyle}" Content="Color">
+            <Label.ToolTip>Color which will be used to render the labels.</Label.ToolTip>
+        </Label>
+        <HeliosSdk:ColorWell Grid.Column="1" Grid.Row="13" Color="{Binding Path=Control.LabelColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,2" Style="{StaticResource LabelColorWellStyle}" />
+        <Label Grid.Column="0" Grid.Row="14" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LabelLabelStyle}" Content="Height">
+            <Label.ToolTip>The maximum height allowed for an individual label. (0 = unlimited)</Label.ToolTip>
+        </Label>
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding Path=Control.MaxLabelHeight}" Margin="2" Style="{StaticResource LabelTextBoxStyle}" />
+        <Label Grid.Column="0" Grid.Row="15" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LabelLabelStyle}" Content="Width">
+            <Label.ToolTip>The maximum width allowed for an individual label. (0 = unlimited)</Label.ToolTip>
+        </Label>
+        <HeliosSdk:HeliosTextBox  Grid.Column="1" Grid.Row="15" FontSize="10" Text="{Binding Path=Control.MaxLabelWidth}" Margin="2" Style="{StaticResource LabelTextBoxStyle}" />
+        <Label Grid.Column="0" Grid.Row="16" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource LabelLabelStyle}" Content="Distance">
+            <Label.ToolTip>Distance from the knob center the labels will be rendered.</Label.ToolTip>
+        </Label>
+        <Slider Grid.Row="16" Grid.Column="1" Minimum="0.1" Maximum="1" Value="{Binding Control.LabelDistance}" Margin="4" TickPlacement="TopLeft" TickFrequency="0.1" Style="{StaticResource LabelSliderStyle}" />
+
     </Grid>
 </HeliosSdk:HeliosPropertyEditor>

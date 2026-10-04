@@ -23,7 +23,6 @@ namespace GadrocsWorkshop.Helios.Controls
     /// Interaction logic for RotarySwitchAppearanceEditor.xaml
     /// </summary>
     [HeliosPropertyEditor("Helios.Base.RotarySwitch", "Appearance")]
-    [HeliosPropertyEditor("Helios.Base.RotarySwitchClickable", "Appearance")]
     public partial class RotarySwitchAppearanceEditor : HeliosPropertyEditor
     {
         public RotarySwitchAppearanceEditor()
