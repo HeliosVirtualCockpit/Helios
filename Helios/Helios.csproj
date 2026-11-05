@@ -569,6 +569,9 @@
     </Content>
     <Content Include="Templates\Base\Simulator Viewports\9 Shkval.htpl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>    
+    <Content Include="Templates\Base\Text Displays\Multiline Text Panel.htpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Shaders\ColorAdjustWithCurve.psc" />
     <None Include="Shaders\Source\readme.md" />
