@@ -1,0 +1,32 @@
+﻿<ControlTemplate>
+<Name>Multiline Text Panel</Name>
+<Category>Text Displays</Category>
+<TypeIdentifier>Helios.Base.TextDisplay</TypeIdentifier>
+<Template>
+<TemplateValues>
+  <Font>
+	<FontFamily>Helios Virtual Cockpit LED Dots 5x7 Regular</FontFamily>
+	<FontStyle>Normal</FontStyle>
+	<FontWeight>Normal</FontWeight>
+	<FontSize>16</FontSize>
+	<HorizontalAlignment>Left</HorizontalAlignment>
+	<VerticalAlignment>Center</VerticalAlignment>
+	<Padding>
+	  <Left>0.015</Left>
+	  <Top>0</Top>
+	  <Right>0</Right>
+	  <Bottom>0</Bottom>
+	</Padding>
+  </Font>
+  <OnTextColor>#FF4DF04D</OnTextColor>
+  <BackgroundColor>#FF000000</BackgroundColor>
+  <TextTest> UHF  305.00  STPT    1 ¶¶ VHF  127.50  10!23!45 ¶¶ M  34    4321  T  75X </TextTest>
+  <ParserDictionary>¶=&#xA;;!=:</ParserDictionary>
+  <UseBackground>True</UseBackground>
+  <UseParserDictionary>True</UseParserDictionary>
+  <ScalingMode>Height</ScalingMode>
+  <Location>0,0</Location>
+  <Size>317,108</Size>
+  <Hidden>False</Hidden></TemplateValues>
+</Template>
+</ControlTemplate>
